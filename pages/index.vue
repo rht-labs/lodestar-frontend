@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div>
-      <logo />
       <h1 class="title">Open Management Portal</h1>
       <h2 class="subtitle">
         Welcome to the OMP. You can request resources here!
@@ -14,12 +13,10 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 import Button from '~/components/patternfly/Button.vue'
 
 export default {
   components: {
-    Logo,
     Button
   }
 }
