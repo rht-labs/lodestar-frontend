@@ -24,7 +24,7 @@ This project uses Jest for unit and snapshot testing. Snapshot testing is for th
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:8080
 $ yarn dev
 
 # run unit & snapshot tests
