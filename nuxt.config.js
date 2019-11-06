@@ -67,7 +67,7 @@ module.exports = {
    ** Server configuration
    */
   server: {
-    port: process.envRuntime.LISTEN_PORT || 8080, // default: 3000
+    port: process.runtimeEnv.LISTEN_PORT || 8080, // default: 3000
     host: '0.0.0.0' // default: localhost
   },
   /*
@@ -83,16 +83,16 @@ module.exports = {
     strategies: {
       keycloak: {
         _scheme: 'oauth2',
-        authorization_endpoint: process.envRuntime.AUTHORIZATION_ENDPOINT,
-        userinfo_endpoint: process.envRuntime.USERINFO_ENDPOINT,
+        authorization_endpoint: process.runtimeEnv.AUTHORIZATION_ENDPOINT,
+        userinfo_endpoint: process.runtimeEnv.USERINFO_ENDPOINT,
         scope: ['openid', 'profile', 'email'],
         access_type: 'offline',
-        access_token_endpoint: process.envRuntime.TOKEN_ENDPOINT,
+        access_token_endpoint: process.runtimeEnv.TOKEN_ENDPOINT,
         response_type: 'code',
         grant_type: 'authorization_code',
         token_type: 'Bearer',
-        redirect_uri: process.envRuntime.BASE_URL + 'callback',
-        client_id: process.envRuntime.CLIENT_ID,
+        redirect_uri: process.runtimeEnv.BASE_URL + 'callback',
+        client_id: process.runtimeEnv.CLIENT_ID,
         token_key: 'access_token',
         state: 'UNIQUE_AND_NON_GUESSABLE'
       }

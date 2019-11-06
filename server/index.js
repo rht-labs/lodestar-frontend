@@ -8,7 +8,7 @@ const app = express()
 // Nuxt currently bakes environment variables in at compile-time,
 // so this breaks that. See: https://github.com/nuxt/nuxt.js/issues/5100
 let runtimeEnvVars = eval("process.env");
-process.envRuntime = {...process.env, ...runtimeEnvVars}
+process.runtimeEnv = {...process.env, ...runtimeEnvVars}
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
