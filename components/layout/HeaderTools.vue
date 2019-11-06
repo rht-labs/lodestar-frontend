@@ -63,7 +63,7 @@
             aria-expanded="false"
             @click="toggleDropdown"
           >
-            <span class="pf-c-dropdown__toggle-text">Tom Heisey</span>
+            <span class="pf-c-dropdown__toggle-text">{{ name }}</span>
             <i
               class="fas fa-caret-down pf-c-dropdown__toggle-icon"
               aria-hidden="true"
@@ -78,8 +78,8 @@
             class="pf-c-dropdown__menu"
           >
             <ul>
-              <li>
-                <a class="pf-c-dropdown__menu-item" href="#">Log Out</a>
+              <li @click="logout">
+                <p class="pf-c-dropdown__menu-item">Log Out</p>
               </li>
               <!--
               <li>
@@ -120,12 +120,23 @@ export default {
       showDropdown: false
     }
   },
+  computed: {
+    name() {
+      return this.$store.state.auth.user.name
+    }
+  },
   methods: {
     toggleDropdown() {
       this.showDropdown = !this.showDropdown
     },
     onUnfocus() {
       this.showDropdown = false
+    },
+    logout() {
+      this.$auth.logout()
+      this.$router.push({
+        path: '/login'
+      })
     }
   }
 }

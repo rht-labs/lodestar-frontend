@@ -20,6 +20,7 @@ module.exports = {
    ** Configure the link router
    */
   router: { 
+    middleware: ['auth'],
     linkExactActiveClass: 'pf-m-current'
   },
   /*
@@ -49,7 +50,10 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
+  ],
   /*
    ** Build configuration
    */
@@ -63,7 +67,35 @@ module.exports = {
    ** Server configuration
    */
   server: {
-    port: 8080, // default: 3000
+    port: process.envRuntime.LISTEN_PORT || 8080, // default: 3000
     host: '0.0.0.0' // default: localhost
+  },
+  /*
+   ** Authentication configuration
+   */
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/callback',
+      home: '/'
+    },
+    strategies: {
+      keycloak: {
+        _scheme: 'oauth2',
+        authorization_endpoint: process.envRuntime.AUTHORIZATION_ENDPOINT,
+        userinfo_endpoint: process.envRuntime.USERINFO_ENDPOINT,
+        scope: ['openid', 'profile', 'email'],
+        access_type: 'offline',
+        access_token_endpoint: process.envRuntime.TOKEN_ENDPOINT,
+        response_type: 'code',
+        grant_type: 'authorization_code',
+        token_type: 'Bearer',
+        redirect_uri: process.envRuntime.BASE_URL + 'callback',
+        client_id: process.envRuntime.CLIENT_ID,
+        token_key: 'access_token',
+        state: 'UNIQUE_AND_NON_GUESSABLE'
+      }
+    }
   }
 }
