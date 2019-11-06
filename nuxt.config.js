@@ -1,3 +1,7 @@
+if (!process.hasOwnProperty('runtimeEnv')){
+  process.runtimeEnv = {}
+}
+
 module.exports = {
   mode: 'universal',
   /*
