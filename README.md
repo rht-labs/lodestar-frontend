@@ -2,6 +2,20 @@
 
 > The user-facing components of the Open Management Portal.
 
+## Configuration
+
+The following environment variables are available:
+
+| Name | Example Value | Required |
+|------|---------------|----------|
+| BASE_URL | https://[my-omp-domain].com/ | True |
+| AUTH_CLIENT_ID | open-management-portal | True |
+| AUTHORIZATION_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/auth | True |
+| USERINFO_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/userinfo | True |
+| TOKEN_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/token | True |
+
+* These examples are based off of a realm named `omp` and a client named `open-management-portal` in Keycloak. For more information about how your Keycloak client is configured and the appropriate URLs to use, navigate to `[my-keycloak-domain]/auth/realms/[my-realm]/.well-known/openid-configuration`.
+
 ## Components
 
 This project was built using Nuxt.js - a framework surrounding Vue. For more information, visit [Nuxt.js docs](https://nuxtjs.org).
