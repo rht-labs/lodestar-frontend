@@ -1,5 +1,5 @@
 if (!process.hasOwnProperty('runtimeEnv')){
-  process.runtimeEnv = {}
+  process.runtimeEnv = eval('process.env')
 }
 
 module.exports = {
