@@ -3,13 +3,6 @@ const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
-// Jacob - Nov. 5, 2019
-// Yes, this is weird.
-// Nuxt currently bakes environment variables in at compile-time,
-// so this breaks that. See: https://github.com/nuxt/nuxt.js/issues/5100
-let runtimeEnvVars = eval("process.env");
-process.runtimeEnv = {...process.env, ...runtimeEnvVars}
-
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
