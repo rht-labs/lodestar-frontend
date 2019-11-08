@@ -9,6 +9,7 @@ The following environment variables are available:
 | Name | Example Value | Required |
 |------|---------------|----------|
 | BASE_URL | https://[my-omp-domain].com/ | True |
+| BACKEND_URL | https://[my-api-domain].com/ | True |
 | AUTH_CLIENT_ID | open-management-portal | True |
 | AUTHORIZATION_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/auth | True |
 | USERINFO_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/userinfo | True |
