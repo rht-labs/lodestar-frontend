@@ -5,5 +5,5 @@ exports[`HeaderTools renders properly 1`] = `
             Disabled link
           </a></li> <li><button disabled=\\"disabled\\" class=\\"pf-c-dropdown__menu-item\\">
             Disabled action
-          </button></li> <li role=\\"separator\\" class=\\"pf-c-divider\\"></li> <li><a href=\\"#\\" class=\\"pf-c-dropdown__menu-item\\">Separated link</a></li></ul></div> <div class=\\"pf-m-user\\"><div class=\\"pf-c-dropdown\\"><button id=\\"page-default-nav-example-dropdown-button\\" aria-expanded=\\"false\\" class=\\"pf-c-dropdown__toggle pf-m-plain\\"><span class=\\"pf-c-dropdown__toggle-text\\">Tom Heisey</span> <i aria-hidden=\\"true\\" class=\\"fas fa-caret-down pf-c-dropdown__toggle-icon\\"></i></button> <!----></div></div></div></div>"
+          </button></li> <li role=\\"separator\\" class=\\"pf-c-divider\\"></li> <li><a href=\\"#\\" class=\\"pf-c-dropdown__menu-item\\">Separated link</a></li></ul></div> <div class=\\"pf-m-user\\"><div class=\\"pf-c-dropdown\\"><button id=\\"page-default-nav-example-dropdown-button\\" aria-expanded=\\"false\\" class=\\"pf-c-dropdown__toggle pf-m-plain\\"><span class=\\"pf-c-dropdown__toggle-text\\">name</span> <i aria-hidden=\\"true\\" class=\\"fas fa-caret-down pf-c-dropdown__toggle-icon\\"></i></button> <!----></div></div></div></div>"
 `;
