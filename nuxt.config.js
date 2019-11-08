@@ -64,6 +64,12 @@ module.exports = {
     extend(config, ctx) {}
   },
   /*
+   ** Environment variables available client-side
+   */
+  env: {
+    backendURL: process.env.BACKEND_URL
+  },
+  /*
    ** Server configuration
    */
   server: {
