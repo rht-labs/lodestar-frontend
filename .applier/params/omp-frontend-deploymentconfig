@@ -1,0 +1,6 @@
+BASE_URL=https://omp-frontend-omp-jasee.apps.s11.core.rht-labs.com/
+CLIENT_ID=open-management-portal
+AUTHORIZATION_ENDPOINT=https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect/auth
+USERINFO_ENDPOINT=https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect/userinfo
+TOKEN_ENDPOINT=https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect/token
+END_SESSION_ENDPOINT=https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect/logout

@@ -1,0 +1,15 @@
+openshift_cluster_content:
+- object: omp-frontend
+  content:
+  - name: imagestream
+    file: '{{ inventory_dir }}/../files/omp-frontend-imagestream.yml'
+  - name: buildconfig
+    template: '{{ inventory_dir }}/../templates/omp-frontend-buildconfig.yml'
+    params: '{{ inventory_dir }}/../params/omp-frontend-buildconfig'
+  - name: deploymentconfig
+    template: '{{ inventory_dir }}/../templates/omp-frontend-deploymentconfig.yml'
+    params: '{{ inventory_dir }}/../params/omp-frontend-deploymentconfig'
+  - name: service
+    file: '{{ inventory_dir }}/../files/omp-frontend-service.yml'
+  - name: route
+    file: '{{ inventory_dir }}/../files/omp-frontend-route.yml'

@@ -1,0 +1,9 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: omp-frontend
+  name: omp-frontend
+spec:
+  lookupPolicy:
+    local: false
