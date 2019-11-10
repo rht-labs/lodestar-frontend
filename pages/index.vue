@@ -1,15 +1,24 @@
 <template>
-  <div class="container">
-    <div>
-      <h1 class="title">Open Management Portal</h1>
-      <h2 class="subtitle">
-        Welcome to the OMP. You can request resources here!
-      </h2>
-      <div class="links">
-        <Button text="this is my patternfly button!" />
+  <main
+    id="main-content-page-default-nav"
+    role="main"
+    class="pf-c-page__main"
+    tabindex="-1"
+  >
+    <div class="pf-c-page__main-section">
+      <div class="container">
+        <div>
+          <h1 class="title">Open Management Portal</h1>
+          <h2 class="subtitle">
+            Welcome to the OMP. You can request resources here!
+          </h2>
+          <div class="links">
+            <Button text="this is my patternfly button!" />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -25,7 +34,10 @@ export default {
 <style>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: calc(
+    100vh - 76px - var(--pf-c-page__main-section--PaddingTop) -
+      var(--pf-c-page__main-section--PaddingBottom)
+  );
   display: flex;
   justify-content: center;
   align-items: center;

@@ -9,6 +9,7 @@
         <nuxt-link class="pf-c-nav__link" to="/">Home</nuxt-link>
         <nuxt-link class="pf-c-nav__link" to="/one">Page 1</nuxt-link>
         <nuxt-link class="pf-c-nav__link" to="/two">Page 2</nuxt-link>
+        <nuxt-link class="pf-c-nav__link" to="/wizard">Wizard</nuxt-link>
       </li>
     </ul>
   </nav>
