@@ -4,7 +4,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: "Open Management Portal",
+    title: 'Open Management Portal',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,7 +19,7 @@ module.exports = {
   /*
    ** Configure the link router
    */
-  router: { 
+  router: {
     middleware: ['auth'],
     linkExactActiveClass: 'pf-m-current'
   },
@@ -30,15 +30,11 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [
-    { src: '@patternfly/patternfly/patternfly.scss', lang: 'scss' }
-  ],
+  css: [{ src: '@patternfly/patternfly/patternfly.scss', lang: 'scss' }],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/directives.js'
-  ],
+  plugins: ['~/plugins/directives.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -50,10 +46,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/auth'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   /*
    ** Build configuration
    */

@@ -7,8 +7,8 @@ describe('Button', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 
-  test("renders properly", () => {
+  test('renders properly', () => {
     const wrapper = mount(Button)
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

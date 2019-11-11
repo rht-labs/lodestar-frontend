@@ -1,11 +1,11 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 import Header from '@/components/layout/Header.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
-var mockStore
-var wrapper
+let mockStore
+let wrapper
 
 describe('Header', () => {
   beforeEach(() => {
@@ -13,19 +13,19 @@ describe('Header', () => {
       modules: {
         auth: {
           namespaced: false,
-          state: { user: { name: "name" }}
+          state: { user: { name: 'name' } }
         }
       }
-    });
-  });
+    })
+  })
 
   test('is a Vue instance', () => {
-    wrapper = shallowMount(Header, { store: mockStore, localVue });
+    wrapper = shallowMount(Header, { store: mockStore, localVue })
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 
-  test("renders properly", () => {
-    wrapper = shallowMount(Header, { store: mockStore, localVue });
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+  test('renders properly', () => {
+    wrapper = shallowMount(Header, { store: mockStore, localVue })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
