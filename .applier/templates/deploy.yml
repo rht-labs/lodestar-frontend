@@ -1,0 +1,135 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: "${NAME}"
+objects:
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: "${NAME}"
+    name: "${NAME}"
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      deploymentconfig: "${NAME}"
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: "${NAME}"
+          deploymentconfig: "${NAME}"
+      spec:
+        containers:
+        - env:
+          - name: BASE_URL
+            value: "${BASE_URL}"
+          - name: BACKEND_URL
+            value: "${BACKEND_URL}"
+          - name: CLIENT_ID
+            value: "${CLIENT_ID}"
+          - name: AUTHORIZATION_ENDPOINT
+            value: "${AUTHORIZATION_ENDPOINT}"
+          - name: USERINFO_ENDPOINT
+            value: "${USERINFO_ENDPOINT}"
+          - name: TOKEN_ENDPOINT
+            value: "${TOKEN_ENDPOINT}"
+          - name: END_SESSION_ENDPOINT
+            value: "${END_SESSION_ENDPOINT}"
+          image: "${IMAGE_NAME}:${IMAGE_TAG}"
+          imagePullPolicy: Always
+          name: "${NAME}"
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - "${NAME}"
+        from:
+          kind: ImageStreamTag
+          name: "${IMAGE_NAME}:${IMAGE_TAG}"
+      type: ImageChange
+    - type: ConfigChange
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: "${NAME}"
+    name: "${NAME}"
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      deploymentconfig: "${NAME}"
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    labels:
+      app: "${NAME}"
+    name: "${NAME}"
+  spec:
+    port:
+      targetPort: 8080-tcp
+    tls:
+      termination: edge
+    to:
+      kind: Service
+      name: "${NAME}"
+      weight: 100
+    wildcardPolicy: None
+parameters:
+- name: NAME
+  description: The name of the app to deploy
+  required: true
+- name: IMAGE_NAME
+  description: The image to deploy
+  required: true
+- name: IMAGE_TAG
+  description: The tag of the image to deploy
+  required: true
+- name: BASE_URL
+  description: The URL that the application will be served at
+  required: true
+- name: BACKEND_URL
+  description: The URL of the API server that the application should connect to
+  required: true
+- name: CLIENT_ID
+  description: The client ID that this app should connect to on the OAuth2 server
+  required: true
+- name: AUTHORIZATION_ENDPOINT
+  description: The OAuth2 endpoint that provides authorization services to this app
+  required: true
+- name: USERINFO_ENDPOINT
+  description: The OAuth2 endpoint that provides information about the currently logged in user
+  required: true
+- name: TOKEN_ENDPOINT
+  description: The OAuth2 endpoint that provides access tokens in exchange for authorization codes
+  required: true
+- name: END_SESSION_ENDPOINT
+  description: The OAuth2 endpoint that logs the currently logged-in user out
+  required: true
