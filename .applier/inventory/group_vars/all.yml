@@ -1,15 +1,30 @@
+build_vars:
+  NAME: omp-frontend
+  OUTPUT_IMAGE_NAME: omp-frontend
+  OUTPUT_IMAGE_TAG: latest
+  BUILDER_IMAGE_NAME: nodejs
+  BUILDER_IMAGE_TAG: 10
+  GIT_URL: https://github.com/rht-labs/omp-fe.git
+  GIT_REF: master
+
+deploy_vars:
+  NAME: omp-frontend
+  IMAGE_NAME: omp-frontend
+  IMAGE_TAG: latest
+  BASE_URL: https://[my-application-url].com/
+  BACKEND_URL: https://[my-application-backend-url].com/
+  CLIENT_ID: open-management-portal
+  AUTHORIZATION_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/auth
+  USERINFO_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/userinfo
+  TOKEN_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/token
+  END_SESSION_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/logout
+
 openshift_cluster_content:
 - object: omp-frontend
   content:
-  - name: imagestream
-    file: '{{ inventory_dir }}/../files/omp-frontend-imagestream.yml'
-  - name: buildconfig
-    template: '{{ inventory_dir }}/../templates/omp-frontend-buildconfig.yml'
-    params: '{{ inventory_dir }}/../params/omp-frontend-buildconfig'
-  - name: deploymentconfig
-    template: '{{ inventory_dir }}/../templates/omp-frontend-deploymentconfig.yml'
-    params: '{{ inventory_dir }}/../params/omp-frontend-deploymentconfig'
-  - name: service
-    file: '{{ inventory_dir }}/../files/omp-frontend-service.yml'
-  - name: route
-    file: '{{ inventory_dir }}/../files/omp-frontend-route.yml'
+  - name: build
+    template: '{{ inventory_dir }}/../templates/build.yml'
+    params_from_vars: "{{ build_vars }}"
+  - name: deployment
+    template: '{{ inventory_dir }}/../templates/deploy.yml'
+    params_from_vars: "{{ deploy_vars }}"
