@@ -9,12 +9,25 @@ The following environment variables are available:
 | Name | Example Value | Required |
 |------|---------------|----------|
 | BASE_URL | https://[my-omp-domain].com/ | True |
+| BACKEND_URL | https://[my-api-domain].com/ | True |
 | AUTH_CLIENT_ID | open-management-portal | True |
 | AUTHORIZATION_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/auth | True |
 | USERINFO_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/userinfo | True |
 | TOKEN_ENDPOINT | https://[my-keycloak-domain].com/auth/realms/omp/protocol/openid-connect/token | True |
 
 * These examples are based off of a realm named `omp` and a client named `open-management-portal` in Keycloak. For more information about how your Keycloak client is configured and the appropriate URLs to use, navigate to `[my-keycloak-domain]/auth/realms/[my-realm]/.well-known/openid-configuration`.
+
+## Deployment
+
+This project includes an `openshift-applier` inventory. To use it, make sure that you are logged in to the cluster and that you customize the variables in `.applier/inventory/group_vars/all.yml` - namely make sure that `deploy_vars` uses the correct endpoints. Once these are configured, you can deploy the project with:
+
+```bash
+$ cd .applier/
+
+$ ansible-galaxy install -r requirements.yml --roles-path=roles --force
+
+$ ansible-playbook apply.yml -i inventory/
+```
 
 ## Components
 
