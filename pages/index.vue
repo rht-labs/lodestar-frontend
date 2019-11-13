@@ -5,20 +5,14 @@
       <h2 class="subtitle">
         Welcome to the OMP. You can request resources here!
       </h2>
-      <div class="links">
-        <Button text="this is my patternfly button!" />
-      </div>
+      <div class="links"></div>
     </div>
   </div>
 </template>
 
 <script>
-import Button from '~/components/patternfly/Button.vue'
-
 export default {
-  components: {
-    Button
-  }
+  components: {}
 }
 </script>
 

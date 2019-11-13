@@ -7,8 +7,8 @@
     <ul class="pf-c-nav__list">
       <li class="pf-c-nav__item">
         <nuxt-link class="pf-c-nav__link" to="/">Home</nuxt-link>
-        <nuxt-link class="pf-c-nav__link" to="/one">Page 1</nuxt-link>
-        <nuxt-link class="pf-c-nav__link" to="/two">Page 2</nuxt-link>
+        <nuxt-link class="pf-c-nav__link" to="/one">Test Vuex Store</nuxt-link>
+        <nuxt-link class="pf-c-nav__link" to="/two">Test Backend</nuxt-link>
       </li>
     </ul>
   </nav>
