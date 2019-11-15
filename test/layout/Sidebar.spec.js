@@ -1,11 +1,11 @@
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Sidebar from '@/components/layout/Sidebar.vue'
-import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 const localVue = createLocalVue()
 
 localVue.component('nuxt-link', {
-  props:   ['to'],
-  template: '<a href="#"><slot>NuxtLink</slot></a>',
+  props: ['to'],
+  template: '<a href="#"><slot>NuxtLink</slot></a>'
 })
 
 describe('Sidebar', () => {
@@ -17,11 +17,11 @@ describe('Sidebar', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 
-  test("renders properly", () => {
+  test('renders properly', () => {
     const wrapper = shallowMount(Sidebar, {
       stubs: ['nuxt-link'],
       localVue
     })
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

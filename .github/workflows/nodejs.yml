@@ -1,0 +1,43 @@
+name: Node CI
+
+on:
+- push
+- pull_request
+    
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: run-linter
+      run: |
+        yarn install
+        yarn lint
+      env:
+        CI: true
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        yarn install
+        yarn build
+        yarn test
+      env:
+        CI: true
