@@ -28,8 +28,4 @@ export default {
 }
 </script>
 
-<style>
-/* .pf-c-page {
-  min-height: 100vh;
-} */
-</style>
+<style></style>

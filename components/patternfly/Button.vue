@@ -1,17 +1,12 @@
 <template>
   <button class="pf-c-button pf-m-primary" @click="click">
-    {{ text }}
+    <slot />
   </button>
 </template>
 
 <script>
 export default {
-  props: {
-    text: {
-      type: String,
-      default: 'Button!'
-    }
-  },
+  props: {},
   methods: {
     click() {
       this.$emit('click')

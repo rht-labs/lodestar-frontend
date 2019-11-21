@@ -12,9 +12,13 @@
             Hello! The counter is currently set to
             {{ this.$store.state.counter }}
             <br /><br />
-            <Button text="Increment counter in store" @click="increment" />
+            <Button @click="increment">
+              Increment counter in store
+            </Button>
             <br /><br />
-            <Button text="Decrement counter in store" @click="decrement" />
+            <Button @click="decrement">
+              Decrement counter in store
+            </Button>
           </h1>
         </div>
       </div>

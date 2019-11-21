@@ -6,7 +6,9 @@
         Welcome to the OMP. You can request resources here!
       </h2>
       <div class="links">
-        <Button text="Log In Using SSO" @click="login" />
+        <Button @click="login">
+          Log In Using SSO!
+        </Button>
       </div>
     </div>
   </div>

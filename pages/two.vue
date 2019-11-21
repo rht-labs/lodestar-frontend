@@ -23,11 +23,9 @@
                 has identified you as {{ user }}!
               </h4>
             </div>
-            <Button
-              v-if="!authenticated"
-              text="Attempt request to backend"
-              @click="authenticate"
-            />
+            <Button v-if="!authenticated" @click="authenticate">
+              Attempt request to backend
+            </Button>
           </h1>
         </div>
       </div>

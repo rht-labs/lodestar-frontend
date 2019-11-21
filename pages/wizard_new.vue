@@ -1,0 +1,60 @@
+<template>
+  <main
+    id="main-content-page-default-nav"
+    role="main"
+    class="pf-c-page__main"
+    tabindex="-1"
+  >
+    <section class="pf-c-page__main-section pf-m-light">
+      <div class="pf-c-content">
+        <h1>New Project</h1>
+        <p>Set up a new project to request resources</p>
+      </div>
+    </section>
+    <Wizard :navigation="navItems" initialState="basic-information">
+      <template slot="basic-information">
+        What is your name
+        <input type="text" />
+      </template>
+      <template slot="point-of-contact"></template>
+    </Wizard>
+  </main>
+</template>
+
+<script>
+import Wizard from '~/components/patternfly/Wizard.vue'
+
+const navItems = [
+  {
+    key: 'basic-information',
+    displayName: 'Basic Information'
+  },
+  {
+    key: 'point-of-contact',
+    displayName: 'Point of Contact'
+  },
+  {
+    key: 'openshift-cluster',
+    displayName: 'OpenShift Cluster'
+  },
+  {
+    key: 'tools-and-services',
+    displayName: 'Tools & Services'
+  },
+  {
+    key: 'users',
+    displayName: 'Users'
+  }
+]
+
+export default {
+  components: {
+    Wizard
+  },
+  data: () => {
+    return {
+      navItems
+    }
+  }
+}
+</script>
