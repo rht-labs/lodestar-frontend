@@ -48,10 +48,7 @@
           <button
             class="pf-c-button pf-m-primary"
             type="submit"
-            :disabled="
-              this.currentState ===
-                this.navigation[this.navigation.length - 1].key
-            "
+            :disabled="currentState === navigation[navigation.length - 1].key"
             @click="next"
           >
             Next
@@ -59,7 +56,7 @@
           <button
             class="pf-c-button pf-m-secondary"
             type="button"
-            :disabled="this.currentState === this.navigation[0].key"
+            :disabled="currentState === navigation[0].key"
             @click="prev"
           >
             Back

@@ -13,10 +13,69 @@
     </section>
     <Wizard :navigation="navItems" initialState="basic-information">
       <template slot="basic-information">
-        What is your name
-        <input type="text" />
+        <form novalidate class="pf-c-form">
+          <div class="pf-c-form__group">
+            <label class="pf-c-form__label" for="customer-name">
+              <span class="pf-c-form__label-text">Customer</span>
+              <span class="pf-c-form__label-required" aria-hidden="true">
+                &#42;
+              </span>
+            </label>
+            <input
+              class="pf-c-form-control"
+              required
+              type="text"
+              id="customer-name"
+              name="customer-name"
+            />
+            <p class="pf-c-form__helper-text" aria-live="polite">
+              The customer name to use for this residency
+            </p>
+          </div>
+          <div class="pf-c-form__group">
+            <label class="pf-c-form__label" for="customer-location">
+              <span class="pf-c-form__label-text">Location</span>
+              <span class="pf-c-form__label-required" aria-hidden="true">
+                &#42;
+              </span>
+            </label>
+            <input
+              class="pf-c-form-control"
+              required
+              type="email"
+              id="customer-location"
+              name="customer-location"
+            />
+            <p class="pf-c-form__helper-text" aria-live="polite">
+              Where the residency will be held
+            </p>
+          </div>
+          <div class="pf-c-form__group">
+            <label class="pf-c-form__label" for="simple-form-number">
+              <span class="pf-c-form__label-text">Phone number</span>
+            </label>
+            <input
+              class="pf-c-form-control"
+              type="tel"
+              id="simple-form-number"
+              name="simple-form-number"
+              placeholder="555-555-5555"
+            />
+          </div>
+        </form>
       </template>
-      <template slot="point-of-contact"></template>
+      <template slot="point-of-contact">
+        point of contact stuff
+      </template>
+      <template slot="openshift-cluster">
+        openshift stuff
+      </template>
+      <template slot="tools-and-services">
+        tools and stuff
+      </template>
+      <template slot="users">
+        users and stuff
+      </template>
     </Wizard>
   </main>
 </template>
