@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button renders properly 1`] = `
-"<button class=\\"pf-c-button pf-m-primary\\">
-  Button!
-</button>"
-`;
+exports[`Button renders properly 1`] = `"<button class=\\"pf-c-button pf-m-primary\\"></button>"`;
