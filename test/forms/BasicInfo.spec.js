@@ -14,6 +14,21 @@ const testProps = {
   ]
 }
 
+const TestDate = Date
+
+beforeEach(() => {
+  global.Date = class extends TestDate {
+    constructor() {
+      super()
+      return new TestDate('01 Jan 1970 00:00:00 GMT')
+    }
+  }
+})
+
+afterEach(() => {
+  global.Date = TestDate
+})
+
 describe('BasicInfo', () => {
   test('is a Vue instance', () => {
     const wrapper = shallowMount(BasicInfo, {

@@ -9,7 +9,7 @@ exports[`BasicInfo renders properly 1`] = `
         *
       </span></label> <input required=\\"required\\" type=\\"email\\" class=\\"pf-c-form-control\\"> <p aria-live=\\"polite\\" class=\\"pf-c-form__helper-text\\">
       Where the residency will be held
-    </p></div> <div class=\\"pf-c-form__group\\"><label for=\\"simple-form-number\\" class=\\"pf-c-form__label\\"><span class=\\"pf-c-form__label-text\\">Dates</span></label> <br> <client-only-stub placeholdertag=\\"div\\"><date-picker-stub value=\\"0,818035920000\\" defaultvalue=\\"Tue Nov 26 2019 00:00:00 GMT-0800 (Pacific Standard Time)\\" disableddate=\\"function _default() {
+    </p></div> <div class=\\"pf-c-form__group\\"><label for=\\"simple-form-number\\" class=\\"pf-c-form__label\\"><span class=\\"pf-c-form__label-text\\">Dates</span></label> <br> <client-only-stub placeholdertag=\\"div\\"><date-picker-stub value=\\"0,818035920000\\" defaultvalue=\\"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)\\" disableddate=\\"function _default() {
           return false;
         }\\" type=\\"date\\" getclasses=\\"function _default() {
           return [];
