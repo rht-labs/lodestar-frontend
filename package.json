@@ -26,7 +26,8 @@
     "express": "^4.16.4",
     "node-sass": "^4.13.0",
     "nuxt": "^2.0.0",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "vue2-datepicker": "^3.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

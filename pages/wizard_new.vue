@@ -27,6 +27,7 @@
               type="text"
               id="customer-name"
               name="customer-name"
+              v-model="customer"
             />
             <p class="pf-c-form__helper-text" aria-live="polite">
               The customer name to use for this residency
@@ -45,6 +46,7 @@
               type="email"
               id="customer-location"
               name="customer-location"
+              v-model="location"
             />
             <p class="pf-c-form__helper-text" aria-live="polite">
               Where the residency will be held
@@ -52,15 +54,18 @@
           </div>
           <div class="pf-c-form__group">
             <label class="pf-c-form__label" for="simple-form-number">
-              <span class="pf-c-form__label-text">Phone number</span>
+              <span class="pf-c-form__label-text">Dates</span>
             </label>
-            <input
-              class="pf-c-form-control"
-              type="tel"
-              id="simple-form-number"
-              name="simple-form-number"
-              placeholder="555-555-5555"
-            />
+            <br />
+            <template>
+              <client-only>
+                <date-picker
+                  v-model="dates"
+                  input-class="pf-c-form-control"
+                  range
+                />
+              </client-only>
+            </template>
           </div>
         </form>
       </template>
@@ -112,8 +117,26 @@ export default {
   },
   data: () => {
     return {
-      navItems
+      navItems,
+      dates: '',
+      customer: '',
+      location: ''
     }
   }
 }
 </script>
+
+<style>
+.pf-c-form-control {
+  width: 100%;
+}
+.mx-datepicker {
+  width: 100%;
+}
+.mx-input-wrapper {
+  width: 100%;
+}
+td.cell {
+  text-align: center;
+}
+</style>

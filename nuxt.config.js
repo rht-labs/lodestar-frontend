@@ -34,7 +34,10 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/directives.js'],
+  plugins: [
+    '~/plugins/directives.js',
+    { src: '~/plugins/datepicker', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
