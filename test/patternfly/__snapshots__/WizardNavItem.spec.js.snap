@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WizardNavItem renders properly 1`] = `"<li class=\\"pf-c-wizard__nav-item\\"><a class=\\"pf-c-wizard__nav-link pf-m-current\\"></a></li>"`;

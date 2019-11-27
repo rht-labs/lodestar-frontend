@@ -59,7 +59,10 @@
 </template>
 
 <script>
+import ClientOnly from 'vue-client-only'
+
 export default {
+  components: { ClientOnly },
   props: ['customer', 'location', 'dates']
 }
 </script>

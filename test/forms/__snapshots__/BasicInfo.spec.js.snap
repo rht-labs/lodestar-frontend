@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BasicInfo renders properly 1`] = `
+"<form novalidate=\\"novalidate\\" class=\\"pf-c-form\\"><div class=\\"pf-c-form__group\\"><label for=\\"customer-name\\" class=\\"pf-c-form__label\\"><span class=\\"pf-c-form__label-text\\">Customer</span> <span aria-hidden=\\"true\\" class=\\"pf-c-form__label-required\\">
+        *
+      </span></label> <input required=\\"required\\" type=\\"text\\" class=\\"pf-c-form-control\\"> <p aria-live=\\"polite\\" class=\\"pf-c-form__helper-text\\">
+      The customer name to use for this residency
+    </p></div> <div class=\\"pf-c-form__group\\"><label for=\\"customer-location\\" class=\\"pf-c-form__label\\"><span class=\\"pf-c-form__label-text\\">Location</span> <span aria-hidden=\\"true\\" class=\\"pf-c-form__label-required\\">
+        *
+      </span></label> <input required=\\"required\\" type=\\"email\\" class=\\"pf-c-form-control\\"> <p aria-live=\\"polite\\" class=\\"pf-c-form__helper-text\\">
+      Where the residency will be held
+    </p></div> <div class=\\"pf-c-form__group\\"><label for=\\"simple-form-number\\" class=\\"pf-c-form__label\\"><span class=\\"pf-c-form__label-text\\">Dates</span></label> <br> <client-only-stub placeholdertag=\\"div\\"><date-picker-stub value=\\"0,818035920000\\" defaultvalue=\\"Tue Nov 26 2019 00:00:00 GMT-0800 (Pacific Standard Time)\\" disableddate=\\"function _default() {
+          return false;
+        }\\" type=\\"date\\" getclasses=\\"function _default() {
+          return [];
+        }\\" titleformat=\\"YYYY-MM-DD\\" format=\\"YYYY-MM-DD\\" timetitleformat=\\"YYYY-MM-DD\\" disabledtime=\\"function _default() {
+          return false;
+        }\\" hourstep=\\"1\\" minutestep=\\"1\\" secondstep=\\"1\\" valuetype=\\"date\\" range=\\"true\\" rangeseparator=\\" ~ \\" placeholder=\\"\\" editable=\\"true\\" clearable=\\"true\\" inputclass=\\"pf-c-form-control\\" inputattr=\\"[object Object]\\" appendtobody=\\"true\\" popupstyle=\\"[object Object]\\" confirmtext=\\"OK\\" shortcuts=\\"\\"></date-picker-stub></client-only-stub> <p aria-live=\\"polite\\" class=\\"pf-c-form__helper-text\\">
+      When the residency will be held
+    </p></div></form>"
+`;
