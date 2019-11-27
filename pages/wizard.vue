@@ -11,7 +11,7 @@
         <p>Set up a new project to request resources</p>
       </div>
     </section>
-    <Wizard :navigation="navItems" initialState="basic-information">
+    <Wizard :navigation="navItems" initial-state="basic-information">
       <template slot="basic-information">
         <BasicInfo v-bind.sync="basic"></BasicInfo>
       </template>

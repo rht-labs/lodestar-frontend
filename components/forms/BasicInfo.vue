@@ -8,10 +8,10 @@
         </span>
       </label>
       <input
+        v-model="customer"
         class="pf-c-form-control"
         required
         type="text"
-        v-model="customer"
         @change="$emit('update:customer', customer)"
       />
       <p class="pf-c-form__helper-text" aria-live="polite">
@@ -26,10 +26,10 @@
         </span>
       </label>
       <input
+        v-model="location"
         class="pf-c-form-control"
         required
         type="email"
-        v-model="location"
         @change="$emit('update:location', location)"
       />
       <p class="pf-c-form__helper-text" aria-live="polite">
@@ -63,7 +63,26 @@ import ClientOnly from 'vue-client-only'
 
 export default {
   components: { ClientOnly },
-  props: ['customer', 'location', 'dates']
+  props: {
+    customer: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    location: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    dates: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  }
 }
 </script>
 

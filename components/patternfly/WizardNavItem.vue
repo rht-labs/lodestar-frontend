@@ -2,7 +2,7 @@
   <li class="pf-c-wizard__nav-item">
     <a
       class="pf-c-wizard__nav-link"
-      v-bind:class="{ 'pf-m-current': isCurrent }"
+      :class="{ 'pf-m-current': isCurrent }"
       @click="$emit('navigate', item.key)"
     >
       <slot />
@@ -12,6 +12,19 @@
 
 <script>
 export default {
-  props: ['item', 'isCurrent']
+  props: {
+    item: {
+      type: Object,
+      default: () => {
+        return {
+          key: undefined
+        }
+      }
+    },
+    isCurrent: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>

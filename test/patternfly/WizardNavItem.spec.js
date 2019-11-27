@@ -3,11 +3,9 @@ import WizardNavItem from '@/components/patternfly/WizardNavItem.vue'
 
 const testProps = {
   isCurrent: true,
-  item: [
-    {
-      key: 'first-form'
-    }
-  ]
+  item: {
+    key: 'first-form'
+  }
 }
 
 describe('WizardNavItem', () => {

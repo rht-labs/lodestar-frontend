@@ -75,7 +75,20 @@ export default {
   components: {
     WizardNavItem
   },
-  props: ['navigation', 'initialState'],
+  props: {
+    navigation: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    initialState: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    }
+  },
   data() {
     return {
       currentState: this.initialState
