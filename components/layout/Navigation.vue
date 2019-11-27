@@ -9,7 +9,7 @@
         <nuxt-link class="pf-c-nav__link" to="/">Home</nuxt-link>
         <nuxt-link class="pf-c-nav__link" to="/one">Test Vuex Store</nuxt-link>
         <nuxt-link class="pf-c-nav__link" to="/two">Test Backend</nuxt-link>
-        <nuxt-link class="pf-c-nav__link" to="/wizard">Wizard Mockup</nuxt-link>
+        <nuxt-link class="pf-c-nav__link" to="/wizard">Wizard</nuxt-link>
       </li>
     </ul>
   </nav>
