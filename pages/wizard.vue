@@ -16,7 +16,7 @@
         <BasicInfo v-bind.sync="basic"></BasicInfo>
       </template>
       <template slot="point-of-contact">
-        point of contact stuff
+        <ContactInfo v-bind.sync="contact"></ContactInfo>
       </template>
       <template slot="openshift-cluster">
         openshift stuff
@@ -34,6 +34,7 @@
 <script>
 import Wizard from '~/components/patternfly/Wizard.vue'
 import BasicInfo from '~/components/forms/BasicInfo.vue'
+import ContactInfo from '~/components/forms/ContactInfo.vue'
 
 const navItems = [
   {
@@ -61,7 +62,8 @@ const navItems = [
 export default {
   components: {
     Wizard,
-    BasicInfo
+    BasicInfo,
+    ContactInfo
   },
   data: () => {
     return {
@@ -70,6 +72,20 @@ export default {
         dates: '',
         customer: '',
         location: ''
+      },
+      contact: {
+        engagementLead: {
+          name: '',
+          phone: ''
+        },
+        techLead: {
+          name: '',
+          phone: ''
+        },
+        customer: {
+          name: '',
+          phone: ''
+        }
       }
     }
   }
