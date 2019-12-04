@@ -91,7 +91,7 @@ export default {
   width: 100%;
 }
 .mx-datepicker {
-  width: 100%;
+  width: 100% !important;
 }
 .mx-input-wrapper {
   width: 100%;
