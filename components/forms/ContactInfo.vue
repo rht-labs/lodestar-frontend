@@ -23,13 +23,13 @@
           &#42;
         </span>
       </label>
-      <input
+      <vue-tel-input
         v-model="engagementLead.phone"
-        class="pf-c-form-control"
-        required
-        type="text"
+        input-classes="pf-c-form-control"
+        placeholder=""
+        wrapper-classes="phone-border"
         @change="$emit('update:engagementLead.phone', engagementLead.phone)"
-      />
+      ></vue-tel-input>
     </div>
     <div class="pf-c-form__group">
       <label class="pf-c-form__label" for="customer-name">
@@ -53,13 +53,13 @@
           &#42;
         </span>
       </label>
-      <input
+      <vue-tel-input
         v-model="techLead.phone"
-        class="pf-c-form-control"
-        required
-        type="text"
+        input-classes="pf-c-form-control"
+        placeholder=""
+        wrapper-classes="phone-border"
         @change="$emit('update:techLead.phone', techLead.phone)"
-      />
+      ></vue-tel-input>
     </div>
     <div class="pf-c-form__group">
       <label class="pf-c-form__label" for="customer-name">
@@ -85,20 +85,24 @@
           &#42;
         </span>
       </label>
-      <input
+      <vue-tel-input
         v-model="customer.phone"
-        class="pf-c-form-control"
-        required
-        type="text"
+        input-classes="pf-c-form-control"
+        placeholder=""
+        wrapper-classes="phone-border"
         @change="$emit('update:customer.phone', customer.phone)"
-      />
+      ></vue-tel-input>
     </div>
   </form>
 </template>
 
 <script>
+import { VueTelInput } from 'vue-tel-input'
+
 export default {
-  components: {},
+  components: {
+    VueTelInput
+  },
   props: {
     engagementLead: {
       type: Object,
@@ -132,6 +136,22 @@ export default {
 </script>
 
 <style>
+.phone-border {
+  border: 1px solid rgb(237, 237, 237) !important;
+  border-bottom: 1px solid rgb(138, 141, 144) !important;
+}
+.phone-border:hover {
+  box-shadow: none !important;
+  border-bottom: 1px solid rgb(0, 102, 204) !important;
+}
+.phone-border:focus-within {
+  box-shadow: none !important;
+  border-bottom: 2px solid rgb(0, 102, 204) !important;
+}
+.phone-border:active {
+  box-shadow: none !important;
+  border-bottom: 2px solid rgb(0, 102, 204) !important;
+}
 .title-spacer {
   margin-top: 10px;
 }

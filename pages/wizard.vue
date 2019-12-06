@@ -69,7 +69,7 @@ export default {
     return {
       navItems,
       basic: {
-        dates: '',
+        dates: [],
         customer: '',
         location: ''
       },
