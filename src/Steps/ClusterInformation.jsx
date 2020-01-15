@@ -36,7 +36,7 @@ const clusterSize = [
 
 const ClusterInformation = () => {
   return(
-    <Form>
+    <Form isHorizontal>
       <FormGroup
          label="Cloud Provider"
          isRequired

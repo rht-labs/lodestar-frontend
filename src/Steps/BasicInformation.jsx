@@ -1,11 +1,18 @@
 import React from 'react';
-import { Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { CalendarAltIcon } from '@patternfly/react-icons';
+import {
+  Form,
+  FormGroup,
+  InputGroup,
+  InputGroupText,
+  TextInput
+} from '@patternfly/react-core';
 
 const BasicInformation = () => {
   return(
-    <Form>
+    <Form isHorizontal>
       <FormGroup
-         label="Customer/Company Name"
+         label="Customer Name"
          isRequired
          fieldId="customer-name"
          helperText="The customer name to use for this residency"
@@ -42,6 +49,36 @@ const BasicInformation = () => {
           id="residency-location"
           name="residency-location"
         />
+      </FormGroup>
+      <FormGroup
+         label="Residency Dates"
+         isRequired
+         fieldId="residency-location"
+      >
+        <InputGroup
+           label="Residency Duration"
+           isRequired
+           fieldId="residency-duration"
+        >
+          <InputGroupText
+            component="label"
+            htmlFor="residency-duration"
+          >
+            <CalendarAltIcon />
+          </InputGroupText>
+           <TextInput
+            name="residency-start-date"
+            id="residency-start-date"
+            type="date"
+            aria-label="Residency start date"
+          />
+           <TextInput
+            name="residency-end-date"
+            id="residency-end-date"
+            type="date"
+            aria-label="Residency end date"
+          />
+        </InputGroup>
       </FormGroup>
     </Form>
   )

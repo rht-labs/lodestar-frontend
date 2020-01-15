@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import {
   Page,
@@ -7,25 +7,19 @@ import {
   PageSection,
   Wizard
 } from '@patternfly/react-core';
-import BasicInformation from  './BasicInformation';
-import ClusterInformation from './ClusterInformation';
-import PointOfContact from './PointOfContact';
+import BasicInformation from  './Steps/BasicInformation';
+import ClusterInformation from './Steps/ClusterInformation';
+import PointOfContact from './Steps/PointOfContact';
 
 const App = () => {
-  const [isNavOpen, toggleNav] = useState(false);
   return (
     <Page
       header={
-        <PageHeader
-          showNavToggle
-          isNavOpen={isNavOpen}
-          onNavToggle={toggleNav}
-        />
+        <PageHeader/>
       }
       sidebar={
         <PageSidebar
-          nav="Navigation"
-          isNavOpen={isNavOpen}
+          isNavOpen
           theme="dark"
         />
       }
@@ -34,14 +28,12 @@ const App = () => {
         style={{height: '92vh'}}
         >
         <Wizard
+          isCompactNav
           isInPage
-          onClose={() => console.log('closed')}
           steps={[
-            { name: 'Basic Information', component: <BasicInformation/> },
-            { name: 'Point of Contact', component: <PointOfContact/> },
-            { name: 'Openshift Cluster', component: <ClusterInformation/> },
-            { name: 'Tools and Services', component: <p>Step 4</p> },
-            { name: 'Users', component: <p>Final Step</p>, hideCancelButton: true, nextButtonText: 'Done' }
+            { name: 'Basic Information', component: <BasicInformation/>, hideCancelButton: true },
+            { name: 'Point of Contact', component: <PointOfContact/>, hideCancelButton: true },
+            { name: 'Openshift Cluster', component: <ClusterInformation/>, hideCancelButton: true },
           ]}
         />
       </PageSection>

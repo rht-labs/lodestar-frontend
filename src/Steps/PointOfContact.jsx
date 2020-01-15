@@ -3,7 +3,7 @@ import { Form, FormGroup, TextInput } from '@patternfly/react-core';
 
 const PointOfContact = () => {
   return(
-    <Form>
+    <Form isHorizontal>
       <FormGroup
          label="Labs Engagement Lead Name"
          isRequired
