@@ -1,0 +1,60 @@
+---
+
+- name: "Set default values"
+  set_fact:
+    target_namespace: ''
+    oc_action: "{{ content.action | default(default_oc_action) }}"
+    file: "{{ content.file | default('') }}"
+    template: "{{ content.template | default('') }}"
+    params: "{{ content.params | default('') }}"
+    params_from_vars: "{{ content.params_from_vars | default({}) }}"
+    oc_ignore_unknown_parameters: "{{ content.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
+    flags: "{{ content.flags | default('') }}"
+    no_log: false
+
+- name: "Set oc_action to delete when in deprovision mode"
+  set_fact:
+    oc_action: "delete"
+  when:
+    - not provision|bool
+
+- name: "Set no_log when specified"
+  set_fact:
+    no_log: true
+  when: (entry.no_log is defined and entry.no_log|bool) or (content.no_log is defined and content.no_log|bool)
+
+- name: "Set the target namespace option if supplied"
+  set_fact:
+    target_namespace: "-n {{ content.namespace }}"
+  when:
+    - content.namespace is defined
+    - content.namespace|trim != ''
+
+- name: "Include any pre-processing role(s) before applying file and/or template"
+  include_tasks: pre-post-step.yml
+  with_items:
+    - "{{ content.pre_steps | default('') }}"
+  loop_control:
+    loop_var: step
+
+- name: "Process Jinja Template (if applicable)"
+  include_tasks: process-jinja.yml
+  when: template | regex_search('\.j2$') or file | regex_search('\.j2$')
+
+- name: "Process Template (if applicable)"
+  include_tasks: process-template.yml
+  when:
+    - template|trim != ''
+    - params|trim != '' or params_from_vars|trim != ''
+
+- name: "Process File (if applicable)"
+  include_tasks: process-file.yml
+  when:
+    - file|trim != ''
+
+- name: "Include any post-processing role(s) after applying file and/or template"
+  include_tasks: pre-post-step.yml
+  with_items:
+    - "{{ content.post_steps | default('') }}"
+  loop_control:
+    loop_var: step

@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: "${NAME}"
+objects:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: "${OUTPUT_IMAGE_NAME}"
+  spec:
+    lookupPolicy:
+      local: false
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    name: "${NAME}"
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: "${OUTPUT_IMAGE_NAME}:${OUTPUT_IMAGE_TAG}"
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      git:
+        ref: "${GIT_REF}"
+        uri: "${GIT_URL}"
+      type: Git
+      dockerfile: |
+        FROM node:12.2.0-alpine AS builder
+        WORKDIR /app
+        COPY . /app
+        RUN npm install && \
+            npm run build
+
+        FROM registry.access.redhat.com/rhscl/httpd-24-rhel7
+        COPY --from=builder /app/build /var/www/html
+        EXPOSE 8080
+    strategy:
+      type: "Docker"
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - type: ConfigChange
+parameters:
+- name: NAME
+  description: The name of the resources to be created
+  required: true
+- name: OUTPUT_IMAGE_NAME
+  description: The imagestream to push the image to when it has been built
+  required: true
+- name: OUTPUT_IMAGE_TAG
+  description: The tag to give the image when it has been built
+  required: true
+- name: GIT_URL
+  description: The Git URL of the project containing the OMP frontend
+  required: true
+- name: GIT_REF
+  description: The git reference to pull for building the app
+  required: true

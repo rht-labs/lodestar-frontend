@@ -1,0 +1,28 @@
+build_vars:
+  NAME: omp-frontend
+  OUTPUT_IMAGE_NAME: omp-frontend
+  OUTPUT_IMAGE_TAG: latest
+  GIT_URL: https://github.com/rht-labs/residency-manager.git
+  GIT_REF: master
+
+deploy_vars:
+  NAME: omp-frontend
+  IMAGE_NAME: omp-frontend
+  IMAGE_TAG: latest
+  BASE_URL: https://[my-application-url].com/
+  BACKEND_URL: https://[my-application-backend-url].com/
+  CLIENT_ID: open-management-portal
+  AUTHORIZATION_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/auth
+  USERINFO_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/userinfo
+  TOKEN_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/token
+  END_SESSION_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/logout
+
+openshift_cluster_content:
+- object: omp-frontend
+  content:
+  - name: build
+    template: '{{ inventory_dir }}/../templates/build.yml'
+    params_from_vars: "{{ build_vars }}"
+  - name: deployment
+    template: '{{ inventory_dir }}/../templates/deploy.yml'
+    params_from_vars: "{{ deploy_vars }}"

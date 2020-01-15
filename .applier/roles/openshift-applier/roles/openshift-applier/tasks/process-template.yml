@@ -1,0 +1,91 @@
+---
+
+- name: "Reset Command Line Options"
+  set_fact:
+    param_file_list: []
+    oc_param_option: ''
+
+- name: "Pre-process params file (if applicable)"
+  block:
+    - name: "Check whether parameters file exists"
+      stat:
+        path: "{{ params }}"
+      ignore_errors: true
+      register: params_result
+      delegate_to: localhost
+    - name: "Fail when params file does  not exist"
+      fail:
+        msg: "{{ params }} - params file doesn't exist."
+      when:
+        - params_result.stat.exists == False
+    # Append '/*' if this is a directory as we'd want it to expand to all files in the dir
+    - name: "Append '/*' when location is a directory"
+      set_fact:
+        params: "{{ params }}/*"
+      when:
+        - params_result.stat.isdir
+    # Build a list of '--param-file' command line parameters to iterate
+    - name: "Build a list --param-file command line parameters"
+      set_fact:
+        param_file_list: "{{ param_file_list + [ item ] }}"
+      with_fileglob:
+        - "{{ params }}"
+  when:
+    - params|trim != ''
+
+- name: "Change 'params_from_vars' fact (if applicable) into command line parameters"
+  set_fact:
+    oc_param_option: "{{ oc_param_option }} --param='{{ item.key }}={{ item.value }}'"
+  with_dict: "{{ params_from_vars }}"
+
+- name: "Copy template and param file(s) to remote location - if required"
+  block:
+    - name: Clear process file facts"
+      set_fact:
+        processed_file_facts: []
+    - name: "Copy inventory file to remote"
+      include_tasks: copy-inventory-file-to-remote.yml
+      vars:
+        file_path: "{{ template }}"
+    - name: "Set template file facts"
+      set_fact:
+        template_facts: "{{ processed_file_facts|first }}"
+        processed_file_facts: []
+    - name: "Copy inventory file list to remote"
+      include_tasks: copy-inventory-file-to-remote.yml
+      vars:
+        file_path: "{{ item }}"
+      with_items:
+        - "{{ param_file_list }}"
+    - name: "Set param file facts"
+      set_fact:
+        # If no file has been processed, the 'ternary' filter will assign an empty 'oc_path'
+        # This will ensure Ansible is happy on the conditionals + ensure the loop below runs at least once.
+        param_facts: "{{ (processed_file_facts|length == 0) | ternary([{ 'oc_path': '' }], processed_file_facts) }}"
+        processed_file_facts: []
+
+- name: "{{ oc_action | capitalize }} OpenShift objects based on template with params for '{{ entry.object }} : {{ content.name | default(template | basename) }}'"
+  shell: >
+    oc process \
+       {{ template_facts.oc_process_local }} \
+       {{ template_facts.oc_option_f }} {{ template_facts.oc_path }} \
+       {{ target_namespace }} \
+       {{ oc_param_option }} \
+       {{ (oc_param_file_item.oc_path|trim == '') | ternary('', ' --param-file="' + oc_param_file_item.oc_path + '"') }} \
+       {{ oc_ignore_unknown_parameters | ternary('--ignore-unknown-parameters', '') }} \
+       | \
+    {{ client }} {{ oc_action }} \
+       {{ target_namespace }} \
+       -f - \
+       {{ (oc_action | regex_search('delete')) | ternary(' --ignore-not-found', '') }} \
+       {{ (client == 'kubectl' and not (oc_action | regex_search('delete|patch'))) | ternary(' --validate=false', '') }} \
+       {{ flags }}
+  register: command_result
+  no_log: "{{ no_log }}"
+  failed_when:
+    - command_result.rc != 0
+    - "'AlreadyExists' not in command_result.stderr"
+  with_items:
+    - "{{ param_facts }}"
+  loop_control:
+    loop_var: 'oc_param_file_item'
