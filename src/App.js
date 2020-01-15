@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import '@patternfly/react-core/dist/styles/base.css';
+import {
+  Page,
+  PageHeader,
+  PageSidebar,
+  PageSection,
+  Wizard
+} from '@patternfly/react-core';
+import BasicInformation from  './BasicInformation';
+import ClusterInformation from './ClusterInformation';
+import PointOfContact from './PointOfContact';
 
-function App() {
+const App = () => {
+  const [isNavOpen, toggleNav] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Page
+      header={
+        <PageHeader
+          showNavToggle
+          isNavOpen={isNavOpen}
+          onNavToggle={toggleNav}
+        />
+      }
+      sidebar={
+        <PageSidebar
+          nav="Navigation"
+          isNavOpen={isNavOpen}
+          theme="dark"
+        />
+      }
+    >
+      <PageSection
+        style={{height: '92vh'}}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Wizard
+          isInPage
+          onClose={() => console.log('closed')}
+          steps={[
+            { name: 'Basic Information', component: <BasicInformation/> },
+            { name: 'Point of Contact', component: <PointOfContact/> },
+            { name: 'Openshift Cluster', component: <ClusterInformation/> },
+            { name: 'Tools and Services', component: <p>Step 4</p> },
+            { name: 'Users', component: <p>Final Step</p>, hideCancelButton: true, nextButtonText: 'Done' }
+          ]}
+        />
+      </PageSection>
+    </Page>
   );
 }
 
