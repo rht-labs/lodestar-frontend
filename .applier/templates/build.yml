@@ -29,13 +29,18 @@ objects:
         ref: "${GIT_REF}"
         uri: "${GIT_URL}"
       type: Git
+      dockerfile: |
+        FROM node:12.2.0-alpine AS builder
+        WORKDIR /app
+        COPY . /app
+        RUN npm install && \
+            npm run build
+
+        FROM registry.access.redhat.com/rhscl/httpd-24-rhel7
+        COPY --from=builder /app/build /var/www/html
+        EXPOSE 8080
     strategy:
-      sourceStrategy:
-        from:
-          kind: ImageStreamTag
-          name: "${BUILDER_IMAGE_NAME}:${BUILDER_IMAGE_TAG}"
-          namespace: openshift
-      type: Source
+      type: "Docker"
     successfulBuildsHistoryLimit: 5
     triggers:
     - type: ConfigChange
@@ -48,12 +53,6 @@ parameters:
   required: true
 - name: OUTPUT_IMAGE_TAG
   description: The tag to give the image when it has been built
-  required: true
-- name: BUILDER_IMAGE_NAME
-  description: The image to use for the s2i build
-  required: true
-- name: BUILDER_IMAGE_TAG
-  description: The tag of the builder image to use
   required: true
 - name: GIT_URL
   description: The Git URL of the project containing the OMP frontend

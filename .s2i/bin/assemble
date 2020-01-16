@@ -1,6 +1,0 @@
-#!/bin/bash
-
-mv /tmp/src/* ./
-fix-permissions ./
-npm install
-fix-permissions ./
