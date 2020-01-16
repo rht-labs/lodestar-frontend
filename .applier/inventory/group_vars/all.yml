@@ -2,7 +2,7 @@ build_vars:
   NAME: omp-frontend
   OUTPUT_IMAGE_NAME: omp-frontend
   OUTPUT_IMAGE_TAG: latest
-  GIT_URL: https://github.com/rht-labs/residency-manager.git
+  GIT_URL: https://github.com/rht-labs/open-management-portal-frontend.git
   GIT_REF: master
 
 deploy_vars:
