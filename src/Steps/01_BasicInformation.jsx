@@ -13,12 +13,10 @@ const BasicInformation = () => {
     <Form isHorizontal>
       <FormGroup
          label="Customer Name"
-         isRequired
          fieldId="customer-name"
          helperText="The client this residency is for"
        >
         <TextInput
-          isRequired
           type="text"
           id="customer-name"
           name="customer-name"
@@ -26,12 +24,10 @@ const BasicInformation = () => {
       </FormGroup>
       <FormGroup
          label="Project Name"
-         isRequired
          fieldId="project-name"
          helperText="The solution being worked on during the residency"
        >
         <TextInput
-          isRequired
           type="text"
           id="project-name"
           name="project-name"
@@ -39,12 +35,11 @@ const BasicInformation = () => {
       </FormGroup>
       <FormGroup
          label="Location"
-         isRequired
          fieldId="residency-location"
          helperText="Where this residency will be held"
        >
         <TextInput
-          isRequired
+
           type="text"
           id="residency-location"
           name="residency-location"
@@ -52,14 +47,11 @@ const BasicInformation = () => {
       </FormGroup>
       <FormGroup
          label="Residency Dates"
-         isRequired
          fieldId="residency-dates"
          helperText="The the start and end dates of this residency"
       >
         <InputGroup
            label="Residency Duration"
-           isRequired
-           fieldId="residency-duration"
         >
           <InputGroupText
             component="label"

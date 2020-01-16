@@ -13,13 +13,10 @@ const PointOfContact = () => {
       <FormGroup
          label="Labs EL"
          isRequired
-         fieldId="engagement lead"
+         fieldId="engagement-lead"
          helperText="Who is the Engagement Lead on this residency?"
       >
         <InputGroup
-           label="Labs Engagement Lead"
-           isRequired
-           fieldId="engagement-lead"
         >
           <InputGroupText
             component="label"
@@ -58,8 +55,6 @@ const PointOfContact = () => {
       >
         <InputGroup
            label="Labs Tech Lead"
-           isRequired
-           fieldId="tech-lead"
         >
           <InputGroupText
             component="label"
@@ -98,8 +93,6 @@ const PointOfContact = () => {
       >
         <InputGroup
            label="Customer Contact"
-           isRequired
-           fieldId="customer-contact"
         >
           <InputGroupText
             component="label"

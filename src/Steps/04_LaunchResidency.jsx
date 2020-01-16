@@ -1,15 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { CogsIcon } from '@patternfly/react-icons';
-import {
-  Progress,
-  ProgressSize,
-  ProgressMeasureLocation
-} from '@patternfly/react-core';
-
-const propTypes = {
-  onClose: PropTypes.func.isRequired
-};
 
 class LaunchResidency extends React.Component {
   constructor(props) {
@@ -45,11 +35,32 @@ class LaunchResidency extends React.Component {
             {percent === 100 ? 'Cluster Configuration Complete' : 'Spinning Up Residency Cluster'}
           </h1>
           <div className="pf-c-empty-state__body">
-            <Progress
-              measureLocation={ProgressMeasureLocation.inside}
-              value={percent}
-              size={ProgressSize.lg}
-            />
+          <div className="pf-c-progress pf-m-singleline">
+              <div className="pf-c-progress__description" />
+              <div
+                className="pf-c-progress__status"
+                aria-hidden="true"
+              >
+                <span className="pf-c-progress__measure">
+                  {percent}%
+                </span>
+              </div>
+              <div
+                className="pf-c-progress__bar"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow={percent}
+                aria-describedby="progress-singleline-example-description"
+              >
+                <div
+                  className="pf-c-progress__indicator"
+                  style={{
+                    width: `${percent}%`
+                  }}
+                />
+              </div>
+            </div>
           </div>
           <div className="pf-c-empty-state__body">
             <h3>
@@ -59,7 +70,6 @@ class LaunchResidency extends React.Component {
           <div className="pf-c-empty-state__secondary">
             <button
               className={percent === 100 ? 'pf-c-button pf-m-primary' : 'pf-c-button pf-m-link'}
-              onClick={this.props.onClose}
             >
               {percent === 100 ? 'View' : 'Cancel'}
             </button>
@@ -69,7 +79,5 @@ class LaunchResidency extends React.Component {
     );
   }
 }
-
-LaunchResidency.propTypes = propTypes;
 
 export default LaunchResidency;
