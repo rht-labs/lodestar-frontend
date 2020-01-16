@@ -34,7 +34,13 @@
     ]
   },
   "devDependencies": {
+    "bufferutil": "^4.0.1",
+    "canvas": "^2.6.1",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2"
+    "enzyme-adapter-react-16": "^1.15.2",
+    "fibers": "^4.0.2",
+    "nodesass": "0.0.2-security",
+    "sass": "^1.24.4",
+    "utf-8-validate": "^5.0.2"
   }
 }
