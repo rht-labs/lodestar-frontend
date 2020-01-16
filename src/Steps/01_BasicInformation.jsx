@@ -15,7 +15,7 @@ const BasicInformation = () => {
          label="Customer Name"
          isRequired
          fieldId="customer-name"
-         helperText="The customer name to use for this residency"
+         helperText="The client this residency is for"
        >
         <TextInput
           isRequired
@@ -28,7 +28,7 @@ const BasicInformation = () => {
          label="Project Name"
          isRequired
          fieldId="project-name"
-         helperText="The project being worked on during the residency"
+         helperText="The solution being worked on during the residency"
        >
         <TextInput
           isRequired
@@ -41,7 +41,7 @@ const BasicInformation = () => {
          label="Location"
          isRequired
          fieldId="residency-location"
-         helperText="Where the residency will be held"
+         helperText="Where this residency will be held"
        >
         <TextInput
           isRequired
@@ -53,7 +53,8 @@ const BasicInformation = () => {
       <FormGroup
          label="Residency Dates"
          isRequired
-         fieldId="residency-location"
+         fieldId="residency-dates"
+         helperText="The the start and end dates of this residency"
       >
         <InputGroup
            label="Residency Duration"
