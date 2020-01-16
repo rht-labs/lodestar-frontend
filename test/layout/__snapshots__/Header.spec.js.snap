@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Header renders properly 1`] = `"<header role=\\"banner\\" class=\\"pf-c-page__header\\"><div class=\\"pf-c-page__header-brand\\"><div class=\\"pf-c-page__header-brand-toggle\\"><button id=\\"page-default-nav-example-nav-toggle\\" type=\\"button\\" class=\\"pf-c-button pf-m-plain\\"><i aria-hidden=\\"true\\" class=\\"fas fa-bars\\"></i></button></div> <a class=\\"pf-c-page__header-brand-link\\"><img src=\\"~assets/logo-with-labs.png\\" alt=\\"PatternFly logo\\" class=\\"pf-c-brand\\"></a></div> <headertools-stub></headertools-stub></header>"`;
