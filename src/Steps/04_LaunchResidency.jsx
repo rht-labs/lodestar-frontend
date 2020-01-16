@@ -1,5 +1,5 @@
-import React from 'react';
-import { CogsIcon } from '@patternfly/react-icons';
+import React from "react";
+import { CogsIcon } from "@patternfly/react-icons";
 
 class LaunchResidency extends React.Component {
   constructor(props) {
@@ -28,22 +28,17 @@ class LaunchResidency extends React.Component {
     return (
       <div className="pf-l-bullseye">
         <div className="pf-c-empty-state pf-m-lg">
-          <CogsIcon
-            size="xl"
-          />
+          <CogsIcon size="xl" />
           <h1 className="pf-c-title pf-m-lg">
-            {percent === 100 ? 'Cluster Configuration Complete' : 'Spinning Up Residency Cluster'}
+            {percent === 100
+              ? "Cluster Configuration Complete"
+              : "Spinning Up Residency Cluster"}
           </h1>
           <div className="pf-c-empty-state__body">
-          <div className="pf-c-progress pf-m-singleline">
+            <div className="pf-c-progress pf-m-singleline">
               <div className="pf-c-progress__description" />
-              <div
-                className="pf-c-progress__status"
-                aria-hidden="true"
-              >
-                <span className="pf-c-progress__measure">
-                  {percent}%
-                </span>
+              <div className="pf-c-progress__status" aria-hidden="true">
+                <span className="pf-c-progress__measure">{percent}%</span>
               </div>
               <div
                 className="pf-c-progress__bar"
@@ -64,14 +59,22 @@ class LaunchResidency extends React.Component {
           </div>
           <div className="pf-c-empty-state__body">
             <h3>
-              We are creating your residency cluster with this information. This might take a second. You may want to get a <span role="img" aria-label="coffee emoji">☕</span>
+              We are creating your residency cluster with this information. This
+              might take a second. You may want to get a{" "}
+              <span role="img" aria-label="coffee emoji">
+                ☕
+              </span>
             </h3>
           </div>
           <div className="pf-c-empty-state__secondary">
             <button
-              className={percent === 100 ? 'pf-c-button pf-m-primary' : 'pf-c-button pf-m-link'}
+              className={
+                percent === 100
+                  ? "pf-c-button pf-m-primary"
+                  : "pf-c-button pf-m-link"
+              }
             >
-              {percent === 100 ? 'View' : 'Cancel'}
+              {percent === 100 ? "View" : "Cancel"}
             </button>
           </div>
         </div>
