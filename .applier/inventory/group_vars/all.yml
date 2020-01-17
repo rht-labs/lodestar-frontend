@@ -8,11 +8,11 @@ build_vars:
   NAME: '{{ app_name }}'
   OUTPUT_IMAGE_NAME: '{{ app_name }}'
   OUTPUT_IMAGE_TAG: latest
-  GIT_URL: https://github.com/rht-labs/residency-manager.git
+  GIT_URL: https://github.com/rht-labs/open-management-portal-frontend.git
   GIT_REF: master
 
 pipeline_vars:
-  PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/rht-labs/residency-manager.git
+  PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/rht-labs/open-management-portal-frontend.git
   PIPELINE_SOURCE_REPOSITORY_REF: master
   NAME: '{{ app_name }}'
 
