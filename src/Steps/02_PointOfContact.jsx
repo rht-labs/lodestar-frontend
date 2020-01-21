@@ -8,13 +8,13 @@ import {
 } from "@patternfly/react-core";
 import { UserIcon, EnvelopeIcon } from "@patternfly/react-icons";
 
-const PointOfContact = () => {
+const PointOfContact = ({ values, onChange }) => {
   return (
     <Form isHorizontal>
       <FormGroup
         label="Labs EL"
         isRequired
-        fieldId="engagement-lead"
+        fieldId="engagement_lead"
         helperText="Who is the Engagement Lead on this residency?"
       >
         <InputGroup>
@@ -23,28 +23,34 @@ const PointOfContact = () => {
           </InputGroupText>
           <TextInput
             name="engagement-lead-name"
-            id="engagement-lead-name"
+            id="name"
             type="text"
             aria-label="Engagement lead name"
             placeholder="Name"
+            onChange={e =>
+              onChange({ type: "engagement_lead_name", payload: e })
+            }
           />
           <InputGroupText component="label" htmlFor="engagement-lead-email">
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
             name="engagement-lead-email"
-            id="engagement-lead-email"
+            id="email"
             type="email"
             aria-label="engagement lead email"
             placeholder="Email Address"
+            onChange={e =>
+              onChange({ type: "engagement_lead_email", payload: e })
+            }
           />
         </InputGroup>
       </FormGroup>
 
       <FormGroup
-        label="Labs Tech Lead"
+        label="Labs Technical Lead"
         isRequired
-        fieldId="tech-lead"
+        fieldId="technical_lead"
         helperText="Who is the Tech Lead on this residency?"
       >
         <InputGroup label="Labs Tech Lead">
@@ -57,6 +63,9 @@ const PointOfContact = () => {
             type="text"
             aria-label="Tech lead name"
             placeholder="Name"
+            onChange={e =>
+              onChange({ type: "technical_lead_name", payload: e })
+            }
           />
           <InputGroupText component="label" htmlFor="tech-lead-email">
             <EnvelopeIcon />
@@ -67,6 +76,9 @@ const PointOfContact = () => {
             type="email"
             aria-label="tech lead email"
             placeholder="Email Address"
+            onChange={e =>
+              onChange({ type: "technical_lead_email", payload: e })
+            }
           />
         </InputGroup>
       </FormGroup>
@@ -86,6 +98,9 @@ const PointOfContact = () => {
             id="customer-contact-name"
             type="text"
             aria-label="Customer contact name"
+            onChange={e =>
+              onChange({ type: "customer_contact_name", payload: e })
+            }
             placeholder="Name"
           />
           <InputGroupText component="label" htmlFor="customer-contact-email">
@@ -97,6 +112,9 @@ const PointOfContact = () => {
             type="email"
             aria-label="customer contact email"
             placeholder="Email Address"
+            onChange={e =>
+              onChange({ type: "customer_contact_email", payload: e })
+            }
           />
         </InputGroup>
       </FormGroup>
