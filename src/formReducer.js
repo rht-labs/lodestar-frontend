@@ -4,6 +4,8 @@ const formReducer = (state, action) => {
       return { ...state, customer_name: action.payload };
     case "project_name":
       return { ...state, project_name: action.payload };
+    case "description":
+      return { ...state, description: action.payload };
     case "location":
       return { ...state, location: action.payload };
     case "start_date":
