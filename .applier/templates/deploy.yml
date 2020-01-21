@@ -60,16 +60,7 @@ objects:
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 30
-    triggers:
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-        - "${NAME}"
-        from:
-          kind: ImageStreamTag
-          name: "${IMAGE_NAME}:${IMAGE_TAG}"
-      type: ImageChange
-    - type: ConfigChange
+    triggers: []
 - apiVersion: v1
   kind: Service
   metadata:
