@@ -10,40 +10,29 @@ objects:
   spec:
     lookupPolicy:
       local: false
-- apiVersion: build.openshift.io/v1
+- apiVersion: v1
   kind: BuildConfig
   metadata:
-    name: "${NAME}"
+    labels:
+      build: '${NAME}'
+    name: '${NAME}'
   spec:
-    failedBuildsHistoryLimit: 5
-    nodeSelector: null
+    nodeSelector:
     output:
       to:
         kind: ImageStreamTag
-        name: "${OUTPUT_IMAGE_NAME}:${OUTPUT_IMAGE_TAG}"
+        name: '${NAME}:${BUILD_TAG}'
     postCommit: {}
     resources: {}
     runPolicy: Serial
     source:
-      git:
-        ref: "${GIT_REF}"
-        uri: "${GIT_URL}"
-      type: Git
-      dockerfile: |
-        FROM node:12.2.0-alpine AS builder
-        WORKDIR /app
-        COPY . /app
-        RUN npm install && \
-            npm run build
-
-        FROM registry.access.redhat.com/rhscl/httpd-24-rhel7
-        COPY --from=builder /app/build /var/www/html
-        EXPOSE 8080
+      binary: {}
+      type: Binary
     strategy:
-      type: "Docker"
-    successfulBuildsHistoryLimit: 5
-    triggers:
-    - type: ConfigChange
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+  status:
+    lastVersion: 1
 parameters:
 - name: NAME
   description: The name of the resources to be created
