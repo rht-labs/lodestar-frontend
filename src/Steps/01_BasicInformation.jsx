@@ -5,6 +5,7 @@ import {
   FormGroup,
   InputGroup,
   InputGroupText,
+  TextArea,
   TextInput
 } from "@patternfly/react-core";
 const BasicInformation = ({ values, onChange }) => {
@@ -79,6 +80,15 @@ const BasicInformation = ({ values, onChange }) => {
             onChange={e => onChange({ type: "end_date", payload: e })}
           />
         </InputGroup>
+      </FormGroup>
+      <FormGroup label="Description" fieldId="description">
+        <TextArea
+          name="description"
+          id="description"
+          aria-label="residency description"
+          value={values.description}
+          onChange={e => onChange({ type: "description", payload: e })}
+        />
       </FormGroup>
     </Form>
   );
