@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
 import "@patternfly/react-styles/css/utilities/Spacing/spacing.css";
 import {
@@ -12,9 +12,12 @@ import BasicInformation from "./Steps/01_BasicInformation";
 import ClusterInformation from "./Steps/03_ClusterInformation";
 import PointOfContact from "./Steps/02_PointOfContact";
 import LaunchResidency from "./Steps/04_LaunchResidency";
-import Logo from "./Logo";
+import Logo from "./Components/Logo/Logo";
+import formReducer from "./formReducer";
+import initialState from "./initialState";
 
 const App = () => {
+  const [state, dispatch] = useReducer(formReducer, initialState);
   return (
     <Page
       header={<PageHeader />}
@@ -33,23 +36,26 @@ const App = () => {
           steps={[
             {
               name: "Basic Information",
-              component: <BasicInformation />,
+              component: (
+                <BasicInformation values={state} onChange={dispatch} />
+              ),
               hideCancelButton: true
             },
             {
               name: "Point of Contact",
-              component: <PointOfContact />,
+              component: <PointOfContact values={state} onChange={dispatch} />,
               hideCancelButton: true
             },
             {
               name: "Openshift Cluster",
-              component: <ClusterInformation />,
-              hideCancelButton: true,
-              nextButtonText: "Launch Residency"
+              component: (
+                <ClusterInformation values={state} onChange={dispatch} />
+              ),
+              hideCancelButton: true
             },
             {
               name: "Launch Residency",
-              component: <LaunchResidency />,
+              component: <LaunchResidency values={state} onChange={dispatch} />,
               isFinishedStep: true
             }
           ]}
