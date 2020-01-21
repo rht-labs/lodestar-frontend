@@ -6,19 +6,21 @@ import {
   FormSelectOption,
   TextInput
 } from "@patternfly/react-core";
+import slug from "slug";
 
-const cloudProviders = [
+const cloudProvider = [
   { value: "open-stack", label: "OpenStack" },
   { value: "aws", label: "AWS" },
   { value: "google-cloud", label: "Google Cloud" },
   { value: "azure", label: "Microsoft Azure" }
 ];
+const cloudProviderRegion = [
+  { value: "us-1-east", label: "US 1 East" },
+  { value: "us-1-west", label: "US 1 West" }
+];
 const openshiftVersion = [
   { value: "v4.3", label: "v4.3" },
-  { value: "v4.2", label: "v4.2" },
-  { value: "v3.11", label: "v3.11", disabled: true },
-  { value: "v3.10", label: "v3.10", disabled: true },
-  { value: "v3.9", label: "v3.9", disabled: true }
+  { value: "v4.2", label: "v4.2" }
 ];
 const persistentStorage = [
   { value: "none", label: "None" },
@@ -33,12 +35,41 @@ const clusterSize = [
   { value: "large", label: "Large - 30+" }
 ];
 
-const ClusterInformation = () => {
+const ClusterInformation = ({ values, onChange }) => {
   return (
     <Form isHorizontal>
       <FormGroup label="Cloud Provider" isRequired fieldId="cloud-provider">
-        <FormSelect aria-label="Cloud Provider">
-          {cloudProviders.map((option, index) => (
+        <FormSelect
+          aria-label="Cloud Provider"
+          value={values.ocp_cloud_provider_name}
+          onChange={e =>
+            onChange({ type: "ocp_cloud_provider_name", payload: e })
+          }
+        >
+          {cloudProvider.map((option, index) => (
+            <FormSelectOption
+              isDisabled={option.disabled}
+              key={index}
+              value={option.value}
+              label={option.label}
+            />
+          ))}
+        </FormSelect>
+      </FormGroup>
+
+      <FormGroup
+        label="Provider Region"
+        isRequired
+        fieldId="cloud-provider-region"
+      >
+        <FormSelect
+          aria-label="Cloud provider region"
+          value={values.ocp_cloud_provider_region}
+          onChange={e =>
+            onChange({ type: "ocp_cloud_provider_region", payload: e })
+          }
+        >
+          {cloudProviderRegion.map((option, index) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -53,7 +84,11 @@ const ClusterInformation = () => {
         isRequired
         fieldId="openshift-provider"
       >
-        <FormSelect aria-label="OpenShift Version">
+        <FormSelect
+          aria-label="OpenShift Version"
+          value={values.ocp_version}
+          onChange={e => onChange({ type: "ocp_version", payload: e })}
+        >
           {openshiftVersion.map((option, index) => (
             <FormSelectOption
               isDisabled={option.disabled}
@@ -64,20 +99,45 @@ const ClusterInformation = () => {
           ))}
         </FormSelect>
       </FormGroup>
+
       <FormGroup
         label="Desired Subdomain"
         isRequired
         fieldId="subdomain"
-        helperText="<desired-subdomain>.rht-labs.com"
+        helperText={
+          <div>
+            Applications will live at:
+            <strong>
+              {`${
+                values.ocp_sub_domain
+                  ? slug(values.ocp_sub_domain)
+                  : "<desired-subdomain>"
+              }.rht-labs.com`}
+            </strong>
+          </div>
+        }
       >
-        <TextInput isRequired type="text" id="subdomain" name="subdomain" />
+        <TextInput
+          isRequired
+          type="text"
+          id="ocp_sub_domain"
+          name="ocp_sub_domain"
+          value={values.ocp_sub_domain}
+          onChange={e => onChange({ type: "ocp_sub_domain", payload: e })}
+        />
       </FormGroup>
       <FormGroup
         label="Persistent Storage Needs"
         isRequired
         fieldId="persistent-storage-needs"
       >
-        <FormSelect aria-label="Persistent Storage Needs">
+        <FormSelect
+          aria-label="Persistent Storage Needs"
+          value={values.ocp_persistent_storage_size}
+          onChange={e =>
+            onChange({ type: "ocp_persistent_storage_size", payload: e })
+          }
+        >
           {persistentStorage.map((option, index) => (
             <FormSelectOption
               isDisabled={option.disabled}
@@ -89,7 +149,11 @@ const ClusterInformation = () => {
         </FormSelect>
       </FormGroup>
       <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
-        <FormSelect aria-label="Cluster Size">
+        <FormSelect
+          aria-label="Cluster Size"
+          value={values.ocp_cluster_size}
+          onChange={e => onChange({ type: "ocp_cluster_size", payload: e })}
+        >
           {clusterSize.map((option, index) => (
             <FormSelectOption
               isDisabled={option.disabled}

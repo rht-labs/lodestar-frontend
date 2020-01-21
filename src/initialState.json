@@ -1,0 +1,21 @@
+{
+  "customer_name": "",
+  "project_name": "",
+  "description": "",
+  "location": "",
+  "start_date": "",
+  "end_date": "",
+  "archive_date": "",
+  "engagement_lead_name": "",
+  "engagement_lead_email": "",
+  "technical_lead_name": "",
+  "technical_lead_email": "",
+  "customer_contact_name": "",
+  "customer_contact_email": "",
+  "ocp_cloud_provider_name": "google-cloud",
+  "ocp_cloud_provider_region": "us-1-west",
+  "ocp_version": "v4.2",
+  "ocp_sub_domain": "",
+  "ocp_persistent_storage_size": "50",
+  "ocp_cluster_size": "medium"
+}
