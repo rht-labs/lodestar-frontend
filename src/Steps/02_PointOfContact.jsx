@@ -12,109 +12,115 @@ const PointOfContact = ({ values, onChange }) => {
   return (
     <Form isHorizontal>
       <FormGroup
-        label="Labs EL"
-        isRequired
         fieldId="engagement_lead"
         helperText="Who is the Engagement Lead on this residency?"
+        isRequired
+        label="Labs EL"
       >
         <InputGroup>
           <InputGroupText component="label" htmlFor="engagement-lead">
             <UserIcon />
           </InputGroupText>
           <TextInput
-            name="engagement-lead-name"
-            id="name"
-            type="text"
             aria-label="Engagement lead name"
-            placeholder="Name"
+            id="name"
+            name="engagement-lead-name"
             onChange={e =>
               onChange({ type: "engagement_lead_name", payload: e })
             }
+            placeholder="Name"
+            type="text"
+            value={values.engagement_lead_name}
           />
           <InputGroupText component="label" htmlFor="engagement-lead-email">
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-            name="engagement-lead-email"
-            id="email"
-            type="email"
             aria-label="engagement lead email"
-            placeholder="Email Address"
+            id="email"
+            name="engagement-lead-email"
             onChange={e =>
               onChange({ type: "engagement_lead_email", payload: e })
             }
+            placeholder="Email Address"
+            type="email"
+            value={values.engagement_lead_email}
           />
         </InputGroup>
       </FormGroup>
 
       <FormGroup
-        label="Labs Technical Lead"
-        isRequired
         fieldId="technical_lead"
+        isRequired
         helperText="Who is the Tech Lead on this residency?"
+        label="Labs Technical Lead"
       >
         <InputGroup label="Labs Tech Lead">
           <InputGroupText component="label" htmlFor="tech-lead-name">
             <UserIcon />
           </InputGroupText>
           <TextInput
-            name="tech-lead-name"
-            id="tech-lead-name"
-            type="text"
             aria-label="Tech lead name"
-            placeholder="Name"
+            id="tech-lead-name"
+            name="tech-lead-name"
             onChange={e =>
               onChange({ type: "technical_lead_name", payload: e })
             }
+            placeholder="Name"
+            type="text"
+            value={values.technical_lead_name}
           />
           <InputGroupText component="label" htmlFor="tech-lead-email">
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-            name="tech-lead-email"
-            id="tech-lead-email"
-            type="email"
             aria-label="tech lead email"
-            placeholder="Email Address"
+            id="tech-lead-email"
+            name="tech-lead-email"
             onChange={e =>
               onChange({ type: "technical_lead_email", payload: e })
             }
+            placeholder="Email Address"
+            type="email"
+            value={values.technical_lead_emails}
           />
         </InputGroup>
       </FormGroup>
 
       <FormGroup
-        label="Customer Contact"
-        isRequired
         fieldId="customer-contact"
         helperText="Who is the main point of contact for the customer?"
+        isRequired
+        label="Customer Contact"
       >
         <InputGroup label="Customer Contact">
           <InputGroupText component="label" htmlFor="customer-contact-name">
             <UserIcon />
           </InputGroupText>
           <TextInput
-            name="customer-contact-name"
-            id="customer-contact-name"
-            type="text"
             aria-label="Customer contact name"
+            id="customer-contact-name"
+            name="customer-contact-name"
             onChange={e =>
               onChange({ type: "customer_contact_name", payload: e })
             }
+            type="text"
             placeholder="Name"
+            value={values.customer_contact_name}
           />
           <InputGroupText component="label" htmlFor="customer-contact-email">
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-            name="customer-contact-email"
-            id="customer-contact-email"
-            type="email"
             aria-label="customer contact email"
-            placeholder="Email Address"
+            id="customer-contact-email"
+            name="customer-contact-email"
             onChange={e =>
               onChange({ type: "customer_contact_email", payload: e })
             }
+            placeholder="Email Address"
+            type="email"
+            value={values.customer_contact_email}
           />
         </InputGroup>
       </FormGroup>

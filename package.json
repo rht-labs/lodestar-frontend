@@ -8,10 +8,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.1",
+    "lodash.find": "^4.6.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "slug": "^2.1.0"
+    "slug": "^2.1.0",
+    "yaml": "^1.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
