@@ -8,9 +8,7 @@ pipeline {
     environment {
         // Global Vars
 
-        NAMESPACE_PREFIX="labs"
-        GIT_DOMAIN = "github.com"
-        GIT_ORG = "rht-labs"
+        NAMESPACE_PREFIX="omp"
 
         PIPELINES_NAMESPACE = "${NAMESPACE_PREFIX}-ci-cd"
         APP_NAME = "omp-frontend"
