@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Button } from "@patternfly/react-core";
 import axios from "axios";
-import slugifyProperty from "../utilities/slugifyProperty";
+import slugProperties from "../utilities/slugProperties";
 
 const LaunchCluster = ({ values }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -48,13 +48,20 @@ const LaunchCluster = ({ values }) => {
 
         {!success ? (
           <Button
-            onClick={e => {
+            onClick={() => {
               setErrorResponse(null);
               setIsLoading(true);
               axios({
+                headers: {
+                  "X-APPLICATION-NONSENSE": "sure-you-can-access-stuff-#yolo"
+                },
                 method: "post",
-                url: `${process.env.REACT_APP_BACKEND_URI}/residencies`,
-                data: slugifyProperty(values, "ocp_sub_domain")
+                url: `${process.env.REACT_APP_BACKEND_URI}/engagements/create`,
+                data: slugProperties(values, [
+                  "ocp_sub_domain",
+                  "customer_name",
+                  "project_name"
+                ])
               })
                 .then(() => {
                   setSuccessResponse(true);
