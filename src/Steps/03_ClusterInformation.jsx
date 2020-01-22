@@ -6,7 +6,7 @@ import {
   FormSelectOption,
   TextInput
 } from "@patternfly/react-core";
-import slug from "slug";
+import slugify from "slugify";
 import find from "lodash.find";
 
 const ClusterInformation = ({ options, values, onChange }) => {
@@ -91,7 +91,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
             <strong>
               {`${
                 values.ocp_sub_domain
-                  ? slug(values.ocp_sub_domain)
+                  ? slugify(values.ocp_sub_domain)
                   : "<desired-subdomain>"
               }.rht-labs.com`}
             </strong>
