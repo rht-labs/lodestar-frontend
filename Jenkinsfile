@@ -153,12 +153,12 @@ pipeline {
                 expression { GIT_BRANCH ==~ /(.*master|.*develop|.*feature.*)/ }
             }
             steps {
-                // echo '### Get Binary from Nexus ###'
-                // sh  '''
-                //         rm -rf build*
-                //         curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/build.zip -o build.zip
-                //         unzip build.zip
-                //     '''
+                echo '### Get Binary from Nexus ###'
+                sh  '''
+                        rm -rf build*
+                        curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/build.zip -o build.zip
+                        unzip build.zip
+                    '''
                 echo '### Create Linux Container Image from package ###'
                 sh  '''
                         oc project ${PIPELINES_NAMESPACE} # probs not needed
