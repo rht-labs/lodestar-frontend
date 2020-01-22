@@ -5,12 +5,14 @@ import {
   PageHeader,
   PageSidebar,
   PageSection,
+  Text,
+  TextVariants,
   Wizard
 } from "@patternfly/react-core";
 import BasicInformation from "./Steps/01_BasicInformation";
 import ClusterInformation from "./Steps/03_ClusterInformation";
 import PointOfContact from "./Steps/02_PointOfContact";
-import LaunchResidency from "./Steps/04_LaunchResidency";
+import LaunchCluster from "./Steps/04_LaunchCluster";
 import Logo from "./Components/Logo/Logo";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
@@ -54,36 +56,42 @@ const App = () => {
     >
       <PageSection>
         <div className="pf-c-content">
-          <h2>Residency Data Gathering</h2>
+          <Text component={TextVariants.h1}>Data Gathering Sheet</Text>
         </div>
       </PageSection>
       <PageSection>
         <Wizard
           isCompactNav
           isInPage
-          footer={<span />} //don't render dumb footer
           steps={[
             {
               name: "Basic Information",
-              component: <BasicInformation values={state} onChange={dispatch} />
+              component: (
+                <BasicInformation values={state} onChange={dispatch} />
+              ),
+              hideCancelButton: true
             },
             {
               name: "Point of Contact",
-              component: <PointOfContact values={state} onChange={dispatch} />
+              component: <PointOfContact values={state} onChange={dispatch} />,
+              hideCancelButton: true
             },
             {
-              name: "Openshift Cluster",
+              name: "OpenShift Cluster",
               component: (
                 <ClusterInformation
                   options={clusterOptions}
                   values={state}
                   onChange={dispatch}
                 />
-              )
+              ),
+              hideCancelButton: true
             },
             {
-              name: "Launch Residency",
-              component: <LaunchResidency values={state} onChange={dispatch} />
+              name: "Launch Cluster",
+              component: <LaunchCluster values={state} onChange={dispatch} />,
+              hideCancelButton: true,
+              isFinishedStep: true
             }
           ]}
         />
