@@ -46,6 +46,8 @@ objects:
             value: "${TOKEN_ENDPOINT}"
           - name: END_SESSION_ENDPOINT
             value: "${END_SESSION_ENDPOINT}"
+          - name: REACT_APP_BACKEND_URI
+            value: "${REACT_APP_BACKEND_URI}"
           image: "${IMAGE_NAME}:${IMAGE_TAG}"
           imagePullPolicy: Always
           name: "${NAME}"
@@ -123,4 +125,7 @@ parameters:
   required: true
 - name: END_SESSION_ENDPOINT
   description: The OAuth2 endpoint that logs the currently logged-in user out
+  required: true
+- name: REACT_APP_BACKEND_URI
+  description: Backend App URI
   required: true
