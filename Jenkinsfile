@@ -118,7 +118,7 @@ pipeline {
                 sh 'npm run test:ci'
 
                 echo '### Running build ###'
-                sh 'npm run build:ci'
+                sh 'npm run build'
 
                 echo '### Packaging App for Nexus ###'
                 sh 'npm run package'
