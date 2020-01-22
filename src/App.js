@@ -26,7 +26,7 @@ const App = () => {
   const [hasError, setHasError] = useState(null);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URI}/project/config`)
+      .get(`${process.env.REACT_APP_BACKEND_URI}/engagements/config`)
       .then(response => {
         const data = yaml.parse(response.data.fileContent);
         setClusterOptions(data);
