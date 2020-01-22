@@ -141,6 +141,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "customer_name",
                     "name": "customer_name",
+                    "placeholder": "e.g. SOCOM",
                     "type": "text",
                   },
                   "children": Array [],
@@ -155,6 +156,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -162,6 +164,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -176,7 +179,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The client this residency is for",
+                    "data": "What client is this for?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -233,6 +236,7 @@ initialize {
                   "class": "pf-c-form-control",
                   "id": "customer_name",
                   "name": "customer_name",
+                  "placeholder": "e.g. SOCOM",
                   "type": "text",
                 },
                 "children": Array [],
@@ -247,6 +251,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                   "type": undefined,
                 },
                 "x-attribsPrefix": Object {
@@ -254,6 +259,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                   "type": undefined,
                 },
               },
@@ -268,7 +274,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The client this residency is for",
+                  "data": "What client is this for?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -439,7 +445,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "The client this residency is for",
+                "data": "What client is this for?",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -461,6 +467,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "customer_name",
                     "name": "customer_name",
+                    "placeholder": "e.g. SOCOM",
                     "type": "text",
                   },
                   "children": Array [],
@@ -475,6 +482,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -482,6 +490,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -776,6 +785,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "project_name",
                       "name": "project_name",
+                      "placeholder": "e.g. UP3",
                       "type": "text",
                     },
                     "children": Array [],
@@ -790,6 +800,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -797,6 +808,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -811,7 +823,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The solution being worked on during the residency",
+                      "data": "The name of the solution being worked on.",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -868,6 +880,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "project_name",
                     "name": "project_name",
+                    "placeholder": "e.g. UP3",
                     "type": "text",
                   },
                   "children": Array [],
@@ -882,6 +895,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -889,6 +903,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -903,7 +918,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The solution being worked on during the residency",
+                    "data": "The name of the solution being worked on.",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -1074,7 +1089,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The solution being worked on during the residency",
+                  "data": "The name of the solution being worked on.",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -1096,6 +1111,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "project_name",
                       "name": "project_name",
+                      "placeholder": "e.g. UP3",
                       "type": "text",
                     },
                     "children": Array [],
@@ -1110,6 +1126,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -1117,6 +1134,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -1411,6 +1429,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "location",
                         "name": "location",
+                        "placeholder": "e.g. Los Angeles, CA",
                         "type": "text",
                       },
                       "children": Array [],
@@ -1425,6 +1444,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -1432,6 +1452,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -1446,7 +1467,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "Where this residency will be held",
+                        "data": "Where will this be held?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -1503,6 +1524,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "location",
                       "name": "location",
+                      "placeholder": "e.g. Los Angeles, CA",
                       "type": "text",
                     },
                     "children": Array [],
@@ -1517,6 +1539,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -1524,6 +1547,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -1538,7 +1562,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "Where this residency will be held",
+                      "data": "Where will this be held?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -1709,7 +1733,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "Where this residency will be held",
+                    "data": "Where will this be held?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -1731,6 +1755,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "location",
                         "name": "location",
+                        "placeholder": "e.g. Los Angeles, CA",
                         "type": "text",
                       },
                       "children": Array [],
@@ -1745,6 +1770,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -1752,6 +1778,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -2116,7 +2143,7 @@ initialize {
                             "next": Object {
                               "attribs": Object {
                                 "aria-invalid": "false",
-                                "aria-label": "Residency start date",
+                                "aria-label": "The end date.",
                                 "class": "pf-c-form-control",
                                 "id": "start_date",
                                 "name": "start_date",
@@ -2193,7 +2220,7 @@ initialize {
                           Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -2351,7 +2378,7 @@ initialize {
                             "prev": Object {
                               "attribs": Object {
                                 "aria-invalid": "false",
-                                "aria-label": "Residency start date",
+                                "aria-label": "The end date.",
                                 "class": "pf-c-form-control",
                                 "id": "start_date",
                                 "name": "start_date",
@@ -2505,7 +2532,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "The the start and end dates of this residency",
+                          "data": "What is the duration?",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -2632,7 +2659,7 @@ initialize {
                           "next": Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -2709,7 +2736,7 @@ initialize {
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -2867,7 +2894,7 @@ initialize {
                           "prev": Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -3021,7 +3048,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The the start and end dates of this residency",
+                        "data": "What is the duration?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -3192,7 +3219,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The the start and end dates of this residency",
+                      "data": "What is the duration?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -3284,7 +3311,7 @@ initialize {
                             "next": Object {
                               "attribs": Object {
                                 "aria-invalid": "false",
-                                "aria-label": "Residency start date",
+                                "aria-label": "The end date.",
                                 "class": "pf-c-form-control",
                                 "id": "start_date",
                                 "name": "start_date",
@@ -3361,7 +3388,7 @@ initialize {
                           Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -3519,7 +3546,7 @@ initialize {
                             "prev": Object {
                               "attribs": Object {
                                 "aria-invalid": "false",
-                                "aria-label": "Residency start date",
+                                "aria-label": "The end date.",
                                 "class": "pf-c-form-control",
                                 "id": "start_date",
                                 "name": "start_date",
@@ -3872,6 +3899,7 @@ initialize {
                             "class": "pf-c-form-control",
                             "id": "description",
                             "name": "description",
+                            "placeholder": "Optional Description",
                           },
                           "children": Array [],
                           "name": "textarea",
@@ -3886,6 +3914,7 @@ initialize {
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
+                            "placeholder": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-invalid": undefined,
@@ -3893,6 +3922,7 @@ initialize {
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
+                            "placeholder": undefined,
                           },
                         },
                       ],
@@ -3933,6 +3963,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "description",
                           "name": "description",
+                          "placeholder": "Optional Description",
                         },
                         "children": Array [],
                         "name": "textarea",
@@ -3947,6 +3978,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
@@ -3954,6 +3986,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                         },
                       },
                     ],
@@ -4204,6 +4237,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "project_name",
                     "name": "project_name",
+                    "placeholder": "e.g. UP3",
                     "type": "text",
                   },
                   "children": Array [],
@@ -4218,6 +4252,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -4225,6 +4260,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -4239,7 +4275,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The solution being worked on during the residency",
+                    "data": "The name of the solution being worked on.",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -4296,6 +4332,7 @@ initialize {
                   "class": "pf-c-form-control",
                   "id": "project_name",
                   "name": "project_name",
+                  "placeholder": "e.g. UP3",
                   "type": "text",
                 },
                 "children": Array [],
@@ -4310,6 +4347,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                   "type": undefined,
                 },
                 "x-attribsPrefix": Object {
@@ -4317,6 +4355,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                   "type": undefined,
                 },
               },
@@ -4331,7 +4370,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The solution being worked on during the residency",
+                  "data": "The name of the solution being worked on.",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -4502,7 +4541,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "The solution being worked on during the residency",
+                "data": "The name of the solution being worked on.",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -4524,6 +4563,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "project_name",
                     "name": "project_name",
+                    "placeholder": "e.g. UP3",
                     "type": "text",
                   },
                   "children": Array [],
@@ -4538,6 +4578,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -4545,6 +4586,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -4839,6 +4881,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "location",
                       "name": "location",
+                      "placeholder": "e.g. Los Angeles, CA",
                       "type": "text",
                     },
                     "children": Array [],
@@ -4853,6 +4896,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -4860,6 +4904,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -4874,7 +4919,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "Where this residency will be held",
+                      "data": "Where will this be held?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -4931,6 +4976,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "location",
                     "name": "location",
+                    "placeholder": "e.g. Los Angeles, CA",
                     "type": "text",
                   },
                   "children": Array [],
@@ -4945,6 +4991,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -4952,6 +4999,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -4966,7 +5014,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "Where this residency will be held",
+                    "data": "Where will this be held?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -5137,7 +5185,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "Where this residency will be held",
+                  "data": "Where will this be held?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -5159,6 +5207,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "location",
                       "name": "location",
+                      "placeholder": "e.g. Los Angeles, CA",
                       "type": "text",
                     },
                     "children": Array [],
@@ -5173,6 +5222,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -5180,6 +5230,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -5544,7 +5595,7 @@ initialize {
                           "next": Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -5621,7 +5672,7 @@ initialize {
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -5779,7 +5830,7 @@ initialize {
                           "prev": Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -5933,7 +5984,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The the start and end dates of this residency",
+                        "data": "What is the duration?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -6060,7 +6111,7 @@ initialize {
                         "next": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -6137,7 +6188,7 @@ initialize {
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -6295,7 +6346,7 @@ initialize {
                         "prev": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -6449,7 +6500,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The the start and end dates of this residency",
+                      "data": "What is the duration?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -6620,7 +6671,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The the start and end dates of this residency",
+                    "data": "What is the duration?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -6712,7 +6763,7 @@ initialize {
                           "next": Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -6789,7 +6840,7 @@ initialize {
                         Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -6947,7 +6998,7 @@ initialize {
                           "prev": Object {
                             "attribs": Object {
                               "aria-invalid": "false",
-                              "aria-label": "Residency start date",
+                              "aria-label": "The end date.",
                               "class": "pf-c-form-control",
                               "id": "start_date",
                               "name": "start_date",
@@ -7300,6 +7351,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "description",
                           "name": "description",
+                          "placeholder": "Optional Description",
                         },
                         "children": Array [],
                         "name": "textarea",
@@ -7314,6 +7366,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-invalid": undefined,
@@ -7321,6 +7374,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                         },
                       },
                     ],
@@ -7361,6 +7415,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "description",
                         "name": "description",
+                        "placeholder": "Optional Description",
                       },
                       "children": Array [],
                       "name": "textarea",
@@ -7375,6 +7430,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
@@ -7382,6 +7438,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                       },
                     },
                   ],
@@ -7613,6 +7670,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "customer_name",
                       "name": "customer_name",
+                      "placeholder": "e.g. SOCOM",
                       "type": "text",
                     },
                     "children": Array [],
@@ -7627,6 +7685,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -7634,6 +7693,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -7648,7 +7708,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The client this residency is for",
+                      "data": "What client is this for?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -7705,6 +7765,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "customer_name",
                     "name": "customer_name",
+                    "placeholder": "e.g. SOCOM",
                     "type": "text",
                   },
                   "children": Array [],
@@ -7719,6 +7780,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -7726,6 +7788,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -7740,7 +7803,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The client this residency is for",
+                    "data": "What client is this for?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -7911,7 +7974,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The client this residency is for",
+                  "data": "What client is this for?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -7933,6 +7996,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "customer_name",
                       "name": "customer_name",
+                      "placeholder": "e.g. SOCOM",
                       "type": "text",
                     },
                     "children": Array [],
@@ -7947,6 +8011,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -7954,6 +8019,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -8267,6 +8333,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "location",
                     "name": "location",
+                    "placeholder": "e.g. Los Angeles, CA",
                     "type": "text",
                   },
                   "children": Array [],
@@ -8281,6 +8348,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -8288,6 +8356,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -8302,7 +8371,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "Where this residency will be held",
+                    "data": "Where will this be held?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -8359,6 +8428,7 @@ initialize {
                   "class": "pf-c-form-control",
                   "id": "location",
                   "name": "location",
+                  "placeholder": "e.g. Los Angeles, CA",
                   "type": "text",
                 },
                 "children": Array [],
@@ -8373,6 +8443,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                   "type": undefined,
                 },
                 "x-attribsPrefix": Object {
@@ -8380,6 +8451,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                   "type": undefined,
                 },
               },
@@ -8394,7 +8466,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "Where this residency will be held",
+                  "data": "Where will this be held?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -8565,7 +8637,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "Where this residency will be held",
+                "data": "Where will this be held?",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -8587,6 +8659,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "location",
                     "name": "location",
+                    "placeholder": "e.g. Los Angeles, CA",
                     "type": "text",
                   },
                   "children": Array [],
@@ -8601,6 +8674,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -8608,6 +8682,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -8972,7 +9047,7 @@ initialize {
                         "next": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -9049,7 +9124,7 @@ initialize {
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -9207,7 +9282,7 @@ initialize {
                         "prev": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -9361,7 +9436,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The the start and end dates of this residency",
+                      "data": "What is the duration?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -9488,7 +9563,7 @@ initialize {
                       "next": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -9565,7 +9640,7 @@ initialize {
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-label": "Residency start date",
+                        "aria-label": "The end date.",
                         "class": "pf-c-form-control",
                         "id": "start_date",
                         "name": "start_date",
@@ -9723,7 +9798,7 @@ initialize {
                       "prev": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -9877,7 +9952,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The the start and end dates of this residency",
+                    "data": "What is the duration?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -10048,7 +10123,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The the start and end dates of this residency",
+                  "data": "What is the duration?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -10140,7 +10215,7 @@ initialize {
                         "next": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -10217,7 +10292,7 @@ initialize {
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -10375,7 +10450,7 @@ initialize {
                         "prev": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -10728,6 +10803,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "description",
                         "name": "description",
+                        "placeholder": "Optional Description",
                       },
                       "children": Array [],
                       "name": "textarea",
@@ -10742,6 +10818,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-invalid": undefined,
@@ -10749,6 +10826,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                       },
                     },
                   ],
@@ -10789,6 +10867,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "description",
                       "name": "description",
+                      "placeholder": "Optional Description",
                     },
                     "children": Array [],
                     "name": "textarea",
@@ -10803,6 +10882,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-invalid": undefined,
@@ -10810,6 +10890,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                     },
                   },
                 ],
@@ -11031,6 +11112,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "project_name",
                       "name": "project_name",
+                      "placeholder": "e.g. UP3",
                       "type": "text",
                     },
                     "children": Array [],
@@ -11045,6 +11127,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -11052,6 +11135,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -11066,7 +11150,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The solution being worked on during the residency",
+                      "data": "The name of the solution being worked on.",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -11123,6 +11207,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "project_name",
                     "name": "project_name",
+                    "placeholder": "e.g. UP3",
                     "type": "text",
                   },
                   "children": Array [],
@@ -11137,6 +11222,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -11144,6 +11230,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -11158,7 +11245,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The solution being worked on during the residency",
+                    "data": "The name of the solution being worked on.",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -11329,7 +11416,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The solution being worked on during the residency",
+                  "data": "The name of the solution being worked on.",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -11351,6 +11438,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "project_name",
                       "name": "project_name",
+                      "placeholder": "e.g. UP3",
                       "type": "text",
                     },
                     "children": Array [],
@@ -11365,6 +11453,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -11372,6 +11461,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -11668,6 +11758,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "customer_name",
                         "name": "customer_name",
+                        "placeholder": "e.g. SOCOM",
                         "type": "text",
                       },
                       "children": Array [],
@@ -11682,6 +11773,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -11689,6 +11781,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -11703,7 +11796,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The client this residency is for",
+                        "data": "What client is this for?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -11760,6 +11853,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "customer_name",
                       "name": "customer_name",
+                      "placeholder": "e.g. SOCOM",
                       "type": "text",
                     },
                     "children": Array [],
@@ -11774,6 +11868,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -11781,6 +11876,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -11795,7 +11891,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The client this residency is for",
+                      "data": "What client is this for?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -11966,7 +12062,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The client this residency is for",
+                    "data": "What client is this for?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -11988,6 +12084,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "customer_name",
                         "name": "customer_name",
+                        "placeholder": "e.g. SOCOM",
                         "type": "text",
                       },
                       "children": Array [],
@@ -12002,6 +12099,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -12009,6 +12107,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -12400,7 +12499,7 @@ initialize {
                       "next": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -12477,7 +12576,7 @@ initialize {
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-label": "Residency start date",
+                        "aria-label": "The end date.",
                         "class": "pf-c-form-control",
                         "id": "start_date",
                         "name": "start_date",
@@ -12635,7 +12734,7 @@ initialize {
                       "prev": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -12789,7 +12888,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The the start and end dates of this residency",
+                    "data": "What is the duration?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -12916,7 +13015,7 @@ initialize {
                     "next": Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-label": "Residency start date",
+                        "aria-label": "The end date.",
                         "class": "pf-c-form-control",
                         "id": "start_date",
                         "name": "start_date",
@@ -12993,7 +13092,7 @@ initialize {
                   Object {
                     "attribs": Object {
                       "aria-invalid": "false",
-                      "aria-label": "Residency start date",
+                      "aria-label": "The end date.",
                       "class": "pf-c-form-control",
                       "id": "start_date",
                       "name": "start_date",
@@ -13151,7 +13250,7 @@ initialize {
                     "prev": Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-label": "Residency start date",
+                        "aria-label": "The end date.",
                         "class": "pf-c-form-control",
                         "id": "start_date",
                         "name": "start_date",
@@ -13305,7 +13404,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The the start and end dates of this residency",
+                  "data": "What is the duration?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -13476,7 +13575,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "The the start and end dates of this residency",
+                "data": "What is the duration?",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -13568,7 +13667,7 @@ initialize {
                       "next": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -13645,7 +13744,7 @@ initialize {
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-label": "Residency start date",
+                        "aria-label": "The end date.",
                         "class": "pf-c-form-control",
                         "id": "start_date",
                         "name": "start_date",
@@ -13803,7 +13902,7 @@ initialize {
                       "prev": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -14156,6 +14255,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "description",
                       "name": "description",
+                      "placeholder": "Optional Description",
                     },
                     "children": Array [],
                     "name": "textarea",
@@ -14170,6 +14270,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-invalid": undefined,
@@ -14177,6 +14278,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                     },
                   },
                 ],
@@ -14217,6 +14319,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "description",
                     "name": "description",
+                    "placeholder": "Optional Description",
                   },
                   "children": Array [],
                   "name": "textarea",
@@ -14231,6 +14334,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                   },
                   "x-attribsPrefix": Object {
                     "aria-invalid": undefined,
@@ -14238,6 +14342,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                   },
                 },
               ],
@@ -14449,6 +14554,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "location",
                       "name": "location",
+                      "placeholder": "e.g. Los Angeles, CA",
                       "type": "text",
                     },
                     "children": Array [],
@@ -14463,6 +14569,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -14470,6 +14577,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -14484,7 +14592,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "Where this residency will be held",
+                      "data": "Where will this be held?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -14541,6 +14649,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "location",
                     "name": "location",
+                    "placeholder": "e.g. Los Angeles, CA",
                     "type": "text",
                   },
                   "children": Array [],
@@ -14555,6 +14664,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                   "x-attribsPrefix": Object {
@@ -14562,6 +14672,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                     "type": undefined,
                   },
                 },
@@ -14576,7 +14687,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "Where this residency will be held",
+                    "data": "Where will this be held?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -14747,7 +14858,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "Where this residency will be held",
+                  "data": "Where will this be held?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -14769,6 +14880,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "location",
                       "name": "location",
+                      "placeholder": "e.g. Los Angeles, CA",
                       "type": "text",
                     },
                     "children": Array [],
@@ -14783,6 +14895,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -14790,6 +14903,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -15086,6 +15200,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "project_name",
                         "name": "project_name",
+                        "placeholder": "e.g. UP3",
                         "type": "text",
                       },
                       "children": Array [],
@@ -15100,6 +15215,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -15107,6 +15223,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -15121,7 +15238,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The solution being worked on during the residency",
+                        "data": "The name of the solution being worked on.",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -15178,6 +15295,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "project_name",
                       "name": "project_name",
+                      "placeholder": "e.g. UP3",
                       "type": "text",
                     },
                     "children": Array [],
@@ -15192,6 +15310,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -15199,6 +15318,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -15213,7 +15333,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The solution being worked on during the residency",
+                      "data": "The name of the solution being worked on.",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -15384,7 +15504,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The solution being worked on during the residency",
+                    "data": "The name of the solution being worked on.",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -15406,6 +15526,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "project_name",
                         "name": "project_name",
+                        "placeholder": "e.g. UP3",
                         "type": "text",
                       },
                       "children": Array [],
@@ -15420,6 +15541,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -15427,6 +15549,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -15723,6 +15846,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "customer_name",
                           "name": "customer_name",
+                          "placeholder": "e.g. SOCOM",
                           "type": "text",
                         },
                         "children": Array [],
@@ -15737,6 +15861,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                         "x-attribsPrefix": Object {
@@ -15744,6 +15869,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                       },
@@ -15758,7 +15884,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "The client this residency is for",
+                          "data": "What client is this for?",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -15815,6 +15941,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "customer_name",
                         "name": "customer_name",
+                        "placeholder": "e.g. SOCOM",
                         "type": "text",
                       },
                       "children": Array [],
@@ -15829,6 +15956,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -15836,6 +15964,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -15850,7 +15979,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The client this residency is for",
+                        "data": "What client is this for?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -16021,7 +16150,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The client this residency is for",
+                      "data": "What client is this for?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -16043,6 +16172,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "customer_name",
                           "name": "customer_name",
+                          "placeholder": "e.g. SOCOM",
                           "type": "text",
                         },
                         "children": Array [],
@@ -16057,6 +16187,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                         "x-attribsPrefix": Object {
@@ -16064,6 +16195,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                       },
@@ -16312,6 +16444,7 @@ initialize {
                     "class": "pf-c-form-control",
                     "id": "description",
                     "name": "description",
+                    "placeholder": "Optional Description",
                   },
                   "children": Array [],
                   "name": "textarea",
@@ -16326,6 +16459,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                   },
                   "x-attribsPrefix": Object {
                     "aria-invalid": undefined,
@@ -16333,6 +16467,7 @@ initialize {
                     "class": undefined,
                     "id": undefined,
                     "name": undefined,
+                    "placeholder": undefined,
                   },
                 },
               ],
@@ -16373,6 +16508,7 @@ initialize {
                   "class": "pf-c-form-control",
                   "id": "description",
                   "name": "description",
+                  "placeholder": "Optional Description",
                 },
                 "children": Array [],
                 "name": "textarea",
@@ -16387,6 +16523,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                 },
                 "x-attribsPrefix": Object {
                   "aria-invalid": undefined,
@@ -16394,6 +16531,7 @@ initialize {
                   "class": undefined,
                   "id": undefined,
                   "name": undefined,
+                  "placeholder": undefined,
                 },
               },
             ],
@@ -16665,7 +16803,7 @@ initialize {
                         "next": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -16742,7 +16880,7 @@ initialize {
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -16900,7 +17038,7 @@ initialize {
                         "prev": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -17054,7 +17192,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The the start and end dates of this residency",
+                      "data": "What is the duration?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -17181,7 +17319,7 @@ initialize {
                       "next": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -17258,7 +17396,7 @@ initialize {
                     Object {
                       "attribs": Object {
                         "aria-invalid": "false",
-                        "aria-label": "Residency start date",
+                        "aria-label": "The end date.",
                         "class": "pf-c-form-control",
                         "id": "start_date",
                         "name": "start_date",
@@ -17416,7 +17554,7 @@ initialize {
                       "prev": Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -17570,7 +17708,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "The the start and end dates of this residency",
+                    "data": "What is the duration?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -17741,7 +17879,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "The the start and end dates of this residency",
+                  "data": "What is the duration?",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -17833,7 +17971,7 @@ initialize {
                         "next": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -17910,7 +18048,7 @@ initialize {
                       Object {
                         "attribs": Object {
                           "aria-invalid": "false",
-                          "aria-label": "Residency start date",
+                          "aria-label": "The end date.",
                           "class": "pf-c-form-control",
                           "id": "start_date",
                           "name": "start_date",
@@ -18068,7 +18206,7 @@ initialize {
                         "prev": Object {
                           "attribs": Object {
                             "aria-invalid": "false",
-                            "aria-label": "Residency start date",
+                            "aria-label": "The end date.",
                             "class": "pf-c-form-control",
                             "id": "start_date",
                             "name": "start_date",
@@ -18504,6 +18642,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "location",
                         "name": "location",
+                        "placeholder": "e.g. Los Angeles, CA",
                         "type": "text",
                       },
                       "children": Array [],
@@ -18518,6 +18657,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -18525,6 +18665,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -18539,7 +18680,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "Where this residency will be held",
+                        "data": "Where will this be held?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -18596,6 +18737,7 @@ initialize {
                       "class": "pf-c-form-control",
                       "id": "location",
                       "name": "location",
+                      "placeholder": "e.g. Los Angeles, CA",
                       "type": "text",
                     },
                     "children": Array [],
@@ -18610,6 +18752,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                     "x-attribsPrefix": Object {
@@ -18617,6 +18760,7 @@ initialize {
                       "class": undefined,
                       "id": undefined,
                       "name": undefined,
+                      "placeholder": undefined,
                       "type": undefined,
                     },
                   },
@@ -18631,7 +18775,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "Where this residency will be held",
+                      "data": "Where will this be held?",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -18802,7 +18946,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "Where this residency will be held",
+                    "data": "Where will this be held?",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -18824,6 +18968,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "location",
                         "name": "location",
+                        "placeholder": "e.g. Los Angeles, CA",
                         "type": "text",
                       },
                       "children": Array [],
@@ -18838,6 +18983,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -18845,6 +18991,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -19141,6 +19288,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "project_name",
                           "name": "project_name",
+                          "placeholder": "e.g. UP3",
                           "type": "text",
                         },
                         "children": Array [],
@@ -19155,6 +19303,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                         "x-attribsPrefix": Object {
@@ -19162,6 +19311,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                       },
@@ -19176,7 +19326,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "The solution being worked on during the residency",
+                          "data": "The name of the solution being worked on.",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -19233,6 +19383,7 @@ initialize {
                         "class": "pf-c-form-control",
                         "id": "project_name",
                         "name": "project_name",
+                        "placeholder": "e.g. UP3",
                         "type": "text",
                       },
                       "children": Array [],
@@ -19247,6 +19398,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                       "x-attribsPrefix": Object {
@@ -19254,6 +19406,7 @@ initialize {
                         "class": undefined,
                         "id": undefined,
                         "name": undefined,
+                        "placeholder": undefined,
                         "type": undefined,
                       },
                     },
@@ -19268,7 +19421,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The solution being worked on during the residency",
+                        "data": "The name of the solution being worked on.",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -19439,7 +19592,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "The solution being worked on during the residency",
+                      "data": "The name of the solution being worked on.",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -19461,6 +19614,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "project_name",
                           "name": "project_name",
+                          "placeholder": "e.g. UP3",
                           "type": "text",
                         },
                         "children": Array [],
@@ -19475,6 +19629,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                         "x-attribsPrefix": Object {
@@ -19482,6 +19637,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                       },
@@ -19778,6 +19934,7 @@ initialize {
                             "class": "pf-c-form-control",
                             "id": "customer_name",
                             "name": "customer_name",
+                            "placeholder": "e.g. SOCOM",
                             "type": "text",
                           },
                           "children": Array [],
@@ -19792,6 +19949,7 @@ initialize {
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
+                            "placeholder": undefined,
                             "type": undefined,
                           },
                           "x-attribsPrefix": Object {
@@ -19799,6 +19957,7 @@ initialize {
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
+                            "placeholder": undefined,
                             "type": undefined,
                           },
                         },
@@ -19813,7 +19972,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "The client this residency is for",
+                            "data": "What client is this for?",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -19870,6 +20029,7 @@ initialize {
                           "class": "pf-c-form-control",
                           "id": "customer_name",
                           "name": "customer_name",
+                          "placeholder": "e.g. SOCOM",
                           "type": "text",
                         },
                         "children": Array [],
@@ -19884,6 +20044,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                         "x-attribsPrefix": Object {
@@ -19891,6 +20052,7 @@ initialize {
                           "class": undefined,
                           "id": undefined,
                           "name": undefined,
+                          "placeholder": undefined,
                           "type": undefined,
                         },
                       },
@@ -19905,7 +20067,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "The client this residency is for",
+                          "data": "What client is this for?",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -20076,7 +20238,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "The client this residency is for",
+                        "data": "What client is this for?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -20098,6 +20260,7 @@ initialize {
                             "class": "pf-c-form-control",
                             "id": "customer_name",
                             "name": "customer_name",
+                            "placeholder": "e.g. SOCOM",
                             "type": "text",
                           },
                           "children": Array [],
@@ -20112,6 +20275,7 @@ initialize {
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
+                            "placeholder": undefined,
                             "type": undefined,
                           },
                           "x-attribsPrefix": Object {
@@ -20119,6 +20283,7 @@ initialize {
                             "class": undefined,
                             "id": undefined,
                             "name": undefined,
+                            "placeholder": undefined,
                             "type": undefined,
                           },
                         },

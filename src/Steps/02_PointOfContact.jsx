@@ -13,7 +13,7 @@ const PointOfContact = ({ values, onChange }) => {
     <Form isHorizontal>
       <FormGroup
         fieldId="engagement_lead"
-        helperText="Who is the Engagement Lead on this residency?"
+        helperText="Who is the Engagement Lead?"
         isRequired
         label="Labs EL"
       >
@@ -25,10 +25,10 @@ const PointOfContact = ({ values, onChange }) => {
             aria-label="Engagement lead name"
             id="name"
             name="engagement-lead-name"
-            onChange={e =>
-              onChange({ type: "engagement_lead_name", payload: e })
-            }
-            placeholder="Name"
+            onChange={e => {
+              onChange({ type: "engagement_lead_name", payload: e });
+            }}
+            placeholder="Full Name"
             type="text"
             value={values.engagement_lead_name}
           />
@@ -52,7 +52,7 @@ const PointOfContact = ({ values, onChange }) => {
       <FormGroup
         fieldId="technical_lead"
         isRequired
-        helperText="Who is the Tech Lead on this residency?"
+        helperText="Who is the Tech Lead?"
         label="Labs Technical Lead"
       >
         <InputGroup label="Labs Tech Lead">
@@ -66,7 +66,7 @@ const PointOfContact = ({ values, onChange }) => {
             onChange={e =>
               onChange({ type: "technical_lead_name", payload: e })
             }
-            placeholder="Name"
+            placeholder="Full Name"
             type="text"
             value={values.technical_lead_name}
           />
@@ -89,7 +89,7 @@ const PointOfContact = ({ values, onChange }) => {
 
       <FormGroup
         fieldId="customer-contact"
-        helperText="Who is the main point of contact for the customer?"
+        helperText="Who is the point person for the project?"
         isRequired
         label="Customer Contact"
       >
@@ -105,7 +105,7 @@ const PointOfContact = ({ values, onChange }) => {
               onChange({ type: "customer_contact_name", payload: e })
             }
             type="text"
-            placeholder="Name"
+            placeholder="Full Name"
             value={values.customer_contact_name}
           />
           <InputGroupText component="label" htmlFor="customer-contact-email">

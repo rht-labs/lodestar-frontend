@@ -3,13 +3,13 @@ import { Alert, Button } from "@patternfly/react-core";
 import axios from "axios";
 import slugifyProperty from "../utilities/slugifyProperty";
 
-const LaunchResidency = ({ values }) => {
+const LaunchCluster = ({ values }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setErrorResponse] = useState(null);
   const [success, setSuccessResponse] = useState(null);
   return (
     <div className="pf-l-bullseye">
-      <div className="pf-c-empty-state pf-m-lg">
+      <div className="pf-c-empty-state">
         {success ? (
           <span
             aria-label="thumbs up emoji"
@@ -32,8 +32,8 @@ const LaunchResidency = ({ values }) => {
           <h3>
             {!isLoading ? (
               <span>
-                We are about to launch your residency cluster with this
-                information.
+                We are about to launch your project cluster with this
+                information! Are you ready?
               </span>
             ) : (
               <span>
@@ -49,7 +49,7 @@ const LaunchResidency = ({ values }) => {
         {!success ? (
           <Button
             onClick={e => {
-              e.preventDefault();
+              setErrorResponse(null);
               setIsLoading(true);
               axios({
                 method: "post",
@@ -94,4 +94,4 @@ const LaunchResidency = ({ values }) => {
     </div>
   );
 };
-export default LaunchResidency;
+export default LaunchCluster;

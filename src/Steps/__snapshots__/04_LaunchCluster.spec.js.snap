@@ -9,7 +9,7 @@ initialize {
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "pf-c-empty-state pf-m-lg",
+          "class": "pf-c-empty-state",
         },
         "children": Array [
           Object {
@@ -41,7 +41,7 @@ initialize {
                       "attribs": Object {},
                       "children": Array [
                         Object {
-                          "data": "We are about to launch your residency cluster with this information.",
+                          "data": "We are about to launch your project cluster with this information! Are you ready?",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -135,7 +135,7 @@ initialize {
                     "attribs": Object {},
                     "children": Array [
                       Object {
-                        "data": "We are about to launch your residency cluster with this information.",
+                        "data": "We are about to launch your project cluster with this information! Are you ready?",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -264,7 +264,7 @@ initialize {
                       "attribs": Object {},
                       "children": Array [
                         Object {
-                          "data": "We are about to launch your residency cluster with this information.",
+                          "data": "We are about to launch your project cluster with this information! Are you ready?",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
