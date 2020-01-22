@@ -21,7 +21,7 @@ const BasicInformation = ({ values, onChange }) => {
           type="text"
           id="customer_name"
           name="customer_name"
-          placeholder="e.g. SOCOM"
+          placeholder="e.g. NASA"
           value={values.customer_name}
           onChange={e => onChange({ type: "customer_name", payload: e })}
         />
@@ -36,7 +36,7 @@ const BasicInformation = ({ values, onChange }) => {
           type="text"
           id="project_name"
           name="project_name"
-          placeholder="e.g. UP3"
+          placeholder="e.g. Mars Probe"
           value={values.project_name}
           onChange={e => onChange({ type: "project_name", payload: e })}
         />
@@ -51,7 +51,7 @@ const BasicInformation = ({ values, onChange }) => {
           type="text"
           id="location"
           name="location"
-          placeholder="e.g. Los Angeles, CA"
+          placeholder="e.g. Pasadena, CA"
           value={values.location}
           onChange={e => onChange({ type: "location", payload: e })}
         />
@@ -89,7 +89,7 @@ const BasicInformation = ({ values, onChange }) => {
           name="description"
           id="description"
           aria-label="residency description"
-          placeholder="Optional Description"
+          placeholder="Description and notes for the Engagment"
           value={values.description}
           onChange={e => onChange({ type: "description", payload: e })}
         />

@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useState } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
 import {
+  Alert,
   Page,
   PageHeader,
   PageSidebar,
@@ -58,8 +59,13 @@ const App = () => {
     >
       <PageSection>
         <div className="pf-c-content">
-          <Text component={TextVariants.h1}>Data Gathering Sheet</Text>
+          <Text component={TextVariants.h1}>Engagement Data Gathering</Text>
         </div>
+        {hasError ? (
+          <Alert isInline title="We encountered an error." variant="danger">
+            {hasError.statusText}
+          </Alert>
+        ) : null}
       </PageSection>
       <PageSection>
         <Wizard
