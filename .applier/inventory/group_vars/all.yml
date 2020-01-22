@@ -27,6 +27,7 @@ dev_vars:
   USERINFO_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/userinfo
   TOKEN_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/token
   END_SESSION_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/logout
+  REACT_APP_BACKEND_URI: https://omp-backend-omp-dev.apps.s11.core.rht-labs.com
 
 test_vars:
   NAME: '{{ app_name }}'
@@ -39,6 +40,7 @@ test_vars:
   USERINFO_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/userinfo
   TOKEN_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/token
   END_SESSION_ENDPOINT: https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/logout
+  REACT_APP_BACKEND_URI: https://omp-backend-omp-test.apps.s11.core.rht-labs.com
 
 openshift_cluster_content:
 - object: '{{ app_name }}'
