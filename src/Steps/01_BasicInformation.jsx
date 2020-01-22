@@ -14,13 +14,14 @@ const BasicInformation = ({ values, onChange }) => {
       <FormGroup
         label="Customer Name"
         fieldId="customer-name"
-        helperText="The client this residency is for"
+        helperText="What client is this for?"
         isRequired
       >
         <TextInput
           type="text"
           id="customer_name"
           name="customer_name"
+          placeholder="e.g. SOCOM"
           value={values.customer_name}
           onChange={e => onChange({ type: "customer_name", payload: e })}
         />
@@ -28,13 +29,14 @@ const BasicInformation = ({ values, onChange }) => {
       <FormGroup
         label="Project Name"
         fieldId="project-name"
-        helperText="The solution being worked on during the residency"
+        helperText="The name of the solution being worked on."
         isRequired
       >
         <TextInput
           type="text"
           id="project_name"
           name="project_name"
+          placeholder="e.g. UP3"
           value={values.project_name}
           onChange={e => onChange({ type: "project_name", payload: e })}
         />
@@ -42,13 +44,14 @@ const BasicInformation = ({ values, onChange }) => {
       <FormGroup
         label="Location"
         fieldId="residency-location"
-        helperText="Where this residency will be held"
+        helperText="Where will this be held?"
         isRequired
       >
         <TextInput
           type="text"
           id="location"
           name="location"
+          placeholder="e.g. Los Angeles, CA"
           value={values.location}
           onChange={e => onChange({ type: "location", payload: e })}
         />
@@ -56,7 +59,7 @@ const BasicInformation = ({ values, onChange }) => {
       <FormGroup
         label="Residency Dates"
         fieldId="residency-dates"
-        helperText="The the start and end dates of this residency"
+        helperText="What is the duration?"
         isRequired
       >
         <InputGroup label="Residency Duration">
@@ -67,7 +70,7 @@ const BasicInformation = ({ values, onChange }) => {
             name="start_date"
             id="start_date"
             type="date"
-            aria-label="Residency start date"
+            aria-label="The end date."
             value={values.start_date}
             onChange={e => onChange({ type: "start_date", payload: e })}
           />
@@ -86,6 +89,7 @@ const BasicInformation = ({ values, onChange }) => {
           name="description"
           id="description"
           aria-label="residency description"
+          placeholder="Optional Description"
           value={values.description}
           onChange={e => onChange({ type: "description", payload: e })}
         />
