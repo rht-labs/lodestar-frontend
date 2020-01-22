@@ -1,7 +1,7 @@
 ---
-ci_cd_namespace: labs-ci-cd
-dev_namespace: labs-dev
-test_namespace: labs-test
+ci_cd_namespace: omp-ci-cd
+dev_namespace: omp-dev
+test_namespace: omp-test
 app_name: omp-frontend
 
 build_vars:
