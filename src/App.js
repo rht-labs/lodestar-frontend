@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useState } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
 import {
+  Alert,
   Page,
   PageHeader,
   PageSidebar,
@@ -22,13 +23,12 @@ import axios from "axios";
 const App = () => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [clusterOptions, setClusterOptions] = useState(null);
+  const [hasError, setHasError] = useState(null);
   useEffect(() => {
     axios
-      .get(
-        "https://gist.githubusercontent.com/jacobsee/894ef91d9f8722c87a403bcca67ba305/raw/35ce8e2b6b76b1e69a5245acf1943389a2ad6c2c/lucas-test.yml"
-      )
+      .get(`${process.env.REACT_APP_BACKEND_URI}/engagements/config`)
       .then(response => {
-        const data = yaml.parse(response.data);
+        const data = yaml.parse(response.data.fileContent);
         setClusterOptions(data);
         dispatch({
           type: "ocp_cloud_provider_region",
@@ -46,6 +46,9 @@ const App = () => {
           type: "ocp_version",
           payload: data.openshift.versions[0].value
         });
+      })
+      .catch(error => {
+        setHasError(error);
       });
   }, []);
   return (
@@ -56,8 +59,13 @@ const App = () => {
     >
       <PageSection>
         <div className="pf-c-content">
-          <Text component={TextVariants.h1}>Data Gathering Sheet</Text>
+          <Text component={TextVariants.h1}>Engagement Data Gathering</Text>
         </div>
+        {hasError ? (
+          <Alert isInline title="We encountered an error." variant="danger">
+            {hasError.statusText}
+          </Alert>
+        ) : null}
       </PageSection>
       <PageSection>
         <Wizard
