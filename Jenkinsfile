@@ -118,7 +118,7 @@ pipeline {
                 sh 'npm run test:ci'
 
                 echo '### Running build ###'
-                sh 'npm run build'
+                sh 'npm run build:ci'
 
                 echo '### Packaging App for Nexus ###'
                 sh 'npm run package'
@@ -155,15 +155,15 @@ pipeline {
             steps {
                 echo '### Get Binary from Nexus ###'
                 sh  '''
-                        rm -rf build*
-                        curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/build.zip -o build.zip
-                        unzip build.zip
+                        rm -rf package-contents*
+                        curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
+                        unzip package-contents.zip
                     '''
                 echo '### Create Linux Container Image from package ###'
                 sh  '''
                         oc project ${PIPELINES_NAMESPACE} # probs not needed
                         oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
-                        oc start-build ${APP_NAME} --from-dir=build --follow
+                        oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
                     '''
             }
             post {

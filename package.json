@@ -19,10 +19,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:ci": "react-scripts build && mkdir -p package-contents && cp -vr build Dockerfile package-contents", 
     "test": "react-scripts test",
     "test:ci": "npm test -- --watchAll=false",
     "package": "zip -r build.zip build",
-    "publish": "curl -vvv -u admin:admin123 --upload-file build.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JOB_NAME}.${BUILD_NUMBER}/build.zip",
+    "publish": "curl -vvv -u admin:admin123 --upload-file build.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JOB_NAME}.${BUILD_NUMBER}/package-contents.zip",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
