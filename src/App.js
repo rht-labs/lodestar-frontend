@@ -14,6 +14,7 @@ import ClusterInformation from "./Steps/03_ClusterInformation";
 import PointOfContact from "./Steps/02_PointOfContact";
 import LaunchCluster from "./Steps/04_LaunchCluster";
 import Logo from "./Components/Logo/Logo";
+import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
 import yaml from "yaml";
@@ -22,13 +23,12 @@ import axios from "axios";
 const App = () => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [clusterOptions, setClusterOptions] = useState(null);
+  const [hasError, setHasError] = useState(null);
   useEffect(() => {
     axios
-      .get(
-        "https://gist.githubusercontent.com/jacobsee/894ef91d9f8722c87a403bcca67ba305/raw/35ce8e2b6b76b1e69a5245acf1943389a2ad6c2c/lucas-test.yml"
-      )
+      .get(`${process.env.REACT_APP_BACKEND_URI}/project/config`)
       .then(response => {
-        const data = yaml.parse(response.data);
+        const data = yaml.parse(response.data.fileContent);
         setClusterOptions(data);
         dispatch({
           type: "ocp_cloud_provider_region",
@@ -46,6 +46,9 @@ const App = () => {
           type: "ocp_version",
           payload: data.openshift.versions[0].value
         });
+      })
+      .catch(error => {
+        setHasError(error);
       });
   }, []);
   return (
