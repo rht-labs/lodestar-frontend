@@ -129,8 +129,8 @@ pipeline {
             post {
                 always {
                     archive "**"
-                    junit 'test-report.xml'
-                    junit 'reports/server/mocha/test-results.xml'
+                    // junit 'test-report.xml'
+                    // junit 'reports/server/mocha/test-results.xml'
                     // publish html
 
                     // Notify slack or some such
