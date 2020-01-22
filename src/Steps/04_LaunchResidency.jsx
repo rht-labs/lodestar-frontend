@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Button } from "@patternfly/react-core";
 import axios from "axios";
+import slugifyProperty from "../utilities/slugifyProperty";
 
 const LaunchResidency = ({ values }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +54,7 @@ const LaunchResidency = ({ values }) => {
               axios({
                 method: "post",
                 url: `${process.env.REACT_APP_BACKEND_URI}/residencies`,
-                data: values
+                data: slugifyProperty(values, "ocp_sub_domain")
               })
                 .then(() => {
                   setSuccessResponse(true);
