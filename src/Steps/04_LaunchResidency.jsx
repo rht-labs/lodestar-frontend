@@ -1,86 +1,97 @@
-import React from "react";
-import { CogsIcon } from "@patternfly/react-icons";
+import React, { useState } from "react";
+import { Alert, Button } from "@patternfly/react-core";
+import axios from "axios";
+import slugifyProperty from "../utilities/slugifyProperty";
 
-class LaunchResidency extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { percent: 0 };
-  }
+const LaunchResidency = ({ values }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setErrorResponse] = useState(null);
+  const [success, setSuccessResponse] = useState(null);
+  return (
+    <div className="pf-l-bullseye">
+      <div className="pf-c-empty-state pf-m-lg">
+        {success ? (
+          <span
+            aria-label="thumbs up emoji"
+            role="img"
+            style={{ fontSize: "5rem" }}
+          >
+            👍🏽
+          </span>
+        ) : (
+          <span
+            aria-label="rocket emoji"
+            role="img"
+            style={{ fontSize: "5rem" }}
+          >
+            🚀
+          </span>
+        )}
 
-  tick() {
-    if (this.state.percent < 100) {
-      this.setState(prevState => ({
-        percent: prevState.percent + 20
-      }));
-    }
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    const { percent } = this.state;
-    return (
-      <div className="pf-l-bullseye">
-        <div className="pf-c-empty-state pf-m-lg">
-          <CogsIcon size="xl" />
-          <h1 className="pf-c-title pf-m-lg">
-            {percent === 100
-              ? "Cluster Configuration Complete"
-              : "Spinning Up Residency Cluster"}
-          </h1>
-          <div className="pf-c-empty-state__body">
-            <div className="pf-c-progress pf-m-singleline">
-              <div className="pf-c-progress__description" />
-              <div className="pf-c-progress__status" aria-hidden="true">
-                <span className="pf-c-progress__measure">{percent}%</span>
-              </div>
-              <div
-                className="pf-c-progress__bar"
-                role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                aria-valuenow={percent}
-                aria-describedby="progress-singleline-example-description"
-              >
-                <div
-                  className="pf-c-progress__indicator"
-                  style={{
-                    width: `${percent}%`
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="pf-c-empty-state__body">
-            <h3>
-              We are creating your residency cluster with this information. This
-              might take a second. You may want to get a{" "}
-              <span role="img" aria-label="coffee emoji">
-                ☕
+        <div className="pf-c-empty-state__body">
+          <h3>
+            {!isLoading ? (
+              <span>
+                We are about to launch your residency cluster with this
+                information.
               </span>
-            </h3>
-          </div>
-          <div className="pf-c-empty-state__secondary">
-            <button
-              className={
-                percent === 100
-                  ? "pf-c-button pf-m-primary"
-                  : "pf-c-button pf-m-link"
-              }
-            >
-              {percent === 100 ? "View" : "Cancel"}
-            </button>
-          </div>
+            ) : (
+              <span>
+                This might take a minute. You may want to get a
+                <span role="img" aria-label="coffee emoji">
+                  ☕
+                </span>
+              </span>
+            )}
+          </h3>
         </div>
-      </div>
-    );
-  }
-}
 
+        {!success ? (
+          <Button
+            onClick={e => {
+              e.preventDefault();
+              setIsLoading(true);
+              axios({
+                method: "post",
+                url: `${process.env.REACT_APP_BACKEND_URI}/residencies`,
+                data: slugifyProperty(values, "ocp_sub_domain")
+              })
+                .then(() => {
+                  setSuccessResponse(true);
+                })
+                .catch(error => {
+                  setErrorResponse(error);
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
+            }}
+            isDisabled={isLoading}
+          >
+            {!isLoading ? "Let's Do It!" : "Launching..."}
+          </Button>
+        ) : (
+          <div className="pf-c-empty-state">
+            <Alert isInline title="You did it!" variant="success">
+              <div>
+                Your cluster should be ready soon at:
+                <a
+                  href={`${values.ocp_sub_domain}.rht-labs.com`}
+                >{`${values.ocp_sub_domain}.rht-labs.com`}</a>
+              </div>
+            </Alert>
+          </div>
+        )}
+
+        {hasError ? (
+          <div className="pf-c-empty-state">
+            <Alert isInline title="We encountered an error." variant="danger">
+              {hasError.statusText}
+            </Alert>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+};
 export default LaunchResidency;

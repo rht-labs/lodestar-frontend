@@ -1,6 +1,5 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
-import "@patternfly/react-styles/css/utilities/Spacing/spacing.css";
 import {
   Page,
   PageHeader,
@@ -15,9 +14,38 @@ import LaunchResidency from "./Steps/04_LaunchResidency";
 import Logo from "./Components/Logo/Logo";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
+import yaml from "yaml";
+import axios from "axios";
 
 const App = () => {
   const [state, dispatch] = useReducer(formReducer, initialState);
+  const [clusterOptions, setClusterOptions] = useState(null);
+  useEffect(() => {
+    axios
+      .get(
+        "https://gist.githubusercontent.com/jacobsee/894ef91d9f8722c87a403bcca67ba305/raw/35ce8e2b6b76b1e69a5245acf1943389a2ad6c2c/lucas-test.yml"
+      )
+      .then(response => {
+        const data = yaml.parse(response.data);
+        setClusterOptions(data);
+        dispatch({
+          type: "ocp_cloud_provider_region",
+          payload: data.providers[0].regions[0].value
+        });
+        dispatch({
+          type: "ocp_cloud_provider_name",
+          payload: data.providers[0].value
+        });
+        dispatch({
+          type: "ocp_cluster_size",
+          payload: data.openshift["cluster-size"][0].value
+        });
+        dispatch({
+          type: "ocp_version",
+          payload: data.openshift.versions[0].value
+        });
+      });
+  }, []);
   return (
     <Page
       header={<PageHeader />}
@@ -33,30 +61,29 @@ const App = () => {
         <Wizard
           isCompactNav
           isInPage
+          footer={<span />} //don't render dumb footer
           steps={[
             {
               name: "Basic Information",
-              component: (
-                <BasicInformation values={state} onChange={dispatch} />
-              ),
-              hideCancelButton: true
+              component: <BasicInformation values={state} onChange={dispatch} />
             },
             {
               name: "Point of Contact",
-              component: <PointOfContact values={state} onChange={dispatch} />,
-              hideCancelButton: true
+              component: <PointOfContact values={state} onChange={dispatch} />
             },
             {
               name: "Openshift Cluster",
               component: (
-                <ClusterInformation values={state} onChange={dispatch} />
-              ),
-              hideCancelButton: true
+                <ClusterInformation
+                  options={clusterOptions}
+                  values={state}
+                  onChange={dispatch}
+                />
+              )
             },
             {
               name: "Launch Residency",
-              component: <LaunchResidency values={state} onChange={dispatch} />,
-              isFinishedStep: true
+              component: <LaunchResidency values={state} onChange={dispatch} />
             }
           ]}
         />
