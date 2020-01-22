@@ -189,7 +189,7 @@ pipeline {
             steps {
                 echo '### Apply Inventory using Ansible-Playbook ###'
                 sh "ansible-galaxy install -r .applier/requirements.yml --roles-path=.applier/roles"
-                sh "ansible-playbook .applier/apply.yml -i .applier/inventory/ -e include_tags=${NODE_ENV} -e ${NODE_ENV}_vars='{\"NAME\":\"${APP_NAME}\",\"IMAGE_NAME\":\"${APP_NAME}\",\"IMAGE_TAG\":\"${JENKINS_TAG}\",\"BASE_URL\":\"${BASE_URL}\",\"BACKEND_URL\":\"${BACKEND_URL}\",\"CLIENT_ID\":\"${CLIENT_ID}\",\"AUTHORIZATION_ENDPOINT\":\"${AUTHORIZATION_ENDPOINT}\",\"USERINFO_ENDPOINT\":\"${USERINFO_ENDPOINT}\",\"TOKEN_ENDPOINT\":\"${TOKEN_ENDPOINT}\",\"END_SESSION_ENDPOINT\":\"${END_SESSION_ENDPOINT}\"},\"REACT_APP_BACKEND_URI\":\"${REACT_APP_BACKEND_URI}\"}'"
+                sh "ansible-playbook .applier/apply.yml -i .applier/inventory/ -e include_tags=${NODE_ENV} -e ${NODE_ENV}_vars='{\"NAME\":\"${APP_NAME}\",\"IMAGE_NAME\":\"${APP_NAME}\",\"IMAGE_TAG\":\"${JENKINS_TAG}\",\"BASE_URL\":\"${BASE_URL}\",\"BACKEND_URL\":\"${BACKEND_URL}\",\"CLIENT_ID\":\"${CLIENT_ID}\",\"AUTHORIZATION_ENDPOINT\":\"${AUTHORIZATION_ENDPOINT}\",\"USERINFO_ENDPOINT\":\"${USERINFO_ENDPOINT}\",\"TOKEN_ENDPOINT\":\"${TOKEN_ENDPOINT}\",\"END_SESSION_ENDPOINT\":\"${END_SESSION_ENDPOINT}\",\"REACT_APP_BACKEND_URI\":\"${REACT_APP_BACKEND_URI}\"}'"
 
 
                 echo '### tag image for namespace ###'
