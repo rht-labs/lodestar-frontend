@@ -157,7 +157,7 @@ pipeline {
                 sh  '''
                         rm -rf package-contents*
                         curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
-                        unzip package-contents.zip
+                        unzip -o package-contents.zip
                     '''
                 echo '### Create Linux Container Image from package ###'
                 sh  '''
