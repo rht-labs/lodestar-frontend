@@ -14,7 +14,6 @@ import ClusterInformation from "./Steps/03_ClusterInformation";
 import PointOfContact from "./Steps/02_PointOfContact";
 import LaunchCluster from "./Steps/04_LaunchCluster";
 import Logo from "./Components/Logo/Logo";
-import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
 import yaml from "yaml";
