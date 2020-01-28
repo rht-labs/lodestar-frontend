@@ -59,8 +59,8 @@ master - env.PROJECT_NAMESPACE = "${NAMESPACE_PREFIX}-test"
          env.REACT_APP_BACKEND_URI = "https://omp-backend-omp-test.apps.s11.core.rht-labs.com"
 
 develop.* or feature.* - env.PROJECT_NAMESPACE = "${NAMESPACE_PREFIX}-dev"
-                         env.NODE_ENV = "dev"
-                         env.QUARKUS_PROFILE = "openshift-dev"
+	                     env.NODE_ENV = "dev"
+	                     env.REACT_APP_BACKEND_URI = "https://omp-backend-omp-dev.apps.s11.core.rht-labs.com"
 ```
 
 #### Ansible
