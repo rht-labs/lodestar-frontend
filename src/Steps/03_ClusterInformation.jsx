@@ -16,7 +16,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
         <FormSelect
           aria-label="Cloud Provider"
           isDisabled={options.providers.length === 1}
-          value={values.ocp_cloud_provider_name}
+          value={values.ocp_cloud_provider_name || ''}
           onChange={e =>
             onChange({ type: "ocp_cloud_provider_name", payload: e })
           }
@@ -40,7 +40,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
         {values.ocp_cloud_provider_name ? (
           <FormSelect
             aria-label="Cloud provider region"
-            value={values.ocp_cloud_provider_region}
+            value={values.ocp_cloud_provider_region || ''}
             onChange={e =>
               onChange({ type: "ocp_cloud_provider_region", payload: e })
             }
@@ -66,7 +66,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
       >
         <FormSelect
           aria-label="OpenShift Version"
-          value={values.ocp_version}
+          value={values.ocp_version || ''}
           isDisabled={options.openshift.versions.length === 1}
           onChange={e => onChange({ type: "ocp_version", payload: e })}
         >
@@ -103,7 +103,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
-          value={values.ocp_sub_domain}
+          value={values.ocp_sub_domain || ''}
           onChange={e => onChange({ type: "ocp_sub_domain", payload: e })}
         />
       </FormGroup>
@@ -119,7 +119,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
           onChange={e =>
             onChange({ type: "ocp_persistent_storage_size", payload: e })
           }
-          value={values.ocp_persistent_storage_size}
+          value={values.ocp_persistent_storage_size || ''}
         >
           {options.openshift["persistent-storage"].map((option, index) => (
             <FormSelectOption
@@ -134,7 +134,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
       <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
         <FormSelect
           aria-label="Cluster Size"
-          value={values.ocp_cluster_size}
+          value={values.ocp_cluster_size || ''}
           isDisabled={options.openshift["cluster-size"].length === 1}
           onChange={e => onChange({ type: "ocp_cluster_size", payload: e })}
         >

@@ -11,9 +11,10 @@ import {
   Wizard
 } from "@patternfly/react-core";
 import BasicInformation from "./Steps/01_BasicInformation";
-import ClusterInformation from "./Steps/03_ClusterInformation";
 import PointOfContact from "./Steps/02_PointOfContact";
-import LaunchCluster from "./Steps/04_LaunchCluster";
+import ClusterInformation from "./Steps/03_ClusterInformation";
+import ClusterUsers from "./Steps/04_ClusterUsers";
+import LaunchCluster from "./Steps/05_LaunchCluster";
 import Logo from "./Components/Logo/Logo";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
@@ -93,6 +94,15 @@ const App = () => {
                   onChange={dispatch}
                 />
               ),
+              hideCancelButton: true
+            },
+            {
+              name: "Cluster Users",
+              component: <ClusterUsers
+                          options={clusterOptions}
+                          values={state}
+                          onChange={dispatch}
+                        />,
               hideCancelButton: true
             },
             {

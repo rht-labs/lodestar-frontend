@@ -30,7 +30,7 @@ const PointOfContact = ({ values, onChange }) => {
             }}
             placeholder="Full Name"
             type="text"
-            value={values.engagement_lead_name}
+            value={values.engagement_lead_name || ''}
           />
           <InputGroupText component="label" htmlFor="engagement-lead-email">
             <EnvelopeIcon />
@@ -44,7 +44,7 @@ const PointOfContact = ({ values, onChange }) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.engagement_lead_email}
+            value={values.engagement_lead_email || ''}
           />
         </InputGroup>
       </FormGroup>
@@ -68,7 +68,7 @@ const PointOfContact = ({ values, onChange }) => {
             }
             placeholder="Full Name"
             type="text"
-            value={values.technical_lead_name}
+            value={values.technical_lead_name || ''}
           />
           <InputGroupText component="label" htmlFor="tech-lead-email">
             <EnvelopeIcon />
@@ -82,7 +82,7 @@ const PointOfContact = ({ values, onChange }) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.technical_lead_emails}
+            value={values.technical_lead_emails || ''}
           />
         </InputGroup>
       </FormGroup>
@@ -106,7 +106,7 @@ const PointOfContact = ({ values, onChange }) => {
             }
             type="text"
             placeholder="Full Name"
-            value={values.customer_contact_name}
+            value={values.customer_contact_name || ''}
           />
           <InputGroupText component="label" htmlFor="customer-contact-email">
             <EnvelopeIcon />
@@ -120,7 +120,7 @@ const PointOfContact = ({ values, onChange }) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.customer_contact_email}
+            value={values.customer_contact_email || ''}
           />
         </InputGroup>
       </FormGroup>
