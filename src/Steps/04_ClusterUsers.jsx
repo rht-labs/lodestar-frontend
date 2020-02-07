@@ -3,15 +3,21 @@ import {
   Form,
   Text,
   TextInput,
-  InputGroup,  
+  InputGroup,
+  Button,  
 } from "@patternfly/react-core";
 
+import { PlusCircleIcon, ErrorCircleOIcon } from '@patternfly/react-icons';
 import injectSheet from 'react-jss';
 
 const styles = {
   listHeader: {
-    width: '25%',
+    width: '24%',
     fontWeight: 'bold',
+  },
+  buttonHeader: {
+    width: '4%',
+    fontWeight: 'bold'
   }
 }
 
@@ -21,10 +27,30 @@ const StyledText = ({classes, children}) => (
   </Text>
 )
 
+const StyledButtonText = ({classes, children}) => (
+  <Text className={classes.buttonHeader}>
+    {children}
+  </Text>
+)
+
 const HeaderText = injectSheet(styles)(StyledText);
+const HeaderTextButton = injectSheet(styles)(StyledButtonText);
+
 
 const ClusterUsers = ({ classes, options, values, onChange }) => {
-  console.log(classes);
+  
+  //Functions for Cluster User interactivity
+  function addUser(){
+    const newUser = {first_name: '', last_name: '', email: '', role: ''};
+    values.engagement_users.push(newUser);
+    onChange({ type: "user", payload: values.engagement_users });
+  }
+
+  function removeUser(index){
+    values.engagement_users.splice(index.currentTarget.value);
+    onChange({ type: "user", payload: values.engagement_users })
+  }
+  
   return (
     <Form isHorizontal>
       <ul>
@@ -34,6 +60,7 @@ const ClusterUsers = ({ classes, options, values, onChange }) => {
             <HeaderText>First Name</HeaderText>
             <HeaderText>email</HeaderText>
             <HeaderText>Role</HeaderText>
+            <HeaderTextButton>Del</HeaderTextButton>
           </InputGroup>
         </li>
         {values.engagement_users.map((value, index) => {
@@ -84,10 +111,16 @@ const ClusterUsers = ({ classes, options, values, onChange }) => {
                 type="text"
                 value={value.role || ''}
               />
-            </InputGroup>
+              <Button onClick={removeUser} value={index} variant="danger" isInline>
+                <ErrorCircleOIcon />
+              </Button>
+            </InputGroup> 
           </li>
         })}
       </ul>
+      <Button onClick={addUser} variant="link" icon={<PlusCircleIcon />}>
+        Add User
+      </Button>
     </Form>
   );
 };
