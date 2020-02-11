@@ -30,6 +30,7 @@ const App = () => {
       .get(`${process.env.REACT_APP_BACKEND_URI}/engagements/config`)
       .then(response => {
         const data = yaml.parse(response.data.fileContent);
+        console.log(data);
         setClusterOptions(data);
         dispatch({
           type: "ocp_cloud_provider_region",
