@@ -6,11 +6,7 @@
   "start_date": null,
   "end_date": null,
   "archive_date": null,
-  "engagement_users": [
-    {"first_name": "Philip", "last_name": "Double", "email": "pdouble@redhat.com", "role": "minister"},
-    {"first_name": "Hudson", "last_name": "Double", "email": "hdouble@redhat.com", "role": "serf"},
-    {"first_name": "Isa", "last_name": "Double", "email": "idouble@redhat.com", "role": "serf"}
-  ],
+  "engagement_users": [],
   "engagement_lead_name": null,
   "engagement_lead_email": null,
   "technical_lead_name": null,
