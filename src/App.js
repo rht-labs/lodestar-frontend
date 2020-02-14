@@ -1,22 +1,12 @@
 import React, { useReducer, useEffect, useState } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
-import {
-  Alert,
-  Page,
-  PageHeader,
-  PageSidebar,
-  PageSection,
-  Text,
-  TextVariants,
-  Wizard
-} from "@patternfly/react-core";
-import BasicInformation from "./Steps/01_BasicInformation";
-import ClusterInformation from "./Steps/03_ClusterInformation";
-import PointOfContact from "./Steps/02_PointOfContact";
-import LaunchCluster from "./Steps/04_LaunchCluster";
-import Logo from "./Components/Logo/Logo";
+import { Page, PageHeader, PageSidebar } from "@patternfly/react-core";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./Components/Routing/PrivateRoute";
+import Nav from "./Components/Navigation/Nav";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
+import EngagementForm from "./engagementForm";
 import yaml from "yaml";
 import axios from "axios";
 
@@ -52,60 +42,60 @@ const App = () => {
       });
   }, []);
   return (
-    <Page
-      header={<PageHeader />}
-      sidebar={<PageSidebar isNavOpen theme="dark" nav={<Logo />} />}
-      style={{ height: "100vh" }}
-    >
-      <PageSection>
-        <div className="pf-c-content">
-          <Text component={TextVariants.h1}>Engagement Data Gathering</Text>
-        </div>
-        {hasError ? (
-          <Alert isInline title="We encountered an error." variant="danger">
-            {hasError.statusText}
-          </Alert>
-        ) : null}
-      </PageSection>
-      <PageSection>
-        <Wizard
-          isCompactNav
-          isInPage
-          steps={[
-            {
-              name: "Basic Information",
-              component: (
-                <BasicInformation values={state} onChange={dispatch} />
-              ),
-              hideCancelButton: true
-            },
-            {
-              name: "Point of Contact",
-              component: <PointOfContact values={state} onChange={dispatch} />,
-              hideCancelButton: true
-            },
-            {
-              name: "OpenShift Cluster",
-              component: (
-                <ClusterInformation
-                  options={clusterOptions}
-                  values={state}
-                  onChange={dispatch}
-                />
-              ),
-              hideCancelButton: true
-            },
-            {
-              name: "Launch Cluster",
-              component: <LaunchCluster values={state} onChange={dispatch} />,
-              hideCancelButton: true,
-              isFinishedStep: true
-            }
-          ]}
-        />
-      </PageSection>
-    </Page>
+    <Router>
+      <Page
+        header={<PageHeader />}
+        sidebar={<PageSidebar isNavOpen theme="dark" nav={<Nav />} />}
+        style={{ height: "100vh" }}
+      >
+        <Switch>
+          <Route exact path="/" component={EngagementForm} />
+          <PrivateRoute path="/private" component={EngagementForm} />
+        </Switch>
+      </Page>
+    </Router>
   );
 };
 
 export default App;
+
+// export default function BasicExample() {
+//   return (
+//     <Router>
+//       <div>
+//         <ul>
+//           <li>
+//             <Link to="/">Home</Link>
+//           </li>
+//           <li>
+//             <Link to="/about">About</Link>
+//           </li>
+//           <li>
+//             <Link to="/dashboard">Dashboard</Link>
+//           </li>
+//         </ul>
+//
+//         <hr />
+//
+//         {/*
+//           A <Switch> looks through all its children <Route>
+//           elements and renders the first one whose path
+//           matches the current URL. Use a <Switch> any time
+//           you have multiple routes, but you want only one
+//           of them to render at a time
+//         */}
+//         <Switch>
+//           <Route exact path="/">
+//             <App />
+//           </Route>
+//           <Route path="/about">
+//             {/*<About />*/}
+//           </Route>
+//           <Route path="/dashboard">
+//             {/*<Dashboard />*/}
+//           </Route>
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// }
