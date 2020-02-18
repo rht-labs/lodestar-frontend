@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "enzyme";
-import LaunchCluster from "./04_LaunchCluster";
+import LaunchCluster from "./05_LaunchCluster";
 import defaultValues from "../initialState";
 
 test("Basic component renders correctly", () => {
