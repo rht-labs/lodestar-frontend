@@ -1,5 +1,7 @@
 const formReducer = (state, action) => {
   switch (action.type) {
+    case "user":
+      return { ...state, engagement_users: action.payload };
     case "customer_name":
       return { ...state, customer_name: action.payload };
     case "project_name":

@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:ci": "react-scripts build && mkdir -p package-contents && cp -vr build Dockerfile package-contents", 
+    "build:ci": "react-scripts build && mkdir -p package-contents && cp -vr build Dockerfile package-contents",
     "test": "react-scripts test",
     "test:ci": "npm test -- --watchAll=false",
     "package": "zip -r package-contents.zip package-contents",
