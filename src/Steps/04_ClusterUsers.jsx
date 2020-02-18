@@ -63,7 +63,7 @@ const ClusterUsers = ({ options, values, onChange }) => {
                 <InputGroup>
                   <Text style={listHeader}>Last Name</Text>
                   <Text style={listHeader}>First Name</Text>
-                  <Text style={listHeader}>email</Text>
+                  <Text style={listHeader}>Email</Text>
                   <Text style={listHeader}>Role</Text>
                   <Text style={buttonHeader}>Del</Text>
                 </InputGroup>
