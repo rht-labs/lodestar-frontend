@@ -1,5 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+import SendToSSO from "./Login";
 
 const isAuthenticated = false;
 
@@ -10,7 +17,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       isAuthenticated === true ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/one" />
+        //         <Redirect to="/one" />
+        <SendToSSO />
       )
     }
   />
