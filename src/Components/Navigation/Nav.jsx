@@ -50,18 +50,4 @@ class NavDefaultList extends React.Component {
   }
 }
 
-// const Logo = () => (
-//   <ul>
-//     <li>
-//       <Link to="/">Form</Link>
-//     </li>
-//     <li>
-//       <Link to="/about">About</Link>
-//     </li>
-//     <li>
-//       <Link to="/dashboard">Dashboard</Link>
-//     </li>
-//   </ul>
-// );
-
 export default NavDefaultList;

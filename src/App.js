@@ -2,7 +2,8 @@ import React, { useReducer, useEffect, useState } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
 import { Page, PageHeader, PageSidebar } from "@patternfly/react-core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrivateRoute from "./Components/Routing/PrivateRoute";
+import PrivateRoute from "./Components/Authentication/PrivateRoute";
+import CallbackHandler from "./Components/Authentication/CallbackHandler";
 import Nav from "./Components/Navigation/Nav";
 import formReducer from "./formReducer";
 import initialState from "./initialState";
@@ -51,6 +52,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={EngagementForm} />
           <PrivateRoute path="/private" component={EngagementForm} />
+          <Route path="/auth_callback" component={CallbackHandler} />
         </Switch>
       </Page>
     </Router>
