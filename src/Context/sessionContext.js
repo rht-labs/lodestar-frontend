@@ -20,12 +20,12 @@ class SessionProvider extends Component {
       accessTokenExpiry: new Date(),
       refreshTokenExpiry: new Date()
     },
-    toggleLogin: () => {
-      const setTo = !this.state.userLoggedIn;
-      this.setState({ userLoggedIn: setTo });
+    roles: [],
+    performLogout: () => {
+      this.setState({ userLoggedIn: false });
     },
-    performLogin: (profile, tokens) => {
-      this.setState({ userLoggedIn: true, profile, tokens });
+    performLogin: (profile, tokens, roles) => {
+      this.setState({ userLoggedIn: true, profile, tokens, roles });
     }
   };
 
@@ -35,7 +35,7 @@ class SessionProvider extends Component {
         value={{
           userLoggedIn: this.state.userLoggedIn,
           profile: this.state.profile,
-          toggleLogin: this.state.toggleLogin,
+          performLogout: this.state.performLogout,
           performLogin: this.state.performLogin
         }}
       >
