@@ -11,6 +11,8 @@ import EngagementForm from "./engagementForm";
 import yaml from "yaml";
 import axios from "axios";
 
+import { SessionProvider } from './Context/sessionContext';
+
 const App = () => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [clusterOptions, setClusterOptions] = useState(null);
@@ -44,60 +46,21 @@ const App = () => {
   }, []);
   return (
     <Router>
-      <Page
-        header={<PageHeader />}
-        sidebar={<PageSidebar isNavOpen theme="dark" nav={<Nav />} />}
-        style={{ height: "100vh" }}
-      >
-        <Switch>
-          <Route exact path="/" component={EngagementForm} />
-          <PrivateRoute path="/private" component={EngagementForm} />
-          <Route path="/auth_callback" component={CallbackHandler} />
-        </Switch>
-      </Page>
+      <SessionProvider>
+        <Page
+          header={<PageHeader />}
+          sidebar={<PageSidebar isNavOpen theme="dark" nav={<Nav />} />}
+          style={{ height: "100vh" }}
+        >
+          <Switch>
+            <Route exact path="/" component={EngagementForm} />
+            <PrivateRoute path="/private" component={EngagementForm} />
+            <Route path="/auth_callback" component={CallbackHandler} />
+          </Switch>
+        </Page>
+      </SessionProvider>
     </Router>
   );
 };
 
 export default App;
-
-// export default function BasicExample() {
-//   return (
-//     <Router>
-//       <div>
-//         <ul>
-//           <li>
-//             <Link to="/">Home</Link>
-//           </li>
-//           <li>
-//             <Link to="/about">About</Link>
-//           </li>
-//           <li>
-//             <Link to="/dashboard">Dashboard</Link>
-//           </li>
-//         </ul>
-//
-//         <hr />
-//
-//         {/*
-//           A <Switch> looks through all its children <Route>
-//           elements and renders the first one whose path
-//           matches the current URL. Use a <Switch> any time
-//           you have multiple routes, but you want only one
-//           of them to render at a time
-//         */}
-//         <Switch>
-//           <Route exact path="/">
-//             <App />
-//           </Route>
-//           <Route path="/about">
-//             {/*<About />*/}
-//           </Route>
-//           <Route path="/dashboard">
-//             {/*<Dashboard />*/}
-//           </Route>
-//         </Switch>
-//       </div>
-//     </Router>
-//   );
-// }
