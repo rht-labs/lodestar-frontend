@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { OauthReceiver } from "@jacobsee/react-oauth-flow";
 import { SessionContext } from "../../Context/sessionContext";
@@ -29,8 +29,6 @@ export default class CallbackHandler extends Component {
                   )
                   .then(userDataResponse => {
                     // noinspection JSUnresolvedVariable
-                    console.log("Performing login using sessionContext now");
-                    console.log(userDataResponse.data);
                     ctx.performLogin({
                       profile: {
                         username: userDataResponse.data.preferred_username,
