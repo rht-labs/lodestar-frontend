@@ -1,9 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import formReducer from './formReducer'
 import initialState from './initialState'
-import axios from 'axios'
+// import axios from 'axios'
 import yaml from 'yaml'
-import { Alert, Page, PageHeader, PageSection, PageSidebar, Text, TextVariants, Wizard } from '@patternfly/react-core'
+import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
+import { SessionContext } from "./Context/sessionContext";
 import BasicInformation from './Steps/01_BasicInformation'
 import PointOfContact from './Steps/02_PointOfContact'
 import ClusterInformation from './Steps/03_ClusterInformation'
@@ -13,8 +14,9 @@ export default function EngagementForm() {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [clusterOptions, setClusterOptions] = useState(null);
   const [hasError, setHasError] = useState(null);
+  const session = useContext(SessionContext);
   useEffect(() => {
-    axios
+    session.axios
       .get(`${process.env.REACT_APP_BACKEND_URI}/engagements/config`)
       .then(response => {
         const data = yaml.parse(response.data.fileContent);
@@ -39,7 +41,7 @@ export default function EngagementForm() {
       .catch(error => {
         setHasError(error);
       });
-  }, []);
+  });
   return (
     <>
       <PageSection>

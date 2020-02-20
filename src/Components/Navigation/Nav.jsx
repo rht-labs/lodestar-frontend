@@ -1,12 +1,8 @@
 import React from "react";
 import {
   Nav,
-  NavExpandable,
   NavItem,
-  NavItemSeparator,
   NavList,
-  NavGroup,
-  NavVariants
 } from "@patternfly/react-core";
 import { Link } from "react-router-dom";
 
