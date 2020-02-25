@@ -8,7 +8,7 @@ import {
 } from "@patternfly/react-core";
 import { UserIcon, EnvelopeIcon } from "@patternfly/react-icons";
 
-const PointOfContact = ({ values, onChange }) => {
+const PointOfContact = ({ values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup
