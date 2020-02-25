@@ -1,4 +1,4 @@
-import slugProperties from "./slugProperties";
+import slugProperties from "./slug_properties";
 
 const baseObject = {
   first_property: "I am a string",

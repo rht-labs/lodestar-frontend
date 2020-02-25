@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { SessionContext } from "../../Context/session_context";
+import { SessionContext } from "../../context/session_context";
 import { AuthenticationRepository } from "../../repositories/authentication/authentication_repository";
 import { useLocation, Redirect } from "react-router";
 
