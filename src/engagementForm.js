@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import formReducer from './formReducer'
 import initialState from './initialState'
-// import axios from 'axios'
 import yaml from 'yaml'
 import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
 import BasicInformation from './Steps/01_BasicInformation'
