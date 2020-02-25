@@ -4,7 +4,6 @@ import initialState from './initialState'
 // import axios from 'axios'
 import yaml from 'yaml'
 import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
-import { SessionContext } from "./Context/sessionContext";
 import BasicInformation from './Steps/01_BasicInformation'
 import PointOfContact from './Steps/02_PointOfContact'
 import ClusterInformation from './Steps/03_ClusterInformation'
@@ -41,7 +40,7 @@ export default function EngagementForm() {
       .catch(error => {
         setHasError(error);
       });
-  });
+  }, []);
   return (
     <>
       <PageSection>
