@@ -5,19 +5,33 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { AuthenticationRepository } from "../../repositories/authentication/authentication_repository";
 
+const AUTHENTICATION_STATES = {
+  authenticated: 'authenticated',
+  unauthenticated: 'unauthenticated',
+  initial: 'initial'
+}
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const [authenticationStatus, setAuthenticationStatus] = useState(AUTHENTICATION_STATES.initial)
+
   useEffect(() => {
     AuthenticationRepository.getInstance().isLoggedIn().then((authLoggedInResponse) => {
-      setIsLoggedIn(authLoggedInResponse)
+      setAuthenticationStatus(authLoggedInResponse ? AUTHENTICATION_STATES.authenticated : AUTHENTICATION_STATES.unauthenticated)
     })
   })
-  return isLoggedIn ? (<Route
-    {...rest}
-    render={props =>
-      <Component {...props} />
-    }
-  />) : isLoggedIn === false ? <SendToSSO /> : <div />
+  
+  if (authenticationStatus === AUTHENTICATION_STATES.authenticated) {
+    return <Route
+      {...rest}
+      render={props =>
+        <Component {...props} />
+      }
+    />
+  } else if (authenticationStatus === AUTHENTICATION_STATES.unauthenticated) {
+    return <SendToSSO />
+  } else {
+    return <div />
+  }
 }
 
 export default PrivateRoute;
