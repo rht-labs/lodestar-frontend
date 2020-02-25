@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "enzyme";
 import ClusterInformation from "./03_ClusterInformation";
-import defaultValues from "../initialState";
+import defaultValues from "../initial_state";
 const options = {
   providers: [
     {

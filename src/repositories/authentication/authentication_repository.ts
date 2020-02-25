@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios, { AxiosInstance } from "axios";
 import { UserToken } from '../../models/user_token'
 import qs from 'querystring'
 import { AppSettings } from "../../settings/config";
@@ -7,28 +7,31 @@ const TOKEN_STORAGE_KEY = 'token'
 
 export class AuthenticationRepository {
   constructor() {
-    this._initializeAxios()
+    this.axios = this.initializeAxios()
   }
 
+  public axios: AxiosInstance
 
-  _instance = null;
+  private static _instance?: AuthenticationRepository;
 
-  axios;
-
-  _initializeAxios() {
-    this.axios = Axios.create();
-    this.axios.interceptors.request.use(function (config) {
+  private initializeAxios() {
+    const axiosInstance = Axios.create();
+    axiosInstance.interceptors.request.use(function (config) {
       const token = AuthenticationRepository.getInstance().getToken();
+      if (!token) {
+        return config;
+      }
       config.headers.Authorization = `Bearer ${token.accessToken}`;
       return config;
     });
+    return axiosInstance;
   }
 
-  static getInstance() {
-    if (!this._instance) {
-      this._instance = new AuthenticationRepository()
+  static getInstance(): AuthenticationRepository {
+    if (!AuthenticationRepository._instance) {
+      AuthenticationRepository._instance = new AuthenticationRepository()
     }
-    return this._instance;
+    return AuthenticationRepository._instance;
   }
 
   /**
@@ -36,11 +39,11 @@ export class AuthenticationRepository {
    * @param {UserToken} tokenObject 
    */
 
-  saveToken(tokenObject) {
+  saveToken(tokenObject: UserToken) {
     try {
       if (typeof tokenObject === 'object' && 'accessToken' in tokenObject && 'refreshToken' in tokenObject) {
         localStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify(tokenObject.toMap()));
-        this._initializeAxios()
+        this.axios = this.initializeAxios()
       } else {
         throw TypeError('Token Object must be an object containing access and refresh tokens')
       }
@@ -55,7 +58,10 @@ export class AuthenticationRepository {
 
   getToken() {
     try {
-      const tokenMap = JSON.parse(localStorage.getItem(TOKEN_STORAGE_KEY))
+      const tokenMap = JSON.parse(localStorage.getItem(TOKEN_STORAGE_KEY) || '')
+      if (!tokenMap) {
+        return null
+      }
       return UserToken.fromMap(tokenMap)
     } catch (e) {
       console.log(e)
@@ -66,11 +72,11 @@ export class AuthenticationRepository {
   /**
    * @returns {Promise<boolean>}
    */
-  isLoggedIn() {
+  isLoggedIn(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       try {
         const token = this.getToken()
-        const isValid = token?.accessTokenExpiry > Date.now();
+        const isValid = token?.accessTokenExpiry ? token.accessTokenExpiry > new Date(Date.now()) : false;
         resolve(!!isValid)
       } catch (e) {
         console.error(e)
@@ -79,7 +85,7 @@ export class AuthenticationRepository {
     });
   }
 
-  async fetchToken(code) {
+  async fetchToken(code: string) {
     const tokenUrl = `${AppSettings.authBaseUrl}/token`
     const requestParams = {
       code,
@@ -97,14 +103,14 @@ export class AuthenticationRepository {
     const { access_token, refresh_token, expires_in, refresh_expires_in } = data
     let currentTime = new Date();
     const userToken = new UserToken({
-      accessToken: access_token,
-      refreshToken: refresh_token,
+      accessToken: access_token as string,
+      refreshToken: refresh_token as string,
       accessTokenExpiry: new Date(
-        currentTime.getTime() + expires_in * 1000
+        currentTime.getTime() + expires_in as number * 1000
       ),
       refreshTokenExpiry: new Date(
         currentTime.getTime() +
-        refresh_expires_in * 1000
+        refresh_expires_in * 1000 as number
       )
     })
     this.saveToken(userToken)

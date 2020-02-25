@@ -2,12 +2,12 @@ import React from "react";
 import "@patternfly/react-core/dist/styles/base.css";
 import { Page, PageHeader, PageSidebar } from "@patternfly/react-core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrivateRoute from "./Components/Authentication/PrivateRoute";
-import CallbackHandler from "./Components/Authentication/CallbackHandler";
-import Nav from "./Components/Navigation/Nav";
-import EngagementForm from "./engagementForm";
+import PrivateRoute from "./Components/Authentication/private_route";
+import CallbackHandler from "./Components/Authentication/callback_handler";
+import Nav from "./Components/Navigation/nav";
+import EngagementForm from "./engagement_form";
 
-import { SessionProvider } from './Context/sessionContext';
+import { SessionProvider } from './Context/session_context';
 
 const App = () => {
   return (

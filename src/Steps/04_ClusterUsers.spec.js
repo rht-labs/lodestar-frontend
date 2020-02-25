@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "enzyme";
 import ClusterUsers from "./04_ClusterUsers";
-import defaultValues from "../initialState";
+import defaultValues from "../initial_state";
 
 const defaultOptions = {
   "user-management": {

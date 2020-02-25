@@ -11,6 +11,6 @@ const OAUTH_CONFIG = {
 const OAUTH_URL = `${AppSettings.authBaseUrl}/auth?client_id=${OAUTH_CONFIG.clientId}&redirect_uri=${encodeURI(OAUTH_CONFIG.redirectUri)}&response_type=code&state=${encodeURI(JSON.stringify(OAUTH_CONFIG.state))}`
 
 export default function SendToSSO() {
-  window.location = OAUTH_URL
+  window.location = OAUTH_URL as any as Location
   return null
 }
