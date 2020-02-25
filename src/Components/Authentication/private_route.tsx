@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Component, ReactNode } from "react";
 import { Route } from "react-router-dom";
-import SendToSSO from "./Login";
+import SendToSSO from "./login";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AuthenticationRepository } from "../../repositories/authentication/authentication_repository";
@@ -11,7 +11,12 @@ const AUTHENTICATION_STATES = {
   initial: 'initial'
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+interface PrivateRouteProps {
+  path: string;
+  component: (props: any) => JSX.Element;
+}
+
+const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteProps) => {
   const [authenticationStatus, setAuthenticationStatus] = useState(AUTHENTICATION_STATES.initial)
 
   useEffect(() => {
@@ -19,7 +24,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       setAuthenticationStatus(authLoggedInResponse ? AUTHENTICATION_STATES.authenticated : AUTHENTICATION_STATES.unauthenticated)
     })
   })
-  
+
   if (authenticationStatus === AUTHENTICATION_STATES.authenticated) {
     return <Route
       {...rest}

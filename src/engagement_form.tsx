@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import formReducer from './formReducer'
-import initialState from './initialState'
+import initialState from './initial_state'
 import yaml from 'yaml'
 import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
 import BasicInformation from './Steps/01_BasicInformation'
@@ -9,11 +9,12 @@ import ClusterInformation from './Steps/03_ClusterInformation'
 import LaunchCluster from './Steps/04_ClusterUsers'
 import { AuthenticationRepository } from './repositories/authentication/authentication_repository'
 import { AppSettings } from './settings/config'
+import { AxiosError } from 'axios'
 
 export default function EngagementForm() {
-  const [state, dispatch] = useReducer(formReducer, initialState);
+  const [state, dispatch] = useReducer<(state: any, action: any) => any>(formReducer, initialState);
   const [clusterOptions, setClusterOptions] = useState(null);
-  const [hasError, setHasError] = useState(null);
+  const [hasError, setHasError] = useState<AxiosError | null>(null);
   useEffect(() => {
     AuthenticationRepository.getInstance().axios
       .get(`${AppSettings.backendUrl}/engagements/config`)
@@ -38,7 +39,7 @@ export default function EngagementForm() {
         });
       })
       .catch(error => {
-        setHasError(error);
+        setHasError(error)
       });
   }, []);
   return (
@@ -49,7 +50,7 @@ export default function EngagementForm() {
         </div>
         {hasError ? (
           <Alert isInline title="We encountered an error." variant="danger">
-            {hasError.statusText}
+            {hasError.message}
           </Alert>
         ) : null}
       </PageSection>
@@ -83,7 +84,7 @@ export default function EngagementForm() {
             },
             {
               name: "Launch Cluster",
-              component: <LaunchCluster values={state} onChange={dispatch} />,
+              component: <LaunchCluster values={state} onChange={dispatch} options={{}} />,
               hideCancelButton: true,
               isFinishedStep: true
             }
