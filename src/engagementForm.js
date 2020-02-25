@@ -8,6 +8,7 @@ import PointOfContact from './Steps/02_PointOfContact'
 import ClusterInformation from './Steps/03_ClusterInformation'
 import LaunchCluster from './Steps/04_ClusterUsers'
 import { AuthenticationRepository } from './repositories/authentication/authentication_repository'
+import { AppSettings } from './settings/config'
 
 export default function EngagementForm() {
   const [state, dispatch] = useReducer(formReducer, initialState);
@@ -15,7 +16,7 @@ export default function EngagementForm() {
   const [hasError, setHasError] = useState(null);
   useEffect(() => {
     AuthenticationRepository.getInstance().axios
-      .get(`${process.env.REACT_APP_BACKEND_URI}/engagements/config`)
+      .get(`${AppSettings.backendUrl}/engagements/config`)
       .then(response => {
         const data = yaml.parse(response.data.fileContent);
         setClusterOptions(data);
