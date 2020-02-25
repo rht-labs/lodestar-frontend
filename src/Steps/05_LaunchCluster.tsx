@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Alert, Button } from "@patternfly/react-core";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import slugProperties from "../utilities/slugProperties";
 import { AppSettings } from "../settings/config";
 
-const LaunchCluster = ({ values }) => {
+const LaunchCluster = ({ values }: any) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setErrorResponse] = useState(null);
-  const [success, setSuccessResponse] = useState(null);
+  const [hasError, setErrorResponse] = useState<AxiosError | null>(null);
+  const [success, setSuccessResponse] = useState<boolean | null>(null);
   return (
     <div className="pf-l-bullseye">
       <div className="pf-c-empty-state">
@@ -94,7 +94,7 @@ const LaunchCluster = ({ values }) => {
         {hasError ? (
           <div className="pf-c-empty-state">
             <Alert isInline title="We encountered an error." variant="danger">
-              {hasError.statusText}
+              {hasError.message}
             </Alert>
           </div>
         ) : null}

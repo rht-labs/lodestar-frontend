@@ -8,7 +8,7 @@ import {
   TextArea,
   TextInput
 } from "@patternfly/react-core";
-const BasicInformation = ({ values, onChange }) => {
+const BasicInformation = ({ values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup
