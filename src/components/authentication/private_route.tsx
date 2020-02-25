@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import SendToSSO from "./login";
 import { useState } from "react";

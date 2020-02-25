@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Alert, Button } from "@patternfly/react-core";
 import axios, { AxiosError } from "axios";
-import slugProperties from "../utilities/slugProperties";
-import { AppSettings } from "../settings/config";
+import slugProperties from "../../../utilities/slug_properties";
+import { AppSettings } from "../../../settings/config";
 
 const LaunchCluster = ({ values }: any) => {
   const [isLoading, setIsLoading] = useState(false);
