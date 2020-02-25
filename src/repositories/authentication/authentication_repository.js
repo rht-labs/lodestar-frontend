@@ -69,10 +69,11 @@ export class AuthenticationRepository {
         return new Promise((resolve, reject) => {
             try {
                 const token = this.getToken()
-                const isValid = token.accessTokenExpiry > Date.now();
-                resolve(isValid)
+                const isValid = token?.accessTokenExpiry > Date.now();
+                resolve(!!isValid)
             } catch (e) {
-                reject(e)
+                console.error(e)
+                resolve(false)
             }
         });
     }
