@@ -1,5 +1,4 @@
 import React, { Component, createContext } from "react";
-import axios from "axios";
 import { AuthenticationRepository } from "../repositories/authentication/authentication_repository";
 import { UserProfile } from "../models/user_profile";
 import { UserToken } from "../models/user_token";

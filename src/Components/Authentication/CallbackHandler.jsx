@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { SessionContext } from "../../Context/sessionContext";
 import { UserProfile } from "../../models/user_profile";
@@ -6,8 +6,6 @@ import { AuthenticationRepository } from "../../repositories/authentication/auth
 import { UserToken } from "../../models/user_token";
 import qs from 'querystring'
 import { useLocation, Redirect } from "react-router";
-import { useContext } from "react";
-import { useState } from "react";
 import { AppSettings } from "../../settings/config";
 
 
@@ -57,6 +55,7 @@ export default function CallbackHandler() {
       });
       setLoginSuccess(true)
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return loginSuccess ? <Redirect to="/private" /> : null
 }
