@@ -3,15 +3,18 @@ export class UserProfile {
         username = '',
         firstName = '',
         lastName = '',
-        email = ''
+        email = '',
+        groups = null
     } = {}) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.groups = groups;
     }
     username = null
     firstName = null
     lastName = null
     email = null
+    groups = null
 }
