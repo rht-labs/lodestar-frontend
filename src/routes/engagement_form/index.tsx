@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import formReducer from '../../form_reducer'
-import initialState from '../../initial_state'
+import formReducer from './form_reducer'
+import initialState from './initial_state'
 import yaml from 'yaml'
 import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
 import BasicInformation from './steps/01_basic_information'
