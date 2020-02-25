@@ -1,7 +1,6 @@
 export const AppSettings = {
-    baseUrl: process.env.REACT_APP_BASE_URL,
-    clientId: process.env.REACT_APP_CLIENT_ID,
-    redirectUri: process.env.REACT_APP_REDIRECT_URI,
-    authBaseUrl: process.env.REACT_APP_AUTH_BASE_URL,
-    backendUrl: process.env.REACT_APP_BACKEND_URI
+    baseUrl: 'http://localhost:3000',
+    clientId: 'open-management-portal',
+    authBaseUrl: 'https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect',
+    backendUrl: 'http://localhost:3000/api'
 }
