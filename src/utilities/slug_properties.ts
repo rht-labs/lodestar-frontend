@@ -1,9 +1,9 @@
 import slugify from "slugify";
 import forOwn from "lodash.forown";
 
-const slugProperties = (iterable: object, properties: array) => {
+const slugProperties = (iterable: object, properties: Array<any>) => {
   if (iterable && properties) {
-    return forOwn(iterable, (value, key, object) => {
+    return forOwn(iterable, (value: any, key: any, object: any) => {
       if (properties.includes(key)) {
         object[key] = slugify(value, { lower: true });
       }

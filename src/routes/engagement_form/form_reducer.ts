@@ -1,4 +1,4 @@
-const formReducer = (state, action) => {
+const formReducer = (state: any, action: any) => {
   switch (action.type) {
     case "user":
       return { ...state, engagement_users: action.payload };

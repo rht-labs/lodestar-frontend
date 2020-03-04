@@ -1,4 +1,4 @@
-{
+export default {
   "customer_name": null,
   "project_name": null,
   "description": null,
