@@ -9,7 +9,7 @@ import {
 import slugify from "slugify";
 import find from "lodash.find";
 
-const ClusterInformation = ({ options, values, onChange }) => {
+const ClusterInformation = ({ options, values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
@@ -21,7 +21,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
             onChange({ type: "ocp_cloud_provider_name", payload: e })
           }
         >
-          {options.providers.map((option, index) => (
+          {options.providers.map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -47,7 +47,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
           >
             {find(options.providers, {
               value: values.ocp_cloud_provider_name
-            }).regions.map((option, index) => (
+            }).regions.map((option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}
                 key={index}
@@ -70,7 +70,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
           isDisabled={options.openshift.versions.length === 1}
           onChange={e => onChange({ type: "ocp_version", payload: e })}
         >
-          {options.openshift.versions.map((option, index) => (
+          {options.openshift.versions.map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -121,7 +121,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
           }
           value={values.ocp_persistent_storage_size || ''}
         >
-          {options.openshift["persistent-storage"].map((option, index) => (
+          {options.openshift["persistent-storage"].map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -138,7 +138,7 @@ const ClusterInformation = ({ options, values, onChange }) => {
           isDisabled={options.openshift["cluster-size"].length === 1}
           onChange={e => onChange({ type: "ocp_cluster_size", payload: e })}
         >
-          {options.openshift["cluster-size"].map((option, index) => (
+          {options.openshift["cluster-size"].map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
