@@ -1,4 +1,4 @@
-{
+export default {
   "customer_name": null,
   "project_name": null,
   "description": null,
@@ -6,6 +6,7 @@
   "start_date": null,
   "end_date": null,
   "archive_date": null,
+  "engagement_users": [],
   "engagement_lead_name": null,
   "engagement_lead_email": null,
   "technical_lead_name": null,

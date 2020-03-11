@@ -1,32 +1,23 @@
-import React, { useReducer, useEffect, useState } from "react";
-import "@patternfly/react-core/dist/styles/base.css";
-import {
-  Alert,
-  Page,
-  PageHeader,
-  PageSidebar,
-  PageSection,
-  Text,
-  TextVariants,
-  Wizard
-} from "@patternfly/react-core";
-import BasicInformation from "./Steps/01_BasicInformation";
-import ClusterInformation from "./Steps/03_ClusterInformation";
-import PointOfContact from "./Steps/02_PointOfContact";
-import LaunchCluster from "./Steps/04_LaunchCluster";
-import Logo from "./Components/Logo/Logo";
-import formReducer from "./formReducer";
-import initialState from "./initialState";
-import yaml from "yaml";
-import axios from "axios";
+import React, { useEffect, useReducer, useState } from 'react'
+import formReducer from './form_reducer'
+import initialState from './initial_state'
+import yaml from 'yaml'
+import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
+import BasicInformation from './steps/01_basic_information'
+import PointOfContact from './steps/02_point_of_contact'
+import ClusterInformation from './steps/03_cluster_information'
+import LaunchCluster from './steps/04_cluster_users'
+import { AuthenticationRepository } from '../../repositories/authentication/authentication_repository'
+import { AppSettings } from '../../settings/config'
+import { AxiosError } from 'axios'
 
-const App = () => {
-  const [state, dispatch] = useReducer(formReducer, initialState);
+export default function EngagementForm() {
+  const [state, dispatch] = useReducer<(state: any, action: any) => any>(formReducer, initialState);
   const [clusterOptions, setClusterOptions] = useState(null);
-  const [hasError, setHasError] = useState(null);
+  const [hasError, setHasError] = useState<AxiosError | null>(null);
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URI}/engagements/config`)
+    AuthenticationRepository.getInstance().axios
+      .get(`${AppSettings.backendUrl}/engagements/config`)
       .then(response => {
         const data = yaml.parse(response.data.fileContent);
         setClusterOptions(data);
@@ -48,22 +39,18 @@ const App = () => {
         });
       })
       .catch(error => {
-        setHasError(error);
+        setHasError(error)
       });
   }, []);
   return (
-    <Page
-      header={<PageHeader />}
-      sidebar={<PageSidebar isNavOpen theme="dark" nav={<Logo />} />}
-      style={{ height: "100vh" }}
-    >
+    <>
       <PageSection>
         <div className="pf-c-content">
           <Text component={TextVariants.h1}>Engagement Data Gathering</Text>
         </div>
         {hasError ? (
           <Alert isInline title="We encountered an error." variant="danger">
-            {hasError.statusText}
+            {hasError.message}
           </Alert>
         ) : null}
       </PageSection>
@@ -97,15 +84,13 @@ const App = () => {
             },
             {
               name: "Launch Cluster",
-              component: <LaunchCluster values={state} onChange={dispatch} />,
+              component: <LaunchCluster values={state} onChange={dispatch} options={{}} />,
               hideCancelButton: true,
               isFinishedStep: true
             }
           ]}
         />
       </PageSection>
-    </Page>
+    </>
   );
 };
-
-export default App;

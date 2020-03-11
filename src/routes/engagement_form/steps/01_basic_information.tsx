@@ -8,7 +8,7 @@ import {
   TextArea,
   TextInput
 } from "@patternfly/react-core";
-const BasicInformation = ({ values, onChange }) => {
+const BasicInformation = ({ values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup
@@ -22,7 +22,7 @@ const BasicInformation = ({ values, onChange }) => {
           id="customer_name"
           name="customer_name"
           placeholder="e.g. NASA"
-          value={values.customer_name}
+          value={values.customer_name || ''}
           onChange={e => onChange({ type: "customer_name", payload: e })}
         />
       </FormGroup>
@@ -37,7 +37,7 @@ const BasicInformation = ({ values, onChange }) => {
           id="project_name"
           name="project_name"
           placeholder="e.g. Mars Probe"
-          value={values.project_name}
+          value={values.project_name || ''}
           onChange={e => onChange({ type: "project_name", payload: e })}
         />
       </FormGroup>
@@ -52,7 +52,7 @@ const BasicInformation = ({ values, onChange }) => {
           id="location"
           name="location"
           placeholder="e.g. Pasadena, CA"
-          value={values.location}
+          value={values.location || ''}
           onChange={e => onChange({ type: "location", payload: e })}
         />
       </FormGroup>
@@ -71,7 +71,7 @@ const BasicInformation = ({ values, onChange }) => {
             id="start_date"
             type="date"
             aria-label="The end date."
-            value={values.start_date}
+            value={values.start_date || ''}
             onChange={e => onChange({ type: "start_date", payload: e })}
           />
           <TextInput
@@ -79,7 +79,7 @@ const BasicInformation = ({ values, onChange }) => {
             id="end_date"
             type="date"
             aria-label="Residency end date"
-            value={values.end_date}
+            value={values.end_date || ''}
             onChange={e => onChange({ type: "end_date", payload: e })}
           />
         </InputGroup>
@@ -90,7 +90,7 @@ const BasicInformation = ({ values, onChange }) => {
           id="description"
           aria-label="residency description"
           placeholder="Description and notes for the Engagment"
-          value={values.description}
+          value={values.description || ''}
           onChange={e => onChange({ type: "description", payload: e })}
         />
       </FormGroup>
