@@ -27,6 +27,8 @@ pipeline {
         USERINFO_ENDPOINT = "https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/userinfo"
         TOKEN_ENDPOINT = "https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/token"
         END_SESSION_ENDPOINT = "https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/logout"
+
+        BC_OUTPUT_KIND = "ImageStreamTag"
     }
 
     // The options directive is for configuration that applies to the whole job.
@@ -139,13 +141,14 @@ pipeline {
                     '''
                 script {
                     if (env.TAG_NAME ==~ /(.*release.*)/) {
-                        APP_NAME =  "quay.io/omp-frontend"
+                        APP_NAME =  "quay.io/gsampaio/omp-frontend"
+                        BC_OUTPUT_KIND = "DockerImage"
                     }
                 }
                 echo '### Create Container Image ###'
                 sh  '''
                         oc project ${PIPELINES_NAMESPACE} # probs not needed
-                        oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"quay.io/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+                        oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"${BC_OUTPUT_KIND}\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
                         oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
                     '''
             }
