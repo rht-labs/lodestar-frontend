@@ -129,15 +129,12 @@ pipeline {
                     label "master"  
                 }
             }
-            if ( tag "release-*" ) {
-                APP_NAME = "quay.io/omp-frontend"
+            when { 
+                not{
+                    tag "release-*"
+                }   
             }
             steps {
-                script {
-                    if ( tag "release-*" ) {
-                        APP_NAME = "quay.io/omp-frontend"
-                    }
-                }
                 echo '### Get Binary from Nexus ###'
                 sh  '''
                         rm -rf package-contents*
@@ -148,6 +145,36 @@ pipeline {
                 sh  '''
                         oc project ${PIPELINES_NAMESPACE} # probs not needed
                         oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+                        oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
+                    '''
+            }
+            post {
+                always {
+                    archive "**"
+                }
+            }
+        }
+
+        stage("Build a Container Image and Push it to Quay") {
+            agent {
+                node {
+                    label "master"  
+                }
+            }
+            when { 
+                tag "release-*" 
+            }
+            steps {
+                echo '### Get Binary from Nexus ###'
+                sh  '''
+                        rm -rf package-contents*
+                        curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
+                        unzip -o package-contents.zip
+                    '''
+                echo '### Create Container Image ###'
+                sh  '''
+                        oc project ${PIPELINES_NAMESPACE} # probs not needed
+                        oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"quay.io/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
                         oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
                     '''
             }
