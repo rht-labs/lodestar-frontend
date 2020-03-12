@@ -38,6 +38,7 @@ pipeline {
     }
 
     stages {
+
         stage("Env test namespace") {
             agent {
                 node {
@@ -54,6 +55,7 @@ pipeline {
                 }
             }
         }
+
         stage("Ansible") {
             agent {
                 node {
@@ -75,7 +77,6 @@ pipeline {
                 }
             }
         }
-
 
         stage("node-build") {
             agent {
@@ -121,11 +122,15 @@ pipeline {
                 }
             }
         }
-        stage("node-bake") {
+
+        stage("Build a Container Image") {
             agent {
                 node {
                     label "master"  
                 }
+            }
+            if ( tag "release-*" ) {
+                APP_NAME = "quay.io/omp-frontend"
             }
             steps {
                 echo '### Get Binary from Nexus ###'
@@ -136,7 +141,9 @@ pipeline {
                     '''
                 echo '### Create Container Image ###'
                 sh  '''
-                        docker build . -t ${APP_NAME}:${GIT_COMMIT}
+                        oc project ${PIPELINES_NAMESPACE} # probs not needed
+                        oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+                        oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
                     '''
             }
             post {
@@ -145,20 +152,7 @@ pipeline {
                 }
             }
         }
-        stage("Push Image to Registry") {
-            agent {
-                node {
-                    label "master"
-                }
-            }
-            when {
-                allOf{
-                    expression { currentBuild.result != 'UNSTABLE' }
-                }
-            }
-            steps {
-                echo '### Push Image to Registry ###'
-            }
-        }
+        
+
     }
 }

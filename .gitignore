@@ -11,6 +11,7 @@
 # production
 /build
 /package-contents
+package-contents.zip
 
 # misc
 .DS_Store
