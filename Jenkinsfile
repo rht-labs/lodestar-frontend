@@ -145,7 +145,7 @@ pipeline {
                 }
             }
         }
-        stage("Push Image to Registru") {
+        stage("Push Image to Registry") {
             agent {
                 node {
                     label "master"
@@ -157,7 +157,7 @@ pipeline {
                 }
             }
             steps {
-                
+                echo '### Push Image to Registry ###'
             }
         }
     }
