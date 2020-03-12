@@ -133,6 +133,11 @@ pipeline {
                 APP_NAME = "quay.io/omp-frontend"
             }
             steps {
+                script {
+                    if ( tag "release-*" ) {
+                        APP_NAME = "quay.io/omp-frontend"
+                    }
+                }
                 echo '### Get Binary from Nexus ###'
                 sh  '''
                         rm -rf package-contents*
