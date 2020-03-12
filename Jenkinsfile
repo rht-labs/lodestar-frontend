@@ -140,7 +140,7 @@ pipeline {
                         unzip -o package-contents.zip
                     '''
                 script {
-                    if (env.TAG_NAME ==~ /(.*release.*)/) {
+                    if (env.GIT_BRANCH ==~ /(.*tags//release.*)/) {
                         APP_NAME =  "quay.io/gsampaio/omp-frontend"
                         BC_OUTPUT_KIND = "DockerImage"
                     }
