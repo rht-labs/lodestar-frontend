@@ -8,6 +8,7 @@ build_vars:
   NAME: '{{ app_name }}'
   OUTPUT_IMAGE_NAME: '{{ app_name }}'
   OUTPUT_IMAGE_TAG: latest
+  PUSH_SECRET: quay-registry-secret
   GIT_URL: https://github.com/rht-labs/open-management-portal-frontend.git
   GIT_REF: master
 

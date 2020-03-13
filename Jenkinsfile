@@ -131,6 +131,9 @@ pipeline {
                     label "master"  
                 }
             }
+            when {
+                expression { GIT_BRANCH ==~ /(.*tags\/release.*)/  }
+            }
             steps {
                 
                 echo '### Get Binary from Nexus ###'
@@ -139,12 +142,37 @@ pipeline {
                         curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
                         unzip -o package-contents.zip
                     '''
-                script {
-                    if (env.GIT_BRANCH ==~ /(.*tags\/release.*)/) {
-                        APP_NAME =  "quay.io/gsampaio/omp-frontend"
-                        BC_OUTPUT_KIND = "DockerImage"
-                    }
+                echo '### Create Container Image ###'
+                sh  '''
+                        oc project ${PIPELINES_NAMESPACE} # probs not needed
+                        oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"DockerImage\\",\\"name\\":\\"quay.io/gsampaio/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+                        oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
+                    '''
+            }
+            post {
+                always {
+                    archive "**"
                 }
+            }
+        }
+
+        stage("Build a Container Image") {
+            agent {
+                node {
+                    label "master"  
+                }
+            }
+            when {
+                expression { GIT_BRANCH ==~ /(.*master)/  }
+            }
+            steps {
+                
+                echo '### Get Binary from Nexus ###'
+                sh  '''
+                        rm -rf package-contents*
+                        curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
+                        unzip -o package-contents.zip
+                    '''
                 echo '### Create Container Image ###'
                 sh  '''
                         oc project ${PIPELINES_NAMESPACE} # probs not needed
