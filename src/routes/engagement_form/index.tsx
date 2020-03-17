@@ -1,23 +1,32 @@
-import React, { useEffect, useReducer, useState } from 'react'
-import formReducer from './form_reducer'
-import initialState from './initial_state'
-import yaml from 'yaml'
-import { Alert, PageSection, Text, TextVariants, Wizard } from '@patternfly/react-core'
-import BasicInformation from './steps/01_basic_information'
-import PointOfContact from './steps/02_point_of_contact'
-import ClusterInformation from './steps/03_cluster_information'
-import LaunchCluster from './steps/04_cluster_users'
-import { AuthenticationRepository } from '../../repositories/authentication/authentication_repository'
-import { AppSettings } from '../../settings/config'
-import { AxiosError } from 'axios'
+import React, { useEffect, useReducer, useState, useContext } from "react";
+import formReducer from "./form_reducer";
+import initialState from "./initial_state";
+import yaml from "yaml";
+import {
+  Alert,
+  PageSection,
+  Text,
+  TextVariants,
+  Wizard
+} from "@patternfly/react-core";
+import BasicInformation from "./steps/01_basic_information";
+import PointOfContact from "./steps/02_point_of_contact";
+import ClusterInformation from "./steps/03_cluster_information";
+import LaunchCluster from "./steps/04_cluster_users";
+import { AxiosError } from "axios";
+import EngagementFormContext from "../../context/engagement_form_context";
 
 export default function EngagementForm() {
-  const [state, dispatch] = useReducer<(state: any, action: any) => any>(formReducer, initialState);
+  const [state, dispatch] = useReducer<(state: any, action: any) => any>(
+    formReducer,
+    initialState
+  );
   const [clusterOptions, setClusterOptions] = useState(null);
   const [hasError, setHasError] = useState<AxiosError | null>(null);
+  const engagementFormContext = useContext(EngagementFormContext);
   useEffect(() => {
-    AuthenticationRepository.getInstance().axios
-      .get(`${AppSettings.backendUrl}/engagements/config`)
+    engagementFormContext
+      .getSessionData()
       .then(response => {
         const data = yaml.parse(response.data.fileContent);
         setClusterOptions(data);
@@ -39,7 +48,7 @@ export default function EngagementForm() {
         });
       })
       .catch(error => {
-        setHasError(error)
+        setHasError(error);
       });
   }, []);
   return (
@@ -84,7 +93,13 @@ export default function EngagementForm() {
             },
             {
               name: "Launch Cluster",
-              component: <LaunchCluster values={state} onChange={dispatch} options={{}} />,
+              component: (
+                <LaunchCluster
+                  values={state}
+                  onChange={dispatch}
+                  options={{}}
+                />
+              ),
               hideCancelButton: true,
               isFinishedStep: true
             }
@@ -93,4 +108,4 @@ export default function EngagementForm() {
       </PageSection>
     </>
   );
-};
+}
