@@ -1,7 +1,9 @@
 name: Node CI
 
 on:
-- pull_request
+  push:
+    branches:
+    - master
     
 jobs:
   check-links:
@@ -42,3 +44,11 @@ jobs:
         npm run test
       env:
         CI: false # TODO: revisit this. npm build turns extra checks on when this is true and something there is broken
+    - uses: jacobsee/s2i-github-action@master
+      with:
+        base: registry.access.redhat.com/rhscl/httpd-24-rhel7
+        path: build
+        output_image: "quay.io/rht-labs/omp-frontend:build-${{ github.run_number }}"
+        image_push_registry: quay.io
+        image_push_username: ${{ secrets.QUAY_USERNAME }}
+        image_push_password: ${{ secrets.QUAY_PASSWORD }}
