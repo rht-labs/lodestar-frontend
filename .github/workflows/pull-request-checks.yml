@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 #     - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+# TODO: This fails because we have a localhost link in the README. Consider removing or otherwise ignoring.
   linting:
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +21,7 @@ jobs:
 #         yarn lint
 #       env:
 #         CI: true
+# TODO: This fails because we don't have linting... Consider (please) adding strict linting.
   build:
 
     runs-on: ubuntu-latest
@@ -40,12 +42,12 @@ jobs:
         npm run build
         npm run test
       env:
-        CI: false # todo: revisit this
+        CI: false # TODO: revisit this. npm build turns extra checks on when this is true and something there is broken
     - uses: jacobsee/s2i-github-action@master
       with:
         base: registry.access.redhat.com/rhscl/httpd-24-rhel7
         path: build
-        output_image: quay.io/rht-labs/omp-frontend:latest
+        output_image: quay.io/rht-labs/omp-frontend:latest # TODO: Tag using something better. _Very_ high priority before release.
         image_push_registry: quay.io
         image_push_username: ${{ secrets.QUAY_USERNAME }}
         image_push_password: ${{ secrets.QUAY_PASSWORD }}
