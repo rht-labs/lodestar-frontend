@@ -1,16 +1,22 @@
-import { AppSettings } from '../../settings/config';
-
-const OAUTH_CONFIG = {
-  clientId: AppSettings.clientId,
-  redirectUri: `${AppSettings.baseUrl}/auth_callback`,
-  state: {
-    from: '/settings'
-  }
-}
-
-const OAUTH_URL = `${AppSettings.authBaseUrl}/auth?client_id=${OAUTH_CONFIG.clientId}&redirect_uri=${encodeURI(OAUTH_CONFIG.redirectUri)}&response_type=code&state=${encodeURI(JSON.stringify(OAUTH_CONFIG.state))}`
+import React from "react";
+import { useContext } from "react";
+import ConfigContext from "../../context/config_context";
 
 export default function SendToSSO() {
-  window.location = OAUTH_URL as any as Location
-  return null
+  const configContext = useContext(ConfigContext);
+  const OAUTH_CONFIG = {
+    clientId: configContext.clientId,
+    redirectUri: `${configContext.baseUrl}/auth_callback`,
+    state: {
+      from: "/settings"
+    }
+  };
+
+  const OAUTH_URL = `${configContext.authBaseUrl}/auth?client_id=${
+    OAUTH_CONFIG.clientId
+  }&redirect_uri=${encodeURI(
+    OAUTH_CONFIG.redirectUri
+  )}&response_type=code&state=${encodeURI(JSON.stringify(OAUTH_CONFIG.state))}`;
+  window.location = (OAUTH_URL as any) as Location;
+  return <div />;
 }
