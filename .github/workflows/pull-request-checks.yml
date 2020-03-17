@@ -9,24 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+#     - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
   linting:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: run-linter
-      run: |
-        yarn install
-        yarn lint
-      env:
-        CI: true
+#     - name: run-linter
+#       run: |
+#         yarn install
+#         yarn lint
+#       env:
+#         CI: true
   build:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -36,8 +36,16 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        yarn install
-        yarn build
-        yarn test
+        npm install
+        npm run build
+        npm run test
       env:
         CI: true
+    - uses: jacobsee/s2i-github-action@master
+      with:
+        base: registry.access.redhat.com/rhscl/httpd-24-rhel7
+        path: build
+        output_image: quay.io/rht-labs/omp-frontend:latest
+        image_push_registry: quay.io
+        image_push_username: ${{ secrets.QUAY_USERNAME }}
+        image_push_password: ${{ secrets.QUAY_PASSWORD }}
