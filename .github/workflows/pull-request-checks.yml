@@ -47,7 +47,7 @@ jobs:
       with:
         base: registry.access.redhat.com/rhscl/httpd-24-rhel7
         path: build
-        output_image: quay.io/rht-labs/omp-frontend:latest # TODO: Tag using something better. _Very_ high priority before release.
+        output_image: "quay.io/rht-labs/omp-frontend:${{ github.run_number }}"
         image_push_registry: quay.io
         image_push_username: ${{ secrets.QUAY_USERNAME }}
         image_push_password: ${{ secrets.QUAY_PASSWORD }}
