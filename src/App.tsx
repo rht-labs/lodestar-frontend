@@ -43,12 +43,20 @@ const Routes = () => {
       style={{ height: "100vh" }}
     >
       <Switch>
-        <EngagementFormProvider
-          sessionContext={sessionContext}
-          configContext={configContext}
-        >
-          <Route exact path="/" component={EngagementForm} />
-        </EngagementFormProvider>
+        <Route
+          exact
+          path="/"
+          component={(props: any) => {
+            return (
+              <EngagementFormProvider
+                sessionContext={sessionContext}
+                configContext={configContext}
+              >
+                <EngagementForm {...props} />
+              </EngagementFormProvider>
+            );
+          }}
+        />
         <PrivateRoute path="/private" component={EngagementForm} />
         <Route path="/auth_callback" component={CallbackHandler} />
       </Switch>

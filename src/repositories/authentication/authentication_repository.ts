@@ -15,8 +15,6 @@ export class AuthenticationRepository {
 
   public axios: AxiosInstance;
 
-  private static _instance?: AuthenticationRepository;
-
   private initializeAxios() {
     const axiosInstance = Axios.create();
     axiosInstance.interceptors.request.use(function(config) {
@@ -63,12 +61,12 @@ export class AuthenticationRepository {
 
   static getToken() {
     try {
-      const tokenMap = JSON.parse(
-        localStorage.getItem(TOKEN_STORAGE_KEY) || ""
-      );
-      if (!tokenMap) {
+      const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY) || "";
+      if (!storedToken) {
         return null;
       }
+      const tokenMap = JSON.parse(storedToken);
+
       return UserToken.fromMap(tokenMap);
     } catch (e) {
       console.log(e);
