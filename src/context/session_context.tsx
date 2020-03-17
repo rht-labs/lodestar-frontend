@@ -21,7 +21,7 @@ const SessionContext = createContext<ISessionContext>({
   tokens: new UserToken(),
   roles: [],
   axios: Axios.create(),
-  performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => null
+  performLogin: () => null
 });
 const { Provider } = SessionContext;
 
