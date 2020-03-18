@@ -44,7 +44,7 @@ jobs:
         npm run test
       env:
         CI: false # TODO: revisit this. npm build turns extra checks on when this is true and something there is broken
-    - uses: jacobsee/s2i-github-action@master
+    - uses: redhat-cop/github-actions/s2i@v1
       with:
         base: registry.access.redhat.com/rhscl/httpd-24-rhel7
         path: build
