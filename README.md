@@ -115,7 +115,7 @@ If you're pushing from a release tag the build will create a container image and
 
 ```
 oc project ${PIPELINES_NAMESPACE} # probs not needed
-oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"DockerImage\\",\\"name\\":\\"quay.io/open-innovation-labs/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"DockerImage\\",\\"name\\":\\"quay.io/rht-labs/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
 oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
 ```
 
