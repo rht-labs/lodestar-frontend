@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   Form,
   FormGroup,
   FormSelect,
   FormSelectOption,
-  TextInput
-} from "@patternfly/react-core";
-import slugify from "slugify";
-import find from "lodash.find";
+  TextInput,
+} from '@patternfly/react-core';
+import slugify from 'slugify';
+import find from 'lodash.find';
 
-const ClusterInformation = ({ options, values, onChange }: any) => {
+export const ClusterInformation = ({ options, values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
@@ -18,7 +18,7 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
           isDisabled={options.providers.length === 1}
           value={values.ocp_cloud_provider_name || ''}
           onChange={e =>
-            onChange({ type: "ocp_cloud_provider_name", payload: e })
+            onChange({ type: 'ocp_cloud_provider_name', payload: e })
           }
         >
           {options.providers.map((option: any, index: any) => (
@@ -42,11 +42,11 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
             aria-label="Cloud provider region"
             value={values.ocp_cloud_provider_region || ''}
             onChange={e =>
-              onChange({ type: "ocp_cloud_provider_region", payload: e })
+              onChange({ type: 'ocp_cloud_provider_region', payload: e })
             }
           >
             {find(options.providers, {
-              value: values.ocp_cloud_provider_name
+              value: values.ocp_cloud_provider_name,
             }).regions.map((option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}
@@ -68,7 +68,7 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
           isDisabled={options.openshift.versions.length === 1}
-          onChange={e => onChange({ type: "ocp_version", payload: e })}
+          onChange={e => onChange({ type: 'ocp_version', payload: e })}
         >
           {options.openshift.versions.map((option: any, index: any) => (
             <FormSelectOption
@@ -92,7 +92,7 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
               {`${
                 values.ocp_sub_domain
                   ? slugify(values.ocp_sub_domain)
-                  : "<desired-subdomain>"
+                  : '<desired-subdomain>'
               }.rht-labs.com`}
             </strong>
           </div>
@@ -104,7 +104,7 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
           id="ocp_sub_domain"
           name="ocp_sub_domain"
           value={values.ocp_sub_domain || ''}
-          onChange={e => onChange({ type: "ocp_sub_domain", payload: e })}
+          onChange={e => onChange({ type: 'ocp_sub_domain', payload: e })}
         />
       </FormGroup>
 
@@ -115,30 +115,32 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
       >
         <FormSelect
           aria-label="Persistent Storage Needs"
-          isDisabled={options.openshift["persistent-storage"].length === 1}
+          isDisabled={options.openshift['persistent-storage'].length === 1}
           onChange={e =>
-            onChange({ type: "ocp_persistent_storage_size", payload: e })
+            onChange({ type: 'ocp_persistent_storage_size', payload: e })
           }
           value={values.ocp_persistent_storage_size || ''}
         >
-          {options.openshift["persistent-storage"].map((option: any, index: any) => (
-            <FormSelectOption
-              isDisabled={option.disabled}
-              key={index}
-              label={option.label}
-              value={option.value}
-            />
-          ))}
+          {options.openshift['persistent-storage'].map(
+            (option: any, index: any) => (
+              <FormSelectOption
+                isDisabled={option.disabled}
+                key={index}
+                label={option.label}
+                value={option.value}
+              />
+            )
+          )}
         </FormSelect>
       </FormGroup>
       <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
         <FormSelect
           aria-label="Cluster Size"
           value={values.ocp_cluster_size || ''}
-          isDisabled={options.openshift["cluster-size"].length === 1}
-          onChange={e => onChange({ type: "ocp_cluster_size", payload: e })}
+          isDisabled={options.openshift['cluster-size'].length === 1}
+          onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
         >
-          {options.openshift["cluster-size"].map((option: any, index: any) => (
+          {options.openshift['cluster-size'].map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -151,5 +153,3 @@ const ClusterInformation = ({ options, values, onChange }: any) => {
     </Form>
   );
 };
-
-export default ClusterInformation;

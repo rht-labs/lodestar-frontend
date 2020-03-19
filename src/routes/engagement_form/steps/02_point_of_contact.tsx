@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   Form,
   FormGroup,
   InputGroup,
   InputGroupText,
-  TextInput
-} from "@patternfly/react-core";
-import { UserIcon, EnvelopeIcon } from "@patternfly/react-icons";
+  TextInput,
+} from '@patternfly/react-core';
+import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 
-const PointOfContact = ({ values, onChange }: any) => {
+export const PointOfContact = ({ values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup
@@ -26,7 +26,7 @@ const PointOfContact = ({ values, onChange }: any) => {
             id="name"
             name="engagement-lead-name"
             onChange={e => {
-              onChange({ type: "engagement_lead_name", payload: e });
+              onChange({ type: 'engagement_lead_name', payload: e });
             }}
             placeholder="Full Name"
             type="text"
@@ -40,7 +40,7 @@ const PointOfContact = ({ values, onChange }: any) => {
             id="email"
             name="engagement-lead-email"
             onChange={e =>
-              onChange({ type: "engagement_lead_email", payload: e })
+              onChange({ type: 'engagement_lead_email', payload: e })
             }
             placeholder="Email Address"
             type="email"
@@ -64,7 +64,7 @@ const PointOfContact = ({ values, onChange }: any) => {
             id="tech-lead-name"
             name="tech-lead-name"
             onChange={e =>
-              onChange({ type: "technical_lead_name", payload: e })
+              onChange({ type: 'technical_lead_name', payload: e })
             }
             placeholder="Full Name"
             type="text"
@@ -78,7 +78,7 @@ const PointOfContact = ({ values, onChange }: any) => {
             id="tech-lead-email"
             name="tech-lead-email"
             onChange={e =>
-              onChange({ type: "technical_lead_email", payload: e })
+              onChange({ type: 'technical_lead_email', payload: e })
             }
             placeholder="Email Address"
             type="email"
@@ -102,7 +102,7 @@ const PointOfContact = ({ values, onChange }: any) => {
             id="customer-contact-name"
             name="customer-contact-name"
             onChange={e =>
-              onChange({ type: "customer_contact_name", payload: e })
+              onChange({ type: 'customer_contact_name', payload: e })
             }
             type="text"
             placeholder="Full Name"
@@ -116,7 +116,7 @@ const PointOfContact = ({ values, onChange }: any) => {
             id="customer-contact-email"
             name="customer-contact-email"
             onChange={e =>
-              onChange({ type: "customer_contact_email", payload: e })
+              onChange({ type: 'customer_contact_email', payload: e })
             }
             placeholder="Email Address"
             type="email"
@@ -127,5 +127,3 @@ const PointOfContact = ({ values, onChange }: any) => {
     </Form>
   );
 };
-
-export default PointOfContact;

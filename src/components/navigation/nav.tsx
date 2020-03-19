@@ -1,40 +1,42 @@
-import React, { useState } from "react";
-import {
-  Nav,
-  NavItem,
-  NavList,
-} from "@patternfly/react-core";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Nav, NavItem, NavList, Popover, Button } from '@patternfly/react-core';
+import { Link, useLocation } from 'react-router-dom';
+import PopupContext from '../../context/popup_context';
 
-const NavDefaultList = () => {
-  const [activeItem, setActiveItem] = useState<number>(0);
-
-  const onSelect = (result: any) => {
-    setActiveItem(result.itemId)
-  }
+export const NavDefaultList = () => {
+  const popupContext = useContext(PopupContext);
+  const { pathname } = useLocation();
 
   return (
-    <Nav onSelect={onSelect} theme="dark">
+    <Nav theme="dark">
       <NavList>
-        <NavItem
-          id="engagementFormLink"
-          itemId={0}
-          isActive={activeItem === 0}
-        >
+        <NavItem id="engagementFormLink" itemId={0} isActive={pathname === '/'}>
           <Link to="/">Engagement Form</Link>
         </NavItem>
-        <NavItem id="privateLink" itemId={3} isActive={activeItem === 3}>
-          <Link to="/private">Private Page</Link>
-        </NavItem>
-        <NavItem id="secondPageLink" itemId={1} isActive={activeItem === 1}>
-          <Link to="/one">Second Page</Link>
-        </NavItem>
-        <NavItem id="thirdPageLink" itemId={2} isActive={activeItem === 2}>
-          <Link to="/two">Third Page</Link>
-        </NavItem>
+        <Popover
+          isVisible={!popupContext.hasBeenShown}
+          headerContent={<span>We're trying to improve</span>}
+          shouldClose={popupContext.onDismissed}
+          distance={0}
+          bodyContent={
+            <div>
+              <div>
+                Tell us about a feature you would like to see included in Open
+                Management Portal.
+              </div>
+              <Button onClick={popupContext.onDismissed}>Ok, got it</Button>
+            </div>
+          }
+        >
+          <NavItem
+            id="engagementFormLink"
+            itemId={1}
+            isActive={pathname === '/feature-request'}
+          >
+            <Link to="/feature-request">Feature Requests</Link>
+          </NavItem>
+        </Popover>
       </NavList>
     </Nav>
   );
-}
-
-export default NavDefaultList;
+};
