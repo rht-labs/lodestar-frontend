@@ -11,6 +11,7 @@ import { SessionContext, SessionProvider } from './context/session_context';
 import { ConfigContext, ConfigProvider } from './context/config_context';
 import Axios from 'axios';
 import { EngagementFormProvider } from './context/engagement_form_context';
+import { PopupProvider } from './context/popup_context';
 
 export const App = () => {
   return (
@@ -39,29 +40,33 @@ const Routes = () => {
   }
 
   return (
-    <Page
-      header={<PageHeader />}
-      sidebar={<PageSidebar isNavOpen theme="dark" nav={<NavDefaultList />} />}
-      style={{ height: '100vh' }}
-    >
-      <Switch>
-        <Route
-          exact
-          path="/"
-          component={(props: any) => {
-            return (
-              <EngagementFormProvider
-                sessionContext={sessionContext}
-                configContext={configContext}
-              >
-                <EngagementForm {...props} />
-              </EngagementFormProvider>
-            );
-          }}
-        />
-        <PrivateRoute path="/private" component={EngagementForm} />
-        <Route path="/auth_callback" component={CallbackHandler} />
-      </Switch>
-    </Page>
+    <PopupProvider>
+      <Page
+        header={<PageHeader />}
+        sidebar={
+          <PageSidebar isNavOpen theme="dark" nav={<NavDefaultList />} />
+        }
+        style={{ height: '100vh' }}
+      >
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={(props: any) => {
+              return (
+                <EngagementFormProvider
+                  sessionContext={sessionContext}
+                  configContext={configContext}
+                >
+                  <EngagementForm {...props} />
+                </EngagementFormProvider>
+              );
+            }}
+          />
+          <PrivateRoute path="/private" component={EngagementForm} />
+          <Route path="/auth_callback" component={CallbackHandler} />
+        </Switch>
+      </Page>
+    </PopupProvider>
   );
 };

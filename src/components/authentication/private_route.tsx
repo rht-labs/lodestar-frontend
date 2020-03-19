@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Route } from 'react-router-dom';
-import { SendToSSO } from './login';
+import { Route, RouteProps } from 'react-router-dom';
+import { SendToSSO } from './send_to_sso';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { SessionContext } from '../../context/session_context';
@@ -11,7 +11,7 @@ const AUTHENTICATION_STATES = {
   initial: 'initial',
 };
 
-interface PrivateRouteProps {
+interface PrivateRouteProps extends RouteProps {
   path: string;
   component: (props: any) => JSX.Element;
 }
