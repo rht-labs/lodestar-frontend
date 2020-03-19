@@ -32,7 +32,7 @@ const defaultOptions = {
 
 test('Basic component renders correctly', () => {
   const component = render(
-    <ClusterUsers options={defaultOptions} values={{ initialState }} />
+    <ClusterUsers options={defaultOptions} values={initialState} />
   );
   expect(component).toMatchSnapshot();
 });
