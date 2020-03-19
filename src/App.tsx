@@ -31,7 +31,7 @@ const Routes = () => {
     Axios.get(`${process.env.PUBLIC_URL}/config.json`).then(({ data }) => {
       configContext.setConfig(data);
     });
-  }, []);
+  }, [configContext]);
   if (configContext.isLoading) {
     return <div />;
   }

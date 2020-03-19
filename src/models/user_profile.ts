@@ -1,9 +1,8 @@
-interface IUserProfile {
-  username?: string
-  firstName?: string
-  lastName?: string
-  email?: string
-  groups?: any
+interface UserProfileParams {
+  username?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
 }
 
 export class UserProfile {
@@ -12,17 +11,14 @@ export class UserProfile {
     firstName = '',
     lastName = '',
     email = '',
-    groups = null
-  }: IUserProfile = {}) {
+  }: UserProfileParams = {}) {
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.groups = groups;
   }
   username?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
-  groups?: any;
 }
