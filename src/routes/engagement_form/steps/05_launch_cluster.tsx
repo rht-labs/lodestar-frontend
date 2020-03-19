@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import { Alert, Button } from "@patternfly/react-core";
-import axios, { AxiosError } from "axios";
-import slugProperties from "../../../utilities/slug_properties";
-import ConfigContext from "../../../context/config_context";
+import React, { useState, useContext } from 'react';
+import { Alert, Button } from '@patternfly/react-core';
+import axios, { AxiosError } from 'axios';
+import { slugProperties } from '../../../utilities/slug_properties';
+import { ConfigContext } from '../../../context/config_context';
 
-const LaunchCluster = ({ values }: any) => {
+export const LaunchCluster = ({ values }: any) => {
   const configContext = useContext(ConfigContext);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setErrorResponse] = useState<AxiosError | null>(null);
@@ -16,7 +16,7 @@ const LaunchCluster = ({ values }: any) => {
           <span
             aria-label="thumbs up emoji"
             role="img"
-            style={{ fontSize: "5rem" }}
+            style={{ fontSize: '5rem' }}
           >
             👍🏽
           </span>
@@ -24,7 +24,7 @@ const LaunchCluster = ({ values }: any) => {
           <span
             aria-label="rocket emoji"
             role="img"
-            style={{ fontSize: "5rem" }}
+            style={{ fontSize: '5rem' }}
           >
             🚀
           </span>
@@ -55,15 +55,15 @@ const LaunchCluster = ({ values }: any) => {
               setIsLoading(true);
               axios({
                 headers: {
-                  "X-APPLICATION-NONSENSE": "sure-you-can-access-stuff-#yolo"
+                  'X-APPLICATION-NONSENSE': 'sure-you-can-access-stuff-#yolo',
                 },
-                method: "post",
+                method: 'post',
                 url: `${configContext.backendUrl}/engagements/create`,
                 data: slugProperties(values, [
-                  "ocp_sub_domain",
-                  "customer_name",
-                  "project_name"
-                ])
+                  'ocp_sub_domain',
+                  'customer_name',
+                  'project_name',
+                ]),
               })
                 .then(() => {
                   setSuccessResponse(true);
@@ -77,7 +77,7 @@ const LaunchCluster = ({ values }: any) => {
             }}
             isDisabled={isLoading}
           >
-            {!isLoading ? "Let's Do It!" : "Launching..."}
+            {!isLoading ? "Let's Do It!" : 'Launching...'}
           </Button>
         ) : (
           <div className="pf-c-empty-state">
@@ -103,4 +103,3 @@ const LaunchCluster = ({ values }: any) => {
     </div>
   );
 };
-export default LaunchCluster;

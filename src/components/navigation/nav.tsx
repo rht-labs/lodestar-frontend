@@ -1,26 +1,18 @@
-import React, { useState } from "react";
-import {
-  Nav,
-  NavItem,
-  NavList,
-} from "@patternfly/react-core";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Nav, NavItem, NavList } from '@patternfly/react-core';
+import { Link } from 'react-router-dom';
 
-const NavDefaultList = () => {
+export const NavDefaultList = () => {
   const [activeItem, setActiveItem] = useState<number>(0);
 
   const onSelect = (result: any) => {
-    setActiveItem(result.itemId)
-  }
+    setActiveItem(result.itemId);
+  };
 
   return (
     <Nav onSelect={onSelect} theme="dark">
       <NavList>
-        <NavItem
-          id="engagementFormLink"
-          itemId={0}
-          isActive={activeItem === 0}
-        >
+        <NavItem id="engagementFormLink" itemId={0} isActive={activeItem === 0}>
           <Link to="/">Engagement Form</Link>
         </NavItem>
         <NavItem id="privateLink" itemId={3} isActive={activeItem === 3}>
@@ -35,6 +27,4 @@ const NavDefaultList = () => {
       </NavList>
     </Nav>
   );
-}
-
-export default NavDefaultList;
+};

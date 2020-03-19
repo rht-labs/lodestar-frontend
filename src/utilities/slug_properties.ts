@@ -1,7 +1,7 @@
-import slugify from "slugify";
-import forOwn from "lodash.forown";
+import slugify from 'slugify';
+import forOwn from 'lodash.forown';
 
-const slugProperties = (iterable: object, properties: Array<any>) => {
+export const slugProperties = (iterable: object, properties: any[]) => {
   if (iterable && properties) {
     return forOwn(iterable, (value: any, key: any, object: any) => {
       if (properties.includes(key)) {
@@ -9,7 +9,5 @@ const slugProperties = (iterable: object, properties: Array<any>) => {
       }
     });
   }
-  throw new Error("Object and Property Required");
+  throw new Error('Object and Property Required');
 };
-
-export default slugProperties;
