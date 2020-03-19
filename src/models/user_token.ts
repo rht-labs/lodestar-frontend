@@ -38,8 +38,12 @@ export class UserToken {
     return new UserToken({
       accessToken: map['accessToken'] as string,
       refreshToken: map['refreshToken'] as string,
-      accessTokenExpiry: new Date(Date.parse(map['accessTokenExpiry'] as string)),
-      refreshTokenExpiry: new Date(Date.parse(map['refreshTokenExpiry'] as string)),
+      accessTokenExpiry: new Date(
+        Date.parse(map['accessTokenExpiry'] as string)
+      ),
+      refreshTokenExpiry: new Date(
+        Date.parse(map['refreshTokenExpiry'] as string)
+      ),
     });
   }
 }

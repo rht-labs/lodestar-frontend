@@ -12,7 +12,7 @@ export interface ConfigContext extends ConfigContextParams {
   setConfig: (params: ConfigContextParams) => void;
 }
 
-const ConfigContext = createContext<ConfigContext>({
+export const ConfigContext = createContext<ConfigContext>({
   baseUrl: '',
   clientId: '',
   authBaseUrl: '',

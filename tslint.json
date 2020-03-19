@@ -1,17 +1,17 @@
 {
   "extends": "gts/tslint.json",
+  "rules": {
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-pascal-case",
+      "ban-keywords",
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
+    ],
+    "no-any": [false, { "ignore-rest-args": true }]
+  },
   "linterOptions": {
-    "rules": {
-      "variable-name": [
-        true,
-        "check-format",
-        "allow-pascal-case",
-        "ban-keywords",
-        "allow-leading-underscore",
-        "allow-trailing-underscore"
-      ],
-      "no-any": [false, { "ignore-rest-args": true }]
-    },
     "exclude": ["**/*.json"]
   }
 }

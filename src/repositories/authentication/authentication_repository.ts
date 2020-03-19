@@ -128,7 +128,7 @@ export class AuthenticationRepository {
     return userToken;
   }
 
-  async getUserProfile() {
+  async getUserProfile(): Promise<UserProfile> {
     const userProfileData = await this.axios.get(
       `${this.config.authBaseUrl}/userinfo`
     );

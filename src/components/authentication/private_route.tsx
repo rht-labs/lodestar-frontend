@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import { Route } from "react-router-dom";
-import SendToSSO from "./login";
-import { useState } from "react";
-import { useEffect } from "react";
-import SessionContext from "../../context/session_context";
+import React, { useContext } from 'react';
+import { Route } from 'react-router-dom';
+import { SendToSSO } from './login';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { SessionContext } from '../../context/session_context';
 
 const AUTHENTICATION_STATES = {
-  authenticated: "authenticated",
-  unauthenticated: "unauthenticated",
-  initial: "initial"
+  authenticated: 'authenticated',
+  unauthenticated: 'unauthenticated',
+  initial: 'initial',
 };
 
 interface PrivateRouteProps {
@@ -16,7 +16,10 @@ interface PrivateRouteProps {
   component: (props: any) => JSX.Element;
 }
 
-const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteProps) => {
+export const PrivateRoute = ({
+  component: Component,
+  ...rest
+}: PrivateRouteProps) => {
   const [authenticationStatus, setAuthenticationStatus] = useState(
     AUTHENTICATION_STATES.initial
   );
@@ -39,5 +42,3 @@ const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteProps) => {
     return <div />;
   }
 };
-
-export default PrivateRoute;
