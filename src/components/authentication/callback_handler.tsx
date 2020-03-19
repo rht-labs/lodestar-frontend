@@ -24,5 +24,5 @@ export default function CallbackHandler() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return loginSuccess ? <Redirect to="/private" /> : null;
+  return loginSuccess ? <Redirect to="/" /> : null;
 }

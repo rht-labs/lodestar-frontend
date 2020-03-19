@@ -50,7 +50,7 @@ export default function EngagementForm() {
       .catch(error => {
         setHasError(error);
       });
-  }, []);
+  }, [engagementFormContext]);
   return (
     <>
       <PageSection>
