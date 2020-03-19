@@ -1,7 +1,9 @@
 name: Node CI
 
 on:
-- pull_request
+  push:
+    branches:
+    - master
     
 jobs:
   check-links:
@@ -42,3 +44,11 @@ jobs:
         npm run test
       env:
         CI: true
+    - uses: redhat-cop/github-actions/s2i@v1
+      with:
+        base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
+        path: build
+        output_image: "quay.io/rht-labs/omp-frontend:${{ github.sha }}"
+        image_push_registry: quay.io
+        image_push_username: ${{ secrets.QUAY_USERNAME }}
+        image_push_password: ${{ secrets.QUAY_PASSWORD }}

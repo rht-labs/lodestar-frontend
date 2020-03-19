@@ -1,0 +1,6 @@
+name: omp-frontend
+
+servicePort: 8080
+
+imageName: "quay.io/rht-labs/omp-frontend"
+imageTag: "latest" # This is intended to be overridden by the parent Helm chart.
