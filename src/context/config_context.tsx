@@ -22,7 +22,11 @@ export const ConfigContext = createContext<ConfigContext>({
 });
 const { Provider } = ConfigContext;
 
-function ConfigProvider({ children }: { children: React.ReactChild }) {
+export const ConfigProvider = ({
+  children,
+}: {
+  children: React.ReactChild;
+}) => {
   const [baseUrl, setBaseUrl] = useState<string>('');
   const [clientId, setClientId] = useState<string>('');
   const [authBaseUrl, setAuthBaseUrl] = useState<string>('');
@@ -51,6 +55,4 @@ function ConfigProvider({ children }: { children: React.ReactChild }) {
       {children}
     </Provider>
   );
-}
-
-export { ConfigContext, ConfigProvider };
+};

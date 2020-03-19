@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState, useContext } from 'react';
 import { formReducer } from './form_reducer';
 import { initialState } from './initial_state';
-import yaml from 'yaml';
 import {
   Alert,
   PageSection,
@@ -13,7 +12,6 @@ import { BasicInformation } from './steps/01_basic_information';
 import { PointOfContact } from './steps/02_point_of_contact';
 import { ClusterInformation } from './steps/03_cluster_information';
 import { ClusterUsers } from './steps/04_cluster_users';
-import { AxiosError } from 'axios';
 import { EngagementFormContext } from '../../context/engagement_form_context';
 
 export function EngagementForm() {
@@ -22,44 +20,37 @@ export function EngagementForm() {
     initialState
   );
   const [clusterOptions, setClusterOptions] = useState(null);
-  const [hasError, setHasError] = useState<AxiosError | null>(null);
   const engagementFormContext = useContext(EngagementFormContext);
   useEffect(() => {
-    engagementFormContext
-      .getSessionData()
-      .then(response => {
-        const data = yaml.parse(response.data.fileContent);
-        setClusterOptions(data);
-        dispatch({
-          type: 'ocp_cloud_provider_region',
-          payload: data.providers[0].regions[0].value,
-        });
-        dispatch({
-          type: 'ocp_cloud_provider_name',
-          payload: data.providers[0].value,
-        });
-        dispatch({
-          type: 'ocp_cluster_size',
-          payload: data.openshift['cluster-size'][0].value,
-        });
-        dispatch({
-          type: 'ocp_version',
-          payload: data.openshift.versions[0].value,
-        });
-      })
-      .catch(error => {
-        setHasError(error);
-      });
-  }, []);
+    const data = engagementFormContext.sessionData;
+    setClusterOptions(data);
+    dispatch({
+      type: 'ocp_cloud_provider_region',
+      payload: data.providers[0].regions[0].value,
+    });
+    dispatch({
+      type: 'ocp_cloud_provider_name',
+      payload: data.providers[0].value,
+    });
+    dispatch({
+      type: 'ocp_cluster_size',
+      payload: data.openshift['cluster-size'][0].value,
+    });
+    dispatch({
+      type: 'ocp_version',
+      payload: data.openshift.versions[0].value,
+    });
+  }, [engagementFormContext]);
+  const engagementFormRequestError = engagementFormContext.error;
   return (
     <>
       <PageSection>
         <div className="pf-c-content">
           <Text component={TextVariants.h1}>Engagement Data Gathering</Text>
         </div>
-        {hasError ? (
+        {engagementFormRequestError ? (
           <Alert isInline title="We encountered an error." variant="danger">
-            {hasError.message}
+            {engagementFormRequestError.message}
           </Alert>
         ) : null}
       </PageSection>
