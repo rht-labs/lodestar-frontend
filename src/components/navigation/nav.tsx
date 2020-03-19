@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
-import { Nav, NavItem, NavList, Popover, Button } from "@patternfly/react-core";
-import { Link, useLocation } from "react-router-dom";
-import PopupContext from "../../context/popup_context";
+import React, { useContext } from 'react';
+import { Nav, NavItem, NavList, Popover, Button } from '@patternfly/react-core';
+import { Link, useLocation } from 'react-router-dom';
+import PopupContext from '../../context/popup_context';
 
-const NavDefaultList = () => {
+export const NavDefaultList = () => {
   const popupContext = useContext(PopupContext);
   const { pathname } = useLocation();
-  console.log(popupContext.hasBeenShown);
 
   return (
     <Nav theme="dark">
       <NavList>
-        <NavItem id="engagementFormLink" itemId={0} isActive={pathname === "/"}>
+        <NavItem id="engagementFormLink" itemId={0} isActive={pathname === '/'}>
           <Link to="/">Engagement Form</Link>
         </NavItem>
         <Popover
@@ -32,7 +31,7 @@ const NavDefaultList = () => {
           <NavItem
             id="engagementFormLink"
             itemId={1}
-            isActive={pathname === "/feature-request"}
+            isActive={pathname === '/feature-request'}
           >
             <Link to="/feature-request">Feature Requests</Link>
           </NavItem>
@@ -41,5 +40,3 @@ const NavDefaultList = () => {
     </Nav>
   );
 };
-
-export default NavDefaultList;

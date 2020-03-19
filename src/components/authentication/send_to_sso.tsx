@@ -1,15 +1,15 @@
-import React from "react";
-import { useContext } from "react";
-import ConfigContext from "../../context/config_context";
+import React from 'react';
+import { useContext } from 'react';
+import { ConfigContext } from '../../context/config_context';
 
-export default function SendToSSO() {
+export function SendToSSO() {
   const configContext = useContext(ConfigContext);
   const OAUTH_CONFIG = {
     clientId: configContext.clientId,
     redirectUri: `${configContext.baseUrl}/auth_callback`,
     state: {
-      from: "/settings"
-    }
+      from: '/settings',
+    },
   };
 
   const OAUTH_URL = `${configContext.authBaseUrl}/auth?client_id=${

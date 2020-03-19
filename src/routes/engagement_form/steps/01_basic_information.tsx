@@ -1,14 +1,14 @@
-import React from "react";
-import { CalendarAltIcon } from "@patternfly/react-icons";
+import React from 'react';
+import { CalendarAltIcon } from '@patternfly/react-icons';
 import {
   Form,
   FormGroup,
   InputGroup,
   InputGroupText,
   TextArea,
-  TextInput
-} from "@patternfly/react-core";
-const BasicInformation = ({ values, onChange }: any) => {
+  TextInput,
+} from '@patternfly/react-core';
+export const BasicInformation = ({ values, onChange }: any) => {
   return (
     <Form isHorizontal>
       <FormGroup
@@ -23,7 +23,7 @@ const BasicInformation = ({ values, onChange }: any) => {
           name="customer_name"
           placeholder="e.g. NASA"
           value={values.customer_name || ''}
-          onChange={e => onChange({ type: "customer_name", payload: e })}
+          onChange={e => onChange({ type: 'customer_name', payload: e })}
         />
       </FormGroup>
       <FormGroup
@@ -38,7 +38,7 @@ const BasicInformation = ({ values, onChange }: any) => {
           name="project_name"
           placeholder="e.g. Mars Probe"
           value={values.project_name || ''}
-          onChange={e => onChange({ type: "project_name", payload: e })}
+          onChange={e => onChange({ type: 'project_name', payload: e })}
         />
       </FormGroup>
       <FormGroup
@@ -53,7 +53,7 @@ const BasicInformation = ({ values, onChange }: any) => {
           name="location"
           placeholder="e.g. Pasadena, CA"
           value={values.location || ''}
-          onChange={e => onChange({ type: "location", payload: e })}
+          onChange={e => onChange({ type: 'location', payload: e })}
         />
       </FormGroup>
       <FormGroup
@@ -72,7 +72,7 @@ const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             aria-label="The end date."
             value={values.start_date || ''}
-            onChange={e => onChange({ type: "start_date", payload: e })}
+            onChange={e => onChange({ type: 'start_date', payload: e })}
           />
           <TextInput
             name="end_date"
@@ -80,7 +80,7 @@ const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             aria-label="Residency end date"
             value={values.end_date || ''}
-            onChange={e => onChange({ type: "end_date", payload: e })}
+            onChange={e => onChange({ type: 'end_date', payload: e })}
           />
         </InputGroup>
       </FormGroup>
@@ -91,11 +91,9 @@ const BasicInformation = ({ values, onChange }: any) => {
           aria-label="residency description"
           placeholder="Description and notes for the Engagment"
           value={values.description || ''}
-          onChange={e => onChange({ type: "description", payload: e })}
+          onChange={e => onChange({ type: 'description', payload: e })}
         />
       </FormGroup>
     </Form>
   );
 };
-
-export default BasicInformation;
