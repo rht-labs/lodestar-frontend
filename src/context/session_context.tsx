@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
-import { AuthenticationRepository } from "../repositories/authentication/authentication_repository";
-import { UserProfile } from "../models/user_profile";
-import { UserToken } from "../models/user_token";
-import ConfigContext from "./config_context";
-import Axios, { AxiosInstance } from "axios";
+import React, { createContext, useContext, useState } from 'react';
+import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
+import { UserProfile } from '../models/user_profile';
+import { UserToken } from '../models/user_token';
+import { ConfigContext } from './config_context';
+import Axios, { AxiosInstance } from 'axios';
 
-export interface ISessionContext {
+export interface SessionContext {
   isLoggedIn: () => Promise<boolean>;
   profile?: UserProfile;
   tokens?: UserToken;
@@ -14,18 +14,21 @@ export interface ISessionContext {
   performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => void;
 }
 
-// Provider and Consumer are connected through their "parent" Context
-const SessionContext = createContext<ISessionContext>({
+export const SessionContext = createContext<SessionContext>({
   isLoggedIn: async () => false,
   profile: new UserProfile(),
   tokens: new UserToken(),
   roles: [],
   axios: Axios.create(),
-  performLogin: () => null
+  performLogin: () => null,
 });
 const { Provider } = SessionContext;
 
-function SessionProvider({ children }: { children: React.ReactChild }) {
+export const SessionProvider = ({
+  children,
+}: {
+  children: React.ReactChild;
+}) => {
   const configContext = useContext(ConfigContext);
   const authenticationRepository: AuthenticationRepository = new AuthenticationRepository(
     configContext
@@ -50,14 +53,10 @@ function SessionProvider({ children }: { children: React.ReactChild }) {
         tokens,
         roles,
         axios: authenticationRepository.axios,
-        performLogin
+        performLogin,
       }}
     >
       {children}
     </Provider>
   );
-}
-
-export { SessionContext, SessionProvider };
-
-export default SessionContext;
+};
