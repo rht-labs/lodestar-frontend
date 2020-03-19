@@ -23,6 +23,9 @@ export function EngagementForm() {
   const engagementFormContext = useContext(EngagementFormContext);
   useEffect(() => {
     const data = engagementFormContext.sessionData;
+    if (!data) {
+      return;
+    }
     setClusterOptions(data);
     dispatch({
       type: 'ocp_cloud_provider_region',

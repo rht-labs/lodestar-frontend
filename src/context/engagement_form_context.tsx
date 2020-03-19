@@ -38,13 +38,12 @@ export const EngagementFormProvider = ({
 
   useEffect(() => {
     getSessionData()
-      .then(({ data }) => setSessionData(yaml.parse(data.fileContent)))
+      .then(({ data }) => {
+        console.log(data);
+        setSessionData(yaml.parse(data.fileContent));
+      })
       .catch(e => setRequestError(e));
   }, [getSessionData]);
-  if (!sessionData) {
-    // TODO: add loading
-    return <div />;
-  }
   return (
     <Provider
       value={{
