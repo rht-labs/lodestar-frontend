@@ -41,4 +41,4 @@ jobs:
         npm run build
         npm run test
       env:
-        CI: false # TODO: revisit this. npm build turns extra checks on when this is true and something there is broken
+        CI: true
