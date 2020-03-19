@@ -48,7 +48,7 @@ jobs:
       with:
         base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
         path: build
-        output_image: "quay.io/rht-labs/omp-frontend:build-${{ github.sha }}"
+        output_image: "quay.io/rht-labs/omp-frontend:${{ github.sha }}"
         image_push_registry: quay.io
         image_push_username: ${{ secrets.QUAY_USERNAME }}
         image_push_password: ${{ secrets.QUAY_PASSWORD }}
