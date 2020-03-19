@@ -28,7 +28,7 @@ const Routes = () => {
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
   useEffect(() => {
-    Axios.get(`${process.env.PUBLIC_URL}/config.json`).then(({ data }) => {
+    Axios.get(`${process.env.PUBLIC_URL}/config/config.json`).then(({ data }) => {
       configContext.setConfig(data);
     });
   }, [configContext]);
