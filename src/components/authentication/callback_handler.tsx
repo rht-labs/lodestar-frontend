@@ -25,4 +25,4 @@ export const CallbackHandler = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return loginSuccess ? <Redirect to="/" /> : null;
-}
+};
