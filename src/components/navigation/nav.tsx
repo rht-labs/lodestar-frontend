@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Nav, NavItem, NavList, Popover, Button } from '@patternfly/react-core';
 import { Link, useLocation } from 'react-router-dom';
-import PopupContext from '../../context/popup_context';
+import { PopupContext } from '../../context/popup_context';
 
 export const NavDefaultList = () => {
   const popupContext = useContext(PopupContext);
