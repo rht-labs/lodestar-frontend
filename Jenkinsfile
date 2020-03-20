@@ -27,6 +27,7 @@ pipeline {
         USERINFO_ENDPOINT = "https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/userinfo"
         TOKEN_ENDPOINT = "https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/token"
         END_SESSION_ENDPOINT = "https://[my-sso-url].com/auth/realms/omp/protocol/openid-connect/logout"
+
     }
 
     // The options directive is for configuration that applies to the whole job.
@@ -38,14 +39,12 @@ pipeline {
     }
 
     stages {
+
         stage("Env test namespace") {
             agent {
                 node {
                     label "master"
                 }
-            }
-            when {
-              expression { GIT_BRANCH ==~ /(.*master)/ }
             }
             steps {
                 script {
@@ -57,32 +56,12 @@ pipeline {
                 }
             }
         }
-        stage("Env dev namespace") {
-            agent {
-                node {
-                    label "master"
-                }
-            }
-            when {
-              expression { GIT_BRANCH ==~ /(.*develop.*|.*feature.*)/ }
-            }
-            steps {
-                script {
-                    // Arbitrary Groovy Script executions can do in script tags
-                    env.PROJECT_NAMESPACE = "${NAMESPACE_PREFIX}-dev"
-                    env.NODE_ENV = "dev"
-                    env.REACT_APP_BACKEND_URI = "https://omp-backend-omp-dev.apps.s11.core.rht-labs.com"
-                }
-            }
-        }
+
         stage("Ansible") {
             agent {
                 node {
                     label "jenkins-slave-ansible"
                 }
-            }
-            when {
-              expression { GIT_BRANCH ==~ /(.*master|.*develop.*|.*feature.*)/ }
             }
             stages{
                 stage("Ansible Galaxy") {
@@ -99,7 +78,6 @@ pipeline {
                 }
             }
         }
-
 
         stage("node-build") {
             agent {
@@ -145,23 +123,56 @@ pipeline {
                 }
             }
         }
-        stage("node-bake") {
+
+        stage("Build a Container Image and Push it to Quay") {
             agent {
                 node {
                     label "master"  
                 }
             }
             when {
-                expression { GIT_BRANCH ==~ /(.*master|.*develop|.*feature.*)/ }
+                expression { GIT_BRANCH ==~ /(.*tags\/release.*)/  }
             }
             steps {
+                
                 echo '### Get Binary from Nexus ###'
                 sh  '''
                         rm -rf package-contents*
                         curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
                         unzip -o package-contents.zip
                     '''
-                echo '### Create Linux Container Image from package ###'
+                echo '### Create Container Image ###'
+                sh  '''
+                        oc project ${PIPELINES_NAMESPACE} # probs not needed
+                        oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"DockerImage\\",\\"name\\":\\"quay.io/rht-labs/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+                        oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
+                    '''
+            }
+            post {
+                always {
+                    archive "**"
+                }
+            }
+        }
+
+        stage("Build a Container Image") {
+            agent {
+                node {
+                    label "master"  
+                }
+            }
+            when {
+                expression { GIT_BRANCH ==~ /(.*master)/  }
+            }
+            steps {
+                
+                echo '### Get Binary from Nexus ###'
+                sh  '''
+                        rm -rf package-contents*
+                        curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JENKINS_TAG}/package-contents.zip -o package-contents.zip
+                        unzip -o package-contents.zip
+                    '''
+                echo '### Create Container Image ###'
                 sh  '''
                         oc project ${PIPELINES_NAMESPACE} # probs not needed
                         oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
@@ -174,46 +185,7 @@ pipeline {
                 }
             }
         }
-        stage("Openshift Deployment") {
-            agent {
-                node {
-                    label "jenkins-slave-ansible"
-                }
-            }
-            when {
-                allOf{
-                    expression { GIT_BRANCH ==~ /(.*master|.*develop.*|.*feature.*)/ }
-                    expression { currentBuild.result != 'UNSTABLE' }
-                }
-            }
-            steps {
-                echo '### Apply Inventory using Ansible-Playbook ###'
-                sh "ansible-galaxy install -r .applier/requirements.yml --roles-path=.applier/roles"
-                sh "ansible-playbook .applier/apply.yml -i .applier/inventory/ -e include_tags=${NODE_ENV} -e ${NODE_ENV}_vars='{\"NAME\":\"${APP_NAME}\",\"IMAGE_NAME\":\"${APP_NAME}\",\"IMAGE_TAG\":\"${JENKINS_TAG}\",\"BASE_URL\":\"${BASE_URL}\",\"BACKEND_URL\":\"${BACKEND_URL}\",\"CLIENT_ID\":\"${CLIENT_ID}\",\"AUTHORIZATION_ENDPOINT\":\"${AUTHORIZATION_ENDPOINT}\",\"USERINFO_ENDPOINT\":\"${USERINFO_ENDPOINT}\",\"TOKEN_ENDPOINT\":\"${TOKEN_ENDPOINT}\",\"END_SESSION_ENDPOINT\":\"${END_SESSION_ENDPOINT}\",\"REACT_APP_BACKEND_URI\":\"${REACT_APP_BACKEND_URI}\"}'"
+        
 
-
-                echo '### tag image for namespace ###'
-                sh  '''
-                    oc project ${PROJECT_NAMESPACE}
-                    oc tag ${PIPELINES_NAMESPACE}/${APP_NAME}:${JENKINS_TAG} ${PROJECT_NAMESPACE}/${APP_NAME}:${JENKINS_TAG}
-                    '''
-                echo '### set env vars and image for deployment ###'
-                sh '''
-                    oc set env dc ${APP_NAME} NODE_ENV=${NODE_ENV}
-                    oc set image dc/${APP_NAME} ${APP_NAME}=docker-registry.default.svc:5000/${PROJECT_NAMESPACE}/${APP_NAME}:${JENKINS_TAG}
-                    oc label --overwrite dc ${APP_NAME} stage=${NODE_ENV}
-                    oc patch dc ${APP_NAME} -p "{\\"spec\\":{\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"version\\":\\"${PACKAGE_JSON_VERSION}\\",\\"release\\":\\"${RELEASE}\\",\\"stage\\":\\"${NODE_ENV}\\",\\"git-commit\\":\\"${GIT_COMMIT}\\",\\"jenkins-build\\":\\"${JENKINS_TAG}\\"}}}}}"
-                    oc rollout latest dc/${APP_NAME}
-                '''
-                echo '### Verify OCP Deployment ###'
-                openshiftVerifyDeployment depCfg: env.APP_NAME,
-                    namespace: env.PROJECT_NAMESPACE,
-                    replicaCount: '1',
-                    verbose: 'false',
-                    verifyReplicaCount: 'true',
-                    waitTime: '',
-                    waitUnit: 'sec'
-            }
-        }
     }
 }

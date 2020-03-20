@@ -99,11 +99,26 @@ curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/rep
 unzip -o package-contents.zip
 ```
 
+###### OpenShift Atomic Registry
+
+If you're pushing from the master branch the build will create a container image and push it to the Openshift internal registry.
+
 ```
 oc project ${PIPELINES_NAMESPACE}
 oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
 oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
 ```
+
+###### Quay
+
+If you're pushing from a release tag the build will create a container image and push it to Quay.
+
+```
+oc project ${PIPELINES_NAMESPACE} # probs not needed
+oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"DockerImage\\",\\"name\\":\\"quay.io/rht-labs/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
+```
+
 
 #### OpenShift Deployment
 
