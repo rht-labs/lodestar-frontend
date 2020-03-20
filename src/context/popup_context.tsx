@@ -1,27 +1,27 @@
-import React, { useEffect } from "react";
-import { createContext, useState } from "react";
+import React, { useEffect } from 'react';
+import { createContext, useState } from 'react';
 
-export interface IPopupContext {
+export interface PopupContext {
   hasBeenShown: boolean;
   onDismissed: () => void;
 }
 
-export const PopupContext = createContext<IPopupContext>({
+export const PopupContext = createContext<PopupContext>({
   hasBeenShown: true,
-  onDismissed: () => null
+  onDismissed: () => null,
 });
 
 const { Provider } = PopupContext;
 
 export function PopupProvider({ children }: { children: React.ReactChild }) {
-  const featureRequestPopupKey = "hasShownFeatureRequestPopup";
+  const featureRequestPopupKey = 'hasShownFeatureRequestPopup';
   const hasBeenShownStoredState =
-    localStorage.getItem(featureRequestPopupKey) === "true";
+    localStorage.getItem(featureRequestPopupKey) === 'true';
 
-  console.log("hasbeenshown", hasBeenShownStoredState);
+  console.log('hasbeenshown', hasBeenShownStoredState);
   const [
     hasShownFeatureRequestPopup,
-    setHasShownFeatureRequestPopup
+    setHasShownFeatureRequestPopup,
   ] = useState<boolean>(hasBeenShownStoredState);
 
   useEffect(() => {
@@ -31,18 +31,16 @@ export function PopupProvider({ children }: { children: React.ReactChild }) {
   }, []);
   const onDismissed = () => {
     setHasShownFeatureRequestPopup(true);
-    localStorage.setItem(featureRequestPopupKey, "true");
+    localStorage.setItem(featureRequestPopupKey, 'true');
   };
   return (
     <Provider
       value={{
         hasBeenShown: hasShownFeatureRequestPopup,
-        onDismissed
+        onDismissed,
       }}
     >
       {children}
     </Provider>
   );
 }
-
-export default PopupContext;
