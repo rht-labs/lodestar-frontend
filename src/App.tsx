@@ -1,7 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { Page, PageHeader, PageSidebar } from '@patternfly/react-core';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { NavDefaultList } from './components/navigation/nav';
@@ -63,7 +68,14 @@ const Routes = () => {
               );
             }}
           />
-          <PrivateRoute path="/private" component={EngagementForm} />
+          <Route
+            path="/feature-request"
+            component={() => {
+              window.location = ('https://docs.google.com/forms/d/e/1FAIpQLSfcKY5eKwDYSxIF9oYeDDVyYCqwcq_AD0eqhY4uLtpcCgfWwA/viewform' as any) as Location;
+              return <Redirect to="/" />;
+            }}
+          />
+          <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
           <Route path="/auth_callback" component={CallbackHandler} />
         </Switch>
       </Page>
