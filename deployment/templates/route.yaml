@@ -5,6 +5,9 @@ metadata:
     app: {{ .Values.name }}
   name: {{ .Values.name }}
 spec:
+  {{- if .Values.hostname }}
+  host: {{ .Values.hostname }}
+  {{- end }}
   port:
     targetPort: "{{ .Values.servicePort }}-tcp"
   tls:
@@ -14,3 +17,5 @@ spec:
     name: {{ .Values.name }}
     weight: 100
   wildcardPolicy: None
+status:
+  ingress: []
