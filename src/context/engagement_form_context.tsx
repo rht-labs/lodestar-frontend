@@ -32,7 +32,7 @@ export const EngagementFormProvider = ({
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const getSessionData = useCallback(() => {
     return sessionContext.axios.get(
-      `${configContext.backendUrl}/engagements/config`
+      `${configContext.backendUrl}/config`
     );
   }, [configContext.backendUrl, sessionContext.axios]);
 
