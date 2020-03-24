@@ -58,7 +58,7 @@ export const LaunchCluster = ({ values }: any) => {
                   'X-APPLICATION-NONSENSE': 'sure-you-can-access-stuff-#yolo',
                 },
                 method: 'post',
-                url: `${configContext.backendUrl}/engagements/create`,
+                url: `${configContext.backendUrl}/engagements`,
                 data: slugProperties(values, [
                   'ocp_sub_domain',
                   'customer_name',

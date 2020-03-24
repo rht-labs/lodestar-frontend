@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { Page, PageHeader, PageSidebar } from '@patternfly/react-core';
+import { Page, PageHeader, PageSidebar, Brand } from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
   Switch,
@@ -47,7 +47,16 @@ const Routes = () => {
   return (
     <PopupProvider>
       <Page
-        header={<PageHeader />}
+        header={
+          <PageHeader
+            logo={
+              <Brand
+                alt="Open Innovation Labs"
+                src={`${process.env.PUBLIC_URL}/oil_logo.png`}
+              ></Brand>
+            }
+          ></PageHeader>
+        }
         sidebar={
           <PageSidebar isNavOpen theme="dark" nav={<NavDefaultList />} />
         }
