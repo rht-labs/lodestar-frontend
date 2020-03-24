@@ -13,6 +13,7 @@ import { PointOfContact } from './steps/02_point_of_contact';
 import { ClusterInformation } from './steps/03_cluster_information';
 import { ClusterUsers } from './steps/04_cluster_users';
 import { EngagementFormContext } from '../../context/engagement_form_context';
+import { LaunchCluster } from './steps/05_launch_cluster';
 
 export function EngagementForm() {
   const [state, dispatch] = useReducer<(state: any, action: any) => any>(
@@ -86,9 +87,20 @@ export function EngagementForm() {
               hideCancelButton: true,
             },
             {
-              name: 'Launch Cluster',
+              name: 'Cluster Users',
               component: (
                 <ClusterUsers values={state} onChange={dispatch} options={{}} />
+              ),
+              hideCancelButton: true,
+            },
+            {
+              name: 'Launch Cluster',
+              component: (
+                <LaunchCluster
+                  values={state}
+                  onChange={dispatch}
+                  options={{}}
+                />
               ),
               hideCancelButton: true,
               isFinishedStep: true,

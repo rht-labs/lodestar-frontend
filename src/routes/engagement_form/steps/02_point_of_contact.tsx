@@ -82,7 +82,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.technical_lead_emails || ''}
+            value={values.technical_lead_email || ''}
           />
         </InputGroup>
       </FormGroup>
