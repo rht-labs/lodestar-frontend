@@ -5,8 +5,6 @@ import {
   PageHeader,
   PageSidebar,
   Brand,
-  Flex,
-  FlexItem,
 } from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
