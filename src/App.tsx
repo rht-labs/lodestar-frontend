@@ -1,6 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { Page, PageHeader, PageSidebar, Brand } from '@patternfly/react-core';
+import {
+  Page,
+  PageHeader,
+  PageSidebar,
+  Brand,
+} from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,12 +16,12 @@ import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { NavDefaultList } from './components/navigation/nav';
 import { EngagementForm } from './routes/engagement_form';
-
 import { SessionContext, SessionProvider } from './context/session_context';
 import { ConfigContext, ConfigProvider } from './context/config_context';
 import Axios from 'axios';
 import { EngagementFormProvider } from './context/engagement_form_context';
 import { PopupProvider } from './context/popup_context';
+import { UserDropdown } from './components/user_dropdown';
 
 export const App = () => {
   return (
@@ -55,6 +60,7 @@ const Routes = () => {
                 src={`${process.env.PUBLIC_URL}/oil_logo.png`}
               ></Brand>
             }
+            avatar={<UserDropdown />}
           ></PageHeader>
         }
         sidebar={
@@ -63,7 +69,7 @@ const Routes = () => {
         style={{ height: '100vh' }}
       >
         <Switch>
-          <Route
+          <PrivateRoute
             exact
             path="/"
             component={(props: any) => {

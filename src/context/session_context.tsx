@@ -3,7 +3,8 @@ import { AuthenticationRepository } from '../repositories/authentication/authent
 import { UserProfile } from '../models/user_profile';
 import { UserToken } from '../models/user_token';
 import { ConfigContext } from './config_context';
-import Axios, { AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
+import { Request } from '../utilities/request';
 
 export interface SessionContext {
   isLoggedIn: () => Promise<boolean>;
@@ -19,20 +20,21 @@ export const SessionContext = createContext<SessionContext>({
   profile: new UserProfile(),
   tokens: new UserToken(),
   roles: [],
-  axios: Axios.create(),
+  axios: Request.client,
   performLogin: () => null,
 });
 const { Provider } = SessionContext;
 
 export const SessionProvider = ({
   children,
+  authenticationRepository: authRepo,
 }: {
   children: React.ReactChild;
+  authenticationRepository?: AuthenticationRepository;
 }) => {
   const configContext = useContext(ConfigContext);
-  const authenticationRepository: AuthenticationRepository = new AuthenticationRepository(
-    configContext
-  );
+  const authenticationRepository: AuthenticationRepository =
+    authRepo ?? new AuthenticationRepository(configContext);
   const [profile, setProfile] = useState(new UserProfile());
   const [tokens, setTokens] = useState(new UserToken());
   const [roles, setRoles] = useState<string[]>([] as string[]);
@@ -52,7 +54,7 @@ export const SessionProvider = ({
         profile,
         tokens,
         roles,
-        axios: authenticationRepository.axios,
+        axios: Request.client,
         performLogin,
       }}
     >
