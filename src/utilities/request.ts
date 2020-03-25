@@ -2,7 +2,7 @@ import { AuthenticationRepository } from '../repositories/authentication/authent
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 export class Request {
   private static instance: AxiosInstance;
-  public static get client() {
+  static get client() {
     if (!Request.instance) {
       Request.instance = axios.create({});
       Request.instance.interceptors.request.use(Request.beforeRequest);

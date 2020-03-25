@@ -8,14 +8,13 @@ const TOKEN_STORAGE_KEY = 'token';
 
 export class AuthenticationRepository {
   constructor(config: ConfigContextParams, requestClient?: AxiosInstance) {
-    this.axios = requestClient ?? Request.client
+    this.axios = requestClient ?? Request.client;
     this.config = config;
   }
 
   config: ConfigContextParams;
 
   axios: AxiosInstance;
-
 
   /**
    *
