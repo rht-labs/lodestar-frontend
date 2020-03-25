@@ -1,13 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import {
-  Page,
-  PageHeader,
-  PageSidebar,
-  Brand,
-  Flex,
-  FlexItem,
-} from '@patternfly/react-core';
+import { Page, PageHeader, PageSidebar, Brand } from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
   Switch,

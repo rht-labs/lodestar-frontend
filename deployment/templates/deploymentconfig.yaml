@@ -35,10 +35,17 @@ spec:
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/app-root/src/config
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config-volume
+        configMap:
+          name: frontend-config
   triggers: 
   - type: ConfigChange

@@ -129,7 +129,7 @@ export const ClusterUsers = ({ options, values, onChange }: any) => {
                         });
                       }}
                     >
-                      {options['user-management'].rbac.roles.map(
+                      {options['user-management']?.rbac?.roles?.map(
                         (option: any, index: number) => (
                           <FormSelectOption
                             isDisabled={option.disabled}
