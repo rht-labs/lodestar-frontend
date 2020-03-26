@@ -1,6 +1,20 @@
 import React, { useContext, useEffect } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { Page, PageHeader, PageSidebar, Brand } from '@patternfly/react-core';
+import {
+  Page,
+  PageHeader,
+  PageSidebar,
+  Brand,
+  Dropdown,
+  DropdownToggle,
+  Toolbar,
+  Nav,
+  NavItem,
+  NavList,
+  ToolbarItem,
+  ToolbarGroup,
+  NavVariants,
+} from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
   Switch,
@@ -49,17 +63,39 @@ const Routes = () => {
       <Page
         header={
           <PageHeader
+            topNav={
+              <Nav>
+                <NavList variant={NavVariants.horizontal}>
+                  <NavItem preventDefault isActive={false}>
+                    <Dropdown
+                      isPlain
+                      toggle={<DropdownToggle>Hello</DropdownToggle>}
+                    ></Dropdown>
+                  </NavItem>
+                </NavList>
+              </Nav>
+            }
+            showNavToggle
             logo={
               <Brand
                 alt="Open Innovation Labs"
                 src={`${process.env.PUBLIC_URL}/oil_logo.png`}
               ></Brand>
             }
-            avatar={<UserDropdown />}
+            toolbar={
+              <Toolbar>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <UserDropdown />
+                  </ToolbarItem>
+                </ToolbarGroup>
+              </Toolbar>
+            }
           ></PageHeader>
         }
+        isManagedSidebar={true}
         sidebar={
-          <PageSidebar isNavOpen theme="dark" nav={<NavDefaultList />} />
+          <PageSidebar isManagedSidebar theme="dark" nav={<NavDefaultList />} />
         }
         style={{ height: '100vh' }}
       >

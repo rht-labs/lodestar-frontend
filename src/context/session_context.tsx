@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
 import { UserProfile } from '../models/user_profile';
 import { UserToken } from '../models/user_token';
@@ -38,6 +38,16 @@ export const SessionProvider = ({
   const [profile, setProfile] = useState(new UserProfile());
   const [tokens, setTokens] = useState(new UserToken());
   const [roles, setRoles] = useState<string[]>([] as string[]);
+  useEffect(() => {
+    const authenticationRepository: AuthenticationRepository =
+      authRepo ?? new AuthenticationRepository(configContext);
+    const tokens = AuthenticationRepository.getToken();
+    if (tokens) {
+      authenticationRepository.getUserProfile().then(profile => {
+        performLogin(profile, tokens, profile.groups as string[]);
+      });
+    }
+  }, [configContext, authRepo]);
   const performLogin = (
     newProfile: UserProfile,
     newTokens: UserToken,
