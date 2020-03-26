@@ -43,6 +43,10 @@ $ ansible-galaxy install -r requirements.yml --roles-path=roles --force
 $ ansible-playbook apply.yml -i inventory/
 ```
 
+## Development
+
+See [the development README](development/README.md) for details on how to spin up a deployment for developing on OpenShift.
+
 ## Pipeline
 
 The deployment pipeline is running through a `Jenkinsfile` located in the root folder of the project. This `Jenksinfile` is written in groovy.
