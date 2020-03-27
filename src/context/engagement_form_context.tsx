@@ -10,7 +10,6 @@ export interface EngagementFormContext {
   error: AxiosError | null;
 }
 
-// Provider and Consumer are connected through their "parent" Context
 export const EngagementFormContext = createContext<EngagementFormContext>({
   getSessionData: async () => null,
   sessionData: null,
@@ -18,7 +17,6 @@ export const EngagementFormContext = createContext<EngagementFormContext>({
 });
 const { Provider } = EngagementFormContext;
 
-// Provider will be exported wrapped in EngagementFormProvider component.
 export const EngagementFormProvider = ({
   children,
   configContext,
