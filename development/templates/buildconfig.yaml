@@ -22,7 +22,7 @@ spec:
       FROM node:12.2.0-alpine AS builder
       WORKDIR /app
       COPY . /app
-      RUN sh -c build.sh
+      RUN sh -c ./build.sh
       FROM registry.access.redhat.com/rhscl/httpd-24-rhel7
       COPY --from=builder /app/build /var/www/html
       EXPOSE 8080
