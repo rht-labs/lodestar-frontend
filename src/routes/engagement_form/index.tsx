@@ -89,7 +89,11 @@ export function EngagementForm() {
             {
               name: 'Cluster Users',
               component: (
-                <ClusterUsers values={state} onChange={dispatch} options={{}} />
+                <ClusterUsers
+                  values={state}
+                  onChange={dispatch}
+                  options={clusterOptions}
+                />
               ),
               hideCancelButton: true,
             },
