@@ -21,6 +21,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { FeatureRequest } from './components/feature_request';
 import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { NavDefaultList } from './components/navigation/nav';
@@ -114,13 +115,7 @@ const Routes = () => {
               );
             }}
           />
-          <Route
-            path="/feature-request"
-            component={() => {
-              window.location = ('https://docs.google.com/forms/d/e/1FAIpQLSfcKY5eKwDYSxIF9oYeDDVyYCqwcq_AD0eqhY4uLtpcCgfWwA/viewform' as any) as Location;
-              return <Redirect to="/" />;
-            }}
-          />
+          <Route path="/feature-request" component={FeatureRequest} />
           <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
           <Route path="/auth_callback" component={CallbackHandler} />
         </Switch>
