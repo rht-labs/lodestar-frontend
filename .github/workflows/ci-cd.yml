@@ -39,9 +39,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        npm install
-        npm run build
-        npm run test
+        sh -c build.sh
       env:
         CI: true
     - uses: redhat-cop/github-actions/s2i@v1
