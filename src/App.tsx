@@ -32,13 +32,20 @@ import Axios from 'axios';
 import { EngagementFormProvider } from './context/engagement_form_context';
 import { PopupProvider } from './context/popup_context';
 import { UserDropdown } from './components/user_dropdown';
+import { EngagementProvider } from './context/engagement_context';
+import { FakedEngagementRepository } from './repositories/engagement/faked_engagement_repository';
+import { EngagementDropdown } from './components/engagement_dropdown';
 
 export const App = () => {
   return (
     <Router>
       <ConfigProvider>
         <SessionProvider>
-          <Routes />
+          <EngagementProvider
+            engagementRepository={new FakedEngagementRepository()}
+          >
+            <Routes />
+          </EngagementProvider>
         </SessionProvider>
       </ConfigProvider>
     </Router>
@@ -67,11 +74,12 @@ const Routes = () => {
             topNav={
               <Nav>
                 <NavList variant={NavVariants.horizontal}>
-                  <NavItem preventDefault isActive={false}>
-                    <Dropdown
-                      isPlain
-                      toggle={<DropdownToggle>Hello</DropdownToggle>}
-                    ></Dropdown>
+                  <NavItem>
+                    <Toolbar>
+                      <ToolbarItem>
+                        <EngagementDropdown />
+                      </ToolbarItem>
+                    </Toolbar>
                   </NavItem>
                 </NavList>
               </Nav>

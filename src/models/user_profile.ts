@@ -20,6 +20,13 @@ export class UserProfile {
     this.email = email;
     this.groups = groups;
   }
+  get displayName(): string {
+    if (this.firstName) {
+      return this.firstName;
+    } else {
+      return this.email || '';
+    }
+  }
   groups?: string[];
   username?: string;
   firstName?: string;

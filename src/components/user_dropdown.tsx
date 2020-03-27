@@ -1,11 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { SessionContext } from '../context/session_context';
-import {
-  Avatar,
-  Dropdown,
-  DropdownToggle,
-  DropdownItem,
-} from '@patternfly/react-core';
+import { Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 export interface UserDropdown {}
 export function UserDropdown(props: UserDropdown) {
@@ -13,7 +8,7 @@ export function UserDropdown(props: UserDropdown) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownItems = [
     <DropdownItem value="logOut" key="logout">
-      <Link to="/logout">Log</Link>
+      <Link to="/logout">Log Out</Link>
     </DropdownItem>,
   ];
 
@@ -32,12 +27,11 @@ export function UserDropdown(props: UserDropdown) {
       }}
     >
       <Dropdown
-        frameBorder="0"
         isPlain={true}
         dropdownItems={dropdownItems}
         toggle={
           <DropdownToggle onToggle={() => setIsOpen(!isOpen)}>
-            Hello, {sessionContext.profile?.email}
+            Hello, {sessionContext.profile?.displayName}
           </DropdownToggle>
         }
         isOpen={isOpen}
