@@ -12,7 +12,19 @@ If you are not familiar with Helm - how to configure it and run - you can start 
 
 ## Using This Chart
 
-Move to the `development` directory (i.e. `cd development/`), and deploy using the following Helm command:
+1. Clone the target repo:
+
+```
+git clone https://github.com/rht-labs/open-management-portal-frontend
+```
+
+2. Change into to the `development` directory:
+
+```
+cd open-management-portal-frontend/development
+```
+
+3. Deploy using the following Helm command:
 
 ```shell script
 helm template . \
