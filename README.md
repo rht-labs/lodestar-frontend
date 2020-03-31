@@ -43,6 +43,12 @@ $ ansible-galaxy install -r requirements.yml --roles-path=roles --force
 $ ansible-playbook apply.yml -i inventory/
 ```
 
+:heavy_exclamation_mark: The applier will not create a route or ingress and if this is required has to be done seperately
+
+## Development
+
+See [the development README](development/README.md) for details on how to spin up a deployment for developing on OpenShift.
+
 ## Pipeline
 
 The deployment pipeline is running through a `Jenkinsfile` located in the root folder of the project. This `Jenksinfile` is written in groovy.
