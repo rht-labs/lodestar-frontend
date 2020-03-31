@@ -1,6 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { SessionContext } from '../context/session_context';
-import { Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+} from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 export interface UserDropdown {}
 export function UserDropdown(props: UserDropdown) {

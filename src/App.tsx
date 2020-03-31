@@ -8,6 +8,7 @@ import {
   Toolbar,
   ToolbarItem,
   ToolbarGroup,
+  Avatar,
 } from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
@@ -15,6 +16,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import avatarImg from './assets/images/avatar.svg';
 import { FeatureRequest } from './components/feature_request';
 import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
@@ -89,6 +91,7 @@ const Routes = () => {
                 </ToolbarGroup>
               </Toolbar>
             }
+            avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
           ></PageHeader>
         }
         isManagedSidebar={true}
