@@ -5,15 +5,9 @@ import {
   PageHeader,
   PageSidebar,
   Brand,
-  Dropdown,
-  DropdownToggle,
   Toolbar,
-  Nav,
-  NavItem,
-  NavList,
   ToolbarItem,
   ToolbarGroup,
-  NavVariants,
 } from '@patternfly/react-core';
 import {
   BrowserRouter as Router,
@@ -71,25 +65,20 @@ const Routes = () => {
       <Page
         header={
           <PageHeader
-            topNav={
-              <Nav>
-                <NavList variant={NavVariants.horizontal}>
-                  <NavItem>
-                    <Toolbar>
-                      <ToolbarItem>
-                        <EngagementDropdown />
-                      </ToolbarItem>
-                    </Toolbar>
-                  </NavItem>
-                </NavList>
-              </Nav>
-            }
             showNavToggle
             logo={
-              <Brand
-                alt="Open Innovation Labs"
-                src={`${process.env.PUBLIC_URL}/oil_logo.png`}
-              ></Brand>
+              <div>
+                <Toolbar>
+                  <Brand
+                    alt="Open Innovation Labs"
+                    src={`${process.env.PUBLIC_URL}/oil_logo.png`}
+                  ></Brand>
+                  <div style={{ width: 50 }} />
+                  <ToolbarItem>
+                    <EngagementDropdown />
+                  </ToolbarItem>
+                </Toolbar>
+              </div>
             }
             toolbar={
               <Toolbar>
