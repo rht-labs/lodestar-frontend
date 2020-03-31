@@ -1,4 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
+import { Request } from '../../utilities/request';
 import { UserToken } from '../../models/user_token';
 import qs from 'querystring';
 import { UserProfile } from '../../models/user_profile';
@@ -6,27 +7,14 @@ import { ConfigContextParams } from '../../context/config_context';
 const TOKEN_STORAGE_KEY = 'token';
 
 export class AuthenticationRepository {
-  constructor(config: ConfigContextParams) {
-    this.axios = this.initializeAxios();
+  constructor(config: ConfigContextParams, requestClient?: AxiosInstance) {
+    this.axios = requestClient ?? Request.client;
     this.config = config;
   }
 
   config: ConfigContextParams;
 
   axios: AxiosInstance;
-
-  private initializeAxios() {
-    const axiosInstance = Axios.create();
-    axiosInstance.interceptors.request.use(config => {
-      const token = AuthenticationRepository.getToken();
-      if (!token) {
-        return config;
-      }
-      config.headers.Authorization = `Bearer ${token.accessToken}`;
-      return config;
-    });
-    return axiosInstance;
-  }
 
   /**
    *
@@ -44,7 +32,6 @@ export class AuthenticationRepository {
           TOKEN_STORAGE_KEY,
           JSON.stringify(tokenObject.toMap())
         );
-        this.axios = this.initializeAxios();
       } else {
         throw TypeError(
           'Token Object must be an object containing access and refresh tokens'
@@ -53,6 +40,10 @@ export class AuthenticationRepository {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  static clearSession() {
+    localStorage.setItem(TOKEN_STORAGE_KEY, '');
   }
 
   /**
