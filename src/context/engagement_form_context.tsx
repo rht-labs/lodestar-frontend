@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState, useCallback } from 'react';
 import yaml from 'yaml';
 import { SessionContext } from './session_context';
 import { ConfigContext } from './config_context';
-import Axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 export interface EngagementFormContext {
   getSessionData: () => Promise<any>;
@@ -26,8 +26,6 @@ export const EngagementFormProvider = ({
   sessionContext: SessionContext;
   configContext: ConfigContext;
 }) => {
-  // TODO: When authentication bug when requesting config is fixed in the backend,
-  // update with sessionContext's axios instance
   const [sessionData, setSessionData] = useState<any>(null);
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const getSessionData = useCallback(() => {
