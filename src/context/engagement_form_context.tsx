@@ -20,6 +20,7 @@ const { Provider } = EngagementFormContext;
 export const EngagementFormProvider = ({
   children,
   configContext,
+  sessionContext,
 }: {
   children: React.ReactChild;
   sessionContext: SessionContext;
@@ -30,8 +31,8 @@ export const EngagementFormProvider = ({
   const [sessionData, setSessionData] = useState<any>(null);
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const getSessionData = useCallback(() => {
-    return Axios.get(`${configContext.backendUrl}/config`);
-  }, [configContext.backendUrl]);
+    return sessionContext.axios.get(`${configContext.backendUrl}/config`);
+  }, [configContext.backendUrl, sessionContext.axios]);
 
   useEffect(() => {
     getSessionData()
