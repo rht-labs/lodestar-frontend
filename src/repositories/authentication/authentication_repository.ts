@@ -109,7 +109,7 @@ export class AuthenticationRepository {
       accessToken: access_token as string,
       refreshToken: refresh_token as string,
       accessTokenExpiry: new Date(
-        ((currentTime.getTime() + expires_in) as number) * 1000
+        (currentTime.getTime() + expires_in * 1000) as number
       ),
       refreshTokenExpiry: new Date(
         (currentTime.getTime() + refresh_expires_in * 1000) as number
