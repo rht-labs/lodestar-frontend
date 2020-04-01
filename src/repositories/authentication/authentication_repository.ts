@@ -73,7 +73,7 @@ export class AuthenticationRepository {
       try {
         const token = AuthenticationRepository.getToken();
         const isValid = token?.accessTokenExpiry
-          ? token.accessTokenExpiry > new Date(Date.now())
+          ? token.accessTokenExpiry.getTime() > new Date(Date.now()).getTime()
           : false;
         resolve(!!isValid);
       } catch (e) {
