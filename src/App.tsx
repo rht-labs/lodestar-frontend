@@ -37,11 +37,7 @@ export const App = () => {
     <Router>
       <ConfigProvider>
         <SessionProvider>
-          <EngagementProvider
-            engagementRepository={new FakedEngagementRepository()}
-          >
-            <Routes />
-          </EngagementProvider>
+          <Routes />
         </SessionProvider>
       </ConfigProvider>
     </Router>
@@ -64,62 +60,80 @@ const Routes = () => {
 
   return (
     <PopupProvider>
-      <Page
-        header={
-          <PageHeader
-            showNavToggle
-            logo={
-              <div>
-                <Toolbar>
-                  <Brand
-                    alt="Open Innovation Labs"
-                    src={`${process.env.PUBLIC_URL}/oil_logo.png`}
-                  ></Brand>
-                  <div style={{ width: 50 }} />
-                  <ToolbarItem>
-                    <EngagementDropdown />
-                  </ToolbarItem>
-                </Toolbar>
-              </div>
-            }
-            toolbar={
-              <Toolbar>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <UserDropdown />
-                  </ToolbarItem>
-                </ToolbarGroup>
-              </Toolbar>
-            }
-            avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
-          ></PageHeader>
+      <EngagementProvider
+        engagementRepository={
+          new FakedEngagementRepository({
+            axios: sessionContext.axios,
+            baseUrl: configContext.backendUrl,
+          })
         }
-        isManagedSidebar={true}
-        sidebar={
-          <PageSidebar isManagedSidebar theme="dark" nav={<NavDefaultList />} />
-        }
-        style={{ height: '100vh' }}
       >
-        <Switch>
-          <PrivateRoute
-            exact
-            path="/"
-            component={(props: any) => {
-              return (
-                <EngagementFormProvider
-                  sessionContext={sessionContext}
-                  configContext={configContext}
-                >
-                  <EngagementForm {...props} />
-                </EngagementFormProvider>
-              );
-            }}
-          />
-          <Route path="/feature-request" component={FeatureRequest} />
-          <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
-          <Route path="/auth_callback" component={CallbackHandler} />
-        </Switch>
-      </Page>
+        <>
+          <Page
+            header={
+              <PageHeader
+                showNavToggle
+                logo={
+                  <div>
+                    <Toolbar>
+                      <Brand
+                        alt="Open Innovation Labs"
+                        src={`${process.env.PUBLIC_URL}/oil_logo.png`}
+                      ></Brand>
+                      <div style={{ width: 50 }} />
+                      <ToolbarItem>
+                        <EngagementDropdown />
+                      </ToolbarItem>
+                    </Toolbar>
+                  </div>
+                }
+                toolbar={
+                  <Toolbar>
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <UserDropdown />
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  </Toolbar>
+                }
+                avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
+              ></PageHeader>
+            }
+            isManagedSidebar={true}
+            sidebar={
+              <PageSidebar
+                isManagedSidebar
+                theme="dark"
+                nav={<NavDefaultList />}
+              />
+            }
+            style={{ height: '100vh' }}
+          >
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/"
+                component={(props: any) => {
+                  return (
+                    <EngagementFormProvider
+                      sessionContext={sessionContext}
+                      configContext={configContext}
+                    >
+                      <EngagementForm {...props} />
+                    </EngagementFormProvider>
+                  );
+                }}
+              />
+              <Route path="/feature-request" component={FeatureRequest} />
+              <PrivateRoute
+                path="/private"
+                component={() => <Redirect to="/" />}
+              />
+              <Route path="/auth_callback" component={CallbackHandler} />
+            </Switch>
+          </Page>
+        </>
+      </EngagementProvider>
     </PopupProvider>
   );
 };
