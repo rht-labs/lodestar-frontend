@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Alert, Button } from '@patternfly/react-core';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { slugProperties } from '../../../utilities/slug_properties';
-import { ConfigContext } from '../../../context/config_context';
+import { EngagementContext } from '../../../context/engagement_context';
 
 export const LaunchCluster = ({ values }: any) => {
-  const configContext = useContext(ConfigContext);
+  const engagementContext = useContext(EngagementContext);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setErrorResponse] = useState<AxiosError | null>(null);
   const [success, setSuccessResponse] = useState<boolean | null>(null);
@@ -53,18 +53,15 @@ export const LaunchCluster = ({ values }: any) => {
             onClick={() => {
               setErrorResponse(null);
               setIsLoading(true);
-              axios({
-                headers: {
-                  'X-APPLICATION-NONSENSE': 'sure-you-can-access-stuff-#yolo',
-                },
-                method: 'post',
-                url: `${configContext.backendUrl}/engagements`,
-                data: slugProperties(values, [
-                  'ocp_sub_domain',
-                  'customer_name',
-                  'project_name',
-                ]),
-              })
+
+              engagementContext
+                .createEngagement(
+                  slugProperties(values, [
+                    'ocp_sub_domain',
+                    'customer_name',
+                    'project_name',
+                  ])
+                )
                 .then(() => {
                   setSuccessResponse(true);
                 })
