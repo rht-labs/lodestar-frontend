@@ -42,7 +42,7 @@ jobs:
         ./build.sh
       env:
         CI: true
-    - uses: redhat-cop/github-actions/s2i@v1
+    - uses: redhat-cop/github-actions/s2i@v2
       with:
         base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
         path: build
