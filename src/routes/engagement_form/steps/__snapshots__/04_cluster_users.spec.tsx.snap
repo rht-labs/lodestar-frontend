@@ -554,6 +554,8 @@ initialize {
         "next": Object {
           "attribs": Object {
             "class": "pf-c-button pf-m-link",
+            "data-ouia-component-type": "PF4/Button",
+            "data-ouia-safe": "true",
             "type": "button",
           },
           "children": Array [
@@ -624,11 +626,30 @@ initialize {
               "name": "span",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Object {
-                "data": "Add User",
+                "attribs": Object {
+                  "class": "pf-c-button__text",
+                },
+                "children": Array [
+                  Object {
+                    "data": "Add User",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "text",
+                  },
+                ],
+                "name": "span",
+                "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
-                "type": "text",
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
               },
               "parent": [Circular],
               "prev": null,
@@ -641,7 +662,20 @@ initialize {
               },
             },
             Object {
-              "data": "Add User",
+              "attribs": Object {
+                "class": "pf-c-button__text",
+              },
+              "children": Array [
+                Object {
+                  "data": "Add User",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "text",
+                },
+              ],
+              "name": "span",
+              "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Object {
@@ -721,7 +755,13 @@ initialize {
                   "class": undefined,
                 },
               },
-              "type": "text",
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
             },
           ],
           "name": "button",
@@ -732,10 +772,14 @@ initialize {
           "type": "tag",
           "x-attribsNamespace": Object {
             "class": undefined,
+            "data-ouia-component-type": undefined,
+            "data-ouia-safe": undefined,
             "type": undefined,
           },
           "x-attribsPrefix": Object {
             "class": undefined,
+            "data-ouia-component-type": undefined,
+            "data-ouia-safe": undefined,
             "type": undefined,
           },
         },
@@ -748,6 +792,8 @@ initialize {
       Object {
         "attribs": Object {
           "class": "pf-c-button pf-m-link",
+          "data-ouia-component-type": "PF4/Button",
+          "data-ouia-safe": "true",
           "type": "button",
         },
         "children": Array [
@@ -818,11 +864,30 @@ initialize {
             "name": "span",
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Object {
-              "data": "Add User",
+              "attribs": Object {
+                "class": "pf-c-button__text",
+              },
+              "children": Array [
+                Object {
+                  "data": "Add User",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "text",
+                },
+              ],
+              "name": "span",
+              "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": [Circular],
-              "type": "text",
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
             },
             "parent": [Circular],
             "prev": null,
@@ -835,7 +900,20 @@ initialize {
             },
           },
           Object {
-            "data": "Add User",
+            "attribs": Object {
+              "class": "pf-c-button__text",
+            },
+            "children": Array [
+              Object {
+                "data": "Add User",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "text",
+              },
+            ],
+            "name": "span",
+            "namespace": "http://www.w3.org/1999/xhtml",
             "next": null,
             "parent": [Circular],
             "prev": Object {
@@ -915,7 +993,13 @@ initialize {
                 "class": undefined,
               },
             },
-            "type": "text",
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
           },
         ],
         "name": "button",
@@ -1476,10 +1560,14 @@ initialize {
         "type": "tag",
         "x-attribsNamespace": Object {
           "class": undefined,
+          "data-ouia-component-type": undefined,
+          "data-ouia-safe": undefined,
           "type": undefined,
         },
         "x-attribsPrefix": Object {
           "class": undefined,
+          "data-ouia-component-type": undefined,
+          "data-ouia-safe": undefined,
           "type": undefined,
         },
       },
