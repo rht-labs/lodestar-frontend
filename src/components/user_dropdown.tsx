@@ -12,7 +12,7 @@ export function UserDropdown(props: UserDropdown) {
     </DropdownItem>,
   ];
 
-  const onSelect = (_: React.SyntheticEvent<HTMLDivElement>) => {
+  const onSelect = (_?: React.SyntheticEvent<HTMLDivElement>) => {
     setIsOpen(false);
   };
 
