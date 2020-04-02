@@ -83,7 +83,11 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
             token?.refreshToken ? token.refreshToken : '',
             'refresh_token'
           ).then(token => {
-            resolve(token && token.accessTokenExpiry.getTime() > new Date(Date.now()).getTime());
+            resolve(
+              token &&
+                token.accessTokenExpiry.getTime() >
+                  new Date(Date.now()).getTime()
+            );
           });
         } else {
           // Nothing is valid!
