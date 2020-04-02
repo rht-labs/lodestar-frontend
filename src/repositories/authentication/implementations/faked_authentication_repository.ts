@@ -11,7 +11,7 @@ export class FakedAuthenticationRepository {
   async isLoggedIn(): Promise<boolean> {
     return true;
   }
-  async fetchToken(code: string): Promise<UserToken> {
+  async fetchToken(code: string, grantType: string): Promise<UserToken> {
     return UserToken.fromFake();
   }
   async getUserProfile(): Promise<UserProfile> {
