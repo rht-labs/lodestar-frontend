@@ -35,7 +35,7 @@ export class UserProfile {
   lastName?: string;
   email?: string;
 
-  public static fromFake() {
+  static fromFake() {
     return new UserProfile({
       username: faker.internet.userName(),
       firstName: faker.name.firstName(),

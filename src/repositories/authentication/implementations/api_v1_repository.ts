@@ -43,11 +43,11 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
     }
   }
 
-  public clearSession() {
+  clearSession() {
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
   }
 
-  public getToken() {
+  getToken() {
     try {
       const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY) || '';
       if (!storedToken) {

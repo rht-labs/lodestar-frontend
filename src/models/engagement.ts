@@ -9,7 +9,7 @@ export class Engagement {
   }
   name: string;
 
-  public static fromFake() {
+  static fromFake() {
     return new Engagement({
       name: faker.company.companyName(),
     });
