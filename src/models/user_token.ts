@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 export interface UserTokenParams {
   accessToken?: string;
   refreshToken?: string;
@@ -44,6 +46,15 @@ export class UserToken {
       refreshTokenExpiry: new Date(
         Date.parse(map['refreshTokenExpiry'] as string)
       ),
+    });
+  }
+
+  static fromFake() {
+    return new UserToken({
+      accessToken: faker.random.uuid(),
+      refreshToken: faker.random.uuid(),
+      accessTokenExpiry: faker.date.future(),
+      refreshTokenExpiry: faker.date.future(),
     });
   }
 }

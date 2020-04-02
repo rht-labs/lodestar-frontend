@@ -1,32 +1,40 @@
 import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 export class Request {
-  private static instance: AxiosInstance;
-  static get client() {
-    if (!Request.instance) {
-      Request.instance = axios.create({});
-      Request.instance.interceptors.request.use(Request.beforeRequest);
-      Request.instance.interceptors.response.use(
-        Request.onRequestSuccess,
-        Request.onRequestFailure
-      );
-    }
-    return Request.instance;
+  constructor({
+    authenticationRepository,
+  }: {
+    authenticationRepository: AuthenticationRepository;
+  }) {
+    this.authenticationRepository = authenticationRepository;
+    this.client = axios.create({});
+    this.client.interceptors.request.use(this.beforeRequest);
+    this.client.interceptors.response.use(
+      this.onRequestSuccess,
+      this.onRequestFailure
+    );
   }
-  private static beforeRequest(request: AxiosRequestConfig) {
-    const accessToken = AuthenticationRepository.getToken()?.accessToken;
+
+  private authenticationRepository: AuthenticationRepository;
+
+  client: AxiosInstance;
+
+  private beforeRequest = (request: AxiosRequestConfig) => {
+    const accessToken = this.authenticationRepository.getToken()?.accessToken;
     request.headers.Authorization = `Bearer ${accessToken}`;
     return request;
-  }
-  private static onRequestSuccess(response: AxiosResponse) {
+  };
+
+  private onRequestSuccess = (response: AxiosResponse) => {
     return response;
-  }
-  private static onRequestFailure(error: { response: AxiosResponse }) {
+  };
+
+  private onRequestFailure = (error: { response: AxiosResponse }) => {
     const { response } = error;
     if (response.status >= 400 && response.status < 500) {
-      AuthenticationRepository.clearSession();
+      this.authenticationRepository.clearSession();
       window.location.reload();
     }
     return error;
-  }
+  };
 }
