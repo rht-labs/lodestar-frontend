@@ -5,7 +5,7 @@ import { AuthenticationRepository } from '../repositories/authentication/authent
 import { UserProfile } from '../models/user_profile';
 import { UserToken } from '../models/user_token';
 import { ConfigContext } from './config_context';
-import { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
 
 export interface SessionContext {
@@ -22,7 +22,7 @@ export const SessionContext = createContext<SessionContext>({
   profile: new UserProfile(),
   tokens: new UserToken(),
   roles: [],
-  axios: Request.client,
+  axios: Axios.create(),
   performLogin: () => null,
 });
 const { Provider } = SessionContext;
@@ -59,6 +59,7 @@ export const SessionProvider = ({
     setTokens(newTokens);
     setRoles(newRoles);
   };
+  const request = new Request({ authenticationRepository });
   return (
     <Provider
       value={{
@@ -66,7 +67,7 @@ export const SessionProvider = ({
         profile,
         tokens,
         roles,
-        axios: Request.client,
+        axios: request.client,
         performLogin,
       }}
     >

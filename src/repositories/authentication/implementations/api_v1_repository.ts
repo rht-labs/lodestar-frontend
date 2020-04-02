@@ -1,5 +1,4 @@
 import Axios, { AxiosInstance } from 'axios';
-import { Request } from '../../../utilities/request';
 import { UserToken } from '../../../models/user_token';
 import qs from 'querystring';
 import { UserProfile } from '../../../models/user_profile';
@@ -9,7 +8,7 @@ const TOKEN_STORAGE_KEY = 'token';
 
 export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   constructor(config: ConfigContextParams, requestClient?: AxiosInstance) {
-    this.axios = requestClient ?? Request.client;
+    this.axios = requestClient ?? Axios.create({});
     this.config = config;
   }
 
@@ -117,8 +116,14 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   }
 
   async getUserProfile(): Promise<UserProfile> {
+    console.log(this.config.authBaseUrl);
     const userProfileData = await this.axios.get(
-      `${this.config.authBaseUrl}/userinfo`
+      `${this.config.authBaseUrl}/userinfo`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.getToken()?.accessToken}`,
+        },
+      }
     );
     return new UserProfile({
       username: userProfileData.data.preferred_username,
