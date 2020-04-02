@@ -19,22 +19,22 @@ export class Request {
 
   public client: AxiosInstance;
 
-  private beforeRequest(request: AxiosRequestConfig) {
+  private beforeRequest = (request: AxiosRequestConfig) => {
     const accessToken = this.authenticationRepository.getToken()?.accessToken;
     request.headers.Authorization = `Bearer ${accessToken}`;
     return request;
-  }
+  };
 
-  private onRequestSuccess(response: AxiosResponse) {
+  private onRequestSuccess = (response: AxiosResponse) => {
     return response;
-  }
-  
-  private onRequestFailure(error: { response: AxiosResponse }) {
+  };
+
+  private onRequestFailure = (error: { response: AxiosResponse }) => {
     const { response } = error;
     if (response.status >= 400 && response.status < 500) {
       this.authenticationRepository.clearSession();
       window.location.reload();
     }
     return error;
-  }
+  };
 }

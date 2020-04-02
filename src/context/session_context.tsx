@@ -41,13 +41,15 @@ export const SessionProvider = ({
   const [tokens, setTokens] = useState(new UserToken());
   const [roles, setRoles] = useState<string[]>([] as string[]);
   useEffect(() => {
-    const authenticationRepository: AuthenticationRepository =
-      authRepo ?? new ApiV1AuthenticationRepository(configContext);
-    const tokens = authenticationRepository.getToken();
-    if (tokens) {
-      authenticationRepository.getUserProfile().then(profile => {
-        performLogin(profile, tokens, profile.groups as string[]);
-      });
+    if (!configContext.isLoading) {
+      const authenticationRepository: AuthenticationRepository =
+        authRepo ?? new ApiV1AuthenticationRepository(configContext);
+      const tokens = authenticationRepository.getToken();
+      if (tokens) {
+        authenticationRepository.getUserProfile().then(profile => {
+          performLogin(profile, tokens, profile.groups as string[]);
+        });
+      }
     }
   }, [configContext, authRepo]);
   const performLogin = (

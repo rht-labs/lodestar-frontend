@@ -46,7 +46,7 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
   }
 
-  getToken() {
+  getToken = () => {
     try {
       const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY) || '';
       if (!storedToken) {
@@ -59,12 +59,12 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
       console.log(e);
       return null;
     }
-  }
+  };
 
   /**
    * @returns {Promise<boolean>}
    */
-  isLoggedIn(): Promise<boolean> {
+  isLoggedIn = (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       try {
         const token = this.getToken();
@@ -77,7 +77,7 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
         resolve(false);
       }
     });
-  }
+  };
 
   async fetchToken(code: string) {
     const tokenUrl = `${this.config.authBaseUrl}/token`;
