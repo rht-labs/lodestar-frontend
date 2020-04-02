@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 interface UserProfileParams {
   username?: string;
   firstName?: string;
@@ -32,4 +34,14 @@ export class UserProfile {
   firstName?: string;
   lastName?: string;
   email?: string;
+
+  static fromFake() {
+    return new UserProfile({
+      username: faker.internet.userName(),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      groups: [],
+    });
+  }
 }
