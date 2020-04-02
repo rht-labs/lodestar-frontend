@@ -17,7 +17,7 @@ export class Request {
 
   private authenticationRepository: AuthenticationRepository;
 
-  public client: AxiosInstance;
+  client: AxiosInstance;
 
   private beforeRequest = (request: AxiosRequestConfig) => {
     const accessToken = this.authenticationRepository.getToken()?.accessToken;
