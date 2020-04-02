@@ -17,7 +17,7 @@ export const CallbackHandler = () => {
       return;
     }
     const authRepo = new ApiV1AuthenticationRepository(configContext);
-    authRepo.fetchToken(code).then(async userToken => {
+    authRepo.fetchToken(code, 'authorization_code').then(async userToken => {
       const profile = await authRepo.getUserProfile();
       ctx.performLogin(profile, userToken, profile.groups as string[]);
       setLoginSuccess(true);

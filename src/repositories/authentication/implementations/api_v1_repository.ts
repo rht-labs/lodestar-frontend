@@ -65,13 +65,35 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
    * @returns {Promise<boolean>}
    */
   isLoggedIn = (): Promise<boolean> => {
+    console.log('are we logged in?')
     return new Promise((resolve, reject) => {
       try {
         const token = this.getToken();
-        const isValid = token?.accessTokenExpiry
+        const isAccessTokenValid = token?.accessTokenExpiry
           ? token.accessTokenExpiry.getTime() > new Date(Date.now()).getTime()
           : false;
-        resolve(!!isValid);
+        const isRefreshTokenValid = token?.refreshTokenExpiry
+          ? token.refreshTokenExpiry.getTime() > new Date(Date.now()).getTime()
+          : false;
+        if (isAccessTokenValid) {
+          console.log('yes')
+          // Access token is valid! Proceed as normal
+          resolve(true);
+        } else if (!isAccessTokenValid && isRefreshTokenValid) {
+          console.log('refreshing')
+          // Fetch new access token using refresh token
+          this.fetchToken(
+            token?.refreshToken ? token.refreshToken : '',
+            'refresh_token'
+          ).then(token => {
+            console.log('refreshed!')
+            resolve(token && token.accessTokenExpiry > new Date(Date.now()));
+          });
+        } else {
+          console.log('no!')
+          // Nothing is valid!
+          resolve(false);
+        }
       } catch (e) {
         console.error(e);
         resolve(false);
@@ -79,14 +101,23 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
     });
   };
 
-  async fetchToken(code: string) {
+  async fetchToken(code: string, grantType: string) {
     const tokenUrl = `${this.config.authBaseUrl}/token`;
-    const requestParams = {
-      code,
-      grant_type: 'authorization_code',
-      client_id: this.config.clientId,
-      redirect_uri: `${this.config.baseUrl}/auth_callback`,
-    };
+    let requestParams = {};
+    if (grantType === 'authorization_code') {
+      requestParams = {
+        code,
+        grant_type: 'authorization_code',
+        client_id: this.config.clientId,
+        redirect_uri: `${this.config.baseUrl}/auth_callback`,
+      };
+    } else if (grantType === 'refresh_token') {
+      requestParams = {
+        grant_type: 'refresh_token',
+        refresh_token: code,
+        client_id: this.config.clientId,
+      };
+    }
     const { data } = await Axios.post(tokenUrl, qs.stringify(requestParams), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
