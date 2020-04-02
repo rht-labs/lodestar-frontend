@@ -1,6 +1,5 @@
-import { EngagementRepository } from './engagement_repository';
-import { Engagement } from '../../models/engagement';
-import faker from 'faker';
+import { EngagementRepository } from '../engagement_repository';
+import { Engagement } from '../../../models/engagement';
 import Axios, { AxiosInstance } from 'axios';
 
 export class FakedEngagementRepository extends EngagementRepository {
@@ -18,9 +17,7 @@ export class FakedEngagementRepository extends EngagementRepository {
   baseUrl: string;
   axios: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
-    return new Array(8)
-      .fill(null)
-      .map(() => new Engagement({ name: faker.company.companyName() }));
+    return new Array(8).fill(null).map(() => Engagement.fromFake());
   }
   async createEngagement(data: any): Promise<void> {
     this.axios.post(`${this.baseUrl}/engagements`, data);

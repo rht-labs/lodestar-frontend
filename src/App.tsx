@@ -29,7 +29,7 @@ import { EngagementFormProvider } from './context/engagement_form_context';
 import { PopupProvider } from './context/popup_context';
 import { UserDropdown } from './components/user_dropdown';
 import { EngagementProvider } from './context/engagement_context';
-import { FakedEngagementRepository } from './repositories/engagement/faked_engagement_repository';
+import { FakedEngagementRepository } from './repositories/engagement/implementations/faked_engagement_repository';
 import { EngagementDropdown } from './components/engagement_dropdown';
 
 export const App = () => {
