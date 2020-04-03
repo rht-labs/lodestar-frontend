@@ -64,15 +64,16 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   /**
    * @returns {Promise<boolean>}
    */
-  isLoggedIn = (): Promise<boolean> => {
+  isLoggedIn = async (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       try {
         const token = this.getToken();
-        const isAccessTokenValid = token?.accessTokenExpiry
-          ? token.accessTokenExpiry.getTime() > new Date(Date.now()).getTime()
-          : false;
+        const accessTokenExpiryTime = token?.accessTokenExpiry.getTime();
+        const now = Date.now();
+        const diff = accessTokenExpiryTime ? accessTokenExpiryTime - now : 0;
+        const isAccessTokenValid = !!accessTokenExpiryTime && diff > 0;
         const isRefreshTokenValid = token?.refreshTokenExpiry
-          ? token.refreshTokenExpiry.getTime() > new Date(Date.now()).getTime()
+          ? token.refreshTokenExpiry.getTime() > Date.now()
           : false;
         if (isAccessTokenValid) {
           // Access token is valid! Proceed as normal
@@ -83,11 +84,7 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
             token?.refreshToken ? token.refreshToken : '',
             'refresh_token'
           ).then(token => {
-            resolve(
-              token &&
-                token.accessTokenExpiry.getTime() >
-                  new Date(Date.now()).getTime()
-            );
+            resolve(token && token.accessTokenExpiry.getTime() > Date.now());
           });
         } else {
           // Nothing is valid!
@@ -120,7 +117,6 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
     const { data } = await Axios.post(tokenUrl, qs.stringify(requestParams), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Origin: this.config.baseUrl,
         Accept: '*/*',
       },
     });
