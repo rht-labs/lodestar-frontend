@@ -1,0 +1,15 @@
+name: omp-frontend
+
+servicePort: 8080
+
+imageName: "omp-frontend"
+imageTag: "latest"
+
+git:
+  uri: https://github.com/rht-labs/open-management-portal-frontend.git
+  ref: master
+
+baseUrl: url
+clientId: secret
+authBaseUrl: url
+backendUrl: url

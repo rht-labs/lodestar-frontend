@@ -43,6 +43,12 @@ $ ansible-galaxy install -r requirements.yml --roles-path=roles --force
 $ ansible-playbook apply.yml -i inventory/
 ```
 
+:heavy_exclamation_mark: The applier will not create a route or ingress and if this is required has to be done seperately
+
+## Development
+
+See [the development README](development/README.md) for details on how to spin up a deployment for developing on OpenShift.
+
 ## Pipeline
 
 The deployment pipeline is running through a `Jenkinsfile` located in the root folder of the project. This `Jenksinfile` is written in groovy.
@@ -99,11 +105,26 @@ curl -v -f http://admin:admin123@${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/rep
 unzip -o package-contents.zip
 ```
 
+###### OpenShift Atomic Registry
+
+If you're pushing from the master branch the build will create a container image and push it to the Openshift internal registry.
+
 ```
 oc project ${PIPELINES_NAMESPACE}
 oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"ImageStreamTag\\",\\"name\\":\\"${APP_NAME}:${JENKINS_TAG}\\"}}}}"
 oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
 ```
+
+###### Quay
+
+If you're pushing from a release tag the build will create a container image and push it to Quay.
+
+```
+oc project ${PIPELINES_NAMESPACE} # probs not needed
+oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"DockerImage\\",\\"name\\":\\"quay.io/rht-labs/${APP_NAME}:${JENKINS_TAG}\\"}}}}"
+oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
+```
+
 
 #### OpenShift Deployment
 
@@ -120,6 +141,15 @@ oc label --overwrite dc ${APP_NAME} stage=${NODE_ENV}
 oc patch dc ${APP_NAME} -p "{\\"spec\\":{\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"version\\":\\"${PACKAGE_JSON_VERSION}\\",\\"release\\":\\"${RELEASE}\\",\\"stage\\":\\"${NODE_ENV}\\",\\"git-commit\\":\\"${GIT_COMMIT}\\",\\"jenkins-build\\":\\"${JENKINS_TAG}\\"}}}}}"
 oc rollout latest dc/${APP_NAME}
 ```
+
+#### Configuration Variables
+
+Because environment variables are compiled into the built source code of the frontend at build time, it is not possible to dynamically change these values at load time on the client side. In order to allow for dynamic updating of configuration variables, these values must be loaded through a network request from the client side from a static file served separate from the client javascript.
+
+Configuration is set using a json file stored in `config/config.json` of the build directory. The JSON file is loaded via network request on page load. Once the configuration has loaded, the web application renders. This allows a volume to be mounted to `config/config.json` and provide dynamic configuration variables to the client depending on the environment in which the frontend is deployed.
+
+An example `config.json` can be seen in the public folder in `config/config.example.json`.
+
 
 ## Learn More
 

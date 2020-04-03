@@ -1,67 +1,79 @@
-import React, { Component, createContext } from "react";
-import { AuthenticationRepository } from "../repositories/authentication/authentication_repository";
-import { UserProfile } from "../models/user_profile";
-import { UserToken } from "../models/user_token";
-import { AxiosInstance } from "axios";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { ApiV1AuthenticationRepository } from '../repositories/authentication/implementations/api_v1_repository';
+import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
 
-export interface ISessionContext {
-  userLoggedIn: boolean;
+import { UserProfile } from '../models/user_profile';
+import { UserToken } from '../models/user_token';
+import { ConfigContext } from './config_context';
+import Axios, { AxiosInstance } from 'axios';
+import { Request } from '../utilities/request';
+
+export interface SessionContext {
+  isLoggedIn: () => Promise<boolean>;
   profile?: UserProfile;
-  axios: AxiosInstance;
   tokens?: UserToken;
   roles: any[];
-  performLogout: () => void;
+  axios: AxiosInstance;
   performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => void;
 }
 
-// Provider and Consumer are connected through their "parent" Context
-const SessionContext = createContext<ISessionContext>({
-  userLoggedIn: false,
+export const SessionContext = createContext<SessionContext>({
+  isLoggedIn: async () => false,
   profile: new UserProfile(),
   tokens: new UserToken(),
   roles: [],
-  axios: AuthenticationRepository.getInstance().axios,
-  performLogout: () => null,
-  performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => null,
+  axios: Axios.create(),
+  performLogin: () => null,
 });
 const { Provider } = SessionContext;
 
-
-
-// Provider will be exported wrapped in ConfigProvider component.
-class SessionProvider extends Component {
-  state: ISessionContext = {
-    userLoggedIn: false,
-    profile: new UserProfile(),
-    tokens: new UserToken(),
-    roles: [],
-    axios: AuthenticationRepository.getInstance().axios,
-    performLogout: () => {
-      this.setState({ userLoggedIn: false });
-    },
-    performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => {
-      this.setState({ userLoggedIn: true, profile, tokens, roles });
-    },
+export const SessionProvider = ({
+  children,
+  authenticationRepository: authRepo,
+}: {
+  children: React.ReactChild;
+  authenticationRepository?: AuthenticationRepository;
+}) => {
+  const configContext = useContext(ConfigContext);
+  const authenticationRepository: AuthenticationRepository =
+    authRepo ?? new ApiV1AuthenticationRepository(configContext);
+  const [profile, setProfile] = useState(new UserProfile());
+  const [tokens, setTokens] = useState(new UserToken());
+  const [roles, setRoles] = useState<string[]>([] as string[]);
+  useEffect(() => {
+    if (!configContext.isLoading) {
+      const authenticationRepository: AuthenticationRepository =
+        authRepo ?? new ApiV1AuthenticationRepository(configContext);
+      const tokens = authenticationRepository.getToken();
+      if (tokens) {
+        authenticationRepository.getUserProfile().then(profile => {
+          performLogin(profile, tokens, profile.groups as string[]);
+        });
+      }
+    }
+  }, [configContext, authRepo]);
+  const performLogin = (
+    newProfile: UserProfile,
+    newTokens: UserToken,
+    newRoles: any[]
+  ) => {
+    setProfile(newProfile);
+    setTokens(newTokens);
+    setRoles(newRoles);
   };
-  render() {
-    return (
-      <Provider
-        value={{
-          userLoggedIn: this.state.userLoggedIn,
-          profile: this.state.profile,
-          performLogout: this.state.performLogout,
-          performLogin: this.state.performLogin,
-          roles: this.state.roles,
-          axios: AuthenticationRepository.getInstance().axios
-        }
-        }
-      >
-        {this.props.children}
-      </Provider>
-    );
-  }
-}
-
-export { SessionContext, SessionProvider };
-
-export default SessionContext;
+  const request = new Request({ authenticationRepository });
+  return (
+    <Provider
+      value={{
+        isLoggedIn: authenticationRepository.isLoggedIn,
+        profile,
+        tokens,
+        roles,
+        axios: request.client,
+        performLogin,
+      }}
+    >
+      {children}
+    </Provider>
+  );
+};

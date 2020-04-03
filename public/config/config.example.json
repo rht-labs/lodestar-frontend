@@ -1,0 +1,6 @@
+{
+  "baseUrl": "http://my-base.url",
+  "clientId": "open-management-portal",
+  "authBaseUrl": "https://my-sso-endpoint.url",
+  "backendUrl": "http://my-backend.url/api"
+}
