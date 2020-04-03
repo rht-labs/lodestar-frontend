@@ -73,6 +73,8 @@ initialize {
               "next": Object {
                 "attribs": Object {
                   "class": "pf-c-button pf-m-primary",
+                  "data-ouia-component-type": "PF4/Button",
+                  "data-ouia-safe": "true",
                   "type": "button",
                 },
                 "children": Array [
@@ -92,10 +94,14 @@ initialize {
                 "type": "tag",
                 "x-attribsNamespace": Object {
                   "class": undefined,
+                  "data-ouia-component-type": undefined,
+                  "data-ouia-safe": undefined,
                   "type": undefined,
                 },
                 "x-attribsPrefix": Object {
                   "class": undefined,
+                  "data-ouia-component-type": undefined,
+                  "data-ouia-safe": undefined,
                   "type": undefined,
                 },
               },
@@ -167,6 +173,8 @@ initialize {
             "next": Object {
               "attribs": Object {
                 "class": "pf-c-button pf-m-primary",
+                "data-ouia-component-type": "PF4/Button",
+                "data-ouia-safe": "true",
                 "type": "button",
               },
               "children": Array [
@@ -186,10 +194,14 @@ initialize {
               "type": "tag",
               "x-attribsNamespace": Object {
                 "class": undefined,
+                "data-ouia-component-type": undefined,
+                "data-ouia-safe": undefined,
                 "type": undefined,
               },
               "x-attribsPrefix": Object {
                 "class": undefined,
+                "data-ouia-component-type": undefined,
+                "data-ouia-safe": undefined,
                 "type": undefined,
               },
             },
@@ -237,6 +249,8 @@ initialize {
           Object {
             "attribs": Object {
               "class": "pf-c-button pf-m-primary",
+              "data-ouia-component-type": "PF4/Button",
+              "data-ouia-safe": "true",
               "type": "button",
             },
             "children": Array [
@@ -338,10 +352,14 @@ initialize {
             "type": "tag",
             "x-attribsNamespace": Object {
               "class": undefined,
+              "data-ouia-component-type": undefined,
+              "data-ouia-safe": undefined,
               "type": undefined,
             },
             "x-attribsPrefix": Object {
               "class": undefined,
+              "data-ouia-component-type": undefined,
+              "data-ouia-safe": undefined,
               "type": undefined,
             },
           },

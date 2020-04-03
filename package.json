@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@patternfly/react-core": "^3.129.3",
+    "@patternfly/react-core": "^4.2.4",
     "@patternfly/react-icons": "^3.14.30",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/axios": "^0.14.0",
+    "@types/enzyme": "^3.10.5",
+    "@types/faker": "^4.1.11",
     "@types/jest": "^25.1.3",
     "@types/lodash": "^4.14.149",
     "@types/lodash.find": "^4.6.6",
@@ -19,6 +21,7 @@
     "@types/react-router-dom": "^5.1.3",
     "@types/yaml": "^1.2.0",
     "axios": "^0.19.1",
+    "faker": "^4.1.0",
     "lodash.find": "^4.6.0",
     "lodash.forown": "^4.4.0",
     "prettier": "^1.19.1",
@@ -26,7 +29,7 @@
     "react-dom": "^16.12.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.1",
     "slugify": "^1.3.6",
     "typescript": "^3.8.2",
     "yaml": "^1.7.2"
@@ -39,7 +42,14 @@
     "test:ci": "npm test -- --watchAll=false",
     "package": "zip -r package-contents.zip package-contents",
     "publish": "curl -vvv -u admin:admin123 --upload-file package-contents.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JOB_NAME}.${BUILD_NUMBER}/package-contents.zip",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,6 +68,7 @@
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2"
+    "enzyme-adapter-react-16": "^1.15.2",
+    "gts": "^1.1.2"
   }
 }
