@@ -32,10 +32,7 @@ export class UserToken {
       refreshTokenExpiry: this.refreshTokenExpiry.toISOString(),
     };
   }
-  /**
-   *
-   * @returns {UserToken}
-   */
+
   static fromMap(map: { [key: string]: unknown }) {
     return new UserToken({
       accessToken: map['accessToken'] as string,

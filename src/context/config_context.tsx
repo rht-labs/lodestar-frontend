@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react';
-
+import React, { createContext, useState, useCallback } from 'react';
+import { PublicConfigRepository } from '../repositories/config/implementations/public_config_repository';
 export interface ConfigContextParams {
   baseUrl: string;
   clientId: string;
@@ -9,7 +9,7 @@ export interface ConfigContextParams {
 
 export interface ConfigContext extends ConfigContextParams {
   isLoading: boolean;
-  setConfig: (params: ConfigContextParams) => void;
+  fetchConfig: () => void;
 }
 
 export const ConfigContext = createContext<ConfigContext>({
@@ -18,7 +18,7 @@ export const ConfigContext = createContext<ConfigContext>({
   authBaseUrl: '',
   backendUrl: '',
   isLoading: true,
-  setConfig: () => null,
+  fetchConfig: () => null,
 });
 const { Provider } = ConfigContext;
 
@@ -41,6 +41,12 @@ export const ConfigProvider = ({
     setIsLoading(false);
   };
 
+  const fetchConfig = useCallback(async () => {
+    const configRepository = new PublicConfigRepository({});
+    const config = await configRepository.fetchConfig();
+    setConfig(config);
+  }, []) 
+
   return (
     <Provider
       value={{
@@ -49,7 +55,7 @@ export const ConfigProvider = ({
         authBaseUrl,
         backendUrl,
         isLoading,
-        setConfig,
+        fetchConfig,
       }}
     >
       {children}
