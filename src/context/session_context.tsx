@@ -53,7 +53,6 @@ export const SessionProvider = ({
   );
 
   const [requestHandler, setRequestHandler] = useState<Request | undefined>();
-  console.log('!!session context');
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
       const userToken = await authenticationRepository.fetchToken(
@@ -72,6 +71,7 @@ export const SessionProvider = ({
 
   useEffect(() => {
     if (!!configContext.appConfig) {
+      console.log('firing session context effect');
       const authenticationRepository: AuthenticationRepository =
         authRepo ?? new ApiV1AuthenticationRepository(configContext);
 
@@ -100,7 +100,8 @@ export const SessionProvider = ({
         isLoading: !sessionData,
       }}
     >
-      {children}
+      {sessionData ? children : null}{' '}
+      {/** TODO: Add a loading spinner or something fancier than "null" */}
     </Provider>
   );
 };

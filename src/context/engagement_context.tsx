@@ -37,6 +37,7 @@ export const EngagementProvider = ({
   );
 
   useEffect(() => {
+    console.log('firing engagement context effect');
     fetchEngagements();
   }, [fetchEngagements]);
 

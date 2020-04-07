@@ -21,7 +21,6 @@ export const ConfigProvider = ({
   children: React.ReactChild;
 }) => {
   const [appConfig, setAppConfig] = useState<Config | null>(null);
-  console.log('!!Config Context');
 
   const fetchConfig = useCallback(async () => {
     const configRepository = new PublicConfigRepository({});
@@ -30,6 +29,7 @@ export const ConfigProvider = ({
   }, []);
 
   useEffect(() => {
+    console.log('firing config context effect');
     fetchConfig();
   }, [fetchConfig]);
 

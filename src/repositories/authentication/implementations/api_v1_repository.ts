@@ -142,7 +142,6 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   }
 
   async getUserProfile(): Promise<UserProfile> {
-    console.log(this.config.appConfig?.authBaseUrl);
     const userProfileData = await this.axios.get(
       `${this.config.appConfig?.authBaseUrl}/userinfo`,
       {
