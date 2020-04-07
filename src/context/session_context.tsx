@@ -13,6 +13,7 @@ import { UserToken } from '../models/user_token';
 import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
+import { SendToSSO } from '../components/authentication/send_to_sso';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -47,6 +48,7 @@ export const SessionProvider = ({
   const configContext = useContext(ConfigContext);
   const authenticationRepository: AuthenticationRepository =
     authRepo ?? new ApiV1AuthenticationRepository(configContext);
+  const [hasTokens, setHasTokens] = useState<boolean | undefined>();
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -73,14 +75,13 @@ export const SessionProvider = ({
 
   useEffect(() => {
     if (!!configContext.appConfig) {
-      console.log('firing session context effect');
       const authenticationRepository: AuthenticationRepository =
         authRepo ?? new ApiV1AuthenticationRepository(configContext);
 
-      const tokens = authenticationRepository.getToken();
+      authenticationRepository.isLoggedIn().then(isLoggedIn => {
+        const tokens = authenticationRepository.getToken();
 
-      if (tokens) {
-        authenticationRepository.isLoggedIn().then(isLoggedIn => {
+        if (tokens) {
           if (isLoggedIn) {
             authenticationRepository.getUserProfile().then(profile => {
               setSessionData({
@@ -90,15 +91,16 @@ export const SessionProvider = ({
               });
             });
             setRequestHandler(new Request({ authenticationRepository }));
-          } else {
-            authenticationRepository.clearSession();
-            window.location.reload();
           }
-        });
-      }
+        } else {
+          setHasTokens(false);
+        }
+      });
     }
   }, [configContext, authRepo]);
-
+  if (hasTokens === false) {
+    return <SendToSSO />;
+  }
   return (
     <Provider
       value={{
@@ -109,8 +111,7 @@ export const SessionProvider = ({
         isLoading: !sessionData,
       }}
     >
-      {sessionData ? children : null}
-      {/** TODO: Add a loading spinner or something fancier than "null" */}
+      {children}
     </Provider>
   );
 };

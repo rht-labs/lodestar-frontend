@@ -25,13 +25,15 @@ export const PrivateRoute = ({
   );
   const sessionContext = useContext(SessionContext);
   useEffect(() => {
-    sessionContext.isLoggedIn().then(authLoggedInResponse => {
-      setAuthenticationStatus(
-        authLoggedInResponse
-          ? AUTHENTICATION_STATES.authenticated
-          : AUTHENTICATION_STATES.unauthenticated
-      );
-    });
+    if (!sessionContext.isLoading) {
+      sessionContext.isLoggedIn().then(authLoggedInResponse => {
+        setAuthenticationStatus(
+          authLoggedInResponse
+            ? AUTHENTICATION_STATES.authenticated
+            : AUTHENTICATION_STATES.unauthenticated
+        );
+      });
+    }
   });
 
   if (authenticationStatus === AUTHENTICATION_STATES.authenticated) {
