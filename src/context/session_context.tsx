@@ -13,7 +13,6 @@ import { UserToken } from '../models/user_token';
 import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
-import { SendToSSO } from '../components/authentication/send_to_sso';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -48,7 +47,6 @@ export const SessionProvider = ({
   const configContext = useContext(ConfigContext);
   const authenticationRepository: AuthenticationRepository =
     authRepo ?? new ApiV1AuthenticationRepository(configContext);
-  const [hasTokens, setHasTokens] = useState<boolean | undefined>();
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -77,10 +75,8 @@ export const SessionProvider = ({
     if (!!configContext.appConfig) {
       const authenticationRepository: AuthenticationRepository =
         authRepo ?? new ApiV1AuthenticationRepository(configContext);
-
       authenticationRepository.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationRepository.getToken();
-
         if (tokens) {
           if (isLoggedIn) {
             authenticationRepository.getUserProfile().then(profile => {
@@ -92,15 +88,10 @@ export const SessionProvider = ({
             });
             setRequestHandler(new Request({ authenticationRepository }));
           }
-        } else {
-          setHasTokens(false);
         }
       });
     }
   }, [configContext, authRepo]);
-  if (hasTokens === false) {
-    return <SendToSSO />;
-  }
   return (
     <Provider
       value={{

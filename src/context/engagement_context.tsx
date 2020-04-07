@@ -1,13 +1,10 @@
 import React, {
   createContext,
-  useEffect,
   useState,
   useCallback,
-  useContext,
 } from 'react';
 import { Engagement } from '../models/engagement';
 import { EngagementRepository } from '../repositories/engagement/engagement_repository';
-import { SessionContext } from './session_context';
 
 export interface EngagementContext {
   getEngagements: () => void;
@@ -30,7 +27,6 @@ export const EngagementProvider = ({
   engagementRepository: EngagementRepository;
 }) => {
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const sessionContext = useContext(SessionContext);
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
@@ -42,13 +38,6 @@ export const EngagementProvider = ({
     },
     [engagementRepository]
   );
-
-  useEffect(() => {
-    if (!sessionContext.isLoading) {
-      console.log('firing engagement context effect');
-      fetchEngagements();
-    }
-  }, [fetchEngagements, sessionContext]);
 
   return (
     <Provider

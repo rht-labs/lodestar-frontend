@@ -15,22 +15,24 @@ const { Provider } = PopupContext;
 
 export function PopupProvider({ children }: { children: React.ReactChild }) {
   const featureRequestPopupKey = 'hasShownFeatureRequestPopup';
-  const hasBeenShownStoredState =
-    localStorage.getItem(featureRequestPopupKey) === 'true';
 
-  console.log('hasbeenshown', hasBeenShownStoredState);
   const [
     hasShownFeatureRequestPopup,
     setHasShownFeatureRequestPopup,
-  ] = useState<boolean>(hasBeenShownStoredState);
+  ] = useState<boolean>(true);
 
   useEffect(() => {
+    const hasBeenShownStoredState =
+      localStorage.getItem(featureRequestPopupKey) === 'true';
+    if (hasShownFeatureRequestPopup !== hasBeenShownStoredState) {
+      setHasShownFeatureRequestPopup(hasBeenShownStoredState);
+    }
     if (!hasBeenShownStoredState) {
       setTimeout(() => {
         setHasShownFeatureRequestPopup(true);
       }, 5000);
     }
-  }, [hasBeenShownStoredState]);
+  }, [hasShownFeatureRequestPopup]);
   const onDismissed = () => {
     setHasShownFeatureRequestPopup(true);
     localStorage.setItem(featureRequestPopupKey, 'true');
