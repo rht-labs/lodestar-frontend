@@ -11,8 +11,8 @@ export const CallbackHandler = () => {
     // TODO: handle case where code is not present
     return null;
   }
-  sessionContext.handleLoginCallback(code);
   if (sessionContext.isLoading) {
+    sessionContext.handleLoginCallback(code);
     return null;
   }
   return <Redirect to="/" />;
