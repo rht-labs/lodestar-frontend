@@ -59,12 +59,14 @@ export const SessionProvider = ({
         authorizationCode,
         'authorization_code'
       );
-      const profile = await authenticationRepository.getUserProfile();
-      setSessionData({
-        profile,
-        roles: profile.groups,
-        tokens: userToken,
-      });
+      if (await authenticationRepository.isLoggedIn()) {
+        const profile = await authenticationRepository.getUserProfile();
+        setSessionData({
+          profile,
+          roles: profile.groups,
+          tokens: userToken,
+        });
+      }
     },
     [authenticationRepository]
   );
@@ -78,14 +80,21 @@ export const SessionProvider = ({
       const tokens = authenticationRepository.getToken();
 
       if (tokens) {
-        authenticationRepository.getUserProfile().then(profile => {
-          setSessionData({
-            profile,
-            tokens,
-            roles: profile.groups,
-          });
+        authenticationRepository.isLoggedIn().then(isLoggedIn => {
+          if (isLoggedIn) {
+            authenticationRepository.getUserProfile().then(profile => {
+              setSessionData({
+                profile,
+                tokens,
+                roles: profile.groups,
+              });
+            });
+            setRequestHandler(new Request({ authenticationRepository }));
+          } else {
+            authenticationRepository.clearSession();
+            window.location.reload();
+          }
         });
-        setRequestHandler(new Request({ authenticationRepository }));
       }
     }
   }, [configContext, authRepo]);
@@ -100,7 +109,7 @@ export const SessionProvider = ({
         isLoading: !sessionData,
       }}
     >
-      {sessionData ? children : null}{' '}
+      {sessionData ? children : null}
       {/** TODO: Add a loading spinner or something fancier than "null" */}
     </Provider>
   );
