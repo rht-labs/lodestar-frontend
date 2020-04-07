@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { Nav, NavItem, NavList, Popover, Button } from '@patternfly/react-core';
+import React from 'react';
+import { Nav, NavItem, NavList } from '@patternfly/react-core';
 import { Link, useLocation } from 'react-router-dom';
-import { PopupContext } from '../../context/popup_context';
-
+import { FeatureRequestPopup } from './feature_request_popup';
 export const NavDefaultList = () => {
-  const popupContext = useContext(PopupContext);
   const { pathname } = useLocation();
 
   return (
@@ -13,21 +11,7 @@ export const NavDefaultList = () => {
         <NavItem id="engagementFormLink" itemId={0} isActive={pathname === '/'}>
           <Link to="/">Engagement Form</Link>
         </NavItem>
-        <Popover
-          isVisible={!popupContext.hasBeenShown}
-          headerContent={<span>We're trying to improve</span>}
-          shouldClose={popupContext.onDismissed}
-          distance={0}
-          bodyContent={
-            <div>
-              <div>
-                Tell us about a feature you would like to see included in Open
-                Management Portal.
-              </div>
-              <Button onClick={popupContext.onDismissed}>Ok, got it</Button>
-            </div>
-          }
-        >
+        <FeatureRequestPopup>
           <NavItem
             id="engagementFormLink"
             itemId={1}
@@ -35,7 +19,7 @@ export const NavDefaultList = () => {
           >
             <Link to="/feature-request">Feature Requests</Link>
           </NavItem>
-        </Popover>
+        </FeatureRequestPopup>
       </NavList>
     </Nav>
   );

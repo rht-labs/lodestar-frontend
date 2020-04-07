@@ -1,8 +1,14 @@
-import React, { createContext, useEffect, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+} from 'react';
 import yaml from 'yaml';
-import { SessionContext } from './session_context';
 import { ConfigContext } from './config_context';
 import { AxiosError, AxiosInstance } from 'axios';
+import { SessionContext } from './session_context';
 
 export interface EngagementFormContext {
   getSessionData: (requestHandler: AxiosInstance) => Promise<any>;
@@ -19,15 +25,13 @@ const { Provider } = EngagementFormContext;
 
 export const EngagementFormProvider = ({
   children,
-  configContext,
-  sessionContext,
 }: {
   children: React.ReactChild;
-  sessionContext: SessionContext;
-  configContext: ConfigContext;
 }) => {
   const [sessionData, setSessionData] = useState<any>(null);
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
+  const configContext = useContext(ConfigContext);
+  const sessionContext = useContext(SessionContext);
   const getSessionData = useCallback(
     (requestHandler: AxiosInstance) => {
       return requestHandler.get(

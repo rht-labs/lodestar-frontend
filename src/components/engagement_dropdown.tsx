@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
 import { EngagementContext } from '../context/engagement_context';
-export function EngagementDropdown() {
+function _EngagementDropdown() {
   const engagementContext = useContext(EngagementContext);
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
-  console.log('engdr')
+  console.log('engr');
   useEffect(() => {
     if (!hasFetchedEngagements) {
       setHasFetchedEngagements(true);
@@ -42,3 +42,5 @@ export function EngagementDropdown() {
     </ContextSelector>
   );
 }
+
+export const EngagementDropdown = React.memo(_EngagementDropdown);

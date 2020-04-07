@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
-import { createContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Popover, Button } from '@patternfly/react-core';
 
-export interface PopupContext {
-  hasBeenShown: boolean;
-  onDismissed: () => void;
-}
-
-export const PopupContext = createContext<PopupContext>({
-  hasBeenShown: true,
-  onDismissed: () => null,
-});
-
-const { Provider } = PopupContext;
-
-export function PopupProvider({ children }: { children: React.ReactChild }) {
+export const FeatureRequestPopup = ({
+  children,
+}: {
+  children: React.ReactChild;
+}) => {
   const featureRequestPopupKey = 'hasShownFeatureRequestPopup';
 
   const [
@@ -38,13 +30,22 @@ export function PopupProvider({ children }: { children: React.ReactChild }) {
     localStorage.setItem(featureRequestPopupKey, 'true');
   };
   return (
-    <Provider
-      value={{
-        hasBeenShown: hasShownFeatureRequestPopup,
-        onDismissed,
-      }}
+    <Popover
+      isVisible={!hasShownFeatureRequestPopup}
+      headerContent={<span>We're trying to improve</span>}
+      shouldClose={onDismissed}
+      distance={0}
+      bodyContent={
+        <div>
+          <div>
+            Tell us about a feature you would like to see included in Open
+            Management Portal.
+          </div>
+          <Button onClick={onDismissed}>Ok, got it</Button>
+        </div>
+      }
     >
-      {children}
-    </Provider>
+      {children as any}
+    </Popover>
   );
-}
+};
