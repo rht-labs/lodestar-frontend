@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import { ApiV1AuthenticationRepository } from '../repositories/authentication/implementations/api_v1_repository';
 import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
 
@@ -13,8 +19,9 @@ export interface SessionContext {
   profile?: UserProfile;
   tokens?: UserToken;
   roles: any[];
-  axios: AxiosInstance;
-  performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => void;
+  isLoading: boolean;
+  axios?: AxiosInstance;
+  handleLoginCallback: (authorizationCode: string) => void;
 }
 
 export const SessionContext = createContext<SessionContext>({
@@ -22,8 +29,9 @@ export const SessionContext = createContext<SessionContext>({
   profile: new UserProfile(),
   tokens: new UserToken(),
   roles: [],
+  isLoading: false,
   axios: Axios.create(),
-  performLogin: () => null,
+  handleLoginCallback: () => null,
 });
 const { Provider } = SessionContext;
 
@@ -40,6 +48,24 @@ export const SessionProvider = ({
   const [profile, setProfile] = useState(new UserProfile());
   const [tokens, setTokens] = useState(new UserToken());
   const [roles, setRoles] = useState<string[]>([] as string[]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [requestHandler, setRequestHandler] = useState<Request | undefined>();
+
+  const handleLoginCallback = useCallback(
+    async (authorizationCode: string) => {
+      setLoading(true);
+
+      const userToken = await authenticationRepository.fetchToken(
+        authorizationCode,
+        'authorization_code'
+      );
+      const profile = await authenticationRepository.getUserProfile();
+      setSessionData(profile, userToken, profile.groups as string[]);
+      setLoading(false);
+    },
+    [authenticationRepository]
+  );
+
   useEffect(() => {
     if (!configContext.isLoading) {
       const authenticationRepository: AuthenticationRepository =
@@ -47,12 +73,13 @@ export const SessionProvider = ({
       const tokens = authenticationRepository.getToken();
       if (tokens) {
         authenticationRepository.getUserProfile().then(profile => {
-          performLogin(profile, tokens, profile.groups as string[]);
+          setSessionData(profile, tokens, profile.groups as string[]);
         });
+        setRequestHandler(new Request({ authenticationRepository }));
       }
     }
   }, [configContext, authRepo]);
-  const performLogin = (
+  const setSessionData = (
     newProfile: UserProfile,
     newTokens: UserToken,
     newRoles: any[]
@@ -61,7 +88,6 @@ export const SessionProvider = ({
     setTokens(newTokens);
     setRoles(newRoles);
   };
-  const request = new Request({ authenticationRepository });
   return (
     <Provider
       value={{
@@ -69,8 +95,9 @@ export const SessionProvider = ({
         profile,
         tokens,
         roles,
-        axios: request.client,
-        performLogin,
+        axios: requestHandler?.client,
+        handleLoginCallback,
+        isLoading: loading,
       }}
     >
       {children}

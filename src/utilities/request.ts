@@ -20,7 +20,8 @@ export class Request {
   client: AxiosInstance;
 
   private beforeRequest = (request: AxiosRequestConfig) => {
-    const accessToken = this.authenticationRepository.getToken()?.accessToken;
+    const token = this.authenticationRepository.getToken();
+    const accessToken = token?.accessToken;
     request.headers.Authorization = `Bearer ${accessToken}`;
     return request;
   };

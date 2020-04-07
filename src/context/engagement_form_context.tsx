@@ -2,16 +2,16 @@ import React, { createContext, useEffect, useState, useCallback } from 'react';
 import yaml from 'yaml';
 import { SessionContext } from './session_context';
 import { ConfigContext } from './config_context';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 
 export interface EngagementFormContext {
-  getSessionData: () => Promise<any>;
+  getSessionData: (requestHandler: AxiosInstance) => Promise<any>;
   sessionData: any;
   error: AxiosError | null;
 }
 
 export const EngagementFormContext = createContext<EngagementFormContext>({
-  getSessionData: async () => null,
+  getSessionData: async (requestHandler: AxiosInstance) => null,
   sessionData: null,
   error: null,
 });
@@ -28,18 +28,23 @@ export const EngagementFormProvider = ({
 }) => {
   const [sessionData, setSessionData] = useState<any>(null);
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
-  const getSessionData = useCallback(() => {
-    return sessionContext.axios.get(`${configContext.backendUrl}/config`);
-  }, [configContext.backendUrl, sessionContext.axios]);
+  const getSessionData = useCallback(
+    (requestHandler: AxiosInstance) => {
+      return requestHandler.get(`${configContext.backendUrl}/config`);
+    },
+    [configContext.backendUrl]
+  );
 
   useEffect(() => {
-    getSessionData()
-      .then(({ data }) => {
-        console.log(data);
-        setSessionData(yaml.parse(data.fileContent));
-      })
-      .catch(e => setRequestError(e));
-  }, [getSessionData]);
+    if (sessionContext.axios) {
+      getSessionData(sessionContext.axios)
+        .then(({ data }) => {
+          console.log(data);
+          setSessionData(yaml.parse(data.fileContent));
+        })
+        .catch(e => setRequestError(e));
+    }
+  }, [getSessionData, sessionContext.axios]);
   return (
     <Provider
       value={{
