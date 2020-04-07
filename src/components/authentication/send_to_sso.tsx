@@ -5,14 +5,14 @@ import { ConfigContext } from '../../context/config_context';
 export function SendToSSO() {
   const configContext = useContext(ConfigContext);
   const OAUTH_CONFIG = {
-    clientId: configContext.clientId,
-    redirectUri: `${configContext.baseUrl}/auth_callback`,
+    clientId: configContext.appConfig?.clientId,
+    redirectUri: `${configContext.appConfig?.baseUrl}/auth_callback`,
     state: {
       from: '/settings',
     },
   };
 
-  const OAUTH_URL = `${configContext.authBaseUrl}/auth?client_id=${
+  const OAUTH_URL = `${configContext.appConfig?.authBaseUrl}/auth?client_id=${
     OAUTH_CONFIG.clientId
   }&redirect_uri=${encodeURI(
     OAUTH_CONFIG.redirectUri

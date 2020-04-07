@@ -14,11 +14,15 @@ import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
 
-export interface SessionContext {
-  isLoggedIn: () => Promise<boolean>;
+export interface SessionData {
   profile?: UserProfile;
   tokens?: UserToken;
-  roles: any[];
+  roles?: any[];
+}
+
+export interface SessionContext {
+  isLoggedIn: () => Promise<boolean>;
+  sessionData?: SessionData;
   isLoading: boolean;
   axios?: AxiosInstance;
   handleLoginCallback: (authorizationCode: string) => void;
@@ -26,9 +30,7 @@ export interface SessionContext {
 
 export const SessionContext = createContext<SessionContext>({
   isLoggedIn: async () => false,
-  profile: new UserProfile(),
-  tokens: new UserToken(),
-  roles: [],
+  sessionData: undefined,
   isLoading: false,
   axios: Axios.create(),
   handleLoginCallback: () => null,
@@ -45,59 +47,57 @@ export const SessionProvider = ({
   const configContext = useContext(ConfigContext);
   const authenticationRepository: AuthenticationRepository =
     authRepo ?? new ApiV1AuthenticationRepository(configContext);
-  const [profile, setProfile] = useState(new UserProfile());
-  const [tokens, setTokens] = useState(new UserToken());
-  const [roles, setRoles] = useState<string[]>([] as string[]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [requestHandler, setRequestHandler] = useState<Request | undefined>();
 
+  const [sessionData, setSessionData] = useState<SessionData | undefined>(
+    undefined
+  );
+
+  const [requestHandler, setRequestHandler] = useState<Request | undefined>();
+  console.log('!!session context');
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
-      setLoading(true);
-
       const userToken = await authenticationRepository.fetchToken(
         authorizationCode,
         'authorization_code'
       );
       const profile = await authenticationRepository.getUserProfile();
-      setSessionData(profile, userToken, profile.groups as string[]);
-      setLoading(false);
+      setSessionData({
+        profile,
+        roles: profile.groups,
+        tokens: userToken,
+      });
     },
     [authenticationRepository]
   );
 
   useEffect(() => {
-    if (!configContext.isLoading) {
+    if (!!configContext.appConfig) {
       const authenticationRepository: AuthenticationRepository =
         authRepo ?? new ApiV1AuthenticationRepository(configContext);
+
       const tokens = authenticationRepository.getToken();
+
       if (tokens) {
         authenticationRepository.getUserProfile().then(profile => {
-          setSessionData(profile, tokens, profile.groups as string[]);
+          setSessionData({
+            profile,
+            tokens,
+            roles: profile.groups,
+          });
         });
         setRequestHandler(new Request({ authenticationRepository }));
       }
     }
   }, [configContext, authRepo]);
-  const setSessionData = (
-    newProfile: UserProfile,
-    newTokens: UserToken,
-    newRoles: any[]
-  ) => {
-    setProfile(newProfile);
-    setTokens(newTokens);
-    setRoles(newRoles);
-  };
+
   return (
     <Provider
       value={{
         isLoggedIn: authenticationRepository.isLoggedIn,
-        profile,
-        tokens,
-        roles,
+        sessionData,
         axios: requestHandler?.client,
         handleLoginCallback,
-        isLoading: loading,
+        isLoading: !sessionData,
       }}
     >
       {children}

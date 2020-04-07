@@ -32,7 +32,9 @@ export class Request {
 
   private onRequestFailure = (error: { response: AxiosResponse }) => {
     const { response } = error;
-    if (response.status >= 400 && response.status < 500) {
+    // TODO: Handle other request errors here
+    if (response.status === 401 || response.status === 403) {
+      console.log('Unauthenticated request', response.status);
       this.authenticationRepository.clearSession();
       window.location.reload();
     }

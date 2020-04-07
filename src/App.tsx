@@ -49,7 +49,7 @@ const Routes = () => {
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
 
-  if (configContext.isLoading) {
+  if (!configContext.appConfig) {
     return <div />;
   }
 
@@ -59,7 +59,7 @@ const Routes = () => {
         engagementRepository={
           new FakedEngagementRepository({
             axios: sessionContext.axios,
-            baseUrl: configContext.backendUrl,
+            baseUrl: configContext.appConfig?.backendUrl,
           })
         }
       >

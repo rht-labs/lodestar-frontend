@@ -1,23 +1,16 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react';
 import { PublicConfigRepository } from '../repositories/config/implementations/public_config_repository';
+import { Config } from '../models/config';
 export interface ConfigContextParams {
-  baseUrl: string;
-  clientId: string;
-  authBaseUrl: string;
-  backendUrl: string;
+  appConfig: Config | null;
 }
 
 export interface ConfigContext extends ConfigContextParams {
-  isLoading: boolean;
   fetchConfig: () => void;
 }
 
 export const ConfigContext = createContext<ConfigContext>({
-  baseUrl: '',
-  clientId: '',
-  authBaseUrl: '',
-  backendUrl: '',
-  isLoading: true,
+  appConfig: null,
   fetchConfig: () => null,
 });
 const { Provider } = ConfigContext;
@@ -27,24 +20,13 @@ export const ConfigProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const [baseUrl, setBaseUrl] = useState<string>('');
-  const [clientId, setClientId] = useState<string>('');
-  const [authBaseUrl, setAuthBaseUrl] = useState<string>('');
-  const [backendUrl, setBackendUrl] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const setConfig = (params: ConfigContextParams) => {
-    setBaseUrl(params.baseUrl);
-    setClientId(params.clientId);
-    setAuthBaseUrl(params.authBaseUrl);
-    setBackendUrl(params.backendUrl);
-    setIsLoading(false);
-  };
+  const [appConfig, setAppConfig] = useState<Config | null>(null);
+  console.log('!!Config Context');
 
   const fetchConfig = useCallback(async () => {
     const configRepository = new PublicConfigRepository({});
     const config = await configRepository.fetchConfig();
-    setConfig(config);
+    setAppConfig(config);
   }, []);
 
   useEffect(() => {
@@ -54,11 +36,7 @@ export const ConfigProvider = ({
   return (
     <Provider
       value={{
-        baseUrl,
-        clientId,
-        authBaseUrl,
-        backendUrl,
-        isLoading,
+        appConfig,
         fetchConfig,
       }}
     >

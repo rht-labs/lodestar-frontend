@@ -7,10 +7,13 @@ export const CallbackHandler = () => {
   const code: string | null = query.get('code');
   const sessionContext = useContext(SessionContext);
 
-  if (!code || sessionContext.isLoading) {
+  if (!code) {
     // TODO: handle case where code is not present
     return null;
   }
   sessionContext.handleLoginCallback(code);
+  if (sessionContext.isLoading) {
+    return null;
+  }
   return <Redirect to="/" />;
 };

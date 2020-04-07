@@ -30,9 +30,11 @@ export const EngagementFormProvider = ({
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const getSessionData = useCallback(
     (requestHandler: AxiosInstance) => {
-      return requestHandler.get(`${configContext.backendUrl}/config`);
+      return requestHandler.get(
+        `${configContext.appConfig?.backendUrl}/config`
+      );
     },
-    [configContext.backendUrl]
+    [configContext.appConfig]
   );
 
   useEffect(() => {
