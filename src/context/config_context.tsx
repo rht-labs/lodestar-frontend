@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useEffect } from 'react';
 import { PublicConfigRepository } from '../repositories/config/implementations/public_config_repository';
 export interface ConfigContextParams {
   baseUrl: string;
@@ -45,7 +45,11 @@ export const ConfigProvider = ({
     const configRepository = new PublicConfigRepository({});
     const config = await configRepository.fetchConfig();
     setConfig(config);
-  }, []) 
+  }, []);
+
+  useEffect(() => {
+    fetchConfig();
+  }, [fetchConfig]);
 
   return (
     <Provider

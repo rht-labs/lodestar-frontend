@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import {
   Page,
@@ -30,25 +30,25 @@ import { UserDropdown } from './components/user_dropdown';
 import { EngagementProvider } from './context/engagement_context';
 import { FakedEngagementRepository } from './repositories/engagement/implementations/faked_engagement_repository';
 import { EngagementDropdown } from './components/engagement_dropdown';
-
+import { ErrorBoundary } from './components/error_boundary';
 export const App = () => {
   return (
-    <Router>
+    <ErrorBoundary>
       <ConfigProvider>
         <SessionProvider>
-          <Routes />
+          <Router>
+            <Routes />
+          </Router>
         </SessionProvider>
       </ConfigProvider>
-    </Router>
+    </ErrorBoundary>
   );
 };
 
 const Routes = () => {
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
-  useEffect(() => {
-    configContext.fetchConfig();
-  }, [configContext, configContext.fetchConfig]);
+
   if (configContext.isLoading) {
     return <div />;
   }
@@ -63,69 +63,63 @@ const Routes = () => {
           })
         }
       >
-        <Page
-          header={
-            <PageHeader
-              showNavToggle
-              logo={
-                <div>
-                  <Toolbar>
-                    <Brand
-                      alt="Open Innovation Labs"
-                      src={`${process.env.PUBLIC_URL}/oil_logo.png`}
-                    ></Brand>
-                    <div style={{ width: 50 }} />
-                    <ToolbarItem>
-                      <EngagementDropdown />
-                    </ToolbarItem>
-                  </Toolbar>
-                </div>
-              }
-              toolbar={
-                <Toolbar>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <UserDropdown />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                </Toolbar>
-              }
-              avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
-            ></PageHeader>
-          }
-          isManagedSidebar={true}
-          sidebar={
-            <PageSidebar
-              isManagedSidebar
-              theme="dark"
-              nav={<NavDefaultList />}
-            />
-          }
-          style={{ height: '100vh' }}
+        <EngagementFormProvider
+          sessionContext={sessionContext}
+          configContext={configContext}
         >
-          <Switch>
-            <PrivateRoute
-              exact
-              path="/"
-              component={(props: any) => {
-                return (
-                  <EngagementFormProvider
-                    sessionContext={sessionContext}
-                    configContext={configContext}
-                  >
-                    <EngagementForm {...props} />
-                  </EngagementFormProvider>
-                );
-              }}
-            />
-            <Route path="/feature-request" component={FeatureRequest} />
-            <PrivateRoute
-              path="/private"
-              component={() => <Redirect to="/" />}
-            />
-            <Route path="/auth_callback" component={CallbackHandler} />
-          </Switch>
-        </Page>
+          <ErrorBoundary>
+            <Page
+              header={
+                <PageHeader
+                  showNavToggle
+                  logo={
+                    <div>
+                      <Toolbar>
+                        <Brand
+                          alt="Open Innovation Labs"
+                          src={`${process.env.PUBLIC_URL}/oil_logo.png`}
+                        ></Brand>
+                        <div style={{ width: 50 }} />
+                        <ToolbarItem>
+                          <EngagementDropdown />
+                        </ToolbarItem>
+                      </Toolbar>
+                    </div>
+                  }
+                  toolbar={
+                    <Toolbar>
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <UserDropdown />
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    </Toolbar>
+                  }
+                  avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
+                ></PageHeader>
+              }
+              isManagedSidebar={true}
+              sidebar={
+                <PageSidebar
+                  isManagedSidebar
+                  theme="dark"
+                  nav={<NavDefaultList />}
+                />
+              }
+              style={{ height: '100vh' }}
+            >
+              <Switch>
+                <PrivateRoute exact path="/" component={EngagementForm} />
+                <Route path="/feature-request" component={FeatureRequest} />
+                <PrivateRoute
+                  path="/private"
+                  component={() => <Redirect to="/" />}
+                />
+                <Route path="/auth_callback" component={CallbackHandler} />
+              </Switch>
+            </Page>
+          </ErrorBoundary>
+        </EngagementFormProvider>
       </EngagementProvider>
     </PopupProvider>
   );

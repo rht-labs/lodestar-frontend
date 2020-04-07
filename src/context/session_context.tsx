@@ -13,7 +13,7 @@ export interface SessionContext {
   profile?: UserProfile;
   tokens?: UserToken;
   roles: any[];
-  axios: AxiosInstance;
+  axios?: AxiosInstance;
   performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => void;
 }
 
@@ -40,6 +40,8 @@ export const SessionProvider = ({
   const [profile, setProfile] = useState(new UserProfile());
   const [tokens, setTokens] = useState(new UserToken());
   const [roles, setRoles] = useState<string[]>([] as string[]);
+
+  const [requestHandler, setRequestHandler] = useState<Request | undefined>();
   useEffect(() => {
     if (!configContext.isLoading) {
       const authenticationRepository: AuthenticationRepository =
@@ -49,6 +51,7 @@ export const SessionProvider = ({
         authenticationRepository.getUserProfile().then(profile => {
           performLogin(profile, tokens, profile.groups as string[]);
         });
+        setRequestHandler(new Request({ authenticationRepository }));
       }
     }
   }, [configContext, authRepo]);
@@ -61,7 +64,6 @@ export const SessionProvider = ({
     setTokens(newTokens);
     setRoles(newRoles);
   };
-  const request = new Request({ authenticationRepository });
   return (
     <Provider
       value={{
@@ -69,7 +71,7 @@ export const SessionProvider = ({
         profile,
         tokens,
         roles,
-        axios: request.client,
+        axios: requestHandler?.client,
         performLogin,
       }}
     >
