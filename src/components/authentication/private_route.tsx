@@ -14,7 +14,6 @@ export const PrivateRoute = ({
 }: PrivateRouteProps) => {
   const sessionContext = useContext(SessionContext);
 
-  console.log('private', sessionContext.authState);
   if (sessionContext.authState === 'authenticated') {
     return <Route {...rest} render={props => <Component {...props} />} />;
   } else if (sessionContext.authState === 'unauthenticated') {

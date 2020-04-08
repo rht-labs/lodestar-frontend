@@ -29,14 +29,14 @@ export interface SessionContext {
   sessionData?: SessionData;
   axios?: AxiosInstance;
   authState: AuthenticationState;
-  handleLoginCallback: (authorizationCode: string) => void;
+  handleLoginCallback: (authorizationCode: string) => Promise<void>;
 }
 
 export const SessionContext = createContext<SessionContext>({
   sessionData: undefined,
   axios: Axios.create(),
   authState: 'initial',
-  handleLoginCallback: () => null,
+  handleLoginCallback: async () => {},
 });
 const { Provider } = SessionContext;
 
@@ -55,12 +55,11 @@ export const SessionProvider = ({
     undefined
   );
   const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
-  console.log(authStatus);
   const [requestHandler, setRequestHandler] = useState<Request | undefined>();
+
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
       setAuthStatus('initial');
-      console.log('in auth');
       try {
         const userToken = await authenticationRepository.fetchToken(
           authorizationCode,
@@ -73,6 +72,7 @@ export const SessionProvider = ({
             roles: profile.groups,
             tokens: userToken,
           });
+          return;
         }
       } catch (e) {
         setAuthStatus('unauthenticated');
