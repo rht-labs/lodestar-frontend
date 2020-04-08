@@ -7,17 +7,19 @@ export const CallbackHandler = () => {
   const code: string | null = query.get('code');
   const sessionContext = useContext(SessionContext);
   const [isHandlingCallback, setIsHandlingCallback] = useState<boolean>(false);
-
   if (!code) {
     // TODO: handle case where code is not present
     return null;
   }
   if (!isHandlingCallback) {
+    console.log(code);
+
     setIsHandlingCallback(true);
     sessionContext.handleLoginCallback(code);
     return null;
   }
-  if (sessionContext.isLoading) {
+  if (!sessionContext.sessionData) {
+    console.log('me');
     return <div />;
   }
   return <Redirect to="/" />;

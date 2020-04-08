@@ -40,7 +40,7 @@ export const ConfigProvider = ({
         fetchConfig,
       }}
     >
-      {children}
+      {appConfig ? children : null}
     </Provider>
   );
 };

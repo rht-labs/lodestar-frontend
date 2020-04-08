@@ -65,6 +65,7 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
    * @returns {Promise<boolean>}
    */
   isLoggedIn = async (): Promise<boolean> => {
+    console.log('in login');
     return new Promise((resolve, reject) => {
       try {
         const token = this.getToken();
@@ -72,9 +73,11 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
         const now = Date.now();
         const diff = accessTokenExpiryTime ? accessTokenExpiryTime - now : 0;
         const isAccessTokenValid = !!accessTokenExpiryTime && diff > 0;
+        console.log('msas');
         const isRefreshTokenValid = token?.refreshTokenExpiry
           ? token.refreshTokenExpiry.getTime() > Date.now()
           : false;
+        console.log(isRefreshTokenValid);
         if (isAccessTokenValid) {
           // Access token is valid! Proceed as normal
           resolve(true);
@@ -91,6 +94,7 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
           resolve(false);
         }
       } catch (e) {
+        console.log('err');
         console.error(e);
         resolve(false);
       }

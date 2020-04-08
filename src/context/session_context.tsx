@@ -14,6 +14,11 @@ import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
 
+export type AuthenticationState =
+  | 'initial'
+  | 'authenticated'
+  | 'unauthenticated';
+
 export interface SessionData {
   profile?: UserProfile;
   tokens?: UserToken;
@@ -21,18 +26,16 @@ export interface SessionData {
 }
 
 export interface SessionContext {
-  isLoggedIn: () => Promise<boolean>;
   sessionData?: SessionData;
-  isLoading: boolean;
   axios?: AxiosInstance;
+  authState: AuthenticationState;
   handleLoginCallback: (authorizationCode: string) => void;
 }
 
 export const SessionContext = createContext<SessionContext>({
-  isLoggedIn: async () => false,
   sessionData: undefined,
-  isLoading: false,
   axios: Axios.create(),
+  authState: 'initial',
   handleLoginCallback: () => null,
 });
 const { Provider } = SessionContext;
@@ -51,21 +54,28 @@ export const SessionProvider = ({
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
-
+  const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
+  console.log(authStatus);
   const [requestHandler, setRequestHandler] = useState<Request | undefined>();
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
-      const userToken = await authenticationRepository.fetchToken(
-        authorizationCode,
-        'authorization_code'
-      );
-      if (await authenticationRepository.isLoggedIn()) {
-        const profile = await authenticationRepository.getUserProfile();
-        setSessionData({
-          profile,
-          roles: profile.groups,
-          tokens: userToken,
-        });
+      setAuthStatus('initial');
+      console.log('in auth');
+      try {
+        const userToken = await authenticationRepository.fetchToken(
+          authorizationCode,
+          'authorization_code'
+        );
+        if (await authenticationRepository.isLoggedIn()) {
+          const profile = await authenticationRepository.getUserProfile();
+          setSessionData({
+            profile,
+            roles: profile.groups,
+            tokens: userToken,
+          });
+        }
+      } catch (e) {
+        setAuthStatus('unauthenticated');
       }
     },
     [authenticationRepository]
@@ -77,29 +87,30 @@ export const SessionProvider = ({
         authRepo ?? new ApiV1AuthenticationRepository(configContext);
       authenticationRepository.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationRepository.getToken();
-        if (tokens) {
-          if (isLoggedIn) {
-            authenticationRepository.getUserProfile().then(profile => {
-              setSessionData({
-                profile,
-                tokens,
-                roles: profile.groups,
-              });
+        if (isLoggedIn && tokens) {
+          setAuthStatus('authenticated');
+          authenticationRepository.getUserProfile().then(profile => {
+            setSessionData({
+              profile,
+              tokens,
+              roles: profile.groups,
             });
-            setRequestHandler(new Request({ authenticationRepository }));
-          }
+          });
+          setRequestHandler(new Request({ authenticationRepository }));
+        } else {
+          setAuthStatus('unauthenticated');
         }
       });
     }
   }, [configContext, authRepo]);
+
   return (
     <Provider
       value={{
-        isLoggedIn: authenticationRepository.isLoggedIn,
         sessionData,
         axios: requestHandler?.client,
         handleLoginCallback,
-        isLoading: !sessionData,
+        authState: authStatus,
       }}
     >
       {children}
