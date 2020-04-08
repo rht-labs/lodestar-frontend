@@ -8,7 +8,7 @@ export const CallbackHandler = () => {
   const [isHandlingCallback, setIsHandlingCallback] = useState<
     'initial' | 'handling' | 'completed'
   >('initial');
-  
+
   useEffect(() => {
     const code: string | null = query.get('code');
     if (isHandlingCallback !== 'handling' && code) {
