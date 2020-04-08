@@ -75,7 +75,6 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
         const isRefreshTokenValid = token?.refreshTokenExpiry
           ? token.refreshTokenExpiry.getTime() > Date.now()
           : false;
-        console.log(isRefreshTokenValid);
         if (isAccessTokenValid) {
           // Access token is valid! Proceed as normal
           resolve(true);
@@ -92,7 +91,6 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
           resolve(false);
         }
       } catch (e) {
-        console.log('err');
         console.error(e);
         resolve(false);
       }
