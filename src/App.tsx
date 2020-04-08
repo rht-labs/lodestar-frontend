@@ -48,9 +48,7 @@ export const App = () => {
 };
 
 const Providers = ({ children }: { children: React.ReactChild }) => {
-  return (
-      <EngagementProvider>{children}</EngagementProvider>
-  );
+  return <EngagementProvider>{children}</EngagementProvider>;
 };
 
 const MainTemplateRoutes = () => {
