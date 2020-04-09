@@ -98,20 +98,20 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   };
 
   async fetchToken(code: string, grantType: string) {
-    const tokenUrl = `${this.config.authBaseUrl}/token`;
+    const tokenUrl = `${this.config.appConfig?.authBaseUrl}/token`;
     let requestParams = {};
     if (grantType === 'authorization_code') {
       requestParams = {
         code,
         grant_type: 'authorization_code',
-        client_id: this.config.clientId,
-        redirect_uri: `${this.config.baseUrl}/auth_callback`,
+        client_id: this.config.appConfig?.clientId,
+        redirect_uri: `${this.config.appConfig?.baseUrl}/auth_callback`,
       };
     } else if (grantType === 'refresh_token') {
       requestParams = {
         grant_type: 'refresh_token',
         refresh_token: code,
-        client_id: this.config.clientId,
+        client_id: this.config.appConfig?.clientId,
       };
     }
     const { data } = await Axios.post(tokenUrl, qs.stringify(requestParams), {
@@ -142,9 +142,8 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   }
 
   async getUserProfile(): Promise<UserProfile> {
-    console.log(this.config.authBaseUrl);
     const userProfileData = await this.axios.get(
-      `${this.config.authBaseUrl}/userinfo`,
+      `${this.config.appConfig?.authBaseUrl}/userinfo`,
       {
         headers: {
           Authorization: `Bearer ${this.getToken()?.accessToken}`,
