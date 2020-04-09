@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback } from 'react';
 import { Engagement } from '../models/engagement';
-import { EngagementRepository } from '../repositories/engagement/engagement_repository';
+import { FakedEngagementRepository } from '../repositories/engagement/implementations/faked_engagement_repository';
 
 export interface EngagementContext {
   getEngagements: () => void;
@@ -17,13 +17,12 @@ const { Provider } = EngagementContext;
 
 export const EngagementProvider = ({
   children,
-  engagementRepository,
 }: {
   children: React.ReactChild;
-  engagementRepository: EngagementRepository;
 }) => {
-  const [engagements, setEngagements] = useState<Engagement[]>([]);
+  const engagementRepository = new FakedEngagementRepository({});
 
+  const [engagements, setEngagements] = useState<Engagement[]>([]);
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
@@ -35,10 +34,6 @@ export const EngagementProvider = ({
     },
     [engagementRepository]
   );
-
-  useEffect(() => {
-    fetchEngagements();
-  }, [fetchEngagements]);
 
   return (
     <Provider

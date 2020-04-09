@@ -7,19 +7,21 @@ export class FakedEngagementRepository extends EngagementRepository {
     axios = Axios.create(),
     baseUrl,
   }: {
-    axios: AxiosInstance;
-    baseUrl: string;
+    axios?: AxiosInstance;
+    baseUrl?: string;
   }) {
     super();
     this.axios = axios;
     this.baseUrl = baseUrl;
   }
-  baseUrl: string;
-  axios: AxiosInstance;
+  baseUrl?: string;
+  axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
     return new Array(8).fill(null).map(() => Engagement.fromFake());
   }
   async createEngagement(data: any): Promise<void> {
-    this.axios.post(`${this.baseUrl}/engagements`, data);
+    if (this.axios) {
+      this.axios.post(`${this.baseUrl}/engagements`, data);
+    }
   }
 }

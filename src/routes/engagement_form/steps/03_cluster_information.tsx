@@ -15,7 +15,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
         <FormSelect
           aria-label="Cloud Provider"
-          isDisabled={options.providers.length === 1}
+          isDisabled={options?.providers?.length === 1}
           value={values.ocp_cloud_provider_name || ''}
           onChange={e =>
             onChange({ type: 'ocp_cloud_provider_name', payload: e })

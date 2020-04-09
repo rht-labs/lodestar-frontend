@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import {
   Page,
@@ -22,118 +22,97 @@ import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { NavDefaultList } from './components/navigation/nav';
 import { EngagementForm } from './routes/engagement_form';
-import { SessionContext, SessionProvider } from './context/session_context';
-import { ConfigContext, ConfigProvider } from './context/config_context';
-import Axios from 'axios';
+import { SessionProvider } from './context/session_context';
+import { ConfigProvider } from './context/config_context';
 import { EngagementFormProvider } from './context/engagement_form_context';
-import { PopupProvider } from './context/popup_context';
 import { UserDropdown } from './components/user_dropdown';
 import { EngagementProvider } from './context/engagement_context';
-import { FakedEngagementRepository } from './repositories/engagement/implementations/faked_engagement_repository';
 import { EngagementDropdown } from './components/engagement_dropdown';
-
+import { ErrorBoundary } from './components/error_boundary';
 export const App = () => {
   return (
-    <Router>
+    <ErrorBoundary>
       <ConfigProvider>
         <SessionProvider>
-          <Routes />
+          <Router>
+            <Providers>
+              <MainTemplate>
+                <MainTemplateRoutes />
+              </MainTemplate>
+            </Providers>
+          </Router>
         </SessionProvider>
       </ConfigProvider>
-    </Router>
+    </ErrorBoundary>
   );
 };
 
-const Routes = () => {
-  const configContext = useContext(ConfigContext);
-  const sessionContext = useContext(SessionContext);
-  useEffect(() => {
-    Axios.get(`${process.env.PUBLIC_URL}/config/config.json`).then(
-      ({ data }) => {
-        configContext.setConfig(data);
-      }
-    );
-  }, [configContext]);
-  if (configContext.isLoading) {
-    return <div />;
-  }
+const Providers = ({ children }: { children: React.ReactChild }) => {
+  return <EngagementProvider>{children}</EngagementProvider>;
+};
 
+const MainTemplateRoutes = () => {
   return (
-    <PopupProvider>
-      <EngagementProvider
-        engagementRepository={
-          new FakedEngagementRepository({
-            axios: sessionContext.axios,
-            baseUrl: configContext.backendUrl,
-          })
-        }
-      >
-        <>
-          <Page
-            header={
-              <PageHeader
-                showNavToggle
-                logo={
-                  <div>
-                    <Toolbar>
-                      <Brand
-                        alt="Open Innovation Labs"
-                        src={`${process.env.PUBLIC_URL}/oil_logo.png`}
-                      ></Brand>
-                      <div style={{ width: 50 }} />
-                      <ToolbarItem>
-                        <EngagementDropdown />
-                      </ToolbarItem>
-                    </Toolbar>
-                  </div>
-                }
-                toolbar={
-                  <Toolbar>
-                    <ToolbarGroup>
-                      <ToolbarItem>
-                        <UserDropdown />
-                      </ToolbarItem>
-                    </ToolbarGroup>
-                  </Toolbar>
-                }
-                avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
-              ></PageHeader>
-            }
-            isManagedSidebar={true}
-            sidebar={
-              <PageSidebar
-                isManagedSidebar
-                theme="dark"
-                nav={<NavDefaultList />}
-              />
-            }
-            style={{ height: '100vh' }}
-          >
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/"
-                component={(props: any) => {
-                  return (
-                    <EngagementFormProvider
-                      sessionContext={sessionContext}
-                      configContext={configContext}
-                    >
-                      <EngagementForm {...props} />
-                    </EngagementFormProvider>
-                  );
-                }}
-              />
-              <Route path="/feature-request" component={FeatureRequest} />
-              <PrivateRoute
-                path="/private"
-                component={() => <Redirect to="/" />}
-              />
-              <Route path="/auth_callback" component={CallbackHandler} />
-            </Switch>
-          </Page>
-        </>
-      </EngagementProvider>
-    </PopupProvider>
+    <Switch>
+      <PrivateRoute
+        exact
+        path="/"
+        component={() => {
+          return (
+            <EngagementFormProvider>
+              <EngagementForm />
+            </EngagementFormProvider>
+          );
+        }}
+      />
+      <Route path="/feature-request" component={FeatureRequest} />
+      <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
+      <Route path="/auth_callback" component={CallbackHandler} />
+    </Switch>
   );
 };
+
+const MainTemplate = React.memo(
+  ({ children }: { children: React.ReactChild }) => {
+    return (
+      <Page
+        header={
+          <PageHeader
+            showNavToggle
+            logo={
+              <div>
+                <Toolbar>
+                  <Brand
+                    alt="Open Innovation Labs"
+                    src={`${process.env.PUBLIC_URL}/oil_logo.png`}
+                  ></Brand>
+                  <div style={{ width: 50 }} />
+                  <ToolbarItem>
+                    <EngagementDropdown />
+                  </ToolbarItem>
+                </Toolbar>
+              </div>
+            }
+            toolbar={
+              <Toolbar>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <UserDropdown />
+                  </ToolbarItem>
+                </ToolbarGroup>
+              </Toolbar>
+            }
+            avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
+          ></PageHeader>
+        }
+        isManagedSidebar={true}
+        sidebar={
+          <PageSidebar isManagedSidebar theme="dark" nav={<NavDefaultList />} />
+        }
+        style={{ height: '100vh' }}
+      >
+        {children}
+      </Page>
+    );
+  }
+);
