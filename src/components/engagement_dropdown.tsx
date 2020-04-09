@@ -6,7 +6,6 @@ function _EngagementDropdown() {
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
-  console.log('engr');
   useEffect(() => {
     if (!hasFetchedEngagements) {
       setHasFetchedEngagements(true);

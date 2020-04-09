@@ -46,9 +46,12 @@ export const EngagementFormProvider = ({
       getSessionData(sessionContext.axios)
         .then(({ data }) => {
           console.log(data);
-          setSessionData(yaml.parse(data.fileContent));
+          setSessionData(yaml.parse(data.content));
         })
-        .catch(e => setRequestError(e));
+        .catch(e => {
+          console.error(e);
+          setRequestError(e);
+        });
     }
   }, [getSessionData, sessionContext.axios]);
   return (
