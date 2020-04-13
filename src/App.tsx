@@ -21,6 +21,7 @@ import { FeatureRequest } from './components/feature_request';
 import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { NavDefaultList } from './components/navigation/nav';
+import { EngagementPane } from './routes/engagement_pane';
 import { EngagementForm } from './routes/engagement_form';
 import { SessionProvider } from './context/session_context';
 import { ConfigProvider } from './context/config_context';
@@ -61,6 +62,17 @@ const MainTemplateRoutes = () => {
           return (
             <EngagementFormProvider>
               <EngagementForm />
+            </EngagementFormProvider>
+          );
+        }}
+      />
+      <PrivateRoute
+        exact
+        path="/wizard"
+        component={() => {
+          return (
+            <EngagementFormProvider>
+              <EngagementPane />
             </EngagementFormProvider>
           );
         }}
