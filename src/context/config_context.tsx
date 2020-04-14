@@ -29,7 +29,6 @@ export const ConfigProvider = ({
   }, []);
 
   useEffect(() => {
-    console.log('firing config context effect');
     fetchConfig();
   }, [fetchConfig]);
 

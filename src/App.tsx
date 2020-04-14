@@ -61,7 +61,7 @@ const MainTemplateRoutes = () => {
         component={() => {
           return (
             <EngagementFormProvider>
-              <EngagementForm />
+              <EngagementPane />
             </EngagementFormProvider>
           );
         }}
@@ -72,7 +72,7 @@ const MainTemplateRoutes = () => {
         component={() => {
           return (
             <EngagementFormProvider>
-              <EngagementPane />
+              <EngagementForm />
             </EngagementFormProvider>
           );
         }}

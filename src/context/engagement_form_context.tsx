@@ -45,7 +45,6 @@ export const EngagementFormProvider = ({
     if (sessionContext.axios) {
       getSessionData(sessionContext.axios)
         .then(({ data }) => {
-          console.log(data);
           setSessionData(yaml.parse(data.content));
         })
         .catch(e => {
