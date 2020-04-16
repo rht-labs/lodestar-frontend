@@ -10,8 +10,16 @@ import slugify from 'slugify';
 import find from 'lodash.find';
 
 export const ClusterInformation = ({ options, values, onChange }: any) => {
+  const tabContent: React.CSSProperties = {
+    margin: 45
+  };
+
+  const input: React.CSSProperties = {
+    backgroundColor: '#EDEDED'
+  };
+
   return (
-    <Form isHorizontal>
+    <Form style={tabContent} isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
         <FormSelect
           aria-label="Cloud Provider"
@@ -39,6 +47,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
       >
         {values.ocp_cloud_provider_name ? (
           <FormSelect
+            style={input}
             aria-label="Cloud provider region"
             value={values.ocp_cloud_provider_region || ''}
             onChange={e =>
@@ -65,6 +74,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
         fieldId="openshift-provider"
       >
         <FormSelect
+          style={input}
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
           isDisabled={options.openshift.versions.length === 1}
@@ -99,6 +109,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
         }
       >
         <TextInput
+          style={input}
           isRequired
           type="text"
           id="ocp_sub_domain"
@@ -114,6 +125,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
         fieldId="persistent-storage-needs"
       >
         <FormSelect
+          style={input}
           aria-label="Persistent Storage Needs"
           isDisabled={options.openshift['persistent-storage'].length === 1}
           onChange={e =>
