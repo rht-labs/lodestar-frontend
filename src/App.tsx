@@ -20,7 +20,7 @@ import {
   Link,
   useLocation,
   Route,
-  // Redirect,
+  Redirect,
 } from 'react-router-dom';
 
 import {
@@ -31,7 +31,7 @@ import {
   BoltIcon } from '@patternfly/react-icons';
 
 import avatarImg from './assets/images/avatar.svg';
-// import { FeatureRequest } from './components/feature_request';
+import { FeatureRequest } from './components/feature_request';
 import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { EngagementPane } from './routes/engagement_pane';
@@ -105,11 +105,15 @@ const MainTemplateRoutes = () => {
       <PrivateRoute
         exact
         path="/admin"
-        component={Admin}
+        component={() => {
+          return (
+            <Admin />
+          );
+        }}
       />
-      {/* <Route path="/feature-request" component={FeatureRequest} />
-      <PrivateRoute path="/private" component={() => <Redirect to="/" />} />*/}
-      <Route path="/auth_callback" component={CallbackHandler} /> 
+      <Route path="/feature-request" component={FeatureRequest} />
+      <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
+      <Route path="/auth_callback" component={CallbackHandler} />
     </Switch>
   );
 };
@@ -162,7 +166,7 @@ const MainTemplate = React.memo(
                         </Link>
                       </NavItem>
                       <NavItem id="adminLink" itemId={3} isActive={pathname === '/admin'}>
-                        <Link style={iconPad} to="/admin">
+                        <Link style={iconPad} to="/wizard">
                           <CogsIcon size="md" title="Administration" />
                         </Link>
                       </NavItem>
