@@ -9,8 +9,17 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 export const BasicInformation = ({ values, onChange }: any) => {
+  
+  const tabContent: React.CSSProperties = {
+    margin: 45
+  };
+
+  const input: React.CSSProperties = {
+    backgroundColor: '#EDEDED'
+  };
+
   return (
-    <Form isHorizontal>
+    <Form style={tabContent} isHorizontal>
       <FormGroup
         label="Customer Name"
         fieldId="customer-name"
@@ -22,6 +31,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           id="customer_name"
           name="customer_name"
           placeholder="e.g. NASA"
+          style={input}
           value={values.customer_name || ''}
           onChange={e => onChange({ type: 'customer_name', payload: e })}
         />
@@ -37,6 +47,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           id="project_name"
           name="project_name"
           placeholder="e.g. Mars Probe"
+          style={input}
           value={values.project_name || ''}
           onChange={e => onChange({ type: 'project_name', payload: e })}
         />
@@ -52,6 +63,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           id="location"
           name="location"
           placeholder="e.g. Pasadena, CA"
+          style={input}
           value={values.location || ''}
           onChange={e => onChange({ type: 'location', payload: e })}
         />
@@ -63,7 +75,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <InputGroup label="Residency Duration">
-          <InputGroupText component="label" htmlFor="residency-duration">
+          <InputGroupText style={input} component="label" htmlFor="residency-duration">
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
@@ -71,6 +83,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             id="start_date"
             type="date"
             aria-label="The end date."
+            style={input}
             value={values.start_date || ''}
             onChange={e => onChange({ type: 'start_date', payload: e })}
           />
@@ -78,6 +91,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             name="end_date"
             id="end_date"
             type="date"
+            style={input}
             aria-label="Residency end date"
             value={values.end_date || ''}
             onChange={e => onChange({ type: 'end_date', payload: e })}
@@ -88,6 +102,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
         <TextArea
           name="description"
           id="description"
+          style={input}
           aria-label="residency description"
           placeholder="Description and notes for the Engagment"
           value={values.description || ''}

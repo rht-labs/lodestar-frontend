@@ -43,6 +43,11 @@ export const ClusterUsers = ({ options, values, onChange }: any) => {
     onChange({ type: 'user', payload: values.engagement_users });
   }
 
+  const tabContent: React.CSSProperties = {
+    backgroundColor: '#FFFFFF',
+    margin: 100
+  };
+
   return (
     <div className="pf-c-empty-state">
       {!values.engagement_users.length ? (
@@ -59,7 +64,7 @@ export const ClusterUsers = ({ options, values, onChange }: any) => {
           </div>
         </div>
       ) : (
-        <Form isHorizontal>
+        <Form style={tabContent} isHorizontal>
           <ul>
             <li>
               <InputGroup>
