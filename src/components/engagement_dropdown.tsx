@@ -11,6 +11,7 @@ function _EngagementDropdown() {
       setHasFetchedEngagements(true);
       engagementContext.getEngagements();
     }
+    console.log(engagementContext.engagements);
   }, [engagementContext, hasFetchedEngagements]);
   const dropdownItems = engagementContext.engagements.map(engagement => {
     return (
