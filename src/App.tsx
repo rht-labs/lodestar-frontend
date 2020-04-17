@@ -166,7 +166,7 @@ const MainTemplate = React.memo(
                         </Link>
                       </NavItem>
                       <NavItem id="adminLink" itemId={3} isActive={pathname === '/admin'}>
-                        <Link style={iconPad} to="/wizard">
+                        <Link style={iconPad} to="/admin">
                           <CogsIcon size="md" title="Administration" />
                         </Link>
                       </NavItem>
