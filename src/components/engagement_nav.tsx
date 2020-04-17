@@ -15,8 +15,8 @@ function _EngagementNav() {
   }, [engagementContext, hasFetchedEngagements]);
   const navItems = engagementContext.engagements.map(engagement => {
     return (
-      <NavItem key={engagement.customer_name}>
-        {engagement.customer_name}
+      <NavItem key={engagement.project_id}>
+        {engagement.project_name}
       </NavItem>
     );
   });
