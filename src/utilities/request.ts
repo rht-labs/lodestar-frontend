@@ -19,11 +19,16 @@ export class Request {
 
   client: AxiosInstance;
 
-  private beforeRequest = (request: AxiosRequestConfig) => {
-    const token = this.authenticationRepository.getToken();
-    const accessToken = token?.accessToken;
-    request.headers.Authorization = `Bearer ${accessToken}`;
-    return request;
+  private beforeRequest = async (request: AxiosRequestConfig) => {
+    if (await this.authenticationRepository.isLoggedIn()) {
+      console.log("says that its logged in");
+      const token = this.authenticationRepository.getToken();
+      const accessToken = token?.accessToken;
+      request.headers.Authorization = `Bearer ${accessToken}`;
+      return request;
+    } else {
+      throw Error('The user is not authenticated');
+    }
   };
 
   private onRequestSuccess = (response: AxiosResponse) => {
