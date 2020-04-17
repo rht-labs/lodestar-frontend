@@ -1,6 +1,6 @@
 import React, { createContext, useState, useCallback, useContext } from 'react';
 import { Engagement } from '../models/engagement';
-import { FakedEngagementRepository } from '../repositories/engagement/implementations/faked_engagement_repository';
+import { ApiV1EngagementRepository } from '../repositories/engagement/implementations/api_v1_repository';
 import { ConfigContext } from './config_context';
 import { SessionContext } from './session_context';
 
@@ -24,7 +24,7 @@ export const EngagementProvider = ({
 }) => {
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
-  const engagementRepository = new FakedEngagementRepository({
+  const engagementRepository = new ApiV1EngagementRepository({
     baseUrl: configContext.appConfig?.backendUrl,
     axios: sessionContext.axios,
   });
