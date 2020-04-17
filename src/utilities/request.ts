@@ -21,7 +21,6 @@ export class Request {
 
   private beforeRequest = async (request: AxiosRequestConfig) => {
     if (await this.authenticationRepository.isLoggedIn()) {
-      console.log("says that its logged in");
       const token = this.authenticationRepository.getToken();
       const accessToken = token?.accessToken;
       request.headers.Authorization = `Bearer ${accessToken}`;

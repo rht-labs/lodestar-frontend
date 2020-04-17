@@ -55,7 +55,7 @@ export const SessionProvider = ({
     undefined
   );
   const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
-  const [requestHandler, setRequestHandler] = useState<Request | undefined>();
+  const requestHandler = new Request({authenticationRepository})
 
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
@@ -96,7 +96,6 @@ export const SessionProvider = ({
               roles: profile.groups,
             });
           });
-          setRequestHandler(new Request({ authenticationRepository }));
         } else {
           setAuthStatus('unauthenticated');
         }
