@@ -7,6 +7,15 @@ function _EngagementNav() {
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
+
+  const columnHeaderStyle: React.CSSProperties = {
+    textAlign: 'center',
+    color: '#AFBAC4',
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderBottom: '1px solid #AFBAC4'
+  };
+
   useEffect(() => {
     if (!hasFetchedEngagements) {
       setHasFetchedEngagements(true);
@@ -29,7 +38,9 @@ function _EngagementNav() {
   // };
 
   return (
+    // <Nav onSelect={this.onSelect}>
     <Nav>
+      <div style={ columnHeaderStyle }>ENGAGEMENTS</div>
       <NavList>
         {navItems}
       </NavList>
