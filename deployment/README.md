@@ -28,6 +28,7 @@ cd open-management-portal-frontend/deployment
 
 ```shell script
 helm template . \
+  --values values-dev.yaml \
   --set git.uri=https://github.com/rht-labs/open-management-portal-frontend.git \
   --set git.ref=master \
   --set baseUrl=<your-base-url> \
