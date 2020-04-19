@@ -1,3 +1,4 @@
+{{- if .Values.development }}
 apiVersion: v1
 kind: BuildConfig
 metadata:
@@ -30,3 +31,4 @@ spec:
     type: Docker
 status:
   lastVersion: 1
+{{- end }}

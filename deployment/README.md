@@ -18,10 +18,10 @@ If you are not familiar with Helm - how to configure it and run - you can start 
 git clone https://github.com/rht-labs/open-management-portal-frontend
 ```
 
-2. Change into to the `development` directory:
+2. Change into to the `deployment` directory:
 
 ```
-cd open-management-portal-frontend/development
+cd open-management-portal-frontend/deployment
 ```
 
 3. Deploy using the following Helm command:
