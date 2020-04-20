@@ -45,7 +45,6 @@ const MainTemplateRoutes = () => {
 
 const MainTemplate = React.memo(
   ({ children }: { children: React.ReactChild }) => {
-
     return (
       <Page
         header={
