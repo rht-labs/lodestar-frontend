@@ -13,8 +13,6 @@ import {
   Avatar,
 } from '@patternfly/react-core';  
 
-// import { StyleSheet } from '@patternfly/react-styles';  
-
 import {
   Link,
   useLocation

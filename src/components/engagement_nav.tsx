@@ -32,37 +32,37 @@ function _EngagementNav() {
     display: 'block',
   }
 
+  const onNavSelect = result => {
+    console.log(result.itemId);
+    setSelectedEngagement(result.itemId);
+    console.log(engagementContext.engagements[result.itemId])
+    engagementContext.setActiveEngagement(engagementContext.engagements[result.itemId]);
+  };
+
+  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
+
   useEffect(() => {
     if (!hasFetchedEngagements) {
       setHasFetchedEngagements(true);
       engagementContext.getEngagements();
     }
   }, [engagementContext, hasFetchedEngagements]);
-  
-  const navItems = engagementContext.engagements.sort(function(a, b) {
+  const navItems = [...engagementContext.engagements].sort(function(a, b) {
       var textA = a.customer_name.toUpperCase();
       var textB = b.customer_name.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-  }).map(engagement => {
+  }).map((engagement, index) => {
     return (
       <NavItem
         style={navDisplay}
-        key={`${engagement.customer_name}---${engagement.project_name}`}
-        itemId= {`${engagement.customer_name}---${engagement.project_name}`}
+        key={index}
+        itemId= {index}
+        isActive={selectedEngagement === index}
       >
         <div>{engagement.project_name}</div><span style={navSub}>{engagement.customer_name}</span>
       </NavItem>
     );
   });
-
-  const onNavSelect = result => {
-    console.log(result.itemId);
-    setSelectedEngagement(result.itemId);
-  };
-
-  const [selectedEngagement, setSelectedEngagement] = useState<string>(
-    'Selected Engagement'
-  );
 
   return (
     <Nav onSelect={onNavSelect}>

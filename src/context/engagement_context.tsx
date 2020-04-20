@@ -6,12 +6,16 @@ import { SessionContext } from './session_context';
 
 export interface EngagementContext {
   getEngagements: () => void;
+  activeEngagement?: Engagement;
+  setActiveEngagement: (Engagement:Engagement) => void;
   engagements: Engagement[];
   createEngagement: (data: any) => Promise<void>;
 }
 
 export const EngagementContext = createContext<EngagementContext>({
   getEngagements: async () => [],
+  activeEngagement: undefined,
+  setActiveEngagement: (engagement: Engagement) => {},
   engagements: [],
   createEngagement: async () => {},
 });
@@ -30,6 +34,7 @@ export const EngagementProvider = ({
   });
 
   const [engagements, setEngagements] = useState<Engagement[]>([]);
+  const [activeEngagement, setActiveEngagement] = useState<Engagement|undefined>();
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
@@ -45,6 +50,8 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
+        activeEngagement,
+        setActiveEngagement,
         engagements,
         getEngagements: fetchEngagements,
         createEngagement,

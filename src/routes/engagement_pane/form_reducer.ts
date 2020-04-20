@@ -40,6 +40,8 @@ export const formReducer = (state: any, action: any) => {
       return { ...state, ocp_persistent_storage_size: action.payload };
     case 'ocp_cluster_size':
       return { ...state, ocp_cluster_size: action.payload };
+    case 'switch_engagement':
+      return {...state, ...action.payload};
     default:
       throw new Error();
   }
