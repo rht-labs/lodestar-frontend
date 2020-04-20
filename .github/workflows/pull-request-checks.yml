@@ -1,8 +1,11 @@
 name: Node CI
 
 on:
-- pull_request
-    
+  pull_request:
+    paths-ignore:
+      - deployment/**
+      - design/**
+
 jobs:
   check-links:
     runs-on: ubuntu-latest
