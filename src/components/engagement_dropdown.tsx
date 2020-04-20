@@ -15,8 +15,8 @@ function _EngagementDropdown() {
   }, [engagementContext, hasFetchedEngagements]);
   const dropdownItems = engagementContext.engagements.map(engagement => {
     return (
-      <ContextSelectorItem key={engagement.name}>
-        {engagement.name}
+      <ContextSelectorItem key={engagement.customer_name}>
+        {engagement.customer_name}
       </ContextSelectorItem>
     );
   });

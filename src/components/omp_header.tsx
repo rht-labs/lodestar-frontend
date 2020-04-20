@@ -11,7 +11,9 @@ import {
   NavList,
   NavVariants,
   Avatar,
-} from '@patternfly/react-core';    
+} from '@patternfly/react-core';  
+
+// import { StyleSheet } from '@patternfly/react-styles';  
 
 import {
   Link,
@@ -47,9 +49,6 @@ function _OMPHeader() {
               src={`${process.env.PUBLIC_URL}/oil_logo.png`}
             ></Brand>
             <div style={{ width: 50 }} />
-            {/* <ToolbarItem>
-              <EngagementDropdown />
-            </ToolbarItem> */}
           </Toolbar>
         </div>
       }
