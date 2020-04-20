@@ -12,6 +12,7 @@ import { PointOfContact } from './tabs/02_point_of_contact';
 import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
 import { EngagementFormContext } from '../../context/engagement_form_context';
+import { EngagementContext } from '../../context/engagement_context';
 import { Loading } from './Loading';
 import { EngagementNav } from '../../components/engagement_nav';
 // import { LaunchCluster } from './tabs/05_launch_cluster';
@@ -25,6 +26,13 @@ export function EngagementPane() {
   const [activeTabKey , setActiveTabKey] = useState<number>(0);
   const [clusterOptions, setClusterOptions] = useState(null);
   const engagementFormContext = useContext(EngagementFormContext);
+  const engagementContext = useContext(EngagementContext);
+  useEffect(() => {
+    dispatch({ 
+      type: 'switch_engagement',
+      payload: engagementContext.activeEngagement,
+    })
+  }, [engagementContext.activeEngagement]);
 
   useEffect(() => {
     const data = engagementFormContext.sessionData;
