@@ -3,14 +3,12 @@ import { Nav, NavItem, NavList } from '@patternfly/react-core';
 
 import { EngagementContext } from '../context/engagement_context';
 
-
 function _EngagementNav() {
   const engagementContext = useContext(EngagementContext);
+
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
-
-  // const currentEngagement = 0;
   
   const columnHeaderStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -31,15 +29,14 @@ function _EngagementNav() {
   const navDisplay: React.CSSProperties = {
     display: 'block',
   }
-
+  
+  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
+  
   const onNavSelect = result => {
-    console.log(result.itemId);
     setSelectedEngagement(result.itemId);
     console.log(engagementContext.engagements[result.itemId])
     engagementContext.setActiveEngagement(engagementContext.engagements[result.itemId]);
   };
-
-  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
 
   useEffect(() => {
     if (!hasFetchedEngagements) {
@@ -47,7 +44,7 @@ function _EngagementNav() {
       engagementContext.getEngagements();
     }
   }, [engagementContext, hasFetchedEngagements]);
-  const navItems = [...engagementContext.engagements].sort(function(a, b) {
+  const navItems = engagementContext.engagements.sort(function(a, b) {
       var textA = a.customer_name.toUpperCase();
       var textB = b.customer_name.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;

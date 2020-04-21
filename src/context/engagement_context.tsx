@@ -20,7 +20,6 @@ export const EngagementContext = createContext<EngagementContext>({
   createEngagement: async () => {},
 });
 const { Provider } = EngagementContext;
-
 export const EngagementProvider = ({
   children,
 }: {
@@ -40,6 +39,7 @@ export const EngagementProvider = ({
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
+    setActiveEngagement(engagements[0]);
   }, [engagementRepository]);
 
   const createEngagement = useCallback(
