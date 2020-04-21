@@ -11,11 +11,11 @@ import find from 'lodash.find';
 
 export const ClusterInformation = ({ options, values, onChange }: any) => {
   const tabContent: React.CSSProperties = {
-    margin: 45
+    margin: 45,
   };
 
   const input: React.CSSProperties = {
-    backgroundColor: '#EDEDED'
+    backgroundColor: '#EDEDED',
   };
 
   return (
@@ -29,7 +29,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
             onChange({ type: 'ocp_cloud_provider_name', payload: e })
           }
         >
-          {options.providers.map((option: any, index: any) => (
+          {options?.providers?.map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -56,7 +56,7 @@ export const ClusterInformation = ({ options, values, onChange }: any) => {
           >
             {find(options.providers, {
               value: values.ocp_cloud_provider_name,
-            }).regions.map((option: any, index: any) => (
+            })?.regions.map((option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}
                 key={index}
