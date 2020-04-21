@@ -22,7 +22,19 @@ export const ClusterInformation = ({
     backgroundColor: '#EDEDED',
   };
 
-  const availableProviderOptions =
+  const availableProviders = [...providerOptions];
+  if (
+    !availableProviders.find(
+      option => option.value === values.ocp_cloud_provider_name
+    )
+  ) {
+    availableProviders.push({
+      value: values.ocp_cloud_provider_name,
+      label: values.ocp_cloud_provider_name,
+    });
+  }
+
+  const availableProviderRegionOptions =
     providerOptions.find(
       providerOption => providerOption.value === values.ocp_cloud_provider_name
     )?.regions ?? [];
@@ -32,13 +44,13 @@ export const ClusterInformation = ({
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
         <FormSelect
           aria-label="Cloud Provider"
-          isDisabled={providerOptions?.length === 1}
+          isDisabled={availableProviders?.length === 1}
           value={values.ocp_cloud_provider_name || ''}
           onChange={e =>
             onChange({ type: 'ocp_cloud_provider_name', payload: e })
           }
         >
-          {providerOptions?.map((option: any, index: any) => (
+          {availableProviders?.map((option: any, index: any) => (
             <FormSelectOption
               isDisabled={option.disabled}
               key={index}
@@ -57,15 +69,15 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="Cloud provider region"
-          isDisabled={availableProviderOptions.length === 0}
-          readOnly={availableProviderOptions.length === 0}
+          isDisabled={availableProviderRegionOptions.length === 0}
+          readOnly={availableProviderRegionOptions.length === 0}
           value={values.ocp_cloud_provider_region || ''}
           onChange={e =>
             onChange({ type: 'ocp_cloud_provider_region', payload: e })
           }
         >
-          {availableProviderOptions.length > 0 ? (
-            availableProviderOptions.map((option: any, index: any) => (
+          {availableProviderRegionOptions.length > 0 ? (
+            availableProviderRegionOptions.map((option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}
                 key={index}
