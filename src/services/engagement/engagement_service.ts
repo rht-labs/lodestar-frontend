@@ -1,6 +1,6 @@
-import { Engagement } from '../../models/engagement';
+import { Engagement } from '../../schemas/engagement';
 
-export abstract class EngagementRepository {
+export abstract class EngagementService {
   abstract async fetchEngagements(): Promise<Engagement[]>;
   abstract async createEngagement(data: any): Promise<void>;
 }

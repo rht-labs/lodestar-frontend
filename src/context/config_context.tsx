@@ -1,6 +1,6 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react';
-import { PublicConfigRepository } from '../repositories/config/implementations/public_config_repository';
-import { Config } from '../models/config';
+import { PublicConfigService } from '../services/config/implementations/public_config_service';
+import { Config } from '../schemas/config';
 export interface ConfigContextParams {
   appConfig: Config | null;
 }
@@ -23,7 +23,7 @@ export const ConfigProvider = ({
   const [appConfig, setAppConfig] = useState<Config | null>(null);
 
   const fetchConfig = useCallback(async () => {
-    const configRepository = new PublicConfigRepository({});
+    const configRepository = new PublicConfigService({});
     const config = await configRepository.fetchConfig();
     setAppConfig(config);
   }, []);

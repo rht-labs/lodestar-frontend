@@ -1,7 +1,7 @@
-import { UserToken } from '../../models/user_token';
-import { UserProfile } from '../../models/user_profile';
+import { UserToken } from '../../schemas/user_token';
+import { UserProfile } from '../../schemas/user_profile';
 
-export abstract class AuthenticationRepository {
+export abstract class AuthService {
   abstract saveToken(token: UserToken): void;
   abstract clearSession(): void;
   abstract isLoggedIn(): Promise<boolean>;

@@ -1,8 +1,8 @@
-import { EngagementRepository } from '../engagement_repository';
-import { Engagement } from '../../../models/engagement';
+import { EngagementService } from '../engagement_repository';
+import { Engagement } from '../../../schemas/engagement';
 import Axios, { AxiosInstance } from 'axios';
 
-export class FakedEngagementRepository extends EngagementRepository {
+export class FakedEngagementService extends EngagementService {
   constructor({
     axios = Axios.create(),
     baseUrl,
