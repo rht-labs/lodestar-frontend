@@ -16,17 +16,16 @@ import { Engagement } from '../schemas/engagement_schema';
 
 export interface EngagementFormContext {
   getSessionData: (requestHandler: AxiosInstance) => Promise<any>;
-  sessionData: any;
-  clusterOptions: any;
   error: AxiosError | null;
   state: any;
+  openshiftOptions?: any;
+  providerOptions?: any;
+  userManagementOptions?: any;
   dispatch: Dispatch<any>;
 }
 
 export const EngagementFormContext = createContext<EngagementFormContext>({
   getSessionData: async () => null,
-  sessionData: null,
-  clusterOptions: {},
   error: null,
   state: {},
   dispatch: () => {},
@@ -38,47 +37,53 @@ export const EngagementFormProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const [sessionData, setSessionData] = useState<any>(null);
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
+  const [openshiftOptions, setOpenshiftOptions] = useState<any>();
+  const [providerOptions, setProviderOptions] = useState<any>();
+  const [userManagementOptions, setUserManagementOptions] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const engagementContext = useContext(EngagementContext);
+
   const [state, dispatch] = useReducer<(state: any, action: any) => any>(
     formReducer,
     getInitialState(engagementContext.activeEngagement)
   );
-  const [clusterOptions, setClusterOptions] = useState(null);
+
   useEffect(() => {
     dispatch({
       type: 'switch_engagement',
       payload: getInitialState(engagementContext.activeEngagement),
     });
   }, [engagementContext.activeEngagement]);
+
+  
   const getSessionData = useCallback(async () => {
     try {
       const { data } = await sessionContext.axios.get(
         `${configContext.appConfig?.backendUrl}/config`
       );
       const parsedData = yaml.parse(data.content);
-      setSessionData(parsedData);
-      setClusterOptions(parsedData);
-      dispatch({
-        type: 'ocp_cloud_provider_region',
-        payload: parsedData.providers[0].regions[0].value,
-      });
-      dispatch({
-        type: 'ocp_cloud_provider_name',
-        payload: parsedData.providers[0].value,
-      });
-      dispatch({
-        type: 'ocp_cluster_size',
-        payload: parsedData.openshift['cluster-size'][0].value,
-      });
-      dispatch({
-        type: 'ocp_version',
-        payload: parsedData.openshift.versions[0].value,
-      });
+      setOpenshiftOptions(parsedData['openshift']);
+      setProviderOptions(parsedData['providers']);
+      setUserManagementOptions(parsedData['user-management']);
+      // dispatch({
+      //   type: 'ocp_cloud_provider_region',
+      //   payload: parsedData.providers[0].regions[0].value,
+      // });
+      // dispatch({
+      //   type: 'ocp_cloud_provider_name',
+      //   payload: parsedData.providers[0].value,
+      // });
+      // dispatch({
+      //   type: 'ocp_cluster_size',
+      //   payload: parsedData.openshift['cluster-size'][0].value,
+      // });
+      // dispatch({
+      //   type: 'ocp_version',
+      //   payload: parsedData.openshift.versions[0].value,
+      // });
     } catch (e) {
       setRequestError(e);
     } finally {
@@ -93,8 +98,9 @@ export const EngagementFormProvider = ({
     <Provider
       value={{
         getSessionData,
-        sessionData,
-        clusterOptions,
+        openshiftOptions,
+        userManagementOptions,
+        providerOptions,
         error: requestError,
         state,
         dispatch,

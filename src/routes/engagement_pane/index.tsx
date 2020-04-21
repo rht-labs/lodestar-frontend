@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Alert, Tabs, Tab } from '@patternfly/react-core';
 import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
@@ -7,15 +7,20 @@ import { ClusterUsers } from './tabs/04_cluster_users';
 import { EngagementFormContext } from '../../context/engagement_form_context';
 import { Loading } from './Loading';
 import { EngagementNav } from '../../components/engagement_nav';
-// import { LaunchCluster } from './tabs/05_launch_cluster';
+import { EngagementContext } from '../../context/engagement_context';
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
   const engagementFormContext = useContext(EngagementFormContext);
+  const engagementContext = useContext(EngagementContext);
 
   const handleTabClick = function(this: any, event: any, tabIndex: any) {
     setActiveTabKey(tabIndex);
   };
+
+  useEffect(() => {
+    setActiveTabKey(0);
+  }, [engagementContext.activeEngagement]);
 
   const contentPane: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -64,11 +69,13 @@ export function EngagementPane() {
               />
             </Tab>
             <Tab eventKey={2} title="OpenShift Cluster">
-              {engagementFormContext.clusterOptions === null ? (
+              {!engagementFormContext.providerOptions ||
+              !engagementFormContext.openshiftOptions ? (
                 <Loading />
               ) : (
                 <ClusterInformation
-                  options={engagementFormContext.clusterOptions}
+                  providerOptions={engagementFormContext.providerOptions}
+                  openshiftOptions={engagementFormContext.openshiftOptions}
                   values={engagementFormContext.state}
                   onChange={engagementFormContext.dispatch}
                 />
@@ -76,7 +83,7 @@ export function EngagementPane() {
             </Tab>
             <Tab eventKey={3} title="Cluster Users">
               <ClusterUsers
-                options={engagementFormContext.clusterOptions}
+                userManagementOptions={engagementFormContext.userManagementOptions}
                 values={engagementFormContext.state}
                 onChange={engagementFormContext.dispatch}
               />

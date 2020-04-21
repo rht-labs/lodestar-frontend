@@ -30,7 +30,7 @@ const buttonHeader: React.CSSProperties = {
   fontWeight: 'bold',
 };
 
-export const ClusterUsers = ({ options, values, onChange }: any) => {
+export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) => {
   //Functions for Cluster User interactivity
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
@@ -134,7 +134,7 @@ export const ClusterUsers = ({ options, values, onChange }: any) => {
                         });
                       }}
                     >
-                      {options['user-management']?.rbac?.roles?.map(
+                      {userManagementOptions?.rbac?.roles?.map(
                         (option: any, index: number) => (
                           <FormSelectOption
                             isDisabled={option.disabled}

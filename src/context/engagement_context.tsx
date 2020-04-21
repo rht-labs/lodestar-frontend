@@ -39,7 +39,9 @@ export const EngagementProvider = ({
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
-    setActiveEngagement(engagements[0]);
+    if (engagements.length > 0) {
+      setActiveEngagement(engagements[0]);
+    }
   }, [engagementRepository]);
 
   const createEngagement = useCallback(
