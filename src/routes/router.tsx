@@ -11,7 +11,6 @@ import { CallbackHandler } from '../components/authentication/callback_handler';
 import { EngagementPane } from './engagement_pane';
 import { Admin } from './admin';
 import { Dashboard } from './dashboard';
-import { EngagementForm } from './engagement_form';
 import { EngagementFormProvider } from '../context/engagement_form_context';
 
 function _OMPRouter() {
@@ -34,17 +33,6 @@ function _OMPRouter() {
           return (
             <EngagementFormProvider>
               <EngagementPane />
-            </EngagementFormProvider>
-          );
-        }}
-      />
-      <PrivateRoute
-        exact
-        path="/wizard"
-        component={() => {
-          return (
-            <EngagementFormProvider>
-              <EngagementForm />
             </EngagementFormProvider>
           );
         }}

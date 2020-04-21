@@ -58,7 +58,6 @@ export const EngagementFormProvider = ({
     });
   }, [engagementContext.activeEngagement]);
 
-  
   const getSessionData = useCallback(async () => {
     try {
       const { data } = await sessionContext.axios.get(

@@ -23,7 +23,6 @@ import {
   ListUlIcon,
   HomeIcon,
   HandPaperIcon,
-  BoltIcon 
 } from '@patternfly/react-icons';
 
 import avatarImg from '../assets/images/avatar.svg';
@@ -63,11 +62,6 @@ function _OMPHeader() {
                 <NavItem id="engagementPaneLink" itemId={1} isActive={pathname === '/engagements'}>
                   <Link style={iconPad} to="/engagements">
                     <ListUlIcon size="md" title="Engagements" />
-                  </Link>
-                </NavItem>
-                <NavItem id="engagementWizardLink" itemId={2} isActive={pathname === '/wizard'}>
-                  <Link style={iconPad} to="/wizard">
-                    <BoltIcon size="md" title="Wizard" />
                   </Link>
                 </NavItem>
                 <NavItem id="adminLink" itemId={3} isActive={pathname === '/admin'}>
