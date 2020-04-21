@@ -22,6 +22,11 @@ export const ClusterInformation = ({
     backgroundColor: '#EDEDED',
   };
 
+  const availableProviderOptions =
+    providerOptions.find(
+      providerOption => providerOption.value === values.ocp_cloud_provider_name
+    )?.regions ?? [];
+
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
@@ -52,24 +57,28 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="Cloud provider region"
+          isDisabled={availableProviderOptions.length === 0}
+          readOnly={availableProviderOptions.length === 0}
           value={values.ocp_cloud_provider_region || ''}
           onChange={e =>
             onChange({ type: 'ocp_cloud_provider_region', payload: e })
           }
         >
-          {(
-            providerOptions.find(
-              providerOption =>
-                providerOption.value === values.ocp_cloud_provider_name
-            )?.regions ?? []
-          ).map((option: any, index: any) => (
+          {availableProviderOptions.length > 0 ? (
+            availableProviderOptions.map((option: any, index: any) => (
+              <FormSelectOption
+                isDisabled={option.disabled}
+                key={index}
+                value={option.value}
+                label={option.label}
+              />
+            ))
+          ) : (
             <FormSelectOption
-              isDisabled={option.disabled}
-              key={index}
-              value={option.value}
-              label={option.label}
+              value={values.ocp_cloud_provider_region}
+              label={values.ocp_cloud_provider_region}
             />
-          ))}
+          )}
         </FormSelect>
       </FormGroup>
 
