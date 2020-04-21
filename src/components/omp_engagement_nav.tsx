@@ -26,6 +26,11 @@ function _EngagementNav() {
     fontSize: 12
   }
 
+  const columnStyle: React.CSSProperties = {
+    overflow: 'auto',
+    height: '100vh'
+  }
+
   const navDisplay: React.CSSProperties = {
     display: 'block',
   }
@@ -62,7 +67,7 @@ function _EngagementNav() {
   });
 
   return (
-    <Nav onSelect={onNavSelect}>
+    <Nav style={ columnStyle } onSelect={onNavSelect}>
       <div style={ columnHeaderStyle }>ENGAGEMENTS</div>
       <NavList>
         {navItems}
