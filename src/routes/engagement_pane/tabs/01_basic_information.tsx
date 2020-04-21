@@ -9,7 +9,16 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 export const BasicInformation = ({ values, onChange }: any) => {
-  
+  let formattedStart = '';
+  if(values.start_date){
+    formattedStart = [values.start_date.slice(0, 4), "-", values.start_date.slice(4, 6), "-", values.start_date.slice(6, 8)].join('');
+  }
+
+  let formattedEnd = '';
+  if(values.end_date){
+    formattedEnd = [values.end_date.slice(0, 4), "-", values.end_date.slice(4, 6), "-", values.end_date.slice(6, 8)].join('');
+  }
+
   const tabContent: React.CSSProperties = {
     margin: 45
   };
@@ -84,7 +93,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             aria-label="The end date."
             style={input}
-            value={values.start_date || ''}
+            value={formattedStart || ''}
             onChange={e => onChange({ type: 'start_date', payload: e })}
           />
           <TextInput
@@ -93,7 +102,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             style={input}
             aria-label="Residency end date"
-            value={values.end_date || ''}
+            value={formattedEnd || ''}
             onChange={e => onChange({ type: 'end_date', payload: e })}
           />
         </InputGroup>

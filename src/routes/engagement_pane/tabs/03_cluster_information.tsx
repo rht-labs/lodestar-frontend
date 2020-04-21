@@ -10,6 +10,9 @@ import slugify from 'slugify';
 import find from 'lodash.find';
 
 export const ClusterInformation = ({ options, values, onChange }: any) => {
+  console.log(options);
+  console.log(values);
+  
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
