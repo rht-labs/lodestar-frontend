@@ -1,6 +1,6 @@
 import React, { createContext, useState, useCallback, useContext } from 'react';
-import { Engagement } from '../schemas/engagement';
-import { Apiv1EngagementService } from '../services/engagement/implementations/apiv1_engagement_service';
+import { Engagement } from '../schemas/engagement_schema';
+import { Apiv1EngagementService } from '../services/engagement_service/implementations/apiv1_engagement_service';
 import { ConfigContext } from './config_context';
 import { SessionContext } from './session_context';
 

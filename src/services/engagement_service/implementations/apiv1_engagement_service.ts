@@ -1,5 +1,5 @@
 import { EngagementService } from '../engagement_service';
-import { Engagement } from '../../../schemas/engagement';
+import { Engagement } from '../../../schemas/engagement_schema';
 import { AxiosInstance } from 'axios';
 
 export class Apiv1EngagementService extends EngagementService {

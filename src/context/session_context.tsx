@@ -5,11 +5,11 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { Apiv1AuthService } from '../services/authentication/implementations/apiv1_auth_service';
-import { AuthService } from '../services/authentication/authentication_service';
+import { Apiv1AuthService } from '../services/authentication_service/implementations/apiv1_auth_service';
+import { AuthService } from '../services/authentication_service/authentication_service';
 
-import { UserProfile } from '../schemas/user_profile';
-import { UserToken } from '../schemas/user_token';
+import { UserProfile } from '../schemas/user_profile_schema';
+import { UserToken } from '../schemas/user_token_schema';
 import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';

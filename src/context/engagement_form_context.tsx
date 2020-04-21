@@ -32,25 +32,20 @@ export const EngagementFormProvider = ({
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
-  const getSessionData = useCallback(
-    (requestHandler: AxiosInstance) => {
-      return requestHandler.get(
+  const getSessionData = useCallback(async () => {
+    try {
+      const { data } = await sessionContext.axios.get(
         `${configContext.appConfig?.backendUrl}/config`
       );
-    },
-    [configContext.appConfig]
-  );
+      setSessionData(yaml.parse(data.content));
+    } catch (e) {
+      console.error(e);
+      setRequestError(e);
+    }
+  }, [configContext.appConfig, sessionContext.axios]);
 
   useEffect(() => {
     if (sessionContext.axios) {
-      getSessionData(sessionContext.axios)
-        .then(({ data }) => {
-          setSessionData(yaml.parse(data.content));
-        })
-        .catch(e => {
-          console.error(e);
-          setRequestError(e);
-        });
     }
   }, [getSessionData, sessionContext.axios]);
   return (
