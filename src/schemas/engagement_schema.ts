@@ -8,7 +8,8 @@ export interface Engagement {
   description: string;
   end_date: string;
   engagement_lead_email: string;
-  engagementLeadName: string;
+  engagement_lead_name: string;
+  engagement_users: Array<any>;
   location: string;
   ocp_cloud_provider_name: string;
   ocp_cloud_provider_region: string;
@@ -24,26 +25,27 @@ export interface Engagement {
 }
 export class Engagement {
   constructor(engagement: Engagement) {
-    this.archive_date = engagement.archive_date
-    this.customer_contact_email = engagement.customer_contact_email
-    this.customer_contact_name = engagement.customer_contact_name
-    this.customer_name = engagement.customer_name
-    this.description = engagement.description
-    this.end_date = engagement.end_date
-    this.engagement_lead_email = engagement.engagement_lead_email
-    this.engagementLeadName = engagement.engagementLeadName
-    this.location = engagement.location
-    this.ocp_cloud_provider_name = engagement.ocp_cloud_provider_name
-    this.ocp_cloud_provider_region = engagement.ocp_cloud_provider_region
-    this.ocp_cluster_size = engagement.ocp_cluster_size
-    this.ocp_persistent_storage_size = engagement.ocp_persistent_storage_size
-    this.ocp_sub_domain = engagement.ocp_sub_domain
-    this.ocp_version = engagement.ocp_version
-    this.project_id = engagement.project_id
-    this.project_name = engagement.project_name
-    this.start_date = engagement.start_date
-    this.technical_lead_email = engagement.technical_lead_email
-    this.technical_lead_name = engagement.technical_lead_name
+    this.archive_date = engagement.archive_date;
+    this.customer_contact_email = engagement.customer_contact_email;
+    this.customer_contact_name = engagement.customer_contact_name;
+    this.customer_name = engagement.customer_name;
+    this.description = engagement.description;
+    this.end_date = engagement.end_date;
+    this.engagement_users = engagement.engagement_users ?? [];
+    this.engagement_lead_email = engagement.engagement_lead_email;
+    this.engagement_lead_name = engagement.engagement_lead_name;
+    this.location = engagement.location;
+    this.ocp_cloud_provider_name = engagement.ocp_cloud_provider_name;
+    this.ocp_cloud_provider_region = engagement.ocp_cloud_provider_region;
+    this.ocp_cluster_size = engagement.ocp_cluster_size;
+    this.ocp_persistent_storage_size = engagement.ocp_persistent_storage_size;
+    this.ocp_sub_domain = engagement.ocp_sub_domain;
+    this.ocp_version = engagement.ocp_version;
+    this.project_id = engagement.project_id;
+    this.project_name = engagement.project_name;
+    this.start_date = engagement.start_date;
+    this.technical_lead_email = engagement.technical_lead_email;
+    this.technical_lead_name = engagement.technical_lead_name;
   }
   archive_date: string;
   customer_contact_email: string;
@@ -52,8 +54,9 @@ export class Engagement {
   description: string;
   end_date: string;
   engagement_lead_email: string;
-  engagementLeadName: string;
+  engagement_lead_name: string;
   location: string;
+  engagement_users: Array<any>;
 
   ocp_cloud_provider_name: string;
   ocp_cloud_provider_region: string;
@@ -65,7 +68,7 @@ export class Engagement {
   project_name: string;
   start_date: string;
   technical_lead_email: string;
-  technical_lead_name: string
+  technical_lead_name: string;
 
   static fromFake() {
     return new Engagement({
@@ -75,8 +78,9 @@ export class Engagement {
       customer_name: faker.lorem.word(),
       description: faker.lorem.word(),
       end_date: faker.lorem.word(),
+      engagement_users: [],
       engagement_lead_email: faker.lorem.word(),
-      engagementLeadName: faker.lorem.word(),
+      engagement_lead_name: faker.lorem.word(),
       location: faker.lorem.word(),
       ocp_cloud_provider_name: faker.lorem.word(),
       ocp_cloud_provider_region: faker.lorem.word(),
