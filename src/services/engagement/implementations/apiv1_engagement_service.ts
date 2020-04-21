@@ -1,8 +1,8 @@
-import { EngagementRepository } from '../engagement_repository';
-import { Engagement } from '../../../models/engagement';
+import { EngagementService } from '../engagement_service';
+import { Engagement } from '../../../schemas/engagement';
 import { AxiosInstance } from 'axios';
 
-export class ApiV1EngagementRepository extends EngagementRepository {
+export class Apiv1EngagementService extends EngagementService {
   constructor({
     axios,
     baseUrl,

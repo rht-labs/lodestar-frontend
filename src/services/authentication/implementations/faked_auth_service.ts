@@ -1,7 +1,7 @@
-import { UserToken } from '../../../models/user_token';
-import { UserProfile } from '../../../models/user_profile';
+import { UserToken } from '../../../schemas/user_token';
+import { UserProfile } from '../../../schemas/user_profile';
 
-export class FakedAuthenticationRepository {
+export class FakedAuthService {
   saveToken(token: UserToken): void {
     return;
   }

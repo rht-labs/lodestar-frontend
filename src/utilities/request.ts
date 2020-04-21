@@ -1,10 +1,10 @@
-import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
+import { AuthService } from '../services/authentication/authentication_service';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 export class Request {
   constructor({
     authenticationRepository,
   }: {
-    authenticationRepository: AuthenticationRepository;
+    authenticationRepository: AuthService;
   }) {
     this.authenticationRepository = authenticationRepository;
     this.client = axios.create({});
@@ -15,7 +15,7 @@ export class Request {
     );
   }
 
-  private authenticationRepository: AuthenticationRepository;
+  private authenticationRepository: AuthService;
 
   client: AxiosInstance;
 

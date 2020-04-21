@@ -1,8 +1,8 @@
-import { ConfigRepository } from '../config_repository';
-import { Config } from '../../../models/config';
+import { ConfigService } from '../config_service';
+import { Config } from '../../../schemas/config';
 import Axios, { AxiosInstance } from 'axios';
 
-export class PublicConfigRepository extends ConfigRepository {
+export class PublicConfigService extends ConfigService {
   constructor({ axios = Axios.create() }: { axios?: AxiosInstance }) {
     super();
     this.axios = axios;

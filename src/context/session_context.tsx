@@ -5,11 +5,11 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { ApiV1AuthenticationRepository } from '../repositories/authentication/implementations/api_v1_repository';
-import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
+import { Apiv1AuthService } from '../services/authentication/implementations/apiv1_auth_service';
+import { AuthService } from '../services/authentication/authentication_service';
 
-import { UserProfile } from '../models/user_profile';
-import { UserToken } from '../models/user_token';
+import { UserProfile } from '../schemas/user_profile';
+import { UserToken } from '../schemas/user_token';
 import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
@@ -45,11 +45,11 @@ export const SessionProvider = ({
   authenticationRepository: authRepo,
 }: {
   children: React.ReactChild;
-  authenticationRepository?: AuthenticationRepository;
+  authenticationRepository?: AuthService;
 }) => {
   const configContext = useContext(ConfigContext);
-  const authenticationRepository: AuthenticationRepository =
-    authRepo ?? new ApiV1AuthenticationRepository(configContext);
+  const authenticationRepository: AuthService =
+    authRepo ?? new Apiv1AuthService(configContext);
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -83,8 +83,8 @@ export const SessionProvider = ({
 
   useEffect(() => {
     if (!!configContext.appConfig) {
-      const authenticationRepository: AuthenticationRepository =
-        authRepo ?? new ApiV1AuthenticationRepository(configContext);
+      const authenticationRepository: AuthService =
+        authRepo ?? new Apiv1AuthService(configContext);
       authenticationRepository.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationRepository.getToken();
         if (isLoggedIn && tokens) {

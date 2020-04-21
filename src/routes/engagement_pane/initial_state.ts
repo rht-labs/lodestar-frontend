@@ -19,4 +19,5 @@ export const initialState = {
   ocp_sub_domain: null,
   ocp_persistent_storage_size: null,
   ocp_cluster_size: null,
+  engagement: null,
 };

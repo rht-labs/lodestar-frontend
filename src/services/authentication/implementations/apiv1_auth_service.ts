@@ -1,12 +1,12 @@
 import Axios, { AxiosInstance } from 'axios';
-import { UserToken } from '../../../models/user_token';
+import { UserToken } from '../../../schemas/user_token';
 import qs from 'querystring';
-import { UserProfile } from '../../../models/user_profile';
+import { UserProfile } from '../../../schemas/user_profile';
 import { ConfigContextParams } from '../../../context/config_context';
-import { AuthenticationRepository } from '../authentication_repository';
+import { AuthService } from '../authentication_service';
 const TOKEN_STORAGE_KEY = 'token';
 
-export class ApiV1AuthenticationRepository implements AuthenticationRepository {
+export class Apiv1AuthService implements AuthService {
   constructor(config: ConfigContextParams, requestClient?: AxiosInstance) {
     this.axios = requestClient ?? Axios.create({});
     this.config = config;
