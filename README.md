@@ -1,9 +1,37 @@
 # OMP Frotend Quickstart
 
+## Organization
+
+The application is separated into several main components. All of these components are located in folders within `src/`.
 
 
+### `src/components`
+`src/components` contains shared components that can be reused across the application. These include custom components built for OMP specifically, or wrapped components from a third-party library.
 
---------------------------------------------
+In this application, components should be stateless as much as possible. They should not contain business logic.
+
+### `src/context`
+`src/context` contains the application contexts. Contexts hold all of the global state and business logic for OMP. For the React docs on Contexts, [see here](https://reactjs.org/docs/context.html).
+
+Contexts serve as the central nervous system for the application. They handle the dirty business of retrieving data from services, processing that data, handling exceptions, storing data, and notifying children of changes. All business logic should flow through a context.
+
+### `src/routes`
+`src/routes` holds container-level UI components. Effectively, anything that would be considered a separate screen will likely have a place in the `routes/` folder. Essentially the components in `src/routes` equate to templates in other design patterns.
+
+`routes` orchestrate smaller components into a more meaningful whole. In some cases, `routes` may be responsible for making some calls to `contexts`, such as asking the context to fetch data that the template needs to render properly. Importantly, though, the `route` should delegate data processing and service calls to the `context`. If you are attempting to make a service call from a `route`, take a step back, and consider how to move that call into the context.
+
+### `src/schemas`
+`src/schemas` contains the data models that are shared across the application. A `schema` is typically a class with a public interface that encapsulates data. The schema may contain some convenience methods for data routine, small tasks, such as combining `firstName` and `lastName` into `fullName`.
+
+Schemas should not contain significant business logic. Schemas should be ignorant of the services that return them.
+
+### `src/services`
+`src/services` encapsulate the dirty details of reaching out to an external service and returning results. Services ought not contain significant business logic; rather, they should be concerned with implementing calls to API's.
+
+Each service is contained in a folder. At the root of the folder is an eponymous file. This file contains the public interface of the service. Any implementer of that interface lives in a folder called `implementations`. This structure allows the contexts to quickly switch between different implementations of the same service.
+
+---
+
 # The React stuff
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -79,9 +107,9 @@ develop.* or feature.* - env.PROJECT_NAMESPACE = "${NAMESPACE_PREFIX}-dev"
 
 #### Ansible
 
-Jenkins will spin up an Ansible agent that will run a playbook called OpenShift Applier (https://github.com/redhat-cop/openshift-applier). The openshift-applier is used to apply OpenShift objects to an OpenShift Cluster. 
+Jenkins will spin up an Ansible agent that will run a playbook called OpenShift Applier (https://github.com/redhat-cop/openshift-applier). The openshift-applier is used to apply OpenShift objects to an OpenShift Cluster.
 
-This stage is going to download the playbook dependencies using Ansible Galaxy and apply the playbook using **build** as a *filter_tag*. This is going to create the necessary resources for our application build in an OpenShift cluster. 
+This stage is going to download the playbook dependencies using Ansible Galaxy and apply the playbook using **build** as a _filter_tag_. This is going to create the necessary resources for our application build in an OpenShift cluster.
 
 #### Test/Node Build/Nexus/OpenShift Build
 
@@ -133,12 +161,11 @@ oc patch bc ${APP_NAME} -p "{\\"spec\\":{\\"output\\":{\\"to\\":{\\"kind\\":\\"D
 oc start-build ${APP_NAME} --from-dir=package-contents/ --follow
 ```
 
-
 #### OpenShift Deployment
 
-Jenkins will spin up an Ansible agent that will run a playbook called OpenShift Applier (https://github.com/redhat-cop/openshift-applier). The `openshift-applier` is used to apply OpenShift objects to an OpenShift Cluster. 
+Jenkins will spin up an Ansible agent that will run a playbook called OpenShift Applier (https://github.com/redhat-cop/openshift-applier). The `openshift-applier` is used to apply OpenShift objects to an OpenShift Cluster.
 
-This agent is going to download the playbook dependencies using Ansible Galaxy and apply the playbook using **environment** as a *filter_tag*. This is going to create the necessary resources for our application deploy in an OpenShift cluster. 
+This agent is going to download the playbook dependencies using Ansible Galaxy and apply the playbook using **environment** as a _filter_tag_. This is going to create the necessary resources for our application deploy in an OpenShift cluster.
 
 Once the resources are ready the pipeline is going to patch the DC with the new image and start a rollout deployment.
 
@@ -157,7 +184,6 @@ Because environment variables are compiled into the built source code of the fro
 Configuration is set using a json file stored in `config/config.json` of the build directory. The JSON file is loaded via network request on page load. Once the configuration has loaded, the web application renders. This allows a volume to be mounted to `config/config.json` and provide dynamic configuration variables to the client depending on the environment in which the frontend is deployed.
 
 An example `config.json` can be seen in the public folder in `config/config.example.json`.
-
 
 ## Learn More
 
