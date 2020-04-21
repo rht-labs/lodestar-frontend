@@ -68,22 +68,6 @@ export const EngagementFormProvider = ({
       setOpenshiftOptions(parsedData['openshift']);
       setProviderOptions(parsedData['providers']);
       setUserManagementOptions(parsedData['user-management']);
-      // dispatch({
-      //   type: 'ocp_cloud_provider_region',
-      //   payload: parsedData.providers[0].regions[0].value,
-      // });
-      // dispatch({
-      //   type: 'ocp_cloud_provider_name',
-      //   payload: parsedData.providers[0].value,
-      // });
-      // dispatch({
-      //   type: 'ocp_cluster_size',
-      //   payload: parsedData.openshift['cluster-size'][0].value,
-      // });
-      // dispatch({
-      //   type: 'ocp_version',
-      //   payload: parsedData.openshift.versions[0].value,
-      // });
     } catch (e) {
       setRequestError(e);
     } finally {
