@@ -6,8 +6,9 @@ import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
 import { EngagementFormContext } from '../../context/engagement_form_context';
 import { Loading } from './Loading';
-import { EngagementNav } from '../../components/engagement_nav';
+import { EngagementNav } from '../../components/omp_engagement_nav';
 import { EngagementContext } from '../../context/engagement_context';
+import { OMPEngagementButtonPane} from '../../components/omp_engagement_button_pane';
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
@@ -90,6 +91,7 @@ export function EngagementPane() {
             </Tab>
           </Tabs>
         </div>
+        <OMPEngagementButtonPane/>
       </div>
       {engagementFormRequestError ? (
         <Alert isInline title="We encountered an error." variant="danger">
