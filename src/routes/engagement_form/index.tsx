@@ -20,29 +20,24 @@ export function EngagementForm() {
     formReducer,
     initialState
   );
-  const [clusterOptions, setClusterOptions] = useState(null);
+  const [clusterOptions] = useState(null);
   const engagementFormContext = useContext(EngagementFormContext);
   useEffect(() => {
-    const data = engagementFormContext.sessionData;
-    if (!data) {
-      return;
-    }
-    setClusterOptions(data);
     dispatch({
       type: 'ocp_cloud_provider_region',
-      payload: data.providers[0].regions[0].value,
+      payload: engagementFormContext.providerOptions[0].regions[0].value,
     });
     dispatch({
       type: 'ocp_cloud_provider_name',
-      payload: data.providers[0].value,
+      payload: engagementFormContext.providerOptions[0].value,
     });
     dispatch({
       type: 'ocp_cluster_size',
-      payload: data.openshift['cluster-size'][0].value,
+      payload: engagementFormContext.openshiftOptions['cluster-size'][0].value,
     });
     dispatch({
       type: 'ocp_version',
-      payload: data.openshift.versions[0].value,
+      payload: engagementFormContext.openshiftOptions.versions[0].value,
     });
   }, [engagementFormContext]);
   const engagementFormRequestError = engagementFormContext.error;
