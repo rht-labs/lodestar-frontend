@@ -1,4 +1,4 @@
-import { Engagement } from '../../schemas/engagement';
+import { Engagement } from '../../schemas/engagement_schema';
 
 export abstract class EngagementService {
   abstract async fetchEngagements(): Promise<Engagement[]>;

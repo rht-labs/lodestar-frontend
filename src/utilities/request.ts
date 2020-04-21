@@ -1,4 +1,4 @@
-import { AuthService } from '../services/authentication/authentication_service';
+import { AuthService } from '../services/authentication_service/authentication_service';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 export class Request {
   constructor({

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react';
-import { PublicConfigService } from '../services/config/implementations/public_config_service';
+import { PublicConfigService } from '../services/config_service/implementations/public_config_service';
 import { Config } from '../schemas/config';
 export interface ConfigContextParams {
   appConfig: Config | null;
