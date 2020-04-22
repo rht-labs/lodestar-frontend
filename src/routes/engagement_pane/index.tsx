@@ -43,6 +43,11 @@ export function EngagementPane() {
     backgroundColor: '#FFFFFF',
   };
 
+  const tab: React.CSSProperties = {
+    borderBottom: '.5px solid #AFBAC4',
+    borderRight: '.5px solid #AFBAC4',
+  };
+
   const engagementFormRequestError = engagementFormContext.error;
   
   return (
@@ -58,19 +63,19 @@ export function EngagementPane() {
             activeKey={activeTabKey}
             onSelect={handleTabClick}
           >
-            <Tab eventKey={0} title="Basic Information">
+            <Tab style={tab} eventKey={0} title="Basic Information">
               <BasicInformation
                 values={engagementFormContext.state}
                 onChange={engagementFormContext.dispatch}
               />
             </Tab>
-            <Tab eventKey={1} title="Point of Contact">
+            <Tab style={tab} eventKey={1} title="Point of Contact">
               <PointOfContact
                 values={engagementFormContext.state}
                 onChange={engagementFormContext.dispatch}
               />
             </Tab>
-            <Tab eventKey={2} title="OpenShift Cluster">
+            <Tab style={tab} eventKey={2} title="OpenShift Cluster">
               {!engagementFormContext.providerOptions ||
               !engagementFormContext.openshiftOptions ? (
                 <Loading />
@@ -83,7 +88,7 @@ export function EngagementPane() {
                 />
               )}
             </Tab>
-            <Tab eventKey={3} title="Cluster Users">
+            <Tab style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
                 userManagementOptions={engagementFormContext.userManagementOptions}
                 values={engagementFormContext.state}
