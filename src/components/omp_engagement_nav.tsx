@@ -12,14 +12,6 @@ import {
 import { EngagementContext } from '../context/engagement_context';
 
 function _EngagementNav() {
-  const engagementContext = useContext(EngagementContext);
-
-  const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
-    false
-  );
-
-  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
-  
   const columnHeaderStyle: React.CSSProperties = {
     textAlign: 'center',
     paddingTop: 8,
@@ -62,6 +54,19 @@ function _EngagementNav() {
     borderRadius: 4
   }
   
+  const engagementContext = useContext(EngagementContext);
+
+  const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
+    false
+  );
+  
+  const [customer_name, setCustomerName] = useState<string>('');
+  const [project_name, setProjectName] = useState<string>('');
+  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(
+    false
+  );
+
   const onNavSelect = result => {
     setSelectedEngagement(result.itemId);
     console.log(engagementContext.engagements[result.itemId])
@@ -90,10 +95,6 @@ function _EngagementNav() {
       </NavItem>
     );
   });
-  
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(
-    false
-  );
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -103,9 +104,6 @@ function _EngagementNav() {
     engagementContext.createEngagement({customer_name, project_name});
     handleModalToggle();
   }
-
-  const [customer_name, setCustomerName] = useState<string>('');
-  const [project_name, setProjectName] = useState<string>('');
 
   return (
     <Nav style={ navColumnStyle } onSelect={onNavSelect}>
