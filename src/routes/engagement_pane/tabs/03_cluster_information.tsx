@@ -44,7 +44,7 @@ export const ClusterInformation = ({
     )?.regions ?? [];
 
   if (
-    availableProviderRegionOptions.length === 0 &&
+    availableProviderRegionOptions?.length === 0 &&
     values.ocp_cloud_provider_region
   ) {
     availableProviderRegionOptions.push({
@@ -82,8 +82,8 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="Cloud provider region"
-          isDisabled={availableProviderRegionOptions.length === 0}
-          readOnly={availableProviderRegionOptions.length === 0}
+          isDisabled={availableProviderRegionOptions?.length === 0}
+          readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
           onChange={e =>
             onChange({ type: 'ocp_cloud_provider_region', payload: e })
@@ -109,17 +109,21 @@ export const ClusterInformation = ({
           style={input}
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
-          isDisabled={openshiftOptions.versions.length === 1}
+          isDisabled={openshiftOptions.versions?.length === 1}
           onChange={e => onChange({ type: 'ocp_version', payload: e })}
         >
-          {openshiftOptions.versions.map((option: any, index: any) => (
-            <FormSelectOption
-              isDisabled={option.disabled}
-              key={index}
-              value={option.value}
-              label={option.label}
-            />
-          ))}
+          {openshiftOptions?.versions?.length > 0 ? (
+            openshiftOptions?.versions?.map((option: any, index: any) => (
+              <FormSelectOption
+                isDisabled={option.disabled}
+                key={index}
+                value={option.value}
+                label={option.label}
+              />
+            ))
+          ) : (
+            <FormSelectOption value={''} label={''} />
+          )}
         </FormSelect>
       </FormGroup>
 
@@ -159,21 +163,25 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="Persistent Storage Needs"
-          isDisabled={openshiftOptions['persistent-storage'].length === 1}
+          isDisabled={openshiftOptions['persistent-storage']?.length === 1}
           onChange={e =>
             onChange({ type: 'ocp_persistent_storage_size', payload: e })
           }
           value={values.ocp_persistent_storage_size || ''}
         >
-          {openshiftOptions['persistent-storage'].map(
-            (option: any, index: any) => (
+          {openshiftOptions['persistent-storage']?.length > 0 ? (
+            openshiftOptions[
+              'persistent-storage'
+            ].map((option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}
                 key={index}
                 label={option.label}
                 value={option.value}
               />
-            )
+            ))
+          ) : (
+            <FormSelectOption label={''} value={''} />
           )}
         </FormSelect>
       </FormGroup>
@@ -181,17 +189,21 @@ export const ClusterInformation = ({
         <FormSelect
           aria-label="Cluster Size"
           value={values.ocp_cluster_size || ''}
-          isDisabled={openshiftOptions['cluster-size'].length === 1}
+          isDisabled={openshiftOptions['cluster-size']?.length === 1}
           onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
         >
-          {openshiftOptions['cluster-size'].map((option: any, index: any) => (
-            <FormSelectOption
-              isDisabled={option.disabled}
-              key={index}
-              label={option.label}
-              value={option.value}
-            />
-          ))}
+          {openshiftOptions['cluster-size']?.length > 0 ? (
+            openshiftOptions['cluster-size'].map((option: any, index: any) => (
+              <FormSelectOption
+                isDisabled={option.disabled}
+                key={index}
+                label={option.label}
+                value={option.value}
+              />
+            ))
+          ) : (
+            <FormSelectOption label={''} value={''} />
+          )}
         </FormSelect>
       </FormGroup>
     </Form>

@@ -122,7 +122,7 @@ export const EngagementFormProvider = ({
   );
 };
 
-const getInitialState = (engagement?: Engagement): Engagement => {
+export const getInitialState = (engagement?: Engagement): Engagement => {
   return {
     project_id: engagement?.project_id ?? null,
     customer_name: engagement?.customer_name ?? null,
