@@ -56,7 +56,35 @@ export const EngagementFormProvider = ({
       type: 'switch_engagement',
       payload: getInitialState(engagementContext.activeEngagement),
     });
-  }, [engagementContext.activeEngagement]);
+    if (providerOptions) {
+      dispatch({
+        type: 'ocp_cloud_provider_region',
+        payload:
+          engagementContext.activeEngagement?.ocp_cloud_provider_region ??
+          providerOptions[0].regions[0].value,
+      });
+      dispatch({
+        type: 'ocp_cloud_provider_name',
+        payload:
+          engagementContext.activeEngagement?.ocp_cloud_provider_name ??
+          providerOptions[0].value,
+      });
+    }
+    if (openshiftOptions) {
+      dispatch({
+        type: 'ocp_cluster_size',
+        payload:
+          engagementContext.activeEngagement?.ocp_cluster_size ??
+          openshiftOptions['cluster-size'][0].value,
+      });
+      dispatch({
+        type: 'ocp_version',
+        payload:
+          engagementContext.activeEngagement?.ocp_version ??
+          openshiftOptions.versions[0].value,
+      });
+    }
+  }, [engagementContext.activeEngagement, openshiftOptions, providerOptions]);
 
   const getSessionData = useCallback(async () => {
     try {
