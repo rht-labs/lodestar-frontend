@@ -25,7 +25,7 @@ export const ClusterInformation = ({
   const availableProviders = [...providerOptions];
   if (
     !availableProviders.find(
-      option => option.value === values.ocp_cloud_provider_name
+      option => option.label === values.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({

@@ -35,7 +35,9 @@ export const EngagementProvider = ({
   });
 
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [activeEngagement, setActiveEngagement] = useState<Engagement | undefined >();
+  const [activeEngagement, setActiveEngagement] = useState<
+    Engagement | undefined
+  >();
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
@@ -44,18 +46,67 @@ export const EngagementProvider = ({
     }
   }, [engagementRepository]);
 
+  const _addNewEngagement = useCallback(
+    (newEngagement: Engagement) => {
+      try {
+        const newEngagementList = [newEngagement, ...engagements];
+        setEngagements(newEngagementList);
+      } catch (e) {
+        // TODO: Handle setting the error
+      }
+    },
+    [engagements]
+  );
+
   const createEngagement = useCallback(
     async (data: any) => {
-      engagementRepository.createEngagement(data);
+      try {
+        const engagement = await engagementRepository.createEngagement(data);
+        _addNewEngagement(engagement);
+        setActiveEngagement(engagement);
+      } catch (e) {}
     },
-    [engagementRepository]
+    [engagementRepository, _addNewEngagement]
+  );
+
+  const _updateEngagementInPlace = useCallback(
+    engagement => {
+      const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
+        if (
+          engagement?.project_name &&
+          engagement?.customer_name &&
+          engagement?.project_name === comparisonEngagement?.project_name &&
+          engagement?.customer_name === comparisonEngagement?.customer_name
+        ) {
+          return true;
+        }
+        return false;
+      });
+      const oldEngagement = engagements[oldEngagementIndex];
+      if (oldEngagementIndex > -1) {
+        const newEngagements = [...engagements];
+        newEngagements.splice(oldEngagementIndex, 1, engagement);
+        setEngagements(newEngagements);
+      }
+      return oldEngagement;
+    },
+    [engagements]
   );
 
   const saveEngagement = useCallback(
     async (data: any) => {
-      engagementRepository.saveEngagement(data);
+      const oldEngagement = _updateEngagementInPlace(data);
+      try {
+        const returnedEngagement = await engagementRepository.saveEngagement(
+          data
+        );
+        _updateEngagementInPlace(returnedEngagement);
+      } catch (e) {
+        _updateEngagementInPlace(oldEngagement);
+        // TODO: Add error state
+      }
     },
-    [engagementRepository]
+    [engagementRepository, _updateEngagementInPlace]
   );
 
   return (
@@ -64,6 +115,7 @@ export const EngagementProvider = ({
         activeEngagement,
         setActiveEngagement,
         engagements,
+        // TODO: add error state
         getEngagements: fetchEngagements,
         createEngagement,
         saveEngagement,

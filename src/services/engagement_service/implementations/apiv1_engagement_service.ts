@@ -3,16 +3,10 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { AxiosInstance } from 'axios';
 
 export class Apiv1EngagementService extends EngagementService {
-  constructor({
-    axios,
-    baseUrl,
-  }: {
-    axios?: AxiosInstance;
-    baseUrl?: string;
-  }) {
+  constructor({ axios, baseUrl }: { axios?: AxiosInstance; baseUrl?: string }) {
     super();
     if (!axios) {
-      throw new Error('axios is required')
+      throw new Error('axios is required');
     }
     this.axios = axios;
     this.baseUrl = baseUrl;
@@ -20,13 +14,25 @@ export class Apiv1EngagementService extends EngagementService {
   baseUrl?: string;
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
-      const {data: engagementsData} = await this.axios.get(`${this.baseUrl}/engagements`);
-      return engagementsData.map((engagementMap) => new Engagement(engagementMap as Engagement));
+    const { data: engagementsData } = await this.axios.get(
+      `${this.baseUrl}/engagements`
+    );
+    return engagementsData.map(
+      engagementMap => new Engagement(engagementMap as Engagement)
+    );
   }
-  async createEngagement(data: any): Promise<void> {
-      this.axios.post(`${this.baseUrl}/engagements`, data);
+  async createEngagement(engagementData: any): Promise<Engagement> {
+    const { data } = await this.axios.post(
+      `${this.baseUrl}/engagements`,
+      engagementData
+    );
+    return new Engagement(data as Engagement);
   }
-  async saveEngagement(data: any): Promise<void> {
-    await this.axios.put(`${this.baseUrl}/engagements/customers/${data.customer_name}/projects/${data.project_name}`, data);
+  async saveEngagement(engagementData: any): Promise<Engagement> {
+    const { data } = await this.axios.put(
+      `${this.baseUrl}/engagements/customers/${engagementData.customer_name}/projects/${engagementData.project_name}`,
+      engagementData
+    );
+    return new Engagement(data as Engagement);
   }
 }
