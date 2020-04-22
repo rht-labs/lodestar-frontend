@@ -1,4 +1,5 @@
 name: omp-frontend
+development: true
 
 servicePort: 8080
 
