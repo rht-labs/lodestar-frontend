@@ -1,13 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {
-  Nav, 
+  Nav,
   NavItem,
   NavList,
   Modal,
   Button,
   Form,
   FormGroup,
-  TextInput } from '@patternfly/react-core';
+  TextInput,
+} from '@patternfly/react-core';
 
 import { EngagementContext } from '../context/engagement_context';
 
@@ -21,24 +22,24 @@ function _EngagementNav() {
     fontWeight: 'bold',
   };
 
-// set style .pf-c-nav__link:active::after to width 75%
+  // set style .pf-c-nav__link:active::after to width 75%
 
   const navSub: React.CSSProperties = {
-    fontSize: 12
-  }
+    fontSize: 12,
+  };
 
   const navColumnStyle: React.CSSProperties = {
     overflow: 'scroll',
-    height: '100%'
-  }
+    height: '100%',
+  };
 
   const navDisplay: React.CSSProperties = {
     display: 'block',
-  }
+  };
 
   const newInstruct: React.CSSProperties = {
     marginBottom: 30,
-  }
+  };
 
   const newEngagementButton: React.CSSProperties = {
     position: 'absolute',
@@ -50,26 +51,33 @@ function _EngagementNav() {
     paddingLeft: 7,
     paddingTop: 1,
     color: '#ffffff',
-    borderRadius: 4
-  }
-  
+    borderRadius: 4,
+  };
+
   const engagementContext = useContext(EngagementContext);
 
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
-  
+
   const [customer_name, setCustomerName] = useState<string>('');
   const [project_name, setProjectName] = useState<string>('');
-  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(
-    false
-  );
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const onNavSelect = result => {
-    setSelectedEngagement(result.itemId);
-    console.log(engagementContext.engagements[result.itemId])
-    engagementContext.setActiveEngagement(engagementContext.engagements[result.itemId]);
+    console.log(engagementContext.engagements[result.itemId]);
+    engagementContext.setActiveEngagement(
+      engagementContext.engagements[result.itemId]
+    );
+  };
+
+  const isSameEngagement = (engagementA, engagementB) => {
+    return (
+      engagementA &&
+      engagementB &&
+      engagementA.project_name === engagementB.project_name &&
+      engagementA.customer_name === engagementB.customer_name
+    );
   };
 
   useEffect(() => {
@@ -78,88 +86,98 @@ function _EngagementNav() {
       engagementContext.getEngagements();
     }
   }, [engagementContext, hasFetchedEngagements]);
-  const navItems = engagementContext.engagements.sort(function(a, b) {
+
+  const navItems = engagementContext.engagements
+    .sort(function(a, b) {
       var textA = a.customer_name.toUpperCase();
       var textB = b.customer_name.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-  }).map((engagement, index) => {
-    return (
-      <NavItem
-        style={navDisplay}
-        key={index}
-        itemId= {index}
-        isActive={selectedEngagement === index}
-      >
-        <div>{engagement.project_name}</div><span style={navSub}>{engagement.customer_name}</span>
-      </NavItem>
-    );
-  });
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    })
+    .map((engagement, index) => {
+      return (
+        <NavItem
+          style={navDisplay}
+          key={index}
+          itemId={index}
+          isActive={isSameEngagement(
+            engagement,
+            engagementContext.activeEngagement
+          )}
+        >
+          <div>{engagement.project_name}</div>
+          <span style={navSub}>{engagement.customer_name}</span>
+        </NavItem>
+      );
+    });
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
-  }
+  };
 
   const createNewEngagement = () => {
-    engagementContext.createEngagement({customer_name, project_name});
+    engagementContext.createEngagement({ customer_name, project_name });
     handleModalToggle();
-  }
+  };
 
   return (
-    <Nav style={ navColumnStyle } onSelect={onNavSelect}>
-      <div style={ columnHeaderStyle }>ENGAGEMENTS</div>
-      <button onClick={ handleModalToggle } style={ newEngagementButton }>+</button>
+    <Nav style={navColumnStyle} onSelect={onNavSelect}>
+      <div style={columnHeaderStyle}>ENGAGEMENTS</div>
+      <button onClick={handleModalToggle} style={newEngagementButton}>
+        +
+      </button>
       <Modal
-          width={'50%'}
-          title="Create New Engagement"
-          isOpen={isModalOpen}
-          onClose={handleModalToggle}
-          actions={[
-            <Button key="confirm" variant="primary" onClick={createNewEngagement}>
-              Submit
-            </Button>,
-            <Button key="cancel" variant="link" onClick={handleModalToggle}>
-              Cancel
-            </Button>
-          ]}
-          isFooterLeftAligned
-        >
-          <div style={newInstruct}>To create a new Engagement, please enter a client and product name then click submit.</div>
-          <Form isHorizontal>
-            <FormGroup
-              label="Customer Name"
-              fieldId="customer-name"
-              helperText="What client is this for?"
-              isRequired
-            >
-              <TextInput
-                type="text"
-                id="customer_name"
-                name="customer_name"
-                placeholder="e.g. NASA"
-                value={customer_name || ''}
-                onChange={setCustomerName}
-              />
-            </FormGroup>
-            <FormGroup
-              label="Project Name"
-              fieldId="project-name"
-              helperText="The name of the solution being worked on."
-              isRequired
-            >
-              <TextInput
-                type="text"
-                id="project_name"
-                name="project_name"
-                placeholder="e.g. Mars Probe"
-                value={project_name || ''}
-                onChange={setProjectName}
-              />
-            </FormGroup>
-          </Form>
-        </Modal>
-      <NavList>
-        {navItems}
-      </NavList>
+        width={'50%'}
+        title="Create New Engagement"
+        isOpen={isModalOpen}
+        onClose={handleModalToggle}
+        actions={[
+          <Button key="confirm" variant="primary" onClick={createNewEngagement}>
+            Submit
+          </Button>,
+          <Button key="cancel" variant="link" onClick={handleModalToggle}>
+            Cancel
+          </Button>,
+        ]}
+        isFooterLeftAligned
+      >
+        <div style={newInstruct}>
+          To create a new Engagement, please enter a client and product name
+          then click submit.
+        </div>
+        <Form isHorizontal>
+          <FormGroup
+            label="Customer Name"
+            fieldId="customer-name"
+            helperText="What client is this for?"
+            isRequired
+          >
+            <TextInput
+              type="text"
+              id="customer_name"
+              name="customer_name"
+              placeholder="e.g. NASA"
+              value={customer_name || ''}
+              onChange={setCustomerName}
+            />
+          </FormGroup>
+          <FormGroup
+            label="Project Name"
+            fieldId="project-name"
+            helperText="The name of the solution being worked on."
+            isRequired
+          >
+            <TextInput
+              type="text"
+              id="project_name"
+              name="project_name"
+              placeholder="e.g. Mars Probe"
+              value={project_name || ''}
+              onChange={setProjectName}
+            />
+          </FormGroup>
+        </Form>
+      </Modal>
+      <NavList>{navItems}</NavList>
     </Nav>
   );
 }
