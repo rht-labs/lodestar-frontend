@@ -30,6 +30,7 @@ export interface SessionContext {
   axios?: AxiosInstance;
   authState: AuthenticationState;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
+  logout: () => {};
 }
 
 export const SessionContext = createContext<SessionContext>({
@@ -37,6 +38,7 @@ export const SessionContext = createContext<SessionContext>({
   axios: Axios.create(),
   authState: 'initial',
   handleLoginCallback: async () => {},
+  logout: async () => {},
 });
 const { Provider } = SessionContext;
 
@@ -81,6 +83,11 @@ export const SessionProvider = ({
     [authenticationRepository]
   );
 
+  const logout = async () => {
+    await authenticationRepository.clearSession()
+    return;
+  }
+
   useEffect(() => {
     if (!!configContext.appConfig) {
       const authenticationRepository: AuthenticationRepository =
@@ -111,6 +118,7 @@ export const SessionProvider = ({
         axios: requestHandler?.client,
         handleLoginCallback,
         authState: authStatus,
+        logout: logout,
       }}
     >
       {children}

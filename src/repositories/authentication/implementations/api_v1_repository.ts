@@ -42,8 +42,23 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
     }
   }
 
-  clearSession() {
+  async clearSession() {
+    console.log('we loggin out')
+    const logoutUrl = `${this.config.appConfig?.authBaseUrl}/logout`;
+    const token = this.getToken();
+    const requestParams = {
+      client_id: this.config.appConfig?.clientId,
+      refresh_token: token?.refreshToken ? token.refreshToken : '',
+    };
+    await Axios.post(logoutUrl, qs.stringify(requestParams), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: '*/*',
+      },
+    })
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
+    console.log('we logged out!')
+    return;
   }
 
   getToken = () => {

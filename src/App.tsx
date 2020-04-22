@@ -22,6 +22,7 @@ import { PrivateRoute } from './components/authentication/private_route';
 import { CallbackHandler } from './components/authentication/callback_handler';
 import { NavDefaultList } from './components/navigation/nav';
 import { EngagementForm } from './routes/engagement_form';
+import LogoutPage from './routes/logout';
 import { SessionProvider } from './context/session_context';
 import { ConfigProvider } from './context/config_context';
 import { EngagementFormProvider } from './context/engagement_form_context';
@@ -68,6 +69,7 @@ const MainTemplateRoutes = () => {
       <Route path="/feature-request" component={FeatureRequest} />
       <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
       <Route path="/auth_callback" component={CallbackHandler} />
+      <PrivateRoute path="/logout" component={() => <LogoutPage />} />
     </Switch>
   );
 };
