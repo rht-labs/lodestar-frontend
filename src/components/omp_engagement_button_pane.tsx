@@ -33,17 +33,12 @@ function _OMPEngagementButtonPane() {
 
   const saveCluster = () => {
     engagementContext.saveEngagement(engagementFormContext.state);
-    // const cn = engagementFormContext.state.customer_name;
-    // const pn = engagementFormContext.state.project_name
-    // engagementContext.engagements.find( ({ customer_name, project_name }) => customer_name === engagementFormContext.state.customer_name && project_name === engagementFormContext.state.project_name) = undefined;
-    // engagementContext.engagements.find(v => v.customer_name === cn && v.project_name === pn) = engagementFormContext.state;
-    // engagementContext.engagements[0] = engagementFormContext.state;
   }
 
   return (
     <div style={ buttonPane } >
       <Button onClick={saveCluster} style={ buttonDisplay } > Save </Button>
-      <Button onClick={launchCluster} style={ buttonDisplay } > Launch </Button>
+      <Button isDisabled={true} onClick={launchCluster} style={ buttonDisplay } > Launch </Button>
     </div>
   );
 }
