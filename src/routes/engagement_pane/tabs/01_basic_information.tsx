@@ -10,13 +10,18 @@ import {
 } from '@patternfly/react-core';
 export const BasicInformation = ({ values, onChange }: any) => {
   let formattedStart = '';
+  let startFormatted = false;
+
   if(values.start_date){
-    formattedStart = [values.start_date.slice(0, 4), "-", values.start_date.slice(4, 6), "-", values.start_date.slice(6, 8)].join('');
+    startFormatted = values.start_date.indexOf('-') > -1;
+    formattedStart = startFormatted ? values.start_date : [values.start_date.slice(0, 4), "-", values.start_date.slice(4, 6), "-", values.start_date.slice(6, 8)].join('');
   }
 
   let formattedEnd = '';
+  let endFormatted = false;
   if(values.end_date){
-    formattedEnd = [values.end_date.slice(0, 4), "-", values.end_date.slice(4, 6), "-", values.end_date.slice(6, 8)].join('');
+    endFormatted = values.end_date.indexOf('-') > -1;
+    formattedEnd = endFormatted ? values.end_date : [values.end_date.slice(0, 4), "-", values.end_date.slice(4, 6), "-", values.end_date.slice(6, 8)].join('');
   }
 
   const tabContent: React.CSSProperties = {

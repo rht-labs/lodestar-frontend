@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Button } from '@patternfly/react-core';
-
+import { EngagementFormContext } from '../context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context';
 import { slugProperties } from '../utilities/slug_properties';
 
 function _OMPEngagementButtonPane() {
   const engagementContext = useContext(EngagementContext);
+  const engagementFormContext = useContext(EngagementFormContext);
   console.log(engagementContext);
   
   const buttonPane: React.CSSProperties = {
@@ -23,9 +24,8 @@ function _OMPEngagementButtonPane() {
   }
 
   const launchCluster = () => {
-    console.log("funk");
     engagementContext.createEngagement(
-      slugProperties(values, [
+      slugProperties(engagementContext.activeEngagement, [
         'ocp_sub_domain',
         'customer_name',
         'project_name',
@@ -33,13 +33,19 @@ function _OMPEngagementButtonPane() {
     );
   }
 
+  const saveCluster = () => {
+    engagementContext.saveEngagement(engagementFormContext.state);
+    // const cn = engagementFormContext.state.customer_name;
+    // const pn = engagementFormContext.state.project_name
+    // engagementContext.engagements.find( ({ customer_name, project_name }) => customer_name === engagementFormContext.state.customer_name && project_name === engagementFormContext.state.project_name) = undefined;
+    // engagementContext.engagements.find(v => v.customer_name === cn && v.project_name === pn) = engagementFormContext.state;
+    // engagementContext.engagements[0] = engagementFormContext.state;
+  }
 
   return (
     <div style={ buttonPane } >
-      <Button style={ buttonDisplay }>Save</Button>
-      <Button
-        style={ buttonDisplay }
-        onClick={launchCluster}>Launch</Button>
+      <Button onClick={saveCluster} style={ buttonDisplay } > Save </Button>
+      <Button onClick={launchCluster} style={ buttonDisplay } > Launch </Button>
     </div>
   );
 }

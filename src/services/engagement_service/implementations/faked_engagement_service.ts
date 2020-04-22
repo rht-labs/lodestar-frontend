@@ -19,7 +19,7 @@ export class FakedEngagementService extends EngagementService {
   async fetchEngagements(): Promise<Engagement[]> {
     return new Array(8).fill(null).map(() => Engagement.fromFake());
   }
-  async createEngagement(data: any): Promise<void> {
+  async createEngagementCluster(data: any): Promise<void> {
     if (this.axios) {
       this.axios.post(`${this.baseUrl}/engagements`, data);
     }
