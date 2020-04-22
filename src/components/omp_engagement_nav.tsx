@@ -1,5 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Nav, NavItem, NavList } from '@patternfly/react-core';
+import {
+  Nav, 
+  NavItem,
+  NavList,
+  Modal,
+  Button,
+  Form,
+  FormGroup,
+  TextInput } from '@patternfly/react-core';
 
 import { EngagementContext } from '../context/engagement_context';
 
@@ -9,6 +17,8 @@ function _EngagementNav() {
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
+
+  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
   
   const columnHeaderStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -26,16 +36,31 @@ function _EngagementNav() {
     fontSize: 12
   }
 
-  const columnStyle: React.CSSProperties = {
-    overflow: 'auto',
+  const navColumnStyle: React.CSSProperties = {
+    overflow: 'scroll',
     height: '100vh'
   }
 
   const navDisplay: React.CSSProperties = {
     display: 'block',
   }
-  
-  const [selectedEngagement, setSelectedEngagement] = useState<number>(0);
+
+  const newInstruct: React.CSSProperties = {
+    marginBottom: 30,
+  }
+
+  const newEngagementButton: React.CSSProperties = {
+    position: 'absolute',
+    top: 8,
+    right: 5,
+    backgroundColor: '#0066cc',
+    width: 25,
+    height: 25,
+    paddingLeft: 7,
+    paddingTop: 1,
+    color: '#ffffff',
+    borderRadius: 4
+  }
   
   const onNavSelect = result => {
     setSelectedEngagement(result.itemId);
@@ -65,10 +90,76 @@ function _EngagementNav() {
       </NavItem>
     );
   });
+  
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(
+    false
+  );
+
+  const handleModalToggle = () => {
+    setIsModalOpen(!isModalOpen);
+  }
+
+  const createNewEngagement = () => {
+    engagementContext.createEngagement({customer_name, project_name});
+    handleModalToggle();
+  }
+
+  const [customer_name, setCustomerName] = useState<string>('');
+  const [project_name, setProjectName] = useState<string>('');
 
   return (
-    <Nav style={ columnStyle } onSelect={onNavSelect}>
+    <Nav style={ navColumnStyle } onSelect={onNavSelect}>
       <div style={ columnHeaderStyle }>ENGAGEMENTS</div>
+      <button onClick={ handleModalToggle } style={ newEngagementButton }>+</button>
+      <Modal
+          width={'50%'}
+          title="Create New Engagement"
+          isOpen={isModalOpen}
+          onClose={handleModalToggle}
+          actions={[
+            <Button key="confirm" variant="primary" onClick={createNewEngagement}>
+              Submit
+            </Button>,
+            <Button key="cancel" variant="link" onClick={handleModalToggle}>
+              Cancel
+            </Button>
+          ]}
+          isFooterLeftAligned
+        >
+          <div style={newInstruct}>To create a new Engagement, please enter a client and product name then click submit.</div>
+          <Form isHorizontal>
+            <FormGroup
+              label="Customer Name"
+              fieldId="customer-name"
+              helperText="What client is this for?"
+              isRequired
+            >
+              <TextInput
+                type="text"
+                id="customer_name"
+                name="customer_name"
+                placeholder="e.g. NASA"
+                value={customer_name || ''}
+                onChange={setCustomerName}
+              />
+            </FormGroup>
+            <FormGroup
+              label="Project Name"
+              fieldId="project-name"
+              helperText="The name of the solution being worked on."
+              isRequired
+            >
+              <TextInput
+                type="text"
+                id="project_name"
+                name="project_name"
+                placeholder="e.g. Mars Probe"
+                value={project_name || ''}
+                onChange={setProjectName}
+              />
+            </FormGroup>
+          </Form>
+        </Modal>
       <NavList>
         {navItems}
       </NavList>

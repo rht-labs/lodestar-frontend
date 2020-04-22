@@ -10,6 +10,7 @@ export interface EngagementContext {
   setActiveEngagement: (Engagement: Engagement) => void;
   engagements: Engagement[];
   createEngagement: (data: any) => Promise<void>;
+  saveEngagement: (data: any) => Promise<void>;
 }
 
 export const EngagementContext = createContext<EngagementContext>({
@@ -18,6 +19,7 @@ export const EngagementContext = createContext<EngagementContext>({
   setActiveEngagement: (engagement: Engagement) => {},
   engagements: [],
   createEngagement: async () => {},
+  saveEngagement: async () => {},
 });
 const { Provider } = EngagementContext;
 export const EngagementProvider = ({
@@ -33,9 +35,7 @@ export const EngagementProvider = ({
   });
 
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [activeEngagement, setActiveEngagement] = useState<
-    Engagement | undefined
-  >();
+  const [activeEngagement, setActiveEngagement] = useState<Engagement | undefined >();
   const fetchEngagements = useCallback(async () => {
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
@@ -51,6 +51,13 @@ export const EngagementProvider = ({
     [engagementRepository]
   );
 
+  const saveEngagement = useCallback(
+    async (data: any) => {
+      engagementRepository.saveEngagement(data);
+    },
+    [engagementRepository]
+  );
+
   return (
     <Provider
       value={{
@@ -59,6 +66,7 @@ export const EngagementProvider = ({
         engagements,
         getEngagements: fetchEngagements,
         createEngagement,
+        saveEngagement,
       }}
     >
       {children}

@@ -26,4 +26,7 @@ export class Apiv1EngagementService extends EngagementService {
   async createEngagement(data: any): Promise<void> {
       this.axios.post(`${this.baseUrl}/engagements`, data);
   }
+  async saveEngagement(data: any): Promise<void> {
+    await this.axios.put(`${this.baseUrl}/engagements/customers/${data.customer_name}/projects/${data.project_name}`, data);
+  }
 }

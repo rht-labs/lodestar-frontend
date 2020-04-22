@@ -55,7 +55,7 @@ export const LaunchCluster = ({ values }: any) => {
               setIsLoading(true);
 
               engagementContext
-                .createEngagement(
+                .createEngagementCluster(
                   slugProperties(values, [
                     'ocp_sub_domain',
                     'customer_name',
