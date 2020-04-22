@@ -43,7 +43,6 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
   }
 
   async clearSession() {
-    console.log('we loggin out')
     const logoutUrl = `${this.config.appConfig?.authBaseUrl}/logout`;
     const token = this.getToken();
     const requestParams = {
@@ -57,7 +56,6 @@ export class ApiV1AuthenticationRepository implements AuthenticationRepository {
       },
     })
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
-    console.log('we logged out!')
     return;
   }
 
