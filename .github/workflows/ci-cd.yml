@@ -1,20 +1,20 @@
-name: Node CI
+name: Build Container
 
 on:
   push:
     branches:
-    - master
+    - versioning
 
 jobs:
   check-links:
-    if: github.repository == 'rht-labs/open-management-portal-frontend'
+    if: github.repository == 'mcanoy/open-management-portal-frontend'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 #     - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
 # TODO: This fails because we have a localhost link in the README. Consider removing or otherwise ignoring.
   linting:
-    if: github.repository == 'rht-labs/open-management-portal-frontend'
+    if: github.repository == 'mcanoy/open-management-portal-frontend'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
 #         CI: true
 # TODO: This fails because we don't have linting... Consider (please) adding strict linting.
   build:
-    if: github.repository == 'rht-labs/open-management-portal-frontend'
+    if: github.repository == 'mcanoy/open-management-portal-frontend'
 
     runs-on: ubuntu-latest
 
@@ -40,16 +40,40 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Find and Replace Commit Manifest
+      uses: jacobtomlinson/gha-find-replace@0.1.1
+      with:
+        find: "4e3f530local"
+        replace: "${{ github.sha }}"
+        include: "public/manifest.json"
+    - name: Find and Replace Tag Manifest
+      uses: jacobtomlinson/gha-find-replace@0.1.1
+      with:
+        find: "v0.0.1-local"
+        replace: "${{ github.ref }}"
+        include: "public/manifest.json"
     - name: npm install, build, and test
       run: |
         ./build.sh
       env:
         CI: true
+    - name: Find and Replace Commit Env
+      uses: jacobtomlinson/gha-find-replace@0.1.1
+      with:
+        find: "###GIT_COMMIT###"
+        replace: "${{ github.sha }}"
+        include: "build/.s2i"
+    - name: Find and Replace Tag Env
+      uses: jacobtomlinson/gha-find-replace@0.1.1
+      with:
+        find: "###GIT_TAG###"
+        replace: "${{ github.ref }}"
+        include: "build/.s2i"
     - uses: redhat-cop/github-actions/s2i@v2
       with:
         base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
         path: build
-        output_image: "quay.io/rht-labs/omp-frontend:${{ github.sha }}"
+        output_image: "quay.io/mcanoy/omp-frontend:${{ github.sha }}"
         image_push_registry: quay.io
         image_push_username: ${{ secrets.QUAY_USERNAME }}
         image_push_password: ${{ secrets.QUAY_PASSWORD }}
