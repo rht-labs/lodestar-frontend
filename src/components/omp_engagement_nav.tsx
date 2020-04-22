@@ -30,7 +30,7 @@ function _EngagementNav() {
 
   const navColumnStyle: React.CSSProperties = {
     overflow: 'scroll',
-    height: '100vh'
+    height: '100%'
   }
 
   const navDisplay: React.CSSProperties = {

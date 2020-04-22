@@ -7,10 +7,8 @@ import { slugProperties } from '../utilities/slug_properties';
 function _OMPEngagementButtonPane() {
   const engagementContext = useContext(EngagementContext);
   const engagementFormContext = useContext(EngagementFormContext);
-  console.log(engagementContext);
   
   const buttonPane: React.CSSProperties = {
-    color: 'pink',
     position: 'absolute',
     right: 10,
     bottom: 10,
