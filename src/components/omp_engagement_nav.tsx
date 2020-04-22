@@ -24,7 +24,6 @@ function _EngagementNav() {
 // set style .pf-c-nav__link:active::after to width 75%
 
   const navSub: React.CSSProperties = {
-    color: '#AFBAC4',
     fontSize: 12
   }
 
