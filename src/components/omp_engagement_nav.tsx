@@ -65,7 +65,6 @@ function _EngagementNav() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const onNavSelect = result => {
-    console.log(engagementContext.engagements[result.itemId]);
     engagementContext.setActiveEngagement(
       engagementContext.engagements[result.itemId]
     );
