@@ -24,8 +24,12 @@ export const ClusterInformation = ({
 
   const availableProviders = [...providerOptions];
   if (
+    values.ocp_cloud_provider_name &&
     !availableProviders.find(
-      option => option.label === values.ocp_cloud_provider_name
+      option =>
+        option &&
+        option.label &&
+        option.label === values.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({
@@ -36,9 +40,18 @@ export const ClusterInformation = ({
 
   const availableProviderRegionOptions =
     providerOptions.find(
-      providerOption => providerOption.value === values.ocp_cloud_provider_name
+      providerOption => providerOption.label === values.ocp_cloud_provider_name
     )?.regions ?? [];
 
+  if (
+    availableProviderRegionOptions.length === 0 &&
+    values.ocp_cloud_provider_region
+  ) {
+    availableProviderRegionOptions.push({
+      value: values.ocp_cloud_provider_region,
+      label: values.ocp_cloud_provider_region,
+    });
+  }
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
@@ -76,21 +89,14 @@ export const ClusterInformation = ({
             onChange({ type: 'ocp_cloud_provider_region', payload: e })
           }
         >
-          {availableProviderRegionOptions.length > 0 ? (
-            availableProviderRegionOptions.map((option: any, index: any) => (
-              <FormSelectOption
-                isDisabled={option.disabled}
-                key={index}
-                value={option.value}
-                label={option.label}
-              />
-            ))
-          ) : (
+          {availableProviderRegionOptions.map((option: any, index: any) => (
             <FormSelectOption
-              value={values.ocp_cloud_provider_region}
-              label={values.ocp_cloud_provider_region}
+              isDisabled={option.disabled}
+              key={index}
+              value={option.value}
+              label={option.label}
             />
-          )}
+          ))}
         </FormSelect>
       </FormGroup>
 
