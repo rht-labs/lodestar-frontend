@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'enzyme';
 import { ClusterUsers } from './04_cluster_users';
-import { initialState } from '../initial_state';
+import { getInitialState } from '../../../context/engagement_form_context';
 
 const defaultOptions = {
   'user-management': {
@@ -32,7 +32,7 @@ const defaultOptions = {
 
 test('Basic component renders correctly', () => {
   const component = render(
-    <ClusterUsers options={defaultOptions} values={initialState} />
+    <ClusterUsers options={defaultOptions} values={getInitialState()} />
   );
   expect(component).toMatchSnapshot();
 });

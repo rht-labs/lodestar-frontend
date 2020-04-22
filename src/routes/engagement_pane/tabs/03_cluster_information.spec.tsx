@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'enzyme';
 import { ClusterInformation } from './03_cluster_information';
-import { initialState } from '../initial_state';
+import { getInitialState } from '../../../context/engagement_form_context';
 const options = {
   providers: [
     {
@@ -63,7 +63,12 @@ const options = {
 
 test('Basic component renders correctly', () => {
   const component = render(
-    <ClusterInformation options={options} values={initialState} />
+    <ClusterInformation
+      providerOptions={[]}
+      openshiftOptions={{}}
+      options={options}
+      values={getInitialState()}
+    />
   );
   expect(component).toMatchSnapshot();
 });
