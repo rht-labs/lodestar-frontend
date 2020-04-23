@@ -172,6 +172,13 @@ Configuration is set using a json file stored in `config/config.json` of the bui
 
 An example `config.json` can be seen in the public folder in `config/config.example.json`.
 
+The variables tracked in config/config.json are:
+  * baseUrl(string) - url of the frontend app
+  * clientId (string) - app ide
+  * authBaseUrl (string) - uri for sso
+  * backendUrl (string) - uri for apis apis
+  * disableLaunch (boolean) - toggle launch functionality
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
