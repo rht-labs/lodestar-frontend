@@ -11,6 +11,10 @@ import {
 
 export const BasicInformation = ({ values, onChange }: any) => {
   const getFormattedDate = (dateString: string = '') => {
+    // Dates must be formatted YYYY-MM-DD for patternfly date picker.
+    // They are coming back inconsistently from the backend,
+    // so this function checks to see if the date needs to be formatted,
+    // then formats the date appropriately
     if (!dateString) {
       return;
     }
