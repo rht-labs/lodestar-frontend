@@ -8,11 +8,24 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-import moment from 'moment';
 
 export const BasicInformation = ({ values, onChange }: any) => {
-  const getPatternflyFormattedDate = (yyyymmdd: string) =>
-    moment(yyyymmdd, 'YYYYMMDD').format('YYYY-MM-DD');
+  const getFormattedDate = (dateString: string = '') => {
+    if (!dateString) {
+      return;
+    }
+    if (dateString.indexOf('-') > -1) {
+      return dateString;
+    } else {
+      return [
+        dateString.slice(0, 4),
+        '-',
+        dateString.slice(4, 6),
+        '-',
+        dateString.slice(6, 8),
+      ].join('');
+    }
+  };
 
   const tabContent: React.CSSProperties = {
     margin: 45,
@@ -92,7 +105,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             aria-label="The end date."
             style={input}
-            value={getPatternflyFormattedDate(values.start_date) || ''}
+            value={getFormattedDate(values.start_date) || ''}
             onChange={e => onChange({ type: 'start_date', payload: e })}
           />
           <TextInput
@@ -101,7 +114,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             style={input}
             aria-label="Residency end date"
-            value={getPatternflyFormattedDate(values.end_date)}
+            value={getFormattedDate(values.end_date) || ''}
             onChange={e => onChange({ type: 'end_date', payload: e })}
           />
         </InputGroup>
