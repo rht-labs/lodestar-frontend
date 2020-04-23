@@ -42,8 +42,21 @@ export class Apiv1AuthService implements AuthService {
     }
   }
 
-  clearSession() {
+  async clearSession() {
+    const logoutUrl = `${this.config.appConfig?.authBaseUrl}/logout`;
+    const token = this.getToken();
+    const requestParams = {
+      client_id: this.config.appConfig?.clientId,
+      refresh_token: token?.refreshToken ? token.refreshToken : '',
+    };
+    await Axios.post(logoutUrl, qs.stringify(requestParams), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: '*/*',
+      },
+    })
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
+    return;
   }
 
   getToken = () => {
