@@ -1,7 +1,0 @@
-apiVersion: image.openshift.io/v1
-kind: ImageStream
-metadata:
-  name: {{ .Values.imageName }}
-spec:
-  lookupPolicy:
-    local: false
