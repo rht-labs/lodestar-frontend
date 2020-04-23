@@ -8,28 +8,18 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
+import moment from 'moment';
+
 export const BasicInformation = ({ values, onChange }: any) => {
-  let formattedStart = '';
-  let startFormatted = false;
-
-  if(values.start_date){
-    startFormatted = values.start_date.indexOf('-') > -1;
-    formattedStart = startFormatted ? values.start_date : [values.start_date.slice(0, 4), "-", values.start_date.slice(4, 6), "-", values.start_date.slice(6, 8)].join('');
-  }
-
-  let formattedEnd = '';
-  let endFormatted = false;
-  if(values.end_date){
-    endFormatted = values.end_date.indexOf('-') > -1;
-    formattedEnd = endFormatted ? values.end_date : [values.end_date.slice(0, 4), "-", values.end_date.slice(4, 6), "-", values.end_date.slice(6, 8)].join('');
-  }
+  const getPatternflyFormattedDate = (yyyymmdd: string) =>
+    moment(yyyymmdd, 'YYYYMMDD').format('YYYY-MM-DD');
 
   const tabContent: React.CSSProperties = {
-    margin: 45
+    margin: 45,
   };
 
   const input: React.CSSProperties = {
-    backgroundColor: '#EDEDED'
+    backgroundColor: '#EDEDED',
   };
 
   return (
@@ -89,7 +79,11 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <InputGroup label="Residency Duration">
-          <InputGroupText style={input} component="label" htmlFor="residency-duration">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="residency-duration"
+          >
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
@@ -98,7 +92,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             aria-label="The end date."
             style={input}
-            value={formattedStart || ''}
+            value={getPatternflyFormattedDate(values.start_date) || ''}
             onChange={e => onChange({ type: 'start_date', payload: e })}
           />
           <TextInput
@@ -107,7 +101,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             type="date"
             style={input}
             aria-label="Residency end date"
-            value={formattedEnd || ''}
+            value={getPatternflyFormattedDate(values.end_date)}
             onChange={e => onChange({ type: 'end_date', payload: e })}
           />
         </InputGroup>
