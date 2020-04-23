@@ -50,3 +50,5 @@ It accepts the following variables
 | `backendUrl`  | The url that the Open Management Portal backend accepts requests on  |
 
 This will spin up all of the usual resources that this service needs in production, plus a `BuildConfig` configured to build it from source from the Git repository specified. To trigger this build, use `oc start-build omp-frontend`.
+
+**Note**: Also check out the list of runtime variables in the [top level README](../README.md#runtime-configuration-variables)

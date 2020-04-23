@@ -113,7 +113,7 @@ Depending on the type of deployment, the way of setting these variables may vary
 |**authBaseUrl** | string | URI for SSO integration | Yes | N/A |
 |**clientId** | string | Identification of the client application for SSO integration | Yes | N/A |
 |**backendUrl** | string | URI for [Backend](https://github.com/rht-labs/open-management-portal-backend.git) APIs | Yes | N/A |
-|**disableLaunch** | boolean | Flag to toggle launch functionality on/off | No | false |
+|**disableLaunch** | boolean | Flag to toggle launch functionality on/off | Yes | N/A |
 
 
 # Learn More
