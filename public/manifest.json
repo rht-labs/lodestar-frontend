@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "OMP",
+  "name": "Open Portal Management",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +11,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "git_commit": "4e3f530local",
+  "git_tag": "v0.0.1-local"
 }

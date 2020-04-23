@@ -41,7 +41,11 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - name: config-volume
+          {{- if .Values.development }}
+          mountPath: /var/www/html/config
+          {{- else }}
           mountPath: /opt/app-root/src/config
+          {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

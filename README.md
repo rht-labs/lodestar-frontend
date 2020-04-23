@@ -1,3 +1,5 @@
+![Build Container](https://github.com/rht-labs/open-management-portal-frontend/workflows/Build%20Container/badge.svg)
+
 # OMP Frotend Quickstart
 
 ## Organization
@@ -29,8 +31,6 @@ Schemas should not contain significant business logic. Schemas should be ignoran
 `src/services` encapsulate the dirty details of reaching out to an external service and returning results. Services ought not contain significant business logic; rather, they should be concerned with implementing calls to API's.
 
 Each service is contained in a folder. At the root of the folder is an eponymous file. This file contains the public interface of the service. Any implementer of that interface lives in a folder called `implementations`. This structure allows the contexts to quickly switch between different implementations of the same service.
-
----
 
 # The React stuff
 
@@ -67,23 +67,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ENV variables for the app are listed in `.env-sample` read from an `.env` file at build time.
 
-### Openshift Applier
-
-This project includes an `openshift-applier` inventory. To use it, make sure that you are logged in to the cluster and that you customize the variables in `.applier/inventory/group_vars/all.yml` - namely make sure that `deploy_vars` uses the correct endpoints. Once these are configured, you can deploy the project with:
-
-```bash
-$ cd .applier/
-
-$ ansible-galaxy install -r requirements.yml --roles-path=roles --force
-
-$ ansible-playbook apply.yml -i inventory/
-```
-
-:heavy_exclamation_mark: The applier will not create a route or ingress and if this is required has to be done seperately
-
 ## Development
 
-See [the development README](development/README.md) for details on how to spin up a deployment for developing on OpenShift.
+See [the development README](deployment/README.md) for details on how to spin up a deployment for developing on OpenShift.
 
 ## Pipeline
 
@@ -177,7 +163,8 @@ oc patch dc ${APP_NAME} -p "{\\"spec\\":{\\"template\\":{\\"metadata\\":{\\"labe
 oc rollout latest dc/${APP_NAME}
 ```
 
-#### Configuration Variables
+
+## Configuration Variables
 
 Because environment variables are compiled into the built source code of the frontend at build time, it is not possible to dynamically change these values at load time on the client side. In order to allow for dynamic updating of configuration variables, these values must be loaded through a network request from the client side from a static file served separate from the client javascript.
 
