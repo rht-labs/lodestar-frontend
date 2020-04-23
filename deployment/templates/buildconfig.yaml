@@ -1,0 +1,34 @@
+{{- if .Values.development }}
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  labels:
+    build: {{ .Values.name }}
+  name: {{ .Values.name }}
+spec:
+  nodeSelector:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: '{{ .Values.imageName }}:{{ .Values.imageTag }}'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: {{ .Values.git.ref }}
+      uri: {{ .Values.git.uri }}
+    type: Git
+    dockerfile: |
+      FROM node:12.2.0-alpine AS builder
+      WORKDIR /app
+      COPY . /app
+      RUN ./build.sh
+      FROM registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
+      COPY --from=builder /app/build /var/www/html
+      EXPOSE 8080
+  strategy:
+    type: Docker
+status:
+  lastVersion: 1
+{{- end }}
