@@ -89,7 +89,7 @@ npm run publish
 
 ### OpenShift Container Platform Build and Deployment
 
-For use in an OpenShift Container Platform environment, this appliction is managed by the use of Helm templates. Please follow the instructions in the (deployment README)[deployment] for detailed instructions.
+For use in an OpenShift Container Platform environment, this appliction is managed by the use of Helm templates. Please follow the instructions in the [deployment README](deployment) for detailed instructions.
 
 
 ## Configuration Variables for local deployments
