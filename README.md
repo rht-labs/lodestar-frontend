@@ -105,9 +105,7 @@ For more descriptions of each variable, please see the [Runtime Configuration Va
 
 ## Runtime Configuration Variables
 
-Depending on the type of deployment, the way of setting these variables may vary. However done, the following values are options that can be set to succesfully run the frontend. 
-
-The variables tracked in config/config.json are:
+Depending on the type of deployment, the way of setting these variables may vary. However done, the following values are options that can be set to succesfully run the frontend:
 
 | Variable | Type | Description | Required | Default |
 |:---------|:-----|:------------|:---------|:--------|
