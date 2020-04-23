@@ -7,7 +7,6 @@ import {
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
-
 import { SessionProvider } from './context/session_context';
 import { ConfigProvider } from './context/config_context';
 import { EngagementProvider } from './context/engagement_context';
