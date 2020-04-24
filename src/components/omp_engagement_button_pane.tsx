@@ -3,10 +3,8 @@ import { Button, Tooltip } from '@patternfly/react-core';
 import { EngagementFormContext } from '../context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context';
 import { ConfigContext } from '../context/config_context';
-// import { slugProperties } from '../utilities/slug_properties';
 
 function _OMPEngagementButtonPane() {
-  console.log("hitting this");
   const engagementContext = useContext(EngagementContext);
   const engagementFormContext = useContext(EngagementFormContext);
   const configContext = useContext(ConfigContext);
