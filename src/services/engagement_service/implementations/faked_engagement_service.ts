@@ -25,4 +25,7 @@ export class FakedEngagementService extends EngagementService {
   async saveEngagement(data: any): Promise<Engagement> {
     return data as Engagement;
   }
+  async launchEngagement(data: any): Promise<Engagement> {
+    return data as Engagement;
+  }
 }
