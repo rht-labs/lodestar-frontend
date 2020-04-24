@@ -11,6 +11,7 @@ export interface EngagementContext {
   engagements: Engagement[];
   createEngagement: (data: any) => Promise<void>;
   saveEngagement: (data: any) => Promise<void>;
+  launchEngagement: (data: any) => Promise<void>;
 }
 
 export const EngagementContext = createContext<EngagementContext>({
@@ -20,6 +21,7 @@ export const EngagementContext = createContext<EngagementContext>({
   engagements: [],
   createEngagement: async () => {},
   saveEngagement: async () => {},
+  launchEngagement: async () => {},
 });
 const { Provider } = EngagementContext;
 export const EngagementProvider = ({
@@ -109,6 +111,32 @@ export const EngagementProvider = ({
     [engagementRepository, _updateEngagementInPlace]
   );
 
+  const showSuccessMessage = () => {
+    console.log("success");
+    //TODO: Once interaction feedback system is worked out - implement here
+  }
+
+  const showErrorMessage = () => {
+    console.log("error");
+    //TODO: Once interaction feedback system is worked out - implement here
+  }
+
+  const launchEngagement = useCallback(
+    async (data: any) => {
+      const oldEngagement = _updateEngagementInPlace(data);
+      try {
+        const returnedEngagement = await engagementRepository.launchEngagement(data);
+        _updateEngagementInPlace(returnedEngagement);
+        showSuccessMessage();
+        setActiveEngagement(returnedEngagement);
+      } catch (e) {
+        _updateEngagementInPlace(oldEngagement);
+        showErrorMessage();
+      }
+    },
+    [_updateEngagementInPlace, engagementRepository]
+  );
+
   return (
     <Provider
       value={{
@@ -119,6 +147,7 @@ export const EngagementProvider = ({
         getEngagements: fetchEngagements,
         createEngagement,
         saveEngagement,
+        launchEngagement,
       }}
     >
       {children}

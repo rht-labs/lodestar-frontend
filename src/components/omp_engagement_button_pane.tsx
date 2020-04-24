@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Tooltip } from '@patternfly/react-core';
 import { EngagementFormContext } from '../context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context';
 import { ConfigContext } from '../context/config_context';
-import { slugProperties } from '../utilities/slug_properties';
+// import { slugProperties } from '../utilities/slug_properties';
 
 function _OMPEngagementButtonPane() {
+  console.log("hitting this");
   const engagementContext = useContext(EngagementContext);
   const engagementFormContext = useContext(EngagementFormContext);
   const configContext = useContext(ConfigContext);
@@ -24,22 +25,33 @@ function _OMPEngagementButtonPane() {
   }
 
   const launchCluster = () => {
-    engagementContext.createEngagement(
-      slugProperties(engagementContext.activeEngagement, [
-        'ocp_sub_domain',
-        'customer_name',
-        'project_name',
-      ])
-    );
+    engagementContext.launchEngagement(engagementFormContext.state);
   }
 
   const saveCluster = () => {
     engagementContext.saveEngagement(engagementFormContext.state);
   }
 
-  //TODO: Set this to config value.
-  const isLaunchDisabled = configContext.appConfig?.disableLaunch;
-  const launchTooltip: string = isLaunchDisabled ? 'Launching new Engagements is currently unavailable. Please try again later.': 'Launch cluster for this engagement.'
+  const [isLaunchDisabled, setIsLaunchDisabled] = useState<boolean>(
+    false
+  );
+
+  const [launchTooltip, setLaunchTooltip] = useState<string>(
+    "Launch the cluster for this engagement."
+  )
+  
+  useEffect(() => {
+    if(configContext.appConfig?.disableLaunch){
+      setIsLaunchDisabled(true);
+      setLaunchTooltip("Launching new Engagement clusters is currently unavailable. Please try again later.");
+    } else if( engagementContext.activeEngagement?.launch !== undefined ){
+      setIsLaunchDisabled(true);
+      setLaunchTooltip("The cluster for this engagement has been launched.")
+    } else {
+      setIsLaunchDisabled(false);
+      setLaunchTooltip("Launch the cluster for this engagement.")
+    }
+  }, [configContext.appConfig, engagementContext.activeEngagement]);
 
   return (  
     <div style={ buttonPane } >

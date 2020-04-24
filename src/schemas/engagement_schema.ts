@@ -22,6 +22,7 @@ export interface Engagement {
   start_date: string;
   technical_lead_email: string;
   technical_lead_name: string;
+  launch: object;
 }
 export class Engagement {
   constructor(engagement: Engagement) {
@@ -46,6 +47,7 @@ export class Engagement {
     this.start_date = engagement.start_date;
     this.technical_lead_email = engagement.technical_lead_email;
     this.technical_lead_name = engagement.technical_lead_name;
+    this.launch = engagement.launch;
   }
   archive_date: string;
   customer_contact_email: string;
@@ -69,6 +71,7 @@ export class Engagement {
   start_date: string;
   technical_lead_email: string;
   technical_lead_name: string;
+  launch: object;
 
   static fromFake() {
     return new Engagement({
@@ -93,6 +96,7 @@ export class Engagement {
       start_date: faker.lorem.word(),
       technical_lead_email: faker.lorem.word(),
       technical_lead_name: faker.lorem.word(),
+      launch: {},
     });
   }
 }

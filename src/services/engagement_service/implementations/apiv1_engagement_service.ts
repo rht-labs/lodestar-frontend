@@ -35,4 +35,11 @@ export class Apiv1EngagementService extends EngagementService {
     );
     return new Engagement(data as Engagement);
   }
+  async launchEngagement(engagementData: any): Promise<Engagement> {
+    const { data } = await this.axios.put(
+      `${this.baseUrl}/engagements/launch`,
+      engagementData
+    );
+    return new Engagement(data as Engagement);
+  }
 }
