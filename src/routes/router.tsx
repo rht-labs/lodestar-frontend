@@ -49,7 +49,7 @@ function _OMPRouter() {
         }}
       />
       <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
-      <PrivateRoute path="/logout" component={() => <LogoutPage />} />
+      <Route path="/logout" component={() => <LogoutPage />} />
       <Route path="/feature-request" component={FeatureRequest} />
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
