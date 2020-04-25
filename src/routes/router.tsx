@@ -12,6 +12,7 @@ import { EngagementPane } from './engagement_pane';
 import { Admin } from './admin';
 import { Dashboard } from './dashboard';
 import { EngagementFormProvider } from '../context/engagement_form_context';
+import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout'
 
 function _OMPRouter() {
@@ -47,10 +48,11 @@ function _OMPRouter() {
           );
         }}
       />
-      <Route path="/feature-request" component={FeatureRequest} />
       <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
-      <Route path="/auth_callback" component={CallbackHandler} />
       <PrivateRoute path="/logout" component={() => <LogoutPage />} />
+      <Route path="/feature-request" component={FeatureRequest} />
+      <Route path="/auth_callback" component={CallbackHandler} />
+      <Route path="/unauthorized" component={UnauthorizedPage} />
     </Switch>
   );
 }
