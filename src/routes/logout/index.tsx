@@ -19,7 +19,7 @@ class LogoutPage extends React.Component<{}, { session: SessionContext }> {
   }
 }
 
-export default React.forwardRef(props => (
+export default React.forwardRef((props, ref) => (
   <SessionContext.Consumer>
     {session => <LogoutPage {...props} session={session} />}
   </SessionContext.Consumer>

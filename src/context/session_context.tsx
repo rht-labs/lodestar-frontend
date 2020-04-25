@@ -103,7 +103,6 @@ export const SessionProvider = ({
               tokens,
               roles: profile.groups,
             });
-            console.log("groups:", profile.groups);
             if(profile.groups ? profile.groups.includes('manage_projects') : false){
               setAuthStatus('authenticated');
             }else{

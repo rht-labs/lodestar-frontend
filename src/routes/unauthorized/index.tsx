@@ -13,7 +13,7 @@ export function UnauthorizedPage() {
   return (
     <>
       <div style={contentPane}>
-        <p>Sorry, your account has not yet been given access to OMP. Please contact the SRE team to resolve this.</p>
+        <p>Sorry, your account has not yet been granted access to this system. Please contact the SRE team to resolve this.</p>
       </div>
     </>
   );
