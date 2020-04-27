@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CalendarAltIcon } from '@patternfly/react-icons';
 import {
   Form,
@@ -8,6 +8,8 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
+import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { APP_FEATURES } from '../../../common/app_features';
 
 export const BasicInformation = ({ values, onChange }: any) => {
   const getFormattedDate = (dateString: string = '') => {
@@ -38,7 +40,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
-
+  const { hasFeature } = useContext(FeatureToggleContext);
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup
@@ -48,6 +50,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <TextInput
+          isDisabled={!hasFeature(APP_FEATURES.writer)}
           type="text"
           id="customer_name"
           name="customer_name"
@@ -64,6 +67,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <TextInput
+          isDisabled={!hasFeature(APP_FEATURES.writer)}
           type="text"
           id="project_name"
           name="project_name"
@@ -80,6 +84,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <TextInput
+          isDisabled={!hasFeature(APP_FEATURES.writer)}
           type="text"
           id="location"
           name="location"
@@ -104,6 +109,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             name="start_date"
             id="start_date"
             type="date"
@@ -113,6 +119,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             onChange={e => onChange({ type: 'start_date', payload: e })}
           />
           <TextInput
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             name="end_date"
             id="end_date"
             type="date"
@@ -125,6 +132,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
       </FormGroup>
       <FormGroup label="Description" fieldId="description">
         <TextArea
+          disabled={!hasFeature(APP_FEATURES.writer)}
           name="description"
           id="description"
           style={input}

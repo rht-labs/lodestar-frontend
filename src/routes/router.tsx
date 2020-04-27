@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { FeatureRequest } from '../components/feature_request';
 import { PrivateRoute } from '../components/authentication/private_route';
@@ -13,46 +9,39 @@ import { Admin } from './admin';
 import { Dashboard } from './dashboard';
 import { EngagementFormProvider } from '../context/engagement_form_context';
 import { UnauthorizedPage } from './unauthorized';
-import LogoutPage from './logout'
+import LogoutPage from './logout';
+import { Feature } from '../components/feature';
+import { APP_FEATURES } from '../common/app_features';
 
 function _OMPRouter() {
-
   return (
     <Switch>
-      <PrivateRoute
-        exact
-        path="/"
-        component={() => {
-          return (
-            <Dashboard />
-          );
-        }}
-      />
-      <PrivateRoute
-        exact
-        path="/engagements"
-        component={() => {
-          return (
-            <EngagementFormProvider>
-              <EngagementPane />
-            </EngagementFormProvider>
-          );
-        }}
-      />
-      <PrivateRoute
-        exact
-        path="/admin"
-        component={() => {
-          return (
-            <Admin />
-          );
-        }}
-      />
-      <PrivateRoute path="/private" component={() => <Redirect to="/" />} />
-      <Route path="/logout" component={() => <LogoutPage />} />
       <Route path="/feature-request" component={FeatureRequest} />
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
+      <Route path="/logout" component={() => <LogoutPage />} />
+      {/* all other routes should be considered private */}
+      <PrivateRoute path="/">
+        <Feature
+          name={APP_FEATURES.reader}
+          inactiveComponent={UnauthorizedPage}
+        >
+          {/* if a user is not authorized, show the unauthorized page */}
+          <Switch>
+            {/* else, show an authorized route */}
+            <Redirect exact from="/" to="/dashboard" />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/engagements">
+              <EngagementFormProvider>
+                <EngagementPane />
+              </EngagementFormProvider>
+            </PrivateRoute>
+            <PrivateRoute exact path="/admin">
+              <Admin />
+            </PrivateRoute>
+          </Switch>
+        </Feature>
+      </PrivateRoute>
     </Switch>
   );
 }

@@ -6,28 +6,40 @@
 
 The application is separated into several main components. All of these components are located in folders within `src/`.
 
-
 ### `src/components`
+
 `src/components` contains shared components that can be reused across the application. These include custom components built for OMP specifically, or wrapped components from a third-party library.
 
 In this application, components should be stateless as much as possible. They should not contain business logic.
 
 ### `src/context`
+
 `src/context` contains the application contexts. Contexts hold all of the global state and business logic for OMP. For the React docs on Contexts, [see here](https://reactjs.org/docs/context.html).
 
 Contexts serve as the central nervous system for the application. They handle the dirty business of retrieving data from services, processing that data, handling exceptions, storing data, and notifying children of changes. All business logic should flow through a context.
 
+#### Feature Context
+
+The feature context and its associated `Feature` component provide a convenient api for protecting features that require certain roles.
+
+The component is written to mirror major parts of the api of the [Parallel Drive React feature flags implementation](https://github.com/paralleldrive/react-feature-toggles/). Any changes to the external api of either of the feature components should be done after studying the api exposed by the Parallel Drive library.
+
+Currently, features are derived from the session data on session context.
+
 ### `src/routes`
+
 `src/routes` holds container-level UI components. Effectively, anything that would be considered a separate screen will likely have a place in the `routes/` folder. Essentially the components in `src/routes` equate to templates in other design patterns.
 
 `routes` orchestrate smaller components into a more meaningful whole. In some cases, `routes` may be responsible for making some calls to `contexts`, such as asking the context to fetch data that the template needs to render properly. Importantly, though, the `route` should delegate data processing and service calls to the `context`. If you are attempting to make a service call from a `route`, take a step back, and consider how to move that call into the context.
 
 ### `src/schemas`
+
 `src/schemas` contains the data models that are shared across the application. A `schema` is typically a class with a public interface that encapsulates data. The schema may contain some convenience methods for data routine, small tasks, such as combining `firstName` and `lastName` into `fullName`.
 
 Schemas should not contain significant business logic. Schemas should be ignorant of the services that return them.
 
 ### `src/services`
+
 `src/services` encapsulate the dirty details of reaching out to an external service and returning results. Services ought not contain significant business logic; rather, they should be concerned with implementing calls to API's.
 
 Each service is contained in a folder. At the root of the folder is an eponymous file. This file contains the public interface of the service. Any implementer of that interface lives in a folder called `implementations`. This structure allows the contexts to quickly switch between different implementations of the same service.
@@ -91,7 +103,6 @@ npm run publish
 
 For use in an OpenShift Container Platform environment, this appliction is managed by the use of Helm templates. Please follow the instructions in the [deployment README](deployment) for detailed instructions.
 
-
 ## Configuration Variables for local deployments
 
 Because environment variables are compiled into the built source code of the frontend at build time, it is not possible to dynamically change these values at load time on the client side. In order to allow for dynamic updating of configuration variables, these values must be loaded through a network request from the client side from a static file served separate from the client javascript.
@@ -102,19 +113,17 @@ An example `config.json` can be seen in [public/config/config.example.json](publ
 
 For more descriptions of each variable, please see the [Runtime Configuration Variables](#runtime-configuration-variables) section below.
 
-
 ## Runtime Configuration Variables
 
 Depending on the type of deployment, the way of setting these variables may vary. However done, the following values are options that can be set to succesfully run the frontend:
 
-| Variable | Type | Description | Required | Default |
-|:---------|:-----|:------------|:---------|:--------|
-|**baseUrl** | string | Target URL for the deployment of **this** Frontend App | Yes | N/A |
-|**authBaseUrl** | string | URI for SSO integration | Yes | N/A |
-|**clientId** | string | Identification of the client application for SSO integration | Yes | N/A |
-|**backendUrl** | string | URI for [Backend](https://github.com/rht-labs/open-management-portal-backend.git) APIs | Yes | N/A |
-|**disableLaunch** | boolean | Flag to toggle launch functionality on/off | Yes | N/A |
-
+| Variable          | Type    | Description                                                                            | Required | Default |
+| :---------------- | :------ | :------------------------------------------------------------------------------------- | :------- | :------ |
+| **baseUrl**       | string  | Target URL for the deployment of **this** Frontend App                                 | Yes      | N/A     |
+| **authBaseUrl**   | string  | URI for SSO integration                                                                | Yes      | N/A     |
+| **clientId**      | string  | Identification of the client application for SSO integration                           | Yes      | N/A     |
+| **backendUrl**    | string  | URI for [Backend](https://github.com/rht-labs/open-management-portal-backend.git) APIs | Yes      | N/A     |
+| **disableLaunch** | boolean | Flag to toggle launch functionality on/off                                             | Yes      | N/A     |
 
 # Learn More
 
