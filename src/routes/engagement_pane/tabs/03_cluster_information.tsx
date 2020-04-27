@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Form,
   FormGroup,
@@ -7,6 +7,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import slugify from 'slugify';
+import { FeatureToggleContext } from '../../../context/feature_toggles';
 
 export const ClusterInformation = ({
   providerOptions,
@@ -14,6 +15,7 @@ export const ClusterInformation = ({
   values,
   onChange,
 }: any) => {
+  const { hasFeature } = useContext(FeatureToggleContext);
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
@@ -65,7 +67,7 @@ export const ClusterInformation = ({
         >
           {availableProviders?.map((option: any, index: any) => (
             <FormSelectOption
-              isDisabled={option.disabled}
+              isDisabled={option.disabled || !hasFeature('writer')}
               key={index}
               value={option.value}
               label={option.label}
@@ -82,7 +84,10 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="Cloud provider region"
-          isDisabled={availableProviderRegionOptions?.length === 0}
+          isDisabled={
+            availableProviderRegionOptions?.length === 0 ||
+            !hasFeature('writer')
+          }
           readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
           onChange={e =>
@@ -91,7 +96,7 @@ export const ClusterInformation = ({
         >
           {availableProviderRegionOptions.map((option: any, index: any) => (
             <FormSelectOption
-              isDisabled={option.disabled}
+              isDisabled={option.disabled || !hasFeature('writer')}
               key={index}
               value={option.value}
               label={option.label}
@@ -109,7 +114,9 @@ export const ClusterInformation = ({
           style={input}
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
-          isDisabled={openshiftOptions.versions?.length === 1}
+          isDisabled={
+            openshiftOptions.versions?.length === 1 || !hasFeature('writer')
+          }
           onChange={e => onChange({ type: 'ocp_version', payload: e })}
         >
           {openshiftOptions?.versions?.length > 0 ? (
@@ -147,6 +154,7 @@ export const ClusterInformation = ({
         <TextInput
           style={input}
           isRequired
+          isDisabled={!hasFeature('writer')}
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
@@ -163,7 +171,10 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="Persistent Storage Needs"
-          isDisabled={openshiftOptions['persistent-storage']?.length === 1}
+          isDisabled={
+            openshiftOptions['persistent-storage']?.length === 1 ||
+            !hasFeature('writer')
+          }
           onChange={e =>
             onChange({ type: 'ocp_persistent_storage_size', payload: e })
           }
@@ -189,7 +200,10 @@ export const ClusterInformation = ({
         <FormSelect
           aria-label="Cluster Size"
           value={values.ocp_cluster_size || ''}
-          isDisabled={openshiftOptions['cluster-size']?.length === 1}
+          isDisabled={
+            openshiftOptions['cluster-size']?.length === 1 ||
+            !hasFeature('writer')
+          }
           onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
         >
           {openshiftOptions['cluster-size']?.length > 0 ? (

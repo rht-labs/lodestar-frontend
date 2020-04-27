@@ -18,12 +18,13 @@ function _OMPRouter() {
       <Route path="/feature-request" component={FeatureRequest} />
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
-      // all other routes should be considered private
+      <Route path="/logout" component={() => <LogoutPage />} />
+      {/* all other routes should be considered private */}
       <PrivateRoute path="/">
         <Feature name="manage_projects" inactiveComponent={UnauthorizedPage}>
-          // if a user is not authorized, show the unauthorized page
+          {/* if a user is not authorized, show the unauthorized page */}
           <Switch>
-            // else, show an authorized route
+            {/* else, show an authorized route */}
             <Redirect exact from="/" to="/dashboard" />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/engagements">
@@ -34,7 +35,6 @@ function _OMPRouter() {
             <PrivateRoute exact path="/admin">
               <Admin />
             </PrivateRoute>
-            <Route path="/logout" component={() => <LogoutPage />} />
           </Switch>
         </Feature>
       </PrivateRoute>
