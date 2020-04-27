@@ -17,7 +17,8 @@ import { Request } from '../utilities/request';
 export type AuthenticationState =
   | 'initial'
   | 'authenticated'
-  | 'unauthenticated';
+  | 'unauthenticated'
+  | 'unauthorized';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -95,13 +96,18 @@ export const SessionProvider = ({
       authenticationRepository.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationRepository.getToken();
         if (isLoggedIn && tokens) {
-          setAuthStatus('authenticated');
+
           authenticationRepository.getUserProfile().then(profile => {
             setSessionData({
               profile,
               tokens,
               roles: profile.groups,
             });
+            if(profile.groups ? profile.groups.includes('manage_projects') : false){
+              setAuthStatus('authenticated');
+            }else{
+              setAuthStatus('unauthorized')
+            }
           });
         } else {
           setAuthStatus('unauthenticated');
