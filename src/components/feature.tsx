@@ -13,7 +13,9 @@ export const Feature = ({
   ...props
 }: FeatureProps) => {
   const { hasFeature } = useContext(FeatureToggleContext);
-  if (hasFeature(name)) {
+  if (!name) {
+  }
+  if (!name || hasFeature(name)) {
     return <>{props.children}</>;
   }
   return Component ? <Component {...props} /> : null;
