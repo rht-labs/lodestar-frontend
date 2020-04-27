@@ -16,6 +16,7 @@ import {
   CubesIcon,
 } from '@patternfly/react-icons';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { APP_FEATURES } from '../../../common/app_features';
 
 const selectStyle: React.CSSProperties = {
   width: '24%',
@@ -89,7 +90,7 @@ export const ClusterUsers = ({
                     <TextInput
                       aria-label="Last Name"
                       name="last-name"
-                      isDisabled={!hasFeature('writer')}
+                      isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].last_name = e;
                         onChange({
@@ -104,7 +105,7 @@ export const ClusterUsers = ({
                     <TextInput
                       aria-label="First Name"
                       name="first-name"
-                      isDisabled={!hasFeature('writer')}
+                      isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].first_name = e;
                         onChange({
@@ -119,7 +120,7 @@ export const ClusterUsers = ({
                     <TextInput
                       aria-label="email"
                       name="email"
-                      isDisabled={!hasFeature('writer')}
+                      isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].email = e;
                         onChange({
@@ -136,7 +137,7 @@ export const ClusterUsers = ({
                       name="role"
                       aria-label="User Role"
                       value={value.role || ''}
-                      isDisabled={!hasFeature('writer')}
+                      isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].role = e;
                         onChange({

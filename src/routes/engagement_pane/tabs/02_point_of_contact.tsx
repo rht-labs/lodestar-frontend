@@ -8,6 +8,7 @@ import {
 } from '@patternfly/react-core';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { APP_FEATURES } from '../../../common/app_features';
 
 export const PointOfContact = ({ values, onChange }: any) => {
   const tabContent: React.CSSProperties = {
@@ -39,7 +40,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
           <TextInput
             aria-label="Engagement lead name"
             style={input}
-            isDisabled={!hasFeature('writer')}
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             id="name"
             name="engagement-lead-name"
             onChange={e => {
@@ -57,7 +58,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature('writer')}
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="engagement lead email"
             id="email"
             style={input}
@@ -87,7 +88,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             <UserIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature('writer')}
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="Tech lead name"
             id="tech-lead-name"
             style={input}
@@ -107,7 +108,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature('writer')}
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             style={input}
             aria-label="tech lead email"
             id="tech-lead-email"
@@ -137,7 +138,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             <UserIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature('writer')}
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             style={input}
             aria-label="Customer contact name"
             id="customer-contact-name"
@@ -157,7 +158,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature('writer')}
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="customer contact email"
             id="customer-contact-email"
             name="customer-contact-email"
