@@ -3,6 +3,7 @@ import { Button, Tooltip } from '@patternfly/react-core';
 import { EngagementFormContext } from '../context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context';
 import { ConfigContext } from '../context/config_context';
+import { Feature } from './feature';
 
 function _OMPEngagementButtonPane() {
   const engagementContext = useContext(EngagementContext);
@@ -51,24 +52,26 @@ function _OMPEngagementButtonPane() {
   };
 
   return (
-    <div style={buttonPane}>
-      <Button onClick={saveCluster} style={buttonDisplay}>
-        {' '}
-        Save{' '}
-      </Button>
-      <Tooltip content={<div>{getTooltipText()}</div>}>
-        <span>
-          <Button
-            isDisabled={isLaunchDisabled()}
-            onClick={launchCluster}
-            style={buttonDisplay}
-          >
-            {' '}
-            Launch{' '}
-          </Button>
-        </span>
-      </Tooltip>
-    </div>
+    <Feature name="writer">
+      <div style={buttonPane}>
+        <Button onClick={saveCluster} style={buttonDisplay}>
+          {' '}
+          Save{' '}
+        </Button>
+        <Tooltip content={<div>{getTooltipText()}</div>}>
+          <span>
+            <Button
+              isDisabled={isLaunchDisabled()}
+              onClick={launchCluster}
+              style={buttonDisplay}
+            >
+              {' '}
+              Launch{' '}
+            </Button>
+          </span>
+        </Tooltip>
+      </div>
+    </Feature>
   );
 }
 

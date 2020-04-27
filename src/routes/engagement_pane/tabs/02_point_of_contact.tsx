@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Form,
   FormGroup,
@@ -7,15 +7,17 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
+import { FeatureToggleContext } from '../../../context/feature_toggles';
 
 export const PointOfContact = ({ values, onChange }: any) => {
-  
   const tabContent: React.CSSProperties = {
-    margin: 45
+    margin: 45,
   };
 
+  const { hasFeature } = useContext(FeatureToggleContext);
+
   const input: React.CSSProperties = {
-    backgroundColor: '#EDEDED'
+    backgroundColor: '#EDEDED',
   };
 
   return (
@@ -27,12 +29,17 @@ export const PointOfContact = ({ values, onChange }: any) => {
         label="Labs EL"
       >
         <InputGroup>
-          <InputGroupText style={input} component="label" htmlFor="engagement-lead">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="engagement-lead"
+          >
             <UserIcon />
           </InputGroupText>
           <TextInput
             aria-label="Engagement lead name"
             style={input}
+            isDisabled={!hasFeature('writer')}
             id="name"
             name="engagement-lead-name"
             onChange={e => {
@@ -42,10 +49,15 @@ export const PointOfContact = ({ values, onChange }: any) => {
             type="text"
             value={values.engagement_lead_name || ''}
           />
-          <InputGroupText style={input} component="label" htmlFor="engagement-lead-email">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="engagement-lead-email"
+          >
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
+            isDisabled={!hasFeature('writer')}
             aria-label="engagement lead email"
             id="email"
             style={input}
@@ -67,10 +79,15 @@ export const PointOfContact = ({ values, onChange }: any) => {
         label="Labs Technical Lead"
       >
         <InputGroup label="Labs Tech Lead">
-          <InputGroupText style={input} component="label" htmlFor="tech-lead-name">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="tech-lead-name"
+          >
             <UserIcon />
           </InputGroupText>
           <TextInput
+            isDisabled={!hasFeature('writer')}
             aria-label="Tech lead name"
             id="tech-lead-name"
             style={input}
@@ -82,11 +99,16 @@ export const PointOfContact = ({ values, onChange }: any) => {
             type="text"
             value={values.technical_lead_name || ''}
           />
-          <InputGroupText style={input} component="label" htmlFor="tech-lead-email">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="tech-lead-email"
+          >
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
-          style={input}
+            isDisabled={!hasFeature('writer')}
+            style={input}
             aria-label="tech lead email"
             id="tech-lead-email"
             name="tech-lead-email"
@@ -107,10 +129,15 @@ export const PointOfContact = ({ values, onChange }: any) => {
         label="Customer Contact"
       >
         <InputGroup label="Customer Contact">
-          <InputGroupText style={input} component="label" htmlFor="customer-contact-name">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="customer-contact-name"
+          >
             <UserIcon />
           </InputGroupText>
           <TextInput
+            isDisabled={!hasFeature('writer')}
             style={input}
             aria-label="Customer contact name"
             id="customer-contact-name"
@@ -122,10 +149,15 @@ export const PointOfContact = ({ values, onChange }: any) => {
             placeholder="Full Name"
             value={values.customer_contact_name || ''}
           />
-          <InputGroupText style={input} component="label" htmlFor="customer-contact-email">
+          <InputGroupText
+            style={input}
+            component="label"
+            htmlFor="customer-contact-email"
+          >
             <EnvelopeIcon />
           </InputGroupText>
           <TextInput
+            isDisabled={!hasFeature('writer')}
             aria-label="customer contact email"
             id="customer-contact-email"
             name="customer-contact-email"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Button,
   EmptyStateIcon,
@@ -15,6 +15,7 @@ import {
   ErrorCircleOIcon,
   CubesIcon,
 } from '@patternfly/react-icons';
+import { FeatureToggleContext } from '../../../context/feature_toggles';
 
 const selectStyle: React.CSSProperties = {
   width: '24%',
@@ -30,7 +31,13 @@ const buttonHeader: React.CSSProperties = {
   fontWeight: 'bold',
 };
 
-export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) => {
+export const ClusterUsers = ({
+  userManagementOptions,
+  values,
+  onChange,
+}: any) => {
+  const { hasFeature } = useContext(FeatureToggleContext);
+
   //Functions for Cluster User interactivity
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
@@ -45,7 +52,7 @@ export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) =
 
   const tabContent: React.CSSProperties = {
     backgroundColor: '#FFFFFF',
-    margin: 100
+    margin: 100,
   };
 
   return (
@@ -82,6 +89,7 @@ export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) =
                     <TextInput
                       aria-label="Last Name"
                       name="last-name"
+                      isDisabled={!hasFeature('writer')}
                       onChange={e => {
                         values.engagement_users[index].last_name = e;
                         onChange({
@@ -96,6 +104,7 @@ export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) =
                     <TextInput
                       aria-label="First Name"
                       name="first-name"
+                      isDisabled={!hasFeature('writer')}
                       onChange={e => {
                         values.engagement_users[index].first_name = e;
                         onChange({
@@ -110,6 +119,7 @@ export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) =
                     <TextInput
                       aria-label="email"
                       name="email"
+                      isDisabled={!hasFeature('writer')}
                       onChange={e => {
                         values.engagement_users[index].email = e;
                         onChange({
@@ -126,6 +136,7 @@ export const ClusterUsers = ({ userManagementOptions, values, onChange }: any) =
                       name="role"
                       aria-label="User Role"
                       value={value.role || ''}
+                      isDisabled={!hasFeature('writer')}
                       onChange={e => {
                         values.engagement_users[index].role = e;
                         onChange({
