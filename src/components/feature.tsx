@@ -3,13 +3,16 @@ import { FeatureToggleContext } from '../context/feature_toggles';
 
 export interface FeatureProps {
   children: React.ReactNode;
-  inactiveComponent: React.ReactNode;
+  inactiveComponent: React.ComponentType<any>;
   name: string;
 }
-export const Feature = (props: FeatureProps) => {
+export const Feature = ({
+  inactiveComponent: Component,
+  ...props
+}: FeatureProps) => {
   const { features } = useContext(FeatureToggleContext);
   if (features.includes(props.name)) {
-    return props.children;
+    return <>{props.children}</>;
   }
-  return props.inactiveComponent;
+  return <Component {...props} />;
 };

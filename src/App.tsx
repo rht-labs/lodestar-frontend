@@ -35,10 +35,6 @@ const Providers = ({ children }: { children: React.ReactChild }) => {
   return <EngagementProvider>{children}</EngagementProvider>;
 };
 
-const MainTemplateRoutes = () => {
-  return <OMPRouter />;
-};
-
 const MainTemplate = React.memo(
   ({ children }: { children: React.ReactChild }) => {
     return (
@@ -48,3 +44,7 @@ const MainTemplate = React.memo(
     );
   }
 );
+
+const MainTemplateRoutes = () => {
+  return <OMPRouter />;
+};
