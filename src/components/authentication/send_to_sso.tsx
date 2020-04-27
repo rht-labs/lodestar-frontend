@@ -16,7 +16,9 @@ export function SendToSSO() {
     OAUTH_CONFIG.clientId
   }&redirect_uri=${encodeURI(
     OAUTH_CONFIG.redirectUri
-  )}&response_type=code&state=${encodeURI(JSON.stringify(OAUTH_CONFIG.state))}`;
+  )}&response_type=code&prompt=select_account&state=${encodeURI(
+    JSON.stringify(OAUTH_CONFIG.state)
+  )}`;
   window.location = (OAUTH_URL as any) as Location;
   return <div />;
 }
