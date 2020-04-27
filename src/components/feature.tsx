@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { FeatureToggleContext } from '../context/feature_toggles';
+import { AppFeature } from '../common/app_features';
 
 export interface FeatureProps {
   children: React.ReactNode;
   inactiveComponent?: React.ComponentType<any>;
-  name: string;
+  name: AppFeature;
 }
 export const Feature = ({
   inactiveComponent: Component,
