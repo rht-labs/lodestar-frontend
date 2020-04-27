@@ -11,6 +11,7 @@ import { EngagementFormProvider } from '../context/engagement_form_context';
 import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
+import { APP_FEATURES } from '../common/app_features';
 
 function _OMPRouter() {
   return (
@@ -21,7 +22,10 @@ function _OMPRouter() {
       <Route path="/logout" component={() => <LogoutPage />} />
       {/* all other routes should be considered private */}
       <PrivateRoute path="/">
-        <Feature name="manage_projects" inactiveComponent={UnauthorizedPage}>
+        <Feature
+          name={APP_FEATURES.reader}
+          inactiveComponent={UnauthorizedPage}
+        >
           {/* if a user is not authorized, show the unauthorized page */}
           <Switch>
             {/* else, show an authorized route */}

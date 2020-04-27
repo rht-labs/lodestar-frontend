@@ -8,6 +8,7 @@ import {
 } from '@patternfly/react-core';
 import slugify from 'slugify';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { APP_FEATURES } from '../../../common/app_features';
 
 export const ClusterInformation = ({
   providerOptions,
@@ -67,7 +68,7 @@ export const ClusterInformation = ({
         >
           {availableProviders?.map((option: any, index: any) => (
             <FormSelectOption
-              isDisabled={option.disabled || !hasFeature('writer')}
+              isDisabled={option.disabled || !hasFeature(APP_FEATURES.writer)}
               key={index}
               value={option.value}
               label={option.label}
@@ -86,7 +87,7 @@ export const ClusterInformation = ({
           aria-label="Cloud provider region"
           isDisabled={
             availableProviderRegionOptions?.length === 0 ||
-            !hasFeature('writer')
+            !hasFeature(APP_FEATURES.writer)
           }
           readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
@@ -96,7 +97,7 @@ export const ClusterInformation = ({
         >
           {availableProviderRegionOptions.map((option: any, index: any) => (
             <FormSelectOption
-              isDisabled={option.disabled || !hasFeature('writer')}
+              isDisabled={option.disabled || !hasFeature(APP_FEATURES.writer)}
               key={index}
               value={option.value}
               label={option.label}
@@ -115,7 +116,8 @@ export const ClusterInformation = ({
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
           isDisabled={
-            openshiftOptions.versions?.length === 1 || !hasFeature('writer')
+            openshiftOptions.versions?.length === 1 ||
+            !hasFeature(APP_FEATURES.writer)
           }
           onChange={e => onChange({ type: 'ocp_version', payload: e })}
         >
@@ -154,7 +156,7 @@ export const ClusterInformation = ({
         <TextInput
           style={input}
           isRequired
-          isDisabled={!hasFeature('writer')}
+          isDisabled={!hasFeature(APP_FEATURES.writer)}
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
@@ -173,7 +175,7 @@ export const ClusterInformation = ({
           aria-label="Persistent Storage Needs"
           isDisabled={
             openshiftOptions['persistent-storage']?.length === 1 ||
-            !hasFeature('writer')
+            !hasFeature(APP_FEATURES.writer)
           }
           onChange={e =>
             onChange({ type: 'ocp_persistent_storage_size', payload: e })
@@ -202,7 +204,7 @@ export const ClusterInformation = ({
           value={values.ocp_cluster_size || ''}
           isDisabled={
             openshiftOptions['cluster-size']?.length === 1 ||
-            !hasFeature('writer')
+            !hasFeature(APP_FEATURES.writer)
           }
           onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
         >
