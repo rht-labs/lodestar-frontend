@@ -16,7 +16,7 @@ export const FeatureToggles = ({ children }: { children: React.ReactNode }) => {
   const features = sessionContext.sessionData?.roles ?? [];
   const hasFeature = useCallback(
     (name: string) => {
-      return features.includes(name);
+      return name && features.includes(name);
     },
     [features]
   );
