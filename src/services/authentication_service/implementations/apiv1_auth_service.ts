@@ -168,6 +168,7 @@ export class Apiv1AuthService implements AuthService {
       firstName: userProfileData.data.given_name,
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
+      groups: userProfileData.data.groups,
     });
   }
 }
