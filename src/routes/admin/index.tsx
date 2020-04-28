@@ -22,7 +22,8 @@ export function Admin() {
   let cardItems = [];
 
   if(versionContext.versions !== undefined){
-    console.log(versionContext.versions.fe);
+    console.log(versionContext.versions);
+    console.log(versionContext.versions.applications);
     // cardItems = versionContext.versions.applications
     //   .map((application, index) => {
     //     return (
