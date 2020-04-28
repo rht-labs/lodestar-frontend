@@ -11,7 +11,7 @@ export class Version {
 
   static fromMap(map: { [key: string]: unknown }) {
     return new Version({
-      versions: map['versions'] as object,
+      versions: map as object,
     });
   }
 }

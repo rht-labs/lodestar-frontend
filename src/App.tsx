@@ -4,6 +4,7 @@ import { Page } from '@patternfly/react-core';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import { SessionProvider } from './context/session_context';
+import { VersionProvider } from './context/version_context';
 import { ConfigProvider } from './context/config_context';
 import { EngagementProvider } from './context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary';
@@ -16,15 +17,17 @@ export const App = () => {
     <ErrorBoundary>
       <ConfigProvider>
         <SessionProvider>
-          <FeatureToggles>
-            <Router>
-              <Providers>
-                <MainTemplate>
-                  <MainTemplateRoutes />
-                </MainTemplate>
-              </Providers>
-            </Router>
-          </FeatureToggles>
+          < VersionProvider>
+            <FeatureToggles>
+              <Router>
+                <Providers>
+                  <MainTemplate>
+                    <MainTemplateRoutes />
+                  </MainTemplate>
+                </Providers>
+              </Router>
+            </FeatureToggles>
+          </VersionProvider>
         </SessionProvider>
       </ConfigProvider>
     </ErrorBoundary>
