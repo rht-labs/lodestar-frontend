@@ -6,12 +6,12 @@ import { SessionContext } from './session_context';
 
 
 export interface VersionContext {
-  getVersions: () => void;
-  versions: Version;
+  fetchVersions: () => void;
+  versions?: Version;
 }
 
 export const VersionContext = createContext<VersionContext>({
-  getVersions: async () => {},
+  fetchVersions: async () => {},
 });
 const { Provider } = VersionContext;
 export const VersionProvider = ({
@@ -26,7 +26,7 @@ export const VersionProvider = ({
     axios: sessionContext.axios,
   });
 
-  const [versions, setVersions] = useState<Version[]>([]);
+  const [versions, setVersions] = useState<Version| undefined>();
 
 const fetchVersions = useCallback(async () => {
   const versions = await versionRepository.fetchVersion();
@@ -37,7 +37,7 @@ const fetchVersions = useCallback(async () => {
     <Provider
       value={{
         versions,
-        getVersions: fetchVersions,
+        fetchVersions,
       }}
     >
       {children}
