@@ -26,11 +26,17 @@ function _Admin() {
         return [
           ...previousComponents,
           ...versionContext.versions.versions[currentKey]?.map((version, mapIndex) => {
+            let label = '';
+            if(version.application === "omp-frontend" && version.version.charAt(0) !== "v"){
+              label = version.git_tag;
+            } else {
+              label = version.version;
+            }
             return (
               <CardBody
               key={`${reduceIndex}${mapIndex}`}
               >
-                <div><b>{version?.application}</b>: <span>{version?.version}</span></div>
+                <div><b>{version?.application}</b>: <span>{label}</span></div>
                 
               </CardBody>
             );
