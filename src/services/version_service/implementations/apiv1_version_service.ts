@@ -18,7 +18,7 @@ export class Apiv1VersionService extends VersionService {
     const { data } = await this.axios.get(
       `${process.env.PUBLIC_URL}/manifest.json`
     );
-    const rObject = [{'git_commit': data.git_commit, 'git_tag': data.git_tag}];
+    const rObject = [{'application': 'omp-frontend', 'git_commit': data.git_commit, 'git_tag': data.git_tag, 'version': data.git_tag}];
     return rObject;
   }
 
