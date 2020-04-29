@@ -26,11 +26,7 @@ spec:
         deploymentconfig: {{ .Values.name }}
     spec:
       containers:
-      {{- if eq .Values.imageTag "latest" }}
       - image: {{ .Values.name }}:{{ .Values.imageTag }}
-      {{- else }}
-      - image: {{ .Values.imageName }}:{{ .Values.imageTag }}
-      {{- end }}
         imagePullPolicy: Always
         name: {{ .Values.name }}
         ports:
@@ -57,7 +53,6 @@ spec:
           name: frontend-config
   triggers: 
   - type: ConfigChange
-  {{- if eq .Values.imageTag "latest" }}
   - type: ImageChange
     imageChangeParams:
       automatic: true
@@ -66,4 +61,3 @@ spec:
         name: {{ .Values.name }}:{{ .Values.imageTag }}
       containerNames:
       - {{ .Values.name }}
-  {{- end }}
