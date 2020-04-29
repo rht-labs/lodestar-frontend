@@ -57,7 +57,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           placeholder="e.g. NASA"
           style={input}
           value={values.customer_name || ''}
-          onChange={e => onChange({ type: 'customer_name', payload: e })}
+          onChange={e => onChange('customer_name', e)}
         />
       </FormGroup>
       <FormGroup
@@ -74,7 +74,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           placeholder="e.g. Mars Probe"
           style={input}
           value={values.project_name || ''}
-          onChange={e => onChange({ type: 'project_name', payload: e })}
+          onChange={e => onChange('project_name', e)}
         />
       </FormGroup>
       <FormGroup
@@ -91,7 +91,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           placeholder="e.g. Pasadena, CA"
           style={input}
           value={values.location || ''}
-          onChange={e => onChange({ type: 'location', payload: e })}
+          onChange={e => onChange('location', e)}
         />
       </FormGroup>
       <FormGroup
@@ -116,7 +116,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             aria-label="The end date."
             style={input}
             value={getFormattedDate(values.start_date) || ''}
-            onChange={e => onChange({ type: 'start_date', payload: e })}
+            onChange={e => onChange('start_date', e)}
           />
           <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
@@ -126,7 +126,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             style={input}
             aria-label="Residency end date"
             value={getFormattedDate(values.end_date) || ''}
-            onChange={e => onChange({ type: 'end_date', payload: e })}
+            onChange={e => onChange('end_date', e)}
           />
         </InputGroup>
       </FormGroup>
@@ -139,7 +139,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
           aria-label="residency description"
           placeholder="Description and notes for the Engagment"
           value={values.description || ''}
-          onChange={e => onChange({ type: 'description', payload: e })}
+          onChange={e => onChange('description', e)}
         />
       </FormGroup>
     </Form>
