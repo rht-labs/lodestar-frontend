@@ -11,6 +11,7 @@ import { ErrorBoundary } from './components/error_boundary';
 import { OMPHeader } from './components/omp_header';
 import { OMPRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_toggles';
+import { Feedback } from './components/omp_feedback';
 
 export const App = () => {
   return (
@@ -42,6 +43,7 @@ const MainTemplate = React.memo(
   ({ children }: { children: React.ReactChild }) => {
     return (
       <Page header={<OMPHeader />} style={{ height: '100vh' }}>
+        <Feedback/>
         {children}
       </Page>
     );
