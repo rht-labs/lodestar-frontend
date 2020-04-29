@@ -79,7 +79,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
       </FormGroup>
       <FormGroup
         label="Location"
-        fieldId="residency-location"
+        fieldId="engagement-location"
         helperText="Where will this be held?"
         isRequired
       >
@@ -95,16 +95,16 @@ export const BasicInformation = ({ values, onChange }: any) => {
         />
       </FormGroup>
       <FormGroup
-        label="Residency Dates"
-        fieldId="residency-dates"
+        label="Engagement Dates"
+        fieldId="engagement-dates"
         helperText="What is the duration?"
         isRequired
       >
-        <InputGroup label="Residency Duration">
+        <InputGroup label="Engagement Duration">
           <InputGroupText
             style={input}
             component="label"
-            htmlFor="residency-duration"
+            htmlFor="engagement-duration"
           >
             <CalendarAltIcon />
           </InputGroupText>
@@ -113,7 +113,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             name="start_date"
             id="start_date"
             type="date"
-            aria-label="The end date."
+            aria-label="The start date."
             style={input}
             value={getFormattedDate(values.start_date) || ''}
             onChange={e => onChange('start_date', e)}
@@ -124,7 +124,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
             id="end_date"
             type="date"
             style={input}
-            aria-label="Residency end date"
+            aria-label="The end date"
             value={getFormattedDate(values.end_date) || ''}
             onChange={e => onChange('end_date', e)}
           />
@@ -136,8 +136,8 @@ export const BasicInformation = ({ values, onChange }: any) => {
           name="description"
           id="description"
           style={input}
-          aria-label="residency description"
-          placeholder="Description and notes for the Engagment"
+          aria-label="engagement description"
+          placeholder="Description and notes for the Engagement"
           value={values.description || ''}
           onChange={e => onChange('description', e)}
         />

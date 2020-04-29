@@ -1,4 +1,3 @@
-{{- if eq .Values.imageTag "latest" }}
 ---
 apiVersion: image.openshift.io/v1
 kind: ImageStream
@@ -21,4 +20,3 @@ spec:
     referencePolicy:
       type: Source
   {{- end}}
-{{- end }}

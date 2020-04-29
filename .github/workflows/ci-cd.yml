@@ -77,3 +77,4 @@ jobs:
         image_push_registry: quay.io
         image_push_username: ${{ secrets.QUAY_USERNAME }}
         image_push_password: ${{ secrets.QUAY_PASSWORD }}
+        image_tags: master
