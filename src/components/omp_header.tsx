@@ -54,7 +54,7 @@ function _OMPHeader() {
           <ToolbarGroup>
             <Nav theme="dark">
               <NavList variant={NavVariants.horizontal}>
-                <NavItem id="homeLink" itemId={0} isActive={pathname === '/'}>
+                <NavItem id="homeLink" itemId={0} isActive={pathname === '/dashboard'}>
                   <Link to="/" style={iconPad}>
                     <HomeIcon size="md" title="Home" />
                   </Link>
