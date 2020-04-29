@@ -7,7 +7,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import slugify from 'slugify';
-import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 
 export const ClusterInformation = ({

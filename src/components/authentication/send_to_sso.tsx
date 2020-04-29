@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { ConfigContext } from '../../context/config_context';
+import { ConfigContext } from '../../context/config_context/config_context';
 
 export function SendToSSO() {
   const configContext = useContext(ConfigContext);

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { EngagementFormContext } from '../context/engagement_form_context';
-import { EngagementContext } from '../context/engagement_context';
-import { ConfigContext } from '../context/config_context';
+import { EngagementFormContext } from '../context/engagement_context/engagement_form_context';
+import { EngagementContext } from '../context/engagement_context/engagement_context';
+import { ConfigContext } from '../context/config_context/config_context';
 import { Feature } from './feature';
 import { APP_FEATURES } from '../common/app_features';
 

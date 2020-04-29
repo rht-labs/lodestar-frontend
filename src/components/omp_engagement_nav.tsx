@@ -10,7 +10,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 
-import { EngagementContext } from '../context/engagement_context';
+import { EngagementContext } from '../context/engagement_context/engagement_context';
 
 function _EngagementNav() {
   const columnHeaderStyle: React.CSSProperties = {

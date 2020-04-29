@@ -8,19 +8,22 @@ import React, {
   Dispatch,
 } from 'react';
 import yaml from 'yaml';
-import { ConfigContext } from './config_context';
+import { ConfigContext } from '../config_context/config_context';
 import { AxiosError, AxiosInstance } from 'axios';
-import { SessionContext } from './session_context';
+import { SessionContext } from '../session_context/session_context';
 import { EngagementContext } from './engagement_context';
-import { Engagement } from '../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement_schema';
 
 export interface EngagementFormContext {
   getSessionData: (requestHandler: AxiosInstance) => Promise<any>;
   error: AxiosError | null;
   state: any;
-  openshiftOptions?: any;
-  providerOptions?: any;
-  userManagementOptions?: any;
+  formOptions: {
+    openshiftOptions?: any;
+    providerOptions?: any;
+    userManagementOptions?: any;
+  };
+
   dispatch: Dispatch<any>;
 }
 
@@ -28,6 +31,7 @@ export const EngagementFormContext = createContext<EngagementFormContext>({
   getSessionData: async () => null,
   error: null,
   state: {},
+  formOptions: {},
   dispatch: () => {},
 });
 const { Provider } = EngagementFormContext;
@@ -40,9 +44,11 @@ export const EngagementFormProvider = ({
   const [requestError, setRequestError] = useState<AxiosError | null>(null);
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
-  const [openshiftOptions, setOpenshiftOptions] = useState<any>();
-  const [providerOptions, setProviderOptions] = useState<any>();
-  const [userManagementOptions, setUserManagementOptions] = useState<any>();
+  const [formOptions, setFormOptions] = useState<{
+    openshiftOptions?: any;
+    providerOptions?: any;
+    userManagementOptions?: any;
+  }>({});
   const [isLoading, setIsLoading] = useState(true);
   const engagementContext = useContext(EngagementContext);
 
@@ -56,35 +62,35 @@ export const EngagementFormProvider = ({
       type: 'switch_engagement',
       payload: getInitialState(engagementContext.activeEngagement),
     });
-    if (providerOptions) {
+    if (formOptions.providerOptions) {
       dispatch({
         type: 'ocp_cloud_provider_region',
         payload:
           engagementContext.activeEngagement?.ocp_cloud_provider_region ??
-          providerOptions[0].regions[0].value,
+          formOptions.providerOptions[0].regions[0].value,
       });
       dispatch({
         type: 'ocp_cloud_provider_name',
         payload:
           engagementContext.activeEngagement?.ocp_cloud_provider_name ??
-          providerOptions[0].value,
+          formOptions.providerOptions[0].value,
       });
     }
-    if (openshiftOptions) {
+    if (formOptions.openshiftOptions) {
       dispatch({
         type: 'ocp_cluster_size',
         payload:
           engagementContext.activeEngagement?.ocp_cluster_size ??
-          openshiftOptions['cluster-size'][0].value,
+          formOptions.openshiftOptions['cluster-size'][0].value,
       });
       dispatch({
         type: 'ocp_version',
         payload:
           engagementContext.activeEngagement?.ocp_version ??
-          openshiftOptions.versions[0].value,
+          formOptions.openshiftOptions.versions[0].value,
       });
     }
-  }, [engagementContext.activeEngagement, openshiftOptions, providerOptions]);
+  }, [engagementContext.activeEngagement, formOptions]);
 
   const getSessionData = useCallback(async () => {
     try {
@@ -92,9 +98,11 @@ export const EngagementFormProvider = ({
         `${configContext.appConfig?.backendUrl}/config`
       );
       const parsedData = yaml.parse(data.content);
-      setOpenshiftOptions(parsedData['openshift']);
-      setProviderOptions(parsedData['providers']);
-      setUserManagementOptions(parsedData['user-management']);
+      setFormOptions({
+        openshiftOptions: parsedData['openshift'],
+        providerOptions: parsedData['providers'],
+        userManagementOptions: parsedData['user-management'],
+      });
     } catch (e) {
       setRequestError(e);
     } finally {
@@ -109,9 +117,7 @@ export const EngagementFormProvider = ({
     <Provider
       value={{
         getSessionData,
-        openshiftOptions,
-        userManagementOptions,
-        providerOptions,
+        formOptions,
         error: requestError,
         state,
         dispatch,
@@ -124,6 +130,7 @@ export const EngagementFormProvider = ({
 
 export const getInitialState = (engagement?: Engagement): Engagement => {
   return {
+    launch: engagement?.launch ?? null,
     project_id: engagement?.project_id ?? null,
     customer_name: engagement?.customer_name ?? null,
     project_name: engagement?.project_name ?? null,

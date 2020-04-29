@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import { SessionContext } from './session_context';
+import { SessionContext } from '../session_context/session_context';
 
 interface FeatureToggleContext {
   features: string[];

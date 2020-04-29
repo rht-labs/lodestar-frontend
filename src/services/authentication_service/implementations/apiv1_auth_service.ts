@@ -2,7 +2,7 @@ import Axios, { AxiosInstance } from 'axios';
 import { UserToken } from '../../../schemas/user_token_schema';
 import qs from 'querystring';
 import { UserProfile } from '../../../schemas/user_profile_schema';
-import { ConfigContextParams } from '../../../context/config_context';
+import { ConfigContextParams } from '../../../context/config_context/config_context';
 import { AuthService } from '../authentication_service';
 const TOKEN_STORAGE_KEY = 'token';
 
@@ -54,7 +54,7 @@ export class Apiv1AuthService implements AuthService {
         'Content-Type': 'application/x-www-form-urlencoded',
         Accept: '*/*',
       },
-    })
+    });
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
     return;
   }
