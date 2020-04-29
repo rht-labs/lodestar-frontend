@@ -5,3 +5,7 @@
 .pf-c-form-control:disabled::after {
   content: '';
 }
+
+.pf-c-nav__item {
+  margin-right: 14px !important;
+}
