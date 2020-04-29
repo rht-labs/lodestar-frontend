@@ -2,6 +2,7 @@ import React, { Profiler } from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
 import { unstable_trace as trace } from 'scheduler/tracing';
+import './assets/css/overrides.css'
 
 if (process.env.NODE_ENV === 'development') {
   trace('initial render', performance.now(), () =>
