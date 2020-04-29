@@ -1,6 +1,6 @@
 ![Build Container](https://github.com/rht-labs/open-management-portal-frontend/workflows/Build%20Container/badge.svg)
 
-# OMP Frotend Quickstart
+# OMP Frontend Quickstart
 
 ## Organization
 
@@ -64,6 +64,8 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+Regenerate test snapshots using `npm run test -- --updateSnapshot --watchAll=false`.
 
 ### `npm run build`
 

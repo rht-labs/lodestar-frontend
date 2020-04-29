@@ -16,6 +16,7 @@ import {
   CubesIcon,
 } from '@patternfly/react-icons';
 import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
+import { Feature } from '../../../components/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
 
@@ -85,7 +86,9 @@ export const ClusterUsers = ({
                 <Text style={listHeader}>First Name</Text>
                 <Text style={listHeader}>Email</Text>
                 <Text style={listHeader}>Role</Text>
-                <Text style={buttonHeader}>Del</Text>
+                <Feature name={APP_FEATURES.writer}>
+                  <Text style={buttonHeader}>Del</Text>
+                </Feature>
               </InputGroup>
             </li>
             {values.engagement_users.map((value: any, index: any) => {
@@ -150,14 +153,16 @@ export const ClusterUsers = ({
                         )
                       )}
                     </FormSelect>
-                    <Button
-                      onClick={removeUser}
-                      value={index}
-                      variant="danger"
-                      isInline
-                    >
-                      <ErrorCircleOIcon />
-                    </Button>
+                    <Feature name={APP_FEATURES.writer}>
+                      <Button
+                        onClick={removeUser}
+                        value={index}
+                        variant="danger"
+                        isInline
+                      >
+                        <ErrorCircleOIcon />
+                      </Button>
+                    </Feature>
                   </InputGroup>
                 </li>
               );
@@ -165,9 +170,11 @@ export const ClusterUsers = ({
           </ul>
         </Form>
       )}
-      <Button onClick={addUser} variant="link" icon={<PlusCircleIcon />}>
-        Add User
-      </Button>
+      <Feature name={APP_FEATURES.writer}>
+        <Button onClick={addUser} variant="link" icon={<PlusCircleIcon />}>
+          Add User
+        </Button>
+      </Feature>
     </div>
   );
 };
