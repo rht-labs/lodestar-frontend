@@ -44,7 +44,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="name"
             name="engagement-lead-name"
             onChange={e => {
-              onChange({ type: 'engagement_lead_name', payload: e });
+              onChange('engagement_lead_name', e);
             }}
             placeholder="Full Name"
             type="text"
@@ -63,9 +63,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="email"
             style={input}
             name="engagement-lead-email"
-            onChange={e =>
-              onChange({ type: 'engagement_lead_email', payload: e })
-            }
+            onChange={e => onChange('engagement_lead_email', e)}
             placeholder="Email Address"
             type="email"
             value={values.engagement_lead_email || ''}
@@ -93,9 +91,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="tech-lead-name"
             style={input}
             name="tech-lead-name"
-            onChange={e =>
-              onChange({ type: 'technical_lead_name', payload: e })
-            }
+            onChange={e => onChange('technical_lead_name', e)}
             placeholder="Full Name"
             type="text"
             value={values.technical_lead_name || ''}
@@ -113,9 +109,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             aria-label="tech lead email"
             id="tech-lead-email"
             name="tech-lead-email"
-            onChange={e =>
-              onChange({ type: 'technical_lead_email', payload: e })
-            }
+            onChange={e => onChange('technical_lead_email', e)}
             placeholder="Email Address"
             type="email"
             value={values.technical_lead_email || ''}
@@ -143,9 +137,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             aria-label="Customer contact name"
             id="customer-contact-name"
             name="customer-contact-name"
-            onChange={e =>
-              onChange({ type: 'customer_contact_name', payload: e })
-            }
+            onChange={e => onChange('customer_contact_name', e)}
             type="text"
             placeholder="Full Name"
             value={values.customer_contact_name || ''}
@@ -163,9 +155,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="customer-contact-email"
             name="customer-contact-email"
             style={input}
-            onChange={e =>
-              onChange({ type: 'customer_contact_email', payload: e })
-            }
+            onChange={e => onChange('customer_contact_email', e)}
             placeholder="Email Address"
             type="email"
             value={values.customer_contact_email || ''}
