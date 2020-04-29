@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - deployment/**
       - design/**
+      - README.md
 
 jobs:
   check-links:
