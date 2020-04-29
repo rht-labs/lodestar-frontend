@@ -1,8 +1,8 @@
 import React, { createContext, useState, useCallback, useContext } from 'react';
-import { Engagement } from '../schemas/engagement_schema';
-import { Apiv1EngagementService } from '../services/engagement_service/implementations/apiv1_engagement_service';
-import { ConfigContext } from './config_context';
-import { SessionContext } from './session_context';
+import { Engagement } from '../../schemas/engagement_schema';
+import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
+import { ConfigContext } from '../config_context/config_context';
+import { SessionContext } from '../session_context/session_context';
 
 export interface EngagementContext {
   getEngagements: () => void;
@@ -112,20 +112,22 @@ export const EngagementProvider = ({
   );
 
   const showSuccessMessage = () => {
-    console.log("success");
+    console.log('success');
     //TODO: Once interaction feedback system is worked out - implement here
-  }
+  };
 
   const showErrorMessage = () => {
-    console.log("error");
+    console.log('error');
     //TODO: Once interaction feedback system is worked out - implement here
-  }
+  };
 
   const launchEngagement = useCallback(
     async (data: any) => {
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        const returnedEngagement = await engagementRepository.launchEngagement(data);
+        const returnedEngagement = await engagementRepository.launchEngagement(
+          data
+        );
         _updateEngagementInPlace(returnedEngagement);
         showSuccessMessage();
         setActiveEngagement(returnedEngagement);

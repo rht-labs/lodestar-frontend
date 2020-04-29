@@ -4,11 +4,11 @@ import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
 import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
-import { EngagementFormContext } from '../../context/engagement_form_context';
+import { EngagementFormContext } from '../../context/engagement_context/engagement_form_context';
 import { Loading } from './Loading';
 import { EngagementNav } from '../../components/omp_engagement_nav';
-import { EngagementContext } from '../../context/engagement_context';
-import { OMPEngagementButtonPane} from '../../components/omp_engagement_button_pane';
+import { EngagementContext } from '../../context/engagement_context/engagement_context';
+import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
@@ -49,7 +49,7 @@ export function EngagementPane() {
   };
 
   const engagementFormRequestError = engagementFormContext.error;
-  
+
   return (
     <>
       <div style={contentPane}>
@@ -76,13 +76,17 @@ export function EngagementPane() {
               />
             </Tab>
             <Tab style={tab} eventKey={2} title="OpenShift Cluster">
-              {!engagementFormContext.providerOptions ||
-              !engagementFormContext.openshiftOptions ? (
+              {!engagementFormContext.formOptions.providerOptions ||
+              !engagementFormContext.formOptions.openshiftOptions ? (
                 <Loading />
               ) : (
                 <ClusterInformation
-                  providerOptions={engagementFormContext.providerOptions}
-                  openshiftOptions={engagementFormContext.openshiftOptions}
+                  providerOptions={
+                    engagementFormContext.formOptions.providerOptions
+                  }
+                  openshiftOptions={
+                    engagementFormContext.formOptions.openshiftOptions
+                  }
                   values={engagementFormContext.state}
                   onChange={engagementFormContext.dispatch}
                 />
@@ -90,14 +94,16 @@ export function EngagementPane() {
             </Tab>
             <Tab style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
-                userManagementOptions={engagementFormContext.userManagementOptions}
+                userManagementOptions={
+                  engagementFormContext.formOptions.userManagementOptions
+                }
                 values={engagementFormContext.state}
                 onChange={engagementFormContext.dispatch}
               />
             </Tab>
           </Tabs>
         </div>
-        <OMPEngagementButtonPane/>
+        <OMPEngagementButtonPane />
       </div>
       {engagementFormRequestError ? (
         <Alert isInline title="We encountered an error." variant="danger">

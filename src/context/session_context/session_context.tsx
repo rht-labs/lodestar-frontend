@@ -5,14 +5,14 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { Apiv1AuthService } from '../services/authentication_service/implementations/apiv1_auth_service';
-import { AuthService } from '../services/authentication_service/authentication_service';
+import { Apiv1AuthService } from '../../services/authentication_service/implementations/apiv1_auth_service';
+import { AuthService } from '../../services/authentication_service/authentication_service';
 
-import { UserProfile } from '../schemas/user_profile_schema';
-import { UserToken } from '../schemas/user_token_schema';
-import { ConfigContext } from './config_context';
+import { UserProfile } from '../../schemas/user_profile_schema';
+import { UserToken } from '../../schemas/user_token_schema';
+import { ConfigContext } from '../config_context/config_context';
 import Axios, { AxiosInstance } from 'axios';
-import { Request } from '../utilities/request';
+import { Request } from '../../utilities/request';
 
 export type AuthenticationState =
   | 'initial'
@@ -31,7 +31,7 @@ export interface SessionContext {
   axios?: AxiosInstance;
   authState: AuthenticationState;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
-  logout: () => {};
+  logout: () => Promise<void>;
 }
 
 export const SessionContext = createContext<SessionContext>({
@@ -58,7 +58,7 @@ export const SessionProvider = ({
     undefined
   );
   const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
-  const requestHandler = new Request({authenticationRepository})
+  const requestHandler = new Request({ authenticationRepository });
 
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
@@ -85,9 +85,9 @@ export const SessionProvider = ({
   );
 
   const logout = async () => {
-    await authenticationRepository.clearSession()
+    await authenticationRepository.clearSession();
     return;
-  }
+  };
 
   useEffect(() => {
     if (!!configContext.appConfig) {
@@ -96,17 +96,20 @@ export const SessionProvider = ({
       authenticationRepository.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationRepository.getToken();
         if (isLoggedIn && tokens) {
-
           authenticationRepository.getUserProfile().then(profile => {
             setSessionData({
               profile,
               tokens,
               roles: profile.groups,
             });
-            if(profile.groups ? profile.groups.includes('manage_projects') : false){
+            if (
+              profile.groups
+                ? profile.groups.includes('manage_projects')
+                : false
+            ) {
               setAuthStatus('authenticated');
-            }else{
-              setAuthStatus('unauthorized')
+            } else {
+              setAuthStatus('unauthorized');
             }
           });
         } else {
