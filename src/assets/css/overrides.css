@@ -13,3 +13,7 @@
 .pf-c-page__main {
   z-index: 301;
 }
+
+.pf-c-dropdown__menu {
+  z-index: 302;
+}

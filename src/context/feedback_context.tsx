@@ -3,35 +3,36 @@ import {AlertVariant} from '@patternfly/react-core';
 
 interface FeedbackContext {
   isLoaderVisible: boolean;
-  setIsLoaderVisible: (isLoaderVisible:boolean) => false;
+  setIsLoaderVisible: (isLoaderVisible:boolean) => void;
   alertMsg: string | null;
-  setAlertMsg: (msg:string) => null;
+  setAlertMsg: (msg:string) => void;
   alertType: AlertVariant;
-  setAlertType: (alertType:AlertVariant) => AlertVariant.success;
-  showAlert: () => {};
-  hideLoader: () => {};
-  showLoader: () => {};
+  setAlertType: (alertType:AlertVariant) => void;
+  showAlert: (msg:string, variant:string) => void;
+  hideLoader: () => void;
+  showLoader: () => void;
+  hideAlert: () => void;
 }
 
 export const FeedbackContext = React.createContext<FeedbackContext>({
   isLoaderVisible: false,
-  // setActiveEngagement: (engagement: Engagement) => {},
-  setIsLoaderVisible: (isLoaderVisible:boolean) => false,
+  setIsLoaderVisible: (isLoaderVisible:boolean) => {},
   alertMsg: null,
   setAlertMsg: (msg:string) => {},
+  setAlertType: (alertType:AlertVariant) => {},
   alertType: AlertVariant.success,
   hideAlert: () => {},
-  showAlert:(msg:string, variant:AlertVariant) => {},
+  showAlert:(msg:string, variant:string) => {},
   hideLoader: () => {},
   showLoader: () => {},
 });
 
-export const FeedbackSystem = ({ children }: { children: React.ReactNode }) => {
+export const FeedbackProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>(null);
   const [alertType, setAlertType] = useState<AlertVariant>(null);
 
-  const hideLoader = () => setIsLoaderVisible(true);
+  const hideLoader = () => setIsLoaderVisible(false);
   const showLoader = () => setIsLoaderVisible(true);
 
   const hideAlert = () => setAlertMsg(null);
@@ -48,7 +49,7 @@ export const FeedbackSystem = ({ children }: { children: React.ReactNode }) => {
     <FeedbackContext.Provider
       value={{
         isLoaderVisible,
-        setIsLoaderVisible,
+        setIsLoaderVisible: (isLoaderVisible) => setIsLoaderVisible(isLoaderVisible),
         alertMsg,
         setAlertMsg,
         alertType,
