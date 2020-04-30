@@ -1,41 +1,64 @@
 import React, { useState } from 'react';
-import { Alert, AlertActionCloseButton, AlertVariant } from '@patternfly/react-core';
+import { Alert, AlertActionCloseButton, AlertVariant, Button, Spinner } from '@patternfly/react-core';
+// import { AutomationIcon } from '@patternfly/react-icons';
 // import { EngagementFormContext } from '../context/engagement_form_context';
 // import { EngagementContext } from '../context/engagement_context';
 // import { ConfigContext } from '../context/config_context';
 
 
-function _OMPFeedback() {
+export function Feedback() {
   // const engagementContext = useContext(EngagementContext);
   // const engagementFormContext = useContext(EngagementFormContext);
   // const configContext = useContext(ConfigContext);
 
-  let type:AlertVariant = AlertVariant.danger;
-  let alertMsg = 'temp message';
-  const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false);
+  const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
+  const [alertMsg, setAlertMsg] = useState<string>(null);
+  const [alertType, setAlertType] = useState<AlertVariant>(null);
   
-  const closeAlert = () => setIsAlertVisible(false);
-  const showAlert = (msg, variant) => {
+  const hideLoader = () => setIsLoaderVisible(true);
+  const showLoader = () => setIsLoaderVisible(true);
+
+  const hideAlert = () => setAlertMsg(null);
+  const showAlert = (msg:string, variant:string) => {
     if(variant === 'error'){
-      type = AlertVariant.error;
+      setAlertType(AlertVariant.danger);
     }else{
-      type = AlertVariant.success;
+      setAlertType(AlertVariant.success);
     }
-    alertMsg = msg;
-    setIsAlertVisible(true);
+    setAlertMsg(msg);
   }
-  showAlert("Your save was successful.", "error");
+
+  const modalStyle: React.CSSProperties = {
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    zIndex: 301,
+  }
+  
+  const spinnerStyle: React.CSSProperties = {
+    left: '49%',
+    top: '45%'
+  }
+  
   return (
     <React.Fragment>
-      {isAlertVisible && (
+      {alertMsg && (
         <Alert
-          variant={type}
+          variant={alertType}
           title={alertMsg}
-          action={<AlertActionCloseButton onClose={closeAlert} />}
+          action={<AlertActionCloseButton onClose={hideAlert} />}
         />
       )}
+      <Button onClick={() => showAlert("Your save was successful.", "success")}>Click</Button>
+      {isLoaderVisible && (
+        <div style={modalStyle}>
+          <Spinner style={spinnerStyle}/>
+        </div>
+      )}
+      <Button onClick={hideLoader}>Click</Button>
     </React.Fragment>
   );
 }
-
-export const Feedback = React.memo(_OMPFeedback);
