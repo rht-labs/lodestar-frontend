@@ -10,7 +10,6 @@ import { SessionContext } from '../session_context/session_context';
 import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement_schema';
-import yaml from 'yaml';
 import {
   engagementFormReducer,
   getInitialState,
@@ -40,30 +39,19 @@ export const useEngagements = (
   const [activeEngagement, setActiveEngagement] = useState<
     Engagement | undefined
   >();
-  const getFormOptions = useCallback(async () => {
-    try {
-      const { data } = await sessionContext.axios.get(
-        `${configContext.appConfig?.backendUrl}/config`
-      );
-      const parsedData = yaml.parse(data.content);
-      setFormOptions({
-        openshiftOptions: parsedData['openshift'],
-        providerOptions: parsedData['providers'],
-        userManagementOptions: parsedData['user-management'],
-      });
-    } catch (e) {
-      setError(e);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [configContext.appConfig, sessionContext.axios]);
   const [engagementFormState, dispatch] = useReducer<
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
   useEffect(() => {
-    getFormOptions();
-  }, [getFormOptions]);
+    try {
+      engagementRepository.getConfig().then(data => setFormOptions(data));
+    } catch (e) {
+      setError(e);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     dispatch({

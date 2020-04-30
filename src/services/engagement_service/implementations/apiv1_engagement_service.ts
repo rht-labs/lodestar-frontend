@@ -1,7 +1,7 @@
 import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { AxiosInstance } from 'axios';
-
+import yaml from 'yaml';
 export class Apiv1EngagementService extends EngagementService {
   constructor({ axios, baseUrl }: { axios?: AxiosInstance; baseUrl?: string }) {
     super();
@@ -41,5 +41,14 @@ export class Apiv1EngagementService extends EngagementService {
       engagementData
     );
     return new Engagement(data as Engagement);
+  }
+  async getConfig(): Promise<any> {
+    const { data } = await this.axios.get(`${this.baseUrl}/config`);
+    const parsedData = yaml.parse(data.content);
+    return {
+      openshiftOptions: parsedData['openshift'],
+      providerOptions: parsedData['providers'],
+      userManagementOptions: parsedData['user-management'],
+    };
   }
 }
