@@ -162,7 +162,7 @@ export const ClusterInformation = ({
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
-          value={values.ocp_sub_domain || ''}
+          value={values.ocp_sub_domain || values.suggested_subdomain || ''}
           onChange={e => onChange({ type: 'ocp_sub_domain', payload: e })}
         />
       </FormGroup>
