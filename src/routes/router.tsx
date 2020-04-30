@@ -7,7 +7,6 @@ import { CallbackHandler } from '../components/authentication/callback_handler';
 import { EngagementPane } from './engagement_pane';
 import { Admin } from './admin';
 import { Dashboard } from './dashboard';
-import { EngagementFormProvider } from '../context/engagement_context/engagement_form_context';
 import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
@@ -32,9 +31,7 @@ function _OMPRouter() {
             <Redirect exact from="/" to="/dashboard" />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/engagements">
-              <EngagementFormProvider>
-                <EngagementPane />
-              </EngagementFormProvider>
+              <EngagementPane />
             </PrivateRoute>
             <PrivateRoute exact path="/admin">
               <Admin />
