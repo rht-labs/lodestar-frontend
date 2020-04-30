@@ -3,22 +3,27 @@ import {AlertVariant} from '@patternfly/react-core';
 
 interface FeedbackContext {
   isLoaderVisible: boolean;
-  setIsLoaderVisible: (b:boolean) => false;
-  alertMsg: string;
-  setAlertMsg: (s:string) => null;
+  setIsLoaderVisible: (isLoaderVisible:boolean) => false;
+  alertMsg: string | null;
+  setAlertMsg: (msg:string) => null;
   alertType: AlertVariant;
-  setAlertType: (a:AlertVariant) => AlertVariant.success;
+  setAlertType: (alertType:AlertVariant) => AlertVariant.success;
+  showAlert: () => {};
+  hideLoader: () => {};
+  showLoader: () => {};
 }
 
 export const FeedbackContext = React.createContext<FeedbackContext>({
   isLoaderVisible: false,
-  setIsLoaderVisible: (b:boolean) => false,
+  // setActiveEngagement: (engagement: Engagement) => {},
+  setIsLoaderVisible: (isLoaderVisible:boolean) => false,
   alertMsg: null,
+  setAlertMsg: (msg:string) => {},
   alertType: AlertVariant.success,
-  hideAlert: any,
-  showAlert:
-  hideLoader: boolean,
-  showLoader: boolean,
+  hideAlert: () => {},
+  showAlert:(msg:string, variant:AlertVariant) => {},
+  hideLoader: () => {},
+  showLoader: () => {},
 });
 
 export const FeedbackSystem = ({ children }: { children: React.ReactNode }) => {
