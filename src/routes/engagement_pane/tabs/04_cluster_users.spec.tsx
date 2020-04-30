@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'enzyme';
 import { ClusterUsers } from './04_cluster_users';
-import { getInitialState } from '../../../context/engagement_form_context';
+import { getInitialState } from '../../../context/engagement_context/engagement_form_reducer';
 
 const defaultOptions = {
   'user-management': {

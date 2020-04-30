@@ -4,7 +4,6 @@ import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
 import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
-import { EngagementFormContext } from '../../context/engagement_context/engagement_form_context';
 import { Loading } from './Loading';
 import { EngagementNav } from '../../components/omp_engagement_nav';
 import { EngagementContext } from '../../context/engagement_context/engagement_context';
@@ -12,9 +11,7 @@ import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
-  const engagementFormContext = useContext(EngagementFormContext);
   const engagementContext = useContext(EngagementContext);
-
   const handleTabClick = function(this: any, event: any, tabIndex: any) {
     setActiveTabKey(tabIndex);
   };
@@ -48,11 +45,12 @@ export function EngagementPane() {
     borderRight: '.5px solid #AFBAC4',
   };
 
-  const engagementFormRequestError = engagementFormContext.error;
+  const engagementFormRequestError = engagementContext.error;
 
   return (
     <>
       <div style={contentPane}>
+        ``
         <div style={columnPane}>
           <EngagementNav />
         </div>
@@ -65,40 +63,40 @@ export function EngagementPane() {
           >
             <Tab style={tab} eventKey={0} title="Basic Information">
               <BasicInformation
-                values={engagementFormContext.engagementFormState}
-                onChange={engagementFormContext.updateFormField}
+                values={engagementContext.engagementFormState}
+                onChange={engagementContext.updateEngagementField}
               />
             </Tab>
             <Tab style={tab} eventKey={1} title="Point of Contact">
               <PointOfContact
-                values={engagementFormContext.engagementFormState}
-                onChange={engagementFormContext.updateFormField}
+                values={engagementContext.engagementFormState}
+                onChange={engagementContext.updateEngagementField}
               />
             </Tab>
             <Tab style={tab} eventKey={2} title="OpenShift Cluster">
-              {!engagementFormContext.formOptions.providerOptions ||
-              !engagementFormContext.formOptions.openshiftOptions ? (
+              {!engagementContext.formOptions.providerOptions ||
+              !engagementContext.formOptions.openshiftOptions ? (
                 <Loading />
               ) : (
                 <ClusterInformation
                   providerOptions={
-                    engagementFormContext.formOptions.providerOptions
+                    engagementContext.formOptions.providerOptions
                   }
                   openshiftOptions={
-                    engagementFormContext.formOptions.openshiftOptions
+                    engagementContext.formOptions.openshiftOptions
                   }
-                  values={engagementFormContext.engagementFormState}
-                  onChange={engagementFormContext.updateFormField}
+                  values={engagementContext.engagementFormState}
+                  onChange={engagementContext.updateEngagementField}
                 />
               )}
             </Tab>
             <Tab style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
                 userManagementOptions={
-                  engagementFormContext.formOptions.userManagementOptions
+                  engagementContext.formOptions.userManagementOptions
                 }
-                values={engagementFormContext.engagementFormState}
-                onChange={engagementFormContext.updateFormField}
+                values={engagementContext.engagementFormState}
+                onChange={engagementContext.updateEngagementField}
               />
             </Tab>
           </Tabs>
