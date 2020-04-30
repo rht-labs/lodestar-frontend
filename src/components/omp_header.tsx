@@ -85,7 +85,7 @@ function _OMPHeader() {
           </ToolbarGroup>
           <ToolbarGroup>
             <ToolbarItem>
-              <UserDropdown />
+              <UserDropdown/>
             </ToolbarItem>
           </ToolbarGroup>
         </Toolbar>
