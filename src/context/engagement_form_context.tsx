@@ -13,6 +13,7 @@ import { AxiosError, AxiosInstance } from 'axios';
 import { SessionContext } from './session_context';
 import { EngagementContext } from './engagement_context';
 import { Engagement } from '../schemas/engagement_schema';
+import { slugify } from 'transliteration';
 
 export interface EngagementFormContext {
   getSessionData: (requestHandler: AxiosInstance) => Promise<any>;
@@ -146,7 +147,27 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
     ocp_persistent_storage_size:
       engagement?.ocp_persistent_storage_size ?? null,
     ocp_cluster_size: engagement?.ocp_cluster_size ?? null,
+    suggested_subdomain:
+      engagement?.project_name || engagement?.customer_name
+        ? generateSuggestedSubdomain(
+            engagement?.project_name ?? '',
+            engagement?.customer_name ?? ''
+          )
+        : null,
   };
+};
+
+const generateSuggestedSubdomain = (
+  project_name: string,
+  customer_name: string
+): string => {
+  let slug = '';
+  if (project_name.length > 2) {
+    slug = slugify(project_name);
+  } else if (customer_name.length > 2) {
+    slug = slugify(customer_name);
+  }
+  return slug.substring(0, 8);
 };
 
 const formReducer = (state: any, action: any) => {
@@ -154,9 +175,23 @@ const formReducer = (state: any, action: any) => {
     case 'user':
       return { ...state, engagement_users: action.payload };
     case 'customer_name':
-      return { ...state, customer_name: action.payload };
+      return {
+        ...state,
+        customer_name: action.payload,
+        suggested_subdomain: generateSuggestedSubdomain(
+          state?.project_name ?? '',
+          action.payload
+        ),
+      };
     case 'project_name':
-      return { ...state, project_name: action.payload };
+      return {
+        ...state,
+        project_name: action.payload,
+        suggested_subdomain: generateSuggestedSubdomain(
+          action.payload,
+          state?.customer_name ?? ''
+        ),
+      };
     case 'description':
       return { ...state, description: action.payload };
     case 'location':
