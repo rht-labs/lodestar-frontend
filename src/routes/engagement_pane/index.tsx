@@ -64,13 +64,13 @@ export function EngagementPane() {
             <Tab style={tab} eventKey={0} title="Basic Information">
               <BasicInformation
                 values={engagementContext.engagementFormState}
-                onChange={engagementContext.updateEngagementField}
+                onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
             <Tab style={tab} eventKey={1} title="Point of Contact">
               <PointOfContact
                 values={engagementContext.engagementFormState}
-                onChange={engagementContext.updateEngagementField}
+                onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
             <Tab style={tab} eventKey={2} title="OpenShift Cluster">
@@ -86,7 +86,7 @@ export function EngagementPane() {
                     engagementContext.formOptions.openshiftOptions
                   }
                   values={engagementContext.engagementFormState}
-                  onChange={engagementContext.updateEngagementField}
+                  onChange={engagementContext.updateEngagementFormField}
                 />
               )}
             </Tab>
@@ -96,7 +96,7 @@ export function EngagementPane() {
                   engagementContext.formOptions.userManagementOptions
                 }
                 values={engagementContext.engagementFormState}
-                onChange={engagementContext.updateEngagementField}
+                onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
           </Tabs>
