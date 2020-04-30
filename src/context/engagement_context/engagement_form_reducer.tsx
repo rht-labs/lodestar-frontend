@@ -39,6 +39,7 @@ export const engagementFormReducer = (
     case 'user':
       return { ...state, engagement_users: action.payload };
     case 'customer_name':
+      console.log(action.payload);
       return { ...state, customer_name: action.payload };
     case 'project_name':
       return { ...state, project_name: action.payload };
