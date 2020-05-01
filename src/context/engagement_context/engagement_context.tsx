@@ -8,6 +8,7 @@ export interface EngagementContext {
   activeEngagement?: Engagement;
   setActiveEngagement: (Engagement: Engagement) => void;
   engagements: Engagement[];
+  getConfig: () => void;
   createEngagement: (data: any) => Promise<void>;
   saveEngagement: (data: any) => Promise<void>;
   updateEngagementFormField: (fieldName: string, payload: any) => void;
@@ -44,12 +45,14 @@ export const EngagementProvider = ({
     saveEngagement,
     launchEngagement,
     engagementFormState,
+    getConfig,
   } = useEngagements();
 
   return (
     <Provider
       value={{
         activeEngagement,
+        getConfig,
         setActiveEngagement,
         engagements,
         error,

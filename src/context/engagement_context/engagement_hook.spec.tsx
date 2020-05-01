@@ -22,16 +22,15 @@ describe('Engagement Context', () => {
   });
 
   test('Can Modify Engagement Form', async () => {
-    const { result, waitForValueToChange, waitForNextUpdate } = renderHook(() =>
+    const { result, waitForNextUpdate } = renderHook(() =>
       useEngagements({ engagementService: new FakedEngagementService() })
     );
     expect(result.current.engagementFormState).toEqual(getInitialState());
     await act(async () => {
       result.current.updateEngagementFormField('customer_name', 'spencer');
       await waitForNextUpdate();
-      expect(result.current.engagementFormState.customer_name).toEqual(
-        'spencer'
-      );
     });
+    expect(result.current.engagementFormState.customer_name).toEqual('spencer');
+    
   });
 });
