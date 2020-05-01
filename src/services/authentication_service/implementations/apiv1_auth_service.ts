@@ -2,7 +2,6 @@ import Axios, { AxiosInstance } from 'axios';
 import { UserToken } from '../../../schemas/user_token_schema';
 import qs from 'querystring';
 import { UserProfile } from '../../../schemas/user_profile_schema';
-import { ConfigContextParams } from '../../../context/config_context/config_context';
 import { AuthService } from '../authentication_service';
 import { Config } from '../../../schemas/config';
 const TOKEN_STORAGE_KEY = 'token';

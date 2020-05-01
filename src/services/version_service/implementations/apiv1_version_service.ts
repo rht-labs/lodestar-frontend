@@ -3,9 +3,11 @@ import { Version } from '../../../schemas/version_schema';
 import Axios, { AxiosInstance } from 'axios';
 
 export class Apiv1VersionService extends VersionService {
-  constructor(baseURL: string) {
+  constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
     super();
     this.axios = Axios.create({ baseURL });
+    this.axios.interceptors.request.use(onBeforeRequest);
+    this.axios.interceptors.response.use(onAfterRequest, onFailure);
   }
   axios?: AxiosInstance;
 

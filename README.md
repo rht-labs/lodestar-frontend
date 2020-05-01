@@ -26,6 +26,11 @@ The component is written to mirror major parts of the api of the [Parallel Drive
 
 Currently, features are derived from the session data on session context.
 
+#### Service Provider Context
+The service provider context acts as a dependency injector for asynchronous services into the application.
+By default, the service provider provides the production services. You can switch to faked services by setting
+`REACT_APP_USE_FAKED=true`.
+
 ### `src/routes`
 
 `src/routes` holds container-level UI components. Effectively, anything that would be considered a separate screen will likely have a place in the `routes/` folder. Essentially the components in `src/routes` equate to templates in other design patterns.

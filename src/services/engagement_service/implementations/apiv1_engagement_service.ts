@@ -2,22 +2,13 @@ import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement_schema';
 import Axios, { AxiosInstance } from 'axios';
 import yaml from 'yaml';
-import { UserToken } from '../../../schemas/user_token_schema';
-const TOKEN_STORAGE_KEY = 'token';
 
 export class Apiv1EngagementService extends EngagementService {
-  constructor(baseURL: string) {
+  constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
     super();
     this.axios = Axios.create({ baseURL });
-    this.axios.interceptors.request.use(request => {
-      const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY) || '';
-
-      const tokenMap = JSON.parse(storedToken);
-
-      const { accessToken } = UserToken.fromMap(tokenMap);
-      request.headers.Authorization = `Bearer ${accessToken}`;
-      return request;
-    });
+    this.axios.interceptors.request.use(onBeforeRequest);
+    this.axios.interceptors.response.use(onAfterRequest, onFailure);
   }
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
