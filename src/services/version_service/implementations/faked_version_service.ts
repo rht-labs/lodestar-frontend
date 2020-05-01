@@ -1,7 +1,7 @@
 import { VersionService } from '../version_service';
 import { Version } from '../../../schemas/version_schema';
 
-export class Apiv1VersionService extends VersionService {
+export class FakedVersionService extends VersionService {
   async fetchVersion(): Promise<Version> {
     return Version.fromMap({
       application: 'omp-frontend',

@@ -97,7 +97,7 @@ export const SessionProvider = ({
             });
             if (
               profile.groups
-                ? profile.groups.includes('manage_projects')
+                ? profile.groups.includes('reader')
                 : false
             ) {
               setAuthStatus('authenticated');
