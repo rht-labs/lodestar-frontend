@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Version } from '../../schemas/version_schema';
-import { Apiv1VersionService } from '../../services/version_service/implementations/apiv1_version_service';
-import { ConfigContext } from '../config_context/config_context';
-import { SessionContext } from '../session_context/session_context';
+import { ServiceProviderContext } from '../service_provider/service_provider_context';
 
 export interface VersionContext {
   fetchVersions: () => void;
@@ -18,19 +16,13 @@ export const VersionProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const configContext = useContext(ConfigContext);
-  const sessionContext = useContext(SessionContext);
-  const versionRepository = new Apiv1VersionService({
-    baseUrl: configContext.appConfig?.backendUrl,
-    axios: sessionContext.axios,
-  });
-
+  const { versionService } = useContext(ServiceProviderContext);
   const [versions, setVersions] = useState<Version | undefined>();
 
   const fetchVersions = useCallback(async () => {
-    const versions = await versionRepository.fetchVersion();
+    const versions = await versionService.fetchVersion();
     setVersions(versions);
-  }, [versionRepository]);
+  }, [versionService]);
 
   return (
     <Provider
