@@ -48,14 +48,16 @@ Each service is contained in a folder. At the root of the folder is an eponymous
 
 ### `Feeback System`
 
-User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  This exposes the following methods:
+User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  
+This exposes the following methods:
 
 * showLoader()
 * hideLoader()
-* showAlert(msg:string, value:string)
+* showAlert(msg:string, value:string, timed:boolean = true)
 * hideAlert()
 
-Example:
+**Example Usage:**  
+Import the context into your component like so:
 
 ```javascript
 import React, { useContext } from 'react';
@@ -68,7 +70,13 @@ once properly imported, the methods can be implemented where needed as follows:
 
 ```javascript
 feedbackContext.showLoader();
+feedbackContext.showAlert("this is my alert message", "error OR success", defaults to true );
+feedbackContext.hideAlert();
+feedbackContext.hideLoader();
 ```
+
+Loaders should be applied to all async operations and page transitions.  
+Alerts should be utilized for all user interactions outside of navigation. (Saves, Launches, Creates)
 
 # The React stuff
 
@@ -80,25 +88,25 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode.  
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
+The page will reload if you make edits.  
 You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
+Launches the test runner in the interactive watch mode.  
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 Regenerate test snapshots using `npm run test -- --updateSnapshot --watchAll=false`.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
+Builds the app for production to the `build` folder.  
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
+The build is minified and the filenames include the hashes.  
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
@@ -115,7 +123,7 @@ For use in an OpenShift Container Platform environment, this appliction is manag
 
 The Node agent is going to install the npm dependecies, run the tests, build the application, package the output + the Dockerfile, and publish this package to Nexus.
 
-```
+```bash
 npm install
 
 npm run test:ci
@@ -127,9 +135,6 @@ npm run package
 npm run publish
 ```
 
-### OpenShift Container Platform Build and Deployment
-
-For use in an OpenShift Container Platform environment, this appliction is managed by the use of Helm templates. Please follow the instructions in the [deployment README](deployment) for detailed instructions.
 
 ## Configuration Variables for local deployments
 
