@@ -44,6 +44,32 @@ Schemas should not contain significant business logic. Schemas should be ignoran
 
 Each service is contained in a folder. At the root of the folder is an eponymous file. This file contains the public interface of the service. Any implementer of that interface lives in a folder called `implementations`. This structure allows the contexts to quickly switch between different implementations of the same service.
 
+## Development
+
+### `Feeback System`
+
+User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  This exposes the following methods:
+
+* showLoader()
+* hideLoader()
+* showAlert(msg:string, value:string)
+* hideAlert()
+
+Example:
+
+```javascript
+import React, { useContext } from 'react';
+import { FeedbackContext } from './src/context/feedback_context';
+
+const feedbackContext = useContext(FeedbackContext);
+```
+
+once properly imported, the methods can be implemented where needed as follows:
+
+```javascript
+feedbackContext.showLoader();
+```
+
 # The React stuff
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
