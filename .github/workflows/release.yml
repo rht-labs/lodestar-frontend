@@ -9,22 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: get the release version
-      id: get_version
-      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - name: tag with release version
       uses: tinact/docker.image-retag@1.0.2
       with:
-        image_name: rht-labs/omp-frontend
+        image_name: mcanoy/omp-frontend
         image_old_tag: ${{ github.sha }}
-        image_new_tag: ${{ steps.get_version.outputs.VERSION }}
+        image_new_tag: ${{ github.event.release.tag_name }}
         registry: quay.io
         registry_username: ${{ secrets.QUAY_USERNAME }}
         registry_password: ${{ secrets.QUAY_PASSWORD }}
     - name: tag with latest
       uses: tinact/docker.image-retag@1.0.2
       with:
-        image_name: rht-labs/omp-frontend
+        image_name: mcanoy/omp-frontend
         image_old_tag: ${{ github.sha }}
         registry: quay.io
         registry_username: ${{ secrets.QUAY_USERNAME }}

@@ -1,0 +1,32 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: omp-frontend
+  name: omp-frontend
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: omp-frontend:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: https://github.com/mcanoy/open-management-portal-frontend.git
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: DockerImage
+        name: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - type: ConfigChange
+status:
+  lastVersion: 1
