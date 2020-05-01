@@ -5,29 +5,22 @@ import {
   useReducer,
   useEffect,
 } from 'react';
-import { ConfigContext } from '../config_context/config_context';
-import { SessionContext } from '../session_context/session_context';
-import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement_schema';
 import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
+import { ServiceProviderContext } from '../service_provider/service_provider_context';
 
 export const useEngagements = (
   props: {
     engagementService?: EngagementService;
   } = {}
 ) => {
-  const configContext = useContext(ConfigContext);
-  const sessionContext = useContext(SessionContext);
-  const engagementRepository =
+  const engagementService =
     props.engagementService ??
-    new Apiv1EngagementService({
-      baseUrl: configContext.appConfig?.backendUrl,
-      axios: sessionContext.axios,
-    });
+    useContext(ServiceProviderContext).engagementService;
   const [formOptions, setFormOptions] = useState<{
     openshiftOptions?: any;
     providerOptions?: any;
@@ -44,9 +37,9 @@ export const useEngagements = (
   >(engagementFormReducer, engagementFormReducer());
 
   const getConfig = useCallback(async () => {
-    const data = await engagementRepository.getConfig();
+    const data = await engagementService.getConfig();
     setFormOptions(data);
-  }, [engagementRepository]);
+  }, [engagementService]);
 
   useEffect(() => {
     dispatch({
@@ -84,12 +77,12 @@ export const useEngagements = (
   }, [activeEngagement, formOptions]);
 
   const fetchEngagements = useCallback(async () => {
-    const engagements = await engagementRepository.fetchEngagements();
+    const engagements = await engagementService.fetchEngagements();
     setEngagements(engagements);
     if (engagements.length > 0) {
       setActiveEngagement(engagements[0]);
     }
-  }, [engagementRepository]);
+  }, [engagementService]);
 
   const _addNewEngagement = useCallback(
     (newEngagement: Engagement) => {
@@ -107,12 +100,12 @@ export const useEngagements = (
   const createEngagement = useCallback(
     async (data: Engagement) => {
       try {
-        const engagement = await engagementRepository.createEngagement(data);
+        const engagement = await engagementService.createEngagement(data);
         _addNewEngagement(engagement);
         setActiveEngagement(engagement);
       } catch (e) {}
     },
-    [engagementRepository, _addNewEngagement]
+    [engagementService, _addNewEngagement]
   );
 
   const _updateEngagementInPlace = useCallback(
@@ -143,16 +136,14 @@ export const useEngagements = (
     async (data: any) => {
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        const returnedEngagement = await engagementRepository.saveEngagement(
-          data
-        );
+        const returnedEngagement = await engagementService.saveEngagement(data);
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         // TODO: Add error state
       }
     },
-    [engagementRepository, _updateEngagementInPlace]
+    [engagementService, _updateEngagementInPlace]
   );
 
   const showSuccessMessage = () => {
@@ -176,7 +167,7 @@ export const useEngagements = (
     async (data: any) => {
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        const returnedEngagement = await engagementRepository.launchEngagement(
+        const returnedEngagement = await engagementService.launchEngagement(
           data
         );
         _updateEngagementInPlace(returnedEngagement);
@@ -187,7 +178,7 @@ export const useEngagements = (
         showErrorMessage();
       }
     },
-    [_updateEngagementInPlace, engagementRepository]
+    [_updateEngagementInPlace, engagementService]
   );
 
   return {
