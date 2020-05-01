@@ -56,7 +56,6 @@ export function EngagementPane() {
   return (
     <>
       <div style={contentPane}>
-        ``
         <div style={columnPane}>
           <EngagementNav />
         </div>
