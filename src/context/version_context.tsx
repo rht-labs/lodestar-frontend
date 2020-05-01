@@ -3,7 +3,7 @@ import { Version } from '../schemas/version_schema';
 import { Apiv1VersionService } from '../services/version_service/implementations/apiv1_version_service';
 import { ConfigContext } from './config_context';
 import { SessionContext } from './session_context';
-
+import { FeedbackContext} from './feedback_context';
 
 export interface VersionContext {
   fetchVersions: () => void;
@@ -21,6 +21,8 @@ export const VersionProvider = ({
 }) => {
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
+  const feedbackContext = useContext(FeedbackContext);
+
   const versionRepository = new Apiv1VersionService({
     baseUrl: configContext.appConfig?.backendUrl,
     axios: sessionContext.axios,
@@ -29,9 +31,11 @@ export const VersionProvider = ({
   const [versions, setVersions] = useState<Version| undefined>();
 
 const fetchVersions = useCallback(async () => {
+  feedbackContext.showLoader();
   const versions = await versionRepository.fetchVersion();
   setVersions(versions);
-}, [versionRepository]);
+  feedbackContext.hideLoader();
+}, [versionRepository, feedbackContext]);
 
   return (
     <Provider
