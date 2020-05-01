@@ -13,7 +13,6 @@ export function Feedback() {
     left: 0,
     width: '100vw',
     height: '100vh',
-    zIndex: 301,
   }
   
   const spinnerStyle: React.CSSProperties = {
