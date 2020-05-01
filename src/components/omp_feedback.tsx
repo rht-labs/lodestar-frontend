@@ -1,5 +1,5 @@
 import React, { useContext }from 'react';
-import { Alert, AlertActionCloseButton, Spinner } from '@patternfly/react-core';
+import { Alert, AlertGroup, AlertActionCloseButton, Spinner } from '@patternfly/react-core';
 import { FeedbackContext } from '../context/feedback_context';
 
 
@@ -23,11 +23,14 @@ export function Feedback() {
   return (
     <React.Fragment>
       {feedbackContext.alertMsg && (
-        <Alert
-          variant={feedbackContext.alertType}
-          title={feedbackContext.alertMsg}
-          action={<AlertActionCloseButton onClose={feedbackContext.hideAlert} />}
-        />
+        <AlertGroup isToast>
+          <Alert
+            isInline
+            variant={feedbackContext.alertType}
+            title={feedbackContext.alertMsg}
+            action={<AlertActionCloseButton onClose={feedbackContext.hideAlert} />}
+          />
+        </AlertGroup>
       )}
       {feedbackContext.isLoaderVisible && (
         <div style={modalStyle}>

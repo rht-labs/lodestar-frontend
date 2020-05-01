@@ -8,7 +8,7 @@ interface FeedbackContext {
   setAlertMsg: (msg:string) => void;
   alertType: AlertVariant;
   setAlertType: (alertType:AlertVariant) => void;
-  showAlert: (msg:string, variant:string) => void;
+  showAlert: (msg:string, variant:string, timed?:boolean) => void;
   hideLoader: () => void;
   showLoader: () => void;
   hideAlert: () => void;
@@ -22,27 +22,40 @@ export const FeedbackContext = React.createContext<FeedbackContext>({
   setAlertType: (alertType:AlertVariant) => {},
   alertType: AlertVariant.success,
   hideAlert: () => {},
-  showAlert:(msg:string, variant:string) => {},
+  showAlert:(msg:string, variant:string, timed:boolean) => {},
   hideLoader: () => {},
   showLoader: () => {},
 });
 
 export const FeedbackProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
+  const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(true);
   const [alertMsg, setAlertMsg] = useState<string>(null);
   const [alertType, setAlertType] = useState<AlertVariant>(null);
 
   const hideLoader = () => setIsLoaderVisible(false);
   const showLoader = () => setIsLoaderVisible(true);
 
-  const hideAlert = () => setAlertMsg(null);
-  const showAlert = (msg:string, variant:string) => {
+  const hideAlert = () => {
+    setAlertMsg(null);
+    if(alertTimer !== null){
+      clearTimeout(alertTimer);
+      alertTimer = null;
+    }
+  }
+  let alertTimer = null;
+  
+  const showAlert = (msg:string, variant:string, timed:boolean = true) => {
     if(variant === 'error'){
       setAlertType(AlertVariant.danger);
     }else{
       setAlertType(AlertVariant.success);
     }
     setAlertMsg(msg);
+
+    if(timed && variant !== 'error'){
+      console.log("show alert");
+      alertTimer = setTimeout(hideAlert, 5000);
+    }
   }
 
   return (

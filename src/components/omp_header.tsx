@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   PageHeader,
@@ -27,6 +27,7 @@ import {
 
 import avatarImg from '../assets/images/avatar.svg';
 import { UserDropdown } from './user_dropdown';
+import { FeedbackContext } from '../context/feedback_context';
 
 function _OMPHeader() {
   const iconPad: React.CSSProperties = {
@@ -34,7 +35,13 @@ function _OMPHeader() {
     paddingTop: 0,
   };
 
+  const feedbackContext = useContext(FeedbackContext);
+
   const { pathname } = useLocation();
+
+  const showLoader = () => {
+    feedbackContext.showLoader();
+  }
 
   return (
     <PageHeader
@@ -59,8 +66,8 @@ function _OMPHeader() {
                     <HomeIcon size="md" title="Home" />
                   </Link>
                 </NavItem>
-                <NavItem id="engagementPaneLink" itemId={1} isActive={pathname === '/engagements'}>
-                  <Link style={iconPad} to="/engagements">
+                <NavItem onClick={showLoader} id="engagementPaneLink" itemId={1} isActive={pathname === '/engagements'}>
+                  <Link style={iconPad} to="/engagements" >
                     <ListUlIcon size="md" title="Engagements" />
                   </Link>
                 </NavItem>
