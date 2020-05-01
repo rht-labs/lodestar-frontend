@@ -113,6 +113,7 @@ export const EngagementProvider = ({
         const returnedEngagement = await engagementRepository.saveEngagement(
           data
         );
+        feedbackContext.showAlert("Your updates have been successfully saved.", "success");
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
@@ -133,11 +134,11 @@ export const EngagementProvider = ({
         _updateEngagementInPlace(returnedEngagement);
         setActiveEngagement(returnedEngagement);
         feedbackContext.hideLoader();
-        feedbackContext.showAlert("You have successfully launched your cluster!", "success");
+        feedbackContext.showAlert("You have successfully launched your engagement!", "success");
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
-        feedbackContext.showAlert("We were unable to launch your cluster. Please followup with an administrator if this continues.", "error");
+        feedbackContext.showAlert("We were unable to launch your engagement. Please followup with an administrator if this continues.", "error", false);
       }
     },
     [_updateEngagementInPlace, engagementRepository, feedbackContext]
