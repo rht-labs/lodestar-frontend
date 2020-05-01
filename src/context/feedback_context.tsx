@@ -3,11 +3,8 @@ import {AlertVariant} from '@patternfly/react-core';
 
 interface FeedbackContext {
   isLoaderVisible: boolean;
-  setIsLoaderVisible: (isLoaderVisible:boolean) => void;
   alertMsg: string | null;
-  setAlertMsg: (msg:string) => void;
   alertType: AlertVariant;
-  setAlertType: (alertType:AlertVariant) => void;
   showAlert: (msg:string, variant:string, timed?:boolean) => void;
   hideLoader: () => void;
   showLoader: () => void;
@@ -16,10 +13,7 @@ interface FeedbackContext {
 
 export const FeedbackContext = React.createContext<FeedbackContext>({
   isLoaderVisible: false,
-  setIsLoaderVisible: (isLoaderVisible:boolean) => {},
   alertMsg: null,
-  setAlertMsg: (msg:string) => {},
-  setAlertType: (alertType:AlertVariant) => {},
   alertType: AlertVariant.success,
   hideAlert: () => {},
   showAlert:(msg:string, variant:string, timed:boolean) => {},
@@ -53,7 +47,6 @@ export const FeedbackProvider = ({ children }: { children: React.ReactNode }) =>
     setAlertMsg(msg);
 
     if(timed && variant !== 'error'){
-      console.log("show alert");
       alertTimer = setTimeout(hideAlert, 5000);
     }
   }
@@ -62,11 +55,8 @@ export const FeedbackProvider = ({ children }: { children: React.ReactNode }) =>
     <FeedbackContext.Provider
       value={{
         isLoaderVisible,
-        setIsLoaderVisible: (isLoaderVisible) => setIsLoaderVisible(isLoaderVisible),
         alertMsg,
-        setAlertMsg,
         alertType,
-        setAlertType,
         hideLoader,
         showLoader,
         hideAlert,
