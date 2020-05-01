@@ -97,6 +97,7 @@ export const useEngagements = (
         const newEngagementList = [newEngagement, ...engagements];
         setEngagements(newEngagementList);
       } catch (e) {
+        console.error(e);
         // TODO: Handle setting the error
       }
     },
@@ -104,7 +105,7 @@ export const useEngagements = (
   );
 
   const createEngagement = useCallback(
-    async (data: any) => {
+    async (data: Engagement) => {
       try {
         const engagement = await engagementRepository.createEngagement(data);
         _addNewEngagement(engagement);

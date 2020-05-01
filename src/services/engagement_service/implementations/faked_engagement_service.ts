@@ -5,8 +5,8 @@ export class FakedEngagementService extends EngagementService {
   async fetchEngagements(): Promise<Engagement[]> {
     return new Array(8).fill(null).map(() => Engagement.fromFake());
   }
-  async createEngagement(data: any): Promise<Engagement> {
-    return Engagement.fromFake();
+  async createEngagement(data: Engagement): Promise<Engagement> {
+    return data;
   }
   async saveEngagement(data: any): Promise<Engagement> {
     return data as Engagement;
