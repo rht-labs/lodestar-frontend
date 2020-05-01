@@ -48,7 +48,7 @@ describe('Engagement Context', () => {
 
   test('Form options update when setting active engagement', async () => {
     const { result, waitForNextUpdate } = getHook();
-    expect(result.current.formOptions).toEqual({});
+    expect(result.current.formOptions).toBe(undefined);
     await act(async () => {
       result.current.getConfig();
       await waitForNextUpdate();

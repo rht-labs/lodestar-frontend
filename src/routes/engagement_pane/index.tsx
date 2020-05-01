@@ -67,19 +67,24 @@ export function EngagementPane() {
             activeKey={activeTabKey}
             onSelect={handleTabClick}
           >
-            <Tab style={tab} eventKey={0} title="Basic Information">
+            <Tab
+              id={'basic_info'}
+              style={tab}
+              eventKey={0}
+              title="Basic Information"
+            >
               <BasicInformation
                 values={engagementContext.engagementFormState}
                 onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
-            <Tab style={tab} eventKey={1} title="Point of Contact">
+            <Tab id={'poc'} style={tab} eventKey={1} title="Point of Contact">
               <PointOfContact
                 values={engagementContext.engagementFormState}
                 onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
-            <Tab style={tab} eventKey={2} title="OpenShift Cluster">
+            <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
               {!engagementContext.formOptions?.providerOptions ||
               !engagementContext.formOptions?.openshiftOptions ? (
                 <Loading />
@@ -96,7 +101,7 @@ export function EngagementPane() {
                 />
               )}
             </Tab>
-            <Tab style={tab} eventKey={3} title="Cluster Users">
+            <Tab id={'cu'} style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
                 userManagementOptions={
                   engagementContext.formOptions?.userManagementOptions

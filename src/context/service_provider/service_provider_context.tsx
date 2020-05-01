@@ -57,7 +57,7 @@ export const ServiceProvider = ({
   shouldUseFaked = process.env.REACT_APP_USE_FAKED === 'true',
 }: {
   children: any;
-  shouldUseFaked: boolean;
+  shouldUseFaked?: boolean;
 }) => {
   const configContext = useContext(ConfigContext);
   return (
