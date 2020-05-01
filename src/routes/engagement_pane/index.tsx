@@ -17,6 +17,12 @@ export function EngagementPane() {
   };
 
   useEffect(() => {
+    if (!engagementContext.formOptions) {
+      engagementContext.getConfig();
+    }
+  }, [engagementContext]);
+
+  useEffect(() => {
     setActiveTabKey(0);
   }, [engagementContext.activeEngagement]);
 
@@ -74,16 +80,16 @@ export function EngagementPane() {
               />
             </Tab>
             <Tab style={tab} eventKey={2} title="OpenShift Cluster">
-              {!engagementContext.formOptions.providerOptions ||
-              !engagementContext.formOptions.openshiftOptions ? (
+              {!engagementContext.formOptions?.providerOptions ||
+              !engagementContext.formOptions?.openshiftOptions ? (
                 <Loading />
               ) : (
                 <ClusterInformation
                   providerOptions={
-                    engagementContext.formOptions.providerOptions
+                    engagementContext.formOptions?.providerOptions
                   }
                   openshiftOptions={
-                    engagementContext.formOptions.openshiftOptions
+                    engagementContext.formOptions?.openshiftOptions
                   }
                   values={engagementContext.engagementFormState}
                   onChange={engagementContext.updateEngagementFormField}
@@ -93,7 +99,7 @@ export function EngagementPane() {
             <Tab style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
                 userManagementOptions={
-                  engagementContext.formOptions.userManagementOptions
+                  engagementContext.formOptions?.userManagementOptions
                 }
                 values={engagementContext.engagementFormState}
                 onChange={engagementContext.updateEngagementFormField}

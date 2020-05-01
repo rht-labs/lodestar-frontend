@@ -10,6 +10,7 @@ import { FakedAuthService } from '../../services/authentication_service/implemen
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { ConfigContext } from '../config_context/config_context';
+import { Request } from '../../utilities/request';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -17,11 +18,27 @@ interface ServiceProvider {
   versionService: VersionService;
 }
 
-const ProductionServiceProviders = (config: Config) => ({
-  engagementService: new Apiv1EngagementService(config.backendUrl),
-  authenticationService: new Apiv1AuthService(config),
-  versionService: new Apiv1VersionService(config.backendUrl),
-});
+const ProductionServiceProviders = (config: Config) => {
+  const authService = new Apiv1AuthService(config);
+  const { beforeRequest, onRequestSuccess, onRequestFailure } = new Request({
+    authenticationRepository: authService,
+  });
+  return {
+    engagementService: new Apiv1EngagementService(
+      config.backendUrl,
+      beforeRequest,
+      onRequestSuccess,
+      onRequestFailure
+    ),
+    authenticationService: authService,
+    versionService: new Apiv1VersionService(
+      config.backendUrl,
+      beforeRequest,
+      onRequestSuccess,
+      onRequestFailure
+    ),
+  };
+};
 
 const FakedServiceProviders = (config: Config) => ({
   engagementService: new FakedEngagementService(),
@@ -40,7 +57,7 @@ export const ServiceProvider = ({ children }: { children: any }) => {
   return (
     <ServiceProviderContext.Provider
       value={
-        process.env.REACT_APP_USE_FAKED
+        process.env.REACT_APP_USE_FAKED === 'true'
           ? FakedServiceProviders(configContext.appConfig)
           : ProductionServiceProviders(configContext.appConfig)
       }

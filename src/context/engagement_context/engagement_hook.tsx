@@ -25,9 +25,10 @@ export const useEngagements = (
     openshiftOptions?: any;
     providerOptions?: any;
     userManagementOptions?: any;
-  }>({});
-  const [error, setError] = useState<any>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  } | undefined>();
+  // TODO: Handle error/loading state
+  const [error] = useState<any>();
+  const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [activeEngagement, setActiveEngagement] = useState<
     Engagement | undefined
@@ -46,7 +47,7 @@ export const useEngagements = (
       type: 'switch_engagement',
       payload: getInitialState(activeEngagement),
     });
-    if (formOptions.providerOptions) {
+    if (formOptions?.providerOptions) {
       dispatch({
         type: 'ocp_cloud_provider_region',
         payload:
@@ -60,7 +61,7 @@ export const useEngagements = (
           formOptions.providerOptions[0].value,
       });
     }
-    if (formOptions.openshiftOptions) {
+    if (formOptions?.openshiftOptions) {
       dispatch({
         type: 'ocp_cluster_size',
         payload:
@@ -155,7 +156,7 @@ export const useEngagements = (
     (fieldName: string, value: any) => {
       dispatch({ type: fieldName, payload: value });
     },
-    [dispatch, engagementFormState]
+    [dispatch]
   );
 
   const showErrorMessage = () => {
