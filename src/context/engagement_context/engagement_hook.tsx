@@ -43,15 +43,10 @@ export const useEngagements = (
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
-  useEffect(() => {
-    try {
-      engagementRepository.getConfig().then(data => setFormOptions(data));
-    } catch (e) {
-      setError(e);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const getConfig = useCallback(async () => {
+    const data = await engagementRepository.getConfig();
+    setFormOptions(data);
+  }, [engagementRepository]);
 
   useEffect(() => {
     dispatch({
@@ -168,7 +163,7 @@ export const useEngagements = (
     (fieldName: string, value: any) => {
       dispatch({ type: fieldName, payload: value });
     },
-    [dispatch]
+    [dispatch, engagementFormState]
   );
 
   const showErrorMessage = () => {
@@ -202,6 +197,7 @@ export const useEngagements = (
     engagementFormState,
     formOptions,
     isLoading,
+    getConfig,
     updateEngagementFormField,
     fetchEngagements,
     createEngagement,
