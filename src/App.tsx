@@ -11,29 +11,32 @@ import { ErrorBoundary } from './components/error_boundary';
 import { OMPHeader } from './components/omp_header';
 import { OMPRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_toggles/feature_toggles';
+import { ServiceProvider } from './context/service_provider/service_provider_context';
 import { Feedback } from './components/omp_feedback';
 import { FeedbackProvider } from './context/feedback_context';
 
 export const App = () => {
   return (
     <ErrorBoundary>
-      <FeedbackProvider>
-        <ConfigProvider>
-          <SessionProvider>
-            <VersionProvider>
-              <FeatureToggles>
-                <Router>
-                  <Providers>
-                    <MainTemplate>
-                      <MainTemplateRoutes />
-                    </MainTemplate>
-                  </Providers>
-                </Router>
-              </FeatureToggles>
-            </VersionProvider>
-          </SessionProvider>
-        </ConfigProvider>
-      </FeedbackProvider>
+      <ConfigProvider>
+        <ServiceProvider>
+          <FeedbackProvider>
+            <SessionProvider>
+              <VersionProvider>
+                <FeatureToggles>
+                  <Router>
+                    <Providers>
+                      <MainTemplate>
+                        <MainTemplateRoutes />
+                      </MainTemplate>
+                    </Providers>
+                  </Router>
+                </FeatureToggles>
+              </VersionProvider>
+            </SessionProvider>
+          </FeedbackProvider>
+        </ServiceProvider>
+      </ConfigProvider>
     </ErrorBoundary>
   );
 };

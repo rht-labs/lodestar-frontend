@@ -18,6 +18,12 @@ export function EngagementPane() {
   };
 
   useEffect(() => {
+    if (!engagementContext.formOptions) {
+      engagementContext.getConfig();
+    }
+  }, [engagementContext]);
+
+  useEffect(() => {
     setActiveTabKey(0);
   }, [engagementContext.activeEngagement]);
 
@@ -51,7 +57,6 @@ export function EngagementPane() {
   return (
     <>
       <div style={contentPane}>
-        ``
         <div style={columnPane}>
           <EngagementNav />
         </div>
@@ -62,39 +67,44 @@ export function EngagementPane() {
             activeKey={activeTabKey}
             onSelect={handleTabClick}
           >
-            <Tab style={tab} eventKey={0} title="Basic Information">
+            <Tab
+              id={'basic_info'}
+              style={tab}
+              eventKey={0}
+              title="Basic Information"
+            >
               <BasicInformation
                 values={engagementContext.engagementFormState}
                 onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
-            <Tab style={tab} eventKey={1} title="Point of Contact">
+            <Tab id={'poc'} style={tab} eventKey={1} title="Point of Contact">
               <PointOfContact
                 values={engagementContext.engagementFormState}
                 onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
-            <Tab style={tab} eventKey={2} title="OpenShift Cluster">
-              {!engagementContext.formOptions.providerOptions ||
-              !engagementContext.formOptions.openshiftOptions ? (
+            <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
+              {!engagementContext.formOptions?.providerOptions ||
+              !engagementContext.formOptions?.openshiftOptions ? (
                 <Loading />
               ) : (
                 <ClusterInformation
                   providerOptions={
-                    engagementContext.formOptions.providerOptions
+                    engagementContext.formOptions?.providerOptions
                   }
                   openshiftOptions={
-                    engagementContext.formOptions.openshiftOptions
+                    engagementContext.formOptions?.openshiftOptions
                   }
                   values={engagementContext.engagementFormState}
                   onChange={engagementContext.updateEngagementFormField}
                 />
               )}
             </Tab>
-            <Tab style={tab} eventKey={3} title="Cluster Users">
+            <Tab id={'cu'} style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
                 userManagementOptions={
-                  engagementContext.formOptions.userManagementOptions
+                  engagementContext.formOptions?.userManagementOptions
                 }
                 values={engagementContext.engagementFormState}
                 onChange={engagementContext.updateEngagementFormField}

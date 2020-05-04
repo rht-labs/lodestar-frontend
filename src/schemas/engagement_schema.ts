@@ -1,5 +1,3 @@
-import faker from 'faker';
-
 export interface Engagement {
   archive_date: string;
   customer_contact_email: string;
@@ -75,27 +73,27 @@ export class Engagement {
 
   static fromFake() {
     return new Engagement({
-      archive_date: faker.lorem.word(),
-      customer_contact_email: faker.lorem.word(),
-      customer_contact_name: faker.lorem.word(),
-      customer_name: faker.lorem.word(),
-      description: faker.lorem.word(),
-      end_date: faker.lorem.word(),
+      archive_date: 'faker',
+      customer_contact_email: 'faker',
+      customer_contact_name: 'faker',
+      customer_name: 'faker',
+      description: 'faker',
+      end_date: 'faker',
       engagement_users: [],
-      engagement_lead_email: faker.lorem.word(),
-      engagement_lead_name: faker.lorem.word(),
-      location: faker.lorem.word(),
-      ocp_cloud_provider_name: faker.lorem.word(),
-      ocp_cloud_provider_region: faker.lorem.word(),
-      ocp_cluster_size: faker.lorem.word(),
-      ocp_persistent_storage_size: faker.lorem.word(),
-      ocp_sub_domain: faker.lorem.word(),
-      ocp_version: faker.lorem.word(),
-      project_id: faker.random.number(),
-      project_name: faker.lorem.word(),
-      start_date: faker.lorem.word(),
-      technical_lead_email: faker.lorem.word(),
-      technical_lead_name: faker.lorem.word(),
+      engagement_lead_email: 'faker',
+      engagement_lead_name: 'faker',
+      location: 'faker',
+      ocp_cloud_provider_name: 'faker',
+      ocp_cloud_provider_region: 'faker',
+      ocp_cluster_size: 'faker',
+      ocp_persistent_storage_size: 'faker',
+      ocp_sub_domain: 'faker',
+      ocp_version: 'faker',
+      project_id: 1,
+      project_name: 'faker',
+      start_date: 'faker',
+      technical_lead_email: 'faker',
+      technical_lead_name: 'faker',
       launch: {},
     });
   }
