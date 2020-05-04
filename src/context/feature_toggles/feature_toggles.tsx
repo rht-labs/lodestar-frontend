@@ -17,7 +17,7 @@ export const FeatureToggles = ({
   features: roles,
 }: {
   children: React.ReactNode;
-  features: string[];
+  features?: string[];
 }) => {
   const sessionContext = useContext(SessionContext);
   const providedFeatures = roles ?? sessionContext.sessionData?.roles ?? [];
