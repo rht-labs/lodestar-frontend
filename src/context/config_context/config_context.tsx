@@ -27,7 +27,7 @@ export const ConfigProvider = ({
 
   useEffect(() => {
     fetchConfig();
-  }, []);
+  }, [fetchConfig]);
 
   return (
     <Provider
