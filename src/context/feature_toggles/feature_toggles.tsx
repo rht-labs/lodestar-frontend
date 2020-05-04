@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { SessionContext } from '../session_context/session_context';
 import { useFeatures } from './feature_hook';
 

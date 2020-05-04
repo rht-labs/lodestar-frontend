@@ -1,5 +1,3 @@
-import faker from 'faker';
-
 export interface Engagement {
   archive_date: string;
   customer_contact_email: string;
