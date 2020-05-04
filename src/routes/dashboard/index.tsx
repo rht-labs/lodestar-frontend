@@ -1,12 +1,17 @@
-import React from 'react';
-// import { initialState } from './initial_state';
+import React, { useContext } from 'react';
+import { FeedbackContext } from '../../context/feedback_context';
 
 export function Dashboard() {
+  const feedbackContext = useContext(FeedbackContext);
+  
   const contentPane: React.CSSProperties = {
     backgroundColor: '#EDEDED',
     height: '100vh',
     padding: 15
   };
+
+  feedbackContext.hideLoader();
+
 
   return (
     <>
