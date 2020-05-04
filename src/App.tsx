@@ -11,25 +11,29 @@ import { ErrorBoundary } from './components/error_boundary';
 import { OMPHeader } from './components/omp_header';
 import { OMPRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_toggles/feature_toggles';
+import { Feedback } from './components/omp_feedback';
+import { FeedbackProvider } from './context/feedback_context';
 
 export const App = () => {
   return (
     <ErrorBoundary>
-      <ConfigProvider>
-        <SessionProvider>
-          <VersionProvider>
-            <FeatureToggles>
-              <Router>
-                <Providers>
-                  <MainTemplate>
-                    <MainTemplateRoutes />
-                  </MainTemplate>
-                </Providers>
-              </Router>
-            </FeatureToggles>
-          </VersionProvider>
-        </SessionProvider>
-      </ConfigProvider>
+      <FeedbackProvider>
+        <ConfigProvider>
+          <SessionProvider>
+            <VersionProvider>
+              <FeatureToggles>
+                <Router>
+                  <Providers>
+                    <MainTemplate>
+                      <MainTemplateRoutes />
+                    </MainTemplate>
+                  </Providers>
+                </Router>
+              </FeatureToggles>
+            </VersionProvider>
+          </SessionProvider>
+        </ConfigProvider>
+      </FeedbackProvider>
     </ErrorBoundary>
   );
 };
@@ -42,6 +46,7 @@ const MainTemplate = React.memo(
   ({ children }: { children: React.ReactChild }) => {
     return (
       <Page header={<OMPHeader />} style={{ height: '100vh' }}>
+        <Feedback />
         {children}
       </Page>
     );

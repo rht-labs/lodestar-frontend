@@ -12,6 +12,7 @@ import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
   const engagementContext = useContext(EngagementContext);
+  
   const handleTabClick = function(this: any, event: any, tabIndex: any) {
     setActiveTabKey(tabIndex);
   };
