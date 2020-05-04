@@ -19,7 +19,7 @@ export class Request {
 
   client: AxiosInstance;
 
-  private beforeRequest = async (request: AxiosRequestConfig) => {
+  public beforeRequest = async (request: AxiosRequestConfig) => {
     if (await this.authenticationRepository.isLoggedIn()) {
       const token = this.authenticationRepository.getToken();
       const accessToken = token?.accessToken;
@@ -30,11 +30,11 @@ export class Request {
     }
   };
 
-  private onRequestSuccess = (response: AxiosResponse) => {
+  public onRequestSuccess = (response: AxiosResponse) => {
     return response;
   };
 
-  private onRequestFailure = (error: { response: AxiosResponse }) => {
+  public onRequestFailure = (error: { response: AxiosResponse }) => {
     const { response } = error;
     // TODO: Handle other request errors here
     if (response.status === 401 || response.status === 403) {
