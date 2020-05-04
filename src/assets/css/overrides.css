@@ -5,3 +5,15 @@
 .pf-c-form-control:disabled::after {
   content: '';
 }
+
+.pf-c-nav__item {
+  margin-right: 14px !important;
+}
+
+/* .pf-c-page__main {
+  z-index: 301;
+}
+
+.pf-c-dropdown {
+  z-index: 302;
+} */
