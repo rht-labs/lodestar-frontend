@@ -10,7 +10,7 @@ const Wrapper = ({ children }) => (
 );
 
 describe('Feature component', () => {
-  test('should render inactive component if role does not is present', () => {
+  test('should render inactive component if role is not present', () => {
     const { getByTestId } = render(
       <Wrapper>
         <Feature
@@ -21,7 +21,7 @@ describe('Feature component', () => {
         </Feature>
       </Wrapper>
     );
-    expect(getByTestId('inactive')).toBeInTheDOM();
+    expect(getByTestId('inactive')).toBeInTheDocument();
   });
 
   test('should render the active component when the role is present', () => {
@@ -35,6 +35,6 @@ describe('Feature component', () => {
         </Feature>
       </Wrapper>
     );
-    expect(getByTestId('active')).toBeInTheDOM();
+    expect(getByTestId('active')).toBeInTheDocument();
   });
 });
