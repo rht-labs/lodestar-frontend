@@ -14,10 +14,10 @@ export const FeatureToggleContext = React.createContext<FeatureToggleContext>({
 
 export const FeatureToggles = ({
   children,
-  roles,
+  features: roles,
 }: {
   children: React.ReactNode;
-  roles: string[];
+  features: string[];
 }) => {
   const sessionContext = useContext(SessionContext);
   const providedFeatures = roles ?? sessionContext.sessionData?.roles ?? [];
