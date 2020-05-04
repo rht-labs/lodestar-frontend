@@ -15,9 +15,10 @@ import {
   ErrorCircleOIcon,
   CubesIcon,
 } from '@patternfly/react-icons';
-import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { Feature } from '../../../components/feature';
 import { APP_FEATURES } from '../../../common/app_features';
+import { Engagement } from '../../../schemas/engagement_schema';
 
 const selectStyle: React.CSSProperties = {
   width: '24%',
@@ -37,19 +38,23 @@ export const ClusterUsers = ({
   userManagementOptions,
   values,
   onChange,
-}: any) => {
+}: {
+  onChange: (name: string, value: any) => void;
+  values: Engagement;
+  userManagementOptions?: any;
+}) => {
   const { hasFeature } = useContext(FeatureToggleContext);
 
   //Functions for Cluster User interactivity
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     values.engagement_users.push(newUser);
-    onChange({ type: 'user', payload: values.engagement_users });
+    onChange('user', values.engagement_users);
   }
 
   function removeUser(index: any) {
     values.engagement_users.splice(index.currentTarget.value, 1);
-    onChange({ type: 'user', payload: values.engagement_users });
+    onChange('user', values.engagement_users);
   }
 
   const tabContent: React.CSSProperties = {
@@ -96,10 +101,7 @@ export const ClusterUsers = ({
                       isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].last_name = e;
-                        onChange({
-                          type: 'user',
-                          payload: values.engagement_users,
-                        });
+                        onChange('user', values.engagement_users);
                       }}
                       placeholder="Last Name"
                       type="text"
@@ -111,10 +113,7 @@ export const ClusterUsers = ({
                       isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].first_name = e;
-                        onChange({
-                          type: 'user',
-                          payload: values.engagement_users,
-                        });
+                        onChange('user', values.engagement_users);
                       }}
                       placeholder="First Name"
                       type="text"
@@ -126,10 +125,7 @@ export const ClusterUsers = ({
                       isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].email = e;
-                        onChange({
-                          type: 'user',
-                          payload: values.engagement_users,
-                        });
+                        onChange('user', values.engagement_users);
                       }}
                       placeholder="Email Address"
                       type="email"
@@ -143,10 +139,7 @@ export const ClusterUsers = ({
                       isDisabled={!hasFeature(APP_FEATURES.writer)}
                       onChange={e => {
                         values.engagement_users[index].role = e;
-                        onChange({
-                          type: 'user',
-                          payload: values.engagement_users,
-                        });
+                        onChange('user', values.engagement_users);
                       }}
                     >
                       {userManagementOptions?.rbac?.roles?.map(
