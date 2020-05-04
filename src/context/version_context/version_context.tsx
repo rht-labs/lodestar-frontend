@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { Version } from '../schemas/version_schema';
-import { Apiv1VersionService } from '../services/version_service/implementations/apiv1_version_service';
-import { ConfigContext } from './config_context';
-import { SessionContext } from './session_context';
-import { FeedbackContext} from './feedback_context';
+import { Version } from '../../schemas/version_schema';
+import { Apiv1VersionService } from '../../services/version_service/implementations/apiv1_version_service';
+import { ConfigContext } from '../config_context/config_context';
+import { SessionContext } from '../session_context/session_context';
+import { FeedbackContext} from '../feedback_context';
 
 export interface VersionContext {
   fetchVersions: () => void;
@@ -28,7 +28,7 @@ export const VersionProvider = ({
     axios: sessionContext.axios,
   });
 
-  const [versions, setVersions] = useState<Version| undefined>();
+  const [versions, setVersions] = useState<Version | undefined>();
 
 const fetchVersions = useCallback(async () => {
   feedbackContext.showLoader();

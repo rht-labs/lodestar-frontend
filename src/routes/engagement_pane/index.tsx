@@ -4,15 +4,13 @@ import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
 import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
-import { EngagementFormContext } from '../../context/engagement_form_context';
 import { Loading } from './Loading';
 import { EngagementNav } from '../../components/omp_engagement_nav';
-import { EngagementContext } from '../../context/engagement_context';
-import { OMPEngagementButtonPane} from '../../components/omp_engagement_button_pane';
+import { EngagementContext } from '../../context/engagement_context/engagement_context';
+import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
-  const engagementFormContext = useContext(EngagementFormContext);
   const engagementContext = useContext(EngagementContext);
   
   const handleTabClick = function(this: any, event: any, tabIndex: any) {
@@ -48,11 +46,12 @@ export function EngagementPane() {
     borderRight: '.5px solid #AFBAC4',
   };
 
-  const engagementFormRequestError = engagementFormContext.error;
-  
+  const engagementFormRequestError = engagementContext.error;
+
   return (
     <>
       <div style={contentPane}>
+        ``
         <div style={columnPane}>
           <EngagementNav />
         </div>
@@ -65,39 +64,45 @@ export function EngagementPane() {
           >
             <Tab style={tab} eventKey={0} title="Basic Information">
               <BasicInformation
-                values={engagementFormContext.state}
-                onChange={engagementFormContext.dispatch}
+                values={engagementContext.engagementFormState}
+                onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
             <Tab style={tab} eventKey={1} title="Point of Contact">
               <PointOfContact
-                values={engagementFormContext.state}
-                onChange={engagementFormContext.dispatch}
+                values={engagementContext.engagementFormState}
+                onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
             <Tab style={tab} eventKey={2} title="OpenShift Cluster">
-              {!engagementFormContext.providerOptions ||
-              !engagementFormContext.openshiftOptions ? (
+              {!engagementContext.formOptions.providerOptions ||
+              !engagementContext.formOptions.openshiftOptions ? (
                 <Loading />
               ) : (
                 <ClusterInformation
-                  providerOptions={engagementFormContext.providerOptions}
-                  openshiftOptions={engagementFormContext.openshiftOptions}
-                  values={engagementFormContext.state}
-                  onChange={engagementFormContext.dispatch}
+                  providerOptions={
+                    engagementContext.formOptions.providerOptions
+                  }
+                  openshiftOptions={
+                    engagementContext.formOptions.openshiftOptions
+                  }
+                  values={engagementContext.engagementFormState}
+                  onChange={engagementContext.updateEngagementFormField}
                 />
               )}
             </Tab>
             <Tab style={tab} eventKey={3} title="Cluster Users">
               <ClusterUsers
-                userManagementOptions={engagementFormContext.userManagementOptions}
-                values={engagementFormContext.state}
-                onChange={engagementFormContext.dispatch}
+                userManagementOptions={
+                  engagementContext.formOptions.userManagementOptions
+                }
+                values={engagementContext.engagementFormState}
+                onChange={engagementContext.updateEngagementFormField}
               />
             </Tab>
           </Tabs>
         </div>
-        <OMPEngagementButtonPane/>
+        <OMPEngagementButtonPane />
       </div>
       {engagementFormRequestError ? (
         <Alert isInline title="We encountered an error." variant="danger">

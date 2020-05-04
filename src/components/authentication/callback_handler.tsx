@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { SessionContext } from '../../context/session_context';
+import { SessionContext } from '../../context/session_context/session_context';
 import { useLocation, Redirect } from 'react-router';
 
 export const CallbackHandler = () => {
