@@ -46,12 +46,6 @@ jobs:
         find: "4e3f530local"
         replace: "${{ github.sha }}"
         include: "public/manifest.json"
-    - name: Find and Replace Tag Manifest
-      uses: jacobtomlinson/gha-find-replace@0.1.1
-      with:
-        find: "v0.0.1-local"
-        replace: "${{ github.ref }}"
-        include: "public/manifest.json"
     - name: npm install, build, and test
       run: |
         ./build.sh
@@ -62,12 +56,6 @@ jobs:
       with:
         find: "###GIT_COMMIT###"
         replace: "${{ github.sha }}"
-        include: "build/.s2i"
-    - name: Find and Replace Tag Env
-      uses: jacobtomlinson/gha-find-replace@0.1.1
-      with:
-        find: "###GIT_TAG###"
-        replace: "${{ github.ref }}"
         include: "build/.s2i"
     - uses: redhat-cop/github-actions/s2i@v2
       with:
