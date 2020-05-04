@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin UI should match snapshot 1`] = `
+<TestStateWrapper>
+  <UNDEFINED />
+</TestStateWrapper>
+`;
