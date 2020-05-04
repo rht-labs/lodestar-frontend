@@ -14,12 +14,14 @@ import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
+import { FeedbackContext } from '../feedback_context';
 
 export const useEngagements = (
   props: {
     engagementService?: EngagementService;
   } = {}
 ) => {
+  const feedbackContext = useContext(FeedbackContext);
   const configContext = useContext(ConfigContext);
   const sessionContext = useContext(SessionContext);
   const engagementRepository =
@@ -33,8 +35,8 @@ export const useEngagements = (
     providerOptions?: any;
     userManagementOptions?: any;
   }>({});
-  const [error, setError] = useState<any>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error] = useState<any>();
+  const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [activeEngagement, setActiveEngagement] = useState<
     Engagement | undefined
@@ -84,12 +86,14 @@ export const useEngagements = (
   }, [activeEngagement, formOptions]);
 
   const fetchEngagements = useCallback(async () => {
+    feedbackContext.showLoader();
     const engagements = await engagementRepository.fetchEngagements();
     setEngagements(engagements);
     if (engagements.length > 0) {
       setActiveEngagement(engagements[0]);
     }
-  }, [engagementRepository]);
+    feedbackContext.hideLoader();
+  }, [engagementRepository, feedbackContext]);
 
   const _addNewEngagement = useCallback(
     (newEngagement: Engagement) => {
@@ -105,14 +109,26 @@ export const useEngagements = (
   );
 
   const createEngagement = useCallback(
-    async (data: Engagement) => {
+    async (data: any) => {
+      feedbackContext.showLoader();
       try {
         const engagement = await engagementRepository.createEngagement(data);
         _addNewEngagement(engagement);
         setActiveEngagement(engagement);
-      } catch (e) {}
+        feedbackContext.hideLoader();
+        feedbackContext.showAlert(
+          'Your engagement has been successfully created',
+          'success'
+        );
+      } catch (e) {
+        feedbackContext.hideLoader();
+        feedbackContext.showAlert(
+          'There was an issue with creating your engagement. Please followup with an administrator if this continues.',
+          'error'
+        );
+      }
     },
-    [engagementRepository, _addNewEngagement]
+    [engagementRepository, _addNewEngagement, feedbackContext]
   );
 
   const _updateEngagementInPlace = useCallback(
@@ -141,53 +157,63 @@ export const useEngagements = (
 
   const saveEngagement = useCallback(
     async (data: any) => {
+      feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
         const returnedEngagement = await engagementRepository.saveEngagement(
           data
         );
+        feedbackContext.showAlert(
+          'Your updates have been successfully saved.',
+          'success'
+        );
+        feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
-        // TODO: Add error state
+        feedbackContext.hideLoader();
+        feedbackContext.showAlert(
+          'There was an issue with saving your changes. Please followup with an administrator if this continues.',
+          'error'
+        );
       }
     },
-    [engagementRepository, _updateEngagementInPlace]
+    [engagementRepository, _updateEngagementInPlace, feedbackContext]
   );
-
-  const showSuccessMessage = () => {
-    console.log('success');
-    //TODO: Once interaction feedback system is worked out - implement here
-  };
 
   const updateEngagementFormField = useCallback(
     (fieldName: string, value: any) => {
       dispatch({ type: fieldName, payload: value });
     },
-    [dispatch, engagementFormState]
+    [dispatch]
   );
-
-  const showErrorMessage = () => {
-    console.log('error');
-    //TODO: Once interaction feedback system is worked out - implement here
-  };
 
   const launchEngagement = useCallback(
     async (data: any) => {
+      feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
         const returnedEngagement = await engagementRepository.launchEngagement(
           data
         );
         _updateEngagementInPlace(returnedEngagement);
-        showSuccessMessage();
         setActiveEngagement(returnedEngagement);
+        feedbackContext.hideLoader();
+        feedbackContext.showAlert(
+          'You have successfully launched your engagement!',
+          'success'
+        );
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
-        showErrorMessage();
+        feedbackContext.hideLoader();
+        feedbackContext.showAlert(
+          'We were unable to launch your engagement. Please followup with an administrator if this continues.',
+          'error',
+          false
+        );
       }
     },
-    [_updateEngagementInPlace, engagementRepository]
+    [_updateEngagementInPlace, engagementRepository, feedbackContext]
   );
 
   return {
