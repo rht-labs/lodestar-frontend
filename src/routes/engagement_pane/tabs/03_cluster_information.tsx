@@ -29,10 +29,7 @@ export const ClusterInformation = ({
   if (
     values.ocp_cloud_provider_name &&
     !availableProviders.find(
-      option =>
-        option &&
-        option.label &&
-        option.label === values.ocp_cloud_provider_name
+      option => option.value && option.value === values.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({
@@ -43,7 +40,7 @@ export const ClusterInformation = ({
 
   const availableProviderRegionOptions =
     providerOptions.find(
-      providerOption => providerOption.label === values.ocp_cloud_provider_name
+      providerOption => providerOption.value === values.ocp_cloud_provider_name
     )?.regions ?? [];
 
   if (

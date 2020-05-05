@@ -93,6 +93,7 @@ export const EngagementFormProvider = ({
         `${configContext.appConfig?.backendUrl}/config`
       );
       const parsedData = yaml.parse(data.content);
+      console.log(parsedData);
       setOpenshiftOptions(parsedData['openshift']);
       setProviderOptions(parsedData['providers']);
       setUserManagementOptions(parsedData['user-management']);
@@ -162,16 +163,16 @@ const generateSuggestedSubdomain = (
   customer_name: string
 ): string => {
   let slug = '';
-  const maxLen = 8
+  const maxLen = 8;
   if (project_name.length > 2) {
     slug = project_name;
   } else if (customer_name.length > 2) {
     slug = customer_name;
   }
-  if (slug.length > maxLen && slug.substring(0, maxLen).includes(" ")) {
-    slug = slug.substr(0, slug.lastIndexOf(" ", maxLen));
+  if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
+    slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
   }
-  slug = slugify(slug.substring(0, maxLen))
+  slug = slugify(slug.substring(0, maxLen));
   return slug;
 };
 
