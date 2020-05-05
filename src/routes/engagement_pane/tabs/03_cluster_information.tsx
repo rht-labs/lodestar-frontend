@@ -64,7 +64,7 @@ export const ClusterInformation = ({
           isDisabled={
             availableProviders?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !!(values as Engagement).launch
           }
           value={values.ocp_cloud_provider_name || ''}
           onChange={e =>
@@ -93,7 +93,7 @@ export const ClusterInformation = ({
           isDisabled={
             availableProviderRegionOptions?.length === 0 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !!(values as Engagement).launch
           }
           readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
@@ -124,7 +124,7 @@ export const ClusterInformation = ({
           isDisabled={
             openshiftOptions.versions?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !!(values as Engagement).launch
           }
           onChange={e => onChange({ type: 'ocp_version', payload: e })}
         >
@@ -166,8 +166,7 @@ export const ClusterInformation = ({
           style={input}
           isRequired
           isDisabled={
-            !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !hasFeature(APP_FEATURES.writer) || !!(values as Engagement).launch
           }
           type="text"
           id="ocp_sub_domain"
@@ -217,7 +216,7 @@ export const ClusterInformation = ({
           isDisabled={
             openshiftOptions['cluster-size']?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !!(values as Engagement).launch
           }
           onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
         >
