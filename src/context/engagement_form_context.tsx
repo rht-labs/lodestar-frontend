@@ -93,7 +93,6 @@ export const EngagementFormProvider = ({
         `${configContext.appConfig?.backendUrl}/config`
       );
       const parsedData = yaml.parse(data.content);
-      console.log(parsedData);
       setOpenshiftOptions(parsedData['openshift']);
       setProviderOptions(parsedData['providers']);
       setUserManagementOptions(parsedData['user-management']);
