@@ -134,6 +134,7 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
     end_date: engagement?.end_date ?? null,
     archive_date: engagement?.archive_date ?? null,
     engagement_users: engagement?.engagement_users ?? [],
+    mongo_id: engagement?.mongo_id ?? undefined,
     engagement_lead_name: engagement?.engagement_lead_name ?? null,
     engagement_lead_email: engagement?.engagement_lead_email ?? null,
     technical_lead_name: engagement?.technical_lead_name ?? null,
