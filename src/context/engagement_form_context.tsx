@@ -132,6 +132,7 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
     location: engagement?.location ?? null,
     start_date: engagement?.start_date ?? null,
     end_date: engagement?.end_date ?? null,
+    launch: engagement?.launch ?? undefined,
     archive_date: engagement?.archive_date ?? null,
     engagement_users: engagement?.engagement_users ?? [],
     engagement_lead_name: engagement?.engagement_lead_name ?? null,
@@ -162,16 +163,16 @@ const generateSuggestedSubdomain = (
   customer_name: string
 ): string => {
   let slug = '';
-  const maxLen = 8
+  const maxLen = 8;
   if (project_name.length > 2) {
     slug = project_name;
   } else if (customer_name.length > 2) {
     slug = customer_name;
   }
-  if (slug.length > maxLen && slug.substring(0, maxLen).includes(" ")) {
-    slug = slug.substr(0, slug.lastIndexOf(" ", maxLen));
+  if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
+    slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
   }
-  slug = slugify(slug.substring(0, maxLen))
+  slug = slugify(slug.substring(0, maxLen));
   return slug;
 };
 
