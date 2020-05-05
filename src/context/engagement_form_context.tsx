@@ -162,12 +162,17 @@ const generateSuggestedSubdomain = (
   customer_name: string
 ): string => {
   let slug = '';
+  const maxLen = 8
   if (project_name.length > 2) {
-    slug = slugify(project_name);
+    slug = project_name;
   } else if (customer_name.length > 2) {
-    slug = slugify(customer_name);
+    slug = customer_name;
   }
-  return slug.substring(0, 8);
+  if (slug.length > maxLen && slug.substring(0, maxLen).includes(" ")) {
+    slug = slug.substr(0, slug.lastIndexOf(" ", maxLen));
+  }
+  slug = slugify(slug.substring(0, maxLen))
+  return slug;
 };
 
 const formReducer = (state: any, action: any) => {
