@@ -9,6 +9,7 @@ import {
 import { slugify } from 'transliteration';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
+import { Engagement } from '../../../schemas/engagement_schema';
 
 export const ClusterInformation = ({
   providerOptions,
@@ -61,7 +62,9 @@ export const ClusterInformation = ({
         <FormSelect
           aria-label="Cloud Provider"
           isDisabled={
-            availableProviders?.length === 1 || !hasFeature(APP_FEATURES.writer)
+            availableProviders?.length === 1 ||
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
           }
           value={values.ocp_cloud_provider_name || ''}
           onChange={e =>
@@ -89,7 +92,8 @@ export const ClusterInformation = ({
           aria-label="Cloud provider region"
           isDisabled={
             availableProviderRegionOptions?.length === 0 ||
-            !hasFeature(APP_FEATURES.writer)
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
           }
           readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
@@ -119,7 +123,8 @@ export const ClusterInformation = ({
           value={values.ocp_version || ''}
           isDisabled={
             openshiftOptions.versions?.length === 1 ||
-            !hasFeature(APP_FEATURES.writer)
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
           }
           onChange={e => onChange({ type: 'ocp_version', payload: e })}
         >
@@ -160,7 +165,10 @@ export const ClusterInformation = ({
         <TextInput
           style={input}
           isRequired
-          isDisabled={!hasFeature(APP_FEATURES.writer)}
+          isDisabled={
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
+          }
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
@@ -208,7 +216,8 @@ export const ClusterInformation = ({
           value={values.ocp_cluster_size || ''}
           isDisabled={
             openshiftOptions['cluster-size']?.length === 1 ||
-            !hasFeature(APP_FEATURES.writer)
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
           }
           onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
         >
