@@ -6,7 +6,7 @@ import {
   FormSelectOption,
   TextInput,
 } from '@patternfly/react-core';
-import { slugify } from 'transliteration'
+import { slugify } from 'transliteration';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 
@@ -147,7 +147,11 @@ export const ClusterInformation = ({
             Applications will live at:&nbsp;
             <strong>
               {`${
-                values.ocp_sub_domain ? slugify(values.ocp_sub_domain) : values.suggested_subdomain
+                values.ocp_sub_domain || values.suggested_subdomain
+                  ? values.ocp_sub_domain
+                    ? slugify(values.ocp_sub_domain)
+                    : values.suggested_subdomain
+                  : '<desired-subdomain>'
               }.rht-labs.com`}
             </strong>
           </div>
