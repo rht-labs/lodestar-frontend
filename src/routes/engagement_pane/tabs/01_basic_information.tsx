@@ -109,7 +109,10 @@ export const BasicInformation = ({ values, onChange }: any) => {
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature(APP_FEATURES.writer)}
+            isDisabled={
+              !hasFeature(APP_FEATURES.writer) ||
+              !!(values as Engagement).mongo_id
+            }
             name="start_date"
             id="start_date"
             type="date"
