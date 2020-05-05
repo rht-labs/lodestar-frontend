@@ -11,9 +11,15 @@ export class Validators {
     past: (input: string) => false,
   };
 
-  static LengthValidator: (maxLength: number) => Validator = (
-    maxLength: number
-  ) => (input: string) => input.trim().length <= maxLength;
+  static LengthValidator: ({
+    maxLength,
+    minLength,
+  }: {
+    maxLength?: number;
+    minLength?: number;
+  }) => Validator = ({ maxLength, minLength }) => (input: string) =>
+    ((maxLength === undefined || input.trim().length <= maxLength) &&
+    (minLength === undefined || input.trim().length >= minLength));
 
   static validate = (value: string, validators: Array<Validator>) =>
     validators.reduce(
