@@ -9,6 +9,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
+import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
 
 export const BasicInformation = ({ values, onChange }: any) => {
@@ -41,6 +42,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
     backgroundColor: '#EDEDED',
   };
   const { hasFeature } = useContext(FeatureToggleContext);
+  console.log(values);
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup
@@ -50,7 +52,10 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <TextInput
-          isDisabled={!hasFeature(APP_FEATURES.writer)}
+          isDisabled={
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
+          }
           type="text"
           id="customer_name"
           name="customer_name"
@@ -67,7 +72,10 @@ export const BasicInformation = ({ values, onChange }: any) => {
         isRequired
       >
         <TextInput
-          isDisabled={!hasFeature(APP_FEATURES.writer)}
+          isDisabled={
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).mongo_id
+          }
           type="text"
           id="project_name"
           name="project_name"
@@ -109,7 +117,10 @@ export const BasicInformation = ({ values, onChange }: any) => {
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature(APP_FEATURES.writer)}
+            isDisabled={
+              !hasFeature(APP_FEATURES.writer) ||
+              !!(values as Engagement).launch
+            }
             name="start_date"
             id="start_date"
             type="date"
