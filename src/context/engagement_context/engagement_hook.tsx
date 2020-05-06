@@ -19,15 +19,18 @@ export const useEngagements = (
     engagementService?: EngagementService;
   } = {}
 ) => {
-const feedbackContext = useContext(FeedbackContext);
-const engagementService =
+  const feedbackContext = useContext(FeedbackContext);
+  const engagementService =
     props.engagementService ??
     useContext(ServiceProviderContext).engagementService;
-  const [formOptions, setFormOptions] = useState<{
-    openshiftOptions?: any;
-    providerOptions?: any;
-    userManagementOptions?: any;
-  } | undefined>();
+  const [formOptions, setFormOptions] = useState<
+    | {
+        openshiftOptions?: any;
+        providerOptions?: any;
+        userManagementOptions?: any;
+      }
+    | undefined
+  >();
   // TODO: Handle error/loading state
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
@@ -80,7 +83,7 @@ const engagementService =
   }, [activeEngagement, formOptions]);
 
   const fetchEngagements = useCallback(async () => {
-feedbackContext.showLoader();
+    feedbackContext.showLoader();
     const engagements = await engagementService.fetchEngagements();
     setEngagements(engagements);
     if (engagements.length > 0) {
@@ -154,9 +157,7 @@ feedbackContext.showLoader();
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        const returnedEngagement = await engagementService.saveEngagement(
-          data
-        );
+        const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
           'success'

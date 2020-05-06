@@ -6,9 +6,10 @@ import {
   FormSelectOption,
   TextInput,
 } from '@patternfly/react-core';
-import slugify from 'slugify';
+import { slugify } from 'transliteration';
 import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
+import { Engagement } from '../../../schemas/engagement_schema';
 
 export const ClusterInformation = ({
   providerOptions,
@@ -29,10 +30,7 @@ export const ClusterInformation = ({
   if (
     values.ocp_cloud_provider_name &&
     !availableProviders.find(
-      option =>
-        option &&
-        option.label &&
-        option.label === values.ocp_cloud_provider_name
+      option => option.value && option.value === values.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({
@@ -43,7 +41,7 @@ export const ClusterInformation = ({
 
   const availableProviderRegionOptions =
     providerOptions.find(
-      providerOption => providerOption.label === values.ocp_cloud_provider_name
+      providerOption => providerOption.value === values.ocp_cloud_provider_name
     )?.regions ?? [];
 
   if (
@@ -61,7 +59,9 @@ export const ClusterInformation = ({
         <FormSelect
           aria-label="Cloud Provider"
           isDisabled={
-            availableProviders?.length === 1 || !hasFeature(APP_FEATURES.writer)
+            availableProviders?.length === 1 ||
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).launch
           }
           value={values.ocp_cloud_provider_name || ''}
           onChange={e => onChange('ocp_cloud_provider_name', e)}
@@ -87,7 +87,8 @@ export const ClusterInformation = ({
           aria-label="Cloud provider region"
           isDisabled={
             availableProviderRegionOptions?.length === 0 ||
-            !hasFeature(APP_FEATURES.writer)
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).launch
           }
           readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
@@ -115,7 +116,8 @@ export const ClusterInformation = ({
           value={values.ocp_version || ''}
           isDisabled={
             openshiftOptions.versions?.length === 1 ||
-            !hasFeature(APP_FEATURES.writer)
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_version', e)}
         >
@@ -140,11 +142,13 @@ export const ClusterInformation = ({
         fieldId="subdomain"
         helperText={
           <div>
-            Applications will live at:
+            Applications will live at:&nbsp;
             <strong>
               {`${
-                values.ocp_sub_domain
-                  ? slugify(values.ocp_sub_domain)
+                values.ocp_sub_domain || values.suggested_subdomain
+                  ? values.ocp_sub_domain
+                    ? slugify(values.ocp_sub_domain)
+                    : values.suggested_subdomain
                   : '<desired-subdomain>'
               }.rht-labs.com`}
             </strong>
@@ -154,7 +158,9 @@ export const ClusterInformation = ({
         <TextInput
           style={input}
           isRequired
-          isDisabled={!hasFeature(APP_FEATURES.writer)}
+          isDisabled={
+            !hasFeature(APP_FEATURES.writer) || !!(values as Engagement).launch
+          }
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
@@ -200,7 +206,8 @@ export const ClusterInformation = ({
           value={values.ocp_cluster_size || ''}
           isDisabled={
             openshiftOptions['cluster-size']?.length === 1 ||
-            !hasFeature(APP_FEATURES.writer)
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_cluster_size', e)}
         >
