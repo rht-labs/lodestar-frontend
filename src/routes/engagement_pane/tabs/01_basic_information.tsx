@@ -11,6 +11,7 @@ import {
 import { Engagement } from '../../../schemas/engagement_schema';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
+import { Engagement } from '../../../schemas/engagement_schema';
 
 export const BasicInformation = ({ values, onChange }: any) => {
   const getFormattedDate = (dateString: string = '') => {
@@ -117,7 +118,10 @@ export const BasicInformation = ({ values, onChange }: any) => {
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={!hasFeature(APP_FEATURES.writer)}
+            isDisabled={
+              !hasFeature(APP_FEATURES.writer) ||
+              !!(values as Engagement).launch
+            }
             name="start_date"
             id="start_date"
             type="date"
