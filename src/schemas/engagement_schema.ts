@@ -11,6 +11,7 @@ export interface Engagement {
   engagement_lead_name: string;
   engagement_users: Array<any>;
   location: string;
+  mongo_id?: string;
   ocp_cloud_provider_name: string;
   ocp_cloud_provider_region: string;
   ocp_cluster_size: string;
@@ -36,6 +37,7 @@ export class Engagement {
     this.engagement_lead_email = engagement.engagement_lead_email;
     this.engagement_lead_name = engagement.engagement_lead_name;
     this.location = engagement.location;
+    this.mongo_id = engagement.mongo_id;
     this.ocp_cloud_provider_name = engagement.ocp_cloud_provider_name;
     this.ocp_cloud_provider_region = engagement.ocp_cloud_provider_region;
     this.ocp_cluster_size = engagement.ocp_cluster_size;
@@ -59,7 +61,7 @@ export class Engagement {
   engagement_lead_name: string;
   location: string;
   engagement_users: Array<any>;
-
+  mongo_id?: string;
   ocp_cloud_provider_name: string;
   ocp_cloud_provider_region: string;
   ocp_cluster_size: string;
@@ -85,6 +87,7 @@ export class Engagement {
       engagement_lead_email: faker.lorem.word(),
       engagement_lead_name: faker.lorem.word(),
       location: faker.lorem.word(),
+      mongo_id: faker.random.uuid(),
       ocp_cloud_provider_name: faker.lorem.word(),
       ocp_cloud_provider_region: faker.lorem.word(),
       ocp_cluster_size: faker.lorem.word(),
