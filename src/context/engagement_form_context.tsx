@@ -132,6 +132,7 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
     location: engagement?.location ?? null,
     start_date: engagement?.start_date ?? null,
     end_date: engagement?.end_date ?? null,
+    launch: engagement?.launch ?? undefined,
     archive_date: engagement?.archive_date ?? null,
     engagement_users: engagement?.engagement_users ?? [],
     mongo_id: engagement?.mongo_id ?? undefined,
