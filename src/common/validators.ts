@@ -38,7 +38,7 @@ export const DateValidator = {
   ) => {
     try {
       const date = new Date(Date.parse(input));
-      if (date >= before && date <= after) {
+      if (date <= before && date >= after) {
         return true;
       }
     } catch (e) {
