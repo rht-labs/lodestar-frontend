@@ -10,7 +10,7 @@ import { OMPTextInput } from '../../../components/omp_text_input';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
-import { Validators } from '../../../common/validators';
+import { EmailAddressValidator, NotNullValidator } from '../../../common/validators';
 
 export const PointOfContact = ({ values, onChange }: any) => {
   const tabContent: React.CSSProperties = {
@@ -61,8 +61,8 @@ export const PointOfContact = ({ values, onChange }: any) => {
           </InputGroupText>
           <OMPTextInput
             validators={[
-              Validators.EmailAddressValidator,
-              Validators.NotNullValidator,
+              EmailAddressValidator,
+              NotNullValidator,
             ]}
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="engagement lead email"
@@ -115,8 +115,8 @@ export const PointOfContact = ({ values, onChange }: any) => {
           </InputGroupText>
           <OMPTextInput
             validators={[
-              Validators.EmailAddressValidator,
-              Validators.NotNullValidator,
+              EmailAddressValidator,
+              NotNullValidator,
             ]}
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             style={input}
@@ -169,8 +169,8 @@ export const PointOfContact = ({ values, onChange }: any) => {
           </InputGroupText>
           <OMPTextInput
             validators={[
-              Validators.NotNullValidator,
-              Validators.EmailAddressValidator,
+              NotNullValidator,
+              EmailAddressValidator,
             ]}
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="customer contact email"
