@@ -70,7 +70,7 @@ describe('Date validators', () => {
         after: faker.date.past(),
       })
     );
-    expect(validate(faker.date.future().toString()));
+    expect(validate(faker.date.future().toString())).toBeFalsy();
   });
 });
 
