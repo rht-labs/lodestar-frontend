@@ -1,24 +1,17 @@
-import React, { createContext, useState } from 'react';
-
+import React, { createContext, useState, useCallback, useEffect } from 'react';
+import { PublicConfigService } from '../services/config_service/implementations/public_config_service';
+import { Config } from '../schemas/config';
 export interface ConfigContextParams {
-  baseUrl: string;
-  clientId: string;
-  authBaseUrl: string;
-  backendUrl: string;
+  appConfig: Config | null;
 }
 
 export interface ConfigContext extends ConfigContextParams {
-  isLoading: boolean;
-  setConfig: (params: ConfigContextParams) => void;
+  fetchConfig: () => void;
 }
 
 export const ConfigContext = createContext<ConfigContext>({
-  baseUrl: '',
-  clientId: '',
-  authBaseUrl: '',
-  backendUrl: '',
-  isLoading: true,
-  setConfig: () => null,
+  appConfig: null,
+  fetchConfig: () => null,
 });
 const { Provider } = ConfigContext;
 
@@ -27,32 +20,26 @@ export const ConfigProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const [baseUrl, setBaseUrl] = useState<string>('');
-  const [clientId, setClientId] = useState<string>('');
-  const [authBaseUrl, setAuthBaseUrl] = useState<string>('');
-  const [backendUrl, setBackendUrl] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [appConfig, setAppConfig] = useState<Config | null>(null);
 
-  const setConfig = (params: ConfigContextParams) => {
-    setBaseUrl(params.baseUrl);
-    setClientId(params.clientId);
-    setAuthBaseUrl(params.authBaseUrl);
-    setBackendUrl(params.backendUrl);
-    setIsLoading(false);
-  };
+  const fetchConfig = useCallback(async () => {
+    const configRepository = new PublicConfigService({});
+    const config = await configRepository.fetchConfig();
+    setAppConfig(config);
+  }, []);
+
+  useEffect(() => {
+    fetchConfig();
+  }, [fetchConfig]);
 
   return (
     <Provider
       value={{
-        baseUrl,
-        clientId,
-        authBaseUrl,
-        backendUrl,
-        isLoading,
-        setConfig,
+        appConfig,
+        fetchConfig,
       }}
     >
-      {children}
+      {appConfig ? children : null}
     </Provider>
   );
 };

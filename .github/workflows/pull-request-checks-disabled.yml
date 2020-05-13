@@ -1,0 +1,26 @@
+name: PR check
+
+on:
+  pull_request:
+    paths:
+      - "!**"
+      - deployment/**
+      - design/**
+      - README.md
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Skip link check
+      run: echo "This check has been skipped because the only changes are in non-code directories."
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Skip linting
+      run: echo "This check has been skipped because the only changes are in non-code directories."
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Skip build
+      run: echo "This build has been skipped because the only changes are in non-code directories."

@@ -1,12 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
 import { EngagementContext } from '../context/engagement_context';
-export function EngagementDropdown() {
+function _EngagementDropdown() {
   const engagementContext = useContext(EngagementContext);
+  const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
+    false
+  );
+  useEffect(() => {
+    if (!hasFetchedEngagements) {
+      setHasFetchedEngagements(true);
+      engagementContext.getEngagements();
+    }
+  }, [engagementContext, hasFetchedEngagements]);
   const dropdownItems = engagementContext.engagements.map(engagement => {
     return (
-      <ContextSelectorItem key={engagement.name}>
-        {engagement.name}
+      <ContextSelectorItem key={engagement.customer_name}>
+        {engagement.customer_name}
       </ContextSelectorItem>
     );
   });
@@ -20,7 +29,6 @@ export function EngagementDropdown() {
     setIsOpen(false);
   };
 
-  console.log(dropdownItems);
   return (
     <ContextSelector
       screenReaderLabel={'Selected Engagement'}
@@ -33,3 +41,5 @@ export function EngagementDropdown() {
     </ContextSelector>
   );
 }
+
+export const EngagementDropdown = React.memo(_EngagementDropdown);

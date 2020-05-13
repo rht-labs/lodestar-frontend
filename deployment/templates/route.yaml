@@ -1,0 +1,23 @@
+{{- if .Values.development }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
+spec:
+  {{- if .Values.hostname }}
+  host: {{ .Values.hostname }}
+  {{- end }}
+  port:
+    targetPort: "{{ .Values.servicePort }}-tcp"
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: {{ .Values.name }}
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress: []
+{{- end }}
