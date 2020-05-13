@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Form,
   FormGroup,
@@ -21,6 +21,10 @@ export const ClusterInformation = ({
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
+
+  const [editedByUser, setEditedByUser] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -53,6 +57,17 @@ export const ClusterInformation = ({
       label: values.ocp_cloud_provider_region,
     });
   }
+
+  const getSubdomain = () => {
+    return !editedByUser['ocp_sub_domain']
+      ? values.ocp_sub_domain || values.suggested_subdomain
+        ? values.ocp_sub_domain
+          ? slugify(values.ocp_sub_domain)
+          : values.suggested_subdomain
+        : '<desired-subdomain>'
+      : values.ocp_sub_domain;
+  };
+
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
@@ -147,15 +162,7 @@ export const ClusterInformation = ({
         helperText={
           <div>
             Applications will live at:&nbsp;
-            <strong>
-              {`${
-                values.ocp_sub_domain || values.suggested_subdomain
-                  ? values.ocp_sub_domain
-                    ? slugify(values.ocp_sub_domain)
-                    : values.suggested_subdomain
-                  : '<desired-subdomain>'
-              }.rht-labs.com`}
-            </strong>
+            <strong>{`${getSubdomain()}.rht-labs.com`}</strong>
           </div>
         }
       >
@@ -168,8 +175,17 @@ export const ClusterInformation = ({
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
-          value={values.ocp_sub_domain || values.suggested_subdomain || ''}
-          onChange={e => onChange({ type: 'ocp_sub_domain', payload: e })}
+          value={
+            !editedByUser['ocp_sub_domain']
+              ? values.ocp_sub_domain || values.suggested_subdomain || ''
+              : values.ocp_sub_domain
+          }
+          onChange={e => {
+            if (!editedByUser['ocp_sub_domain']) {
+              setEditedByUser({ ...editedByUser, ocp_sub_domain: true });
+            }
+            onChange({ type: 'ocp_sub_domain', payload: e });
+          }}
         />
       </FormGroup>
 
