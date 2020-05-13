@@ -8,7 +8,6 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-import { Engagement } from '../../../schemas/engagement_schema';
 import { FeatureToggleContext } from '../../../context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
