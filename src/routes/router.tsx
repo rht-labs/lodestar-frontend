@@ -12,10 +12,12 @@ import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
 import { APP_FEATURES } from '../common/app_features';
+import { LandingPage } from './landing_page/landing_page';
 
 function _OMPRouter() {
   return (
     <Switch>
+      <Route path="/landing" component={LandingPage} />
       <Route path="/feature-request" component={FeatureRequest} />
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
