@@ -1,20 +1,47 @@
 import React, { useEffect, useContext } from 'react';
 import { FeedbackContext } from '../../context/feedback_context';
-import { Page, PageHeader, Brand } from '@patternfly/react-core';
+import {
+  Page,
+  PageHeader,
+  Toolbar,
+  Button,
+  PageSection,
+} from '@patternfly/react-core';
+import { Link } from 'react-router-dom';
+import './landing_page.css';
 export const LandingPage = () => {
   const feedbackContext = useContext(FeedbackContext);
   useEffect(() => feedbackContext.hideLoader(), [feedbackContext]);
   const pageHeader = (
     <PageHeader
-      logo={<Brand alt="Patternfly Logo" />}
-      // toolbar={PageToolbar}
-      // avatar={<Avatar src={imgAvatar} alt="Avatar image" />}
-      // topNav={PageNav}
+      logo={<span className="logo-text">Open Management Portal</span>}
+      toolbar={
+        <Toolbar>
+          <Link to="/dashboard">
+            <Button>Log In</Button>
+          </Link>
+        </Toolbar>
+      }
     />
   );
   return (
-    <>
-      <Page header={pageHeader}></Page>
-    </>
+    <div className="landing-page">
+      <Page header={pageHeader}>
+        <PageSection style={{ padding: 0 }}>
+          <div style={{ height: 25 }}></div>
+        </PageSection>
+        <div className="jumbotron-container">
+          <div className="cta">
+            <span>Open Management Portal</span>
+            <Link to="/dashboard">
+              <Button>Get Started</Button>
+            </Link>
+          </div>
+          <div className="background-image" />
+          <div className="background-image-overlay" />
+        </div>
+        <PageSection></PageSection>
+      </Page>
+    </div>
   );
 };
