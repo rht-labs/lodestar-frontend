@@ -1,0 +1,15 @@
+{{- if .Values.development }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  config.json: |
+    {
+      "baseUrl": "{{ .Values.baseUrl }}",
+      "clientId": "{{ .Values.clientId }}",
+      "authBaseUrl": "{{ .Values.authBaseUrl }}",
+      "backendUrl": "{{ .Values.backendUrl }}",
+      "disableLaunch": "{{ .Values.disableLaunch }}"
+    }
+{{- end }}

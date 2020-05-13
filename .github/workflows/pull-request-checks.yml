@@ -1,8 +1,12 @@
-name: Node CI
+name: PR check
 
 on:
-- pull_request
-    
+  pull_request:
+    paths-ignore:
+      - deployment/**
+      - design/**
+      - README.md
+
 jobs:
   check-links:
     runs-on: ubuntu-latest

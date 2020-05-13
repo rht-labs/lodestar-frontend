@@ -19,6 +19,7 @@
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "@types/react-router-dom": "^5.1.3",
+    "@types/scheduler": "^0.16.1",
     "@types/yaml": "^1.2.0",
     "axios": "^0.19.1",
     "faker": "^4.1.0",
@@ -30,7 +31,8 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "slugify": "^1.3.6",
+    "scheduler": "^0.19.1",
+    "transliteration": "^2.1.8",
     "typescript": "^3.8.2",
     "yaml": "^1.7.2"
   },

@@ -1,29 +1,45 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { ApiV1AuthenticationRepository } from '../repositories/authentication/implementations/api_v1_repository';
-import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import { Apiv1AuthService } from '../services/authentication_service/implementations/apiv1_auth_service';
+import { AuthService } from '../services/authentication_service/authentication_service';
 
-import { UserProfile } from '../models/user_profile';
-import { UserToken } from '../models/user_token';
+import { UserProfile } from '../schemas/user_profile_schema';
+import { UserToken } from '../schemas/user_token_schema';
 import { ConfigContext } from './config_context';
 import Axios, { AxiosInstance } from 'axios';
 import { Request } from '../utilities/request';
 
-export interface SessionContext {
-  isLoggedIn: () => Promise<boolean>;
+export type AuthenticationState =
+  | 'initial'
+  | 'authenticated'
+  | 'unauthenticated'
+  | 'unauthorized';
+
+export interface SessionData {
   profile?: UserProfile;
   tokens?: UserToken;
-  roles: any[];
-  axios: AxiosInstance;
-  performLogin: (profile: UserProfile, tokens: UserToken, roles: any[]) => void;
+  roles?: any[];
+}
+
+export interface SessionContext {
+  sessionData?: SessionData;
+  axios?: AxiosInstance;
+  authState: AuthenticationState;
+  handleLoginCallback: (authorizationCode: string) => Promise<void>;
+  logout: () => {};
 }
 
 export const SessionContext = createContext<SessionContext>({
-  isLoggedIn: async () => false,
-  profile: new UserProfile(),
-  tokens: new UserToken(),
-  roles: [],
+  sessionData: undefined,
   axios: Axios.create(),
-  performLogin: () => null,
+  authState: 'initial',
+  handleLoginCallback: async () => {},
+  logout: async () => {},
 });
 const { Provider } = SessionContext;
 
@@ -32,45 +48,82 @@ export const SessionProvider = ({
   authenticationRepository: authRepo,
 }: {
   children: React.ReactChild;
-  authenticationRepository?: AuthenticationRepository;
+  authenticationRepository?: AuthService;
 }) => {
   const configContext = useContext(ConfigContext);
-  const authenticationRepository: AuthenticationRepository =
-    authRepo ?? new ApiV1AuthenticationRepository(configContext);
-  const [profile, setProfile] = useState(new UserProfile());
-  const [tokens, setTokens] = useState(new UserToken());
-  const [roles, setRoles] = useState<string[]>([] as string[]);
-  useEffect(() => {
-    if (!configContext.isLoading) {
-      const authenticationRepository: AuthenticationRepository =
-        authRepo ?? new ApiV1AuthenticationRepository(configContext);
-      const tokens = authenticationRepository.getToken();
-      if (tokens) {
-        authenticationRepository.getUserProfile().then(profile => {
-          performLogin(profile, tokens, profile.groups as string[]);
-        });
+  const authenticationRepository: AuthService =
+    authRepo ?? new Apiv1AuthService(configContext);
+
+  const [sessionData, setSessionData] = useState<SessionData | undefined>(
+    undefined
+  );
+  const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
+  const requestHandler = new Request({authenticationRepository})
+
+  const handleLoginCallback = useCallback(
+    async (authorizationCode: string) => {
+      setAuthStatus('initial');
+      try {
+        const userToken = await authenticationRepository.fetchToken(
+          authorizationCode,
+          'authorization_code'
+        );
+        if (await authenticationRepository.isLoggedIn()) {
+          const profile = await authenticationRepository.getUserProfile();
+          setSessionData({
+            profile,
+            roles: profile.groups,
+            tokens: userToken,
+          });
+          return;
+        }
+      } catch (e) {
+        setAuthStatus('unauthenticated');
       }
+    },
+    [authenticationRepository]
+  );
+
+  const logout = async () => {
+    await authenticationRepository.clearSession()
+    return;
+  }
+
+  useEffect(() => {
+    if (!!configContext.appConfig) {
+      const authenticationRepository: AuthService =
+        authRepo ?? new Apiv1AuthService(configContext);
+      authenticationRepository.isLoggedIn().then(isLoggedIn => {
+        const tokens = authenticationRepository.getToken();
+        if (isLoggedIn && tokens) {
+
+          authenticationRepository.getUserProfile().then(profile => {
+            setSessionData({
+              profile,
+              tokens,
+              roles: profile.groups,
+            });
+            if(profile.groups ? profile.groups.includes('manage_projects') : false){
+              setAuthStatus('authenticated');
+            }else{
+              setAuthStatus('unauthorized')
+            }
+          });
+        } else {
+          setAuthStatus('unauthenticated');
+        }
+      });
     }
   }, [configContext, authRepo]);
-  const performLogin = (
-    newProfile: UserProfile,
-    newTokens: UserToken,
-    newRoles: any[]
-  ) => {
-    setProfile(newProfile);
-    setTokens(newTokens);
-    setRoles(newRoles);
-  };
-  const request = new Request({ authenticationRepository });
+
   return (
     <Provider
       value={{
-        isLoggedIn: authenticationRepository.isLoggedIn,
-        profile,
-        tokens,
-        roles,
-        axios: request.client,
-        performLogin,
+        sessionData,
+        axios: requestHandler?.client,
+        handleLoginCallback,
+        authState: authStatus,
+        logout: logout,
       }}
     >
       {children}

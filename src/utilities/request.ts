@@ -1,10 +1,10 @@
-import { AuthenticationRepository } from '../repositories/authentication/authentication_repository';
+import { AuthService } from '../services/authentication_service/authentication_service';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 export class Request {
   constructor({
     authenticationRepository,
   }: {
-    authenticationRepository: AuthenticationRepository;
+    authenticationRepository: AuthService;
   }) {
     this.authenticationRepository = authenticationRepository;
     this.client = axios.create({});
@@ -15,14 +15,19 @@ export class Request {
     );
   }
 
-  private authenticationRepository: AuthenticationRepository;
+  private authenticationRepository: AuthService;
 
   client: AxiosInstance;
 
-  private beforeRequest = (request: AxiosRequestConfig) => {
-    const accessToken = this.authenticationRepository.getToken()?.accessToken;
-    request.headers.Authorization = `Bearer ${accessToken}`;
-    return request;
+  private beforeRequest = async (request: AxiosRequestConfig) => {
+    if (await this.authenticationRepository.isLoggedIn()) {
+      const token = this.authenticationRepository.getToken();
+      const accessToken = token?.accessToken;
+      request.headers.Authorization = `Bearer ${accessToken}`;
+      return request;
+    } else {
+      throw Error('The user is not authenticated');
+    }
   };
 
   private onRequestSuccess = (response: AxiosResponse) => {
@@ -31,7 +36,9 @@ export class Request {
 
   private onRequestFailure = (error: { response: AxiosResponse }) => {
     const { response } = error;
-    if (response.status >= 400 && response.status < 500) {
+    // TODO: Handle other request errors here
+    if (response.status === 401 || response.status === 403) {
+      console.log('Unauthenticated request', response.status);
       this.authenticationRepository.clearSession();
       window.location.reload();
     }
