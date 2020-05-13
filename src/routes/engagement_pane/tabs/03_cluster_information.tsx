@@ -58,14 +58,26 @@ export const ClusterInformation = ({
     });
   }
 
-  const getSubdomain = () => {
-    return !editedByUser['ocp_sub_domain']
-      ? values.ocp_sub_domain || values.suggested_subdomain
-        ? values.ocp_sub_domain
-          ? slugify(values.ocp_sub_domain)
-          : values.suggested_subdomain
-        : '<desired-subdomain>'
-      : values.ocp_sub_domain;
+  const getSubdomainHelperText = () => {
+    if (editedByUser['ocp_sub_domain']) {
+      return values.ocp_sub_domain;
+    } else {
+      if (values.ocp_sub_domain) {
+        return slugify(values.ocp_sub_domain);
+      } else if (values.suggested_subdomain) {
+        return values.suggested_subdomain;
+      } else {
+        return '<desired-subdomain>';
+      }
+    }
+  };
+
+  const getSubdomainFieldText = () => {
+    if (editedByUser['ocp_sub_domain']) {
+      return values.ocp_sub_domain;
+    } else {
+      return values.ocp_sub_domain || values.suggested_subdomain || '';
+    }
   };
 
   return (
@@ -162,7 +174,7 @@ export const ClusterInformation = ({
         helperText={
           <div>
             Applications will live at:&nbsp;
-            <strong>{`${getSubdomain()}.rht-labs.com`}</strong>
+            <strong>{`${getSubdomainHelperText()}.rht-labs.com`}</strong>
           </div>
         }
       >
@@ -175,11 +187,7 @@ export const ClusterInformation = ({
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
-          value={
-            !editedByUser['ocp_sub_domain']
-              ? values.ocp_sub_domain || values.suggested_subdomain || ''
-              : values.ocp_sub_domain
-          }
+          value={getSubdomainFieldText()}
           onChange={e => {
             if (!editedByUser['ocp_sub_domain']) {
               setEditedByUser({ ...editedByUser, ocp_sub_domain: true });
