@@ -12,38 +12,60 @@ import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
 import { APP_FEATURES } from '../common/app_features';
+import { LandingPage } from './landing_page/landing_page';
+import { Page } from '@patternfly/react-core';
+import { OMPHeader } from '../components/omp_header';
+import { Feedback } from '../components/omp_feedback';
 
 function _OMPRouter() {
   return (
     <Switch>
-      <Route path="/feature-request" component={FeatureRequest} />
-      <Route path="/auth_callback" component={CallbackHandler} />
-      <Route path="/unauthorized" component={UnauthorizedPage} />
-      <Route path="/logout" component={() => <LogoutPage />} />
-      {/* all other routes should be considered private */}
-      <PrivateRoute path="/">
-        <Feature
-          name={APP_FEATURES.reader}
-          inactiveComponent={UnauthorizedPage}
-        >
-          {/* if a user is not authorized, show the unauthorized page */}
+      <Route path="/landing" component={LandingPage} />
+      <Route path="/">
+        <MainTemplate>
           <Switch>
-            {/* else, show an authorized route */}
-            <Redirect exact from="/" to="/dashboard" />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/engagements">
-              <EngagementFormProvider>
-                <EngagementPane />
-              </EngagementFormProvider>
-            </PrivateRoute>
-            <PrivateRoute exact path="/admin">
-              <Admin />
+            <Route path="/feature-request" component={FeatureRequest} />
+            <Route path="/auth_callback" component={CallbackHandler} />
+            <Route path="/unauthorized" component={UnauthorizedPage} />
+            <Route path="/logout" component={() => <LogoutPage />} />
+            {/* all other routes should be considered private */}
+            <PrivateRoute path="/">
+              <Feature
+                name={APP_FEATURES.reader}
+                inactiveComponent={UnauthorizedPage}
+              >
+                {/* if a user is not authorized, show the unauthorized page */}
+                <Switch>
+                  {/* else, show an authorized route */}
+                  <Redirect exact from="/" to="/dashboard" />
+                  <PrivateRoute path="/dashboard" component={Dashboard} />
+                  <PrivateRoute exact path="/engagements">
+                    <EngagementFormProvider>
+                      <EngagementPane />
+                    </EngagementFormProvider>
+                  </PrivateRoute>
+                  <PrivateRoute exact path="/admin">
+                    <Admin />
+                  </PrivateRoute>
+                </Switch>
+              </Feature>
             </PrivateRoute>
           </Switch>
-        </Feature>
-      </PrivateRoute>
+        </MainTemplate>
+      </Route>
     </Switch>
   );
 }
+
+const MainTemplate = React.memo(
+  ({ children }: { children: React.ReactChild }) => {
+    return (
+      <Page header={<OMPHeader />} style={{ height: '100vh' }}>
+        <Feedback />
+        {children}
+      </Page>
+    );
+  }
+);
 
 export const OMPRouter = React.memo(_OMPRouter);
