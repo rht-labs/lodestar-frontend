@@ -1,9 +1,15 @@
+import React from 'react';
 import { useFeatures } from './feature_hook';
 import { renderHook } from '@testing-library/react-hooks';
+import { FeatureToggles } from './feature_toggles';
 
 describe('Feature Context Hook', () => {
-  const getHook = (features?: string[]) =>
-    renderHook(() => useFeatures(features));
+  const getHook = (features?: string[]) => {
+    const wrapper = ({ children }) => (
+      <FeatureToggles features={features}>{children}</FeatureToggles>
+    );
+    return renderHook(() => useFeatures(), { wrapper });
+  };
 
   test('should be empty array when initialized without roles', () => {
     const { result } = getHook();
