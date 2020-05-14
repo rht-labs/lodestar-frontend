@@ -17,7 +17,7 @@ export const LandingPage = () => {
       logo={<span className="logo-text">Open Management Portal</span>}
       toolbar={
         <Toolbar>
-          <Link to="/dashboard">
+          <Link to="/app">
             <Button>Log In</Button>
           </Link>
         </Toolbar>
@@ -33,7 +33,7 @@ export const LandingPage = () => {
         <div className="jumbotron-container">
           <div className="cta">
             <span>Open Management Portal</span>
-            <Link to="/dashboard">
+            <Link to="/app">
               <Button>Get Started</Button>
             </Link>
           </div>

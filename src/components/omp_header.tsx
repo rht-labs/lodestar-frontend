@@ -62,17 +62,17 @@ function _OMPHeader() {
             <Nav theme="dark">
               <NavList variant={NavVariants.horizontal}>
                 <NavItem id="homeLink" itemId={0} isActive={pathname === '/dashboard'}>
-                  <Link to="/" style={iconPad}>
+                  <Link to="/app" style={iconPad}>
                     <HomeIcon size="md" title="Home" />
                   </Link>
                 </NavItem>
                 <NavItem onClick={showLoader} id="engagementPaneLink" itemId={1} isActive={pathname === '/engagements'}>
-                  <Link style={iconPad} to="/engagements" >
+                  <Link style={iconPad} to="/app/engagements" >
                     <ListUlIcon size="md" title="Engagements" />
                   </Link>
                 </NavItem>
                 <NavItem id="adminLink" itemId={3} isActive={pathname === '/admin'}>
-                  <Link style={iconPad} to="/admin">
+                  <Link style={iconPad} to="/app/admin">
                     <CogsIcon size="md" title="Administration" />
                   </Link>
                 </NavItem>

@@ -22,5 +22,5 @@ export const CallbackHandler = () => {
   if (!sessionContext.sessionData) {
     return <div />;
   }
-  return <Redirect to="/" />;
+  return <Redirect to="/app" />;
 };
