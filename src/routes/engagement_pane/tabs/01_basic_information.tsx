@@ -42,7 +42,6 @@ export const BasicInformation = ({ values, onChange }: any) => {
     backgroundColor: '#EDEDED',
   };
   const { hasFeature } = useContext(FeatureToggleContext);
-  console.log(values);
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup

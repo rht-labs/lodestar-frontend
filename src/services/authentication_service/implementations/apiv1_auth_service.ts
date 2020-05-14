@@ -69,7 +69,6 @@ export class Apiv1AuthService implements AuthService {
 
       return UserToken.fromMap(tokenMap);
     } catch (e) {
-      console.log(e);
       return null;
     }
   };

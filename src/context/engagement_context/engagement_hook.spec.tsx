@@ -1,25 +1,28 @@
+import React from 'react';
 import { renderHook, act, cleanup } from '@testing-library/react-hooks';
-import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { useEngagements } from './engagement_hook';
 import { getInitialState } from './engagement_form_reducer';
 import { Engagement } from '../../schemas/engagement_schema';
+import { TestStateWrapper } from '../../common/test_state_wrapper';
 
 describe('Engagement Context', () => {
-  const getHook = () =>
-    renderHook(() =>
-      useEngagements({ engagementService: new FakedEngagementService() })
+  const getHook = () => {
+    const wrapper = ({ children }) => (
+      <TestStateWrapper>{children}</TestStateWrapper>
     );
+    return renderHook(() => useEngagements(), { wrapper });
+  };
 
   afterEach(() => {
     cleanup();
   });
 
   test('Fetch Engagements', async () => {
-    const { result, waitForNextUpdate, unmount } = getHook();
+    const { result, waitForNextUpdate } = getHook();
     expect(result.current).toBeTruthy();
     expect(Array.isArray(result.current.engagements)).toBeTruthy();
     act(() => {
-      result.current.fetchEngagements();
+      result.current.getEngagements();
     });
     await waitForNextUpdate();
 

@@ -1,21 +1,5 @@
-import { useCallback, useState } from 'react';
-import { Config } from '../../schemas/config';
-import { ConfigService } from '../../services/config_service/config_service';
+import { useContext } from 'react';
 
-export const useConfig = ({
-  configRepository,
-}: {
-  configRepository: ConfigService;
-}) => {
-  const [appConfig, setAppConfig] = useState<Config>();
+import { ConfigContext } from './config_context';
 
-  const fetchConfig = useCallback(async () => {
-    const config = await configRepository.fetchConfig();
-    setAppConfig(config);
-  }, [configRepository]);
-
-  return {
-    appConfig,
-    fetchConfig,
-  };
-};
+export const useConfig = () => useContext(ConfigContext);
