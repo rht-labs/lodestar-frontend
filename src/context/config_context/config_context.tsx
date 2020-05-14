@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { useConfig } from './config_hook';
 import { Config } from '../../schemas/config';
 import { PublicConfigService } from '../../services/config_service/implementations/public_config_service';
@@ -21,8 +21,9 @@ export const ConfigProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
+  const [configRepository] = useState(new PublicConfigService());
   const { appConfig, fetchConfig } = useConfig({
-    configRepository: new PublicConfigService(),
+    configRepository,
   });
 
   useEffect(() => {
