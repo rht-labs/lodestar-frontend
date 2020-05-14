@@ -172,8 +172,12 @@ export const useEngagements = (
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
+        let errorMessage = 'There was an issue with saving your changes. Please followup with an administrator if this continues.';
+        if(e.status === 409){
+          errorMessage = "The path that you input is already taken.  Please update and try saving again.";
+        } 
         feedbackContext.showAlert(
-          'There was an issue with saving your changes. Please followup with an administrator if this continues.',
+          errorMessage,
           'error'
         );
       }
