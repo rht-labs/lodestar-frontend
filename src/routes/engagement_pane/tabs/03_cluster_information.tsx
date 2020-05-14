@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Form,
   FormGroup,
@@ -21,6 +21,10 @@ export const ClusterInformation = ({
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
+
+  const [editedByUser, setEditedByUser] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -53,6 +57,29 @@ export const ClusterInformation = ({
       label: values.ocp_cloud_provider_region,
     });
   }
+
+  const getSubdomainHelperText = () => {
+    if (editedByUser['ocp_sub_domain']) {
+      return values.ocp_sub_domain;
+    } else {
+      if (values.ocp_sub_domain) {
+        return slugify(values.ocp_sub_domain);
+      } else if (values.suggested_subdomain) {
+        return values.suggested_subdomain;
+      } else {
+        return '<desired-subdomain>';
+      }
+    }
+  };
+
+  const getSubdomainFieldText = () => {
+    if (editedByUser['ocp_sub_domain']) {
+      return values.ocp_sub_domain;
+    } else {
+      return values.ocp_sub_domain || values.suggested_subdomain || '';
+    }
+  };
+
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
@@ -143,15 +170,7 @@ export const ClusterInformation = ({
         helperText={
           <div>
             Applications will live at:&nbsp;
-            <strong>
-              {`${
-                values.ocp_sub_domain || values.suggested_subdomain
-                  ? values.ocp_sub_domain
-                    ? slugify(values.ocp_sub_domain)
-                    : values.suggested_subdomain
-                  : '<desired-subdomain>'
-              }.rht-labs.com`}
-            </strong>
+            <strong>{`${getSubdomainHelperText()}.rht-labs.com`}</strong>
           </div>
         }
       >
@@ -164,8 +183,13 @@ export const ClusterInformation = ({
           type="text"
           id="ocp_sub_domain"
           name="ocp_sub_domain"
-          value={values.ocp_sub_domain || values.suggested_subdomain || ''}
-          onChange={e => onChange('ocp_sub_domain', e)}
+          value={getSubdomainFieldText()}
+          onChange={e => {
+            if (!editedByUser['ocp_sub_domain']) {
+              setEditedByUser({ ...editedByUser, ocp_sub_domain: true });
+            }
+            onChange({ type: 'ocp_sub_domain', payload: e });
+          }}
         />
       </FormGroup>
 
