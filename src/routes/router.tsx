@@ -20,14 +20,14 @@ import { Feedback } from '../components/omp_feedback';
 function _OMPRouter() {
   return (
     <Switch>
-      <Route path="/landing" component={LandingPage} />
-      <Route path="/">
+      <Route path="/" exact component={LandingPage} />
+      <Route path="/feature-request" component={FeatureRequest} />
+      <Route path="/auth_callback" component={CallbackHandler} />
+      <Route path="/unauthorized" component={UnauthorizedPage} />
+      <Route path="/logout" component={LogoutPage} />
+      <Route path="/app">
         <MainTemplate>
           <Switch>
-            <Route path="/feature-request" component={FeatureRequest} />
-            <Route path="/auth_callback" component={CallbackHandler} />
-            <Route path="/unauthorized" component={UnauthorizedPage} />
-            <Route path="/logout" component={() => <LogoutPage />} />
             {/* all other routes should be considered private */}
             <PrivateRoute path="/">
               <Feature
@@ -37,14 +37,14 @@ function _OMPRouter() {
                 {/* if a user is not authorized, show the unauthorized page */}
                 <Switch>
                   {/* else, show an authorized route */}
-                  <Redirect exact from="/" to="/dashboard" />
-                  <PrivateRoute path="/dashboard" component={Dashboard} />
-                  <PrivateRoute exact path="/engagements">
+                  <Redirect exact from="/app" to="/app/dashboard" />
+                  <PrivateRoute path="/app/dashboard" component={Dashboard} />
+                  <PrivateRoute exact path="/app/engagements">
                     <EngagementFormProvider>
                       <EngagementPane />
                     </EngagementFormProvider>
                   </PrivateRoute>
-                  <PrivateRoute exact path="/admin">
+                  <PrivateRoute exact path="/app/admin">
                     <Admin />
                   </PrivateRoute>
                 </Switch>
