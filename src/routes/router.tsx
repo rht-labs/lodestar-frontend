@@ -16,7 +16,6 @@ import { LandingPage } from './landing_page/landing_page';
 import { Page } from '@patternfly/react-core';
 import { OMPHeader } from '../components/omp_header';
 import { Feedback } from '../components/omp_feedback';
-import { SendToSSO } from '../components/authentication/send_to_sso';
 
 function _OMPRouter() {
   return (
