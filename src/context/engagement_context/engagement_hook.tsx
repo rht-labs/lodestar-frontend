@@ -118,9 +118,14 @@ export const useEngagements = (
           'success'
         );
       } catch (e) {
+        console.log(e);
         feedbackContext.hideLoader();
+        let errorMessage = 'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
+        if(e.status === 409){
+          errorMessage = "This client already has a project with that name, Please choose another.";
+        } 
         feedbackContext.showAlert(
-          'There was an issue with creating your engagement. Please followup with an administrator if this continues.',
+          errorMessage,
           'error'
         );
       }

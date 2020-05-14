@@ -42,6 +42,6 @@ export class Request {
       this.authenticationRepository.clearSession();
       window.location.reload();
     }
-    return error;
+    throw response;
   };
 }
