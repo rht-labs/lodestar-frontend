@@ -143,8 +143,12 @@ export const EngagementProvider = ({
         );
       } catch (e) {
         feedbackContext.hideLoader();
+        let errorMessage = 'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
+        if(e.status === 409){
+          errorMessage = "This client already has a project with that name, Please choose another.";
+        } 
         feedbackContext.showAlert(
-          'There was an issue with creating your engagement. Please followup with an administrator if this continues.',
+          errorMessage,
           'error'
         );
       }
@@ -191,8 +195,12 @@ export const EngagementProvider = ({
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
+        let errorMessage = 'There was an issue with saving your changes. Please followup with an administrator if this continues.';
+        if(e.status === 409){
+          errorMessage = "The path that you input is already taken.  Please update and try saving again.";
+        } 
         feedbackContext.showAlert(
-          'There was an issue with saving your changes. Please followup with an administrator if this continues.',
+          errorMessage,
           'error'
         );
       }
