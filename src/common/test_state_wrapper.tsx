@@ -15,19 +15,17 @@ import { FakedConfigService } from '../services/config_service/implementations/f
 export const TestStateWrapper = ({ children = null }) => {
   return (
     <ErrorBoundary>
-      <ConfigProvider configRepository={new FakedConfigService()}>
-        <ServiceProvider shouldUseFaked={true}>
-          <FeedbackProvider>
-            <SessionProvider>
-              <EngagementProvider>
-                <VersionProvider>
-                  <FeatureToggles>{children}</FeatureToggles>
-                </VersionProvider>
-              </EngagementProvider>
-            </SessionProvider>
-          </FeedbackProvider>
-        </ServiceProvider>
-      </ConfigProvider>
+      <ServiceProvider shouldUseFaked={true}>
+        <FeedbackProvider>
+          <SessionProvider>
+            <EngagementProvider>
+              <VersionProvider>
+                <FeatureToggles>{children}</FeatureToggles>
+              </VersionProvider>
+            </EngagementProvider>
+          </SessionProvider>
+        </FeedbackProvider>
+      </ServiceProvider>
     </ErrorBoundary>
   );
 };
