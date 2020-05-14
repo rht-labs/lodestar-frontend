@@ -1,15 +1,4 @@
-import { useCallback } from 'react';
+import { useContext } from 'react';
+import { FeatureToggleContext } from './feature_toggles';
 
-export const useFeatures = (features: string[] = []) => {
-  const hasFeature = useCallback(
-    (name: string) => {
-      return name && features.includes(name);
-    },
-    [features]
-  );
-
-  return {
-    features,
-    hasFeature,
-  };
-};
+export const useFeatures = () => useContext(FeatureToggleContext);
