@@ -34,14 +34,13 @@ export class Request {
     return response;
   };
 
-  public onRequestFailure = (error: { response: AxiosResponse }) => {
+  public onRequestFailure = (error: any) => {
     const { response } = error;
-    // TODO: Handle other request errors here
-    if (response.status === 401 || response.status === 403) {
+    if (response?.status === 401 || response?.status === 403) {
       console.log('Unauthenticated request', response.status);
       this.authenticationRepository.clearSession();
       window.location.reload();
     }
-    throw response;
+    throw error;
   };
 }

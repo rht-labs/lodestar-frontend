@@ -14,11 +14,12 @@ import { FeatureToggles } from './context/feature_toggles/feature_toggles';
 import { ServiceProvider } from './context/service_provider/service_provider_context';
 import { Feedback } from './components/omp_feedback';
 import { FeedbackProvider } from './context/feedback_context';
+import { PublicConfigService } from './services/config_service/implementations/public_config_service';
 
 export const App = () => {
   return (
     <ErrorBoundary>
-      <ConfigProvider>
+      <ConfigProvider configRepository={new PublicConfigService()}>
         <ServiceProvider>
           <FeedbackProvider>
             <SessionProvider>
