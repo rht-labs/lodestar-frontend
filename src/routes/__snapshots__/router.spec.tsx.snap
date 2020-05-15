@@ -5,11 +5,189 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div />
+      <div
+        class="landing-page"
+      >
+        <div
+          class="pf-c-page"
+        >
+          <header
+            class="pf-c-page__header"
+          >
+            <div
+              class="pf-c-page__header-brand"
+            >
+              <a
+                class="pf-c-page__header-brand-link"
+              >
+                <span
+                  class="logo-text"
+                >
+                  Open Management Portal
+                </span>
+              </a>
+            </div>
+            <div
+              class="pf-c-page__header-tools"
+            >
+              <div
+                class="pf-l-toolbar"
+              >
+                <a
+                  href="/app"
+                >
+                  <button
+                    class="pf-c-button pf-m-primary"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    Log In
+                  </button>
+                </a>
+              </div>
+            </div>
+          </header>
+          <main
+            class="pf-c-page__main"
+            tabindex="-1"
+          >
+            <section
+              class="pf-c-page__main-section"
+              style="padding: 0px;"
+            >
+              <div
+                style="height: 25px;"
+              />
+            </section>
+            <div
+              class="jumbotron-container"
+            >
+              <div
+                class="cta"
+              >
+                <span>
+                  Open Management Portal
+                </span>
+                <a
+                  href="/app"
+                >
+                  <button
+                    class="pf-c-button pf-m-primary"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    type="button"
+                  >
+                    Get Started
+                  </button>
+                </a>
+              </div>
+              <div
+                class="background-image"
+              />
+              <div
+                class="background-image-overlay"
+              />
+            </div>
+            <section
+              class="pf-c-page__main-section"
+            />
+          </main>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <div />
+    <div
+      class="landing-page"
+    >
+      <div
+        class="pf-c-page"
+      >
+        <header
+          class="pf-c-page__header"
+        >
+          <div
+            class="pf-c-page__header-brand"
+          >
+            <a
+              class="pf-c-page__header-brand-link"
+            >
+              <span
+                class="logo-text"
+              >
+                Open Management Portal
+              </span>
+            </a>
+          </div>
+          <div
+            class="pf-c-page__header-tools"
+          >
+            <div
+              class="pf-l-toolbar"
+            >
+              <a
+                href="/app"
+              >
+                <button
+                  class="pf-c-button pf-m-primary"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe="true"
+                  type="button"
+                >
+                  Log In
+                </button>
+              </a>
+            </div>
+          </div>
+        </header>
+        <main
+          class="pf-c-page__main"
+          tabindex="-1"
+        >
+          <section
+            class="pf-c-page__main-section"
+            style="padding: 0px;"
+          >
+            <div
+              style="height: 25px;"
+            />
+          </section>
+          <div
+            class="jumbotron-container"
+          >
+            <div
+              class="cta"
+            >
+              <span>
+                Open Management Portal
+              </span>
+              <a
+                href="/app"
+              >
+                <button
+                  class="pf-c-button pf-m-primary"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe="true"
+                  type="button"
+                >
+                  Get Started
+                </button>
+              </a>
+            </div>
+            <div
+              class="background-image"
+            />
+            <div
+              class="background-image-overlay"
+            />
+          </div>
+          <section
+            class="pf-c-page__main-section"
+          />
+        </main>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
