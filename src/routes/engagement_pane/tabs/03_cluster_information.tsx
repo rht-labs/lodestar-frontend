@@ -188,7 +188,7 @@ export const ClusterInformation = ({
             if (!editedByUser['ocp_sub_domain']) {
               setEditedByUser({ ...editedByUser, ocp_sub_domain: true });
             }
-            onChange({ type: 'ocp_sub_domain', payload: e });
+            onChange('ocp_sub_domain', e);
           }}
         />
       </FormGroup>
