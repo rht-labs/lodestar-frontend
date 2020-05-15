@@ -31,7 +31,6 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "scheduler": "^0.19.1",
-    "slugify": "^1.3.6",
     "transliteration": "^2.1.8",
     "typescript": "^3.8.2"
   },
@@ -40,7 +39,7 @@
     "build": "react-scripts build",
     "build:ci": "react-scripts build && mkdir -p package-contents && cp -vr build Dockerfile package-contents",
     "test": "react-scripts test",
-    "test:ci": "npm test -- --watchAll=false",
+    "test:ci": "npm test -- --watchAll=false --coverage",
     "package": "zip -r package-contents.zip package-contents",
     "publish": "curl -vvv -u admin:admin123 --upload-file package-contents.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JOB_NAME}.${BUILD_NUMBER}/package-contents.zip",
     "eject": "react-scripts eject",

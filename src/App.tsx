@@ -1,6 +1,5 @@
 import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { Page } from '@patternfly/react-core';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import { SessionProvider } from './context/session_context/session_context';
@@ -8,17 +7,16 @@ import { VersionProvider } from './context/version_context/version_context';
 import { ConfigProvider } from './context/config_context/config_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary';
-import { OMPHeader } from './components/omp_header';
 import { OMPRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_toggles/feature_toggles';
 import { ServiceProvider } from './context/service_provider/service_provider_context';
-import { Feedback } from './components/omp_feedback';
 import { FeedbackProvider } from './context/feedback_context';
+import { PublicConfigService } from './services/config_service/implementations/public_config_service';
 
 export const App = () => {
   return (
     <ErrorBoundary>
-      <ConfigProvider>
+      <ConfigProvider configRepository={new PublicConfigService()}>
         <ServiceProvider>
           <FeedbackProvider>
             <SessionProvider>
@@ -26,9 +24,7 @@ export const App = () => {
                 <FeatureToggles>
                   <Router>
                     <Providers>
-                      <MainTemplate>
-                        <MainTemplateRoutes />
-                      </MainTemplate>
+                      <OMPRouter />
                     </Providers>
                   </Router>
                 </FeatureToggles>
@@ -43,19 +39,4 @@ export const App = () => {
 
 const Providers = ({ children }: { children: React.ReactChild }) => {
   return <EngagementProvider>{children}</EngagementProvider>;
-};
-
-const MainTemplate = React.memo(
-  ({ children }: { children: React.ReactChild }) => {
-    return (
-      <Page header={<OMPHeader />} style={{ height: '100vh' }}>
-        <Feedback />
-        {children}
-      </Page>
-    );
-  }
-);
-
-const MainTemplateRoutes = () => {
-  return <OMPRouter />;
 };

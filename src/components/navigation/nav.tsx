@@ -9,7 +9,7 @@ export const NavDefaultList = () => {
     <Nav theme="dark">
       <NavList>
         <NavItem id="engagementFormLink" itemId={0} isActive={pathname === '/'}>
-          <Link to="/">Engagement Form</Link>
+          <Link to="/app">Engagement Form</Link>
         </NavItem>
         <FeatureRequestPopup>
           <NavItem
@@ -17,7 +17,7 @@ export const NavDefaultList = () => {
             itemId={1}
             isActive={pathname === '/feature-request'}
           >
-            <Link to="/feature-request">Feature Requests</Link>
+            <Link to="/app/feature-request">Feature Requests</Link>
           </NavItem>
         </FeatureRequestPopup>
       </NavList>
