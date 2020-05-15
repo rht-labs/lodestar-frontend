@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { SessionContext } from '../session_context/session_context';
-import { useFeatures } from './feature_hook';
 
 interface FeatureToggleContext {
   features: string[];
@@ -14,17 +13,24 @@ export const FeatureToggleContext = React.createContext<FeatureToggleContext>({
 
 export const FeatureToggles = ({
   children,
-  features: roles,
+  features,
 }: {
   children: React.ReactNode;
   features?: string[];
 }) => {
   const sessionContext = useContext(SessionContext);
-  const providedFeatures = roles ?? sessionContext.sessionData?.roles ?? [];
+  const providedFeatures = features ?? sessionContext.sessionData?.roles ?? [];
+  const hasFeature = useCallback(
+    (name: string) => {
+      return name && providedFeatures.includes(name);
+    },
+    [providedFeatures]
+  );
 
-  const { features, hasFeature } = useFeatures(providedFeatures);
   return (
-    <FeatureToggleContext.Provider value={{ features, hasFeature }}>
+    <FeatureToggleContext.Provider
+      value={{ features: providedFeatures, hasFeature }}
+    >
       {children}
     </FeatureToggleContext.Provider>
   );
