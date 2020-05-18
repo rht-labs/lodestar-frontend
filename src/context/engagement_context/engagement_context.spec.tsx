@@ -17,10 +17,14 @@ describe('Engagement Context', () => {
     cleanup();
   });
 
+  test('by default, engagements are an empty list', () => {
+    const { result } = getHook();
+    expect(result.current.engagements).toEqual([]);
+  });
+
   test('Fetch Engagements', async () => {
     const { result, waitForNextUpdate } = getHook();
-    expect(result.current).toBeTruthy();
-    expect(Array.isArray(result.current.engagements)).toBeTruthy();
+
     act(() => {
       result.current.getEngagements();
     });
@@ -29,9 +33,13 @@ describe('Engagement Context', () => {
     expect(result.current.engagements.length).toBeGreaterThan(0);
   });
 
+  test('by default, engagement form equals initial state', () => {
+    const { result } = getHook();
+    expect(result.current.engagementFormState).toEqual(getInitialState());
+  });
+
   test('Can Modify Engagement Form', async () => {
     const { result, waitForNextUpdate } = getHook();
-    expect(result.current.engagementFormState).toEqual(getInitialState());
     await act(async () => {
       result.current.updateEngagementFormField('customer_name', 'spencer');
       await waitForNextUpdate();
@@ -49,9 +57,13 @@ describe('Engagement Context', () => {
     expect(result.current.activeEngagement.customer_name).toEqual('spencer');
   });
 
+  test('form options are undefined by default', () => {
+    const { result } = getHook();
+    expect(result.current.formOptions).toBe(undefined);
+  });
+
   test('Form options update when setting active engagement', async () => {
     const { result, waitForNextUpdate } = getHook();
-    expect(result.current.formOptions).toBe(undefined);
     await act(async () => {
       result.current.getConfig();
       await waitForNextUpdate();
@@ -86,15 +98,22 @@ describe('Engagement Context', () => {
 
   test('Can create a new engagement', async () => {
     const { result, waitForNextUpdate } = getHook();
-    expect(result.current.engagements).toEqual([]);
     await act(async () => {
       result.current.createEngagement({
         customer_name: 'spencer',
       } as Engagement);
       await waitForNextUpdate();
     });
-    expect(result.current.engagements.length).toEqual(1);
     expect(result.current.engagements[0].customer_name).toEqual('spencer');
+  });
+  test('When creating a new engagement, it is set as the active engagement', async () => {
+    const { result, waitForNextUpdate } = getHook();
+    await act(async () => {
+      result.current.createEngagement({
+        customer_name: 'spencer',
+      } as Engagement);
+      await waitForNextUpdate();
+    });
     expect(result.current.activeEngagement.customer_name).toEqual('spencer');
   });
 });
