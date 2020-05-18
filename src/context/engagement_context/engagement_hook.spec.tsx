@@ -67,34 +67,21 @@ describe('Engagement Context', () => {
   test('Form is launchable when required fields are filled', async () => {
     const { result, waitForNextUpdate } = getHook();
     await act(async () => {
-      result.current.setActiveEngagement(new Engagement({
-        'customer_contact_email': 'funk@parliament.com',
-        'customer_contact_name': 'hello',
-        'customer_name': 'hello',
-        'description': 'hello',
-        'end_date': 'hello',
-        'engagement_lead_email': 'hello',
-        'engagement_lead_name': 'hello',
-        'engagement_users': [],
-        'location': 'hello',
-        'ocp_cloud_provider_name': 'hello',
-        'ocp_cloud_provider_region': 'hello',
-        'ocp_cluster_size': 'hello',
-        'ocp_persistent_storage_size': 'hello',
-        'ocp_sub_domain': 'hello',
-        'ocp_version': 'hello',
-        'project_name': 'hello',
-        'start_date': 'hello',
-        'technical_lead_email': 'hello',
-        'technical_lead_name': 'hello',
-        'archive_date': null,
-        'project_id': 1,
-        'mongo_id': 'null',
-        'launch': null
-      }))
+      result.current.setActiveEngagement(Engagement.fromFake());
       await waitForNextUpdate;
-    })
+    });
     expect(result.current.isLaunchable).toBeTruthy();
+  });
+
+  test('should not be launchable if one required field is not defined', async () => {
+    const { result, waitForNextUpdate } = getHook();
+    await act(async () => {
+      const engagement = Engagement.fromFake();
+      engagement.customer_contact_email = null;
+      result.current.setActiveEngagement(engagement);
+      await waitForNextUpdate;
+    });
+    expect(result.current.isLaunchable).toBeFalsy();
   });
 
   test('Can create a new engagement', async () => {
