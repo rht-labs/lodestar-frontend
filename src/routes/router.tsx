@@ -24,7 +24,7 @@ function _OMPRouter() {
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
-      <Route path="/app">
+      <PrivateRoute path="/app">
         <MainTemplate>
           <Switch>
             {/* all other routes should be considered private */}
@@ -49,7 +49,7 @@ function _OMPRouter() {
             </PrivateRoute>
           </Switch>
         </MainTemplate>
-      </Route>
+      </PrivateRoute>
     </Switch>
   );
 }

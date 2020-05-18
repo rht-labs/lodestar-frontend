@@ -101,7 +101,7 @@ export function EngagementPane() {
                 />
               )}
             </Tab>
-            <Tab id={'cu'} style={tab} eventKey={3} title="Cluster Users">
+            <Tab id={'cu'} style={tab} eventKey={3} title="Users">
               <ClusterUsers
                 userManagementOptions={
                   engagementContext.formOptions?.userManagementOptions
