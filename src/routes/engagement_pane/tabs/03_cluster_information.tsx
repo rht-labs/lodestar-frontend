@@ -7,7 +7,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { slugify } from 'transliteration';
-import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
 
@@ -91,9 +91,7 @@ export const ClusterInformation = ({
             !!(values as Engagement).launch
           }
           value={values.ocp_cloud_provider_name || ''}
-          onChange={e =>
-            onChange({ type: 'ocp_cloud_provider_name', payload: e })
-          }
+          onChange={e => onChange('ocp_cloud_provider_name', e)}
         >
           {availableProviders?.map((option: any, index: any) => (
             <FormSelectOption
@@ -121,9 +119,7 @@ export const ClusterInformation = ({
           }
           readOnly={availableProviderRegionOptions?.length === 0}
           value={values.ocp_cloud_provider_region || ''}
-          onChange={e =>
-            onChange({ type: 'ocp_cloud_provider_region', payload: e })
-          }
+          onChange={e => onChange('ocp_cloud_provider_region', e)}
         >
           {availableProviderRegionOptions.map((option: any, index: any) => (
             <FormSelectOption
@@ -150,7 +146,7 @@ export const ClusterInformation = ({
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
-          onChange={e => onChange({ type: 'ocp_version', payload: e })}
+          onChange={e => onChange('ocp_version', e)}
         >
           {openshiftOptions?.versions?.length > 0 ? (
             openshiftOptions?.versions?.map((option: any, index: any) => (
@@ -192,7 +188,7 @@ export const ClusterInformation = ({
             if (!editedByUser['ocp_sub_domain']) {
               setEditedByUser({ ...editedByUser, ocp_sub_domain: true });
             }
-            onChange({ type: 'ocp_sub_domain', payload: e });
+            onChange('ocp_sub_domain', e);
           }}
         />
       </FormGroup>
@@ -209,9 +205,7 @@ export const ClusterInformation = ({
             openshiftOptions['persistent-storage']?.length === 1 ||
             !hasFeature(APP_FEATURES.writer)
           }
-          onChange={e =>
-            onChange({ type: 'ocp_persistent_storage_size', payload: e })
-          }
+          onChange={e => onChange('ocp_persistent_storage_size', e)}
           value={values.ocp_persistent_storage_size || ''}
         >
           {openshiftOptions['persistent-storage']?.length > 0 ? (
@@ -239,7 +233,7 @@ export const ClusterInformation = ({
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
-          onChange={e => onChange({ type: 'ocp_cluster_size', payload: e })}
+          onChange={e => onChange('ocp_cluster_size', e)}
         >
           {openshiftOptions['cluster-size']?.length > 0 ? (
             openshiftOptions['cluster-size'].map((option: any, index: any) => (

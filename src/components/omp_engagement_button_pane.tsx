@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { EngagementFormContext } from '../context/engagement_form_context';
-import { EngagementContext } from '../context/engagement_context';
-import { ConfigContext } from '../context/config_context';
+import { EngagementContext } from '../context/engagement_context/engagement_context';
+import { ConfigContext } from '../context/config_context/config_context';
 import { Feature } from './feature';
 import { APP_FEATURES } from '../common/app_features';
 
 function _OMPEngagementButtonPane() {
   const engagementContext = useContext(EngagementContext);
-  const engagementFormContext = useContext(EngagementFormContext);
   const configContext = useContext(ConfigContext);
 
   const buttonPane: React.CSSProperties = {
@@ -25,11 +23,11 @@ function _OMPEngagementButtonPane() {
   };
 
   const launchCluster = () => {
-    engagementContext.launchEngagement(engagementFormContext.state);
+    engagementContext.launchEngagement(engagementContext.engagementFormState);
   };
 
   const saveCluster = () => {
-    engagementContext.saveEngagement(engagementFormContext.state);
+    engagementContext.saveEngagement(engagementContext.engagementFormState);
   };
 
   const isLaunchDisabled = () => {
@@ -37,7 +35,9 @@ function _OMPEngagementButtonPane() {
       return true;
     } else if (engagementContext.activeEngagement?.launch !== undefined) {
       return true;
-    } else {
+    } else if (!engagementContext.isLaunchable) { 
+      return true;
+    }else {
       return false;
     }
   };

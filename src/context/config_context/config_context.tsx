@@ -1,6 +1,6 @@
-import React, { createContext, useState, useCallback, useEffect } from 'react';
-import { PublicConfigService } from '../services/config_service/implementations/public_config_service';
-import { Config } from '../schemas/config';
+import React, { createContext, useEffect, useState, useCallback } from 'react';
+import { Config } from '../../schemas/config';
+import { ConfigService } from '../../services/config_service/config_service';
 export interface ConfigContextParams {
   appConfig: Config | null;
 }
@@ -17,16 +17,17 @@ const { Provider } = ConfigContext;
 
 export const ConfigProvider = ({
   children,
+  configRepository,
 }: {
+  configRepository: ConfigService;
   children: React.ReactChild;
 }) => {
-  const [appConfig, setAppConfig] = useState<Config | null>(null);
+  const [appConfig, setAppConfig] = useState<Config>();
 
   const fetchConfig = useCallback(async () => {
-    const configRepository = new PublicConfigService({});
     const config = await configRepository.fetchConfig();
     setAppConfig(config);
-  }, []);
+  }, [configRepository]);
 
   useEffect(() => {
     fetchConfig();
@@ -39,7 +40,7 @@ export const ConfigProvider = ({
         fetchConfig,
       }}
     >
-      {appConfig ? children : null}
+      {children}
     </Provider>
   );
 };
