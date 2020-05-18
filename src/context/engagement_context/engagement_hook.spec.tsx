@@ -59,6 +59,31 @@ describe('Engagement Context', () => {
     expect(result.current.formOptions).toHaveProperty('providerOptions');
   });
 
+  test('Form completeness for launch', async () => {
+    const { result } = getHook();
+    expect(result.current.isLaunchable).toBeFalsy();
+  });
+
+  test('Form is launchable when required fields are filled', async () => {
+    const { result, waitForNextUpdate } = getHook();
+    await act(async () => {
+      result.current.setActiveEngagement(Engagement.fromFake());
+      await waitForNextUpdate;
+    });
+    expect(result.current.isLaunchable).toBeTruthy();
+  });
+
+  test('should not be launchable if one required field is not defined', async () => {
+    const { result, waitForNextUpdate } = getHook();
+    await act(async () => {
+      const engagement = Engagement.fromFake();
+      engagement.customer_contact_email = null;
+      result.current.setActiveEngagement(engagement);
+      await waitForNextUpdate;
+    });
+    expect(result.current.isLaunchable).toBeFalsy();
+  });
+
   test('Can create a new engagement', async () => {
     const { result, waitForNextUpdate } = getHook();
     expect(result.current.engagements).toEqual([]);
