@@ -2,17 +2,17 @@ import Axios, { AxiosInstance } from 'axios';
 import { UserToken } from '../../../schemas/user_token_schema';
 import qs from 'querystring';
 import { UserProfile } from '../../../schemas/user_profile_schema';
-import { ConfigContextParams } from '../../../context/config_context';
 import { AuthService } from '../authentication_service';
+import { Config } from '../../../schemas/config';
 const TOKEN_STORAGE_KEY = 'token';
 
 export class Apiv1AuthService implements AuthService {
-  constructor(config: ConfigContextParams, requestClient?: AxiosInstance) {
-    this.axios = requestClient ?? Axios.create({});
+  constructor(config: Config) {
     this.config = config;
+    this.axios = Axios.create({ baseURL: config.authBaseUrl });
   }
 
-  config: ConfigContextParams;
+  config: Config;
 
   axios: AxiosInstance;
 
@@ -43,10 +43,10 @@ export class Apiv1AuthService implements AuthService {
   }
 
   async clearSession() {
-    const logoutUrl = `${this.config.appConfig?.authBaseUrl}/logout`;
+    const logoutUrl = `${this?.config.authBaseUrl}/logout`;
     const token = this.getToken();
     const requestParams = {
-      client_id: this.config.appConfig?.clientId,
+      client_id: this?.config.clientId,
       refresh_token: token?.refreshToken ? token.refreshToken : '',
     };
     await Axios.post(logoutUrl, qs.stringify(requestParams), {
@@ -54,7 +54,7 @@ export class Apiv1AuthService implements AuthService {
         'Content-Type': 'application/x-www-form-urlencoded',
         Accept: '*/*',
       },
-    })
+    });
     localStorage.setItem(TOKEN_STORAGE_KEY, '');
     return;
   }
@@ -69,7 +69,6 @@ export class Apiv1AuthService implements AuthService {
 
       return UserToken.fromMap(tokenMap);
     } catch (e) {
-      console.log(e);
       return null;
     }
   };
@@ -111,20 +110,20 @@ export class Apiv1AuthService implements AuthService {
   };
 
   async fetchToken(code: string, grantType: string) {
-    const tokenUrl = `${this.config.appConfig?.authBaseUrl}/token`;
+    const tokenUrl = `${this?.config.authBaseUrl}/token`;
     let requestParams = {};
     if (grantType === 'authorization_code') {
       requestParams = {
         code,
         grant_type: 'authorization_code',
-        client_id: this.config.appConfig?.clientId,
-        redirect_uri: `${this.config.appConfig?.baseUrl}/auth_callback`,
+        client_id: this?.config.clientId,
+        redirect_uri: `${this?.config.baseUrl}/auth_callback`,
       };
     } else if (grantType === 'refresh_token') {
       requestParams = {
         grant_type: 'refresh_token',
         refresh_token: code,
-        client_id: this.config.appConfig?.clientId,
+        client_id: this?.config.clientId,
       };
     }
     const { data } = await Axios.post(tokenUrl, qs.stringify(requestParams), {
@@ -156,7 +155,7 @@ export class Apiv1AuthService implements AuthService {
 
   async getUserProfile(): Promise<UserProfile> {
     const userProfileData = await this.axios.get(
-      `${this.config.appConfig?.authBaseUrl}/userinfo`,
+      `${this?.config.authBaseUrl}/userinfo`,
       {
         headers: {
           Authorization: `Bearer ${this.getToken()?.accessToken}`,

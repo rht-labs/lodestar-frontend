@@ -5,14 +5,12 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { Apiv1AuthService } from '../services/authentication_service/implementations/apiv1_auth_service';
-import { AuthService } from '../services/authentication_service/authentication_service';
+import { AuthService } from '../../services/authentication_service/authentication_service';
 
-import { UserProfile } from '../schemas/user_profile_schema';
-import { UserToken } from '../schemas/user_token_schema';
-import { ConfigContext } from './config_context';
+import { UserProfile } from '../../schemas/user_profile_schema';
+import { UserToken } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
-import { Request } from '../utilities/request';
+import { ServiceProviderContext } from '../service_provider/service_provider_context';
 
 export type AuthenticationState =
   | 'initial'
@@ -31,7 +29,7 @@ export interface SessionContext {
   axios?: AxiosInstance;
   authState: AuthenticationState;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
-  logout: () => {};
+  logout: () => Promise<void>;
 }
 
 export const SessionContext = createContext<SessionContext>({
@@ -45,31 +43,28 @@ const { Provider } = SessionContext;
 
 export const SessionProvider = ({
   children,
-  authenticationRepository: authRepo,
+  authenticationService: authRepo,
 }: {
   children: React.ReactChild;
-  authenticationRepository?: AuthService;
+  authenticationService?: AuthService;
 }) => {
-  const configContext = useContext(ConfigContext);
-  const authenticationRepository: AuthService =
-    authRepo ?? new Apiv1AuthService(configContext);
+  const { authenticationService } = useContext(ServiceProviderContext);
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
   const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
-  const requestHandler = new Request({authenticationRepository})
 
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
       setAuthStatus('initial');
       try {
-        const userToken = await authenticationRepository.fetchToken(
+        const userToken = await authenticationService.fetchToken(
           authorizationCode,
           'authorization_code'
         );
-        if (await authenticationRepository.isLoggedIn()) {
-          const profile = await authenticationRepository.getUserProfile();
+        if (await authenticationService.isLoggedIn()) {
+          const profile = await authenticationService.getUserProfile();
           setSessionData({
             profile,
             roles: profile.groups,
@@ -81,32 +76,33 @@ export const SessionProvider = ({
         setAuthStatus('unauthenticated');
       }
     },
-    [authenticationRepository]
+    [authenticationService]
   );
 
   const logout = async () => {
-    await authenticationRepository.clearSession()
+    await authenticationService.clearSession();
     return;
-  }
+  };
 
   useEffect(() => {
-    if (!!configContext.appConfig) {
-      const authenticationRepository: AuthService =
-        authRepo ?? new Apiv1AuthService(configContext);
-      authenticationRepository.isLoggedIn().then(isLoggedIn => {
-        const tokens = authenticationRepository.getToken();
+    if (!!authenticationService) {
+      authenticationService.isLoggedIn().then(isLoggedIn => {
+        const tokens = authenticationService.getToken();
         if (isLoggedIn && tokens) {
-
-          authenticationRepository.getUserProfile().then(profile => {
+          authenticationService.getUserProfile().then(profile => {
             setSessionData({
               profile,
               tokens,
               roles: profile.groups,
             });
-            if(profile.groups ? profile.groups.includes('manage_projects') : false){
+            if (
+              profile.groups
+                ? profile.groups.includes('reader')
+                : false
+            ) {
               setAuthStatus('authenticated');
-            }else{
-              setAuthStatus('unauthorized')
+            } else {
+              setAuthStatus('unauthorized');
             }
           });
         } else {
@@ -114,13 +110,12 @@ export const SessionProvider = ({
         }
       });
     }
-  }, [configContext, authRepo]);
+  }, [authenticationService, authRepo]);
 
   return (
     <Provider
       value={{
         sessionData,
-        axios: requestHandler?.client,
         handleLoginCallback,
         authState: authStatus,
         logout: logout,

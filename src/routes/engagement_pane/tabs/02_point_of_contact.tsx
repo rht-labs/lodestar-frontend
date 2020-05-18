@@ -6,9 +6,11 @@ import {
   InputGroupText,
   TextInput,
 } from '@patternfly/react-core';
+import { OMPTextInput } from '../../../components/omp_text_input';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
-import { FeatureToggleContext } from '../../../context/feature_toggles';
+import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
+import { Validators } from '../../../common/validators';
 
 export const PointOfContact = ({ values, onChange }: any) => {
   const tabContent: React.CSSProperties = {
@@ -44,7 +46,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="name"
             name="engagement-lead-name"
             onChange={e => {
-              onChange({ type: 'engagement_lead_name', payload: e });
+              onChange('engagement_lead_name', e);
             }}
             placeholder="Full Name"
             type="text"
@@ -57,15 +59,17 @@ export const PointOfContact = ({ values, onChange }: any) => {
           >
             <EnvelopeIcon />
           </InputGroupText>
-          <TextInput
+          <OMPTextInput
+            validators={[
+              Validators.EmailAddressValidator,
+              Validators.NotNullValidator,
+            ]}
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="engagement lead email"
             id="email"
             style={input}
             name="engagement-lead-email"
-            onChange={e =>
-              onChange({ type: 'engagement_lead_email', payload: e })
-            }
+            onChange={e => onChange('engagement_lead_email', e)}
             placeholder="Email Address"
             type="email"
             value={values.engagement_lead_email || ''}
@@ -93,9 +97,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="tech-lead-name"
             style={input}
             name="tech-lead-name"
-            onChange={e =>
-              onChange({ type: 'technical_lead_name', payload: e })
-            }
+            onChange={e => onChange('technical_lead_name', e)}
             placeholder="Full Name"
             type="text"
             value={values.technical_lead_name || ''}
@@ -107,15 +109,17 @@ export const PointOfContact = ({ values, onChange }: any) => {
           >
             <EnvelopeIcon />
           </InputGroupText>
-          <TextInput
+          <OMPTextInput
+            validators={[
+              Validators.EmailAddressValidator,
+              Validators.NotNullValidator,
+            ]}
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             style={input}
             aria-label="tech lead email"
             id="tech-lead-email"
             name="tech-lead-email"
-            onChange={e =>
-              onChange({ type: 'technical_lead_email', payload: e })
-            }
+            onChange={e => onChange('technical_lead_email', e)}
             placeholder="Email Address"
             type="email"
             value={values.technical_lead_email || ''}
@@ -143,9 +147,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             aria-label="Customer contact name"
             id="customer-contact-name"
             name="customer-contact-name"
-            onChange={e =>
-              onChange({ type: 'customer_contact_name', payload: e })
-            }
+            onChange={e => onChange('customer_contact_name', e)}
             type="text"
             placeholder="Full Name"
             value={values.customer_contact_name || ''}
@@ -157,15 +159,17 @@ export const PointOfContact = ({ values, onChange }: any) => {
           >
             <EnvelopeIcon />
           </InputGroupText>
-          <TextInput
+          <OMPTextInput
+            validators={[
+              Validators.NotNullValidator,
+              Validators.EmailAddressValidator,
+            ]}
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="customer contact email"
             id="customer-contact-email"
             name="customer-contact-email"
             style={input}
-            onChange={e =>
-              onChange({ type: 'customer_contact_email', payload: e })
-            }
+            onChange={e => onChange('customer_contact_email', e)}
             placeholder="Email Address"
             type="email"
             value={values.customer_contact_email || ''}

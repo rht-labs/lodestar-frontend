@@ -1,32 +1,36 @@
 import { VersionService } from '../version_service';
 import { Version } from '../../../schemas/version_schema';
-import { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance } from 'axios';
 
 export class Apiv1VersionService extends VersionService {
-  constructor({ axios, baseUrl }: { axios?: AxiosInstance; baseUrl?: string }) {
+  constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
     super();
-    if (!axios) {
-      throw new Error('axios is required');
-    }
-    this.axios = axios;
-    this.baseUrl = baseUrl;
+    this.axios = Axios.create();
+    this.baseUrl = baseURL;
+    this.axios.interceptors.request.use(onBeforeRequest);
+    this.axios.interceptors.response.use(onAfterRequest, onFailure);
   }
-  baseUrl?: string;
+  baseUrl: string;
   axios?: AxiosInstance;
-  
+
   private async fetchManifest(): Promise<object> {
     const { data } = await this.axios.get(
       `${process.env.PUBLIC_URL}/manifest.json`
     );
-    const rObject = [{'application': 'omp-frontend', 'git_commit': data.git_commit, 'git_tag': data.git_tag, 'version': data.git_tag}];
+    const rObject = [
+      {
+        application: 'omp-frontend',
+        git_commit: data.git_commit,
+        git_tag: data.git_tag,
+        version: data.git_tag,
+      },
+    ];
     return rObject;
   }
 
   async fetchVersion(): Promise<Version> {
-    const { data } = await this.axios.get(
-      `${this.baseUrl}/api/v1/version`
-    );
+    const { data } = await this.axios.get(`${this.baseUrl}/api/v1/version`);
     const fe = await this.fetchManifest();
-    return Version.fromMap({...data, fe});
+    return Version.fromMap({ ...data, fe });
   }
 }

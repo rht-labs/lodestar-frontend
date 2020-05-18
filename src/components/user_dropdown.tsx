@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { SessionContext } from '../context/session_context';
+import { SessionContext } from '../context/session_context/session_context';
 import { Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 export interface UserDropdown {}

@@ -41,7 +41,7 @@ export class UserProfile {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
-      groups: [],
+      groups: ['reader', 'writer'],
     });
   }
 }

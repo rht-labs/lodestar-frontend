@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Component matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        style="background-color: rgb(237, 237, 237); height: 100vh; padding: 15px;"
+      >
+        <h1>
+          Dashboard
+        </h1>
+        <p>
+          This is a super fancy dashboard where people mine data about all of the amazing engagements taking place in the Labs Universe.
+        </p>
+        <p>
+          <b>
+            If you squint really hard, you can see it!!!
+          </b>
+        </p>
+        <p>
+          Please make a selection from the nav menu (top of screen - house/list/cog - hold over to see tooltip)
+        </p>
+        <p>
+          Select the raised hand to be taken to the feedback form to report any issues, share thoughts or provide suggestions.
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      style="background-color: rgb(237, 237, 237); height: 100vh; padding: 15px;"
+    >
+      <h1>
+        Dashboard
+      </h1>
+      <p>
+        This is a super fancy dashboard where people mine data about all of the amazing engagements taking place in the Labs Universe.
+      </p>
+      <p>
+        <b>
+          If you squint really hard, you can see it!!!
+        </b>
+      </p>
+      <p>
+        Please make a selection from the nav menu (top of screen - house/list/cog - hold over to see tooltip)
+      </p>
+      <p>
+        Select the raised hand to be taken to the feedback form to report any issues, share thoughts or provide suggestions.
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

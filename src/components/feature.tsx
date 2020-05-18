@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FeatureToggleContext } from '../context/feature_toggles';
+import { FeatureToggleContext } from '../context/feature_toggles/feature_toggles';
 import { AppFeature } from '../common/app_features';
 
 export interface FeatureProps {
@@ -9,10 +9,10 @@ export interface FeatureProps {
 }
 
 /**
- * 
+ *
  * By default, Feature shows the feature-protected component if the feature name provided
  * is included in the current user's roles, or if there is no feature name provided at all.
- * 
+ *
  * The reason for showing the feature if there is no feature name is to allow developers to
  * proactively wrap product features in a Feature component and add the flag later.
  */
