@@ -27,6 +27,7 @@ The component is written to mirror major parts of the api of the [Parallel Drive
 Currently, features are derived from the session data on session context.
 
 #### Service Provider Context
+
 The service provider context acts as a dependency injector for asynchronous services into the application.
 By default, the service provider provides the production services. You can switch to faked services by setting
 `REACT_APP_USE_FAKED=true`.
@@ -140,6 +141,25 @@ npm run package
 npm run publish
 ```
 
+## Fields required to be populated to allow launch
+
+An engagement cannot be launched until the following fields are populated for that engagement:
+
+| Variable                    | Section             | Description                                           |
+| :-------------------------- | :-----------------  | :-----------------------------------------------------|
+| **Customer Name**           | Basic               | The name of the customer for this engagement          |
+| **Project Name**            | Basic               | The name of this engagements project                  |
+| **Residency Date (Start)**  | Basic               | The start date of the engagement                      |
+| **Residency Date (End)**    | Basic               | The start date of the engagement                      |
+| **Labs EL**                 | Point of Contact    | The name and email for the Engagement Lead            |
+| **Labs Technical Lead**     | Point of Contact    | The name and email for the Technical Lead             |
+| **Customer Contact**        | Point of Contact    | The name and email for the client contact             |
+| **Cloud Provider**          | OpenShift Cluster   | Which cloud provider is being utilized                |
+| **Provider Region**         | OpenShift Cluster   | Which region is this cloud hosted                     |
+| **Open Shift Version**      | OpenShift Cluster   | Which version of OpenShift is required                |
+| **Desired Subdomain**       | OpenShift Cluster   | What is the desired path for the cluster              |
+| **Persistent Storage**      | OpenShift Cluster   | What are the storage requirements                     |
+| **Cluster Size**            | OpenShift Cluster   | What is the size of the cluter                        |
 
 ## Configuration Variables for local deployments
 
