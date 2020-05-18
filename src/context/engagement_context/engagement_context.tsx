@@ -24,6 +24,8 @@ export interface EngagementContext {
   createEngagement: (data: any) => Promise<void>;
   saveEngagement: (data: any) => Promise<void>;
   updateEngagementFormField: (fieldName: string, payload: any) => void;
+  isLaunchable: boolean; 
+
 
   formOptions?: {
     openshiftOptions?: any;
@@ -156,6 +158,32 @@ export const EngagementProvider = ({
     [engagementService, _addNewEngagement, feedbackContext]
   );
 
+  const _checkLaunchReady = () => {
+    const requiredFields = [
+      'customer_contact_email',
+      'customer_contact_name',
+      'customer_name',
+      'description',
+      'end_date',
+      'engagement_lead_email',
+      'engagement_lead_name',
+      'engagement_users',
+      'location',
+      'ocp_cloud_provider_name',
+      'ocp_cloud_provider_region',
+      'ocp_cluster_size',
+      'ocp_persistent_storage_size',
+      'ocp_sub_domain',
+      'ocp_version',
+      'project_name',
+      'start_date',
+      'technical_lead_email',
+      'technical_lead_name',
+    ];    
+    let result = requiredFields.every(o => typeof engagementFormState[o] === 'boolean' || !!engagementFormState[o]);
+    return result;
+  };
+
   const _updateEngagementInPlace = useCallback(
     engagement => {
       const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
@@ -247,6 +275,7 @@ export const EngagementProvider = ({
       value={{
         activeEngagement,
         getConfig,
+        isLaunchable: _checkLaunchReady(),
         setActiveEngagement,
         engagements,
         error,
