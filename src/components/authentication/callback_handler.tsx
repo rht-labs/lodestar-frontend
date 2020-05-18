@@ -8,15 +8,22 @@ export const CallbackHandler = () => {
   const [isHandlingCallback, setIsHandlingCallback] = useState<
     'initial' | 'handling' | 'completed'
   >('initial');
-
+  const mountedRef = React.useRef(true);
   useEffect(() => {
     const code: string | null = query.get('code');
     if (isHandlingCallback !== 'handling' && code) {
-      setIsHandlingCallback('handling');
-      sessionContext.handleLoginCallback(code).then(() => {
-        setIsHandlingCallback('completed');
-      });
+      if (mountedRef.current) {
+        setIsHandlingCallback('handling');
+        sessionContext.handleLoginCallback(code).then(() => {
+          if (mountedRef.current) {
+            setIsHandlingCallback('completed');
+          }
+        });
+      }
     }
+    return () => {
+      mountedRef.current = false;
+    };
   }, [sessionContext, isHandlingCallback, query]);
 
   if (!sessionContext.sessionData) {
