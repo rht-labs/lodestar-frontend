@@ -35,7 +35,9 @@ function _OMPEngagementButtonPane() {
       return true;
     } else if (engagementContext.activeEngagement?.launch !== undefined) {
       return true;
-    } else {
+    } else if (!engagementContext.isLaunchable) { 
+      return true;
+    }else {
       return false;
     }
   };
