@@ -13,7 +13,6 @@ describe('Feature Context Hook', () => {
 
   test('should be empty array when initialized without roles', () => {
     const { result } = getHook();
-    expect(Array.isArray(result.current.features)).toBe(true);
     expect(result.current.features.length).toEqual(0);
   });
 

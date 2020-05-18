@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Version } from '../../schemas/version_schema';
-import { ServiceProviderContext } from '../service_provider/service_provider_context';
+import { ServiceProviderContext } from '../service_provider_context/service_provider_context';
 import { FeedbackContext } from '../feedback_context';
 
 export interface VersionContext {
