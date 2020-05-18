@@ -12,6 +12,7 @@ spec:
   port:
     targetPort: "{{ .Values.servicePort }}-tcp"
   tls:
+    insecureEdgeTerminationPolicy: Redirect
     termination: edge
   to:
     kind: Service
