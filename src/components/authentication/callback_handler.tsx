@@ -12,14 +12,12 @@ export const CallbackHandler = () => {
   useEffect(() => {
     const code: string | null = query.get('code');
     if (isHandlingCallback !== 'handling' && code) {
-      if (mountedRef.current) {
         setIsHandlingCallback('handling');
         sessionContext.handleLoginCallback(code).then(() => {
           if (mountedRef.current) {
             setIsHandlingCallback('completed');
           }
         });
-      }
     }
     return () => {
       mountedRef.current = false;
