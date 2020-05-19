@@ -11,7 +11,7 @@ import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
-import { ServiceProviderContext } from '../service_provider/service_provider_context';
+import { ServiceProviderContext } from '../service_provider_context/service_provider_context';
 import { FeedbackContext } from '../feedback_context';
 
 export interface EngagementContext {

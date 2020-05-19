@@ -9,7 +9,7 @@ import { EngagementProvider } from './context/engagement_context/engagement_cont
 import { ErrorBoundary } from './components/error_boundary';
 import { OMPRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_toggles/feature_toggles';
-import { ServiceProvider } from './context/service_provider/service_provider_context';
+import { ServiceProvider } from './context/service_provider_context/service_provider_context';
 import { FeedbackProvider } from './context/feedback_context';
 import { PublicConfigService } from './services/config_service/implementations/public_config_service';
 
