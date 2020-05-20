@@ -64,7 +64,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: omp-frontend-latest.tar
-        path: /tmp/omp-frontend-latest.tar
+        path: /tmp
     - name: Load Container Image
       run: |
         docker load --input /tmp/omp-frontend-latest.tar
