@@ -24,6 +24,11 @@ describe('Validation Context Hook', () => {
     expect(result.current.validationResults).toEqual({});
   });
 
+  test('getting a validation result for a field that has not been validated returns an empty array', () => {
+    const { result } = getHook();
+    expect(result.current.getValidationResult('hello')).toEqual([]);
+  });
+
   test('the validate function from context should return an empty array by default', () => {
     const { result } = getHook();
     expect(result.current.validate('hello')('blah')).toEqual([]);
@@ -62,7 +67,7 @@ describe('Validation Context Hook', () => {
       result.current.validate('hello')('hi');
       await waitForNextUpdate;
     });
-
-    expect(result.current.validationResults['hello']).toEqual([]);
+    
+    expect(result.current.getValidationResult('hello')).toEqual([]);
   });
 });

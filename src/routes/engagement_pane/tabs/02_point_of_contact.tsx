@@ -6,11 +6,10 @@ import {
   InputGroupText,
   TextInput,
 } from '@patternfly/react-core';
-import { OMPTextInput } from '../../../components/omp_text_input';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
-import { Validators } from '../../../common/validators';
+import { useValidation } from '../../../context/validation_context/validation_hook';
 
 export const PointOfContact = ({ values, onChange }: any) => {
   const tabContent: React.CSSProperties = {
@@ -22,6 +21,9 @@ export const PointOfContact = ({ values, onChange }: any) => {
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
+  const { validate, getValidationResult: getValidationResults } = useValidation();
+
+  getValidationResults('engagement_lead_email');
 
   return (
     <Form style={tabContent} isHorizontal>
@@ -59,17 +61,16 @@ export const PointOfContact = ({ values, onChange }: any) => {
           >
             <EnvelopeIcon />
           </InputGroupText>
-          <OMPTextInput
-            validators={[
-              Validators.EmailAddressValidator,
-              Validators.NotNullValidator,
-            ]}
+          <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="engagement lead email"
             id="email"
             style={input}
             name="engagement-lead-email"
-            onChange={e => onChange('engagement_lead_email', e)}
+            onChange={e =>
+              validate('engagement_lead_email')(e) &&
+              onChange('engagement_lead_email', e)
+            }
             placeholder="Email Address"
             type="email"
             value={values.engagement_lead_email || ''}
@@ -109,17 +110,16 @@ export const PointOfContact = ({ values, onChange }: any) => {
           >
             <EnvelopeIcon />
           </InputGroupText>
-          <OMPTextInput
-            validators={[
-              Validators.EmailAddressValidator,
-              Validators.NotNullValidator,
-            ]}
+          <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             style={input}
             aria-label="tech lead email"
             id="tech-lead-email"
             name="tech-lead-email"
-            onChange={e => onChange('technical_lead_email', e)}
+            onChange={e =>
+              validate('engagement_lead_email')(e) &&
+              onChange('technical_lead_email', e)
+            }
             placeholder="Email Address"
             type="email"
             value={values.technical_lead_email || ''}
@@ -159,17 +159,16 @@ export const PointOfContact = ({ values, onChange }: any) => {
           >
             <EnvelopeIcon />
           </InputGroupText>
-          <OMPTextInput
-            validators={[
-              Validators.NotNullValidator,
-              Validators.EmailAddressValidator,
-            ]}
+          <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             aria-label="customer contact email"
             id="customer-contact-email"
             name="customer-contact-email"
             style={input}
-            onChange={e => onChange('customer_contact_email', e)}
+            onChange={e =>
+              validate('engagement_lead_email')(e) &&
+              onChange('customer_contact_email', e)
+            }
             placeholder="Email Address"
             type="email"
             value={values.customer_contact_email || ''}
