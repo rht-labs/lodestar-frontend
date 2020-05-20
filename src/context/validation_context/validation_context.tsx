@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { Validator } from '../../common/validators';
 
-/**
- * The validation context provides an anchor that a validation consumer can use to validate a given value.
- *
- * The validation context receives a list of FieldValidators as a property, and provides
- * a curried method for validating against that list of validators.
- *
- * Additionally, it provides an object of ValidationErrors to consumers, so the consumer can decide
- * how to show validation errors.
- */
-
 export interface ValidationContext {
   validate: (fieldName: string) => (value: any) => string[];
   getValidationResult: (fieldName: string) => string[];
@@ -42,7 +32,7 @@ export const ValidationProvider = ({
     });
   };
 
-  const getValidationResults = (fieldName: string) => {
+  const getValidationResult = (fieldName: string) => {
     if (validationResults && validationResults[fieldName]) {
       return validationResults[fieldName];
     }
@@ -53,7 +43,7 @@ export const ValidationProvider = ({
     <Provider
       value={{
         validationResults,
-        getValidationResult: getValidationResults,
+        getValidationResult,
         validate: (fieldName: string) => (value: any) => {
           if (validators && validators[fieldName]) {
             const result = validators[fieldName]
