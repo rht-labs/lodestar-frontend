@@ -64,6 +64,11 @@ function _EngagementNav() {
   const [project_name, setProjectName] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    setCustomerName(null);
+    setProjectName(null);
+  }, [engagementContext.activeEngagement]);
+
   const onNavSelect = result => {
     engagementContext.setActiveEngagement(
       engagementContext.engagements[result.itemId]

@@ -89,7 +89,6 @@ export const BasicInformation = ({ values, onChange }: any) => {
         label="Location"
         fieldId="engagement-location"
         helperText="Where will this be held?"
-        isRequired
       >
         <TextInput
           isDisabled={!hasFeature(APP_FEATURES.writer)}
