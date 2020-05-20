@@ -46,7 +46,13 @@ export const ValidationProvider = ({
         validate: (fieldName: string) => (value: any) => {
           if (validators && validators[fieldName]) {
             const result = validators[fieldName]
-              .reduce((acc, curr) => [...acc, curr(value)], [])
+              .reduce(
+                (accumulatedErrors, currentValidator) => [
+                  ...accumulatedErrors,
+                  currentValidator(value),
+                ],
+                []
+              )
               .filter(message => !!message);
             setFieldResult(fieldName, result);
             return result;
