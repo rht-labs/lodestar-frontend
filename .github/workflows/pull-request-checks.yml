@@ -25,7 +25,7 @@ jobs:
 #       env:
 #         CI: true
 # TODO: This fails because we don't have linting... Consider (please) adding strict linting.
-  build:
+  local-build:
 
     runs-on: ubuntu-latest
 
@@ -44,3 +44,50 @@ jobs:
         ./build.sh
       env:
         CI: true
+    - uses: vrutkovs/action-s2i@master
+      with:
+        path: "./build"
+        base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
+        image: omp-frontend:latest
+    - name: Export Container Image
+      run: |
+        docker save --output omp-frontend.tar omp-frontend:latest
+    - uses: actions/upload-artifact@v2
+      with:
+        name: omp-frontend-latest.tar
+        path: omp-frontend.tar
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: omp-frontend-latest.tar
+        path: /tmp/omp-frontend-latest.tar
+    - name: Load Container Image
+      run: |
+        docker load --input fedora.tar
+    - uses: anchore/scan-action@master
+      with:
+        image-reference: "todolist-tester:latest"
+        fail-build: false
+        include-app-packages: true
+      id: vuln_scan
+    - run: |
+        echo ::set-output name=numVuln::$(jq --raw-output '.vulnerabilities | length' ${{steps.vuln_scan.outputs.vulnerabilities}})
+        echo ::set-output name=highVuln::$(jq 'reduce .vulnerabilities[] as $s(0; if $s.severity == "High" then .+1 else . end)' ${{steps.vuln_scan.outputs.vulnerabilities}})
+        echo ::set-output name=medVuln::$(jq 'reduce .vulnerabilities[] as $s(0; if $s.severity == "Medium" then .+1 else . end)' ${{steps.vuln_scan.outputs.vulnerabilities}})
+        echo ::set-output name=lowVuln::$(jq 'reduce .vulnerabilities[] as $s(0; if $s.severity == "Low" then .+1 else . end)' ${{steps.vuln_scan.outputs.vulnerabilities}})
+        echo ::set-output name=highPkg::$(jq --raw-output '.vulnerabilities[] | select(.severity == "High") | "|" + .package + "|" + .vuln + "|" + .url + "|\n"' ${{steps.vuln_scan.outputs.vulnerabilities}})
+      id: vuln_out
+    - uses: actions/github-script@0.9.0
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "There are ${{steps.vuln_out.outputs.numVuln}} vulnerabilities present in this image\n\n🟡 There are ${{steps.vuln_out.outputs.lowVuln}} low vulnerabilities\n🟠 There are ${{steps.vuln_out.outputs.medVuln}} medium vulnerabilities\n🔴 There are ${{steps.vuln_out.outputs.highVuln}} high vulnerabilities"
+          })
+
