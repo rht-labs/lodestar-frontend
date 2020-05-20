@@ -21,9 +21,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
-  const { validate, getValidationResult: getValidationResults } = useValidation();
-
-  getValidationResults('engagement_lead_email');
+  const { validate, getValidationResult } = useValidation();
 
   return (
     <Form style={tabContent} isHorizontal>
@@ -32,6 +30,14 @@ export const PointOfContact = ({ values, onChange }: any) => {
         helperText="Who is the Engagement Lead?"
         isRequired
         label="Labs EL"
+        helperTextInvalid={getValidationResult('engagement_lead_email').join(
+          ' '
+        )}
+        validated={
+          getValidationResult('engagement_lead_email').length > 0
+            ? 'error'
+            : 'default'
+        }
       >
         <InputGroup>
           <InputGroupText
@@ -83,6 +89,14 @@ export const PointOfContact = ({ values, onChange }: any) => {
         isRequired
         helperText="Who is the Tech Lead?"
         label="Labs Technical Lead"
+        helperTextInvalid={getValidationResult('technical_lead_email').join(
+          ' '
+        )}
+        validated={
+          getValidationResult('technical_lead_email').length > 0
+            ? 'error'
+            : 'default'
+        }
       >
         <InputGroup label="Labs Tech Lead">
           <InputGroupText
@@ -117,7 +131,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             id="tech-lead-email"
             name="tech-lead-email"
             onChange={e =>
-              validate('engagement_lead_email')(e) &&
+              validate('technical_lead_email')(e) &&
               onChange('technical_lead_email', e)
             }
             placeholder="Email Address"
@@ -132,6 +146,14 @@ export const PointOfContact = ({ values, onChange }: any) => {
         helperText="Who is the point person for the project?"
         isRequired
         label="Customer Contact"
+        helperTextInvalid={getValidationResult('customer_contact_email').join(
+          ' '
+        )}
+        validated={
+          getValidationResult('customer_contact_email').length > 0
+            ? 'error'
+            : 'default'
+        }
       >
         <InputGroup label="Customer Contact">
           <InputGroupText
@@ -166,7 +188,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             name="customer-contact-email"
             style={input}
             onChange={e =>
-              validate('engagement_lead_email')(e) &&
+              validate('customer_contact_email')(e) &&
               onChange('customer_contact_email', e)
             }
             placeholder="Email Address"
