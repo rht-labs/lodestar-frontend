@@ -24,12 +24,12 @@ describe('Validation Context Hook', () => {
     expect(result.current.validationResults).toEqual({});
   });
 
-  test('the validate function from context should return true by default', () => {
+  test('the validate function from context should return an empty array by default', () => {
     const { result } = getHook();
     expect(result.current.validate('hello')('blah')).toEqual([]);
   });
 
-  test('the validate function returns true if all validators pass', () => {
+  test('the validate function returns an empty array if all validators pass', () => {
     const { result } = getHook({
       hello: [
         Validators.NotNullValidator,
@@ -41,7 +41,7 @@ describe('Validation Context Hook', () => {
     });
   });
 
-  test('the validate function returns false if any validator fails', () => {
+  test('the validate function returns an array of strings if any validator fails', () => {
     const { result } = getHook({
       hello: [
         Validators.NotNullValidator,
