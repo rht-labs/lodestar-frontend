@@ -67,7 +67,7 @@ jobs:
         path: /tmp/omp-frontend-latest.tar
     - name: Load Container Image
       run: |
-        docker load --input fedora.tar
+        docker load --input omp-frontend-latest.tar
     - uses: anchore/scan-action@master
       with:
         image-reference: "todolist-tester:latest"
