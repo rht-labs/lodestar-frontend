@@ -2,8 +2,8 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { slugify } from 'transliteration';
 
 const generateSuggestedSubdomain = (
-  project_name: string,
-  customer_name: string
+  project_name: string = '',
+  customer_name: string = ''
 ): string => {
   let slug = '';
   const maxLen = 8;
@@ -18,6 +18,14 @@ const generateSuggestedSubdomain = (
   slug = slugify(slug.substring(0, maxLen));
   return slug;
 };
+
+const getInitialSubdomain = (engagement: Engagement) =>
+  engagement?.project_name || engagement?.customer_name
+    ? generateSuggestedSubdomain(
+        engagement?.project_name,
+        engagement?.customer_name
+      )
+    : null;
 
 export const getInitialState = (engagement?: Engagement): Engagement => {
   return {
@@ -41,15 +49,16 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
     ocp_cloud_provider_name: engagement?.ocp_cloud_provider_name ?? null,
     ocp_cloud_provider_region: engagement?.ocp_cloud_provider_region ?? null,
     ocp_version: engagement?.ocp_version ?? null,
-    ocp_sub_domain: engagement?.ocp_sub_domain ?? null,
+    ocp_sub_domain:
+      engagement?.ocp_sub_domain ?? getInitialSubdomain(engagement) ?? null,
     ocp_persistent_storage_size:
       engagement?.ocp_persistent_storage_size ?? null,
     ocp_cluster_size: engagement?.ocp_cluster_size ?? null,
     suggested_subdomain:
       engagement?.project_name || engagement?.customer_name
         ? generateSuggestedSubdomain(
-            engagement?.project_name ?? '',
-            engagement?.customer_name ?? ''
+            engagement?.project_name,
+            engagement?.customer_name
           )
         : null,
   };
