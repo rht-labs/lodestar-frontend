@@ -24,8 +24,7 @@ export interface EngagementContext {
   createEngagement: (data: any) => Promise<void>;
   saveEngagement: (data: any) => Promise<void>;
   updateEngagementFormField: (fieldName: string, payload: any) => void;
-  isLaunchable: boolean; 
-
+  isLaunchable: boolean;
 
   formOptions?: {
     openshiftOptions?: any;
@@ -105,6 +104,12 @@ export const EngagementProvider = ({
           activeEngagement?.ocp_version ??
           formOptions.openshiftOptions.versions[0].value,
       });
+      dispatch({
+        type: 'ocp_persistent_storage_size',
+        payload:
+          activeEngagement?.ocp_persistent_storage_size ??
+          formOptions.openshiftOptions?.['persistent-storage'][0].value,
+      });
     }
   }, [activeEngagement, formOptions]);
 
@@ -145,14 +150,13 @@ export const EngagementProvider = ({
         );
       } catch (e) {
         feedbackContext.hideLoader();
-        let errorMessage = 'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
-        if(e.reponse.status === 409){
-          errorMessage = "This client already has a project with that name. Please choose another.";
-        } 
-        feedbackContext.showAlert(
-          errorMessage,
-          'error'
-        );
+        let errorMessage =
+          'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
+        if (e.reponse.status === 409) {
+          errorMessage =
+            'This client already has a project with that name. Please choose another.';
+        }
+        feedbackContext.showAlert(errorMessage, 'error');
       }
     },
     [engagementService, _addNewEngagement, feedbackContext]
@@ -169,7 +173,6 @@ export const EngagementProvider = ({
       'technical_lead_email',
       'engagement_lead_name',
       'technical_lead_name',
-      'description',
       'ocp_cloud_provider_name',
       'ocp_cloud_provider_region',
       'ocp_version',
@@ -177,8 +180,11 @@ export const EngagementProvider = ({
       'ocp_persistent_storage_size',
       'ocp_sub_domain',
       'project_name',
-    ];    
-    let result = requiredFields.every(o => typeof engagementFormState[o] === 'boolean' || !!engagementFormState[o]);
+    ];
+    let result = requiredFields.every(
+      o =>
+        typeof engagementFormState[o] === 'boolean' || !!engagementFormState[o]
+    );
     return result;
   };
 
@@ -221,14 +227,13 @@ export const EngagementProvider = ({
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
-        let errorMessage = 'There was an issue with saving your changes. Please followup with an administrator if this continues.';
-        if(e.response.status === 409){
-          errorMessage = "The path that you input is already taken.  Please update and try saving again.";
-        } 
-        feedbackContext.showAlert(
-          errorMessage,
-          'error'
-        );
+        let errorMessage =
+          'There was an issue with saving your changes. Please followup with an administrator if this continues.';
+        if (e.response.status === 409) {
+          errorMessage =
+            'The path that you input is already taken.  Please update and try saving again.';
+        }
+        feedbackContext.showAlert(errorMessage, 'error');
       }
     },
     [engagementService, _updateEngagementInPlace, feedbackContext]
