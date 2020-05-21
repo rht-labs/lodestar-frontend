@@ -54,7 +54,7 @@ jobs:
         docker save --output omp-frontend.tar omp-frontend:latest
     - uses: actions/upload-artifact@v2
       with:
-        name: omp-frontend-latest.tar
+        name: omp-frontend.tar
         path: omp-frontend.tar
 
   security-scan:
@@ -63,13 +63,13 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: omp-frontend-latest.tar
+        name: omp-frontend.tar
     - name: Load Container Image
       run: |
-        docker load --input omp-frontend-latest.tar
+        docker load --input omp-frontend.tar
     - uses: anchore/scan-action@master
       with:
-        image-reference: "todolist-tester:latest"
+        image-reference: "omp-frontend:latest"
         fail-build: false
         include-app-packages: true
       id: vuln_scan
