@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Validator } from '../../common/validators';
 
 export interface ValidationContext {
   validate: (fieldName: string) => (value: any) => string[];
   getValidationResult: (fieldName: string) => string[];
   validationResults: { [key: string]: any };
+  clearValidationResults: () => void;
 }
 
 export type FormValidator = { [key: string]: Validator[] };
@@ -12,6 +13,7 @@ export type FormValidator = { [key: string]: Validator[] };
 export const ValidationContext = React.createContext<ValidationContext>({
   validate: (fieldName: string) => (value: any) => [],
   getValidationResult: (fieldName: string) => [],
+  clearValidationResults: () => {},
   validationResults: {},
 });
 
@@ -25,12 +27,6 @@ export const ValidationProvider = ({
   validators: FormValidator;
 }) => {
   const [validationResults, setValidationResults] = useState({});
-  const setFieldResult = (field: string, result: Array<string>) => {
-    setValidationResults({
-      ...validationResults,
-      [field]: result,
-    });
-  };
 
   const getValidationResult = (fieldName: string) => {
     if (validationResults && validationResults[fieldName]) {
@@ -39,28 +35,44 @@ export const ValidationProvider = ({
     return [];
   };
 
+  const clearValidationResults = useCallback(() => {
+    setValidationResults({});
+  }, [setValidationResults]);
+
+  const validate = useCallback(
+    (fieldName: string) => (value: any) => {
+      const setFieldResult = (field: string, result: Array<string>) => {
+        setValidationResults({
+          ...validationResults,
+          [field]: result,
+        });
+      };
+      if (validators && validators[fieldName]) {
+        const result = validators[fieldName]
+          .reduce(
+            (accumulatedErrors, currentValidator) => [
+              ...accumulatedErrors,
+              currentValidator(value),
+            ],
+            []
+          )
+          .filter(message => !!message);
+        setFieldResult(fieldName, result);
+        return result;
+      } else {
+        return [];
+      }
+    },
+    [validators, validationResults]
+  );
+
   return (
     <Provider
       value={{
         validationResults,
         getValidationResult,
-        validate: (fieldName: string) => (value: any) => {
-          if (validators && validators[fieldName]) {
-            const result = validators[fieldName]
-              .reduce(
-                (accumulatedErrors, currentValidator) => [
-                  ...accumulatedErrors,
-                  currentValidator(value),
-                ],
-                []
-              )
-              .filter(message => !!message);
-            setFieldResult(fieldName, result);
-            return result;
-          } else {
-            return [];
-          }
-        },
+        clearValidationResults,
+        validate,
       }}
     >
       {children}
