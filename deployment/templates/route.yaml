@@ -20,4 +20,3 @@ spec:
   wildcardPolicy: None
 status:
   ingress: []
-{{- end }}
