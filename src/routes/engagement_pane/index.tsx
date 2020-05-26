@@ -8,11 +8,28 @@ import { Loading } from './Loading';
 import { EngagementNav } from '../../components/omp_engagement_nav';
 import { EngagementContext } from '../../context/engagement_context/engagement_context';
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
+import { ValidationProvider } from '../../context/validation_context/validation_context';
+import { Validators } from '../../common/validators';
+
+const engagement_form_validators = {
+  engagement_lead_email: [
+    Validators.EmailAddressValidator,
+    Validators.NotNullValidator,
+  ],
+  technical_lead_email: [
+    Validators.EmailAddressValidator,
+    Validators.NotNullValidator,
+  ],
+  customer_contact_email: [
+    Validators.EmailAddressValidator,
+    Validators.NotNullValidator,
+  ],
+};
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
   const engagementContext = useContext(EngagementContext);
-  
+
   const handleTabClick = function(this: any, event: any, tabIndex: any) {
     setActiveTabKey(tabIndex);
   };
@@ -56,69 +73,71 @@ export function EngagementPane() {
 
   return (
     <>
-      <div style={contentPane}>
-        <div style={columnPane}>
-          <EngagementNav />
-        </div>
-        <div style={formPane}>
-          <Tabs
-            style={tabs}
-            isFilled
-            activeKey={activeTabKey}
-            onSelect={handleTabClick}
-          >
-            <Tab
-              id={'basic_info'}
-              style={tab}
-              eventKey={0}
-              title="Basic Information"
+      <ValidationProvider validators={engagement_form_validators}>
+        <div style={contentPane}>
+          <div style={columnPane}>
+            <EngagementNav />
+          </div>
+          <div style={formPane}>
+            <Tabs
+              style={tabs}
+              isFilled
+              activeKey={activeTabKey}
+              onSelect={handleTabClick}
             >
-              <BasicInformation
-                values={engagementContext.engagementFormState}
-                onChange={engagementContext.updateEngagementFormField}
-              />
-            </Tab>
-            <Tab id={'poc'} style={tab} eventKey={1} title="Point of Contact">
-              <PointOfContact
-                values={engagementContext.engagementFormState}
-                onChange={engagementContext.updateEngagementFormField}
-              />
-            </Tab>
-            <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
-              {!engagementContext.formOptions?.providerOptions ||
-              !engagementContext.formOptions?.openshiftOptions ? (
-                <Loading />
-              ) : (
-                <ClusterInformation
-                  providerOptions={
-                    engagementContext.formOptions?.providerOptions
-                  }
-                  openshiftOptions={
-                    engagementContext.formOptions?.openshiftOptions
+              <Tab
+                id={'basic_info'}
+                style={tab}
+                eventKey={0}
+                title="Basic Information"
+              >
+                <BasicInformation
+                  values={engagementContext.engagementFormState}
+                  onChange={engagementContext.updateEngagementFormField}
+                />
+              </Tab>
+              <Tab id={'poc'} style={tab} eventKey={1} title="Point of Contact">
+                <PointOfContact
+                  values={engagementContext.engagementFormState}
+                  onChange={engagementContext.updateEngagementFormField}
+                />
+              </Tab>
+              <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
+                {!engagementContext.formOptions?.providerOptions ||
+                !engagementContext.formOptions?.openshiftOptions ? (
+                  <Loading />
+                ) : (
+                  <ClusterInformation
+                    providerOptions={
+                      engagementContext.formOptions?.providerOptions
+                    }
+                    openshiftOptions={
+                      engagementContext.formOptions?.openshiftOptions
+                    }
+                    values={engagementContext.engagementFormState}
+                    onChange={engagementContext.updateEngagementFormField}
+                  />
+                )}
+              </Tab>
+              <Tab id={'cu'} style={tab} eventKey={3} title="Users">
+                <ClusterUsers
+                  userManagementOptions={
+                    engagementContext.formOptions?.userManagementOptions
                   }
                   values={engagementContext.engagementFormState}
                   onChange={engagementContext.updateEngagementFormField}
                 />
-              )}
-            </Tab>
-            <Tab id={'cu'} style={tab} eventKey={3} title="Users">
-              <ClusterUsers
-                userManagementOptions={
-                  engagementContext.formOptions?.userManagementOptions
-                }
-                values={engagementContext.engagementFormState}
-                onChange={engagementContext.updateEngagementFormField}
-              />
-            </Tab>
-          </Tabs>
+              </Tab>
+            </Tabs>
+          </div>
+          <OMPEngagementButtonPane />
         </div>
-        <OMPEngagementButtonPane />
-      </div>
-      {engagementFormRequestError ? (
-        <Alert isInline title="We encountered an error." variant="danger">
-          {engagementFormRequestError.message}
-        </Alert>
-      ) : null}
+        {engagementFormRequestError ? (
+          <Alert isInline title="We encountered an error." variant="danger">
+            {engagementFormRequestError.message}
+          </Alert>
+        ) : null}
+      </ValidationProvider>
     </>
   );
 }
