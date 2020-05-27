@@ -9,22 +9,15 @@ import { EngagementNav } from '../../components/omp_engagement_nav';
 import { EngagementContext } from '../../context/engagement_context/engagement_context';
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { Validators } from '../../common/validators';
+import { ValidatorFactory } from '../../schemas/validators';
 
-const engagement_form_validators = {
-  engagement_lead_email: [
-    Validators.EmailAddressValidator,
-    Validators.NotNullValidator,
-  ],
-  technical_lead_email: [
-    Validators.EmailAddressValidator,
-    Validators.NotNullValidator,
-  ],
-  customer_contact_email: [
-    Validators.EmailAddressValidator,
-    Validators.NotNullValidator,
-  ],
-};
+const getValidators = (formOptions = {}) =>
+  Object.keys(formOptions || {}).reduce((acc, k) => {
+    return {
+      ...acc,
+      [k]: (formOptions?.[k]?.validators || []).map(ValidatorFactory),
+    };
+  }, {});
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
@@ -73,7 +66,9 @@ export function EngagementPane() {
 
   return (
     <>
-      <ValidationProvider validators={engagement_form_validators}>
+      <ValidationProvider
+        validators={getValidators(engagementContext?.formOptions)}
+      >
         <div style={contentPane}>
           <div style={columnPane}>
             <EngagementNav />
