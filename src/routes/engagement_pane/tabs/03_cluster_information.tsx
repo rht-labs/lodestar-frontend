@@ -36,7 +36,7 @@ export const ClusterInformation = ({
     backgroundColor: '#EDEDED',
   };
 
-  const availableProviders = [...formOptions?.providers?.options];
+  const availableProviders = formOptions?.providers?.options ?? [];
   if (
     values.ocp_cloud_provider_name &&
     !availableProviders.find(
@@ -49,7 +49,7 @@ export const ClusterInformation = ({
     });
   }
 
-  const availableProviderRegionOptions = formOptions?.regions?.options;
+  const availableProviderRegionOptions = formOptions?.regions?.options ?? [];
 
   if (
     availableProviderRegionOptions?.length === 0 &&
