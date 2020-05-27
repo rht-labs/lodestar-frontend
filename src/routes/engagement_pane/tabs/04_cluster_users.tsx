@@ -19,6 +19,7 @@ import { FeatureToggleContext } from '../../../context/feature_toggles/feature_t
 import { Feature } from '../../../components/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 const selectStyle: React.CSSProperties = {
   width: '24%',
@@ -35,13 +36,13 @@ const buttonHeader: React.CSSProperties = {
 };
 
 export const ClusterUsers = ({
-  userManagementOptions,
   values,
+  formOptions,
   onChange,
 }: {
   onChange: (name: string, value: any) => void;
   values: Engagement;
-  userManagementOptions?: any;
+  formOptions?: EngagementFormConfig;
 }) => {
   const { hasFeature } = useContext(FeatureToggleContext);
 
@@ -142,7 +143,7 @@ export const ClusterUsers = ({
                         onChange('user', values.engagement_users);
                       }}
                     >
-                      {userManagementOptions?.rbac?.roles?.map(
+                      {formOptions?.user_roles?.options?.map(
                         (option: any, index: number) => (
                           <FormSelectOption
                             isDisabled={option.disabled}

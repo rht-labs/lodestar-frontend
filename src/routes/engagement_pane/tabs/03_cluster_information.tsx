@@ -10,13 +10,19 @@ import { slugify } from 'transliteration';
 import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
+
+interface ClusterInformationProps {
+  formOptions?: EngagementFormConfig;
+  values: any;
+  onChange: (field: string, value: any) => void;
+}
 
 export const ClusterInformation = ({
-  providerOptions,
-  openshiftOptions,
+  formOptions,
   values,
   onChange,
-}: any) => {
+}: ClusterInformationProps) => {
   const { hasFeature } = useContext(FeatureToggleContext);
   const tabContent: React.CSSProperties = {
     margin: 45,
@@ -30,7 +36,7 @@ export const ClusterInformation = ({
     backgroundColor: '#EDEDED',
   };
 
-  const availableProviders = [...providerOptions];
+  const availableProviders = [...formOptions?.providers?.options];
   if (
     values.ocp_cloud_provider_name &&
     !availableProviders.find(
@@ -43,10 +49,7 @@ export const ClusterInformation = ({
     });
   }
 
-  const availableProviderRegionOptions =
-    providerOptions.find(
-      providerOption => providerOption.value === values.ocp_cloud_provider_name
-    )?.regions ?? [];
+  const availableProviderRegionOptions = formOptions?.regions?.options;
 
   if (
     availableProviderRegionOptions?.length === 0 &&
@@ -142,21 +145,23 @@ export const ClusterInformation = ({
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
           isDisabled={
-            openshiftOptions.versions?.length === 1 ||
+            formOptions?.openshift_versions?.options?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_version', e)}
         >
-          {openshiftOptions?.versions?.length > 0 ? (
-            openshiftOptions?.versions?.map((option: any, index: any) => (
-              <FormSelectOption
-                isDisabled={option.disabled}
-                key={index}
-                value={option.value}
-                label={option.label}
-              />
-            ))
+          {formOptions?.openshift_versions?.options?.length > 0 ? (
+            formOptions?.openshift_versions?.options?.map(
+              (option: any, index: any) => (
+                <FormSelectOption
+                  isDisabled={option.disabled}
+                  key={index}
+                  value={option.value}
+                  label={option.label}
+                />
+              )
+            )
           ) : (
             <FormSelectOption value={''} label={''} />
           )}
@@ -202,23 +207,23 @@ export const ClusterInformation = ({
           style={input}
           aria-label="Persistent Storage Needs"
           isDisabled={
-            openshiftOptions['persistent-storage']?.length === 1 ||
+            formOptions?.openshift_persistent_storage?.options?.length === 1 ||
             !hasFeature(APP_FEATURES.writer)
           }
           onChange={e => onChange('ocp_persistent_storage_size', e)}
           value={values.ocp_persistent_storage_size || ''}
         >
-          {openshiftOptions['persistent-storage']?.length > 0 ? (
-            openshiftOptions[
-              'persistent-storage'
-            ].map((option: any, index: any) => (
-              <FormSelectOption
-                isDisabled={option.disabled}
-                key={index}
-                label={option.label}
-                value={option.value}
-              />
-            ))
+          {formOptions?.openshift_persistent_storage?.options?.length > 0 ? (
+            formOptions?.openshift_persistent_storage?.options?.map(
+              (option: any, index: any) => (
+                <FormSelectOption
+                  isDisabled={option.disabled}
+                  key={index}
+                  label={option.label}
+                  value={option.value}
+                />
+              )
+            )
           ) : (
             <FormSelectOption label={''} value={''} />
           )}
@@ -229,21 +234,23 @@ export const ClusterInformation = ({
           aria-label="Cluster Size"
           value={values.ocp_cluster_size || ''}
           isDisabled={
-            openshiftOptions['cluster-size']?.length === 1 ||
+            formOptions?.openshift_cluster_size?.options?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_cluster_size', e)}
         >
-          {openshiftOptions['cluster-size']?.length > 0 ? (
-            openshiftOptions['cluster-size'].map((option: any, index: any) => (
-              <FormSelectOption
-                isDisabled={option.disabled}
-                key={index}
-                label={option.label}
-                value={option.value}
-              />
-            ))
+          {formOptions?.openshift_cluster_size?.options?.length > 0 ? (
+            formOptions?.openshift_cluster_size?.options.map(
+              (option: any, index: any) => (
+                <FormSelectOption
+                  isDisabled={option.disabled}
+                  key={index}
+                  label={option.label}
+                  value={option.value}
+                />
+              )
+            )
           ) : (
             <FormSelectOption label={''} value={''} />
           )}
