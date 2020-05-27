@@ -89,7 +89,7 @@
           }
        ]
     },
-    "tech-lead-email": {
+    "technical_lead_email": {
        "validators": [
           {
              "kind": "regex",

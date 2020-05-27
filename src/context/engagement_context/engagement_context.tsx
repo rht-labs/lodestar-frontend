@@ -27,11 +27,7 @@ export interface EngagementContext {
   updateEngagementFormField: (fieldName: string, payload: any) => void;
   isLaunchable: boolean;
 
-  formOptions?: {
-    openshiftOptions?: any;
-    providerOptions?: any;
-    userManagementOptions?: any;
-  };
+  formOptions?: EngagementFormConfig;
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
