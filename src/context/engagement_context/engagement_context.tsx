@@ -59,7 +59,6 @@ export const EngagementProvider = ({
 
   const getConfig = useCallback(async () => {
     const data = await engagementService.getConfig();
-    console.info(data);
     setFormOptions(data);
   }, [engagementService]);
 
