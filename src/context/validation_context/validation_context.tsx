@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Validator } from '../../common/validators';
+import { Validator } from '../../schemas/validators';
 
 export interface ValidationContext {
   validate: (fieldName: string) => (value: any) => string[];
