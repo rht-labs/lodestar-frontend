@@ -44,7 +44,7 @@ export class Validators {
 }
 
 export function ValidatorFactory(props): Validator {
-  if (props.kind in REGISTERED_VALIDATORS) {
+  if (props?.kind && props.kind in REGISTERED_VALIDATORS) {
     return REGISTERED_VALIDATORS[props.kind](props);
   }
   return null;
