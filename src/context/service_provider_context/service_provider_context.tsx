@@ -11,6 +11,7 @@ import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { ConfigContext } from '../config_context/config_context';
 import { Request } from '../../utilities/request';
+import { NewConfigEngagementService } from '../../services/engagement_service/implementations/new_config_engagement_service';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -24,7 +25,7 @@ const ProductionServiceProviders = (config: Config) => {
     authenticationRepository: authService,
   });
   return {
-    engagementService: new Apiv1EngagementService(
+    engagementService: new NewConfigEngagementService(
       config.backendUrl,
       beforeRequest,
       onRequestSuccess,

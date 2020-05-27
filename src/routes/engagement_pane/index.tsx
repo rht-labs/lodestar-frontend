@@ -103,17 +103,11 @@ export function EngagementPane() {
                 />
               </Tab>
               <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
-                {!engagementContext.formOptions?.providerOptions ||
-                !engagementContext.formOptions?.openshiftOptions ? (
+                {!engagementContext.formOptions ? (
                   <Loading />
                 ) : (
                   <ClusterInformation
-                    providerOptions={
-                      engagementContext.formOptions?.providerOptions
-                    }
-                    openshiftOptions={
-                      engagementContext.formOptions?.openshiftOptions
-                    }
+                    formOptions={engagementContext.formOptions}
                     values={engagementContext.engagementFormState}
                     onChange={engagementContext.updateEngagementFormField}
                   />
@@ -121,9 +115,7 @@ export function EngagementPane() {
               </Tab>
               <Tab id={'cu'} style={tab} eventKey={3} title="Users">
                 <ClusterUsers
-                  userManagementOptions={
-                    engagementContext.formOptions?.userManagementOptions
-                  }
+                  formOptions={engagementContext.formOptions}
                   values={engagementContext.engagementFormState}
                   onChange={engagementContext.updateEngagementFormField}
                 />

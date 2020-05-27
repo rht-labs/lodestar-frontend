@@ -14,6 +14,10 @@ export class Validators {
     past: (input: string) => 'The date must be in the past',
   };
 
+  static RegexValidator = (regex: RegExp): Validator => (input: string) => {
+    return regex.test(input) ? null : 'Invalid input';
+  };
+
   static LengthValidator: ({
     maxLength,
     minLength,
