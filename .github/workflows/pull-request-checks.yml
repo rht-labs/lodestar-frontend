@@ -82,7 +82,7 @@ jobs:
       id: vuln_out
     - uses: actions/github-script@0.9.0
       with:
-        github-token: ${{secrets.DISCUSSION_WRITER_TOKEN}}
+        github-token: ${{secrets.ACTIONS_TOKEN}}
         script: |
           github.issues.createComment({
             issue_number: context.issue.number,
