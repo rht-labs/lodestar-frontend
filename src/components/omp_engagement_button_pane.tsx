@@ -55,7 +55,7 @@ function _OMPEngagementButtonPane() {
   return (
     <Feature name={APP_FEATURES.writer}>
       <div style={buttonPane}>
-        <Button onClick={saveCluster} style={buttonDisplay}>
+        <Button onClick={saveCluster} style={buttonDisplay} data-cy="engagement-save">
           {' '}
           Save{' '}
         </Button>
@@ -65,6 +65,7 @@ function _OMPEngagementButtonPane() {
               isDisabled={isLaunchDisabled()}
               onClick={launchCluster}
               style={buttonDisplay}
+              data-cy="launch"
             >
               {' '}
               Launch{' '}
