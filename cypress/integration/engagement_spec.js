@@ -1,31 +1,5 @@
 describe('Create an Engagement', () => {
-  it('Get Token', () => {
-    // cy.request({
-    //   form: true,
-    //   method: 'POST',
-    //   url: '***',
-    //   body: {
-    //     username: '***',
-    //     password: '***',
-    //     grant_type: 'password',
-    //     client_id: 'open-management-portal'
-    //   }
-    // })
-    // .then((resp) => {
-    //   var jwt = resp.body
-    //   const currentTime = new Date()
-    //   const accessTokenExpiry = new Date((currentTime.getTime() + jwt.expires_in * 1000)).toISOString()
-    //   const refreshTokenExpiry = new Date((currentTime.getTime() + jwt.refresh_expires_in * 1000)).toISOString()
-      
-    //   var elToken = '{' 
-    //     + '"accessToken": "' + jwt.access_token + '",'
-    //     + '"accessTokenExpiry": "' + accessTokenExpiry  + '",'
-    //     + '"refreshToken": "' + jwt.refresh_token  + '",'
-    //     + '"refreshTokenExpiry": "' + refreshTokenExpiry  + '"'
-    //     + '}'
-
-    //   window.localStorage.setItem('token', elToken)
-    // })
+  it('New Engagement', () => {
 
     cy.server()
     cy.route({ method: 'PUT', url: 'engagements/customers/e2e/projects/cypressio' }).as('saveCheck')
