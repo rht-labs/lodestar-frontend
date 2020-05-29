@@ -135,7 +135,7 @@ function _EngagementNav() {
         isOpen={isModalOpen}
         onClose={handleModalToggle}
         actions={[
-          <Button key="confirm" variant="primary" onClick={createNewEngagement}>
+          <Button key="confirm" variant="primary" onClick={createNewEngagement} data-cy="createNewEngagement">
             Submit
           </Button>,
           <Button key="cancel" variant="link" onClick={handleModalToggle}>
@@ -162,6 +162,7 @@ function _EngagementNav() {
               placeholder="e.g. NASA"
               value={customer_name || ''}
               onChange={setCustomerName}
+              data-cy="new_customer_name"
             />
           </FormGroup>
           <FormGroup
@@ -177,6 +178,7 @@ function _EngagementNav() {
               placeholder="e.g. Mars Probe"
               value={project_name || ''}
               onChange={setProjectName}
+              data-cy="new_engagement_name"
             />
           </FormGroup>
         </Form>
