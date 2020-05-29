@@ -1,111 +1,116 @@
 {
-    "providers": {
-       "options": [
-          {
-             "label": "AWS",
-             "value": "ec2"
-          }
-       ]
-    },
-    "regions": {
-       "options": [
-          {
-             "label": "US East 1 (N. Virginia)",
-             "value": "us-east-1"
-          },
-          {
-             "label": "US East 2 (Ohio)",
-             "value": "us-east-2"
-          }
-       ]
-    },
-    "openshift_versions": {
-       "options": [
-          {
-             "label": "v4.1",
-             "value": "4.1.31"
-          },
-          {
-             "label": "v4.2",
-             "value": "4.2.16"
-          },
-          {
-             "label": "v4.3",
-             "value": "4.3.0"
-          }
-       ]
-    },
-    "openshift_persistent_storage": {
-       "validators": [
-          {
-             "kind": "regex",
-             "value": null
-          }
-       ],
-       "options": [
-          {
-             "label": "None",
-             "value": "none"
-          },
-          {
-             "label": "50GB",
-             "value": "50G"
-          },
-          {
-             "label": "100GB",
-             "value": "100G"
-          },
-          {
-             "label": "250GB",
-             "value": "250G"
-          },
-          {
-             "label": "500GB",
-             "value": "500G"
-          }
-       ]
-    },
-    "openshift_cluster_size": {
-       "options": [
-          {
-             "label": "Small",
-             "value": "small"
-          }
-       ]
-    },
-    "user_roles": {
-       "options": [
-          {
-             "label": "Developer",
-             "value": "developer"
-          },
-          {
-             "label": "Observer",
-             "value": "observer"
-          },
-          {
-             "label": "Admin",
-             "value": "admin"
-          }
-       ]
-    },
-    "technical_lead_email": {
-       "validators": [
-          {
-             "kind": "regex",
-             "value": "^[A-Za-z0-9._%+-]+@redhat.com$"
-          }
-       ]
-    },
-    "end-date": {
-       "validators": [
-          {
-             "kind": "date",
-             "value": {
-                "before": "2100-01-01T00:00:00.000Z",
-                "after": "@today"
-             }
-          }
-       ]
-    }
- }
+   "cloud_options": {
+      "cloud_providers": {
+         "options": [
+            {
+               "label": "AWS",
+               "value": "ec2",
+               "options": [
+                  {
+                     "label": "US East 1 (N. Virginia)",
+                     "value": "us-east-1"
+                  },
+                  {
+                     "label": "US East 2 (Ohio)",
+                     "value": "us-east-2"
+                  }
+               ]
+            }
+         ]
+      }
+   },
+   "openshift_options": {
+      "openshift_versions": {
+         "options": [
+            {
+               "label": "v4.1",
+               "value": "4.1.31"
+            },
+            {
+               "label": "v4.2",
+               "value": "4.2.16"
+            },
+            {
+               "label": "v4.3",
+               "value": "4.3.0"
+            }
+         ]
+      },
+      "openshift_persistent_storage": {
+         "validators": [
+            {
+               "kind": "notnull"
+            }
+         ],
+         "options": [
+            {
+               "label": "None",
+               "value": "none"
+            },
+            {
+               "label": "50GB",
+               "value": "50G"
+            },
+            {
+               "label": "100GB",
+               "value": "100G"
+            },
+            {
+               "label": "250GB",
+               "value": "250G"
+            },
+            {
+               "label": "500GB",
+               "value": "500G"
+            }
+         ]
+      },
+      "openshift_cluster_size": {
+         "options": [
+            {
+               "label": "Small",
+               "value": "small"
+            }
+         ]
+      }
+   },
+   "user_options": {
+      "user_roles": {
+         "options": [
+            {
+               "label": "Developer",
+               "value": "developer"
+            },
+            {
+               "label": "Observer",
+               "value": "observer"
+            },
+            {
+               "label": "Admin",
+               "value": "admin"
+            }
+         ]
+      }
+   },
+   "contact_options": {
+      "technical_lead_email": {
+         "validators": [
+            {
+               "kind": "regex",
+               "value": "^[A-Za-z0-9._%+-]+@redhat.com$"
+            }
+         ]
+      },
+      "end_date": {
+         "validators": [
+            {
+               "kind": "date",
+               "value": {
+                  "before": "2100-01-01T00:00:00.000Z",
+                  "after": "@today"
+               }
+            }
+         ]
+      }
+   }
+}

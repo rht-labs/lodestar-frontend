@@ -1,6 +1,7 @@
 export interface EngagementFormOption {
   label: string;
   value: string;
+  options?: EngagementFormOption[];
 }
 
 export interface EngagementFormValidator {
@@ -13,4 +14,6 @@ export interface FormConfig {
   validators?: EngagementFormValidator[];
 }
 
-export type EngagementFormConfig = { [key: string]: FormConfig };
+export type EngagementFormConfig = {
+  [key: string]: { [key: string]: FormConfig };
+};

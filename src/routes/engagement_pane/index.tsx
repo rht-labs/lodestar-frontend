@@ -10,12 +10,21 @@ import { EngagementContext } from '../../context/engagement_context/engagement_c
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { ValidatorFactory } from '../../schemas/validators';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 
-const getValidators = (formOptions = {}) =>
-  Object.keys(formOptions || {}).reduce((acc, k) => {
+const getValidators = (formOptions: EngagementFormConfig = {}) =>
+  Object.keys(formOptions || {}).reduce((acc, groupingKey) => {
     return {
       ...acc,
-      [k]: (formOptions?.[k]?.validators || []).map(ValidatorFactory),
+      ...Object.keys(formOptions[groupingKey] ?? {}).reduce(
+        (acc, k) => ({
+          ...acc,
+          [k]: (formOptions?.[groupingKey]?.[k]?.validators || []).map(
+            ValidatorFactory
+          ),
+        }),
+        {}
+      ),
     };
   }, {});
 
