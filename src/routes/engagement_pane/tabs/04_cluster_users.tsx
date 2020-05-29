@@ -143,16 +143,16 @@ export const ClusterUsers = ({
                         onChange('user', values.engagement_users);
                       }}
                     >
-                      {formOptions?.user_roles?.options?.map(
-                        (option: any, index: number) => (
-                          <FormSelectOption
-                            isDisabled={option.disabled}
-                            key={index}
-                            value={option.value}
-                            label={option.label}
-                          />
-                        )
-                      )}
+                      {(
+                        formOptions?.user_options?.user_roles?.options ?? []
+                      )?.map((option: any, index: number) => (
+                        <FormSelectOption
+                          isDisabled={option.disabled}
+                          key={index}
+                          value={option.value}
+                          label={option.label}
+                        />
+                      ))}
                     </FormSelect>
                     <Feature name={APP_FEATURES.writer}>
                       <Button
