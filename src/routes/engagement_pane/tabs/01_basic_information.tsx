@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { CalendarAltIcon } from '@patternfly/react-icons';
+import React, { useContext, useState } from 'react';
+import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import {
   Form,
   FormGroup,
@@ -13,24 +13,44 @@ import { FeatureToggleContext } from '../../../context/feature_toggles/feature_t
 import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
 
-export const BasicInformation = ({ values, onChange }: any) => {
-  const getFormattedDate = (dateString: string = '') => {
+export interface BasicInformationProps {
+  values: Engagement;
+  onChange: (fieldName: string, value: any) => void;
+  formOptions: object;
+}
+
+export const BasicInformation = ({
+  values,
+  onChange,
+  formOptions,
+}: BasicInformationProps) => {
+  const getFormattedDate = (inputDate: Date | string = '') => {
     // Dates must be formatted YYYY-MM-DD for patternfly date picker.
     // They are coming back inconsistently from the backend,
     // so this function checks to see if the date needs to be formatted,
     // then formats the date appropriately
-    if (!dateString) {
+    if (!inputDate) {
       return;
     }
-    if (dateString.indexOf('-') > -1) {
-      return dateString;
+    if (inputDate instanceof Date) {
+      const formattedDate = `${inputDate.getUTCFullYear()}-${(
+        inputDate.getUTCMonth() + 1
+      )
+        .toString()
+        .padStart(2, '0')}-${(inputDate.getUTCDate() - 1)
+        .toString()
+        .padStart(2, '0')}`;
+      return formattedDate;
+    }
+    if (inputDate.indexOf('-') > -1) {
+      return inputDate;
     } else {
       return [
-        dateString.slice(0, 4),
+        inputDate.slice(0, 4),
         '-',
-        dateString.slice(4, 6),
+        inputDate.slice(4, 6),
         '-',
-        dateString.slice(6, 8),
+        inputDate.slice(6, 8),
       ].join('');
     }
   };
@@ -43,6 +63,27 @@ export const BasicInformation = ({ values, onChange }: any) => {
     backgroundColor: '#EDEDED',
   };
   const { hasFeature } = useContext(FeatureToggleContext);
+
+  const [editedByUser, setEditedByUser] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+  const gracePeriod =
+    formOptions?.['basic-information']?.['env_grace_period'] ?? 0;
+  const maxGracePeriod =
+    formOptions?.['basic-information']?.['env_grace_period_max'];
+
+  const getRetirementDate = (): string => {
+    if (editedByUser['archive_date']) {
+      return getFormattedDate(values.archive_date);
+    } else if (values.end_date) {
+      const newDate = new Date(Date.parse(values.end_date));
+      newDate.setDate(newDate.getUTCDate() + (gracePeriod ?? 0));
+      return getFormattedDate(newDate);
+      // return values.end_date;
+    }
+    return '';
+  };
+
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup
@@ -102,7 +143,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
         />
       </FormGroup>
       <FormGroup
-        label="Engagement Dates"
+        label="Start and End Dates"
         fieldId="engagement-dates"
         helperText="What is the duration?"
         isRequired
@@ -137,6 +178,34 @@ export const BasicInformation = ({ values, onChange }: any) => {
             aria-label="The end date"
             value={getFormattedDate(values.end_date) || ''}
             onChange={e => onChange('end_date', e)}
+          />
+        </InputGroup>
+      </FormGroup>
+      <FormGroup
+        label={
+          <span
+            title={`Modifying the retirement date will impact the total cost of the residency.\nAny changes to this field should be coordinated with Labs leadership.`}
+          >
+            Environment Retirement Date <InfoCircleIcon />
+          </span>
+        }
+        fieldId="retirement"
+      >
+        <InputGroup label="Retirement Date">
+          <TextInput
+            type="date"
+            name="archive_date"
+            aria-label="Environment Retirement Date"
+            value={getRetirementDate()}
+            onChange={e => {
+              if (!editedByUser['archive_date']) {
+                setEditedByUser({ ...editedByUser, archive_date: true });
+              }
+              onChange('archive_date', e);
+            }}
+            style={input}
+            min={values.end_date}
+            max={maxGracePeriod ? values.end_date + maxGracePeriod : undefined}
           />
         </InputGroup>
       </FormGroup>

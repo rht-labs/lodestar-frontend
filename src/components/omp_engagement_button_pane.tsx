@@ -44,11 +44,11 @@ function _OMPEngagementButtonPane() {
 
   const getTooltipText = () => {
     if (configContext.appConfig?.disableLaunch) {
-      return 'Launching new Engagement clusters is currently unavailable. Please try again later.';
+      return 'Launching new Engagements is currently unavailable. Please try again later.';
     } else if (engagementContext.activeEngagement?.launch !== undefined) {
-      return 'The cluster for this engagement has been launched.';
+      return 'This engagement has been launched';
     } else {
-      return 'Launch the cluster for this engagement.';
+      return 'Launch this engagement.';
     }
   };
 
