@@ -79,7 +79,6 @@ export const BasicInformation = ({
       const newDate = new Date(Date.parse(values.end_date));
       newDate.setDate(newDate.getUTCDate() + (gracePeriod ?? 0));
       return getFormattedDate(newDate);
-      // return values.end_date;
     }
     return '';
   };
