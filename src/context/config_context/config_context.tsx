@@ -29,10 +29,6 @@ export const ConfigProvider = ({
     setAppConfig(config);
   }, [configRepository]);
 
-  useEffect(() => {
-    fetchConfig();
-  }, [fetchConfig]);
-
   return (
     <Provider
       value={{
