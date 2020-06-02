@@ -10,7 +10,9 @@ import { AuthService } from '../../services/authentication_service/authenticatio
 import { UserProfile } from '../../schemas/user_profile_schema';
 import { UserToken } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
-import { ServiceProviderContext } from '../service_provider_context/service_provider_context';
+import {
+  useServiceProviders,
+} from '../service_provider_context/service_provider_context';
 
 export type AuthenticationState =
   | 'initial'
@@ -48,7 +50,7 @@ export const SessionProvider = ({
   children: React.ReactChild;
   authenticationService?: AuthService;
 }) => {
-  const { authenticationService } = useContext(ServiceProviderContext);
+  const { authenticationService } = useServiceProviders();
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -95,11 +97,7 @@ export const SessionProvider = ({
               tokens,
               roles: profile.groups,
             });
-            if (
-              profile.groups
-                ? profile.groups.includes('reader')
-                : false
-            ) {
+            if (profile.groups ? profile.groups.includes('reader') : false) {
               setAuthStatus('authenticated');
             } else {
               setAuthStatus('unauthorized');
@@ -125,3 +123,5 @@ export const SessionProvider = ({
     </Provider>
   );
 };
+
+export const useSession = () => useContext(SessionContext);

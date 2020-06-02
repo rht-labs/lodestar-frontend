@@ -9,8 +9,8 @@ import { Apiv1AuthService } from '../../services/authentication_service/implemen
 import { FakedAuthService } from '../../services/authentication_service/implementations/faked_auth_service';
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
-import { ConfigContext } from '../config_context/config_context';
 import { Request } from '../../utilities/request';
+import { useConfig } from '../config_context/config_hook';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -63,7 +63,7 @@ export const ServiceProvider = ({
     shouldUseFaked === undefined
       ? process?.env?.['REACT_APP_USE_FAKED']?.toLowerCase() === 'true'
       : shouldUseFaked;
-  const configContext = useContext(ConfigContext);
+  const configContext = useConfig();
   if (!shouldUseFaked && !configContext.appConfig) {
     return null;
   }
@@ -79,3 +79,5 @@ export const ServiceProvider = ({
     </ServiceProviderContext.Provider>
   );
 };
+
+export const useServiceProviders = () => useContext(ServiceProviderContext);

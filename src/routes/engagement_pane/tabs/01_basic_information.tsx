@@ -12,6 +12,7 @@ import {
 import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
+import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 export const BasicInformation = ({ values, onChange }: any) => {
   const getFormattedDate = (dateString: string = '') => {
@@ -42,7 +43,7 @@ export const BasicInformation = ({ values, onChange }: any) => {
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
   return (
     <Form style={tabContent} isHorizontal>
       <FormGroup

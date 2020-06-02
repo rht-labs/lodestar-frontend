@@ -7,9 +7,9 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { slugify } from 'transliteration';
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
+import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 export const ClusterInformation = ({
   providerOptions,
@@ -17,7 +17,7 @@ export const ClusterInformation = ({
   values,
   onChange,
 }: any) => {
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
   const tabContent: React.CSSProperties = {
     margin: 45,
   };

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Form,
   FormGroup,
@@ -7,16 +7,16 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 import { useValidation } from '../../../context/validation_context/validation_hook';
+import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 export const PointOfContact = ({ values, onChange }: any) => {
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
 
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
