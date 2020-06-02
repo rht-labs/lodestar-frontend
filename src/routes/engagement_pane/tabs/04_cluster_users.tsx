@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Button,
   EmptyStateIcon,
@@ -15,7 +15,6 @@ import {
   ErrorCircleOIcon,
   CubesIcon,
 } from '@patternfly/react-icons';
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { Feature } from '../../../components/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
