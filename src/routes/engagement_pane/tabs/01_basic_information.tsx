@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { CalendarAltIcon } from '@patternfly/react-icons';
 import {
   Form,
@@ -9,7 +9,6 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';

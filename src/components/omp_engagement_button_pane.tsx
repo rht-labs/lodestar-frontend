@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { ConfigContext } from '../context/config_context/config_context';
 import { Feature } from './feature';
 import { APP_FEATURES } from '../common/app_features';
 import { useEngagements } from '../context/engagement_context/engagement_hook';

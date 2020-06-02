@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import {
   PageHeader,
@@ -24,7 +24,7 @@ import {
 
 import avatarImg from '../assets/images/avatar.svg';
 import { UserDropdown } from './user_dropdown';
-import { FeedbackContext, useFeedback } from '../context/feedback_context';
+import { useFeedback } from '../context/feedback_context';
 
 function _OMPHeader() {
   const iconPad: React.CSSProperties = {
