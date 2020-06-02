@@ -1,6 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardHeader, CardBody } from '@patternfly/react-core';
-import { VersionContext } from '../../context/version_context/version_context';
+import {
+  useVersion,
+} from '../../context/version_context/version_context';
 
 function _Admin() {
   const contentPane: React.CSSProperties = {
@@ -9,7 +11,7 @@ function _Admin() {
     padding: 15,
   };
 
-  const versionContext = useContext(VersionContext);
+  const versionContext = useVersion();
 
   useEffect(() => {
     if (!versionContext.versions) {

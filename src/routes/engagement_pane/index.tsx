@@ -10,6 +10,7 @@ import { EngagementContext } from '../../context/engagement_context/engagement_c
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { Validators } from '../../common/validators';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 const engagement_form_validators = {
   engagement_lead_email: [
@@ -28,21 +29,28 @@ const engagement_form_validators = {
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
-  const engagementContext = useContext(EngagementContext);
+  const {
+    formOptions,
+    getConfig,
+    activeEngagement,
+    error,
+    engagementFormState,
+    updateEngagementFormField,
+  } = useEngagements();
 
   const handleTabClick = function(this: any, event: any, tabIndex: any) {
     setActiveTabKey(tabIndex);
   };
 
   useEffect(() => {
-    if (!engagementContext.formOptions) {
-      engagementContext.getConfig();
+    if (!formOptions) {
+      getConfig();
     }
-  }, [engagementContext]);
+  }, [formOptions, getConfig]);
 
   useEffect(() => {
     setActiveTabKey(0);
-  }, [engagementContext.activeEngagement]);
+  }, [activeEngagement]);
 
   const contentPane: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -69,7 +77,7 @@ export function EngagementPane() {
     borderRight: '.5px solid #AFBAC4',
   };
 
-  const engagementFormRequestError = engagementContext.error;
+  const engagementFormRequestError = error;
 
   return (
     <>
@@ -92,40 +100,34 @@ export function EngagementPane() {
                 title="Basic Information"
               >
                 <BasicInformation
-                  values={engagementContext.engagementFormState}
-                  onChange={engagementContext.updateEngagementFormField}
+                  values={engagementFormState}
+                  onChange={updateEngagementFormField}
                 />
               </Tab>
               <Tab id={'poc'} style={tab} eventKey={1} title="Point of Contact">
                 <PointOfContact
-                  values={engagementContext.engagementFormState}
-                  onChange={engagementContext.updateEngagementFormField}
+                  values={engagementFormState}
+                  onChange={updateEngagementFormField}
                 />
               </Tab>
               <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
-                {!engagementContext.formOptions?.providerOptions ||
-                !engagementContext.formOptions?.openshiftOptions ? (
+                {!formOptions?.providerOptions ||
+                !formOptions?.openshiftOptions ? (
                   <Loading />
                 ) : (
                   <ClusterInformation
-                    providerOptions={
-                      engagementContext.formOptions?.providerOptions
-                    }
-                    openshiftOptions={
-                      engagementContext.formOptions?.openshiftOptions
-                    }
-                    values={engagementContext.engagementFormState}
-                    onChange={engagementContext.updateEngagementFormField}
+                    providerOptions={formOptions?.providerOptions}
+                    openshiftOptions={formOptions?.openshiftOptions}
+                    values={engagementFormState}
+                    onChange={updateEngagementFormField}
                   />
                 )}
               </Tab>
               <Tab id={'cu'} style={tab} eventKey={3} title="Users">
                 <ClusterUsers
-                  userManagementOptions={
-                    engagementContext.formOptions?.userManagementOptions
-                  }
-                  values={engagementContext.engagementFormState}
-                  onChange={engagementContext.updateEngagementFormField}
+                  userManagementOptions={formOptions?.userManagementOptions}
+                  values={engagementFormState}
+                  onChange={updateEngagementFormField}
                 />
               </Tab>
             </Tabs>
