@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Nav,
   NavItem,
@@ -10,7 +10,6 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 
-import { EngagementContext } from '../context/engagement_context/engagement_context';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 
 function _EngagementNav() {

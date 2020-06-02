@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { SendToSSO } from './send_to_sso';
-import {
-  useSession,
-} from '../../context/session_context/session_context';
+import { useSession } from '../../context/session_context/session_context';
 
 export const PrivateRoute = (props: RouteProps) => {
   const sessionContext = useSession();
