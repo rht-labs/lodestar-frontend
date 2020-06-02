@@ -1,8 +1,8 @@
-import { useContext, createContext } from 'react';
+import React, { createContext } from 'react';
 
 const GlobalLoadingContext = createContext<undefined>(undefined);
 
-const GlobalLoadingProvider = (props: { children: any }) => {
+export const GlobalLoadingProvider = (props: { children: any }) => {
   return (
     <GlobalLoadingContext.Provider value={undefined}>
       {props.children}
