@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Tabs, Tab } from '@patternfly/react-core';
 import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
@@ -6,7 +6,6 @@ import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
 import { Loading } from './Loading';
 import { EngagementNav } from '../../components/omp_engagement_nav';
-import { EngagementContext } from '../../context/engagement_context/engagement_context';
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { Validators } from '../../common/validators';

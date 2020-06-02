@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AppFeature } from '../common/app_features';
 import { useFeatures } from '../context/feature_toggles/feature_hook';
 

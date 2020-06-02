@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Version } from '../../schemas/version_schema';
-import {
-  useServiceProviders,
-} from '../service_provider_context/service_provider_context';
-import { FeedbackContext, useFeedback } from '../feedback_context';
+import { useServiceProviders } from '../service_provider_context/service_provider_context';
+import { useFeedback } from '../feedback_context';
 
 export interface VersionContext {
   fetchVersions: () => void;
