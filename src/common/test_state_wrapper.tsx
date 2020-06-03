@@ -12,18 +12,16 @@ import { FeedbackProvider } from '../context/feedback_context';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
-    <ErrorBoundary>
-      <ServiceProvider shouldUseFaked={true}>
-        <FeedbackProvider>
-          <SessionProvider>
-            <EngagementProvider>
-              <VersionProvider>
-                <FeatureToggles>{children}</FeatureToggles>
-              </VersionProvider>
-            </EngagementProvider>
-          </SessionProvider>
-        </FeedbackProvider>
-      </ServiceProvider>
-    </ErrorBoundary>
+    <ServiceProvider shouldUseFaked={true}>
+      <FeedbackProvider>
+        <SessionProvider>
+          <EngagementProvider>
+            <VersionProvider>
+              <FeatureToggles>{children}</FeatureToggles>
+            </VersionProvider>
+          </EngagementProvider>
+        </SessionProvider>
+      </FeedbackProvider>
+    </ServiceProvider>
   );
 };
