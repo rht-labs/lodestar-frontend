@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useEffect, useState, useCallback } from 'react';
 import { Config } from '../../schemas/config';
 import { ConfigService } from '../../services/config_service/config_service';
 export interface ConfigContextParams {
@@ -28,6 +28,10 @@ export const ConfigProvider = ({
     const config = await configRepository.fetchConfig();
     setAppConfig(config);
   }, [configRepository]);
+
+  useEffect(() => {
+    fetchConfig();
+  }, [fetchConfig]);
 
   return (
     <Provider
