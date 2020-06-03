@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { AuthService } from '../../services/authentication_service/authentication_service';
 import { VersionService } from '../../services/version_service/version_service';
@@ -63,16 +63,24 @@ export const ServiceProvider = ({
     shouldUseFaked === undefined
       ? process?.env?.['REACT_APP_USE_FAKED']?.toLowerCase() === 'true'
       : shouldUseFaked;
-  const configContext = useConfig();
-  if (!shouldUseFaked && !configContext.appConfig) {
+
+  const { appConfig, fetchConfig } = useConfig();
+
+  useEffect(() => {
+    if (!shouldUseFaked && !appConfig) {
+      fetchConfig();
+    }
+  }, [shouldUseFaked, appConfig, fetchConfig]);
+  console.log(appConfig);
+  if (!appConfig) {
     return null;
   }
   return (
     <ServiceProviderContext.Provider
       value={
         shouldUseFaked
-          ? FakedServiceProviders(configContext.appConfig)
-          : ProductionServiceProviders(configContext.appConfig)
+          ? FakedServiceProviders(appConfig)
+          : ProductionServiceProviders(appConfig)
       }
     >
       {children}
