@@ -11,6 +11,7 @@ import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { Request } from '../../utilities/request';
 import { useConfig } from '../config_context/config_hook';
+import { Logger } from '../../utilities/logger';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -71,10 +72,11 @@ export const ServiceProvider = ({
       fetchConfig();
     }
   }, [shouldUseFaked, appConfig, fetchConfig]);
-  console.log(appConfig);
+  Logger.log(appConfig);
   if (!appConfig) {
     return null;
   }
+  console.log('hello');
   return (
     <ServiceProviderContext.Provider
       value={

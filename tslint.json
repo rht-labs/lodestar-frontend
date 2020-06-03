@@ -9,6 +9,7 @@
       "allow-leading-underscore",
       "allow-trailing-underscore"
     ],
+    "no-console": [true],
     "no-any": [false, { "ignore-rest-args": true }]
   },
   "linterOptions": {

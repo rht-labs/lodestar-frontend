@@ -1,4 +1,5 @@
 import React from 'react';
+import { Logger } from '../utilities/logger';
 
 export interface ErrorBoundaryProps {
   children: React.ReactChild;
@@ -11,7 +12,7 @@ export interface ErrorBoundaryProps {
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
   componentDidCatch(error: any, errorInfo: any) {
-    console.log(this.props.meta, error, errorInfo);
+    Logger.log(this.props.meta, error, errorInfo);
   }
   render() {
     return this.props.children;
