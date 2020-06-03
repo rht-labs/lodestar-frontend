@@ -1,16 +1,12 @@
 import React from 'react';
-import { useFeedback } from '../../context/feedback_context';
 
 export function Dashboard() {
-  const feedbackContext = useFeedback();
 
   const contentPane: React.CSSProperties = {
     backgroundColor: '#EDEDED',
     height: '100vh',
     padding: 15,
   };
-
-  feedbackContext.hideLoader();
 
   return (
     <>
