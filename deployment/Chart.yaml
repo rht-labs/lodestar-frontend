@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 name: omp-frontend
 description: A Helm chart to deploy the frontend of the Open Management Portal
 
