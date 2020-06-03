@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Alert,
   AlertGroup,
   AlertActionCloseButton,
   Spinner,
 } from '@patternfly/react-core';
-import { FeedbackContext } from '../context/feedback_context';
+import { useFeedback } from '../context/feedback_context';
 
 export function Feedback() {
-  const feedbackContext = useContext(FeedbackContext);
+  const { alertMsg, alertType, hideAlert, isLoaderVisible } = useFeedback();
 
   const modalStyle: React.CSSProperties = {
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -27,19 +27,17 @@ export function Feedback() {
 
   return (
     <React.Fragment>
-      {feedbackContext.alertMsg && (
+      {alertMsg && (
         <AlertGroup isToast>
           <Alert
             isInline
-            variant={feedbackContext.alertType}
-            title={feedbackContext.alertMsg}
-            action={
-              <AlertActionCloseButton onClose={feedbackContext.hideAlert} />
-            }
+            variant={alertType}
+            title={alertMsg}
+            action={<AlertActionCloseButton onClose={hideAlert} />}
           />
         </AlertGroup>
       )}
-      {feedbackContext.isLoaderVisible && (
+      {isLoaderVisible && (
         <div style={modalStyle}>
           <Spinner style={spinnerStyle} />
         </div>

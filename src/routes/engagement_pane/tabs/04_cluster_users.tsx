@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Button,
   EmptyStateIcon,
@@ -15,10 +15,10 @@ import {
   ErrorCircleOIcon,
   CubesIcon,
 } from '@patternfly/react-icons';
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { Feature } from '../../../components/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
+import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 const selectStyle: React.CSSProperties = {
   width: '24%',
@@ -43,7 +43,7 @@ export const ClusterUsers = ({
   values: Engagement;
   userManagementOptions?: any;
 }) => {
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
 
   //Functions for Cluster User interactivity
   function addUser() {

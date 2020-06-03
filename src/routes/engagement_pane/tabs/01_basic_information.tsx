@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import {
   Form,
@@ -9,9 +9,9 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
+import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 export interface BasicInformationProps {
   values: Engagement;
@@ -62,7 +62,7 @@ export const BasicInformation = ({
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
 
   const [editedByUser, setEditedByUser] = useState<{ [key: string]: boolean }>(
     {}
