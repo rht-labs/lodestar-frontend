@@ -24,11 +24,11 @@ export const App = () => {
               <VersionProvider>
                 <FeatureToggles>
                   <Router>
-                    <Providers>
+                    <EngagementProvider>
                       <GlobalLoadingProvider>
                         <OMPRouter />
                       </GlobalLoadingProvider>
-                    </Providers>
+                    </EngagementProvider>
                   </Router>
                 </FeatureToggles>
               </VersionProvider>
@@ -38,8 +38,4 @@ export const App = () => {
       </ConfigProvider>
     </ErrorBoundary>
   );
-};
-
-const Providers = ({ children }: { children: React.ReactChild }) => {
-  return <EngagementProvider>{children}</EngagementProvider>;
 };
