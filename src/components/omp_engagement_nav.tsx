@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Nav,
   NavItem,
@@ -10,7 +10,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 
-import { EngagementContext } from '../context/engagement_context/engagement_context';
+import { useEngagements } from '../context/engagement_context/engagement_hook';
 
 function _EngagementNav() {
   const columnHeaderStyle: React.CSSProperties = {
@@ -54,7 +54,13 @@ function _EngagementNav() {
     borderRadius: 4,
   };
 
-  const engagementContext = useContext(EngagementContext);
+  const {
+    activeEngagement,
+    setActiveEngagement,
+    engagements,
+    getEngagements,
+    createEngagement,
+  } = useEngagements();
 
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
@@ -67,12 +73,10 @@ function _EngagementNav() {
   useEffect(() => {
     setCustomerName(null);
     setProjectName(null);
-  }, [engagementContext.activeEngagement]);
+  }, [activeEngagement]);
 
   const onNavSelect = result => {
-    engagementContext.setActiveEngagement(
-      engagementContext.engagements[result.itemId]
-    );
+    setActiveEngagement(engagements[result.itemId]);
   };
 
   const isSameEngagement = (engagementA, engagementB) => {
@@ -87,11 +91,11 @@ function _EngagementNav() {
   useEffect(() => {
     if (!hasFetchedEngagements) {
       setHasFetchedEngagements(true);
-      engagementContext.getEngagements();
+      getEngagements();
     }
-  }, [engagementContext, hasFetchedEngagements]);
+  }, [getEngagements, hasFetchedEngagements]);
 
-  const navItems = engagementContext.engagements
+  const navItems = engagements
     .sort(function(a, b) {
       var textA = a.customer_name.toUpperCase();
       var textB = b.customer_name.toUpperCase();
@@ -103,10 +107,7 @@ function _EngagementNav() {
           style={navDisplay}
           key={index}
           itemId={index}
-          isActive={isSameEngagement(
-            engagement,
-            engagementContext.activeEngagement
-          )}
+          isActive={isSameEngagement(engagement, activeEngagement)}
         >
           <div>{engagement.project_name}</div>
           <span style={navSub}>{engagement.customer_name}</span>
@@ -119,7 +120,7 @@ function _EngagementNav() {
   };
 
   const createNewEngagement = () => {
-    engagementContext.createEngagement({ customer_name, project_name });
+    createEngagement({ customer_name, project_name });
     handleModalToggle();
   };
 

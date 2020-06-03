@@ -1,9 +1,8 @@
 import React from 'react';
-import { useContext } from 'react';
-import { ConfigContext } from '../../context/config_context/config_context';
+import { useConfig } from '../../context/config_context/config_hook';
 
 export function SendToSSO() {
-  const configContext = useContext(ConfigContext);
+  const configContext = useConfig();
   const OAUTH_CONFIG = {
     clientId: configContext.appConfig?.clientId,
     redirectUri: `${configContext.appConfig?.baseUrl}/auth_callback`,
