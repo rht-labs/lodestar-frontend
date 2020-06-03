@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Card, CardHeader, CardBody } from '@patternfly/react-core';
-import {
-  useVersion,
-} from '../../context/version_context/version_context';
+import { useVersion } from '../../context/version_context/version_context';
 
 function _Admin() {
   const contentPane: React.CSSProperties = {
@@ -21,12 +19,15 @@ function _Admin() {
 
   let cardItems = [];
 
-  if (versionContext.versions !== undefined) {
+  if (!!versionContext?.versions?.versions) {
     cardItems = Object.keys(versionContext.versions?.versions).reduce(
       (previousComponents, currentKey, reduceIndex) => {
+        if (!Array.isArray(versionContext.versions.versions[currentKey])) {
+          return previousComponents;
+        }
         return [
           ...previousComponents,
-          ...versionContext.versions.versions[currentKey]?.map(
+          ...((versionContext?.versions?.versions[currentKey] ?? []).map(
             (version, mapIndex) => {
               let label = '';
               if (
@@ -45,7 +46,7 @@ function _Admin() {
                 </CardBody>
               );
             }
-          ),
+          ) ?? []),
         ];
       },
       []
