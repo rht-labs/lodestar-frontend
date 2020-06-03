@@ -71,8 +71,8 @@ export const ServiceProvider = ({
       fetchConfig();
     }
   }, [shouldUseFaked, appConfig, fetchConfig]);
-  console.log(appConfig);
-  if (!appConfig) {
+
+  if (!appConfig && !shouldUseFaked) {
     return null;
   }
   return (
