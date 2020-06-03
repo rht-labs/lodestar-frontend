@@ -12,6 +12,7 @@ import { FeatureToggles } from './context/feature_toggles/feature_toggles';
 import { ServiceProvider } from './context/service_provider_context/service_provider_context';
 import { FeedbackProvider } from './context/feedback_context';
 import { PublicConfigService } from './services/config_service/implementations/public_config_service';
+import { GlobalLoadingProvider } from './context/global_loading_context/global_loading_context';
 
 export const App = () => {
   return (
@@ -23,9 +24,11 @@ export const App = () => {
               <VersionProvider>
                 <FeatureToggles>
                   <Router>
-                    <Providers>
-                      <OMPRouter />
-                    </Providers>
+                    <EngagementProvider>
+                      <GlobalLoadingProvider>
+                        <OMPRouter />
+                      </GlobalLoadingProvider>
+                    </EngagementProvider>
                   </Router>
                 </FeatureToggles>
               </VersionProvider>
@@ -35,8 +38,4 @@ export const App = () => {
       </ConfigProvider>
     </ErrorBoundary>
   );
-};
-
-const Providers = ({ children }: { children: React.ReactChild }) => {
-  return <EngagementProvider>{children}</EngagementProvider>;
 };

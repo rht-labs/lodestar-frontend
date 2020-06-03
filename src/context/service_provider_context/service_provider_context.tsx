@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { AuthService } from '../../services/authentication_service/authentication_service';
 import { VersionService } from '../../services/version_service/version_service';
@@ -8,9 +8,9 @@ import { Apiv1AuthService } from '../../services/authentication_service/implemen
 import { FakedAuthService } from '../../services/authentication_service/implementations/faked_auth_service';
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
-import { ConfigContext } from '../config_context/config_context';
 import { Request } from '../../utilities/request';
 import { NewConfigEngagementService } from '../../services/engagement_service/implementations/new_config_engagement_service';
+import { useConfig } from '../config_context/config_hook';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -63,19 +63,29 @@ export const ServiceProvider = ({
     shouldUseFaked === undefined
       ? process?.env?.['REACT_APP_USE_FAKED']?.toLowerCase() === 'true'
       : shouldUseFaked;
-  const configContext = useContext(ConfigContext);
-  if (!shouldUseFaked && !configContext.appConfig) {
+
+  const { appConfig, fetchConfig } = useConfig();
+
+  useEffect(() => {
+    if (!shouldUseFaked && !appConfig) {
+      fetchConfig();
+    }
+  }, [shouldUseFaked, appConfig, fetchConfig]);
+
+  if (!appConfig && !shouldUseFaked) {
     return null;
   }
   return (
     <ServiceProviderContext.Provider
       value={
         shouldUseFaked
-          ? FakedServiceProviders(configContext.appConfig)
-          : ProductionServiceProviders(configContext.appConfig)
+          ? FakedServiceProviders(appConfig)
+          : ProductionServiceProviders(appConfig)
       }
     >
       {children}
     </ServiceProviderContext.Provider>
   );
 };
+
+export const useServiceProviders = () => useContext(ServiceProviderContext);

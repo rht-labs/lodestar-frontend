@@ -1,16 +1,10 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/authentication_service/authentication_service';
 
 import { UserProfile } from '../../schemas/user_profile_schema';
 import { UserToken } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
-import { ServiceProviderContext } from '../service_provider_context/service_provider_context';
+import { useServiceProviders } from '../service_provider_context/service_provider_context';
 
 export type AuthenticationState =
   | 'initial'
@@ -27,6 +21,7 @@ export interface SessionData {
 export interface SessionContext {
   sessionData?: SessionData;
   axios?: AxiosInstance;
+  checkAuthStatus: () => Promise<void>;
   authState: AuthenticationState;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -38,6 +33,7 @@ export const SessionContext = createContext<SessionContext>({
   authState: 'initial',
   handleLoginCallback: async () => {},
   logout: async () => {},
+  checkAuthStatus: async () => null,
 });
 const { Provider } = SessionContext;
 
@@ -48,7 +44,7 @@ export const SessionProvider = ({
   children: React.ReactChild;
   authenticationService?: AuthService;
 }) => {
-  const { authenticationService } = useContext(ServiceProviderContext);
+  const { authenticationService } = useServiceProviders();
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -84,9 +80,9 @@ export const SessionProvider = ({
     return;
   };
 
-  useEffect(() => {
+  const checkAuthStatus = useCallback(async () => {
     if (!!authenticationService) {
-      authenticationService.isLoggedIn().then(isLoggedIn => {
+      return authenticationService.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationService.getToken();
         if (isLoggedIn && tokens) {
           authenticationService.getUserProfile().then(profile => {
@@ -95,11 +91,7 @@ export const SessionProvider = ({
               tokens,
               roles: profile.groups,
             });
-            if (
-              profile.groups
-                ? profile.groups.includes('reader')
-                : false
-            ) {
+            if (profile.groups ? profile.groups.includes('reader') : false) {
               setAuthStatus('authenticated');
             } else {
               setAuthStatus('unauthorized');
@@ -110,11 +102,12 @@ export const SessionProvider = ({
         }
       });
     }
-  }, [authenticationService, authRepo]);
+  }, [setAuthStatus, setSessionData, authenticationService]);
 
   return (
     <Provider
       value={{
+        checkAuthStatus,
         sessionData,
         handleLoginCallback,
         authState: authStatus,
@@ -125,3 +118,5 @@ export const SessionProvider = ({
     </Provider>
   );
 };
+
+export const useSession = () => useContext(SessionContext);

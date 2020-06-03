@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Version } from '../../schemas/version_schema';
-import { ServiceProviderContext } from '../service_provider_context/service_provider_context';
-import { FeedbackContext } from '../feedback_context';
+import { useServiceProviders } from '../service_provider_context/service_provider_context';
+import { useFeedback } from '../feedback_context';
 
 export interface VersionContext {
   fetchVersions: () => void;
@@ -17,9 +17,9 @@ export const VersionProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const { versionService } = useContext(ServiceProviderContext);
+  const { versionService } = useServiceProviders();
   const [versions, setVersions] = useState<Version | undefined>();
-  const feedbackContext = useContext(FeedbackContext);
+  const feedbackContext = useFeedback();
   const fetchVersions = useCallback(async () => {
     feedbackContext.showLoader();
     const versions = await versionService.fetchVersion();
@@ -38,3 +38,5 @@ export const VersionProvider = ({
     </Provider>
   );
 };
+
+export const useVersion = () => useContext(VersionContext);

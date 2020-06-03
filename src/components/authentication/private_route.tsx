@@ -1,16 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { SendToSSO } from './send_to_sso';
-import { SessionContext } from '../../context/session_context/session_context';
+import { useSession } from '../../context/session_context/session_context';
 
 export const PrivateRoute = (props: RouteProps) => {
-  const sessionContext = useContext(SessionContext);
+  const { checkAuthStatus, authState } = useSession();
+  const [authStatusChecked, setAuthStatusChecked] = useState<boolean>(false);
+  useEffect(() => {
+    setAuthStatusChecked(false);
+    checkAuthStatus().then(() => {
+      setAuthStatusChecked(true);
+    });
+  }, [authState, checkAuthStatus]);
 
-  if (sessionContext.authState === 'authenticated') {
+  if (!authStatusChecked) {
+    return <div />;
+  }
+
+  if (authState === 'authenticated') {
     return <Route {...props} />;
-  } else if (sessionContext.authState === 'unauthorized') {
+  } else if (authState === 'unauthorized') {
     return <Redirect to="/unauthorized" />;
-  } else if (sessionContext.authState === 'unauthenticated') {
+  } else if (authState === 'unauthenticated') {
     return <SendToSSO />;
   } else {
     return <div />;

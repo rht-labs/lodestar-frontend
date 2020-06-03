@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import {
   PageHeader,
@@ -11,13 +11,10 @@ import {
   NavList,
   NavVariants,
   Avatar,
-} from '@patternfly/react-core';  
+} from '@patternfly/react-core';
 
-import {
-  Link,
-  useLocation
-} from 'react-router-dom';
-        
+import { Link, useLocation } from 'react-router-dom';
+
 import {
   CogsIcon,
   ListUlIcon,
@@ -27,7 +24,7 @@ import {
 
 import avatarImg from '../assets/images/avatar.svg';
 import { UserDropdown } from './user_dropdown';
-import { FeedbackContext } from '../context/feedback_context';
+import { useFeedback } from '../context/feedback_context';
 
 function _OMPHeader() {
   const iconPad: React.CSSProperties = {
@@ -35,13 +32,13 @@ function _OMPHeader() {
     paddingTop: 0,
   };
 
-  const feedbackContext = useContext(FeedbackContext);
+  const feedbackContext = useFeedback();
 
   const { pathname } = useLocation();
 
   const showLoader = () => {
     feedbackContext.showLoader();
-  }
+  };
 
   return (
     <PageHeader
@@ -61,17 +58,30 @@ function _OMPHeader() {
           <ToolbarGroup>
             <Nav theme="dark">
               <NavList variant={NavVariants.horizontal}>
-                <NavItem id="homeLink" itemId={0} isActive={pathname === '/dashboard'}>
+                <NavItem
+                  id="homeLink"
+                  itemId={0}
+                  isActive={pathname === '/dashboard'}
+                >
                   <Link to="/app" style={iconPad}>
                     <HomeIcon size="md" title="Home" />
                   </Link>
                 </NavItem>
-                <NavItem onClick={showLoader} id="engagementPaneLink" itemId={1} isActive={pathname === '/engagements'}>
-                  <Link style={iconPad} to="/app/engagements" >
+                <NavItem
+                  onClick={showLoader}
+                  id="engagementPaneLink"
+                  itemId={1}
+                  isActive={pathname === '/engagements'}
+                >
+                  <Link style={iconPad} to="/app/engagements">
                     <ListUlIcon size="md" title="Engagements" />
                   </Link>
                 </NavItem>
-                <NavItem id="adminLink" itemId={3} isActive={pathname === '/admin'}>
+                <NavItem
+                  id="adminLink"
+                  itemId={3}
+                  isActive={pathname === '/admin'}
+                >
                   <Link style={iconPad} to="/app/admin">
                     <CogsIcon size="md" title="Administration" />
                   </Link>
@@ -88,11 +98,11 @@ function _OMPHeader() {
               >
                 <HandPaperIcon size="md" title="Feature Request" />
               </a>
-            </ToolbarItem> 
+            </ToolbarItem>
           </ToolbarGroup>
           <ToolbarGroup>
             <ToolbarItem>
-              <UserDropdown/>
+              <UserDropdown />
             </ToolbarItem>
           </ToolbarGroup>
         </Toolbar>
