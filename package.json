@@ -47,7 +47,7 @@
     "check": "gts check src/*.tsx src/*.ts",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix src/*.ts{x}",
+    "fix": "gts fix src/*.ts src/*.tsx",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check"
