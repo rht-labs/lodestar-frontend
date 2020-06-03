@@ -1,19 +1,14 @@
 import React, { createContext } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
-import {
-  useState,
-  useContext,
-  useCallback,
-  useReducer,
-  useEffect,
-} from 'react';
+import { useState, useCallback, useReducer, useEffect } from 'react';
 import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
-import { ServiceProviderContext } from '../service_provider_context/service_provider_context';
-import { FeedbackContext } from '../feedback_context';
+import { useServiceProviders } from '../service_provider_context/service_provider_context';
+import { useFeedback } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
+
 
 export interface EngagementContext {
   getEngagements: () => void;
@@ -42,10 +37,10 @@ export const EngagementProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const feedbackContext = useContext(FeedbackContext);
-  const engagementService = useContext(ServiceProviderContext)
-    .engagementService;
+  const feedbackContext = useFeedback();
+  const { engagementService } = useServiceProviders();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
+
   // TODO: Handle error/loading state
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);

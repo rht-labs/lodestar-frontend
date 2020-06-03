@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { FeatureToggleContext } from '../context/feature_toggles/feature_toggles';
+import React from 'react';
 import { AppFeature } from '../common/app_features';
+import { useFeatures } from '../context/feature_toggles/feature_hook';
 
 export interface FeatureProps {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export const Feature = ({
   name,
   ...props
 }: FeatureProps) => {
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
   if (!name) {
   }
   if (!name || hasFeature(name)) {

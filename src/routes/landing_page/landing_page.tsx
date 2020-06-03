@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from 'react';
-import { FeedbackContext } from '../../context/feedback_context';
+import React, { useEffect } from 'react';
+import { useFeedback } from '../../context/feedback_context';
 import {
   Page,
   PageHeader,
@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import './landing_page.css';
 export const LandingPage = () => {
-  const feedbackContext = useContext(FeedbackContext);
+  const feedbackContext = useFeedback();
   useEffect(() => feedbackContext.hideLoader(), [feedbackContext]);
   const pageHeader = (
     <PageHeader

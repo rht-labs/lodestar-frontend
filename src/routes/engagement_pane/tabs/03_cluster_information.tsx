@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   FormGroup,
@@ -7,10 +7,10 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { slugify } from 'transliteration';
-import { FeatureToggleContext } from '../../../context/feature_toggles/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 interface ClusterInformationProps {
   formOptions?: EngagementFormConfig;
@@ -23,7 +23,7 @@ export const ClusterInformation = ({
   values,
   onChange,
 }: ClusterInformationProps) => {
-  const { hasFeature } = useContext(FeatureToggleContext);
+  const { hasFeature } = useFeatures();
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
@@ -156,7 +156,8 @@ export const ClusterInformation = ({
           }
           onChange={e => onChange('ocp_version', e)}
         >
-          {formOptions?.openshift_options?.openshift_versions?.options?.length > 0 ? (
+          {formOptions?.openshift_options?.openshift_versions?.options?.length >
+          0 ? (
             formOptions?.openshift_options?.openshift_versions?.options?.map(
               (option: any, index: any) => (
                 <FormSelectOption
@@ -212,13 +213,14 @@ export const ClusterInformation = ({
           style={input}
           aria-label="Persistent Storage Needs"
           isDisabled={
-            formOptions?.openshift_options?.openshift_persistent_storage?.options?.length === 1 ||
-            !hasFeature(APP_FEATURES.writer)
+            formOptions?.openshift_options?.openshift_persistent_storage
+              ?.options?.length === 1 || !hasFeature(APP_FEATURES.writer)
           }
           onChange={e => onChange('ocp_persistent_storage_size', e)}
           value={values.ocp_persistent_storage_size || ''}
         >
-          {formOptions?.openshift_options?.openshift_persistent_storage?.options?.length > 0 ? (
+          {formOptions?.openshift_options?.openshift_persistent_storage?.options
+            ?.length > 0 ? (
             formOptions?.openshift_options?.openshift_persistent_storage?.options?.map(
               (option: any, index: any) => (
                 <FormSelectOption
@@ -239,13 +241,15 @@ export const ClusterInformation = ({
           aria-label="Cluster Size"
           value={values.ocp_cluster_size || ''}
           isDisabled={
-            formOptions?.openshift_options?.openshift_cluster_size?.options?.length === 1 ||
+            formOptions?.openshift_options?.openshift_cluster_size?.options
+              ?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_cluster_size', e)}
         >
-          {formOptions?.openshift_options?.openshift_cluster_size?.options?.length > 0 ? (
+          {formOptions?.openshift_options?.openshift_cluster_size?.options
+            ?.length > 0 ? (
             formOptions?.openshift_options?.openshift_cluster_size?.options.map(
               (option: any, index: any) => (
                 <FormSelectOption

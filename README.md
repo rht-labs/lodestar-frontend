@@ -94,8 +94,10 @@ In the project directory, you can run:
 
 ### `npm start`
 
+<!-- markdown-link-check-disable -->
 Runs the app in the development mode.  
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- markdown-link-check-enable -->
 
 The page will reload if you make edits.  
 You will also see any lint errors in the console.
@@ -106,6 +108,20 @@ Launches the test runner in the interactive watch mode.
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 Regenerate test snapshots using `npm run test -- --updateSnapshot --watchAll=false`.
+
+### `npm run e2e`
+
+Launches the e2e test runner in the interactive watch mode. See this section about the [test runner](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview) for more information. Sensitive env variables should be set on the command or by export. Do not check in. 
+
+Suggested:
+
+```
+export CYPRESS_BASE_URL=fe-env-url
+export CYPRESS_SSO_USER=e2e
+export CYPRESS_SSO_PASSWORD=****
+export CYPRESS_SSO_URL=sso_url
+npm run e2e
+```
 
 ### `npm run build`
 

@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { EngagementContext } from '../context/engagement_context/engagement_context';
-import { ConfigContext } from '../context/config_context/config_context';
 import { Feature } from './feature';
 import { APP_FEATURES } from '../common/app_features';
-
+import { useEngagements } from '../context/engagement_context/engagement_hook';
+import { useConfig } from '../context/config_context/config_hook';
 function _OMPEngagementButtonPane() {
-  const engagementContext = useContext(EngagementContext);
-  const configContext = useContext(ConfigContext);
+  const engagementContext = useEngagements();
+  const configContext = useConfig();
 
   const buttonPane: React.CSSProperties = {
     position: 'absolute',
@@ -35,27 +34,27 @@ function _OMPEngagementButtonPane() {
       return true;
     } else if (engagementContext.activeEngagement?.launch !== undefined) {
       return true;
-    } else if (!engagementContext.isLaunchable) { 
+    } else if (!engagementContext.isLaunchable) {
       return true;
-    }else {
+    } else {
       return false;
     }
   };
 
   const getTooltipText = () => {
     if (configContext.appConfig?.disableLaunch) {
-      return 'Launching new Engagement clusters is currently unavailable. Please try again later.';
+      return 'Launching new Engagements is currently unavailable. Please try again later.';
     } else if (engagementContext.activeEngagement?.launch !== undefined) {
-      return 'The cluster for this engagement has been launched.';
+      return 'This engagement has been launched';
     } else {
-      return 'Launch the cluster for this engagement.';
+      return 'Launch this engagement.';
     }
   };
 
   return (
     <Feature name={APP_FEATURES.writer}>
       <div style={buttonPane}>
-        <Button onClick={saveCluster} style={buttonDisplay}>
+        <Button onClick={saveCluster} style={buttonDisplay} data-cy="engagement-save">
           {' '}
           Save{' '}
         </Button>
@@ -65,6 +64,7 @@ function _OMPEngagementButtonPane() {
               isDisabled={isLaunchDisabled()}
               onClick={launchCluster}
               style={buttonDisplay}
+              data-cy="launch"
             >
               {' '}
               Launch{' '}
