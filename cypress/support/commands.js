@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("login", (url, email, password) => { 
+Cypress.Commands.add('login', (url, email, password) => {
   cy.request({
     form: true,
     method: 'POST',
@@ -33,22 +33,25 @@ Cypress.Commands.add("login", (url, email, password) => {
       username: email,
       password: password,
       grant_type: 'password',
-      client_id: 'open-management-portal'
-    }
-  })
-  .then((resp) => {
-    const jwt = resp.body
-    const currentTime = new Date()
-    const accessTokenExpiry = new Date((currentTime.getTime() + jwt.expires_in * 1000)).toISOString()
-    const refreshTokenExpiry = new Date((currentTime.getTime() + jwt.refresh_expires_in * 1000)).toISOString()
-        
-    var elToken = '{' 
-      + '"accessToken": "' + jwt.access_token + '",'
-      + '"accessTokenExpiry": "' + accessTokenExpiry  + '",'
-      + '"refreshToken": "' + jwt.refresh_token  + '",'
-      + '"refreshTokenExpiry": "' + refreshTokenExpiry  + '"'
-      + '}'
-  
-    window.localStorage.setItem('token', elToken)
-  })
-})
+      client_id: 'open-management-portal',
+    },
+  }).then(resp => {
+    const jwt = resp.body;
+    const currentTime = new Date();
+    const accessTokenExpiry = new Date(
+      currentTime.getTime() + jwt.expires_in * 1000
+    ).toISOString();
+    const refreshTokenExpiry = new Date(
+      currentTime.getTime() + jwt.refresh_expires_in * 1000
+    ).toISOString();
+
+    var elToken = {
+      accessToken: jwt.access_token,
+      accessTokenExpiry: accessTokenExpiry,
+      refreshToken: jwt.refresh_token,
+      refreshTokenExpiry: refreshTokenExpiry,
+    };
+
+    window.localStorage.setItem('token', JSON.stringify(elToken));
+  });
+});
