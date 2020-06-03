@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-} from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/authentication_service/authentication_service';
 
 import { UserProfile } from '../../schemas/user_profile_schema';
@@ -87,7 +82,7 @@ export const SessionProvider = ({
 
   const checkAuthStatus = useCallback(async () => {
     if (!!authenticationService) {
-      authenticationService.isLoggedIn().then(isLoggedIn => {
+      return authenticationService.isLoggedIn().then(isLoggedIn => {
         const tokens = authenticationService.getToken();
         if (isLoggedIn && tokens) {
           authenticationService.getUserProfile().then(profile => {
