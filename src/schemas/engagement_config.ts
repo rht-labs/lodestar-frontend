@@ -6,7 +6,7 @@ export interface EngagementFormOption {
 
 export interface EngagementFormValidator {
   kind: string;
-  value: any;
+  value?: any;
 }
 
 export interface FormConfig {
