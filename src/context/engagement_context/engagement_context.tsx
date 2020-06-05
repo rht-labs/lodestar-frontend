@@ -7,6 +7,7 @@ import {
 } from './engagement_form_reducer';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { useFeedback } from '../feedback_context';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 export interface EngagementContext {
   getEngagements: () => void;
@@ -20,11 +21,7 @@ export interface EngagementContext {
   updateEngagementFormField: (fieldName: string, payload: any) => void;
   isLaunchable: boolean;
 
-  formOptions?: {
-    openshiftOptions?: any;
-    providerOptions?: any;
-    userManagementOptions?: any;
-  };
+  formOptions?: EngagementFormConfig;
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
@@ -41,14 +38,8 @@ export const EngagementProvider = ({
 }) => {
   const feedbackContext = useFeedback();
   const { engagementService } = useServiceProviders();
-  const [formOptions, setFormOptions] = useState<
-    | {
-        openshiftOptions?: any;
-        providerOptions?: any;
-        userManagementOptions?: any;
-      }
-    | undefined
-  >();
+  const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
+
   // TODO: Handle error/loading state
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
@@ -70,18 +61,20 @@ export const EngagementProvider = ({
       type: 'switch_engagement',
       payload: getInitialState(activeEngagement),
     });
-    if (formOptions?.providerOptions) {
+    if (formOptions?.regions) {
       dispatch({
         type: 'ocp_cloud_provider_region',
         payload:
           activeEngagement?.ocp_cloud_provider_region ??
-          formOptions.providerOptions[0].regions[0].value,
+          formOptions?.providers?.options[0]?.options?.[0]?.value,
       });
+    }
+    if (formOptions?.providers) {
       dispatch({
         type: 'ocp_cloud_provider_name',
         payload:
           activeEngagement?.ocp_cloud_provider_name ??
-          formOptions.providerOptions[0].value,
+          formOptions?.providers?.options[0].value,
       });
     }
     if (formOptions?.openshiftOptions) {
@@ -89,19 +82,19 @@ export const EngagementProvider = ({
         type: 'ocp_cluster_size',
         payload:
           activeEngagement?.ocp_cluster_size ??
-          formOptions.openshiftOptions['cluster-size'][0].value,
+          formOptions?.cluster_size?.options[0].value,
       });
       dispatch({
         type: 'ocp_version',
         payload:
           activeEngagement?.ocp_version ??
-          formOptions.openshiftOptions.versions[0].value,
+          formOptions.versions?.options[0].value,
       });
       dispatch({
         type: 'ocp_persistent_storage_size',
         payload:
           activeEngagement?.ocp_persistent_storage_size ??
-          formOptions.openshiftOptions?.['persistent-storage'][0].value,
+          formOptions?.persistent_storage?.options[0].value,
       });
     }
   }, [activeEngagement, formOptions]);

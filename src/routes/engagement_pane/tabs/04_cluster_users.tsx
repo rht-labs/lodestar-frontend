@@ -18,6 +18,7 @@ import {
 import { Feature } from '../../../components/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 
 const selectStyle: React.CSSProperties = {
@@ -35,13 +36,13 @@ const buttonHeader: React.CSSProperties = {
 };
 
 export const ClusterUsers = ({
-  userManagementOptions,
   values,
+  formOptions,
   onChange,
 }: {
   onChange: (name: string, value: any) => void;
   values: Engagement;
-  userManagementOptions?: any;
+  formOptions?: EngagementFormConfig;
 }) => {
   const { hasFeature } = useFeatures();
 
@@ -142,16 +143,16 @@ export const ClusterUsers = ({
                         onChange('user', values.engagement_users);
                       }}
                     >
-                      {userManagementOptions?.rbac?.roles?.map(
-                        (option: any, index: number) => (
-                          <FormSelectOption
-                            isDisabled={option.disabled}
-                            key={index}
-                            value={option.value}
-                            label={option.label}
-                          />
-                        )
-                      )}
+                      {(
+                        formOptions?.user_options?.user_roles?.options ?? []
+                      )?.map((option: any, index: number) => (
+                        <FormSelectOption
+                          isDisabled={option.disabled}
+                          key={index}
+                          value={option.value}
+                          label={option.label}
+                        />
+                      ))}
                     </FormSelect>
                     <Feature name={APP_FEATURES.writer}>
                       <Button

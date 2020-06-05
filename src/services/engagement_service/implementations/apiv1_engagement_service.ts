@@ -1,6 +1,7 @@
 import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement_schema';
 import Axios, { AxiosInstance } from 'axios';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 export class Apiv1EngagementService extends EngagementService {
   constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
@@ -34,7 +35,7 @@ export class Apiv1EngagementService extends EngagementService {
     );
     return new Engagement(data as Engagement);
   }
-  async getConfig(): Promise<any> {
+  async getConfig(): Promise<EngagementFormConfig> {
     const { data } = await this.axios.get(`/config`, {
       headers: {
         'Content-Type': 'application/json',

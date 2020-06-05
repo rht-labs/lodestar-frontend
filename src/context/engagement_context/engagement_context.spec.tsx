@@ -68,7 +68,7 @@ describe('Engagement Context', () => {
       result.current.getConfig();
       await waitForNextUpdate();
     });
-    expect(result.current.formOptions).toHaveProperty('providerOptions');
+    expect(result.current.formOptions).toHaveProperty('cloud_options');
   });
 
   test('Form completeness for launch', async () => {
