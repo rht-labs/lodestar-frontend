@@ -37,7 +37,7 @@ export const ClusterInformation = ({
   };
 
   const availableProviders =
-    formOptions?.cloud_options?.cloud_providers?.options ?? [];
+    formOptions?.cloud_options?.providers?.options ?? [];
   if (
     values.ocp_cloud_provider_name &&
     !availableProviders.find(
@@ -51,9 +51,9 @@ export const ClusterInformation = ({
   }
 
   const availableProviderRegionOptions =
-    formOptions?.cloud_options?.cloud_providers?.options?.[
-      values.ocp_cloud_provider_name
-    ]?.options ?? [];
+    formOptions?.cloud_options?.providers?.options?.find(
+      p => p.value === values.ocp_cloud_provider_name
+    )?.options ?? [];
 
   if (
     availableProviderRegionOptions?.length === 0 &&
@@ -149,16 +149,14 @@ export const ClusterInformation = ({
           aria-label="OpenShift Version"
           value={values.ocp_version || ''}
           isDisabled={
-            formOptions?.openshift_options?.openshift_versions?.options
-              ?.length === 1 ||
+            formOptions?.openshift_options?.versions?.options?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_version', e)}
         >
-          {formOptions?.openshift_options?.openshift_versions?.options?.length >
-          0 ? (
-            formOptions?.openshift_options?.openshift_versions?.options?.map(
+          {formOptions?.openshift_options?.versions?.options?.length > 0 ? (
+            formOptions?.openshift_options?.versions?.options?.map(
               (option: any, index: any) => (
                 <FormSelectOption
                   isDisabled={option.disabled}
@@ -213,15 +211,15 @@ export const ClusterInformation = ({
           style={input}
           aria-label="Persistent Storage Needs"
           isDisabled={
-            formOptions?.openshift_options?.openshift_persistent_storage
-              ?.options?.length === 1 || !hasFeature(APP_FEATURES.writer)
+            formOptions?.openshift_options?.persistent_storage?.options
+              ?.length === 1 || !hasFeature(APP_FEATURES.writer)
           }
           onChange={e => onChange('ocp_persistent_storage_size', e)}
           value={values.ocp_persistent_storage_size || ''}
         >
-          {formOptions?.openshift_options?.openshift_persistent_storage?.options
-            ?.length > 0 ? (
-            formOptions?.openshift_options?.openshift_persistent_storage?.options?.map(
+          {formOptions?.openshift_options?.persistent_storage?.options?.length >
+          0 ? (
+            formOptions?.openshift_options?.persistent_storage?.options?.map(
               (option: any, index: any) => (
                 <FormSelectOption
                   isDisabled={option.disabled}
@@ -241,16 +239,15 @@ export const ClusterInformation = ({
           aria-label="Cluster Size"
           value={values.ocp_cluster_size || ''}
           isDisabled={
-            formOptions?.openshift_options?.openshift_cluster_size?.options
-              ?.length === 1 ||
+            formOptions?.openshift_options?.cluster_size?.options?.length ===
+              1 ||
             !hasFeature(APP_FEATURES.writer) ||
             !!(values as Engagement).launch
           }
           onChange={e => onChange('ocp_cluster_size', e)}
         >
-          {formOptions?.openshift_options?.openshift_cluster_size?.options
-            ?.length > 0 ? (
-            formOptions?.openshift_options?.openshift_cluster_size?.options.map(
+          {formOptions?.openshift_options?.cluster_size?.options?.length > 0 ? (
+            formOptions?.openshift_options?.cluster_size?.options.map(
               (option: any, index: any) => (
                 <FormSelectOption
                   isDisabled={option.disabled}
