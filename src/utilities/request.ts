@@ -1,5 +1,6 @@
 import { AuthService } from '../services/authentication_service/authentication_service';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
+import { Logger } from './logger';
 export class Request {
   constructor({
     authenticationRepository,
@@ -37,7 +38,7 @@ export class Request {
   public onRequestFailure = (error: any) => {
     const { response } = error;
     if (response?.status === 401 || response?.status === 403) {
-      console.log('Unauthenticated request', response.status);
+      Logger.log('Unauthenticated request', response.status);
       this.authenticationRepository.clearSession();
       window.location.reload();
     }

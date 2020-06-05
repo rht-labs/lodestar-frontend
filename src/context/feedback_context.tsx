@@ -26,7 +26,7 @@ export const FeedbackProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(true);
+  const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>(null);
   const [alertType, setAlertType] = useState<AlertVariant>(null);
 

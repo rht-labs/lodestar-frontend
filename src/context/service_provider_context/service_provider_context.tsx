@@ -75,6 +75,7 @@ export const ServiceProvider = ({
   if (!appConfig && !shouldUseFaked) {
     return null;
   }
+
   return (
     <ServiceProviderContext.Provider
       value={
