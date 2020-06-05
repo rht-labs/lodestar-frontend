@@ -9,8 +9,8 @@ import { FakedAuthService } from '../../services/authentication_service/implemen
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { Request } from '../../utilities/request';
-import { NewConfigEngagementService } from '../../services/engagement_service/implementations/new_config_engagement_service';
 import { useConfig } from '../config_context/config_hook';
+import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -24,7 +24,7 @@ const ProductionServiceProviders = (config: Config) => {
     authenticationRepository: authService,
   });
   return {
-    engagementService: new NewConfigEngagementService(
+    engagementService: new Apiv1EngagementService(
       config.backendUrl,
       beforeRequest,
       onRequestSuccess,
