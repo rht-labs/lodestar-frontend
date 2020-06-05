@@ -43,6 +43,6 @@ export class Apiv1EngagementService extends EngagementService {
         Accept: 'application/json',
       },
     });
-    return data;
+    return data as EngagementFormConfig;
   }
 }
