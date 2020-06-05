@@ -24,7 +24,6 @@ import {
 
 import avatarImg from '../assets/images/avatar.svg';
 import { UserDropdown } from './user_dropdown';
-import { useFeedback } from '../context/feedback_context';
 
 function _OMPHeader() {
   const iconPad: React.CSSProperties = {
@@ -32,13 +31,7 @@ function _OMPHeader() {
     paddingTop: 0,
   };
 
-  const feedbackContext = useFeedback();
-
   const { pathname } = useLocation();
-
-  const showLoader = () => {
-    feedbackContext.showLoader();
-  };
 
   return (
     <PageHeader
@@ -68,7 +61,6 @@ function _OMPHeader() {
                   </Link>
                 </NavItem>
                 <NavItem
-                  onClick={showLoader}
                   id="engagementPaneLink"
                   itemId={1}
                   isActive={pathname === '/engagements'}

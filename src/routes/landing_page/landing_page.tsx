@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useFeedback } from '../../context/feedback_context';
+import React from 'react';
 import {
   Page,
   PageHeader,
@@ -10,8 +9,6 @@ import {
 import { Link } from 'react-router-dom';
 import './landing_page.css';
 export const LandingPage = () => {
-  const feedbackContext = useFeedback();
-  useEffect(() => feedbackContext.hideLoader(), [feedbackContext]);
   const pageHeader = (
     <PageHeader
       logo={<span className="logo-text">Open Management Portal</span>}

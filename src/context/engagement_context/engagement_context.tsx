@@ -107,13 +107,17 @@ export const EngagementProvider = ({
   }, [activeEngagement, formOptions]);
 
   const fetchEngagements = useCallback(async () => {
-    feedbackContext.showLoader();
-    const engagements = await engagementService.fetchEngagements();
-    setEngagements(engagements);
-    if (engagements.length > 0) {
-      setActiveEngagement(engagements[0]);
+    try {
+      feedbackContext.showLoader();
+      const engagements = await engagementService.fetchEngagements();
+      setEngagements(engagements);
+      if (engagements.length > 0) {
+        setActiveEngagement(engagements[0]);
+      }
+      feedbackContext.hideLoader();
+    } catch (e) {
+      feedbackContext.hideLoader();
     }
-    feedbackContext.hideLoader();
   }, [engagementService, feedbackContext]);
 
   const _addNewEngagement = useCallback(
