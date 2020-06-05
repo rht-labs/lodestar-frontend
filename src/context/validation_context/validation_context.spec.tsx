@@ -3,7 +3,7 @@ import { useValidation } from './validation_hook';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { ValidationProvider, FormValidator } from './validation_context';
 import '@testing-library/jest-dom/extend-expect';
-import { Validators } from '../../common/validators';
+import { Validators } from '../../schemas/validators';
 
 describe('Validation Context Hook', () => {
   const wrapper = validators => ({ children }) => (
@@ -67,7 +67,7 @@ describe('Validation Context Hook', () => {
       result.current.validate('hello')('hi');
       await waitForNextUpdate;
     });
-    
+
     expect(result.current.getValidationResult('hello')).toEqual([]);
   });
 });

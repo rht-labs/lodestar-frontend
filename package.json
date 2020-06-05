@@ -39,10 +39,10 @@
     "package": "zip -r package-contents.zip package-contents",
     "publish": "curl -vvv -u admin:admin123 --upload-file package-contents.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JOB_NAME}.${BUILD_NUMBER}/package-contents.zip",
     "eject": "react-scripts eject",
-    "check": "gts check",
+    "check": "gts check src/*.tsx src/*.ts",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix",
+    "fix": "gts fix src/*.ts src/*.tsx",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check"

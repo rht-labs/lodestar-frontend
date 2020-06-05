@@ -4,13 +4,13 @@ import { AuthService } from '../../services/authentication_service/authenticatio
 import { VersionService } from '../../services/version_service/version_service';
 import { Apiv1VersionService } from '../../services/version_service/implementations/apiv1_version_service';
 import { FakedVersionService } from '../../services/version_service/implementations/faked_version_service';
-import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
 import { Apiv1AuthService } from '../../services/authentication_service/implementations/apiv1_auth_service';
 import { FakedAuthService } from '../../services/authentication_service/implementations/faked_auth_service';
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { Request } from '../../utilities/request';
 import { useConfig } from '../config_context/config_hook';
+import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
 
 interface ServiceProvider {
   engagementService: EngagementService;

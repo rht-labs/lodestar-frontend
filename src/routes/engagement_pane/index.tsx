@@ -8,23 +8,25 @@ import { Loading } from './Loading';
 import { EngagementNav } from '../../components/omp_engagement_nav';
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { Validators } from '../../common/validators';
+import { ValidatorFactory } from '../../schemas/validators';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
-const engagement_form_validators = {
-  engagement_lead_email: [
-    Validators.EmailAddressValidator,
-    Validators.NotNullValidator,
-  ],
-  technical_lead_email: [
-    Validators.EmailAddressValidator,
-    Validators.NotNullValidator,
-  ],
-  customer_contact_email: [
-    Validators.EmailAddressValidator,
-    Validators.NotNullValidator,
-  ],
-};
+const getValidators = (formOptions: EngagementFormConfig = {}) =>
+  Object.keys(formOptions || {}).reduce((acc, groupingKey) => {
+    return {
+      ...acc,
+      ...Object.keys(formOptions[groupingKey] ?? {}).reduce(
+        (acc, k) => ({
+          ...acc,
+          [k]: (formOptions?.[groupingKey]?.[k]?.validators || []).map(
+            ValidatorFactory
+          ),
+        }),
+        {}
+      ),
+    };
+  }, {});
 
 export function EngagementPane() {
   const [activeTabKey, setActiveTabKey] = useState<number>(0);
@@ -80,7 +82,7 @@ export function EngagementPane() {
 
   return (
     <>
-      <ValidationProvider validators={engagement_form_validators}>
+      <ValidationProvider validators={getValidators(formOptions)}>
         <div style={contentPane}>
           <div style={columnPane}>
             <EngagementNav />
@@ -99,6 +101,7 @@ export function EngagementPane() {
                 title="Basic Information"
               >
                 <BasicInformation
+                  formOptions={formOptions}
                   values={engagementFormState}
                   onChange={updateEngagementFormField}
                 />
@@ -110,13 +113,11 @@ export function EngagementPane() {
                 />
               </Tab>
               <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
-                {!formOptions?.providerOptions ||
-                !formOptions?.openshiftOptions ? (
+                {!formOptions ? (
                   <Loading />
                 ) : (
                   <ClusterInformation
-                    providerOptions={formOptions?.providerOptions}
-                    openshiftOptions={formOptions?.openshiftOptions}
+                    formOptions={formOptions}
                     values={engagementFormState}
                     onChange={updateEngagementFormField}
                   />
@@ -124,7 +125,7 @@ export function EngagementPane() {
               </Tab>
               <Tab id={'cu'} style={tab} eventKey={3} title="Users">
                 <ClusterUsers
-                  userManagementOptions={formOptions?.userManagementOptions}
+                  formOptions={formOptions}
                   values={engagementFormState}
                   onChange={updateEngagementFormField}
                 />

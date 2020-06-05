@@ -14,6 +14,10 @@ export class Validators {
     past: (input: string) => 'The date must be in the past',
   };
 
+  static RegexValidator = (regex: RegExp): Validator => (input: string) => {
+    return regex.test(input) ? null : 'Invalid input';
+  };
+
   static LengthValidator: ({
     maxLength,
     minLength,
@@ -38,3 +42,18 @@ export class Validators {
       true
     );
 }
+
+export function ValidatorFactory(props): Validator {
+  if (props?.kind && props.kind in REGISTERED_VALIDATORS) {
+    return REGISTERED_VALIDATORS[props.kind](props);
+  }
+  return null;
+}
+
+type ValidatorFactory = (props: any) => Validator;
+
+const REGISTERED_VALIDATORS: { [key: string]: ValidatorFactory } = {
+  regex: props => Validators.RegexValidator(RegExp(props.value as string)),
+  email: props => Validators.EmailAddressValidator,
+  notnull: props => Validators.NotNullValidator,
+};

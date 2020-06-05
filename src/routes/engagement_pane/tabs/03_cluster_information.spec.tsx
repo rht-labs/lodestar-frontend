@@ -64,9 +64,8 @@ const options = {
 test('Basic component renders correctly', () => {
   const component = render(
     <ClusterInformation
-      providerOptions={[]}
-      openshiftOptions={{}}
-      options={options}
+      formOptions={{}}
+      onChange={() => {}}
       values={getInitialState()}
     />
   );
