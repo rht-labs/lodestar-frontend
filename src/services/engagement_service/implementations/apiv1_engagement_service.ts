@@ -43,10 +43,6 @@ export class Apiv1EngagementService extends EngagementService {
         Accept: 'application/json',
       },
     });
-    return {
-      openshiftOptions: data['openshift'],
-      providerOptions: data['providers'],
-      userManagementOptions: data['user-management'],
-    };
+    return data as EngagementFormConfig;
   }
 }
