@@ -1,116 +1,140 @@
 {
-   "cloud_options": {
-      "cloud_providers": {
-         "options": [
+  "cloud_options": {
+    "providers": {
+      "options": [
+        {
+          "label": "AWS",
+          "value": "ec2",
+          "options": [
             {
-               "label": "AWS",
-               "value": "ec2",
-               "options": [
-                  {
-                     "label": "US East 1 (N. Virginia)",
-                     "value": "us-east-1"
-                  },
-                  {
-                     "label": "US East 2 (Ohio)",
-                     "value": "us-east-2"
-                  }
-               ]
-            }
-         ]
-      }
-   },
-   "openshift_options": {
-      "openshift_versions": {
-         "options": [
-            {
-               "label": "v4.1",
-               "value": "4.1.31"
+              "label": "Asia Pacific (Hong Kong)",
+              "value": "ap-east-1"
             },
             {
-               "label": "v4.2",
-               "value": "4.2.16"
+              "label": "Asia Pacific (Singapore)",
+              "value": "ap-southeast-1"
             },
             {
-               "label": "v4.3",
-               "value": "4.3.0"
-            }
-         ]
-      },
-      "openshift_persistent_storage": {
-         "validators": [
-            {
-               "kind": "notnull"
-            }
-         ],
-         "options": [
-            {
-               "label": "None",
-               "value": "none"
+              "label": "Asia Pacific (Sydney)",
+              "value": "ap-southeast-2"
             },
             {
-               "label": "50GB",
-               "value": "50G"
+              "label": "Europe (Frankfurt)",
+              "value": "eu-central-1"
             },
             {
-               "label": "100GB",
-               "value": "100G"
+              "label": "Europe (Ireland)",
+              "value": "eu-west-1"
             },
             {
-               "label": "250GB",
-               "value": "250G"
+              "label": "Europe (London)",
+              "value": "eu-west-2"
             },
             {
-               "label": "500GB",
-               "value": "500G"
-            }
-         ]
-      },
-      "openshift_cluster_size": {
-         "options": [
-            {
-               "label": "Small",
-               "value": "small"
-            }
-         ]
-      }
-   },
-   "user_options": {
-      "user_roles": {
-         "options": [
-            {
-               "label": "Developer",
-               "value": "developer"
+              "label": "Europe (Paris)",
+              "value": "eu-west-3"
             },
             {
-               "label": "Observer",
-               "value": "observer"
+              "label": "Europe (Stockholm)",
+              "value": "eu-north-1"
             },
             {
-               "label": "Admin",
-               "value": "admin"
-            }
-         ]
-      }
-   },
-   "contact_options": {
-      "technical_lead_email": {
-         "validators": [
+              "label": "US East 1 (N. Virginia)",
+              "value": "us-east-1"
+            },
             {
-               "kind": "regex",
-               "value": "^[A-Za-z0-9._%+-]+@redhat.com$"
-            }
-         ]
-      },
-      "end_date": {
-         "validators": [
+              "label": "US East 2 (Ohio)",
+              "value": "us-east-2"
+            },
             {
-               "kind": "date",
-               "value": {
-                  "before": "2100-01-01T00:00:00.000Z",
-                  "after": "@today"
-               }
+              "label": "US West 1 (N. California)",
+              "value": "us-west-1"
+            },
+            {
+              "label": "US West 2 (Oregon)",
+              "value": "us-west-2"
             }
-         ]
-      }
-   }
+          ]
+        }
+      ]
+    }
+  },
+  "openshift_options": {
+    "versions": {
+      "options": [
+        {
+          "label": "v4.1",
+          "value": "4.1.31"
+        },
+        {
+          "label": "v4.2",
+          "value": "4.2.16"
+        },
+        {
+          "label": "v4.3",
+          "value": "4.3.0"
+        }
+      ]
+    },
+    "persistent_storage": {
+      "validators": [
+        {
+          "kind": "notnull"
+        }
+      ],
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "50GB",
+          "value": "50G"
+        },
+        {
+          "label": "100GB",
+          "value": "100G"
+        },
+        {
+          "label": "250GB",
+          "value": "250G"
+        },
+        {
+          "label": "500GB",
+          "value": "500G"
+        }
+      ]
+    },
+    "cluster_size": {
+      "options": [
+        {
+          "label": "Small",
+          "value": "small"
+        }
+      ]
+    }
+  },
+  "user_options": {
+    "user_roles": {
+      "options": [
+        {
+          "label": "Developer",
+          "value": "developer"
+        },
+        {
+          "label": "Observer",
+          "value": "observer"
+        },
+        {
+          "label": "Admin",
+          "value": "admin"
+        }
+      ]
+    }
+  },
+  "contact_options": null,
+  "logistics": {
+    "start_date": null,
+    "end_date": null
+  }
 }

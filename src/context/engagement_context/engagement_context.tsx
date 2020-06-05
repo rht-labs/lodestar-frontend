@@ -9,7 +9,6 @@ import { useServiceProviders } from '../service_provider_context/service_provide
 import { useFeedback } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
-
 export interface EngagementContext {
   getEngagements: () => void;
   engagementFormState?: Engagement;
@@ -67,7 +66,7 @@ export const EngagementProvider = ({
         type: 'ocp_cloud_provider_region',
         payload:
           activeEngagement?.ocp_cloud_provider_region ??
-          formOptions?.regions?.options[0].value,
+          formOptions?.providers?.options[0]?.options?.[0]?.value,
       });
     }
     if (formOptions?.providers) {
@@ -83,19 +82,19 @@ export const EngagementProvider = ({
         type: 'ocp_cluster_size',
         payload:
           activeEngagement?.ocp_cluster_size ??
-          formOptions?.openshift_cluster_size?.options[0].value,
+          formOptions?.cluster_size?.options[0].value,
       });
       dispatch({
         type: 'ocp_version',
         payload:
           activeEngagement?.ocp_version ??
-          formOptions.openshift_versions?.options[0].value,
+          formOptions.versions?.options[0].value,
       });
       dispatch({
         type: 'ocp_persistent_storage_size',
         payload:
           activeEngagement?.ocp_persistent_storage_size ??
-          formOptions?.openshift_persistent_storage?.options[0].value,
+          formOptions?.persistent_storage?.options[0].value,
       });
     }
   }, [activeEngagement, formOptions]);

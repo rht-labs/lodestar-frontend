@@ -82,9 +82,7 @@ export function EngagementPane() {
 
   return (
     <>
-      <ValidationProvider
-        validators={getValidators(engagementContext?.formOptions)}
-      >
+      <ValidationProvider validators={getValidators(formOptions)}>
         <div style={contentPane}>
           <div style={columnPane}>
             <EngagementNav />
@@ -115,8 +113,7 @@ export function EngagementPane() {
                 />
               </Tab>
               <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
-                {!formOptions?.providerOptions ||
-                !formOptions?.openshiftOptions ? (
+                {!formOptions ? (
                   <Loading />
                 ) : (
                   <ClusterInformation
