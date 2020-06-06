@@ -49,11 +49,10 @@ export const ClusterInformation = ({
       label: values.ocp_cloud_provider_name,
     });
   }
-
-  const availableProviderRegionOptions =
-    formOptions?.cloud_options?.providers?.options?.find(
-      p => p.value === values.ocp_cloud_provider_name
-    )?.options ?? [];
+  const provider = formOptions?.cloud_options?.providers?.options?.find(
+    p => p.value === values.ocp_cloud_provider_name
+  );
+  const availableProviderRegionOptions = provider?.options ?? [];
 
   if (
     availableProviderRegionOptions?.length === 0 &&
