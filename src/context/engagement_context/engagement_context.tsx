@@ -69,32 +69,32 @@ export const EngagementProvider = ({
           formOptions?.providers?.options[0]?.options?.[0]?.value,
       });
     }
-    if (formOptions?.providers) {
+    if (formOptions?.cloud_options) {
       dispatch({
         type: 'ocp_cloud_provider_name',
         payload:
           activeEngagement?.ocp_cloud_provider_name ??
-          formOptions?.providers?.options[0].value,
+          formOptions?.cloud_options?.providers?.options[0].value,
       });
     }
-    if (formOptions?.openshiftOptions) {
+    if (formOptions?.openshift_options) {
       dispatch({
         type: 'ocp_cluster_size',
         payload:
           activeEngagement?.ocp_cluster_size ??
-          formOptions?.cluster_size?.options[0].value,
+          formOptions?.openshift_options?.custer_size?.options[0].value,
       });
       dispatch({
         type: 'ocp_version',
         payload:
           activeEngagement?.ocp_version ??
-          formOptions.versions?.options[0].value,
+          formOptions.openshift_options?.versions?.options[0].value,
       });
       dispatch({
         type: 'ocp_persistent_storage_size',
         payload:
           activeEngagement?.ocp_persistent_storage_size ??
-          formOptions?.persistent_storage?.options[0].value,
+          formOptions?.openshift_options?.persistent_storage?.options[0].value,
       });
     }
   }, [activeEngagement, formOptions]);
