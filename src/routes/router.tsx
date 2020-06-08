@@ -1,29 +1,29 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
-import { FeatureRequest } from '../components/feature_request';
-import { PrivateRoute } from '../components/authentication/private_route';
-import { CallbackHandler } from '../components/authentication/callback_handler';
-import { EngagementPane } from './engagement_pane';
-import { Admin } from './admin';
-import { Dashboard } from './dashboard';
-import { UnauthorizedPage } from './unauthorized';
+import {FeatureRequest} from '../components/feature_request';
+import {PrivateRoute} from '../components/authentication/private_route';
+import {CallbackHandler} from '../components/authentication/callback_handler';
+import {EngagementPane} from './engagement_pane';
+import {Admin} from './admin';
+import {Dashboard} from './dashboard';
+import {UnauthorizedPage} from './unauthorized';
 import LogoutPage from './logout';
-import { Feature } from '../components/feature';
-import { APP_FEATURES } from '../common/app_features';
-import { LandingPage } from './landing_page/landing_page';
-import { Page } from '@patternfly/react-core';
-import { OMPHeader } from '../components/omp_header';
-import { Feedback } from '../components/omp_feedback';
+import {Feature} from '../components/feature';
+import {APP_FEATURES} from '../common/app_features';
+import {LandingPage} from './landing_page/landing_page';
+import {Page} from '@patternfly/react-core';
+import {OMPHeader} from '../components/omp_header';
+import {Feedback} from '../components/omp_feedback';
 
 function _OMPRouter() {
   return (
     <Switch>
-      <Route path="/" exact component={LandingPage} />
-      <Route path="/feature-request" component={FeatureRequest} />
-      <Route path="/auth_callback" component={CallbackHandler} />
-      <Route path="/unauthorized" component={UnauthorizedPage} />
-      <Route path="/logout" component={LogoutPage} />
+      <Route path="/" exact component={LandingPage}/>
+      <Route path="/feature-request" component={FeatureRequest}/>
+      <Route path="/auth_callback" component={CallbackHandler}/>
+      <Route path="/unauthorized" component={UnauthorizedPage}/>
+      <Route path="/logout" component={LogoutPage}/>
       <PrivateRoute path="/app">
         <MainTemplate>
           <Switch>
@@ -36,13 +36,27 @@ function _OMPRouter() {
                 {/* if a user is not authorized, show the unauthorized page */}
                 <Switch>
                   {/* else, show an authorized route */}
-                  <Redirect exact from="/app" to="/app/dashboard" />
-                  <PrivateRoute path="/app/dashboard" component={Dashboard} />
-                  <PrivateRoute exact path="/app/engagements">
-                      <EngagementPane />
+                  <Redirect exact from="/app" to="/app/dashboard"/>
+                  <PrivateRoute path="/app/dashboard" component={Dashboard}/>
+                  <PrivateRoute path="/app/engagements">
+                    <Switch>
+                      <Redirect exact from="/app/engagements" to="/app/engagements/active"/>
+                      <PrivateRoute path="/app/engagements/pre-launch">
+                        <div>this is a pre launch</div>
+                      </PrivateRoute>
+                      <PrivateRoute path="/app/engagements/active">
+                        <div>this is a active</div>
+                      </PrivateRoute>
+                      <PrivateRoute path="/app/engagements/past">
+                        <div>this is a past</div>
+                      </PrivateRoute>
+                      <PrivateRoute path="/app/engagements/new">
+                        <EngagementPane/>
+                      </PrivateRoute>
+                    </Switch>
                   </PrivateRoute>
                   <PrivateRoute exact path="/app/admin">
-                    <Admin />
+                    <Admin/>
                   </PrivateRoute>
                 </Switch>
               </Feature>
@@ -55,10 +69,10 @@ function _OMPRouter() {
 }
 
 const MainTemplate = React.memo(
-  ({ children }: { children: React.ReactChild }) => {
+  ({children}: { children: React.ReactChild }) => {
     return (
-      <Page header={<OMPHeader />} style={{ height: '100vh' }}>
-        <Feedback />
+      <Page header={<OMPHeader/>} style={{height: '100vh'}}>
+        <Feedback/>
         {children}
       </Page>
     );
