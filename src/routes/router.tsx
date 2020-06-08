@@ -12,9 +12,7 @@ import LogoutPage from './logout';
 import {Feature} from '../components/feature';
 import {APP_FEATURES} from '../common/app_features';
 import {LandingPage} from './landing_page/landing_page';
-import {Page} from '@patternfly/react-core';
-import {OMPHeader} from '../components/omp_header';
-import {Feedback} from '../components/omp_feedback';
+import {MainTemplate} from '../layout/main_template';
 
 function _OMPRouter() {
   return (
@@ -67,16 +65,5 @@ function _OMPRouter() {
     </Switch>
   );
 }
-
-const MainTemplate = React.memo(
-  ({children}: { children: React.ReactChild }) => {
-    return (
-      <Page header={<OMPHeader/>} style={{height: '100vh'}}>
-        <Feedback/>
-        {children}
-      </Page>
-    );
-  }
-);
 
 export const OMPRouter = React.memo(_OMPRouter);

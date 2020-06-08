@@ -22,8 +22,8 @@ import {
   HandPaperIcon,
 } from '@patternfly/react-icons';
 
-import avatarImg from '../assets/images/avatar.svg';
-import { UserDropdown } from './user_dropdown';
+import avatarImg from '../../assets/images/avatar.svg';
+import { UserDropdown } from '../user_dropdown';
 
 function _OMPHeader() {
   const iconPad: React.CSSProperties = {
@@ -35,6 +35,7 @@ function _OMPHeader() {
 
   return (
     <PageHeader
+      showNavToggle
       logo={
         <div>
           <Toolbar>
