@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {PageSidebar} from '@patternfly/react-core';
-import {EngagementNavigation} from './engagement_navigation';
 
 export interface DrawerProps {
   isDrawerOpen: boolean;
+  children: ReactNode;
 }
 
 export function Drawer(props:DrawerProps){
   return(
-    <PageSidebar nav={<EngagementNavigation/>} isNavOpen={props.isDrawerOpen} theme="dark" >
+    <PageSidebar nav={props.children} isNavOpen={props.isDrawerOpen} theme="dark" >
     </PageSidebar>
   )
 }
