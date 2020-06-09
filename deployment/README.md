@@ -47,7 +47,7 @@ It accepts the following variables
 | `baseUrl`  | The FQDN at which this route will be exposed - depends on your environment  |
 | `clientId`  | The client ID that the SSO server is configured to accept auth requests using  |
 | `authBaseUrl`  | The url that your SSO server accepts OpenID Connect requests on - for Keycloak, something like `https://<keycloak-base-url>.com/auth/realms/<realm-id>/protocol/openid-connect`  |
-| `backendUrl`  | The url that the Open Management Portal backend accepts requests on  |
+| `backendUrl`  | The url that the LodeStar backend accepts requests on  |
 
 This will spin up all of the usual resources that this service needs in production, plus a `BuildConfig` configured to build it from source from the Git repository specified. To trigger this build, use `oc start-build omp-frontend`.
 
