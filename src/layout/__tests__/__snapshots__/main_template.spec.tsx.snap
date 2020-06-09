@@ -1,0 +1,438 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main Template layout  matches the snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="pf-c-page"
+        style="height: 100vh;"
+      >
+        <header
+          class="pf-c-page__header"
+        >
+          <div
+            class="pf-c-page__header-brand"
+          >
+            <div
+              class="pf-c-page__header-brand-toggle"
+            >
+              <button
+                aria-controls="page-sidebar"
+                aria-expanded="true"
+                aria-label="Global navigation"
+                class="pf-c-button pf-m-plain"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                id="nav-toggle"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 448 512"
+                  width="1em"
+                >
+                  <path
+                    d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+                    transform=""
+                  />
+                </svg>
+              </button>
+            </div>
+            <a
+              class="pf-c-page__header-brand-link"
+            >
+              <div>
+                <div
+                  class="pf-l-toolbar"
+                >
+                  <img
+                    alt="Open Innovation Labs"
+                    class="pf-c-brand"
+                    src="/oil_logo.png"
+                  />
+                  <div
+                    style="width: 50px;"
+                  />
+                </div>
+              </div>
+            </a>
+          </div>
+        </header>
+        <div
+          class="pf-c-page__sidebar pf-m-dark pf-m-expanded"
+          id="page-sidebar"
+        >
+          <div
+            class="pf-c-page__sidebar-body"
+          >
+            <div>
+              <nav
+                aria-label="Global"
+                class="pf-c-nav pf-m-dark"
+                data-ouia-component-id="0"
+                data-ouia-component-type="PF4/Nav"
+                data-ouia-safe="true"
+              >
+                <ul
+                  class="pf-c-nav__list"
+                >
+                  <li
+                    class="pf-c-nav__item pf-m-expanded"
+                  >
+                    <a
+                      aria-expanded="true"
+                      class="pf-c-nav__link"
+                      data-component="pf-nav-expandable"
+                      href="#"
+                      id="navExpandableEngagement"
+                    >
+                      Engagements
+                      <span
+                        class="pf-c-nav__toggle"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 256 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                            transform=""
+                          />
+                        </svg>
+                      </span>
+                    </a>
+                    <section
+                      aria-labelledby="navExpandableEngagement"
+                      class="pf-c-nav__subnav"
+                    >
+                      
+                      <ul
+                        class="pf-c-nav__simple-list"
+                      >
+                        <li
+                          class="pf-c-nav__item"
+                        >
+                          <a
+                            class="pf-c-nav__link"
+                            href="/app/engagements/overview"
+                          >
+                            Overview
+                          </a>
+                        </li>
+                        <li
+                          class="pf-c-nav__item"
+                        >
+                          <a
+                            class="pf-c-nav__link"
+                            href="/app/engagements/upcoming"
+                          >
+                            Upcoming
+                          </a>
+                        </li>
+                        <li
+                          class="pf-c-nav__item"
+                        >
+                          <a
+                            class="pf-c-nav__link"
+                            href="/app/engagements/active"
+                          >
+                            Active
+                          </a>
+                        </li>
+                        <li
+                          class="pf-c-nav__item"
+                        >
+                          <a
+                            class="pf-c-nav__link"
+                            href="/app/engagements/past"
+                          >
+                            Past
+                          </a>
+                        </li>
+                        <hr
+                          class="pf-c-divider"
+                        />
+                        <li
+                          class="pf-c-nav__item"
+                        >
+                          <a
+                            class="pf-c-nav__link"
+                            href="/app/engagements/new"
+                          >
+                            + Create New
+                          </a>
+                        </li>
+                      </ul>
+                    </section>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <main
+          class="pf-c-page__main"
+          tabindex="-1"
+        >
+          <div
+            data-testid="mainTemplateContent"
+          >
+            main template Content
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="pf-c-page"
+      style="height: 100vh;"
+    >
+      <header
+        class="pf-c-page__header"
+      >
+        <div
+          class="pf-c-page__header-brand"
+        >
+          <div
+            class="pf-c-page__header-brand-toggle"
+          >
+            <button
+              aria-controls="page-sidebar"
+              aria-expanded="true"
+              aria-label="Global navigation"
+              class="pf-c-button pf-m-plain"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              id="nav-toggle"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 448 512"
+                width="1em"
+              >
+                <path
+                  d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+                  transform=""
+                />
+              </svg>
+            </button>
+          </div>
+          <a
+            class="pf-c-page__header-brand-link"
+          >
+            <div>
+              <div
+                class="pf-l-toolbar"
+              >
+                <img
+                  alt="Open Innovation Labs"
+                  class="pf-c-brand"
+                  src="/oil_logo.png"
+                />
+                <div
+                  style="width: 50px;"
+                />
+              </div>
+            </div>
+          </a>
+        </div>
+      </header>
+      <div
+        class="pf-c-page__sidebar pf-m-dark pf-m-expanded"
+        id="page-sidebar"
+      >
+        <div
+          class="pf-c-page__sidebar-body"
+        >
+          <div>
+            <nav
+              aria-label="Global"
+              class="pf-c-nav pf-m-dark"
+              data-ouia-component-id="0"
+              data-ouia-component-type="PF4/Nav"
+              data-ouia-safe="true"
+            >
+              <ul
+                class="pf-c-nav__list"
+              >
+                <li
+                  class="pf-c-nav__item pf-m-expanded"
+                >
+                  <a
+                    aria-expanded="true"
+                    class="pf-c-nav__link"
+                    data-component="pf-nav-expandable"
+                    href="#"
+                    id="navExpandableEngagement"
+                  >
+                    Engagements
+                    <span
+                      class="pf-c-nav__toggle"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 256 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                          transform=""
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                  <section
+                    aria-labelledby="navExpandableEngagement"
+                    class="pf-c-nav__subnav"
+                  >
+                    
+                    <ul
+                      class="pf-c-nav__simple-list"
+                    >
+                      <li
+                        class="pf-c-nav__item"
+                      >
+                        <a
+                          class="pf-c-nav__link"
+                          href="/app/engagements/overview"
+                        >
+                          Overview
+                        </a>
+                      </li>
+                      <li
+                        class="pf-c-nav__item"
+                      >
+                        <a
+                          class="pf-c-nav__link"
+                          href="/app/engagements/upcoming"
+                        >
+                          Upcoming
+                        </a>
+                      </li>
+                      <li
+                        class="pf-c-nav__item"
+                      >
+                        <a
+                          class="pf-c-nav__link"
+                          href="/app/engagements/active"
+                        >
+                          Active
+                        </a>
+                      </li>
+                      <li
+                        class="pf-c-nav__item"
+                      >
+                        <a
+                          class="pf-c-nav__link"
+                          href="/app/engagements/past"
+                        >
+                          Past
+                        </a>
+                      </li>
+                      <hr
+                        class="pf-c-divider"
+                      />
+                      <li
+                        class="pf-c-nav__item"
+                      >
+                        <a
+                          class="pf-c-nav__link"
+                          href="/app/engagements/new"
+                        >
+                          + Create New
+                        </a>
+                      </li>
+                    </ul>
+                  </section>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <main
+        class="pf-c-page__main"
+        tabindex="-1"
+      >
+        <div
+          data-testid="mainTemplateContent"
+        >
+          main template Content
+        </div>
+      </main>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
