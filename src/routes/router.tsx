@@ -39,7 +39,7 @@ function _OMPRouter() {
                   <PrivateRoute path="/app/engagements">
                     <Switch>
                       <Redirect exact from="/app/engagements" to="/app/engagements/active"/>
-                      <PrivateRoute path="/app/engagements/pre-launch">
+                      <PrivateRoute path="/app/engagements/upcoming">
                         <div>this is a pre launch</div>
                       </PrivateRoute>
                       <PrivateRoute path="/app/engagements/active">

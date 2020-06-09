@@ -125,9 +125,19 @@ Object {
                         >
                           <a
                             class="pf-c-nav__link"
-                            href="/app/engagements/pre-launch"
+                            href="/app/engagements/overview"
                           >
-                            Pre-launch
+                            Overview
+                          </a>
+                        </li>
+                        <li
+                          class="pf-c-nav__item"
+                        >
+                          <a
+                            class="pf-c-nav__link"
+                            href="/app/engagements/upcoming"
+                          >
+                            Upcoming
                           </a>
                         </li>
                         <li
@@ -150,6 +160,9 @@ Object {
                             Past
                           </a>
                         </li>
+                        <hr
+                          class="pf-c-divider"
+                        />
                         <li
                           class="pf-c-nav__item"
                         >
@@ -157,7 +170,7 @@ Object {
                             class="pf-c-nav__link"
                             href="/app/engagements/new"
                           >
-                            + Add
+                            + Create New
                           </a>
                         </li>
                       </ul>
@@ -302,9 +315,19 @@ Object {
                       >
                         <a
                           class="pf-c-nav__link"
-                          href="/app/engagements/pre-launch"
+                          href="/app/engagements/overview"
                         >
-                          Pre-launch
+                          Overview
+                        </a>
+                      </li>
+                      <li
+                        class="pf-c-nav__item"
+                      >
+                        <a
+                          class="pf-c-nav__link"
+                          href="/app/engagements/upcoming"
+                        >
+                          Upcoming
                         </a>
                       </li>
                       <li
@@ -327,6 +350,9 @@ Object {
                           Past
                         </a>
                       </li>
+                      <hr
+                        class="pf-c-divider"
+                      />
                       <li
                         class="pf-c-nav__item"
                       >
@@ -334,7 +360,7 @@ Object {
                           class="pf-c-nav__link"
                           href="/app/engagements/new"
                         >
-                          + Add
+                          + Create New
                         </a>
                       </li>
                     </ul>
