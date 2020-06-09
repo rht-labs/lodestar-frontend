@@ -5,8 +5,11 @@ import {Feedback} from '../components/omp_feedback';
 import {Drawer} from '../components/navigation/drawer';
 import {EngagementNavigation} from '../components/navigation/engagement_navigation';
 
-export const MainTemplate =
-  ({children}: { children: React.ReactChild }) => {
+export interface MainTemplateProps{
+  children: React.ReactChild;
+}
+
+export const MainTemplate = (props: MainTemplateProps) => {
 
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true);
 
@@ -24,7 +27,7 @@ export const MainTemplate =
               </Drawer>
             }>
         <Feedback/>
-        {children}
+        {props.children}
       </Page>
     );
   };

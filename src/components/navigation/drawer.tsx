@@ -8,7 +8,7 @@ export interface DrawerProps {
 
 export function Drawer(props:DrawerProps){
   return(
-    <PageSidebar nav={props.children} isNavOpen={props.isDrawerOpen} theme="dark" >
+    <PageSidebar nav={props.children} isNavOpen={props.isDrawerOpen} theme="dark">
     </PageSidebar>
   )
 }
