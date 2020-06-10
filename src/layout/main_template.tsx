@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Page} from '@patternfly/react-core';
 import {NavigationBar} from '../components/navigation/navigation_bar';
-import {Feedback} from '../components/omp_feedback';
 import {Drawer} from '../components/navigation/drawer';
 import {EngagementNavigation} from '../components/navigation/engagement_navigation';
 
@@ -26,7 +25,6 @@ export const MainTemplate = (props: MainTemplateProps) => {
                 <EngagementNavigation/>
               </Drawer>
             }>
-        <Feedback/>
         {props.children}
       </Page>
     );
