@@ -2,6 +2,7 @@ import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { AlreadyExistsError } from '../engagement_service_errors';
 
 export class Apiv1EngagementService extends EngagementService {
   constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
@@ -18,8 +19,16 @@ export class Apiv1EngagementService extends EngagementService {
     );
   }
   async createEngagement(engagementData: any): Promise<Engagement> {
-    const { data } = await this.axios.post(`/engagements`, engagementData);
-    return new Engagement(data as Engagement);
+    try {
+      const { data } = await this.axios.post(`/engagements`, engagementData);
+      return new Engagement(data as Engagement);
+    } catch (e) {
+      if (e.response.status === 409) {
+        throw new AlreadyExistsError(
+          'A project with this customer name and project name already exists'
+        );
+      }
+    }
   }
   async saveEngagement(engagementData: any): Promise<Engagement> {
     const { data } = await this.axios.put(

@@ -1,27 +1,28 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
-import {FeatureRequest} from '../components/feature_request';
-import {PrivateRoute} from '../components/authentication/private_route';
-import {CallbackHandler} from '../components/authentication/callback_handler';
-import {EngagementPane} from './engagement_pane';
-import {Admin} from './admin';
-import {Dashboard} from './dashboard';
-import {UnauthorizedPage} from './unauthorized';
+import { FeatureRequest } from '../components/feature_request';
+import { PrivateRoute } from '../components/authentication/private_route';
+import { CallbackHandler } from '../components/authentication/callback_handler';
+import { Admin } from './admin';
+import { Dashboard } from './dashboard';
+import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
-import {Feature} from '../components/feature';
-import {APP_FEATURES} from '../common/app_features';
-import {LandingPage} from './landing_page/landing_page';
-import {MainTemplate} from '../layout/main_template';
+import { Feature } from '../components/feature';
+import { APP_FEATURES } from '../common/app_features';
+import { LandingPage } from './landing_page/landing_page';
+import { MainTemplate } from '../layout/main_template';
+import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
+import { EngagementPane } from './engagement_pane';
 
 function _OMPRouter() {
   return (
     <Switch>
-      <Route path="/" exact component={LandingPage}/>
-      <Route path="/feature-request" component={FeatureRequest}/>
-      <Route path="/auth_callback" component={CallbackHandler}/>
-      <Route path="/unauthorized" component={UnauthorizedPage}/>
-      <Route path="/logout" component={LogoutPage}/>
+      <Route path="/" exact component={LandingPage} />
+      <Route path="/feature-request" component={FeatureRequest} />
+      <Route path="/auth_callback" component={CallbackHandler} />
+      <Route path="/unauthorized" component={UnauthorizedPage} />
+      <Route path="/logout" component={LogoutPage} />
       <PrivateRoute path="/app">
         <MainTemplate>
           <Switch>
@@ -34,11 +35,15 @@ function _OMPRouter() {
                 {/* if a user is not authorized, show the unauthorized page */}
                 <Switch>
                   {/* else, show an authorized route */}
-                  <Redirect exact from="/app" to="/app/dashboard"/>
-                  <PrivateRoute path="/app/dashboard" component={Dashboard}/>
+                  <Redirect exact from="/app" to="/app/dashboard" />
+                  <PrivateRoute path="/app/dashboard" component={Dashboard} />
                   <PrivateRoute path="/app/engagements">
                     <Switch>
-                      <Redirect exact from="/app/engagements" to="/app/engagements/active"/>
+                      <Redirect
+                        exact
+                        from="/app/engagements"
+                        to="/app/engagements/active"
+                      />
                       <PrivateRoute path="/app/engagements/upcoming">
                         <div>this is a pre launch</div>
                       </PrivateRoute>
@@ -49,12 +54,16 @@ function _OMPRouter() {
                         <div>this is a past</div>
                       </PrivateRoute>
                       <PrivateRoute path="/app/engagements/new">
-                        <EngagementPane/>
+                        <CreateNewEngagement />
                       </PrivateRoute>
+                      <PrivateRoute
+                        path="/app/engagements/:customer_name/:project_name"
+                        component={EngagementPane}
+                      />
                     </Switch>
                   </PrivateRoute>
                   <PrivateRoute exact path="/app/admin">
-                    <Admin/>
+                    <Admin />
                   </PrivateRoute>
                 </Switch>
               </Feature>

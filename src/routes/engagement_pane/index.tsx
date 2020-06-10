@@ -11,14 +11,19 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { Logger } from '../../utilities/logger';
+import { useParams } from 'react-router';
 
 export function EngagementPane() {
+  const { project_name, customer_name } = useParams();
+
   const {
     formOptions,
     getConfig,
     error,
     engagementFormState,
     updateEngagementFormField,
+    setActiveEngagement,
+    getEngagement,
   } = useEngagements();
 
   useEffect(() => {
@@ -27,6 +32,18 @@ export function EngagementPane() {
       getConfig();
     }
   }, [formOptions, getConfig]);
+
+  useEffect(() => {
+    if (!customer_name || !project_name) {
+      return;
+    }
+    getEngagement(customer_name, project_name).then(engagement => {
+      if (engagement) {
+        setActiveEngagement(engagement);
+      } else {
+      }
+    });
+  });
 
   const validators = getValidatorsFromFormOptions(formOptions);
 
