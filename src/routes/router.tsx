@@ -14,6 +14,7 @@ import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementPane } from './engagement_pane';
+import { EngagementListView } from './engagement_list/engagement_list';
 
 function _OMPRouter() {
   return (
@@ -42,16 +43,28 @@ function _OMPRouter() {
                       <Redirect
                         exact
                         from="/app/engagements"
-                        to="/app/engagements/active"
+                        to="/app/engagements/all"
                       />
+                      <PrivateRoute path="/app/engagements/all">
+                        <EngagementListView title="All Engagements" />
+                      </PrivateRoute>
                       <PrivateRoute path="/app/engagements/upcoming">
-                        <div>this is a pre launch</div>
+                        <EngagementListView
+                          filter={() => true}
+                          title="Upcoming Engagements"
+                        />
                       </PrivateRoute>
                       <PrivateRoute path="/app/engagements/active">
-                        <div>this is a active</div>
+                        <EngagementListView
+                          filter={() => true}
+                          title="Active Engagements"
+                        />
                       </PrivateRoute>
                       <PrivateRoute path="/app/engagements/past">
-                        <div>this is a past</div>
+                        <EngagementListView
+                          filter={() => true}
+                          title="Past Engagements"
+                        />
                       </PrivateRoute>
                       <PrivateRoute path="/app/engagements/new">
                         <CreateNewEngagement />
