@@ -14,12 +14,7 @@ import {
 } from '@patternfly/react-core';
 import { useVersion } from '../../context/version_context/version_context';
 
-function _Admin() {
-  const contentPane: React.CSSProperties = {
-    backgroundColor: '#EDEDED',
-    height: '100vh',
-    padding: 15,
-  };
+function About() {
 
   const versionContext = useVersion();
 
@@ -98,4 +93,4 @@ function _Admin() {
   );
 }
 
-export const Admin = React.memo(_Admin);
+export const Admin = React.memo(About);

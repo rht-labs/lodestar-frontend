@@ -5,7 +5,7 @@ import {FeatureRequest} from '../components/feature_request';
 import {PrivateRoute} from '../components/authentication/private_route';
 import {CallbackHandler} from '../components/authentication/callback_handler';
 import {EngagementPane} from './engagement_pane';
-import {Admin} from './admin';
+import {Admin} from './about';
 import {Dashboard} from './dashboard';
 import {UnauthorizedPage} from './unauthorized';
 import LogoutPage from './logout';
