@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { PageSection, Text } from '@patternfly/react-core';
+import {
+  PageSection,
+  Text,
+  PageSectionVariants,
+  TextContent,
+} from '@patternfly/react-core';
 import { Logger } from '../../utilities/logger';
 
 export interface EngagementListProps {
@@ -38,8 +43,10 @@ export function EngagementListView(props: EngagementListProps) {
   const title = props.title ?? 'Engagements';
   return (
     <>
-      <PageSection>
-        <Text component="h1">{title}</Text>
+      <PageSection variant={PageSectionVariants.light}>
+        <TextContent>
+          <Text component="h1">{title}</Text>
+        </TextContent>
       </PageSection>
       <PageSection>
         <EngagementList engagements={filteredEngagements} />
