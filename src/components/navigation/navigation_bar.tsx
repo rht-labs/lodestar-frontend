@@ -17,6 +17,7 @@ import {
 
 import {
   CogIcon,
+  HelpIcon
 } from '@patternfly/react-icons';
 
 export interface NavigationBarProps{
@@ -52,12 +53,12 @@ export function NavigationBar(props:NavigationBarProps) {
             <Nav theme="dark">
               <NavList variant={NavVariants.horizontal}>
                 <NavItem
-                  id="adminLink"
+                  id="aboutLink"
                   itemId={3}
-                  isActive={pathname === '/admin'}
+                  isActive={pathname === '/about'}
                 >
-                  <Link style={iconPad} to="/app/admin">
-                    <CogIcon size="md" title="Administration" />
+                  <Link style={iconPad} to="/app/about">
+                    <HelpIcon size="md" title="About" />
                   </Link>
                 </NavItem>
               </NavList>
@@ -71,7 +72,6 @@ export function NavigationBar(props:NavigationBarProps) {
           </ToolbarGroup>
         </Toolbar>
       }
-      avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
     />
   );
 }

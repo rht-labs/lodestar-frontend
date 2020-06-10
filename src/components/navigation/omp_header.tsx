@@ -42,7 +42,7 @@ function _OMPHeader() {
         <Brand
           alt="Open Innovation Labs"
           src={`${process.env.PUBLIC_URL}/oil_logo.png`}
-        ></Brand>
+        />
         <div style={{width: 50}}/>
       </Toolbar>
     </div>

@@ -6,45 +6,117 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        style="background-color: rgb(237, 237, 237); height: 100vh; padding: 15px;"
+        class="pf-c-page"
       >
-        <h1>
-          Administration Pane
-        </h1>
-        <p>
-          This is where administrators monitor the application and control their minions!
-        </p>
-        <article
-          class="pf-c-card pf-m-compact"
+        <a
+          class="pf-c-button pf-m-primary pf-c-skip-to-content"
+          href="#main-content-page-layout-default-nav"
         >
-          <div
-            class="pf-c-card__header pf-c-title pf-m-md"
+          Skip to content
+        </a>
+        <main
+          class="pf-c-page__main"
+          id="main-content-page-layout-default-nav"
+          tabindex="-1"
+        >
+          <section
+            class="pf-c-page__main-section pf-m-light"
           >
-            Component Versions
-          </div>
-        </article>
+            <div
+              class="pf-c-content"
+            >
+              <h1
+                class=""
+                data-pf-content="true"
+              >
+                About
+              </h1>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                This is where versions of the application can be tracked.
+              </p>
+            </div>
+          </section>
+          <section
+            class="pf-c-page__main-section"
+          >
+            <div
+              class="pf-l-gallery"
+            >
+              <div>
+                <article
+                  class="pf-c-card pf-m-compact"
+                >
+                  <div
+                    class="pf-c-card__header pf-c-title pf-m-md"
+                  >
+                    Component Versions
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+        </main>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      style="background-color: rgb(237, 237, 237); height: 100vh; padding: 15px;"
+      class="pf-c-page"
     >
-      <h1>
-        Administration Pane
-      </h1>
-      <p>
-        This is where administrators monitor the application and control their minions!
-      </p>
-      <article
-        class="pf-c-card pf-m-compact"
+      <a
+        class="pf-c-button pf-m-primary pf-c-skip-to-content"
+        href="#main-content-page-layout-default-nav"
       >
-        <div
-          class="pf-c-card__header pf-c-title pf-m-md"
+        Skip to content
+      </a>
+      <main
+        class="pf-c-page__main"
+        id="main-content-page-layout-default-nav"
+        tabindex="-1"
+      >
+        <section
+          class="pf-c-page__main-section pf-m-light"
         >
-          Component Versions
-        </div>
-      </article>
+          <div
+            class="pf-c-content"
+          >
+            <h1
+              class=""
+              data-pf-content="true"
+            >
+              About
+            </h1>
+            <p
+              class=""
+              data-pf-content="true"
+            >
+              This is where versions of the application can be tracked.
+            </p>
+          </div>
+        </section>
+        <section
+          class="pf-c-page__main-section"
+        >
+          <div
+            class="pf-l-gallery"
+          >
+            <div>
+              <article
+                class="pf-c-card pf-m-compact"
+              >
+                <div
+                  class="pf-c-card__header pf-c-title pf-m-md"
+                >
+                  Component Versions
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   </div>,
   "debug": [Function],

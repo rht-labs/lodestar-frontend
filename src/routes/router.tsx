@@ -53,7 +53,7 @@ function _OMPRouter() {
                       </PrivateRoute>
                     </Switch>
                   </PrivateRoute>
-                  <PrivateRoute exact path="/app/admin">
+                  <PrivateRoute exact path="/app/about">
                     <Admin/>
                   </PrivateRoute>
                 </Switch>

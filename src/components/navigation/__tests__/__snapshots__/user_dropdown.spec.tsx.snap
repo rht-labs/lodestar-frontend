@@ -21,14 +21,9 @@ Object {
             id="pf-toggle-id-0"
             type="button"
           >
-            <span
-              class="pf-c-dropdown__toggle-text"
-            >
-              Hello, 
-            </span>
             <svg
               aria-hidden="true"
-              class="pf-c-dropdown__toggle-icon"
+              class=""
               fill="currentColor"
               height="1em"
               role="img"
@@ -63,14 +58,9 @@ Object {
           id="pf-toggle-id-0"
           type="button"
         >
-          <span
-            class="pf-c-dropdown__toggle-text"
-          >
-            Hello, 
-          </span>
           <svg
             aria-hidden="true"
-            class="pf-c-dropdown__toggle-icon"
+            class=""
             fill="currentColor"
             height="1em"
             role="img"
