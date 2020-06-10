@@ -1,5 +1,4 @@
 import React from 'react';
-import avatarImg from '../../assets/images/avatar.svg';
 import { UserDropdown } from './user_dropdown';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -12,11 +11,9 @@ import {
   NavItem,
   NavList,
   NavVariants,
-  Avatar,
 } from '@patternfly/react-core';
 
 import {
-  CogIcon,
   HelpIcon
 } from '@patternfly/react-icons';
 
