@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Alert, Wizard, PageSection, Text } from '@patternfly/react-core';
+import {
+  Alert,
+  Wizard,
+  PageSection,
+  Text,
+  PageSectionVariants,
+  TextContent,
+} from '@patternfly/react-core';
 import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
 import { ClusterInformation } from './tabs/03_cluster_information';
@@ -107,8 +114,10 @@ const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
 function WizardTemplate(props: any) {
   return (
     <>
-      <PageSection>
-        <Text component="h1">Create New Engagement</Text>
+      <PageSection variant={PageSectionVariants.light}>
+        <TextContent>
+          <Text component="h1">Create New Engagement</Text>
+        </TextContent>
       </PageSection>
       <PageSection style={{}}>{props.children}</PageSection>
     </>
