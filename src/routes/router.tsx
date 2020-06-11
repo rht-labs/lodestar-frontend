@@ -1,12 +1,13 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
-import { FeatureRequest } from '../components/feature_request';
-import { PrivateRoute } from '../components/authentication/private_route';
-import { CallbackHandler } from '../components/authentication/callback_handler';
+import {FeatureRequest} from '../components/feature_request';
+import {PrivateRoute} from '../components/authentication/private_route';
+import {CallbackHandler} from '../components/authentication/callback_handler';
+import {EngagementPane} from './engagement_pane';
+import {Admin} from './about';
+import {Dashboard} from './dashboard';
 import { About } from './about';
-import { Dashboard } from './dashboard';
-import { UnauthorizedPage } from './unauthorized';
+import {UnauthorizedPage} from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
 import { APP_FEATURES } from '../common/app_features';
@@ -75,7 +76,7 @@ function _OMPRouter() {
                       />
                     </Switch>
                   </PrivateRoute>
-                  <PrivateRoute exact path="/app/admin">
+                  <PrivateRoute exact path="/app/about">
                     <About />
                   </PrivateRoute>
                 </Switch>
