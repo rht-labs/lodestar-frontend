@@ -1,38 +1,35 @@
 import React, { useEffect } from 'react';
-import {
-  Alert,
-  Wizard,
-  PageSection,
-  Text,
-  PageSectionVariants,
-  TextContent,
-} from '@patternfly/react-core';
-import { BasicInformation } from './tabs/01_basic_information';
-import { PointOfContact } from './tabs/02_point_of_contact';
-import { ClusterInformation } from './tabs/03_cluster_information';
-import { ClusterUsers } from './tabs/04_cluster_users';
-import { Loading } from './Loading';
-import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { ValidatorFactory } from '../../schemas/validators';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
+import { EngagementTabView } from './engagement_tab_view';
+import { ValidatorFactory } from '../../schemas/validators';
+import {
+  Alert,
+  PageSection,
+  TextContent,
+  Text,
+  PageSectionVariants,
+} from '@patternfly/react-core';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { ValidationProvider } from '../../context/validation_context/validation_context';
 
-export function EngagementPane() {
+export interface EngagementViewProps {
+  engagement?: Engagement;
+}
+
+export function EngagementView(props) {
   const { project_name, customer_name } = useParams();
 
   const {
     formOptions,
     getConfig,
     error,
-    engagementFormState,
-    updateEngagementFormField,
     setActiveEngagement,
+    activeEngagement,
     getEngagement,
   } = useEngagements();
-
   useEffect(() => {
     if (!formOptions) {
       Logger.info('getting config');
@@ -51,8 +48,7 @@ export function EngagementPane() {
       }
     });
   });
-
-  const validators = getValidatorsFromFormOptions(formOptions);
+  const engagementFormRequestError = error;
 
   const AlertMessage = () => {
     return engagementFormRequestError ? (
@@ -61,37 +57,33 @@ export function EngagementPane() {
       </Alert>
     ) : null;
   };
+  useEffect(() => {
+    if (!formOptions) {
+      Logger.info('getting config');
+      getConfig();
+    }
+  }, [formOptions, getConfig]);
 
-  const engagementFormRequestError = error;
-
-  const steps = getWizardSteps(
-    formOptions,
-    engagementFormState,
-    updateEngagementFormField
-  );
+  useEffect(() => {
+    if (!customer_name || !project_name) {
+      return;
+    }
+    getEngagement(customer_name, project_name).then(engagement => {
+      if (engagement) {
+        setActiveEngagement(engagement);
+      } else {
+      }
+    });
+  });
+  const validators = getValidatorsFromFormOptions(formOptions);
 
   return (
-    <>
-      <WizardTemplate>
-        <ValidationProvider validators={validators}>
-          <AlertMessage />
-          <Wizard
-            isInPage
-            isCompactNav
-            steps={steps}
-            footer={<CustomWizardFooter />}
-          />
-        </ValidationProvider>
-      </WizardTemplate>
-    </>
-  );
-}
-
-function CustomWizardFooter() {
-  return (
-    <div style={{ zIndex: 100 }}>
-      <OMPEngagementButtonPane />
-    </div>
+    <ValidationProvider validators={validators}>
+      <EngagementViewTemplate engagement={activeEngagement}>
+        <AlertMessage />
+        <EngagementTabView engagement={activeEngagement} />
+      </EngagementViewTemplate>
+    </ValidationProvider>
   );
 }
 
@@ -111,65 +103,22 @@ const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
     };
   }, {});
 
-function WizardTemplate(props: any) {
+function EngagementViewTemplate({
+  engagement,
+  children,
+}: {
+  engagement: Engagement;
+  children: any;
+}) {
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Text component="h1">Create New Engagement</Text>
+          <Text component="h1">{engagement?.project_name}</Text>
+          <Text component="h3">{engagement?.customer_name}</Text>
         </TextContent>
       </PageSection>
-      <PageSection style={{}}>{props.children}</PageSection>
+      <PageSection variant={PageSectionVariants.light}>{children}</PageSection>
     </>
   );
-}
-
-function getWizardSteps(
-  formOptions,
-  engagementFormState,
-  updateEngagementFormField
-) {
-  return [
-    {
-      name: 'Basic Information',
-      component: (
-        <BasicInformation
-          formOptions={formOptions}
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-    {
-      name: 'Point of Contact',
-      component: (
-        <PointOfContact
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-    {
-      name: 'Cluster Information',
-      component: !formOptions ? (
-        <Loading />
-      ) : (
-        <ClusterInformation
-          formOptions={formOptions}
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-    {
-      name: 'Users',
-      component: (
-        <ClusterUsers
-          formOptions={formOptions}
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-  ];
 }

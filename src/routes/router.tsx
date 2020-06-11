@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import {FeatureRequest} from '../components/feature_request';
 import {PrivateRoute} from '../components/authentication/private_route';
 import {CallbackHandler} from '../components/authentication/callback_handler';
-import {EngagementPane} from './engagement_pane';
 import {Dashboard} from './dashboard';
 import { About } from './about';
 import {UnauthorizedPage} from './unauthorized';
@@ -14,6 +13,7 @@ import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
+import { EngagementView } from './engagement_pane';
 
 function _OMPRouter() {
   return (
@@ -70,7 +70,7 @@ function _OMPRouter() {
                       </PrivateRoute>
                       <PrivateRoute
                         path="/app/engagements/:customer_name/:project_name"
-                        component={EngagementPane}
+                        component={EngagementView}
                       />
                     </Switch>
                   </PrivateRoute>

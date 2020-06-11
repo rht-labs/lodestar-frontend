@@ -1,3 +1,5 @@
+import faker from 'faker/locale/en_US';
+
 export interface Engagement {
   archive_date: string;
   customer_contact_email: string;
@@ -76,27 +78,27 @@ export class Engagement {
 
   static fromFake() {
     return new Engagement({
-      archive_date: 'faker',
-      customer_contact_email: 'faker',
-      customer_contact_name: 'faker',
-      customer_name: 'faker',
-      description: 'faker',
-      end_date: 'faker',
+      archive_date: faker.date.recent().toISOString(),
+      customer_contact_email: faker.internet.email(),
+      customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      customer_name: faker.company.companyName(),
+      description: faker.lorem.paragraph(),
+      end_date: faker.date.future().toISOString(),
       engagement_users: [],
-      engagement_lead_email: 'faker',
-      engagement_lead_name: 'faker',
-      location: 'faker',
-      ocp_cloud_provider_name: 'faker',
-      ocp_cloud_provider_region: 'faker',
-      ocp_cluster_size: 'faker',
-      ocp_persistent_storage_size: 'faker',
-      ocp_sub_domain: 'faker',
-      ocp_version: 'faker',
-      project_id: 1,
-      project_name: 'faker',
-      start_date: 'faker',
-      technical_lead_email: 'faker',
-      technical_lead_name: 'faker',
+      engagement_lead_email: faker.internet.email(),
+      engagement_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+      ocp_cloud_provider_name: 'AWS',
+      ocp_cloud_provider_region: faker.lorem.word(),
+      ocp_cluster_size: 'Large',
+      ocp_persistent_storage_size: `${faker.random.number()}G`,
+      ocp_sub_domain: faker.lorem.word(),
+      ocp_version: faker.random.number().toString(),
+      project_id: faker.random.number(),
+      project_name: faker.company.bsNoun(),
+      start_date: faker.date.recent().toISOString(),
+      technical_lead_email: faker.internet.email(),
+      technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       launch: {},
     });
   }

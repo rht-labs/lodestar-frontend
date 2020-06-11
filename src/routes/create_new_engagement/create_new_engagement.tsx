@@ -1,7 +1,7 @@
 import React from 'react';
 import { CreateEngagementModal } from './create_engagement_modal';
 import { useHistory } from 'react-router';
-import { EngagementPane } from '../engagement_pane';
+import { EngagementView } from '../engagement_pane';
 
 export function CreateNewEngagement(props) {
   const history = useHistory();
@@ -15,7 +15,7 @@ export function CreateNewEngagement(props) {
   return (
     <div>
       <CreateEngagementModal onRequestClose={handleModalClose} isOpen={true} />
-      <EngagementPane />
+      <EngagementView />
     </div>
   );
 }

@@ -1,31 +1,36 @@
 import { Engagement } from './engagement_schema';
 
+const engagementProperties = [
+  'archive_date',
+  'customer_contact_email',
+  'customer_contact_name',
+  'customer_name',
+  'description',
+  'end_date',
+  'engagement_users',
+  'engagement_lead_email',
+  'engagement_lead_name',
+  'location',
+  'mongo_id',
+  'ocp_cloud_provider_name',
+  'ocp_cloud_provider_region',
+  'ocp_cluster_size',
+  'ocp_persistent_storage_size',
+  'ocp_sub_domain',
+  'ocp_version',
+  'project_id',
+  'project_name',
+  'start_date',
+  'technical_lead_email',
+  'technical_lead_name',
+  'launch',
+];
+
 describe('Engagement Schema', () => {
   test('Faked engagement schema has not changed', () => {
-    expect({ ...Engagement.fromFake() }).toEqual({
-      archive_date: 'faker',
-      customer_contact_email: 'faker',
-      customer_contact_name: 'faker',
-      customer_name: 'faker',
-      description: 'faker',
-      end_date: 'faker',
-      engagement_users: [],
-      engagement_lead_email: 'faker',
-      engagement_lead_name: 'faker',
-      location: 'faker',
-      ocp_cloud_provider_name: 'faker',
-      ocp_cloud_provider_region: 'faker',
-      ocp_cluster_size: 'faker',
-      ocp_persistent_storage_size: 'faker',
-      ocp_sub_domain: 'faker',
-      ocp_version: 'faker',
-      project_id: 1,
-      project_name: 'faker',
-      start_date: 'faker',
-      technical_lead_email: 'faker',
-      technical_lead_name: 'faker',
-      launch: {},
-    });
+    expect(Object.keys(Engagement.fromFake()).sort()).toEqual(
+      engagementProperties.sort()
+    );
   });
   test('users should be an empty array by default', () => {
     expect(new Engagement({} as Engagement).engagement_users).toEqual([]);
