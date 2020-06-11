@@ -118,7 +118,7 @@ function EngagementViewTemplate({
           <Text component="h3">{engagement?.customer_name}</Text>
         </TextContent>
       </PageSection>
-      <PageSection>{children}</PageSection>
+      <PageSection variant={PageSectionVariants.light}>{children}</PageSection>
     </>
   );
 }
