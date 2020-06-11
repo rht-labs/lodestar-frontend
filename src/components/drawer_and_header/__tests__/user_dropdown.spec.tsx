@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserDropdown } from './user_dropdown';
+import { UserDropdown } from '../user_dropdown';
 import { render } from '@testing-library/react';
 
 describe('User Dropdown UI', () => {

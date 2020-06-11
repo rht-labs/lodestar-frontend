@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { useSession } from '../context/session_context/session_context';
-import { Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
-export interface UserDropdown {}
+import React, {useState} from 'react';
+import {useSession} from '../../context/session_context/session_context';
+import {Dropdown, DropdownItem, DropdownToggle} from '@patternfly/react-core';
+import {Link} from 'react-router-dom';
+
+export interface UserDropdown {
+}
+
 export function UserDropdown(props: UserDropdown) {
   const sessionContext = useSession();
   const [isOpen, setIsOpen] = useState(false);
@@ -31,12 +34,12 @@ export function UserDropdown(props: UserDropdown) {
         dropdownItems={dropdownItems}
         toggle={
           <DropdownToggle onToggle={() => setIsOpen(!isOpen)}>
-            Hello, {sessionContext?.sessionData?.profile?.displayName}
+            {sessionContext?.sessionData?.profile?.displayName}
           </DropdownToggle>
         }
         isOpen={isOpen}
         onSelect={onSelect}
-      ></Dropdown>
+      />
     </div>
   );
 }

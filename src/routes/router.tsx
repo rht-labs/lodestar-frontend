@@ -1,19 +1,18 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
-import { FeatureRequest } from '../components/feature_request';
-import { PrivateRoute } from '../components/authentication/private_route';
-import { CallbackHandler } from '../components/authentication/callback_handler';
-import { Admin } from './admin';
-import { Dashboard } from './dashboard';
-import { UnauthorizedPage } from './unauthorized';
+import {FeatureRequest} from '../components/feature_request';
+import {PrivateRoute} from '../components/authentication/private_route';
+import {CallbackHandler} from '../components/authentication/callback_handler';
+import {EngagementPane} from './engagement_pane';
+import {Dashboard} from './dashboard';
+import { About } from './about';
+import {UnauthorizedPage} from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
 import { APP_FEATURES } from '../common/app_features';
 import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
-import { EngagementPane } from './engagement_pane';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 
 function _OMPRouter() {
@@ -75,8 +74,8 @@ function _OMPRouter() {
                       />
                     </Switch>
                   </PrivateRoute>
-                  <PrivateRoute exact path="/app/admin">
-                    <Admin />
+                  <PrivateRoute exact path="/app/about">
+                    <About />
                   </PrivateRoute>
                 </Switch>
               </Feature>

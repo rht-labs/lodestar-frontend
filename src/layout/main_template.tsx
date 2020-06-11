@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import {Page} from '@patternfly/react-core';
-import {NavigationBar} from '../components/navigation/navigation_bar';
-import {Feedback} from '../components/omp_feedback';
-import {Drawer} from '../components/navigation/drawer';
-import {EngagementNavigation} from '../components/navigation/engagement_navigation';
+import {Header} from '../components/drawer_and_header/header';
+import {Drawer} from '../components/drawer_and_header/drawer';
+import {EngagementNavigation} from '../components/drawer_and_header/engagement_navigation';
 
 export interface MainTemplateProps{
   children: React.ReactChild;
@@ -18,15 +17,14 @@ export const MainTemplate = (props: MainTemplateProps) => {
     };
 
     return (
-      <Page header={<NavigationBar isDrawerOpen={isDrawerOpen}
-                                   onNavToggle={onNavToggle}/>}
+      <Page header={<Header isDrawerOpen={isDrawerOpen}
+                            onNavToggle={onNavToggle}/>}
             style={{height: '100vh'}}
             sidebar={
               <Drawer isDrawerOpen={isDrawerOpen}>
                 <EngagementNavigation/>
               </Drawer>
             }>
-        <Feedback/>
         {props.children}
       </Page>
     );
