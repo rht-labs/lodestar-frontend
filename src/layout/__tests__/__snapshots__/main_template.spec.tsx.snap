@@ -47,30 +47,186 @@ Object {
             <a
               class="pf-c-page__header-brand-link"
             >
-              <div>
+              <img
+                alt="Open Innovation Labs"
+                class="pf-c-brand"
+                src="/oil_logo.png"
+              />
+            </a>
+          </div>
+          <div
+            class="pf-c-page__header-tools"
+          >
+            <div
+              class="pf-c-page__header-tools-group"
+            >
+              <div
+                class="pf-c-page__header-tools-item"
+              >
                 <div
-                  class="pf-c-toolbar"
-                  id="pf-random-id-0"
+                  class="pf-c-dropdown"
+                  data-ouia-component-id="0"
+                  data-ouia-component-type="PF4/Dropdown"
+                  data-ouia-safe="true"
                 >
-                  <img
-                    alt="Open Innovation Labs"
-                    class="pf-c-brand"
-                    src="/oil_logo.png"
-                  />
-                  <div
-                    style="width: 50px;"
-                  />
-                  <div
-                    class="pf-c-toolbar__content pf-m-hidden"
-                    hidden=""
+                  <button
+                    aria-haspopup="true"
+                    aria-label="Notifications"
+                    class="pf-c-button pf-m-plain"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    id="pf-toggle-id-0"
+                    parentref="[object Object]"
+                    type="button"
                   >
-                    <div
-                      class="pf-c-toolbar__group"
-                    />
+                    <span
+                      class="pf-c-notification-badge pf-m-unread"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 448 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"
+                          transform=""
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="pf-c-page__header-tools-item"
+              >
+                <nav
+                  aria-label="Global"
+                  class="pf-c-nav pf-m-horizontal"
+                  data-ouia-component-id="4"
+                  data-ouia-component-type="PF4/Nav"
+                  data-ouia-safe="true"
+                >
+                  <button
+                    aria-label="Scroll left"
+                    class="pf-c-nav__scroll-button"
+                    disabled=""
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 256 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+                        transform=""
+                      />
+                    </svg>
+                  </button>
+                  <ul
+                    class="pf-c-nav__list"
+                  >
+                    <li
+                      class="pf-c-nav__item"
+                    >
+                      <a
+                        class="pf-c-nav__link"
+                        href="/app/about"
+                        style="padding-bottom: 0px; padding-top: 0px;"
+                      >
+                        <svg
+                          aria-labelledby="icon-title-1"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 64 1024 1024"
+                          width="1em"
+                        >
+                          <title
+                            id="icon-title-1"
+                          >
+                            About
+                          </title>
+                          <path
+                            d="M512.059-73.143c-282.338 0-512.059 229.673-512.059 512.025 0 282.235 229.721 511.975 512.059 511.975 282.281 0 511.941-229.735 511.941-511.975 0.005-282.352-229.659-512.025-511.941-512.025zM512.059 826.523c-213.826 0-387.728-173.856-387.728-387.643 0-213.89 173.904-387.694 387.728-387.694 213.717 0 387.671 173.803 387.671 387.694 0.005 213.785-173.957 387.643-387.671 387.643zM585.143 164.571v109.714c0 4.951-1.808 9.237-5.429 12.857s-7.906 5.429-12.857 5.429h-109.714c-4.953 0-9.239-1.808-12.857-5.429s-5.429-7.906-5.429-12.857v-109.714c0-4.951 1.81-9.237 5.429-12.857s7.904-5.429 12.857-5.429h109.714c4.951 0 9.237 1.808 12.857 5.429s5.429 7.906 5.429 12.857zM521.616 365.714c118.343 0 214.286 88.965 214.286 187.429s-95.943 178.286-214.286 178.286c-173.045 0-208.091-93.714-213.963-171.113 0-7.936 6.729-9.838 15.872-9.838s108.073 0 113.143 0c6.096 0 14.475 0.633 17.554 10.571 0 48.857 135.968 54.953 135.968-7.904 0-31.506-29.717-63.817-68.571-66.194s-82.286-7.607-82.286-54.199c0-13.022 0-25.673 0-44.693 0-19.015 9.717-22.343 27.431-22.343s54.853-0.002 54.853-0.002z"
+                            transform="rotate(180 0 512) scale(-1 1)"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                  <button
+                    aria-label="Scroll right"
+                    class="pf-c-nav__scroll-button"
+                    disabled=""
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 256 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                        transform=""
+                      />
+                    </svg>
+                  </button>
+                </nav>
+              </div>
+              <div
+                class="pf-c-page__header-tools-item"
+              >
+                <div
+                  style="width: auto; height: 50px; justify-content: center; display: flex; align-items: center;"
+                >
+                  <div
+                    class="pf-c-dropdown"
+                    data-ouia-component-id="2"
+                    data-ouia-component-type="PF4/Dropdown"
+                    data-ouia-safe="true"
+                  >
+                    <button
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      class="pf-c-dropdown__toggle pf-m-plain"
+                      id="pf-toggle-id-1"
+                      type="button"
+                    >
+                      <span
+                        class="pf-c-dropdown__toggle-icon"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 320 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                            transform=""
+                          />
+                        </svg>
+                      </span>
+                    </button>
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         </header>
         <div
@@ -84,7 +240,7 @@ Object {
               <nav
                 aria-label="Global"
                 class="pf-c-nav"
-                data-ouia-component-id="1"
+                data-ouia-component-id="5"
                 data-ouia-component-type="PF4/Nav"
                 data-ouia-safe="true"
               >
@@ -249,30 +405,186 @@ Object {
           <a
             class="pf-c-page__header-brand-link"
           >
-            <div>
+            <img
+              alt="Open Innovation Labs"
+              class="pf-c-brand"
+              src="/oil_logo.png"
+            />
+          </a>
+        </div>
+        <div
+          class="pf-c-page__header-tools"
+        >
+          <div
+            class="pf-c-page__header-tools-group"
+          >
+            <div
+              class="pf-c-page__header-tools-item"
+            >
               <div
-                class="pf-c-toolbar"
-                id="pf-random-id-0"
+                class="pf-c-dropdown"
+                data-ouia-component-id="0"
+                data-ouia-component-type="PF4/Dropdown"
+                data-ouia-safe="true"
               >
-                <img
-                  alt="Open Innovation Labs"
-                  class="pf-c-brand"
-                  src="/oil_logo.png"
-                />
-                <div
-                  style="width: 50px;"
-                />
-                <div
-                  class="pf-c-toolbar__content pf-m-hidden"
-                  hidden=""
+                <button
+                  aria-haspopup="true"
+                  aria-label="Notifications"
+                  class="pf-c-button pf-m-plain"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe="true"
+                  id="pf-toggle-id-0"
+                  parentref="[object Object]"
+                  type="button"
                 >
-                  <div
-                    class="pf-c-toolbar__group"
-                  />
+                  <span
+                    class="pf-c-notification-badge pf-m-unread"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 448 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"
+                        transform=""
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div
+              class="pf-c-page__header-tools-item"
+            >
+              <nav
+                aria-label="Global"
+                class="pf-c-nav pf-m-horizontal"
+                data-ouia-component-id="4"
+                data-ouia-component-type="PF4/Nav"
+                data-ouia-safe="true"
+              >
+                <button
+                  aria-label="Scroll left"
+                  class="pf-c-nav__scroll-button"
+                  disabled=""
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="currentColor"
+                    height="1em"
+                    role="img"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 256 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+                      transform=""
+                    />
+                  </svg>
+                </button>
+                <ul
+                  class="pf-c-nav__list"
+                >
+                  <li
+                    class="pf-c-nav__item"
+                  >
+                    <a
+                      class="pf-c-nav__link"
+                      href="/app/about"
+                      style="padding-bottom: 0px; padding-top: 0px;"
+                    >
+                      <svg
+                        aria-labelledby="icon-title-1"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 64 1024 1024"
+                        width="1em"
+                      >
+                        <title
+                          id="icon-title-1"
+                        >
+                          About
+                        </title>
+                        <path
+                          d="M512.059-73.143c-282.338 0-512.059 229.673-512.059 512.025 0 282.235 229.721 511.975 512.059 511.975 282.281 0 511.941-229.735 511.941-511.975 0.005-282.352-229.659-512.025-511.941-512.025zM512.059 826.523c-213.826 0-387.728-173.856-387.728-387.643 0-213.89 173.904-387.694 387.728-387.694 213.717 0 387.671 173.803 387.671 387.694 0.005 213.785-173.957 387.643-387.671 387.643zM585.143 164.571v109.714c0 4.951-1.808 9.237-5.429 12.857s-7.906 5.429-12.857 5.429h-109.714c-4.953 0-9.239-1.808-12.857-5.429s-5.429-7.906-5.429-12.857v-109.714c0-4.951 1.81-9.237 5.429-12.857s7.904-5.429 12.857-5.429h109.714c4.951 0 9.237 1.808 12.857 5.429s5.429 7.906 5.429 12.857zM521.616 365.714c118.343 0 214.286 88.965 214.286 187.429s-95.943 178.286-214.286 178.286c-173.045 0-208.091-93.714-213.963-171.113 0-7.936 6.729-9.838 15.872-9.838s108.073 0 113.143 0c6.096 0 14.475 0.633 17.554 10.571 0 48.857 135.968 54.953 135.968-7.904 0-31.506-29.717-63.817-68.571-66.194s-82.286-7.607-82.286-54.199c0-13.022 0-25.673 0-44.693 0-19.015 9.717-22.343 27.431-22.343s54.853-0.002 54.853-0.002z"
+                          transform="rotate(180 0 512) scale(-1 1)"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+                <button
+                  aria-label="Scroll right"
+                  class="pf-c-nav__scroll-button"
+                  disabled=""
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="currentColor"
+                    height="1em"
+                    role="img"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 256 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                      transform=""
+                    />
+                  </svg>
+                </button>
+              </nav>
+            </div>
+            <div
+              class="pf-c-page__header-tools-item"
+            >
+              <div
+                style="width: auto; height: 50px; justify-content: center; display: flex; align-items: center;"
+              >
+                <div
+                  class="pf-c-dropdown"
+                  data-ouia-component-id="2"
+                  data-ouia-component-type="PF4/Dropdown"
+                  data-ouia-safe="true"
+                >
+                  <button
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    class="pf-c-dropdown__toggle pf-m-plain"
+                    id="pf-toggle-id-1"
+                    type="button"
+                  >
+                    <span
+                      class="pf-c-dropdown__toggle-icon"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 320 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                          transform=""
+                        />
+                      </svg>
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       </header>
       <div
@@ -286,7 +598,7 @@ Object {
             <nav
               aria-label="Global"
               class="pf-c-nav"
-              data-ouia-component-id="1"
+              data-ouia-component-id="5"
               data-ouia-component-type="PF4/Nav"
               data-ouia-safe="true"
             >

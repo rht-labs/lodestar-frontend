@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
-import { Card, CardHeader, CardBody } from '@patternfly/react-core';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  PageSection,
+  PageSectionVariants,
+  TextContent,
+  Text,
+  Gallery,
+  GalleryItem,
+  Page,
+  SkipToContent
+} from '@patternfly/react-core';
 import { useVersion } from '../../context/version_context/version_context';
 
-function _Admin() {
-  const contentPane: React.CSSProperties = {
-    backgroundColor: '#EDEDED',
-    height: '100vh',
-    padding: 15,
-  };
+export function About() {
 
   const versionContext = useVersion();
 
@@ -53,21 +60,35 @@ function _Admin() {
     );
   }
 
+  const pageId = 'main-content-page-layout-default-nav';
+  const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to content</SkipToContent>;
+
   return (
     <>
-      <div style={contentPane}>
-        <h1>Administration Pane</h1>
-        <p>
-          This is where administrators monitor the application and control their
-          minions!
-        </p>
-        <Card isCompact={true}>
-          <CardHeader>Component Versions</CardHeader>
-          {cardItems}
-        </Card>
-      </div>
+      <Page
+        isManagedSidebar
+        skipToContent={PageSkipToContent}
+        mainContainerId={pageId}
+      >
+        <PageSection variant={PageSectionVariants.light}>
+          <TextContent>
+            <Text component="h1">About</Text>
+            <Text component="p">
+              This is where versions of the application can be tracked.
+            </Text>
+          </TextContent>
+        </PageSection>
+        <PageSection>
+          <Gallery>
+            <GalleryItem>
+              <Card isCompact={true}>
+                <CardHeader>Component Versions</CardHeader>
+                {cardItems}
+              </Card>
+            </GalleryItem>
+          </Gallery>
+        </PageSection>
+      </Page>
     </>
   );
 }
-
-export const Admin = React.memo(_Admin);
