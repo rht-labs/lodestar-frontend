@@ -1,12 +1,12 @@
 import React from 'react';
 import { Wizard } from '@patternfly/react-core';
-import { BasicInformation } from './form_views/01_basic_information';
-import { PointOfContact } from './form_views/02_point_of_contact';
-import { ClusterInformation } from './form_views/03_cluster_information';
-import { ClusterUsers } from './form_views/04_cluster_users';
-import { Loading } from './Loading';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
+import { BasicInformation } from '../form_views/01_basic_information';
+import { PointOfContact } from '../form_views/02_point_of_contact';
+import { ClusterInformation } from '../form_views/03_cluster_information';
+import { ClusterUsers } from '../form_views/04_cluster_users';
+import { Loading } from '../Loading';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { OMPEngagementButtonPane } from '../../../components/omp_engagement_button_pane';
 
 export function EngagementWizard() {
   const {

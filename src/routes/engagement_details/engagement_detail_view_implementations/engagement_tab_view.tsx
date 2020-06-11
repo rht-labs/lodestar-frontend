@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { EngagementViewProps } from '.';
-import { Loading } from './Loading';
+import { EngagementViewProps } from '..';
+import { Loading } from '../Loading';
 import { Tabs, Tab } from '@patternfly/react-core';
 import { Table, TableVariant, TableBody } from '@patternfly/react-table';
-import { BasicInformation } from './form_views/01_basic_information';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { PointOfContact } from './form_views/02_point_of_contact';
-import { ClusterUsers } from './form_views/04_cluster_users';
-import { ClusterInformation } from './form_views/03_cluster_information';
-import { Engagement } from '../../schemas/engagement_schema';
+import { BasicInformation } from '../form_views/01_basic_information';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { PointOfContact } from '../form_views/02_point_of_contact';
+import { ClusterUsers } from '../form_views/04_cluster_users';
+import { ClusterInformation } from '../form_views/03_cluster_information';
+import { Engagement } from '../../../schemas/engagement_schema';
 
 interface EngagementTabViewProps extends EngagementViewProps {}
 

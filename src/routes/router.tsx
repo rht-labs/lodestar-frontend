@@ -1,11 +1,11 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import {FeatureRequest} from '../components/feature_request';
-import {PrivateRoute} from '../components/authentication/private_route';
-import {CallbackHandler} from '../components/authentication/callback_handler';
-import {Dashboard} from './dashboard';
+import { FeatureRequest } from '../components/feature_request';
+import { PrivateRoute } from '../components/authentication/private_route';
+import { CallbackHandler } from '../components/authentication/callback_handler';
+import { Dashboard } from './dashboard';
 import { About } from './about';
-import {UnauthorizedPage} from './unauthorized';
+import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
 import { APP_FEATURES } from '../common/app_features';
@@ -13,7 +13,7 @@ import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
-import { EngagementView } from './engagement_pane';
+import { EngagementDetailView } from './engagement_details';
 
 function _OMPRouter() {
   return (
@@ -70,7 +70,7 @@ function _OMPRouter() {
                       </PrivateRoute>
                       <PrivateRoute
                         path="/app/engagements/:customer_name/:project_name"
-                        component={EngagementView}
+                        component={EngagementDetailView}
                       />
                     </Switch>
                   </PrivateRoute>
