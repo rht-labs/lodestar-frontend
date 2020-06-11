@@ -15,12 +15,12 @@ import {
 
 import {HelpIcon} from '@patternfly/react-icons';
 
-export interface NavigationBarProps {
+export interface HeaderProps {
   isDrawerOpen: boolean;
   onNavToggle: () => void;
 }
 
-export function NavigationBar(props: NavigationBarProps) {
+export function Header(props: HeaderProps) {
 
   const iconPad: React.CSSProperties = {
     paddingBottom: 0,

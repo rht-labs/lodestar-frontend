@@ -1,14 +1,14 @@
 import React from 'react';
 import {MemoryRouter} from 'react-router';
 import {render} from '@testing-library/react';
-import {NavigationBar} from '../navigation_bar';
+import {Header} from '../header';
 
 describe('Notification UI ', () => {
   test('should match snapshot', () => {
     expect(render(
       <MemoryRouter>
 
-        <NavigationBar isDrawerOpen={true} onNavToggle={() => null}/>
+        <Header isDrawerOpen={true} onNavToggle={() => null}/>
       </MemoryRouter>))
       .toMatchSnapshot();
   });
