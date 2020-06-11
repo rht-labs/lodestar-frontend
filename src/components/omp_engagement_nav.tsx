@@ -148,7 +148,6 @@ function _EngagementNav() {
             Cancel
           </Button>,
         ]}
-        isFooterLeftAligned
       >
         <div style={newInstruct}>
           To create a new Engagement, please enter a client and product name
