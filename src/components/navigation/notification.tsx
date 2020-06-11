@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Dropdown, DropdownItem, NotificationBadge, DropdownToggle, DropdownGroup, DropdownSeparator} from '@patternfly/react-core';
+import {Dropdown, DropdownItem, DropdownSeparator, NotificationBadge} from '@patternfly/react-core';
 import {BellIcon} from '@patternfly/react-icons';
 
 export interface NotificationProps {
@@ -11,6 +11,7 @@ export function Notification(props: NotificationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClick = () => {
+    onToggle();
     setRead(true);
   };
   const onToggle = () => {
@@ -22,7 +23,7 @@ export function Notification(props: NotificationProps) {
     <DropdownItem key="action" component="button">
       Unread notification 2
     </DropdownItem>,
-    <DropdownSeparator key="separator" />,
+    <DropdownSeparator key="separator"/>,
     <DropdownItem key="disabled link" isDisabled>
       Read notification
     </DropdownItem>,
@@ -41,11 +42,9 @@ export function Notification(props: NotificationProps) {
         isPlain
         dropdownItems={dropdownItems}
         toggle={
-          <DropdownToggle onToggle={onToggle} toggleIndicator={() => <div></div>}>
-            <NotificationBadge isRead={isRead} onClick={onClick} aria-label="Notifications">
-              <BellIcon/>
-            </NotificationBadge>
-          </DropdownToggle>
+          <NotificationBadge isRead={isRead} onClick={onClick} aria-label="Notifications">
+            <BellIcon/>
+          </NotificationBadge>
         }
         isOpen={isOpen}
         onSelect={onSelect}
