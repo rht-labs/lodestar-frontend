@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="pf-c-page__sidebar pf-m-dark pf-m-expanded"
+        class="pf-c-page__sidebar pf-m-expanded"
         id="page-sidebar"
       >
         <div
@@ -17,7 +17,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="pf-c-page__sidebar pf-m-dark pf-m-expanded"
+      class="pf-c-page__sidebar pf-m-expanded"
       id="page-sidebar"
     >
       <div

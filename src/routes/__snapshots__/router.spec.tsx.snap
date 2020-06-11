@@ -13,6 +13,7 @@ Object {
         >
           <header
             class="pf-c-page__header"
+            toolbar="[object Object]"
           >
             <div
               class="pf-c-page__header-brand"
@@ -26,26 +27,6 @@ Object {
                   LodeStar
                 </span>
               </a>
-            </div>
-            <div
-              class="pf-c-page__header-tools"
-            >
-              <div
-                class="pf-l-toolbar"
-              >
-                <a
-                  href="/app"
-                >
-                  <button
-                    class="pf-c-button pf-m-primary"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    Log In
-                  </button>
-                </a>
-              </div>
             </div>
           </header>
           <main
@@ -106,6 +87,7 @@ Object {
       >
         <header
           class="pf-c-page__header"
+          toolbar="[object Object]"
         >
           <div
             class="pf-c-page__header-brand"
@@ -119,26 +101,6 @@ Object {
                 LodeStar
               </span>
             </a>
-          </div>
-          <div
-            class="pf-c-page__header-tools"
-          >
-            <div
-              class="pf-l-toolbar"
-            >
-              <a
-                href="/app"
-              >
-                <button
-                  class="pf-c-button pf-m-primary"
-                  data-ouia-component-type="PF4/Button"
-                  data-ouia-safe="true"
-                  type="button"
-                >
-                  Log In
-                </button>
-              </a>
-            </div>
           </div>
         </header>
         <main

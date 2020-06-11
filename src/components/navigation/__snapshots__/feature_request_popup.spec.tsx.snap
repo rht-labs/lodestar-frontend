@@ -24,7 +24,7 @@ Object {
         data-state="hidden"
         id="tippy-1"
         role="tooltip"
-        style="max-width: calc(2rem + 18.75rem); transition-duration: 0ms;"
+        style="max-width: calc(1rem + 1rem + 18.75rem); transition-duration: 0ms;"
         tabindex="-1"
       >
         <div
@@ -71,7 +71,7 @@ Object {
                     </svg>
                   </button>
                   <h6
-                    class="pf-c-title pf-m-xl"
+                    class="pf-c-title pf-m-md"
                     id="popover-pf-random-id-0-header"
                   >
                     <span>

@@ -8,8 +8,8 @@ Object {
       <div>
         <nav
           aria-label="Global"
-          class="pf-c-nav pf-m-dark"
-          data-ouia-component-id="0"
+          class="pf-c-nav"
+          data-ouia-component-id="1"
           data-ouia-component-type="PF4/Nav"
           data-ouia-safe="true"
         >
@@ -22,7 +22,6 @@ Object {
               <a
                 aria-expanded="true"
                 class="pf-c-nav__link"
-                data-component="pf-nav-expandable"
                 href="#"
                 id="navExpandableEngagement"
               >
@@ -30,20 +29,24 @@ Object {
                 <span
                   class="pf-c-nav__toggle"
                 >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 256 512"
-                    width="1em"
+                  <span
+                    class="pf-c-nav__toggle-icon"
                   >
-                    <path
-                      d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-                      transform=""
-                    />
-                  </svg>
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 256 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                        transform=""
+                      />
+                    </svg>
+                  </span>
                 </span>
               </a>
               <section
@@ -52,7 +55,7 @@ Object {
               >
                 
                 <ul
-                  class="pf-c-nav__simple-list"
+                  class="pf-c-nav__list"
                 >
                   <li
                     class="pf-c-nav__item"
@@ -119,8 +122,8 @@ Object {
     <div>
       <nav
         aria-label="Global"
-        class="pf-c-nav pf-m-dark"
-        data-ouia-component-id="0"
+        class="pf-c-nav"
+        data-ouia-component-id="1"
         data-ouia-component-type="PF4/Nav"
         data-ouia-safe="true"
       >
@@ -133,7 +136,6 @@ Object {
             <a
               aria-expanded="true"
               class="pf-c-nav__link"
-              data-component="pf-nav-expandable"
               href="#"
               id="navExpandableEngagement"
             >
@@ -141,20 +143,24 @@ Object {
               <span
                 class="pf-c-nav__toggle"
               >
-                <svg
-                  aria-hidden="true"
-                  fill="currentColor"
-                  height="1em"
-                  role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 256 512"
-                  width="1em"
+                <span
+                  class="pf-c-nav__toggle-icon"
                 >
-                  <path
-                    d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-                    transform=""
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    fill="currentColor"
+                    height="1em"
+                    role="img"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 256 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                      transform=""
+                    />
+                  </svg>
+                </span>
               </span>
             </a>
             <section
@@ -163,7 +169,7 @@ Object {
             >
               
               <ul
-                class="pf-c-nav__simple-list"
+                class="pf-c-nav__list"
               >
                 <li
                   class="pf-c-nav__item"
