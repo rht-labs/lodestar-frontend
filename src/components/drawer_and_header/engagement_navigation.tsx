@@ -8,6 +8,13 @@ export const EngagementNavigation = () => {
   return (
     <div>
       <Nav theme="dark">
+        <NavItem
+          title="Dashboard"
+          itemId="dashboard"
+          isActive={pathname.includes('/app/dashboard')}
+        >
+          <Link to="/app/dashboard">Dashboard</Link>
+        </NavItem>
         <NavList>
           <NavExpandable
             title={'Engagements'}
@@ -18,7 +25,7 @@ export const EngagementNavigation = () => {
             <NavItem
               id="Overview"
               itemId={0}
-              isActive={pathname === '/app/engagements/overview'}
+              isActive={pathname === '/app/engagements/all'}
             >
               <Link to="/app/engagements/all">Overview</Link>
             </NavItem>
@@ -43,7 +50,6 @@ export const EngagementNavigation = () => {
             >
               <Link to="/app/engagements/past">Past</Link>
             </NavItem>
-            <hr className="pf-c-divider" />
             <NavItem
               id="New"
               itemId={0}
