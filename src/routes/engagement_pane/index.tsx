@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react';
-import {
-  Alert,
-  Wizard,
-  PageSection,
-  Text,
-  PageSectionVariants,
-  TextContent,
-} from '@patternfly/react-core';
-import { BasicInformation } from './tabs/01_basic_information';
-import { PointOfContact } from './tabs/02_point_of_contact';
-import { ClusterInformation } from './tabs/03_cluster_information';
-import { ClusterUsers } from './tabs/04_cluster_users';
-import { Loading } from './Loading';
-import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { ValidatorFactory } from '../../schemas/validators';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
+import { EngagementTabView } from './engagement_tab_view';
+import { ValidatorFactory } from '../../schemas/validators';
+import {
+  Alert,
+  PageSection,
+  TextContent,
+  Text,
+  PageSectionVariants,
+} from '@patternfly/react-core';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { ValidationProvider } from '../../context/validation_context/validation_context';
 
-export function EngagementPane() {
+export interface EngagementViewProps {
+  engagement: Engagement;
+}
+
+export function EngagementView(props) {
   const { project_name, customer_name } = useParams();
 
   const {
@@ -30,9 +29,18 @@ export function EngagementPane() {
     engagementFormState,
     updateEngagementFormField,
     setActiveEngagement,
+    activeEngagement,
     getEngagement,
   } = useEngagements();
+  const engagementFormRequestError = error;
 
+  const AlertMessage = () => {
+    return engagementFormRequestError ? (
+      <Alert isInline title="We encountered an error." variant="danger">
+        {engagementFormRequestError.message}
+      </Alert>
+    ) : null;
+  };
   useEffect(() => {
     if (!formOptions) {
       Logger.info('getting config');
@@ -51,47 +59,15 @@ export function EngagementPane() {
       }
     });
   });
-
   const validators = getValidatorsFromFormOptions(formOptions);
 
-  const AlertMessage = () => {
-    return engagementFormRequestError ? (
-      <Alert isInline title="We encountered an error." variant="danger">
-        {engagementFormRequestError.message}
-      </Alert>
-    ) : null;
-  };
-
-  const engagementFormRequestError = error;
-
-  const steps = getWizardSteps(
-    formOptions,
-    engagementFormState,
-    updateEngagementFormField
-  );
-
   return (
-    <>
-      <WizardTemplate>
-        <ValidationProvider validators={validators}>
-          <AlertMessage />
-          <Wizard
-            isInPage
-            isCompactNav
-            steps={steps}
-            footer={<CustomWizardFooter />}
-          />
-        </ValidationProvider>
-      </WizardTemplate>
-    </>
-  );
-}
-
-function CustomWizardFooter() {
-  return (
-    <div style={{ zIndex: 100 }}>
-      <OMPEngagementButtonPane />
-    </div>
+    <ValidationProvider validators={validators}>
+      <EngagementViewTemplate>
+        <AlertMessage />
+        <EngagementTabView engagement={activeEngagement} />
+      </EngagementViewTemplate>
+    </ValidationProvider>
   );
 }
 
@@ -111,7 +87,7 @@ const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
     };
   }, {});
 
-function WizardTemplate(props: any) {
+function EngagementViewTemplate(props: any) {
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
@@ -122,54 +98,4 @@ function WizardTemplate(props: any) {
       <PageSection style={{}}>{props.children}</PageSection>
     </>
   );
-}
-
-function getWizardSteps(
-  formOptions,
-  engagementFormState,
-  updateEngagementFormField
-) {
-  return [
-    {
-      name: 'Basic Information',
-      component: (
-        <BasicInformation
-          formOptions={formOptions}
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-    {
-      name: 'Point of Contact',
-      component: (
-        <PointOfContact
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-    {
-      name: 'Cluster Information',
-      component: !formOptions ? (
-        <Loading />
-      ) : (
-        <ClusterInformation
-          formOptions={formOptions}
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-    {
-      name: 'Users',
-      component: (
-        <ClusterUsers
-          formOptions={formOptions}
-          values={engagementFormState}
-          onChange={updateEngagementFormField}
-        />
-      ),
-    },
-  ];
 }
