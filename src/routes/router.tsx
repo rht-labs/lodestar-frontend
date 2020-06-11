@@ -14,7 +14,6 @@ import { APP_FEATURES } from '../common/app_features';
 import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
-import { EngagementPane } from './engagement_pane';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 
 function _OMPRouter() {
