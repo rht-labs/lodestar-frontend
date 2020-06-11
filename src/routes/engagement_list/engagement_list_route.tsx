@@ -8,6 +8,7 @@ import {
   TextContent,
 } from '@patternfly/react-core';
 import { Logger } from '../../utilities/logger';
+import { Link } from 'react-router-dom';
 
 export function EngagementListRoute(props: EngagementListProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
@@ -41,7 +42,15 @@ export interface EngagementListProps {
 }
 
 function EngagementListItem({ engagement }: { engagement: Engagement }) {
-  return <div>{engagement.project_name}</div>;
+  return (
+    <div>
+      <Link
+        to={`/app/engagements/${engagement.customer_name}/${engagement.project_name}`}
+      >
+        {engagement.project_name}
+      </Link>
+    </div>
+  );
 }
 
 function EngagementList({ engagements }: { engagements: Engagement[] }) {
