@@ -244,6 +244,16 @@ Object {
                 data-ouia-component-type="PF4/Nav"
                 data-ouia-safe="true"
               >
+                <li
+                  class="pf-c-nav__item"
+                >
+                  <a
+                    class="pf-c-nav__link"
+                    href="/app/dashboard"
+                  >
+                    Dashboard
+                  </a>
+                </li>
                 <ul
                   class="pf-c-nav__list"
                 >
@@ -328,9 +338,6 @@ Object {
                             Past
                           </a>
                         </li>
-                        <hr
-                          class="pf-c-divider"
-                        />
                         <li
                           class="pf-c-nav__item"
                         >
@@ -602,6 +609,16 @@ Object {
               data-ouia-component-type="PF4/Nav"
               data-ouia-safe="true"
             >
+              <li
+                class="pf-c-nav__item"
+              >
+                <a
+                  class="pf-c-nav__link"
+                  href="/app/dashboard"
+                >
+                  Dashboard
+                </a>
+              </li>
               <ul
                 class="pf-c-nav__list"
               >
@@ -686,9 +703,6 @@ Object {
                           Past
                         </a>
                       </li>
-                      <hr
-                        class="pf-c-divider"
-                      />
                       <li
                         class="pf-c-nav__item"
                       >

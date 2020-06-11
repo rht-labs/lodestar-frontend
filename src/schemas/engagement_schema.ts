@@ -102,4 +102,31 @@ export class Engagement {
       launch: {},
     });
   }
+
+  static staticFaked() {
+    return new Engagement({
+      archive_date: 'today',
+      customer_contact_email: 'bob@doe.com',
+      customer_contact_name: `Bob Doe`,
+      customer_name: 'NASA',
+      description: "It's rocket science",
+      end_date: 'tomorrow',
+      engagement_users: [],
+      engagement_lead_email: 'alice@doe.com',
+      engagement_lead_name: `Alice Doe`,
+      location: `Nashville, TN`,
+      ocp_cloud_provider_name: 'AWS',
+      ocp_cloud_provider_region: 'N. Virginia',
+      ocp_cluster_size: 'Large',
+      ocp_persistent_storage_size: `100G`,
+      ocp_sub_domain: 'ordoabchao',
+      ocp_version: '4.4',
+      project_id: 1,
+      project_name: 'Boots on the Moon',
+      start_date: 'yesterday',
+      technical_lead_email: 'eve@doe.com',
+      technical_lead_name: `Eve Doe`,
+      launch: {},
+    });
+  }
 }
