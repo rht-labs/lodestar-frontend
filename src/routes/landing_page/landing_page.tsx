@@ -11,7 +11,7 @@ import './landing_page.css';
 export const LandingPage = () => {
   const pageHeader = (
     <PageHeader
-      logo={<span className="logo-text">Open Management Portal</span>}
+      logo={<span className="logo-text">LodeStar</span>}
       toolbar={
         <Toolbar>
           <Link to="/app">
@@ -29,7 +29,7 @@ export const LandingPage = () => {
         </PageSection>
         <div className="jumbotron-container">
           <div className="cta">
-            <span>Open Management Portal</span>
+            <span>LodeStar</span>
             <Link to="/app">
               <Button>Get Started</Button>
             </Link>

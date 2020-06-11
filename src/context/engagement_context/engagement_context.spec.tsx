@@ -17,9 +17,9 @@ describe('Engagement Context', () => {
     cleanup();
   });
 
-  test('by default, engagements are an empty list', () => {
+  test('by default, engagements are undefined', () => {
     const { result } = getHook();
-    expect(result.current.engagements).toEqual([]);
+    expect(result.current.engagements).toEqual(undefined);
   });
 
   test('Fetch Engagements', async () => {
@@ -105,15 +105,5 @@ describe('Engagement Context', () => {
       await waitForNextUpdate();
     });
     expect(result.current.engagements[0].customer_name).toEqual('spencer');
-  });
-  test('When creating a new engagement, it is set as the active engagement', async () => {
-    const { result, waitForNextUpdate } = getHook();
-    await act(async () => {
-      result.current.createEngagement({
-        customer_name: 'spencer',
-      } as Engagement);
-      await waitForNextUpdate();
-    });
-    expect(result.current.activeEngagement.customer_name).toEqual('spencer');
   });
 });

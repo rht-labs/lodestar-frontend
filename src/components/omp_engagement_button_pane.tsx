@@ -4,7 +4,8 @@ import { Feature } from './feature';
 import { APP_FEATURES } from '../common/app_features';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 import { useConfig } from '../context/config_context/config_hook';
-function _OMPEngagementButtonPane() {
+
+export function OMPEngagementButtonPane() {
   const engagementContext = useEngagements();
   const configContext = useConfig();
 
@@ -54,7 +55,11 @@ function _OMPEngagementButtonPane() {
   return (
     <Feature name={APP_FEATURES.writer}>
       <div style={buttonPane}>
-        <Button onClick={saveCluster} style={buttonDisplay} data-cy="engagement-save">
+        <Button
+          onClick={saveCluster}
+          style={buttonDisplay}
+          data-cy="engagement-save"
+        >
           {' '}
           Save{' '}
         </Button>
@@ -75,5 +80,3 @@ function _OMPEngagementButtonPane() {
     </Feature>
   );
 }
-
-export const OMPEngagementButtonPane = React.memo(_OMPEngagementButtonPane);

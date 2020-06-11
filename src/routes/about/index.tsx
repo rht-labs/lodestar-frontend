@@ -14,7 +14,7 @@ import {
 } from '@patternfly/react-core';
 import { useVersion } from '../../context/version_context/version_context';
 
-function About() {
+export function About() {
 
   const versionContext = useVersion();
 
@@ -92,5 +92,3 @@ function About() {
     </>
   );
 }
-
-export const Admin = React.memo(About);

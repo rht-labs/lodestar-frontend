@@ -1,18 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, Tabs, Tab } from '@patternfly/react-core';
+import React, { useEffect } from 'react';
+import {
+  Alert,
+  Wizard,
+  PageSection,
+  Text,
+  PageSectionVariants,
+  TextContent,
+} from '@patternfly/react-core';
 import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
 import { ClusterInformation } from './tabs/03_cluster_information';
 import { ClusterUsers } from './tabs/04_cluster_users';
 import { Loading } from './Loading';
-import { EngagementNav } from '../../components/omp_engagement_nav';
-import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { ValidatorFactory } from '../../schemas/validators';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
+import { Logger } from '../../utilities/logger';
+import { useParams } from 'react-router';
 
-const getValidators = (formOptions: EngagementFormConfig = {}) =>
+export function EngagementPane() {
+  const { project_name, customer_name } = useParams();
+
+  const {
+    formOptions,
+    getConfig,
+    error,
+    engagementFormState,
+    updateEngagementFormField,
+    setActiveEngagement,
+    getEngagement,
+  } = useEngagements();
+
+  useEffect(() => {
+    if (!formOptions) {
+      Logger.info('getting config');
+      getConfig();
+    }
+  }, [formOptions, getConfig]);
+
+  useEffect(() => {
+    if (!customer_name || !project_name) {
+      return;
+    }
+    getEngagement(customer_name, project_name).then(engagement => {
+      if (engagement) {
+        setActiveEngagement(engagement);
+      } else {
+      }
+    });
+  });
+
+  const validators = getValidatorsFromFormOptions(formOptions);
+
+  const AlertMessage = () => {
+    return engagementFormRequestError ? (
+      <Alert isInline title="We encountered an error." variant="danger">
+        {engagementFormRequestError.message}
+      </Alert>
+    ) : null;
+  };
+
+  const engagementFormRequestError = error;
+
+  const steps = getWizardSteps(
+    formOptions,
+    engagementFormState,
+    updateEngagementFormField
+  );
+
+  return (
+    <>
+      <WizardTemplate>
+        <ValidationProvider validators={validators}>
+          <AlertMessage />
+          <Wizard
+            isInPage
+            isCompactNav
+            steps={steps}
+            footer={<CustomWizardFooter />}
+          />
+        </ValidationProvider>
+      </WizardTemplate>
+    </>
+  );
+}
+
+function CustomWizardFooter() {
+  return (
+    <div style={{ zIndex: 100 }}>
+      <OMPEngagementButtonPane />
+    </div>
+  );
+}
+
+const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
   Object.keys(formOptions || {}).reduce((acc, groupingKey) => {
     return {
       ...acc,
@@ -28,118 +111,65 @@ const getValidators = (formOptions: EngagementFormConfig = {}) =>
     };
   }, {});
 
-export function EngagementPane() {
-  const [activeTabKey, setActiveTabKey] = useState<number>(0);
-  const {
-    formOptions,
-    getConfig,
-    activeEngagement,
-    error,
-    engagementFormState,
-    updateEngagementFormField,
-  } = useEngagements();
-
-  const handleTabClick = function(this: any, event: any, tabIndex: any) {
-    setActiveTabKey(tabIndex);
-  };
-
-  useEffect(() => {
-    if (!formOptions) {
-      getConfig();
-    }
-  }, [formOptions, getConfig]);
-
-  useEffect(() => {
-    setActiveTabKey(0);
-  }, [activeEngagement]);
-
-  const contentPane: React.CSSProperties = {
-    backgroundColor: '#EDEDED',
-    height: '100vh',
-    display: 'flex',
-  };
-
-  const columnPane: React.CSSProperties = {
-    backgroundColor: '#FFFFFF',
-    width: '15%',
-    borderRight: '1px solid #AFBAC4',
-  };
-
-  const formPane: React.CSSProperties = {
-    width: '85%',
-  };
-
-  const tabs: React.CSSProperties = {
-    backgroundColor: '#FFFFFF',
-  };
-
-  const tab: React.CSSProperties = {
-    borderBottom: '.5px solid #AFBAC4',
-    borderRight: '.5px solid #AFBAC4',
-  };
-
-  const engagementFormRequestError = error;
-
+function WizardTemplate(props: any) {
   return (
     <>
-      <ValidationProvider validators={getValidators(formOptions)}>
-        <div style={contentPane}>
-          <div style={columnPane}>
-            <EngagementNav />
-          </div>
-          <div style={formPane}>
-            <Tabs
-              style={tabs}
-              isFilled
-              activeKey={activeTabKey}
-              onSelect={handleTabClick}
-            >
-              <Tab
-                id={'basic_info'}
-                style={tab}
-                eventKey={0}
-                title="Basic Information"
-              >
-                <BasicInformation
-                  formOptions={formOptions}
-                  values={engagementFormState}
-                  onChange={updateEngagementFormField}
-                />
-              </Tab>
-              <Tab id={'poc'} style={tab} eventKey={1} title="Point of Contact">
-                <PointOfContact
-                  values={engagementFormState}
-                  onChange={updateEngagementFormField}
-                />
-              </Tab>
-              <Tab id={'oc'} style={tab} eventKey={2} title="OpenShift Cluster">
-                {!formOptions ? (
-                  <Loading />
-                ) : (
-                  <ClusterInformation
-                    formOptions={formOptions}
-                    values={engagementFormState}
-                    onChange={updateEngagementFormField}
-                  />
-                )}
-              </Tab>
-              <Tab id={'cu'} style={tab} eventKey={3} title="Users">
-                <ClusterUsers
-                  formOptions={formOptions}
-                  values={engagementFormState}
-                  onChange={updateEngagementFormField}
-                />
-              </Tab>
-            </Tabs>
-          </div>
-          <OMPEngagementButtonPane />
-        </div>
-        {engagementFormRequestError ? (
-          <Alert isInline title="We encountered an error." variant="danger">
-            {engagementFormRequestError.message}
-          </Alert>
-        ) : null}
-      </ValidationProvider>
+      <PageSection variant={PageSectionVariants.light}>
+        <TextContent>
+          <Text component="h1">Create New Engagement</Text>
+        </TextContent>
+      </PageSection>
+      <PageSection style={{}}>{props.children}</PageSection>
     </>
   );
+}
+
+function getWizardSteps(
+  formOptions,
+  engagementFormState,
+  updateEngagementFormField
+) {
+  return [
+    {
+      name: 'Basic Information',
+      component: (
+        <BasicInformation
+          formOptions={formOptions}
+          values={engagementFormState}
+          onChange={updateEngagementFormField}
+        />
+      ),
+    },
+    {
+      name: 'Point of Contact',
+      component: (
+        <PointOfContact
+          values={engagementFormState}
+          onChange={updateEngagementFormField}
+        />
+      ),
+    },
+    {
+      name: 'Cluster Information',
+      component: !formOptions ? (
+        <Loading />
+      ) : (
+        <ClusterInformation
+          formOptions={formOptions}
+          values={engagementFormState}
+          onChange={updateEngagementFormField}
+        />
+      ),
+    },
+    {
+      name: 'Users',
+      component: (
+        <ClusterUsers
+          formOptions={formOptions}
+          values={engagementFormState}
+          onChange={updateEngagementFormField}
+        />
+      ),
+    },
+  ];
 }
