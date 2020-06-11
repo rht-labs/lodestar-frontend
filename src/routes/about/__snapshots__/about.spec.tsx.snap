@@ -50,7 +50,7 @@ Object {
                   class="pf-c-card pf-m-compact"
                 >
                   <div
-                    class="pf-c-card__header pf-c-title pf-m-md"
+                    class="pf-c-card__header"
                   >
                     Component Versions
                   </div>
@@ -108,7 +108,7 @@ Object {
                 class="pf-c-card pf-m-compact"
               >
                 <div
-                  class="pf-c-card__header pf-c-title pf-m-md"
+                  class="pf-c-card__header"
                 >
                   Component Versions
                 </div>
