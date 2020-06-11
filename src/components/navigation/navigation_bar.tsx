@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserDropdown } from './user_dropdown';
 import { Link, useLocation } from 'react-router-dom';
+import {Notification} from "./notification";
 import {
   PageHeader,
   Brand,
@@ -47,6 +48,10 @@ export function NavigationBar(props:NavigationBarProps) {
       toolbar={
         <Toolbar>
           <ToolbarGroup>
+            <Notification />
+          </ToolbarGroup>
+
+          <ToolbarGroup>
             <Nav theme="dark">
               <NavList variant={NavVariants.horizontal}>
                 <NavItem
@@ -55,13 +60,12 @@ export function NavigationBar(props:NavigationBarProps) {
                   isActive={pathname === '/about'}
                 >
                   <Link style={iconPad} to="/app/about">
-                    <HelpIcon size="md" title="About" />
+                    <HelpIcon title="About" />
                   </Link>
                 </NavItem>
               </NavList>
             </Nav>
           </ToolbarGroup>
-
           <ToolbarGroup>
             <ToolbarItem>
               <UserDropdown />
