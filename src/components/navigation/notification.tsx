@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Dropdown,
-  DropdownItem,
-  DropdownToggle,
-  NotificationBadge,
-} from '@patternfly/react-core';
+import {Alert, Dropdown, DropdownItem, DropdownToggle, NotificationBadge} from '@patternfly/react-core';
 import {BellIcon} from '@patternfly/react-icons';
 
 export interface NotificationProps {
@@ -27,7 +21,7 @@ export function Notification(props: NotificationProps) {
         aria-relevant="additions text"
         aria-atomic="true"
         variant="info"
-        title="Test Notification" >
+        title="Test Notification">
         Test Notification
       </Alert>
     </DropdownItem>,
