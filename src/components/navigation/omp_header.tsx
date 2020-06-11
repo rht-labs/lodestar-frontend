@@ -9,8 +9,6 @@ import {
   Nav,
   NavItem,
   NavList,
-  NavVariants,
-  Avatar,
 } from '@patternfly/react-core';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -22,7 +20,6 @@ import {
   HandPaperIcon,
 } from '@patternfly/react-icons';
 
-import avatarImg from '../../assets/images/avatar.svg';
 import { UserDropdown } from '../user_dropdown';
 
 function _OMPHeader() {
@@ -47,11 +44,11 @@ function _OMPHeader() {
           </Toolbar>
         </div>
       }
-      toolbar={
+      headerTools={
         <Toolbar>
           <ToolbarGroup>
-            <Nav theme="dark">
-              <NavList variant={NavVariants.horizontal}>
+            <Nav theme="dark" variant="horizontal">
+              <NavList>
                 <NavItem
                   id="homeLink"
                   itemId={0}
@@ -100,7 +97,6 @@ function _OMPHeader() {
           </ToolbarGroup>
         </Toolbar>
       }
-      avatar={<Avatar src={avatarImg} alt={'User Avatar'} />}
     ></PageHeader>
   );
 }
