@@ -1,3 +1,5 @@
+import faker from 'faker/locale/en_US';
+
 export interface Engagement {
   archive_date: string;
   customer_contact_email: string;
@@ -79,7 +81,7 @@ export class Engagement {
       archive_date: 'faker',
       customer_contact_email: 'faker',
       customer_contact_name: 'faker',
-      customer_name: 'faker',
+      customer_name: faker.company.companyName(),
       description: 'faker',
       end_date: 'faker',
       engagement_users: [],
@@ -93,7 +95,7 @@ export class Engagement {
       ocp_sub_domain: 'faker',
       ocp_version: 'faker',
       project_id: 1,
-      project_name: 'faker',
+      project_name: faker.company.catchPhrase(),
       start_date: 'faker',
       technical_lead_email: 'faker',
       technical_lead_name: 'faker',

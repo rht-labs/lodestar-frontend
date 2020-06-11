@@ -13,8 +13,8 @@ import { APP_FEATURES } from '../common/app_features';
 import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
-import { EngagementWizard } from './engagement_pane/engagement_wizard';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
+import { EngagementView } from './engagement_pane';
 
 function _OMPRouter() {
   return (
@@ -71,7 +71,7 @@ function _OMPRouter() {
                       </PrivateRoute>
                       <PrivateRoute
                         path="/app/engagements/:customer_name/:project_name"
-                        component={EngagementWizard}
+                        component={EngagementView}
                       />
                     </Switch>
                   </PrivateRoute>

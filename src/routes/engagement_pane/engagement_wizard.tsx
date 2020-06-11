@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Wizard } from '@patternfly/react-core';
 import { BasicInformation } from './tabs/01_basic_information';
 import { PointOfContact } from './tabs/02_point_of_contact';
@@ -7,39 +7,13 @@ import { ClusterUsers } from './tabs/04_cluster_users';
 import { Loading } from './Loading';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { OMPEngagementButtonPane } from '../../components/omp_engagement_button_pane';
-import { Logger } from '../../utilities/logger';
-import { useParams } from 'react-router';
 
 export function EngagementWizard() {
-  const { project_name, customer_name } = useParams();
-
   const {
     formOptions,
-    getConfig,
     engagementFormState,
     updateEngagementFormField,
-    setActiveEngagement,
-    getEngagement,
   } = useEngagements();
-
-  useEffect(() => {
-    if (!formOptions) {
-      Logger.info('getting config');
-      getConfig();
-    }
-  }, [formOptions, getConfig]);
-
-  useEffect(() => {
-    if (!customer_name || !project_name) {
-      return;
-    }
-    getEngagement(customer_name, project_name).then(engagement => {
-      if (engagement) {
-        setActiveEngagement(engagement);
-      } else {
-      }
-    });
-  });
 
   const steps = getWizardSteps(
     formOptions,
@@ -48,14 +22,12 @@ export function EngagementWizard() {
   );
 
   return (
-    <>
-      <Wizard
-        isInPage
-        isCompactNav
-        steps={steps}
-        footer={<CustomWizardFooter />}
-      />
-    </>
+    <Wizard
+      isInPage
+      isCompactNav
+      steps={steps}
+      footer={<CustomWizardFooter />}
+    />
   );
 }
 

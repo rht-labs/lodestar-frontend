@@ -16,7 +16,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 
 export interface EngagementViewProps {
-  engagement: Engagement;
+  engagement?: Engagement;
 }
 
 export function EngagementView(props) {
@@ -26,12 +26,28 @@ export function EngagementView(props) {
     formOptions,
     getConfig,
     error,
-    engagementFormState,
-    updateEngagementFormField,
     setActiveEngagement,
     activeEngagement,
     getEngagement,
   } = useEngagements();
+  useEffect(() => {
+    if (!formOptions) {
+      Logger.info('getting config');
+      getConfig();
+    }
+  }, [formOptions, getConfig]);
+
+  useEffect(() => {
+    if (!customer_name || !project_name) {
+      return;
+    }
+    getEngagement(customer_name, project_name).then(engagement => {
+      if (engagement) {
+        setActiveEngagement(engagement);
+      } else {
+      }
+    });
+  });
   const engagementFormRequestError = error;
 
   const AlertMessage = () => {
@@ -63,7 +79,7 @@ export function EngagementView(props) {
 
   return (
     <ValidationProvider validators={validators}>
-      <EngagementViewTemplate>
+      <EngagementViewTemplate engagement={activeEngagement}>
         <AlertMessage />
         <EngagementTabView engagement={activeEngagement} />
       </EngagementViewTemplate>
@@ -87,15 +103,22 @@ const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
     };
   }, {});
 
-function EngagementViewTemplate(props: any) {
+function EngagementViewTemplate({
+  engagement,
+  children,
+}: {
+  engagement: Engagement;
+  children: any;
+}) {
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Text component="h1">Create New Engagement</Text>
+          <Text component="h1">{engagement?.project_name}</Text>
+          <Text component="h3">{engagement?.customer_name}</Text>
         </TextContent>
       </PageSection>
-      <PageSection style={{}}>{props.children}</PageSection>
+      <PageSection>{children}</PageSection>
     </>
   );
 }
