@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, Dropdown, DropdownItem, DropdownToggle, NotificationBadge} from '@patternfly/react-core';
+import {Dropdown, DropdownItem, NotificationBadge, DropdownToggle, DropdownGroup, DropdownSeparator} from '@patternfly/react-core';
 import {BellIcon} from '@patternfly/react-icons';
 
 export interface NotificationProps {
@@ -13,17 +13,21 @@ export function Notification(props: NotificationProps) {
   const onClick = () => {
     setRead(true);
   };
+  const onToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   const dropdownItems = [
-    <DropdownItem value="notification" key="notification">
-      <Alert
-        aria-live="assertive"
-        aria-relevant="additions text"
-        aria-atomic="true"
-        variant="info"
-        title="Test Notification">
-        Test Notification
-      </Alert>
+    <DropdownItem key="link">Unread notification </DropdownItem>,
+    <DropdownItem key="action" component="button">
+      Unread notification 2
+    </DropdownItem>,
+    <DropdownSeparator key="separator" />,
+    <DropdownItem key="disabled link" isDisabled>
+      Read notification
+    </DropdownItem>,
+    <DropdownItem key="disabled action" isDisabled component="button">
+      Read notification
     </DropdownItem>,
   ];
 
@@ -37,7 +41,7 @@ export function Notification(props: NotificationProps) {
         isPlain
         dropdownItems={dropdownItems}
         toggle={
-          <DropdownToggle onToggle={() => setIsOpen(!isOpen)} toggleIndicator={null}>
+          <DropdownToggle onToggle={onToggle} toggleIndicator={() => <div></div>}>
             <NotificationBadge isRead={isRead} onClick={onClick} aria-label="Notifications">
               <BellIcon/>
             </NotificationBadge>
