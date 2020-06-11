@@ -11,6 +11,7 @@ import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';
+import { Loading } from '../Loading';
 
 interface ClusterInformationProps {
   formOptions?: EngagementFormConfig;
@@ -24,13 +25,15 @@ export const ClusterInformation = ({
   onChange,
 }: ClusterInformationProps) => {
   const { hasFeature } = useFeatures();
-  const tabContent: React.CSSProperties = {
-    margin: 45,
-  };
-
   const [editedByUser, setEditedByUser] = useState<{ [key: string]: boolean }>(
     {}
   );
+  if (!formOptions) {
+    return <Loading />;
+  }
+  const tabContent: React.CSSProperties = {
+    margin: 45,
+  };
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
