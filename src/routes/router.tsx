@@ -13,7 +13,7 @@ import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
-import { EngagementView } from './engagement_details';
+import { EngagementDetailView } from './engagement_details';
 
 function _OMPRouter() {
   return (
@@ -70,7 +70,7 @@ function _OMPRouter() {
                       </PrivateRoute>
                       <PrivateRoute
                         path="/app/engagements/:customer_name/:project_name"
-                        component={EngagementView}
+                        component={EngagementDetailView}
                       />
                     </Switch>
                   </PrivateRoute>
