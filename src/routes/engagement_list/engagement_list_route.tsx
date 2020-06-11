@@ -8,27 +8,9 @@ import {
   TextContent,
 } from '@patternfly/react-core';
 import { Logger } from '../../utilities/logger';
+import { Link } from 'react-router-dom';
 
-export interface EngagementListProps {
-  filter?: (engagement: Engagement) => boolean;
-  title?: string;
-}
-
-function EngagementListItem({ engagement }: { engagement: Engagement }) {
-  return <div>{engagement.project_name}</div>;
-}
-
-function EngagementList({ engagements }: { engagements: Engagement[] }) {
-  return (
-    <>
-      {(engagements ?? []).map(e => (
-        <EngagementListItem engagement={e} />
-      ))}
-    </>
-  );
-}
-
-export function EngagementListView(props: EngagementListProps) {
+export function EngagementListRoute(props: EngagementListProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
   useEffect(() => {
     if (contextEngagements === undefined) {
@@ -51,6 +33,32 @@ export function EngagementListView(props: EngagementListProps) {
       <PageSection>
         <EngagementList engagements={filteredEngagements} />
       </PageSection>
+    </>
+  );
+}
+export interface EngagementListProps {
+  filter?: (engagement: Engagement) => boolean;
+  title?: string;
+}
+
+function EngagementListItem({ engagement }: { engagement: Engagement }) {
+  return (
+    <div>
+      <Link
+        to={`/app/engagements/${engagement.customer_name}/${engagement.project_name}`}
+      >
+        {engagement.project_name}
+      </Link>
+    </div>
+  );
+}
+
+function EngagementList({ engagements }: { engagements: Engagement[] }) {
+  return (
+    <>
+      {(engagements ?? []).map(e => (
+        <EngagementListItem engagement={e} />
+      ))}
     </>
   );
 }
