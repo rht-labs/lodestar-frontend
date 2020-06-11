@@ -8,19 +8,23 @@ import {
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { useFeedback } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-
+import { Logger } from '../../utilities/logger';
+import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 export interface EngagementContext {
-  getEngagements: () => void;
+  getEngagements: () => Promise<Engagement[]>;
   engagementFormState?: Engagement;
   activeEngagement?: Engagement;
   setActiveEngagement: (Engagement: Engagement) => void;
-  engagements: Engagement[];
+  engagements?: Engagement[];
+  getEngagement: (
+    customerName: string,
+    projectName: string
+  ) => Promise<Engagement>;
   getConfig: () => void;
-  createEngagement: (data: any) => Promise<void>;
+  createEngagement: (data: any) => Promise<Engagement>;
   saveEngagement: (data: any) => Promise<void>;
   updateEngagementFormField: (fieldName: string, payload: any) => void;
   isLaunchable: boolean;
-
   formOptions?: EngagementFormConfig;
   error: any;
   isLoading: boolean;
@@ -43,7 +47,7 @@ export const EngagementProvider = ({
   // TODO: Handle error/loading state
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
-  const [engagements, setEngagements] = useState<Engagement[]>([]);
+  const [engagements, setEngagements] = useState<Engagement[]>(undefined);
   const [activeEngagement, setActiveEngagement] = useState<
     Engagement | undefined
   >();
@@ -57,6 +61,7 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
+    Logger.info('change active engagement', activeEngagement);
     dispatch({
       type: 'switch_engagement',
       payload: getInitialState(activeEngagement),
@@ -108,15 +113,29 @@ export const EngagementProvider = ({
         setActiveEngagement(engagements[0]);
       }
       feedbackContext.hideLoader();
+      return engagements;
     } catch (e) {
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);
 
+  const getEngagement = useCallback(
+    async (customerName: string, projectName: string) => {
+      let availableEngagements = engagements ?? (await fetchEngagements());
+      Logger.info(engagements);
+      return availableEngagements?.find(
+        engagement =>
+          engagement.customer_name === customerName &&
+          engagement.project_name === projectName
+      );
+    },
+    [engagements, fetchEngagements]
+  );
+
   const _addNewEngagement = useCallback(
     (newEngagement: Engagement) => {
       try {
-        const newEngagementList = [newEngagement, ...engagements];
+        const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
         console.error(e);
@@ -132,24 +151,25 @@ export const EngagementProvider = ({
       try {
         const engagement = await engagementService.createEngagement(data);
         _addNewEngagement(engagement);
-        setActiveEngagement(engagement);
+        setEngagements([...engagements, engagement]);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
           'success'
         );
+        return engagement;
       } catch (e) {
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
-        if (e.reponse.status === 409) {
+        if (e instanceof AlreadyExistsError) {
           errorMessage =
             'This client already has a project with that name. Please choose another.';
         }
         feedbackContext.showAlert(errorMessage, 'error');
       }
     },
-    [engagementService, _addNewEngagement, feedbackContext]
+    [engagementService, _addNewEngagement, feedbackContext, engagements]
   );
 
   const _checkLaunchReady = () => {
@@ -219,7 +239,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with saving your changes. Please followup with an administrator if this continues.';
-        if (e.response.status === 409) {
+        if (e instanceof AlreadyExistsError) {
           errorMessage =
             'The path that you input is already taken.  Please update and try saving again.';
         }
@@ -245,7 +265,6 @@ export const EngagementProvider = ({
           data
         );
         _updateEngagementInPlace(returnedEngagement);
-        setActiveEngagement(returnedEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'You have successfully launched your engagement!',
@@ -271,6 +290,7 @@ export const EngagementProvider = ({
         isLaunchable: _checkLaunchReady(),
         setActiveEngagement,
         engagements,
+        getEngagement,
         error,
         engagementFormState,
         formOptions,

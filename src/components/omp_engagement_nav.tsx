@@ -95,7 +95,7 @@ function _EngagementNav() {
     }
   }, [getEngagements, hasFetchedEngagements]);
 
-  const navItems = engagements
+  const navItems = (engagements ?? [])
     .sort(function(a, b) {
       var textA = a.customer_name.toUpperCase();
       var textB = b.customer_name.toUpperCase();
@@ -136,7 +136,12 @@ function _EngagementNav() {
         isOpen={isModalOpen}
         onClose={handleModalToggle}
         actions={[
-          <Button key="confirm" variant="primary" onClick={createNewEngagement} data-cy="createNewEngagement">
+          <Button
+            key="confirm"
+            variant="primary"
+            onClick={createNewEngagement}
+            data-cy="createNewEngagement"
+          >
             Submit
           </Button>,
           <Button key="cancel" variant="link" onClick={handleModalToggle}>
