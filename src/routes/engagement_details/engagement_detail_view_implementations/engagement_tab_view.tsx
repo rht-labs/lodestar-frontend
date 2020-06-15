@@ -25,12 +25,12 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
 
   return (
     <Tabs isBox activeKey={currentTab} onSelect={handleTabSelect}>
-      <Tab title="Overview" eventKey={0}>
+      <Tab title="Overview" eventKey={0} id="overview">
         <TabContentWrapper>
           <EngagementOverview engagement={engagement} />
         </TabContentWrapper>
       </Tab>
-      <Tab title="Basic Information" eventKey={1}>
+      <Tab title="Basic Information" eventKey={1} id="basic_information">
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <BasicInformation
@@ -45,7 +45,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
-      <Tab title="Users" eventKey={2}>
+      <Tab title="Users" eventKey={2} id="users">
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <ClusterUsers
@@ -56,7 +56,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
-      <Tab title="Cluster Information" eventKey={3}>
+      <Tab title="Cluster Information" eventKey={3} id="cluster_information">
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <ClusterInformation
