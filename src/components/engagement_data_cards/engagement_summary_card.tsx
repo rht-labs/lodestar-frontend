@@ -9,7 +9,6 @@ export function EngagementSummaryCard({
 }: {
   engagement?: Engagement;
 }) {
-  console.log(engagement);
   return (
     <DataCard title="Engagement Summary">
       <Grid hasGutter>

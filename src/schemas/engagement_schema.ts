@@ -27,7 +27,7 @@ export interface Engagement {
   suggested_subdomain?: string;
 }
 export abstract class Engagement {
-  static fromFake() {
+  static fromFake(): Engagement {
     return {
       archive_date: faker.date.recent(),
       customer_contact_email: faker.internet.email(),
@@ -39,6 +39,7 @@ export abstract class Engagement {
       engagement_lead_email: faker.internet.email(),
       engagement_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+      mongo_id: '1',
       ocp_cloud_provider_name: 'AWS',
       ocp_cloud_provider_region: faker.lorem.word(),
       ocp_cluster_size: 'Large',
@@ -50,11 +51,11 @@ export abstract class Engagement {
       start_date: faker.date.recent(),
       technical_lead_email: faker.internet.email(),
       technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      launch: {},
+      launch: null,
     };
   }
 
-  static staticFaked() {
+  static staticFaked(): Engagement {
     return {
       archive_date: new Date(),
       customer_contact_email: 'bob@doe.com',
@@ -77,7 +78,7 @@ export abstract class Engagement {
       start_date: new Date(),
       technical_lead_email: 'eve@doe.com',
       technical_lead_name: `Eve Doe`,
-      launch: {},
+      launch: null,
     };
   }
 }
