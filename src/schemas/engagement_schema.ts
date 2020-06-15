@@ -1,7 +1,7 @@
 import faker from 'faker/locale/en_US';
 
 export interface Engagement {
-  archive_date: string;
+  archive_date: Date;
   customer_contact_email: string;
   customer_contact_name: string;
   customer_name: string;
@@ -29,7 +29,7 @@ export interface Engagement {
 export abstract class Engagement {
   static fromFake() {
     return {
-      archive_date: faker.date.recent().toISOString(),
+      archive_date: faker.date.recent(),
       customer_contact_email: faker.internet.email(),
       customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       customer_name: faker.company.companyName(),
@@ -56,7 +56,7 @@ export abstract class Engagement {
 
   static staticFaked() {
     return {
-      archive_date: 'today',
+      archive_date: new Date(),
       customer_contact_email: 'bob@doe.com',
       customer_contact_name: `Bob Doe`,
       customer_name: 'NASA',

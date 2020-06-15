@@ -8,10 +8,11 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-
+import { parse as parseDate, format as formatDate } from 'date-fns';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';
+import { Logger } from '../../../utilities/logger';
 
 export interface BasicInformationProps {
   engagement: Engagement;
@@ -33,25 +34,11 @@ export const BasicInformation = ({
       return;
     }
     if (inputDate instanceof Date) {
-      const formattedDate = `${inputDate.getUTCFullYear()}-${(
-        inputDate.getUTCMonth() + 1
-      )
-        .toString()
-        .padStart(2, '0')}-${(inputDate.getUTCDate() - 1)
-        .toString()
-        .padStart(2, '0')}`;
-      return formattedDate;
-    }
-    if (inputDate.indexOf('-') > -1) {
+      return formatDate(inputDate, 'yyyy-MM-dd');
+    } else if (inputDate.indexOf('-') > -1) {
       return inputDate;
     } else {
-      return [
-        inputDate.slice(0, 4),
-        '-',
-        inputDate.slice(4, 6),
-        '-',
-        inputDate.slice(6, 8),
-      ].join('');
+      return parseDate(inputDate, 'yyyyMMdd', new Date());
     }
   };
 
@@ -73,12 +60,13 @@ export const BasicInformation = ({
     formOptions?.['basic-information']?.['env_grace_period_max'];
 
   const getRetirementDate = (): string => {
+    Logger.info('engageement end', engagement.end_date);
     if (editedByUser['archive_date']) {
-      return getFormattedDate(engagement.archive_date);
-    } else if (engagement.end_date) {
-      const newDate = new Date(Date.parse(engagement.end_date));
+      return formatDate(engagement.archive_date, 'yyyy-MM-dd');
+    } else if (engagement.end_date instanceof Date) {
+      const newDate = engagement.end_date ?? new Date();
       newDate.setDate(newDate.getUTCDate() + (gracePeriod ?? 0));
-      return getFormattedDate(newDate);
+      return formatDate(newDate, 'yyyy-MM-dd');
     }
     return '';
   };
@@ -166,7 +154,9 @@ export const BasicInformation = ({
             aria-label="The start date."
             style={input}
             value={getFormattedDate(engagement.start_date) || ''}
-            onChange={e => onChange('start_date', e)}
+            onChange={e =>
+              onChange('start_date', parseDate(e, 'yyyy-MM-dd', 0))
+            }
           />
           <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
@@ -176,7 +166,7 @@ export const BasicInformation = ({
             style={input}
             aria-label="The end date"
             value={getFormattedDate(engagement.end_date) || ''}
-            onChange={e => onChange('end_date', e)}
+            onChange={e => onChange('end_date', parseDate(e, 'yyyy-MM-dd', 0))}
           />
         </InputGroup>
       </FormGroup>
@@ -203,7 +193,7 @@ export const BasicInformation = ({
               onChange('archive_date', e);
             }}
             style={input}
-            min={engagement.end_date}
+            min={engagement.end_date?.valueOf()}
             max={
               maxGracePeriod ? engagement.end_date + maxGracePeriod : undefined
             }

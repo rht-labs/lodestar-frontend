@@ -49,7 +49,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     <Tabs isBox activeKey={getActiveKey()} onSelect={handleTabSelect}>
       <Tab title="Overview" eventKey={TabNames.overview} id="overview">
         <TabContentWrapper>
-          <EngagementOverview engagement={engagement} />
+          <EngagementOverview engagement={engagementFormState} />
         </TabContentWrapper>
       </Tab>
       <Tab
@@ -58,7 +58,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
         id="basic_information"
       >
         <TabContentWrapper>
-          <EditPaneWrapper engagement={engagement}>
+          <EditPaneWrapper engagement={engagementFormState}>
             <BasicInformation
               formOptions={formOptions}
               engagement={engagementFormState}
@@ -73,7 +73,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
       </Tab>
       <Tab title="Users" eventKey={TabNames.users} id="users">
         <TabContentWrapper>
-          <EditPaneWrapper engagement={engagement}>
+          <EditPaneWrapper engagement={engagementFormState}>
             <ClusterUsers
               formOptions={formOptions}
               engagement={engagementFormState}
@@ -88,7 +88,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
         id="cluster_information"
       >
         <TabContentWrapper>
-          <EditPaneWrapper engagement={engagement}>
+          <EditPaneWrapper engagement={engagementFormState}>
             <ClusterInformation
               formOptions={formOptions}
               engagement={engagementFormState}

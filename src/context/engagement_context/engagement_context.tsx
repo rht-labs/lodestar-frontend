@@ -224,7 +224,7 @@ export const EngagementProvider = ({
   );
 
   const saveEngagement = useCallback(
-    async (data: any) => {
+    async (data: Engagement) => {
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {

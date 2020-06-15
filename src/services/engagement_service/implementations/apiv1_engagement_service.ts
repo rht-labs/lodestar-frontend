@@ -35,7 +35,7 @@ export class Apiv1EngagementService extends EngagementService {
   async saveEngagement(engagementData: any): Promise<Engagement> {
     const { data } = await this.axios.put(
       `/engagements/customers/${engagementData.customer_name}/projects/${engagementData.project_name}`,
-      engagementData
+      Apiv1EngagementService.engagementSerializer.serialize(engagementData)
     );
     return Apiv1EngagementService.engagementSerializer.deserialize(data);
   }
