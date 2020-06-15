@@ -10,6 +10,7 @@ import { useFeedback } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { Logger } from '../../utilities/logger';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
   engagementFormState?: Engagement;
@@ -223,7 +224,7 @@ export const EngagementProvider = ({
   );
 
   const saveEngagement = useCallback(
-    async (data: any) => {
+    async (data: Engagement) => {
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {

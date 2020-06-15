@@ -374,9 +374,7 @@ Object {
                         </div>
                         <div
                           class="pf-l-grid__item pf-m-3-col"
-                        >
-                          <div />
-                        </div>
+                        />
                       </div>
                     </div>
                   </article>
@@ -396,9 +394,7 @@ Object {
       >
         <div
           style="padding-top: 20px;"
-        >
-          <div />
-        </div>
+        />
       </section>
       <section
         aria-labelledby="pf-tab-users-users"
@@ -410,9 +406,7 @@ Object {
       >
         <div
           style="padding-top: 20px;"
-        >
-          <div />
-        </div>
+        />
       </section>
       <section
         aria-labelledby="pf-tab-cluster_info-cluster_information"
@@ -424,9 +418,7 @@ Object {
       >
         <div
           style="padding-top: 20px;"
-        >
-          <div />
-        </div>
+        />
       </section>
     </div>
   </body>,
@@ -800,9 +792,7 @@ Object {
                       </div>
                       <div
                         class="pf-l-grid__item pf-m-3-col"
-                      >
-                        <div />
-                      </div>
+                      />
                     </div>
                   </div>
                 </article>
@@ -822,9 +812,7 @@ Object {
     >
       <div
         style="padding-top: 20px;"
-      >
-        <div />
-      </div>
+      />
     </section>
     <section
       aria-labelledby="pf-tab-users-users"
@@ -836,9 +824,7 @@ Object {
     >
       <div
         style="padding-top: 20px;"
-      >
-        <div />
-      </div>
+      />
     </section>
     <section
       aria-labelledby="pf-tab-cluster_info-cluster_information"
@@ -850,9 +836,7 @@ Object {
     >
       <div
         style="padding-top: 20px;"
-      >
-        <div />
-      </div>
+      />
     </section>
   </div>,
   "debug": [Function],

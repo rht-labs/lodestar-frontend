@@ -32,7 +32,4 @@ describe('Engagement Schema', () => {
       engagementProperties.sort()
     );
   });
-  test('users should be an empty array by default', () => {
-    expect(new Engagement({} as Engagement).engagement_users).toEqual([]);
-  });
 });

@@ -1,6 +1,5 @@
 import { Engagement } from '../../schemas/engagement_schema';
 import { slugify } from 'transliteration';
-
 const generateSuggestedSubdomain = (
   project_name: string = '',
   customer_name: string = ''

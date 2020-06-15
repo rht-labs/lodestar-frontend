@@ -8,19 +8,20 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-
+import { parse as parseDate, format as formatDate } from 'date-fns';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { APP_FEATURES } from '../../../common/app_features';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';
+import { Logger } from '../../../utilities/logger';
 
 export interface BasicInformationProps {
-  values: Engagement;
+  engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
 }
 
 export const BasicInformation = ({
-  values,
+  engagement,
   onChange,
   formOptions,
 }: BasicInformationProps) => {
@@ -33,25 +34,11 @@ export const BasicInformation = ({
       return;
     }
     if (inputDate instanceof Date) {
-      const formattedDate = `${inputDate.getUTCFullYear()}-${(
-        inputDate.getUTCMonth() + 1
-      )
-        .toString()
-        .padStart(2, '0')}-${(inputDate.getUTCDate() - 1)
-        .toString()
-        .padStart(2, '0')}`;
-      return formattedDate;
-    }
-    if (inputDate.indexOf('-') > -1) {
+      return formatDate(inputDate, 'yyyy-MM-dd');
+    } else if (inputDate.indexOf('-') > -1) {
       return inputDate;
     } else {
-      return [
-        inputDate.slice(0, 4),
-        '-',
-        inputDate.slice(4, 6),
-        '-',
-        inputDate.slice(6, 8),
-      ].join('');
+      return parseDate(inputDate, 'yyyyMMdd', new Date());
     }
   };
 
@@ -73,12 +60,13 @@ export const BasicInformation = ({
     formOptions?.['basic-information']?.['env_grace_period_max'];
 
   const getRetirementDate = (): string => {
+    Logger.info('engageement end', engagement.end_date);
     if (editedByUser['archive_date']) {
-      return getFormattedDate(values.archive_date);
-    } else if (values.end_date) {
-      const newDate = new Date(Date.parse(values.end_date));
+      return formatDate(engagement.archive_date, 'yyyy-MM-dd');
+    } else if (engagement.end_date instanceof Date) {
+      const newDate = engagement.end_date ?? new Date();
       newDate.setDate(newDate.getUTCDate() + (gracePeriod ?? 0));
-      return getFormattedDate(newDate);
+      return formatDate(newDate, 'yyyy-MM-dd');
     }
     return '';
   };
@@ -94,14 +82,14 @@ export const BasicInformation = ({
         <TextInput
           isDisabled={
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !!(engagement as Engagement).mongo_id
           }
           type="text"
           id="customer_name"
           name="customer_name"
           placeholder="e.g. NASA"
           style={input}
-          value={values.customer_name || ''}
+          value={engagement.customer_name || ''}
           onChange={e => onChange('customer_name', e)}
         />
       </FormGroup>
@@ -114,14 +102,14 @@ export const BasicInformation = ({
         <TextInput
           isDisabled={
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).mongo_id
+            !!(engagement as Engagement).mongo_id
           }
           type="text"
           id="project_name"
           name="project_name"
           placeholder="e.g. Mars Probe"
           style={input}
-          value={values.project_name || ''}
+          value={engagement.project_name || ''}
           onChange={e => onChange('project_name', e)}
         />
       </FormGroup>
@@ -137,7 +125,7 @@ export const BasicInformation = ({
           name="location"
           placeholder="e.g. Pasadena, CA"
           style={input}
-          value={values.location || ''}
+          value={engagement.location || ''}
           onChange={e => onChange('location', e)}
         />
       </FormGroup>
@@ -158,15 +146,17 @@ export const BasicInformation = ({
           <TextInput
             isDisabled={
               !hasFeature(APP_FEATURES.writer) ||
-              !!(values as Engagement).launch
+              !!(engagement as Engagement).launch
             }
             name="start_date"
             id="start_date"
             type="date"
             aria-label="The start date."
             style={input}
-            value={getFormattedDate(values.start_date) || ''}
-            onChange={e => onChange('start_date', e)}
+            value={getFormattedDate(engagement.start_date) || ''}
+            onChange={e =>
+              onChange('start_date', parseDate(e, 'yyyy-MM-dd', 0))
+            }
           />
           <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
@@ -175,8 +165,8 @@ export const BasicInformation = ({
             type="date"
             style={input}
             aria-label="The end date"
-            value={getFormattedDate(values.end_date) || ''}
-            onChange={e => onChange('end_date', e)}
+            value={getFormattedDate(engagement.end_date) || ''}
+            onChange={e => onChange('end_date', parseDate(e, 'yyyy-MM-dd', 0))}
           />
         </InputGroup>
       </FormGroup>
@@ -203,8 +193,10 @@ export const BasicInformation = ({
               onChange('archive_date', e);
             }}
             style={input}
-            min={values.end_date}
-            max={maxGracePeriod ? values.end_date + maxGracePeriod : undefined}
+            min={engagement.end_date?.valueOf()}
+            max={
+              maxGracePeriod ? engagement.end_date + maxGracePeriod : undefined
+            }
           />
         </InputGroup>
       </FormGroup>
@@ -216,7 +208,7 @@ export const BasicInformation = ({
           style={input}
           aria-label="engagement description"
           placeholder="Description and notes for the Engagement"
-          value={values.description || ''}
+          value={engagement.description || ''}
           onChange={e => onChange('description', e)}
         />
       </FormGroup>

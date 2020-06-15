@@ -79,7 +79,7 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  yesterday
+                  Jun 15, 2020
                 </p>
               </div>
             </div>
@@ -99,7 +99,7 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  tomorrow
+                  Jun 15, 2020
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                yesterday
+                Jun 15, 2020
               </p>
             </div>
           </div>
@@ -203,7 +203,7 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                tomorrow
+                Jun 15, 2020
               </p>
             </div>
           </div>
@@ -410,18 +410,7 @@ Object {
             </div>
             <div
               class="pf-l-grid__item pf-m-3-col"
-            >
-              <div
-                class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                >
-                  Launched On
-                </h6>
-              </div>
-            </div>
+            />
           </div>
         </div>
       </article>
@@ -568,18 +557,7 @@ Object {
           </div>
           <div
             class="pf-l-grid__item pf-m-3-col"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-              >
-                Launched On
-              </h6>
-            </div>
-          </div>
+          />
         </div>
       </div>
     </article>

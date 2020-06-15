@@ -5,7 +5,7 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Feature } from '../feature';
 import { APP_FEATURES } from '../../common/app_features';
-
+import { format as formatDate } from 'date-fns';
 export function LaunchAction(props: { engagement: Engagement }) {
   const { launchEngagement } = useEngagements();
   if (!props.engagement) {
@@ -26,7 +26,12 @@ export function LaunchAction(props: { engagement: Engagement }) {
   } else {
     return (
       <TitledDataPoint title="Launched On">
-        {(props.engagement?.launch as any)?.launched_date_time}
+        {(props.engagement?.launch as any)?.launched_date_time
+          ? formatDate(
+              props.engagement?.launch?.launched_date_time,
+              'MMM dd, yyyy'
+            )
+          : null}
       </TitledDataPoint>
     );
   }

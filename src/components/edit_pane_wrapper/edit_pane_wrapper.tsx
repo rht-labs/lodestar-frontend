@@ -16,7 +16,7 @@ export function EditPaneWrapper(props: EditPaneWrapperProps) {
   if (engagement) {
     return (
       <Feature name={APP_FEATURES.writer}>
-        <div style={{ padding: '0 3rem 1rem 3rem' }}>
+        <div style={{ padding: '0 3rem 0 3rem' }}>
           <Flex justifyContent={{ default: 'justifyContentFlexEnd' }}>
             <FlexItem>
               <Button

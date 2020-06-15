@@ -10,7 +10,7 @@ test('Basic component renders correctly', () => {
       <ClusterInformation
         formOptions={{}}
         onChange={() => {}}
-        values={getInitialState()}
+        engagement={getInitialState()}
       />
     </TestStateWrapper>
   );

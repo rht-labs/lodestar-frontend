@@ -5,7 +5,11 @@ import { getInitialState } from '../../../context/engagement_context/engagement_
 
 test('Basic component renders correctly', () => {
   const component = render(
-    <BasicInformation values={{ initialState: getInitialState() }} />
+    <BasicInformation
+      formOptions={null}
+      onChange={() => {}}
+      engagement={getInitialState()}
+    />
   );
   expect(component).toMatchSnapshot();
 });

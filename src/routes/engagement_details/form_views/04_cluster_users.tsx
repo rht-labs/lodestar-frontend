@@ -38,27 +38,29 @@ const buttonHeader: React.CSSProperties = {
   fontWeight: 'bold',
 };
 
+export interface ClusterUserProps {
+  onChange: (name: string, value: any) => void;
+  engagement: Engagement;
+  formOptions?: EngagementFormConfig;
+}
+
 export const ClusterUsers = ({
-  values,
+  engagement,
   formOptions,
   onChange,
-}: {
-  onChange: (name: string, value: any) => void;
-  values: Engagement;
-  formOptions?: EngagementFormConfig;
-}) => {
+}: ClusterUserProps) => {
   const { hasFeature } = useFeatures();
 
   //Functions for Cluster User interactivity
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
-    values.engagement_users.push(newUser);
-    onChange('user', values.engagement_users);
+    engagement.engagement_users.push(newUser);
+    onChange('user', engagement.engagement_users);
   }
 
   function removeUser(index: any) {
-    values.engagement_users.splice(index.currentTarget.value, 1);
-    onChange('user', values.engagement_users);
+    engagement.engagement_users.splice(index.currentTarget.value, 1);
+    onChange('user', engagement.engagement_users);
   }
 
   const tabContent: React.CSSProperties = {
@@ -68,7 +70,7 @@ export const ClusterUsers = ({
 
   return (
     <div>
-      {!values.engagement_users.length ? (
+      {!engagement.engagement_users.length ? (
         <EmptyState>
           <EmptyStateIcon icon={CubesIcon} />
           <Title headingLevel="h4" size="lg">
@@ -97,7 +99,7 @@ export const ClusterUsers = ({
                   </Feature>
                 </InputGroup>
               </li>
-              {values.engagement_users.map((value: any, index: any) => {
+              {engagement.engagement_users.map((value: any, index: any) => {
                 return (
                   <li key={index}>
                     <InputGroup>
@@ -106,8 +108,8 @@ export const ClusterUsers = ({
                         name="last-name"
                         isDisabled={!hasFeature(APP_FEATURES.writer)}
                         onChange={e => {
-                          values.engagement_users[index].last_name = e;
-                          onChange('user', values.engagement_users);
+                          engagement.engagement_users[index].last_name = e;
+                          onChange('user', engagement.engagement_users);
                         }}
                         placeholder="Last Name"
                         type="text"
@@ -118,8 +120,8 @@ export const ClusterUsers = ({
                         name="first-name"
                         isDisabled={!hasFeature(APP_FEATURES.writer)}
                         onChange={e => {
-                          values.engagement_users[index].first_name = e;
-                          onChange('user', values.engagement_users);
+                          engagement.engagement_users[index].first_name = e;
+                          onChange('user', engagement.engagement_users);
                         }}
                         placeholder="First Name"
                         type="text"
@@ -130,8 +132,8 @@ export const ClusterUsers = ({
                         name="email"
                         isDisabled={!hasFeature(APP_FEATURES.writer)}
                         onChange={e => {
-                          values.engagement_users[index].email = e;
-                          onChange('user', values.engagement_users);
+                          engagement.engagement_users[index].email = e;
+                          onChange('user', engagement.engagement_users);
                         }}
                         placeholder="Email Address"
                         type="email"
@@ -144,8 +146,8 @@ export const ClusterUsers = ({
                         value={value.role || ''}
                         isDisabled={!hasFeature(APP_FEATURES.writer)}
                         onChange={e => {
-                          values.engagement_users[index].role = e;
-                          onChange('user', values.engagement_users);
+                          engagement.engagement_users[index].role = e;
+                          onChange('user', engagement.engagement_users);
                         }}
                       >
                         {(
