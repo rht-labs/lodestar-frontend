@@ -11,7 +11,10 @@ import { EngagementSummaryCard } from '../data_cards/engagement_summary_card';
 import { PointOfContactCard } from '../data_cards/point_of_contact_card';
 import { OpenshiftClusterSummaryCard } from '../data_cards/openshift_cluster_summary';
 import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane_wrapper';
+<<<<<<< HEAD
 import { useLocation, useHistory } from 'react-router';
+=======
+>>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
 
 interface EngagementTabViewProps extends EngagementViewProps {}
 
@@ -28,6 +31,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     engagementFormState,
     updateEngagementFormField,
   } = useEngagements();
+<<<<<<< HEAD
   const { pathname } = useLocation();
   const history = useHistory();
   const handleTabSelect = (_, tabIndex) => {
@@ -52,15 +56,27 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
   return (
     <Tabs isBox activeKey={getActiveKey()} onSelect={handleTabSelect}>
       <Tab title="Overview" eventKey={TabNames.overview} id="overview">
+=======
+  const [currentTab, setCurrentTab] = useState(0);
+  const handleTabSelect = (e, tabIndex) => setCurrentTab(tabIndex);
+
+  return (
+    <Tabs isBox activeKey={currentTab} onSelect={handleTabSelect}>
+      <Tab title="Overview" eventKey={0} id="overview">
+>>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         <TabContentWrapper>
           <EngagementOverview engagement={engagement} />
         </TabContentWrapper>
       </Tab>
+<<<<<<< HEAD
       <Tab
         title="Basic Information"
         eventKey={TabNames.basicInfo}
         id="basic_information"
       >
+=======
+      <Tab title="Basic Information" eventKey={1} id="basic_information">
+>>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <BasicInformation
@@ -75,7 +91,11 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
+<<<<<<< HEAD
       <Tab title="Users" eventKey={TabNames.users} id="users">
+=======
+      <Tab title="Users" eventKey={2} id="users">
+>>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <ClusterUsers
@@ -86,11 +106,15 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
+<<<<<<< HEAD
       <Tab
         title="Cluster Information"
         eventKey={TabNames.clusterInfo}
         id="cluster_information"
       >
+=======
+      <Tab title="Cluster Information" eventKey={3} id="cluster_information">
+>>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <ClusterInformation
