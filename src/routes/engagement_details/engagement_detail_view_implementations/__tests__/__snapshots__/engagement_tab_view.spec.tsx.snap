@@ -39,15 +39,9 @@ Object {
             class="pf-c-tabs__item pf-m-current"
           >
             <button
-<<<<<<< HEAD
               aria-controls="pf-tab-section-overview-overview"
               class="pf-c-tabs__link"
               id="pf-tab-overview-overview"
-=======
-              aria-controls="pf-tab-section-0-overview"
-              class="pf-c-tabs__link"
-              id="pf-tab-0-overview"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
             >
               Overview
             </button>
@@ -56,15 +50,9 @@ Object {
             class="pf-c-tabs__item"
           >
             <button
-<<<<<<< HEAD
               aria-controls="pf-tab-section-basic_info-basic_information"
               class="pf-c-tabs__link"
               id="pf-tab-basic_info-basic_information"
-=======
-              aria-controls="pf-tab-section-1-basic_information"
-              class="pf-c-tabs__link"
-              id="pf-tab-1-basic_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
             >
               Basic Information
             </button>
@@ -73,15 +61,9 @@ Object {
             class="pf-c-tabs__item"
           >
             <button
-<<<<<<< HEAD
               aria-controls="pf-tab-section-users-users"
               class="pf-c-tabs__link"
               id="pf-tab-users-users"
-=======
-              aria-controls="pf-tab-section-2-users"
-              class="pf-c-tabs__link"
-              id="pf-tab-2-users"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
             >
               Users
             </button>
@@ -90,15 +72,9 @@ Object {
             class="pf-c-tabs__item"
           >
             <button
-<<<<<<< HEAD
               aria-controls="pf-tab-section-cluster_info-cluster_information"
               class="pf-c-tabs__link"
               id="pf-tab-cluster_info-cluster_information"
-=======
-              aria-controls="pf-tab-section-3-cluster_information"
-              class="pf-c-tabs__link"
-              id="pf-tab-3-cluster_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
             >
               Cluster Information
             </button>
@@ -127,15 +103,9 @@ Object {
         </button>
       </div>
       <section
-<<<<<<< HEAD
         aria-labelledby="pf-tab-overview-overview"
         class="pf-c-tab-content"
         id="pf-tab-section-overview-overview"
-=======
-        aria-labelledby="pf-tab-0-overview"
-        class="pf-c-tab-content"
-        id="pf-tab-section-0-overview"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         role="tabpanel"
         tabindex="0"
       >
@@ -417,17 +387,10 @@ Object {
         </div>
       </section>
       <section
-<<<<<<< HEAD
         aria-labelledby="pf-tab-basic_info-basic_information"
         class="pf-c-tab-content"
         hidden=""
         id="pf-tab-section-basic_info-basic_information"
-=======
-        aria-labelledby="pf-tab-1-basic_information"
-        class="pf-c-tab-content"
-        hidden=""
-        id="pf-tab-section-1-basic_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         role="tabpanel"
         tabindex="0"
       >
@@ -438,17 +401,10 @@ Object {
         </div>
       </section>
       <section
-<<<<<<< HEAD
         aria-labelledby="pf-tab-users-users"
         class="pf-c-tab-content"
         hidden=""
         id="pf-tab-section-users-users"
-=======
-        aria-labelledby="pf-tab-2-users"
-        class="pf-c-tab-content"
-        hidden=""
-        id="pf-tab-section-2-users"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         role="tabpanel"
         tabindex="0"
       >
@@ -459,17 +415,10 @@ Object {
         </div>
       </section>
       <section
-<<<<<<< HEAD
         aria-labelledby="pf-tab-cluster_info-cluster_information"
         class="pf-c-tab-content"
         hidden=""
         id="pf-tab-section-cluster_info-cluster_information"
-=======
-        aria-labelledby="pf-tab-3-cluster_information"
-        class="pf-c-tab-content"
-        hidden=""
-        id="pf-tab-section-3-cluster_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
         role="tabpanel"
         tabindex="0"
       >
@@ -516,15 +465,9 @@ Object {
           class="pf-c-tabs__item pf-m-current"
         >
           <button
-<<<<<<< HEAD
             aria-controls="pf-tab-section-overview-overview"
             class="pf-c-tabs__link"
             id="pf-tab-overview-overview"
-=======
-            aria-controls="pf-tab-section-0-overview"
-            class="pf-c-tabs__link"
-            id="pf-tab-0-overview"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
           >
             Overview
           </button>
@@ -533,15 +476,9 @@ Object {
           class="pf-c-tabs__item"
         >
           <button
-<<<<<<< HEAD
             aria-controls="pf-tab-section-basic_info-basic_information"
             class="pf-c-tabs__link"
             id="pf-tab-basic_info-basic_information"
-=======
-            aria-controls="pf-tab-section-1-basic_information"
-            class="pf-c-tabs__link"
-            id="pf-tab-1-basic_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
           >
             Basic Information
           </button>
@@ -550,15 +487,9 @@ Object {
           class="pf-c-tabs__item"
         >
           <button
-<<<<<<< HEAD
             aria-controls="pf-tab-section-users-users"
             class="pf-c-tabs__link"
             id="pf-tab-users-users"
-=======
-            aria-controls="pf-tab-section-2-users"
-            class="pf-c-tabs__link"
-            id="pf-tab-2-users"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
           >
             Users
           </button>
@@ -567,15 +498,9 @@ Object {
           class="pf-c-tabs__item"
         >
           <button
-<<<<<<< HEAD
             aria-controls="pf-tab-section-cluster_info-cluster_information"
             class="pf-c-tabs__link"
             id="pf-tab-cluster_info-cluster_information"
-=======
-            aria-controls="pf-tab-section-3-cluster_information"
-            class="pf-c-tabs__link"
-            id="pf-tab-3-cluster_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
           >
             Cluster Information
           </button>
@@ -604,15 +529,9 @@ Object {
       </button>
     </div>
     <section
-<<<<<<< HEAD
       aria-labelledby="pf-tab-overview-overview"
       class="pf-c-tab-content"
       id="pf-tab-section-overview-overview"
-=======
-      aria-labelledby="pf-tab-0-overview"
-      class="pf-c-tab-content"
-      id="pf-tab-section-0-overview"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
       role="tabpanel"
       tabindex="0"
     >
@@ -894,17 +813,10 @@ Object {
       </div>
     </section>
     <section
-<<<<<<< HEAD
       aria-labelledby="pf-tab-basic_info-basic_information"
       class="pf-c-tab-content"
       hidden=""
       id="pf-tab-section-basic_info-basic_information"
-=======
-      aria-labelledby="pf-tab-1-basic_information"
-      class="pf-c-tab-content"
-      hidden=""
-      id="pf-tab-section-1-basic_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
       role="tabpanel"
       tabindex="0"
     >
@@ -915,17 +827,10 @@ Object {
       </div>
     </section>
     <section
-<<<<<<< HEAD
       aria-labelledby="pf-tab-users-users"
       class="pf-c-tab-content"
       hidden=""
       id="pf-tab-section-users-users"
-=======
-      aria-labelledby="pf-tab-2-users"
-      class="pf-c-tab-content"
-      hidden=""
-      id="pf-tab-section-2-users"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
       role="tabpanel"
       tabindex="0"
     >
@@ -936,17 +841,10 @@ Object {
       </div>
     </section>
     <section
-<<<<<<< HEAD
       aria-labelledby="pf-tab-cluster_info-cluster_information"
       class="pf-c-tab-content"
       hidden=""
       id="pf-tab-section-cluster_info-cluster_information"
-=======
-      aria-labelledby="pf-tab-3-cluster_information"
-      class="pf-c-tab-content"
-      hidden=""
-      id="pf-tab-section-3-cluster_information"
->>>>>>> aeecaa6afbe721a620cbfa6ad3f5afd4c34c8128
       role="tabpanel"
       tabindex="0"
     >
