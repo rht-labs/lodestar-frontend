@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EngagementViewProps } from '..';
 import { Tabs, Tab, Grid, GridItem, TextContent } from '@patternfly/react-core';
 import { BasicInformation } from '../form_views/01_basic_information';
@@ -11,8 +11,16 @@ import { EngagementSummaryCard } from '../data_cards/engagement_summary_card';
 import { PointOfContactCard } from '../data_cards/point_of_contact_card';
 import { OpenshiftClusterSummaryCard } from '../data_cards/openshift_cluster_summary';
 import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane_wrapper';
+import { useLocation, useHistory } from 'react-router';
 
 interface EngagementTabViewProps extends EngagementViewProps {}
+
+enum TabNames {
+  basicInfo = 'basic_info',
+  clusterInfo = 'cluster_info',
+  users = 'users',
+  overview = 'overview',
+}
 
 export function EngagementTabView({ engagement }: EngagementTabViewProps) {
   const {
@@ -20,17 +28,39 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     engagementFormState,
     updateEngagementFormField,
   } = useEngagements();
-  const [currentTab, setCurrentTab] = useState(0);
-  const handleTabSelect = (e, tabIndex) => setCurrentTab(tabIndex);
+  const { pathname } = useLocation();
+  const history = useHistory();
+  const handleTabSelect = (_, tabIndex) => {
+    history.push(
+      `/app/engagements/${engagementFormState.customer_name}/${engagementFormState.project_name}/${tabIndex}`
+    );
+  };
+
+  function getActiveKey() {
+    if (pathname.includes('overview')) {
+      return TabNames.overview;
+    } else if (pathname.includes('basic_info')) {
+      return TabNames.basicInfo;
+    } else if (pathname.includes('cluster_info')) {
+      return TabNames.clusterInfo;
+    } else if (pathname.includes('users')) {
+      return TabNames.users;
+    }
+    return TabNames.overview;
+  }
 
   return (
-    <Tabs isBox activeKey={currentTab} onSelect={handleTabSelect}>
-      <Tab title="Overview" eventKey={0} id="overview">
+    <Tabs isBox activeKey={getActiveKey()} onSelect={handleTabSelect}>
+      <Tab title="Overview" eventKey={TabNames.overview} id="overview">
         <TabContentWrapper>
           <EngagementOverview engagement={engagement} />
         </TabContentWrapper>
       </Tab>
-      <Tab title="Basic Information" eventKey={1} id="basic_information">
+      <Tab
+        title="Basic Information"
+        eventKey={TabNames.basicInfo}
+        id="basic_information"
+      >
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <BasicInformation
@@ -45,7 +75,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
-      <Tab title="Users" eventKey={2} id="users">
+      <Tab title="Users" eventKey={TabNames.users} id="users">
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <ClusterUsers
@@ -56,7 +86,11 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
-      <Tab title="Cluster Information" eventKey={3} id="cluster_information">
+      <Tab
+        title="Cluster Information"
+        eventKey={TabNames.clusterInfo}
+        id="cluster_information"
+      >
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagement}>
             <ClusterInformation
