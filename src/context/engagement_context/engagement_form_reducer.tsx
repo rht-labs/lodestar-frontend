@@ -97,9 +97,9 @@ export const engagementFormReducer = (
     case 'location':
       return { ...state, location: action.payload };
     case 'start_date':
-      return { ...state, start_date: action.payload };
+      return { ...state, start_date: new Date(Date.parse(action.payload)) };
     case 'end_date':
-      return { ...state, end_date: action.payload };
+      return { ...state, end_date: new Date(Date.parse(action.payload)) };
     case 'archive_date':
       return { ...state, archive_date: action.payload };
     case 'engagement_lead_name':

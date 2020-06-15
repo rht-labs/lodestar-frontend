@@ -24,12 +24,12 @@ export function EngagementSummaryCard({
         </GridItem>
         <GridItem span={6}>
           <TitledDataPoint title="Start Date">
-            {engagement?.start_date}
+            {engagement?.start_date?.toISOString()}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={6}>
           <TitledDataPoint title="End Date">
-            {engagement?.end_date}
+            {engagement?.end_date?.toISOString()}
           </TitledDataPoint>
         </GridItem>
       </Grid>
