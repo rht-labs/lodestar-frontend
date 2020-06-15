@@ -12,6 +12,7 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';
 import { Loading } from '../Loading';
+import { LaunchAction } from '../../../components/launch_action/launch_action';
 
 interface ClusterInformationProps {
   formOptions?: EngagementFormConfig;
@@ -263,6 +264,9 @@ export const ClusterInformation = ({
             <FormSelectOption label={''} value={''} />
           )}
         </FormSelect>
+      </FormGroup>
+      <FormGroup label="Cluster Launch" fieldId="launch-data">
+        <LaunchAction engagement={values} />
       </FormGroup>
     </Form>
   );

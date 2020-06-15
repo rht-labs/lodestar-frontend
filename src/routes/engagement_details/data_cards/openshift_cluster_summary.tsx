@@ -3,6 +3,7 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { DataCard } from '../../../components/data_card/data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../../components/titled_data_point/titled_data_point';
+import { LaunchAction } from '../../../components/launch_action/launch_action';
 
 export function OpenshiftClusterSummaryCard({
   engagement,
@@ -41,6 +42,9 @@ export function OpenshiftClusterSummaryCard({
           <TitledDataPoint title="Subdomain">
             {engagement?.ocp_sub_domain}
           </TitledDataPoint>
+        </GridItem>
+        <GridItem span={3}>
+          <LaunchAction engagement={engagement} />
         </GridItem>
       </Grid>
     </DataCard>

@@ -10,6 +10,7 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { EngagementSummaryCard } from '../data_cards/engagement_summary_card';
 import { PointOfContactCard } from '../data_cards/point_of_contact_card';
 import { OpenshiftClusterSummaryCard } from '../data_cards/openshift_cluster_summary';
+import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane_wrapper';
 
 interface EngagementTabViewProps extends EngagementViewProps {}
 
@@ -26,38 +27,44 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     <Tabs isBox activeKey={currentTab} onSelect={handleTabSelect}>
       <Tab title="Overview" eventKey={0}>
         <TabContentWrapper>
-          <TableDisplayView engagement={engagement} />
+          <EngagementOverview engagement={engagement} />
         </TabContentWrapper>
       </Tab>
       <Tab title="Basic Information" eventKey={1}>
         <TabContentWrapper>
-          <BasicInformation
-            formOptions={formOptions}
-            values={engagementFormState}
-            onChange={updateEngagementFormField}
-          />
-          <PointOfContact
-            values={engagementFormState}
-            onChange={updateEngagementFormField}
-          />
+          <EditPaneWrapper engagement={engagement}>
+            <BasicInformation
+              formOptions={formOptions}
+              values={engagementFormState}
+              onChange={updateEngagementFormField}
+            />
+            <PointOfContact
+              values={engagementFormState}
+              onChange={updateEngagementFormField}
+            />
+          </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
       <Tab title="Users" eventKey={2}>
         <TabContentWrapper>
-          <ClusterUsers
-            formOptions={formOptions}
-            values={engagementFormState}
-            onChange={updateEngagementFormField}
-          />
+          <EditPaneWrapper engagement={engagement}>
+            <ClusterUsers
+              formOptions={formOptions}
+              values={engagementFormState}
+              onChange={updateEngagementFormField}
+            />
+          </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
       <Tab title="Cluster Information" eventKey={3}>
         <TabContentWrapper>
-          <ClusterInformation
-            formOptions={formOptions}
-            values={engagementFormState}
-            onChange={updateEngagementFormField}
-          />
+          <EditPaneWrapper engagement={engagement}>
+            <ClusterInformation
+              formOptions={formOptions}
+              values={engagementFormState}
+              onChange={updateEngagementFormField}
+            />
+          </EditPaneWrapper>
         </TabContentWrapper>
       </Tab>
     </Tabs>
@@ -68,7 +75,7 @@ function TabContentWrapper(props: { children: any }) {
   return <div style={{ paddingTop: 20 }}>{props.children}</div>;
 }
 
-function TableDisplayView({ engagement }: { engagement?: Engagement }) {
+function EngagementOverview({ engagement }: { engagement?: Engagement }) {
   return (
     <TextContent>
       <div>
@@ -83,17 +90,6 @@ function TableDisplayView({ engagement }: { engagement?: Engagement }) {
             <OpenshiftClusterSummaryCard engagement={engagement} />
           </GridItem>
         </Grid>
-        {/* <Table
-          aria-label="Compact expandable table"
-          variant={TableVariant.compact}
-          rows={Object.keys(engagement).map(k => [
-            k,
-            JSON.stringify(engagement[k]),
-          ])}
-          cells={['', '']}
-        >
-          <TableBody />
-        </Table> */}
       </div>
     </TextContent>
   );
