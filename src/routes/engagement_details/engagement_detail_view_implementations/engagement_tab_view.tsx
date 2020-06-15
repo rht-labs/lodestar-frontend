@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { EngagementViewProps } from '..';
-import { Loading } from '../Loading';
 import { Tabs, Tab, Grid, GridItem, TextContent } from '@patternfly/react-core';
 import { BasicInformation } from '../form_views/01_basic_information';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
@@ -22,9 +21,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
   } = useEngagements();
   const [currentTab, setCurrentTab] = useState(0);
   const handleTabSelect = (e, tabIndex) => setCurrentTab(tabIndex);
-  if (!engagement) {
-    return <Loading />;
-  }
+
   return (
     <Tabs isBox activeKey={currentTab} onSelect={handleTabSelect}>
       <Tab title="Overview" eventKey={0}>
@@ -71,7 +68,7 @@ function TabContentWrapper(props: { children: any }) {
   return <div style={{ paddingTop: 20 }}>{props.children}</div>;
 }
 
-function TableDisplayView({ engagement }: { engagement: Engagement }) {
+function TableDisplayView({ engagement }: { engagement?: Engagement }) {
   return (
     <TextContent>
       <div>

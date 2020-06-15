@@ -7,39 +7,39 @@ import { TitledDataPoint } from '../../../components/titled_data_point/titled_da
 export function OpenshiftClusterSummaryCard({
   engagement,
 }: {
-  engagement: Engagement;
+  engagement?: Engagement;
 }) {
   return (
     <DataCard title="Openshift Information">
       <Grid hasGutter>
         <GridItem span={3}>
           <TitledDataPoint title="Cloud Provider">
-            {engagement.ocp_cloud_provider_name}
+            {engagement?.ocp_cloud_provider_name}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Openshift Version">
-            {engagement.ocp_version}
+            {engagement?.ocp_version}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Storage Size">
-            {engagement.ocp_persistent_storage_size}
+            {engagement?.ocp_persistent_storage_size}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Cloud Region">
-            {engagement.ocp_cloud_provider_region}
+            {engagement?.ocp_cloud_provider_region}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Cloud Provider">
-            {engagement.ocp_cluster_size}
+            {engagement?.ocp_cluster_size}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Subdomain">
-            {engagement.ocp_sub_domain}
+            {engagement?.ocp_sub_domain}
           </TitledDataPoint>
         </GridItem>
       </Grid>
