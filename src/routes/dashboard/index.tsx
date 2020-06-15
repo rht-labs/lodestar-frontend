@@ -1,16 +1,19 @@
 import React from 'react';
-
+import {
+  PageSection,
+  PageSectionVariants,
+  Title,
+  TextContent,
+} from '@patternfly/react-core';
 export function Dashboard() {
-
-  const contentPane: React.CSSProperties = {
-    backgroundColor: '#EDEDED',
-    height: '100vh',
-    padding: 15,
-  };
-
   return (
     <>
-      <div style={contentPane}>
+      <PageSection variant={PageSectionVariants.light}>
+        <TextContent>
+          <Title headingLevel="h1">Dashboard</Title>
+        </TextContent>
+      </PageSection>
+      <PageSection>
         <h1>Dashboard</h1>
         <p>
           This is a super fancy dashboard where people mine data about all of
@@ -27,7 +30,7 @@ export function Dashboard() {
           Select the raised hand to be taken to the feedback form to report any
           issues, share thoughts or provide suggestions.
         </p>
-      </div>
+      </PageSection>
     </>
   );
 }

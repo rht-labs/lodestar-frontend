@@ -408,6 +408,20 @@ Object {
                 </p>
               </div>
             </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                >
+                  Launched On
+                </h6>
+              </div>
+            </div>
           </div>
         </div>
       </article>
@@ -550,6 +564,20 @@ Object {
               >
                 ordoabchao
               </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+              >
+                Launched On
+              </h6>
             </div>
           </div>
         </div>

@@ -10,17 +10,17 @@ export function PointOfContactCard({ engagement }: { engagement: Engagement }) {
       <Grid hasGutter>
         <GridItem span={6}>
           <TitledDataPoint title="Engagement Lead">
-            {engagement.engagement_lead_name}
+            {engagement?.engagement_lead_name}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={6}>
           <TitledDataPoint title="Technical Lead">
-            {engagement.technical_lead_name}
+            {engagement?.technical_lead_name}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={6}>
           <TitledDataPoint title="Customer Contact">
-            {engagement.customer_contact_name}
+            {engagement?.customer_contact_name}
           </TitledDataPoint>
         </GridItem>
       </Grid>

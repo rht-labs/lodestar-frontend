@@ -3,44 +3,48 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { DataCard } from '../../../components/data_card/data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../../components/titled_data_point/titled_data_point';
+import { LaunchAction } from '../../../components/launch_action/launch_action';
 
 export function OpenshiftClusterSummaryCard({
   engagement,
 }: {
-  engagement: Engagement;
+  engagement?: Engagement;
 }) {
   return (
     <DataCard title="Openshift Information">
       <Grid hasGutter>
         <GridItem span={3}>
           <TitledDataPoint title="Cloud Provider">
-            {engagement.ocp_cloud_provider_name}
+            {engagement?.ocp_cloud_provider_name}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Openshift Version">
-            {engagement.ocp_version}
+            {engagement?.ocp_version}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Storage Size">
-            {engagement.ocp_persistent_storage_size}
+            {engagement?.ocp_persistent_storage_size}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Cloud Region">
-            {engagement.ocp_cloud_provider_region}
+            {engagement?.ocp_cloud_provider_region}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Cloud Provider">
-            {engagement.ocp_cluster_size}
+            {engagement?.ocp_cluster_size}
           </TitledDataPoint>
         </GridItem>
         <GridItem span={3}>
           <TitledDataPoint title="Subdomain">
-            {engagement.ocp_sub_domain}
+            {engagement?.ocp_sub_domain}
           </TitledDataPoint>
+        </GridItem>
+        <GridItem span={3}>
+          <LaunchAction engagement={engagement} />
         </GridItem>
       </Grid>
     </DataCard>
