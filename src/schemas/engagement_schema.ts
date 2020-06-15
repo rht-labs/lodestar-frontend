@@ -1,5 +1,5 @@
 import faker from 'faker/locale/en_US';
-
+import { LaunchData } from './launch_data';
 export interface Engagement {
   archive_date: Date;
   customer_contact_email: string;
@@ -23,7 +23,7 @@ export interface Engagement {
   start_date: Date;
   technical_lead_email: string;
   technical_lead_name: string;
-  launch: object;
+  launch?: LaunchData;
   suggested_subdomain?: string;
 }
 export abstract class Engagement {

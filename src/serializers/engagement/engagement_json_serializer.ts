@@ -1,7 +1,8 @@
 import { Serializer } from '../serializer';
 import { Engagement } from '../../schemas/engagement_schema';
-import { parse as parseDate, format } from 'date-fns';
+import { parse as parseDate, format, parseISO } from 'date-fns';
 import { Logger } from '../../utilities/logger';
+import { LaunchData } from '../../schemas/launch_data';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
@@ -51,7 +52,17 @@ export class EngagementJsonSerializer
         : undefined,
       technical_lead_email: data['technical_lead_email'],
       technical_lead_name: data['technical_lead_name'],
-      launch: data['launch'],
+      launch: this.parseLaunchData(data['launch']),
+    };
+  }
+
+  private parseLaunchData(launchData): LaunchData {
+    if (!launchData) {
+      return undefined;
+    }
+    return {
+      launched_date_time: parseISO(launchData['launched_date_time']),
+      launched_by: launchData['launched_by'],
     };
   }
 }
