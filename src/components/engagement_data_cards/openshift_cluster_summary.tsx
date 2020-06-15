@@ -1,9 +1,9 @@
 import React from 'react';
-import { Engagement } from '../../../schemas/engagement_schema';
-import { DataCard } from '../../../components/data_card/data_card';
+import { Engagement } from '../../schemas/engagement_schema';
+import { DataCard } from './data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
-import { TitledDataPoint } from '../../../components/titled_data_point/titled_data_point';
-import { LaunchAction } from '../../../components/launch_action/launch_action';
+import { TitledDataPoint } from '../titled_data_point/titled_data_point';
+import { LaunchAction } from '../launch_action/launch_action';
 
 export function OpenshiftClusterSummaryCard({
   engagement,

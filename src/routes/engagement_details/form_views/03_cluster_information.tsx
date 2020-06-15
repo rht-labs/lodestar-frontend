@@ -16,13 +16,13 @@ import { LaunchAction } from '../../../components/launch_action/launch_action';
 
 interface ClusterInformationProps {
   formOptions?: EngagementFormConfig;
-  values: any;
+  engagement: Engagement;
   onChange: (field: string, value: any) => void;
 }
 
 export const ClusterInformation = ({
   formOptions,
-  values,
+  engagement,
   onChange,
 }: ClusterInformationProps) => {
   const { hasFeature } = useFeatures();
@@ -43,39 +43,40 @@ export const ClusterInformation = ({
   const availableProviders =
     formOptions?.cloud_options?.providers?.options ?? [];
   if (
-    values.ocp_cloud_provider_name &&
+    engagement.ocp_cloud_provider_name &&
     !availableProviders.find(
-      option => option.value && option.value === values.ocp_cloud_provider_name
+      option =>
+        option.value && option.value === engagement.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({
-      value: values.ocp_cloud_provider_name,
-      label: values.ocp_cloud_provider_name,
+      value: engagement.ocp_cloud_provider_name,
+      label: engagement.ocp_cloud_provider_name,
     });
   }
   const provider = formOptions?.cloud_options?.providers?.options?.find(
-    p => p.value === values.ocp_cloud_provider_name
+    p => p.value === engagement.ocp_cloud_provider_name
   );
   const availableProviderRegionOptions = provider?.options ?? [];
 
   if (
     availableProviderRegionOptions?.length === 0 &&
-    values.ocp_cloud_provider_region
+    engagement.ocp_cloud_provider_region
   ) {
     availableProviderRegionOptions.push({
-      value: values.ocp_cloud_provider_region,
-      label: values.ocp_cloud_provider_region,
+      value: engagement.ocp_cloud_provider_region,
+      label: engagement.ocp_cloud_provider_region,
     });
   }
 
   const getSubdomainHelperText = () => {
     if (editedByUser['ocp_sub_domain']) {
-      return values.ocp_sub_domain;
+      return engagement.ocp_sub_domain;
     } else {
-      if (values.ocp_sub_domain) {
-        return slugify(values.ocp_sub_domain);
-      } else if (values.suggested_subdomain) {
-        return values.suggested_subdomain;
+      if (engagement.ocp_sub_domain) {
+        return slugify(engagement.ocp_sub_domain);
+      } else if (engagement.suggested_subdomain) {
+        return engagement.suggested_subdomain;
       } else {
         return '<desired-subdomain>';
       }
@@ -84,9 +85,9 @@ export const ClusterInformation = ({
 
   const getSubdomainFieldText = () => {
     if (editedByUser['ocp_sub_domain']) {
-      return values.ocp_sub_domain;
+      return engagement.ocp_sub_domain;
     } else {
-      return values.ocp_sub_domain || values.suggested_subdomain || '';
+      return engagement.ocp_sub_domain || engagement.suggested_subdomain || '';
     }
   };
 
@@ -98,9 +99,9 @@ export const ClusterInformation = ({
           isDisabled={
             availableProviders?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).launch
+            !!(engagement as Engagement).launch
           }
-          value={values.ocp_cloud_provider_name || ''}
+          value={engagement.ocp_cloud_provider_name || ''}
           onChange={e => onChange('ocp_cloud_provider_name', e)}
         >
           {availableProviders?.map((option: any, index: any) => (
@@ -125,10 +126,10 @@ export const ClusterInformation = ({
           isDisabled={
             availableProviderRegionOptions?.length === 0 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).launch
+            !!(engagement as Engagement).launch
           }
           readOnly={availableProviderRegionOptions?.length === 0}
-          value={values.ocp_cloud_provider_region || ''}
+          value={engagement.ocp_cloud_provider_region || ''}
           onChange={e => onChange('ocp_cloud_provider_region', e)}
         >
           {availableProviderRegionOptions.map((option: any, index: any) => (
@@ -150,11 +151,11 @@ export const ClusterInformation = ({
         <FormSelect
           style={input}
           aria-label="OpenShift Version"
-          value={values.ocp_version || ''}
+          value={engagement.ocp_version || ''}
           isDisabled={
             formOptions?.openshift_options?.versions?.options?.length === 1 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).launch
+            !!(engagement as Engagement).launch
           }
           onChange={e => onChange('ocp_version', e)}
         >
@@ -190,7 +191,8 @@ export const ClusterInformation = ({
           style={input}
           isRequired
           isDisabled={
-            !hasFeature(APP_FEATURES.writer) || !!(values as Engagement).launch
+            !hasFeature(APP_FEATURES.writer) ||
+            !!(engagement as Engagement).launch
           }
           type="text"
           id="ocp_sub_domain"
@@ -218,7 +220,7 @@ export const ClusterInformation = ({
               ?.length === 1 || !hasFeature(APP_FEATURES.writer)
           }
           onChange={e => onChange('ocp_persistent_storage_size', e)}
-          value={values.ocp_persistent_storage_size || ''}
+          value={engagement.ocp_persistent_storage_size || ''}
         >
           {formOptions?.openshift_options?.persistent_storage?.options?.length >
           0 ? (
@@ -240,12 +242,12 @@ export const ClusterInformation = ({
       <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
         <FormSelect
           aria-label="Cluster Size"
-          value={values.ocp_cluster_size || ''}
+          value={engagement.ocp_cluster_size || ''}
           isDisabled={
             formOptions?.openshift_options?.cluster_size?.options?.length ===
               1 ||
             !hasFeature(APP_FEATURES.writer) ||
-            !!(values as Engagement).launch
+            !!(engagement as Engagement).launch
           }
           onChange={e => onChange('ocp_cluster_size', e)}
         >
@@ -266,7 +268,7 @@ export const ClusterInformation = ({
         </FormSelect>
       </FormGroup>
       <FormGroup label="Cluster Launch" fieldId="launch-data">
-        <LaunchAction engagement={values} />
+        <LaunchAction engagement={engagement} />
       </FormGroup>
     </Form>
   );

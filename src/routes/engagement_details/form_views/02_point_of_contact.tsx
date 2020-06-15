@@ -10,8 +10,17 @@ import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../../common/app_features';
 import { useValidation } from '../../../context/validation_context/validation_hook';
 import { useFeatures } from '../../../context/feature_toggles/feature_hook';
+import { Engagement } from '../../../schemas/engagement_schema';
 
-export const PointOfContact = ({ values, onChange }: any) => {
+export interface PointOfContactProps {
+  engagement: Engagement;
+  onChange: (fieldName: string, payload: string) => void;
+}
+
+export const PointOfContact = ({
+  engagement,
+  onChange,
+}: PointOfContactProps) => {
   const tabContent: React.CSSProperties = {
     margin: 45,
   };
@@ -58,7 +67,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             }}
             placeholder="Full Name"
             type="text"
-            value={values.engagement_lead_name || ''}
+            value={engagement.engagement_lead_name || ''}
           />
           <InputGroupText
             style={input}
@@ -79,7 +88,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.engagement_lead_email || ''}
+            value={engagement.engagement_lead_email || ''}
           />
         </InputGroup>
       </FormGroup>
@@ -115,7 +124,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             onChange={e => onChange('technical_lead_name', e)}
             placeholder="Full Name"
             type="text"
-            value={values.technical_lead_name || ''}
+            value={engagement.technical_lead_name || ''}
           />
           <InputGroupText
             style={input}
@@ -136,7 +145,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.technical_lead_email || ''}
+            value={engagement.technical_lead_email || ''}
           />
         </InputGroup>
       </FormGroup>
@@ -172,7 +181,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             onChange={e => onChange('customer_contact_name', e)}
             type="text"
             placeholder="Full Name"
-            value={values.customer_contact_name || ''}
+            value={engagement.customer_contact_name || ''}
           />
           <InputGroupText
             style={input}
@@ -193,7 +202,7 @@ export const PointOfContact = ({ values, onChange }: any) => {
             }
             placeholder="Email Address"
             type="email"
-            value={values.customer_contact_email || ''}
+            value={engagement.customer_contact_email || ''}
           />
         </InputGroup>
       </FormGroup>

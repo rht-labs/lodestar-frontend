@@ -1,18 +1,14 @@
 import React from 'react';
 import { EngagementViewProps } from '..';
-import { Tabs, Tab, Grid, GridItem, TextContent } from '@patternfly/react-core';
+import { Tabs, Tab } from '@patternfly/react-core';
 import { BasicInformation } from '../form_views/01_basic_information';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { PointOfContact } from '../form_views/02_point_of_contact';
 import { ClusterUsers } from '../form_views/04_cluster_users';
 import { ClusterInformation } from '../form_views/03_cluster_information';
-import { Engagement } from '../../../schemas/engagement_schema';
-import { EngagementSummaryCard } from '../data_cards/engagement_summary_card';
-import { PointOfContactCard } from '../data_cards/point_of_contact_card';
-import { OpenshiftClusterSummaryCard } from '../data_cards/openshift_cluster_summary';
 import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane_wrapper';
 import { useLocation, useHistory } from 'react-router';
-
+import { EngagementOverview } from '../tab_views/overview';
 interface EngagementTabViewProps extends EngagementViewProps {}
 
 enum TabNames {
@@ -65,11 +61,11 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           <EditPaneWrapper engagement={engagement}>
             <BasicInformation
               formOptions={formOptions}
-              values={engagementFormState}
+              engagement={engagementFormState}
               onChange={updateEngagementFormField}
             />
             <PointOfContact
-              values={engagementFormState}
+              engagement={engagementFormState}
               onChange={updateEngagementFormField}
             />
           </EditPaneWrapper>
@@ -80,7 +76,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           <EditPaneWrapper engagement={engagement}>
             <ClusterUsers
               formOptions={formOptions}
-              values={engagementFormState}
+              engagement={engagementFormState}
               onChange={updateEngagementFormField}
             />
           </EditPaneWrapper>
@@ -95,7 +91,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
           <EditPaneWrapper engagement={engagement}>
             <ClusterInformation
               formOptions={formOptions}
-              values={engagementFormState}
+              engagement={engagementFormState}
               onChange={updateEngagementFormField}
             />
           </EditPaneWrapper>
@@ -107,24 +103,4 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
 
 function TabContentWrapper(props: { children: any }) {
   return <div style={{ paddingTop: 20 }}>{props.children}</div>;
-}
-
-function EngagementOverview({ engagement }: { engagement?: Engagement }) {
-  return (
-    <TextContent>
-      <div>
-        <Grid hasGutter>
-          <GridItem span={6}>
-            <EngagementSummaryCard engagement={engagement} />
-          </GridItem>
-          <GridItem span={6}>
-            <PointOfContactCard engagement={engagement} />
-          </GridItem>
-          <GridItem span={12}>
-            <OpenshiftClusterSummaryCard engagement={engagement} />
-          </GridItem>
-        </Grid>
-      </div>
-    </TextContent>
-  );
 }

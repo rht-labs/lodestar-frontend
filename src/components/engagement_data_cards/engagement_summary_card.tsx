@@ -1,8 +1,8 @@
 import React from 'react';
-import { DataCard } from '../../../components/data_card/data_card';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { DataCard } from './data_card';
+import { Engagement } from '../../schemas/engagement_schema';
 import { Grid, GridItem } from '@patternfly/react-core';
-import { TitledDataPoint } from '../../../components/titled_data_point/titled_data_point';
+import { TitledDataPoint } from '../titled_data_point/titled_data_point';
 
 export function EngagementSummaryCard({
   engagement,
