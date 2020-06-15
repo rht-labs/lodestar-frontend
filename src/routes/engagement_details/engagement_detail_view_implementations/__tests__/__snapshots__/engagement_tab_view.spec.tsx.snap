@@ -39,9 +39,9 @@ Object {
             class="pf-c-tabs__item pf-m-current"
           >
             <button
-              aria-controls="pf-tab-section-0-overview"
+              aria-controls="pf-tab-section-overview-overview"
               class="pf-c-tabs__link"
-              id="pf-tab-0-overview"
+              id="pf-tab-overview-overview"
             >
               Overview
             </button>
@@ -50,9 +50,9 @@ Object {
             class="pf-c-tabs__item"
           >
             <button
-              aria-controls="pf-tab-section-1-basic_information"
+              aria-controls="pf-tab-section-basic_info-basic_information"
               class="pf-c-tabs__link"
-              id="pf-tab-1-basic_information"
+              id="pf-tab-basic_info-basic_information"
             >
               Basic Information
             </button>
@@ -61,9 +61,9 @@ Object {
             class="pf-c-tabs__item"
           >
             <button
-              aria-controls="pf-tab-section-2-users"
+              aria-controls="pf-tab-section-users-users"
               class="pf-c-tabs__link"
-              id="pf-tab-2-users"
+              id="pf-tab-users-users"
             >
               Users
             </button>
@@ -72,9 +72,9 @@ Object {
             class="pf-c-tabs__item"
           >
             <button
-              aria-controls="pf-tab-section-3-cluster_information"
+              aria-controls="pf-tab-section-cluster_info-cluster_information"
               class="pf-c-tabs__link"
-              id="pf-tab-3-cluster_information"
+              id="pf-tab-cluster_info-cluster_information"
             >
               Cluster Information
             </button>
@@ -103,9 +103,9 @@ Object {
         </button>
       </div>
       <section
-        aria-labelledby="pf-tab-0-overview"
+        aria-labelledby="pf-tab-overview-overview"
         class="pf-c-tab-content"
-        id="pf-tab-section-0-overview"
+        id="pf-tab-section-overview-overview"
         role="tabpanel"
         tabindex="0"
       >
@@ -387,10 +387,10 @@ Object {
         </div>
       </section>
       <section
-        aria-labelledby="pf-tab-1-basic_information"
+        aria-labelledby="pf-tab-basic_info-basic_information"
         class="pf-c-tab-content"
         hidden=""
-        id="pf-tab-section-1-basic_information"
+        id="pf-tab-section-basic_info-basic_information"
         role="tabpanel"
         tabindex="0"
       >
@@ -401,10 +401,10 @@ Object {
         </div>
       </section>
       <section
-        aria-labelledby="pf-tab-2-users"
+        aria-labelledby="pf-tab-users-users"
         class="pf-c-tab-content"
         hidden=""
-        id="pf-tab-section-2-users"
+        id="pf-tab-section-users-users"
         role="tabpanel"
         tabindex="0"
       >
@@ -415,10 +415,10 @@ Object {
         </div>
       </section>
       <section
-        aria-labelledby="pf-tab-3-cluster_information"
+        aria-labelledby="pf-tab-cluster_info-cluster_information"
         class="pf-c-tab-content"
         hidden=""
-        id="pf-tab-section-3-cluster_information"
+        id="pf-tab-section-cluster_info-cluster_information"
         role="tabpanel"
         tabindex="0"
       >
@@ -465,9 +465,9 @@ Object {
           class="pf-c-tabs__item pf-m-current"
         >
           <button
-            aria-controls="pf-tab-section-0-overview"
+            aria-controls="pf-tab-section-overview-overview"
             class="pf-c-tabs__link"
-            id="pf-tab-0-overview"
+            id="pf-tab-overview-overview"
           >
             Overview
           </button>
@@ -476,9 +476,9 @@ Object {
           class="pf-c-tabs__item"
         >
           <button
-            aria-controls="pf-tab-section-1-basic_information"
+            aria-controls="pf-tab-section-basic_info-basic_information"
             class="pf-c-tabs__link"
-            id="pf-tab-1-basic_information"
+            id="pf-tab-basic_info-basic_information"
           >
             Basic Information
           </button>
@@ -487,9 +487,9 @@ Object {
           class="pf-c-tabs__item"
         >
           <button
-            aria-controls="pf-tab-section-2-users"
+            aria-controls="pf-tab-section-users-users"
             class="pf-c-tabs__link"
-            id="pf-tab-2-users"
+            id="pf-tab-users-users"
           >
             Users
           </button>
@@ -498,9 +498,9 @@ Object {
           class="pf-c-tabs__item"
         >
           <button
-            aria-controls="pf-tab-section-3-cluster_information"
+            aria-controls="pf-tab-section-cluster_info-cluster_information"
             class="pf-c-tabs__link"
-            id="pf-tab-3-cluster_information"
+            id="pf-tab-cluster_info-cluster_information"
           >
             Cluster Information
           </button>
@@ -529,9 +529,9 @@ Object {
       </button>
     </div>
     <section
-      aria-labelledby="pf-tab-0-overview"
+      aria-labelledby="pf-tab-overview-overview"
       class="pf-c-tab-content"
-      id="pf-tab-section-0-overview"
+      id="pf-tab-section-overview-overview"
       role="tabpanel"
       tabindex="0"
     >
@@ -813,10 +813,10 @@ Object {
       </div>
     </section>
     <section
-      aria-labelledby="pf-tab-1-basic_information"
+      aria-labelledby="pf-tab-basic_info-basic_information"
       class="pf-c-tab-content"
       hidden=""
-      id="pf-tab-section-1-basic_information"
+      id="pf-tab-section-basic_info-basic_information"
       role="tabpanel"
       tabindex="0"
     >
@@ -827,10 +827,10 @@ Object {
       </div>
     </section>
     <section
-      aria-labelledby="pf-tab-2-users"
+      aria-labelledby="pf-tab-users-users"
       class="pf-c-tab-content"
       hidden=""
-      id="pf-tab-section-2-users"
+      id="pf-tab-section-users-users"
       role="tabpanel"
       tabindex="0"
     >
@@ -841,10 +841,10 @@ Object {
       </div>
     </section>
     <section
-      aria-labelledby="pf-tab-3-cluster_information"
+      aria-labelledby="pf-tab-cluster_info-cluster_information"
       class="pf-c-tab-content"
       hidden=""
-      id="pf-tab-section-3-cluster_information"
+      id="pf-tab-section-cluster_info-cluster_information"
       role="tabpanel"
       tabindex="0"
     >
