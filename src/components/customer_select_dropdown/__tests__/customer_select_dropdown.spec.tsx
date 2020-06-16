@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent, queryByAttribute } from '@testing-library/react';
-import { CustomerSelect } from '../customer_select_dropdown';
+import { render, fireEvent } from '@testing-library/react';
+import { _CustomerSelectDropdown as CustomerSelect } from '../customer_select_dropdown';
 
 describe('Customer Select Dropdown', () => {
   let customers;

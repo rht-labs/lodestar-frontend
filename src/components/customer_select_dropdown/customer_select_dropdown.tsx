@@ -10,7 +10,7 @@ export interface CustomerSelectDropdownProps {
 export interface HasOptions {
   options?: string[];
 }
-export function CustomerSelect(
+export function _CustomerSelectDropdown(
   props: CustomerSelectDropdownProps & HasOptions
 ) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -49,13 +49,14 @@ export function CustomerSelectDropdown(props: CustomerSelectDropdownProps) {
         []
     )
   );
+  const CUSTOMER_DROPDOWN = _CustomerSelectDropdown;
   useEffect(() => {
     if (engagements === undefined) {
       getEngagements();
     }
   }, [engagements, getEngagements]);
   return (
-    <CustomerSelect
+    <CUSTOMER_DROPDOWN
       onSelect={props.onSelect}
       options={customerNames}
       placeholder={props.placeholder}
