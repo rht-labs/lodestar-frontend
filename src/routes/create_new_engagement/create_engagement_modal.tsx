@@ -8,6 +8,7 @@ import {
   Text,
 } from '@patternfly/react-core';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 
 export interface CreateEngagementModalProps {
   isOpen: boolean;
@@ -47,11 +48,14 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
         >
           Submit
         </Button>,
-        <Button key="cancel" variant="link" onClick={props.onRequestClose}>
+        <Button
+          key="cancel"
+          variant="link"
+          onClick={() => props.onRequestClose()}
+        >
           Cancel
         </Button>,
       ]}
-      isFooterLeftAligned
     >
       <Text component="h6">
         To create a new Engagement, please enter a client and product name then
@@ -64,14 +68,10 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
           helperText="What client is this for?"
           isRequired
         >
-          <TextInput
-            type="text"
-            id="customer_name"
-            name="customer_name"
+          <CustomerSelectDropdown
             placeholder="e.g. NASA"
-            value={customerName || ''}
-            onChange={setCustomerName}
-            data-cy="new_customer_name"
+            selectedValue={customerName}
+            onSelect={setCustomerName}
           />
         </FormGroup>
         <FormGroup
