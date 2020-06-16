@@ -14,6 +14,7 @@ import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailView } from './engagement_details';
+import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 
 function _OMPRouter() {
   return (
@@ -38,41 +39,43 @@ function _OMPRouter() {
                   <Redirect exact from="/app" to="/app/dashboard" />
                   <PrivateRoute path="/app/dashboard" component={Dashboard} />
                   <PrivateRoute path="/app/engagements">
-                    <Switch>
-                      <Redirect
-                        exact
-                        from="/app/engagements"
-                        to="/app/engagements/all"
-                      />
-                      <PrivateRoute path="/app/engagements/all">
-                        <EngagementListRoute title="All Engagements" />
-                      </PrivateRoute>
-                      <PrivateRoute path="/app/engagements/upcoming">
-                        <EngagementListRoute
-                          filter={() => true}
-                          title="Upcoming Engagements"
+                    <ModalVisibilityProvider>
+                      <Switch>
+                        <Redirect
+                          exact
+                          from="/app/engagements"
+                          to="/app/engagements/all"
                         />
-                      </PrivateRoute>
-                      <PrivateRoute path="/app/engagements/active">
-                        <EngagementListRoute
-                          filter={() => true}
-                          title="Active Engagements"
+                        <PrivateRoute path="/app/engagements/all">
+                          <EngagementListRoute title="All Engagements" />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/upcoming">
+                          <EngagementListRoute
+                            filter={() => true}
+                            title="Upcoming Engagements"
+                          />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/active">
+                          <EngagementListRoute
+                            filter={() => true}
+                            title="Active Engagements"
+                          />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/past">
+                          <EngagementListRoute
+                            filter={() => true}
+                            title="Past Engagements"
+                          />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/new">
+                          <CreateNewEngagement />
+                        </PrivateRoute>
+                        <PrivateRoute
+                          path="/app/engagements/:customer_name/:project_name"
+                          component={EngagementDetailView}
                         />
-                      </PrivateRoute>
-                      <PrivateRoute path="/app/engagements/past">
-                        <EngagementListRoute
-                          filter={() => true}
-                          title="Past Engagements"
-                        />
-                      </PrivateRoute>
-                      <PrivateRoute path="/app/engagements/new">
-                        <CreateNewEngagement />
-                      </PrivateRoute>
-                      <PrivateRoute
-                        path="/app/engagements/:customer_name/:project_name"
-                        component={EngagementDetailView}
-                      />
-                    </Switch>
+                      </Switch>
+                    </ModalVisibilityProvider>
                   </PrivateRoute>
                   <PrivateRoute exact path="/app/about">
                     <About />

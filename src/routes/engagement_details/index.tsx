@@ -11,6 +11,8 @@ import {
   TextContent,
   Text,
   PageSectionVariants,
+  AlertVariant,
+  Button,
 } from '@patternfly/react-core';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
@@ -87,6 +89,30 @@ export function EngagementDetailView(props) {
   );
 }
 
+interface LaunchMessageProps {
+  engagement: Engagement;
+  onLaunch: (engagement: Engagement) => void;
+}
+function LaunchMessage({ engagement, onLaunch }: LaunchMessageProps) {
+  if (!engagement?.launch) {
+    return (
+      <Alert
+        isInline
+        title="Engagement not launched"
+        variant={AlertVariant.warning}
+        actionLinks={
+          <>
+            <Button onClick={() => onLaunch(engagement)}>Launch</Button>
+          </>
+        }
+      >
+        This engagement has not been launched
+      </Alert>
+    );
+  }
+  return <div />;
+}
+
 const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
   Object.keys(formOptions || {}).reduce((acc, groupingKey) => {
     return {
@@ -110,6 +136,7 @@ function EngagementViewTemplate({
   engagement: Engagement;
   children: any;
 }) {
+  const { launchEngagement } = useEngagements();
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
@@ -117,6 +144,9 @@ function EngagementViewTemplate({
           <Text component="h1">{engagement?.project_name}</Text>
           <Text component="h3">{engagement?.customer_name}</Text>
         </TextContent>
+      </PageSection>
+      <PageSection variant={PageSectionVariants.light}>
+        <LaunchMessage onLaunch={launchEngagement} engagement={engagement} />
       </PageSection>
       <PageSection variant={PageSectionVariants.light}>{children}</PageSection>
     </>
