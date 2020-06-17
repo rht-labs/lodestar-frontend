@@ -29,7 +29,7 @@ export function EngagementSummaryEditModal(
 ) {
   const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
-  const getFormattedDate = (inputDate: Date | string = '') => {
+  const getFormattedDate = (inputDate: Date | string = ''): string => {
     // Dates must be formatted YYYY-MM-DD for patternfly date picker.
     // They are coming back inconsistently from the backend,
     // so this function checks to see if the date needs to be formatted,
@@ -42,7 +42,10 @@ export function EngagementSummaryEditModal(
     } else if (inputDate.indexOf('-') > -1) {
       return inputDate;
     } else {
-      return parseDate(inputDate, 'yyyyMMdd', new Date());
+      return formatDate(
+        parseDate(inputDate, 'yyyyMMdd', new Date()),
+        'yyyy-MM-dd'
+      );
     }
   };
   const { saveEngagement, engagementFormState } = useEngagements();

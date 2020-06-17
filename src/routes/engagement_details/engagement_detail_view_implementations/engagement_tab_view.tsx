@@ -6,6 +6,7 @@ import { ClusterUsers } from '../form_views/04_cluster_users';
 import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane_wrapper';
 import { useLocation, useHistory } from 'react-router';
 import { EngagementOverviewTab } from '../tab_views/overview';
+import { HostingEnvironmentTab } from '../tab_views/hosting_environment';
 interface EngagementTabViewProps extends EngagementViewProps {}
 
 enum TabNames {
@@ -13,6 +14,7 @@ enum TabNames {
   clusterInfo = 'cluster_info',
   users = 'users',
   overview = 'overview',
+  hostingEnvironment = 'hosting_environment',
 }
 
 export function EngagementTabView({ engagement }: EngagementTabViewProps) {
@@ -30,21 +32,18 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
   };
 
   function getActiveKey() {
-    if (pathname.includes('overview')) {
-      return TabNames.overview;
-    } else if (pathname.includes('basic_info')) {
-      return TabNames.basicInfo;
-    } else if (pathname.includes('cluster_info')) {
-      return TabNames.clusterInfo;
-    } else if (pathname.includes('users')) {
-      return TabNames.users;
+    const activeTab = Object.keys(TabNames).find(e => {
+      return pathname.includes(TabNames[e]);
+    });
+    if (activeTab) {
+      return TabNames[activeTab];
     }
-    return TabNames.overview;
+    return TabNames.basicInfo;
   }
 
   return (
     <Tabs isBox activeKey={getActiveKey()} onSelect={handleTabSelect}>
-      <Tab title="Overview" eventKey={TabNames.overview} id="overview">
+      <Tab title="Basic Information" eventKey={TabNames.overview} id="overview">
         <TabContentWrapper>
           <EngagementOverviewTab
             formOptions={formOptions}
@@ -59,6 +58,21 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
             <ClusterUsers
               formOptions={formOptions}
               engagement={engagementFormState}
+              onChange={updateEngagementFormField}
+            />
+          </EditPaneWrapper>
+        </TabContentWrapper>
+      </Tab>
+      <Tab
+        title="Hosting Environment"
+        eventKey={TabNames.hostingEnvironment}
+        id={'hosting_environment'}
+      >
+        <TabContentWrapper>
+          <EditPaneWrapper engagement={engagementFormState}>
+            <HostingEnvironmentTab
+              formOptions={formOptions}
+              engagement={engagement}
               onChange={updateEngagementFormField}
             />
           </EditPaneWrapper>

@@ -44,40 +44,40 @@ export function OpenshiftClusterEditModal({
   const availableProviders =
     formOptions?.cloud_options?.providers?.options ?? [];
   if (
-    engagement.ocp_cloud_provider_name &&
+    engagement?.ocp_cloud_provider_name &&
     !availableProviders.find(
       option =>
-        option.value && option.value === engagement.ocp_cloud_provider_name
+        option.value && option.value === engagement?.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({
-      value: engagement.ocp_cloud_provider_name,
-      label: engagement.ocp_cloud_provider_name,
+      value: engagement?.ocp_cloud_provider_name,
+      label: engagement?.ocp_cloud_provider_name,
     });
   }
   const provider = formOptions?.cloud_options?.providers?.options?.find(
-    p => p.value === engagement.ocp_cloud_provider_name
+    p => p.value === engagement?.ocp_cloud_provider_name
   );
   const availableProviderRegionOptions = provider?.options ?? [];
 
   if (
     availableProviderRegionOptions?.length === 0 &&
-    engagement.ocp_cloud_provider_region
+    engagement?.ocp_cloud_provider_region
   ) {
     availableProviderRegionOptions.push({
-      value: engagement.ocp_cloud_provider_region,
-      label: engagement.ocp_cloud_provider_region,
+      value: engagement?.ocp_cloud_provider_region,
+      label: engagement?.ocp_cloud_provider_region,
     });
   }
 
   const getSubdomainHelperText = () => {
     if (editedByUser['ocp_sub_domain']) {
-      return engagement.ocp_sub_domain;
+      return engagement?.ocp_sub_domain;
     } else {
-      if (engagement.ocp_sub_domain) {
-        return slugify(engagement.ocp_sub_domain);
-      } else if (engagement.suggested_subdomain) {
-        return engagement.suggested_subdomain;
+      if (engagement?.ocp_sub_domain) {
+        return slugify(engagement?.ocp_sub_domain);
+      } else if (engagement?.suggested_subdomain) {
+        return engagement?.suggested_subdomain;
       } else {
         return '<desired-subdomain>';
       }
@@ -86,9 +86,11 @@ export function OpenshiftClusterEditModal({
 
   const getSubdomainFieldText = () => {
     if (editedByUser['ocp_sub_domain']) {
-      return engagement.ocp_sub_domain;
+      return engagement?.ocp_sub_domain;
     } else {
-      return engagement.ocp_sub_domain || engagement.suggested_subdomain || '';
+      return (
+        engagement?.ocp_sub_domain || engagement?.suggested_subdomain || ''
+      );
     }
   };
 
@@ -115,9 +117,9 @@ export function OpenshiftClusterEditModal({
               isDisabled={
                 availableProviders?.length === 1 ||
                 !hasFeature(APP_FEATURES.writer) ||
-                !!(engagement as Engagement).launch
+                !!engagement?.launch
               }
-              value={engagement.ocp_cloud_provider_name || ''}
+              value={engagement?.ocp_cloud_provider_name || ''}
               onChange={e => onChange('ocp_cloud_provider_name', e)}
             >
               {availableProviders?.map((option: any, index: any) => (
@@ -142,10 +144,10 @@ export function OpenshiftClusterEditModal({
               isDisabled={
                 availableProviderRegionOptions?.length === 0 ||
                 !hasFeature(APP_FEATURES.writer) ||
-                !!(engagement as Engagement).launch
+                !!engagement?.launch
               }
               readOnly={availableProviderRegionOptions?.length === 0}
-              value={engagement.ocp_cloud_provider_region || ''}
+              value={engagement?.ocp_cloud_provider_region || ''}
               onChange={e => onChange('ocp_cloud_provider_region', e)}
             >
               {availableProviderRegionOptions.map((option: any, index: any) => (
@@ -169,12 +171,12 @@ export function OpenshiftClusterEditModal({
             <FormSelect
               style={input}
               aria-label="OpenShift Version"
-              value={engagement.ocp_version || ''}
+              value={engagement?.ocp_version || ''}
               isDisabled={
                 formOptions?.openshift_options?.versions?.options?.length ===
                   1 ||
                 !hasFeature(APP_FEATURES.writer) ||
-                !!(engagement as Engagement).launch
+                !!engagement?.launch
               }
               onChange={e => onChange('ocp_version', e)}
             >
@@ -210,8 +212,7 @@ export function OpenshiftClusterEditModal({
               style={input}
               isRequired
               isDisabled={
-                !hasFeature(APP_FEATURES.writer) ||
-                !!(engagement as Engagement).launch
+                !hasFeature(APP_FEATURES.writer) || !!engagement?.launch
               }
               type="text"
               id="ocp_sub_domain"
@@ -239,7 +240,7 @@ export function OpenshiftClusterEditModal({
                   ?.length === 1 || !hasFeature(APP_FEATURES.writer)
               }
               onChange={e => onChange('ocp_persistent_storage_size', e)}
-              value={engagement.ocp_persistent_storage_size || ''}
+              value={engagement?.ocp_persistent_storage_size || ''}
             >
               {formOptions?.openshift_options?.persistent_storage?.options
                 ?.length > 0 ? (
@@ -261,12 +262,12 @@ export function OpenshiftClusterEditModal({
           <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
             <FormSelect
               aria-label="Cluster Size"
-              value={engagement.ocp_cluster_size || ''}
+              value={engagement?.ocp_cluster_size || ''}
               isDisabled={
                 formOptions?.openshift_options?.cluster_size?.options
                   ?.length === 1 ||
                 !hasFeature(APP_FEATURES.writer) ||
-                !!(engagement as Engagement).launch
+                !!engagement?.launch
               }
               onChange={e => onChange('ocp_cluster_size', e)}
             >
