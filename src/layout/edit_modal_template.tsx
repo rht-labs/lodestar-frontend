@@ -22,11 +22,13 @@ export function EditModalTemplate(props: EditModalTemplateProps) {
           </TextContent>
         </div>
       </PageSection>
+      <PageSection>{props.children}</PageSection>
       <PageSection>
-        {props.children}
-        <Flex justifyContent={{ default: 'justifyContentFlexEnd' }}>
-          <FlexItem>{props.actions}</FlexItem>
-        </Flex>
+        <div style={{ marginTop: '1rem' }}>
+          <Flex justifyContent={{ default: 'justifyContentFlexEnd' }}>
+            <FlexItem>{props.actions}</FlexItem>
+          </Flex>
+        </div>
       </PageSection>
     </>
   );
