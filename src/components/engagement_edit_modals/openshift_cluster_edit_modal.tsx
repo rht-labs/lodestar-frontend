@@ -18,7 +18,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { slugify } from 'transliteration';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
-export interface OpenshiftClusterEditModalProps {
+export interface OpenShiftClusterEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   engagement: Engagement;
@@ -26,13 +26,13 @@ export interface OpenshiftClusterEditModalProps {
   onSave: (engagement: Engagement) => void;
 }
 
-export function OpenshiftClusterEditModal({
+export function OpenShiftClusterEditModal({
   engagement,
   formOptions,
   onChange,
   isOpen,
   onSave: propsOnSave,
-}: OpenshiftClusterEditModalProps) {
+}: OpenShiftClusterEditModalProps) {
   const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
   const [editedByUser, setEditedByUser] = useState<{ [key: string]: boolean }>(
@@ -110,7 +110,7 @@ export function OpenshiftClusterEditModal({
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Edit Engagement"
+        title="Hosting Environment"
       >
         <Form isHorizontal>
           <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>

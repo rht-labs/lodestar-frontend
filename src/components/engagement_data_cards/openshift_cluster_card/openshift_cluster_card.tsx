@@ -3,29 +3,29 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
-import { OpenshiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
+import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
-export interface OpenshiftClusterSummaryCardProps {
+export interface OpenShiftClusterSummaryCardProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
 }
 
-export function OpenshiftClusterSummaryCard({
+export function OpenShiftClusterSummaryCard({
   engagement,
   onSave,
   onChange,
   formOptions,
-}: OpenshiftClusterSummaryCardProps) {
+}: OpenShiftClusterSummaryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
   return (
     <>
-      <OpenshiftClusterEditModal
+      <OpenShiftClusterEditModal
         formOptions={formOptions}
         onChange={onChange}
         onSave={onSave}
@@ -35,7 +35,7 @@ export function OpenshiftClusterSummaryCard({
       <DataCard
         isEditable
         onEdit={() => requestOpen(OPENSHIFT_MODAL_KEY)}
-        title="Openshift Information"
+        title="Hosting Environment"
       >
         <Grid hasGutter>
           <GridItem span={4}>
@@ -44,7 +44,7 @@ export function OpenshiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
-            <TitledDataPoint title="Openshift Version">
+            <TitledDataPoint title="OpenShift Version">
               {engagement?.ocp_version}
             </TitledDataPoint>
           </GridItem>

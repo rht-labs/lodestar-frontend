@@ -10,7 +10,7 @@ import { HostingEnvironmentTab } from '../tab_views/hosting_environment';
 interface EngagementTabViewProps extends EngagementViewProps {}
 
 enum TabNames {
-  basicInfo = 'basic_info',
+  overview = 'overview',
   users = 'users',
   hostingEnvironment = 'hosting_environment',
 }
@@ -37,16 +37,12 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     if (activeTab) {
       return TabNames[activeTab];
     }
-    return TabNames.basicInfo;
+    return TabNames.overview;
   }
 
   return (
     <Tabs isBox activeKey={getActiveKey()} onSelect={handleTabSelect}>
-      <Tab
-        title="Basic Information"
-        eventKey={TabNames.basicInfo}
-        id="overview"
-      >
+      <Tab title="Overview" eventKey={TabNames.overview} id="overview">
         <TabContentWrapper>
           <EngagementOverviewTab
             onSave={saveEngagement}

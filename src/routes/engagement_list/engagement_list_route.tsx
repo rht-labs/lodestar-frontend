@@ -6,9 +6,12 @@ import {
   Text,
   PageSectionVariants,
   TextContent,
+  Flex,
+  FlexItem,
+  Button,
 } from '@patternfly/react-core';
 import { Logger } from '../../utilities/logger';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export function EngagementListRoute(props: EngagementListProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
@@ -23,12 +26,22 @@ export function EngagementListRoute(props: EngagementListProps) {
       : contextEngagements;
   Logger.info(contextEngagements);
   const title = props.title ?? 'Engagements';
+  const history = useHistory();
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
-        <TextContent>
-          <Text component="h1">{title}</Text>
-        </TextContent>
+        <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
+          <FlexItem>
+            <TextContent>
+              <Text component="h1">{title}</Text>
+            </TextContent>
+          </FlexItem>
+          <FlexItem>
+            <Button onClick={() => history.push('/app/engagements/new')}>
+              Create New
+            </Button>
+          </FlexItem>
+        </Flex>
       </PageSection>
       <PageSection>
         <EngagementList engagements={filteredEngagements} />

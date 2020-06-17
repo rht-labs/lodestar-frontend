@@ -2,7 +2,7 @@ import React from 'react';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
-import { OpenshiftClusterSummaryCard } from '../../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
+import { OpenShiftClusterSummaryCard } from '../../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
 
 export interface HostingEnvironmentTabProps {
   engagement: Engagement;
@@ -21,7 +21,7 @@ export function HostingEnvironmentTab({
     <TextContent>
       <Grid hasGutter>
         <GridItem span={12}>
-          <OpenshiftClusterSummaryCard
+          <OpenShiftClusterSummaryCard
             onSave={onSave}
             formOptions={formOptions}
             onChange={onChange}

@@ -24,9 +24,9 @@ export function EngagementDetailsViewTemplate({
           <Text component="h1">{engagement?.project_name}</Text>
           <Text component="h3">{engagement?.customer_name}</Text>
         </TextContent>
-      </PageSection>
-      <PageSection variant={PageSectionVariants.light}>
-        <LaunchMessage onLaunch={launchEngagement} engagement={engagement} />
+        <div style={{ marginTop: '1rem' }}>
+          <LaunchMessage onLaunch={launchEngagement} engagement={engagement} />
+        </div>
       </PageSection>
       <PageSection variant={PageSectionVariants.light}>{children}</PageSection>
     </>

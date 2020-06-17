@@ -39,11 +39,11 @@ Object {
             class="pf-c-tabs__item pf-m-current"
           >
             <button
-              aria-controls="pf-tab-section-basic_info-overview"
+              aria-controls="pf-tab-section-overview-overview"
               class="pf-c-tabs__link"
-              id="pf-tab-basic_info-overview"
+              id="pf-tab-overview-overview"
             >
-              Basic Information
+              Overview
             </button>
           </li>
           <li
@@ -92,9 +92,9 @@ Object {
         </button>
       </div>
       <section
-        aria-labelledby="pf-tab-basic_info-overview"
+        aria-labelledby="pf-tab-overview-overview"
         class="pf-c-tab-content"
-        id="pf-tab-section-basic_info-overview"
+        id="pf-tab-section-overview-overview"
         role="tabpanel"
         tabindex="0"
       >
@@ -397,7 +397,7 @@ Object {
                         <h2
                           class="pf-c-title pf-m-xl"
                         >
-                          Openshift Information
+                          Hosting Environment
                         </h2>
                       </div>
                       <div />
@@ -433,7 +433,7 @@ Object {
                             class=""
                             data-pf-content="true"
                           >
-                            Openshift Version
+                            OpenShift Version
                           </h6>
                         </div>
                       </div>
@@ -541,11 +541,11 @@ Object {
           class="pf-c-tabs__item pf-m-current"
         >
           <button
-            aria-controls="pf-tab-section-basic_info-overview"
+            aria-controls="pf-tab-section-overview-overview"
             class="pf-c-tabs__link"
-            id="pf-tab-basic_info-overview"
+            id="pf-tab-overview-overview"
           >
-            Basic Information
+            Overview
           </button>
         </li>
         <li
@@ -594,9 +594,9 @@ Object {
       </button>
     </div>
     <section
-      aria-labelledby="pf-tab-basic_info-overview"
+      aria-labelledby="pf-tab-overview-overview"
       class="pf-c-tab-content"
-      id="pf-tab-section-basic_info-overview"
+      id="pf-tab-section-overview-overview"
       role="tabpanel"
       tabindex="0"
     >
@@ -899,7 +899,7 @@ Object {
                       <h2
                         class="pf-c-title pf-m-xl"
                       >
-                        Openshift Information
+                        Hosting Environment
                       </h2>
                     </div>
                     <div />
@@ -935,7 +935,7 @@ Object {
                           class=""
                           data-pf-content="true"
                         >
-                          Openshift Version
+                          OpenShift Version
                         </h6>
                       </div>
                     </div>

@@ -50,7 +50,7 @@ export function EngagementSummaryEditModal(
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Edit Engagement"
+        title="Engagement Summary"
       >
         <Form>
           <FormGroup label="Description" fieldId="description">

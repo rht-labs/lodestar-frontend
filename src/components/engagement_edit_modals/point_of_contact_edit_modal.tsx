@@ -52,7 +52,7 @@ export function PointOfContactEditModal({
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Edit Engagement"
+        title="Points of Contact"
       >
         <Form>
           <FormGroup

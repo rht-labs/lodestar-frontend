@@ -360,7 +360,7 @@ Object {
 }
 `;
 
-exports[`Openshift Cluster Summary matches snapshot 1`] = `
+exports[`OpenShift Cluster Summary matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -378,7 +378,7 @@ Object {
               <h2
                 class="pf-c-title pf-m-xl"
               >
-                Openshift Information
+                Hosting Environment
               </h2>
             </div>
             <div />
@@ -420,7 +420,7 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  Openshift Version
+                  OpenShift Version
                 </h6>
                 <p
                   class=""
@@ -530,7 +530,7 @@ Object {
             <h2
               class="pf-c-title pf-m-xl"
             >
-              Openshift Information
+              Hosting Environment
             </h2>
           </div>
           <div />
@@ -572,7 +572,7 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                Openshift Version
+                OpenShift Version
               </h6>
               <p
                 class=""
