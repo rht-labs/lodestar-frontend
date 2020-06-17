@@ -4,13 +4,14 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { format as formatDate } from 'date-fns';
-import { EngagementSummaryEditModal } from './engagement_summary_edit_modal';
+import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagement_summary_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 
 export interface EngagementSummaryCardProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
+  onSave: (engagement: Engagement) => void;
 }
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
@@ -18,11 +19,13 @@ export function EngagementSummaryCard({
   engagement,
   onChange = () => null,
   formOptions,
+  onSave,
 }: EngagementSummaryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
   return (
     <>
       <EngagementSummaryEditModal
+        onSave={onSave}
         formOptions={formOptions}
         onChange={onChange}
         engagement={engagement}

@@ -4,7 +4,7 @@ import { Engagement } from '../../../schemas/engagement_schema';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { PointOfContactEditModal } from './point_of_contact_edit_modal';
+import { PointOfContactEditModal } from '../../engagement_edit_modals/point_of_contact_edit_modal';
 
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
@@ -12,12 +12,14 @@ export interface PointOfContactCardProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
+  onSave: (engagement: Engagement) => void;
 }
 
 export function PointOfContactCard({
   engagement,
   formOptions,
   onChange,
+  onSave,
 }: PointOfContactCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
 
@@ -27,6 +29,7 @@ export function PointOfContactCard({
         formOptions={formOptions}
         onChange={onChange}
         engagement={engagement}
+        onSave={onSave}
         isOpen={activeModalKey === POINT_OF_CONTACT_MODAL_KEY}
       />
       <DataCard

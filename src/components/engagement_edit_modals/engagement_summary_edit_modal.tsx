@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement_schema';
 import {
   Modal,
   ModalVariant,
@@ -11,47 +11,31 @@ import {
   Form,
   TextArea,
 } from '@patternfly/react-core';
-import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { EditModalTemplate } from '../../../layout/edit_modal_template';
+import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { CalendarAltIcon } from '@patternfly/react-icons';
-import { useFeatures } from '../../../context/feature_toggles/feature_hook';
-import { parse as parseDate, format as formatDate } from 'date-fns';
-import { APP_FEATURES } from '../../../common/app_features';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { parse as parseDate } from 'date-fns';
+import { APP_FEATURES } from '../../common/app_features';
+import { getFormattedDate } from '../../common/patternfly_date_adapter';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
   engagement: Engagement;
   isOpen: boolean;
+  onSave: (engagement: Engagement) => void;
 }
 export function EngagementSummaryEditModal(
   props: EngagementSummaryEditModalProps
 ) {
   const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
-  const getFormattedDate = (inputDate: Date | string = ''): string => {
-    // Dates must be formatted YYYY-MM-DD for patternfly date picker.
-    // They are coming back inconsistently from the backend,
-    // so this function checks to see if the date needs to be formatted,
-    // then formats the date appropriately
-    if (!inputDate) {
-      return;
-    }
-    if (inputDate instanceof Date) {
-      return formatDate(inputDate, 'yyyy-MM-dd');
-    } else if (inputDate.indexOf('-') > -1) {
-      return inputDate;
-    } else {
-      return formatDate(
-        parseDate(inputDate, 'yyyyMMdd', new Date()),
-        'yyyy-MM-dd'
-      );
-    }
-  };
-  const { saveEngagement, engagementFormState } = useEngagements();
+
+  const { engagementFormState } = useEngagements();
 
   const onSave = () => {
-    saveEngagement(engagementFormState);
+    props.onSave(engagementFormState);
     requestClose();
   };
   return (

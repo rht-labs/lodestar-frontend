@@ -9,7 +9,8 @@ import {
   Button,
   ButtonVariant,
 } from '@patternfly/react-core';
-
+import { Feature } from '../../components/feature';
+import { APP_FEATURES } from '../../common/app_features';
 export interface DataCardProps {
   title: string;
   children: any;
@@ -31,7 +32,9 @@ export function DataCard({
             <Title headingLevel="h2">{title}</Title>
           </LevelItem>
           <LevelItem>
-            <EditButton onClick={onEdit} isEditable={isEditable} />
+            <Feature name={APP_FEATURES.writer}>
+              <EditButton onClick={onEdit} isEditable={isEditable} />
+            </Feature>
           </LevelItem>
         </Level>
       </CardTitle>

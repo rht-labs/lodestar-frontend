@@ -8,18 +8,21 @@ export interface HostingEnvironmentTabProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
+  onSave: (engagement: Engagement) => void;
 }
 
 export function HostingEnvironmentTab({
   engagement,
   onChange,
   formOptions,
+  onSave,
 }: HostingEnvironmentTabProps) {
   return (
     <TextContent>
       <Grid hasGutter>
         <GridItem span={12}>
           <OpenshiftClusterSummaryCard
+            onSave={onSave}
             formOptions={formOptions}
             onChange={onChange}
             engagement={engagement}

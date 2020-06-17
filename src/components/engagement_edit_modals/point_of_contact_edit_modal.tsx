@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement_schema';
 import {
   Modal,
   ModalVariant,
@@ -10,23 +10,25 @@ import {
   FormGroup,
   Form,
 } from '@patternfly/react-core';
-import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { EditModalTemplate } from '../../../layout/edit_modal_template';
+import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
-import { useFeatures } from '../../../context/feature_toggles/feature_hook';
-import { APP_FEATURES } from '../../../common/app_features';
-import { useValidation } from '../../../context/validation_context/validation_hook';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { APP_FEATURES } from '../../common/app_features';
+import { useValidation } from '../../context/validation_context/validation_hook';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 export interface PointOfContactEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
   engagement: Engagement;
   isOpen: boolean;
+  onSave: (engagement: Engagement) => void;
 }
 export function PointOfContactEditModal({
   onChange,
   engagement,
   isOpen,
+  onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
   const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
@@ -35,10 +37,10 @@ export function PointOfContactEditModal({
     backgroundColor: '#EDEDED',
   };
   const { validate, getValidationResult } = useValidation();
-  const { saveEngagement, engagementFormState } = useEngagements();
+  const { engagementFormState } = useEngagements();
 
   const onSave = () => {
-    saveEngagement(engagementFormState);
+    propsOnSave(engagementFormState);
     requestClose();
   };
 

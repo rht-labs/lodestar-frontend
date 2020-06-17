@@ -14,16 +14,20 @@ export interface EditModalTemplateProps {
 }
 export function EditModalTemplate(props: EditModalTemplateProps) {
   return (
-    <PageSection>
-      <div style={{ marginBottom: '1rem' }}>
-        <TextContent>
-          <Title headingLevel="h1">{props.title}</Title>
-        </TextContent>
-      </div>
-      {props.children}
-      <Flex justifyContent={{ default: 'justifyContentFlexEnd' }}>
-        <FlexItem>{props.actions}</FlexItem>
-      </Flex>
-    </PageSection>
+    <>
+      <PageSection>
+        <div style={{ marginBottom: '1rem' }}>
+          <TextContent>
+            <Title headingLevel="h1">{props.title}</Title>
+          </TextContent>
+        </div>
+      </PageSection>
+      <PageSection>
+        {props.children}
+        <Flex justifyContent={{ default: 'justifyContentFlexEnd' }}>
+          <FlexItem>{props.actions}</FlexItem>
+        </Flex>
+      </PageSection>
+    </>
   );
 }

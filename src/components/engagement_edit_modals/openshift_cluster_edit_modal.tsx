@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement_schema';
 import {
   Modal,
   ModalVariant,
@@ -10,19 +10,20 @@ import {
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { EditModalTemplate } from '../../../layout/edit_modal_template';
-import { useFeatures } from '../../../context/feature_toggles/feature_hook';
-import { APP_FEATURES } from '../../../common/app_features';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { EditModalTemplate } from '../../layout/edit_modal_template';
+import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { APP_FEATURES } from '../../common/app_features';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { slugify } from 'transliteration';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface OpenshiftClusterEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
+  onSave: (engagement: Engagement) => void;
 }
 
 export function OpenshiftClusterEditModal({
@@ -30,6 +31,7 @@ export function OpenshiftClusterEditModal({
   formOptions,
   onChange,
   isOpen,
+  onSave: propsOnSave,
 }: OpenshiftClusterEditModalProps) {
   const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
@@ -94,14 +96,14 @@ export function OpenshiftClusterEditModal({
     }
   };
 
-  const { saveEngagement, engagementFormState } = useEngagements();
+  const { engagementFormState } = useEngagements();
 
   const onSave = () => {
-    saveEngagement(engagementFormState);
+    propsOnSave(engagementFormState);
     requestClose();
   };
   return (
-    <Modal variant={ModalVariant.small} isOpen={isOpen} onClose={requestClose}>
+    <Modal variant={ModalVariant.large} isOpen={isOpen} onClose={requestClose}>
       <EditModalTemplate
         actions={
           <div>

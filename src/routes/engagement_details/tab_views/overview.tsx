@@ -9,12 +9,14 @@ export interface EngagementOverviewTabProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
+  onSave: (engagement: Engagement) => void;
 }
 
 export function EngagementOverviewTab({
   engagement,
   formOptions,
   onChange,
+  onSave,
 }: EngagementOverviewTabProps) {
   return (
     <TextContent>
@@ -22,6 +24,7 @@ export function EngagementOverviewTab({
         <Grid hasGutter>
           <GridItem span={8}>
             <EngagementSummaryCard
+              onSave={onSave}
               onChange={onChange}
               formOptions={formOptions}
               engagement={engagement}
@@ -29,6 +32,7 @@ export function EngagementOverviewTab({
           </GridItem>
           <GridItem span={4}>
             <PointOfContactCard
+              onSave={onSave}
               onChange={onChange}
               formOptions={formOptions}
               engagement={engagement}
