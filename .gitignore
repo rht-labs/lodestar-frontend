@@ -29,3 +29,5 @@ yarn-error.log*
 
 #ide
 /.vscode
+
+.adhoc
