@@ -3,17 +3,11 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
-import { EngagementTabView } from './engagement_detail_view_implementations/engagement_tab_view';
-import { ValidatorFactory } from '../../schemas/validators';
-import {
-  Alert,
-  PageSection,
-  TextContent,
-  Text,
-  PageSectionVariants,
-} from '@patternfly/react-core';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { EngagementTabView } from './implementations/engagement_tab_view';
+import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
+import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
+import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 
 export interface EngagementViewProps {
   engagement?: Engagement;
@@ -79,46 +73,10 @@ export function EngagementDetailView(props) {
 
   return (
     <ValidationProvider validators={validators}>
-      <EngagementViewTemplate engagement={activeEngagement}>
+      <EngagementDetailsViewTemplate engagement={activeEngagement}>
         <AlertMessage />
         <EngagementTabView engagement={activeEngagement} />
-      </EngagementViewTemplate>
+      </EngagementDetailsViewTemplate>
     </ValidationProvider>
-  );
-}
-
-const getValidatorsFromFormOptions = (formOptions: EngagementFormConfig = {}) =>
-  Object.keys(formOptions || {}).reduce((acc, groupingKey) => {
-    return {
-      ...acc,
-      ...Object.keys(formOptions[groupingKey] ?? {}).reduce(
-        (acc, k) => ({
-          ...acc,
-          [k]: (formOptions?.[groupingKey]?.[k]?.validators || []).map(
-            ValidatorFactory
-          ),
-        }),
-        {}
-      ),
-    };
-  }, {});
-
-function EngagementViewTemplate({
-  engagement,
-  children,
-}: {
-  engagement: Engagement;
-  children: any;
-}) {
-  return (
-    <>
-      <PageSection variant={PageSectionVariants.light}>
-        <TextContent>
-          <Text component="h1">{engagement?.project_name}</Text>
-          <Text component="h3">{engagement?.customer_name}</Text>
-        </TextContent>
-      </PageSection>
-      <PageSection variant={PageSectionVariants.light}>{children}</PageSection>
-    </>
   );
 }

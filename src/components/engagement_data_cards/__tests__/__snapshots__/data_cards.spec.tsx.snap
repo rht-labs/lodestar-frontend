@@ -11,11 +11,18 @@ Object {
         <div
           class="pf-c-card__title"
         >
-          <h2
-            class="pf-c-title pf-m-xl"
+          <div
+            class="pf-l-level"
           >
-            Engagement Summary
-          </h2>
+            <div>
+              <h2
+                class="pf-c-title pf-m-xl"
+              >
+                Engagement Summary
+              </h2>
+            </div>
+            <div />
+          </div>
         </div>
         <div
           class="pf-c-card__body"
@@ -24,7 +31,7 @@ Object {
             class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item pf-m-6-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -44,7 +51,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-6-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -64,7 +71,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-6-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -79,12 +86,12 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  Jun 16, 2020
+                  Jun 17, 2020
                 </p>
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-6-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -99,7 +106,47 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  Jun 16, 2020
+                  Jun 17, 2020
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-4-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                >
+                  Description
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  It's rocket science
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-4-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                >
+                  Location
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Nashville, TN
                 </p>
               </div>
             </div>
@@ -107,6 +154,7 @@ Object {
         </div>
       </article>
     </div>
+    <div />
   </body>,
   "container": <div>
     <article
@@ -115,11 +163,18 @@ Object {
       <div
         class="pf-c-card__title"
       >
-        <h2
-          class="pf-c-title pf-m-xl"
+        <div
+          class="pf-l-level"
         >
-          Engagement Summary
-        </h2>
+          <div>
+            <h2
+              class="pf-c-title pf-m-xl"
+            >
+              Engagement Summary
+            </h2>
+          </div>
+          <div />
+        </div>
       </div>
       <div
         class="pf-c-card__body"
@@ -128,7 +183,7 @@ Object {
           class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid__item pf-m-6-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -148,7 +203,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-6-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -168,7 +223,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-6-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -183,12 +238,12 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                Jun 16, 2020
+                Jun 17, 2020
               </p>
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-6-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -203,7 +258,47 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                Jun 16, 2020
+                Jun 17, 2020
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-4-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+              >
+                Description
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                It's rocket science
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-4-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+              >
+                Location
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Nashville, TN
               </p>
             </div>
           </div>
@@ -265,7 +360,7 @@ Object {
 }
 `;
 
-exports[`Openshift Cluster Summary matches snapshot 1`] = `
+exports[`OpenShift Cluster Summary matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -276,11 +371,18 @@ Object {
         <div
           class="pf-c-card__title"
         >
-          <h2
-            class="pf-c-title pf-m-xl"
+          <div
+            class="pf-l-level"
           >
-            Openshift Information
-          </h2>
+            <div>
+              <h2
+                class="pf-c-title pf-m-xl"
+              >
+                Hosting Environment
+              </h2>
+            </div>
+            <div />
+          </div>
         </div>
         <div
           class="pf-c-card__body"
@@ -289,7 +391,7 @@ Object {
             class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -309,7 +411,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -318,7 +420,7 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  Openshift Version
+                  OpenShift Version
                 </h6>
                 <p
                   class=""
@@ -329,7 +431,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -349,7 +451,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -369,7 +471,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -389,7 +491,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
                 class="pf-c-content"
@@ -408,13 +510,11 @@ Object {
                 </p>
               </div>
             </div>
-            <div
-              class="pf-l-grid__item pf-m-3-col"
-            />
           </div>
         </div>
       </article>
     </div>
+    <div />
   </body>,
   "container": <div>
     <article
@@ -423,11 +523,18 @@ Object {
       <div
         class="pf-c-card__title"
       >
-        <h2
-          class="pf-c-title pf-m-xl"
+        <div
+          class="pf-l-level"
         >
-          Openshift Information
-        </h2>
+          <div>
+            <h2
+              class="pf-c-title pf-m-xl"
+            >
+              Hosting Environment
+            </h2>
+          </div>
+          <div />
+        </div>
       </div>
       <div
         class="pf-c-card__body"
@@ -436,7 +543,7 @@ Object {
           class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -456,7 +563,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -465,7 +572,7 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                Openshift Version
+                OpenShift Version
               </h6>
               <p
                 class=""
@@ -476,7 +583,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -496,7 +603,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -516,7 +623,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -536,7 +643,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
               class="pf-c-content"
@@ -555,9 +662,6 @@ Object {
               </p>
             </div>
           </div>
-          <div
-            class="pf-l-grid__item pf-m-3-col"
-          />
         </div>
       </div>
     </article>
@@ -627,11 +731,18 @@ Object {
         <div
           class="pf-c-card__title"
         >
-          <h2
-            class="pf-c-title pf-m-xl"
+          <div
+            class="pf-l-level"
           >
-            Points of Contact
-          </h2>
+            <div>
+              <h2
+                class="pf-c-title pf-m-xl"
+              >
+                Points of Contact
+              </h2>
+            </div>
+            <div />
+          </div>
         </div>
         <div
           class="pf-c-card__body"
@@ -703,6 +814,7 @@ Object {
         </div>
       </article>
     </div>
+    <div />
   </body>,
   "container": <div>
     <article
@@ -711,11 +823,18 @@ Object {
       <div
         class="pf-c-card__title"
       >
-        <h2
-          class="pf-c-title pf-m-xl"
+        <div
+          class="pf-l-level"
         >
-          Points of Contact
-        </h2>
+          <div>
+            <h2
+              class="pf-c-title pf-m-xl"
+            >
+              Points of Contact
+            </h2>
+          </div>
+          <div />
+        </div>
       </div>
       <div
         class="pf-c-card__body"
