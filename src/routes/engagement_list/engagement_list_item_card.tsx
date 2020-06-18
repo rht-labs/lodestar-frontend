@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Card, CardBody, CardTitle, Flex, FlexItem} from '@patternfly/react-core';
+import {Button, Card, CardBody, CardTitle, Flex, FlexItem, Nav, NavItem, NavList} from '@patternfly/react-core';
+import { useHistory } from "react-router";
 
 export interface DataCardProps {
   title: string;
@@ -11,6 +12,7 @@ export interface DataCardProps {
 export function EngagementListItemCard(props: DataCardProps) {
 
   const url = `/app/engagements/${props.customer}/${props.project}`;
+  const history = useHistory();
 
   return (
     <>
@@ -19,15 +21,21 @@ export function EngagementListItemCard(props: DataCardProps) {
         isCompact
         style={{margin: '0 1rem', padding: '1rem'}}>
         <CardTitle>
-            {props.title}
+          <Nav onSelect={() => { history.push(url)}} variant="tertiary">
+            <NavList>
+              <NavItem style={{fontWeight: 'bold'}}>
+                {props.title}
+              </NavItem>
+            </NavList>
+          </Nav>
         </CardTitle>
-        <CardBody>
+        <CardBody style={{padding: '0 2rem'}}>
           <Flex>
             <FlexItem grow={{ default: 'grow' }}>
               {props.children}
             </FlexItem>
             <FlexItem>
-              <Button onClick={() => {window.location.href =  url }} variant="secondary">
+              <Button onClick={() => { history.push(url)} } variant="secondary">
                   View Engagement
               </Button>
             </FlexItem>
