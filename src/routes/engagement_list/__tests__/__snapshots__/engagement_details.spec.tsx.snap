@@ -884,7 +884,8 @@ Object {
               <div
                 class="pf-l-grid__item"
               >
-                Target start date: 
+                Target start date:
+                 
                 Jun 18, 2020
               </div>
             </div>
@@ -1083,7 +1084,8 @@ Object {
             <div
               class="pf-l-grid__item"
             >
-              Target start date: 
+              Target start date:
+               
               Jun 18, 2020
             </div>
           </div>
