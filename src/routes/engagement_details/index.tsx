@@ -3,11 +3,11 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
-import { EngagementTabView } from './implementations/engagement_tab_view';
 import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
+import { EngagementPageView } from './implementations/engagement_page_view';
 
 export interface EngagementViewProps {
   engagement?: Engagement;
@@ -75,7 +75,7 @@ export function EngagementDetailView(props) {
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate engagement={activeEngagement}>
         <AlertMessage />
-        <EngagementTabView engagement={activeEngagement} />
+        <EngagementPageView engagement={activeEngagement} />
       </EngagementDetailsViewTemplate>
     </ValidationProvider>
   );
