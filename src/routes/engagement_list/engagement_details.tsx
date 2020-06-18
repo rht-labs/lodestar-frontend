@@ -15,7 +15,7 @@ import {
   CubeIcon,
   OutlinedClockIcon,
   UserIcon} from '@patternfly/react-icons';
-
+import { differenceInWeeks } from 'date-fns';
 
 function calculateDuration(startDate?: Date, endDate?: Date){
 
@@ -98,7 +98,9 @@ export function EngagementDetails(
               </Tooltip>
             </FlexItem>
             <FlexItem>
-              { calculateDuration(engagement?.start_date, engagement?.end_date) }
+              { (engagement?.start_date && engagement?.end_date)
+                ? differenceInWeeks(engagement?.end_date, engagement?.start_date)
+                : 0}
             </FlexItem>
           </Flex>
 

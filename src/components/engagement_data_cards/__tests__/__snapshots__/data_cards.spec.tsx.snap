@@ -79,7 +79,7 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  Jun We, yyyy
+                  Mon Jun 01 2020
                 </p>
               </div>
             </div>
@@ -99,7 +99,7 @@ Object {
                   class=""
                   data-pf-content="true"
                 >
-                  Jun We, yyyy
+                  Wed Jul 01 2020
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                Jun We, yyyy
+                Mon Jun 01 2020
               </p>
             </div>
           </div>
@@ -203,7 +203,7 @@ Object {
                 class=""
                 data-pf-content="true"
               >
-                Jun We, yyyy
+                Wed Jul 01 2020
               </p>
             </div>
           </div>
