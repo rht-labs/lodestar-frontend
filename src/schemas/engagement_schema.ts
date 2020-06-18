@@ -51,7 +51,7 @@ export abstract class Engagement {
       start_date: faker.date.recent(),
       technical_lead_email: faker.internet.email(),
       technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      launch: null,
+      launch: faker.random.boolean() ? { launched_by: faker.name.firstName(), launched_date_time: faker.date.recent() } : null
     };
   }
 
