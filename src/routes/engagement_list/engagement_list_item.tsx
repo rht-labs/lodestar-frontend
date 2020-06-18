@@ -18,7 +18,6 @@ function EngagementStatus(launchDate?: Date, startDate?: Date, endDate?: Date): 
 export function EngagementListItem({engagement}: { engagement: Engagement }) {
 
   const status = EngagementStatus(engagement.launch, engagement.start_date, engagement.end_date);
-
   return (
     <>
       <EngagementListItemCard title={engagement.project_name}>

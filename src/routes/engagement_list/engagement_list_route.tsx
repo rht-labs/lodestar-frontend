@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import {EngagementList, EngagementListProps} from "./engagement_list";
 import {
   PageSection,
   Text,
@@ -8,7 +8,6 @@ import {
   TextContent,
 } from '@patternfly/react-core';
 import { Logger } from '../../utilities/logger';
-import { EngagementListItem } from './engagement_list_item';
 
 export function EngagementListRoute(props: EngagementListProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
@@ -36,19 +35,4 @@ export function EngagementListRoute(props: EngagementListProps) {
     </>
   );
 }
-export interface EngagementListProps {
-  filter?: (engagement: Engagement) => boolean;
-  title?: string;
-}
 
-function EngagementList({ engagements }: { engagements: Engagement[] }) {
-
-  return (
-    <>
-      {(engagements ?? []).map(e => (
-        <EngagementListItem engagement={e} />
-      ))}
-    </>
-
-  );
-}

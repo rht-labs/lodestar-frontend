@@ -1,5 +1,6 @@
 import React from 'react';
 import {Engagement} from '../../schemas/engagement_schema';
+import { differenceInWeeks } from 'date-fns';
 import {
   Flex,
   FlexItem,
@@ -15,20 +16,6 @@ import {
   CubeIcon,
   OutlinedClockIcon,
   UserIcon} from '@patternfly/react-icons';
-import { differenceInWeeks } from 'date-fns';
-
-function calculateDuration(startDate?: Date, endDate?: Date){
-
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-
-  if (startDate && endDate) {
-    // Discard the time and time-zone information.
-    const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-    const utc2 = Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
-    return Math.ceil((utc2 - utc1) / (MILLISECONDS_PER_DAY * 7));
-  }
-  else return 0;
-}
 
 function getStatusColor(status?: string) {
   switch(status){
@@ -47,7 +34,7 @@ function getStatusColor(status?: string) {
 function renderFirstLine(status?: string, startDate?: Date)  {
   if (status === 'upcoming') {
     return (
-      <div>
+      <div data-testid="upcomingEngagement">
         <Grid hasGutter>
           <GridItem span={12}>
             Created by:
@@ -60,7 +47,7 @@ function renderFirstLine(status?: string, startDate?: Date)  {
       </div>)
   } else {
     return (
-      <div>
+      <div data-testid="activeOrPastEngagement">
         The link to the last demo:
         <Link to='#'> https://pf4.345jdhgksdf.org </Link>
       </div> )}
