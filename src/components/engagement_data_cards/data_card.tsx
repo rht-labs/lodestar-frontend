@@ -11,6 +11,7 @@ import {
 } from '@patternfly/react-core';
 import { Feature } from '../../components/feature';
 import { APP_FEATURES } from '../../common/app_features';
+import { Link } from 'react-router-dom';
 export interface DataCardProps {
   title: string;
   children: any;
@@ -29,7 +30,9 @@ export function DataCard({
       <CardTitle>
         <Level>
           <LevelItem>
-            <Title headingLevel="h2">{title}</Title>
+            <Title headingLevel="h3" style={{ fontWeight: 'normal' }}>
+              {title}
+            </Title>
           </LevelItem>
           <LevelItem>
             <Feature name={APP_FEATURES.writer}>
@@ -51,11 +54,7 @@ function EditButton({
   onClick: () => void;
 }) {
   if (isEditable) {
-    return (
-      <Button onClick={onClick} variant={ButtonVariant.plain}>
-        Edit
-      </Button>
-    );
+    return <Link onClick={onClick}>Edit</Link>;
   }
   return <div />;
 }
