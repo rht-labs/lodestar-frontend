@@ -1,21 +1,18 @@
 import React from 'react';
 import { EngagementViewProps } from '..';
 import { Tabs, Tab } from '@patternfly/react-core';
-import { BasicInformation } from '../form_views/01_basic_information';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import { PointOfContact } from '../form_views/02_point_of_contact';
-import { ClusterUsers } from '../form_views/04_cluster_users';
-import { ClusterInformation } from '../form_views/03_cluster_information';
+import { ClusterUsers } from '../tab_views/users';
 import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane_wrapper';
 import { useLocation, useHistory } from 'react-router';
-import { EngagementOverview } from '../tab_views/overview';
+import { EngagementOverviewTab } from '../tab_views/overview';
+import { HostingEnvironmentTab } from '../tab_views/hosting_environment';
 interface EngagementTabViewProps extends EngagementViewProps {}
 
 enum TabNames {
-  basicInfo = 'basic_info',
-  clusterInfo = 'cluster_info',
-  users = 'users',
   overview = 'overview',
+  users = 'users',
+  hostingEnvironment = 'hosting_environment',
 }
 
 export function EngagementTabView({ engagement }: EngagementTabViewProps) {
@@ -23,6 +20,7 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     formOptions,
     engagementFormState,
     updateEngagementFormField,
+    saveEngagement,
   } = useEngagements();
   const { pathname } = useLocation();
   const history = useHistory();
@@ -33,14 +31,11 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
   };
 
   function getActiveKey() {
-    if (pathname.includes('overview')) {
-      return TabNames.overview;
-    } else if (pathname.includes('basic_info')) {
-      return TabNames.basicInfo;
-    } else if (pathname.includes('cluster_info')) {
-      return TabNames.clusterInfo;
-    } else if (pathname.includes('users')) {
-      return TabNames.users;
+    const activeTab = Object.keys(TabNames).find(e => {
+      return pathname.includes(TabNames[e]);
+    });
+    if (activeTab) {
+      return TabNames[activeTab];
     }
     return TabNames.overview;
   }
@@ -49,26 +44,12 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
     <Tabs isBox activeKey={getActiveKey()} onSelect={handleTabSelect}>
       <Tab title="Overview" eventKey={TabNames.overview} id="overview">
         <TabContentWrapper>
-          <EngagementOverview engagement={engagementFormState} />
-        </TabContentWrapper>
-      </Tab>
-      <Tab
-        title="Basic Information"
-        eventKey={TabNames.basicInfo}
-        id="basic_information"
-      >
-        <TabContentWrapper>
-          <EditPaneWrapper engagement={engagementFormState}>
-            <BasicInformation
-              formOptions={formOptions}
-              engagement={engagementFormState}
-              onChange={updateEngagementFormField}
-            />
-            <PointOfContact
-              engagement={engagementFormState}
-              onChange={updateEngagementFormField}
-            />
-          </EditPaneWrapper>
+          <EngagementOverviewTab
+            onSave={saveEngagement}
+            formOptions={formOptions}
+            onChange={updateEngagementFormField}
+            engagement={engagementFormState}
+          />
         </TabContentWrapper>
       </Tab>
       <Tab title="Users" eventKey={TabNames.users} id="users">
@@ -83,15 +64,16 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
         </TabContentWrapper>
       </Tab>
       <Tab
-        title="Cluster Information"
-        eventKey={TabNames.clusterInfo}
-        id="cluster_information"
+        title="Hosting Environment"
+        eventKey={TabNames.hostingEnvironment}
+        id={'hosting_environment'}
       >
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagementFormState}>
-            <ClusterInformation
+            <HostingEnvironmentTab
+              onSave={saveEngagement}
               formOptions={formOptions}
-              engagement={engagementFormState}
+              engagement={engagement}
               onChange={updateEngagementFormField}
             />
           </EditPaneWrapper>
