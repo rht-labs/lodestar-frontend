@@ -19,7 +19,10 @@ export function EngagementDetailsViewTemplate({
   const { launchEngagement } = useEngagements();
   return (
     <>
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection
+        variant={PageSectionVariants.light}
+        style={{ paddingBottom: 0 }}
+      >
         <TextContent>
           <Text component="h1">{engagement?.project_name}</Text>
           <Text component="h3">{engagement?.customer_name}</Text>

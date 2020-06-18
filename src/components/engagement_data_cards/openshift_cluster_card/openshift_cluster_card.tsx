@@ -38,32 +38,37 @@ export function OpenShiftClusterSummaryCard({
         title="Hosting Environment"
       >
         <Grid hasGutter>
-          <GridItem span={4}>
+          <GridItem span={3}>
+            <TitledDataPoint title="Hosting Type">
+              OpenShift Container Platform
+            </TitledDataPoint>
+          </GridItem>
+          <GridItem span={3}>
             <TitledDataPoint title="Cloud Provider">
               {engagement?.ocp_cloud_provider_name}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="OpenShift Version">
               {engagement?.ocp_version}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="Storage Size">
               {engagement?.ocp_persistent_storage_size}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="Cloud Region">
               {engagement?.ocp_cloud_provider_region}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="Cloud Provider">
               {engagement?.ocp_cluster_size}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="Subdomain">
               {engagement?.ocp_sub_domain}
             </TitledDataPoint>
