@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import {EngagementList, EngagementListProps} from "./engagement_list";
 import {
   PageSection,
   Text,
@@ -11,7 +11,7 @@ import {
   Button,
 } from '@patternfly/react-core';
 import { Logger } from '../../utilities/logger';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export function EngagementListRoute(props: EngagementListProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
@@ -49,29 +49,4 @@ export function EngagementListRoute(props: EngagementListProps) {
     </>
   );
 }
-export interface EngagementListProps {
-  filter?: (engagement: Engagement) => boolean;
-  title?: string;
-}
 
-function EngagementListItem({ engagement }: { engagement: Engagement }) {
-  return (
-    <div>
-      <Link
-        to={`/app/engagements/${engagement.customer_name}/${engagement.project_name}`}
-      >
-        {engagement.project_name}
-      </Link>
-    </div>
-  );
-}
-
-function EngagementList({ engagements }: { engagements: Engagement[] }) {
-  return (
-    <>
-      {(engagements ?? []).map(e => (
-        <EngagementListItem engagement={e} />
-      ))}
-    </>
-  );
-}
