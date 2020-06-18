@@ -1,4 +1,4 @@
-import {Engagement} from "../../../schemas/engagement_schema";
+import {Engagement} from "../../schemas/engagement_schema";
 
 export function upcomingEngagement(): Engagement {
   return {

@@ -3,7 +3,7 @@ import {cleanup, render} from '@testing-library/react';
 import {MemoryRouter} from 'react-router';
 import "@testing-library/jest-dom/extend-expect";
 import {EngagementDetails} from '../engagement_details';
-import {upcomingEngagement, activeEngagement, pastEngagement} from "./mockEngagements";
+import {upcomingEngagement, activeEngagement, pastEngagement} from "../mockEngagements";
 
 afterEach(cleanup);
 
