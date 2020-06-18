@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, ButtonVariant, Card, CardBody, CardTitle, Flex, FlexItem} from '@patternfly/react-core';
-import {Link} from 'react-router-dom';
+import {Button, Card, CardBody, CardTitle, Flex, FlexItem} from '@patternfly/react-core';
 
 export interface DataCardProps {
   title: string;
@@ -20,7 +19,6 @@ export function EngagementListItemCard(props: DataCardProps) {
         isCompact
         style={{margin: '0 1rem', padding: '1rem'}}>
         <CardTitle>
-            
             {props.title}
         </CardTitle>
         <CardBody>
