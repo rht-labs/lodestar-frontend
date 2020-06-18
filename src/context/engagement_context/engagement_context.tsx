@@ -126,8 +126,8 @@ export const EngagementProvider = ({
       Logger.info(engagements);
       return availableEngagements?.find(
         engagement =>
-          engagement.customer_name === customerName &&
-          engagement.project_name === projectName
+          engagement?.customer_name === customerName &&
+          engagement?.project_name === projectName
       );
     },
     [engagements, fetchEngagements]
