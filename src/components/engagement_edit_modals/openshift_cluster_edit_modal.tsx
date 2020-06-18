@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
