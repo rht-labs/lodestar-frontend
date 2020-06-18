@@ -1,6 +1,6 @@
 import React from 'react';
 import {Engagement} from '../../schemas/engagement_schema';
-import { differenceInWeeks } from 'date-fns';
+import { differenceInWeeks, format as formatDate } from 'date-fns';
 import {
   Flex,
   FlexItem,
@@ -31,7 +31,7 @@ function getStatusColor(status?: string) {
   }
 }
 
-function renderFirstLine(status?: string, startDate?: Date)  {
+function FirstLine({status, startDate}: {status?: string, startDate?: Date})   {
   if (status === 'upcoming') {
     return (
       <div data-testid="upcomingEngagement">
@@ -41,7 +41,7 @@ function renderFirstLine(status?: string, startDate?: Date)  {
             <Link to='#'> Takeshi.K </Link>
           </GridItem>
           <GridItem>
-            Target start date: { startDate ? startDate.toDateString() : 'TBA' }
+            Target start date: { startDate ? formatDate(startDate, 'MMM dd, yyyy') : 'TBA' }
           </GridItem>
         </Grid>
       </div>)
@@ -59,7 +59,7 @@ export function EngagementDetails(
   return <>
     <Grid hasGutter>
       <GridItem span={12}>
-        { renderFirstLine(status, engagement?.start_date) }
+         <FirstLine status={status} startDate={engagement?.start_date} />
       </GridItem>
       <GridItem span={6}>
         <Flex>
