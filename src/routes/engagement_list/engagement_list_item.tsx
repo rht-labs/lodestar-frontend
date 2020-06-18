@@ -9,7 +9,7 @@ export function EngagementListItem({engagement}: { engagement: Engagement }) {
   const status = EngagementStatus(engagement.launch, engagement.start_date, engagement.end_date);
   return (
     <>
-      <EngagementListItemCard title={engagement.project_name}>
+      <EngagementListItemCard title={engagement.project_name} customer={engagement.customer_name} project={engagement.project_name}>
         <EngagementDetails engagement={engagement} status={status}/>
       </EngagementListItemCard>
     </>
