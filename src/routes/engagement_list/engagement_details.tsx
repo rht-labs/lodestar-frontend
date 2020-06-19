@@ -68,6 +68,13 @@ function FirstLine({
   }
 }
 
+function DurationInWeeks({ startDate, endDate}: { startDate?: Date; endDate?: Date}) {
+  if (!!startDate && isValid(startDate) && !!endDate && isValid(endDate)) {
+    return <>{differenceInWeeks(endDate, startDate)}</>
+  }
+  else return <>0</>;
+}
+
 export function EngagementDetails({
   engagement,
   status,
@@ -105,12 +112,9 @@ export function EngagementDetails({
                 </Tooltip>
               </FlexItem>
               <FlexItem>
-                {engagement?.start_date && engagement?.end_date
-                  ? differenceInWeeks(
-                      engagement?.end_date,
-                      engagement?.start_date
-                    )
-                  : 0}
+                <DurationInWeeks
+                  startDate={engagement?.start_date}
+                  endDate={engagement?.end_date}/>
               </FlexItem>
             </Flex>
 
