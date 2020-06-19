@@ -42,6 +42,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build_output
+          path: build/
       - uses: vrutkovs/action-s2i@master
         with:
           path: "./build"
