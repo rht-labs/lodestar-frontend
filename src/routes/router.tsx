@@ -1,20 +1,20 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { FeatureRequest } from '../components/feature_request';
 import { PrivateRoute } from '../components/authentication/private_route';
 import { CallbackHandler } from '../components/authentication/callback_handler';
-import { EngagementPane } from './engagement_pane';
-import { Admin } from './admin';
 import { Dashboard } from './dashboard';
+import { About } from './about';
 import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
 import { Feature } from '../components/feature';
 import { APP_FEATURES } from '../common/app_features';
 import { LandingPage } from './landing_page/landing_page';
-import { Page } from '@patternfly/react-core';
-import { OMPHeader } from '../components/omp_header';
-import { Feedback } from '../components/omp_feedback';
+import { MainTemplate } from '../layout/main_template';
+import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
+import { EngagementListRoute } from './engagement_list/engagement_list_route';
+import { EngagementDetailView } from './engagement_details';
+import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 
 function _OMPRouter() {
   return (
@@ -38,11 +38,47 @@ function _OMPRouter() {
                   {/* else, show an authorized route */}
                   <Redirect exact from="/app" to="/app/dashboard" />
                   <PrivateRoute path="/app/dashboard" component={Dashboard} />
-                  <PrivateRoute exact path="/app/engagements">
-                      <EngagementPane />
+                  <PrivateRoute path="/app/engagements">
+                    <ModalVisibilityProvider>
+                      <Switch>
+                        <Redirect
+                          exact
+                          from="/app/engagements"
+                          to="/app/engagements/all"
+                        />
+                        <PrivateRoute path="/app/engagements/all">
+                          <EngagementListRoute title="All Engagements" />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/upcoming">
+                          <EngagementListRoute
+                            filter={() => true}
+                            title="Upcoming Engagements"
+                          />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/active">
+                          <EngagementListRoute
+                            filter={() => true}
+                            title="Active Engagements"
+                          />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/past">
+                          <EngagementListRoute
+                            filter={() => true}
+                            title="Past Engagements"
+                          />
+                        </PrivateRoute>
+                        <PrivateRoute path="/app/engagements/new">
+                          <CreateNewEngagement />
+                        </PrivateRoute>
+                        <PrivateRoute
+                          path="/app/engagements/:customer_name/:project_name"
+                          component={EngagementDetailView}
+                        />
+                      </Switch>
+                    </ModalVisibilityProvider>
                   </PrivateRoute>
-                  <PrivateRoute exact path="/app/admin">
-                    <Admin />
+                  <PrivateRoute exact path="/app/about">
+                    <About />
                   </PrivateRoute>
                 </Switch>
               </Feature>
@@ -53,16 +89,5 @@ function _OMPRouter() {
     </Switch>
   );
 }
-
-const MainTemplate = React.memo(
-  ({ children }: { children: React.ReactChild }) => {
-    return (
-      <Page header={<OMPHeader />} style={{ height: '100vh' }}>
-        <Feedback />
-        {children}
-      </Page>
-    );
-  }
-);
 
 export const OMPRouter = React.memo(_OMPRouter);

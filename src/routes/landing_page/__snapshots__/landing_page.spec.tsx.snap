@@ -15,6 +15,7 @@ initialize {
           Object {
             "attribs": Object {
               "class": "pf-c-page__header",
+              "toolbar": "[object Object]",
             },
             "children": Array [
               Object {
@@ -70,255 +71,9 @@ initialize {
                 ],
                 "name": "div",
                 "namespace": "http://www.w3.org/1999/xhtml",
-                "next": Object {
-                  "attribs": Object {
-                    "class": "pf-c-page__header-tools",
-                  },
-                  "children": Array [
-                    Object {
-                      "attribs": Object {
-                        "class": "pf-l-toolbar",
-                      },
-                      "children": Array [
-                        Object {
-                          "attribs": Object {
-                            "href": "/app",
-                          },
-                          "children": Array [
-                            Object {
-                              "attribs": Object {
-                                "class": "pf-c-button pf-m-primary",
-                                "data-ouia-component-type": "PF4/Button",
-                                "data-ouia-safe": "true",
-                                "type": "button",
-                              },
-                              "children": Array [
-                                Object {
-                                  "data": "Log In",
-                                  "next": null,
-                                  "parent": [Circular],
-                                  "prev": null,
-                                  "type": "text",
-                                },
-                              ],
-                              "name": "button",
-                              "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": null,
-                              "parent": [Circular],
-                              "prev": null,
-                              "type": "tag",
-                              "x-attribsNamespace": Object {
-                                "class": undefined,
-                                "data-ouia-component-type": undefined,
-                                "data-ouia-safe": undefined,
-                                "type": undefined,
-                              },
-                              "x-attribsPrefix": Object {
-                                "class": undefined,
-                                "data-ouia-component-type": undefined,
-                                "data-ouia-safe": undefined,
-                                "type": undefined,
-                              },
-                            },
-                          ],
-                          "name": "a",
-                          "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": null,
-                          "parent": [Circular],
-                          "prev": null,
-                          "type": "tag",
-                          "x-attribsNamespace": Object {
-                            "href": undefined,
-                          },
-                          "x-attribsPrefix": Object {
-                            "href": undefined,
-                          },
-                        },
-                      ],
-                      "name": "div",
-                      "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": null,
-                      "parent": [Circular],
-                      "prev": null,
-                      "type": "tag",
-                      "x-attribsNamespace": Object {
-                        "class": undefined,
-                      },
-                      "x-attribsPrefix": Object {
-                        "class": undefined,
-                      },
-                    },
-                  ],
-                  "name": "div",
-                  "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": null,
-                  "parent": [Circular],
-                  "prev": [Circular],
-                  "type": "tag",
-                  "x-attribsNamespace": Object {
-                    "class": undefined,
-                  },
-                  "x-attribsPrefix": Object {
-                    "class": undefined,
-                  },
-                },
-                "parent": [Circular],
-                "prev": null,
-                "type": "tag",
-                "x-attribsNamespace": Object {
-                  "class": undefined,
-                },
-                "x-attribsPrefix": Object {
-                  "class": undefined,
-                },
-              },
-              Object {
-                "attribs": Object {
-                  "class": "pf-c-page__header-tools",
-                },
-                "children": Array [
-                  Object {
-                    "attribs": Object {
-                      "class": "pf-l-toolbar",
-                    },
-                    "children": Array [
-                      Object {
-                        "attribs": Object {
-                          "href": "/app",
-                        },
-                        "children": Array [
-                          Object {
-                            "attribs": Object {
-                              "class": "pf-c-button pf-m-primary",
-                              "data-ouia-component-type": "PF4/Button",
-                              "data-ouia-safe": "true",
-                              "type": "button",
-                            },
-                            "children": Array [
-                              Object {
-                                "data": "Log In",
-                                "next": null,
-                                "parent": [Circular],
-                                "prev": null,
-                                "type": "text",
-                              },
-                            ],
-                            "name": "button",
-                            "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": null,
-                            "parent": [Circular],
-                            "prev": null,
-                            "type": "tag",
-                            "x-attribsNamespace": Object {
-                              "class": undefined,
-                              "data-ouia-component-type": undefined,
-                              "data-ouia-safe": undefined,
-                              "type": undefined,
-                            },
-                            "x-attribsPrefix": Object {
-                              "class": undefined,
-                              "data-ouia-component-type": undefined,
-                              "data-ouia-safe": undefined,
-                              "type": undefined,
-                            },
-                          },
-                        ],
-                        "name": "a",
-                        "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": null,
-                        "parent": [Circular],
-                        "prev": null,
-                        "type": "tag",
-                        "x-attribsNamespace": Object {
-                          "href": undefined,
-                        },
-                        "x-attribsPrefix": Object {
-                          "href": undefined,
-                        },
-                      },
-                    ],
-                    "name": "div",
-                    "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": null,
-                    "parent": [Circular],
-                    "prev": null,
-                    "type": "tag",
-                    "x-attribsNamespace": Object {
-                      "class": undefined,
-                    },
-                    "x-attribsPrefix": Object {
-                      "class": undefined,
-                    },
-                  },
-                ],
-                "name": "div",
-                "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
-                "prev": Object {
-                  "attribs": Object {
-                    "class": "pf-c-page__header-brand",
-                  },
-                  "children": Array [
-                    Object {
-                      "attribs": Object {
-                        "class": "pf-c-page__header-brand-link",
-                      },
-                      "children": Array [
-                        Object {
-                          "attribs": Object {
-                            "class": "logo-text",
-                          },
-                          "children": Array [
-                            Object {
-                              "data": "LodeStar",
-                              "next": null,
-                              "parent": [Circular],
-                              "prev": null,
-                              "type": "text",
-                            },
-                          ],
-                          "name": "span",
-                          "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": null,
-                          "parent": [Circular],
-                          "prev": null,
-                          "type": "tag",
-                          "x-attribsNamespace": Object {
-                            "class": undefined,
-                          },
-                          "x-attribsPrefix": Object {
-                            "class": undefined,
-                          },
-                        },
-                      ],
-                      "name": "a",
-                      "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": null,
-                      "parent": [Circular],
-                      "prev": null,
-                      "type": "tag",
-                      "x-attribsNamespace": Object {
-                        "class": undefined,
-                      },
-                      "x-attribsPrefix": Object {
-                        "class": undefined,
-                      },
-                    },
-                  ],
-                  "name": "div",
-                  "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": [Circular],
-                  "parent": [Circular],
-                  "prev": null,
-                  "type": "tag",
-                  "x-attribsNamespace": Object {
-                    "class": undefined,
-                  },
-                  "x-attribsPrefix": Object {
-                    "class": undefined,
-                  },
-                },
+                "prev": null,
                 "type": "tag",
                 "x-attribsNamespace": Object {
                   "class": undefined,
@@ -2373,9 +2128,11 @@ initialize {
             "type": "tag",
             "x-attribsNamespace": Object {
               "class": undefined,
+              "toolbar": undefined,
             },
             "x-attribsPrefix": Object {
               "class": undefined,
+              "toolbar": undefined,
             },
           },
           Object {
@@ -4408,6 +4165,7 @@ initialize {
             "prev": Object {
               "attribs": Object {
                 "class": "pf-c-page__header",
+                "toolbar": "[object Object]",
               },
               "children": Array [
                 Object {
@@ -4463,255 +4221,9 @@ initialize {
                   ],
                   "name": "div",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
-                    "attribs": Object {
-                      "class": "pf-c-page__header-tools",
-                    },
-                    "children": Array [
-                      Object {
-                        "attribs": Object {
-                          "class": "pf-l-toolbar",
-                        },
-                        "children": Array [
-                          Object {
-                            "attribs": Object {
-                              "href": "/app",
-                            },
-                            "children": Array [
-                              Object {
-                                "attribs": Object {
-                                  "class": "pf-c-button pf-m-primary",
-                                  "data-ouia-component-type": "PF4/Button",
-                                  "data-ouia-safe": "true",
-                                  "type": "button",
-                                },
-                                "children": Array [
-                                  Object {
-                                    "data": "Log In",
-                                    "next": null,
-                                    "parent": [Circular],
-                                    "prev": null,
-                                    "type": "text",
-                                  },
-                                ],
-                                "name": "button",
-                                "namespace": "http://www.w3.org/1999/xhtml",
-                                "next": null,
-                                "parent": [Circular],
-                                "prev": null,
-                                "type": "tag",
-                                "x-attribsNamespace": Object {
-                                  "class": undefined,
-                                  "data-ouia-component-type": undefined,
-                                  "data-ouia-safe": undefined,
-                                  "type": undefined,
-                                },
-                                "x-attribsPrefix": Object {
-                                  "class": undefined,
-                                  "data-ouia-component-type": undefined,
-                                  "data-ouia-safe": undefined,
-                                  "type": undefined,
-                                },
-                              },
-                            ],
-                            "name": "a",
-                            "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": null,
-                            "parent": [Circular],
-                            "prev": null,
-                            "type": "tag",
-                            "x-attribsNamespace": Object {
-                              "href": undefined,
-                            },
-                            "x-attribsPrefix": Object {
-                              "href": undefined,
-                            },
-                          },
-                        ],
-                        "name": "div",
-                        "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": null,
-                        "parent": [Circular],
-                        "prev": null,
-                        "type": "tag",
-                        "x-attribsNamespace": Object {
-                          "class": undefined,
-                        },
-                        "x-attribsPrefix": Object {
-                          "class": undefined,
-                        },
-                      },
-                    ],
-                    "name": "div",
-                    "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": null,
-                    "parent": [Circular],
-                    "prev": [Circular],
-                    "type": "tag",
-                    "x-attribsNamespace": Object {
-                      "class": undefined,
-                    },
-                    "x-attribsPrefix": Object {
-                      "class": undefined,
-                    },
-                  },
-                  "parent": [Circular],
-                  "prev": null,
-                  "type": "tag",
-                  "x-attribsNamespace": Object {
-                    "class": undefined,
-                  },
-                  "x-attribsPrefix": Object {
-                    "class": undefined,
-                  },
-                },
-                Object {
-                  "attribs": Object {
-                    "class": "pf-c-page__header-tools",
-                  },
-                  "children": Array [
-                    Object {
-                      "attribs": Object {
-                        "class": "pf-l-toolbar",
-                      },
-                      "children": Array [
-                        Object {
-                          "attribs": Object {
-                            "href": "/app",
-                          },
-                          "children": Array [
-                            Object {
-                              "attribs": Object {
-                                "class": "pf-c-button pf-m-primary",
-                                "data-ouia-component-type": "PF4/Button",
-                                "data-ouia-safe": "true",
-                                "type": "button",
-                              },
-                              "children": Array [
-                                Object {
-                                  "data": "Log In",
-                                  "next": null,
-                                  "parent": [Circular],
-                                  "prev": null,
-                                  "type": "text",
-                                },
-                              ],
-                              "name": "button",
-                              "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": null,
-                              "parent": [Circular],
-                              "prev": null,
-                              "type": "tag",
-                              "x-attribsNamespace": Object {
-                                "class": undefined,
-                                "data-ouia-component-type": undefined,
-                                "data-ouia-safe": undefined,
-                                "type": undefined,
-                              },
-                              "x-attribsPrefix": Object {
-                                "class": undefined,
-                                "data-ouia-component-type": undefined,
-                                "data-ouia-safe": undefined,
-                                "type": undefined,
-                              },
-                            },
-                          ],
-                          "name": "a",
-                          "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": null,
-                          "parent": [Circular],
-                          "prev": null,
-                          "type": "tag",
-                          "x-attribsNamespace": Object {
-                            "href": undefined,
-                          },
-                          "x-attribsPrefix": Object {
-                            "href": undefined,
-                          },
-                        },
-                      ],
-                      "name": "div",
-                      "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": null,
-                      "parent": [Circular],
-                      "prev": null,
-                      "type": "tag",
-                      "x-attribsNamespace": Object {
-                        "class": undefined,
-                      },
-                      "x-attribsPrefix": Object {
-                        "class": undefined,
-                      },
-                    },
-                  ],
-                  "name": "div",
-                  "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
-                  "prev": Object {
-                    "attribs": Object {
-                      "class": "pf-c-page__header-brand",
-                    },
-                    "children": Array [
-                      Object {
-                        "attribs": Object {
-                          "class": "pf-c-page__header-brand-link",
-                        },
-                        "children": Array [
-                          Object {
-                            "attribs": Object {
-                              "class": "logo-text",
-                            },
-                            "children": Array [
-                              Object {
-                                "data": "LodeStar",
-                                "next": null,
-                                "parent": [Circular],
-                                "prev": null,
-                                "type": "text",
-                              },
-                            ],
-                            "name": "span",
-                            "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": null,
-                            "parent": [Circular],
-                            "prev": null,
-                            "type": "tag",
-                            "x-attribsNamespace": Object {
-                              "class": undefined,
-                            },
-                            "x-attribsPrefix": Object {
-                              "class": undefined,
-                            },
-                          },
-                        ],
-                        "name": "a",
-                        "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": null,
-                        "parent": [Circular],
-                        "prev": null,
-                        "type": "tag",
-                        "x-attribsNamespace": Object {
-                          "class": undefined,
-                        },
-                        "x-attribsPrefix": Object {
-                          "class": undefined,
-                        },
-                      },
-                    ],
-                    "name": "div",
-                    "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": [Circular],
-                    "parent": [Circular],
-                    "prev": null,
-                    "type": "tag",
-                    "x-attribsNamespace": Object {
-                      "class": undefined,
-                    },
-                    "x-attribsPrefix": Object {
-                      "class": undefined,
-                    },
-                  },
+                  "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
                     "class": undefined,
@@ -4729,9 +4241,11 @@ initialize {
               "type": "tag",
               "x-attribsNamespace": Object {
                 "class": undefined,
+                "toolbar": undefined,
               },
               "x-attribsPrefix": Object {
                 "class": undefined,
+                "toolbar": undefined,
               },
             },
             "type": "tag",

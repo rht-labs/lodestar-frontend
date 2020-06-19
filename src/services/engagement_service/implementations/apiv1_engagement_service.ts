@@ -2,6 +2,8 @@ import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { AlreadyExistsError } from '../engagement_service_errors';
+import { EngagementJsonSerializer } from '../../../serializers/engagement/engagement_json_serializer';
 
 export class Apiv1EngagementService extends EngagementService {
   constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
@@ -10,30 +12,39 @@ export class Apiv1EngagementService extends EngagementService {
     this.axios.interceptors.request.use(onBeforeRequest);
     this.axios.interceptors.response.use(onAfterRequest, onFailure);
   }
+  private static engagementSerializer = new EngagementJsonSerializer();
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
     const { data: engagementsData } = await this.axios.get(`/engagements`);
-    return engagementsData.map(
-      engagementMap => new Engagement(engagementMap as Engagement)
+    return engagementsData.map(engagementMap =>
+      Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
     );
   }
   async createEngagement(engagementData: any): Promise<Engagement> {
-    const { data } = await this.axios.post(`/engagements`, engagementData);
-    return new Engagement(data as Engagement);
+    try {
+      const { data } = await this.axios.post(`/engagements`, engagementData);
+      return Apiv1EngagementService.engagementSerializer.deserialize(data);
+    } catch (e) {
+      if (e.response.status === 409) {
+        throw new AlreadyExistsError(
+          'A project with this customer name and project name already exists'
+        );
+      }
+    }
   }
   async saveEngagement(engagementData: any): Promise<Engagement> {
     const { data } = await this.axios.put(
       `/engagements/customers/${engagementData.customer_name}/projects/${engagementData.project_name}`,
-      engagementData
+      Apiv1EngagementService.engagementSerializer.serialize(engagementData)
     );
-    return new Engagement(data as Engagement);
+    return Apiv1EngagementService.engagementSerializer.deserialize(data);
   }
   async launchEngagement(engagementData: any): Promise<Engagement> {
     const { data } = await this.axios.put(
       `/engagements/launch`,
       engagementData
     );
-    return new Engagement(data as Engagement);
+    return Apiv1EngagementService.engagementSerializer.deserialize(data);
   }
   async getConfig(): Promise<EngagementFormConfig> {
     const { data } = await this.axios.get(`/config`, {
