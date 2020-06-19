@@ -1,7 +1,6 @@
 import { Serializer } from '../serializer';
 import { Engagement } from '../../schemas/engagement_schema';
-import { parse as parseDate, format, parseISO } from 'date-fns';
-import { Logger } from '../../utilities/logger';
+import { parse, format, parseISO, isValid } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 
 export class EngagementJsonSerializer
@@ -9,8 +8,20 @@ export class EngagementJsonSerializer
   private static formatDate(date: Date) {
     return format(date, 'yyyy-MM-dd');
   }
+  private static parseDate(dateInput: any): Date {
+    if (typeof dateInput === 'string') {
+      try {
+        const parsedDate = parse(dateInput, 'yyyy-MM-dd', new Date());
+        if (isValid(parsedDate)) {
+          return parsedDate;
+        }
+        return undefined;
+      } catch (e) {
+        return undefined;
+      }
+    }
+  }
   serialize(engagement: Engagement): object {
-    Logger.info('hello', engagement);
     const e = {
       ...engagement,
       archive_date: engagement.archive_date
@@ -33,7 +44,7 @@ export class EngagementJsonSerializer
       customer_name: data['customer_name'],
       description: data['description'],
       end_date: data['end_date']
-        ? parseDate(data['end_date'], 'yyyy-MM-dd', new Date())
+        ? EngagementJsonSerializer.parseDate(data['end_date'])
         : undefined,
       engagement_users: data['engagement_users'],
       engagement_lead_email: data['engagement_lead_email'],
@@ -47,9 +58,7 @@ export class EngagementJsonSerializer
       ocp_version: data['ocp_version'],
       project_id: data['project_id'],
       project_name: data['project_name'],
-      start_date: data['start_date']
-        ? parseDate(data['start_date'], 'yyyy-MM-dd', new Date())
-        : undefined,
+      start_date: EngagementJsonSerializer.parseDate(data['start_date']),
       technical_lead_email: data['technical_lead_email'],
       technical_lead_name: data['technical_lead_name'],
       launch: this.parseLaunchData(data['launch']),
