@@ -11,22 +11,20 @@ jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-#    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
-# fails with message TypeError: Cannot read property 'get' of undefined
+      - uses: actions/checkout@v2
+  #    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+  # fails with message TypeError: Cannot read property 'get' of undefined
   linting:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-#     - name: run-linter
-#       run: |
-#         yarn install
-#         yarn lint
-#       env:
-#         CI: true
-# TODO: This fails because we don't have linting... Consider (please) adding strict linting.
+      - uses: actions/checkout@v2
+  #     - name: run-linter
+  #       run: |
+  #         yarn install
+  #         yarn lint
+  #       env:
+  #         CI: true
   local-build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -34,29 +32,45 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        ./build.sh
-      env:
-        CI: true
-    - uses: vrutkovs/action-s2i@master
-      with:
-        path: "./build"
-        base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
-        image: omp-frontend:latest
-    - name: Export Container Image
-      run: |
-        docker save --output omp-frontend.tar omp-frontend:latest
-    - uses: actions/upload-artifact@v2
-      with:
-        name: omp-frontend.tar
-        path: omp-frontend.tar
-
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        run: |
+          ./build.sh
+        env:
+          CI: true
+      - name: Upload build folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: build_output
+          path: build/
+  image_build:
+    needs: local-build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build_output
+          path: build/
+      - uses: vrutkovs/action-s2i@master
+        with:
+          path: "./build"
+          base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
+          image: omp-frontend:latest
+      - name: Export Container Image
+        run: |
+          docker save --output omp-frontend.tar omp-frontend:latest
+      - uses: actions/upload-artifact@v2
+        with:
+          name: omp-frontend.tar
+          path: omp-frontend.tar
 #  security-scan:
 #    runs-on: ubuntu-latest
 #    needs: local-build
