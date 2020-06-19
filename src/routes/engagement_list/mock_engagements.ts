@@ -1,4 +1,4 @@
-import {Engagement} from "../../schemas/engagement_schema";
+import { Engagement } from '../../schemas/engagement_schema';
 
 export function upcomingEngagement(): Engagement {
   return {
@@ -7,7 +7,7 @@ export function upcomingEngagement(): Engagement {
     customer_contact_name: `Bob Doe`,
     customer_name: 'NASA',
     description: "It's rocket science",
-    end_date: new Date(),
+    end_date: new Date(2050, 1, 3),
     engagement_users: [],
     engagement_lead_email: 'alice@doe.com',
     engagement_lead_name: `Alice Doe`,
@@ -20,7 +20,7 @@ export function upcomingEngagement(): Engagement {
     ocp_version: '4.4',
     project_id: 1,
     project_name: 'Boots on the Moon',
-    start_date: new Date(),
+    start_date: new Date(2050, 1, 1),
     technical_lead_email: 'eve@doe.com',
     technical_lead_name: `Eve Doe`,
     launch: null,
@@ -34,7 +34,7 @@ export function activeEngagement(): Engagement {
     customer_contact_name: `Bob Doe`,
     customer_name: 'NASA',
     description: "It's rocket science",
-    end_date: ( d => new Date(d.setDate(d.getDate()+1)) )(new Date),
+    end_date: new Date(2050, 1, 1),
     engagement_users: ['a', 'b', 'c'],
     engagement_lead_email: 'alice@doe.com',
     engagement_lead_name: `Alice Doe`,
@@ -47,10 +47,13 @@ export function activeEngagement(): Engagement {
     ocp_version: '4.4',
     project_id: 1,
     project_name: 'Boots on the Moon',
-    start_date: ( d => new Date(d.setDate(d.getDate()-10)) )(new Date),
+    start_date: new Date(2000, 1, 1),
     technical_lead_email: 'eve@doe.com',
     technical_lead_name: `Eve Doe`,
-    launch: new Date(),
+    launch: {
+      launched_by: 'John Doe',
+      launched_date_time: new Date(2020, 3, 21),
+    },
   };
 }
 
@@ -61,8 +64,8 @@ export function pastEngagement(): Engagement {
     customer_contact_name: `Bob Doe`,
     customer_name: 'NASA',
     description: "It's rocket science",
-    end_date: ( d => new Date(d.setDate(d.getDate()-1)) )(new Date),
-    engagement_users: ['1','2', '3', '1','2', '3'],
+    end_date: new Date(2020, 1, 3),
+    engagement_users: ['1', '2', '3', '1', '2', '3'],
     engagement_lead_email: 'alice@doe.com',
     engagement_lead_name: `Alice Doe`,
     location: `Nashville, TN`,
@@ -74,9 +77,12 @@ export function pastEngagement(): Engagement {
     ocp_version: '4.4',
     project_id: 1,
     project_name: 'Boots on the Moon',
-    start_date: ( d => new Date(d.setDate(d.getDate()-10)) )(new Date),
+    start_date: new Date(2020, 1, 1),
     technical_lead_email: 'eve@doe.com',
     technical_lead_name: `Eve Doe`,
-    launch: new Date(),
+    launch: {
+      launched_by: 'John Doe',
+      launched_date_time: new Date(2020, 1, 2),
+    },
   };
 }

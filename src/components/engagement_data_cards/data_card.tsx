@@ -8,9 +8,14 @@ import {
   LevelItem,
   Button,
   ButtonVariant,
+  Grid,
+  GridItem,
+  Flex,
+  FlexItem,
 } from '@patternfly/react-core';
 import { Feature } from '../../components/feature';
 import { APP_FEATURES } from '../../common/app_features';
+
 export interface DataCardProps {
   title: string;
   children: any;
@@ -26,19 +31,32 @@ export function DataCard({
 }: DataCardProps) {
   return (
     <Card>
-      <CardTitle>
-        <Level>
-          <LevelItem>
-            <Title headingLevel="h2">{title}</Title>
-          </LevelItem>
-          <LevelItem>
-            <Feature name={APP_FEATURES.writer}>
-              <EditButton onClick={onEdit} isEditable={isEditable} />
-            </Feature>
-          </LevelItem>
-        </Level>
-      </CardTitle>
-      <CardBody>{children}</CardBody>
+      <Grid>
+        <GridItem span={11}>
+          <CardTitle>
+            <Level>
+              <LevelItem>
+                <Title headingLevel="h3" style={{ fontWeight: 'normal' }}>
+                  {title}
+                </Title>
+              </LevelItem>
+              <LevelItem></LevelItem>
+            </Level>
+          </CardTitle>
+          <CardBody>{children}</CardBody>
+        </GridItem>
+        <GridItem span={1}>
+          <Flex style={{ height: '100%' }}>
+            <FlexItem alignSelf={{ default: 'alignSelfCenter' }}>
+              <Feature name={APP_FEATURES.writer}>
+                <div style={{ marginRight: '1rem' }}>
+                  <EditButton onClick={onEdit} isEditable={isEditable} />
+                </div>
+              </Feature>
+            </FlexItem>
+          </Flex>
+        </GridItem>
+      </Grid>
     </Card>
   );
 }
@@ -52,7 +70,7 @@ function EditButton({
 }) {
   if (isEditable) {
     return (
-      <Button onClick={onClick} variant={ButtonVariant.plain}>
+      <Button variant={ButtonVariant.link} onClick={onClick}>
         Edit
       </Button>
     );

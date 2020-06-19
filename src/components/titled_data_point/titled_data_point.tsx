@@ -9,7 +9,9 @@ export interface TitledDataPointProps {
 export function TitledDataPoint(props: TitledDataPointProps) {
   return (
     <TextContent>
-      <Text component={TextVariants.h6}>{props.title}</Text>
+      <Text component={TextVariants.h6} style={{ marginBottom: '0.1rem' }}>
+        {props.title}
+      </Text>
       {typeof props.children === 'string' ? (
         <Text>{props.children}</Text>
       ) : (

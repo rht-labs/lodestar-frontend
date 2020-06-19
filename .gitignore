@@ -30,3 +30,5 @@ report*.json
 #ide
 /.vscode
 .idea
+
+.adhoc
