@@ -8,6 +8,22 @@ on:
       - README.md
 
 jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+  #    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+  # fails with message TypeError: Cannot read property 'get' of undefined
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+  #     - name: run-linter
+  #       run: |
+  #         yarn install
+  #         yarn lint
+  #       env:
+  #         CI: true
   local-build:
     runs-on: ubuntu-latest
 
