@@ -67,6 +67,13 @@ function FirstLine({
   }
 }
 
+function DurationInWeeks({ startDate, endDate}: { startDate?: Date; endDate?: Date}) {
+  if (!!startDate && isValid(startDate) && !!endDate && isValid(endDate)) {
+    return <>{differenceInWeeks(endDate, startDate)}</>
+  }
+  else return <>0</>;
+}
+
 export function EngagementDetails({
   engagement,
   status,
@@ -160,11 +167,4 @@ export function EngagementDetails({
       </Grid>
     </>
   );
-}
-
-function DurationInWeeks({ startDate, endDate}: { startDate?: Date; endDate?: Date}) {
-    if (!!startDate && isValid(startDate) && !!endDate && isValid(endDate)) {
-      return <>{differenceInWeeks(endDate, startDate)}</>
-    }
-    else return <>0</>;
 }
