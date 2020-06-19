@@ -18,6 +18,7 @@ import {HelpIcon} from '@patternfly/react-icons';
 export interface HeaderProps {
   isDrawerOpen: boolean;
   onNavToggle: () => void;
+  onNotificationClick: () => void;
 }
 
 export function Header(props: HeaderProps) {
@@ -42,7 +43,7 @@ export function Header(props: HeaderProps) {
         <PageHeaderTools>
           <PageHeaderToolsGroup>
             <PageHeaderToolsItem>
-              <Notification/>
+              <Notification onNotificationClick={props.onNotificationClick}/>
             </PageHeaderToolsItem>
             <PageHeaderToolsItem>
               <Nav theme="dark" variant="horizontal">
