@@ -32,7 +32,6 @@ function getStatusColor(status?: string) {
   }
 }
 
-
 function FirstLine({
   status,
   startDate,
@@ -105,12 +104,9 @@ export function EngagementDetails({
                 </Tooltip>
               </FlexItem>
               <FlexItem>
-                {engagement?.start_date && engagement?.end_date
-                  ? differenceInWeeks(
-                      engagement?.end_date,
-                      engagement?.start_date
-                    )
-                  : 0}
+                <DurationInWeeks
+                  startDate={engagement?.start_date}
+                  endDate={engagement?.end_date}/>
               </FlexItem>
             </Flex>
 
@@ -164,4 +160,11 @@ export function EngagementDetails({
       </Grid>
     </>
   );
+}
+
+function DurationInWeeks({ startDate, endDate}: { startDate?: Date; endDate?: Date}) {
+    if (!!startDate && isValid(startDate) && !!endDate && isValid(endDate)) {
+      return <>{differenceInWeeks(endDate, startDate)}</>
+    }
+    else return <>0</>;
 }
