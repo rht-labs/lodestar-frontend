@@ -375,6 +375,14 @@ Object {
                   <div
                     class="pf-c-drawer__head"
                   >
+                    <h3
+                      class=""
+                      data-pf-content="true"
+                    >
+                      <b>
+                        All Notifications
+                      </b>
+                    </h3>
                     <div
                       class="pf-c-drawer__actions"
                     >
@@ -484,57 +492,9 @@ Object {
                     Success alert title
                   </h4>
                   <div
-                    class="pf-c-alert__action"
-                  >
-                    <button
-                      aria-label="Close Success alert: alert: Success alert title"
-                      class="pf-c-button pf-m-plain"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 352 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <div
                     class="pf-c-alert__description"
                   >
-                    <p>
-                      Success alert description. 
-                    </p>
-                  </div>
-                  <div
-                    class="pf-c-alert__action-group"
-                  >
-                    <button
-                      class="pf-c-button pf-m-link pf-m-inline"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      type="button"
-                    >
-                      View details
-                    </button>
-                    <button
-                      class="pf-c-button pf-m-link pf-m-inline"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      type="button"
-                    >
-                      Ignore
-                    </button>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
                   </div>
                 </div>
                 <div
@@ -1038,6 +998,14 @@ Object {
                 <div
                   class="pf-c-drawer__head"
                 >
+                  <h3
+                    class=""
+                    data-pf-content="true"
+                  >
+                    <b>
+                      All Notifications
+                    </b>
+                  </h3>
                   <div
                     class="pf-c-drawer__actions"
                   >
@@ -1147,57 +1115,9 @@ Object {
                   Success alert title
                 </h4>
                 <div
-                  class="pf-c-alert__action"
-                >
-                  <button
-                    aria-label="Close Success alert: alert: Success alert title"
-                    class="pf-c-button pf-m-plain"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 352 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                        transform=""
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div
                   class="pf-c-alert__description"
                 >
-                  <p>
-                    Success alert description. 
-                  </p>
-                </div>
-                <div
-                  class="pf-c-alert__action-group"
-                >
-                  <button
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    View details
-                  </button>
-                  <button
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    Ignore
-                  </button>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
                 </div>
               </div>
               <div
