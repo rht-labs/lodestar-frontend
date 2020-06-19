@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About UI should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="pf-c-page"
+      >
+        <a
+          class="pf-c-button pf-m-primary pf-c-skip-to-content"
+          href="#main-content-page-layout-default-nav"
+        >
+          Skip to content
+        </a>
+        <main
+          class="pf-c-page__main"
+          id="main-content-page-layout-default-nav"
+          tabindex="-1"
+        >
+          <section
+            class="pf-c-page__main-section pf-m-light"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h1
+                class=""
+                data-pf-content="true"
+              >
+                About
+              </h1>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                This is where versions of the application can be tracked.
+              </p>
+            </div>
+          </section>
+          <section
+            class="pf-c-page__main-section"
+          >
+            <div
+              class="pf-l-gallery"
+            >
+              <div>
+                <article
+                  class="pf-c-card pf-m-compact"
+                >
+                  <div
+                    class="pf-c-card__header"
+                  >
+                    Component Versions
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="pf-c-page"
+    >
+      <a
+        class="pf-c-button pf-m-primary pf-c-skip-to-content"
+        href="#main-content-page-layout-default-nav"
+      >
+        Skip to content
+      </a>
+      <main
+        class="pf-c-page__main"
+        id="main-content-page-layout-default-nav"
+        tabindex="-1"
+      >
+        <section
+          class="pf-c-page__main-section pf-m-light"
+        >
+          <div
+            class="pf-c-content"
+          >
+            <h1
+              class=""
+              data-pf-content="true"
+            >
+              About
+            </h1>
+            <p
+              class=""
+              data-pf-content="true"
+            >
+              This is where versions of the application can be tracked.
+            </p>
+          </div>
+        </section>
+        <section
+          class="pf-c-page__main-section"
+        >
+          <div
+            class="pf-l-gallery"
+          >
+            <div>
+              <article
+                class="pf-c-card pf-m-compact"
+              >
+                <div
+                  class="pf-c-card__header"
+                >
+                  Component Versions
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

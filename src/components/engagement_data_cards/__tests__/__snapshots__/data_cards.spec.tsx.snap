@@ -1,0 +1,1159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Engagement summary card matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <article
+        class="pf-c-card"
+      >
+        <div
+          class="pf-l-grid"
+        >
+          <div
+            class="pf-l-grid__item pf-m-11-col"
+          >
+            <div
+              class="pf-c-card__title"
+            >
+              <div
+                class="pf-l-level"
+              >
+                <div>
+                  <h3
+                    class="pf-c-title pf-m-lg"
+                    style="font-weight: normal;"
+                  >
+                    Engagement Summary
+                  </h3>
+                </div>
+                <div />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-grid pf-m-gutter"
+              >
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Company
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      NASA
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Project
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Boots on the Moon
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Start Date
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Jun 01, 2020
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      End Date
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Jul 01, 2020
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Description
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      It's rocket science
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Location
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Nashville, TN
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-1-col"
+          >
+            <div
+              class="pf-l-flex"
+              style="height: 100%;"
+            >
+              <div
+                class="pf-m-align-self-center"
+              />
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div />
+  </body>,
+  "container": <div>
+    <article
+      class="pf-c-card"
+    >
+      <div
+        class="pf-l-grid"
+      >
+        <div
+          class="pf-l-grid__item pf-m-11-col"
+        >
+          <div
+            class="pf-c-card__title"
+          >
+            <div
+              class="pf-l-level"
+            >
+              <div>
+                <h3
+                  class="pf-c-title pf-m-lg"
+                  style="font-weight: normal;"
+                >
+                  Engagement Summary
+                </h3>
+              </div>
+              <div />
+            </div>
+          </div>
+          <div
+            class="pf-c-card__body"
+          >
+            <div
+              class="pf-l-grid pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Company
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    NASA
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Project
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Boots on the Moon
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Start Date
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Jun 01, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    End Date
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Jul 01, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Description
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    It's rocket science
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Location
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Nashville, TN
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-1-col"
+        >
+          <div
+            class="pf-l-flex"
+            style="height: 100%;"
+          >
+            <div
+              class="pf-m-align-self-center"
+            />
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`OpenShift Cluster Summary matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <article
+        class="pf-c-card"
+      >
+        <div
+          class="pf-l-grid"
+        >
+          <div
+            class="pf-l-grid__item pf-m-11-col"
+          >
+            <div
+              class="pf-c-card__title"
+            >
+              <div
+                class="pf-l-level"
+              >
+                <div>
+                  <h3
+                    class="pf-c-title pf-m-lg"
+                    style="font-weight: normal;"
+                  >
+                    Hosting Environment
+                  </h3>
+                </div>
+                <div />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-grid pf-m-gutter"
+              >
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Hosting Type
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      OpenShift Container Platform
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Cloud Provider
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      AWS
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      OpenShift Version
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      4.4
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Storage Size
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      100G
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Cloud Region
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      N. Virginia
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Cloud Provider
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Large
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-3-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Subdomain
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      ordoabchao
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-1-col"
+          >
+            <div
+              class="pf-l-flex"
+              style="height: 100%;"
+            >
+              <div
+                class="pf-m-align-self-center"
+              />
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div />
+  </body>,
+  "container": <div>
+    <article
+      class="pf-c-card"
+    >
+      <div
+        class="pf-l-grid"
+      >
+        <div
+          class="pf-l-grid__item pf-m-11-col"
+        >
+          <div
+            class="pf-c-card__title"
+          >
+            <div
+              class="pf-l-level"
+            >
+              <div>
+                <h3
+                  class="pf-c-title pf-m-lg"
+                  style="font-weight: normal;"
+                >
+                  Hosting Environment
+                </h3>
+              </div>
+              <div />
+            </div>
+          </div>
+          <div
+            class="pf-c-card__body"
+          >
+            <div
+              class="pf-l-grid pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Hosting Type
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    OpenShift Container Platform
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Cloud Provider
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    AWS
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    OpenShift Version
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    4.4
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Storage Size
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    100G
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Cloud Region
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    N. Virginia
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Cloud Provider
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Large
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-3-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Subdomain
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    ordoabchao
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-1-col"
+        >
+          <div
+            class="pf-l-flex"
+            style="height: 100%;"
+          >
+            <div
+              class="pf-m-align-self-center"
+            />
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Point of Contact Card matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <article
+        class="pf-c-card"
+      >
+        <div
+          class="pf-l-grid"
+        >
+          <div
+            class="pf-l-grid__item pf-m-11-col"
+          >
+            <div
+              class="pf-c-card__title"
+            >
+              <div
+                class="pf-l-level"
+              >
+                <div>
+                  <h3
+                    class="pf-c-title pf-m-lg"
+                    style="font-weight: normal;"
+                  >
+                    Points of Contact
+                  </h3>
+                </div>
+                <div />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-grid pf-m-gutter"
+              >
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Engagement Lead
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Alice Doe
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Technical Lead
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Eve Doe
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Customer Contact
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Bob Doe
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-1-col"
+          >
+            <div
+              class="pf-l-flex"
+              style="height: 100%;"
+            >
+              <div
+                class="pf-m-align-self-center"
+              />
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div />
+  </body>,
+  "container": <div>
+    <article
+      class="pf-c-card"
+    >
+      <div
+        class="pf-l-grid"
+      >
+        <div
+          class="pf-l-grid__item pf-m-11-col"
+        >
+          <div
+            class="pf-c-card__title"
+          >
+            <div
+              class="pf-l-level"
+            >
+              <div>
+                <h3
+                  class="pf-c-title pf-m-lg"
+                  style="font-weight: normal;"
+                >
+                  Points of Contact
+                </h3>
+              </div>
+              <div />
+            </div>
+          </div>
+          <div
+            class="pf-c-card__body"
+          >
+            <div
+              class="pf-l-grid pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Engagement Lead
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Alice Doe
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Technical Lead
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Eve Doe
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Customer Contact
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Bob Doe
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-1-col"
+        >
+          <div
+            class="pf-l-flex"
+            style="height: 100%;"
+          >
+            <div
+              class="pf-m-align-self-center"
+            />
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

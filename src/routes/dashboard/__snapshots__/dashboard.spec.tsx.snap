@@ -5,8 +5,21 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        style="background-color: rgb(237, 237, 237); height: 100vh; padding: 15px;"
+      <section
+        class="pf-c-page__main-section pf-m-light"
+      >
+        <div
+          class="pf-c-content"
+        >
+          <h1
+            class="pf-c-title pf-m-2xl"
+          >
+            Dashboard
+          </h1>
+        </div>
+      </section>
+      <section
+        class="pf-c-page__main-section"
       >
         <h1>
           Dashboard
@@ -25,12 +38,25 @@ Object {
         <p>
           Select the raised hand to be taken to the feedback form to report any issues, share thoughts or provide suggestions.
         </p>
-      </div>
+      </section>
     </div>
   </body>,
   "container": <div>
-    <div
-      style="background-color: rgb(237, 237, 237); height: 100vh; padding: 15px;"
+    <section
+      class="pf-c-page__main-section pf-m-light"
+    >
+      <div
+        class="pf-c-content"
+      >
+        <h1
+          class="pf-c-title pf-m-2xl"
+        >
+          Dashboard
+        </h1>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section"
     >
       <h1>
         Dashboard
@@ -49,7 +75,7 @@ Object {
       <p>
         Select the raised hand to be taken to the feedback form to report any issues, share thoughts or provide suggestions.
       </p>
-    </div>
+    </section>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
