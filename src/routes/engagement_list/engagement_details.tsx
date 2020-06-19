@@ -32,6 +32,7 @@ function getStatusColor(status?: string) {
   }
 }
 
+
 function FirstLine({
   status,
   startDate,
@@ -39,7 +40,7 @@ function FirstLine({
   status?: string;
   startDate?: Date;
 }) {
-  console.log(startDate);
+
   if (status === 'upcoming') {
     return (
       <div data-testid="upcomingEngagement">

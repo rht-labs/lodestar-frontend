@@ -1,17 +1,17 @@
 import React from 'react';
 import {cleanup, render} from '@testing-library/react';
-import {Drawer} from '../drawer';
+import {BlackDrawer} from '../black_drawer';
 import {MemoryRouter} from 'react-router';
 import "@testing-library/jest-dom/extend-expect";
 
 afterEach(cleanup);
 
-describe('Drawer ', () => {
+describe('BlackDrawer ', () => {
   test('matches the snapshot', () => {
     expect(
       render(
         <MemoryRouter>
-          <Drawer/>
+          <BlackDrawer/>
         </MemoryRouter>
       )
     ).toMatchSnapshot();
@@ -20,10 +20,10 @@ describe('Drawer ', () => {
   test('renders drawer with the correct navigation child', () => {
     const { getByTestId } = render(
       <MemoryRouter>
-        <Drawer isDrawerOpen={true}>
+        <BlackDrawer isDrawerOpen={true}>
           <div data-testid="drawer">
           </div>
-        </Drawer>
+        </BlackDrawer>
       </MemoryRouter>
     );
     expect(getByTestId("drawer")).toBeInTheDocument();

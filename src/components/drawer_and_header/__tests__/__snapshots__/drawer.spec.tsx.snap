@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Drawer  matches the snapshot 1`] = `
+exports[`BlackDrawer  matches the snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
