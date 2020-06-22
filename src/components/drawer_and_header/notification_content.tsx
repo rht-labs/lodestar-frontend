@@ -9,6 +9,12 @@ import {
 
 export interface NotificationContentProps{
   onClose: any;
+  notification: [
+    {
+      title: string,
+      message: string,
+      type: "default" | "info" | "warning" | "success" | "danger" | undefined
+    }]
 }
 
 export function NotificationContent(props: NotificationContentProps) {
@@ -23,20 +29,11 @@ export function NotificationContent(props: NotificationContentProps) {
           <DrawerCloseButton onClick={props.onClose}/>
         </DrawerActions>
       </DrawerHead>
-      <Alert title="Default alert title">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert variant="success" title="Success alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert variant="info" title="Info alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert variant="warning" title="Warning alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert variant="danger" title="Danger alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
+
+      {props.notification?.map(n => (
+        <Alert title={ n.title} variant={ n.type }>
+          { n.message }
+        </Alert>
+        ))}
     </DrawerPanelContent>
   )}
