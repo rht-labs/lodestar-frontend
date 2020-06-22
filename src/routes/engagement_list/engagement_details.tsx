@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Engagement,
-  EngagementStatus,
-} from '../../schemas/engagement_schema';
+import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
 import { differenceInWeeks, format as formatDate, isValid } from 'date-fns';
 import {
   Flex,
@@ -20,20 +17,6 @@ import {
   OutlinedClockIcon,
   UserIcon,
 } from '@patternfly/react-icons';
-
-function getStatusColor(status?: string) {
-  switch (status) {
-    case 'upcoming': {
-      return '#FF4500';
-    }
-    case 'active': {
-      return '#228B22';
-    }
-    default: {
-      return '#C0C0C0';
-    }
-  }
-}
 
 function FirstLine({
   status,
@@ -185,6 +168,19 @@ const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
       return 'Past';
     }
     return '';
+  };
+  const getStatusColor = (status?: EngagementStatus) => {
+    switch (status) {
+      case EngagementStatus.upcoming: {
+        return '#FF4500';
+      }
+      case EngagementStatus.active: {
+        return '#228B22';
+      }
+      default: {
+        return '#C0C0C0';
+      }
+    }
   };
   return (
     <b style={{ color: getStatusColor(status) }}>
