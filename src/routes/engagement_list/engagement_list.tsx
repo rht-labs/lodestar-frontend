@@ -1,14 +1,45 @@
 import React from 'react';
-import { Engagement } from "../../schemas/engagement_schema";
+import { Engagement } from '../../schemas/engagement_schema';
 import { EngagementListItem } from './engagement_list_item';
+import {
+  EmptyState,
+  EmptyStateIcon,
+  Title,
+  EmptyStateBody,
+  Button,
+} from '@patternfly/react-core';
+import { SearchIcon } from '@patternfly/react-icons';
+import { useHistory } from 'react-router';
 
 export interface EngagementListProps {
   filter?: (engagement: Engagement) => boolean;
   title?: string;
 }
 
-export function EngagementList({ engagements }: { engagements: Engagement[] }) {
+function EngagementListEmptyState(props) {
+  const history = useHistory();
+  return (
+    <EmptyState>
+      <EmptyStateIcon icon={SearchIcon} />
+      <Title headingLevel="h4" size="lg">
+        There's nothing here.
+      </Title>
+      <EmptyStateBody>
+        <p style={{ marginBottom: '1rem' }}>
+          There are no engagements that match your search criteria.
+        </p>
+        <Button onClick={() => history.push('/app/engagements/new')}>
+          Create New
+        </Button>
+      </EmptyStateBody>
+    </EmptyState>
+  );
+}
 
+export function EngagementList({ engagements }: { engagements: Engagement[] }) {
+  if (!engagements || !engagements.length) {
+    return <EngagementListEmptyState />;
+  }
   return (
     <>
       {(engagements ?? []).map(e => (

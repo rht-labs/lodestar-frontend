@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
 import { differenceInWeeks, format as formatDate, isValid } from 'date-fns';
 import {
   Flex,
@@ -18,30 +18,14 @@ import {
   UserIcon,
 } from '@patternfly/react-icons';
 
-function getStatusColor(status?: string) {
-  switch (status) {
-    case 'upcoming': {
-      return '#FF4500';
-    }
-    case 'active': {
-      return '#228B22';
-    }
-    default: {
-      return '#C0C0C0';
-    }
-  }
-}
-
-
 function FirstLine({
   status,
   startDate,
 }: {
-  status?: string;
+  status?: EngagementStatus;
   startDate?: Date;
 }) {
-
-  if (status === 'upcoming') {
+  if (status === EngagementStatus.upcoming) {
     return (
       <div data-testid="upcomingEngagement">
         <Grid hasGutter>
@@ -68,11 +52,16 @@ function FirstLine({
   }
 }
 
-function DurationInWeeks({ startDate, endDate}: { startDate?: Date; endDate?: Date}) {
+function DurationInWeeks({
+  startDate,
+  endDate,
+}: {
+  startDate?: Date;
+  endDate?: Date;
+}) {
   if (!!startDate && isValid(startDate) && !!endDate && isValid(endDate)) {
-    return <>{differenceInWeeks(endDate, startDate)}</>
-  }
-  else return <>0</>;
+    return <>{differenceInWeeks(endDate, startDate)}</>;
+  } else return <>0</>;
 }
 
 export function EngagementDetails({
@@ -80,7 +69,7 @@ export function EngagementDetails({
   status,
 }: {
   engagement?: Engagement;
-  status?: string;
+  status?: EngagementStatus;
 }) {
   return (
     <>
@@ -114,7 +103,8 @@ export function EngagementDetails({
               <FlexItem>
                 <DurationInWeeks
                   startDate={engagement?.start_date}
-                  endDate={engagement?.end_date}/>
+                  endDate={engagement?.end_date}
+                />
               </FlexItem>
             </Flex>
 
@@ -155,9 +145,7 @@ export function EngagementDetails({
             </Flex>
             <Flex>
               <FlexItem>
-                <b style={{ color: getStatusColor(status) }}>
-                  {status?.toString().toUpperCase()}
-                </b>
+                <EngagementStatusText status={status} />
               </FlexItem>
             </Flex>
           </Flex>
@@ -169,3 +157,34 @@ export function EngagementDetails({
     </>
   );
 }
+
+const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
+  const getEngagementStatusText = () => {
+    if (status === EngagementStatus.active) {
+      return 'Active';
+    } else if (status === EngagementStatus.upcoming) {
+      return 'Upcoming';
+    } else if (status === EngagementStatus.past) {
+      return 'Past';
+    }
+    return '';
+  };
+  const getStatusColor = (status?: EngagementStatus) => {
+    switch (status) {
+      case EngagementStatus.upcoming: {
+        return '#FF4500';
+      }
+      case EngagementStatus.active: {
+        return '#228B22';
+      }
+      default: {
+        return '#C0C0C0';
+      }
+    }
+  };
+  return (
+    <b style={{ color: getStatusColor(status) }}>
+      {getEngagementStatusText().toUpperCase()}
+    </b>
+  );
+};
