@@ -6,15 +6,11 @@ import {
   DrawerPanelContent,
   Alert, Text
 } from '@patternfly/react-core';
+import {Notification} from "../../schemas/notification_schema";
 
 export interface NotificationContentProps{
   onClose: any;
-  notification: [
-    {
-      title: string,
-      message: string,
-      type: "default" | "info" | "warning" | "success" | "danger" | undefined
-    }]
+  notifications: Notification[],
 }
 
 export function NotificationContent(props: NotificationContentProps) {
@@ -30,7 +26,7 @@ export function NotificationContent(props: NotificationContentProps) {
         </DrawerActions>
       </DrawerHead>
 
-      {props.notification?.map(n => (
+      {props.notifications?.map(n => (
         <Alert title={ n.title} variant={ n.type }>
           { n.message }
         </Alert>
