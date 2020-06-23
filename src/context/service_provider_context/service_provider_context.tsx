@@ -11,11 +11,14 @@ import { FakedEngagementService } from '../../services/engagement_service/implem
 import { Request } from '../../utilities/request';
 import { useConfig } from '../config_context/config_hook';
 import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
+import { NotificationService } from "../../services/notification_service/notification_service";
+import { FakedNotificationService } from "../../services/notification_service/implementations/faked_notification_service";
 
 interface ServiceProvider {
   engagementService: EngagementService;
   authenticationService: AuthService;
   versionService: VersionService;
+  notificationService: NotificationService;
 }
 
 const ProductionServiceProviders = (config: Config) => {
@@ -37,20 +40,18 @@ const ProductionServiceProviders = (config: Config) => {
       onRequestSuccess,
       onRequestFailure
     ),
+    notificationService: new FakedNotificationService()
   };
 };
 
-const FakedServiceProviders = (config: Config) => ({
+const FakedServiceProviders = (config?: Config | undefined) => ({
   engagementService: new FakedEngagementService(),
   authenticationService: new FakedAuthService(),
   versionService: new FakedVersionService(),
+  notificationService: new FakedNotificationService()
 });
 
-export const ServiceProviderContext = React.createContext<ServiceProvider>({
-  authenticationService: null,
-  engagementService: null,
-  versionService: null,
-});
+export const ServiceProviderContext = React.createContext<ServiceProvider>( FakedServiceProviders() );
 
 export const ServiceProvider = ({
   children,
