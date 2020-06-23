@@ -16,7 +16,6 @@ import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailView } from './engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import {
-  getEngagementStatus,
   EngagementStatus,
 } from '../schemas/engagement_schema';
 
@@ -55,28 +54,25 @@ function _OMPRouter() {
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/upcoming">
                           <EngagementListRoute
-                            filter={engagement =>
-                              getEngagementStatus(engagement) ===
-                              EngagementStatus.upcoming
-                            }
+                            newFilter={{
+                              allowedStatuses: [EngagementStatus.upcoming],
+                            }}
                             title="Upcoming Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/active">
                           <EngagementListRoute
-                            filter={engagement =>
-                              getEngagementStatus(engagement) ===
-                              EngagementStatus.active
-                            }
+                            newFilter={{
+                              allowedStatuses: [EngagementStatus.active],
+                            }}
                             title="Active Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/past">
                           <EngagementListRoute
-                            filter={engagement =>
-                              getEngagementStatus(engagement) ===
-                              EngagementStatus.past
-                            }
+                            newFilter={{
+                              allowedStatuses: [EngagementStatus.past],
+                            }}
                             title="Past Engagements"
                           />
                         </PrivateRoute>
