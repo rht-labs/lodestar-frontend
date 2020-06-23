@@ -13,7 +13,7 @@ Object {
         type="button"
       >
         <span
-          class="pf-c-notification-badge pf-m-unread"
+          class="pf-c-notification-badge pf-m-read"
         >
           <svg
             aria-hidden="true"
@@ -42,7 +42,7 @@ Object {
       type="button"
     >
       <span
-        class="pf-c-notification-badge pf-m-unread"
+        class="pf-c-notification-badge pf-m-read"
       >
         <svg
           aria-hidden="true"

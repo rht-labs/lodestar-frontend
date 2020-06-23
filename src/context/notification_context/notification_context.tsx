@@ -11,28 +11,36 @@ interface NotificationContext {
 export const NotificationContext = React.createContext<NotificationContext>({
   hasNotification: false,
   notifications: [],
-  fetchNotifications: () => {}
+  fetchNotifications: () => {
+  }
 });
 
 export const NotificationProvider = ({children}: {
   children: React.ReactNode;
 }) => {
+
+  const [hasNotification, setHasNotification] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const { notificationService } = useServiceProviders();
+  const {notificationService} = useServiceProviders();
 
   const fetchNotifications = useCallback(
     async () => {
-      const response =  await (notificationService.fetchNotifications());
+      const response = await (notificationService.fetchNotifications());
       setNotifications(response);
+      setHasNotification(true);
     },
     [setNotifications, notificationService],
   );
 
   return (
-    <NotificationContext.Provider
-      value={{ hasNotification: true, notifications, fetchNotifications }}
-    >
-      {children}
-    </NotificationContext.Provider>
+      <NotificationContext.Provider
+        value={{
+          hasNotification,
+          notifications,
+          fetchNotifications
+        }}
+      >
+        {children}
+      </NotificationContext.Provider>
   );
 };
