@@ -19,8 +19,12 @@ export const engagementFilterFactory = (
     }
     if (filter.searchTerm) {
       filterResults.push(
-        engagement.customer_name.toLowerCase().includes(filter.searchTerm) ||
-          engagement.project_name.toLowerCase().includes(filter.searchTerm)
+        engagement.customer_name
+          .toLowerCase()
+          .includes(filter.searchTerm?.trim()?.toLowerCase()) ||
+          engagement.project_name
+            .toLowerCase()
+            .includes(filter.searchTerm?.trim()?.toLowerCase())
       );
     }
     return !!filterResults.length ? filterResults.every(r => !!r) : true;
