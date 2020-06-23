@@ -12,9 +12,10 @@ import {
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router-dom';
 import {
-  Engagement,
-  getEngagementStatus,
-} from '../../schemas/engagement_schema';
+  engagementFilterFactory,
+  engagementSortFactory,
+} from '../../common/engagement_filter_factory';
+import { Engagement } from '../../schemas/engagement_schema';
 import { EngagementListFilter } from '../../schemas/engagement_filter';
 import { EngagementFilter } from '../../components/engagement_filter/engagement_filter';
 
@@ -23,29 +24,6 @@ export interface EngagementListRouteProps {
   newFilter?: EngagementListFilter;
   title: string;
 }
-
-const buildFilter = (
-  filter?: EngagementListFilter
-): ((engagement: Engagement) => boolean) => {
-  if (!filter) {
-    return () => true;
-  }
-  return (engagement: Engagement) => {
-    const filterResults: boolean[] = [];
-    if (filter.allowedStatuses) {
-      filterResults.push(
-        filter.allowedStatuses.includes(getEngagementStatus(engagement))
-      );
-    }
-    if (filter.searchTerm) {
-      filterResults.push(
-        engagement.customer_name.toLowerCase().includes(filter.searchTerm) ||
-          engagement.project_name.toLowerCase().includes(filter.searchTerm)
-      );
-    }
-    return !!filterResults.length ? filterResults.every(r => !!r) : true;
-  };
-};
 
 export function EngagementListRoute(props: EngagementListRouteProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
@@ -63,11 +41,13 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
     setFilterDefinition(newFilter);
   }, [newFilter, setFilterDefinition]);
 
-  const filter = buildFilter(filterDefinition);
-  const filteredEngagements =
-    filter && typeof filter === 'function'
-      ? (contextEngagements ?? []).filter(filter)
-      : contextEngagements;
+  const filter = engagementFilterFactory(filterDefinition);
+  const sorter = engagementSortFactory(filterDefinition);
+
+  const filteredEngagements = (filter && typeof filter === 'function'
+    ? (contextEngagements ?? []).filter(filter)
+    : contextEngagements
+  ).sort(sorter);
 
   const title = props.title ?? 'Engagements';
   const history = useHistory();
