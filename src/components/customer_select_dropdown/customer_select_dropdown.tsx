@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Select, SelectVariant, SelectOption } from '@patternfly/react-core';
-import { Logger } from '../../utilities/logger';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 export interface CustomerSelectDropdownProps {
   onSelect: (selectedOption: string) => void;
@@ -22,7 +21,6 @@ export function _CustomerSelectDropdown(
     <Select
       isOpen={isOpen}
       onToggle={() => setIsOpen(!isOpen)}
-      onCreateOption={option => Logger.info(option)}
       onSelect={handleSelect}
       isCreatable={true}
       selections={props.selectedValue}
