@@ -123,7 +123,6 @@ export const EngagementProvider = ({
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
       let availableEngagements = engagements ?? (await fetchEngagements());
-      Logger.info(engagements);
       return availableEngagements?.find(
         engagement =>
           engagement?.customer_name === customerName &&
