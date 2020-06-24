@@ -12,7 +12,7 @@ export function LaunchMessage({ engagement, onLaunch }: LaunchMessageProps) {
       <Alert
         isInline
         title="Engagement not launched"
-        variant={AlertVariant.warning}
+        variant={AlertVariant.info}
         actionLinks={
           <>
             <Button onClick={() => onLaunch(engagement)}>Launch</Button>
