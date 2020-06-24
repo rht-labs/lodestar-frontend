@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { FeatureRequest } from '../components/feature_request';
 import { PrivateRoute } from '../components/authentication/private_route';
@@ -15,16 +15,12 @@ import { CreateNewEngagement } from './create_new_engagement/create_new_engageme
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailView } from './engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
-import { useNotification } from "../context/notification_context/notification_hook";
-import {
-  getEngagementStatus,
-  EngagementStatus,
-} from '../schemas/engagement_schema';
+import { useNotification } from '../context/notification_context/notification_hook';
+import { EngagementStatus } from '../schemas/engagement_schema';
 
 function _OMPRouter() {
-
   const { fetchNotifications } = useNotification();
-  useEffect(()=> {
+  useEffect(() => {
     fetchNotifications();
   }, [fetchNotifications]);
 
@@ -62,28 +58,25 @@ function _OMPRouter() {
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/upcoming">
                           <EngagementListRoute
-                            filter={engagement =>
-                              getEngagementStatus(engagement) ===
-                              EngagementStatus.upcoming
-                            }
+                            filterDefinition={{
+                              allowedStatuses: [EngagementStatus.upcoming],
+                            }}
                             title="Upcoming Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/active">
                           <EngagementListRoute
-                            filter={engagement =>
-                              getEngagementStatus(engagement) ===
-                              EngagementStatus.active
-                            }
+                            filterDefinition={{
+                              allowedStatuses: [EngagementStatus.active],
+                            }}
                             title="Active Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/past">
                           <EngagementListRoute
-                            filter={engagement =>
-                              getEngagementStatus(engagement) ===
-                              EngagementStatus.past
-                            }
+                            filterDefinition={{
+                              allowedStatuses: [EngagementStatus.past],
+                            }}
                             title="Past Engagements"
                           />
                         </PrivateRoute>

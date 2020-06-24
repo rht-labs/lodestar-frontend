@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import {EngagementList, EngagementListProps} from "./engagement_list";
+import { EngagementList } from './engagement_list';
 import {
   PageSection,
   Text,
@@ -10,23 +10,53 @@ import {
   FlexItem,
   Button,
 } from '@patternfly/react-core';
-import { Logger } from '../../utilities/logger';
 import { useHistory } from 'react-router-dom';
+import {
+  engagementFilterFactory,
+  engagementSortFactory,
+} from '../../common/engagement_filter_factory';
+import { Engagement } from '../../schemas/engagement_schema';
+import { EngagementFilter } from '../../schemas/engagement_filter';
+import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 
-export function EngagementListRoute(props: EngagementListProps) {
+export interface EngagementListRouteProps {
+  filter?: (engagement: Engagement) => boolean;
+  filterDefinition?: EngagementFilter;
+  title: string;
+}
+
+export function EngagementListRoute(props: EngagementListRouteProps) {
   const { engagements: contextEngagements, getEngagements } = useEngagements();
   useEffect(() => {
     if (contextEngagements === undefined) {
       getEngagements();
     }
   }, [contextEngagements, getEngagements]);
-  const filteredEngagements =
-    props.filter && typeof props.filter === 'function'
-      ? (contextEngagements ?? []).filter(props.filter)
-      : contextEngagements;
-  Logger.info(contextEngagements);
+  const { filterDefinition: propsFilter } = props;
+  const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
+    props.filterDefinition
+  );
+
+  useEffect(() => {
+    setFilterDefinition(propsFilter);
+  }, [propsFilter, setFilterDefinition]);
+
+  const filter = engagementFilterFactory(filterDefinition);
+  const sorter = engagementSortFactory(filterDefinition);
+
+  const filteredEngagements = (filter && typeof filter === 'function'
+    ? (contextEngagements ?? []).filter(filter)
+    : contextEngagements
+  ).sort(sorter);
+
   const title = props.title ?? 'Engagements';
   const history = useHistory();
+  const handleChange = useCallback(
+    (propsFilter: EngagementFilter) => {
+      setFilterDefinition(propsFilter);
+    },
+    [setFilterDefinition]
+  );
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
@@ -42,6 +72,14 @@ export function EngagementListRoute(props: EngagementListProps) {
             </Button>
           </FlexItem>
         </Flex>
+      </PageSection>
+      <PageSection>
+        <div style={{ margin: '0 1rem' }}>
+          <EngagementFilterBar
+            filter={filterDefinition}
+            onChange={handleChange}
+          />
+        </div>
       </PageSection>
       <PageSection>
         <EngagementList engagements={filteredEngagements} />

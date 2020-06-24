@@ -13,7 +13,6 @@ import { useHistory } from 'react-router';
 
 export interface EngagementListProps {
   filter?: (engagement: Engagement) => boolean;
-  title?: string;
 }
 
 function EngagementListEmptyState(props) {
