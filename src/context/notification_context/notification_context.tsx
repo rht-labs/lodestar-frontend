@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {Notification} from '../../schemas/notification_schema'
 import {useServiceProviders} from "../service_provider_context/service_provider_context";
+import {FEATURE_FLAG_NOTIFICATION} from "../../common/feature_flags";
 
 interface NotificationContext {
   hasNotification: boolean;
@@ -32,15 +33,28 @@ export const NotificationProvider = ({children}: {
     [setNotifications, notificationService],
   );
 
+  function notificationFeed() {
+    if (!FEATURE_FLAG_NOTIFICATION) {
+      return ({
+        hasNotification,
+        notifications,
+        fetchNotifications
+      })
+    }
+    else {
+      return (
+        {
+          hasNotification: false,
+          notifications: [],
+          fetchNotifications: () => {}
+        }
+      )
+    }
+  }
+
   return (
-      <NotificationContext.Provider
-        value={{
-          hasNotification,
-          notifications,
-          fetchNotifications
-        }}
-      >
-        {children}
-      </NotificationContext.Provider>
+    <NotificationContext.Provider value={ notificationFeed() } >
+      {children}
+    </NotificationContext.Provider>
   );
 };
