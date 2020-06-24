@@ -9,17 +9,20 @@ import {
 } from '@patternfly/react-core';
 import { EngagementStatus } from '../../schemas/engagement_schema';
 import {
-  EngagementListFilter,
+  EngagementFilter,
   EngagementSortFields,
   SortOption,
 } from '../../schemas/engagement_filter';
 
 export interface EngagementFilterProps {
-  onChange: (filter: EngagementListFilter) => void;
-  filter: EngagementListFilter;
+  onChange: (filter: EngagementFilter) => void;
+  filter: EngagementFilter;
 }
 
-export function EngagementFilter({ onChange, filter }: EngagementFilterProps) {
+export function EngagementFilterBar({
+  onChange,
+  filter,
+}: EngagementFilterProps) {
   const [isStatusSelectOpen, setIsStatusSelectOpen] = useState<boolean>(false);
   const [isSortSelectOpen, setIsSortSelectOpen] = useState<boolean>(false);
   const createSortOption = (

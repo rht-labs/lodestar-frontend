@@ -1,11 +1,11 @@
 import {
-  EngagementListFilter,
+  EngagementFilter,
   EngagementSortFields,
 } from '../schemas/engagement_filter';
 import { Engagement, getEngagementStatus } from '../schemas/engagement_schema';
 
 export const engagementFilterFactory = (
-  filter?: EngagementListFilter
+  filter?: EngagementFilter
 ): ((engagement: Engagement) => boolean) => {
   if (!filter) {
     return () => true;
@@ -32,7 +32,7 @@ export const engagementFilterFactory = (
 };
 
 export const engagementSortFactory = (
-  filter?: EngagementListFilter
+  filter?: EngagementFilter
 ): ((a: Engagement, b: Engagement) => number) => {
   const ascendingIndex =
     filter?.sort?.isAscending === undefined || filter?.sort?.isAscending
@@ -42,7 +42,7 @@ export const engagementSortFactory = (
     return (a, b) => (a.start_date < b.start_date ? -1 : 1) * ascendingIndex;
   }
   if (filter?.sort?.sortField === EngagementSortFields.endDate) {
-    return (a, b) => (a.start_date < b.start_date ? -1 : 1) * ascendingIndex;
+    return (a, b) => (a.end_date < b.end_date ? -1 : 1) * ascendingIndex;
   }
   if (filter?.sort?.sortField === EngagementSortFields.customerName) {
     return (a, b) =>

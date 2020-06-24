@@ -16,12 +16,12 @@ import {
   engagementSortFactory,
 } from '../../common/engagement_filter_factory';
 import { Engagement } from '../../schemas/engagement_schema';
-import { EngagementListFilter } from '../../schemas/engagement_filter';
-import { EngagementFilter } from '../../components/engagement_filter/engagement_filter';
+import { EngagementFilter } from '../../schemas/engagement_filter';
+import { EngagementFilterBar } from '../../components/engagement_filter/engagement_filter';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
-  newFilter?: EngagementListFilter;
+  newFilter?: EngagementFilter;
   title: string;
 }
 
@@ -33,9 +33,9 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
     }
   }, [contextEngagements, getEngagements]);
   const { newFilter } = props;
-  const [filterDefinition, setFilterDefinition] = useState<
-    EngagementListFilter
-  >(props.newFilter);
+  const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
+    props.newFilter
+  );
 
   useEffect(() => {
     setFilterDefinition(newFilter);
@@ -52,7 +52,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const title = props.title ?? 'Engagements';
   const history = useHistory();
   const handleChange = useCallback(
-    (newFilter: EngagementListFilter) => {
+    (newFilter: EngagementFilter) => {
       setFilterDefinition(newFilter);
     },
     [setFilterDefinition]
@@ -75,7 +75,10 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
       </PageSection>
       <PageSection>
         <div style={{ margin: '0 1rem' }}>
-          <EngagementFilter filter={filterDefinition} onChange={handleChange} />
+          <EngagementFilterBar
+            filter={filterDefinition}
+            onChange={handleChange}
+          />
         </div>
       </PageSection>
       <PageSection>

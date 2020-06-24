@@ -1,9 +1,9 @@
 import { EngagementStatus } from './engagement_schema';
 
-export interface EngagementListFilter {
+export interface EngagementFilter {
   searchTerm?: string;
   allowedStatuses?: EngagementStatus[];
-  sort: SortOption<EngagementSortFields>;
+  sort?: SortOption<EngagementSortFields>;
 }
 
 export enum EngagementSortFields {
