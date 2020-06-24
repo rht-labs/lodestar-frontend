@@ -17,7 +17,7 @@ import {
 } from '../../common/engagement_filter_factory';
 import { Engagement } from '../../schemas/engagement_schema';
 import { EngagementFilter } from '../../schemas/engagement_filter';
-import { EngagementFilterBar } from '../../components/engagement_filter/engagement_filter';
+import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
