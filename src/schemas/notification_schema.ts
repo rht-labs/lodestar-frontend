@@ -30,31 +30,31 @@ export class Notification {
       [
         new Notification(
           {
-            title: faker.lorem.words(),
+            title: "Default Notification format",
             message: faker.lorem.paragraph(),
             type: NotificationType.DEFAULT
           }),
         new Notification(
           {
-            title: faker.lorem.words(),
+            title: "Test Warning",
             message: faker.lorem.paragraph(),
             type: NotificationType.WARNING
           }),
         new Notification(
           {
-            title: faker.lorem.words(),
+            title: "Test Success",
             message: faker.lorem.paragraph(),
             type: NotificationType.SUCCESS
           }),
         new Notification(
           {
-            title: faker.lorem.words(),
+            title: "Test Danger",
             message: faker.lorem.paragraph(),
             type: NotificationType.DANGER
           }),
         new Notification(
           {
-            title: faker.lorem.words(),
+            title: "Test Info",
             message: faker.lorem.paragraph(),
             type: NotificationType.INFO
           }),
