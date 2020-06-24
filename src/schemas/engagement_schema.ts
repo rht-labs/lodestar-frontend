@@ -51,7 +51,12 @@ export abstract class Engagement {
       start_date: faker.date.recent(),
       technical_lead_email: faker.internet.email(),
       technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      launch: faker.random.boolean() ? { launched_by: faker.name.firstName(), launched_date_time: faker.date.recent() } : null
+      launch: faker.random.boolean()
+        ? {
+            launched_by: faker.name.firstName(),
+            launched_date_time: faker.date.recent(),
+          }
+        : null,
     };
   }
 
@@ -82,3 +87,22 @@ export abstract class Engagement {
     };
   }
 }
+
+export enum EngagementStatus {
+  active = 'active',
+  past = 'past',
+  upcoming = 'upcoming',
+}
+
+export const getEngagementStatus = (
+  engagement: Engagement
+): EngagementStatus => {
+  const Today = new Date();
+  const { start_date, launch, end_date } = engagement;
+  const launch_date = launch?.launched_date_time;
+  if (launch_date) {
+    if (start_date <= Today && end_date > Today) {
+      return EngagementStatus.active;
+    } else return EngagementStatus.past;
+  } else return EngagementStatus.upcoming;
+};
