@@ -567,7 +567,7 @@ Object {
                       data-pf-content="true"
                       style="margin-bottom: 0.1rem;"
                     >
-                      Cloud Provider
+                      Cluster Size
                     </h6>
                     <p
                       class=""
@@ -767,7 +767,7 @@ Object {
                     data-pf-content="true"
                     style="margin-bottom: 0.1rem;"
                   >
-                    Cloud Provider
+                    Cluster Size
                   </h6>
                   <p
                     class=""
