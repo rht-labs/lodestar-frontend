@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {NotificationBadge} from '@patternfly/react-core';
 import {BellIcon} from '@patternfly/react-icons';
+import { useNotification } from '../../context/notification_context/notification_hook';
 
 export interface NotificationProps {
   onNotificationClick: () => void;
@@ -8,7 +9,9 @@ export interface NotificationProps {
 
 export function Notification(props: NotificationProps) {
 
-  const [isRead, setRead] = useState(false);
+  const { hasNotification } = useNotification();
+  const [isRead, setRead] = useState(!hasNotification);
+
   const onClick = () => {
     setRead(true);
     props.onNotificationClick();
