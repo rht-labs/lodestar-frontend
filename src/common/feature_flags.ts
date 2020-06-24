@@ -1,1 +1,1 @@
-export const FEATURE_FLAG_NOTIFICATION = false;
+export const FEATURE_FLAG_NOTIFICATION = true;
