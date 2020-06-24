@@ -15,9 +15,7 @@ import { CreateNewEngagement } from './create_new_engagement/create_new_engageme
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailView } from './engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
-import {
-  EngagementStatus,
-} from '../schemas/engagement_schema';
+import { EngagementStatus } from '../schemas/engagement_schema';
 
 function _OMPRouter() {
   return (
@@ -54,7 +52,7 @@ function _OMPRouter() {
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/upcoming">
                           <EngagementListRoute
-                            newFilter={{
+                            filterDefinition={{
                               allowedStatuses: [EngagementStatus.upcoming],
                             }}
                             title="Upcoming Engagements"
@@ -62,7 +60,7 @@ function _OMPRouter() {
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/active">
                           <EngagementListRoute
-                            newFilter={{
+                            filterDefinition={{
                               allowedStatuses: [EngagementStatus.active],
                             }}
                             title="Active Engagements"
@@ -70,7 +68,7 @@ function _OMPRouter() {
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/past">
                           <EngagementListRoute
-                            newFilter={{
+                            filterDefinition={{
                               allowedStatuses: [EngagementStatus.past],
                             }}
                             title="Past Engagements"

@@ -21,7 +21,7 @@ import { EngagementFilterBar } from '../../components/engagement_filter_bar/enga
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
-  newFilter?: EngagementFilter;
+  filterDefinition?: EngagementFilter;
   title: string;
 }
 
@@ -32,14 +32,14 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
       getEngagements();
     }
   }, [contextEngagements, getEngagements]);
-  const { newFilter } = props;
+  const { filterDefinition: propsFilter } = props;
   const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
-    props.newFilter
+    props.filterDefinition
   );
 
   useEffect(() => {
-    setFilterDefinition(newFilter);
-  }, [newFilter, setFilterDefinition]);
+    setFilterDefinition(propsFilter);
+  }, [propsFilter, setFilterDefinition]);
 
   const filter = engagementFilterFactory(filterDefinition);
   const sorter = engagementSortFactory(filterDefinition);
@@ -52,8 +52,8 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const title = props.title ?? 'Engagements';
   const history = useHistory();
   const handleChange = useCallback(
-    (newFilter: EngagementFilter) => {
-      setFilterDefinition(newFilter);
+    (propsFilter: EngagementFilter) => {
+      setFilterDefinition(propsFilter);
     },
     [setFilterDefinition]
   );
