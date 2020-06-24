@@ -15,7 +15,7 @@ import { CreateNewEngagement } from './create_new_engagement/create_new_engageme
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailView } from './engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
-import { useNotification } from "../context/notification_context/notification_hook";
+import {useNotification} from "../context/notification_context/notification_hook";
 
 function _OMPRouter() {
 
