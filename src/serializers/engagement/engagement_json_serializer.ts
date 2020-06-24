@@ -33,6 +33,7 @@ export class EngagementJsonSerializer
       start_date: engagement.start_date
         ? EngagementJsonSerializer.formatDate(engagement.start_date)
         : null,
+      launch: this.serializeLaunchData(engagement.launch),
     };
     return e;
   }
@@ -62,6 +63,15 @@ export class EngagementJsonSerializer
       technical_lead_email: data['technical_lead_email'],
       technical_lead_name: data['technical_lead_name'],
       launch: this.parseLaunchData(data['launch']),
+    };
+  }
+
+  private serializeLaunchData(launchData?: LaunchData) {
+    return {
+      launched_date_time: launchData?.launched_date_time
+        ?.toISOString()
+        ?.split('Z')?.[0], // backend doesn't support the 'Z' UTC notation
+      launched_by: launchData?.launched_by,
     };
   }
 
