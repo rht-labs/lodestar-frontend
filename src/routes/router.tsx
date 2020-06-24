@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { FeatureRequest } from '../components/feature_request';
 import { PrivateRoute } from '../components/authentication/private_route';
@@ -15,12 +15,19 @@ import { CreateNewEngagement } from './create_new_engagement/create_new_engageme
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailView } from './engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
+import { useNotification } from "../context/notification_context/notification_hook";
 import {
   getEngagementStatus,
   EngagementStatus,
 } from '../schemas/engagement_schema';
 
 function _OMPRouter() {
+
+  const { fetchNotifications } = useNotification();
+  useEffect(()=> {
+    fetchNotifications();
+  }, [fetchNotifications]);
+
   return (
     <Switch>
       <Route path="/" exact component={LandingPage} />
