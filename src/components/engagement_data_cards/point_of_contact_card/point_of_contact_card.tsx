@@ -44,15 +44,17 @@ export function PointOfContactCard({
       />
       <DataCard
         title="Points of Contact"
-        actionButton={() => (
-          <div>
+        trailingIcon={() =>
+          !engagement || engagement?.launch ? (
+            <div />
+          ) : (
             <RequiredFieldsWarning
               requiredFields={pointOfContactRequiredFields}
             />
-            <EditButton
-              onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
-            />
-          </div>
+          )
+        }
+        actionButton={() => (
+          <EditButton onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)} />
         )}
       >
         <Grid hasGutter>

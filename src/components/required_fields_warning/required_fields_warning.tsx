@@ -1,5 +1,8 @@
 import React from 'react';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+import {
+  ExclamationTriangleIcon,
+  CheckCircleIcon,
+} from '@patternfly/react-icons';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Tooltip } from '@patternfly/react-core';
 import { getHumanReadableFieldName } from '../../common/human_readable_engagement_field';
@@ -14,7 +17,11 @@ export function RequiredFieldsWarning({
     .filter(field => missingRequiredFields.includes(field))
     .map(field => getHumanReadableFieldName(field));
   if (!neededFields?.length) {
-    return <div />;
+    return (
+      <Tooltip content="All required fields are completed">
+        <CheckCircleIcon color="green" />
+      </Tooltip>
+    );
   }
   return (
     <Tooltip content={`Missing required fields: ${neededFields.join(', ')}`}>

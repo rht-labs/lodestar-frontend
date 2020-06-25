@@ -14,11 +14,13 @@ export interface DataCardProps {
   title: string;
   children: any;
   actionButton?: React.FunctionComponent;
+  trailingIcon?: React.FunctionComponent;
 }
 
 export function DataCard({
   children,
   title,
+  trailingIcon: TrailingIcon = () => <div />,
   actionButton: ActionButton,
 }: DataCardProps) {
   return (
@@ -27,7 +29,8 @@ export function DataCard({
         <Level>
           <LevelItem>
             <Title headingLevel="h3" style={{ fontWeight: 'normal' }}>
-              {title}
+              {title}&nbsp;&nbsp;
+              <TrailingIcon />
             </Title>
           </LevelItem>
           <LevelItem>

@@ -40,15 +40,19 @@ export function EngagementSummaryCard({
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard
-        actionButton={() => (
-          <div>
+        trailingIcon={() =>
+          !engagement || engagement?.launch ? (
+            <div />
+          ) : (
             <RequiredFieldsWarning
               requiredFields={engagementSummaryRequiredFields}
             />
-            <EditButton
-              onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
-            />
-          </div>
+          )
+        }
+        actionButton={() => (
+          <EditButton
+            onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
+          />
         )}
         title="Engagement Summary"
       >

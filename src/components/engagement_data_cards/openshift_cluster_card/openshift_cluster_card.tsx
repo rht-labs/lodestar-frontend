@@ -43,9 +43,15 @@ export function OpenShiftClusterSummaryCard({
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
+        trailingIcon={() =>
+          !engagement || engagement?.launch ? (
+            <div />
+          ) : (
+            <RequiredFieldsWarning requiredFields={openshiftRequiredFields} />
+          )
+        }
         actionButton={() => (
           <div>
-            <RequiredFieldsWarning requiredFields={openshiftRequiredFields} />
             <EditButton onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)} />
           </div>
         )}
