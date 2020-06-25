@@ -108,7 +108,7 @@ export const EngagementProvider = ({
         type: 'ocp_cluster_size',
         payload:
           activeEngagement?.ocp_cluster_size ??
-          formOptions?.openshift_options?.custer_size?.options[0].value,
+          formOptions?.openshift_options?.cluster_size?.options[0].value,
       });
       dispatch({
         type: 'ocp_version',
@@ -193,7 +193,9 @@ export const EngagementProvider = ({
   const _checkLaunchReady = useCallback(() => {
     let result = requiredFields.every(
       o =>
-        typeof engagementFormState[o] === 'boolean' || !!engagementFormState[o]
+        typeof engagementFormState[o] === 'boolean' ||
+        typeof engagementFormState[0] === 'number' ||
+        !!engagementFormState[o]
     );
     return result;
   }, [engagementFormState, requiredFields]);
@@ -201,7 +203,9 @@ export const EngagementProvider = ({
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
-        engagementFormState[field] !== 'boolean' && !engagementFormState[field]
+        engagementFormState[field] !== 'boolean' &&
+        engagementFormState[field] !== 'number' &&
+        !engagementFormState[field]
     );
   }, [engagementFormState, requiredFields]);
 
