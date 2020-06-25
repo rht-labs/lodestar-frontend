@@ -10,8 +10,7 @@ import { useModalVisibility } from '../../context/edit_modal_visibility_context/
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { GitCommit } from '../../schemas/git_commit';
-import { TitledDataPoint } from '../titled_data_point/titled_data_point';
-
+import { ActivityHistoryLineItem } from '../activity_history_line_item/activity_history_line_item';
 export interface ActivityHistoryDetailsModalProps {
   isOpen: boolean;
 }
@@ -23,7 +22,7 @@ export function ActivityHistoryDetailsModal(
 
   return (
     <Modal
-      variant={ModalVariant.small}
+      variant={ModalVariant.large}
       isOpen={props.isOpen}
       onClose={requestClose}
     >
@@ -46,17 +45,9 @@ function DetailedActivityHistoryList({ commits }: { commits: GitCommit[] }) {
     <Grid hasGutter>
       {commits?.map(commit => (
         <GridItem span={12}>
-          <DetailedActivityHistoryItem commit={commit} />
+          <ActivityHistoryLineItem commit={commit} />
         </GridItem>
       ))}
     </Grid>
-  );
-}
-
-function DetailedActivityHistoryItem({ commit }: { commit: GitCommit }) {
-  return (
-    <TitledDataPoint title={`${commit.author_email}`}>
-      {commit.message}
-    </TitledDataPoint>
   );
 }

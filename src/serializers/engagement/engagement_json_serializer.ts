@@ -41,10 +41,9 @@ export class EngagementJsonSerializer
   deserialize(data: object): Engagement {
     return {
       archive_date: data['archive_date'],
-      // commits: (data['commits'] as any[])?.map(d =>
-      //   EngagementJsonSerializer.gitCommitSerializer.deserialize(d)
-      // ),
-      commits: data['commits'],
+      commits: (data['commits'] as any[])
+        ?.filter(d => !(d['author_email'] === 'bot@bot.com'))
+        ?.map(d => EngagementJsonSerializer.gitCommitSerializer.deserialize(d)),
       customer_contact_email: data['customer_contact_email'],
       customer_contact_name: data['customer_contact_name'],
       customer_name: data['customer_name'],

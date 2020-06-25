@@ -5,26 +5,26 @@ import { Grid, GridItem, Button, ButtonVariant } from '@patternfly/react-core';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { GitCommit } from '../../../schemas/git_commit';
-import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
+import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
 export interface GitHistoryCardProps {
   engagement: Engagement;
 }
-const GIT_COMMIT_MODAL_KEY = 'engagement_summary';
+const ACTIVITY_HISTORY_MODAL_KEY = 'activity_history';
 
-export function GitHistoryCard({ engagement }: GitHistoryCardProps) {
+export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
   const { activeEngagement: { commits } = {} } = useEngagements();
   return (
     <>
       <ActivityHistoryDetailsModal
-        isOpen={activeModalKey?.includes(GIT_COMMIT_MODAL_KEY)}
+        isOpen={activeModalKey?.includes(ACTIVITY_HISTORY_MODAL_KEY)}
       />
       <DataCard
         actionButton={() => (
           <Button
             variant={ButtonVariant.link}
-            onClick={() => requestOpen(GIT_COMMIT_MODAL_KEY)}
+            onClick={() => requestOpen(ACTIVITY_HISTORY_MODAL_KEY)}
           >
             View More
           </Button>
@@ -63,10 +63,6 @@ function ActivityListItem({ commit }: { commit: GitCommit }) {
   if (!commit) {
     return <div />;
   } else {
-    return (
-      <TitledDataPoint title={`${commit.author_email}`}>
-        {commit.message}
-      </TitledDataPoint>
-    );
+    return <ActivityHistoryLineItem commit={commit} />;
   }
 }
