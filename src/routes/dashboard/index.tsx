@@ -41,7 +41,7 @@ export function Dashboard() {
             <DashboardDataCard
               icon={TachometerAltIcon}
               numberOfEngagements={numberOfTotalEngagements}
-              title={'Total Engagements'}
+              title={'All Engagements'}
               subtitle={'All available engagements in the system. Including upcoming, active and past ones'}
               url={"/app/engagements/all"}/>
           </GridItem>
