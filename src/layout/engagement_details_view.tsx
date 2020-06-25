@@ -6,7 +6,7 @@ import {
   Text,
   PageSectionVariants,
 } from '@patternfly/react-core';
-import { LaunchMessage } from '../components/launch_alert_banner/launch_alert_banner';
+import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_alert_banner';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 
 export function EngagementDetailsViewTemplate({
@@ -29,7 +29,7 @@ export function EngagementDetailsViewTemplate({
         </TextContent>
       </PageSection>
       <div style={{ marginTop: '1rem' }}>
-        <LaunchMessage onLaunch={launchEngagement} engagement={engagement} />
+        <LaunchAlertBanner onLaunch={launchEngagement} engagement={engagement} />
       </div>
       <PageSection variant={PageSectionVariants.default}>
         {children}

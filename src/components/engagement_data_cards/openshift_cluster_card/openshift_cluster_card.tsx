@@ -64,7 +64,7 @@ export function OpenShiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
-            <TitledDataPoint title="Cloud Provider">
+            <TitledDataPoint title="Cluster Size">
               {engagement?.ocp_cluster_size}
             </TitledDataPoint>
           </GridItem>
