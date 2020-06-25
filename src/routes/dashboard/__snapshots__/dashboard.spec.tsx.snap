@@ -71,7 +71,7 @@ Object {
                         class=""
                         data-pf-content="true"
                       >
-                        Total Engagements
+                        All Engagements
                       </h2>
                     </div>
                     <div
@@ -365,7 +365,7 @@ Object {
                       class=""
                       data-pf-content="true"
                     >
-                      Total Engagements
+                      All Engagements
                     </h2>
                   </div>
                   <div
