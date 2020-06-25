@@ -17,8 +17,7 @@ import { APP_FEATURES } from '../../common/app_features';
 export interface DataCardProps {
   title: string;
   children: any;
-  onActionClick?: () => void;
-  actionButton?: any;
+  actionButton?: React.FunctionComponent;
 }
 
 export function DataCard({
