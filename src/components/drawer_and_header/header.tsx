@@ -1,7 +1,7 @@
 import React from 'react';
-import {UserDropdown} from './user_dropdown';
-import {Link, useLocation} from 'react-router-dom';
-import {Notification} from "./notification";
+import { UserDropdown } from './user_dropdown';
+import { Link, useLocation } from 'react-router-dom';
+import { Notification } from './notification';
 import {
   Brand,
   Nav,
@@ -10,10 +10,10 @@ import {
   PageHeader,
   PageHeaderTools,
   PageHeaderToolsGroup,
-  PageHeaderToolsItem
+  PageHeaderToolsItem,
 } from '@patternfly/react-core';
 
-import {HelpIcon} from '@patternfly/react-icons';
+import { HelpIcon, LightbulbIcon } from '@patternfly/react-icons';
 
 export interface HeaderProps {
   isDrawerOpen: boolean;
@@ -22,12 +22,11 @@ export interface HeaderProps {
 }
 
 export function Header(props: HeaderProps) {
-
   const iconPad: React.CSSProperties = {
     paddingBottom: 0,
     paddingTop: 0,
   };
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   return (
     <PageHeader
       showNavToggle
@@ -43,25 +42,39 @@ export function Header(props: HeaderProps) {
         <PageHeaderTools>
           <PageHeaderToolsGroup>
             <PageHeaderToolsItem>
-              <Notification onNotificationClick={props.onNotificationClick}/>
-            </PageHeaderToolsItem>
-            <PageHeaderToolsItem>
               <Nav theme="dark" variant="horizontal">
                 <NavList>
                   <NavItem
                     id="aboutLink"
-                    itemId={3}
+                    itemId={2}
                     isActive={pathname === '/about'}
                   >
                     <Link style={iconPad} to="/app/about">
-                      <HelpIcon title="About"/>
+                      <HelpIcon title="About" />
                     </Link>
+                  </NavItem>
+                  <NavItem
+                    id="feedback"
+                    itemId={3}
+                    isActive={pathname === '/about'}
+                  >
+                    <Link
+                      to="/app/requestfeature"
+                      title="Feedback and Feature Request"
+                    >
+                      <LightbulbIcon />
+                    </Link>
+                  </NavItem>
+                  <NavItem id="notifications" itemId={4}>
+                    <Notification
+                      onNotificationClick={props.onNotificationClick}
+                    />
                   </NavItem>
                 </NavList>
               </Nav>
             </PageHeaderToolsItem>
             <PageHeaderToolsItem>
-              <UserDropdown/>
+              <UserDropdown />
             </PageHeaderToolsItem>
           </PageHeaderToolsGroup>
         </PageHeaderTools>
