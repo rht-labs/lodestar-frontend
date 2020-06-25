@@ -273,64 +273,6 @@ Object {
                               class="pf-c-title pf-m-lg"
                               style="font-weight: normal;"
                             >
-                              Activity History
-                            </h3>
-                          </div>
-                          <div />
-                        </div>
-                      </div>
-                      <div
-                        class="pf-c-card__body"
-                      >
-                        <div
-                          class="pf-l-grid pf-m-gutter"
-                        >
-                          <div
-                            class="pf-l-grid__item pf-m-12-col"
-                          >
-                            <div />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-1-col"
-                    >
-                      <div
-                        class="pf-l-flex"
-                        style="height: 100%;"
-                      >
-                        <div
-                          class="pf-m-align-self-center"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-12-col"
-              >
-                <article
-                  class="pf-c-card"
-                >
-                  <div
-                    class="pf-l-grid"
-                  >
-                    <div
-                      class="pf-l-grid__item pf-m-11-col"
-                    >
-                      <div
-                        class="pf-c-card__title"
-                      >
-                        <div
-                          class="pf-l-level"
-                        >
-                          <div>
-                            <h3
-                              class="pf-c-title pf-m-lg"
-                              style="font-weight: normal;"
-                            >
                               Points of Contact
                             </h3>
                           </div>
@@ -605,6 +547,64 @@ Object {
                         <div
                           class="pf-l-grid pf-m-gutter"
                         />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-1-col"
+                    >
+                      <div
+                        class="pf-l-flex"
+                        style="height: 100%;"
+                      >
+                        <div
+                          class="pf-m-align-self-center"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                <article
+                  class="pf-c-card"
+                >
+                  <div
+                    class="pf-l-grid"
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-11-col"
+                    >
+                      <div
+                        class="pf-c-card__title"
+                      >
+                        <div
+                          class="pf-l-level"
+                        >
+                          <div>
+                            <h3
+                              class="pf-c-title pf-m-lg"
+                              style="font-weight: normal;"
+                            >
+                              Activity History
+                            </h3>
+                          </div>
+                          <div />
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-card__body"
+                      >
+                        <div
+                          class="pf-l-grid pf-m-gutter"
+                        >
+                          <div
+                            class="pf-l-grid__item pf-m-12-col"
+                          >
+                            <div />
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div
@@ -1149,64 +1149,6 @@ Object {
                             class="pf-c-title pf-m-lg"
                             style="font-weight: normal;"
                           >
-                            Activity History
-                          </h3>
-                        </div>
-                        <div />
-                      </div>
-                    </div>
-                    <div
-                      class="pf-c-card__body"
-                    >
-                      <div
-                        class="pf-l-grid pf-m-gutter"
-                      >
-                        <div
-                          class="pf-l-grid__item pf-m-12-col"
-                        >
-                          <div />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="pf-l-grid__item pf-m-1-col"
-                  >
-                    <div
-                      class="pf-l-flex"
-                      style="height: 100%;"
-                    >
-                      <div
-                        class="pf-m-align-self-center"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-12-col"
-            >
-              <article
-                class="pf-c-card"
-              >
-                <div
-                  class="pf-l-grid"
-                >
-                  <div
-                    class="pf-l-grid__item pf-m-11-col"
-                  >
-                    <div
-                      class="pf-c-card__title"
-                    >
-                      <div
-                        class="pf-l-level"
-                      >
-                        <div>
-                          <h3
-                            class="pf-c-title pf-m-lg"
-                            style="font-weight: normal;"
-                          >
                             Points of Contact
                           </h3>
                         </div>
@@ -1481,6 +1423,64 @@ Object {
                       <div
                         class="pf-l-grid pf-m-gutter"
                       />
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-1-col"
+                  >
+                    <div
+                      class="pf-l-flex"
+                      style="height: 100%;"
+                    >
+                      <div
+                        class="pf-m-align-self-center"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              <article
+                class="pf-c-card"
+              >
+                <div
+                  class="pf-l-grid"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-11-col"
+                  >
+                    <div
+                      class="pf-c-card__title"
+                    >
+                      <div
+                        class="pf-l-level"
+                      >
+                        <div>
+                          <h3
+                            class="pf-c-title pf-m-lg"
+                            style="font-weight: normal;"
+                          >
+                            Activity History
+                          </h3>
+                        </div>
+                        <div />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-card__body"
+                    >
+                      <div
+                        class="pf-l-grid pf-m-gutter"
+                      >
+                        <div
+                          class="pf-l-grid__item pf-m-12-col"
+                        >
+                          <div />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div
