@@ -96,7 +96,7 @@ export function EngagementDetails({
               </FlexItem>
             </Flex>
 
-            {FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD &&
+            {!FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD &&
             <>
               <Flex>
                 <FlexItem spacer={{default: 'spacerSm'}}>
