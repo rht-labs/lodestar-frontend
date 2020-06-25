@@ -25,6 +25,9 @@ export interface Engagement {
   technical_lead_name: string;
   launch?: LaunchData;
   suggested_subdomain?: string;
+  created_by_email: string,
+  created_by_user: string,
+  created_on: Date
 }
 export abstract class Engagement {
   static fromFake(): Engagement {
@@ -51,6 +54,9 @@ export abstract class Engagement {
       start_date: faker.date.recent(),
       technical_lead_email: faker.internet.email(),
       technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      created_by_email: faker.internet.email(),
+      created_by_user: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      created_on: faker.date.recent(),
       launch: faker.random.boolean()
         ? {
             launched_by: faker.name.firstName(),
@@ -84,6 +90,9 @@ export abstract class Engagement {
       technical_lead_email: 'eve@doe.com',
       technical_lead_name: `Eve Doe`,
       launch: null,
+      created_by_email: "dwasinge@redhat.com",
+      created_by_user: "dwasinge",
+      created_on: "2020-06-23T17:46:30.008",
     };
   }
 }

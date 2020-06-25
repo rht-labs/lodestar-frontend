@@ -9,9 +9,11 @@ import {FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD} from "../../common/feature_flags"
 function FirstLine({
                      status,
                      startDate,
+                     createdBy
                    }: {
   status?: EngagementStatus;
   startDate?: Date;
+  createdBy?: string;
 }) {
   if (status === EngagementStatus.upcoming) {
     return (
@@ -19,7 +21,9 @@ function FirstLine({
         <Grid hasGutter>
           <GridItem span={12}>
             Created by:
-            <Link to="#"> Takeshi.K </Link>
+            <Link to="#">
+              {!!createdBy ? (" " + createdBy) : 'TBA'}
+            </Link>
           </GridItem>
           <GridItem>
             Target start date:{' '}
@@ -63,7 +67,9 @@ export function EngagementDetails({
     <>
       <Grid hasGutter>
         <GridItem span={12}>
-          <FirstLine status={status} startDate={engagement?.start_date}/>
+          <FirstLine status={status}
+                     startDate={engagement?.start_date}
+                     createdBy={engagement?.created_by_user}/>
         </GridItem>
         <GridItem span={6}>
           <Flex>
