@@ -42,7 +42,7 @@ export function Dashboard() {
               icon={TachometerAltIcon}
               numberOfEngagements={numberOfTotalEngagements}
               title={'Total Engagements'}
-              subtitle={'Number of all engagements. Including the upcoming, active and past ones.'}
+              subtitle={'All available engagements in the system. Including upcoming, active and past ones'}
               url={"/app/engagements/all"}/>
           </GridItem>
           <GridItem span={3}>
@@ -50,7 +50,7 @@ export function Dashboard() {
               icon={PendingIcon}
               numberOfEngagements={numberOfUpcomingEngagements}
               title={'Upcoming Engagements'}
-              subtitle={'Number of upcoming engagements. The ones that have not been launched yet. '}
+              subtitle={'Upcoming engagements in the future. The ones that have not been launched yet. '}
               url={"/app/engagements/upcoming"}/>
           </GridItem>
           <GridItem span={3}>
@@ -58,7 +58,7 @@ export function Dashboard() {
               icon={OnRunningIcon}
               numberOfEngagements={numberOfActiveEngagements}
               title={'Active Engagements'}
-              subtitle={'Number of engagements that are running at the moment.'}
+              subtitle={'Engagements that are already in progress and running at the moment.'}
               url={"/app/engagements/active"}/>
           </GridItem>
           <GridItem span={3}>
@@ -66,7 +66,7 @@ export function Dashboard() {
               icon={AsleepIcon}
               numberOfEngagements={numberOfPastEngagements}
               title={'Past Engagements'}
-              subtitle={'Number of past engagements. the ones that had been closed or archived.'}
+              subtitle={'Engagements that are finished, closed or archived.'}
               url={"/app/engagements/past"}/>
           </GridItem>
         </Grid>

@@ -54,7 +54,8 @@ function _OMPRouter() {
                           to="/app/engagements/all"
                         />
                         <PrivateRoute path="/app/engagements/all">
-                          <EngagementListRoute title="All Engagements" />
+                          <EngagementListRoute title="All Engagements"
+                                               subtitle="All available engagements in the system. Including upcoming, active and past ones."/>
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/upcoming">
                           <EngagementListRoute
@@ -62,6 +63,7 @@ function _OMPRouter() {
                               allowedStatuses: [EngagementStatus.upcoming],
                             }}
                             title="Upcoming Engagements"
+                            subtitle="Upcoming engagements in the future. The ones that have not been launched yet. "
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/active">
@@ -70,6 +72,7 @@ function _OMPRouter() {
                               allowedStatuses: [EngagementStatus.active],
                             }}
                             title="Active Engagements"
+                            subtitle="Engagements that are already in progress and running at the moment."
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/past">
@@ -78,6 +81,7 @@ function _OMPRouter() {
                               allowedStatuses: [EngagementStatus.past],
                             }}
                             title="Past Engagements"
+                            subtitle="Engagements that are finished, closed or archived."
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/new">
