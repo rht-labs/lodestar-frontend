@@ -7,6 +7,7 @@ import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshif
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
+import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
@@ -23,6 +24,14 @@ export function OpenShiftClusterSummaryCard({
   onChange,
   formOptions,
 }: OpenShiftClusterSummaryCardProps) {
+  const openshiftRequiredFields = [
+    'ocp_cloud_provider_name',
+    'ocp_cloud_provider_region',
+    'ocp_version',
+    'ocp_cluster_size',
+    'ocp_persistent_storage_size',
+    'ocp_sub_domain',
+  ];
   const { requestOpen, activeModalKey } = useModalVisibility();
   return (
     <>
@@ -34,8 +43,17 @@ export function OpenShiftClusterSummaryCard({
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
+        trailingIcon={() =>
+          !engagement || engagement?.launch ? (
+            <div />
+          ) : (
+            <RequiredFieldsWarning requiredFields={openshiftRequiredFields} />
+          )
+        }
         actionButton={() => (
-          <EditButton onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)} />
+          <div>
+            <EditButton onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)} />
+          </div>
         )}
         title="Hosting Environment"
       >

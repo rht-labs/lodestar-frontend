@@ -17,6 +17,7 @@ export interface EngagementContext {
   activeEngagement?: Engagement;
   setActiveEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
+  requiredFields: string[];
   getEngagement: (
     customerName: string,
     projectName: string
@@ -25,6 +26,7 @@ export interface EngagementContext {
   createEngagement: (data: any) => Promise<Engagement>;
   saveEngagement: (data: any) => Promise<void>;
   updateEngagementFormField: (fieldName: string, payload: any) => void;
+  missingRequiredFields: string[];
   isLaunchable: boolean;
   formOptions?: EngagementFormConfig;
   error: any;
@@ -41,6 +43,24 @@ export const EngagementProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
+  const requiredFields = [
+    'customer_contact_email',
+    'customer_contact_name',
+    'customer_name',
+    'end_date',
+    'start_date',
+    'engagement_lead_email',
+    'technical_lead_email',
+    'engagement_lead_name',
+    'technical_lead_name',
+    'ocp_cloud_provider_name',
+    'ocp_cloud_provider_region',
+    'ocp_version',
+    'ocp_cluster_size',
+    'ocp_persistent_storage_size',
+    'ocp_sub_domain',
+    'project_name',
+  ];
   const feedbackContext = useFeedback();
   const { engagementService } = useServiceProviders();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
@@ -88,7 +108,7 @@ export const EngagementProvider = ({
         type: 'ocp_cluster_size',
         payload:
           activeEngagement?.ocp_cluster_size ??
-          formOptions?.openshift_options?.custer_size?.options[0].value,
+          formOptions?.openshift_options?.cluster_size?.options[0].value,
       });
       dispatch({
         type: 'ocp_version',
@@ -170,31 +190,24 @@ export const EngagementProvider = ({
     [engagementService, _addNewEngagement, feedbackContext, engagements]
   );
 
-  const _checkLaunchReady = () => {
-    const requiredFields = [
-      'customer_contact_email',
-      'customer_contact_name',
-      'customer_name',
-      'end_date',
-      'start_date',
-      'engagement_lead_email',
-      'technical_lead_email',
-      'engagement_lead_name',
-      'technical_lead_name',
-      'ocp_cloud_provider_name',
-      'ocp_cloud_provider_region',
-      'ocp_version',
-      'ocp_cluster_size',
-      'ocp_persistent_storage_size',
-      'ocp_sub_domain',
-      'project_name',
-    ];
+  const _checkLaunchReady = useCallback(() => {
     let result = requiredFields.every(
       o =>
-        typeof engagementFormState[o] === 'boolean' || !!engagementFormState[o]
+        typeof engagementFormState[o] === 'boolean' ||
+        typeof engagementFormState[0] === 'number' ||
+        !!engagementFormState[o]
     );
     return result;
-  };
+  }, [engagementFormState, requiredFields]);
+
+  const missingRequiredFields = useCallback(() => {
+    return requiredFields.filter(
+      field =>
+        engagementFormState[field] !== 'boolean' &&
+        engagementFormState[field] !== 'number' &&
+        !engagementFormState[field]
+    );
+  }, [engagementFormState, requiredFields]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -256,6 +269,11 @@ export const EngagementProvider = ({
 
   const launchEngagement = useCallback(
     async (data: any) => {
+      if (!_checkLaunchReady()) {
+        throw Error(
+          'This engagement does not have the required fields to launch'
+        );
+      }
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
@@ -278,12 +296,19 @@ export const EngagementProvider = ({
         );
       }
     },
-    [_updateEngagementInPlace, engagementService, feedbackContext]
+    [
+      _updateEngagementInPlace,
+      _checkLaunchReady,
+      engagementService,
+      feedbackContext,
+    ]
   );
   return (
     <Provider
       value={{
+        requiredFields,
         activeEngagement,
+        missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
         setActiveEngagement,

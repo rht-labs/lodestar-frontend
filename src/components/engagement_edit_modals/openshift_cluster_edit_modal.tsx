@@ -14,7 +14,6 @@ import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version'
 import { SubdomainFormField } from '../engagement_form_fields/subdomain';
 import { PersistentStorageFormField } from '../engagement_form_fields/persistent_storage';
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
-
 export interface OpenShiftClusterEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -30,6 +29,7 @@ export function OpenShiftClusterEditModal({
   isOpen,
   onSave: propsOnSave,
 }: OpenShiftClusterEditModalProps) {
+
   const { requestClose } = useModalVisibility();
   const availableProviders = getAvailableProviders(engagement, formOptions);
   const provider = formOptions?.cloud_options?.providers?.options?.find(
