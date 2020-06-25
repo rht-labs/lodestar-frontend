@@ -16,9 +16,10 @@ export class Apiv1EngagementService extends EngagementService {
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
     const { data: engagementsData } = await this.axios.get(`/engagements`);
-    return engagementsData.map(engagementMap =>
+    const serializedEngagements = engagementsData.map(engagementMap =>
       Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
     );
+    return serializedEngagements;
   }
   async createEngagement(engagementData: any): Promise<Engagement> {
     try {

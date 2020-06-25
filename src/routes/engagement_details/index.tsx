@@ -41,7 +41,7 @@ export function EngagementDetailView(props) {
       } else {
       }
     });
-  });
+  }, [customer_name, project_name, setActiveEngagement, getEngagement]);
   const engagementFormRequestError = error;
 
   const AlertMessage = () => {
@@ -58,17 +58,6 @@ export function EngagementDetailView(props) {
     }
   }, [formOptions, getConfig]);
 
-  useEffect(() => {
-    if (!customer_name || !project_name) {
-      return;
-    }
-    getEngagement(customer_name, project_name).then(engagement => {
-      if (engagement) {
-        setActiveEngagement(engagement);
-      } else {
-      }
-    });
-  });
   const validators = getValidatorsFromFormOptions(formOptions);
 
   return (
