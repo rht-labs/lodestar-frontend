@@ -26,12 +26,14 @@ export interface EngagementListRouteProps {
 }
 
 export function EngagementListRoute(props: EngagementListRouteProps) {
+  const [hasFetched, setHasFetched] = useState<boolean>(false);
   const { engagements: contextEngagements, getEngagements } = useEngagements();
   useEffect(() => {
-    if (contextEngagements === undefined) {
+    if (!hasFetched) {
+      setHasFetched(true);
       getEngagements();
     }
-  }, [contextEngagements, getEngagements]);
+  }, [contextEngagements, getEngagements, hasFetched]);
   const { filterDefinition: propsFilter } = props;
   const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
     props.filterDefinition

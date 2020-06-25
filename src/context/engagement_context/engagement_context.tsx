@@ -110,12 +110,10 @@ export const EngagementProvider = ({
       feedbackContext.showLoader();
       const engagements = await engagementService.fetchEngagements();
       setEngagements(engagements);
-      if (engagements.length > 0) {
-        setActiveEngagement(engagements[0]);
-      }
       feedbackContext.hideLoader();
       return engagements;
     } catch (e) {
+      console.error(e);
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);

@@ -58,22 +58,22 @@ export const engagementFilterFactory = (
 const engagementSorters = (sortOrderMultiplier: number = 1) => {
   return {
     startDate: (a: Engagement, b: Engagement) =>
-      (a.start_date < b.start_date ? -1 : 1) * sortOrderMultiplier,
+      (a.start_date > b.start_date ? 1 : -1) * sortOrderMultiplier,
 
     endDate: (a: Engagement, b: Engagement) =>
-      (a.end_date < b.end_date ? -1 : 1) * sortOrderMultiplier,
+      (a.end_date > b.end_date ? 1 : -1) * sortOrderMultiplier,
 
     customerName: (a: Engagement, b: Engagement) =>
-      (a.customer_name < b.customer_name ? -1 : 1) * sortOrderMultiplier,
+      (a.customer_name > b.customer_name ? 1 : -1) * sortOrderMultiplier,
 
     projectName: (a: Engagement, b: Engagement) =>
-      (a.project_name < b.project_name ? -1 : 11) * sortOrderMultiplier,
+      (a.project_name > b.project_name ? 1 : -1) * sortOrderMultiplier,
   };
 };
 
 /**
  * The Engagement Sort Factory parses the `sort` field of the Engagement filter definition.
- * It returns a single function that can be passed to the `sort` method of an Engagement array. 
+ * It returns a single function that can be passed to the `sort` method of an Engagement array.
  */
 export const engagementSortFactory = ({ sort }: EngagementFilter = {}): ((
   a: Engagement,

@@ -1,7 +1,9 @@
 import faker from 'faker/locale/en_US';
 import { LaunchData } from './launch_data';
+import { GitCommit } from './git_commit';
 export interface Engagement {
   archive_date: Date;
+  commits: GitCommit[];
   customer_contact_email: string;
   customer_contact_name: string;
   customer_name: string;
@@ -30,6 +32,7 @@ export abstract class Engagement {
   static fromFake(): Engagement {
     return {
       archive_date: faker.date.recent(),
+      commits: [],
       customer_contact_email: faker.internet.email(),
       customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       customer_name: faker.company.companyName(),
@@ -63,6 +66,7 @@ export abstract class Engagement {
   static staticFaked(): Engagement {
     return {
       archive_date: new Date(),
+      commits: [],
       customer_contact_email: 'bob@doe.com',
       customer_contact_name: `Bob Doe`,
       customer_name: 'NASA',

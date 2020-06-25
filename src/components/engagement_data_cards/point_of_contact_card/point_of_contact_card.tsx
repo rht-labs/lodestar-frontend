@@ -5,6 +5,7 @@ import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { PointOfContactEditModal } from '../../engagement_edit_modals/point_of_contact_edit_modal';
+import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
@@ -34,8 +35,9 @@ export function PointOfContactCard({
       />
       <DataCard
         title="Points of Contact"
-        isEditable
-        onEdit={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
+        actionButton={() => (
+          <EditButton onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)} />
+        )}
       >
         <Grid hasGutter>
           <GridItem span={4}>

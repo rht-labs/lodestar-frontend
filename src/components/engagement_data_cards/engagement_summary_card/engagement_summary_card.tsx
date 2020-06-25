@@ -6,6 +6,7 @@ import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { format as formatDate } from 'date-fns';
 import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagement_summary_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 
 export interface EngagementSummaryCardProps {
   engagement: Engagement;
@@ -32,8 +33,11 @@ export function EngagementSummaryCard({
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard
-        isEditable
-        onEdit={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
+        actionButton={() => (
+          <EditButton
+            onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
+          />
+        )}
         title="Engagement Summary"
       >
         <Grid hasGutter>

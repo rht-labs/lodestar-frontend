@@ -6,6 +6,7 @@ import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
@@ -33,8 +34,9 @@ export function OpenShiftClusterSummaryCard({
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
-        isEditable
-        onEdit={() => requestOpen(OPENSHIFT_MODAL_KEY)}
+        actionButton={() => (
+          <EditButton onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)} />
+        )}
         title="Hosting Environment"
       >
         <Grid hasGutter>
