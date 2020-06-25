@@ -6,7 +6,7 @@ import { PointOfContactCard } from '../../../components/engagement_data_cards/po
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { OpenShiftClusterSummaryCard } from '../../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
 import { UserCard } from '../../../components/engagement_data_cards/user_card/user_card';
-
+import { GitHistoryCard } from '../../../components/engagement_data_cards/git_history_card/git_history_card';
 export interface EngagementOverviewTabProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
@@ -30,6 +30,9 @@ export function EngagementOverviewTab({
             formOptions={formOptions}
             engagement={engagement}
           />
+        </GridItem>
+        <GridItem span={12}>
+          <GitHistoryCard engagement={engagement} />
         </GridItem>
         <GridItem span={12}>
           <PointOfContactCard

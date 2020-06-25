@@ -2,12 +2,14 @@ import { Serializer } from '../serializer';
 import { Engagement } from '../../schemas/engagement_schema';
 import { parse, format, parseISO, isValid } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
+import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
   private static formatDate(date: Date) {
     return format(date, 'yyyy-MM-dd');
   }
+  private static gitCommitSerializer = new GitCommitJsonSerializer();
   private static parseDate(dateInput: any): Date {
     if (typeof dateInput === 'string') {
       try {
@@ -39,6 +41,10 @@ export class EngagementJsonSerializer
   deserialize(data: object): Engagement {
     return {
       archive_date: data['archive_date'],
+      // commits: (data['commits'] as any[])?.map(d =>
+      //   EngagementJsonSerializer.gitCommitSerializer.deserialize(d)
+      // ),
+      commits: data['commits'],
       customer_contact_email: data['customer_contact_email'],
       customer_contact_name: data['customer_contact_name'],
       customer_name: data['customer_name'],

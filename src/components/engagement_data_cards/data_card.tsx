@@ -6,8 +6,6 @@ import {
   Title,
   Level,
   LevelItem,
-  Button,
-  ButtonVariant,
   Grid,
   GridItem,
   Flex,
@@ -19,15 +17,14 @@ import { APP_FEATURES } from '../../common/app_features';
 export interface DataCardProps {
   title: string;
   children: any;
-  isEditable?: boolean;
-  onEdit?: () => void;
+  onActionClick?: () => void;
+  actionButton?: any;
 }
 
 export function DataCard({
   children,
   title,
-  isEditable = false,
-  onEdit = () => {},
+  actionButton: ActionButton,
 }: DataCardProps) {
   return (
     <Card>
@@ -50,7 +47,7 @@ export function DataCard({
             <FlexItem alignSelf={{ default: 'alignSelfCenter' }}>
               <Feature name={APP_FEATURES.writer}>
                 <div style={{ marginRight: '1rem' }}>
-                  <EditButton onClick={onEdit} isEditable={isEditable} />
+                  {ActionButton ? <ActionButton /> : <div />}
                 </div>
               </Feature>
             </FlexItem>
@@ -59,21 +56,4 @@ export function DataCard({
       </Grid>
     </Card>
   );
-}
-
-function EditButton({
-  isEditable,
-  onClick,
-}: {
-  isEditable: boolean;
-  onClick: () => void;
-}) {
-  if (isEditable) {
-    return (
-      <Button variant={ButtonVariant.link} onClick={onClick}>
-        Edit
-      </Button>
-    );
-  }
-  return <div />;
 }
