@@ -25,6 +25,9 @@ const engagementProperties = [
   'technical_lead_email',
   'technical_lead_name',
   'launch',
+  'created_by_email',
+  'created_by_user',
+  'created_on'
 ];
 
 describe('Engagement Schema', () => {

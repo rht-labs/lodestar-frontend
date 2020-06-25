@@ -1,35 +1,75 @@
-import React from 'react';
-import {
-  PageSection,
-  PageSectionVariants,
-  Title,
-  TextContent,
-} from '@patternfly/react-core';
+import React, {useEffect} from 'react';
+import {Grid, GridItem, PageSection, PageSectionVariants, Text, TextContent, Title,} from '@patternfly/react-core';
+import {DashboardDataCard} from "../../components/dashboard_data_cards/dashboard_data_card";
+import {AsleepIcon, OnRunningIcon, PendingIcon, TachometerAltIcon} from "@patternfly/react-icons";
+import {useEngagements} from "../../context/engagement_context/engagement_hook";
+import {EngagementStatus} from "../../schemas/engagement_schema";
+import {engagementFilterFactory} from '../../common/engagement_filter_factory';
+
 export function Dashboard() {
+
+  const { engagements, getEngagements } = useEngagements();
+
+  useEffect(() => {
+    if (engagements === undefined) {
+      getEngagements();
+    }
+  }, [engagements, getEngagements]);
+
+  const numberOfTotalEngagements = engagements?.length;
+  const numberOfUpcomingEngagements = engagements?.filter(
+    engagementFilterFactory({allowedStatuses: [EngagementStatus.upcoming]})
+  ).length;
+  const numberOfActiveEngagements = engagements?.filter(
+    engagementFilterFactory({allowedStatuses: [EngagementStatus.active]})
+  ).length;
+  const numberOfPastEngagements = engagements?.filter(
+    engagementFilterFactory({allowedStatuses: [EngagementStatus.past]})
+  ).length;
+
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
           <Title headingLevel="h1">Dashboard</Title>
+          <Text component="p">This dashboard gives you an overview of all engagements and beyond.</Text>
         </TextContent>
       </PageSection>
       <PageSection>
-        <h1>Dashboard</h1>
-        <p>
-          This is a super fancy dashboard where people mine data about all of
-          the amazing engagements taking place in the Labs Universe.
-        </p>
-        <p>
-          <b>If you squint really hard, you can see it!!!</b>
-        </p>
-        <p>
-          Please make a selection from the nav menu (top of screen -
-          house/list/cog - hold over to see tooltip)
-        </p>
-        <p>
-          Select the raised hand to be taken to the feedback form to report any
-          issues, share thoughts or provide suggestions.
-        </p>
+        <Grid hasGutter>
+          <GridItem span={3}>
+            <DashboardDataCard
+              icon={TachometerAltIcon}
+              numberOfEngagements={numberOfTotalEngagements}
+              title={'All Engagements'}
+              subtitle={'All available engagements in the system. Including upcoming, active and past ones'}
+              url={"/app/engagements/all"}/>
+          </GridItem>
+          <GridItem span={3}>
+            <DashboardDataCard
+              icon={PendingIcon}
+              numberOfEngagements={numberOfUpcomingEngagements}
+              title={'Upcoming Engagements'}
+              subtitle={'Upcoming engagements in the future. The ones that have not been launched yet. '}
+              url={"/app/engagements/upcoming"}/>
+          </GridItem>
+          <GridItem span={3}>
+            <DashboardDataCard
+              icon={OnRunningIcon}
+              numberOfEngagements={numberOfActiveEngagements}
+              title={'Active Engagements'}
+              subtitle={'Engagements that are already in progress and running at the moment.'}
+              url={"/app/engagements/active"}/>
+          </GridItem>
+          <GridItem span={3}>
+            <DashboardDataCard
+              icon={AsleepIcon}
+              numberOfEngagements={numberOfPastEngagements}
+              title={'Past Engagements'}
+              subtitle={'Engagements that are finished, closed or archived.'}
+              url={"/app/engagements/past"}/>
+          </GridItem>
+        </Grid>
       </PageSection>
     </>
   );

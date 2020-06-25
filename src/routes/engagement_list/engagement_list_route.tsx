@@ -23,6 +23,7 @@ export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
   filterDefinition?: EngagementFilter;
   title: string;
+  subtitle: string;
 }
 
 export function EngagementListRoute(props: EngagementListRouteProps) {
@@ -52,6 +53,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   ).sort(sorter);
 
   const title = props.title ?? 'Engagements';
+  const subtitle = props.subtitle ?? '';
   const history = useHistory();
   const handleChange = useCallback(
     (propsFilter: EngagementFilter) => {
@@ -66,6 +68,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
           <FlexItem>
             <TextContent>
               <Text component="h1">{title}</Text>
+              <Text component="p">{subtitle}</Text>
             </TextContent>
           </FlexItem>
           <FlexItem>

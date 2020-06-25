@@ -1,29 +1,19 @@
 import React from 'react';
-import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
-import { differenceInWeeks, format as formatDate, isValid } from 'date-fns';
-import {
-  Flex,
-  FlexItem,
-  Grid,
-  GridItem,
-  Tooltip,
-  TooltipPosition,
-} from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
-import {
-  ClipboardCheckIcon,
-  CodeBranchIcon,
-  CubeIcon,
-  OutlinedClockIcon,
-  UserIcon,
-} from '@patternfly/react-icons';
+import {Engagement, EngagementStatus} from '../../schemas/engagement_schema';
+import {differenceInWeeks, format as formatDate, isValid} from 'date-fns';
+import {Flex, FlexItem, Grid, GridItem, Tooltip, TooltipPosition,} from '@patternfly/react-core';
+import {Link} from 'react-router-dom';
+import {ClipboardCheckIcon, CodeBranchIcon, CubeIcon, OutlinedClockIcon, UserIcon,} from '@patternfly/react-icons';
+import {FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD} from "../../common/feature_flags";
 
 function FirstLine({
-  status,
-  startDate,
-}: {
+                     status,
+                     startDate,
+                     createdBy
+                   }: {
   status?: EngagementStatus;
   startDate?: Date;
+  createdBy?: string;
 }) {
   if (status === EngagementStatus.upcoming) {
     return (
@@ -31,7 +21,9 @@ function FirstLine({
         <Grid hasGutter>
           <GridItem span={12}>
             Created by:
-            <Link to="#"> Takeshi.K </Link>
+            <Link to="#">
+              {!!createdBy ? (" " + createdBy) : 'TBA'}
+            </Link>
           </GridItem>
           <GridItem>
             Target start date:{' '}
@@ -53,9 +45,9 @@ function FirstLine({
 }
 
 function DurationInWeeks({
-  startDate,
-  endDate,
-}: {
+                           startDate,
+                           endDate,
+                         }: {
   startDate?: Date;
   endDate?: Date;
 }) {
@@ -65,9 +57,9 @@ function DurationInWeeks({
 }
 
 export function EngagementDetails({
-  engagement,
-  status,
-}: {
+                                    engagement,
+                                    status,
+                                  }: {
   engagement?: Engagement;
   status?: EngagementStatus;
 }) {
@@ -75,29 +67,31 @@ export function EngagementDetails({
     <>
       <Grid hasGutter>
         <GridItem span={12}>
-          <FirstLine status={status} startDate={engagement?.start_date} />
+          <FirstLine status={status}
+                     startDate={engagement?.start_date}
+                     createdBy={engagement?.created_by_user}/>
         </GridItem>
         <GridItem span={6}>
           <Flex>
             <Flex>
-              <FlexItem spacer={{ default: 'spacerSm' }}>
+              <FlexItem spacer={{default: 'spacerSm'}}>
                 <Tooltip
                   position={TooltipPosition.bottom}
                   content={'Number of people in this engagement'}
                 >
-                  <UserIcon />
+                  <UserIcon/>
                 </Tooltip>
               </FlexItem>
               <FlexItem>{engagement?.engagement_users?.length || 0}</FlexItem>
             </Flex>
 
             <Flex>
-              <FlexItem spacer={{ default: 'spacerSm' }}>
+              <FlexItem spacer={{default: 'spacerSm'}}>
                 <Tooltip
                   position={TooltipPosition.bottom}
                   content={'Number of weeks for this engagement'}
                 >
-                  <OutlinedClockIcon />
+                  <OutlinedClockIcon/>
                 </Tooltip>
               </FlexItem>
               <FlexItem>
@@ -108,57 +102,61 @@ export function EngagementDetails({
               </FlexItem>
             </Flex>
 
-            <Flex>
-              <FlexItem spacer={{ default: 'spacerSm' }}>
-                <Tooltip
-                  position={TooltipPosition.bottom}
-                  content={'Number of available reports'}
-                >
-                  <ClipboardCheckIcon />
-                </Tooltip>
-              </FlexItem>
-              <FlexItem>-</FlexItem>
-            </Flex>
+            {!FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD &&
+            <>
+              <Flex>
+                <FlexItem spacer={{default: 'spacerSm'}}>
+                  <Tooltip
+                    position={TooltipPosition.bottom}
+                    content={'Number of available reports'}
+                  >
+                    <ClipboardCheckIcon/>
+                  </Tooltip>
+                </FlexItem>
+                <FlexItem>-</FlexItem>
+              </Flex>
 
-            <Flex>
-              <FlexItem spacer={{ default: 'spacerSm' }}>
-                <Tooltip
-                  position={TooltipPosition.bottom}
-                  content={'Number of commits'}
-                >
-                  <CodeBranchIcon />
-                </Tooltip>
-              </FlexItem>
-              <FlexItem>-</FlexItem>
-            </Flex>
+              <Flex>
+                <FlexItem spacer={{default: 'spacerSm'}}>
+                  <Tooltip
+                    position={TooltipPosition.bottom}
+                    content={'Number of commits'}
+                  >
+                    <CodeBranchIcon/>
+                  </Tooltip>
+                </FlexItem>
+                <FlexItem>-</FlexItem>
+              </Flex>
 
-            <Flex>
-              <FlexItem spacer={{ default: 'spacerSm' }}>
-                <Tooltip
-                  position={TooltipPosition.bottom}
-                  content={'Number of repositories'}
-                >
-                  <CubeIcon />
-                </Tooltip>
-              </FlexItem>
-              <FlexItem>-</FlexItem>
-            </Flex>
+              <Flex>
+                <FlexItem spacer={{default: 'spacerSm'}}>
+                  <Tooltip
+                    position={TooltipPosition.bottom}
+                    content={'Number of repositories'}
+                  >
+                    <CubeIcon/>
+                  </Tooltip>
+                </FlexItem>
+                <FlexItem>-</FlexItem>
+              </Flex>
+            </>
+            }
             <Flex>
               <FlexItem>
-                <EngagementStatusText status={status} />
+                <EngagementStatusText status={status}/>
               </FlexItem>
             </Flex>
           </Flex>
         </GridItem>
         <GridItem span={6}>
-          Updated 2 days ago: Section <b>Users</b>
+          Updated X days ago
         </GridItem>
       </Grid>
     </>
   );
 }
 
-const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
+const EngagementStatusText = ({status}: { status: EngagementStatus }) => {
   const getEngagementStatusText = () => {
     if (status === EngagementStatus.active) {
       return 'Active';
@@ -172,18 +170,18 @@ const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
   const getStatusColor = (status?: EngagementStatus) => {
     switch (status) {
       case EngagementStatus.upcoming: {
-        return '#FF4500';
+        return '#EC7A08';
       }
       case EngagementStatus.active: {
-        return '#228B22';
+        return '#6CA100';
       }
       default: {
-        return '#C0C0C0';
+        return '#B8BBBE';
       }
     }
   };
   return (
-    <b style={{ color: getStatusColor(status) }}>
+    <b style={{color: getStatusColor(status)}}>
       {getEngagementStatusText().toUpperCase()}
     </b>
   );
