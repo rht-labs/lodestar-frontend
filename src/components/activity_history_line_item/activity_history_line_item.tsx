@@ -14,8 +14,7 @@ export function ActivityHistoryLineItem({ commit }: { commit: GitCommit }) {
     <p>
       <span>Updated by&nbsp;</span>
       <b>{commit.author_name}&nbsp;</b>
-      <b>{dateText}:&nbsp;</b>
-      <span>{commit.message}</span>
+      <b>{dateText}</b>
     </p>
   );
 }

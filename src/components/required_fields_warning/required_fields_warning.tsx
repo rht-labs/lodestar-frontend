@@ -18,7 +18,7 @@ export function RequiredFieldsWarning({
   }
   return (
     <Tooltip content={`Missing required fields: ${neededFields.join(', ')}`}>
-      <ExclamationTriangleIcon />
+      <ExclamationTriangleIcon color="#EC7A08" />
     </Tooltip>
   );
 }
