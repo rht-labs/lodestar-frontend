@@ -29,6 +29,7 @@ export function CloudProviderFormField({
           !hasFeature(APP_FEATURES.writer) ||
           !!engagement?.launch
         }
+        isRequired
         value={engagement?.ocp_cloud_provider_name || ''}
         onChange={e => onChange('ocp_cloud_provider_name', e)}
       >
