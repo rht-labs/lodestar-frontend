@@ -7,6 +7,7 @@ import { format as formatDate } from 'date-fns';
 import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagement_summary_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
+import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 
 export interface EngagementSummaryCardProps {
   engagement: Engagement;
@@ -23,6 +24,12 @@ export function EngagementSummaryCard({
   onSave,
 }: EngagementSummaryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
+  const engagementSummaryRequiredFields = [
+    'customer_name',
+    'end_date',
+    'start_date',
+    'project_name',
+  ];
   return (
     <>
       <EngagementSummaryEditModal
@@ -34,9 +41,14 @@ export function EngagementSummaryCard({
       />
       <DataCard
         actionButton={() => (
-          <EditButton
-            onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
-          />
+          <div>
+            <RequiredFieldsWarning
+              requiredFields={engagementSummaryRequiredFields}
+            />
+            <EditButton
+              onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
+            />
+          </div>
         )}
         title="Engagement Summary"
       >
