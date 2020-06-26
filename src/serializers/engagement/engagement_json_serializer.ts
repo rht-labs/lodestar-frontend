@@ -3,6 +3,7 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { parse, format, parseISO, isValid } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
+import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
@@ -10,6 +11,7 @@ export class EngagementJsonSerializer
     return format(date, 'yyyy-MM-dd');
   }
   private static gitCommitSerializer = new GitCommitJsonSerializer();
+  private static clusterStatusSerializer = new ClusterStatusJsonSerializer();
   private static parseDate(dateInput: any): Date {
     if (typeof dateInput === 'string') {
       try {
@@ -72,6 +74,10 @@ export class EngagementJsonSerializer
       technical_lead_email: data['technical_lead_email'],
       technical_lead_name: data['technical_lead_name'],
       launch: this.parseLaunchData(data['launch']),
+      status: EngagementJsonSerializer.clusterStatusSerializer.deserialize(
+        data['status']
+      ),
+      creation_details: data['creation_details'],
     };
   }
 
