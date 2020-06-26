@@ -29,7 +29,6 @@ export function OpenShiftClusterEditModal({
   isOpen,
   onSave: propsOnSave,
 }: OpenShiftClusterEditModalProps) {
-
   const { requestClose } = useModalVisibility();
   const availableProviders = getAvailableProviders(engagement, formOptions);
   const provider = formOptions?.cloud_options?.providers?.options?.find(
