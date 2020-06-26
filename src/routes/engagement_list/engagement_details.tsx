@@ -18,7 +18,8 @@ import {
   UserIcon,
 } from '@patternfly/react-icons';
 import { ActivityHistoryLineItem } from '../../components/activity_history_line_item/activity_history_line_item';
-import { FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD } from '../../common/feature_flags';
+import { APP_FEATURES } from '../../common/app_features';
+import { Feature } from '../../components/feature';
 
 function FirstLine({
   status,
@@ -115,8 +116,7 @@ export function EngagementDetails({
                 />
               </FlexItem>
             </Flex>
-
-            {!FEATURE_FLAG_ICONS_IN_ENGAGEMENT_CARD && (
+            <Feature name={APP_FEATURES.engagementCardIcons}>
               <>
                 <Flex>
                   <FlexItem spacer={{ default: 'spacerSm' }}>
@@ -154,7 +154,7 @@ export function EngagementDetails({
                   <FlexItem>-</FlexItem>
                 </Flex>
               </>
-            )}
+            </Feature>
             <Flex>
               <FlexItem>
                 <EngagementStatusText status={status} />
