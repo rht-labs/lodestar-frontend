@@ -26,6 +26,7 @@ const engagementProperties = [
   'technical_lead_name',
   'launch',
   'creation_details',
+  'status',
 ];
 
 describe('Engagement Schema', () => {
