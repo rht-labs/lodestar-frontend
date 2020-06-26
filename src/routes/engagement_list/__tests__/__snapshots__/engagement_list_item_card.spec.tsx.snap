@@ -45,12 +45,11 @@ Object {
               <li
                 class="pf-c-nav__item"
               >
-                <a
-                  class="pf-c-nav__link"
-                  style="font-weight: bold;"
+                <h2
+                  class="pf-c-title pf-m-xl pf-c-nav__link"
                 >
                   Test Title
-                </a>
+                </h2>
               </li>
             </ul>
             <button
@@ -74,6 +73,10 @@ Object {
               </svg>
             </button>
           </nav>
+          <h6
+            class="pf-c-title pf-m-md"
+            style="margin: 0px 1rem;"
+          />
         </div>
         <div
           class="pf-c-card__body"
@@ -147,12 +150,11 @@ Object {
             <li
               class="pf-c-nav__item"
             >
-              <a
-                class="pf-c-nav__link"
-                style="font-weight: bold;"
+              <h2
+                class="pf-c-title pf-m-xl pf-c-nav__link"
               >
                 Test Title
-              </a>
+              </h2>
             </li>
           </ul>
           <button
@@ -176,6 +178,10 @@ Object {
             </svg>
           </button>
         </nav>
+        <h6
+          class="pf-c-title pf-m-md"
+          style="margin: 0px 1rem;"
+        />
       </div>
       <div
         class="pf-c-card__body"

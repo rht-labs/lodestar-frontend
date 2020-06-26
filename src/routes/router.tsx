@@ -27,7 +27,6 @@ function _OMPRouter() {
   return (
     <Switch>
       <Route path="/" exact component={LandingPage} />
-      <Route path="/feature-request" component={FeatureRequest} />
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
@@ -44,6 +43,10 @@ function _OMPRouter() {
                 <Switch>
                   {/* else, show an authorized route */}
                   <Redirect exact from="/app" to="/app/dashboard" />
+                  <Route
+                    path="/app/requestfeature"
+                    component={FeatureRequest}
+                  />
                   <PrivateRoute path="/app/dashboard" component={Dashboard} />
                   <PrivateRoute path="/app/engagements">
                     <ModalVisibilityProvider>

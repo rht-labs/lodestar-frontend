@@ -68,6 +68,11 @@ export function EngagementSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
+            <TitledDataPoint title="Location">
+              {engagement.location}
+            </TitledDataPoint>
+          </GridItem>
+          <GridItem span={4}>
             <TitledDataPoint title="Start Date">
               {engagement?.start_date
                 ? formatDate(engagement?.start_date, 'MMM dd, yyyy')
@@ -84,11 +89,6 @@ export function EngagementSummaryCard({
           <GridItem span={4}>
             <TitledDataPoint title="Description">
               {engagement?.description}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem span={4}>
-            <TitledDataPoint title="Location">
-              {engagement.location}
             </TitledDataPoint>
           </GridItem>
         </Grid>
