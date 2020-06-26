@@ -192,6 +192,21 @@ Object {
                             data-pf-content="true"
                             style="margin-bottom: 0.1rem;"
                           >
+                            Location
+                          </h6>
+                        </div>
+                      </div>
+                      <div
+                        class="pf-l-grid__item pf-m-4-col"
+                      >
+                        <div
+                          class="pf-c-content"
+                        >
+                          <h6
+                            class=""
+                            data-pf-content="true"
+                            style="margin-bottom: 0.1rem;"
+                          >
                             Start Date
                           </h6>
                         </div>
@@ -223,21 +238,6 @@ Object {
                             style="margin-bottom: 0.1rem;"
                           >
                             Description
-                          </h6>
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-4-col"
-                      >
-                        <div
-                          class="pf-c-content"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Location
                           </h6>
                         </div>
                       </div>
@@ -999,6 +999,21 @@ Object {
                           data-pf-content="true"
                           style="margin-bottom: 0.1rem;"
                         >
+                          Location
+                        </h6>
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-4-col"
+                    >
+                      <div
+                        class="pf-c-content"
+                      >
+                        <h6
+                          class=""
+                          data-pf-content="true"
+                          style="margin-bottom: 0.1rem;"
+                        >
                           Start Date
                         </h6>
                       </div>
@@ -1030,21 +1045,6 @@ Object {
                           style="margin-bottom: 0.1rem;"
                         >
                           Description
-                        </h6>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-4-col"
-                    >
-                      <div
-                        class="pf-c-content"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Location
                         </h6>
                       </div>
                     </div>

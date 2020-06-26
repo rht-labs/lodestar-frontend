@@ -99,6 +99,27 @@ Object {
                   data-pf-content="true"
                   style="margin-bottom: 0.1rem;"
                 >
+                  Location
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Nashville, TN
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-4-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
                   Start Date
                 </h6>
                 <p
@@ -148,27 +169,6 @@ Object {
                   data-pf-content="true"
                 >
                   It's rocket science
-                </p>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-4-col"
-            >
-              <div
-                class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  Location
-                </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  Nashville, TN
                 </p>
               </div>
             </div>
@@ -273,6 +273,27 @@ Object {
                 data-pf-content="true"
                 style="margin-bottom: 0.1rem;"
               >
+                Location
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Nashville, TN
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-4-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
                 Start Date
               </h6>
               <p
@@ -322,27 +343,6 @@ Object {
                 data-pf-content="true"
               >
                 It's rocket science
-              </p>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-4-col"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                Location
-              </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                Nashville, TN
               </p>
             </div>
           </div>

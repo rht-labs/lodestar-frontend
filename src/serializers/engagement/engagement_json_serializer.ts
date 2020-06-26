@@ -13,7 +13,12 @@ export class EngagementJsonSerializer
   private static parseDate(dateInput: any): Date {
     if (typeof dateInput === 'string') {
       try {
-        const parsedDate = parse(dateInput, 'yyyy-MM-dd', new Date());
+        let parsedDate;
+        parsedDate = parseISO(dateInput);
+        if (isValid(parsedDate)) {
+          return parsedDate;
+        }
+        parsedDate = parse(dateInput, 'yyyy-MM-dd', new Date());
         if (isValid(parsedDate)) {
           return parsedDate;
         }

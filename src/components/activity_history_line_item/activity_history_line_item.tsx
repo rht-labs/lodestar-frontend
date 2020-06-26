@@ -6,9 +6,12 @@ export function ActivityHistoryLineItem({ commit }: { commit: GitCommit }) {
   const difference = differenceInDays(new Date(), commit?.committed_date);
   let dateText = '';
   if (difference) {
-    dateText = `${difference} days ago`;
+    dateText = `${difference} day${difference > 1 ? 's' : ''} ago`;
   } else {
     dateText = 'today';
+  }
+  if (!commit) {
+    return <div />;
   }
   return (
     <p>
