@@ -1,3 +1,4 @@
+import faker from 'faker';
 export enum Severity {
   info,
   warning,
@@ -14,8 +15,8 @@ export abstract class SystemMessage {
   static fromFake(): SystemMessage {
     return {
       severity: Severity.info,
-      message: fakerStatic.lorem.sentence(),
-      updated: fakerStatic.date.recent(),
+      message: faker.lorem.sentence(),
+      updated: faker.date.recent(),
     };
   }
   static staticFaked(): SystemMessage {

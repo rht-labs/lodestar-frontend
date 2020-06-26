@@ -1,5 +1,6 @@
 import { Subsystem } from './subsystem';
 import { SystemMessage } from './system_message';
+import faker from 'faker';
 
 export enum HealthStatus {
   yellow,
@@ -20,7 +21,7 @@ export interface ClusterStatus {
 export abstract class ClusterStatus {
   static fromFake(): ClusterStatus {
     return {
-      overall_status: HealthStatus[HealthStatus[fakerStatic.random.number(2)]],
+      overall_status: HealthStatus[HealthStatus[faker.random.number(2)]],
       messages: Array.apply(null, new Array(4)).map(x =>
         SystemMessage.fromFake()
       ) as SystemMessage[],
