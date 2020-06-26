@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ExclamationTriangleIcon,
-  CheckCircleIcon,
+  CheckCircleIcon, ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 import {HealthStatus} from "../../../schemas/cluster_status";
 
@@ -14,11 +14,11 @@ export function StatusIcon({
 
   switch(status){
     case HealthStatus.green:
-      return <ExclamationTriangleIcon color="#EC7A08" />
+      return <ExclamationTriangleIcon color='#EC7A08' />;
     case HealthStatus.yellow:
-      return <CheckCircleIcon color="green" />
+      return <CheckCircleIcon color="green"/>;
     case HealthStatus.red:
-      return <ExclamationTriangleIcon color="red" />
+      return <ExclamationCircleIcon color="#C9190B" />;
     default:
       return <div/>
   }

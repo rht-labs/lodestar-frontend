@@ -12,11 +12,12 @@ export interface Subsystem {
   api: string;
   messages: SystemMessage[];
 }
+const fakeSubsystemNames = ['Openshift Cluster', 'Atlassian', 'IBM Cloud', 'Mural', 'RH SSO'];
 
 export abstract class Subsystem {
   static fromFake(): Subsystem {
     return {
-      name: faker.name.firstName(),
+      name: fakeSubsystemNames[faker.random.number(4)],
       status: HealthStatus[HealthStatus[faker.random.number(2)]],
       state: ClusterState[ClusterState[faker.random.number(1)]],
       info: faker.lorem.sentence(),
@@ -28,7 +29,7 @@ export abstract class Subsystem {
   }
   static staticFaked(): Subsystem {
     return {
-      name: 'openshift',
+      name: 'Openshift',
       status: HealthStatus.yellow,
       state: ClusterState.provisioning,
       info: 'Deployment In Progress',

@@ -89,7 +89,7 @@ Object {
                 class=""
               >
                 <b
-                  style="color: rgb(108, 161, 0);"
+                  style="color: green;"
                 >
                   ACTIVE
                 </b>
@@ -190,7 +190,7 @@ Object {
               class=""
             >
               <b
-                style="color: rgb(108, 161, 0);"
+                style="color: green;"
               >
                 ACTIVE
               </b>
