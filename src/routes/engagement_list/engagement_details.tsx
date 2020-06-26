@@ -17,6 +17,7 @@ import {
   OutlinedClockIcon,
   UserIcon,
 } from '@patternfly/react-icons';
+import { ActivityHistoryLineItem } from '../../components/activity_history_line_item/activity_history_line_item';
 
 function FirstLine({
   status,
@@ -151,7 +152,7 @@ export function EngagementDetails({
           </Flex>
         </GridItem>
         <GridItem span={6}>
-          Updated 2 days ago: Section <b>Users</b>
+          <ActivityHistoryLineItem commit={engagement?.commits?.[0]} />
         </GridItem>
       </Grid>
     </>

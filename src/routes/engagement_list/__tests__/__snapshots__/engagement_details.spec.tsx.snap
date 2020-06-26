@@ -181,10 +181,7 @@ Object {
         <div
           class="pf-l-grid__item pf-m-6-col"
         >
-          Updated 2 days ago: Section 
-          <b>
-            Users
-          </b>
+          <div />
         </div>
       </div>
     </div>
@@ -366,10 +363,7 @@ Object {
       <div
         class="pf-l-grid__item pf-m-6-col"
       >
-        Updated 2 days ago: Section 
-        <b>
-          Users
-        </b>
+        <div />
       </div>
     </div>
   </div>,
@@ -608,10 +602,7 @@ Object {
         <div
           class="pf-l-grid__item pf-m-6-col"
         >
-          Updated 2 days ago: Section 
-          <b>
-            Users
-          </b>
+          <div />
         </div>
       </div>
     </div>
@@ -793,10 +784,7 @@ Object {
       <div
         class="pf-l-grid__item pf-m-6-col"
       >
-        Updated 2 days ago: Section 
-        <b>
-          Users
-        </b>
+        <div />
       </div>
     </div>
   </div>,
@@ -1050,10 +1038,7 @@ Object {
         <div
           class="pf-l-grid__item pf-m-6-col"
         >
-          Updated 2 days ago: Section 
-          <b>
-            Users
-          </b>
+          <div />
         </div>
       </div>
     </div>
@@ -1250,10 +1235,7 @@ Object {
       <div
         class="pf-l-grid__item pf-m-6-col"
       >
-        Updated 2 days ago: Section 
-        <b>
-          Users
-        </b>
+        <div />
       </div>
     </div>
   </div>,
