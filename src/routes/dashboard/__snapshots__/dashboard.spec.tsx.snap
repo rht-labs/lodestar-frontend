@@ -143,7 +143,7 @@ Object {
                     <div
                       class="pf-c-empty-state__body"
                     >
-                      Upcoming engagements in the future. The ones that have not been launched yet. 
+                      Upcoming engagements in the future.
                     </div>
                     <div
                       class="pf-c-empty-state__primary"
@@ -437,7 +437,7 @@ Object {
                   <div
                     class="pf-c-empty-state__body"
                   >
-                    Upcoming engagements in the future. The ones that have not been launched yet. 
+                    Upcoming engagements in the future.
                   </div>
                   <div
                     class="pf-c-empty-state__primary"
