@@ -83,7 +83,7 @@ export function EngagementDetails({
           <FirstLine
             status={status}
             startDate={engagement?.start_date}
-            createdBy={engagement?.created_by_user}
+            createdBy={engagement?.creation_details?.created_by_user}
           />
         </GridItem>
         <GridItem span={6}>
