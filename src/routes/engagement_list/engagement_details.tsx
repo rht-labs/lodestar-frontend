@@ -187,7 +187,7 @@ const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
         return '#EC7A08';
       }
       case EngagementStatus.active: {
-        return '#6CA100';
+        return 'green';
       }
       default: {
         return '#B8BBBE';

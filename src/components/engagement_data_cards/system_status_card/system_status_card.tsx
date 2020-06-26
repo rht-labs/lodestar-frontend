@@ -1,14 +1,11 @@
 import React from 'react';
 import {DataCard} from '../data_card';
-import {Engagement} from '../../../schemas/engagement_schema';
 import {Button, ButtonVariant, Grid, GridItem} from '@patternfly/react-core';
 import {SubsystemDetails} from "./subsystem_details";
+import {useEngagements} from "../../../context/engagement_context/engagement_hook";
 
-export interface SystemStatusCardProps {
-  engagement: Engagement;
-}
-
-export function SystemStatusCard({engagement}: SystemStatusCardProps) {
+export function SystemStatusCard() {
+  const { activeEngagement } = useEngagements();
   return (
     <>
       <DataCard
@@ -22,7 +19,7 @@ export function SystemStatusCard({engagement}: SystemStatusCardProps) {
         title="System Status"
       >
         <Grid hasGutter>
-          {engagement?.status?.subsystems.map( subsystem => (
+          {activeEngagement?.status?.subsystems.map( subsystem => (
             <GridItem span={2}>
               <SubsystemDetails
                 title={subsystem.name}
