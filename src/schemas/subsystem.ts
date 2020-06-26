@@ -17,13 +17,13 @@ export abstract class Subsystem {
   static fromFake(): Subsystem {
     return {
       name: faker.name.firstName(),
-      status: HealthStatus[HealthStatus[fakerStatic.random.number(2)]],
-      state: ClusterState[ClusterState[fakerStatic.random.number(1)]],
-      info: fakerStatic.lorem.sentence(),
+      status: HealthStatus[HealthStatus[faker.random.number(2)]],
+      state: ClusterState[ClusterState[faker.random.number(1)]],
+      info: faker.lorem.sentence(),
       updated: faker.date.recent(),
       web_console: faker.internet.url(),
       api: faker.internet.url(),
-      messages: SystemMessage[SystemMessage[fakerStatic.random.number(3)]],
+      messages: SystemMessage[SystemMessage[faker.random.number(3)]],
     };
   }
   static staticFaked(): Subsystem {
