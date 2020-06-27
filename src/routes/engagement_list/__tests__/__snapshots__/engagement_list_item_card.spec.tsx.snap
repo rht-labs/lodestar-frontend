@@ -47,6 +47,7 @@ Object {
               >
                 <h2
                   class="pf-c-title pf-m-xl pf-c-nav__link"
+                  style="cursor: pointer;"
                 >
                   Test Title
                 </h2>
@@ -152,6 +153,7 @@ Object {
             >
               <h2
                 class="pf-c-title pf-m-xl pf-c-nav__link"
+                style="cursor: pointer;"
               >
                 Test Title
               </h2>
