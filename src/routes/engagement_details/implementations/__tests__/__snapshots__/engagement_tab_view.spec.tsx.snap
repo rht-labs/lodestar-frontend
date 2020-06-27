@@ -416,6 +416,7 @@ Object {
                           >
                             Cloud Provider
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -461,6 +462,7 @@ Object {
                           >
                             Cloud Region
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -718,6 +720,7 @@ Object {
                           >
                             Cloud Provider
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -763,6 +766,7 @@ Object {
                           >
                             Cloud Region
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -1223,6 +1227,7 @@ Object {
                         >
                           Cloud Provider
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1268,6 +1273,7 @@ Object {
                         >
                           Cloud Region
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1525,6 +1531,7 @@ Object {
                         >
                           Cloud Provider
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1570,6 +1577,7 @@ Object {
                         >
                           Cloud Region
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
