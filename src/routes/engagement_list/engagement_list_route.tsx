@@ -22,8 +22,8 @@ import { EngagementFilterBar } from '../../components/engagement_filter_bar/enga
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
   filterDefinition?: EngagementFilter;
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
 }
 
 export function EngagementListRoute(props: EngagementListRouteProps) {

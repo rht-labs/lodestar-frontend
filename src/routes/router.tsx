@@ -57,16 +57,14 @@ function _OMPRouter() {
                           to="/app/engagements/all"
                         />
                         <PrivateRoute path="/app/engagements/all">
-                          <EngagementListRoute title="All Engagements"
-                                               subtitle="All available engagements in the system. Including upcoming, active and past ones."/>
+                          <EngagementListRoute title="Engagements" />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/upcoming">
                           <EngagementListRoute
                             filterDefinition={{
                               allowedStatuses: [EngagementStatus.upcoming],
                             }}
-                            title="Upcoming Engagements"
-                            subtitle="Upcoming engagements in the future. The ones that have not been launched yet. "
+                            title="Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/active">
@@ -74,8 +72,7 @@ function _OMPRouter() {
                             filterDefinition={{
                               allowedStatuses: [EngagementStatus.active],
                             }}
-                            title="Active Engagements"
-                            subtitle="Engagements that are already in progress and running at the moment."
+                            title="Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/past">
@@ -83,8 +80,7 @@ function _OMPRouter() {
                             filterDefinition={{
                               allowedStatuses: [EngagementStatus.past],
                             }}
-                            title="Past Engagements"
-                            subtitle="Engagements that are finished, closed or archived."
+                            title="Engagements"
                           />
                         </PrivateRoute>
                         <PrivateRoute path="/app/engagements/new">
