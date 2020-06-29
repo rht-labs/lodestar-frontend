@@ -2,7 +2,6 @@ import { Serializer } from '../serializer';
 import {
   ClusterStatus,
   HealthStatus,
-  ClusterState,
 } from '../../schemas/cluster_status';
 import { SystemMessage, Severity } from '../../schemas/system_message';
 import { Subsystem } from '../../schemas/subsystem';
@@ -36,7 +35,7 @@ export class ClusterStatusJsonSerializer
     return {
       ...(data as Subsystem),
       status: HealthStatus[HealthStatus[data['status']]],
-      state: ClusterState[ClusterState[data['state']]],
+      state: 'provisioning',
       updated: parseISO(data['updated']),
       messages: (data['messages'] ?? []).map(message =>
         this.parseSystemMessage(message)

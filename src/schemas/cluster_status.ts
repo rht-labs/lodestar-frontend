@@ -8,10 +8,6 @@ export enum HealthStatus {
   red,
 }
 
-export enum ClusterState {
-  provisioning,
-}
-
 export interface ClusterStatus {
   overall_status: HealthStatus;
   messages: SystemMessage[];
