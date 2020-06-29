@@ -122,7 +122,7 @@ export const getEngagementStatus = (
   const hasLaunched = !!launch?.launched_date_time;
   if (start_date > Today && !hasLaunched) {
     return EngagementStatus.upcoming;
-  } else if (hasLaunched && end_date > Today) {
+  } else if (hasLaunched && end_date >= Today) {
     return EngagementStatus.active;
   } else if (hasLaunched && end_date < Today) {
     return EngagementStatus.past;
