@@ -500,12 +500,7 @@ Object {
                 >
                   OpenShift Version
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  4.4
-                </p>
+                <span />
               </div>
             </div>
             <div
@@ -521,12 +516,7 @@ Object {
                 >
                   Storage Size
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  100G
-                </p>
+                <span />
               </div>
             </div>
             <div
@@ -558,12 +548,7 @@ Object {
                 >
                   Cluster Size
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  Large
-                </p>
+                <span />
               </div>
             </div>
             <div
@@ -685,12 +670,7 @@ Object {
               >
                 OpenShift Version
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                4.4
-              </p>
+              <span />
             </div>
           </div>
           <div
@@ -706,12 +686,7 @@ Object {
               >
                 Storage Size
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                100G
-              </p>
+              <span />
             </div>
           </div>
           <div
@@ -743,12 +718,7 @@ Object {
               >
                 Cluster Size
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                Large
-              </p>
+              <span />
             </div>
           </div>
           <div

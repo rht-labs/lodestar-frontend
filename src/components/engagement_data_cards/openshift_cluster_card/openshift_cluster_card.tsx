@@ -69,7 +69,7 @@ export function OpenShiftClusterSummaryCard({
           <GridItem span={3}>
             <TitledDataPoint title="Cloud Provider">
               <span>
-                {getHumanReadableProviderName(
+                {getHumanReadableLabel(
                   formOptions?.cloud_options?.providers?.options,
                   engagement?.ocp_cloud_provider_name
                 )}
@@ -78,18 +78,28 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="OpenShift Version">
-              {engagement?.ocp_version}
+              <span>
+                {getHumanReadableLabel(
+                  formOptions?.openshift_options?.versions?.options,
+                  engagement?.ocp_version
+                )}
+              </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Storage Size">
-              {engagement?.ocp_persistent_storage_size}
+              <span>
+                {getHumanReadableLabel(
+                  formOptions?.openshift_options?.persistent_storage?.options,
+                  engagement?.ocp_persistent_storage_size
+                )}
+              </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Cloud Region">
               <span>
-                {getHumanReadableProviderName(
+                {getHumanReadableLabel(
                   formOptions?.cloud_options?.providers?.options?.find(
                     option =>
                       option.value === engagement?.ocp_cloud_provider_name
@@ -101,7 +111,12 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Cluster Size">
-              {engagement?.ocp_cluster_size}
+              <span>
+                {getHumanReadableLabel(
+                  formOptions?.openshift_options?.cluster_size?.options,
+                  engagement?.ocp_cluster_size
+                )}
+              </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
@@ -115,7 +130,7 @@ export function OpenShiftClusterSummaryCard({
   );
 }
 
-function getHumanReadableProviderName(
+function getHumanReadableLabel(
   lookupArray: EngagementFormOption[] = [],
   value: string
 ) {
