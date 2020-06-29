@@ -123,6 +123,10 @@ export const getEngagementStatus = (
   if (launch_date) {
     if (start_date <= Today && end_date > Today) {
       return EngagementStatus.active;
-    } else return EngagementStatus.past;
+    } else if (start_date > Today) {
+      return EngagementStatus.upcoming;
+    } else {
+      return EngagementStatus.past;
+    }
   } else return EngagementStatus.upcoming;
 };
