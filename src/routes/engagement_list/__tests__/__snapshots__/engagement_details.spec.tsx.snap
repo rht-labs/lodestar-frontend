@@ -13,7 +13,25 @@ Object {
         >
           <div
             data-testid="activeOrPastEngagement"
-          />
+          >
+            <div
+              class="pf-l-grid pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                Created by:
+                 TBA
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                Target start date:
+                 
+                Feb 01, 2000
+              </div>
+            </div>
+          </div>
         </div>
         <div
           class="pf-l-grid__item pf-m-6-col"
@@ -107,7 +125,25 @@ Object {
       >
         <div
           data-testid="activeOrPastEngagement"
-        />
+        >
+          <div
+            class="pf-l-grid pf-m-gutter"
+          >
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              Created by:
+               TBA
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2000
+            </div>
+          </div>
+        </div>
       </div>
       <div
         class="pf-l-grid__item pf-m-6-col"
@@ -258,7 +294,25 @@ Object {
         >
           <div
             data-testid="activeOrPastEngagement"
-          />
+          >
+            <div
+              class="pf-l-grid pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                Created by:
+                 TBA
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                Target start date:
+                 
+                Feb 01, 2020
+              </div>
+            </div>
+          </div>
         </div>
         <div
           class="pf-l-grid__item pf-m-6-col"
@@ -352,7 +406,25 @@ Object {
       >
         <div
           data-testid="activeOrPastEngagement"
-        />
+        >
+          <div
+            class="pf-l-grid pf-m-gutter"
+          >
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              Created by:
+               TBA
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2020
+            </div>
+          </div>
+        </div>
       </div>
       <div
         class="pf-l-grid__item pf-m-6-col"

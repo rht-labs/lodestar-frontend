@@ -49,6 +49,18 @@ function FirstLine({
   } else {
     return (
       <div data-testid="activeOrPastEngagement">
+        <Grid hasGutter>
+          <GridItem span={12}>
+            Created by:
+            {!!createdBy ? ' ' + createdBy : ' TBA'}
+          </GridItem>
+          <GridItem>
+            Target start date:{' '}
+            {!!startDate && isValid(startDate)
+              ? formatDate(startDate, 'MMM dd, yyyy')
+              : 'TBA'}
+          </GridItem>
+        </Grid>
       </div>
     );
   }
