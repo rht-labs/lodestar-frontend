@@ -7,15 +7,14 @@ import {
   PageSectionVariants,
   TextContent,
   Text,
-  Gallery,
-  GalleryItem,
   Page,
-  SkipToContent
+  SkipToContent,
+  Grid,
+  GridItem,
 } from '@patternfly/react-core';
 import { useVersion } from '../../context/version_context/version_context';
 
 export function About() {
-
   const versionContext = useVersion();
 
   useEffect(() => {
@@ -61,7 +60,9 @@ export function About() {
   }
 
   const pageId = 'main-content-page-layout-default-nav';
-  const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to content</SkipToContent>;
+  const PageSkipToContent = (
+    <SkipToContent href={`#${pageId}`}>Skip to content</SkipToContent>
+  );
 
   return (
     <>
@@ -79,14 +80,14 @@ export function About() {
           </TextContent>
         </PageSection>
         <PageSection>
-          <Gallery>
-            <GalleryItem>
+          <Grid>
+            <GridItem span={4}>
               <Card isCompact={true}>
                 <CardHeader>Component Versions</CardHeader>
                 {cardItems}
               </Card>
-            </GalleryItem>
-          </Gallery>
+            </GridItem>
+          </Grid>
         </PageSection>
       </Page>
     </>
