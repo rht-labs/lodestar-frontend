@@ -35,7 +35,7 @@ export function SystemStatusDetailsModal(
         }
         title="System Status Messages"
       >
-        <DetailedSystemStatusList messages={activeEngagement?.status.messages}/>
+        <DetailedSystemStatusList messages={activeEngagement?.status?.messages}/>
       </EditModalTemplate>
     </Modal>
   );
