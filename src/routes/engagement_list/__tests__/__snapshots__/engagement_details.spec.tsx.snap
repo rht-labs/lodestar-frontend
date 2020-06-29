@@ -13,14 +13,7 @@ Object {
         >
           <div
             data-testid="activeOrPastEngagement"
-          >
-            The link to the last demo:
-            <a
-              href="/"
-            >
-               https://pf4.345jdhgksdf.org 
-            </a>
-          </div>
+          />
         </div>
         <div
           class="pf-l-grid__item pf-m-6-col"
@@ -114,14 +107,7 @@ Object {
       >
         <div
           data-testid="activeOrPastEngagement"
-        >
-          The link to the last demo:
-          <a
-            href="/"
-          >
-             https://pf4.345jdhgksdf.org 
-          </a>
-        </div>
+        />
       </div>
       <div
         class="pf-l-grid__item pf-m-6-col"
@@ -272,14 +258,7 @@ Object {
         >
           <div
             data-testid="activeOrPastEngagement"
-          >
-            The link to the last demo:
-            <a
-              href="/"
-            >
-               https://pf4.345jdhgksdf.org 
-            </a>
-          </div>
+          />
         </div>
         <div
           class="pf-l-grid__item pf-m-6-col"
@@ -373,14 +352,7 @@ Object {
       >
         <div
           data-testid="activeOrPastEngagement"
-        >
-          The link to the last demo:
-          <a
-            href="/"
-          >
-             https://pf4.345jdhgksdf.org 
-          </a>
-        </div>
+        />
       </div>
       <div
         class="pf-l-grid__item pf-m-6-col"
