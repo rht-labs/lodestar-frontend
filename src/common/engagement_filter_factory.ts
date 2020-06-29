@@ -10,7 +10,7 @@ function hasSearchTermMatch(engagement: Engagement, searchTerm: string = '') {
   }
   const cleanedSearchTerm = searchTerm?.trim()?.toLowerCase();
   const cleanedCustomerName = engagement.customer_name.toLowerCase().trim();
-  const cleanedProjectName = engagement.project_name;
+  const cleanedProjectName = engagement.project_name.toLowerCase().trim();
   return (
     cleanedProjectName.includes(cleanedSearchTerm) ||
     cleanedCustomerName.includes(cleanedSearchTerm)

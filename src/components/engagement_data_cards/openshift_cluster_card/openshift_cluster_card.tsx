@@ -4,7 +4,10 @@ import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import {
+  EngagementFormConfig,
+  EngagementFormOption,
+} from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
@@ -65,7 +68,12 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Cloud Provider">
-              {engagement?.ocp_cloud_provider_name}
+              <span>
+                {getHumanReadableProviderName(
+                  formOptions?.cloud_options?.providers?.options,
+                  engagement?.ocp_cloud_provider_name
+                )}
+              </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
@@ -80,7 +88,15 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Cloud Region">
-              {engagement?.ocp_cloud_provider_region}
+              <span>
+                {getHumanReadableProviderName(
+                  formOptions?.cloud_options?.providers?.options?.find(
+                    option =>
+                      option.value === engagement?.ocp_cloud_provider_name
+                  )?.options ?? [],
+                  engagement?.ocp_cloud_provider_region
+                )}
+              </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
@@ -97,4 +113,11 @@ export function OpenShiftClusterSummaryCard({
       </DataCard>
     </>
   );
+}
+
+function getHumanReadableProviderName(
+  lookupArray: EngagementFormOption[] = [],
+  value: string
+) {
+  return lookupArray?.find(option => option.value === value)?.label;
 }

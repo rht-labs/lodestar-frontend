@@ -36,7 +36,9 @@ export function EngagementListItemCard(props: DataCardProps) {
           >
             <NavList>
               <NavItem style={{ fontWeight: 'bold', cursor: 'pointer' }}>
-                <Title headingLevel="h2">{props.title}</Title>
+                <Title headingLevel="h2" style={{ cursor: 'pointer' }}>
+                  {props.title}
+                </Title>
               </NavItem>
             </NavList>
           </Nav>
