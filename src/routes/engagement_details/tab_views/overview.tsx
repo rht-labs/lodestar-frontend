@@ -33,6 +33,9 @@ export function EngagementOverviewTab({
           />
         </GridItem>
         <GridItem span={12}>
+          <SystemStatusCard engagement={engagement} />
+        </GridItem>
+        <GridItem span={12}>
           <PointOfContactCard
             onSave={onSave}
             onChange={onChange}
@@ -58,9 +61,6 @@ export function EngagementOverviewTab({
         </GridItem>
         <GridItem span={12}>
           <ActivityHistoryCard engagement={engagement} />
-        </GridItem>
-        <GridItem span={12}>
-          <SystemStatusCard engagement={engagement} />
         </GridItem>
       </Grid>
     </TextContent>

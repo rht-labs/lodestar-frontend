@@ -68,13 +68,13 @@ const statusAlert = (overallStatus?: HealthStatus) => {
       return AlertVariant.success;
     }
     case HealthStatus.yellow: {
-      return AlertVariant.info;
+      return AlertVariant.warning;
     }
     case HealthStatus.red: {
       return AlertVariant.danger;
     }
     default: {
-      return AlertVariant.warning;
+      return AlertVariant.info;
     }
   }
 };
