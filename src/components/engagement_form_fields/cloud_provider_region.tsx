@@ -37,14 +37,18 @@ export function CloudProviderRegionFormField({
         value={engagement?.ocp_cloud_provider_region || ''}
         onChange={e => onChange('ocp_cloud_provider_region', e)}
       >
-        {availableProviderRegionOptions.map((option: any, index: any) => (
-          <FormSelectOption
-            isDisabled={option.disabled || !hasFeature(APP_FEATURES.writer)}
-            key={index}
-            value={option.value}
-            label={option.label}
-          />
-        ))}
+        {[
+          <FormSelectOption label={'Select a region'} value={undefined} />,
+        ].concat(
+          availableProviderRegionOptions.map((option: any, index: any) => (
+            <FormSelectOption
+              isDisabled={option.disabled || !hasFeature(APP_FEATURES.writer)}
+              key={index}
+              value={option.value}
+              label={option.label}
+            />
+          ))
+        )}
       </FormSelect>
     </FormGroup>
   );

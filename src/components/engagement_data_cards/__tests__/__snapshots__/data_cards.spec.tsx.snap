@@ -484,12 +484,7 @@ Object {
                 >
                   Cloud Provider
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  AWS
-                </p>
+                <span />
               </div>
             </div>
             <div
@@ -547,12 +542,7 @@ Object {
                 >
                   Cloud Region
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  N. Virginia
-                </p>
+                <span />
               </div>
             </div>
             <div
@@ -679,12 +669,7 @@ Object {
               >
                 Cloud Provider
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                AWS
-              </p>
+              <span />
             </div>
           </div>
           <div
@@ -742,12 +727,7 @@ Object {
               >
                 Cloud Region
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                N. Virginia
-              </p>
+              <span />
             </div>
           </div>
           <div

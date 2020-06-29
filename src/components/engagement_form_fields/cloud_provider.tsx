@@ -24,23 +24,26 @@ export function CloudProviderFormField({
     <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
       <FormSelect
         aria-label="Cloud Provider"
-        isDisabled={
-          availableProviders?.length === 1 ||
-          !hasFeature(APP_FEATURES.writer) ||
-          !!engagement?.launch
-        }
+        isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}
         isRequired
         value={engagement?.ocp_cloud_provider_name || ''}
         onChange={e => onChange('ocp_cloud_provider_name', e)}
       >
-        {availableProviders?.map((option: any, index: any) => (
+        {[
           <FormSelectOption
-            isDisabled={option.disabled}
-            key={index}
-            value={option.value}
-            label={option.label}
-          />
-        ))}
+            label="Select a provider"
+            value={undefined}
+          ></FormSelectOption>,
+        ].concat(
+          availableProviders?.map((option: any, index: any) => (
+            <FormSelectOption
+              isDisabled={option.disabled}
+              key={index}
+              value={option.value}
+              label={option.label}
+            />
+          ))
+        )}
       </FormSelect>
     </FormGroup>
   );

@@ -36,7 +36,7 @@ function FirstLine({
         <Grid hasGutter>
           <GridItem span={12}>
             Created by:
-            <Link to="#">{!!createdBy ? ' ' + createdBy : ' TBA'}</Link>
+            {!!createdBy ? ' ' + createdBy : ' TBA'}
           </GridItem>
           <GridItem>
             Target start date:{' '}

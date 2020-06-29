@@ -13,9 +13,14 @@ export class ClusterStatusJsonSerializer
     return clusterStatus;
   }
   deserialize(data: object): ClusterStatus {
+    if (!data) {
+      return undefined;
+    }
     return {
       ...(data as ClusterStatus),
-      overall_status: HealthStatus[HealthStatus[data['overall_status']]],
+      overall_status: data['overall_status']
+        ? HealthStatus[HealthStatus[data['overall_status']]]
+        : undefined,
       messages: (data['messages'] ?? []).map(message =>
         this.parseSystemMessage(message)
       ),
@@ -25,6 +30,9 @@ export class ClusterStatusJsonSerializer
     };
   }
   private parseSystemMessage(data): SystemMessage {
+    if (!data) {
+      return undefined;
+    }
     return {
       ...(data as SystemMessage),
       severity: Severity.info,
@@ -32,6 +40,9 @@ export class ClusterStatusJsonSerializer
     } as SystemMessage;
   }
   private parseSubsystem(data): Subsystem {
+    if (!data) {
+      return undefined;
+    }
     return {
       ...(data as Subsystem),
       status: HealthStatus[HealthStatus[data['status']]],

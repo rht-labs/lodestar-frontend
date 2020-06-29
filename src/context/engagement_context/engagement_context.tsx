@@ -1,6 +1,6 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
-import { useState, useCallback, useReducer, useEffect } from 'react';
+import { useState, useCallback, useReducer } from 'react';
 import {
   engagementFormReducer,
   getInitialState,
@@ -8,8 +8,8 @@ import {
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { useFeedback } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { Logger } from '../../utilities/logger';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import { Logger } from '../../utilities/logger';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -87,44 +87,7 @@ export const EngagementProvider = ({
       type: 'switch_engagement',
       payload: getInitialState(activeEngagement),
     });
-    if (formOptions?.regions) {
-      dispatch({
-        type: 'ocp_cloud_provider_region',
-        payload:
-          activeEngagement?.ocp_cloud_provider_region ??
-          formOptions?.providers?.options[0]?.options?.[0]?.value,
-      });
-    }
-    if (formOptions?.cloud_options) {
-      dispatch({
-        type: 'ocp_cloud_provider_name',
-        payload:
-          activeEngagement?.ocp_cloud_provider_name ??
-          formOptions?.cloud_options?.providers?.options[0].value,
-      });
-    }
-    if (formOptions?.openshift_options) {
-      dispatch({
-        type: 'ocp_cluster_size',
-        payload:
-          activeEngagement?.ocp_cluster_size ??
-          formOptions?.openshift_options?.cluster_size?.options[0].value,
-      });
-      dispatch({
-        type: 'ocp_version',
-        payload:
-          activeEngagement?.ocp_version ??
-          formOptions.openshift_options?.versions?.options[0].value,
-      });
-      dispatch({
-        type: 'ocp_persistent_storage_size',
-        payload:
-          activeEngagement?.ocp_persistent_storage_size ??
-          formOptions?.openshift_options?.persistent_storage?.options[0].value,
-      });
-    }
   }, [activeEngagement, formOptions]);
-
   const fetchEngagements = useCallback(async () => {
     try {
       feedbackContext.showLoader();
