@@ -12,7 +12,7 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="activeOrPastEngagement"
+            data-testid="upcomingEngagement"
           >
             <div
               class="pf-l-grid pf-m-gutter"
@@ -124,7 +124,7 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="activeOrPastEngagement"
+          data-testid="upcomingEngagement"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -293,7 +293,7 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="activeOrPastEngagement"
+            data-testid="upcomingEngagement"
           >
             <div
               class="pf-l-grid pf-m-gutter"
@@ -405,7 +405,7 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="activeOrPastEngagement"
+          data-testid="upcomingEngagement"
         >
           <div
             class="pf-l-grid pf-m-gutter"
