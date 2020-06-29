@@ -40,7 +40,7 @@ export function StatusMessageItem({
                 dataListCells={[
                   <DataListCell key="severity" >
                     <div style={severityBox}>
-                      Severity: {severity}
+                      Severity: {Severity[severity]}
                     </div>
                   </DataListCell>,
                   <DataListCell key="message" width={5}>
