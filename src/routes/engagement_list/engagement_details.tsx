@@ -9,7 +9,6 @@ import {
   Tooltip,
   TooltipPosition,
 } from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
 import {
   ClipboardCheckIcon,
   CodeBranchIcon,
@@ -50,8 +49,6 @@ function FirstLine({
   } else {
     return (
       <div data-testid="activeOrPastEngagement">
-        The link to the last demo:
-        <Link to="#"> https://pf4.345jdhgksdf.org </Link>
       </div>
     );
   }
