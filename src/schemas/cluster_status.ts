@@ -3,13 +3,9 @@ import { SystemMessage } from './system_message';
 import faker from 'faker';
 
 export enum HealthStatus {
-  yellow,
-  green,
-  red,
-}
-
-export enum ClusterState {
-  provisioning,
+  yellow = "yellow",
+  green = "green",
+  red = "red",
 }
 
 export interface ClusterStatus {

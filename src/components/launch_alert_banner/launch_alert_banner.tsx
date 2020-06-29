@@ -4,6 +4,7 @@ import { Alert, AlertVariant, Button } from '@patternfly/react-core';
 import { format } from 'date-fns';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { RequiredFieldsWarning } from '../required_fields_warning/required_fields_warning';
+import { HealthStatus } from "../../schemas/cluster_status";
 interface LaunchAlertBannerProps {
   engagement: Engagement;
   onLaunch: (engagement: Engagement) => void;
@@ -13,13 +14,15 @@ export function LaunchAlertBanner({
   onLaunch,
 }: LaunchAlertBannerProps) {
   const { isLaunchable, requiredFields } = useEngagements();
+  const overallStatus = engagement?.status?.overall_status;
+
   return (
     <Alert
       isInline
       title={
         engagement?.launch ? 'Engagement Launched' : 'Engagement Not Launched'
       }
-      variant={AlertVariant.info}
+      variant={statusAlert(overallStatus)}
       actionLinks={
         !engagement?.launch ? (
           <div>
@@ -58,3 +61,21 @@ export function LaunchMessage({ engagement }: LaunchMessageProps) {
   }
   return <span>{launchMessage}</span>;
 }
+
+const statusAlert = (overallStatus?: HealthStatus) => {
+  switch (overallStatus) {
+    case HealthStatus.green: {
+      return AlertVariant.success;
+    }
+    case HealthStatus.yellow: {
+      return AlertVariant.warning;
+    }
+    case HealthStatus.red: {
+      return AlertVariant.danger;
+    }
+    default: {
+      return AlertVariant.info;
+    }
+  }
+};
+

@@ -262,6 +262,40 @@ Object {
                           class="pf-c-title pf-m-lg"
                           style="font-weight: normal;"
                         >
+                          System Status
+                            
+                          <div />
+                        </h3>
+                      </div>
+                      <div />
+                    </div>
+                  </div>
+                  <div
+                    class="pf-c-card__body"
+                  >
+                    <div
+                      class="pf-l-grid"
+                    />
+                  </div>
+                </article>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                <article
+                  class="pf-c-card"
+                >
+                  <div
+                    class="pf-c-card__title"
+                  >
+                    <div
+                      class="pf-l-level"
+                    >
+                      <div>
+                        <h3
+                          class="pf-c-title pf-m-lg"
+                          style="font-weight: normal;"
+                        >
                           Points of Contact
                             
                           <svg
@@ -432,6 +466,7 @@ Object {
                           >
                             OpenShift Version
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -447,6 +482,7 @@ Object {
                           >
                             Storage Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -478,6 +514,7 @@ Object {
                           >
                             Cluster Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -736,6 +773,7 @@ Object {
                           >
                             OpenShift Version
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -751,6 +789,7 @@ Object {
                           >
                             Storage Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -782,6 +821,7 @@ Object {
                           >
                             Cluster Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -808,6 +848,7 @@ Object {
         </div>
       </section>
     </div>
+    <div />
     <div />
     <div />
     <div />
@@ -1073,6 +1114,40 @@ Object {
                         class="pf-c-title pf-m-lg"
                         style="font-weight: normal;"
                       >
+                        System Status
+                          
+                        <div />
+                      </h3>
+                    </div>
+                    <div />
+                  </div>
+                </div>
+                <div
+                  class="pf-c-card__body"
+                >
+                  <div
+                    class="pf-l-grid"
+                  />
+                </div>
+              </article>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              <article
+                class="pf-c-card"
+              >
+                <div
+                  class="pf-c-card__title"
+                >
+                  <div
+                    class="pf-l-level"
+                  >
+                    <div>
+                      <h3
+                        class="pf-c-title pf-m-lg"
+                        style="font-weight: normal;"
+                      >
                         Points of Contact
                           
                         <svg
@@ -1243,6 +1318,7 @@ Object {
                         >
                           OpenShift Version
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1258,6 +1334,7 @@ Object {
                         >
                           Storage Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1289,6 +1366,7 @@ Object {
                         >
                           Cluster Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1547,6 +1625,7 @@ Object {
                         >
                           OpenShift Version
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1562,6 +1641,7 @@ Object {
                         >
                           Storage Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1593,6 +1673,7 @@ Object {
                         >
                           Cluster Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div

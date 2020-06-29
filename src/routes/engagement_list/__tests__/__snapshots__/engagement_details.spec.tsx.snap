@@ -12,14 +12,25 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="activeOrPastEngagement"
+            data-testid="upcomingEngagement"
           >
-            The link to the last demo:
-            <a
-              href="/"
+            <div
+              class="pf-l-grid pf-m-gutter"
             >
-               https://pf4.345jdhgksdf.org 
-            </a>
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                Created by:
+                 TBA
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                Target start date:
+                 
+                Feb 01, 2000
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -89,7 +100,7 @@ Object {
                 class=""
               >
                 <b
-                  style="color: rgb(108, 161, 0);"
+                  style="color: green;"
                 >
                   ACTIVE
                 </b>
@@ -113,14 +124,25 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="activeOrPastEngagement"
+          data-testid="upcomingEngagement"
         >
-          The link to the last demo:
-          <a
-            href="/"
+          <div
+            class="pf-l-grid pf-m-gutter"
           >
-             https://pf4.345jdhgksdf.org 
-          </a>
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              Created by:
+               TBA
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2000
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -190,7 +212,7 @@ Object {
               class=""
             >
               <b
-                style="color: rgb(108, 161, 0);"
+                style="color: green;"
               >
                 ACTIVE
               </b>
@@ -271,14 +293,25 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="activeOrPastEngagement"
+            data-testid="upcomingEngagement"
           >
-            The link to the last demo:
-            <a
-              href="/"
+            <div
+              class="pf-l-grid pf-m-gutter"
             >
-               https://pf4.345jdhgksdf.org 
-            </a>
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                Created by:
+                 TBA
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                Target start date:
+                 
+                Feb 01, 2020
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -372,14 +405,25 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="activeOrPastEngagement"
+          data-testid="upcomingEngagement"
         >
-          The link to the last demo:
-          <a
-            href="/"
+          <div
+            class="pf-l-grid pf-m-gutter"
           >
-             https://pf4.345jdhgksdf.org 
-          </a>
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              Created by:
+               TBA
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2020
+            </div>
+          </div>
         </div>
       </div>
       <div
