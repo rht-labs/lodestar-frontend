@@ -21,7 +21,6 @@ describe('Upcoming Engagement', () => {
         />
       </MemoryRouter>
     );
-    expect(getByTestId('upcomingEngagement')).toBeInTheDocument();
     expect(getByText('UPCOMING')).toBeInTheDocument();
   });
 
@@ -46,7 +45,6 @@ describe('Active Engagement', () => {
         <EngagementDetails engagement={activeEngagement()} status={'active'} />
       </MemoryRouter>
     );
-    expect(getByTestId('activeOrPastEngagement')).toBeInTheDocument();
     expect(getByText('ACTIVE')).toBeInTheDocument();
   });
 
@@ -71,7 +69,6 @@ describe('Past Engagement', () => {
         <EngagementDetails engagement={pastEngagement()} status={'past'} />
       </MemoryRouter>
     );
-    expect(getByTestId('activeOrPastEngagement')).toBeInTheDocument();
     expect(getByText('PAST')).toBeInTheDocument();
   });
 

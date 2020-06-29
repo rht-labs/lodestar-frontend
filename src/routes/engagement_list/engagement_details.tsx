@@ -9,7 +9,6 @@ import {
   Tooltip,
   TooltipPosition,
 } from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
 import {
   ClipboardCheckIcon,
   CodeBranchIcon,
@@ -30,7 +29,6 @@ function FirstLine({
   startDate?: Date;
   createdBy?: string;
 }) {
-  if (status === EngagementStatus.upcoming) {
     return (
       <div data-testid="upcomingEngagement">
         <Grid hasGutter>
@@ -47,14 +45,6 @@ function FirstLine({
         </Grid>
       </div>
     );
-  } else {
-    return (
-      <div data-testid="activeOrPastEngagement">
-        The link to the last demo:
-        <Link to="#"> https://pf4.345jdhgksdf.org </Link>
-      </div>
-    );
-  }
 }
 
 function DurationInWeeks({
@@ -187,7 +177,7 @@ const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
         return '#EC7A08';
       }
       case EngagementStatus.active: {
-        return '#6CA100';
+        return 'green';
       }
       default: {
         return '#B8BBBE';
