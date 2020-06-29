@@ -432,6 +432,7 @@ Object {
                           >
                             OpenShift Version
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -447,6 +448,7 @@ Object {
                           >
                             Storage Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -478,6 +480,7 @@ Object {
                           >
                             Cluster Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -736,6 +739,7 @@ Object {
                           >
                             OpenShift Version
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -751,6 +755,7 @@ Object {
                           >
                             Storage Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -782,6 +787,7 @@ Object {
                           >
                             Cluster Size
                           </h6>
+                          <span />
                         </div>
                       </div>
                       <div
@@ -1243,6 +1249,7 @@ Object {
                         >
                           OpenShift Version
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1258,6 +1265,7 @@ Object {
                         >
                           Storage Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1289,6 +1297,7 @@ Object {
                         >
                           Cluster Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1547,6 +1556,7 @@ Object {
                         >
                           OpenShift Version
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1562,6 +1572,7 @@ Object {
                         >
                           Storage Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
@@ -1593,6 +1604,7 @@ Object {
                         >
                           Cluster Size
                         </h6>
+                        <span />
                       </div>
                     </div>
                     <div
