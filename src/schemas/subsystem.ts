@@ -1,11 +1,11 @@
 import { SystemMessage } from './system_message';
-import { ClusterState, HealthStatus } from './cluster_status';
+import { HealthStatus } from './cluster_status';
 import faker from 'faker/locale/en_US';
 
 export interface Subsystem {
   name: string;
   status: HealthStatus;
-  state: ClusterState;
+  state: string;
   info: string;
   updated: Date;
   web_console: string;
@@ -19,7 +19,7 @@ export abstract class Subsystem {
     return {
       name: fakeSubsystemNames[faker.random.number(4)],
       status: HealthStatus[HealthStatus[faker.random.number(2)]],
-      state: ClusterState[ClusterState[faker.random.number(1)]],
+      state: 'provisioning',
       info: faker.lorem.sentence(),
       updated: faker.date.recent(),
       web_console: faker.internet.url(),
@@ -31,7 +31,7 @@ export abstract class Subsystem {
     return {
       name: 'Openshift',
       status: HealthStatus.yellow,
-      state: ClusterState.provisioning,
+      state: "provisioning",
       info: 'Deployment In Progress',
       updated: new Date(2020, 1, 1),
       web_console: 'https://console......',
