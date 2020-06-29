@@ -21,30 +21,37 @@ export function CloudProviderFormField({
 }: CloudProviderFormFieldProps) {
   const { hasFeature } = useFeatures();
   return (
-    <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
-      <FormSelect
-        aria-label="Cloud Provider"
-        isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}
-        isRequired
-        value={engagement?.ocp_cloud_provider_name || ''}
-        onChange={e => onChange('ocp_cloud_provider_name', e)}
-      >
-        {[
-          <FormSelectOption
-            label="Select a provider"
-            value={undefined}
-          ></FormSelectOption>,
-        ].concat(
-          availableProviders?.map((option: any, index: any) => (
+    <>
+      <FormGroup fieldId="Hosting Platform" label="Hosting Type">
+        <FormSelect isRequired isDisabled={true}>
+          <FormSelectOption label={'OpenShift Container Platform'} />
+        </FormSelect>
+      </FormGroup>
+      <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
+        <FormSelect
+          aria-label="Cloud Provider"
+          isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}
+          isRequired
+          value={engagement?.ocp_cloud_provider_name || ''}
+          onChange={e => onChange('ocp_cloud_provider_name', e)}
+        >
+          {[
             <FormSelectOption
-              isDisabled={option.disabled}
-              key={index}
-              value={option.value}
-              label={option.label}
-            />
-          ))
-        )}
-      </FormSelect>
-    </FormGroup>
+              label="Select a provider"
+              value={undefined}
+            ></FormSelectOption>,
+          ].concat(
+            availableProviders?.map((option: any, index: any) => (
+              <FormSelectOption
+                isDisabled={option.disabled}
+                key={index}
+                value={option.value}
+                label={option.label}
+              />
+            ))
+          )}
+        </FormSelect>
+      </FormGroup>
+    </>
   );
 }
