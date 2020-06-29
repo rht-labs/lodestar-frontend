@@ -37,8 +37,7 @@ export function SystemStatusCard({
           {status?.subsystems.map( subsystem => (
             <GridItem span={2}>
               <SubsystemDetails
-                title={subsystem.name}
-                status={subsystem.status}
+                subsystem={subsystem}
               />
             </GridItem>
           ))}

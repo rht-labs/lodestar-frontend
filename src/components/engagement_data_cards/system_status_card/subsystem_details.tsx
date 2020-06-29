@@ -1,26 +1,38 @@
 import React from 'react';
-import {Flex, FlexItem} from '@patternfly/react-core';
-import {HealthStatus} from "../../../schemas/cluster_status";
+import {Button, Flex, FlexItem, ButtonVariant} from '@patternfly/react-core';
 import {StatusIcon} from "./status_icons";
+import {Subsystem} from "../../../schemas/subsystem";
+import {useModalVisibility} from "../../../context/edit_modal_visibility_context/edit_modal_visibility_hook";
+import {SubsystemDetailsModal} from "./subsystem_details_modal";
 
 export interface SubsystemDetailsProps {
-  status: HealthStatus,
-  title: string,
+  subsystem: Subsystem;
 }
 
 export function SubsystemDetails({
-  status,
-  title
+  subsystem
 }: SubsystemDetailsProps) {
+
+  const { requestOpen, activeModalKey } = useModalVisibility();
+  const SYSTEM_STATUS_MODAL_KEY = 'Subsystem';
 
   return (
     <>
+      <SubsystemDetailsModal
+        isOpen={activeModalKey?.includes(SYSTEM_STATUS_MODAL_KEY)}
+        subsystem={subsystem}
+      />
       <Flex>
         <FlexItem>
-          <StatusIcon status={status}/>
+          <StatusIcon status={subsystem.status}/>
         </FlexItem>
         <FlexItem>
-          {title}
+          <Button
+            variant={ButtonVariant.link}
+            onClick={() => requestOpen(SYSTEM_STATUS_MODAL_KEY)}
+          >
+            {subsystem.name}
+          </Button>
         </FlexItem>
       </Flex>
     </>

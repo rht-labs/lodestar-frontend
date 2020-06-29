@@ -7,7 +7,7 @@ import {
   DataListItemCells,
   DataListItemRow
 } from "@patternfly/react-core";
-import { format as formatDate, isValid } from 'date-fns';
+import { isValid } from 'date-fns';
 
 export interface StatusMessageItemProps{
   severity: Severity,
@@ -48,9 +48,7 @@ export function StatusMessageItem({
                   </DataListCell>,
                   <DataListCell key="updated">
                     <span>
-                    {!!updated && isValid(updated)
-                      ? formatDate(updated, 'MMM dd, yyyy')
-                      : ' - '}
+                    {!!updated && isValid(updated) ? updated : ' - '}
                     </span>
                   </DataListCell>,
                 ]}
