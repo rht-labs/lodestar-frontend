@@ -11,6 +11,7 @@ import {
   DataListItemCells,
   DataListItemRow,
 } from '@patternfly/react-core';
+import { formatISO, isValid } from 'date-fns';
 
 import {EditModalTemplate} from "../../../layout/edit_modal_template";
 import {useModalVisibility} from "../../../context/edit_modal_visibility_context/edit_modal_visibility_hook";
@@ -75,6 +76,7 @@ function DetailedSubsystemStatusList({ subsystem }: { subsystem: Subsystem }) {
                   </DataListCell>,
                   <DataListCell key="subsystemInfo" >
                     <b> Updated: </b> {subsystem.updated.toString()}
+                    {!!subsystem.updated && isValid(subsystem.updated) ? formatISO(subsystem.updated) : ' - '}
                   </DataListCell>,
                 ]}
               />
