@@ -38,7 +38,7 @@ export function OpenShiftVersionFormField({
         onChange={e => onChange('ocp_version', e)}
       >
         {[
-          <FormSelectOption value={undefined} label="Select OC version" />,
+          <FormSelectOption value={undefined} label="Select OpenShift version" />,
         ].concat(
           formOptions?.openshift_options?.versions?.options?.map(
             (option: any, index: any) => (
