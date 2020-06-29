@@ -118,11 +118,9 @@ export const getEngagementStatus = (
   engagement: Engagement
 ): EngagementStatus => {
   const Today = new Date();
-  const { start_date, launch, end_date } = engagement;
+  const { launch, end_date } = engagement;
   const hasLaunched = !!launch?.launched_date_time;
-  if (start_date > Today && !hasLaunched) {
-    return EngagementStatus.upcoming;
-  } else if (hasLaunched && end_date >= Today) {
+  if (hasLaunched && end_date >= Today) {
     return EngagementStatus.active;
   } else if (hasLaunched && end_date < Today) {
     return EngagementStatus.past;
