@@ -7,7 +7,7 @@ import {
   DataListItemCells,
   DataListItemRow
 } from "@patternfly/react-core";
-import { isValid } from 'date-fns';
+import { formatISO, isValid } from 'date-fns';
 
 export interface StatusMessageItemProps{
   severity: Severity,
@@ -21,16 +21,6 @@ export function StatusMessageItem({
   updated
 }: StatusMessageItemProps) {
 
-  const severityBox = {
-    display: 'block',
-    width: '100%',
-    padding: '.25rem .5rem',
-    color: '#004e8a',
-    backgroundColor: '#def3ff',
-    border: '1px solid rgba(0,0,0,.1)',
-    borderRadius: '4px'
-  };
-
   return (
     <>
       <DataList aria-label="system status message" isCompact>
@@ -39,16 +29,17 @@ export function StatusMessageItem({
             <DataListItemCells
                 dataListCells={[
                   <DataListCell key="severity" >
-                    <div style={severityBox}>
-                      Severity: {Severity[severity]}
-                    </div>
+                    <b> Severity: </b>
+                    {Severity[severity]}
                   </DataListCell>,
-                  <DataListCell key="message" width={5}>
+                  <DataListCell key="message" width={4}>
+                    <b> Message: </b>
                     <span> {message ? message : 'No message'} </span>
                   </DataListCell>,
-                  <DataListCell key="updated">
+                  <DataListCell key="updated" width={2}>
+                    <b> Updated: </b>
                     <span>
-                    {!!updated && isValid(updated) ? updated : ' - '}
+                    {!!updated && isValid(updated) ? formatISO(updated) : ' - '}
                     </span>
                   </DataListCell>,
                 ]}
