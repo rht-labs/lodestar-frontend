@@ -43,9 +43,11 @@ Object {
             class="pf-c-page__main-section"
           >
             <div
-              class="pf-l-gallery"
+              class="pf-l-grid"
             >
-              <div>
+              <div
+                class="pf-l-grid__item pf-m-4-col"
+              >
                 <article
                   class="pf-c-card pf-m-compact"
                 >
@@ -101,9 +103,11 @@ Object {
           class="pf-c-page__main-section"
         >
           <div
-            class="pf-l-gallery"
+            class="pf-l-grid"
           >
-            <div>
+            <div
+              class="pf-l-grid__item pf-m-4-col"
+            >
               <article
                 class="pf-c-card pf-m-compact"
               >
