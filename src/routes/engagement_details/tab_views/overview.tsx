@@ -7,6 +7,7 @@ import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { OpenShiftClusterSummaryCard } from '../../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
 import { UserCard } from '../../../components/engagement_data_cards/user_card/user_card';
 import { ActivityHistoryCard } from '../../../components/engagement_data_cards/activity_history_card/activity_history_card';
+import {SystemStatusCard} from "../../../components/engagement_data_cards/system_status_card/system_status_card";
 export interface EngagementOverviewTabProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
@@ -30,6 +31,9 @@ export function EngagementOverviewTab({
             formOptions={formOptions}
             engagement={engagement}
           />
+        </GridItem>
+        <GridItem span={12}>
+          <SystemStatusCard engagement={engagement} />
         </GridItem>
         <GridItem span={12}>
           <PointOfContactCard
