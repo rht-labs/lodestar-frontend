@@ -7,10 +7,11 @@ import { useEngagements } from '../../context/engagement_context/engagement_hook
 import { DescriptionFormField } from '../engagement_form_fields/description';
 import { LocationFormField } from '../engagement_form_fields/location';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_start_end_date';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
-  formOptions: object;
+  formOptions: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
@@ -50,6 +51,7 @@ export function EngagementSummaryEditModal(
           />
           <EngagementStartEndDateFormField
             onChange={props.onChange}
+            formOptions={props.formOptions}
             engagement={props.engagement}
           />
         </Form>
