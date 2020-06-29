@@ -17,8 +17,8 @@ const fakeSubsystemNames = ['Openshift Cluster', 'Atlassian', 'IBM Cloud', 'Mura
 export abstract class Subsystem {
   static fromFake(): Subsystem {
     return {
-      name: fakeSubsystemNames[faker.random.number(4)],
-      status: HealthStatus[HealthStatus[faker.random.number(2)]],
+      name: fakeSubsystemNames[faker.random.number(fakeSubsystemNames.length - 1)],
+      status: HealthStatus[HealthStatus[faker.random.number(Object.keys(HealthStatus).length - 1)]],
       state: 'provisioning',
       info: faker.lorem.sentence(),
       updated: faker.date.recent(),
