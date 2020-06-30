@@ -35,7 +35,7 @@ export function EngagementStartEndDateFormField(
   const getRetirementDate = (): string => {
     if (
       !props.engagement.end_date ||
-      props.engagement?.end_date! instanceof Date
+      !(props.engagement?.end_date instanceof Date)
     ) {
       return undefined;
     }
