@@ -14,9 +14,9 @@ export function StatusIcon({
 
   switch(status){
     case HealthStatus.green:
-      return <ExclamationTriangleIcon color='#EC7A08' />;
-    case HealthStatus.yellow:
       return <CheckCircleIcon color="green"/>;
+    case HealthStatus.yellow:
+      return <ExclamationTriangleIcon color='#EC7A08' />;
     case HealthStatus.red:
       return <ExclamationCircleIcon color="#C9190B" />;
     default:
