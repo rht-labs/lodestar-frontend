@@ -1,13 +1,6 @@
 import React from 'react';
 import { Logger } from '../utilities/logger';
-import {
-  EmptyState,
-  PageSection,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-} from '@patternfly/react-core';
-import { OutlinedSadTearIcon } from '@patternfly/react-icons';
+import { ErrorFallbackUI } from './error_fallback_ui/error_fallback_ui';
 
 export interface ErrorBoundaryProps {
   children: React.ReactChild;
@@ -45,23 +38,3 @@ export class ErrorBoundary extends React.Component<
     return this.props.children;
   }
 }
-
-const ErrorFallbackUI = () => {
-  return (
-    <PageSection style={{ height: '100%' }}>
-      <>
-        <EmptyState>
-          <EmptyStateIcon icon={OutlinedSadTearIcon} />
-          <Title size="lg" headingLevel="h4">
-            Something went wrong
-          </Title>
-          <EmptyStateBody>
-            It seems we've bumped into an error. This is likely Oystein's fault.
-            Send him an email:{' '}
-            <a href="mailto:obedin@redhat.com">obedin@redhat.com</a>
-          </EmptyStateBody>
-        </EmptyState>
-      </>
-    </PageSection>
-  );
-};

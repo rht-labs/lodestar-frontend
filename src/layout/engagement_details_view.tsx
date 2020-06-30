@@ -17,7 +17,6 @@ export function EngagementDetailsViewTemplate({
   children: any;
 }) {
   const { launchEngagement } = useEngagements();
-  throw Error();
   return (
     <>
       <PageSection
