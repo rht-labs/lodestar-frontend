@@ -12,7 +12,7 @@ export interface ErrorBoundaryProps {
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
   componentDidCatch(error: any, errorInfo: any) {
-    Logger.log(this.props.meta, error, errorInfo);
+    Logger.error(this.props.meta, error, errorInfo);
   }
   render() {
     return this.props.children;

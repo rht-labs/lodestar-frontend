@@ -76,6 +76,38 @@ Each service is contained in a folder. At the root of the folder is an eponymous
 
 ## Development
 
+### Logging
+
+This repository reimplements several common methods from the `console` interface. Any output that needs to be logged must be logged through this interface. The logger can be imported from `src/utilities/logger/index.ts`.
+
+**BAD:**
+
+```typescript
+async function myAsynchronousFunction() {
+  try {
+    await myAsynchronousTask();
+  } catch (e) {
+    console.error(e);
+    // handle MyError
+  }
+}
+```
+
+**GOOD:**
+
+```typescript
+import { Logger } from './src/utilities/logger';
+
+async function myAsynchronousFunction() {
+  try {
+    await myAsynchronousTask();
+  } catch (e) {
+    Logger.error(e);
+    // handle MyError
+  }
+}
+```
+
 ### `Feeback System`
 
 User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  
