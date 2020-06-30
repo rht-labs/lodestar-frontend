@@ -17,6 +17,7 @@ export function EngagementDetailsViewTemplate({
   children: any;
 }) {
   const { launchEngagement } = useEngagements();
+  throw Error();
   return (
     <>
       <PageSection
@@ -29,7 +30,10 @@ export function EngagementDetailsViewTemplate({
         </TextContent>
       </PageSection>
       <div style={{ marginTop: '1rem' }}>
-        <LaunchAlertBanner onLaunch={launchEngagement} engagement={engagement} />
+        <LaunchAlertBanner
+          onLaunch={launchEngagement}
+          engagement={engagement}
+        />
       </div>
       <PageSection variant={PageSectionVariants.default}>
         {children}
