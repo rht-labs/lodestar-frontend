@@ -46,7 +46,7 @@ export class ClusterStatusJsonSerializer
     return {
       ...(data as Subsystem),
       status: HealthStatus[HealthStatus[data['status']]],
-      state: 'provisioning',
+      state: 'provisioned',
       updated: parseISO(data['updated']),
       messages: (data['messages'] ?? []).map(message =>
         this.parseSystemMessage(message)

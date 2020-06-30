@@ -72,7 +72,7 @@ function DetailedSubsystemStatusList({ subsystem }: { subsystem: Subsystem }) {
                   </DataListCell>,
                   <DataListCell key="subsystemMessage" >
                     <b> Messages: </b>
-                    {subsystem.messages.map(m => <div>m.message</div>)}
+                    {subsystem.messages.map(m => <div>{m.message}</div>)}
                   </DataListCell>,
                   <DataListCell key="subsystemInfo" >
                     <b> Updated: </b> {subsystem.updated.toString()}

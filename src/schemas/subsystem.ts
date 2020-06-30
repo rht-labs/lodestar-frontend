@@ -19,7 +19,7 @@ export abstract class Subsystem {
     return {
       name: fakeSubsystemNames[faker.random.number(fakeSubsystemNames.length - 1)],
       status: HealthStatus[HealthStatus[faker.random.number(Object.keys(HealthStatus).length - 1)]],
-      state: 'provisioning',
+      state: 'provisioned',
       info: faker.lorem.sentence(),
       updated: faker.date.recent(),
       web_console: faker.internet.url(),
@@ -31,7 +31,7 @@ export abstract class Subsystem {
     return {
       name: 'Openshift',
       status: HealthStatus.yellow,
-      state: "provisioning",
+      state: "provisioned",
       info: 'Deployment In Progress',
       updated: new Date(2020, 1, 1),
       web_console: 'https://console......',
