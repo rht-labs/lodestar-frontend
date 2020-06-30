@@ -33,6 +33,12 @@ export function EngagementStartEndDateFormField(
     ] as number) ?? 0;
 
   const getRetirementDate = (): string => {
+    if (
+      !props.engagement.end_date ||
+      props.engagement?.end_date! instanceof Date
+    ) {
+      return undefined;
+    }
     if (props.engagement?.archive_date || retirementDateChanged) {
       return getFormattedDate(props.engagement?.archive_date);
     } else if (props.engagement?.end_date) {
