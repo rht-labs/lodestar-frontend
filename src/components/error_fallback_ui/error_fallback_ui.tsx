@@ -22,10 +22,7 @@ export const ErrorFallbackUI = () => {
               First, try refreshing your browser and navigating back to this
               page.
             </p>
-            <p>
-              If that doesn't work, please send us an email at:&nbsp;
-              <a href="mailto:obedin@redhat.com">obedin@redhat.com</a>
-            </p>
+            <p>If that doesn't work, please send an email to the SRE team.</p>
           </EmptyStateBody>
         </EmptyState>
       </>
