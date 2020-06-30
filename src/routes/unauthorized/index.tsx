@@ -1,4 +1,6 @@
 import React from 'react';
+import {EmptyState, EmptyStateBody, EmptyStateIcon, Title} from "@patternfly/react-core";
+import {LockIcon} from "@patternfly/react-icons";
 
 export function UnauthorizedPage() {
   const contentPane: React.CSSProperties = {
@@ -13,7 +15,16 @@ export function UnauthorizedPage() {
   return (
     <>
       <div style={contentPane}>
-        <p>Sorry, your account has not yet been granted access to this system. Please contact the SRE team to resolve this.</p>
+        <EmptyState>
+          <EmptyStateIcon icon={LockIcon}/>
+          <Title size="lg" headingLevel="h4">
+            Access denied
+          </Title>
+          <EmptyStateBody>
+            Sorry, your account has not yet been granted access to this system. Please contact the SRE team to resolve
+            this.
+          </EmptyStateBody>
+        </EmptyState>
       </div>
     </>
   );
