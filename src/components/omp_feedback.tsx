@@ -20,7 +20,7 @@ export function Feedback() {
     zIndex: 1000,
     opacity: 0.67,
     transitionProperty: 'opacity, height',
-    transitionDelay: `${transitionDuration}ms, ${0}ms`,
+    transitionDelay: `${transitionDuration}ms, 0ms`,
     transitionDuration: `${transitionDuration + 2}ms, ${transitionDuration}ms`,
   };
 
