@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useContext,
-  useCallback,
-  useRef,
-  useEffect,
-} from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { AlertVariant } from '@patternfly/react-core';
 
 interface FeedbackContext {
@@ -54,7 +48,7 @@ export const FeedbackProvider = ({
   };
 
   const hideAlertRef = useRef(hideAlert);
-  useEffect(() => clearTimeout(alertTimer), []);
+  useEffect(() => clearTimeout(alertTimer), [alertTimer]);
   const showAlert = (
     msg: string,
     variant: AlertType,
