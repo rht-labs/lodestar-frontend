@@ -6,7 +6,7 @@ import {
   getInitialState,
 } from './engagement_form_reducer';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
-import { useFeedback } from '../feedback_context';
+import { useFeedback, AlertType } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
@@ -96,6 +96,11 @@ export const EngagementProvider = ({
       feedbackContext.hideLoader();
       return engagements;
     } catch (e) {
+      feedbackContext.showAlert(
+        'Something went wrong while getting the engagements',
+        AlertType.error,
+        true
+      );
       console.error(e);
       feedbackContext.hideLoader();
     }
@@ -103,14 +108,21 @@ export const EngagementProvider = ({
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
-      let availableEngagements = engagements ?? (await fetchEngagements());
-      return availableEngagements?.find(
-        engagement =>
-          engagement?.customer_name === customerName &&
-          engagement?.project_name === projectName
-      );
+      try {
+        let availableEngagements = engagements ?? (await fetchEngagements());
+        return availableEngagements?.find(
+          engagement =>
+            engagement?.customer_name === customerName &&
+            engagement?.project_name === projectName
+        );
+      } catch (e) {
+        feedbackContext.showAlert(
+          'There was a problem fetching this engagement',
+          AlertType.error
+        );
+      }
     },
-    [engagements, fetchEngagements]
+    [engagements, fetchEngagements, feedbackContext]
   );
 
   const _addNewEngagement = useCallback(
@@ -136,7 +148,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
-          'success'
+          AlertType.success
         );
         return engagement;
       } catch (e) {
@@ -145,9 +157,9 @@ export const EngagementProvider = ({
           'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
           errorMessage =
-            'This client already has a project with that name. Please choose another.';
+            'This client already has a project with that name. Please choose a different project name.';
         }
-        feedbackContext.showAlert(errorMessage, 'error');
+        feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
     [engagementService, _addNewEngagement, feedbackContext, engagements]
@@ -204,7 +216,7 @@ export const EngagementProvider = ({
         const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
-          'success'
+          AlertType.success
         );
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
@@ -217,7 +229,7 @@ export const EngagementProvider = ({
           errorMessage =
             'The path that you input is already taken.  Please update and try saving again.';
         }
-        feedbackContext.showAlert(errorMessage, 'error');
+        feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
     [engagementService, _updateEngagementInPlace, feedbackContext]
@@ -247,14 +259,14 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'You have successfully launched your engagement!',
-          'success'
+          AlertType.success
         );
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'We were unable to launch your engagement. Please followup with an administrator if this continues.',
-          'error',
+          AlertType.error,
           false
         );
       }
