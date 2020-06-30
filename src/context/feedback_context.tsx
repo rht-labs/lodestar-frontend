@@ -1,11 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, {
+  useState,
+  useContext,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import { AlertVariant } from '@patternfly/react-core';
 
 interface FeedbackContext {
   isLoaderVisible: boolean;
   alertMsg: string | null;
   alertType: AlertVariant;
-  showAlert: (msg: string, variant: string, timed?: boolean) => void;
+  showAlert: (msg: string, variant: AlertType, timed?: boolean) => void;
   hideLoader: () => void;
   showLoader: () => void;
   hideAlert: () => void;
@@ -16,10 +22,15 @@ export const FeedbackContext = React.createContext<FeedbackContext>({
   alertMsg: null,
   alertType: AlertVariant.success,
   hideAlert: () => {},
-  showAlert: (msg: string, variant: string, timed: boolean) => {},
+  showAlert: (msg: string, variant: AlertType, timed: boolean) => {},
   hideLoader: () => {},
   showLoader: () => {},
 });
+
+export enum AlertType {
+  error,
+  success,
+}
 
 export const FeedbackProvider = ({
   children,
@@ -29,6 +40,7 @@ export const FeedbackProvider = ({
   const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>(null);
   const [alertType, setAlertType] = useState<AlertVariant>(null);
+  const [alertTimer, setAlertTimer] = useState(null);
 
   const hideLoader = () => setIsLoaderVisible(false);
   const showLoader = () => setIsLoaderVisible(true);
@@ -37,21 +49,26 @@ export const FeedbackProvider = ({
     setAlertMsg(null);
     if (alertTimer !== null) {
       clearTimeout(alertTimer);
-      alertTimer = null;
+      setAlertTimer(null);
     }
   };
-  let alertTimer = null;
 
-  const showAlert = (msg: string, variant: string, timed: boolean = true) => {
-    if (variant === 'error') {
+  const hideAlertRef = useRef(hideAlert);
+  useEffect(() => clearTimeout(alertTimer), []);
+  const showAlert = (
+    msg: string,
+    variant: AlertType,
+    timed: boolean = true
+  ) => {
+    if (variant === AlertType.error) {
       setAlertType(AlertVariant.danger);
     } else {
       setAlertType(AlertVariant.success);
     }
     setAlertMsg(msg);
 
-    if (timed && variant !== 'error') {
-      alertTimer = setTimeout(hideAlert, 5000);
+    if (timed && variant !== AlertType.error) {
+      setAlertTimer(setTimeout(hideAlertRef.current, 5000));
     }
   };
 
