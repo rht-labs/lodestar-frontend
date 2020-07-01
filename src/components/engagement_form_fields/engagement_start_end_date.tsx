@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
 import {
   FormGroup,
@@ -19,9 +19,11 @@ interface EngagementStartEndDateProps {
   onChange: (fieldName: string, value: any) => void;
 }
 
-export function EngagementStartEndDateFormField(
-  props: EngagementStartEndDateProps
-) {
+export function EngagementStartEndDateFormField({
+  onChange,
+  engagement,
+  ...props
+}: EngagementStartEndDateProps) {
   const [retirementDateChanged, setRetirementDateChanged] = useState(false);
   const gracePeriodInDays: number =
     (props.formOptions?.['logistics_options']?.[
@@ -32,22 +34,28 @@ export function EngagementStartEndDateFormField(
       'env_grace_period_max'
     ] as number) ?? 0;
 
-  const getRetirementDate = (): string => {
-    if (
-      !props.engagement.end_date ||
-      !(props.engagement?.end_date instanceof Date)
-    ) {
+  const { end_date, archive_date } = engagement ?? {};
+
+  const getRetirementDate = useCallback((): Date => {
+    if (!end_date || !(end_date instanceof Date)) {
       return undefined;
     }
-    if (props.engagement?.archive_date || retirementDateChanged) {
-      return getFormattedDate(props.engagement?.archive_date);
-    } else if (props.engagement?.end_date) {
-      const newDate = props.engagement?.end_date;
+    if (archive_date || retirementDateChanged) {
+      return archive_date;
+    } else if (end_date) {
+      const newDate = end_date;
       newDate.setDate(newDate.getUTCDate() + (gracePeriodInDays ?? 0));
-      return getFormattedDate(newDate);
+      return newDate;
     }
-    return '';
-  };
+    return undefined;
+  }, [end_date, archive_date, gracePeriodInDays, retirementDateChanged]);
+
+  useEffect(() => {
+    if (end_date) {
+      onChange('archive_date', getRetirementDate());
+    }
+  }, [getRetirementDate, onChange, end_date]);
+
   const { hasFeature } = useFeatures();
   return (
     <>
@@ -64,15 +72,15 @@ export function EngagementStartEndDateFormField(
           <TextInput
             isDisabled={
               !hasFeature(APP_FEATURES.writer) ||
-              !!(props.engagement as Engagement).launch
+              !!(engagement as Engagement).launch
             }
             name="start_date"
             id="start_date"
             type="date"
             aria-label="The start date."
-            value={getFormattedDate(props.engagement?.start_date) || ''}
+            value={getFormattedDate(engagement?.start_date) || ''}
             onChange={e =>
-              props.onChange('start_date', parseDate(e, 'yyyy-MM-dd', 0))
+              onChange('start_date', parseDate(e, 'yyyy-MM-dd', 0))
             }
           />
           <TextInput
@@ -81,10 +89,8 @@ export function EngagementStartEndDateFormField(
             id="end_date"
             type="date"
             aria-label="The end date"
-            value={getFormattedDate(props.engagement?.end_date) || ''}
-            onChange={e =>
-              props.onChange('end_date', parseDate(e, 'yyyy-MM-dd', 0))
-            }
+            value={getFormattedDate(engagement?.end_date) || ''}
+            onChange={e => onChange('end_date', parseDate(e, 'yyyy-MM-dd', 0))}
           />
         </InputGroup>
       </FormGroup>
@@ -103,15 +109,15 @@ export function EngagementStartEndDateFormField(
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
-            value={getRetirementDate()}
+            value={getFormattedDate(getRetirementDate())}
             onChange={e => {
               setRetirementDateChanged(true);
-              props.onChange('archive_date', parseDate(e, 'yyyy-MM-dd', 0));
+              onChange('archive_date', parseDate(e, 'yyyy-MM-dd', 0));
             }}
-            min={getFormattedDate(props.engagement?.end_date)}
+            min={getFormattedDate(engagement?.end_date)}
             max={getFormattedDate(
               maxGracePeriodInDays
-                ? addDays(props.engagement?.end_date, maxGracePeriodInDays)
+                ? addDays(engagement?.end_date, maxGracePeriodInDays)
                 : undefined
             )}
           />
