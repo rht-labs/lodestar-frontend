@@ -5,7 +5,7 @@ import {
   GridItem,
   Button,
   ButtonVariant,
-  InputGroup,
+  InputGroup, Flex, FlexItem,
 } from '@patternfly/react-core';
 import { EngagementFilter } from '../../schemas/engagement_filter';
 import { SortSelect } from './components/sort_select';
@@ -23,30 +23,33 @@ export function EngagementFilterBar({
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
   return (
-    <Grid hasGutter>
-      <GridItem span={4}>
-        <InputGroup>
-          <Button variant="control" aria-label="search button for search input">
-            <SearchIcon />
+    <Flex justifyContent={{ default: 'justifyContentCenter' }} >
+      <Flex style={{marginTop: '1rem'}}>
+        <FlexItem grow={{ default: 'grow' }}>
+          <InputGroup>
+            <Button variant="control" aria-label="search button for search input">
+              <SearchIcon />
+            </Button>
+            <TextInput
+              style={{minWidth: '15rem'}}
+              value={searchTerm}
+              onChange={searchTerm => onChange({ ...filter, searchTerm })}
+              placeholder="Search for an engagement"
+            />
+          </InputGroup>
+        </FlexItem>
+        <FlexItem>
+          <EngagementStatusSelect onChange={onChange} filter={filter} />
+        </FlexItem>
+        <FlexItem>
+          <SortSelect onChange={onChange} filter={filter} />
+        </FlexItem>
+        <FlexItem>
+          <Button variant={ButtonVariant.secondary} onClick={() => onChange({})}>
+            Reset
           </Button>
-          <TextInput
-            value={searchTerm}
-            onChange={searchTerm => onChange({ ...filter, searchTerm })}
-            placeholder="Search for an engagement"
-          />
-        </InputGroup>
-      </GridItem>
-      <GridItem span={3}>
-        <EngagementStatusSelect onChange={onChange} filter={filter} />
-      </GridItem>
-      <GridItem span={3}>
-        <SortSelect onChange={onChange} filter={filter} />
-      </GridItem>
-      <GridItem span={2}>
-        <Button variant={ButtonVariant.secondary} onClick={() => onChange({})}>
-          Reset
-        </Button>
-      </GridItem>
-    </Grid>
+        </FlexItem>
+      </Flex>
+    </Flex>
   );
 }
