@@ -37,7 +37,8 @@ export function UserCard({
         actionButton={() => (
           <EditButton
             onClick={() => requestOpen(USER_EDIT_MODAL_KEY)}
-            text={'Edit'}/>
+            text={'Edit'}
+          />
         )}
         title="Engagement Users"
       >
@@ -52,8 +53,8 @@ export function UserCard({
 const UserGrid = ({ engagement }: { engagement: Engagement }) => {
   return (
     <>
-      {engagement?.engagement_users?.map(user => (
-        <UserTile user={user} />
+      {engagement?.engagement_users?.map((user, i) => (
+        <UserTile key={i} user={user} />
       ))}
     </>
   );

@@ -24,6 +24,7 @@ export function SystemStatusDetailsModal(props: SystemStatusDetailsModalProps) {
       variant={ModalVariant.large}
       isOpen={props.isOpen}
       onClose={requestClose}
+      title="System Status Details"
     >
       <EditModalTemplate
         actions={
@@ -31,7 +32,6 @@ export function SystemStatusDetailsModal(props: SystemStatusDetailsModalProps) {
             <Button onClick={requestClose}>Close</Button>
           </div>
         }
-        title="System Status Messages"
       >
         <DetailedSystemStatusList
           messages={props.engagement?.status?.messages}
@@ -45,7 +45,10 @@ function DetailedSystemStatusList({ messages }: { messages: SystemMessage[] }) {
   return (
     <Grid>
       {messages?.map(systemMessage => (
-        <GridItem span={12}>
+        <GridItem
+          span={12}
+          key={systemMessage.updated.toISOString() + systemMessage.message}
+        >
           <StatusMessageItem
             severity={systemMessage.severity}
             message={systemMessage.message}

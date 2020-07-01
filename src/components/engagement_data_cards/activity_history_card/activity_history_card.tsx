@@ -6,7 +6,7 @@ import { useModalVisibility } from '../../../context/edit_modal_visibility_conte
 import { GitCommit } from '../../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
-import {EditButton} from "../../data_card_edit_button/data_card_edit_button";
+import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 export interface GitHistoryCardProps {
   engagement: Engagement;
 }
@@ -50,7 +50,7 @@ function ActivityList({ commits }: { commits: GitCommit[] }) {
     return (
       <>
         {commits.map(commit => (
-          <ActivityListItem commit={commit} />
+          <ActivityListItem key={commit.id} commit={commit} />
         ))}
       </>
     );

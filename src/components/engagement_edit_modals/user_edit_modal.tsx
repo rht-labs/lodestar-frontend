@@ -60,14 +60,18 @@ export function UserEditModal({
     onChange('user', engagement.engagement_users);
   }
   return (
-    <Modal variant={ModalVariant.large} isOpen={isOpen} onClose={requestClose}>
+    <Modal
+      variant={ModalVariant.large}
+      isOpen={isOpen}
+      onClose={requestClose}
+      title="Engagement Users"
+    >
       <EditModalTemplate
         actions={
           <div>
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Engagement Users"
       >
         <div>
           {!engagement.engagement_users.length ? (

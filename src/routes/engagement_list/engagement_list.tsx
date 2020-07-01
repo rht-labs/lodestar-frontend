@@ -42,7 +42,10 @@ export function EngagementList({ engagements }: { engagements: Engagement[] }) {
   return (
     <>
       {(engagements ?? []).map(e => (
-        <EngagementListItem engagement={e} />
+        <EngagementListItem
+          key={`${e.project_name}${e.customer_name}`}
+          engagement={e}
+        />
       ))}
     </>
   );
