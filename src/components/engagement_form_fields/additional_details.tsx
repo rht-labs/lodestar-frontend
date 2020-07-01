@@ -9,9 +9,7 @@ export interface DescriptionFormFieldProps {
   onChange: (fieldName: string, value: any) => void;
 }
 
-export function AdditionalInformationFormField(
-  props: DescriptionFormFieldProps
-) {
+export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
   const { hasFeature } = useFeatures();
   return (
     <FormGroup label="Additional Information" fieldId="additional_details">

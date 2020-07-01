@@ -13,7 +13,7 @@ import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version'
 import { SubdomainFormField } from '../engagement_form_fields/subdomain';
 import { PersistentStorageFormField } from '../engagement_form_fields/persistent_storage';
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
-import { AdditionalInformationFormField } from '../engagement_form_fields/additional_information';
+import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 export interface OpenShiftClusterEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -84,7 +84,7 @@ export function OpenShiftClusterEditModal({
             formOptions={formOptions}
             engagement={engagement}
           />
-          <AdditionalInformationFormField
+          <AdditionalDetailsFormField
             onChange={onChange}
             engagement={engagement}
           />
