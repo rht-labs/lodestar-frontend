@@ -20,7 +20,7 @@ export function Dashboard() {
   const numberOfUpcomingEngagements = engagements?.filter(
     engagementFilterFactory({allowedStatuses: [EngagementStatus.upcoming]})
   ).length;
-  const numberOfActiveEngagements = engagements?.filter(
+  const numberOfcurrentEngagements = engagements?.filter(
     engagementFilterFactory({allowedStatuses: [EngagementStatus.active]})
   ).length;
   const numberOfPastEngagements = engagements?.filter(
@@ -56,7 +56,7 @@ export function Dashboard() {
           <GridItem span={3}>
             <DashboardDataCard
               icon={OnRunningIcon}
-              numberOfEngagements={numberOfActiveEngagements}
+              numberOfEngagements={numberOfcurrentEngagements}
               title={'Active Engagements'}
               subtitle={'Engagements that are already in progress and running at the moment.'}
               url={"/app/engagements/active"}/>

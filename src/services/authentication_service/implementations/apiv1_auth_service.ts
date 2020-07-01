@@ -4,6 +4,7 @@ import qs from 'querystring';
 import { UserProfile } from '../../../schemas/user_profile_schema';
 import { AuthService } from '../authentication_service';
 import { Config } from '../../../schemas/config';
+import { Logger } from '../../../utilities/logger';
 const TOKEN_STORAGE_KEY = 'token';
 
 export class Apiv1AuthService implements AuthService {
@@ -38,7 +39,7 @@ export class Apiv1AuthService implements AuthService {
         );
       }
     } catch (e) {
-      console.error(e);
+      Logger.instance.error(e);
     }
   }
 
@@ -103,7 +104,7 @@ export class Apiv1AuthService implements AuthService {
           resolve(false);
         }
       } catch (e) {
-        console.error(e);
+        Logger.instance.error(e);
         resolve(false);
       }
     });

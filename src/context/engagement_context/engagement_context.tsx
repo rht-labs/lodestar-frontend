@@ -6,16 +6,16 @@ import {
   getInitialState,
 } from './engagement_form_reducer';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
-import { useFeedback } from '../feedback_context';
+import { useFeedback, AlertType } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
-  engagementFormState?: Engagement;
-  activeEngagement?: Engagement;
-  setActiveEngagement: (Engagement: Engagement) => void;
+  currentEngagementChanges?: Engagement;
+  currentEngagement?: Engagement;
+  setcurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
   requiredFields: string[];
   getEngagement: (
@@ -69,10 +69,10 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
-  const [activeEngagement, setActiveEngagement] = useState<
+  const [currentEngagement, setcurrentEngagement] = useState<
     Engagement | undefined
   >();
-  const [engagementFormState, dispatch] = useReducer<
+  const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
@@ -82,12 +82,12 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
-    Logger.info('change active engagement', activeEngagement);
+    Logger.instance.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
-      payload: getInitialState(activeEngagement),
+      payload: getInitialState(currentEngagement),
     });
-  }, [activeEngagement, formOptions]);
+  }, [currentEngagement, formOptions]);
   const fetchEngagements = useCallback(async () => {
     try {
       feedbackContext.showLoader();
@@ -96,21 +96,34 @@ export const EngagementProvider = ({
       feedbackContext.hideLoader();
       return engagements;
     } catch (e) {
-      console.error(e);
+      feedbackContext.showAlert(
+        'Something went wrong while getting the engagements',
+        AlertType.error,
+        true
+      );
+      Logger.instance.error(e);
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
-      let availableEngagements = engagements ?? (await fetchEngagements());
-      return availableEngagements?.find(
-        engagement =>
-          engagement?.customer_name === customerName &&
-          engagement?.project_name === projectName
-      );
+      try {
+        let availableEngagements = engagements ?? (await fetchEngagements());
+        return availableEngagements?.find(
+          engagement =>
+            engagement?.customer_name === customerName &&
+            engagement?.project_name === projectName
+        );
+      } catch (e) {
+        Logger.instance.error(e);
+        feedbackContext.showAlert(
+          'There was a problem fetching this engagement',
+          AlertType.error
+        );
+      }
     },
-    [engagements, fetchEngagements]
+    [engagements, fetchEngagements, feedbackContext]
   );
 
   const _addNewEngagement = useCallback(
@@ -119,7 +132,7 @@ export const EngagementProvider = ({
         const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
-        console.error(e);
+        Logger.instance.error(e);
         // TODO: Handle setting the error
       }
     },
@@ -136,18 +149,19 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
-          'success'
+          AlertType.success
         );
         return engagement;
       } catch (e) {
+        Logger.instance.error(e);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
           errorMessage =
-            'This client already has a project with that name. Please choose another.';
+            'This client already has a project with that name. Please choose a different project name.';
         }
-        feedbackContext.showAlert(errorMessage, 'error');
+        feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
     [engagementService, _addNewEngagement, feedbackContext, engagements]
@@ -156,21 +170,21 @@ export const EngagementProvider = ({
   const _checkLaunchReady = useCallback(() => {
     let result = requiredFields.every(
       o =>
-        typeof engagementFormState[o] === 'boolean' ||
-        typeof engagementFormState[0] === 'number' ||
-        !!engagementFormState[o]
+        typeof currentEngagementChanges[o] === 'boolean' ||
+        typeof currentEngagementChanges[o] === 'number' ||
+        !!currentEngagementChanges[o]
     );
     return result;
-  }, [engagementFormState, requiredFields]);
+  }, [currentEngagementChanges, requiredFields]);
 
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
-        engagementFormState[field] !== 'boolean' &&
-        engagementFormState[field] !== 'number' &&
-        !engagementFormState[field]
+        currentEngagementChanges[field] !== 'boolean' &&
+        currentEngagementChanges[field] !== 'number' &&
+        !currentEngagementChanges[field]
     );
-  }, [engagementFormState, requiredFields]);
+  }, [currentEngagementChanges, requiredFields]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -204,11 +218,12 @@ export const EngagementProvider = ({
         const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
-          'success'
+          AlertType.success
         );
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
@@ -217,7 +232,7 @@ export const EngagementProvider = ({
           errorMessage =
             'The path that you input is already taken.  Please update and try saving again.';
         }
-        feedbackContext.showAlert(errorMessage, 'error');
+        feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
     [engagementService, _updateEngagementInPlace, feedbackContext]
@@ -247,14 +262,15 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'You have successfully launched your engagement!',
-          'success'
+          AlertType.success
         );
       } catch (e) {
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'We were unable to launch your engagement. Please followup with an administrator if this continues.',
-          'error',
+          AlertType.error,
           false
         );
       }
@@ -270,15 +286,18 @@ export const EngagementProvider = ({
     <Provider
       value={{
         requiredFields,
-        activeEngagement,
+        currentEngagement,
         missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
-        setActiveEngagement,
+        setcurrentEngagement,
         engagements,
         getEngagement,
         error,
-        engagementFormState,
+        currentEngagementChanges: {
+          ...currentEngagement,
+          ...currentEngagementChanges,
+        },
         formOptions,
         isLoading,
         updateEngagementFormField,
