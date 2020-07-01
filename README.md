@@ -102,11 +102,17 @@ async function myAsynchronousFunction() {
   try {
     await myAsynchronousTask();
   } catch (e) {
-    Logger.error(e);
+    Logger.instance.error(e);
     // handle MyError
   }
 }
 ```
+
+Use good judgment when creating console logs. As a rule, any error or unexpected behavior that is caught in the application should be logged with `Logger.instance.error`. **Do not silence errors**. `debug` and `info` are additional log levels to choose from. `debug` is the noisiest level, with `info` being less noisy.
+
+#### Logging Config Variables
+
+The logger can be set with values in `config.json`. Available log types are defined in `src/utilities/logger/index.ts`. Log Verbosity is an enum defined in `src/utilities/logger/logger.ts`. To set this value, set the config value defined in `config.example.json` to the desired log verbosity.
 
 ### `Feeback System`
 

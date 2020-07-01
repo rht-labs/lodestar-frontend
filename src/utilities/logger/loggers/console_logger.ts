@@ -1,10 +1,5 @@
 import { Logger, LogVerbosity } from '../logger';
 
-const logger =
-  typeof console != undefined && process.env.NODE_ENV === 'development'
-    ? console
-    : ({} as any);
-
 export const ConsoleLogger = (verbosity: LogVerbosity): Logger => {
   const level = (function() {
     switch (verbosity) {
@@ -17,8 +12,8 @@ export const ConsoleLogger = (verbosity: LogVerbosity): Logger => {
     }
   })();
   return {
-    debug: (...args) => level === 0 && logger?.debug?.(...args),
-    info: (...args) => level <= 1 && logger?.info?.(...args),
-    error: (...args) => logger?.error?.(...args),
+    debug: (...args) => level === 0 && console.debug?.(...args),
+    info: (...args) => level <= 1 && console.info?.(...args),
+    error: (...args) => console.error?.(...args),
   };
 };

@@ -1,4 +1,5 @@
 import { Engagement } from '../../schemas/engagement_schema';
+import { HealthStatus } from '../../schemas/cluster_status';
 
 export function upcomingEngagement(): Engagement {
   return {
@@ -15,6 +16,17 @@ export function upcomingEngagement(): Engagement {
     ocp_cloud_provider_name: 'AWS',
     ocp_cloud_provider_region: 'N. Virginia',
     ocp_cluster_size: 'Large',
+    commits: [],
+    creation_details: {
+      created_by_email: 'john@doe.com',
+      created_by_user: 'John Doe',
+      created_on: new Date(2020, 1, 1),
+    },
+    status: {
+      messages: [],
+      overall_status: HealthStatus.green,
+      subsystems: [],
+    },
     ocp_persistent_storage_size: `100G`,
     ocp_sub_domain: 'ordoabchao',
     ocp_version: '4.4',
@@ -27,7 +39,7 @@ export function upcomingEngagement(): Engagement {
   };
 }
 
-export function activeEngagement(): Engagement {
+export function currentEngagement(): Engagement {
   return {
     archive_date: new Date(),
     customer_contact_email: 'bob@doe.com',
@@ -42,6 +54,17 @@ export function activeEngagement(): Engagement {
     ocp_cloud_provider_name: 'AWS',
     ocp_cloud_provider_region: 'N. Virginia',
     ocp_cluster_size: 'Large',
+    commits: [],
+    creation_details: {
+      created_by_email: 'john@doe.com',
+      created_by_user: 'John Doe',
+      created_on: new Date(2020, 1, 1),
+    },
+    status: {
+      messages: [],
+      overall_status: HealthStatus.green,
+      subsystems: [],
+    },
     ocp_persistent_storage_size: `100G`,
     ocp_sub_domain: 'ordoabchao',
     ocp_version: '4.4',
@@ -72,6 +95,17 @@ export function pastEngagement(): Engagement {
     ocp_cloud_provider_name: 'AWS',
     ocp_cloud_provider_region: 'N. Virginia',
     ocp_cluster_size: 'Large',
+    commits: [],
+    creation_details: {
+      created_by_email: 'john@doe.com',
+      created_by_user: 'John Doe',
+      created_on: new Date(2020, 1, 1),
+    },
+    status: {
+      messages: [],
+      overall_status: HealthStatus.green,
+      subsystems: [],
+    },
     ocp_persistent_storage_size: `100G`,
     ocp_sub_domain: 'ordoabchao',
     ocp_version: '4.4',

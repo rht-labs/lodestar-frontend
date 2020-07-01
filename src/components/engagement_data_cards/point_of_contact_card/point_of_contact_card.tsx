@@ -11,17 +11,21 @@ import { RequiredFieldsWarning } from '../../required_fields_warning/required_fi
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
 export interface PointOfContactCardProps {
-  engagement: Engagement;
+  currentEngagement: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
   onSave: (engagement: Engagement) => void;
+  missingRequiredFields: string[];
 }
 
 export function PointOfContactCard({
-  engagement,
+  currentEngagement,
+  currentEngagementChanges,
   formOptions,
   onChange,
   onSave,
+  missingRequiredFields,
 }: PointOfContactCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
 
@@ -38,17 +42,18 @@ export function PointOfContactCard({
       <PointOfContactEditModal
         formOptions={formOptions}
         onChange={onChange}
-        engagement={engagement}
+        engagement={currentEngagementChanges}
         onSave={onSave}
         isOpen={activeModalKey === POINT_OF_CONTACT_MODAL_KEY}
       />
       <DataCard
         title="Points of Contact"
         trailingIcon={() =>
-          !engagement || engagement?.launch ? (
+          !currentEngagement || currentEngagement?.launch ? (
             <div />
           ) : (
             <RequiredFieldsWarning
+              missingRequiredFields={missingRequiredFields}
               requiredFields={pointOfContactRequiredFields}
             />
           )
@@ -62,17 +67,17 @@ export function PointOfContactCard({
         <Grid hasGutter>
           <GridItem span={4}>
             <TitledDataPoint title="Engagement Lead">
-              {engagement?.engagement_lead_name}
+              {currentEngagement?.engagement_lead_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Technical Lead">
-              {engagement?.technical_lead_name}
+              {currentEngagement?.technical_lead_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Customer Contact">
-              {engagement?.customer_contact_name}
+              {currentEngagement?.customer_contact_name}
             </TitledDataPoint>
           </GridItem>
         </Grid>

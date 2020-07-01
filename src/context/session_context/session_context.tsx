@@ -70,7 +70,7 @@ export const SessionProvider = ({
           return;
         }
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         setAuthStatus('unauthenticated');
       }
     },

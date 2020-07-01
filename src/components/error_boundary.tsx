@@ -4,7 +4,7 @@ import { ErrorFallbackUI } from './error_fallback_ui/error_fallback_ui';
 
 export interface ErrorBoundaryProps {
   children: React.ReactChild;
-  fallbackUI: React.FunctionComponent;
+  fallbackUI?: React.FunctionComponent;
   meta?: any;
 }
 
@@ -26,11 +26,11 @@ export class ErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error) {
-    Logger.error(error);
+    Logger.instance.error(error);
     return { hasError: true };
   }
   componentDidCatch(error: any, errorInfo: any) {
-    Logger.error(this.props.meta, error, errorInfo);
+    Logger.instance.error(this.props.meta, error, errorInfo);
   }
   render() {
     const { fallbackUI: FallbackUI = () => <ErrorFallbackUI /> } = this.props;

@@ -1,6 +1,6 @@
 export type Validator = (input: any) => string | null;
 
-export class Validators {
+export abstract class Validators {
   static NotNullValidator: Validator = (input: string) =>
     !!input.trim() ? null : 'The value provided must not be null';
 
