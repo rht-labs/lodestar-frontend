@@ -31,9 +31,12 @@ export function DashboardDataCard({
 
   const history = useHistory();
 
+  const cardShape: React.CSSProperties = {
+    minHeight: '45vh',
+  };
 
   return (
-    <Card isHoverable isCompact>
+    <Card isHoverable isCompact style={cardShape}>
       <CardBody>
         <EmptyState>
           <EmptyStateIcon icon={icon}/>
