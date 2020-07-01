@@ -5,6 +5,7 @@ import {
 } from '@patternfly/react-core';
 import { EngagementStatus } from '../../../schemas/engagement_schema';
 import { EngagementFilterProps } from '../engagement_filter_bar';
+import {FilterIcon} from "@patternfly/react-icons";
 
 export function EngagementStatusSelect({
   onChange,
@@ -23,7 +24,7 @@ export function EngagementStatusSelect({
   };
   return (
     <Select
-      placeholderText="Engagement Status"
+      placeholderText={<><FilterIcon style={{marginRight: '1rem'}}/> Engagement Status </>}
       isOpen={isStatusSelectOpen}
       onToggle={() => setIsStatusSelectOpen(!isStatusSelectOpen)}
       selections={filter?.allowedStatuses}
