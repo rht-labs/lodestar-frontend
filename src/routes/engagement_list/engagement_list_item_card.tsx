@@ -25,7 +25,7 @@ export function EngagementListItemCard(props: DataCardProps) {
 
   return (
     <>
-      <Card isHoverable isCompact style={{ margin: '1rem', padding: '1rem' }}>
+      <Card isHoverable isCompact style={{ margin: '1rem', padding: '2rem' }}>
         <CardBody style={{ padding: '0 2rem' }}>
           <Flex style={{ alignItems: 'center'}}>
             <FlexItem flex={{ default: 'flex_1' }}>
