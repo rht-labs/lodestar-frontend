@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataCard } from '../data_card';
 import { Engagement } from '../../../schemas/engagement_schema';
-import { Grid, GridItem, Button, ButtonVariant } from '@patternfly/react-core';
+import { Grid, GridItem } from '@patternfly/react-core';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { GitCommit } from '../../../schemas/git_commit';
