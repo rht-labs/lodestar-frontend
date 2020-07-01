@@ -59,7 +59,9 @@ export function PointOfContactCard({
           )
         }
         actionButton={() => (
-          <EditButton onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)} />
+          <EditButton
+            onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
+            text={'Edit'}/>
         )}
       >
         <Grid hasGutter>

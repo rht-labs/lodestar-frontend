@@ -12,24 +12,20 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="upcomingEngagement"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid pf-m-gutter"
+              class="pf-l-grid__item pf-m-12-col"
             >
-              <div
-                class="pf-l-grid__item pf-m-12-col"
-              >
-                Created by:
-                 John Doe
-              </div>
-              <div
-                class="pf-l-grid__item"
-              >
-                Target start date:
-                 
-                Feb 01, 2000
-              </div>
+              Created by:
+               John Doe
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2000
             </div>
           </div>
         </div>
@@ -124,24 +120,20 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="upcomingEngagement"
+          class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid pf-m-gutter"
+            class="pf-l-grid__item pf-m-12-col"
           >
-            <div
-              class="pf-l-grid__item pf-m-12-col"
-            >
-              Created by:
-               John Doe
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              Target start date:
-               
-              Feb 01, 2000
-            </div>
+            Created by:
+             John Doe
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            Target start date:
+             
+            Feb 01, 2000
           </div>
         </div>
       </div>
@@ -293,24 +285,20 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="upcomingEngagement"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid pf-m-gutter"
+              class="pf-l-grid__item pf-m-12-col"
             >
-              <div
-                class="pf-l-grid__item pf-m-12-col"
-              >
-                Created by:
-                 John Doe
-              </div>
-              <div
-                class="pf-l-grid__item"
-              >
-                Target start date:
-                 
-                Feb 01, 2020
-              </div>
+              Created by:
+               John Doe
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2020
             </div>
           </div>
         </div>
@@ -405,24 +393,20 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="upcomingEngagement"
+          class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid pf-m-gutter"
+            class="pf-l-grid__item pf-m-12-col"
           >
-            <div
-              class="pf-l-grid__item pf-m-12-col"
-            >
-              Created by:
-               John Doe
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              Target start date:
-               
-              Feb 01, 2020
-            </div>
+            Created by:
+             John Doe
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            Target start date:
+             
+            Feb 01, 2020
           </div>
         </div>
       </div>
@@ -574,24 +558,20 @@ Object {
           class="pf-l-grid__item pf-m-12-col"
         >
           <div
-            data-testid="upcomingEngagement"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid pf-m-gutter"
+              class="pf-l-grid__item pf-m-12-col"
             >
-              <div
-                class="pf-l-grid__item pf-m-12-col"
-              >
-                Created by:
-                 John Doe
-              </div>
-              <div
-                class="pf-l-grid__item"
-              >
-                Target start date:
-                 
-                Feb 01, 2050
-              </div>
+              Created by:
+               John Doe
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              Target start date:
+               
+              Feb 01, 2050
             </div>
           </div>
         </div>
@@ -686,24 +666,20 @@ Object {
         class="pf-l-grid__item pf-m-12-col"
       >
         <div
-          data-testid="upcomingEngagement"
+          class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid pf-m-gutter"
+            class="pf-l-grid__item pf-m-12-col"
           >
-            <div
-              class="pf-l-grid__item pf-m-12-col"
-            >
-              Created by:
-               John Doe
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              Target start date:
-               
-              Feb 01, 2050
-            </div>
+            Created by:
+             John Doe
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            Target start date:
+             
+            Feb 01, 2050
           </div>
         </div>
       </div>

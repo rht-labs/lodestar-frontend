@@ -1,6 +1,9 @@
 import React from 'react';
 import { DataCard } from '../data_card';
-import { Engagement } from '../../../schemas/engagement_schema';
+import {
+  Engagement,
+  getEngagementStatus,
+} from '../../../schemas/engagement_schema';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { format as formatDate } from 'date-fns';
@@ -9,6 +12,7 @@ import { useModalVisibility } from '../../../context/edit_modal_visibility_conte
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { EngagementStatusText } from '../../../routes/engagement_list/engagement_status_text';
 
 export interface EngagementSummaryCardProps {
   currentEngagement: Engagement;
@@ -35,6 +39,8 @@ export function EngagementSummaryCard({
     'start_date',
     'project_name',
   ];
+  const status = getEngagementStatus(currentEngagement);
+
   return (
     <>
       <EngagementSummaryEditModal
@@ -58,43 +64,54 @@ export function EngagementSummaryCard({
         actionButton={() => (
           <EditButton
             onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
+            text={'Edit'}
           />
         )}
         title="Engagement Summary"
       >
         <Grid hasGutter>
-          <GridItem span={4}>
+          <GridItem style={{ marginBottom: '1rem' }}>
+            <EngagementStatusText status={status} />
+          </GridItem>
+          <GridItem span={3}>
             <TitledDataPoint title="Company">
               {currentEngagement?.customer_name}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="Project">
               {currentEngagement?.project_name}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="Location">
               {currentEngagement?.location}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
+            <TitledDataPoint title="Description">
+              {currentEngagement?.description}
+            </TitledDataPoint>
+          </GridItem>
+          <GridItem span={3}>
             <TitledDataPoint title="Start Date">
               {currentEngagement?.start_date
                 ? formatDate(currentEngagement?.start_date, 'MMM dd, yyyy')
                 : null}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem span={3}>
             <TitledDataPoint title="End Date">
               {currentEngagement?.end_date
                 ? formatDate(currentEngagement?.end_date, 'MMM dd, yyyy')
                 : null}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
-            <TitledDataPoint title="Description">
-              {currentEngagement?.description}
+          <GridItem span={3}>
+            <TitledDataPoint title="Created By">
+              {!!currentEngagement?.creation_details?.created_by_user
+                ? currentEngagement?.creation_details?.created_by_user
+                : ''}
             </TitledDataPoint>
           </GridItem>
         </Grid>

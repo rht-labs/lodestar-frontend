@@ -62,7 +62,9 @@ export function OpenShiftClusterSummaryCard({
         }
         actionButton={() => (
           <div>
-            <EditButton onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)} />
+            <EditButton
+              onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)}
+              text={'Edit'}/>
           </div>
         )}
         title="Hosting Environment"

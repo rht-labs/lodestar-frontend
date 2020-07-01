@@ -1,10 +1,11 @@
 import React from 'react';
 import { DataCard } from '../data_card';
-import { Button, ButtonVariant, Grid, GridItem } from '@patternfly/react-core';
+import { Grid, GridItem } from '@patternfly/react-core';
 import { SubsystemDetails } from './subsystem_details';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { SystemStatusDetailsModal } from './system_status_details_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 
 export interface SystemStatusCardProps {
   currentEngagement: Engagement;
@@ -22,12 +23,10 @@ export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
       />
       <DataCard
         actionButton={() => (
-          <Button
-            variant={ButtonVariant.link}
+          <EditButton
             onClick={() => requestOpen(SYSTEM_STATUS_MODAL_KEY)}
-          >
-            View More
-          </Button>
+            text={'View More'}
+          />
         )}
         title="System Status"
       >

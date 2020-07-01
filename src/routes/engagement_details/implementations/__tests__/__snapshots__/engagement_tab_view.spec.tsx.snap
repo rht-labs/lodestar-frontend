@@ -111,7 +111,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -139,7 +140,17 @@ Object {
                       class="pf-l-grid pf-m-gutter"
                     >
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item"
+                        style="margin-bottom: 1rem;"
+                      >
+                        <b
+                          style="color: rgb(236, 122, 8);"
+                        >
+                          UPCOMING
+                        </b>
+                      </div>
+                      <div
+                        class="pf-l-grid__item pf-m-3-col"
                       >
                         <div
                           class="pf-c-content"
@@ -154,7 +165,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-3-col"
                       >
                         <div
                           class="pf-c-content"
@@ -169,7 +180,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-3-col"
                       >
                         <div
                           class="pf-c-content"
@@ -184,7 +195,22 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-3-col"
+                      >
+                        <div
+                          class="pf-c-content"
+                        >
+                          <h6
+                            class=""
+                            data-pf-content="true"
+                            style="margin-bottom: 0.1rem;"
+                          >
+                            Description
+                          </h6>
+                        </div>
+                      </div>
+                      <div
+                        class="pf-l-grid__item pf-m-3-col"
                       >
                         <div
                           class="pf-c-content"
@@ -199,7 +225,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-3-col"
                       >
                         <div
                           class="pf-c-content"
@@ -214,7 +240,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-3-col"
                       >
                         <div
                           class="pf-c-content"
@@ -224,8 +250,12 @@ Object {
                             data-pf-content="true"
                             style="margin-bottom: 0.1rem;"
                           >
-                            Description
+                            Created By
                           </h6>
+                          <p
+                            class=""
+                            data-pf-content="true"
+                          />
                         </div>
                       </div>
                     </div>
@@ -236,7 +266,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -270,7 +301,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -350,7 +382,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -514,7 +547,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -548,7 +582,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -668,7 +703,8 @@ Object {
                 class="pf-l-grid__item pf-m-12-col"
               >
                 <article
-                  class="pf-c-card"
+                  class="pf-c-card pf-m-compact"
+                  style="padding: 1rem;"
                 >
                   <div
                     class="pf-c-card__title"
@@ -935,7 +971,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
@@ -963,7 +1000,17 @@ Object {
                     class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item"
+                      style="margin-bottom: 1rem;"
+                    >
+                      <b
+                        style="color: rgb(236, 122, 8);"
+                      >
+                        UPCOMING
+                      </b>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-3-col"
                     >
                       <div
                         class="pf-c-content"
@@ -978,7 +1025,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-3-col"
                     >
                       <div
                         class="pf-c-content"
@@ -993,7 +1040,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-3-col"
                     >
                       <div
                         class="pf-c-content"
@@ -1008,7 +1055,22 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-3-col"
+                    >
+                      <div
+                        class="pf-c-content"
+                      >
+                        <h6
+                          class=""
+                          data-pf-content="true"
+                          style="margin-bottom: 0.1rem;"
+                        >
+                          Description
+                        </h6>
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-3-col"
                     >
                       <div
                         class="pf-c-content"
@@ -1023,7 +1085,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-3-col"
                     >
                       <div
                         class="pf-c-content"
@@ -1038,7 +1100,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-3-col"
                     >
                       <div
                         class="pf-c-content"
@@ -1048,8 +1110,12 @@ Object {
                           data-pf-content="true"
                           style="margin-bottom: 0.1rem;"
                         >
-                          Description
+                          Created By
                         </h6>
+                        <p
+                          class=""
+                          data-pf-content="true"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1060,7 +1126,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
@@ -1094,7 +1161,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
@@ -1174,7 +1242,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
@@ -1338,7 +1407,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
@@ -1372,7 +1442,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
@@ -1492,7 +1563,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col"
             >
               <article
-                class="pf-c-card"
+                class="pf-c-card pf-m-compact"
+                style="padding: 1rem;"
               >
                 <div
                   class="pf-c-card__title"
