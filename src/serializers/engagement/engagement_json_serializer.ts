@@ -4,6 +4,7 @@ import { parse, format, parseISO, isValid } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
+import { Logger } from '../../utilities/logger';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
@@ -26,6 +27,7 @@ export class EngagementJsonSerializer
         }
         return undefined;
       } catch (e) {
+        Logger.error(e);
         return undefined;
       }
     }

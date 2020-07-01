@@ -5,6 +5,7 @@ import { UserProfile } from '../../schemas/user_profile_schema';
 import { UserToken } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
+import { Logger } from '../../utilities/logger';
 
 export type AuthenticationState =
   | 'initial'
@@ -69,6 +70,7 @@ export const SessionProvider = ({
           return;
         }
       } catch (e) {
+        Logger.error(e);
         setAuthStatus('unauthenticated');
       }
     },
