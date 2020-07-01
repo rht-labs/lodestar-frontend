@@ -1,5 +1,4 @@
 import React from 'react';
-import { EngagementViewProps } from '..';
 import { Tabs, Tab } from '@patternfly/react-core';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { ClusterUsers } from '../tab_views/users';
@@ -7,7 +6,6 @@ import { EditPaneWrapper } from '../../../components/edit_pane_wrapper/edit_pane
 import { useLocation, useHistory } from 'react-router';
 import { EngagementOverviewTab } from '../tab_views/overview';
 import { HostingEnvironmentTab } from '../tab_views/hosting_environment';
-interface EngagementTabViewProps extends EngagementViewProps {}
 
 enum TabNames {
   overview = 'overview',
@@ -15,12 +13,14 @@ enum TabNames {
   hostingEnvironment = 'hosting_environment',
 }
 
-export function EngagementTabView({ engagement }: EngagementTabViewProps) {
+export function EngagementTabView() {
   const {
     formOptions,
     engagementFormState,
     updateEngagementFormField,
     saveEngagement,
+    activeEngagement,
+    missingRequiredFields,
   } = useEngagements();
   const { pathname } = useLocation();
   const history = useHistory();
@@ -48,7 +48,9 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
             onSave={saveEngagement}
             formOptions={formOptions}
             onChange={updateEngagementFormField}
-            engagement={engagementFormState}
+            activeEngagement={activeEngagement}
+            engagementFormState={engagementFormState}
+            missingRequiredFields={missingRequiredFields}
           />
         </TabContentWrapper>
       </Tab>
@@ -56,9 +58,12 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagementFormState}>
             <ClusterUsers
+              activeEngagement={activeEngagement}
+              onSave={saveEngagement}
               formOptions={formOptions}
-              engagement={engagementFormState}
               onChange={updateEngagementFormField}
+              missingRequiredFields={missingRequiredFields}
+              engagementFormState={engagementFormState}
             />
           </EditPaneWrapper>
         </TabContentWrapper>
@@ -71,10 +76,12 @@ export function EngagementTabView({ engagement }: EngagementTabViewProps) {
         <TabContentWrapper>
           <EditPaneWrapper engagement={engagementFormState}>
             <HostingEnvironmentTab
+              activeEngagement={activeEngagement}
               onSave={saveEngagement}
               formOptions={formOptions}
-              engagement={engagement}
               onChange={updateEngagementFormField}
+              missingRequiredFields={missingRequiredFields}
+              engagementFormState={engagementFormState}
             />
           </EditPaneWrapper>
         </TabContentWrapper>

@@ -10,7 +10,7 @@ import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_v
 import { EngagementPageView } from './implementations/engagement_page_view';
 
 export interface EngagementViewProps {
-  engagement?: Engagement;
+  activeEngagement?: Engagement;
 }
 
 export function EngagementDetailView(props) {
@@ -64,7 +64,7 @@ export function EngagementDetailView(props) {
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate engagement={activeEngagement}>
         <AlertMessage />
-        <EngagementPageView engagement={activeEngagement} />
+        <EngagementPageView />
       </EngagementDetailsViewTemplate>
     </ValidationProvider>
   );

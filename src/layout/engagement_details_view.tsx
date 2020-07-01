@@ -16,7 +16,12 @@ export function EngagementDetailsViewTemplate({
   engagement: Engagement;
   children: any;
 }) {
-  const { launchEngagement } = useEngagements();
+  const {
+    launchEngagement,
+    missingRequiredFields,
+    isLaunchable,
+    requiredFields,
+  } = useEngagements();
   return (
     <>
       <PageSection
@@ -30,6 +35,9 @@ export function EngagementDetailsViewTemplate({
       </PageSection>
       <div style={{ marginTop: '1rem' }}>
         <LaunchAlertBanner
+          requiredFields={requiredFields}
+          isLaunchable={isLaunchable}
+          missingRequiredFields={missingRequiredFields}
           onLaunch={launchEngagement}
           engagement={engagement}
         />

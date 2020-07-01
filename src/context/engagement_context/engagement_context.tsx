@@ -294,7 +294,7 @@ export const EngagementProvider = ({
         engagements,
         getEngagement,
         error,
-        engagementFormState,
+        engagementFormState: { ...activeEngagement, ...engagementFormState },
         formOptions,
         isLoading,
         updateEngagementFormField,

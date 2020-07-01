@@ -15,17 +15,21 @@ import { RequiredFieldsWarning } from '../../required_fields_warning/required_fi
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
 export interface OpenShiftClusterSummaryCardProps {
-  engagement: Engagement;
+  activeEngagement: Engagement;
+  engagementFormState: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
+  missingRequiredFields: string[];
 }
 
 export function OpenShiftClusterSummaryCard({
-  engagement,
+  activeEngagement,
+  engagementFormState,
   onSave,
   onChange,
   formOptions,
+  missingRequiredFields,
 }: OpenShiftClusterSummaryCardProps) {
   const openshiftRequiredFields = [
     'ocp_cloud_provider_name',
@@ -42,15 +46,18 @@ export function OpenShiftClusterSummaryCard({
         formOptions={formOptions}
         onChange={onChange}
         onSave={onSave}
-        engagement={engagement}
+        engagement={engagementFormState}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
         trailingIcon={() =>
-          !engagement || engagement?.launch ? (
+          !activeEngagement || activeEngagement?.launch ? (
             <div />
           ) : (
-            <RequiredFieldsWarning requiredFields={openshiftRequiredFields} />
+            <RequiredFieldsWarning
+              missingRequiredFields={missingRequiredFields}
+              requiredFields={openshiftRequiredFields}
+            />
           )
         }
         actionButton={() => (
@@ -71,7 +78,7 @@ export function OpenShiftClusterSummaryCard({
               <span>
                 {getHumanReadableLabel(
                   formOptions?.cloud_options?.providers?.options,
-                  engagement?.ocp_cloud_provider_name
+                  activeEngagement?.ocp_cloud_provider_name
                 )}
               </span>
             </TitledDataPoint>
@@ -81,7 +88,7 @@ export function OpenShiftClusterSummaryCard({
               <span>
                 {getHumanReadableLabel(
                   formOptions?.openshift_options?.versions?.options,
-                  engagement?.ocp_version
+                  activeEngagement?.ocp_version
                 )}
               </span>
             </TitledDataPoint>
@@ -91,7 +98,7 @@ export function OpenShiftClusterSummaryCard({
               <span>
                 {getHumanReadableLabel(
                   formOptions?.openshift_options?.persistent_storage?.options,
-                  engagement?.ocp_persistent_storage_size
+                  activeEngagement?.ocp_persistent_storage_size
                 )}
               </span>
             </TitledDataPoint>
@@ -102,9 +109,9 @@ export function OpenShiftClusterSummaryCard({
                 {getHumanReadableLabel(
                   formOptions?.cloud_options?.providers?.options?.find(
                     option =>
-                      option.value === engagement?.ocp_cloud_provider_name
+                      option.value === activeEngagement?.ocp_cloud_provider_name
                   )?.options ?? [],
-                  engagement?.ocp_cloud_provider_region
+                  activeEngagement?.ocp_cloud_provider_region
                 )}
               </span>
             </TitledDataPoint>
@@ -114,14 +121,14 @@ export function OpenShiftClusterSummaryCard({
               <span>
                 {getHumanReadableLabel(
                   formOptions?.openshift_options?.cluster_size?.options,
-                  engagement?.ocp_cluster_size
+                  activeEngagement?.ocp_cluster_size
                 )}
               </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Subdomain">
-              {engagement?.ocp_sub_domain}
+              {activeEngagement?.ocp_sub_domain}
             </TitledDataPoint>
           </GridItem>
         </Grid>

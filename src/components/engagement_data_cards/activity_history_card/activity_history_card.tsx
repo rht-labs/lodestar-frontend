@@ -3,7 +3,6 @@ import { DataCard } from '../data_card';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { Grid, GridItem, Button, ButtonVariant } from '@patternfly/react-core';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { GitCommit } from '../../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
@@ -14,10 +13,11 @@ const ACTIVITY_HISTORY_MODAL_KEY = 'activity_history';
 
 export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
-  const { activeEngagement: { commits } = {} } = useEngagements();
+  const { commits = [] } = engagement;
   return (
     <>
       <ActivityHistoryDetailsModal
+        engagement={engagement}
         isOpen={activeModalKey?.includes(ACTIVITY_HISTORY_MODAL_KEY)}
       />
       <DataCard

@@ -8,19 +8,24 @@ import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagem
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 export interface EngagementSummaryCardProps {
-  engagement: Engagement;
+  activeEngagement: Engagement;
+  engagementFormState: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: object;
+  formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
+  missingRequiredFields: string[];
 }
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
 export function EngagementSummaryCard({
-  engagement,
+  activeEngagement,
+  engagementFormState,
   onChange = () => null,
   formOptions,
+  missingRequiredFields,
   onSave,
 }: EngagementSummaryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
@@ -36,15 +41,16 @@ export function EngagementSummaryCard({
         onSave={onSave}
         formOptions={formOptions}
         onChange={onChange}
-        engagement={engagement}
+        engagement={engagementFormState}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard
         trailingIcon={() =>
-          !engagement || engagement?.launch ? (
+          !activeEngagement || activeEngagement?.launch ? (
             <div />
           ) : (
             <RequiredFieldsWarning
+              missingRequiredFields={missingRequiredFields}
               requiredFields={engagementSummaryRequiredFields}
             />
           )
@@ -59,36 +65,36 @@ export function EngagementSummaryCard({
         <Grid hasGutter>
           <GridItem span={4}>
             <TitledDataPoint title="Company">
-              {engagement?.customer_name}
+              {activeEngagement?.customer_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Project">
-              {engagement?.project_name}
+              {activeEngagement?.project_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Location">
-              {engagement.location}
+              {activeEngagement?.location}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Start Date">
-              {engagement?.start_date
-                ? formatDate(engagement?.start_date, 'MMM dd, yyyy')
+              {activeEngagement?.start_date
+                ? formatDate(activeEngagement?.start_date, 'MMM dd, yyyy')
                 : null}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="End Date">
-              {engagement?.end_date
-                ? formatDate(engagement?.end_date, 'MMM dd, yyyy')
+              {activeEngagement?.end_date
+                ? formatDate(activeEngagement?.end_date, 'MMM dd, yyyy')
                 : null}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Description">
-              {engagement?.description}
+              {activeEngagement?.description}
             </TitledDataPoint>
           </GridItem>
         </Grid>
