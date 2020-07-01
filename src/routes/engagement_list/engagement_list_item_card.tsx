@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardTitle,
   Flex,
   FlexItem,
   Nav,
@@ -26,30 +25,32 @@ export function EngagementListItemCard(props: DataCardProps) {
 
   return (
     <>
-      <Card isHoverable isCompact style={{ margin: '0 1rem', padding: '1rem' }}>
-        <CardTitle>
-          <Nav
-            onSelect={() => {
-              history.push(url);
-            }}
-            variant="tertiary"
-          >
-            <NavList>
-              <NavItem style={{ fontWeight: 'bold', cursor: 'pointer' }}>
-                <Title headingLevel="h2" style={{ cursor: 'pointer' }}>
-                  {props.title}
-                </Title>
-              </NavItem>
-            </NavList>
-          </Nav>
-          <Title style={{ margin: '0 1rem' }} headingLevel="h6">
-            {props.customer}
-          </Title>
-        </CardTitle>
+      <Card isHoverable isCompact style={{ margin: '1rem', padding: '1rem' }}>
         <CardBody style={{ padding: '0 2rem' }}>
-          <Flex>
-            <FlexItem grow={{ default: 'grow' }}>{props.children}</FlexItem>
-            <FlexItem>
+          <Flex style={{ alignItems: 'center'}}>
+            <FlexItem flex={{ default: 'flex_1' }}>
+              <Nav
+                onSelect={() => {
+                  history.push(url);
+                }}
+                variant="tertiary"
+              >
+                <NavList>
+                  <NavItem>
+                    <Title headingLevel="h3" style={{ fontWeight: 'bolder',cursor: 'pointer' }}>
+                      {props.title}
+                    </Title>
+                  </NavItem>
+                </NavList>
+              </Nav>
+              <Title style={{ margin: '0 1rem' ,  fontWeight: 'normal'}} headingLevel="h4">
+                {props.customer}
+              </Title>
+            </FlexItem>
+            <FlexItem flex={{ default: 'flex_3' }}>
+              {props.children}
+            </FlexItem>
+            <FlexItem flex={{ default: 'flexNone' }}>
               <Button
                 onClick={() => {
                   history.push(url);
