@@ -144,10 +144,8 @@ Object {
                         style="margin-bottom: 1rem;"
                       >
                         <b
-                          style="color: rgb(236, 122, 8);"
-                        >
-                          UPCOMING
-                        </b>
+                          style="color: rgb(184, 187, 190);"
+                        />
                       </div>
                       <div
                         class="pf-l-grid__item pf-m-3-col"
@@ -1004,10 +1002,8 @@ Object {
                       style="margin-bottom: 1rem;"
                     >
                       <b
-                        style="color: rgb(236, 122, 8);"
-                      >
-                        UPCOMING
-                      </b>
+                        style="color: rgb(184, 187, 190);"
+                      />
                     </div>
                     <div
                       class="pf-l-grid__item pf-m-3-col"
