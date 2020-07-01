@@ -24,7 +24,7 @@ export function DataCard({
   actionButton: ActionButton,
 }: DataCardProps) {
   return (
-    <Card>
+    <Card isCompact style={{ padding: '1rem' }}>
       <CardTitle>
         <Level>
           <LevelItem>
