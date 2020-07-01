@@ -1,6 +1,6 @@
 import React from 'react';
 import {DataCard} from '../data_card';
-import {Button, ButtonVariant, Grid, GridItem} from '@patternfly/react-core';
+import {Grid, GridItem} from '@patternfly/react-core';
 import {SubsystemDetails} from "./subsystem_details";
 import {useEngagements} from "../../../context/engagement_context/engagement_hook";
 import {Engagement} from "../../../schemas/engagement_schema";

@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   TextInput,
-  Grid,
-  GridItem,
   Button,
   ButtonVariant,
   InputGroup, Flex, FlexItem,
