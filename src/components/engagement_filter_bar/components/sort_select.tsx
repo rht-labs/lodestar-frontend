@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {
+  Button,
+  InputGroup,
   Select,
   SelectOption,
   SelectOptionObject,
@@ -9,6 +11,7 @@ import {
   SortOption,
 } from '../../../schemas/engagement_filter';
 import { EngagementFilterProps } from '../engagement_filter_bar';
+import { SortAmountDownIcon } from "@patternfly/react-icons";
 export function SortSelect({ filter, onChange }: EngagementFilterProps) {
   const [isSortSelectOpen, setIsSortSelectOpen] = useState<boolean>(false);
 
@@ -35,7 +38,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
     return {
       sortField: option?.sortField,
       isAscending: option.isAscending,
-      toString: function() {
+      toString: function () {
         return getSortDisplayValue(option?.sortField, option?.isAscending);
       },
     } as any;
@@ -62,36 +65,43 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
     );
   });
   return (
-    <Select
-      placeholderText="Sort by"
-      isOpen={isSortSelectOpen}
-      onToggle={() => setIsSortSelectOpen(!isSortSelectOpen)}
-      selections={sortSelection}
-      onSelect={(
-        _,
-        selection: { sortField: EngagementSortFields; isAscending: boolean }
-      ) =>
-        onChange({
-          ...filter,
-          sort: {
-            sortField: selection?.sortField,
-            isAscending: selection?.isAscending,
-          },
-        })
-      }
-    >
-      {
-        sortSelectOptions.map(option => [
-          <SelectOption
-            value={createSortOption({
-              sortField: option?.sortField as EngagementSortFields,
-              isAscending: option?.isAscending,
-            })}
-          >
-            {getSortDisplayValue(option?.sortField, option?.isAscending)}
-          </SelectOption>,
-        ]) as []
-      }
-    </Select>
+    <>
+      <InputGroup>
+        <Button variant="control" aria-label="search button for search input">
+          <SortAmountDownIcon />
+        </Button>
+        <Select
+          placeholderText="Sort by"
+          isOpen={isSortSelectOpen}
+          onToggle={() => setIsSortSelectOpen(!isSortSelectOpen)}
+          selections={sortSelection}
+          onSelect={(
+            _,
+            selection: { sortField: EngagementSortFields; isAscending: boolean }
+          ) =>
+            onChange({
+              ...filter,
+              sort: {
+                sortField: selection?.sortField,
+                isAscending: selection?.isAscending,
+              },
+            })
+          }
+        >
+          {
+            sortSelectOptions.map(option => [
+              <SelectOption
+                value={createSortOption({
+                  sortField: option?.sortField as EngagementSortFields,
+                  isAscending: option?.isAscending,
+                })}
+              >
+                {getSortDisplayValue(option?.sortField, option?.isAscending)}
+              </SelectOption>,
+            ]) as []
+          }
+        </Select>
+      </InputGroup>
+    </>
   );
 }

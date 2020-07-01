@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, ButtonVariant } from '@patternfly/react-core';
-export function EditButton({ onClick }: { onClick: () => void }) {
+export function EditButton({ text, onClick }: { text: string, onClick: () => void }) {
   return (
-    <Button variant={ButtonVariant.link} onClick={onClick}>
-      Edit
+    <Button variant={ButtonVariant.secondary}
+            onClick={onClick} style={{ minWidth: '7rem' }}>
+      {text}
     </Button>
   );
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { DataCard } from '../data_card';
 import { Engagement } from '../../../schemas/engagement_schema';
-import { Grid, GridItem, Button, ButtonVariant } from '@patternfly/react-core';
+import { Grid, GridItem } from '@patternfly/react-core';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { GitCommit } from '../../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
+import {EditButton} from "../../data_card_edit_button/data_card_edit_button";
 export interface GitHistoryCardProps {
   engagement: Engagement;
 }
@@ -22,12 +23,10 @@ export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
       />
       <DataCard
         actionButton={() => (
-          <Button
-            variant={ButtonVariant.link}
+          <EditButton
             onClick={() => requestOpen(ACTIVITY_HISTORY_MODAL_KEY)}
-          >
-            View More
-          </Button>
+            text={'View More'}
+          />
         )}
         title="Activity History"
       >

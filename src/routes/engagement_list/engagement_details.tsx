@@ -19,6 +19,7 @@ import {
 import { ActivityHistoryLineItem } from '../../components/activity_history_line_item/activity_history_line_item';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature';
+import { EngagementStatusText } from "./engagement_status_text";
 
 function FirstLine({
   status,
@@ -30,7 +31,7 @@ function FirstLine({
   createdBy?: string;
 }) {
     return (
-      <div data-testid="upcomingEngagement">
+      <>
         <Grid hasGutter>
           <GridItem span={12}>
             Created by:
@@ -43,7 +44,7 @@ function FirstLine({
               : 'TBA'}
           </GridItem>
         </Grid>
-      </div>
+      </>
     );
 }
 
@@ -160,33 +161,4 @@ export function EngagementDetails({
   );
 }
 
-const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
-  const getEngagementStatusText = () => {
-    if (status === EngagementStatus.active) {
-      return 'Active';
-    } else if (status === EngagementStatus.upcoming) {
-      return 'Upcoming';
-    } else if (status === EngagementStatus.past) {
-      return 'Past';
-    }
-    return '';
-  };
-  const getStatusColor = (status?: EngagementStatus) => {
-    switch (status) {
-      case EngagementStatus.upcoming: {
-        return '#EC7A08';
-      }
-      case EngagementStatus.active: {
-        return 'green';
-      }
-      default: {
-        return '#B8BBBE';
-      }
-    }
-  };
-  return (
-    <b style={{ color: getStatusColor(status) }}>
-      {getEngagementStatusText().toUpperCase()}
-    </b>
-  );
-};
+
