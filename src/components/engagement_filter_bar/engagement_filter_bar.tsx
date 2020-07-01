@@ -21,8 +21,8 @@ export function EngagementFilterBar({
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
   return (
-    <Flex justifyContent={{ default: 'justifyContentCenter' }} >
-      <Flex style={{marginTop: '1rem'}}>
+    <Flex justifyContent={{ default: 'justifyContentFlexStart' }} >
+      <Flex style={{marginTop: '2rem'}}>
         <FlexItem grow={{ default: 'grow' }}>
           <InputGroup>
             <Button variant="control" aria-label="search button for search input">
