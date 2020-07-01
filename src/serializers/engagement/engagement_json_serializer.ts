@@ -35,6 +35,7 @@ export class EngagementJsonSerializer
   serialize(engagement: Engagement): object {
     const e = {
       ...engagement,
+      additional_details: (engagement.additional_details ?? '').trim(),
       archive_date: engagement.archive_date
         ? EngagementJsonSerializer.formatDate(engagement.archive_date)
         : null,
@@ -49,6 +50,8 @@ export class EngagementJsonSerializer
   }
   deserialize(data: object): Engagement {
     return {
+      ...data,
+      additional_details: data['additional_details'],
       archive_date: data['archive_date']
         ? EngagementJsonSerializer.parseDate(data['archive_date'])
         : undefined,
