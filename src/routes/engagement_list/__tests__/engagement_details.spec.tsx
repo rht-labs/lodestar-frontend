@@ -5,9 +5,10 @@ import '@testing-library/jest-dom/extend-expect';
 import { EngagementDetails } from '../engagement_details';
 import {
   upcomingEngagement,
-  activeEngagement,
+  currentEngagement,
   pastEngagement,
 } from '../mock_engagements';
+import { EngagementStatus } from '../../../schemas/engagement_schema';
 
 afterEach(cleanup);
 
@@ -17,7 +18,7 @@ describe('Upcoming Engagement', () => {
       <MemoryRouter>
         <EngagementDetails
           engagement={upcomingEngagement()}
-          status={'upcoming'}
+          status={EngagementStatus.upcoming}
         />
       </MemoryRouter>
     );
@@ -30,7 +31,7 @@ describe('Upcoming Engagement', () => {
         <MemoryRouter>
           <EngagementDetails
             engagement={upcomingEngagement()}
-            status={'upcoming'}
+            status={EngagementStatus.upcoming}
           />
         </MemoryRouter>
       )
@@ -42,7 +43,10 @@ describe('Active Engagement', () => {
   test('shows the right status and label', () => {
     const { getByTestId, getByText } = render(
       <MemoryRouter>
-        <EngagementDetails engagement={activeEngagement()} status={'active'} />
+        <EngagementDetails
+          engagement={currentEngagement()}
+          status={EngagementStatus.active}
+        />
       </MemoryRouter>
     );
     expect(getByText('ACTIVE')).toBeInTheDocument();
@@ -53,8 +57,8 @@ describe('Active Engagement', () => {
       render(
         <MemoryRouter>
           <EngagementDetails
-            engagement={activeEngagement()}
-            status={'active'}
+            engagement={currentEngagement()}
+            status={EngagementStatus.active}
           />
         </MemoryRouter>
       )
@@ -66,7 +70,10 @@ describe('Past Engagement', () => {
   test('shows the right status and label', () => {
     const { getByTestId, getByText } = render(
       <MemoryRouter>
-        <EngagementDetails engagement={pastEngagement()} status={'past'} />
+        <EngagementDetails
+          engagement={pastEngagement()}
+          status={EngagementStatus.past}
+        />
       </MemoryRouter>
     );
     expect(getByText('PAST')).toBeInTheDocument();
@@ -76,7 +83,10 @@ describe('Past Engagement', () => {
     expect(
       render(
         <MemoryRouter>
-          <EngagementDetails engagement={pastEngagement()} status={'past'} />
+          <EngagementDetails
+            engagement={pastEngagement()}
+            status={EngagementStatus.past}
+          />
         </MemoryRouter>
       )
     ).toMatchSnapshot();

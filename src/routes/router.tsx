@@ -17,8 +17,10 @@ import { EngagementDetailView } from './engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { useNotification } from '../context/notification_context/notification_hook';
 import { EngagementStatus } from '../schemas/engagement_schema';
+import { Feedback } from '../components/omp_feedback';
+import { ErrorBoundary } from '../components/error_boundary';
 
-function _OMPRouter() {
+export function OMPRouter() {
   const { fetchNotifications } = useNotification();
   useEffect(() => {
     fetchNotifications();
@@ -32,78 +34,84 @@ function _OMPRouter() {
       <Route path="/logout" component={LogoutPage} />
       <PrivateRoute path="/app">
         <MainTemplate>
-          <Switch>
-            {/* all other routes should be considered private */}
-            <PrivateRoute path="/">
-              <Feature
-                name={APP_FEATURES.reader}
-                inactiveComponent={UnauthorizedPage}
-              >
-                {/* if a user is not authorized, show the unauthorized page */}
-                <Switch>
-                  {/* else, show an authorized route */}
-                  <Redirect exact from="/app" to="/app/dashboard" />
-                  <Route
-                    path="/app/requestfeature"
-                    component={FeatureRequest}
-                  />
-                  <PrivateRoute path="/app/dashboard" component={Dashboard} />
-                  <PrivateRoute path="/app/engagements">
-                    <ModalVisibilityProvider>
-                      <Switch>
-                        <Redirect
-                          exact
-                          from="/app/engagements"
-                          to="/app/engagements/all"
-                        />
-                        <PrivateRoute path="/app/engagements/all">
-                          <EngagementListRoute title="Engagements" />
-                        </PrivateRoute>
-                        <PrivateRoute path="/app/engagements/upcoming">
-                          <EngagementListRoute
-                            filterDefinition={{
-                              allowedStatuses: [EngagementStatus.upcoming],
-                            }}
-                            title="Engagements"
-                          />
-                        </PrivateRoute>
-                        <PrivateRoute path="/app/engagements/active">
-                          <EngagementListRoute
-                            filterDefinition={{
-                              allowedStatuses: [EngagementStatus.active],
-                            }}
-                            title="Engagements"
-                          />
-                        </PrivateRoute>
-                        <PrivateRoute path="/app/engagements/past">
-                          <EngagementListRoute
-                            filterDefinition={{
-                              allowedStatuses: [EngagementStatus.past],
-                            }}
-                            title="Engagements"
-                          />
-                        </PrivateRoute>
-                        <PrivateRoute path="/app/engagements/new">
-                          <CreateNewEngagement />
-                        </PrivateRoute>
-                        <PrivateRoute
-                          path="/app/engagements/:customer_name/:project_name"
-                          component={EngagementDetailView}
-                        />
-                      </Switch>
-                    </ModalVisibilityProvider>
-                  </PrivateRoute>
-                  <PrivateRoute exact path="/app/about">
-                    <About />
-                  </PrivateRoute>
-                </Switch>
-              </Feature>
-            </PrivateRoute>
-          </Switch>
+          <ErrorBoundary>
+            <>
+              <Feedback />
+              <Switch>
+                {/* all other routes should be considered private */}
+                <PrivateRoute path="/">
+                  <Feature
+                    name={APP_FEATURES.reader}
+                    inactiveComponent={UnauthorizedPage}
+                  >
+                    {/* if a user is not authorized, show the unauthorized page */}
+                    <Switch>
+                      {/* else, show an authorized route */}
+                      <Redirect exact from="/app" to="/app/dashboard" />
+                      <Route
+                        path="/app/requestfeature"
+                        component={FeatureRequest}
+                      />
+                      <PrivateRoute
+                        path="/app/dashboard"
+                        component={Dashboard}
+                      />
+                      <PrivateRoute path="/app/engagements">
+                        <ModalVisibilityProvider>
+                          <Switch>
+                            <Redirect
+                              exact
+                              from="/app/engagements"
+                              to="/app/engagements/all"
+                            />
+                            <PrivateRoute path="/app/engagements/all">
+                              <EngagementListRoute title="Engagements" />
+                            </PrivateRoute>
+                            <PrivateRoute path="/app/engagements/upcoming">
+                              <EngagementListRoute
+                                filterDefinition={{
+                                  allowedStatuses: [EngagementStatus.upcoming],
+                                }}
+                                title="Engagements"
+                              />
+                            </PrivateRoute>
+                            <PrivateRoute path="/app/engagements/active">
+                              <EngagementListRoute
+                                filterDefinition={{
+                                  allowedStatuses: [EngagementStatus.active],
+                                }}
+                                title="Engagements"
+                              />
+                            </PrivateRoute>
+                            <PrivateRoute path="/app/engagements/past">
+                              <EngagementListRoute
+                                filterDefinition={{
+                                  allowedStatuses: [EngagementStatus.past],
+                                }}
+                                title="Engagements"
+                              />
+                            </PrivateRoute>
+                            <PrivateRoute path="/app/engagements/new">
+                              <CreateNewEngagement />
+                            </PrivateRoute>
+                            <PrivateRoute
+                              path="/app/engagements/:customer_name/:project_name"
+                              component={EngagementDetailView}
+                            />
+                          </Switch>
+                        </ModalVisibilityProvider>
+                      </PrivateRoute>
+                      <PrivateRoute exact path="/app/about">
+                        <About />
+                      </PrivateRoute>
+                    </Switch>
+                  </Feature>
+                </PrivateRoute>
+              </Switch>
+            </>
+          </ErrorBoundary>
         </MainTemplate>
       </PrivateRoute>
     </Switch>
   );
 }
-
-export const OMPRouter = React.memo(_OMPRouter);

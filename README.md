@@ -76,6 +76,44 @@ Each service is contained in a folder. At the root of the folder is an eponymous
 
 ## Development
 
+### Logging
+
+This repository reimplements several common methods from the `console` interface. Any output that needs to be logged must be logged through this interface. The logger can be imported from `src/utilities/logger/index.ts`.
+
+**BAD:**
+
+```typescript
+async function myAsynchronousFunction() {
+  try {
+    await myAsynchronousTask();
+  } catch (e) {
+    console.error(e);
+    // handle MyError
+  }
+}
+```
+
+**GOOD:**
+
+```typescript
+import { Logger } from './src/utilities/logger';
+
+async function myAsynchronousFunction() {
+  try {
+    await myAsynchronousTask();
+  } catch (e) {
+    Logger.instance.error(e);
+    // handle MyError
+  }
+}
+```
+
+Use good judgment when creating console logs. As a rule, any error or unexpected behavior that is caught in the application should be logged with `Logger.instance.error`. **Do not silence errors**. `debug` and `info` are additional log levels to choose from. `debug` is the noisiest level, with `info` being less noisy.
+
+#### Logging Config Variables
+
+The logger can be set with values in `config.json`. Available log types are defined in `src/utilities/logger/index.ts`. Log Verbosity is an enum defined in `src/utilities/logger/logger.ts`. To set this value, set the config value defined in `config.example.json` to the desired log verbosity.
+
 ### `Feeback System`
 
 User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  

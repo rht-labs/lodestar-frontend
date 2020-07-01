@@ -3,7 +3,6 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { DescriptionFormField } from '../engagement_form_fields/description';
 import { LocationFormField } from '../engagement_form_fields/location';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_start_end_date';
@@ -20,10 +19,9 @@ export function EngagementSummaryEditModal(
   props: EngagementSummaryEditModalProps
 ) {
   const { requestClose } = useModalVisibility();
-  const { engagementFormState } = useEngagements();
 
   const onSave = () => {
-    props.onSave(engagementFormState);
+    props.onSave(props.engagement);
     requestClose();
   };
   return (

@@ -8,17 +8,17 @@ import {
 } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { GitCommit } from '../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../activity_history_line_item/activity_history_line_item';
+import { Engagement } from '../../schemas/engagement_schema';
 export interface ActivityHistoryDetailsModalProps {
   isOpen: boolean;
+  engagement: Engagement;
 }
 export function ActivityHistoryDetailsModal(
   props: ActivityHistoryDetailsModalProps
 ) {
   const { requestClose } = useModalVisibility();
-  const { activeEngagement } = useEngagements();
 
   return (
     <Modal
@@ -34,7 +34,7 @@ export function ActivityHistoryDetailsModal(
         }
         title="Activity History"
       >
-        <DetailedActivityHistoryList commits={activeEngagement?.commits} />
+        <DetailedActivityHistoryList commits={props.engagement?.commits} />
       </EditModalTemplate>
     </Modal>
   );
