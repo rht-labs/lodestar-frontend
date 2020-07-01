@@ -9,7 +9,7 @@ import { UserCard } from '../../../components/engagement_data_cards/user_card/us
 import { ActivityHistoryCard } from '../../../components/engagement_data_cards/activity_history_card/activity_history_card';
 import { SystemStatusCard } from '../../../components/engagement_data_cards/system_status_card/system_status_card';
 export interface EngagementOverviewTabProps {
-  activeEngagement: Engagement;
+  currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -18,7 +18,7 @@ export interface EngagementOverviewTabProps {
 }
 
 export function EngagementOverviewTab({
-  activeEngagement,
+  currentEngagement,
   currentEngagementChanges,
   missingRequiredFields,
   formOptions,
@@ -31,7 +31,7 @@ export function EngagementOverviewTab({
         <GridItem span={12}>
           <EngagementSummaryCard
             currentEngagementChanges={currentEngagementChanges}
-            activeEngagement={activeEngagement}
+            currentEngagement={currentEngagement}
             onSave={onSave}
             onChange={onChange}
             formOptions={formOptions}
@@ -39,14 +39,14 @@ export function EngagementOverviewTab({
           />
         </GridItem>
         <GridItem span={12}>
-          <SystemStatusCard activeEngagement={currentEngagementChanges} />
+          <SystemStatusCard currentEngagement={currentEngagementChanges} />
         </GridItem>
         <GridItem span={12}>
           <PointOfContactCard
             onSave={onSave}
             onChange={onChange}
             formOptions={formOptions}
-            activeEngagement={activeEngagement}
+            currentEngagement={currentEngagement}
             currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
@@ -56,7 +56,7 @@ export function EngagementOverviewTab({
             onSave={onSave}
             onChange={onChange}
             formOptions={formOptions}
-            activeEngagement={currentEngagementChanges}
+            currentEngagement={currentEngagementChanges}
             currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />

@@ -7,17 +7,17 @@ import { SystemStatusDetailsModal } from './system_status_details_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 
 export interface SystemStatusCardProps {
-  activeEngagement: Engagement;
+  currentEngagement: Engagement;
 }
 const SYSTEM_STATUS_MODAL_KEY = 'system_status';
 
-export function SystemStatusCard({ activeEngagement }: SystemStatusCardProps) {
-  const { status } = activeEngagement;
+export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
+  const { status } = currentEngagement;
   const { requestOpen, activeModalKey } = useModalVisibility();
   return (
     <>
       <SystemStatusDetailsModal
-        engagement={activeEngagement}
+        engagement={currentEngagement}
         isOpen={activeModalKey?.includes(SYSTEM_STATUS_MODAL_KEY)}
       />
       <DataCard

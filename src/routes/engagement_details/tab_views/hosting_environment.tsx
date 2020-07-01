@@ -5,7 +5,7 @@ import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { OpenShiftClusterSummaryCard } from '../../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
 
 export interface HostingEnvironmentTabProps {
-  activeEngagement: Engagement;
+  currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -15,7 +15,7 @@ export interface HostingEnvironmentTabProps {
 
 export function HostingEnvironmentTab({
   currentEngagementChanges,
-  activeEngagement,
+  currentEngagement,
   onChange,
   formOptions,
   onSave,
@@ -29,7 +29,7 @@ export function HostingEnvironmentTab({
             onSave={onSave}
             formOptions={formOptions}
             onChange={onChange}
-            activeEngagement={activeEngagement}
+            currentEngagement={currentEngagement}
             currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />

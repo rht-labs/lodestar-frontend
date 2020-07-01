@@ -11,7 +11,7 @@ import { RequiredFieldsWarning } from '../../required_fields_warning/required_fi
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
 export interface PointOfContactCardProps {
-  activeEngagement: Engagement;
+  currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
@@ -20,7 +20,7 @@ export interface PointOfContactCardProps {
 }
 
 export function PointOfContactCard({
-  activeEngagement,
+  currentEngagement,
   currentEngagementChanges,
   formOptions,
   onChange,
@@ -49,7 +49,7 @@ export function PointOfContactCard({
       <DataCard
         title="Points of Contact"
         trailingIcon={() =>
-          !activeEngagement || activeEngagement?.launch ? (
+          !currentEngagement || currentEngagement?.launch ? (
             <div />
           ) : (
             <RequiredFieldsWarning
@@ -65,17 +65,17 @@ export function PointOfContactCard({
         <Grid hasGutter>
           <GridItem span={4}>
             <TitledDataPoint title="Engagement Lead">
-              {activeEngagement?.engagement_lead_name}
+              {currentEngagement?.engagement_lead_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Technical Lead">
-              {activeEngagement?.technical_lead_name}
+              {currentEngagement?.technical_lead_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Customer Contact">
-              {activeEngagement?.customer_contact_name}
+              {currentEngagement?.customer_contact_name}
             </TitledDataPoint>
           </GridItem>
         </Grid>

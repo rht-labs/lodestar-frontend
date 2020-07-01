@@ -19,7 +19,7 @@ export function EngagementTabView() {
     currentEngagementChanges,
     updateEngagementFormField,
     saveEngagement,
-    activeEngagement,
+    currentEngagement,
     missingRequiredFields,
   } = useEngagements();
   const { pathname } = useLocation();
@@ -48,7 +48,7 @@ export function EngagementTabView() {
             onSave={saveEngagement}
             formOptions={formOptions}
             onChange={updateEngagementFormField}
-            activeEngagement={activeEngagement}
+            currentEngagement={currentEngagement}
             currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
@@ -58,7 +58,7 @@ export function EngagementTabView() {
         <TabContentWrapper>
           <EditPaneWrapper engagement={currentEngagementChanges}>
             <ClusterUsers
-              activeEngagement={activeEngagement}
+              currentEngagement={currentEngagement}
               onSave={saveEngagement}
               formOptions={formOptions}
               onChange={updateEngagementFormField}
@@ -76,7 +76,7 @@ export function EngagementTabView() {
         <TabContentWrapper>
           <EditPaneWrapper engagement={currentEngagementChanges}>
             <HostingEnvironmentTab
-              activeEngagement={activeEngagement}
+              currentEngagement={currentEngagement}
               onSave={saveEngagement}
               formOptions={formOptions}
               onChange={updateEngagementFormField}

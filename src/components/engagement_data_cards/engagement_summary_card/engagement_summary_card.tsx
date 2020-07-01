@@ -11,7 +11,7 @@ import { RequiredFieldsWarning } from '../../required_fields_warning/required_fi
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 export interface EngagementSummaryCardProps {
-  activeEngagement: Engagement;
+  currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -21,7 +21,7 @@ export interface EngagementSummaryCardProps {
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
 export function EngagementSummaryCard({
-  activeEngagement,
+  currentEngagement,
   currentEngagementChanges,
   onChange = () => null,
   formOptions,
@@ -46,7 +46,7 @@ export function EngagementSummaryCard({
       />
       <DataCard
         trailingIcon={() =>
-          !activeEngagement || activeEngagement?.launch ? (
+          !currentEngagement || currentEngagement?.launch ? (
             <div />
           ) : (
             <RequiredFieldsWarning
@@ -65,36 +65,36 @@ export function EngagementSummaryCard({
         <Grid hasGutter>
           <GridItem span={4}>
             <TitledDataPoint title="Company">
-              {activeEngagement?.customer_name}
+              {currentEngagement?.customer_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Project">
-              {activeEngagement?.project_name}
+              {currentEngagement?.project_name}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Location">
-              {activeEngagement?.location}
+              {currentEngagement?.location}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Start Date">
-              {activeEngagement?.start_date
-                ? formatDate(activeEngagement?.start_date, 'MMM dd, yyyy')
+              {currentEngagement?.start_date
+                ? formatDate(currentEngagement?.start_date, 'MMM dd, yyyy')
                 : null}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="End Date">
-              {activeEngagement?.end_date
-                ? formatDate(activeEngagement?.end_date, 'MMM dd, yyyy')
+              {currentEngagement?.end_date
+                ? formatDate(currentEngagement?.end_date, 'MMM dd, yyyy')
                 : null}
             </TitledDataPoint>
           </GridItem>
           <GridItem span={4}>
             <TitledDataPoint title="Description">
-              {activeEngagement?.description}
+              {currentEngagement?.description}
             </TitledDataPoint>
           </GridItem>
         </Grid>

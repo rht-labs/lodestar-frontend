@@ -3,7 +3,7 @@ import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import {
   upcomingEngagement,
-  activeEngagement,
+  currentEngagement,
   pastEngagement,
 } from '../mock_engagements';
 import {
@@ -20,7 +20,7 @@ describe('Engagement status', () => {
     );
   });
   test('renders the active status', () => {
-    expect(getEngagementStatus(activeEngagement())).toEqual(
+    expect(getEngagementStatus(currentEngagement())).toEqual(
       EngagementStatus.active
     );
   });

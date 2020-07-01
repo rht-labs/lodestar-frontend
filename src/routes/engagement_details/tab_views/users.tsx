@@ -39,7 +39,7 @@ const buttonHeader: React.CSSProperties = {
 };
 
 export interface ClusterUserProps {
-  activeEngagement: Engagement;
+  currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -48,7 +48,7 @@ export interface ClusterUserProps {
 }
 
 export const ClusterUsers = ({
-  activeEngagement,
+  currentEngagement,
   currentEngagementChanges,
   missingRequiredFields,
   formOptions,
@@ -104,7 +104,7 @@ export const ClusterUsers = ({
                   </Feature>
                 </InputGroup>
               </li>
-              {activeEngagement?.engagement_users.map(
+              {currentEngagement?.engagement_users.map(
                 (value: any, index: any) => {
                   return (
                     <li key={index}>
@@ -114,12 +114,12 @@ export const ClusterUsers = ({
                           name="last-name"
                           isDisabled={!hasFeature(APP_FEATURES.writer)}
                           onChange={e => {
-                            activeEngagement.engagement_users[
+                            currentEngagement.engagement_users[
                               index
                             ].last_name = e;
                             onChange(
                               'user',
-                              activeEngagement?.engagement_users
+                              currentEngagement?.engagement_users
                             );
                           }}
                           placeholder="Last Name"
@@ -131,12 +131,12 @@ export const ClusterUsers = ({
                           name="first-name"
                           isDisabled={!hasFeature(APP_FEATURES.writer)}
                           onChange={e => {
-                            activeEngagement.engagement_users[
+                            currentEngagement.engagement_users[
                               index
                             ].first_name = e;
                             onChange(
                               'user',
-                              activeEngagement?.engagement_users
+                              currentEngagement?.engagement_users
                             );
                           }}
                           placeholder="First Name"
@@ -148,10 +148,10 @@ export const ClusterUsers = ({
                           name="email"
                           isDisabled={!hasFeature(APP_FEATURES.writer)}
                           onChange={e => {
-                            activeEngagement.engagement_users[index].email = e;
+                            currentEngagement.engagement_users[index].email = e;
                             onChange(
                               'user',
-                              activeEngagement?.engagement_users
+                              currentEngagement?.engagement_users
                             );
                           }}
                           placeholder="Email Address"
@@ -165,10 +165,10 @@ export const ClusterUsers = ({
                           value={value.role || ''}
                           isDisabled={!hasFeature(APP_FEATURES.writer)}
                           onChange={e => {
-                            activeEngagement.engagement_users[index].role = e;
+                            currentEngagement.engagement_users[index].role = e;
                             onChange(
                               'user',
-                              activeEngagement?.engagement_users
+                              currentEngagement?.engagement_users
                             );
                           }}
                         >

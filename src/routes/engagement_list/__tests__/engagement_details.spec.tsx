@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { EngagementDetails } from '../engagement_details';
 import {
   upcomingEngagement,
-  activeEngagement,
+  currentEngagement,
   pastEngagement,
 } from '../mock_engagements';
 
@@ -42,7 +42,7 @@ describe('Active Engagement', () => {
   test('shows the right status and label', () => {
     const { getByTestId, getByText } = render(
       <MemoryRouter>
-        <EngagementDetails engagement={activeEngagement()} status={'active'} />
+        <EngagementDetails engagement={currentEngagement()} status={'active'} />
       </MemoryRouter>
     );
     expect(getByText('ACTIVE')).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('Active Engagement', () => {
       render(
         <MemoryRouter>
           <EngagementDetails
-            engagement={activeEngagement()}
+            engagement={currentEngagement()}
             status={'active'}
           />
         </MemoryRouter>

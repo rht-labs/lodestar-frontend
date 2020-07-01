@@ -14,8 +14,8 @@ import { Logger } from '../../utilities/logger';
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
   currentEngagementChanges?: Engagement;
-  activeEngagement?: Engagement;
-  setActiveEngagement: (Engagement: Engagement) => void;
+  currentEngagement?: Engagement;
+  setcurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
   requiredFields: string[];
   getEngagement: (
@@ -69,7 +69,7 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
-  const [activeEngagement, setActiveEngagement] = useState<
+  const [currentEngagement, setcurrentEngagement] = useState<
     Engagement | undefined
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
@@ -82,12 +82,12 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
-    Logger.info('change active engagement', activeEngagement);
+    Logger.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
-      payload: getInitialState(activeEngagement),
+      payload: getInitialState(currentEngagement),
     });
-  }, [activeEngagement, formOptions]);
+  }, [currentEngagement, formOptions]);
   const fetchEngagements = useCallback(async () => {
     try {
       feedbackContext.showLoader();
@@ -286,15 +286,15 @@ export const EngagementProvider = ({
     <Provider
       value={{
         requiredFields,
-        activeEngagement,
+        currentEngagement,
         missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
-        setActiveEngagement,
+        setcurrentEngagement,
         engagements,
         getEngagement,
         error,
-        currentEngagementChanges: { ...activeEngagement, ...currentEngagementChanges },
+        currentEngagementChanges: { ...currentEngagement, ...currentEngagementChanges },
         formOptions,
         isLoading,
         updateEngagementFormField,

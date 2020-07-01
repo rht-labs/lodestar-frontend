@@ -49,12 +49,12 @@ describe('Engagement Context', () => {
 
   test('Can switch engagements', async () => {
     const { result, waitForNextUpdate } = getHook();
-    expect(result.current.activeEngagement).toBe(undefined);
+    expect(result.current.currentEngagement).toBe(undefined);
     await act(async () => {
-      result.current.setActiveEngagement({ customer_name: 'spencer' } as any);
+      result.current.setcurrentEngagement({ customer_name: 'spencer' } as any);
       await waitForNextUpdate();
     });
-    expect(result.current.activeEngagement.customer_name).toEqual('spencer');
+    expect(result.current.currentEngagement.customer_name).toEqual('spencer');
   });
 
   test('form options are undefined by default', () => {
@@ -79,7 +79,7 @@ describe('Engagement Context', () => {
   test('Form is launchable when required fields are filled', async () => {
     const { result, waitForNextUpdate } = getHook();
     await act(async () => {
-      result.current.setActiveEngagement(Engagement.fromFake());
+      result.current.setcurrentEngagement(Engagement.fromFake());
       await waitForNextUpdate;
     });
     expect(result.current.isLaunchable).toBeTruthy();
@@ -90,7 +90,7 @@ describe('Engagement Context', () => {
     await act(async () => {
       const engagement = Engagement.fromFake();
       engagement.customer_contact_email = null;
-      result.current.setActiveEngagement(engagement);
+      result.current.setcurrentEngagement(engagement);
       await waitForNextUpdate;
     });
     expect(result.current.isLaunchable).toBeFalsy();

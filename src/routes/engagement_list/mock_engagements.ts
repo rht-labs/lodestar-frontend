@@ -27,7 +27,7 @@ export function upcomingEngagement(): Engagement {
   };
 }
 
-export function activeEngagement(): Engagement {
+export function currentEngagement(): Engagement {
   return {
     archive_date: new Date(),
     customer_contact_email: 'bob@doe.com',

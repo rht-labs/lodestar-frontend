@@ -8,14 +8,14 @@ export function EngagementPageView() {
     currentEngagementChanges,
     updateEngagementFormField,
     saveEngagement,
-    activeEngagement,
+    currentEngagement,
     missingRequiredFields,
   } = useEngagements();
 
   return (
     <>
       <EngagementOverviewTab
-        activeEngagement={activeEngagement}
+        currentEngagement={currentEngagement}
         missingRequiredFields={missingRequiredFields}
         onSave={saveEngagement}
         formOptions={formOptions}

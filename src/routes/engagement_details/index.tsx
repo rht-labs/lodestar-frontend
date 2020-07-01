@@ -10,7 +10,7 @@ import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_v
 import { EngagementPageView } from './implementations/engagement_page_view';
 
 export interface EngagementViewProps {
-  activeEngagement?: Engagement;
+  currentEngagement?: Engagement;
 }
 
 export function EngagementDetailView(props) {
@@ -20,8 +20,8 @@ export function EngagementDetailView(props) {
     formOptions,
     getConfig,
     error,
-    setActiveEngagement,
-    activeEngagement,
+    setcurrentEngagement,
+    currentEngagement,
     getEngagement,
   } = useEngagements();
   useEffect(() => {
@@ -37,11 +37,11 @@ export function EngagementDetailView(props) {
     }
     getEngagement(customer_name, project_name).then(engagement => {
       if (engagement) {
-        setActiveEngagement(engagement);
+        setcurrentEngagement(engagement);
       } else {
       }
     });
-  }, [customer_name, project_name, setActiveEngagement, getEngagement]);
+  }, [customer_name, project_name, setcurrentEngagement, getEngagement]);
   const engagementFormRequestError = error;
 
   const AlertMessage = () => {
@@ -62,7 +62,7 @@ export function EngagementDetailView(props) {
 
   return (
     <ValidationProvider validators={validators}>
-      <EngagementDetailsViewTemplate engagement={activeEngagement}>
+      <EngagementDetailsViewTemplate engagement={currentEngagement}>
         <AlertMessage />
         <EngagementPageView />
       </EngagementDetailsViewTemplate>
