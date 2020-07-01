@@ -13,7 +13,7 @@ import { Logger } from '../../utilities/logger';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
-  engagementFormState?: Engagement;
+  currentEngagementChanges?: Engagement;
   activeEngagement?: Engagement;
   setActiveEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
@@ -72,7 +72,7 @@ export const EngagementProvider = ({
   const [activeEngagement, setActiveEngagement] = useState<
     Engagement | undefined
   >();
-  const [engagementFormState, dispatch] = useReducer<
+  const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
@@ -170,21 +170,21 @@ export const EngagementProvider = ({
   const _checkLaunchReady = useCallback(() => {
     let result = requiredFields.every(
       o =>
-        typeof engagementFormState[o] === 'boolean' ||
-        typeof engagementFormState[0] === 'number' ||
-        !!engagementFormState[o]
+        typeof currentEngagementChanges[o] === 'boolean' ||
+        typeof currentEngagementChanges[0] === 'number' ||
+        !!currentEngagementChanges[o]
     );
     return result;
-  }, [engagementFormState, requiredFields]);
+  }, [currentEngagementChanges, requiredFields]);
 
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
-        engagementFormState[field] !== 'boolean' &&
-        engagementFormState[field] !== 'number' &&
-        !engagementFormState[field]
+        currentEngagementChanges[field] !== 'boolean' &&
+        currentEngagementChanges[field] !== 'number' &&
+        !currentEngagementChanges[field]
     );
-  }, [engagementFormState, requiredFields]);
+  }, [currentEngagementChanges, requiredFields]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -294,7 +294,7 @@ export const EngagementProvider = ({
         engagements,
         getEngagement,
         error,
-        engagementFormState: { ...activeEngagement, ...engagementFormState },
+        currentEngagementChanges: { ...activeEngagement, ...currentEngagementChanges },
         formOptions,
         isLoading,
         updateEngagementFormField,

@@ -15,7 +15,7 @@ describe('Engagement summary card', () => {
             formOptions={{}}
             onChange={() => {}}
             activeEngagement={Engagement.staticFaked()}
-            engagementFormState={Engagement.staticFaked()}
+            currentEngagementChanges={Engagement.staticFaked()}
             missingRequiredFields={[]}
           />
         </TestStateWrapper>
@@ -34,7 +34,7 @@ describe('OpenShift Cluster Summary', () => {
             formOptions={{}}
             onChange={() => {}}
             activeEngagement={Engagement.staticFaked()}
-            engagementFormState={Engagement.staticFaked()}
+            currentEngagementChanges={Engagement.staticFaked()}
             missingRequiredFields={[]}
           />
         </TestStateWrapper>
@@ -53,7 +53,7 @@ describe('Point of Contact Card', () => {
             formOptions={{}}
             onChange={() => {}}
             activeEngagement={Engagement.staticFaked()}
-            engagementFormState={Engagement.staticFaked()}
+            currentEngagementChanges={Engagement.staticFaked()}
             missingRequiredFields={[]}
           />
         </TestStateWrapper>

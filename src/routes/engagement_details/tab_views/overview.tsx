@@ -10,7 +10,7 @@ import { ActivityHistoryCard } from '../../../components/engagement_data_cards/a
 import { SystemStatusCard } from '../../../components/engagement_data_cards/system_status_card/system_status_card';
 export interface EngagementOverviewTabProps {
   activeEngagement: Engagement;
-  engagementFormState: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
@@ -19,7 +19,7 @@ export interface EngagementOverviewTabProps {
 
 export function EngagementOverviewTab({
   activeEngagement,
-  engagementFormState,
+  currentEngagementChanges,
   missingRequiredFields,
   formOptions,
   onChange,
@@ -30,7 +30,7 @@ export function EngagementOverviewTab({
       <Grid hasGutter>
         <GridItem span={12}>
           <EngagementSummaryCard
-            engagementFormState={engagementFormState}
+            currentEngagementChanges={currentEngagementChanges}
             activeEngagement={activeEngagement}
             onSave={onSave}
             onChange={onChange}
@@ -39,7 +39,7 @@ export function EngagementOverviewTab({
           />
         </GridItem>
         <GridItem span={12}>
-          <SystemStatusCard activeEngagement={engagementFormState} />
+          <SystemStatusCard activeEngagement={currentEngagementChanges} />
         </GridItem>
         <GridItem span={12}>
           <PointOfContactCard
@@ -47,7 +47,7 @@ export function EngagementOverviewTab({
             onChange={onChange}
             formOptions={formOptions}
             activeEngagement={activeEngagement}
-            engagementFormState={engagementFormState}
+            currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
         </GridItem>
@@ -56,8 +56,8 @@ export function EngagementOverviewTab({
             onSave={onSave}
             onChange={onChange}
             formOptions={formOptions}
-            activeEngagement={engagementFormState}
-            engagementFormState={engagementFormState}
+            activeEngagement={currentEngagementChanges}
+            currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
         </GridItem>
@@ -66,11 +66,11 @@ export function EngagementOverviewTab({
             onSave={onSave}
             onChange={onChange}
             formOptions={formOptions}
-            engagement={engagementFormState}
+            engagement={currentEngagementChanges}
           />
         </GridItem>
         <GridItem span={12}>
-          <ActivityHistoryCard engagement={engagementFormState} />
+          <ActivityHistoryCard engagement={currentEngagementChanges} />
         </GridItem>
       </Grid>
     </TextContent>

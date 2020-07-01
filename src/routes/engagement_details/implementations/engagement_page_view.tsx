@@ -5,7 +5,7 @@ import { EngagementOverviewTab } from '../tab_views/overview';
 export function EngagementPageView() {
   const {
     formOptions,
-    engagementFormState,
+    currentEngagementChanges,
     updateEngagementFormField,
     saveEngagement,
     activeEngagement,
@@ -20,7 +20,7 @@ export function EngagementPageView() {
         onSave={saveEngagement}
         formOptions={formOptions}
         onChange={updateEngagementFormField}
-        engagementFormState={engagementFormState}
+        currentEngagementChanges={currentEngagementChanges}
       />
     </>
   );

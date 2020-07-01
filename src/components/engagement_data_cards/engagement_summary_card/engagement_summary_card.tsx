@@ -12,7 +12,7 @@ import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 export interface EngagementSummaryCardProps {
   activeEngagement: Engagement;
-  engagementFormState: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
@@ -22,7 +22,7 @@ const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
 export function EngagementSummaryCard({
   activeEngagement,
-  engagementFormState,
+  currentEngagementChanges,
   onChange = () => null,
   formOptions,
   missingRequiredFields,
@@ -41,7 +41,7 @@ export function EngagementSummaryCard({
         onSave={onSave}
         formOptions={formOptions}
         onChange={onChange}
-        engagement={engagementFormState}
+        engagement={currentEngagementChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard

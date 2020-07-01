@@ -35,7 +35,7 @@ describe('Engagement Context', () => {
 
   test('by default, engagement form equals initial state', () => {
     const { result } = getHook();
-    expect(result.current.engagementFormState).toEqual(getInitialState());
+    expect(result.current.currentEngagementChanges).toEqual(getInitialState());
   });
 
   test('Can Modify Engagement Form', async () => {
@@ -44,7 +44,7 @@ describe('Engagement Context', () => {
       result.current.updateEngagementFormField('customer_name', 'spencer');
       await waitForNextUpdate();
     });
-    expect(result.current.engagementFormState.customer_name).toEqual('spencer');
+    expect(result.current.currentEngagementChanges.customer_name).toEqual('spencer');
   });
 
   test('Can switch engagements', async () => {

@@ -16,7 +16,7 @@ enum TabNames {
 export function EngagementTabView() {
   const {
     formOptions,
-    engagementFormState,
+    currentEngagementChanges,
     updateEngagementFormField,
     saveEngagement,
     activeEngagement,
@@ -26,7 +26,7 @@ export function EngagementTabView() {
   const history = useHistory();
   const handleTabSelect = (_, tabIndex) => {
     history.push(
-      `/app/engagements/${engagementFormState.customer_name}/${engagementFormState.project_name}/${tabIndex}`
+      `/app/engagements/${currentEngagementChanges.customer_name}/${currentEngagementChanges.project_name}/${tabIndex}`
     );
   };
 
@@ -49,21 +49,21 @@ export function EngagementTabView() {
             formOptions={formOptions}
             onChange={updateEngagementFormField}
             activeEngagement={activeEngagement}
-            engagementFormState={engagementFormState}
+            currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
         </TabContentWrapper>
       </Tab>
       <Tab title="Users" eventKey={TabNames.users} id="users">
         <TabContentWrapper>
-          <EditPaneWrapper engagement={engagementFormState}>
+          <EditPaneWrapper engagement={currentEngagementChanges}>
             <ClusterUsers
               activeEngagement={activeEngagement}
               onSave={saveEngagement}
               formOptions={formOptions}
               onChange={updateEngagementFormField}
               missingRequiredFields={missingRequiredFields}
-              engagementFormState={engagementFormState}
+              currentEngagementChanges={currentEngagementChanges}
             />
           </EditPaneWrapper>
         </TabContentWrapper>
@@ -74,14 +74,14 @@ export function EngagementTabView() {
         id={'hosting_environment'}
       >
         <TabContentWrapper>
-          <EditPaneWrapper engagement={engagementFormState}>
+          <EditPaneWrapper engagement={currentEngagementChanges}>
             <HostingEnvironmentTab
               activeEngagement={activeEngagement}
               onSave={saveEngagement}
               formOptions={formOptions}
               onChange={updateEngagementFormField}
               missingRequiredFields={missingRequiredFields}
-              engagementFormState={engagementFormState}
+              currentEngagementChanges={currentEngagementChanges}
             />
           </EditPaneWrapper>
         </TabContentWrapper>

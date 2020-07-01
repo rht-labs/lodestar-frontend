@@ -40,7 +40,7 @@ const buttonHeader: React.CSSProperties = {
 
 export interface ClusterUserProps {
   activeEngagement: Engagement;
-  engagementFormState: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
@@ -49,7 +49,7 @@ export interface ClusterUserProps {
 
 export const ClusterUsers = ({
   activeEngagement,
-  engagementFormState,
+  currentEngagementChanges,
   missingRequiredFields,
   formOptions,
   onChange,
@@ -59,13 +59,13 @@ export const ClusterUsers = ({
   //Functions for Cluster User interactivity
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
-    engagementFormState?.engagement_users.push(newUser);
-    onChange('user', engagementFormState?.engagement_users);
+    currentEngagementChanges?.engagement_users.push(newUser);
+    onChange('user', currentEngagementChanges?.engagement_users);
   }
 
   function removeUser(index: any) {
-    engagementFormState?.engagement_users.splice(index.currentTarget.value, 1);
-    onChange('user', engagementFormState?.engagement_users);
+    currentEngagementChanges?.engagement_users.splice(index.currentTarget.value, 1);
+    onChange('user', currentEngagementChanges?.engagement_users);
   }
 
   const tabContent: React.CSSProperties = {
@@ -75,7 +75,7 @@ export const ClusterUsers = ({
 
   return (
     <div>
-      {!engagementFormState?.engagement_users.length ? (
+      {!currentEngagementChanges?.engagement_users.length ? (
         <EmptyState>
           <EmptyStateIcon icon={CubesIcon} />
           <Title headingLevel="h4" size="lg">

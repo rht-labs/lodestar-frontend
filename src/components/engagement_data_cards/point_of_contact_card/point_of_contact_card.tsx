@@ -12,7 +12,7 @@ const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
 export interface PointOfContactCardProps {
   activeEngagement: Engagement;
-  engagementFormState: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
   onSave: (engagement: Engagement) => void;
@@ -21,7 +21,7 @@ export interface PointOfContactCardProps {
 
 export function PointOfContactCard({
   activeEngagement,
-  engagementFormState,
+  currentEngagementChanges,
   formOptions,
   onChange,
   onSave,
@@ -42,7 +42,7 @@ export function PointOfContactCard({
       <PointOfContactEditModal
         formOptions={formOptions}
         onChange={onChange}
-        engagement={engagementFormState}
+        engagement={currentEngagementChanges}
         onSave={onSave}
         isOpen={activeModalKey === POINT_OF_CONTACT_MODAL_KEY}
       />

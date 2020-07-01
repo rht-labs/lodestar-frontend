@@ -6,7 +6,7 @@ import { OpenShiftClusterSummaryCard } from '../../../components/engagement_data
 
 export interface HostingEnvironmentTabProps {
   activeEngagement: Engagement;
-  engagementFormState: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
@@ -14,7 +14,7 @@ export interface HostingEnvironmentTabProps {
 }
 
 export function HostingEnvironmentTab({
-  engagementFormState,
+  currentEngagementChanges,
   activeEngagement,
   onChange,
   formOptions,
@@ -30,7 +30,7 @@ export function HostingEnvironmentTab({
             formOptions={formOptions}
             onChange={onChange}
             activeEngagement={activeEngagement}
-            engagementFormState={engagementFormState}
+            currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
         </GridItem>

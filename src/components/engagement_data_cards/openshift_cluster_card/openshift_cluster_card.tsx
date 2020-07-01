@@ -16,7 +16,7 @@ const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
 export interface OpenShiftClusterSummaryCardProps {
   activeEngagement: Engagement;
-  engagementFormState: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
@@ -25,7 +25,7 @@ export interface OpenShiftClusterSummaryCardProps {
 
 export function OpenShiftClusterSummaryCard({
   activeEngagement,
-  engagementFormState,
+  currentEngagementChanges,
   onSave,
   onChange,
   formOptions,
@@ -46,7 +46,7 @@ export function OpenShiftClusterSummaryCard({
         formOptions={formOptions}
         onChange={onChange}
         onSave={onSave}
-        engagement={engagementFormState}
+        engagement={currentEngagementChanges}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
