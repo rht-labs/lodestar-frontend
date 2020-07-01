@@ -9,6 +9,7 @@ import {
   SortOption,
 } from '../../../schemas/engagement_filter';
 import { EngagementFilterProps } from '../engagement_filter_bar';
+import {FilterIcon, SortAmountDownIcon} from "@patternfly/react-icons";
 export function SortSelect({ filter, onChange }: EngagementFilterProps) {
   const [isSortSelectOpen, setIsSortSelectOpen] = useState<boolean>(false);
 
@@ -63,7 +64,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
   });
   return (
     <Select
-      placeholderText="Sort by"
+      placeholderText={<><SortAmountDownIcon style={{marginRight: '1rem'}}/> Sort by</>}
       isOpen={isSortSelectOpen}
       onToggle={() => setIsSortSelectOpen(!isSortSelectOpen)}
       selections={sortSelection}
