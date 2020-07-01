@@ -16,7 +16,7 @@ export interface CreateEngagementModalProps {
 }
 
 export function CreateEngagementModal(props: CreateEngagementModalProps) {
-  const { activeEngagement, createEngagement } = useEngagements();
+  const { currentEngagement, createEngagement } = useEngagements();
 
   const [customerName, setCustomerName] = useState(null);
   const [projectName, setProjectName] = useState(null);
@@ -24,7 +24,7 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
   useEffect(() => {
     setCustomerName(null);
     setProjectName(null);
-  }, [activeEngagement]);
+  }, [currentEngagement]);
 
   const createNewEngagement = () => {
     createEngagement({

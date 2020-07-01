@@ -3,16 +3,16 @@ import {
   ExclamationTriangleIcon,
   CheckCircleIcon,
 } from '@patternfly/react-icons';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Tooltip } from '@patternfly/react-core';
 import { getHumanReadableFieldName } from '../../common/human_readable_engagement_field';
 interface RequiredFieldsWarningProps {
   requiredFields: string[];
+  missingRequiredFields: string[];
 }
 export function RequiredFieldsWarning({
   requiredFields = [],
+  missingRequiredFields = [],
 }: RequiredFieldsWarningProps) {
-  const { missingRequiredFields } = useEngagements();
   const neededFields = requiredFields
     .filter(field => missingRequiredFields.includes(field))
     .map(field => getHumanReadableFieldName(field));

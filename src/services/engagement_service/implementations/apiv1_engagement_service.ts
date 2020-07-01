@@ -27,7 +27,7 @@ export class Apiv1EngagementService extends EngagementService {
       const { data } = await this.axios.post(`/engagements`, engagementData);
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {
-      Logger.error(e);
+      Logger.instance.error(e);
       if (e.response.status === 409) {
         throw new AlreadyExistsError(
           'A project with this customer name and project name already exists'

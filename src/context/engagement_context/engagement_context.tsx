@@ -13,9 +13,9 @@ import { Logger } from '../../utilities/logger';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
-  engagementFormState?: Engagement;
-  activeEngagement?: Engagement;
-  setActiveEngagement: (Engagement: Engagement) => void;
+  currentEngagementChanges?: Engagement;
+  currentEngagement?: Engagement;
+  setcurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
   requiredFields: string[];
   getEngagement: (
@@ -69,10 +69,10 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
-  const [activeEngagement, setActiveEngagement] = useState<
+  const [currentEngagement, setcurrentEngagement] = useState<
     Engagement | undefined
   >();
-  const [engagementFormState, dispatch] = useReducer<
+  const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
@@ -82,12 +82,12 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
-    Logger.info('change active engagement', activeEngagement);
+    Logger.instance.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
-      payload: getInitialState(activeEngagement),
+      payload: getInitialState(currentEngagement),
     });
-  }, [activeEngagement, formOptions]);
+  }, [currentEngagement, formOptions]);
   const fetchEngagements = useCallback(async () => {
     try {
       feedbackContext.showLoader();
@@ -101,7 +101,7 @@ export const EngagementProvider = ({
         AlertType.error,
         true
       );
-      Logger.error(e);
+      Logger.instance.error(e);
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);
@@ -116,7 +116,7 @@ export const EngagementProvider = ({
             engagement?.project_name === projectName
         );
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         feedbackContext.showAlert(
           'There was a problem fetching this engagement',
           AlertType.error
@@ -132,7 +132,7 @@ export const EngagementProvider = ({
         const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         // TODO: Handle setting the error
       }
     },
@@ -153,7 +153,7 @@ export const EngagementProvider = ({
         );
         return engagement;
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
@@ -170,21 +170,21 @@ export const EngagementProvider = ({
   const _checkLaunchReady = useCallback(() => {
     let result = requiredFields.every(
       o =>
-        typeof engagementFormState[o] === 'boolean' ||
-        typeof engagementFormState[0] === 'number' ||
-        !!engagementFormState[o]
+        typeof currentEngagementChanges[o] === 'boolean' ||
+        typeof currentEngagementChanges[o] === 'number' ||
+        !!currentEngagementChanges[o]
     );
     return result;
-  }, [engagementFormState, requiredFields]);
+  }, [currentEngagementChanges, requiredFields]);
 
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
-        engagementFormState[field] !== 'boolean' &&
-        engagementFormState[field] !== 'number' &&
-        !engagementFormState[field]
+        currentEngagementChanges[field] !== 'boolean' &&
+        currentEngagementChanges[field] !== 'number' &&
+        !currentEngagementChanges[field]
     );
-  }, [engagementFormState, requiredFields]);
+  }, [currentEngagementChanges, requiredFields]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -223,7 +223,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
@@ -265,7 +265,7 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
@@ -286,15 +286,18 @@ export const EngagementProvider = ({
     <Provider
       value={{
         requiredFields,
-        activeEngagement,
+        currentEngagement,
         missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
-        setActiveEngagement,
+        setcurrentEngagement,
         engagements,
         getEngagement,
         error,
-        engagementFormState,
+        currentEngagementChanges: {
+          ...currentEngagement,
+          ...currentEngagementChanges,
+        },
         formOptions,
         isLoading,
         updateEngagementFormField,

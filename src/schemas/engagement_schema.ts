@@ -117,6 +117,9 @@ export enum EngagementStatus {
 export const getEngagementStatus = (
   engagement: Engagement
 ): EngagementStatus => {
+  if (!engagement) {
+    return null;
+  }
   const Today = new Date();
   const { launch, end_date } = engagement;
   const hasLaunched = !!launch?.launched_date_time;

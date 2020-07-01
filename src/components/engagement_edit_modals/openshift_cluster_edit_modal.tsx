@@ -7,7 +7,6 @@ import {
   EngagementFormConfig,
   EngagementFormOption,
 } from '../../schemas/engagement_config';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider';
 import { CloudProviderRegionFormField } from '../engagement_form_fields/cloud_provider_region';
 import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version';
@@ -39,10 +38,8 @@ export function OpenShiftClusterEditModal({
     engagement
   );
 
-  const { engagementFormState } = useEngagements();
-
   const onSave = () => {
-    propsOnSave(engagementFormState);
+    propsOnSave(engagement);
     requestClose();
   };
   return (

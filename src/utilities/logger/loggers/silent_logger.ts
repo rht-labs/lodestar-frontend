@@ -1,6 +1,6 @@
 import { Logger } from '../logger';
 
-const SilentLogger: Logger = {
+export const SilentLogger: Logger = {
   info: () => {},
   error: () => {},
   debug: () => {},

@@ -39,13 +39,18 @@ const buttonHeader: React.CSSProperties = {
 };
 
 export interface ClusterUserProps {
-  onChange: (name: string, value: any) => void;
-  engagement: Engagement;
-  formOptions?: EngagementFormConfig;
+  currentEngagement: Engagement;
+  currentEngagementChanges: Engagement;
+  onChange: (fieldName: string, value: any) => void;
+  formOptions: EngagementFormConfig;
+  onSave: (engagement: Engagement) => void;
+  missingRequiredFields: string[];
 }
 
 export const ClusterUsers = ({
-  engagement,
+  currentEngagement,
+  currentEngagementChanges,
+  missingRequiredFields,
   formOptions,
   onChange,
 }: ClusterUserProps) => {
@@ -54,13 +59,13 @@ export const ClusterUsers = ({
   //Functions for Cluster User interactivity
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
-    engagement.engagement_users.push(newUser);
-    onChange('user', engagement.engagement_users);
+    currentEngagementChanges?.engagement_users.push(newUser);
+    onChange('user', currentEngagementChanges?.engagement_users);
   }
 
   function removeUser(index: any) {
-    engagement.engagement_users.splice(index.currentTarget.value, 1);
-    onChange('user', engagement.engagement_users);
+    currentEngagementChanges?.engagement_users.splice(index.currentTarget.value, 1);
+    onChange('user', currentEngagementChanges?.engagement_users);
   }
 
   const tabContent: React.CSSProperties = {
@@ -70,7 +75,7 @@ export const ClusterUsers = ({
 
   return (
     <div>
-      {!engagement.engagement_users.length ? (
+      {!currentEngagementChanges?.engagement_users.length ? (
         <EmptyState>
           <EmptyStateIcon icon={CubesIcon} />
           <Title headingLevel="h4" size="lg">
@@ -99,82 +104,100 @@ export const ClusterUsers = ({
                   </Feature>
                 </InputGroup>
               </li>
-              {engagement.engagement_users.map((value: any, index: any) => {
-                return (
-                  <li key={index}>
-                    <InputGroup>
-                      <TextInput
-                        aria-label="Last Name"
-                        name="last-name"
-                        isDisabled={!hasFeature(APP_FEATURES.writer)}
-                        onChange={e => {
-                          engagement.engagement_users[index].last_name = e;
-                          onChange('user', engagement.engagement_users);
-                        }}
-                        placeholder="Last Name"
-                        type="text"
-                        value={value.last_name || ''}
-                      />
-                      <TextInput
-                        aria-label="First Name"
-                        name="first-name"
-                        isDisabled={!hasFeature(APP_FEATURES.writer)}
-                        onChange={e => {
-                          engagement.engagement_users[index].first_name = e;
-                          onChange('user', engagement.engagement_users);
-                        }}
-                        placeholder="First Name"
-                        type="text"
-                        value={value.first_name || ''}
-                      />
-                      <TextInput
-                        aria-label="email"
-                        name="email"
-                        isDisabled={!hasFeature(APP_FEATURES.writer)}
-                        onChange={e => {
-                          engagement.engagement_users[index].email = e;
-                          onChange('user', engagement.engagement_users);
-                        }}
-                        placeholder="Email Address"
-                        type="email"
-                        value={value.email || ''}
-                      />
-                      <FormSelect
-                        style={selectStyle}
-                        name="role"
-                        aria-label="User Role"
-                        value={value.role || ''}
-                        isDisabled={!hasFeature(APP_FEATURES.writer)}
-                        onChange={e => {
-                          engagement.engagement_users[index].role = e;
-                          onChange('user', engagement.engagement_users);
-                        }}
-                      >
-                        {(
-                          formOptions?.user_options?.user_roles?.options ?? []
-                        )?.map((option: any, index: number) => (
-                          <FormSelectOption
-                            isDisabled={option.disabled}
-                            key={index}
-                            value={option.value}
-                            label={option.label}
-                          />
-                        ))}
-                      </FormSelect>
-                      <Feature name={APP_FEATURES.writer}>
-                        <Button
-                          onClick={removeUser}
-                          value={index}
-                          variant="danger"
-                          isInline
+              {currentEngagement?.engagement_users.map(
+                (value: any, index: any) => {
+                  return (
+                    <li key={index}>
+                      <InputGroup>
+                        <TextInput
+                          aria-label="Last Name"
+                          name="last-name"
+                          isDisabled={!hasFeature(APP_FEATURES.writer)}
+                          onChange={e => {
+                            currentEngagement.engagement_users[
+                              index
+                            ].last_name = e;
+                            onChange(
+                              'user',
+                              currentEngagement?.engagement_users
+                            );
+                          }}
+                          placeholder="Last Name"
+                          type="text"
+                          value={value.last_name || ''}
+                        />
+                        <TextInput
+                          aria-label="First Name"
+                          name="first-name"
+                          isDisabled={!hasFeature(APP_FEATURES.writer)}
+                          onChange={e => {
+                            currentEngagement.engagement_users[
+                              index
+                            ].first_name = e;
+                            onChange(
+                              'user',
+                              currentEngagement?.engagement_users
+                            );
+                          }}
+                          placeholder="First Name"
+                          type="text"
+                          value={value.first_name || ''}
+                        />
+                        <TextInput
+                          aria-label="email"
+                          name="email"
+                          isDisabled={!hasFeature(APP_FEATURES.writer)}
+                          onChange={e => {
+                            currentEngagement.engagement_users[index].email = e;
+                            onChange(
+                              'user',
+                              currentEngagement?.engagement_users
+                            );
+                          }}
+                          placeholder="Email Address"
+                          type="email"
+                          value={value.email || ''}
+                        />
+                        <FormSelect
+                          style={selectStyle}
+                          name="role"
+                          aria-label="User Role"
+                          value={value.role || ''}
+                          isDisabled={!hasFeature(APP_FEATURES.writer)}
+                          onChange={e => {
+                            currentEngagement.engagement_users[index].role = e;
+                            onChange(
+                              'user',
+                              currentEngagement?.engagement_users
+                            );
+                          }}
                         >
-                          <ErrorCircleOIcon />
-                        </Button>
-                      </Feature>
-                    </InputGroup>
-                  </li>
-                );
-              })}
+                          {(
+                            formOptions?.user_options?.user_roles?.options ?? []
+                          )?.map((option: any, index: number) => (
+                            <FormSelectOption
+                              isDisabled={option.disabled}
+                              key={index}
+                              value={option.value}
+                              label={option.label}
+                            />
+                          ))}
+                        </FormSelect>
+                        <Feature name={APP_FEATURES.writer}>
+                          <Button
+                            onClick={removeUser}
+                            value={index}
+                            variant="danger"
+                            isInline
+                          >
+                            <ErrorCircleOIcon />
+                          </Button>
+                        </Feature>
+                      </InputGroup>
+                    </li>
+                  );
+                }
+              )}
             </ul>
           </Form>
           <Feature name={APP_FEATURES.writer}>

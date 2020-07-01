@@ -16,7 +16,6 @@ import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_toggles/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 export interface PointOfContactEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: object;
@@ -37,10 +36,9 @@ export function PointOfContactEditModal({
     backgroundColor: '#EDEDED',
   };
   const { validate, getValidationResult } = useValidation();
-  const { engagementFormState } = useEngagements();
 
   const onSave = () => {
-    propsOnSave(engagementFormState);
+    propsOnSave(engagement);
     requestClose();
   };
 

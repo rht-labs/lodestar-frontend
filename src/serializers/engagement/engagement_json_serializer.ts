@@ -27,7 +27,7 @@ export class EngagementJsonSerializer
         }
         return undefined;
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         return undefined;
       }
     }

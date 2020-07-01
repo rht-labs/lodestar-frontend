@@ -39,7 +39,7 @@ export class Apiv1AuthService implements AuthService {
         );
       }
     } catch (e) {
-      Logger.error(e);
+      Logger.instance.error(e);
     }
   }
 
@@ -104,7 +104,7 @@ export class Apiv1AuthService implements AuthService {
           resolve(false);
         }
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         resolve(false);
       }
     });
