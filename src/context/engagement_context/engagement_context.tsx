@@ -171,7 +171,7 @@ export const EngagementProvider = ({
     let result = requiredFields.every(
       o =>
         typeof currentEngagementChanges[o] === 'boolean' ||
-        typeof currentEngagementChanges[0] === 'number' ||
+        typeof currentEngagementChanges[o] === 'number' ||
         !!currentEngagementChanges[o]
     );
     return result;
@@ -294,7 +294,10 @@ export const EngagementProvider = ({
         engagements,
         getEngagement,
         error,
-        currentEngagementChanges: { ...currentEngagement, ...currentEngagementChanges },
+        currentEngagementChanges: {
+          ...currentEngagement,
+          ...currentEngagementChanges,
+        },
         formOptions,
         isLoading,
         updateEngagementFormField,
