@@ -40,6 +40,11 @@ export function EngagementStartEndDateFormField({
     if (!end_date || !(end_date instanceof Date)) {
       return undefined;
     }
+    if (end_date && archive_date < end_date) {
+      const newDate = end_date;
+      newDate.setDate(newDate.getUTCDate() + (gracePeriodInDays ?? 0));
+      return newDate;
+    }
     if (archive_date || retirementDateChanged) {
       return archive_date;
     } else if (end_date) {
