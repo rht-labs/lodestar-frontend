@@ -6,9 +6,8 @@ const LOGGERS = (logVerbosity: LogVerbosity) => ({
   console: ConsoleLogger(logVerbosity),
 });
 
-const ENV_LOG_VERBOSITY: LogVerbosity = (function() {
-  const envVerbosityLevel = process.env.REACT_APP_LOG_VERBOSITY;
-  switch (envVerbosityLevel) {
+export const getLogVerbosityFromString = (verbosity: string): LogVerbosity => {
+  switch (verbosity) {
     case 'error':
       return LogVerbosity.error;
     case 'info':
@@ -18,16 +17,34 @@ const ENV_LOG_VERBOSITY: LogVerbosity = (function() {
     default:
       return LogVerbosity.error;
   }
-})();
+};
 
-export const Logger: LoggerContract = (function(): LoggerContract {
-  const envLogger = process.env.REACT_APP_LOGGER ?? '';
-  const loggers = LOGGERS(ENV_LOG_VERBOSITY);
-  if (envLogger in loggers) {
-    return loggers[envLogger];
+export function createLogger(
+  loggerType: string = '',
+  logVerbosity: LogVerbosity
+) {
+  const loggers = LOGGERS(logVerbosity);
+  if (loggerType in loggers) {
+    return loggers[loggerType];
   } else if (process.env.NODE_ENV === 'production') {
     return loggers.console;
   } else {
     return loggers.console;
   }
-})();
+}
+
+export class Logger {
+  private static _instance: LoggerContract;
+  static get instance() {
+    if (!Logger._instance) {
+      Logger._instance = createLogger(
+        process.env.REACT_APP_LOGGER ?? '',
+        getLogVerbosityFromString(process.env.REACT_APP_LOG_VERBOSITY)
+      );
+    }
+    return Logger._instance;
+  }
+  static set instance(logger: LoggerContract) {
+    Logger._instance = logger;
+  }
+}

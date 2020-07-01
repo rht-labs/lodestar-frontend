@@ -1,6 +1,7 @@
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useEffect } from 'react';
 import { Config } from '../../schemas/config';
 import { ConfigService } from '../../services/config_service/config_service';
+import { Logger, createLogger } from '../../utilities/logger';
 export interface ConfigContextParams {
   appConfig: Config | null;
 }
@@ -28,6 +29,12 @@ export const ConfigProvider = ({
     const config = await configRepository.fetchConfig();
     setAppConfig(config);
   }, [configRepository]);
+
+  useEffect(() => {
+    if (appConfig) {
+      Logger.instance = createLogger(appConfig.loggerType, appConfig.logLevel);
+    }
+  }, [appConfig]);
 
   return (
     <Provider

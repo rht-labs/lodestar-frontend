@@ -26,7 +26,7 @@ export function EngagementDetailView(props) {
   } = useEngagements();
   useEffect(() => {
     if (!formOptions) {
-      Logger.info('getting config');
+      Logger.instance.info('getting config');
       getConfig();
     }
   }, [formOptions, getConfig]);
@@ -53,7 +53,7 @@ export function EngagementDetailView(props) {
   };
   useEffect(() => {
     if (!formOptions) {
-      Logger.info('getting config');
+      Logger.instance.info('getting config');
       getConfig();
     }
   }, [formOptions, getConfig]);

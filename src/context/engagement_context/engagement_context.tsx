@@ -82,7 +82,7 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
-    Logger.info('change active engagement', currentEngagement);
+    Logger.instance.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
       payload: getInitialState(currentEngagement),
@@ -101,7 +101,7 @@ export const EngagementProvider = ({
         AlertType.error,
         true
       );
-      Logger.error(e);
+      Logger.instance.error(e);
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);
@@ -116,7 +116,7 @@ export const EngagementProvider = ({
             engagement?.project_name === projectName
         );
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         feedbackContext.showAlert(
           'There was a problem fetching this engagement',
           AlertType.error
@@ -132,7 +132,7 @@ export const EngagementProvider = ({
         const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         // TODO: Handle setting the error
       }
     },
@@ -153,7 +153,7 @@ export const EngagementProvider = ({
         );
         return engagement;
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
@@ -223,7 +223,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
@@ -265,7 +265,7 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        Logger.error(e);
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
