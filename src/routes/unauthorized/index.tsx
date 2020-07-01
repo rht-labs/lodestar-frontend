@@ -21,7 +21,7 @@ export function UnauthorizedPage() {
             Access denied
           </Title>
           <EmptyStateBody>
-            Sorry, your account has not yet been granted access to this system. Please contact the SRE team to resolve
+            Sorry, your account has not yet been granted access to this system. Please contact the Open Innovation Labs SRE team to resolve
             this.
           </EmptyStateBody>
         </EmptyState>
