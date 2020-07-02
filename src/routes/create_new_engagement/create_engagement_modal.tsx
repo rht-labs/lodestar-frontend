@@ -9,6 +9,7 @@ import {
 } from '@patternfly/react-core';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
+import { useValidation } from '../../context/validation_context/validation_hook';
 
 export interface CreateEngagementModalProps {
   isOpen: boolean;
@@ -20,7 +21,7 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
 
   const [customerName, setCustomerName] = useState(null);
   const [projectName, setProjectName] = useState(null);
-
+  const { getValidationResult, validate } = useValidation();
   useEffect(() => {
     setCustomerName(null);
     setProjectName(null);
@@ -33,6 +34,11 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
     });
     props.onRequestClose(customerName, projectName);
   };
+  const hasValidInput =
+    !!customerName &&
+    !!projectName &&
+    getValidationResult('project_name')?.length === 0 &&
+    getValidationResult('customer_name')?.length === 0;
   return (
     <Modal
       width={'50%'}
@@ -45,6 +51,7 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
           variant="primary"
           onClick={createNewEngagement}
           data-cy="createNewEngagement"
+          isDisabled={!hasValidInput}
         >
           Submit
         </Button>,
@@ -67,11 +74,19 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
           fieldId="customer-name"
           helperText="What client is this for?"
           isRequired
+          helperTextInvalid={getValidationResult('customer_name').join(' ')}
+          validated={
+            getValidationResult('customer_name').length > 0
+              ? 'error'
+              : 'default'
+          }
         >
           <CustomerSelectDropdown
             placeholder="e.g. NASA"
             selectedValue={customerName}
-            onSelect={setCustomerName}
+            onSelect={value =>
+              validate('customer_name')(value) && setCustomerName(value)
+            }
           />
         </FormGroup>
         <FormGroup
@@ -79,6 +94,10 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
           fieldId="project-name"
           helperText="The name of the solution being worked on."
           isRequired
+          helperTextInvalid={getValidationResult('project_name').join(' ')}
+          validated={
+            getValidationResult('project_name').length > 0 ? 'error' : 'default'
+          }
         >
           <TextInput
             type="text"
@@ -86,7 +105,9 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
             name="project_name"
             placeholder="e.g. Mars Probe"
             value={projectName || ''}
-            onChange={setProjectName}
+            onChange={value =>
+              validate('project_name')(value) && setProjectName(value)
+            }
             data-cy="new_engagement_name"
           />
         </FormGroup>

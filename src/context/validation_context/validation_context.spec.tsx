@@ -37,7 +37,7 @@ describe('Validation Context Hook', () => {
   test('the validate function returns an empty array if all validators pass', () => {
     const { result } = getHook({
       hello: [
-        Validators.NotNullValidator,
+        Validators.NotNullValidator(),
         Validators.LengthValidator({ maxLength: 4, minLength: 1 }),
       ],
     });
@@ -49,7 +49,7 @@ describe('Validation Context Hook', () => {
   test('the validate function returns an array of strings if any validator fails', () => {
     const { result } = getHook({
       hello: [
-        Validators.NotNullValidator,
+        Validators.NotNullValidator(),
         Validators.LengthValidator({ minLength: 5 }),
       ],
     });
@@ -60,7 +60,7 @@ describe('Validation Context Hook', () => {
 
   test('when a validation fails, the validationResults should update', async () => {
     const { result, waitForNextUpdate } = getHook({
-      hello: [Validators.NotNullValidator],
+      hello: [Validators.NotNullValidator()],
     });
 
     await act(async () => {
