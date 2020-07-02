@@ -3,9 +3,33 @@ import { SystemMessage } from './system_message';
 import faker from 'faker';
 
 export enum HealthStatus {
-  yellow = "yellow",
-  green = "green",
-  red = "red",
+  yellow = 'yellow',
+  green = 'green',
+  red = 'red',
+}
+
+export function getHumanReadableNameForHealthStatus(status: HealthStatus) {
+  switch (status) {
+    case HealthStatus.green:
+      return 'Green';
+    case HealthStatus.yellow:
+      return 'Yellow';
+    case HealthStatus.red:
+      return 'Red';
+  }
+}
+
+export function getColorForHealthStatus(status: HealthStatus) {
+  switch (status) {
+    case HealthStatus.green:
+      return 'green';
+    case HealthStatus.yellow:
+      return '#EC7A08';
+    case HealthStatus.red:
+      return '#C9190B';
+    default:
+      return 'grey';
+  }
 }
 
 export interface ClusterStatus {

@@ -1,25 +1,29 @@
 import React from 'react';
 import {
   ExclamationTriangleIcon,
-  CheckCircleIcon, ExclamationCircleIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
 } from '@patternfly/react-icons';
-import {HealthStatus} from "../../../schemas/cluster_status";
+import {
+  HealthStatus,
+  getColorForHealthStatus,
+} from '../../../schemas/cluster_status';
 
 interface StatusIconProps {
   status: HealthStatus;
 }
-export function StatusIcon({
-  status
-}: StatusIconProps) {
 
-  switch(status){
+export function StatusIcon({ status }: StatusIconProps) {
+  switch (status) {
     case HealthStatus.green:
-      return <CheckCircleIcon color="green"/>;
+      return <CheckCircleIcon color={getColorForHealthStatus(status)} />;
     case HealthStatus.yellow:
-      return <ExclamationTriangleIcon color='#EC7A08' />;
+      return (
+        <ExclamationTriangleIcon color={getColorForHealthStatus(status)} />
+      );
     case HealthStatus.red:
-      return <ExclamationCircleIcon color="#C9190B" />;
+      return <ExclamationCircleIcon color={getColorForHealthStatus(status)} />;
     default:
-      return <div/>
+      return <div />;
   }
 }

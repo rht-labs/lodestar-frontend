@@ -5,19 +5,20 @@ import {
   Button,
   Grid,
   GridItem,
-  DataList,
-  DataListCell,
-  DataListItem,
-  DataListItemCells,
-  DataListItemRow,
+  Title,
+  TextContent,
 } from '@patternfly/react-core';
-import { formatISO, isValid } from 'date-fns';
-
+import { Table, ICell, TableHeader, TableBody } from '@patternfly/react-table';
 import { EditModalTemplate } from '../../../layout/edit_modal_template';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { Subsystem } from '../../../schemas/subsystem';
-export interface SubsystemDetailsModalProps {
+import { StatusIcon } from './status_icons';
+import { getHumanReadableNameForHealthStatus } from '../../../schemas/cluster_status';
+export interface SubsystemDetailsModalProps extends HasSubsystem {
   isOpen: boolean;
+}
+
+export interface HasSubsystem {
   subsystem: Subsystem;
 }
 export function SubsystemDetailsModal(props: SubsystemDetailsModalProps) {
@@ -26,7 +27,7 @@ export function SubsystemDetailsModal(props: SubsystemDetailsModalProps) {
   return (
     <Modal
       variant={ModalVariant.large}
-      isOpen={props.isOpen}
+      isOpen={props.subsystem.name === 'openshift'}
       onClose={requestClose}
       title={props.subsystem.name}
     >
@@ -47,44 +48,91 @@ function DetailedSubsystemStatusList({ subsystem }: { subsystem: Subsystem }) {
   return (
     <Grid>
       <GridItem span={12}>
-        <DataList aria-label="system status message" isCompact>
-          <DataListItem aria-labelledby="system-status-messages">
-            <DataListItemRow>
-              <DataListItemCells
-                dataListCells={[
-                  <DataListCell key="subsystemInfo">
-                    <b> Api: </b> {subsystem.api}
-                  </DataListCell>,
-                  <DataListCell key="subsystemInfo">
-                    <b> web_console: </b> {subsystem.web_console}
-                  </DataListCell>,
-                  <DataListCell key="subsystemInfo">
-                    <b> State: </b> {subsystem.state}
-                  </DataListCell>,
-                  <DataListCell key="subsystemInfo">
-                    <b> Status: </b> {subsystem.status}
-                  </DataListCell>,
-                  <DataListCell key="subsystemInfo">
-                    <b> Info: </b> {subsystem.info}
-                  </DataListCell>,
-                  <DataListCell key="subsystemMessage">
-                    <b> Messages: </b>
-                    {subsystem.messages.map(m => (
-                      <div>{m.message}</div>
-                    ))}
-                  </DataListCell>,
-                  <DataListCell key="subsystemInfo">
-                    <b> Updated: </b> {subsystem.updated.toString()}
-                    {!!subsystem.updated && isValid(subsystem.updated)
-                      ? formatISO(subsystem.updated)
-                      : ' - '}
-                  </DataListCell>,
-                ]}
-              />
-            </DataListItemRow>
-          </DataListItem>
-        </DataList>
+        <DetailsSection title="Subsystem Status">
+          <Grid>
+            <GridItem span={12}>
+              <HealthStatusWidget subsystem={subsystem} />
+            </GridItem>
+            <GridItem span={12}>
+              <InfoWidget subsystem={subsystem} />
+            </GridItem>
+          </Grid>
+        </DetailsSection>
+      </GridItem>
+      <GridItem span={12}>
+        <DetailsSection title="Messages">
+          <MessageWidget subsystem={subsystem} />
+        </DetailsSection>
       </GridItem>
     </Grid>
+  );
+}
+
+function DetailsSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div style={{ padding: '1rem 0' }}>
+      <TextContent>
+        <div style={{ padding: '0 0 0.5rem 0' }}>
+          <Title headingLevel="h3">{title}</Title>
+        </div>
+        <div>{children}</div>
+      </TextContent>
+    </div>
+  );
+}
+
+function InfoWidget({ subsystem }: HasSubsystem) {
+  if (!subsystem || !subsystem.info) {
+    return <div />;
+  }
+  return (
+    <div>
+      <div>
+        <span>
+          <strong>Info:&nbsp;&nbsp;</strong>
+          {subsystem.info}
+        </span>
+      </div>
+      <div>
+        <span>
+          <strong>State:&nbsp;&nbsp;</strong>
+          {subsystem.state}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function HealthStatusWidget({ subsystem }: HasSubsystem) {
+  return (
+    <span>
+      <strong>Current Status:&nbsp;&nbsp;</strong>
+      <StatusIcon status={subsystem.status} />
+      &nbsp;&nbsp;
+      <span>{getHumanReadableNameForHealthStatus(subsystem.status)}</span>
+    </span>
+  );
+}
+
+function MessageWidget({ subsystem }: HasSubsystem) {
+  if (!subsystem || !subsystem.messages) {
+    return <div />;
+  }
+  const columns: ICell[] = [{ title: 'Severity' }, { title: 'Message' }];
+  const rows = subsystem.messages.map(message => [
+    message.severity,
+    message.message,
+  ]);
+  return (
+    <Table cells={columns} rows={rows}>
+      <TableHeader />
+      <TableBody />
+    </Table>
   );
 }
