@@ -629,12 +629,8 @@ Object {
                 >
                   Subdomain
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  ordoabchao
-                </p>
+                ordoabchao
+                .na-1.rht-labs.com
               </div>
             </div>
           </div>
@@ -800,12 +796,8 @@ Object {
               >
                 Subdomain
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                ordoabchao
-              </p>
+              ordoabchao
+              .na-1.rht-labs.com
             </div>
           </div>
         </div>
