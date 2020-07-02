@@ -50,7 +50,7 @@ export function Dashboard() {
               icon={PendingIcon}
               numberOfEngagements={numberOfUpcomingEngagements}
               title={'Upcoming Engagements'}
-              subtitle={'Upcoming engagements in the future.'}
+              subtitle={'Upcoming engagements in the future, and are not launched yet.'}
               url={"/app/engagements/upcoming"}/>
           </GridItem>
           <GridItem span={3}>
