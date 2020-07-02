@@ -19,7 +19,6 @@ export function LaunchAlertBanner({
   missingRequiredFields,
 }: LaunchAlertBannerProps) {
   const overallStatus = engagement?.status?.overall_status;
-
   return (
     <Alert
       isInline
