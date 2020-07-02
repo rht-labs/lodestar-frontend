@@ -1,21 +1,25 @@
 export type Validator = (input: any) => string | null;
 
 export abstract class Validators {
-  static NotNullValidator: Validator = (input: string) =>
-    !!input.trim() ? null : 'The value provided must not be null';
+  static NotNullValidator = (message?: string): Validator => (input: string) =>
+    !!input.trim() ? null : message ?? 'The value provided must not be null';
 
-  static EmailAddressValidator: Validator = (input: string) =>
+  static EmailAddressValidator = (message?: string): Validator => (
+    input: string
+  ) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)
       ? null
-      : 'Enter a valid email address';
+      : message ?? 'Enter a valid email address';
 
   static DateValidator: { [key: string]: Validator } = {
     future: (input: string) => 'The date must be in the future',
     past: (input: string) => 'The date must be in the past',
   };
 
-  static RegexValidator = (regex: RegExp): Validator => (input: string) => {
-    return regex.test(input) ? null : 'Invalid input';
+  static RegexValidator = (regex: RegExp, message): Validator => (
+    input: string
+  ) => {
+    return regex.test(input) ? null : message ?? 'Invalid input';
   };
 
   static LengthValidator: ({
@@ -45,6 +49,7 @@ export abstract class Validators {
 
 export function ValidatorFactory(props): Validator {
   if (props?.kind && props.kind in REGISTERED_VALIDATORS) {
+    console.log(props?.value);
     return REGISTERED_VALIDATORS[props.kind](props);
   }
   return null;
@@ -53,7 +58,8 @@ export function ValidatorFactory(props): Validator {
 type ValidatorFactory = (props: any) => Validator;
 
 const REGISTERED_VALIDATORS: { [key: string]: ValidatorFactory } = {
-  regex: props => Validators.RegexValidator(RegExp(props.value as string)),
-  email: props => Validators.EmailAddressValidator,
-  notnull: props => Validators.NotNullValidator,
+  regex: props =>
+    Validators.RegexValidator(RegExp(props.value as string), props.message),
+  email: props => Validators.EmailAddressValidator(props.message as string),
+  notnull: props => Validators.NotNullValidator(props.message as string),
 };
