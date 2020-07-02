@@ -13,7 +13,8 @@ import { EditModalTemplate } from '../../../layout/edit_modal_template';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { Subsystem } from '../../../schemas/subsystem';
 import { StatusIcon } from './status_icons';
-import { getHumanReadableNameForHealthStatus } from '../../../schemas/cluster_status';
+import { getHumanReadableSeverity } from '../../../schemas/system_message';
+import { formatISO } from 'date-fns';
 export interface SubsystemDetailsModalProps extends HasSubsystem {
   isOpen: boolean;
 }
@@ -27,9 +28,9 @@ export function SubsystemDetailsModal(props: SubsystemDetailsModalProps) {
   return (
     <Modal
       variant={ModalVariant.large}
-      isOpen={props.subsystem.name === 'openshift'}
+      isOpen={props.isOpen}
       onClose={requestClose}
-      title={props.subsystem.name}
+      title={`${props.subsystem.name} Status`}
     >
       <EditModalTemplate
         actions={
@@ -47,22 +48,21 @@ export function SubsystemDetailsModal(props: SubsystemDetailsModalProps) {
 function DetailedSubsystemStatusList({ subsystem }: { subsystem: Subsystem }) {
   return (
     <Grid>
-      <GridItem span={12}>
-        <DetailsSection title="Subsystem Status">
-          <Grid>
-            <GridItem span={12}>
-              <HealthStatusWidget subsystem={subsystem} />
-            </GridItem>
-            <GridItem span={12}>
-              <InfoWidget subsystem={subsystem} />
-            </GridItem>
-          </Grid>
-        </DetailsSection>
+      <GridItem span={8}>
+        <Grid>
+          <GridItem span={12}>
+            <HealthStatusWidget subsystem={subsystem} />
+          </GridItem>
+          <GridItem span={12}>
+            <InfoWidget subsystem={subsystem} />
+          </GridItem>
+        </Grid>
+      </GridItem>
+      <GridItem span={4}>
+        <AccessUrlWidget subsystem={subsystem} />
       </GridItem>
       <GridItem span={12}>
-        <DetailsSection title="Messages">
-          <MessageWidget subsystem={subsystem} />
-        </DetailsSection>
+        <MessageWidget subsystem={subsystem} />
       </GridItem>
     </Grid>
   );
@@ -114,8 +114,6 @@ function HealthStatusWidget({ subsystem }: HasSubsystem) {
     <span>
       <strong>Current Status:&nbsp;&nbsp;</strong>
       <StatusIcon status={subsystem.status} />
-      &nbsp;&nbsp;
-      <span>{getHumanReadableNameForHealthStatus(subsystem.status)}</span>
     </span>
   );
 }
@@ -124,15 +122,41 @@ function MessageWidget({ subsystem }: HasSubsystem) {
   if (!subsystem || !subsystem.messages) {
     return <div />;
   }
-  const columns: ICell[] = [{ title: 'Severity' }, { title: 'Message' }];
+  const columns: ICell[] = [
+    { title: 'Severity' },
+    { title: 'Message' },
+    { title: 'Timestamp' },
+  ];
   const rows = subsystem.messages.map(message => [
-    message.severity,
+    getHumanReadableSeverity(message.severity),
     message.message,
+    formatISO(message.updated),
   ]);
   return (
-    <Table cells={columns} rows={rows}>
-      <TableHeader />
-      <TableBody />
-    </Table>
+    <DetailsSection title="Messages">
+      <Table cells={columns} rows={rows}>
+        <TableHeader />
+        <TableBody />
+      </Table>
+    </DetailsSection>
+  );
+}
+
+function AccessUrlWidget({ subsystem }: HasSubsystem) {
+  if (!subsystem?.access_urls) {
+    return <div />;
+  }
+  return (
+    <DetailsSection title="Access Links">
+      <ul>
+        {subsystem?.access_urls
+          ?.filter(accessLink => accessLink.url && accessLink.title)
+          ?.map(accessLink => (
+            <li>
+              <a href={accessLink?.url}>{accessLink?.title}</a>
+            </li>
+          ))}
+      </ul>
+    </DetailsSection>
   );
 }

@@ -5,6 +5,17 @@ export enum Severity {
   danger,
 }
 
+export function getHumanReadableSeverity(severity: Severity) {
+  switch (severity) {
+    case Severity.info:
+      return 'Info';
+    case Severity.warning:
+      return 'Warning';
+    case Severity.danger:
+      return 'Danger';
+  }
+}
+
 export interface SystemMessage {
   severity: Severity;
   message: string;
