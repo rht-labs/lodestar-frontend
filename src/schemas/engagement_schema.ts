@@ -29,6 +29,7 @@ export interface Engagement {
   technical_lead_name: string;
   launch?: LaunchData;
   creation_details: CreationDetails;
+  last_update_by_name: string;
   suggested_subdomain?: string;
   status: ClusterStatus;
 }
@@ -63,6 +64,7 @@ export abstract class Engagement {
         created_by_user: `${faker.name.firstName()} ${faker.name.lastName()}`,
         created_on: faker.date.recent(),
       },
+      last_update_by_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       launch: faker.random.boolean()
         ? {
             launched_by: faker.name.firstName(),
@@ -103,6 +105,7 @@ export abstract class Engagement {
         created_by_user: 'dwasinge',
         created_on: new Date(2020, 1, 1),
       },
+      last_update_by_name: `James Doe`,
       status: ClusterStatus.staticFake(),
     };
   }
