@@ -7,7 +7,7 @@ import {
 } from '@patternfly/react-core';
 import { EngagementStatus } from '../../../schemas/engagement_schema';
 import { EngagementFilterProps } from '../engagement_filter_bar';
-import {FilterIcon} from "@patternfly/react-icons";
+import { FilterIcon } from '@patternfly/react-icons';
 
 export function EngagementStatusSelect({
   onChange,
@@ -42,14 +42,18 @@ export function EngagementStatusSelect({
             })
           }
         >
-          {[<SelectOption value={undefined}>Any</SelectOption>].concat(
+          {[
+            <SelectOption key="any" value={undefined}>
+              Any
+            </SelectOption>,
+          ].concat(
             Object.keys(EngagementStatus).map(statusKey => (
-              <SelectOption value={EngagementStatus[statusKey]}>
+              <SelectOption key={statusKey} value={EngagementStatus[statusKey]}>
                 {getStatusDisplayValue(EngagementStatus[statusKey])}
               </SelectOption>
             ))
           )}
-      </Select>
+        </Select>
       </InputGroup>
     </>
   );
