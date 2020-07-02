@@ -4,6 +4,7 @@ import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 export interface Engagement {
+  additional_details?: string;
   archive_date: Date;
   commits: GitCommit[];
   customer_contact_email: string;
@@ -35,12 +36,13 @@ export interface Engagement {
 export abstract class Engagement {
   static fromFake(): Engagement {
     return {
+      additional_details: faker.lorem.paragraphs(2),
       archive_date: faker.date.recent(),
       commits: [],
       customer_contact_email: faker.internet.email(),
       customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       customer_name: faker.company.companyName(),
-      description: faker.lorem.paragraph(),
+      description: faker.lorem.paragraphs(2),
       end_date: faker.date.future(),
       engagement_users: [],
       engagement_lead_email: faker.internet.email(),
@@ -75,6 +77,7 @@ export abstract class Engagement {
 
   static staticFaked(): Engagement {
     return {
+      additional_details: 'Additional information here',
       archive_date: new Date(),
       commits: [],
       customer_contact_email: 'bob@doe.com',
