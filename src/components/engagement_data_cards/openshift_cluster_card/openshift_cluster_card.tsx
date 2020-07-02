@@ -130,7 +130,7 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Subdomain">
-              {currentEngagement?.ocp_sub_domain}
+              {currentEngagement?.ocp_sub_domain}.na-1.rht-labs.com
             </TitledDataPoint>
           </GridItem>
         </Grid>
