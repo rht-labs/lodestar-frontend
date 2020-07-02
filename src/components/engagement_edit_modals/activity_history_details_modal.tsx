@@ -25,6 +25,7 @@ export function ActivityHistoryDetailsModal(
       variant={ModalVariant.large}
       isOpen={props.isOpen}
       onClose={requestClose}
+      title="Activity History"
     >
       <EditModalTemplate
         actions={
@@ -32,7 +33,6 @@ export function ActivityHistoryDetailsModal(
             <Button onClick={requestClose}>Close</Button>
           </div>
         }
-        title="Activity History"
       >
         <DetailedActivityHistoryList commits={props.engagement?.commits} />
       </EditModalTemplate>

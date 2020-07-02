@@ -29,6 +29,7 @@ export function EngagementSummaryEditModal(
       variant={ModalVariant.small}
       isOpen={props.isOpen}
       onClose={requestClose}
+      title="Engagement Summary"
     >
       <EditModalTemplate
         actions={
@@ -36,7 +37,6 @@ export function EngagementSummaryEditModal(
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Engagement Summary"
       >
         <Form>
           <DescriptionFormField

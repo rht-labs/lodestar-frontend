@@ -43,14 +43,18 @@ export function PointOfContactEditModal({
   };
 
   return (
-    <Modal variant={ModalVariant.small} isOpen={isOpen} onClose={requestClose}>
+    <Modal
+      variant={ModalVariant.small}
+      isOpen={isOpen}
+      onClose={requestClose}
+      title="Points of Contact"
+    >
       <EditModalTemplate
         actions={
           <div>
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Points of Contact"
       >
         <Form>
           <FormGroup

@@ -44,14 +44,18 @@ export function OpenShiftClusterEditModal({
     requestClose();
   };
   return (
-    <Modal variant={ModalVariant.large} isOpen={isOpen} onClose={requestClose}>
+    <Modal
+      variant={ModalVariant.large}
+      isOpen={isOpen}
+      onClose={requestClose}
+      title="Hosting Environment"
+    >
       <EditModalTemplate
         actions={
           <div>
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Hosting Environment"
       >
         <Form isHorizontal>
           <CloudProviderFormField
