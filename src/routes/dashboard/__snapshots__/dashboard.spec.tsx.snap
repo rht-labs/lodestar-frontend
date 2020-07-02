@@ -35,7 +35,7 @@ Object {
           >
             <article
               class="pf-c-card pf-m-hoverable pf-m-compact"
-              style="min-height: 45vh;"
+              style="min-height: 50vh;"
             >
               <div
                 class="pf-c-card__body"
@@ -102,7 +102,7 @@ Object {
           >
             <article
               class="pf-c-card pf-m-hoverable pf-m-compact"
-              style="min-height: 45vh;"
+              style="min-height: 50vh;"
             >
               <div
                 class="pf-c-card__body"
@@ -145,7 +145,7 @@ Object {
                     <div
                       class="pf-c-empty-state__body"
                     >
-                      Upcoming engagements in the future.
+                      Upcoming engagements in the future, and are not launched yet.
                     </div>
                     <div
                       class="pf-c-empty-state__primary"
@@ -169,7 +169,7 @@ Object {
           >
             <article
               class="pf-c-card pf-m-hoverable pf-m-compact"
-              style="min-height: 45vh;"
+              style="min-height: 50vh;"
             >
               <div
                 class="pf-c-card__body"
@@ -236,7 +236,7 @@ Object {
           >
             <article
               class="pf-c-card pf-m-hoverable pf-m-compact"
-              style="min-height: 45vh;"
+              style="min-height: 50vh;"
             >
               <div
                 class="pf-c-card__body"
@@ -333,7 +333,7 @@ Object {
         >
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 45vh;"
+            style="min-height: 50vh;"
           >
             <div
               class="pf-c-card__body"
@@ -400,7 +400,7 @@ Object {
         >
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 45vh;"
+            style="min-height: 50vh;"
           >
             <div
               class="pf-c-card__body"
@@ -443,7 +443,7 @@ Object {
                   <div
                     class="pf-c-empty-state__body"
                   >
-                    Upcoming engagements in the future.
+                    Upcoming engagements in the future, and are not launched yet.
                   </div>
                   <div
                     class="pf-c-empty-state__primary"
@@ -467,7 +467,7 @@ Object {
         >
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 45vh;"
+            style="min-height: 50vh;"
           >
             <div
               class="pf-c-card__body"
@@ -534,7 +534,7 @@ Object {
         >
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 45vh;"
+            style="min-height: 50vh;"
           >
             <div
               class="pf-c-card__body"

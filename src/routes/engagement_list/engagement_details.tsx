@@ -20,33 +20,7 @@ import { ActivityHistoryLineItem } from '../../components/activity_history_line_
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature';
 import { EngagementStatusText } from "./engagement_status_text";
-
-function FirstLine({
-  status,
-  startDate,
-  createdBy,
-}: {
-  status?: EngagementStatus;
-  startDate?: Date;
-  createdBy?: string;
-}) {
-    return (
-      <>
-        <Grid hasGutter>
-          <GridItem span={12}>
-            Created by:
-            {!!createdBy ? ' ' + createdBy : ' TBA'}
-          </GridItem>
-          <GridItem>
-            Target start date:{' '}
-            {!!startDate && isValid(startDate)
-              ? formatDate(startDate, 'MMM dd, yyyy')
-              : 'TBA'}
-          </GridItem>
-        </Grid>
-      </>
-    );
-}
+import { DisplayCreatedByName } from "../../common/display_created_by_name";
 
 function DurationInWeeks({
   startDate,
@@ -71,11 +45,20 @@ export function EngagementDetails({
     <>
       <Grid hasGutter>
         <GridItem span={12}>
-          <FirstLine
-            status={status}
-            startDate={engagement?.start_date}
-            createdBy={engagement?.creation_details?.created_by_user}
-          />
+          <Grid hasGutter>
+            <GridItem span={12}>
+              {'Created by: '}
+              <DisplayCreatedByName
+                userFromServer={engagement?.creation_details?.created_by_user}
+                lastUpdatedBy={engagement?.last_update_by_name}/>
+            </GridItem>
+            <GridItem>
+              Target start date:{' '}
+              {!!engagement?.start_date && isValid(engagement?.start_date)
+                ? formatDate(engagement?.start_date, 'MMM dd, yyyy')
+                : 'TBA'}
+            </GridItem>
+          </Grid>
         </GridItem>
         <GridItem span={6}>
           <Flex>

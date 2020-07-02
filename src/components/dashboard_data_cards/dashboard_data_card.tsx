@@ -32,7 +32,7 @@ export function DashboardDataCard({
   const history = useHistory();
 
   const cardShape: React.CSSProperties = {
-    minHeight: '45vh',
+    minHeight: '50vh',
   };
 
   return (

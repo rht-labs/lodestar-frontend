@@ -27,6 +27,7 @@ const engagementProperties = [
   'technical_lead_name',
   'launch',
   'creation_details',
+  "last_update_by_name",
   'status',
 ];
 

@@ -85,6 +85,7 @@ export class EngagementJsonSerializer
         data['status']
       ),
       creation_details: data['creation_details'],
+      last_update_by_name: data['last_update_by_name'],
     };
   }
 
