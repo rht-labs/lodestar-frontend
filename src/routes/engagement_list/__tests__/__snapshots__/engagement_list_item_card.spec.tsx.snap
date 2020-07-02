@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <article
-        class="pf-c-card pf-m-hoverable pf-m-compact"
+        class="pf-c-card pf-m-compact"
         style="margin: 1rem; padding: 2rem 0.5rem;"
       >
         <div
@@ -113,7 +113,7 @@ Object {
   </body>,
   "container": <div>
     <article
-      class="pf-c-card pf-m-hoverable pf-m-compact"
+      class="pf-c-card pf-m-compact"
       style="margin: 1rem; padding: 2rem 0.5rem;"
     >
       <div
