@@ -53,7 +53,7 @@ export function EngagementSummaryCard({
       <DataCard
         trailingIcon={() =>
           !currentEngagement || currentEngagement?.launch ? (
-            <div />
+            <div/>
           ) : (
             <RequiredFieldsWarning
               missingRequiredFields={missingRequiredFields}
@@ -70,8 +70,8 @@ export function EngagementSummaryCard({
         title="Engagement Summary"
       >
         <Grid hasGutter>
-          <GridItem style={{ marginBottom: '1rem' }}>
-            <EngagementStatusText status={status} />
+          <GridItem style={{marginBottom: '1rem'}}>
+            <EngagementStatusText status={status}/>
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Company">
@@ -109,13 +109,21 @@ export function EngagementSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Created By">
-              {!!currentEngagement?.creation_details?.created_by_user
-                ? currentEngagement?.creation_details?.created_by_user
-                : ''}
+              <DisplayName userFromServer={currentEngagement?.creation_details?.created_by_user}/>
             </TitledDataPoint>
           </GridItem>
         </Grid>
       </DataCard>
     </>
   );
+}
+
+function DisplayName({userFromServer}: {userFromServer?: string }) {
+  return (
+    <>
+      { !!userFromServer
+        ? userFromServer
+        : ''}
+    </>
+  )
 }
