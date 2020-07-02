@@ -4,7 +4,7 @@ describe('email validator', () => {
   let validate;
   beforeEach(() => {
     validate = (input: string) =>
-      Validators.validate(input, [Validators.EmailAddressValidator]);
+      Validators.validate(input, [Validators.EmailAddressValidator()]);
   });
   test('an email without a domain is not valid', () => {
     expect(validate('ss@')).not.toBe(null);
@@ -27,7 +27,7 @@ describe('null validator', () => {
   let validate;
   beforeEach(() => {
     validate = (input: string) =>
-      Validators.validate(input, [Validators.NotNullValidator]);
+      Validators.validate(input, [Validators.NotNullValidator()]);
   });
   test('a string of whitespace is not valid', () => {
     expect(validate(' ')).not.toBe(null);
