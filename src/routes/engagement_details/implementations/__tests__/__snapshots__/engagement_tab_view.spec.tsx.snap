@@ -250,10 +250,6 @@ Object {
                           >
                             Created By
                           </h6>
-                          <p
-                            class=""
-                            data-pf-content="true"
-                          />
                         </div>
                       </div>
                     </div>
@@ -1110,10 +1106,6 @@ Object {
                         >
                           Created By
                         </h6>
-                        <p
-                          class=""
-                          data-pf-content="true"
-                        />
                       </div>
                     </div>
                   </div>

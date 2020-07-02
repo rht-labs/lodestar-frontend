@@ -3,12 +3,11 @@ import {
   Button,
   Card,
   CardBody,
-  Flex,
-  FlexItem,
   Nav,
   NavItem,
   NavList,
   Title,
+  Grid, GridItem,
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router';
 
@@ -25,10 +24,10 @@ export function EngagementListItemCard(props: DataCardProps) {
 
   return (
     <>
-      <Card isHoverable isCompact style={{ margin: '1rem', padding: '2rem' }}>
+      <Card isCompact style={{ margin: '1rem', padding: '2rem 0.5rem' }}>
         <CardBody style={{ padding: '0 2rem' }}>
-          <Flex style={{ alignItems: 'center'}}>
-            <FlexItem flex={{ default: 'flex_1' }}>
+          <Grid hasGutter style={{alignItems: 'center', alignContent: 'center'}}>
+            <GridItem span={3} >
               <Nav
                 onSelect={() => {
                   history.push(url);
@@ -37,7 +36,7 @@ export function EngagementListItemCard(props: DataCardProps) {
               >
                 <NavList>
                   <NavItem>
-                    <Title headingLevel="h3" style={{ fontWeight: 'bolder',cursor: 'pointer' }}>
+                    <Title headingLevel="h3" style={{ fontWeight: 'bolder',cursor: 'pointer', wordWrap: "break-word"}}>
                       {props.title}
                     </Title>
                   </NavItem>
@@ -46,11 +45,11 @@ export function EngagementListItemCard(props: DataCardProps) {
               <Title style={{ margin: '0 1rem' ,  fontWeight: 'normal'}} headingLevel="h4">
                 {props.customer}
               </Title>
-            </FlexItem>
-            <FlexItem flex={{ default: 'flex_3' }}>
+            </GridItem>
+            <GridItem span={7}>
               {props.children}
-            </FlexItem>
-            <FlexItem flex={{ default: 'flexNone' }}>
+            </GridItem>
+            <GridItem span={2}>
               <Button
                 onClick={() => {
                   history.push(url);
@@ -59,8 +58,8 @@ export function EngagementListItemCard(props: DataCardProps) {
               >
                 View Engagement
               </Button>
-            </FlexItem>
-          </Flex>
+            </GridItem>
+          </Grid>
         </CardBody>
       </Card>
     </>

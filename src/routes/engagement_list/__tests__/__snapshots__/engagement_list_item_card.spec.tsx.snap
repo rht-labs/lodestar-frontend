@@ -6,19 +6,19 @@ Object {
   "baseElement": <body>
     <div>
       <article
-        class="pf-c-card pf-m-hoverable pf-m-compact"
-        style="margin: 1rem; padding: 2rem;"
+        class="pf-c-card pf-m-compact"
+        style="margin: 1rem; padding: 2rem 0.5rem;"
       >
         <div
           class="pf-c-card__body"
           style="padding: 0px 2rem;"
         >
           <div
-            class="pf-l-flex"
-            style="align-items: center;"
+            class="pf-l-grid pf-m-gutter"
+            style="align-items: center; align-content: center;"
           >
             <div
-              class="pf-m-flex-1"
+              class="pf-l-grid__item pf-m-3-col"
             >
               <nav
                 aria-label="Local"
@@ -55,7 +55,7 @@ Object {
                   >
                     <h3
                       class="pf-c-title pf-m-lg pf-c-nav__link"
-                      style="font-weight: bolder; cursor: pointer;"
+                      style="font-weight: bolder; cursor: pointer; word-wrap: break-word;"
                     >
                       Test Title
                     </h3>
@@ -88,14 +88,14 @@ Object {
               />
             </div>
             <div
-              class="pf-m-flex-3"
+              class="pf-l-grid__item pf-m-7-col"
             >
               <div>
                  Test Child Component 
               </div>
             </div>
             <div
-              class="pf-m-flex-none"
+              class="pf-l-grid__item pf-m-2-col"
             >
               <button
                 class="pf-c-button pf-m-secondary"
@@ -113,19 +113,19 @@ Object {
   </body>,
   "container": <div>
     <article
-      class="pf-c-card pf-m-hoverable pf-m-compact"
-      style="margin: 1rem; padding: 2rem;"
+      class="pf-c-card pf-m-compact"
+      style="margin: 1rem; padding: 2rem 0.5rem;"
     >
       <div
         class="pf-c-card__body"
         style="padding: 0px 2rem;"
       >
         <div
-          class="pf-l-flex"
-          style="align-items: center;"
+          class="pf-l-grid pf-m-gutter"
+          style="align-items: center; align-content: center;"
         >
           <div
-            class="pf-m-flex-1"
+            class="pf-l-grid__item pf-m-3-col"
           >
             <nav
               aria-label="Local"
@@ -162,7 +162,7 @@ Object {
                 >
                   <h3
                     class="pf-c-title pf-m-lg pf-c-nav__link"
-                    style="font-weight: bolder; cursor: pointer;"
+                    style="font-weight: bolder; cursor: pointer; word-wrap: break-word;"
                   >
                     Test Title
                   </h3>
@@ -195,14 +195,14 @@ Object {
             />
           </div>
           <div
-            class="pf-m-flex-3"
+            class="pf-l-grid__item pf-m-7-col"
           >
             <div>
                Test Child Component 
             </div>
           </div>
           <div
-            class="pf-m-flex-none"
+            class="pf-l-grid__item pf-m-2-col"
           >
             <button
               class="pf-c-button pf-m-secondary"
