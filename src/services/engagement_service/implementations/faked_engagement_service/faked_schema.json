@@ -1,176 +1,187 @@
 {
   "basic_information": {
-    "project_name": {
-      "validators": [
-        {
-          "kind": "regex",
-          "value": "^[a-zA-Z0-9 ]*$",
-          "message": "Failed regex validation. Must be alphanumeric."
-        }
-      ]
-    },
-    "customer_name": {
-      "validators": [
-        {
-          "kind": "regex",
-          "value": "^[a-zA-Z0-9 ]*$",
-          "message": "Failed regex validation. Must be alphanumeric."
-        }
-      ]
-    }
+     "end_date": {
+        "validators": [
+           {
+              "kind": "date",
+              "value": {
+                 "min": "@today"
+              },
+              "message": "End date must be after today"
+           }
+        ]
+     },
+     "project_name": {
+        "validators": [
+           {
+              "kind": "regex",
+              "value": "^[a-zA-Z0-9 ]*$",
+              "message": "Only alphanumeric characters and spaces are allowed"
+           }
+        ]
+     },
+     "customer_name": {
+        "validators": [
+           {
+              "kind": "regex",
+              "value": "^[a-zA-Z0-9 ]*$",
+              "message": "Only alphanumeric characters and spaces are allowed"
+           }
+        ]
+     }
   },
   "cloud_options": {
-    "providers": {
-      "options": [
-        {
-          "label": "AWS",
-          "value": "ec2",
-          "options": [
-            {
-              "label": "Asia Pacific (Hong Kong)",
-              "value": "ap-east-1"
-            },
-            {
-              "label": "Asia Pacific (Singapore)",
-              "value": "ap-southeast-1"
-            },
-            {
-              "label": "Asia Pacific (Sydney)",
-              "value": "ap-southeast-2"
-            },
-            {
-              "label": "Europe (Frankfurt)",
-              "value": "eu-central-1"
-            },
-            {
-              "label": "Europe (Ireland)",
-              "value": "eu-west-1"
-            },
-            {
-              "label": "Europe (London)",
-              "value": "eu-west-2"
-            },
-            {
-              "label": "Europe (Paris)",
-              "value": "eu-west-3"
-            },
-            {
-              "label": "Europe (Stockholm)",
-              "value": "eu-north-1"
-            },
-            {
-              "label": "US East 1 (N. Virginia)",
-              "value": "us-east-1"
-            },
-            {
-              "label": "US East 2 (Ohio)",
-              "value": "us-east-2"
-            },
-            {
-              "label": "US West 1 (N. California)",
-              "value": "us-west-1"
-            },
-            {
-              "label": "US West 2 (Oregon)",
-              "value": "us-west-2"
-            }
-          ]
-        },
-        {
-          "label": "Other",
-          "value": "other",
-          "options": [
-            {
+     "providers": {
+        "options": [
+           {
+              "label": "AWS",
+              "value": "ec2",
+              "options": [
+                 {
+                    "label": "Asia Pacific (Hong Kong)",
+                    "value": "ap-east-1"
+                 },
+                 {
+                    "label": "Asia Pacific (Singapore)",
+                    "value": "ap-southeast-1"
+                 },
+                 {
+                    "label": "Asia Pacific (Sydney)",
+                    "value": "ap-southeast-2"
+                 },
+                 {
+                    "label": "Europe (Frankfurt)",
+                    "value": "eu-central-1"
+                 },
+                 {
+                    "label": "Europe (Ireland)",
+                    "value": "eu-west-1"
+                 },
+                 {
+                    "label": "Europe (London)",
+                    "value": "eu-west-2"
+                 },
+                 {
+                    "label": "Europe (Paris)",
+                    "value": "eu-west-3"
+                 },
+                 {
+                    "label": "Europe (Stockholm)",
+                    "value": "eu-north-1"
+                 },
+                 {
+                    "label": "US East 1 (N. Virginia)",
+                    "value": "us-east-1"
+                 },
+                 {
+                    "label": "US East 2 (Ohio)",
+                    "value": "us-east-2"
+                 },
+                 {
+                    "label": "US West 1 (N. California)",
+                    "value": "us-west-1"
+                 },
+                 {
+                    "label": "US West 2 (Oregon)",
+                    "value": "us-west-2"
+                 }
+              ]
+           },
+           {
               "label": "Other",
-              "value": "other"
-            }
-          ]
-        }
-      ]
-    }
+              "value": "other",
+              "options": [
+                 {
+                    "label": "Other",
+                    "value": "other"
+                 }
+              ]
+           }
+        ]
+     }
   },
   "openshift_options": {
-    "versions": {
-      "options": [
-        {
-          "label": "v4.1",
-          "value": "4.1.41"
-        },
-        {
-          "label": "v4.2",
-          "value": "4.2.34"
-        },
-        {
-          "label": "v4.3",
-          "value": "4.3.26"
-        },
-        {
-          "label": "v4.4",
-          "value": "4.4.10"
-        }
-      ]
-    },
-    "persistent_storage": {
-      "validators": [
-        {
-          "kind": "notnull"
-        }
-      ],
-      "options": [
-        {
-          "label": "None",
-          "value": "none"
-        },
-        {
-          "label": "50GB",
-          "value": "50G"
-        },
-        {
-          "label": "100GB",
-          "value": "100G"
-        },
-        {
-          "label": "250GB",
-          "value": "250G"
-        },
-        {
-          "label": "500GB",
-          "value": "500G"
-        }
-      ]
-    },
-    "cluster_size": {
-      "options": [
-        {
-          "label": "Small",
-          "value": "small"
-        }
-      ]
-    }
+     "versions": {
+        "options": [
+           {
+              "label": "v4.1",
+              "value": "4.1.41"
+           },
+           {
+              "label": "v4.2",
+              "value": "4.2.34"
+           },
+           {
+              "label": "v4.3",
+              "value": "4.3.26"
+           },
+           {
+              "label": "v4.4",
+              "value": "4.4.10"
+           }
+        ]
+     },
+     "persistent_storage": {
+        "validators": [
+           {
+              "kind": "notnull"
+           }
+        ],
+        "options": [
+           {
+              "label": "None",
+              "value": "none"
+           },
+           {
+              "label": "50GB",
+              "value": "50G"
+           },
+           {
+              "label": "100GB",
+              "value": "100G"
+           },
+           {
+              "label": "250GB",
+              "value": "250G"
+           },
+           {
+              "label": "500GB",
+              "value": "500G"
+           }
+        ]
+     },
+     "cluster_size": {
+        "options": [
+           {
+              "label": "Small",
+              "value": "small"
+           }
+        ]
+     }
   },
   "user_options": {
-    "user_roles": {
-      "options": [
-        {
-          "label": "Developer",
-          "value": "developer"
-        },
-        {
-          "label": "Observer",
-          "value": "observer"
-        },
-        {
-          "label": "Admin",
-          "value": "admin"
-        }
-      ]
-    }
+     "user_roles": {
+        "options": [
+           {
+              "label": "Developer",
+              "value": "developer"
+           },
+           {
+              "label": "Observer",
+              "value": "observer"
+           },
+           {
+              "label": "Admin",
+              "value": "admin"
+           }
+        ]
+     }
   },
   "logistics_options": {
-    "start_date": null,
-    "end_date": null,
-    "technical_contact_email": null,
-    "env_default_grace_period": 30,
-    "env_grace_period_max": 180
+     "start_date": null,
+     "end_date": null,
+     "technical_contact_email": null,
+     "env_default_grace_period": 30,
+     "env_grace_period_max": 180
   }
 }
