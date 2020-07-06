@@ -69,19 +69,23 @@ export function EngagementStartEndDateFormField({
     },
     [end_date, gracePeriodInDays, maxGracePeriodInDays, retirementDateChanged]
   );
+
+  // if the end date is less than the start date, set the end date to the start date
   useEffect(() => {
     if (end_date < start_date) {
       onChange('end_date', start_date);
     }
   }, [start_date, end_date, onChange]);
+
+  // when the archive date or end date changes, check that it is within bounds. If not, update it
   useEffect(() => {
-    if (
-      archive_date?.valueOf() !==
-      normalizeRetirementDate(archive_date).valueOf()
-    ) {
-      onChange('archive_date', normalizeRetirementDate(archive_date));
+    const normalizedRetirementDate = normalizeRetirementDate(archive_date);
+
+    if (archive_date?.valueOf() !== normalizedRetirementDate.valueOf()) {
+      onChange('archive_date', normalizedRetirementDate);
     }
-  }, [archive_date, normalizeRetirementDate, onChange]);
+  }, [archive_date, normalizeRetirementDate, onChange, end_date]);
+
   useEffect(() => {
     setEndDateText(getFormattedDate(end_date));
   }, [end_date]);
@@ -91,12 +95,6 @@ export function EngagementStartEndDateFormField({
   useEffect(() => {
     setArchiveDateText(getFormattedDate(archive_date));
   }, [archive_date]);
-  useEffect(() => {
-    const normalizedRetirementDate = normalizeRetirementDate(archive_date);
-    if (normalizedRetirementDate.valueOf() !== archive_date.valueOf()) {
-      onChange('archive_date', normalizedRetirementDate);
-    }
-  }, [end_date, archive_date, normalizeRetirementDate, onChange]);
 
   const getMaxRetirementDate = () => {
     return maxGracePeriodInDays
