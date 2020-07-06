@@ -1,10 +1,14 @@
-import { Validators } from './validators';
+import { validate as _validate } from '.';
+import {
+  EmailAddressValidator,
+  LengthValidator,
+  NotNullValidator,
+} from './standard_validators';
 
 describe('email validator', () => {
   let validate;
   beforeEach(() => {
-    validate = (input: string) =>
-      Validators.validate(input, [Validators.EmailAddressValidator()]);
+    validate = (input: string) => _validate(input, [EmailAddressValidator()]);
   });
   test('an email without a domain is not valid', () => {
     expect(validate('ss@')).not.toBe(null);
@@ -26,8 +30,7 @@ describe('email validator', () => {
 describe('null validator', () => {
   let validate;
   beforeEach(() => {
-    validate = (input: string) =>
-      Validators.validate(input, [Validators.NotNullValidator()]);
+    validate = (input: string) => _validate(input, [NotNullValidator()]);
   });
   test('a string of whitespace is not valid', () => {
     expect(validate(' ')).not.toBe(null);
@@ -44,9 +47,7 @@ describe('length validators', () => {
   let validate;
   beforeEach(() => {
     validate = (input: string) =>
-      Validators.validate(input, [
-        Validators.LengthValidator({ minLength: 2, maxLength: 4 }),
-      ]);
+      _validate(input, [LengthValidator({ minLength: 2, maxLength: 4 })]);
   });
   test('string too short', () => {
     expect(validate('a')).not.toBe(null);
