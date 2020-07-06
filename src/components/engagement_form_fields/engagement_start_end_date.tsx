@@ -10,10 +10,11 @@ import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_toggles/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { getFormattedDate } from '../../common/patternfly_date_adapter';
-import { parse as parseDate } from 'date-fns';
+import { parse as parseDate, startOfToday } from 'date-fns';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { addDays } from 'date-fns';
 import { useValidation } from '../../context/validation_context/validation_hook';
+import { max } from 'date-fns';
 interface EngagementStartEndDateProps {
   engagement: Engagement;
   formOptions: EngagementFormConfig;
@@ -25,7 +26,7 @@ export function EngagementStartEndDateFormField({
   engagement,
   ...props
 }: EngagementStartEndDateProps) {
-  const { validate } = useValidation();
+  const { validate, getValidationResult } = useValidation();
   const [retirementDateChanged, setRetirementDateChanged] = useState(false);
   const gracePeriodInDays: number =
     (props.formOptions?.['logistics_options']?.[
@@ -35,33 +36,78 @@ export function EngagementStartEndDateFormField({
     (props.formOptions?.['logistics_options']?.[
       'env_grace_period_max'
     ] as number) ?? 0;
-
-  const { end_date, archive_date } = engagement ?? {};
-
-  const getRetirementDate = useCallback((): Date => {
+  const { start_date, end_date, archive_date } = engagement ?? {};
+  const getRetirementDate = useCallback(() => {
     if (!end_date || !(end_date instanceof Date)) {
       return undefined;
-    }
-    if (end_date && archive_date < end_date) {
-      const newDate = end_date;
-      newDate.setDate(newDate.getUTCDate() + (gracePeriodInDays ?? 0));
-      return newDate;
-    }
-    if (archive_date || retirementDateChanged) {
+    } else if (end_date && archive_date && archive_date <= end_date) {
+      return addDays(end_date, gracePeriodInDays);
+    } else if (
+      archive_date &&
+      end_date &&
+      archive_date >= addDays(end_date, maxGracePeriodInDays)
+    ) {
+      return addDays(end_date, maxGracePeriodInDays);
+    } else if (archive_date || retirementDateChanged) {
       return archive_date;
     } else if (end_date) {
-      const newDate = end_date;
-      newDate.setDate(newDate.getUTCDate() + (gracePeriodInDays ?? 0));
-      return newDate;
+      return addDays(end_date, gracePeriodInDays);
     }
     return undefined;
-  }, [end_date, archive_date, gracePeriodInDays, retirementDateChanged]);
+  }, [
+    archive_date,
+    end_date,
+    gracePeriodInDays,
+    maxGracePeriodInDays,
+    retirementDateChanged,
+  ]);
+
+  const [startDateText, setStartDateText] = useState(
+    getFormattedDate(start_date) || getFormattedDate(new Date())
+  );
+  const [endDateText, setEndDateText] = useState(
+    getFormattedDate(end_date) || ''
+  );
+  const [archiveDateText, setArchiveDateText] = useState(
+    getFormattedDate(getRetirementDate())
+  );
+  useEffect(
+    () =>
+      setStartDateText(
+        getFormattedDate(start_date) || getFormattedDate(new Date())
+      ),
+    [start_date, setStartDateText]
+  );
+  useEffect(
+    () =>
+      setEndDateText(
+        getFormattedDate(end_date) || getFormattedDate(new Date())
+      ),
+    [end_date, setEndDateText]
+  );
+  useEffect(() => {
+    const formattedArchiveDate = getFormattedDate(getRetirementDate());
+    if (formattedArchiveDate !== archiveDateText) {
+      setArchiveDateText(getFormattedDate(getRetirementDate()));
+    }
+  }, [setArchiveDateText, getRetirementDate, archiveDateText]);
 
   useEffect(() => {
     if (end_date) {
-      onChange('archive_date', getRetirementDate());
+      const retirementDate = getRetirementDate();
+      if (getFormattedDate(retirementDate) !== getFormattedDate(archive_date)) {
+        onChange('archive_date', retirementDate);
+      }
+    } else {
+      onChange('end_date', new Date());
     }
-  }, [getRetirementDate, onChange, end_date]);
+  }, [onChange, getRetirementDate, end_date, archive_date]);
+
+  const getMaxRetirementDate = () => {
+    return maxGracePeriodInDays
+      ? addDays(engagement?.end_date, maxGracePeriodInDays)
+      : undefined;
+  };
 
   const { hasFeature } = useFeatures();
   return (
@@ -70,6 +116,10 @@ export function EngagementStartEndDateFormField({
         label="Start and End Dates"
         fieldId="engagement-dates"
         helperText="What is the duration?"
+        helperTextInvalid={getValidationResult('end_date')}
+        validated={
+          getValidationResult('end_date').length > 0 ? 'error' : 'default'
+        }
         isRequired
       >
         <InputGroup label="Engagement Duration">
@@ -78,16 +128,16 @@ export function EngagementStartEndDateFormField({
           </InputGroupText>
           <TextInput
             isDisabled={
-              !hasFeature(APP_FEATURES.writer) ||
-              !!(engagement as Engagement).launch
+              !hasFeature(APP_FEATURES.writer) || !!engagement?.launch
             }
             name="start_date"
             id="start_date"
             type="date"
             aria-label="The start date."
-            value={getFormattedDate(engagement?.start_date) || ''}
-            onChange={e =>
-              onChange('start_date', parseDate(e, 'yyyy-MM-dd', 0))
+            value={startDateText}
+            onChange={setStartDateText}
+            onBlur={e =>
+              onChange('start_date', parseDate(e.target.value, 'yyyy-MM-dd', 0))
             }
           />
           <TextInput
@@ -96,9 +146,13 @@ export function EngagementStartEndDateFormField({
             id="end_date"
             type="date"
             aria-label="The end date"
-            value={getFormattedDate(engagement?.end_date) || ''}
-            onChange={e => {
-              const parsedDate = parseDate(e, 'yyyy-MM-dd', 0);
+            value={endDateText}
+            min={getFormattedDate(
+              max([startOfToday(), engagement?.start_date ?? startOfToday()])
+            )}
+            onChange={setEndDateText}
+            onBlur={e => {
+              const parsedDate = parseDate(e.target.value, 'yyyy-MM-dd', 0);
               validate('end_date')(parsedDate);
               onChange('end_date', parsedDate);
             }}
@@ -120,17 +174,19 @@ export function EngagementStartEndDateFormField({
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
-            value={getFormattedDate(getRetirementDate())}
+            value={archiveDateText}
+            onBlur={e => {
+              onChange(
+                'archive_date',
+                parseDate(e.target.value, 'yyyy-MM-dd', 0)
+              );
+            }}
             onChange={e => {
               setRetirementDateChanged(true);
-              onChange('archive_date', parseDate(e, 'yyyy-MM-dd', 0));
+              setArchiveDateText(e);
             }}
             min={getFormattedDate(engagement?.end_date)}
-            max={getFormattedDate(
-              maxGracePeriodInDays
-                ? addDays(engagement?.end_date, maxGracePeriodInDays)
-                : undefined
-            )}
+            max={getFormattedDate(getMaxRetirementDate())}
           />
         </InputGroup>
       </FormGroup>

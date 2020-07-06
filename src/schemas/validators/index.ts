@@ -1,10 +1,4 @@
 import { Validator } from './validator';
-import {
-  RegexValidator,
-  EmailAddressValidator,
-  NotNullValidator,
-  DateValidator,
-} from './standard_validators';
 
 type ValidatorFactory = (validationOptions: any) => Validator;
 
@@ -44,19 +38,3 @@ export function ValidatorFactory(validationOptions): Validator {
   }
   return null;
 }
-
-Validation.registerValidator('regex', validationOptions =>
-  RegexValidator(RegExp(validationOptions.value), validationOptions.message)
-);
-
-Validation.registerValidator('email', validationOptions =>
-  EmailAddressValidator(validationOptions.message)
-);
-
-Validation.registerValidator('notnull', validationOptions =>
-  NotNullValidator(validationOptions.message as string)
-);
-
-Validation.registerValidator('date', validationOptions =>
-  DateValidator(validationOptions.value, validationOptions.message)
-);
