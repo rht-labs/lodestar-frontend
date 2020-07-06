@@ -13,6 +13,7 @@ import { getFormattedDate } from '../../common/patternfly_date_adapter';
 import { parse as parseDate } from 'date-fns';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { addDays } from 'date-fns';
+import { useValidation } from '../../context/validation_context/validation_hook';
 interface EngagementStartEndDateProps {
   engagement: Engagement;
   formOptions: EngagementFormConfig;
@@ -24,6 +25,7 @@ export function EngagementStartEndDateFormField({
   engagement,
   ...props
 }: EngagementStartEndDateProps) {
+  const { validate } = useValidation();
   const [retirementDateChanged, setRetirementDateChanged] = useState(false);
   const gracePeriodInDays: number =
     (props.formOptions?.['logistics_options']?.[
@@ -95,7 +97,11 @@ export function EngagementStartEndDateFormField({
             type="date"
             aria-label="The end date"
             value={getFormattedDate(engagement?.end_date) || ''}
-            onChange={e => onChange('end_date', parseDate(e, 'yyyy-MM-dd', 0))}
+            onChange={e => {
+              const parsedDate = parseDate(e, 'yyyy-MM-dd', 0);
+              validate('end_date')(parsedDate);
+              onChange('end_date', parsedDate);
+            }}
           />
         </InputGroup>
       </FormGroup>
