@@ -9,19 +9,13 @@ export const getValidatorsFromFormOptions = (
       return {
         ...previousSchemaGroups,
         ...Object.keys(formOptions[currentGroupKey] ?? {}).reduce(
-          (previousGroupFields, currentFieldKey) => {
-            console.log(
-              currentFieldKey,
-              formOptions?.[currentGroupKey]?.[currentFieldKey]?.validators
-            );
-            return {
-              ...previousGroupFields,
-              [currentFieldKey.trim()]: (
-                formOptions?.[currentGroupKey]?.[currentFieldKey]?.validators ||
-                []
-              ).map(ValidatorFactory),
-            };
-          },
+          (previousGroupFields, currentFieldKey) => ({
+            ...previousGroupFields,
+            [currentFieldKey]: (
+              formOptions?.[currentGroupKey]?.[currentFieldKey]?.validators ||
+              []
+            ).map(ValidatorFactory),
+          }),
           {}
         ),
       };
