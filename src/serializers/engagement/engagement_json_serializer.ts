@@ -1,6 +1,6 @@
 import { Serializer } from '../serializer';
 import { Engagement } from '../../schemas/engagement_schema';
-import { parse, format, parseISO, isValid } from 'date-fns';
+import { parse, parseISO, isValid, formatISO } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
@@ -9,7 +9,7 @@ import { Logger } from '../../utilities/logger';
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
   private static formatDate(date: Date) {
-    return format(date, 'yyyy-MM-dd');
+    return formatISO(date);
   }
   private static gitCommitSerializer = new GitCommitJsonSerializer();
   private static clusterStatusSerializer = new ClusterStatusJsonSerializer();
