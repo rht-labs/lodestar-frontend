@@ -59,7 +59,6 @@ export function EngagementDetailView(props) {
   }, [formOptions, getConfig]);
 
   const validators = getValidatorsFromFormOptions(formOptions);
-
   return (
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate engagement={currentEngagement}>
