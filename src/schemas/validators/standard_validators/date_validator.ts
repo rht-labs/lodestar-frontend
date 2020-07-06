@@ -21,9 +21,7 @@ export const DateValidator = (
   message: string
 ): Validator => (input: Date) => {
   if (!(input instanceof Date) || !isValid(input)) {
-    throw Error(
-      'When using a date validator, the input must be a plain Javascript date'
-    );
+    return message;
   }
   if (value.min && value.min in DATE_EXPRESSIONS) {
     if (input < DATE_EXPRESSIONS[value.min]()) {
