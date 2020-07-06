@@ -10,10 +10,11 @@ import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_toggles/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { getFormattedDate } from '../../common/patternfly_date_adapter';
-import { parse as parseDate } from 'date-fns';
+import { parse as parseDate, startOfToday } from 'date-fns';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { addDays } from 'date-fns';
 import { useValidation } from '../../context/validation_context/validation_hook';
+import { max } from 'date-fns';
 interface EngagementStartEndDateProps {
   engagement: Engagement;
   formOptions: EngagementFormConfig;
@@ -100,6 +101,9 @@ export function EngagementStartEndDateFormField({
             type="date"
             aria-label="The end date"
             value={getFormattedDate(engagement?.end_date) || ''}
+            min={getFormattedDate(
+              max([startOfToday(), engagement?.start_date ?? startOfToday()])
+            )}
             onChange={e => {
               const parsedDate = parseDate(e, 'yyyy-MM-dd', 0);
               validate('end_date')(parsedDate);
