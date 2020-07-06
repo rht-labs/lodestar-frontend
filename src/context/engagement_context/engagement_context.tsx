@@ -33,7 +33,24 @@ export interface EngagementContext {
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
 }
-
+const requiredFields = [
+  'customer_contact_email',
+  'customer_contact_name',
+  'customer_name',
+  'end_date',
+  'start_date',
+  'engagement_lead_email',
+  'technical_lead_email',
+  'engagement_lead_name',
+  'technical_lead_name',
+  'ocp_cloud_provider_name',
+  'ocp_cloud_provider_region',
+  'ocp_version',
+  'ocp_cluster_size',
+  'ocp_persistent_storage_size',
+  'ocp_sub_domain',
+  'project_name',
+];
 export const EngagementContext = createContext<EngagementContext>(null);
 
 const { Provider } = EngagementContext;
@@ -43,24 +60,6 @@ export const EngagementProvider = ({
 }: {
   children: React.ReactChild;
 }) => {
-  const requiredFields = [
-    'customer_contact_email',
-    'customer_contact_name',
-    'customer_name',
-    'end_date',
-    'start_date',
-    'engagement_lead_email',
-    'technical_lead_email',
-    'engagement_lead_name',
-    'technical_lead_name',
-    'ocp_cloud_provider_name',
-    'ocp_cloud_provider_region',
-    'ocp_version',
-    'ocp_cluster_size',
-    'ocp_persistent_storage_size',
-    'ocp_sub_domain',
-    'project_name',
-  ];
   const feedbackContext = useFeedback();
   const { engagementService } = useServiceProviders();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
@@ -175,7 +174,7 @@ export const EngagementProvider = ({
         !!currentEngagementChanges[o]
     );
     return result;
-  }, [currentEngagementChanges, requiredFields]);
+  }, [currentEngagementChanges]);
 
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
@@ -184,7 +183,7 @@ export const EngagementProvider = ({
         currentEngagementChanges[field] !== 'number' &&
         !currentEngagementChanges[field]
     );
-  }, [currentEngagementChanges, requiredFields]);
+  }, [currentEngagementChanges]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
