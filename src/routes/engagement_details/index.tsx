@@ -59,6 +59,7 @@ export function EngagementDetailView(props) {
   }, [formOptions, getConfig]);
 
   const validators = getValidatorsFromFormOptions(formOptions);
+  // console.log(validators);
 
   return (
     <ValidationProvider validators={validators}>

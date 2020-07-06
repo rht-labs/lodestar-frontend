@@ -25,7 +25,7 @@ export function EngagementStartEndDateFormField({
   engagement,
   ...props
 }: EngagementStartEndDateProps) {
-  const { validate } = useValidation();
+  const { validate, getValidationResult } = useValidation();
   const [retirementDateChanged, setRetirementDateChanged] = useState(false);
   const gracePeriodInDays: number =
     (props.formOptions?.['logistics_options']?.[
@@ -70,6 +70,10 @@ export function EngagementStartEndDateFormField({
         label="Start and End Dates"
         fieldId="engagement-dates"
         helperText="What is the duration?"
+        helperTextInvalid={getValidationResult('end_date')}
+        validated={
+          getValidationResult('end_date').length > 0 ? 'error' : 'default'
+        }
         isRequired
       >
         <InputGroup label="Engagement Duration">
@@ -78,8 +82,7 @@ export function EngagementStartEndDateFormField({
           </InputGroupText>
           <TextInput
             isDisabled={
-              !hasFeature(APP_FEATURES.writer) ||
-              !!(engagement as Engagement).launch
+              !hasFeature(APP_FEATURES.writer) || !!engagement?.launch
             }
             name="start_date"
             id="start_date"
