@@ -23,7 +23,7 @@ export abstract class Validation {
     };
   }
   public static get availableValidatorTypes() {
-    return Validation.availableValidatorTypes ?? {};
+    return Validation._validators ?? {};
   }
 }
 
