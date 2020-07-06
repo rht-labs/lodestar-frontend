@@ -41,12 +41,6 @@ export const ValidationProvider = ({
 
   const validate = useCallback(
     (fieldName: string) => (value: any) => {
-      const setFieldResult = (field: string, result: Array<string>) => {
-        setValidationResults({
-          ...validationResults,
-          [field]: result,
-        });
-      };
       if (validators && validators[fieldName]) {
         const result = validators[fieldName]
           .reduce(
@@ -57,7 +51,10 @@ export const ValidationProvider = ({
             []
           )
           .filter(message => !!message);
-        setFieldResult(fieldName, result);
+        setValidationResults({
+          ...validationResults,
+          [fieldName]: result,
+        });
         return result;
       } else {
         return [];

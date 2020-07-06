@@ -5,7 +5,8 @@ import {
   NotNullValidator,
   DateValidator,
 } from './standard_validators';
-type ValidatorFactory = (props: any) => Validator;
+
+type ValidatorFactory = (validationOptions: any) => Validator;
 
 export abstract class Validation {
   private static _validators: { [key: string]: ValidatorFactory } = {};
@@ -13,6 +14,9 @@ export abstract class Validation {
     key: string,
     validatorFactory: ValidatorFactory
   ) {
+    if (key in Validation._validators) {
+      throw Error('A validator with this key has already been registered.');
+    }
     Validation._validators = {
       ...Validation._validators,
       [key]: validatorFactory,
@@ -29,25 +33,30 @@ export const validate = (value: string, validators: Array<Validator>) =>
     true
   );
 
-export function ValidatorFactory(props): Validator {
-  if (props?.kind && props.kind in Validation.availableValidatorTypes) {
-    return Validation.availableValidatorTypes[props.kind](props);
+export function ValidatorFactory(validationOptions): Validator {
+  if (
+    validationOptions?.kind &&
+    validationOptions.kind in Validation.availableValidatorTypes
+  ) {
+    return Validation.availableValidatorTypes[validationOptions.kind](
+      validationOptions
+    );
   }
   return null;
 }
 
-Validation.registerValidator('regex', props =>
-  RegexValidator(RegExp(props.value), props.message)
+Validation.registerValidator('regex', validationOptions =>
+  RegexValidator(RegExp(validationOptions.value), validationOptions.message)
 );
 
-Validation.registerValidator('email', props =>
-  EmailAddressValidator(props.message)
+Validation.registerValidator('email', validationOptions =>
+  EmailAddressValidator(validationOptions.message)
 );
 
-Validation.registerValidator('notnull', props =>
-  NotNullValidator(props.message as string)
+Validation.registerValidator('notnull', validationOptions =>
+  NotNullValidator(validationOptions.message as string)
 );
 
-Validation.registerValidator('date', props =>
-  DateValidator(props.value, props.message)
+Validation.registerValidator('date', validationOptions =>
+  DateValidator(validationOptions.value, validationOptions.message)
 );
