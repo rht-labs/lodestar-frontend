@@ -34,7 +34,7 @@ export function RequiredFieldsWarning({
         <div style={{ padding: '0 0 0 2rem' }}>
           <ul style={{ listStyleType: 'disc' }}>
             {neededFields.map(f => (
-              <li>{f}</li>
+              <li key={f.toString()}>{f}</li>
             ))}
           </ul>
         </div>

@@ -49,6 +49,7 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
+
         <Gallery hasGutter>
             <DashboardDataCard
               icon={TachometerAltIcon}
