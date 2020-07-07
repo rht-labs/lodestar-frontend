@@ -45,13 +45,13 @@ export function EngagementStartEndDateFormField({
     getFormattedDate(end_date) || ''
   );
   const [archiveDateText, setArchiveDateText] = useState(
-    getFormattedDate(archive_date) || getFormattedDate(new Date())
+    getFormattedDate(archive_date) || ''
   );
 
   const normalizeRetirementDate = useCallback(
     (retirementDate: Date) => {
       if (!end_date || !(end_date instanceof Date)) {
-        return new Date();
+        return undefined;
       } else if (end_date && retirementDate && retirementDate <= end_date) {
         return addDays(end_date, gracePeriodInDays);
       } else if (
@@ -65,7 +65,7 @@ export function EngagementStartEndDateFormField({
       } else if (end_date) {
         return addDays(end_date, gracePeriodInDays);
       }
-      return new Date();
+      return startOfToday();
     },
     [end_date, gracePeriodInDays, maxGracePeriodInDays, retirementDateChanged]
   );
@@ -81,7 +81,7 @@ export function EngagementStartEndDateFormField({
   useEffect(() => {
     const normalizedRetirementDate = normalizeRetirementDate(archive_date);
 
-    if (archive_date?.valueOf() !== normalizedRetirementDate.valueOf()) {
+    if (archive_date?.valueOf() !== normalizedRetirementDate?.valueOf()) {
       onChange('archive_date', normalizedRetirementDate);
     }
   }, [archive_date, normalizeRetirementDate, onChange, end_date]);
