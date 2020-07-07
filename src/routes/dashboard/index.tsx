@@ -51,7 +51,7 @@ export function Dashboard() {
       </PageSection>
       <PageSection>
         <Grid hasGutter>
-          <GridItem span={3}>
+          <GridItem lg={3} md={6} sm={12}>
             <DashboardDataCard
               icon={TachometerAltIcon}
               numberOfEngagements={numberOfTotalEngagements}
@@ -62,7 +62,7 @@ export function Dashboard() {
               url={'/app/engagements/all'}
             />
           </GridItem>
-          <GridItem span={3}>
+          <GridItem lg={3} md={6} sm={12}>
             <DashboardDataCard
               icon={PendingIcon}
               numberOfEngagements={numberOfUpcomingEngagements}
@@ -73,7 +73,7 @@ export function Dashboard() {
               url={'/app/engagements/upcoming'}
             />
           </GridItem>
-          <GridItem span={3}>
+          <GridItem lg={3} md={6} sm={12}>
             <DashboardDataCard
               icon={OnRunningIcon}
               numberOfEngagements={numberOfcurrentEngagements}
@@ -84,7 +84,7 @@ export function Dashboard() {
               url={'/app/engagements/active'}
             />
           </GridItem>
-          <GridItem span={3}>
+          <GridItem lg={3} md={6} sm={12}>
             <DashboardDataCard
               icon={AsleepIcon}
               numberOfEngagements={numberOfPastEngagements}
