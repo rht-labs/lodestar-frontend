@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {Grid, GridItem, PageSection, PageSectionVariants, Text, TextContent, Title,} from '@patternfly/react-core';
+import {
+  Gallery,
+  PageSection,
+  PageSectionVariants,
+  Text,
+  TextContent,
+  Title,
+} from '@patternfly/react-core';
 import {DashboardDataCard} from "../../components/dashboard_data_cards/dashboard_data_card";
 import {AsleepIcon, OnRunningIcon, PendingIcon, TachometerAltIcon} from "@patternfly/react-icons";
 import {useEngagements} from "../../context/engagement_context/engagement_hook";
@@ -36,40 +43,36 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <Grid hasGutter>
-          <GridItem span={3}>
+        <Gallery hasGutter>
+
             <DashboardDataCard
               icon={TachometerAltIcon}
               numberOfEngagements={numberOfTotalEngagements}
               title={'All Engagements'}
               subtitle={'All available engagements in the system. Including upcoming, active and past ones'}
               url={"/app/engagements/all"}/>
-          </GridItem>
-          <GridItem span={3}>
+
             <DashboardDataCard
               icon={PendingIcon}
               numberOfEngagements={numberOfUpcomingEngagements}
               title={'Upcoming Engagements'}
               subtitle={'Upcoming engagements in the future, and are not launched yet.'}
               url={"/app/engagements/upcoming"}/>
-          </GridItem>
-          <GridItem span={3}>
+
             <DashboardDataCard
               icon={OnRunningIcon}
               numberOfEngagements={numberOfcurrentEngagements}
               title={'Active Engagements'}
               subtitle={'Engagements that are already in progress and running at the moment.'}
               url={"/app/engagements/active"}/>
-          </GridItem>
-          <GridItem span={3}>
+
             <DashboardDataCard
               icon={AsleepIcon}
               numberOfEngagements={numberOfPastEngagements}
               title={'Past Engagements'}
               subtitle={'Engagements that are finished, closed or archived.'}
               url={"/app/engagements/past"}/>
-          </GridItem>
-        </Grid>
+        </Gallery>
       </PageSection>
     </>
   );
