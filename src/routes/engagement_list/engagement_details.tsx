@@ -44,7 +44,7 @@ export function EngagementDetails({
   return (
     <>
       <Grid hasGutter>
-        <GridItem span={12}>
+        <GridItem md={6} lg={12}>
           <Grid hasGutter>
             <GridItem span={12}>
               {'Created by: '}
@@ -60,7 +60,7 @@ export function EngagementDetails({
             </GridItem>
           </Grid>
         </GridItem>
-        <GridItem span={6}>
+        <GridItem md={12} lg={6}>
           <Flex>
             <Flex>
               <FlexItem spacer={{ default: 'spacerSm' }}>
@@ -141,7 +141,7 @@ export function EngagementDetails({
             </Flex>
           </Flex>
         </GridItem>
-        <GridItem span={6}>
+        <GridItem md={12} lg={6}>
           <ActivityHistoryLineItem commit={engagement?.commits?.[0]} />
         </GridItem>
       </Grid>
