@@ -28,7 +28,6 @@ export function LaunchAlertBanner({
     ],
     []
   );
-  console.log(validationErrors);
   const hasValidationErrors = validationErrors.length > 0;
   return (
     <Alert
