@@ -9,6 +9,7 @@ interface LaunchAlertBannerProps {
   onLaunch: (engagement: Engagement) => void;
   isLaunchable: boolean;
   requiredFields: string[];
+  getValidationResult: (field: string) => string[];
   missingRequiredFields: string[];
 }
 export function LaunchAlertBanner({
@@ -17,8 +18,18 @@ export function LaunchAlertBanner({
   isLaunchable,
   requiredFields,
   missingRequiredFields,
+  getValidationResult,
 }: LaunchAlertBannerProps) {
   const overallStatus = engagement?.status?.overall_status;
+  const validationErrors = requiredFields.reduce(
+    (validationResults, field) => [
+      ...validationResults,
+      ...getValidationResult(field),
+    ],
+    []
+  );
+  console.log(validationErrors);
+  const hasValidationErrors = validationErrors.length > 0;
   return (
     <Alert
       isInline
@@ -30,7 +41,7 @@ export function LaunchAlertBanner({
         !engagement?.launch ? (
           <div>
             <Button
-              isDisabled={!isLaunchable}
+              isDisabled={!isLaunchable || hasValidationErrors}
               onClick={() => onLaunch(engagement)}
             >
               Launch
