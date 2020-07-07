@@ -66,6 +66,7 @@ export function EngagementDetails({
               <FlexItem spacer={{ default: 'spacerSm' }}>
                 <Tooltip
                   position={TooltipPosition.bottom}
+                  entryDelay={0}
                   content={'Number of people in this engagement'}
                 >
                   <UserIcon />
@@ -78,6 +79,7 @@ export function EngagementDetails({
               <FlexItem spacer={{ default: 'spacerSm' }}>
                 <Tooltip
                   position={TooltipPosition.bottom}
+                  entryDelay={0}
                   content={'Number of weeks for this engagement'}
                 >
                   <OutlinedClockIcon />
@@ -96,6 +98,7 @@ export function EngagementDetails({
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
                       position={TooltipPosition.bottom}
+                      entryDelay={0}
                       content={'Number of available reports'}
                     >
                       <ClipboardCheckIcon />
@@ -108,6 +111,7 @@ export function EngagementDetails({
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
                       position={TooltipPosition.bottom}
+                      entryDelay={0}
                       content={'Number of commits'}
                     >
                       <CodeBranchIcon />
@@ -120,6 +124,7 @@ export function EngagementDetails({
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
                       position={TooltipPosition.bottom}
+                      entryDelay={0}
                       content={'Number of repositories'}
                     >
                       <CubeIcon />

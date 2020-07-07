@@ -18,13 +18,15 @@ export function RequiredFieldsWarning({
     .map(field => getHumanReadableFieldName(field));
   if (!neededFields?.length) {
     return (
-      <Tooltip content="All required fields are completed">
+      <Tooltip content="All required fields are completed"
+               entryDelay={0}>
         <CheckCircleIcon color="green" />
       </Tooltip>
     );
   }
   return (
-    <Tooltip content={`Missing required fields: ${neededFields.join(', ')}`}>
+    <Tooltip content={`Missing required fields: ${neededFields.join(', ')}`}
+             entryDelay={0}>
       <ExclamationTriangleIcon color="#EC7A08" />
     </Tooltip>
   );

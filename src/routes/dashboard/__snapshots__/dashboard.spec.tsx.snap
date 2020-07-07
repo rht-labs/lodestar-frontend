@@ -32,7 +32,7 @@ Object {
         >
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 50vh;"
+            style="min-height: 40vh;"
           >
             <div
               class="pf-c-card__body"
@@ -65,12 +65,19 @@ Object {
                       class=""
                       data-pf-content="true"
                     />
-                    <h2
-                      class=""
-                      data-pf-content="true"
+                    <button
+                      class="pf-c-button pf-m-link pf-m-inline"
+                      data-ouia-component-type="PF4/Button"
+                      data-ouia-safe="true"
+                      type="button"
                     >
-                      All Engagements
-                    </h2>
+                      <h2
+                        class=""
+                        data-pf-content="true"
+                      >
+                        All Engagements
+                      </h2>
+                    </button>
                   </div>
                   <div
                     class="pf-c-empty-state__body"
@@ -84,6 +91,7 @@ Object {
                       class="pf-c-button pf-m-link"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
+                      style="vertical-align: bottom;"
                       type="button"
                     >
                       View all
@@ -95,7 +103,7 @@ Object {
           </article>
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 50vh;"
+            style="min-height: 40vh;"
           >
             <div
               class="pf-c-card__body"
@@ -128,12 +136,19 @@ Object {
                       class=""
                       data-pf-content="true"
                     />
-                    <h2
-                      class=""
-                      data-pf-content="true"
+                    <button
+                      class="pf-c-button pf-m-link pf-m-inline"
+                      data-ouia-component-type="PF4/Button"
+                      data-ouia-safe="true"
+                      type="button"
                     >
-                      Upcoming Engagements
-                    </h2>
+                      <h2
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Upcoming Engagements
+                      </h2>
+                    </button>
                   </div>
                   <div
                     class="pf-c-empty-state__body"
@@ -147,6 +162,7 @@ Object {
                       class="pf-c-button pf-m-link"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
+                      style="vertical-align: bottom;"
                       type="button"
                     >
                       View all
@@ -158,7 +174,7 @@ Object {
           </article>
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 50vh;"
+            style="min-height: 40vh;"
           >
             <div
               class="pf-c-card__body"
@@ -191,12 +207,19 @@ Object {
                       class=""
                       data-pf-content="true"
                     />
-                    <h2
-                      class=""
-                      data-pf-content="true"
+                    <button
+                      class="pf-c-button pf-m-link pf-m-inline"
+                      data-ouia-component-type="PF4/Button"
+                      data-ouia-safe="true"
+                      type="button"
                     >
-                      Active Engagements
-                    </h2>
+                      <h2
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Active Engagements
+                      </h2>
+                    </button>
                   </div>
                   <div
                     class="pf-c-empty-state__body"
@@ -210,6 +233,7 @@ Object {
                       class="pf-c-button pf-m-link"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
+                      style="vertical-align: bottom;"
                       type="button"
                     >
                       View all
@@ -221,7 +245,7 @@ Object {
           </article>
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            style="min-height: 50vh;"
+            style="min-height: 40vh;"
           >
             <div
               class="pf-c-card__body"
@@ -254,12 +278,19 @@ Object {
                       class=""
                       data-pf-content="true"
                     />
-                    <h2
-                      class=""
-                      data-pf-content="true"
+                    <button
+                      class="pf-c-button pf-m-link pf-m-inline"
+                      data-ouia-component-type="PF4/Button"
+                      data-ouia-safe="true"
+                      type="button"
                     >
-                      Past Engagements
-                    </h2>
+                      <h2
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Past Engagements
+                      </h2>
+                    </button>
                   </div>
                   <div
                     class="pf-c-empty-state__body"
@@ -273,6 +304,7 @@ Object {
                       class="pf-c-button pf-m-link"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
+                      style="vertical-align: bottom;"
                       type="button"
                     >
                       View all
@@ -314,7 +346,7 @@ Object {
       >
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          style="min-height: 50vh;"
+          style="min-height: 40vh;"
         >
           <div
             class="pf-c-card__body"
@@ -347,12 +379,19 @@ Object {
                     class=""
                     data-pf-content="true"
                   />
-                  <h2
-                    class=""
-                    data-pf-content="true"
+                  <button
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    type="button"
                   >
-                    All Engagements
-                  </h2>
+                    <h2
+                      class=""
+                      data-pf-content="true"
+                    >
+                      All Engagements
+                    </h2>
+                  </button>
                 </div>
                 <div
                   class="pf-c-empty-state__body"
@@ -366,6 +405,7 @@ Object {
                     class="pf-c-button pf-m-link"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
+                    style="vertical-align: bottom;"
                     type="button"
                   >
                     View all
@@ -377,7 +417,7 @@ Object {
         </article>
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          style="min-height: 50vh;"
+          style="min-height: 40vh;"
         >
           <div
             class="pf-c-card__body"
@@ -410,12 +450,19 @@ Object {
                     class=""
                     data-pf-content="true"
                   />
-                  <h2
-                    class=""
-                    data-pf-content="true"
+                  <button
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    type="button"
                   >
-                    Upcoming Engagements
-                  </h2>
+                    <h2
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Upcoming Engagements
+                    </h2>
+                  </button>
                 </div>
                 <div
                   class="pf-c-empty-state__body"
@@ -429,6 +476,7 @@ Object {
                     class="pf-c-button pf-m-link"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
+                    style="vertical-align: bottom;"
                     type="button"
                   >
                     View all
@@ -440,7 +488,7 @@ Object {
         </article>
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          style="min-height: 50vh;"
+          style="min-height: 40vh;"
         >
           <div
             class="pf-c-card__body"
@@ -473,12 +521,19 @@ Object {
                     class=""
                     data-pf-content="true"
                   />
-                  <h2
-                    class=""
-                    data-pf-content="true"
+                  <button
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    type="button"
                   >
-                    Active Engagements
-                  </h2>
+                    <h2
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Active Engagements
+                    </h2>
+                  </button>
                 </div>
                 <div
                   class="pf-c-empty-state__body"
@@ -492,6 +547,7 @@ Object {
                     class="pf-c-button pf-m-link"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
+                    style="vertical-align: bottom;"
                     type="button"
                   >
                     View all
@@ -503,7 +559,7 @@ Object {
         </article>
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          style="min-height: 50vh;"
+          style="min-height: 40vh;"
         >
           <div
             class="pf-c-card__body"
@@ -536,12 +592,19 @@ Object {
                     class=""
                     data-pf-content="true"
                   />
-                  <h2
-                    class=""
-                    data-pf-content="true"
+                  <button
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    type="button"
                   >
-                    Past Engagements
-                  </h2>
+                    <h2
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Past Engagements
+                    </h2>
+                  </button>
                 </div>
                 <div
                   class="pf-c-empty-state__body"
@@ -555,6 +618,7 @@ Object {
                     class="pf-c-button pf-m-link"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
+                    style="vertical-align: bottom;"
                     type="button"
                   >
                     View all
