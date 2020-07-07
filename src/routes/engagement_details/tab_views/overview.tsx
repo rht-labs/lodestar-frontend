@@ -39,7 +39,12 @@ export function EngagementOverviewTab({
           />
         </GridItem>
         <GridItem span={12}>
-          <SystemStatusCard currentEngagement={currentEngagementChanges} />
+          {
+            currentEngagement?.launch
+            ? <SystemStatusCard currentEngagement={currentEngagementChanges} />
+            : <></>
+          }
+
         </GridItem>
         <GridItem span={12}>
           <PointOfContactCard
