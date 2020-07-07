@@ -7,14 +7,13 @@ import {
   EngagementFormConfig,
   EngagementFormOption,
 } from '../../schemas/engagement_config';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider';
 import { CloudProviderRegionFormField } from '../engagement_form_fields/cloud_provider_region';
 import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version';
 import { SubdomainFormField } from '../engagement_form_fields/subdomain';
 import { PersistentStorageFormField } from '../engagement_form_fields/persistent_storage';
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
-
+import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 export interface OpenShiftClusterEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
@@ -40,21 +39,23 @@ export function OpenShiftClusterEditModal({
     engagement
   );
 
-  const { engagementFormState } = useEngagements();
-
   const onSave = () => {
-    propsOnSave(engagementFormState);
+    propsOnSave(engagement);
     requestClose();
   };
   return (
-    <Modal variant={ModalVariant.large} isOpen={isOpen} onClose={requestClose}>
+    <Modal
+      variant={ModalVariant.large}
+      isOpen={isOpen}
+      onClose={requestClose}
+      title="Hosting Environment"
+    >
       <EditModalTemplate
         actions={
           <div>
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Hosting Environment"
       >
         <Form isHorizontal>
           <CloudProviderFormField
@@ -85,6 +86,10 @@ export function OpenShiftClusterEditModal({
           <ClusterSizeFormField
             onChange={onChange}
             formOptions={formOptions}
+            engagement={engagement}
+          />
+          <AdditionalDetailsFormField
+            onChange={onChange}
             engagement={engagement}
           />
         </Form>

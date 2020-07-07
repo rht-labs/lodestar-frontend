@@ -2,6 +2,30 @@
 
 # OMP Frontend Quickstart
 
+## First things first
+
+The following technologies are used in this application:
+
+1. [React](https://reactjs.org/docs/getting-started.html)
+1. [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+1. [Provider/Consumer and React Contexts](https://reactjs.org/docs/context.html)
+1. [Patternfly](https://www.patternfly.org/v4/documentation/react/overview/release-notes)
+1. [Typescript](https://www.typescriptlang.org/docs/)
+1. [Jest](https://jestjs.io/docs/en/tutorial-react)
+1. [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+1. [Cypress](http://cypress.io/)
+1. [React Router](https://reacttraining.com/react-router/)
+
+### Style
+
+GTS is used as the styleguide for the application.
+Code that does not conform to the styleguide will fail PR tests.
+Before submitting a PR, confirm that your code passes the style check by running
+`npm run check`.
+
+Additionally, you can attempt to automatically fix any style errors in your code by running:
+`npm run fix`. _Pro tip: commit any changes you have before running any script that may modify your source files._
+
 ## Organization
 
 The application is separated into several main components. All of these components are located in folders within `src/`.
@@ -29,8 +53,8 @@ Currently, features are derived from the session data on session context.
 #### Service Provider Context
 
 The service provider context acts as a dependency injector for asynchronous services into the application.
-By default, the service provider provides the production services. You can switch to faked services by setting
-`REACT_APP_USE_FAKED=true`.
+By default, the service provider provides the production services.
+You can switch to faked services by passing an environment variable: `REACT_APP_USE_FAKED=true`.
 
 ### `src/routes`
 
@@ -52,15 +76,53 @@ Each service is contained in a folder. At the root of the folder is an eponymous
 
 ## Development
 
+### Logging
+
+This repository reimplements several common methods from the `console` interface. Any output that needs to be logged must be logged through this interface. The logger can be imported from `src/utilities/logger/index.ts`.
+
+**BAD:**
+
+```typescript
+async function myAsynchronousFunction() {
+  try {
+    await myAsynchronousTask();
+  } catch (e) {
+    console.error(e);
+    // handle MyError
+  }
+}
+```
+
+**GOOD:**
+
+```typescript
+import { Logger } from './src/utilities/logger';
+
+async function myAsynchronousFunction() {
+  try {
+    await myAsynchronousTask();
+  } catch (e) {
+    Logger.instance.error(e);
+    // handle MyError
+  }
+}
+```
+
+Use good judgment when creating console logs. As a rule, any error or unexpected behavior that is caught in the application should be logged with `Logger.instance.error`. **Do not silence errors**. `debug` and `info` are additional log levels to choose from. `debug` is the noisiest level, with `info` being less noisy.
+
+#### Logging Config Variables
+
+The logger can be set with values in `config.json`. Available log types are defined in `src/utilities/logger/index.ts`. Log Verbosity is an enum defined in `src/utilities/logger/logger.ts`. To set this value, set the config value defined in `config.example.json` to the desired log verbosity.
+
 ### `Feeback System`
 
 User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  
 This exposes the following methods:
 
-* showLoader()
-* hideLoader()
-* showAlert(msg:string, value:string, timed:boolean = true)
-* hideAlert()
+- showLoader()
+- hideLoader()
+- showAlert(msg:string, value:string, timed:boolean = true)
+- hideAlert()
 
 **Example Usage:**  
 Import the context into your component like so:
@@ -95,8 +157,10 @@ In the project directory, you can run:
 ### `npm start`
 
 <!-- markdown-link-check-disable -->
+
 Runs the app in the development mode.  
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 <!-- markdown-link-check-enable -->
 
 The page will reload if you make edits.  
@@ -111,7 +175,7 @@ Regenerate test snapshots using `npm run test -- --updateSnapshot --watchAll=fal
 
 ### `npm run e2e`
 
-Launches the e2e test runner in the interactive watch mode. See this section about the [test runner](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview) for more information. Sensitive env variables should be set on the command or by export. Do not check in. 
+Launches the e2e test runner in the interactive watch mode. See this section about the [test runner](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview) for more information. Sensitive env variables should be set on the command or by export. Do not check in.
 
 Suggested:
 
@@ -161,21 +225,21 @@ npm run publish
 
 An engagement cannot be launched until the following fields are populated for that engagement:
 
-| Variable                    | Section             | Description                                           |
-| :-------------------------- | :-----------------  | :-----------------------------------------------------|
-| **Customer Name**           | Basic               | The name of the customer for this engagement          |
-| **Project Name**            | Basic               | The name of this engagements project                  |
-| **Residency Date (Start)**  | Basic               | The start date of the engagement                      |
-| **Residency Date (End)**    | Basic               | The start date of the engagement                      |
-| **Labs EL**                 | Point of Contact    | The name and email for the Engagement Lead            |
-| **Labs Technical Lead**     | Point of Contact    | The name and email for the Technical Lead             |
-| **Customer Contact**        | Point of Contact    | The name and email for the client contact             |
-| **Cloud Provider**          | OpenShift Cluster   | Which cloud provider is being utilized                |
-| **Provider Region**         | OpenShift Cluster   | Which region is this cloud hosted                     |
-| **Open Shift Version**      | OpenShift Cluster   | Which version of OpenShift is required                |
-| **Desired Subdomain**       | OpenShift Cluster   | What is the desired path for the cluster              |
-| **Persistent Storage**      | OpenShift Cluster   | What are the storage requirements                     |
-| **Cluster Size**            | OpenShift Cluster   | What is the size of the cluter                        |
+| Variable                   | Section           | Description                                  |
+| :------------------------- | :---------------- | :------------------------------------------- |
+| **Customer Name**          | Basic             | The name of the customer for this engagement |
+| **Project Name**           | Basic             | The name of this engagements project         |
+| **Residency Date (Start)** | Basic             | The start date of the engagement             |
+| **Residency Date (End)**   | Basic             | The start date of the engagement             |
+| **Labs EL**                | Point of Contact  | The name and email for the Engagement Lead   |
+| **Labs Technical Lead**    | Point of Contact  | The name and email for the Technical Lead    |
+| **Customer Contact**       | Point of Contact  | The name and email for the client contact    |
+| **Cloud Provider**         | OpenShift Cluster | Which cloud provider is being utilized       |
+| **Provider Region**        | OpenShift Cluster | Which region is this cloud hosted            |
+| **Open Shift Version**     | OpenShift Cluster | Which version of OpenShift is required       |
+| **Desired Subdomain**      | OpenShift Cluster | What is the desired path for the cluster     |
+| **Persistent Storage**     | OpenShift Cluster | What are the storage requirements            |
+| **Cluster Size**           | OpenShift Cluster | What is the size of the cluter               |
 
 ## Configuration Variables for local deployments
 

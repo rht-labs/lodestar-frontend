@@ -4,6 +4,7 @@ import {BlackDrawer} from '../components/drawer_and_header/black_drawer';
 import {EngagementNavigation} from '../components/drawer_and_header/engagement_navigation';
 import {Drawer, DrawerContent, Page,} from '@patternfly/react-core';
 import {NotificationContent} from "../components/drawer_and_header/notification_content";
+import { useNotification } from '../context/notification_context/notification_hook';
 
 export interface MainTemplateProps {
   children: React.ReactChild;
@@ -11,6 +12,7 @@ export interface MainTemplateProps {
 
 export const MainTemplate = (props: MainTemplateProps) => {
 
+  const { notifications } = useNotification();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true);
   const [isNotificationExpanded, setIsNotificationExpanded] = useState(false);
 
@@ -38,7 +40,9 @@ export const MainTemplate = (props: MainTemplateProps) => {
             </BlackDrawer>
           }>
       <Drawer isExpanded={isNotificationExpanded}>
-        <DrawerContent panelContent={<NotificationContent onClose={onClose}/>}>
+        <DrawerContent panelContent={
+          <NotificationContent onClose={onClose}
+                               notifications={notifications}/>}>
           {props.children}
         </DrawerContent>
       </Drawer>

@@ -2,6 +2,8 @@ import { Engagement } from './engagement_schema';
 
 const engagementProperties = [
   'archive_date',
+  'additional_details',
+  'commits',
   'customer_contact_email',
   'customer_contact_name',
   'customer_name',
@@ -24,6 +26,9 @@ const engagementProperties = [
   'technical_lead_email',
   'technical_lead_name',
   'launch',
+  'creation_details',
+  "last_update_by_name",
+  'status',
 ];
 
 describe('Engagement Schema', () => {

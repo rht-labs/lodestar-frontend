@@ -1,6 +1,15 @@
 import React from 'react';
-import {Button, Card, CardBody, CardTitle, Flex, FlexItem, Nav, NavItem, NavList} from '@patternfly/react-core';
-import { useHistory } from "react-router";
+import {
+  Button,
+  Card,
+  CardBody,
+  Nav,
+  NavItem,
+  NavList,
+  Title,
+  Grid, GridItem,
+} from '@patternfly/react-core';
+import { useHistory } from 'react-router';
 
 export interface DataCardProps {
   title: string;
@@ -10,36 +19,47 @@ export interface DataCardProps {
 }
 
 export function EngagementListItemCard(props: DataCardProps) {
-
   const url = `/app/engagements/${props.customer}/${props.project}`;
   const history = useHistory();
 
   return (
     <>
-      <Card
-        isHoverable
-        isCompact
-        style={{margin: '0 1rem', padding: '1rem'}}>
-        <CardTitle>
-          <Nav onSelect={() => { history.push(url)}} variant="tertiary">
-            <NavList>
-              <NavItem style={{fontWeight: 'bold'}}>
-                {props.title}
-              </NavItem>
-            </NavList>
-          </Nav>
-        </CardTitle>
-        <CardBody style={{padding: '0 2rem'}}>
-          <Flex>
-            <FlexItem grow={{ default: 'grow' }}>
+      <Card isCompact style={{ margin: '1rem', padding: '2rem 0.5rem' }}>
+        <CardBody style={{ padding: '0 2rem' }}>
+          <Grid hasGutter style={{alignItems: 'center', alignContent: 'center'}}>
+            <GridItem span={3} >
+              <Nav
+                onSelect={() => {
+                  history.push(url);
+                }}
+                variant="tertiary"
+              >
+                <NavList>
+                  <NavItem>
+                    <Title headingLevel="h3" style={{ fontWeight: 'bolder',cursor: 'pointer', wordWrap: "break-word"}}>
+                      {props.title}
+                    </Title>
+                  </NavItem>
+                </NavList>
+              </Nav>
+              <Title style={{ margin: '0 1rem' ,  fontWeight: 'normal'}} headingLevel="h4">
+                {props.customer}
+              </Title>
+            </GridItem>
+            <GridItem span={7}>
               {props.children}
-            </FlexItem>
-            <FlexItem>
-              <Button onClick={() => { history.push(url)} } variant="secondary">
-                  View Engagement
+            </GridItem>
+            <GridItem span={2}>
+              <Button
+                onClick={() => {
+                  history.push(url);
+                }}
+                variant="secondary"
+              >
+                View Engagement
               </Button>
-            </FlexItem>
-          </Flex>
+            </GridItem>
+          </Grid>
         </CardBody>
       </Card>
     </>

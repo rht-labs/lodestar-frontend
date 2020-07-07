@@ -2,6 +2,9 @@ import React from 'react';
 import { CreateEngagementModal } from './create_engagement_modal';
 import { useHistory } from 'react-router';
 import { EngagementDetailView } from '../engagement_details';
+import { ValidationProvider } from '../../context/validation_context/validation_context';
+import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export function CreateNewEngagement(props) {
   const history = useHistory();
@@ -13,9 +16,18 @@ export function CreateNewEngagement(props) {
     }
   };
 
+  const { formOptions } = useEngagements();
+
   return (
     <div>
-      <CreateEngagementModal onRequestClose={handleModalClose} isOpen={true} />
+      <ValidationProvider
+        validators={getValidatorsFromFormOptions(formOptions)}
+      >
+        <CreateEngagementModal
+          onRequestClose={handleModalClose}
+          isOpen={true}
+        />
+      </ValidationProvider>
       <EngagementDetailView />
     </div>
   );

@@ -6,7 +6,7 @@ import {
   Text,
   PageSectionVariants,
 } from '@patternfly/react-core';
-import { LaunchMessage } from '../components/launch_alert_banner/launch_alert_banner';
+import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_alert_banner';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 
 export function EngagementDetailsViewTemplate({
@@ -16,7 +16,12 @@ export function EngagementDetailsViewTemplate({
   engagement: Engagement;
   children: any;
 }) {
-  const { launchEngagement } = useEngagements();
+  const {
+    launchEngagement,
+    missingRequiredFields,
+    isLaunchable,
+    requiredFields,
+  } = useEngagements();
   return (
     <>
       <PageSection
@@ -27,11 +32,19 @@ export function EngagementDetailsViewTemplate({
           <Text component="h1">{engagement?.project_name}</Text>
           <Text component="h3">{engagement?.customer_name}</Text>
         </TextContent>
-        <div style={{ marginTop: '1rem' }}>
-          <LaunchMessage onLaunch={launchEngagement} engagement={engagement} />
-        </div>
       </PageSection>
-      <PageSection variant={PageSectionVariants.light}>{children}</PageSection>
+      <div style={{ marginTop: '1rem' }}>
+        <LaunchAlertBanner
+          requiredFields={requiredFields}
+          isLaunchable={isLaunchable}
+          missingRequiredFields={missingRequiredFields}
+          onLaunch={launchEngagement}
+          engagement={engagement}
+        />
+      </div>
+      <PageSection variant={PageSectionVariants.default}>
+        {children}
+      </PageSection>
     </>
   );
 }

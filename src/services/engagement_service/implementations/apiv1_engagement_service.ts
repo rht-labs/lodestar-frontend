@@ -4,6 +4,7 @@ import Axios, { AxiosInstance } from 'axios';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { AlreadyExistsError } from '../engagement_service_errors';
 import { EngagementJsonSerializer } from '../../../serializers/engagement/engagement_json_serializer';
+import { Logger } from '../../../utilities/logger';
 
 export class Apiv1EngagementService extends EngagementService {
   constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
@@ -16,15 +17,17 @@ export class Apiv1EngagementService extends EngagementService {
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
     const { data: engagementsData } = await this.axios.get(`/engagements`);
-    return engagementsData.map(engagementMap =>
+    const serializedEngagements = engagementsData.map(engagementMap =>
       Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
     );
+    return serializedEngagements;
   }
   async createEngagement(engagementData: any): Promise<Engagement> {
     try {
       const { data } = await this.axios.post(`/engagements`, engagementData);
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {
+      Logger.instance.error(e);
       if (e.response.status === 409) {
         throw new AlreadyExistsError(
           'A project with this customer name and project name already exists'

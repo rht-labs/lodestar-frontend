@@ -5,17 +5,21 @@ import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { OpenShiftClusterSummaryCard } from '../../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
 
 export interface HostingEnvironmentTabProps {
-  engagement: Engagement;
+  currentEngagement: Engagement;
+  currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
   formOptions: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
+  missingRequiredFields: string[];
 }
 
 export function HostingEnvironmentTab({
-  engagement,
+  currentEngagementChanges,
+  currentEngagement,
   onChange,
   formOptions,
   onSave,
+  missingRequiredFields,
 }: HostingEnvironmentTabProps) {
   return (
     <TextContent>
@@ -25,7 +29,9 @@ export function HostingEnvironmentTab({
             onSave={onSave}
             formOptions={formOptions}
             onChange={onChange}
-            engagement={engagement}
+            currentEngagement={currentEngagement}
+            currentEngagementChanges={currentEngagementChanges}
+            missingRequiredFields={missingRequiredFields}
           />
         </GridItem>
       </Grid>

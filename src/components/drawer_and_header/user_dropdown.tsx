@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
-import {useSession} from '../../context/session_context/session_context';
-import {Dropdown, DropdownItem, DropdownToggle} from '@patternfly/react-core';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSession } from '../../context/session_context/session_context';
+import { Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
+import { Link } from 'react-router-dom';
 
-export interface UserDropdown {
-}
+export interface UserDropdown {}
 
 export function UserDropdown(props: UserDropdown) {
   const sessionContext = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownItems = [
-    <DropdownItem value="logOut" key="logout">
-      <Link to="/logout">Log Out</Link>
+    <DropdownItem value="logOut" key="logout" component={Link} to="/Logout">
+      Log Out
     </DropdownItem>,
   ];
 

@@ -38,7 +38,7 @@ export class Request {
   public onRequestFailure = (error: any) => {
     const { response } = error;
     if (response?.status === 401 || response?.status === 403) {
-      Logger.log('Unauthenticated request', response.status);
+      Logger.instance.info('Unauthenticated request', response.status);
       this.authenticationRepository.clearSession();
       window.location.reload();
     }

@@ -91,6 +91,8 @@ export const engagementFormReducer = (
           state?.customer_name ?? ''
         ),
       };
+    case 'additional_details':
+      return { ...state, additional_details: action.payload };
     case 'description':
       return { ...state, description: action.payload };
     case 'location':

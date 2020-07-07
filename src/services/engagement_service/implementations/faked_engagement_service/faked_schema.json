@@ -1,4 +1,24 @@
 {
+  "basic_information": {
+    "project_name": {
+      "validators": [
+        {
+          "kind": "regex",
+          "value": "^[a-zA-Z0-9 ]*$",
+          "message": "Only alphanumeric characters and spaces are allowed"
+        }
+      ]
+    },
+    "customer_name": {
+      "validators": [
+        {
+          "kind": "regex",
+          "value": "^[a-zA-Z0-9 ]*$",
+          "message": "Only alphanumeric characters and spaces are allowed"
+        }
+      ]
+    }
+  },
   "cloud_options": {
     "providers": {
       "options": [
@@ -55,6 +75,16 @@
               "value": "us-west-2"
             }
           ]
+        },
+        {
+          "label": "Other",
+          "value": "other",
+          "options": [
+            {
+              "label": "Other",
+              "value": "other"
+            }
+          ]
         }
       ]
     }
@@ -64,15 +94,19 @@
       "options": [
         {
           "label": "v4.1",
-          "value": "4.1.31"
+          "value": "4.1.41"
         },
         {
           "label": "v4.2",
-          "value": "4.2.16"
+          "value": "4.2.34"
         },
         {
           "label": "v4.3",
-          "value": "4.3.0"
+          "value": "4.3.26"
+        },
+        {
+          "label": "v4.4",
+          "value": "4.4.10"
         }
       ]
     },
@@ -132,9 +166,21 @@
       ]
     }
   },
-  "contact_options": null,
-  "logistics": {
+  "logistics_options": {
     "start_date": null,
-    "end_date": null
+    "end_date": {
+      "validators": [
+        {
+          "kind": "date",
+          "value": {
+            "min": "@today"
+          },
+          "message": "End date must be after today"
+        }
+      ]
+    },
+    "technical_contact_email": null,
+    "env_default_grace_period": 30,
+    "env_grace_period_max": 180
   }
 }

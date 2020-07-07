@@ -63,40 +63,10 @@ Object {
               <div
                 class="pf-c-page__header-tools-item"
               >
-                <button
-                  aria-label="Notifications"
-                  class="pf-c-button pf-m-plain"
-                  data-ouia-component-type="PF4/Button"
-                  data-ouia-safe="true"
-                  type="button"
-                >
-                  <span
-                    class="pf-c-notification-badge pf-m-unread"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 448 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"
-                        transform=""
-                      />
-                    </svg>
-                  </span>
-                </button>
-              </div>
-              <div
-                class="pf-c-page__header-tools-item"
-              >
                 <nav
                   aria-label="Global"
                   class="pf-c-nav pf-m-horizontal"
-                  data-ouia-component-id="8"
+                  data-ouia-component-id="3"
                   data-ouia-component-type="PF4/Nav"
                   data-ouia-safe="true"
                 >
@@ -132,7 +102,7 @@ Object {
                         style="padding-bottom: 0px; padding-top: 0px;"
                       >
                         <svg
-                          aria-labelledby="icon-title-1"
+                          aria-labelledby="icon-title-0"
                           fill="currentColor"
                           height="1em"
                           role="img"
@@ -141,7 +111,7 @@ Object {
                           width="1em"
                         >
                           <title
-                            id="icon-title-1"
+                            id="icon-title-0"
                           >
                             About
                           </title>
@@ -151,6 +121,60 @@ Object {
                           />
                         </svg>
                       </a>
+                    </li>
+                    <li
+                      class="pf-c-nav__item"
+                    >
+                      <a
+                        class="pf-c-nav__link"
+                        href="/app/requestfeature"
+                        title="Feedback and Feature Request"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 352 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M96.06 454.35c.01 6.29 1.87 12.45 5.36 17.69l17.09 25.69a31.99 31.99 0 0 0 26.64 14.28h61.71a31.99 31.99 0 0 0 26.64-14.28l17.09-25.69a31.989 31.989 0 0 0 5.36-17.69l.04-38.35H96.01l.05 38.35zM0 176c0 44.37 16.45 84.85 43.56 115.78 16.52 18.85 42.36 58.23 52.21 91.45.04.26.07.52.11.78h160.24c.04-.26.07-.51.11-.78 9.85-33.22 35.69-72.6 52.21-91.45C335.55 260.85 352 220.37 352 176 352 78.61 272.91-.3 175.45 0 73.44.31 0 82.97 0 176zm176-80c-44.11 0-80 35.89-80 80 0 8.84-7.16 16-16 16s-16-7.16-16-16c0-61.76 50.24-112 112-112 8.84 0 16 7.16 16 16s-7.16 16-16 16z"
+                            transform=""
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-nav__item"
+                    >
+                      <button
+                        aria-label="Notifications"
+                        class="pf-c-button pf-m-plain"
+                        data-ouia-component-type="PF4/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <span
+                          class="pf-c-notification-badge pf-m-read"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 448 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"
+                              transform=""
+                            />
+                          </svg>
+                        </span>
+                      </button>
                     </li>
                   </ul>
                   <button
@@ -230,7 +254,7 @@ Object {
               <nav
                 aria-label="Global"
                 class="pf-c-nav"
-                data-ouia-component-id="9"
+                data-ouia-component-id="4"
                 data-ouia-component-type="PF4/Nav"
                 data-ouia-safe="true"
               >
@@ -295,6 +319,20 @@ Object {
                             class="pf-c-nav__link"
                             href="/app/engagements/all"
                           >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              style="margin-right: 1rem;"
+                              viewBox="0 0 576 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"
+                                transform=""
+                              />
+                            </svg>
                             Overview
                           </a>
                         </li>
@@ -305,6 +343,20 @@ Object {
                             class="pf-c-nav__link"
                             href="/app/engagements/upcoming"
                           >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              style="margin-right: 1rem;"
+                              viewBox="0 64 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M512-73.143c-70.656 0-136.997 13.385-199.022 40.009s-116.151 63.342-162.523 110.007-83.017 101.010-110.007 162.962-40.521 128.366-40.521 199.022c0 70.656 13.531 136.997 40.521 199.022s63.634 116.151 110.007 162.523 100.498 83.017 162.523 110.007 128.366 40.521 199.022 40.521c70.656 0 136.997-13.531 199.022-40.521s116.151-63.707 162.523-110.007c46.299-46.299 83.017-100.498 110.007-162.523s40.521-128.366 40.521-199.022c0-70.656-13.531-136.997-40.521-199.022s-63.707-116.37-110.007-162.962c-46.299-46.665-100.498-83.31-162.523-110.007s-128.366-40.009-199.022-40.009zM361.545 796.379c-46.958-20.334-88.137-48.128-123.465-83.529s-63.195-76.507-83.529-123.465c-20.334-46.958-30.501-97.134-30.501-150.455s10.167-103.643 30.501-150.967c20.334-47.323 48.128-88.503 83.529-123.465s76.507-62.683 123.465-83.017c46.958-20.334 97.134-30.501 150.455-30.501s103.497 10.167 150.455 30.501c46.958 20.334 88.137 47.982 123.465 83.017s63.122 76.142 83.529 123.465c20.334 47.323 30.501 97.646 30.501 150.967s-10.167 103.497-30.501 150.455c-20.334 46.958-48.128 88.137-83.529 123.465s-76.507 63.122-123.465 83.529c-46.958 20.334-97.134 30.501-150.455 30.501s-103.497-10.167-150.455-30.501zM328.997 662.967c0 0-8.338-94.135 73.143-130.633 26.112-11.703 70.875-33.573 72.411-71.68l0.731-1.536c2.267-36.571-19.017-60.928-74.606-80.311-75.557-26.331-71.753-160.037-71.753-160.037v0c-0.073-0.512-0.146-1.024-0.146-1.536v-62.098c0-2.487 0.805-4.535 2.341-6.071s3.584-2.341 6.071-2.341h349.038c2.487 0 4.535 0.805 6.071 2.341s2.341 3.657 2.341 6.071v62.098c0 0.512-0.073 1.024-0.146 1.536v0c0 0 4.096 134.51-73.143 162.597-58.661 21.358-75.41 48.786-74.313 77.751 3.438 30.427 49.225 60.123 74.313 75.118 79.653 47.616 74.167 119.735 73.289 127.927v60.489c0 2.487-0.805 4.535-2.341 6.071s-3.584 2.341-6.071 2.341h-348.965c-2.487 0-4.535-0.805-6.071-2.341s-2.341-3.584-2.341-6.071v-56.174c0-0.878 0.073-2.121 0.293-3.511h-0.146zM527.872 273.188c111.397 0.512 93.696-54.491 93.696-54.491h-219.429c0 55.223 87.625 53.687 87.625 53.687l38.107 0.731z"
+                                transform="rotate(180 0 512) scale(-1 1)"
+                              />
+                            </svg>
                             Upcoming
                           </a>
                         </li>
@@ -315,6 +367,20 @@ Object {
                             class="pf-c-nav__link"
                             href="/app/engagements/active"
                           >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              style="margin-right: 1rem;"
+                              viewBox="0 64 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M511.781-73.143c-70.656 0-136.923 13.312-198.875 40.009s-116.078 63.269-162.45 109.934c-46.299 46.665-82.944 100.937-109.934 162.962s-40.448 128.293-40.448 198.875 13.458 136.923 40.448 198.875 63.634 116.078 109.934 162.45c46.299 46.299 100.425 82.944 162.45 109.934s128.293 40.448 198.875 40.448 136.923-13.458 198.875-40.448 116.078-63.634 162.45-109.934c46.299-46.299 82.944-100.425 109.934-162.45s40.448-128.293 40.448-198.875-13.458-136.923-40.448-198.875-63.634-116.297-109.934-162.962-100.425-83.31-162.45-109.934-128.293-40.009-198.875-40.009v0zM361.326 795.94c-46.958-20.334-88.137-48.128-123.465-83.456s-63.122-76.434-83.456-123.465-30.501-97.134-30.501-150.455 10.167-103.643 30.501-150.894c20.334-47.323 48.128-88.43 83.456-123.465s76.434-62.61 123.465-82.944 97.134-30.501 150.455-30.501 103.424 10.167 150.455 30.501c46.958 20.334 88.137 47.982 123.465 82.944s63.122 76.142 83.456 123.465 30.501 97.646 30.501 150.894-10.167 103.424-30.501 150.455c-20.334 46.958-48.128 88.137-83.456 123.465s-76.434 63.122-123.465 83.456-97.134 30.501-150.455 30.501c-53.321 0-103.424-10.167-150.455-30.501v0zM730.697 498.395c1.975-8.119 2.414-19.383-1.17-26.331-7.387-14.263-16.457-26.99-26.185-40.96-83.017-119.296-158.135-200.485-249.71-305.371-17.993-20.626-34.889-13.751-42.057-9.070-15.579 10.24-15.799 29.769-7.314 52.297 9.801 25.966 20.48 57.783 29.842 79.799 22.455 52.736 20.187 58.075 41.911 114.907-52.297-0.1024-127.781-0.951-180.078-1.463-15.067-0.146-33.499 1.902-39.497 16.311-5.778 13.751-0.146 26.039 8.558 38.107 64.146 89.381 172.617 212.626 248.174 294.546 6.51 7.022 30.062 23.333 43.739 21.358 10.825-1.536 21.87 1.243 26.843-9.289 5.851-12.434 2.706-25.746-2.56-37.23-22.016-48.347-45.714-118.638-71.095-174.519 50.615-0.073 144.53-0.073 195.145-0.146 8.558 0 18.432-0.731 23.406-8.046 1.024-1.536 1.755-3.145 2.121-4.901v0z"
+                                transform="rotate(180 0 512) scale(-1 1)"
+                              />
+                            </svg>
                             Active
                           </a>
                         </li>
@@ -325,6 +391,20 @@ Object {
                             class="pf-c-nav__link"
                             href="/app/engagements/past"
                           >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              style="margin-right: 1rem;"
+                              viewBox="0 64 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M512-73.143c-70.656 0-136.997 13.385-199.022 40.009s-116.151 63.342-162.523 110.007-83.017 101.010-110.007 162.962-40.521 128.366-40.521 199.022c0 70.656 13.531 136.997 40.521 199.022s63.634 116.151 110.007 162.523 100.498 83.017 162.523 110.007 128.366 40.521 199.022 40.521c70.656 0 136.997-13.531 199.022-40.521s116.151-63.707 162.523-110.007c46.299-46.299 83.017-100.498 110.007-162.523s40.521-128.366 40.521-199.022c0-70.656-13.531-136.997-40.521-199.022s-63.707-116.37-110.007-162.962c-46.299-46.665-100.498-83.31-162.523-110.007s-128.366-40.009-199.022-40.009zM361.545 796.379c-46.958-20.334-88.137-48.128-123.465-83.529s-63.195-76.507-83.529-123.465c-20.334-46.958-30.501-97.134-30.501-150.455s10.167-103.643 30.501-150.967c20.334-47.323 48.128-88.503 83.529-123.465s76.507-62.683 123.465-83.017c46.958-20.334 97.134-30.501 150.455-30.501s103.497 10.167 150.455 30.501c46.958 20.334 88.137 47.982 123.465 83.017s63.122 76.142 83.529 123.465c20.334 47.323 30.501 97.646 30.501 150.967s-10.167 103.497-30.501 150.455c-20.334 46.958-48.128 88.137-83.529 123.465s-76.507 63.122-123.465 83.529c-46.958 20.334-97.134 30.501-150.455 30.501s-103.497-10.167-150.455-30.501zM758.565 330.313c-21.211-45.861-53.248-82.505-96.037-109.934s-89.527-41.179-140.069-41.179c-35.255 0-68.901 6.875-100.937 20.699s-59.758 32.329-83.017 55.589c-23.259 23.259-41.765 50.907-55.589 83.017s-20.699 65.682-20.699 100.937c0 34.597 6.51 67.584 19.456 99.109s30.574 58.807 52.882 81.847 48.859 41.618 79.799 55.735c30.939 14.117 63.707 21.87 98.231 23.259 9.947 0.439 21.358-6.217 25.234-15.506 4.096-9.289 4.681-19.675-2.779-26.697-19.456-17.627-36.571-38.107-46.885-61.513s-17.701-45.787-17.701-71.753c0-33.426 5.998-61.952 22.455-90.185s38.839-50.615 67.072-67.072 59.099-24.722 92.526-24.722c26.624 0 52.443 5.705 77.239 17.262 9.289 4.096 17.408 2.56 24.357-4.389 3.145-3.145 5.12-7.022 5.925-11.483s0.293-8.85-1.536-12.873v0z"
+                                transform="rotate(180 0 512) scale(-1 1)"
+                              />
+                            </svg>
                             Past
                           </a>
                         </li>
@@ -335,7 +415,21 @@ Object {
                             class="pf-c-nav__link"
                             href="/app/engagements/new"
                           >
-                            + Create New
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              style="margin-right: 1rem;"
+                              viewBox="0 0 448 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                transform=""
+                              />
+                            </svg>
+                            Create New
                           </a>
                         </li>
                       </ul>
@@ -375,6 +469,14 @@ Object {
                   <div
                     class="pf-c-drawer__head"
                   >
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      <b>
+                         All Notifications 
+                      </b>
+                    </p>
                     <div
                       class="pf-c-drawer__actions"
                     >
@@ -408,17 +510,14 @@ Object {
                   </div>
                 </div>
                 <div
-                  aria-label="Default Alert"
-                  class="pf-c-alert"
-                  data-ouia-component-id="3"
-                  data-ouia-component-type="PF4/Alert"
-                  data-ouia-safe="true"
+                  class="pf-c-empty-state"
                 >
                   <div
-                    class="pf-c-alert__icon"
+                    class="pf-c-empty-state__content"
                   >
                     <svg
                       aria-hidden="true"
+                      class="pf-c-empty-state__icon"
                       fill="currentColor"
                       height="1em"
                       role="img"
@@ -431,233 +530,16 @@ Object {
                         transform=""
                       />
                     </svg>
-                  </div>
-                  <h4
-                    class="pf-c-alert__title"
-                  >
-                    <span
-                      class="pf-u-screen-reader"
+                    <h4
+                      class="pf-c-title pf-m-lg"
                     >
-                      Default alert:
-                    </span>
-                    Default alert title
-                  </h4>
-                  <div
-                    class="pf-c-alert__description"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-                  </div>
-                </div>
-                <div
-                  aria-label="Success Alert"
-                  class="pf-c-alert pf-m-success"
-                  data-ouia-component-id="4"
-                  data-ouia-component-type="PF4/Alert"
-                  data-ouia-safe="true"
-                >
-                  <div
-                    class="pf-c-alert__icon"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 512 512"
-                      width="1em"
+                      No new notifications
+                    </h4>
+                    <div
+                      class="pf-c-empty-state__body"
                     >
-                      <path
-                        d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
-                        transform=""
-                      />
-                    </svg>
-                  </div>
-                  <h4
-                    class="pf-c-alert__title"
-                  >
-                    <span
-                      class="pf-u-screen-reader"
-                    >
-                      Success alert:
-                    </span>
-                    Success alert title
-                  </h4>
-                  <div
-                    class="pf-c-alert__action"
-                  >
-                    <button
-                      aria-label="Close Success alert: alert: Success alert title"
-                      class="pf-c-button pf-m-plain"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 352 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <div
-                    class="pf-c-alert__description"
-                  >
-                    <p>
-                      Success alert description. 
-                    </p>
-                  </div>
-                  <div
-                    class="pf-c-alert__action-group"
-                  >
-                    <button
-                      class="pf-c-button pf-m-link pf-m-inline"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      type="button"
-                    >
-                      View details
-                    </button>
-                    <button
-                      class="pf-c-button pf-m-link pf-m-inline"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      type="button"
-                    >
-                      Ignore
-                    </button>
-                  </div>
-                </div>
-                <div
-                  aria-label="Info Alert"
-                  class="pf-c-alert pf-m-info"
-                  data-ouia-component-id="5"
-                  data-ouia-component-type="PF4/Alert"
-                  data-ouia-safe="true"
-                >
-                  <div
-                    class="pf-c-alert__icon"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 512 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                        transform=""
-                      />
-                    </svg>
-                  </div>
-                  <h4
-                    class="pf-c-alert__title"
-                  >
-                    <span
-                      class="pf-u-screen-reader"
-                    >
-                      Info alert:
-                    </span>
-                    Info alert title
-                  </h4>
-                  <div
-                    class="pf-c-alert__description"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-                  </div>
-                </div>
-                <div
-                  aria-label="Warning Alert"
-                  class="pf-c-alert pf-m-warning"
-                  data-ouia-component-id="6"
-                  data-ouia-component-type="PF4/Alert"
-                  data-ouia-safe="true"
-                >
-                  <div
-                    class="pf-c-alert__icon"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 576 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
-                        transform=""
-                      />
-                    </svg>
-                  </div>
-                  <h4
-                    class="pf-c-alert__title"
-                  >
-                    <span
-                      class="pf-u-screen-reader"
-                    >
-                      Warning alert:
-                    </span>
-                    Warning alert title
-                  </h4>
-                  <div
-                    class="pf-c-alert__description"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-                  </div>
-                </div>
-                <div
-                  aria-label="Danger Alert"
-                  class="pf-c-alert pf-m-danger"
-                  data-ouia-component-id="7"
-                  data-ouia-component-type="PF4/Alert"
-                  data-ouia-safe="true"
-                >
-                  <div
-                    class="pf-c-alert__icon"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 512 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
-                        transform=""
-                      />
-                    </svg>
-                  </div>
-                  <h4
-                    class="pf-c-alert__title"
-                  >
-                    <span
-                      class="pf-u-screen-reader"
-                    >
-                      Danger alert:
-                    </span>
-                    Danger alert title
-                  </h4>
-                  <div
-                    class="pf-c-alert__description"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
+                      No new notifications are available. Please come back later.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -726,40 +608,10 @@ Object {
             <div
               class="pf-c-page__header-tools-item"
             >
-              <button
-                aria-label="Notifications"
-                class="pf-c-button pf-m-plain"
-                data-ouia-component-type="PF4/Button"
-                data-ouia-safe="true"
-                type="button"
-              >
-                <span
-                  class="pf-c-notification-badge pf-m-unread"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 448 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"
-                      transform=""
-                    />
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <div
-              class="pf-c-page__header-tools-item"
-            >
               <nav
                 aria-label="Global"
                 class="pf-c-nav pf-m-horizontal"
-                data-ouia-component-id="8"
+                data-ouia-component-id="3"
                 data-ouia-component-type="PF4/Nav"
                 data-ouia-safe="true"
               >
@@ -795,7 +647,7 @@ Object {
                       style="padding-bottom: 0px; padding-top: 0px;"
                     >
                       <svg
-                        aria-labelledby="icon-title-1"
+                        aria-labelledby="icon-title-0"
                         fill="currentColor"
                         height="1em"
                         role="img"
@@ -804,7 +656,7 @@ Object {
                         width="1em"
                       >
                         <title
-                          id="icon-title-1"
+                          id="icon-title-0"
                         >
                           About
                         </title>
@@ -814,6 +666,60 @@ Object {
                         />
                       </svg>
                     </a>
+                  </li>
+                  <li
+                    class="pf-c-nav__item"
+                  >
+                    <a
+                      class="pf-c-nav__link"
+                      href="/app/requestfeature"
+                      title="Feedback and Feature Request"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 352 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M96.06 454.35c.01 6.29 1.87 12.45 5.36 17.69l17.09 25.69a31.99 31.99 0 0 0 26.64 14.28h61.71a31.99 31.99 0 0 0 26.64-14.28l17.09-25.69a31.989 31.989 0 0 0 5.36-17.69l.04-38.35H96.01l.05 38.35zM0 176c0 44.37 16.45 84.85 43.56 115.78 16.52 18.85 42.36 58.23 52.21 91.45.04.26.07.52.11.78h160.24c.04-.26.07-.51.11-.78 9.85-33.22 35.69-72.6 52.21-91.45C335.55 260.85 352 220.37 352 176 352 78.61 272.91-.3 175.45 0 73.44.31 0 82.97 0 176zm176-80c-44.11 0-80 35.89-80 80 0 8.84-7.16 16-16 16s-16-7.16-16-16c0-61.76 50.24-112 112-112 8.84 0 16 7.16 16 16s-7.16 16-16 16z"
+                          transform=""
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                  <li
+                    class="pf-c-nav__item"
+                  >
+                    <button
+                      aria-label="Notifications"
+                      class="pf-c-button pf-m-plain"
+                      data-ouia-component-type="PF4/Button"
+                      data-ouia-safe="true"
+                      type="button"
+                    >
+                      <span
+                        class="pf-c-notification-badge pf-m-read"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 448 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"
+                            transform=""
+                          />
+                        </svg>
+                      </span>
+                    </button>
                   </li>
                 </ul>
                 <button
@@ -893,7 +799,7 @@ Object {
             <nav
               aria-label="Global"
               class="pf-c-nav"
-              data-ouia-component-id="9"
+              data-ouia-component-id="4"
               data-ouia-component-type="PF4/Nav"
               data-ouia-safe="true"
             >
@@ -958,6 +864,20 @@ Object {
                           class="pf-c-nav__link"
                           href="/app/engagements/all"
                         >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="margin-right: 1rem;"
+                            viewBox="0 0 576 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"
+                              transform=""
+                            />
+                          </svg>
                           Overview
                         </a>
                       </li>
@@ -968,6 +888,20 @@ Object {
                           class="pf-c-nav__link"
                           href="/app/engagements/upcoming"
                         >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="margin-right: 1rem;"
+                            viewBox="0 64 1024 1024"
+                            width="1em"
+                          >
+                            <path
+                              d="M512-73.143c-70.656 0-136.997 13.385-199.022 40.009s-116.151 63.342-162.523 110.007-83.017 101.010-110.007 162.962-40.521 128.366-40.521 199.022c0 70.656 13.531 136.997 40.521 199.022s63.634 116.151 110.007 162.523 100.498 83.017 162.523 110.007 128.366 40.521 199.022 40.521c70.656 0 136.997-13.531 199.022-40.521s116.151-63.707 162.523-110.007c46.299-46.299 83.017-100.498 110.007-162.523s40.521-128.366 40.521-199.022c0-70.656-13.531-136.997-40.521-199.022s-63.707-116.37-110.007-162.962c-46.299-46.665-100.498-83.31-162.523-110.007s-128.366-40.009-199.022-40.009zM361.545 796.379c-46.958-20.334-88.137-48.128-123.465-83.529s-63.195-76.507-83.529-123.465c-20.334-46.958-30.501-97.134-30.501-150.455s10.167-103.643 30.501-150.967c20.334-47.323 48.128-88.503 83.529-123.465s76.507-62.683 123.465-83.017c46.958-20.334 97.134-30.501 150.455-30.501s103.497 10.167 150.455 30.501c46.958 20.334 88.137 47.982 123.465 83.017s63.122 76.142 83.529 123.465c20.334 47.323 30.501 97.646 30.501 150.967s-10.167 103.497-30.501 150.455c-20.334 46.958-48.128 88.137-83.529 123.465s-76.507 63.122-123.465 83.529c-46.958 20.334-97.134 30.501-150.455 30.501s-103.497-10.167-150.455-30.501zM328.997 662.967c0 0-8.338-94.135 73.143-130.633 26.112-11.703 70.875-33.573 72.411-71.68l0.731-1.536c2.267-36.571-19.017-60.928-74.606-80.311-75.557-26.331-71.753-160.037-71.753-160.037v0c-0.073-0.512-0.146-1.024-0.146-1.536v-62.098c0-2.487 0.805-4.535 2.341-6.071s3.584-2.341 6.071-2.341h349.038c2.487 0 4.535 0.805 6.071 2.341s2.341 3.657 2.341 6.071v62.098c0 0.512-0.073 1.024-0.146 1.536v0c0 0 4.096 134.51-73.143 162.597-58.661 21.358-75.41 48.786-74.313 77.751 3.438 30.427 49.225 60.123 74.313 75.118 79.653 47.616 74.167 119.735 73.289 127.927v60.489c0 2.487-0.805 4.535-2.341 6.071s-3.584 2.341-6.071 2.341h-348.965c-2.487 0-4.535-0.805-6.071-2.341s-2.341-3.584-2.341-6.071v-56.174c0-0.878 0.073-2.121 0.293-3.511h-0.146zM527.872 273.188c111.397 0.512 93.696-54.491 93.696-54.491h-219.429c0 55.223 87.625 53.687 87.625 53.687l38.107 0.731z"
+                              transform="rotate(180 0 512) scale(-1 1)"
+                            />
+                          </svg>
                           Upcoming
                         </a>
                       </li>
@@ -978,6 +912,20 @@ Object {
                           class="pf-c-nav__link"
                           href="/app/engagements/active"
                         >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="margin-right: 1rem;"
+                            viewBox="0 64 1024 1024"
+                            width="1em"
+                          >
+                            <path
+                              d="M511.781-73.143c-70.656 0-136.923 13.312-198.875 40.009s-116.078 63.269-162.45 109.934c-46.299 46.665-82.944 100.937-109.934 162.962s-40.448 128.293-40.448 198.875 13.458 136.923 40.448 198.875 63.634 116.078 109.934 162.45c46.299 46.299 100.425 82.944 162.45 109.934s128.293 40.448 198.875 40.448 136.923-13.458 198.875-40.448 116.078-63.634 162.45-109.934c46.299-46.299 82.944-100.425 109.934-162.45s40.448-128.293 40.448-198.875-13.458-136.923-40.448-198.875-63.634-116.297-109.934-162.962-100.425-83.31-162.45-109.934-128.293-40.009-198.875-40.009v0zM361.326 795.94c-46.958-20.334-88.137-48.128-123.465-83.456s-63.122-76.434-83.456-123.465-30.501-97.134-30.501-150.455 10.167-103.643 30.501-150.894c20.334-47.323 48.128-88.43 83.456-123.465s76.434-62.61 123.465-82.944 97.134-30.501 150.455-30.501 103.424 10.167 150.455 30.501c46.958 20.334 88.137 47.982 123.465 82.944s63.122 76.142 83.456 123.465 30.501 97.646 30.501 150.894-10.167 103.424-30.501 150.455c-20.334 46.958-48.128 88.137-83.456 123.465s-76.434 63.122-123.465 83.456-97.134 30.501-150.455 30.501c-53.321 0-103.424-10.167-150.455-30.501v0zM730.697 498.395c1.975-8.119 2.414-19.383-1.17-26.331-7.387-14.263-16.457-26.99-26.185-40.96-83.017-119.296-158.135-200.485-249.71-305.371-17.993-20.626-34.889-13.751-42.057-9.070-15.579 10.24-15.799 29.769-7.314 52.297 9.801 25.966 20.48 57.783 29.842 79.799 22.455 52.736 20.187 58.075 41.911 114.907-52.297-0.1024-127.781-0.951-180.078-1.463-15.067-0.146-33.499 1.902-39.497 16.311-5.778 13.751-0.146 26.039 8.558 38.107 64.146 89.381 172.617 212.626 248.174 294.546 6.51 7.022 30.062 23.333 43.739 21.358 10.825-1.536 21.87 1.243 26.843-9.289 5.851-12.434 2.706-25.746-2.56-37.23-22.016-48.347-45.714-118.638-71.095-174.519 50.615-0.073 144.53-0.073 195.145-0.146 8.558 0 18.432-0.731 23.406-8.046 1.024-1.536 1.755-3.145 2.121-4.901v0z"
+                              transform="rotate(180 0 512) scale(-1 1)"
+                            />
+                          </svg>
                           Active
                         </a>
                       </li>
@@ -988,6 +936,20 @@ Object {
                           class="pf-c-nav__link"
                           href="/app/engagements/past"
                         >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="margin-right: 1rem;"
+                            viewBox="0 64 1024 1024"
+                            width="1em"
+                          >
+                            <path
+                              d="M512-73.143c-70.656 0-136.997 13.385-199.022 40.009s-116.151 63.342-162.523 110.007-83.017 101.010-110.007 162.962-40.521 128.366-40.521 199.022c0 70.656 13.531 136.997 40.521 199.022s63.634 116.151 110.007 162.523 100.498 83.017 162.523 110.007 128.366 40.521 199.022 40.521c70.656 0 136.997-13.531 199.022-40.521s116.151-63.707 162.523-110.007c46.299-46.299 83.017-100.498 110.007-162.523s40.521-128.366 40.521-199.022c0-70.656-13.531-136.997-40.521-199.022s-63.707-116.37-110.007-162.962c-46.299-46.665-100.498-83.31-162.523-110.007s-128.366-40.009-199.022-40.009zM361.545 796.379c-46.958-20.334-88.137-48.128-123.465-83.529s-63.195-76.507-83.529-123.465c-20.334-46.958-30.501-97.134-30.501-150.455s10.167-103.643 30.501-150.967c20.334-47.323 48.128-88.503 83.529-123.465s76.507-62.683 123.465-83.017c46.958-20.334 97.134-30.501 150.455-30.501s103.497 10.167 150.455 30.501c46.958 20.334 88.137 47.982 123.465 83.017s63.122 76.142 83.529 123.465c20.334 47.323 30.501 97.646 30.501 150.967s-10.167 103.497-30.501 150.455c-20.334 46.958-48.128 88.137-83.529 123.465s-76.507 63.122-123.465 83.529c-46.958 20.334-97.134 30.501-150.455 30.501s-103.497-10.167-150.455-30.501zM758.565 330.313c-21.211-45.861-53.248-82.505-96.037-109.934s-89.527-41.179-140.069-41.179c-35.255 0-68.901 6.875-100.937 20.699s-59.758 32.329-83.017 55.589c-23.259 23.259-41.765 50.907-55.589 83.017s-20.699 65.682-20.699 100.937c0 34.597 6.51 67.584 19.456 99.109s30.574 58.807 52.882 81.847 48.859 41.618 79.799 55.735c30.939 14.117 63.707 21.87 98.231 23.259 9.947 0.439 21.358-6.217 25.234-15.506 4.096-9.289 4.681-19.675-2.779-26.697-19.456-17.627-36.571-38.107-46.885-61.513s-17.701-45.787-17.701-71.753c0-33.426 5.998-61.952 22.455-90.185s38.839-50.615 67.072-67.072 59.099-24.722 92.526-24.722c26.624 0 52.443 5.705 77.239 17.262 9.289 4.096 17.408 2.56 24.357-4.389 3.145-3.145 5.12-7.022 5.925-11.483s0.293-8.85-1.536-12.873v0z"
+                              transform="rotate(180 0 512) scale(-1 1)"
+                            />
+                          </svg>
                           Past
                         </a>
                       </li>
@@ -998,7 +960,21 @@ Object {
                           class="pf-c-nav__link"
                           href="/app/engagements/new"
                         >
-                          + Create New
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="margin-right: 1rem;"
+                            viewBox="0 0 448 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                              transform=""
+                            />
+                          </svg>
+                          Create New
                         </a>
                       </li>
                     </ul>
@@ -1038,6 +1014,14 @@ Object {
                 <div
                   class="pf-c-drawer__head"
                 >
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    <b>
+                       All Notifications 
+                    </b>
+                  </p>
                   <div
                     class="pf-c-drawer__actions"
                   >
@@ -1071,17 +1055,14 @@ Object {
                 </div>
               </div>
               <div
-                aria-label="Default Alert"
-                class="pf-c-alert"
-                data-ouia-component-id="3"
-                data-ouia-component-type="PF4/Alert"
-                data-ouia-safe="true"
+                class="pf-c-empty-state"
               >
                 <div
-                  class="pf-c-alert__icon"
+                  class="pf-c-empty-state__content"
                 >
                   <svg
                     aria-hidden="true"
+                    class="pf-c-empty-state__icon"
                     fill="currentColor"
                     height="1em"
                     role="img"
@@ -1094,233 +1075,16 @@ Object {
                       transform=""
                     />
                   </svg>
-                </div>
-                <h4
-                  class="pf-c-alert__title"
-                >
-                  <span
-                    class="pf-u-screen-reader"
+                  <h4
+                    class="pf-c-title pf-m-lg"
                   >
-                    Default alert:
-                  </span>
-                  Default alert title
-                </h4>
-                <div
-                  class="pf-c-alert__description"
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-                </div>
-              </div>
-              <div
-                aria-label="Success Alert"
-                class="pf-c-alert pf-m-success"
-                data-ouia-component-id="4"
-                data-ouia-component-type="PF4/Alert"
-                data-ouia-safe="true"
-              >
-                <div
-                  class="pf-c-alert__icon"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 512 512"
-                    width="1em"
+                    No new notifications
+                  </h4>
+                  <div
+                    class="pf-c-empty-state__body"
                   >
-                    <path
-                      d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
-                      transform=""
-                    />
-                  </svg>
-                </div>
-                <h4
-                  class="pf-c-alert__title"
-                >
-                  <span
-                    class="pf-u-screen-reader"
-                  >
-                    Success alert:
-                  </span>
-                  Success alert title
-                </h4>
-                <div
-                  class="pf-c-alert__action"
-                >
-                  <button
-                    aria-label="Close Success alert: alert: Success alert title"
-                    class="pf-c-button pf-m-plain"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      fill="currentColor"
-                      height="1em"
-                      role="img"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 352 512"
-                      width="1em"
-                    >
-                      <path
-                        d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                        transform=""
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div
-                  class="pf-c-alert__description"
-                >
-                  <p>
-                    Success alert description. 
-                  </p>
-                </div>
-                <div
-                  class="pf-c-alert__action-group"
-                >
-                  <button
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    View details
-                  </button>
-                  <button
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    Ignore
-                  </button>
-                </div>
-              </div>
-              <div
-                aria-label="Info Alert"
-                class="pf-c-alert pf-m-info"
-                data-ouia-component-id="5"
-                data-ouia-component-type="PF4/Alert"
-                data-ouia-safe="true"
-              >
-                <div
-                  class="pf-c-alert__icon"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                      transform=""
-                    />
-                  </svg>
-                </div>
-                <h4
-                  class="pf-c-alert__title"
-                >
-                  <span
-                    class="pf-u-screen-reader"
-                  >
-                    Info alert:
-                  </span>
-                  Info alert title
-                </h4>
-                <div
-                  class="pf-c-alert__description"
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-                </div>
-              </div>
-              <div
-                aria-label="Warning Alert"
-                class="pf-c-alert pf-m-warning"
-                data-ouia-component-id="6"
-                data-ouia-component-type="PF4/Alert"
-                data-ouia-safe="true"
-              >
-                <div
-                  class="pf-c-alert__icon"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 576 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
-                      transform=""
-                    />
-                  </svg>
-                </div>
-                <h4
-                  class="pf-c-alert__title"
-                >
-                  <span
-                    class="pf-u-screen-reader"
-                  >
-                    Warning alert:
-                  </span>
-                  Warning alert title
-                </h4>
-                <div
-                  class="pf-c-alert__description"
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-                </div>
-              </div>
-              <div
-                aria-label="Danger Alert"
-                class="pf-c-alert pf-m-danger"
-                data-ouia-component-id="7"
-                data-ouia-component-type="PF4/Alert"
-                data-ouia-safe="true"
-              >
-                <div
-                  class="pf-c-alert__icon"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 512 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
-                      transform=""
-                    />
-                  </svg>
-                </div>
-                <h4
-                  class="pf-c-alert__title"
-                >
-                  <span
-                    class="pf-u-screen-reader"
-                  >
-                    Danger alert:
-                  </span>
-                  Danger alert title
-                </h4>
-                <div
-                  class="pf-c-alert__description"
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
+                    No new notifications are available. Please come back later.
+                  </div>
                 </div>
               </div>
             </div>

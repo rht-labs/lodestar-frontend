@@ -1,22 +1,23 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
-import { useState, useCallback, useReducer, useEffect } from 'react';
+import { useState, useCallback, useReducer } from 'react';
 import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
-import { useFeedback } from '../feedback_context';
+import { useFeedback, AlertType } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { Logger } from '../../utilities/logger';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import { Logger } from '../../utilities/logger';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
-  engagementFormState?: Engagement;
-  activeEngagement?: Engagement;
-  setActiveEngagement: (Engagement: Engagement) => void;
+  currentEngagementChanges?: Engagement;
+  currentEngagement?: Engagement;
+  setcurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
+  requiredFields: string[];
   getEngagement: (
     customerName: string,
     projectName: string
@@ -25,13 +26,31 @@ export interface EngagementContext {
   createEngagement: (data: any) => Promise<Engagement>;
   saveEngagement: (data: any) => Promise<void>;
   updateEngagementFormField: (fieldName: string, payload: any) => void;
+  missingRequiredFields: string[];
   isLaunchable: boolean;
   formOptions?: EngagementFormConfig;
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
 }
-
+const requiredFields = [
+  'customer_contact_email',
+  'customer_contact_name',
+  'customer_name',
+  'end_date',
+  'start_date',
+  'engagement_lead_email',
+  'technical_lead_email',
+  'engagement_lead_name',
+  'technical_lead_name',
+  'ocp_cloud_provider_name',
+  'ocp_cloud_provider_region',
+  'ocp_version',
+  'ocp_cluster_size',
+  'ocp_persistent_storage_size',
+  'ocp_sub_domain',
+  'project_name',
+];
 export const EngagementContext = createContext<EngagementContext>(null);
 
 const { Provider } = EngagementContext;
@@ -49,10 +68,10 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
-  const [activeEngagement, setActiveEngagement] = useState<
+  const [currentEngagement, setcurrentEngagement] = useState<
     Engagement | undefined
   >();
-  const [engagementFormState, dispatch] = useReducer<
+  const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
@@ -62,75 +81,48 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
-    Logger.info('change active engagement', activeEngagement);
+    Logger.instance.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
-      payload: getInitialState(activeEngagement),
+      payload: getInitialState(currentEngagement),
     });
-    if (formOptions?.regions) {
-      dispatch({
-        type: 'ocp_cloud_provider_region',
-        payload:
-          activeEngagement?.ocp_cloud_provider_region ??
-          formOptions?.providers?.options[0]?.options?.[0]?.value,
-      });
-    }
-    if (formOptions?.cloud_options) {
-      dispatch({
-        type: 'ocp_cloud_provider_name',
-        payload:
-          activeEngagement?.ocp_cloud_provider_name ??
-          formOptions?.cloud_options?.providers?.options[0].value,
-      });
-    }
-    if (formOptions?.openshift_options) {
-      dispatch({
-        type: 'ocp_cluster_size',
-        payload:
-          activeEngagement?.ocp_cluster_size ??
-          formOptions?.openshift_options?.custer_size?.options[0].value,
-      });
-      dispatch({
-        type: 'ocp_version',
-        payload:
-          activeEngagement?.ocp_version ??
-          formOptions.openshift_options?.versions?.options[0].value,
-      });
-      dispatch({
-        type: 'ocp_persistent_storage_size',
-        payload:
-          activeEngagement?.ocp_persistent_storage_size ??
-          formOptions?.openshift_options?.persistent_storage?.options[0].value,
-      });
-    }
-  }, [activeEngagement, formOptions]);
-
+  }, [currentEngagement, formOptions]);
   const fetchEngagements = useCallback(async () => {
     try {
       feedbackContext.showLoader();
       const engagements = await engagementService.fetchEngagements();
       setEngagements(engagements);
-      if (engagements.length > 0) {
-        setActiveEngagement(engagements[0]);
-      }
       feedbackContext.hideLoader();
       return engagements;
     } catch (e) {
+      feedbackContext.showAlert(
+        'Something went wrong while getting the engagements',
+        AlertType.error,
+        true
+      );
+      Logger.instance.error(e);
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
-      let availableEngagements = engagements ?? (await fetchEngagements());
-      Logger.info(engagements);
-      return availableEngagements?.find(
-        engagement =>
-          engagement?.customer_name === customerName &&
-          engagement?.project_name === projectName
-      );
+      try {
+        let availableEngagements = engagements ?? (await fetchEngagements());
+        return availableEngagements?.find(
+          engagement =>
+            engagement?.customer_name === customerName &&
+            engagement?.project_name === projectName
+        );
+      } catch (e) {
+        Logger.instance.error(e);
+        feedbackContext.showAlert(
+          'There was a problem fetching this engagement',
+          AlertType.error
+        );
+      }
     },
-    [engagements, fetchEngagements]
+    [engagements, fetchEngagements, feedbackContext]
   );
 
   const _addNewEngagement = useCallback(
@@ -139,7 +131,7 @@ export const EngagementProvider = ({
         const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
-        console.error(e);
+        Logger.instance.error(e);
         // TODO: Handle setting the error
       }
     },
@@ -156,48 +148,42 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
-          'success'
+          AlertType.success
         );
         return engagement;
       } catch (e) {
+        Logger.instance.error(e);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
           errorMessage =
-            'This client already has a project with that name. Please choose another.';
+            'This client already has a project with that name. Please choose a different project name.';
         }
-        feedbackContext.showAlert(errorMessage, 'error');
+        feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
     [engagementService, _addNewEngagement, feedbackContext, engagements]
   );
 
-  const _checkLaunchReady = () => {
-    const requiredFields = [
-      'customer_contact_email',
-      'customer_contact_name',
-      'customer_name',
-      'end_date',
-      'start_date',
-      'engagement_lead_email',
-      'technical_lead_email',
-      'engagement_lead_name',
-      'technical_lead_name',
-      'ocp_cloud_provider_name',
-      'ocp_cloud_provider_region',
-      'ocp_version',
-      'ocp_cluster_size',
-      'ocp_persistent_storage_size',
-      'ocp_sub_domain',
-      'project_name',
-    ];
+  const _checkLaunchReady = useCallback(() => {
     let result = requiredFields.every(
       o =>
-        typeof engagementFormState[o] === 'boolean' || !!engagementFormState[o]
+        typeof currentEngagementChanges[o] === 'boolean' ||
+        typeof currentEngagementChanges[o] === 'number' ||
+        !!currentEngagementChanges[o]
     );
     return result;
-  };
+  }, [currentEngagementChanges]);
+
+  const missingRequiredFields = useCallback(() => {
+    return requiredFields.filter(
+      field =>
+        currentEngagementChanges[field] !== 'boolean' &&
+        currentEngagementChanges[field] !== 'number' &&
+        !currentEngagementChanges[field]
+    );
+  }, [currentEngagementChanges]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -231,11 +217,12 @@ export const EngagementProvider = ({
         const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
-          'success'
+          AlertType.success
         );
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
@@ -244,7 +231,7 @@ export const EngagementProvider = ({
           errorMessage =
             'The path that you input is already taken.  Please update and try saving again.';
         }
-        feedbackContext.showAlert(errorMessage, 'error');
+        feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
     [engagementService, _updateEngagementInPlace, feedbackContext]
@@ -259,6 +246,11 @@ export const EngagementProvider = ({
 
   const launchEngagement = useCallback(
     async (data: any) => {
+      if (!_checkLaunchReady()) {
+        throw Error(
+          'This engagement does not have the required fields to launch'
+        );
+      }
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
@@ -269,31 +261,42 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'You have successfully launched your engagement!',
-          'success'
+          AlertType.success
         );
       } catch (e) {
+        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'We were unable to launch your engagement. Please followup with an administrator if this continues.',
-          'error',
+          AlertType.error,
           false
         );
       }
     },
-    [_updateEngagementInPlace, engagementService, feedbackContext]
+    [
+      _updateEngagementInPlace,
+      _checkLaunchReady,
+      engagementService,
+      feedbackContext,
+    ]
   );
   return (
     <Provider
       value={{
-        activeEngagement,
+        requiredFields,
+        currentEngagement,
+        missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
-        setActiveEngagement,
+        setcurrentEngagement,
         engagements,
         getEngagement,
         error,
-        engagementFormState,
+        currentEngagementChanges: {
+          ...currentEngagement,
+          ...currentEngagementChanges,
+        },
         formOptions,
         isLoading,
         updateEngagementFormField,

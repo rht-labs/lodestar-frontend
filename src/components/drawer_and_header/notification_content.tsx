@@ -1,14 +1,48 @@
 import React from 'react';
 import {
+  Alert,
   DrawerActions,
   DrawerCloseButton,
   DrawerHead,
   DrawerPanelContent,
-  Alert, AlertActionCloseButton, AlertActionLink,
+  EmptyState, EmptyStateBody, EmptyStateIcon,
+  Text, Title
 } from '@patternfly/react-core';
+import {Notification} from "../../schemas/notification_schema";
+import {BellIcon} from "@patternfly/react-icons";
 
-export interface NotificationContentProps{
+export interface NotificationContentProps {
   onClose: any;
+  notifications: Notification[],
+}
+
+function NotificationItems({notifications}: {notifications?: Notification[]}) {
+  if (notifications?.length === 0) {
+    return (
+      <>
+        <EmptyState>
+          <EmptyStateIcon icon={BellIcon} />
+          <Title size="lg" headingLevel="h4">
+            No new notifications
+          </Title>
+          <EmptyStateBody>
+            No new notifications are available. Please come back later.
+          </EmptyStateBody>
+        </EmptyState>
+      </>
+    )
+  }
+  else {
+    return (
+      <>
+        {notifications?.map(n => (
+          <Alert title={n.title} variant={n.type}>
+            {n.message}
+          </Alert>
+        ))}
+      </>
+    )
+  }
 }
 
 export function NotificationContent(props: NotificationContentProps) {
@@ -16,34 +50,14 @@ export function NotificationContent(props: NotificationContentProps) {
   return (
     <DrawerPanelContent>
       <DrawerHead>
+        <Text>
+          <b> All Notifications </b>
+        </Text>
         <DrawerActions>
           <DrawerCloseButton onClick={props.onClose}/>
         </DrawerActions>
       </DrawerHead>
-      <Alert title="Default alert title">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert
-        variant="success"
-        title="Success alert title"
-        actionClose={<AlertActionCloseButton />}
-        actionLinks={
-          <>
-            <AlertActionLink >View details</AlertActionLink>
-            <AlertActionLink>Ignore</AlertActionLink>
-          </>
-        }
-      >
-        <p>Success alert description. </p>
-      </Alert>
-      <Alert variant="info" title="Info alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert variant="warning" title="Warning alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
-      <Alert variant="danger" title="Danger alert title" >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante
-      </Alert>
+      <NotificationItems notifications={props.notifications}/>
     </DrawerPanelContent>
-  )}
+  )
+}

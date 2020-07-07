@@ -1,10 +1,10 @@
-import { format as formatDate, parse as parseDate } from 'date-fns';
+import { format as formatDate, parse as parseDate, isValid } from 'date-fns';
 export const getFormattedDate = (inputDate: Date | string = ''): string => {
   // Dates must be formatted YYYY-MM-DD for patternfly date picker.
   // They are coming back inconsistently from the backend,
   // so this function checks to see if the date needs to be formatted,
   // then formats the date appropriately
-  if (!inputDate) {
+  if (!inputDate || (inputDate instanceof Date && !isValid(inputDate))) {
     return;
   }
   if (inputDate instanceof Date) {

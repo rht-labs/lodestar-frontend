@@ -28,7 +28,6 @@ import { Engagement } from '../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useFeatures } from '../../context/feature_toggles/feature_hook';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 
 export interface UserEditModalProps {
@@ -46,10 +45,9 @@ export function UserEditModal({
   onSave: propsOnSave,
 }: UserEditModalProps) {
   const { requestClose } = useModalVisibility();
-  const { engagementFormState } = useEngagements();
   const { hasFeature } = useFeatures();
   const onSave = () => {
-    propsOnSave(engagementFormState);
+    propsOnSave(engagement);
     requestClose();
   };
   function addUser() {
@@ -62,14 +60,18 @@ export function UserEditModal({
     onChange('user', engagement.engagement_users);
   }
   return (
-    <Modal variant={ModalVariant.large} isOpen={isOpen} onClose={requestClose}>
+    <Modal
+      variant={ModalVariant.large}
+      isOpen={isOpen}
+      onClose={requestClose}
+      title="Engagement Users"
+    >
       <EditModalTemplate
         actions={
           <div>
             <Button onClick={onSave}>Save</Button>
           </div>
         }
-        title="Engagement Users"
       >
         <div>
           {!engagement.engagement_users.length ? (

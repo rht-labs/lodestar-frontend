@@ -3,7 +3,10 @@ import { useValidation } from './validation_hook';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { ValidationProvider, FormValidator } from './validation_context';
 import '@testing-library/jest-dom/extend-expect';
-import { Validators } from '../../schemas/validators';
+import {
+  NotNullValidator,
+  LengthValidator,
+} from '../../schemas/validators/standard_validators';
 
 describe('Validation Context Hook', () => {
   const wrapper = validators => ({ children }) => (
@@ -37,8 +40,8 @@ describe('Validation Context Hook', () => {
   test('the validate function returns an empty array if all validators pass', () => {
     const { result } = getHook({
       hello: [
-        Validators.NotNullValidator,
-        Validators.LengthValidator({ maxLength: 4, minLength: 1 }),
+        NotNullValidator(),
+        LengthValidator({ maxLength: 4, minLength: 1 }),
       ],
     });
     act(() => {
@@ -48,10 +51,7 @@ describe('Validation Context Hook', () => {
 
   test('the validate function returns an array of strings if any validator fails', () => {
     const { result } = getHook({
-      hello: [
-        Validators.NotNullValidator,
-        Validators.LengthValidator({ minLength: 5 }),
-      ],
+      hello: [NotNullValidator(), LengthValidator({ minLength: 5 })],
     });
     act(() => {
       expect(result.current.validate('hello')('hi').length).toBeGreaterThan(0);
@@ -60,7 +60,7 @@ describe('Validation Context Hook', () => {
 
   test('when a validation fails, the validationResults should update', async () => {
     const { result, waitForNextUpdate } = getHook({
-      hello: [Validators.NotNullValidator],
+      hello: [NotNullValidator()],
     });
 
     await act(async () => {

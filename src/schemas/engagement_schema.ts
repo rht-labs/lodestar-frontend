@@ -1,7 +1,12 @@
 import faker from 'faker/locale/en_US';
 import { LaunchData } from './launch_data';
+import { GitCommit } from './git_commit';
+import { CreationDetails } from './creation_details';
+import { ClusterStatus } from './cluster_status';
 export interface Engagement {
+  additional_details?: string;
   archive_date: Date;
+  commits: GitCommit[];
   customer_contact_email: string;
   customer_contact_name: string;
   customer_name: string;
@@ -24,16 +29,21 @@ export interface Engagement {
   technical_lead_email: string;
   technical_lead_name: string;
   launch?: LaunchData;
+  creation_details: CreationDetails;
+  last_update_by_name: string;
   suggested_subdomain?: string;
+  status: ClusterStatus;
 }
 export abstract class Engagement {
   static fromFake(): Engagement {
     return {
+      additional_details: faker.lorem.paragraphs(2),
       archive_date: faker.date.recent(),
+      commits: [],
       customer_contact_email: faker.internet.email(),
       customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       customer_name: faker.company.companyName(),
-      description: faker.lorem.paragraph(),
+      description: faker.lorem.paragraphs(2),
       end_date: faker.date.future(),
       engagement_users: [],
       engagement_lead_email: faker.internet.email(),
@@ -51,13 +61,27 @@ export abstract class Engagement {
       start_date: faker.date.recent(),
       technical_lead_email: faker.internet.email(),
       technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      launch: faker.random.boolean() ? { launched_by: faker.name.firstName(), launched_date_time: faker.date.recent() } : null
+      creation_details: {
+        created_by_email: faker.internet.email(),
+        created_by_user: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        created_on: faker.date.recent(),
+      },
+      last_update_by_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      launch: faker.random.boolean()
+        ? {
+            launched_by: faker.name.firstName(),
+            launched_date_time: faker.date.recent(),
+          }
+        : null,
+      status: ClusterStatus.fromFake(),
     };
   }
 
   static staticFaked(): Engagement {
     return {
+      additional_details: 'Additional information here',
       archive_date: new Date(),
+      commits: [],
       customer_contact_email: 'bob@doe.com',
       customer_contact_name: `Bob Doe`,
       customer_name: 'NASA',
@@ -79,6 +103,37 @@ export abstract class Engagement {
       technical_lead_email: 'eve@doe.com',
       technical_lead_name: `Eve Doe`,
       launch: null,
+      creation_details: {
+        created_by_email: 'dwasinge@redhat.com',
+        created_by_user: 'dwasinge',
+        created_on: new Date(2020, 1, 1),
+      },
+      last_update_by_name: `James Doe`,
+      status: ClusterStatus.staticFake(),
     };
   }
 }
+
+export enum EngagementStatus {
+  active = 'active',
+  past = 'past',
+  upcoming = 'upcoming',
+}
+
+export const getEngagementStatus = (
+  engagement: Engagement
+): EngagementStatus => {
+  if (!engagement) {
+    return null;
+  }
+  const Today = new Date();
+  const { launch, end_date } = engagement;
+  const hasLaunched = !!launch?.launched_date_time;
+  if (hasLaunched && end_date >= Today) {
+    return EngagementStatus.active;
+  } else if (hasLaunched && end_date < Today) {
+    return EngagementStatus.past;
+  } else {
+    return EngagementStatus.upcoming;
+  }
+};

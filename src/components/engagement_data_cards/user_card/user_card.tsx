@@ -6,6 +6,7 @@ import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
+import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -33,8 +34,12 @@ export function UserCard({
         engagement={engagement}
       />
       <DataCard
-        isEditable
-        onEdit={() => requestOpen(USER_EDIT_MODAL_KEY)}
+        actionButton={() => (
+          <EditButton
+            onClick={() => requestOpen(USER_EDIT_MODAL_KEY)}
+            text={'Edit'}
+          />
+        )}
         title="Engagement Users"
       >
         <Grid hasGutter>
@@ -48,8 +53,8 @@ export function UserCard({
 const UserGrid = ({ engagement }: { engagement: Engagement }) => {
   return (
     <>
-      {engagement?.engagement_users?.map(user => (
-        <UserTile user={user} />
+      {engagement?.engagement_users?.map((user, i) => (
+        <UserTile key={i} user={user} />
       ))}
     </>
   );

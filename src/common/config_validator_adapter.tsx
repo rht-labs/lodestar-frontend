@@ -4,17 +4,21 @@ import { EngagementFormConfig } from '../schemas/engagement_config';
 export const getValidatorsFromFormOptions = (
   formOptions: EngagementFormConfig = {}
 ) =>
-  Object.keys(formOptions || {}).reduce((acc, groupingKey) => {
-    return {
-      ...acc,
-      ...Object.keys(formOptions[groupingKey] ?? {}).reduce(
-        (acc, k) => ({
-          ...acc,
-          [k]: (formOptions?.[groupingKey]?.[k]?.validators || []).map(
-            ValidatorFactory
-          ),
-        }),
-        {}
-      ),
-    };
-  }, {});
+  Object.keys(formOptions || {}).reduce(
+    (previousSchemaGroups, currentGroupKey) => {
+      return {
+        ...previousSchemaGroups,
+        ...Object.keys(formOptions[currentGroupKey] ?? {}).reduce(
+          (previousGroupFields, currentFieldKey) => ({
+            ...previousGroupFields,
+            [currentFieldKey]: (
+              formOptions?.[currentGroupKey]?.[currentFieldKey]?.validators ||
+              []
+            ).map(ValidatorFactory),
+          }),
+          {}
+        ),
+      };
+    },
+    {}
+  );

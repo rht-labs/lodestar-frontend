@@ -6,176 +6,198 @@ Object {
   "baseElement": <body>
     <div>
       <article
-        class="pf-c-card"
+        class="pf-c-card pf-m-compact"
+        style="padding: 1rem;"
       >
         <div
-          class="pf-l-grid"
+          class="pf-c-card__title"
         >
           <div
-            class="pf-l-grid__item pf-m-11-col"
+            class="pf-l-level"
           >
-            <div
-              class="pf-c-card__title"
-            >
-              <div
-                class="pf-l-level"
+            <div>
+              <h3
+                class="pf-c-title pf-m-lg"
+                style="font-weight: normal;"
               >
-                <div>
-                  <h3
-                    class="pf-c-title pf-m-lg"
-                    style="font-weight: normal;"
-                  >
-                    Engagement Summary
-                  </h3>
-                </div>
-                <div />
-              </div>
+                Engagement Summary
+                  
+                <svg
+                  aria-hidden="true"
+                  fill="green"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                >
+                  <path
+                    d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                    transform=""
+                  />
+                </svg>
+              </h3>
             </div>
-            <div
-              class="pf-c-card__body"
-            >
-              <div
-                class="pf-l-grid pf-m-gutter"
-              >
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Company
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      NASA
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Project
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Boots on the Moon
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Start Date
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Jun 01, 2020
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      End Date
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Jul 01, 2020
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Description
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      It's rocket science
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Location
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Nashville, TN
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div />
           </div>
+        </div>
+        <div
+          class="pf-c-card__body"
+        >
           <div
-            class="pf-l-grid__item pf-m-1-col"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-flex"
-              style="height: 100%;"
+              class="pf-l-grid__item"
+              style="margin-bottom: 1rem;"
+            >
+              <b
+                style="color: rgb(236, 122, 8);"
+              >
+                UPCOMING
+              </b>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
             >
               <div
-                class="pf-m-align-self-center"
-              />
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Company
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  NASA
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Project
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Boots on the Moon
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Location
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Nashville, TN
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Description
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  It's rocket science
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Start Date
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Jun 01, 2020
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  End Date
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Jul 01, 2020
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Created By
+                </h6>
+                dwasinge
+              </div>
             </div>
           </div>
         </div>
@@ -185,176 +207,198 @@ Object {
   </body>,
   "container": <div>
     <article
-      class="pf-c-card"
+      class="pf-c-card pf-m-compact"
+      style="padding: 1rem;"
     >
       <div
-        class="pf-l-grid"
+        class="pf-c-card__title"
       >
         <div
-          class="pf-l-grid__item pf-m-11-col"
+          class="pf-l-level"
         >
-          <div
-            class="pf-c-card__title"
-          >
-            <div
-              class="pf-l-level"
+          <div>
+            <h3
+              class="pf-c-title pf-m-lg"
+              style="font-weight: normal;"
             >
-              <div>
-                <h3
-                  class="pf-c-title pf-m-lg"
-                  style="font-weight: normal;"
-                >
-                  Engagement Summary
-                </h3>
-              </div>
-              <div />
-            </div>
+              Engagement Summary
+                
+              <svg
+                aria-hidden="true"
+                fill="green"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 512 512"
+                width="1em"
+              >
+                <path
+                  d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                  transform=""
+                />
+              </svg>
+            </h3>
           </div>
-          <div
-            class="pf-c-card__body"
-          >
-            <div
-              class="pf-l-grid pf-m-gutter"
-            >
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Company
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    NASA
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Project
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Boots on the Moon
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Start Date
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Jun 01, 2020
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    End Date
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Jul 01, 2020
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Description
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    It's rocket science
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Location
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Nashville, TN
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div />
         </div>
+      </div>
+      <div
+        class="pf-c-card__body"
+      >
         <div
-          class="pf-l-grid__item pf-m-1-col"
+          class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-flex"
-            style="height: 100%;"
+            class="pf-l-grid__item"
+            style="margin-bottom: 1rem;"
+          >
+            <b
+              style="color: rgb(236, 122, 8);"
+            >
+              UPCOMING
+            </b>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
           >
             <div
-              class="pf-m-align-self-center"
-            />
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Company
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                NASA
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Project
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Boots on the Moon
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Location
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Nashville, TN
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Description
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                It's rocket science
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Start Date
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Jun 01, 2020
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                End Date
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Jul 01, 2020
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Created By
+              </h6>
+              dwasinge
+            </div>
           </div>
         </div>
       </div>
@@ -420,197 +464,164 @@ Object {
   "baseElement": <body>
     <div>
       <article
-        class="pf-c-card"
+        class="pf-c-card pf-m-compact"
+        style="padding: 1rem;"
       >
         <div
-          class="pf-l-grid"
+          class="pf-c-card__title"
         >
           <div
-            class="pf-l-grid__item pf-m-11-col"
+            class="pf-l-level"
           >
-            <div
-              class="pf-c-card__title"
-            >
-              <div
-                class="pf-l-level"
+            <div>
+              <h3
+                class="pf-c-title pf-m-lg"
+                style="font-weight: normal;"
               >
-                <div>
-                  <h3
-                    class="pf-c-title pf-m-lg"
-                    style="font-weight: normal;"
-                  >
-                    Hosting Environment
-                  </h3>
-                </div>
-                <div />
-              </div>
+                Hosting Environment
+                  
+                <svg
+                  aria-hidden="true"
+                  fill="green"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                >
+                  <path
+                    d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                    transform=""
+                  />
+                </svg>
+              </h3>
             </div>
-            <div
-              class="pf-c-card__body"
-            >
-              <div
-                class="pf-l-grid pf-m-gutter"
-              >
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Hosting Type
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      OpenShift Container Platform
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Cloud Provider
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      AWS
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      OpenShift Version
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      4.4
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Storage Size
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      100G
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Cloud Region
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      N. Virginia
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Cloud Provider
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Large
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-3-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Subdomain
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      ordoabchao
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div />
           </div>
+        </div>
+        <div
+          class="pf-c-card__body"
+        >
           <div
-            class="pf-l-grid__item pf-m-1-col"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-flex"
-              style="height: 100%;"
+              class="pf-l-grid__item pf-m-3-col"
             >
               <div
-                class="pf-m-align-self-center"
-              />
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Hosting Type
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  OpenShift Container Platform
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Cloud Provider
+                </h6>
+                <span />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  OpenShift Version
+                </h6>
+                <span />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Storage Size
+                </h6>
+                <span />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Cloud Region
+                </h6>
+                <span />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Cluster Size
+                </h6>
+                <span />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-3-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Subdomain
+                </h6>
+                ordoabchao
+                .na-1.rht-labs.com
+              </div>
             </div>
           </div>
         </div>
@@ -620,197 +631,164 @@ Object {
   </body>,
   "container": <div>
     <article
-      class="pf-c-card"
+      class="pf-c-card pf-m-compact"
+      style="padding: 1rem;"
     >
       <div
-        class="pf-l-grid"
+        class="pf-c-card__title"
       >
         <div
-          class="pf-l-grid__item pf-m-11-col"
+          class="pf-l-level"
         >
-          <div
-            class="pf-c-card__title"
-          >
-            <div
-              class="pf-l-level"
+          <div>
+            <h3
+              class="pf-c-title pf-m-lg"
+              style="font-weight: normal;"
             >
-              <div>
-                <h3
-                  class="pf-c-title pf-m-lg"
-                  style="font-weight: normal;"
-                >
-                  Hosting Environment
-                </h3>
-              </div>
-              <div />
-            </div>
+              Hosting Environment
+                
+              <svg
+                aria-hidden="true"
+                fill="green"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 512 512"
+                width="1em"
+              >
+                <path
+                  d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                  transform=""
+                />
+              </svg>
+            </h3>
           </div>
-          <div
-            class="pf-c-card__body"
-          >
-            <div
-              class="pf-l-grid pf-m-gutter"
-            >
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Hosting Type
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    OpenShift Container Platform
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Cloud Provider
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    AWS
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    OpenShift Version
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    4.4
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Storage Size
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    100G
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Cloud Region
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    N. Virginia
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Cloud Provider
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Large
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-3-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Subdomain
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    ordoabchao
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div />
         </div>
+      </div>
+      <div
+        class="pf-c-card__body"
+      >
         <div
-          class="pf-l-grid__item pf-m-1-col"
+          class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-flex"
-            style="height: 100%;"
+            class="pf-l-grid__item pf-m-3-col"
           >
             <div
-              class="pf-m-align-self-center"
-            />
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Hosting Type
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                OpenShift Container Platform
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Cloud Provider
+              </h6>
+              <span />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                OpenShift Version
+              </h6>
+              <span />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Storage Size
+              </h6>
+              <span />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Cloud Region
+              </h6>
+              <span />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Cluster Size
+              </h6>
+              <span />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-3-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Subdomain
+              </h6>
+              ordoabchao
+              .na-1.rht-labs.com
+            </div>
           </div>
         </div>
       </div>
@@ -876,113 +854,109 @@ Object {
   "baseElement": <body>
     <div>
       <article
-        class="pf-c-card"
+        class="pf-c-card pf-m-compact"
+        style="padding: 1rem;"
       >
         <div
-          class="pf-l-grid"
+          class="pf-c-card__title"
         >
           <div
-            class="pf-l-grid__item pf-m-11-col"
+            class="pf-l-level"
           >
-            <div
-              class="pf-c-card__title"
-            >
-              <div
-                class="pf-l-level"
+            <div>
+              <h3
+                class="pf-c-title pf-m-lg"
+                style="font-weight: normal;"
               >
-                <div>
-                  <h3
-                    class="pf-c-title pf-m-lg"
-                    style="font-weight: normal;"
-                  >
-                    Points of Contact
-                  </h3>
-                </div>
-                <div />
-              </div>
+                Points of Contact
+                  
+                <svg
+                  aria-hidden="true"
+                  fill="green"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                >
+                  <path
+                    d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                    transform=""
+                  />
+                </svg>
+              </h3>
             </div>
-            <div
-              class="pf-c-card__body"
-            >
-              <div
-                class="pf-l-grid pf-m-gutter"
-              >
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Engagement Lead
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Alice Doe
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Technical Lead
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Eve Doe
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-4-col"
-                >
-                  <div
-                    class="pf-c-content"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Customer Contact
-                    </h6>
-                    <p
-                      class=""
-                      data-pf-content="true"
-                    >
-                      Bob Doe
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div />
           </div>
+        </div>
+        <div
+          class="pf-c-card__body"
+        >
           <div
-            class="pf-l-grid__item pf-m-1-col"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-flex"
-              style="height: 100%;"
+              class="pf-l-grid__item pf-m-4-col"
             >
               <div
-                class="pf-m-align-self-center"
-              />
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Engagement Lead
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Alice Doe
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-4-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Technical Lead
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Eve Doe
+                </p>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-4-col"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
+                >
+                  Customer Contact
+                </h6>
+                <p
+                  class=""
+                  data-pf-content="true"
+                >
+                  Bob Doe
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -992,113 +966,109 @@ Object {
   </body>,
   "container": <div>
     <article
-      class="pf-c-card"
+      class="pf-c-card pf-m-compact"
+      style="padding: 1rem;"
     >
       <div
-        class="pf-l-grid"
+        class="pf-c-card__title"
       >
         <div
-          class="pf-l-grid__item pf-m-11-col"
+          class="pf-l-level"
         >
-          <div
-            class="pf-c-card__title"
-          >
-            <div
-              class="pf-l-level"
+          <div>
+            <h3
+              class="pf-c-title pf-m-lg"
+              style="font-weight: normal;"
             >
-              <div>
-                <h3
-                  class="pf-c-title pf-m-lg"
-                  style="font-weight: normal;"
-                >
-                  Points of Contact
-                </h3>
-              </div>
-              <div />
-            </div>
+              Points of Contact
+                
+              <svg
+                aria-hidden="true"
+                fill="green"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 512 512"
+                width="1em"
+              >
+                <path
+                  d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                  transform=""
+                />
+              </svg>
+            </h3>
           </div>
-          <div
-            class="pf-c-card__body"
-          >
-            <div
-              class="pf-l-grid pf-m-gutter"
-            >
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Engagement Lead
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Alice Doe
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Technical Lead
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Eve Doe
-                  </p>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-4-col"
-              >
-                <div
-                  class="pf-c-content"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Customer Contact
-                  </h6>
-                  <p
-                    class=""
-                    data-pf-content="true"
-                  >
-                    Bob Doe
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div />
         </div>
+      </div>
+      <div
+        class="pf-c-card__body"
+      >
         <div
-          class="pf-l-grid__item pf-m-1-col"
+          class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-flex"
-            style="height: 100%;"
+            class="pf-l-grid__item pf-m-4-col"
           >
             <div
-              class="pf-m-align-self-center"
-            />
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Engagement Lead
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Alice Doe
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-4-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Technical Lead
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Eve Doe
+              </p>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-4-col"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
+              >
+                Customer Contact
+              </h6>
+              <p
+                class=""
+                data-pf-content="true"
+              >
+                Bob Doe
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -7,15 +7,11 @@ export const PrivateRoute = (props: RouteProps) => {
   const { checkAuthStatus, authState } = useSession();
   const [authStatusChecked, setAuthStatusChecked] = useState<boolean>(false);
   useEffect(() => {
-    setAuthStatusChecked(false);
-    checkAuthStatus().then(() => {
-      setAuthStatusChecked(true);
-    });
-  }, [authState, checkAuthStatus]);
-
-  if (!authStatusChecked) {
-    return <div />;
-  }
+    if (!authStatusChecked) {
+      checkAuthStatus();
+    }
+    setAuthStatusChecked(true);
+  }, [authState, checkAuthStatus, authStatusChecked]);
 
   if (authState === 'authenticated') {
     return <Route {...props} />;

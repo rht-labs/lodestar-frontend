@@ -24,16 +24,18 @@ export function ClusterSizeFormField({
   return (
     <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
       <FormSelect
+        isRequired
         aria-label="Cluster Size"
         value={engagement?.ocp_cluster_size || ''}
         isDisabled={
-          formOptions?.openshift_options?.cluster_size?.options?.length === 1 ||
           !hasFeature(APP_FEATURES.writer) ||
           !!engagement?.launch
         }
         onChange={e => onChange('ocp_cluster_size', e)}
       >
-        {formOptions?.openshift_options?.cluster_size?.options?.length > 0 ? (
+        {[
+          <FormSelectOption value={undefined} label="Select cluster size" />,
+        ].concat(
           formOptions?.openshift_options?.cluster_size?.options.map(
             (option: any, index: any) => (
               <FormSelectOption
@@ -44,8 +46,6 @@ export function ClusterSizeFormField({
               />
             )
           )
-        ) : (
-          <FormSelectOption label={''} value={''} />
         )}
       </FormSelect>
     </FormGroup>
