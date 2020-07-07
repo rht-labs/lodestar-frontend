@@ -99,10 +99,10 @@ export function UserEditModal({
                       <InputGroup>
                         <Grid style={{ width: '100%' }}>
                           <GridItem span={3}>
-                            <Text>Last Name</Text>
+                            <Text>First Name</Text>
                           </GridItem>
                           <GridItem span={3}>
-                            <Text>First Name</Text>
+                            <Text>Last Name</Text>
                           </GridItem>
                           <GridItem span={3}>
                             <Text>Email</Text>
@@ -126,27 +126,6 @@ export function UserEditModal({
                               <Grid style={{ width: '100%' }}>
                                 <GridItem span={3}>
                                   <TextInput
-                                    aria-label="Last Name"
-                                    name="last-name"
-                                    isDisabled={
-                                      !hasFeature(APP_FEATURES.writer)
-                                    }
-                                    onChange={e => {
-                                      engagement.engagement_users[
-                                        index
-                                      ].last_name = e;
-                                      onChange(
-                                        'user',
-                                        engagement.engagement_users
-                                      );
-                                    }}
-                                    placeholder="Last Name"
-                                    type="text"
-                                    value={value.last_name || ''}
-                                  />
-                                </GridItem>
-                                <GridItem span={3}>
-                                  <TextInput
                                     aria-label="First Name"
                                     name="first-name"
                                     isDisabled={
@@ -164,6 +143,27 @@ export function UserEditModal({
                                     placeholder="First Name"
                                     type="text"
                                     value={value.first_name || ''}
+                                  />
+                                </GridItem>
+                                <GridItem span={3}>
+                                  <TextInput
+                                    aria-label="Last Name"
+                                    name="last-name"
+                                    isDisabled={
+                                      !hasFeature(APP_FEATURES.writer)
+                                    }
+                                    onChange={e => {
+                                      engagement.engagement_users[
+                                        index
+                                      ].last_name = e;
+                                      onChange(
+                                        'user',
+                                        engagement.engagement_users
+                                      );
+                                    }}
+                                    placeholder="Last Name"
+                                    type="text"
+                                    value={value.last_name || ''}
                                   />
                                 </GridItem>
                                 <GridItem span={3}>

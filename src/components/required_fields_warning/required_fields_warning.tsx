@@ -3,7 +3,7 @@ import {
   ExclamationTriangleIcon,
   CheckCircleIcon,
 } from '@patternfly/react-icons';
-import { Tooltip } from '@patternfly/react-core';
+import { Tooltip, Popover } from '@patternfly/react-core';
 import { getHumanReadableFieldName } from '../../common/human_readable_engagement_field';
 interface RequiredFieldsWarningProps {
   requiredFields: string[];
@@ -23,9 +23,28 @@ export function RequiredFieldsWarning({
       </Tooltip>
     );
   }
+  const tooltipText = neededFields.join(', ');
   return (
-    <Tooltip content={`Missing required fields: ${neededFields.join(', ')}`}>
-      <ExclamationTriangleIcon color="#EC7A08" />
-    </Tooltip>
+    <Popover
+      headerContent="Missing required fields"
+      aria-label="Missing fields warning"
+      bodyContent={
+        <div style={{ padding: '0 0 0 2rem' }}>
+          <ul style={{ listStyleType: 'disc' }}>
+            {neededFields.map(f => (
+              <li>{f}</li>
+            ))}
+          </ul>
+        </div>
+      }
+    >
+      <span>
+        <ExclamationTriangleIcon
+          style={{ cursor: 'pointer' }}
+          color="#EC7A08"
+          title={`Missing required fields: ${tooltipText}`}
+        />
+      </span>
+    </Popover>
   );
 }

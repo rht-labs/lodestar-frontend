@@ -43,7 +43,7 @@ export abstract class Engagement {
       customer_contact_email: faker.internet.email(),
       customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       customer_name: faker.company.companyName(),
-      description: faker.lorem.paragraphs(2),
+      description: faker.lorem.paragraphs(5),
       end_date: faker.date.future(),
       engagement_users: [],
       engagement_lead_email: faker.internet.email(),

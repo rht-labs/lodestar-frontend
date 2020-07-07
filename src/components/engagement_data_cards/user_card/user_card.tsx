@@ -70,7 +70,7 @@ const UserTile = ({
   };
 }) => {
   return (
-    <GridItem span={3}>
+    <GridItem lg={3} md={6} sm={12}>
       <TitledDataPoint title={`${user.first_name} ${user.last_name}`}>
         {user.email}
       </TitledDataPoint>
