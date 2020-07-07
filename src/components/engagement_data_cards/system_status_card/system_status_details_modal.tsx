@@ -24,7 +24,7 @@ export function SystemStatusDetailsModal(props: SystemStatusDetailsModalProps) {
       variant={ModalVariant.large}
       isOpen={props.isOpen}
       onClose={requestClose}
-      title="System Status Details"
+      title="System Status messages"
     >
       <EditModalTemplate
         actions={
@@ -44,18 +44,24 @@ export function SystemStatusDetailsModal(props: SystemStatusDetailsModalProps) {
 function DetailedSystemStatusList({ messages }: { messages: SystemMessage[] }) {
   return (
     <Grid>
-      {messages?.map(systemMessage => (
-        <GridItem
-          span={12}
-          key={systemMessage.updated.toISOString() + systemMessage.message}
-        >
-          <StatusMessageItem
-            severity={systemMessage.severity}
-            message={systemMessage.message}
-            updated={systemMessage.updated}
-          />
-        </GridItem>
-      ))}
+      {messages
+        ? messages?.map(systemMessage => (
+            <GridItem
+              span={12}
+              key={systemMessage.updated.toISOString() + systemMessage.message}
+            >
+              <StatusMessageItem
+                severity={systemMessage.severity}
+                message={systemMessage.message}
+                updated={systemMessage.updated}
+              />
+            </GridItem>
+          ))
+        : <GridItem
+          span={12}>
+            There are no messages to display
+          </GridItem>
+      }
     </Grid>
   );
 }

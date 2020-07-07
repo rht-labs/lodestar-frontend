@@ -32,7 +32,7 @@ export function DashboardDataCard({
   const history = useHistory();
 
   const cardShape: React.CSSProperties = {
-    minHeight: '50vh',
+    minHeight: '40vh',
   };
 
   return (
@@ -44,15 +44,20 @@ export function DashboardDataCard({
             <Text component={TextVariants.h1}>
               {numberOfEngagements}
             </Text>
-            <Text component={TextVariants.h2}>
-              {title}
-            </Text>
+            <Button variant="link"
+                    isInline
+                    onClick={() => { history.push(url)} }>
+              <Text component={TextVariants.h2}>
+                {title}
+              </Text>
+            </Button>
           </TextContent>
           <EmptyStateBody>
             {subtitle}
           </EmptyStateBody>
           <EmptyStatePrimary>
             <Button variant="link"
+                    style={{verticalAlign: 'bottom'}}
                     onClick={() => { history.push(url)} }>
               View all
             </Button>

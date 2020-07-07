@@ -18,7 +18,9 @@ export function RequiredFieldsWarning({
     .map(field => getHumanReadableFieldName(field));
   if (!neededFields?.length) {
     return (
-      <Tooltip content="All required fields are completed">
+      <Tooltip content="All required fields are completed"
+               entryDelay={10}
+               exitDelay={10}>
         <CheckCircleIcon color="green" />
       </Tooltip>
     );
@@ -39,11 +41,14 @@ export function RequiredFieldsWarning({
       }
     >
       <span>
-        <ExclamationTriangleIcon
-          style={{ cursor: 'pointer' }}
-          color="#EC7A08"
-          title={`Missing required fields: ${tooltipText}`}
-        />
+        <Tooltip content={`Missing required fields: ${tooltipText}`}
+                 entryDelay={10}
+                 exitDelay={10}>
+          <ExclamationTriangleIcon
+            style={{ cursor: 'pointer' }}
+            color="#EC7A08"
+          />
+        </Tooltip>
       </span>
     </Popover>
   );
