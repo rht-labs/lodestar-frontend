@@ -3,11 +3,8 @@ import {
   Button,
   Card,
   CardBody,
-  Nav,
-  NavItem,
-  NavList,
   Title,
-  Grid, GridItem, TextVariants, Text,
+  Grid, GridItem,
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router';
 

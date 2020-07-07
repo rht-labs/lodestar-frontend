@@ -10,6 +10,7 @@ Object {
         class="pf-c-button pf-m-plain"
         data-ouia-component-type="PF4/Button"
         data-ouia-safe="true"
+        title="Notifications"
         type="button"
       >
         <span
@@ -39,6 +40,7 @@ Object {
       class="pf-c-button pf-m-plain"
       data-ouia-component-type="PF4/Button"
       data-ouia-safe="true"
+      title="Notifications"
       type="button"
     >
       <span
