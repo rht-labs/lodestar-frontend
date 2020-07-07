@@ -71,42 +71,42 @@ export function EngagementSummaryCard({
         title="Engagement Summary"
       >
         <Grid hasGutter>
-          <GridItem md={8} sm={12}>
+          <GridItem md={12} lg={8}>
             <Grid hasGutter>
               <GridItem style={{ marginBottom: '1rem' }}>
                 <EngagementStatusText status={status} />
               </GridItem>
-              <GridItem md={4} sm={6}>
+              <GridItem md={6} lg={4}>
                 <TitledDataPoint title="Company">
                   {currentEngagement?.customer_name}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={4} sm={6}>
+              <GridItem md={6} lg={4}>
                 <TitledDataPoint title="Project">
                   {currentEngagement?.project_name}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={4} sm={6}>
+              <GridItem md={6} lg={4}>
                 <TitledDataPoint title="Location">
                   {currentEngagement?.location}
                 </TitledDataPoint>
               </GridItem>
 
-              <GridItem md={4} sm={6}>
+              <GridItem md={6} lg={4}>
                 <TitledDataPoint title="Start Date">
                   {currentEngagement?.start_date
                     ? formatDate(currentEngagement?.start_date, 'MMM dd, yyyy')
                     : null}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={4} sm={6}>
+              <GridItem md={6} lg={4}>
                 <TitledDataPoint title="End Date">
                   {currentEngagement?.end_date
                     ? formatDate(currentEngagement?.end_date, 'MMM dd, yyyy')
                     : null}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={4} sm={6}>
+              <GridItem md={6} lg={4}>
                 <TitledDataPoint title="Created By">
                   <DisplayCreatedByName
                     userFromServer={
@@ -118,7 +118,7 @@ export function EngagementSummaryCard({
               </GridItem>
             </Grid>
           </GridItem>
-          <GridItem md={4} sm={12}>
+          <GridItem md={12} lg={4}>
             <TitledDataPoint title="Description">
               {currentEngagement?.description}
             </TitledDataPoint>

@@ -32,7 +32,7 @@ export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
       >
         <Grid>
           {status?.subsystems.map(subsystem => (
-            <GridItem key={subsystem.name} span={2}>
+            <GridItem key={subsystem.name} lg={2} md={6}>
               <SubsystemDetails subsystem={subsystem} />
             </GridItem>
           ))}
