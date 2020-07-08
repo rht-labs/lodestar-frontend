@@ -259,37 +259,7 @@ Object {
               <div
                 class="pf-l-grid__item pf-m-12-col"
               >
-                <article
-                  class="pf-c-card pf-m-compact"
-                  style="padding: 1rem;"
-                >
-                  <div
-                    class="pf-c-card__title"
-                  >
-                    <div
-                      class="pf-l-level"
-                    >
-                      <div>
-                        <h3
-                          class="pf-c-title pf-m-lg"
-                          style="font-weight: normal;"
-                        >
-                          System Status
-                            
-                          <div />
-                        </h3>
-                      </div>
-                      <div />
-                    </div>
-                  </div>
-                  <div
-                    class="pf-c-card__body"
-                  >
-                    <div
-                      class="pf-l-grid"
-                    />
-                  </div>
-                </article>
+                <div />
               </div>
               <div
                 class="pf-l-grid__item pf-m-12-col"
@@ -858,7 +828,6 @@ Object {
     <div />
     <div />
     <div />
-    <div />
   </body>,
   "container": <div>
     <div
@@ -1115,37 +1084,7 @@ Object {
             <div
               class="pf-l-grid__item pf-m-12-col"
             >
-              <article
-                class="pf-c-card pf-m-compact"
-                style="padding: 1rem;"
-              >
-                <div
-                  class="pf-c-card__title"
-                >
-                  <div
-                    class="pf-l-level"
-                  >
-                    <div>
-                      <h3
-                        class="pf-c-title pf-m-lg"
-                        style="font-weight: normal;"
-                      >
-                        System Status
-                          
-                        <div />
-                      </h3>
-                    </div>
-                    <div />
-                  </div>
-                </div>
-                <div
-                  class="pf-c-card__body"
-                >
-                  <div
-                    class="pf-l-grid"
-                  />
-                </div>
-              </article>
+              <div />
             </div>
             <div
               class="pf-l-grid__item pf-m-12-col"
