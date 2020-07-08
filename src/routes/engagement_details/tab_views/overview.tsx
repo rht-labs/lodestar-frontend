@@ -39,7 +39,7 @@ export function EngagementOverviewTab({
           />
         </GridItem>
         <GridItem span={12}>
-          <SystemStatusCard currentEngagement={currentEngagementChanges} />
+          <SystemStatusCard currentEngagement={currentEngagement} />
         </GridItem>
         <GridItem span={12}>
           <PointOfContactCard
@@ -56,7 +56,7 @@ export function EngagementOverviewTab({
             onSave={onSave}
             onChange={onChange}
             formOptions={formOptions}
-            currentEngagement={currentEngagementChanges}
+            currentEngagement={currentEngagement}
             currentEngagementChanges={currentEngagementChanges}
             missingRequiredFields={missingRequiredFields}
           />
@@ -70,7 +70,7 @@ export function EngagementOverviewTab({
           />
         </GridItem>
         <GridItem span={12}>
-          <ActivityHistoryCard engagement={currentEngagementChanges} />
+          <ActivityHistoryCard engagement={currentEngagement} />
         </GridItem>
       </Grid>
     </TextContent>

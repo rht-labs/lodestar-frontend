@@ -2,7 +2,11 @@ import React from 'react';
 import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { SubsystemDetails } from './subsystem_details';
-import { Engagement } from '../../../schemas/engagement_schema';
+import {
+  Engagement,
+  getEngagementStatus,
+  EngagementStatus,
+} from '../../../schemas/engagement_schema';
 import { SystemStatusDetailsModal } from './system_status_details_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
@@ -13,8 +17,11 @@ export interface SystemStatusCardProps {
 const SYSTEM_STATUS_MODAL_KEY = 'system_status';
 
 export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
-  const { status } = currentEngagement;
+  const status = currentEngagement?.status;
   const { requestOpen, activeModalKey } = useModalVisibility();
+  if (getEngagementStatus(currentEngagement) === EngagementStatus.upcoming) {
+    return <div />;
+  }
   return (
     <>
       <SystemStatusDetailsModal
