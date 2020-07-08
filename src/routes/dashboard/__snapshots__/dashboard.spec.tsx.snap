@@ -84,19 +84,6 @@ Object {
                   >
                     All available engagements in the system. Including upcoming, active and past ones
                   </div>
-                  <div
-                    class="pf-c-empty-state__primary"
-                  >
-                    <button
-                      class="pf-c-button pf-m-link"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      style="vertical-align: bottom;"
-                      type="button"
-                    >
-                      View all
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -154,19 +141,6 @@ Object {
                     class="pf-c-empty-state__body"
                   >
                     Upcoming engagements in the future, and are not launched yet.
-                  </div>
-                  <div
-                    class="pf-c-empty-state__primary"
-                  >
-                    <button
-                      class="pf-c-button pf-m-link"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      style="vertical-align: bottom;"
-                      type="button"
-                    >
-                      View all
-                    </button>
                   </div>
                 </div>
               </div>
@@ -226,19 +200,6 @@ Object {
                   >
                     Engagements that are already in progress and running at the moment.
                   </div>
-                  <div
-                    class="pf-c-empty-state__primary"
-                  >
-                    <button
-                      class="pf-c-button pf-m-link"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      style="vertical-align: bottom;"
-                      type="button"
-                    >
-                      View all
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -296,19 +257,6 @@ Object {
                     class="pf-c-empty-state__body"
                   >
                     Engagements that are finished, closed or archived.
-                  </div>
-                  <div
-                    class="pf-c-empty-state__primary"
-                  >
-                    <button
-                      class="pf-c-button pf-m-link"
-                      data-ouia-component-type="PF4/Button"
-                      data-ouia-safe="true"
-                      style="vertical-align: bottom;"
-                      type="button"
-                    >
-                      View all
-                    </button>
                   </div>
                 </div>
               </div>
@@ -398,19 +346,6 @@ Object {
                 >
                   All available engagements in the system. Including upcoming, active and past ones
                 </div>
-                <div
-                  class="pf-c-empty-state__primary"
-                >
-                  <button
-                    class="pf-c-button pf-m-link"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    style="vertical-align: bottom;"
-                    type="button"
-                  >
-                    View all
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -468,19 +403,6 @@ Object {
                   class="pf-c-empty-state__body"
                 >
                   Upcoming engagements in the future, and are not launched yet.
-                </div>
-                <div
-                  class="pf-c-empty-state__primary"
-                >
-                  <button
-                    class="pf-c-button pf-m-link"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    style="vertical-align: bottom;"
-                    type="button"
-                  >
-                    View all
-                  </button>
                 </div>
               </div>
             </div>
@@ -540,19 +462,6 @@ Object {
                 >
                   Engagements that are already in progress and running at the moment.
                 </div>
-                <div
-                  class="pf-c-empty-state__primary"
-                >
-                  <button
-                    class="pf-c-button pf-m-link"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    style="vertical-align: bottom;"
-                    type="button"
-                  >
-                    View all
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -610,19 +519,6 @@ Object {
                   class="pf-c-empty-state__body"
                 >
                   Engagements that are finished, closed or archived.
-                </div>
-                <div
-                  class="pf-c-empty-state__primary"
-                >
-                  <button
-                    class="pf-c-button pf-m-link"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    style="vertical-align: bottom;"
-                    type="button"
-                  >
-                    View all
-                  </button>
                 </div>
               </div>
             </div>

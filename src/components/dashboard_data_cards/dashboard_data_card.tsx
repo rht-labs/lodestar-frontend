@@ -6,7 +6,6 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
   Text,
   TextContent,
   TextVariants
@@ -55,13 +54,6 @@ export function DashboardDataCard({
           <EmptyStateBody>
             {subtitle}
           </EmptyStateBody>
-          <EmptyStatePrimary>
-            <Button variant="link"
-                    style={{verticalAlign: 'bottom'}}
-                    onClick={() => { history.push(url)} }>
-              View all
-            </Button>
-          </EmptyStatePrimary>
         </EmptyState>
       </CardBody>
     </Card>
