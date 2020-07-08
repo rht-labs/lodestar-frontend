@@ -179,11 +179,11 @@ export const EngagementProvider = ({
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
-        currentEngagementChanges[field] !== 'boolean' &&
-        currentEngagementChanges[field] !== 'number' &&
-        !currentEngagementChanges[field]
+        currentEngagement?.[field] !== 'boolean' &&
+        currentEngagement?.[field] !== 'number' &&
+        !currentEngagement?.[field]
     );
-  }, [currentEngagementChanges]);
+  }, [currentEngagement]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {

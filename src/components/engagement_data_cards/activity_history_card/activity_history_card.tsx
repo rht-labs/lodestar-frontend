@@ -14,7 +14,7 @@ const ACTIVITY_HISTORY_MODAL_KEY = 'activity_history';
 
 export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
-  const { commits = [] } = engagement;
+  const commits = engagement?.commits ?? [];
   return (
     <>
       <ActivityHistoryDetailsModal
