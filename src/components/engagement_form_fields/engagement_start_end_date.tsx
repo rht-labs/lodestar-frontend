@@ -39,7 +39,7 @@ export function EngagementStartEndDateFormField({
   const { start_date, end_date, archive_date } = engagement ?? {};
 
   const [startDateText, setStartDateText] = useState(
-    getFormattedDate(start_date) || getFormattedDate(new Date())
+    getFormattedDate(start_date) || ''
   );
   const [endDateText, setEndDateText] = useState(
     getFormattedDate(end_date) || ''

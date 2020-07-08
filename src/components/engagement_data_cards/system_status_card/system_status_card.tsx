@@ -17,7 +17,7 @@ export interface SystemStatusCardProps {
 const SYSTEM_STATUS_MODAL_KEY = 'system_status';
 
 export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
-  const { status } = currentEngagement;
+  const status = currentEngagement?.status;
   const { requestOpen, activeModalKey } = useModalVisibility();
   if (getEngagementStatus(currentEngagement) === EngagementStatus.upcoming) {
     return <div />;
