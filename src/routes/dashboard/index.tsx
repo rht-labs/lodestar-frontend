@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Grid,
-  GridItem,
+  Gallery,
   PageSection,
   PageSectionVariants,
   Text,
@@ -50,8 +49,8 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <Grid hasGutter>
-          <GridItem lg={3} md={6} sm={12}>
+
+        <Gallery hasGutter>
             <DashboardDataCard
               icon={TachometerAltIcon}
               numberOfEngagements={numberOfTotalEngagements}
@@ -61,8 +60,7 @@ export function Dashboard() {
               }
               url={'/app/engagements/all'}
             />
-          </GridItem>
-          <GridItem lg={3} md={6} sm={12}>
+
             <DashboardDataCard
               icon={PendingIcon}
               numberOfEngagements={numberOfUpcomingEngagements}
@@ -72,8 +70,7 @@ export function Dashboard() {
               }
               url={'/app/engagements/upcoming'}
             />
-          </GridItem>
-          <GridItem lg={3} md={6} sm={12}>
+
             <DashboardDataCard
               icon={OnRunningIcon}
               numberOfEngagements={numberOfcurrentEngagements}
@@ -83,8 +80,7 @@ export function Dashboard() {
               }
               url={'/app/engagements/active'}
             />
-          </GridItem>
-          <GridItem lg={3} md={6} sm={12}>
+
             <DashboardDataCard
               icon={AsleepIcon}
               numberOfEngagements={numberOfPastEngagements}
@@ -92,8 +88,7 @@ export function Dashboard() {
               subtitle={'Engagements that are finished, closed or archived.'}
               url={'/app/engagements/past'}
             />
-          </GridItem>
-        </Grid>
+        </Gallery>
       </PageSection>
     </>
   );
