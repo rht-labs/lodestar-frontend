@@ -4,7 +4,7 @@ import {
   Card,
   CardBody,
   Title,
-  Grid, GridItem, Flex,
+  Grid, GridItem,
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router';
 
