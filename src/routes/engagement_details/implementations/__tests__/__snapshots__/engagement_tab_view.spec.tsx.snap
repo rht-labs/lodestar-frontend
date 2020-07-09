@@ -140,19 +140,19 @@ Object {
                       class="pf-l-grid pf-m-gutter"
                     >
                       <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-8-col-on-lg"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
+                        style="margin-bottom: 1rem;"
+                      >
+                        <b
+                          style="color: rgb(184, 187, 190);"
+                        />
+                      </div>
+                      <div
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
                       >
                         <div
                           class="pf-l-grid pf-m-gutter"
                         >
-                          <div
-                            class="pf-l-grid__item"
-                            style="margin-bottom: 1rem;"
-                          >
-                            <b
-                              style="color: rgb(184, 187, 190);"
-                            />
-                          </div>
                           <div
                             class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
                           >
@@ -958,19 +958,19 @@ Object {
                     class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-8-col-on-lg"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
+                      style="margin-bottom: 1rem;"
+                    >
+                      <b
+                        style="color: rgb(184, 187, 190);"
+                      />
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
                     >
                       <div
                         class="pf-l-grid pf-m-gutter"
                       >
-                        <div
-                          class="pf-l-grid__item"
-                          style="margin-bottom: 1rem;"
-                        >
-                          <b
-                            style="color: rgb(184, 187, 190);"
-                          />
-                        </div>
                         <div
                           class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
                         >

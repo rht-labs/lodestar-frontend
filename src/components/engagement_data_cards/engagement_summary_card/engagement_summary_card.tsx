@@ -71,11 +71,11 @@ export function EngagementSummaryCard({
         title="Engagement Summary"
       >
         <Grid hasGutter>
-          <GridItem md={12} lg={8}>
+          <GridItem md={12} lg={12} style={{ marginBottom: '1rem' }}>
+            <EngagementStatusText status={status} />
+          </GridItem>
+          <GridItem md={12} lg={6}>
             <Grid hasGutter>
-              <GridItem style={{ marginBottom: '1rem' }}>
-                <EngagementStatusText status={status} />
-              </GridItem>
               <GridItem md={6} lg={4}>
                 <TitledDataPoint title="Company">
                   {currentEngagement?.customer_name}
