@@ -259,19 +259,19 @@ Object {
                 data-ouia-component-type="PF4/Nav"
                 data-ouia-safe="true"
               >
-                <li
-                  class="pf-c-nav__item"
-                >
-                  <a
-                    class="pf-c-nav__link"
-                    href="/app/dashboard"
-                  >
-                    Dashboard
-                  </a>
-                </li>
                 <ul
                   class="pf-c-nav__list"
                 >
+                  <li
+                    class="pf-c-nav__item"
+                  >
+                    <a
+                      class="pf-c-nav__link"
+                      href="/app/dashboard"
+                    >
+                      Dashboard
+                    </a>
+                  </li>
                   <li
                     class="pf-c-nav__item pf-m-expanded"
                   >
@@ -805,19 +805,19 @@ Object {
               data-ouia-component-type="PF4/Nav"
               data-ouia-safe="true"
             >
-              <li
-                class="pf-c-nav__item"
-              >
-                <a
-                  class="pf-c-nav__link"
-                  href="/app/dashboard"
-                >
-                  Dashboard
-                </a>
-              </li>
               <ul
                 class="pf-c-nav__list"
               >
+                <li
+                  class="pf-c-nav__item"
+                >
+                  <a
+                    class="pf-c-nav__link"
+                    href="/app/dashboard"
+                  >
+                    Dashboard
+                  </a>
+                </li>
                 <li
                   class="pf-c-nav__item pf-m-expanded"
                 >
