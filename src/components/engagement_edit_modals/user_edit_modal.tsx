@@ -205,17 +205,26 @@ export function UserEditModal({
                                       );
                                     }}
                                   >
-                                    {(
-                                      formOptions?.user_options?.user_roles
-                                        ?.options ?? []
-                                    )?.map((option: any, index: number) => (
+                                    {[
                                       <FormSelectOption
-                                        isDisabled={option.disabled}
-                                        key={index}
-                                        value={option.value}
-                                        label={option.label}
-                                      />
-                                    ))}
+                                        isDisabled={true}
+                                        key={'placeholder'}
+                                        value={undefined}
+                                        label={'Select a role'}
+                                      />,
+                                    ].concat(
+                                      (
+                                        formOptions?.user_options?.user_roles
+                                          ?.options ?? []
+                                      )?.map((option: any, index: number) => (
+                                        <FormSelectOption
+                                          isDisabled={option.disabled}
+                                          key={index}
+                                          value={option.value}
+                                          label={option.label}
+                                        />
+                                      ))
+                                    )}
                                   </FormSelect>
                                 </GridItem>
                                 <GridItem span={1}>
