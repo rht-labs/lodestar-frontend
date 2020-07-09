@@ -41,7 +41,7 @@ describe('Main Template layout ', () => {
     );
 
     const pageSideBar = getById(dom.container, 'page-sidebar');
-    expect(pageSideBar).not.toHaveClass('pf-m-collapsed');
+    expect(pageSideBar).toHaveClass('pf-c-page__sidebar pf-m-collapsed');
   });
 
   test('toggle the drawer between opened and closed', async () => {
@@ -58,7 +58,7 @@ describe('Main Template layout ', () => {
     await act(async () => {
       await fireEvent.click(navToggle as Element);
       const pageSideBar = getById(dom.container, 'page-sidebar');
-      expect(pageSideBar).toHaveClass('pf-m-collapsed');
+      expect(pageSideBar).toHaveClass('pf-c-page__sidebar pf-m-expanded');
     })
   })
 });
