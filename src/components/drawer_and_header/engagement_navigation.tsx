@@ -9,14 +9,14 @@ export const EngagementNavigation = () => {
   return (
     <div>
       <Nav theme="dark">
-        <NavItem
-          title="Dashboard"
-          itemId="dashboard"
-          isActive={pathname.includes('/app/dashboard')}
-        >
-          <Link to="/app/dashboard">Dashboard</Link>
-        </NavItem>
         <NavList>
+          <NavItem
+            title="Dashboard"
+            itemId="dashboard"
+            isActive={pathname.includes('/app/dashboard')}
+          >
+            <Link to="/app/dashboard">Dashboard</Link>
+          </NavItem>
           <NavExpandable
             title={'Engagements'}
             isActive={pathname.includes('/app/engagements')}
