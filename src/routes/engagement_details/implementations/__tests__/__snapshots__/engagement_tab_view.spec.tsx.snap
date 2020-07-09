@@ -532,7 +532,13 @@ Object {
                   >
                     <div
                       class="pf-l-grid pf-m-gutter"
-                    />
+                    >
+                      <div
+                        class="pf-l-grid__item pf-m-12-col"
+                      >
+                        No users have been added to this engagement yet
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>
@@ -1350,7 +1356,13 @@ Object {
                 >
                   <div
                     class="pf-l-grid pf-m-gutter"
-                  />
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      No users have been added to this engagement yet
+                    </div>
+                  </div>
                 </div>
               </article>
             </div>

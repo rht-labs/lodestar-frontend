@@ -81,7 +81,7 @@ export function UserEditModal({
                 No Users Added
               </Title>
               <EmptyStateBody>
-                <p>No users have been added to this engagement's yet.</p>
+                <p>No users have been added to this engagement yet.</p>
                 <p>
                   Select the 'add user' button below, to begin adding users.
                 </p>
