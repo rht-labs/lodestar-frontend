@@ -24,8 +24,28 @@ export function About() {
   }, [versionContext]);
 
   let cardItems = [];
+  let applicationCard = null;
 
   if (!!versionContext?.versions?.versions) {
+    // Find LodeStar app version (if it exists) and move it to the top
+    let lodestarVersion = versionContext.versions?.versions.applications.find(e => e.application == "lodestar")
+    if (lodestarVersion) {
+      applicationCard = <CardBody>
+        <div>
+          <b>LodeStar</b>: <span>{lodestarVersion.version}</span>
+        </div>
+      </CardBody>
+      // Remove it from the component version list
+      const index = versionContext.versions?.versions.applications.indexOf(lodestarVersion);
+      versionContext.versions?.versions.applications.splice(index, 1);
+    } else {
+      applicationCard = <CardBody>
+        <div>
+          <b>LodeStar</b>: <span>Unknown</span>
+        </div>
+      </CardBody>
+    }
+
     cardItems = Object.keys(versionContext.versions?.versions).reduce(
       (previousComponents, currentKey, reduceIndex) => {
         if (!Array.isArray(versionContext.versions.versions[currentKey])) {
@@ -83,6 +103,8 @@ export function About() {
           <Grid>
             <GridItem span={4}>
               <Card isCompact={true}>
+                <CardHeader>LodeStar Version</CardHeader>
+                {applicationCard}
                 <CardHeader>Component Versions</CardHeader>
                 {cardItems}
               </Card>
