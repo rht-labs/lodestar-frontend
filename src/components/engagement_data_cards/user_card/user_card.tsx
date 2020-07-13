@@ -60,7 +60,7 @@ const UserGrid = ({ engagement }: { engagement: Engagement }) => {
             <UserTile key={i} user={user} />
           ))
         : <GridItem span={12}>
-            <p style={{fontStyle: 'italic'}}> No users have been added to this engagement yet </p>
+            <p style={{fontStyle: 'italic'}}> No users have been added to this engagement </p>
           </GridItem>
       }
     </>

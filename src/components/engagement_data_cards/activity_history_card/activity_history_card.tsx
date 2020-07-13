@@ -56,7 +56,7 @@ function ActivityList({ commits }: { commits: GitCommit[] }) {
       </>
     );
   }
-  return <p style={{fontStyle: 'italic'}}> There are no activities to display yet</p>;
+  return <p style={{fontStyle: 'italic'}}> No activity to display</p>;
 }
 
 function ActivityListItem({ commit }: { commit: GitCommit }) {

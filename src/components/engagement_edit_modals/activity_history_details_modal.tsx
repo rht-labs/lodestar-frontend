@@ -37,7 +37,7 @@ export function ActivityHistoryDetailsModal(
         {
           anyActivities
           ? <DetailedActivityHistoryList commits={props.engagement?.commits} />
-          : <p style={{fontStyle: 'italic'}}> There are no activities to display yet</p>
+          : <p style={{fontStyle: 'italic'}}> No activity to display</p>
         }
       </EditModalTemplate>
     </Modal>

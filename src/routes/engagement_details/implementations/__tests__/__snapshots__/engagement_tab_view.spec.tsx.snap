@@ -539,7 +539,7 @@ Object {
                         <p
                           style="font-style: italic;"
                         >
-                           No users have been added to this engagement yet 
+                           No users have been added to this engagement 
                         </p>
                       </div>
                     </div>
@@ -584,7 +584,7 @@ Object {
                         <p
                           style="font-style: italic;"
                         >
-                           There are no activities to display yet
+                           No activity to display
                         </p>
                       </div>
                     </div>
@@ -1373,7 +1373,7 @@ Object {
                       <p
                         style="font-style: italic;"
                       >
-                         No users have been added to this engagement yet 
+                         No users have been added to this engagement 
                       </p>
                     </div>
                   </div>
@@ -1418,7 +1418,7 @@ Object {
                       <p
                         style="font-style: italic;"
                       >
-                         There are no activities to display yet
+                         No activity to display
                       </p>
                     </div>
                   </div>

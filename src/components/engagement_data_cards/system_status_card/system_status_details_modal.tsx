@@ -59,7 +59,7 @@ function DetailedSystemStatusList({ messages }: { messages: SystemMessage[] }) {
           ))
         : <GridItem
           span={12}>
-            There are no messages to display
+            No users have been added to this engagement
           </GridItem>
       }
     </Grid>
