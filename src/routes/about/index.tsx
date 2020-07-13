@@ -28,7 +28,7 @@ export function About() {
 
   if (!!versionContext?.versions?.versions) {
     // Find LodeStar app version (if it exists) and move it to the top
-    let lodestarVersion = versionContext.versions?.versions.applications.find(e => e.application == "lodestar")
+    let lodestarVersion = versionContext.versions?.versions?.applications?.find(e => e.application === "lodestar")
     if (lodestarVersion) {
       applicationCard = <CardBody>
         <div>
