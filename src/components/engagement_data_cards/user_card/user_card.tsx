@@ -51,7 +51,7 @@ export function UserCard({
 }
 
 const UserGrid = ({ engagement }: { engagement: Engagement }) => {
-  const hasAnyUsers= !(engagement?.engagement_users.length === 0);
+  const hasAnyUsers= (engagement?.engagement_users.length > 0);
 
   return (
     <>
@@ -60,7 +60,7 @@ const UserGrid = ({ engagement }: { engagement: Engagement }) => {
             <UserTile key={i} user={user} />
           ))
         : <GridItem span={12}>
-            No users have been added to this engagement yet
+            <p style={{fontStyle: 'italic'}}> No users have been added to this engagement yet </p>
           </GridItem>
       }
     </>

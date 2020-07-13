@@ -536,7 +536,11 @@ Object {
                       <div
                         class="pf-l-grid__item pf-m-12-col"
                       >
-                        No users have been added to this engagement yet
+                        <p
+                          style="font-style: italic;"
+                        >
+                           No users have been added to this engagement yet 
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -576,7 +580,13 @@ Object {
                     >
                       <div
                         class="pf-l-grid__item pf-m-12-col"
-                      />
+                      >
+                        <p
+                          style="font-style: italic;"
+                        >
+                           There are no activities to display yet
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -1360,7 +1370,11 @@ Object {
                     <div
                       class="pf-l-grid__item pf-m-12-col"
                     >
-                      No users have been added to this engagement yet
+                      <p
+                        style="font-style: italic;"
+                      >
+                         No users have been added to this engagement yet 
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -1400,7 +1414,13 @@ Object {
                   >
                     <div
                       class="pf-l-grid__item pf-m-12-col"
-                    />
+                    >
+                      <p
+                        style="font-style: italic;"
+                      >
+                         There are no activities to display yet
+                      </p>
+                    </div>
                   </div>
                 </div>
               </article>

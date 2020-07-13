@@ -19,10 +19,10 @@ export function ActivityHistoryDetailsModal(
   props: ActivityHistoryDetailsModalProps
 ) {
   const { requestClose } = useModalVisibility();
-
+  const anyActivities = (props.engagement?.commits?.length > 0);
   return (
     <Modal
-      variant={ModalVariant.large}
+      variant={ModalVariant.small}
       isOpen={props.isOpen}
       onClose={requestClose}
       title="Activity History"
@@ -34,7 +34,11 @@ export function ActivityHistoryDetailsModal(
           </div>
         }
       >
-        <DetailedActivityHistoryList commits={props.engagement?.commits} />
+        {
+          anyActivities
+          ? <DetailedActivityHistoryList commits={props.engagement?.commits} />
+          : <p style={{fontStyle: 'italic'}}> There are no activities to display yet</p>
+        }
       </EditModalTemplate>
     </Modal>
   );
