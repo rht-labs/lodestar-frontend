@@ -532,7 +532,17 @@ Object {
                   >
                     <div
                       class="pf-l-grid pf-m-gutter"
-                    />
+                    >
+                      <div
+                        class="pf-l-grid__item pf-m-12-col"
+                      >
+                        <p
+                          style="font-style: italic;"
+                        >
+                           No users have been added to this engagement 
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>
@@ -570,7 +580,13 @@ Object {
                     >
                       <div
                         class="pf-l-grid__item pf-m-12-col"
-                      />
+                      >
+                        <p
+                          style="font-style: italic;"
+                        >
+                           No activity to display
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -1350,7 +1366,17 @@ Object {
                 >
                   <div
                     class="pf-l-grid pf-m-gutter"
-                  />
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      <p
+                        style="font-style: italic;"
+                      >
+                         No users have been added to this engagement 
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </article>
             </div>
@@ -1388,7 +1414,13 @@ Object {
                   >
                     <div
                       class="pf-l-grid__item pf-m-12-col"
-                    />
+                    >
+                      <p
+                        style="font-style: italic;"
+                      >
+                         No activity to display
+                      </p>
+                    </div>
                   </div>
                 </div>
               </article>
