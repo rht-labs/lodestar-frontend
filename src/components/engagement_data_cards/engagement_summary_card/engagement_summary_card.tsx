@@ -66,6 +66,7 @@ export function EngagementSummaryCard({
           <EditButton
             onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
             text={'Edit'}
+            data-cy={'edit_summary_card'}
           />
         )}
         title="Engagement Summary"

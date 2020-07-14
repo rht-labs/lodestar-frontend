@@ -87,6 +87,7 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
             onSelect={value =>
               validate('customer_name')(value) && setCustomerName(value)
             }
+            data-cy="customer_dropdown"
           />
         </FormGroup>
         <FormGroup
