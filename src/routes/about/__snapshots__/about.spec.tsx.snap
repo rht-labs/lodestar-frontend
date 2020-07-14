@@ -54,6 +54,11 @@ Object {
                   <div
                     class="pf-c-card__header"
                   >
+                    LodeStar Version
+                  </div>
+                  <div
+                    class="pf-c-card__header"
+                  >
                     Component Versions
                   </div>
                 </article>
@@ -111,6 +116,11 @@ Object {
               <article
                 class="pf-c-card pf-m-compact"
               >
+                <div
+                  class="pf-c-card__header"
+                >
+                  LodeStar Version
+                </div>
                 <div
                   class="pf-c-card__header"
                 >
