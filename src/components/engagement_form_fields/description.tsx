@@ -17,6 +17,7 @@ export function DescriptionFormField(props: DescriptionFormFieldProps) {
         disabled={!hasFeature(APP_FEATURES.writer)}
         name="description"
         id="description"
+        resizeOrientation="vertical"
         aria-label="engagement description"
         placeholder="Description and notes for the Engagement"
         value={props.engagement.description || ''}

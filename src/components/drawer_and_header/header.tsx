@@ -10,8 +10,9 @@ import {
   PageHeader,
   PageHeaderTools,
   PageHeaderToolsGroup,
-  PageHeaderToolsItem,
+  PageHeaderToolsItem, TooltipPosition,
 } from '@patternfly/react-core';
+import { Tooltip } from '@patternfly/react-core';
 
 import { HelpIcon, LightbulbIcon } from '@patternfly/react-icons';
 
@@ -50,7 +51,13 @@ export function Header(props: HeaderProps) {
                     isActive={pathname === '/about'}
                   >
                     <Link style={iconPad} to="/app/about">
-                      <HelpIcon title="About" />
+                      <Tooltip
+                        content={'About'}
+                        entryDelay={10}
+                        exitDelay={10}
+                        position={TooltipPosition.bottom}>
+                        <HelpIcon title="About" />
+                      </Tooltip>
                     </Link>
                   </NavItem>
                   <NavItem
@@ -62,13 +69,26 @@ export function Header(props: HeaderProps) {
                       to="/app/requestfeature"
                       title="Feedback and Feature Request"
                     >
-                      <LightbulbIcon />
+                      <Tooltip
+                        content={'Feedback and Feature Request'}
+                        entryDelay={10}
+                        exitDelay={10}
+                        position={TooltipPosition.bottom}>
+                        <LightbulbIcon />
+                      </Tooltip>
                     </Link>
                   </NavItem>
                   <NavItem id="notifications" itemId={4}>
-                    <Notification
-                      onNotificationClick={props.onNotificationClick}
-                    />
+                    <Tooltip
+                      content={'Notifications'}
+                      entryDelay={10}
+                      exitDelay={10}
+                      position={TooltipPosition.bottom}
+                    >
+                      <Notification
+                        onNotificationClick={props.onNotificationClick}
+                      />
+                    </Tooltip>
                   </NavItem>
                 </NavList>
               </Nav>

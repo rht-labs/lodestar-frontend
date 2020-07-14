@@ -3,9 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  Nav,
-  NavItem,
-  NavList,
   Title,
   Grid, GridItem,
 } from '@patternfly/react-core';
@@ -26,30 +23,24 @@ export function EngagementListItemCard(props: DataCardProps) {
     <>
       <Card isCompact style={{ margin: '1rem', padding: '2rem 0.5rem' }}>
         <CardBody style={{ padding: '0 2rem' }}>
-          <Grid hasGutter style={{alignItems: 'center', alignContent: 'center'}}>
-            <GridItem span={3} >
-              <Nav
-                onSelect={() => {
-                  history.push(url);
-                }}
-                variant="tertiary"
-              >
-                <NavList>
-                  <NavItem>
-                    <Title headingLevel="h3" style={{ fontWeight: 'bolder',cursor: 'pointer', wordWrap: "break-word"}}>
-                      {props.title}
-                    </Title>
-                  </NavItem>
-                </NavList>
-              </Nav>
-              <Title style={{ margin: '0 1rem' ,  fontWeight: 'normal'}} headingLevel="h4">
+          <Grid hasGutter style={{alignItems: 'center'}}>
+            <GridItem md={12} lg={3}>
+              <Button variant="link"
+                      isInline
+                      style={ {whiteSpace: 'normal', wordWrap: 'break-word', textAlign:'left'}}
+                      onClick={() => { history.push(url)} }>
+                <Title headingLevel="h3" style={{ fontWeight: 'bolder'}}>
+                  {props.title}
+                </Title>
+              </Button>
+              <Title style={{ fontWeight: 'normal'}} headingLevel="h4">
                 {props.customer}
               </Title>
             </GridItem>
-            <GridItem span={7}>
+            <GridItem md={12} lg={7}>
               {props.children}
             </GridItem>
-            <GridItem span={2}>
+            <GridItem sm={12} md={4} lg={2}>
               <Button
                 onClick={() => {
                   history.push(url);
