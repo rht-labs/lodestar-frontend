@@ -1,28 +1,35 @@
-describe('New engagement', () => {
-  beforeEach(() => {
+describe('Login', () => {
+  it('sso login', () => {
     cy.login(
         Cypress.env('SSO_URL'),
         Cypress.env('SSO_USER'),
         Cypress.env('SSO_PASSWORD')
     );
   });
+});
 
-  it('create and save changes to newly created engagement', () => {
+describe('new engagement', () => {
+
+  it('creates a new engagement', () => {
 
     cy.server();
     cy.route({method: 'POST', url: 'engagements'}).as('createCheck');
-    cy.route({
-      method: 'PUT',
-      url: 'engagements/customers/e2e/projects/cypressio',
-    }).as('saveCheck');
-    cy.route({method: 'PUT', url: 'engagements/launch'}).as('launchCheck');
 
-    cy.visit('/app');
+    cy.visit('http://localhost:3000');
+    cy.request('/app');
+
+    cy.get('[data-cy=get_started_button]')
+        .click();
+
+    cy.request('/app/dashboard');
+
+    cy.get('#nav-toggle')
+        .click();
 
     cy.contains('Engagements');
     cy.contains('Create New').click();
 
-    cy.get('#pf-toggle-id-18')
+    cy.get('#customer_dropdown')
         .click()
         .get('[data-testid=NASA]')
         .click();
@@ -95,3 +102,22 @@ describe('New engagement', () => {
     // cy.get('[data-cy=launch]').should('be.disabled');
   });
 });
+
+// describe('new engagement', () => {
+//
+//   it('Search for the newly added engagement, and edit that', () => {
+//     cy.server();
+//     cy.route({
+//       method: 'PUT',
+//       url: 'engagements/customers/e2e/projects/cypressio',
+//     }).as('saveCheck');
+//
+//     cy.request('/app/dashboard');
+//
+//     cy.get('#nav-toggle')
+//         .click();
+//
+//     cy.contains('Create New').click();
+//   })
+// });
+
