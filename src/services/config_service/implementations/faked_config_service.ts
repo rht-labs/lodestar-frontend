@@ -7,9 +7,10 @@ export class FakedConfigService extends ConfigService {
       baseUrl: 'http://localhost:3000',
       clientId: 'open-management-portal',
       authBaseUrl:
-        'https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect',
-      backendUrl: 'https://omp-backend-omp.apps.test.omp.rht-labs.com',
+        'https://sso.example.com/auth/realms/omp/protocol/openid-connect',
+      backendUrl: 'https://omp-backend.example.com',
       disableLaunch: false,
+      supportEmailAddress: 'redhatsupport@redhat.com',
     });
   }
 }

@@ -37,11 +37,11 @@ export abstract class GitCommit {
   static staticFaked(): GitCommit {
     return {
       added: [],
-      author_email: 'sstolwor@redhat.com',
-      author_name: 'sstolwor@redhat.com',
+      author_email: 'random-user@example.com',
+      author_name: 'random-user@example.com',
       authored_date: new Date(2020, 1, 1),
       committed_date: new Date(2020, 1, 1),
-      committer_email: 'bedin+gitlabbot@redhat.com',
+      committer_email: 'random-user+gitlabbot@example.com',
       committer_name: 'Innovation Labs Bot',
       id: 'e169e7c04a9c180a7a75af124f0cbfc657fc47ae',
       message: '💓 engagement update by git-api 📂 ',
@@ -50,7 +50,7 @@ export abstract class GitCommit {
       short_id: 'e169e7c0',
       title: '💓 engagement update by git-api 📂 ',
       web_url:
-        'https://gitlab.consulting.redhat.com/rht-labs/residencies/sandbox/spencer-4/spencer-4/iac/-/commit/e169e7c04a9c180a7a75af124f0cbfc657fc47ae',
+        'https://gitlab.example.com/my-org/engagements/company/project/iac/-/commit/e169e7c04a9c180a7a75af124f0cbfc657fc47ae',
     };
   }
 }
