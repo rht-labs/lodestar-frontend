@@ -10,7 +10,7 @@ describe('Login', () => {
 
 describe('new engagement', () => {
 
-  it('creates a new engagement', () => {
+  it('creates a new engagement and edit the details', () => {
 
     cy.server();
     cy.route({method: 'POST', url: 'engagements'}).as('createCheck');
@@ -39,21 +39,14 @@ describe('new engagement', () => {
         .get('[data-cy=createNewEngagement]')
         .click();
 
-    cy.wait('@createCheck').should('have.property', 'status', 201);
-
-    cy.get('li > .pf-c-alert')
-        .contains('Your engagement has been successfully created');
-
-    // cy.get('input[name=location]')
-    //   .should('have.value', '')
-    //   .type('Katmandu, Nepal')
-    //   .get('input[name=start_date]')
-    //   .type('2020-10-25')
-    //   .get('input[name=end_date]')
-    //   .type('2020-12-25')
-    //   .get('textarea[name=description]')
-    //   .type('Herp derpsum derp herpy le nerpy terp jerpy derpy.');
+    // cy.wait('@createCheck').should('have.property', 'status', 201);
     //
+    // cy.get('li > .pf-c-alert')
+    //     .contains('Your engagement has been successfully created');
+
+    cy.get('button[data-cy=edit_summary_card]')
+        .click();
+
     // cy.contains('Point of Contact').click();
     //
     // cy.get('input[name=engagement-lead-name]').type('Morgan Reilly');
@@ -100,6 +93,40 @@ describe('new engagement', () => {
     // cy.wait('@launchCheck').should('have.property', 'status', 200);
     //
     // cy.get('[data-cy=launch]').should('be.disabled');
+  });
+  it('Edit the Summary details', () => {
+
+    cy.get('textarea[data-cy=description_field]')
+        .type('Herp derpsum derp herpy le nerpy terp jerpy derpy.')
+        .get('input[data-cy=location_field]')
+        .should('have.value', '')
+        .type('Katmandu, Nepal')
+        .get('input[data-cy=start_date_input]')
+        .type('2020-10-25')
+        .get('input[data-cy=end_date_input]')
+        .type('2020-12-25');
+
+    //todo: needs to come back to this engagement and assert if the values have been updated
+    // cy.get('button[data-cy=save_summary_card]')
+    //     .click();
+    //
+    // cy.get('[data-cy=description_label]')
+    //     .should('have.value', 'Herp derpsum derp herpy le nerpy terp jerpy derpy.');
+    //
+    // cy.get('[data-cy=location_label]')
+    //     .should('have.value', 'Katmandu, Nepal');
+    //
+    // cy.get('[data-cy=start_date_label]')
+    //     .should('have.value', '2020-10-25');
+    //
+    // cy.get('[data-cy=end_date_label]')
+    //     .should('have.value', '2020-12-25');
+
+  });
+
+  it('Edit the points of contact', () => {
+    cy.get('button[data-cy=points_of_contact]')
+        .click();
   });
 });
 

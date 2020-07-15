@@ -62,6 +62,7 @@ export function PointOfContactCard({
           <EditButton
             onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
             text={'Edit'}
+            dataCy={'points_of_contact'}
           />
         )}
       >
