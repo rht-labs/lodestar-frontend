@@ -19,8 +19,8 @@ import {
 import { ActivityHistoryLineItem } from '../../components/activity_history_line_item/activity_history_line_item';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature';
-import { EngagementStatusText } from "./engagement_status_text";
-import { DisplayCreatedByName } from "../../common/display_created_by_name";
+import { EngagementStatusText } from './engagement_status_text';
+import { DisplayCreatedByName } from '../../common/display_created_by_name';
 
 function DurationInWeeks({
   startDate,
@@ -50,7 +50,8 @@ export function EngagementDetails({
               {'Created by: '}
               <DisplayCreatedByName
                 userFromServer={engagement?.creation_details?.created_by_user}
-                lastUpdatedBy={engagement?.last_update_by_name}/>
+                lastUpdatedBy={engagement?.last_update_by_name}
+              />
             </GridItem>
             <GridItem>
               Target start date:{' '}
@@ -143,5 +144,3 @@ export function EngagementDetails({
     </>
   );
 }
-
-
