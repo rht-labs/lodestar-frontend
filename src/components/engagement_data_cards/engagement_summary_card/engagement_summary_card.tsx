@@ -13,7 +13,7 @@ import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { EngagementStatusText } from '../../../routes/engagement_list/engagement_status_text';
-import {DisplayCreatedByName} from "../../../common/display_created_by_name";
+import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 
 export interface EngagementSummaryCardProps {
   currentEngagement: Engagement;
@@ -54,7 +54,7 @@ export function EngagementSummaryCard({
       <DataCard
         trailingIcon={() =>
           !currentEngagement || currentEngagement?.launch ? (
-            <div/>
+            <div />
           ) : (
             <RequiredFieldsWarning
               missingRequiredFields={missingRequiredFields}
@@ -71,8 +71,8 @@ export function EngagementSummaryCard({
         title="Engagement Summary"
       >
         <Grid hasGutter>
-          <GridItem style={{marginBottom: '1rem'}}>
-            <EngagementStatusText status={status}/>
+          <GridItem style={{ marginBottom: '1rem' }}>
+            <EngagementStatusText status={status} />
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Company">
@@ -91,7 +91,9 @@ export function EngagementSummaryCard({
           </GridItem>
           <GridItem span={3}>
             <TitledDataPoint title="Description">
-              {currentEngagement?.description}
+              <span style={{ whiteSpace: 'pre-line' }}>
+                {currentEngagement?.description}
+              </span>
             </TitledDataPoint>
           </GridItem>
           <GridItem span={3}>
@@ -111,8 +113,11 @@ export function EngagementSummaryCard({
           <GridItem span={3}>
             <TitledDataPoint title="Created By">
               <DisplayCreatedByName
-                userFromServer={currentEngagement?.creation_details?.created_by_user}
-                lastUpdatedBy={currentEngagement?.last_update_by_name}/>
+                userFromServer={
+                  currentEngagement?.creation_details?.created_by_user
+                }
+                lastUpdatedBy={currentEngagement?.last_update_by_name}
+              />
             </TitledDataPoint>
           </GridItem>
         </Grid>
@@ -120,4 +125,3 @@ export function EngagementSummaryCard({
     </>
   );
 }
-

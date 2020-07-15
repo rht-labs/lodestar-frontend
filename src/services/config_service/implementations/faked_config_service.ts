@@ -10,6 +10,7 @@ export class FakedConfigService extends ConfigService {
         'https://sso.example.com/auth/realms/omp/protocol/openid-connect',
       backendUrl: 'https://omp-backend.example.com',
       disableLaunch: false,
+      supportEmailAddress: 'redhatsupport@redhat.com',
     });
   }
 }
