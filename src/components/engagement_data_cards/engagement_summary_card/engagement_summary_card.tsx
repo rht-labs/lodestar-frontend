@@ -120,7 +120,9 @@ export function EngagementSummaryCard({
           </GridItem>
           <GridItem md={12} lg={4}>
             <TitledDataPoint title="Description">
-              {currentEngagement?.description}
+              <span style={{ whiteSpace: 'pre-line' }}>
+                {currentEngagement?.description}
+              </span>
             </TitledDataPoint>
           </GridItem>
         </Grid>

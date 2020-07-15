@@ -7,8 +7,10 @@ import {
   EmptyStateBody,
 } from '@patternfly/react-core';
 import { OutlinedSmileBeamIcon } from '@patternfly/react-icons';
+import { useConfig } from '../../context/config_context/config_hook';
 
 export const ErrorFallbackUI = () => {
+  const { appConfig } = useConfig();
   return (
     <PageSection style={{ height: '100%' }}>
       <>
@@ -22,7 +24,13 @@ export const ErrorFallbackUI = () => {
               First, try refreshing your browser and navigating back to this
               page.
             </p>
-            <p>If that doesn't work, please send an email to the SRE team.</p>
+            <p>
+              If that doesn't work, please send an email to&nbsp;
+              <a href={`mailto:${appConfig.supportEmailAddress}`}>
+                {appConfig.supportEmailAddress}
+              </a>
+              .
+            </p>
           </EmptyStateBody>
         </EmptyState>
       </>

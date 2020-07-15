@@ -19,6 +19,7 @@ export class Config {
     disableLaunch,
     logLevel,
     loggerType,
+    supportEmailAddress,
   }: Config) {
     this.baseUrl = baseUrl;
     this.clientId = clientId;
@@ -27,6 +28,7 @@ export class Config {
     this.disableLaunch = disableLaunch;
     this.logLevel = logLevel;
     this.loggerType = loggerType;
+    this.supportEmailAddress = supportEmailAddress;
   }
 
   baseUrl: string;
@@ -36,6 +38,7 @@ export class Config {
   disableLaunch: boolean;
   logLevel: LogVerbosity;
   loggerType: string;
+  supportEmailAddress: string;
 
   static fromMap(map: { [key: string]: unknown }) {
     return new Config({
@@ -46,6 +49,7 @@ export class Config {
       disableLaunch: map['disableLaunch'] as boolean,
       logLevel: getLogVerbosityFromString(map['logLevel'] as string),
       loggerType: map['loggerType'] as string,
+      supportEmailAddress: map['supportEmailAddress'] as string,
     });
   }
 }
