@@ -133,12 +133,11 @@ Object {
                 >
                   Description
                 </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
+                <span
+                  style="white-space: pre-line;"
                 >
                   It's rocket science
-                </p>
+                </span>
               </div>
             </div>
             <div
@@ -334,12 +333,11 @@ Object {
               >
                 Description
               </h6>
-              <p
-                class=""
-                data-pf-content="true"
+              <span
+                style="white-space: pre-line;"
               >
                 It's rocket science
-              </p>
+              </span>
             </div>
           </div>
           <div
