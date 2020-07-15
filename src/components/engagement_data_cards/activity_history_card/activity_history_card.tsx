@@ -46,7 +46,8 @@ export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
 }
 
 function ActivityList({ commits }: { commits: GitCommit[] }) {
-  if (commits) {
+  const anyActivities = (commits?.length > 0);
+  if (anyActivities) {
     return (
       <>
         {commits.map(commit => (
@@ -55,7 +56,7 @@ function ActivityList({ commits }: { commits: GitCommit[] }) {
       </>
     );
   }
-  return <div />;
+  return <p style={{fontStyle: 'italic'}}> No activity to display</p>;
 }
 
 function ActivityListItem({ commit }: { commit: GitCommit }) {

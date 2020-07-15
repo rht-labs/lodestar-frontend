@@ -44,7 +44,7 @@ export function EngagementDetails({
   return (
     <>
       <Grid hasGutter>
-        <GridItem span={12}>
+        <GridItem md={6} lg={12}>
           <Grid hasGutter>
             <GridItem span={12}>
               {'Created by: '}
@@ -61,12 +61,13 @@ export function EngagementDetails({
             </GridItem>
           </Grid>
         </GridItem>
-        <GridItem span={6}>
+        <GridItem md={12} lg={6}>
           <Flex>
             <Flex>
               <FlexItem spacer={{ default: 'spacerSm' }}>
                 <Tooltip
                   position={TooltipPosition.bottom}
+                  entryDelay={0}
                   content={'Number of people in this engagement'}
                 >
                   <UserIcon />
@@ -79,6 +80,7 @@ export function EngagementDetails({
               <FlexItem spacer={{ default: 'spacerSm' }}>
                 <Tooltip
                   position={TooltipPosition.bottom}
+                  entryDelay={0}
                   content={'Number of weeks for this engagement'}
                 >
                   <OutlinedClockIcon />
@@ -97,6 +99,7 @@ export function EngagementDetails({
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
                       position={TooltipPosition.bottom}
+                      entryDelay={0}
                       content={'Number of available reports'}
                     >
                       <ClipboardCheckIcon />
@@ -109,6 +112,7 @@ export function EngagementDetails({
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
                       position={TooltipPosition.bottom}
+                      entryDelay={0}
                       content={'Number of commits'}
                     >
                       <CodeBranchIcon />
@@ -121,6 +125,7 @@ export function EngagementDetails({
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
                       position={TooltipPosition.bottom}
+                      entryDelay={0}
                       content={'Number of repositories'}
                     >
                       <CubeIcon />
@@ -137,7 +142,7 @@ export function EngagementDetails({
             </Flex>
           </Flex>
         </GridItem>
-        <GridItem span={6}>
+        <GridItem md={12} lg={6}>
           <ActivityHistoryLineItem commit={engagement?.commits?.[0]} />
         </GridItem>
       </Grid>
