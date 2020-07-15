@@ -140,7 +140,7 @@ Object {
                       class="pf-l-grid pf-m-gutter"
                     >
                       <div
-                        class="pf-l-grid__item"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
                         style="margin-bottom: 1rem;"
                       >
                         <b
@@ -148,52 +148,105 @@ Object {
                         />
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
                       >
                         <div
-                          class="pf-c-content"
+                          class="pf-l-grid pf-m-gutter"
                         >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
+                          <div
+                            class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
                           >
-                            Company
-                          </h6>
+                            <div
+                              class="pf-c-content"
+                            >
+                              <h6
+                                class=""
+                                data-pf-content="true"
+                                style="margin-bottom: 0.1rem;"
+                              >
+                                Company
+                              </h6>
+                            </div>
+                          </div>
+                          <div
+                            class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                          >
+                            <div
+                              class="pf-c-content"
+                            >
+                              <h6
+                                class=""
+                                data-pf-content="true"
+                                style="margin-bottom: 0.1rem;"
+                              >
+                                Project
+                              </h6>
+                            </div>
+                          </div>
+                          <div
+                            class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                          >
+                            <div
+                              class="pf-c-content"
+                            >
+                              <h6
+                                class=""
+                                data-pf-content="true"
+                                style="margin-bottom: 0.1rem;"
+                              >
+                                Location
+                              </h6>
+                            </div>
+                          </div>
+                          <div
+                            class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                          >
+                            <div
+                              class="pf-c-content"
+                            >
+                              <h6
+                                class=""
+                                data-pf-content="true"
+                                style="margin-bottom: 0.1rem;"
+                              >
+                                Start Date
+                              </h6>
+                            </div>
+                          </div>
+                          <div
+                            class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                          >
+                            <div
+                              class="pf-c-content"
+                            >
+                              <h6
+                                class=""
+                                data-pf-content="true"
+                                style="margin-bottom: 0.1rem;"
+                              >
+                                End Date
+                              </h6>
+                            </div>
+                          </div>
+                          <div
+                            class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                          >
+                            <div
+                              class="pf-c-content"
+                            >
+                              <h6
+                                class=""
+                                data-pf-content="true"
+                                style="margin-bottom: 0.1rem;"
+                              >
+                                Created By
+                              </h6>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
-                      >
-                        <div
-                          class="pf-c-content"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Project
-                          </h6>
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-3-col"
-                      >
-                        <div
-                          class="pf-c-content"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Location
-                          </h6>
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -210,90 +263,13 @@ Object {
                           />
                         </div>
                       </div>
-                      <div
-                        class="pf-l-grid__item pf-m-3-col"
-                      >
-                        <div
-                          class="pf-c-content"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Start Date
-                          </h6>
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-3-col"
-                      >
-                        <div
-                          class="pf-c-content"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            End Date
-                          </h6>
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-3-col"
-                      >
-                        <div
-                          class="pf-c-content"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Created By
-                          </h6>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </article>
               </div>
               <div
                 class="pf-l-grid__item pf-m-12-col"
-              >
-                <article
-                  class="pf-c-card pf-m-compact"
-                  style="padding: 1rem;"
-                >
-                  <div
-                    class="pf-c-card__title"
-                  >
-                    <div
-                      class="pf-l-level"
-                    >
-                      <div>
-                        <h3
-                          class="pf-c-title pf-m-lg"
-                          style="font-weight: normal;"
-                        >
-                          System Status
-                            
-                          <div />
-                        </h3>
-                      </div>
-                      <div />
-                    </div>
-                  </div>
-                  <div
-                    class="pf-c-card__body"
-                  >
-                    <div
-                      class="pf-l-grid"
-                    />
-                  </div>
-                </article>
-              </div>
+              />
               <div
                 class="pf-l-grid__item pf-m-12-col"
               >
@@ -327,7 +303,7 @@ Object {
                       class="pf-l-grid pf-m-gutter"
                     >
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
                       >
                         <div
                           class="pf-c-content"
@@ -342,7 +318,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
                       >
                         <div
                           class="pf-c-content"
@@ -357,7 +333,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-4-col"
+                        class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
                       >
                         <div
                           class="pf-c-content"
@@ -408,7 +384,7 @@ Object {
                       class="pf-l-grid pf-m-gutter"
                     >
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -429,7 +405,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -445,7 +421,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -461,7 +437,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -477,7 +453,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -493,7 +469,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -509,7 +485,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -559,7 +535,17 @@ Object {
                   >
                     <div
                       class="pf-l-grid pf-m-gutter"
-                    />
+                    >
+                      <div
+                        class="pf-l-grid__item pf-m-12-col"
+                      >
+                        <p
+                          style="font-style: italic;"
+                        >
+                           No users have been added to this engagement 
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>
@@ -597,7 +583,13 @@ Object {
                     >
                       <div
                         class="pf-l-grid__item pf-m-12-col"
-                      />
+                      >
+                        <p
+                          style="font-style: italic;"
+                        >
+                           No activity to display
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -717,7 +709,7 @@ Object {
                       class="pf-l-grid pf-m-gutter"
                     >
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -738,7 +730,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -754,7 +746,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -770,7 +762,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -786,7 +778,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -802,7 +794,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -818,7 +810,7 @@ Object {
                         </div>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                       >
                         <div
                           class="pf-c-content"
@@ -842,7 +834,6 @@ Object {
         </div>
       </section>
     </div>
-    <div />
     <div />
     <div />
     <div />
@@ -986,7 +977,7 @@ Object {
                     class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-l-grid__item"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
                       style="margin-bottom: 1rem;"
                     >
                       <b
@@ -994,52 +985,105 @@ Object {
                       />
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
                     >
                       <div
-                        class="pf-c-content"
+                        class="pf-l-grid pf-m-gutter"
                       >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
+                        <div
+                          class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
                         >
-                          Company
-                        </h6>
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h6
+                              class=""
+                              data-pf-content="true"
+                              style="margin-bottom: 0.1rem;"
+                            >
+                              Company
+                            </h6>
+                          </div>
+                        </div>
+                        <div
+                          class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h6
+                              class=""
+                              data-pf-content="true"
+                              style="margin-bottom: 0.1rem;"
+                            >
+                              Project
+                            </h6>
+                          </div>
+                        </div>
+                        <div
+                          class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h6
+                              class=""
+                              data-pf-content="true"
+                              style="margin-bottom: 0.1rem;"
+                            >
+                              Location
+                            </h6>
+                          </div>
+                        </div>
+                        <div
+                          class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h6
+                              class=""
+                              data-pf-content="true"
+                              style="margin-bottom: 0.1rem;"
+                            >
+                              Start Date
+                            </h6>
+                          </div>
+                        </div>
+                        <div
+                          class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h6
+                              class=""
+                              data-pf-content="true"
+                              style="margin-bottom: 0.1rem;"
+                            >
+                              End Date
+                            </h6>
+                          </div>
+                        </div>
+                        <div
+                          class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h6
+                              class=""
+                              data-pf-content="true"
+                              style="margin-bottom: 0.1rem;"
+                            >
+                              Created By
+                            </h6>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
-                    >
-                      <div
-                        class="pf-c-content"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Project
-                        </h6>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-3-col"
-                    >
-                      <div
-                        class="pf-c-content"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Location
-                        </h6>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1056,90 +1100,13 @@ Object {
                         />
                       </div>
                     </div>
-                    <div
-                      class="pf-l-grid__item pf-m-3-col"
-                    >
-                      <div
-                        class="pf-c-content"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Start Date
-                        </h6>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-3-col"
-                    >
-                      <div
-                        class="pf-c-content"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          End Date
-                        </h6>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-3-col"
-                    >
-                      <div
-                        class="pf-c-content"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Created By
-                        </h6>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </article>
             </div>
             <div
               class="pf-l-grid__item pf-m-12-col"
-            >
-              <article
-                class="pf-c-card pf-m-compact"
-                style="padding: 1rem;"
-              >
-                <div
-                  class="pf-c-card__title"
-                >
-                  <div
-                    class="pf-l-level"
-                  >
-                    <div>
-                      <h3
-                        class="pf-c-title pf-m-lg"
-                        style="font-weight: normal;"
-                      >
-                        System Status
-                          
-                        <div />
-                      </h3>
-                    </div>
-                    <div />
-                  </div>
-                </div>
-                <div
-                  class="pf-c-card__body"
-                >
-                  <div
-                    class="pf-l-grid"
-                  />
-                </div>
-              </article>
-            </div>
+            />
             <div
               class="pf-l-grid__item pf-m-12-col"
             >
@@ -1173,7 +1140,7 @@ Object {
                     class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
                     >
                       <div
                         class="pf-c-content"
@@ -1188,7 +1155,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
                     >
                       <div
                         class="pf-c-content"
@@ -1203,7 +1170,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-4-col"
+                      class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
                     >
                       <div
                         class="pf-c-content"
@@ -1254,7 +1221,7 @@ Object {
                     class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1275,7 +1242,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1291,7 +1258,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1307,7 +1274,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1323,7 +1290,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1339,7 +1306,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1355,7 +1322,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1405,7 +1372,17 @@ Object {
                 >
                   <div
                     class="pf-l-grid pf-m-gutter"
-                  />
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      <p
+                        style="font-style: italic;"
+                      >
+                         No users have been added to this engagement 
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </article>
             </div>
@@ -1443,7 +1420,13 @@ Object {
                   >
                     <div
                       class="pf-l-grid__item pf-m-12-col"
-                    />
+                    >
+                      <p
+                        style="font-style: italic;"
+                      >
+                         No activity to display
+                      </p>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -1563,7 +1546,7 @@ Object {
                     class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1584,7 +1567,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1600,7 +1583,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1616,7 +1599,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1632,7 +1615,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1648,7 +1631,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"
@@ -1664,7 +1647,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
                     >
                       <div
                         class="pf-c-content"

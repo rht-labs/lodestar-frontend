@@ -71,53 +71,58 @@ export function EngagementSummaryCard({
         title="Engagement Summary"
       >
         <Grid hasGutter>
-          <GridItem style={{ marginBottom: '1rem' }}>
+          <GridItem md={12} lg={12} style={{ marginBottom: '1rem' }}>
             <EngagementStatusText status={status} />
           </GridItem>
-          <GridItem span={3}>
-            <TitledDataPoint title="Company">
-              {currentEngagement?.customer_name}
-            </TitledDataPoint>
+          <GridItem md={12} lg={6}>
+            <Grid hasGutter>
+              <GridItem md={6} lg={4}>
+                <TitledDataPoint title="Company">
+                  {currentEngagement?.customer_name}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={4}>
+                <TitledDataPoint title="Project">
+                  {currentEngagement?.project_name}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={4}>
+                <TitledDataPoint title="Location">
+                  {currentEngagement?.location}
+                </TitledDataPoint>
+              </GridItem>
+
+              <GridItem md={6} lg={4}>
+                <TitledDataPoint title="Start Date">
+                  {currentEngagement?.start_date
+                    ? formatDate(currentEngagement?.start_date, 'MMM dd, yyyy')
+                    : null}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={4}>
+                <TitledDataPoint title="End Date">
+                  {currentEngagement?.end_date
+                    ? formatDate(currentEngagement?.end_date, 'MMM dd, yyyy')
+                    : null}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={4}>
+                <TitledDataPoint title="Created By">
+                  <DisplayCreatedByName
+                    userFromServer={
+                      currentEngagement?.creation_details?.created_by_user
+                    }
+                    lastUpdatedBy={currentEngagement?.last_update_by_name}
+                  />
+                </TitledDataPoint>
+              </GridItem>
+            </Grid>
           </GridItem>
-          <GridItem span={3}>
-            <TitledDataPoint title="Project">
-              {currentEngagement?.project_name}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem span={3}>
-            <TitledDataPoint title="Location">
-              {currentEngagement?.location}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem span={3}>
+          <GridItem md={12} lg={4}>
             <TitledDataPoint title="Description">
               <span style={{ whiteSpace: 'pre-line' }}>
                 {currentEngagement?.description}
               </span>
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem span={3}>
-            <TitledDataPoint title="Start Date">
-              {currentEngagement?.start_date
-                ? formatDate(currentEngagement?.start_date, 'MMM dd, yyyy')
-                : null}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem span={3}>
-            <TitledDataPoint title="End Date">
-              {currentEngagement?.end_date
-                ? formatDate(currentEngagement?.end_date, 'MMM dd, yyyy')
-                : null}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem span={3}>
-            <TitledDataPoint title="Created By">
-              <DisplayCreatedByName
-                userFromServer={
-                  currentEngagement?.creation_details?.created_by_user
-                }
-                lastUpdatedBy={currentEngagement?.last_update_by_name}
-              />
             </TitledDataPoint>
           </GridItem>
         </Grid>

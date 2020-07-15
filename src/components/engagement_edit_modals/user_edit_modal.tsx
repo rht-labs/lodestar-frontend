@@ -20,7 +20,7 @@ import {
 import {
   PlusCircleIcon,
   ErrorCircleOIcon,
-  CubesIcon,
+  UsersIcon,
 } from '@patternfly/react-icons';
 import { Feature } from '../../components/feature';
 import { APP_FEATURES } from '../../common/app_features';
@@ -76,12 +76,12 @@ export function UserEditModal({
         <div>
           {!engagement.engagement_users.length ? (
             <EmptyState>
-              <EmptyStateIcon icon={CubesIcon} />
+              <EmptyStateIcon icon={UsersIcon} />
               <Title headingLevel="h4" size="lg">
                 No Users Added
               </Title>
               <EmptyStateBody>
-                <p>No users have been added to this engagement's yet.</p>
+                <p>No users have been added to this engagement</p>
                 <p>
                   Select the 'add user' button below, to begin adding users.
                 </p>

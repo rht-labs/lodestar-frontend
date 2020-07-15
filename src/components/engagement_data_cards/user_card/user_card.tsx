@@ -51,11 +51,18 @@ export function UserCard({
 }
 
 const UserGrid = ({ engagement }: { engagement: Engagement }) => {
+  const hasAnyUsers= (engagement?.engagement_users.length > 0);
+
   return (
     <>
-      {engagement?.engagement_users?.map((user, i) => (
-        <UserTile key={i} user={user} />
-      ))}
+      { hasAnyUsers
+        ? engagement?.engagement_users?.map((user, i) => (
+            <UserTile key={i} user={user} />
+          ))
+        : <GridItem span={12}>
+            <p style={{fontStyle: 'italic'}}> No users have been added to this engagement </p>
+          </GridItem>
+      }
     </>
   );
 };
@@ -70,7 +77,7 @@ const UserTile = ({
   };
 }) => {
   return (
-    <GridItem span={3}>
+    <GridItem lg={3} md={6} sm={12}>
       <TitledDataPoint title={`${user.first_name} ${user.last_name}`}>
         {user.email}
       </TitledDataPoint>

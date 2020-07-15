@@ -20,7 +20,7 @@ Object {
             >
               <button
                 aria-controls="page-sidebar"
-                aria-expanded="true"
+                aria-expanded="false"
                 aria-label="Global navigation"
                 class="pf-c-button pf-m-plain"
                 data-ouia-component-type="PF4/Button"
@@ -154,6 +154,7 @@ Object {
                         class="pf-c-button pf-m-plain"
                         data-ouia-component-type="PF4/Button"
                         data-ouia-safe="true"
+                        title="Notifications"
                         type="button"
                       >
                         <span
@@ -244,7 +245,7 @@ Object {
           </div>
         </header>
         <div
-          class="pf-c-page__sidebar pf-m-expanded"
+          class="pf-c-page__sidebar pf-m-collapsed"
           id="page-sidebar"
         >
           <div
@@ -565,7 +566,7 @@ Object {
           >
             <button
               aria-controls="page-sidebar"
-              aria-expanded="true"
+              aria-expanded="false"
               aria-label="Global navigation"
               class="pf-c-button pf-m-plain"
               data-ouia-component-type="PF4/Button"
@@ -699,6 +700,7 @@ Object {
                       class="pf-c-button pf-m-plain"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
+                      title="Notifications"
                       type="button"
                     >
                       <span
@@ -789,7 +791,7 @@ Object {
         </div>
       </header>
       <div
-        class="pf-c-page__sidebar pf-m-expanded"
+        class="pf-c-page__sidebar pf-m-collapsed"
         id="page-sidebar"
       >
         <div

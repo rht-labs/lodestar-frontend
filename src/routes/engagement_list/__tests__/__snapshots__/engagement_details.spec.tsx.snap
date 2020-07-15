@@ -9,7 +9,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -30,7 +30,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div
             class="pf-l-flex"
@@ -105,7 +105,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div />
         </div>
@@ -117,7 +117,7 @@ Object {
       class="pf-l-grid pf-m-gutter"
     >
       <div
-        class="pf-l-grid__item pf-m-12-col"
+        class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
       >
         <div
           class="pf-l-grid pf-m-gutter"
@@ -138,7 +138,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div
           class="pf-l-flex"
@@ -213,7 +213,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div />
       </div>
@@ -282,7 +282,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -303,7 +303,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div
             class="pf-l-flex"
@@ -378,7 +378,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div />
         </div>
@@ -390,7 +390,7 @@ Object {
       class="pf-l-grid pf-m-gutter"
     >
       <div
-        class="pf-l-grid__item pf-m-12-col"
+        class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
       >
         <div
           class="pf-l-grid pf-m-gutter"
@@ -411,7 +411,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div
           class="pf-l-flex"
@@ -486,7 +486,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div />
       </div>
@@ -555,7 +555,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -576,7 +576,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div
             class="pf-l-flex"
@@ -651,7 +651,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div />
         </div>
@@ -663,7 +663,7 @@ Object {
       class="pf-l-grid pf-m-gutter"
     >
       <div
-        class="pf-l-grid__item pf-m-12-col"
+        class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
       >
         <div
           class="pf-l-grid pf-m-gutter"
@@ -684,7 +684,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div
           class="pf-l-flex"
@@ -759,7 +759,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div />
       </div>
