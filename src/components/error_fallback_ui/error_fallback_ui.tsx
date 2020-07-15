@@ -26,8 +26,14 @@ export const ErrorFallbackUI = () => {
             </p>
             <p>
               If that doesn't work, please send an email to&nbsp;
-              <a href={`mailto:${appConfig.supportEmailAddress}`}>
-                {appConfig.supportEmailAddress}
+              <a
+                href={
+                  appConfig?.supportEmailAddress
+                    ? `mailto:${appConfig?.supportEmailAddress}`
+                    : '#'
+                }
+              >
+                {appConfig?.supportEmailAddress ?? ''}
               </a>
               .
             </p>

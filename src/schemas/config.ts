@@ -9,8 +9,9 @@ export interface Config {
   disableLaunch: boolean;
   loggerType: string;
   logLevel: LogVerbosity;
+  supportEmailAddress: string;
 }
-export class Config {
+export class Config implements Config {
   constructor({
     baseUrl,
     clientId,

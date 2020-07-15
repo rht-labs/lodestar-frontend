@@ -37,7 +37,10 @@ Object {
             <div
               class="pf-c-empty-state__body"
             >
-              Sorry, your account has not yet been granted access to this system. Please contact the Open Innovation Labs SRE team to resolve this.
+              Sorry, your account has not yet been granted access to this system. Please send an email to 
+              <a
+                href="mailto:undefined"
+              />
             </div>
           </div>
         </div>
@@ -77,7 +80,10 @@ Object {
           <div
             class="pf-c-empty-state__body"
           >
-            Sorry, your account has not yet been granted access to this system. Please contact the Open Innovation Labs SRE team to resolve this.
+            Sorry, your account has not yet been granted access to this system. Please send an email to 
+            <a
+              href="mailto:undefined"
+            />
           </div>
         </div>
       </div>
