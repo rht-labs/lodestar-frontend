@@ -13,7 +13,7 @@ describe('new engagement', () => {
   it('creates a new engagement', () => {
 
     cy.server();
-    cy.route({method: 'POST', url: 'engagements'}).as('createCheck');
+    cy.route({method: 'POST', url: 'engagements'}).as('createEngagement');
 
     cy.visit('http://localhost:3000');
     cy.request('/app');
@@ -35,45 +35,22 @@ describe('new engagement', () => {
         .click();
 
     cy.get('[data-cy=new_engagement_name]')
-        .type('cypressio 3')
+        .type('cypressio4')
         .get('[data-cy=createNewEngagement]')
         .click();
 
-    // cy.wait('@createCheck').should('have.property', 'status', 201);
-    //
-    // cy.get('li > .pf-c-alert')
-    //     .contains('Your engagement has been successfully created');
+    cy.wait('@createEngagement').should('have.property', 'status', 201);
+
+    cy.get('li > .pf-c-alert')
+        .contains('Your engagement has been successfully created');
+
+    cy.get('[data-cy=launch_button]').should('be.disabled');
 
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
-
-    //
-    // cy.contains('Users').click();
-    //
-    // cy.contains('Add User').click();
-    //
-    // cy.get('input[name=last-name]')
-    //   .type('Lowry')
-    //   .get('input[name=first-name]')
-    //   .type('Kyle')
-    //   .get('input[name=email]')
-    //   .type('lowry@redhat.com')
-    //   .get('[aria-label="User Role"]')
-    //   .select('Admin')
-    //   .should('have.value', 'admin');
-    //
-    // cy.get('[data-cy=engagement-save]').click();
-    //
-    // cy.wait('@saveCheck').should('have.property', 'status', 200);
-    //
-    // cy.contains('Basic Information').click();
-    // cy.get('[data-cy=launch]').click();
-    // cy.wait('@launchCheck').should('have.property', 'status', 200);
-    //
-    // cy.get('[data-cy=launch]').should('be.disabled');
   });
 
-  it.skip('Edit engagement summary', () => {
+  it('Edit engagement summary', () => {
     cy.get('button[data-cy=edit_summary_card]')
         .click();
 
@@ -85,11 +62,21 @@ describe('new engagement', () => {
         .type('Katmandu, Nepal')
         .get('input[data-cy=start_date_input]')
         .type('2020-10-25')
+        .should('have.value', '2020-10-25')
         .get('input[data-cy=end_date_input]')
-        .type('2020-12-25');
+        .type('2020-12-25')
+        .should('have.value', '2020-12-25');
+
+    cy.get('textarea[data-cy=description_field]')
+        .click('bottomLeft');
+
+    cy.get('[data-cy=retirement_date_input]')
+        .should('have.value', '2021-01-24');
 
     cy.get('button[data-cy=save_summary_card]')
         .click();
+
+    cy.get('[data-cy=launch_button]').should('be.disabled');
 
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
@@ -121,6 +108,8 @@ describe('new engagement', () => {
 
     cy.get('[data-cy=save_point_of_contact]')
         .click();
+
+    cy.get('[data-cy=launch_button]').should('be.disabled');
 
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
@@ -156,10 +145,15 @@ describe('new engagement', () => {
 
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
-
   });
 
-  it('Edit engagement users', () => {
+  it.skip('Edit engagement users', () => {
+    cy.server();
+    cy.route({
+      method: 'PUT',
+      url: 'engagements/customers/e2e/projects/cypressio',
+    }).as('saveCheck');
+
     cy.get('button[data-cy=edit_user_button]')
         .click();
     cy.get('button[data-cy=add_new_user]')
@@ -182,5 +176,22 @@ describe('new engagement', () => {
 
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
+  });
+
+  it.skip('Launch engagement', () => {
+    cy.server();
+    cy.route({
+      method: 'PUT',
+      url: 'engagements/customers/NASA/projects/cypressio4',
+    }).as('saveEngagement');
+    cy.route({ method: 'PUT', url: 'engagements/launch' }).as('launchEngagement');
+
+    cy.get('[data-cy=launch_button]')
+        .click();
+
+    cy.wait('@launchEngagement').should('have.property', 'status', 200);
+
+    cy.get('.pf-c-alert__action > .pf-c-button')
+        .contains('You have successfully launched your engagement!')
   });
 });

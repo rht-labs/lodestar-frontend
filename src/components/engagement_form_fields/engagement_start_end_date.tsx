@@ -168,6 +168,7 @@ export function EngagementStartEndDateFormField({
           <TextInput
             id="archive_date"
             isDisabled={!hasFeature(APP_FEATURES.writer)}
+            data-cy={'retirement_date_input'}
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
