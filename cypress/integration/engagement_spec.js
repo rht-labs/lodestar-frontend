@@ -73,7 +73,7 @@ describe('new engagement', () => {
     // cy.get('[data-cy=launch]').should('be.disabled');
   });
 
-  it('Edit engagement summary', () => {
+  it.skip('Edit engagement summary', () => {
     cy.get('button[data-cy=edit_summary_card]')
         .click();
 
@@ -95,7 +95,7 @@ describe('new engagement', () => {
         .click();
   });
 
-  it('Edit points of contact', () => {
+  it.skip('Edit points of contact', () => {
 
     cy.get('[data-cy="points_of_contact"]')
         .click();
@@ -127,7 +127,7 @@ describe('new engagement', () => {
   });
 
 
-  it('Edit hosting environment', () => {
+  it.skip('Edit hosting environment', () => {
 
     cy.get('[data-cy="hosting_env_button"]')
         .click();
@@ -157,5 +157,30 @@ describe('new engagement', () => {
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
 
-  })
+  });
+
+  it('Edit engagement users', () => {
+    cy.get('button[data-cy=edit_user_button]')
+        .click();
+    cy.get('button[data-cy=add_new_user]')
+        .click();
+
+    cy.get('[data-cy=input_user_firstname]')
+        .clear()
+        .type('Sara')
+        .get('input[data-cy=input_user_lastname]')
+        .clear()
+        .type('Kim')
+        .get('input[data-cy=input_user_email]')
+        .type('sara.kim@test.net')
+        .get('#user_role_dropdown')
+        .select('developer', { force: true })
+        .should('have.value', 'developer');
+
+    cy.get('button[data-cy=save_users]')
+        .click();
+
+    cy.get('.pf-c-alert__action > .pf-c-button')
+        .click();
+  });
 });
