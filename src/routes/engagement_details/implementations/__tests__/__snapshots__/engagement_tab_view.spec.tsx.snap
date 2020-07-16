@@ -265,6 +265,9 @@ Object {
                           >
                             Description
                           </h6>
+                          <span
+                            style="white-space: pre-line;"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1120,6 +1123,9 @@ Object {
                         >
                           Description
                         </h6>
+                        <span
+                          style="white-space: pre-line;"
+                        />
                       </div>
                     </div>
                   </div>
