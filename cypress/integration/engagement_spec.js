@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Login', () => {
   it('sso login', () => {
     cy.login(
@@ -39,10 +41,10 @@ describe('new engagement', () => {
         .get('[data-cy=createNewEngagement]')
         .click();
 
-    cy.wait('@createEngagement').should('have.property', 'status', 201);
-
-    cy.get('li > .pf-c-alert')
-        .contains('Your engagement has been successfully created');
+    // cy.wait('@createEngagement').should('have.property', 'status', 201);
+    //
+    // cy.get('li > .pf-c-alert')
+    //     .contains('Your engagement has been successfully created');
 
     cy.get('[data-cy=launch_button]').should('be.disabled');
 
@@ -51,12 +53,12 @@ describe('new engagement', () => {
   });
 
   it('Edit engagement summary', () => {
-    cy.get('button[data-cy=edit_summary_card]')
+    cy.get('[data-cy=edit_summary_card]')
         .click();
 
     cy.get('textarea[data-cy=description_field]')
         .clear()
-        .type('Herp derpsum derp herpy le nerpy terp jerpy derpy.')
+        .type('Test description')
         .get('input[data-cy=location_field]')
         .clear()
         .type('Katmandu, Nepal')
@@ -78,11 +80,14 @@ describe('new engagement', () => {
 
     cy.get('[data-cy=launch_button]').should('be.disabled');
 
+    // cy.get('li > .pf-c-alert')
+    //     .contains('Your updates have been successfully saved.');
+
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
   });
 
-  it.skip('Edit points of contact', () => {
+  it('Edit points of contact', () => {
 
     cy.get('[data-cy="points_of_contact"]')
         .click();
@@ -116,7 +121,7 @@ describe('new engagement', () => {
   });
 
 
-  it.skip('Edit hosting environment', () => {
+  it('Edit hosting environment', () => {
 
     cy.get('[data-cy="hosting_env_button"]')
         .click();
@@ -147,7 +152,7 @@ describe('new engagement', () => {
         .click();
   });
 
-  it.skip('Edit engagement users', () => {
+  it('Edit engagement users', () => {
     cy.server();
     cy.route({
       method: 'PUT',
@@ -178,7 +183,7 @@ describe('new engagement', () => {
         .click();
   });
 
-  it.skip('Launch engagement', () => {
+  it('Launch engagement', () => {
     cy.server();
     cy.route({
       method: 'PUT',
