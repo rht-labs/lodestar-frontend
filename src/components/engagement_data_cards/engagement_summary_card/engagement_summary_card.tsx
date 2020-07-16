@@ -41,7 +41,6 @@ export function EngagementSummaryCard({
     'project_name',
   ];
   const status = getEngagementStatus(currentEngagement);
-
   return (
     <>
       <EngagementSummaryEditModal
