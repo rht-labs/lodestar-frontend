@@ -23,8 +23,8 @@ export function EngagementFilterBar({
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
   return (
-    <Flex justifyContent={{ default: 'justifyContentFlexStart' }}>
-      <Flex style={{ marginTop: '2rem' }}>
+    <Flex justifyContent={{ default: 'justifyContentFlexStart' }} >
+      <Flex style={{ marginTop: '2rem' }} direction={{ default: 'column', md: 'row' }}>
         <FlexItem grow={{ default: 'grow' }}>
           <InputGroup>
             <Button
