@@ -16,11 +16,10 @@ describe('Create an Engagement', () => {
 
     cy.visit('/app');
 
-    cy.contains('Engagements').click();
+  
+    cy.contains('Create New').click();
 
-    cy.contains('+').click();
-
-    cy.get('[data-cy=new_customer_name]')
+    cy.get('[data-cy=customer-name]')
       .type('e2e')
       .get('[data-cy=new_engagement_name]')
       .type('cypressio')
