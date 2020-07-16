@@ -25,6 +25,7 @@ export function LocationFormField(props: LocationFormFieldProps) {
         placeholder="e.g. Pasadena, CA"
         value={props.engagement.location || ''}
         onChange={e => props.onChange('location', e)}
+        data-cy={'location_field'}
       />
     </FormGroup>
   );

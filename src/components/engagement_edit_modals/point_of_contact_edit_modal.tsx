@@ -52,7 +52,9 @@ export function PointOfContactEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave}>Save</Button>
+            <Button onClick={onSave} data-cy={'save_point_of_contact'}>
+              Save
+            </Button>
           </div>
         }
       >
@@ -91,6 +93,7 @@ export function PointOfContactEditModal({
                 placeholder="Full Name"
                 type="text"
                 value={engagement.engagement_lead_name || ''}
+                data-cy={'engagement_lead_name'}
               />
               <InputGroupText
                 style={input}
@@ -112,6 +115,7 @@ export function PointOfContactEditModal({
                 placeholder="Email Address"
                 type="email"
                 value={engagement.engagement_lead_email || ''}
+                data-cy={'engagement_lead_email'}
               />
             </InputGroup>
           </FormGroup>
@@ -148,6 +152,7 @@ export function PointOfContactEditModal({
                 placeholder="Full Name"
                 type="text"
                 value={engagement.technical_lead_name || ''}
+                data-cy={'tech_lead_name'}
               />
               <InputGroupText
                 style={input}
@@ -169,6 +174,7 @@ export function PointOfContactEditModal({
                 placeholder="Email Address"
                 type="email"
                 value={engagement.technical_lead_email || ''}
+                data-cy={'tech_lead_email'}
               />
             </InputGroup>
           </FormGroup>
@@ -205,6 +211,7 @@ export function PointOfContactEditModal({
                 type="text"
                 placeholder="Full Name"
                 value={engagement.customer_contact_name || ''}
+                data-cy={'customer_contact_name'}
               />
               <InputGroupText
                 style={input}
@@ -226,6 +233,7 @@ export function PointOfContactEditModal({
                 placeholder="Email Address"
                 type="email"
                 value={engagement.customer_contact_email || ''}
+                data-cy={'customer_contact_email'}
               />
             </InputGroup>
           </FormGroup>

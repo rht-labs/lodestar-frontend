@@ -38,6 +38,7 @@ export function UserCard({
           <EditButton
             onClick={() => requestOpen(USER_EDIT_MODAL_KEY)}
             text={'Edit'}
+            dataCy={'edit_user_button'}
           />
         )}
         title="Engagement Users"

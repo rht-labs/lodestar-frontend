@@ -68,6 +68,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="company_label"
                   >
                     <h6
                       class=""
@@ -89,6 +90,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="project_label"
                   >
                     <h6
                       class=""
@@ -110,6 +112,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="location_label"
                   >
                     <h6
                       class=""
@@ -131,6 +134,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="start_date_label"
                   >
                     <h6
                       class=""
@@ -152,6 +156,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="end_date_label"
                   >
                     <h6
                       class=""
@@ -173,6 +178,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="created_by_label"
                   >
                     <h6
                       class=""
@@ -191,6 +197,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="description_label"
               >
                 <h6
                   class=""
@@ -199,11 +206,12 @@ Object {
                 >
                   Description
                 </h6>
-                <span
-                  style="white-space: pre-line;"
+                <p
+                  class=""
+                  data-pf-content="true"
                 >
                   It's rocket science
-                </span>
+                </p>
               </div>
             </div>
           </div>
@@ -276,6 +284,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="company_label"
                 >
                   <h6
                     class=""
@@ -297,6 +306,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="project_label"
                 >
                   <h6
                     class=""
@@ -318,6 +328,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="location_label"
                 >
                   <h6
                     class=""
@@ -339,6 +350,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="start_date_label"
                 >
                   <h6
                     class=""
@@ -360,6 +372,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="end_date_label"
                 >
                   <h6
                     class=""
@@ -381,6 +394,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="created_by_label"
                 >
                   <h6
                     class=""
@@ -399,6 +413,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="description_label"
             >
               <h6
                 class=""
@@ -407,11 +422,12 @@ Object {
               >
                 Description
               </h6>
-              <span
-                style="white-space: pre-line;"
+              <p
+                class=""
+                data-pf-content="true"
               >
                 It's rocket science
-              </span>
+              </p>
             </div>
           </div>
         </div>
@@ -524,6 +540,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="hosting_type"
               >
                 <h6
                   class=""
@@ -545,6 +562,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_provider"
               >
                 <h6
                   class=""
@@ -561,6 +579,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="oc_version"
               >
                 <h6
                   class=""
@@ -577,6 +596,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="storage_size"
               >
                 <h6
                   class=""
@@ -593,6 +613,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_region"
               >
                 <h6
                   class=""
@@ -609,6 +630,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cluster_size"
               >
                 <h6
                   class=""
@@ -625,6 +647,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="sub_domain"
               >
                 <h6
                   class=""
@@ -691,6 +714,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="hosting_type"
             >
               <h6
                 class=""
@@ -712,6 +736,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_provider"
             >
               <h6
                 class=""
@@ -728,6 +753,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="oc_version"
             >
               <h6
                 class=""
@@ -744,6 +770,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="storage_size"
             >
               <h6
                 class=""
@@ -760,6 +787,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_region"
             >
               <h6
                 class=""
@@ -776,6 +804,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cluster_size"
             >
               <h6
                 class=""
@@ -792,6 +821,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="sub_domain"
             >
               <h6
                 class=""
