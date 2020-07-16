@@ -47,7 +47,11 @@ export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
 function SubsystemStatuses({ status }: { status: ClusterStatus }) {
   return (
     <Grid>
-      {!status?.subsystems?.length && 'No systems are reporting statuses'}
+      {!status?.subsystems?.length && (
+        <span style={{ fontStyle: 'italic' }}>
+          No systems are reporting statuses
+        </span>
+      )}
       {status?.subsystems.map(subsystem => (
         <GridItem key={subsystem.name} span={2}>
           <SubsystemDetails subsystem={subsystem} />
