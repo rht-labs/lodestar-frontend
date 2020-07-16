@@ -11,7 +11,7 @@ describe('new engagement', () => {
     cy.server();
     cy.route({method: 'POST', url: 'engagements'}).as('createEngagement');
 
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.request('/app');
 
     cy.get('[data-cy=get_started_button]')
