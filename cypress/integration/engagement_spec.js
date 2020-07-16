@@ -44,80 +44,9 @@ describe('new engagement', () => {
     // cy.get('li > .pf-c-alert')
     //     .contains('Your engagement has been successfully created');
 
-    // Edit Engagement Summary
-    cy.get('button[data-cy=edit_summary_card]')
-        .click();
-
-    cy.get('textarea[data-cy=description_field]')
-        .type('Herp derpsum derp herpy le nerpy terp jerpy derpy.')
-        .get('input[data-cy=location_field]')
-        .type('Katmandu, Nepal')
-        .get('input[data-cy=start_date_input]')
-        .type('2020-10-25')
-        .get('input[data-cy=end_date_input]')
-        .type('2020-12-25');
-
-    cy.get('button[data-cy=save_summary_card]')
-        .click();
-    cy.get('li > .pf-c-alert')
-        .contains('Your updates have been successfully saved.')
-
     cy.get('.pf-c-alert__action > .pf-c-button')
         .click();
 
-    // Edit points of contact
-    cy.get('[data-cy="points_of_contact"]')
-        .click();
-
-    cy.get('[data-cy="engagement_lead_name"]')
-        .type('Test EL')
-        .get('[data-cy=engagement_lead_email]')
-        .type('test.el@redhat.com')
-        .get('[data-cy=tech_lead_name]')
-        .type('Test tech')
-        .get('[data-cy=tech_lead_email]')
-        .type('test.tech@redhat.com')
-        .get('[data-cy=customer_contact_name]')
-        .type('Test Customer')
-        .get('[data-cy=customer_contact_email]')
-        .type('test@customer.com');
-
-    cy.get('[data-cy=save_point_of_contact]')
-        .click();
-
-    // Edit points of contact
-    cy.get('[data-cy="points_of_contact"]')
-        .click();
-
-    cy.get('[data-cy="engagement_lead_name"]')
-        .type('Test EL')
-        .get('[data-cy=engagement_lead_email]')
-        .type('test.el@redhat.com')
-        .get('[data-cy=tech_lead_name]')
-        .type('Test tech')
-        .get('[data-cy=tech_lead_email]')
-        .type('test.tech@redhat.com')
-        .get('[data-cy=customer_contact_name]')
-        .type('Test Customer')
-        .get('[data-cy=customer_contact_email]')
-        .type('test@customer.com');
-
-    cy.get('[data-cy=save_point_of_contact]')
-        .click();
-
-    // cy.contains('OpenShift Cluster').click();
-    //
-    // cy.get('[aria-label="Cloud provider region"]')
-    //   .select('us-east-1')
-    //   .should('have.value', 'us-east-1')
-    //   .get('[aria-label="OpenShift Version"]')
-    //   .select('v4.4')
-    //   .should('have.value', '4.4.3')
-    //   .get('input[name=ocp_sub_domain]')
-    //   .should('have.value', 'cypressi')
-    //   .get('[aria-label="Persistent Storage Needs"]')
-    //   .select('50GB')
-    //   .should('have.value', '50G');
     //
     // cy.contains('Users').click();
     //
@@ -143,4 +72,90 @@ describe('new engagement', () => {
     //
     // cy.get('[data-cy=launch]').should('be.disabled');
   });
+
+  it('Edit engagement summary', () => {
+    cy.get('button[data-cy=edit_summary_card]')
+        .click();
+
+    cy.get('textarea[data-cy=description_field]')
+        .clear()
+        .type('Herp derpsum derp herpy le nerpy terp jerpy derpy.')
+        .get('input[data-cy=location_field]')
+        .clear()
+        .type('Katmandu, Nepal')
+        .get('input[data-cy=start_date_input]')
+        .type('2020-10-25')
+        .get('input[data-cy=end_date_input]')
+        .type('2020-12-25');
+
+    cy.get('button[data-cy=save_summary_card]')
+        .click();
+
+    cy.get('.pf-c-alert__action > .pf-c-button')
+        .click();
+  });
+
+  it('Edit points of contact', () => {
+
+    cy.get('[data-cy="points_of_contact"]')
+        .click();
+
+    cy.get('[data-cy="engagement_lead_name"]')
+        .clear()
+        .type('Test EL')
+        .get('[data-cy=engagement_lead_email]')
+        .clear()
+        .type('test.el@redhat.com')
+        .get('[data-cy=tech_lead_name]')
+        .clear()
+        .type('Test tech')
+        .get('[data-cy=tech_lead_email]')
+        .clear()
+        .type('test.tech@redhat.com')
+        .get('[data-cy=customer_contact_name]')
+        .clear()
+        .type('Test Customer')
+        .get('[data-cy=customer_contact_email]')
+        .clear()
+        .type('test@customer.com');
+
+    cy.get('[data-cy=save_point_of_contact]')
+        .click();
+
+    cy.get('.pf-c-alert__action > .pf-c-button')
+        .click();
+  });
+
+
+  it('Edit hosting environment', () => {
+
+    cy.get('[data-cy="hosting_env_button"]')
+        .click();
+
+    cy.get('#cloud_provider_dropdown')
+        .select('AWS',{ force: true })
+        .should('have.value', 'ec2')
+        .get('#cloud_provider_region_dropdown')
+        .select('eu-west-3',{ force: true })
+        .should('have.value', 'eu-west-3')
+        .get('#oc_version_dropdown')
+        .select('v4.1',{ force: true })
+        .should('have.value', '4.1.41')
+        .get('[data-cy=desired_subdomain_input]')
+        .clear()
+        .type('cypress_test')
+        .get('#persistent_storage_dropdown')
+        .select('50G',{ force: true })
+        .should('have.value', '50G')
+        .get('#cluster_size_dropdown')
+        .select('Small', { force: true })
+        .should('have.value', 'small');
+
+    cy.get('[data-cy=hosting_env_save]')
+        .click();
+
+    cy.get('.pf-c-alert__action > .pf-c-button')
+        .click();
+
+  })
 });

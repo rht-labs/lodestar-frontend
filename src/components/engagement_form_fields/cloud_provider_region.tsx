@@ -28,6 +28,7 @@ export function CloudProviderRegionFormField({
     >
       <FormSelect
         aria-label="Cloud provider region"
+        id={"cloud_provider_region_dropdown"}
         isDisabled={
           availableProviderRegionOptions?.length === 0 ||
           !hasFeature(APP_FEATURES.writer) ||
@@ -46,6 +47,7 @@ export function CloudProviderRegionFormField({
               key={index}
               value={option.value}
               label={option.label}
+              data-cy={option.value}
             />
           ))
         )}

@@ -25,6 +25,7 @@ export function ClusterSizeFormField({
     <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
       <FormSelect
         isRequired
+        id='cluster_size_dropdown'
         aria-label="Cluster Size"
         value={engagement?.ocp_cluster_size || ''}
         isDisabled={
@@ -43,6 +44,7 @@ export function ClusterSizeFormField({
                 key={index}
                 label={option.label}
                 value={option.value}
+                data-cy={option.label}
               />
             )
           )

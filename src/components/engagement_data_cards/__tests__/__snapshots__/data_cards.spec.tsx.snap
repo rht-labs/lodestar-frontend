@@ -540,6 +540,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="hosting_type"
               >
                 <h6
                   class=""
@@ -561,6 +562,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_provider"
               >
                 <h6
                   class=""
@@ -577,6 +579,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="oc_version"
               >
                 <h6
                   class=""
@@ -593,6 +596,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="storage_size"
               >
                 <h6
                   class=""
@@ -609,6 +613,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_region"
               >
                 <h6
                   class=""
@@ -625,6 +630,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cluster_size"
               >
                 <h6
                   class=""
@@ -641,6 +647,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="sub_domain"
               >
                 <h6
                   class=""
@@ -707,6 +714,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="hosting_type"
             >
               <h6
                 class=""
@@ -728,6 +736,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_provider"
             >
               <h6
                 class=""
@@ -744,6 +753,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="oc_version"
             >
               <h6
                 class=""
@@ -760,6 +770,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="storage_size"
             >
               <h6
                 class=""
@@ -776,6 +787,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_region"
             >
               <h6
                 class=""
@@ -792,6 +804,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cluster_size"
             >
               <h6
                 class=""
@@ -808,6 +821,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="sub_domain"
             >
               <h6
                 class=""

@@ -29,6 +29,7 @@ export function OpenShiftVersionFormField({
     >
       <FormSelect
         aria-label="OpenShift Version"
+        id={'oc_version_dropdown'}
         value={engagement?.ocp_version || ''}
         isDisabled={
           formOptions?.openshift_options?.versions?.options?.length === 1 ||
@@ -47,6 +48,7 @@ export function OpenShiftVersionFormField({
                 key={index}
                 value={option.value}
                 label={option.label}
+                data-cy={option.value}
               />
             )
           )
