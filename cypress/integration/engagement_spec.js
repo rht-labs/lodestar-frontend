@@ -1,19 +1,13 @@
 /// <reference types="cypress" />
 
-describe('Login', () => {
-  it('sso login', () => {
+describe('new engagement', () => {
+
+  it('creates a new engagement', () => {
     cy.login(
         Cypress.env('SSO_URL'),
         Cypress.env('SSO_USER'),
         Cypress.env('SSO_PASSWORD')
     );
-  });
-});
-
-describe('new engagement', () => {
-
-  it('creates a new engagement', () => {
-
     cy.server();
     cy.route({method: 'POST', url: 'engagements'}).as('createEngagement');
 
@@ -33,18 +27,22 @@ describe('new engagement', () => {
 
     cy.get('#customer_dropdown')
         .click()
-        .get('[data-testid=NASA]')
+        .get('[data-testid=e2e]')
         .click();
 
+    const uuid = () => Cypress._.random(0, 1e6);
+    const id = uuid();
+    const testEngagementName = `cypressio_${id}`
+
     cy.get('[data-cy=new_engagement_name]')
-        .type('cypressio4')
+        .type(testEngagementName)
         .get('[data-cy=createNewEngagement]')
         .click();
 
-    // cy.wait('@createEngagement').should('have.property', 'status', 201);
-    //
-    // cy.get('li > .pf-c-alert')
-    //     .contains('Your engagement has been successfully created');
+    cy.wait('@createEngagement').should('have.property', 'status', 201);
+
+    cy.get('li > .pf-c-alert')
+        .contains('Your engagement has been successfully created');
 
     cy.get('[data-cy=launch_button]').should('be.disabled');
 
@@ -53,6 +51,11 @@ describe('new engagement', () => {
   });
 
   it('Edit engagement summary', () => {
+    cy.login(
+        Cypress.env('SSO_URL'),
+        Cypress.env('SSO_USER'),
+        Cypress.env('SSO_PASSWORD')
+    );
     cy.get('[data-cy=edit_summary_card]')
         .click();
 
@@ -88,7 +91,11 @@ describe('new engagement', () => {
   });
 
   it('Edit points of contact', () => {
-
+    cy.login(
+        Cypress.env('SSO_URL'),
+        Cypress.env('SSO_USER'),
+        Cypress.env('SSO_PASSWORD')
+    );
     cy.get('[data-cy="points_of_contact"]')
         .click();
 
@@ -122,7 +129,11 @@ describe('new engagement', () => {
 
 
   it('Edit hosting environment', () => {
-
+    cy.login(
+        Cypress.env('SSO_URL'),
+        Cypress.env('SSO_USER'),
+        Cypress.env('SSO_PASSWORD')
+    );
     cy.get('[data-cy="hosting_env_button"]')
         .click();
 
@@ -153,6 +164,11 @@ describe('new engagement', () => {
   });
 
   it('Edit engagement users', () => {
+    cy.login(
+        Cypress.env('SSO_URL'),
+        Cypress.env('SSO_USER'),
+        Cypress.env('SSO_PASSWORD')
+    );
     cy.server();
     cy.route({
       method: 'PUT',
@@ -184,6 +200,11 @@ describe('new engagement', () => {
   });
 
   it('Launch engagement', () => {
+    cy.login(
+        Cypress.env('SSO_URL'),
+        Cypress.env('SSO_USER'),
+        Cypress.env('SSO_PASSWORD')
+    );
     cy.server();
     cy.route({
       method: 'PUT',
@@ -191,12 +212,15 @@ describe('new engagement', () => {
     }).as('saveEngagement');
     cy.route({ method: 'PUT', url: 'engagements/launch' }).as('launchEngagement');
 
+    cy.get('#nav-toggle')
+        .click();
+
     cy.get('[data-cy=launch_button]')
         .click();
 
     cy.wait('@launchEngagement').should('have.property', 'status', 200);
 
-    cy.get('.pf-c-alert__action > .pf-c-button')
+    cy.get('li > .pf-c-alert > .pf-c-alert__title')
         .contains('You have successfully launched your engagement!')
   });
 });

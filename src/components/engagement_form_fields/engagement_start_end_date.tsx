@@ -185,7 +185,6 @@ export function EngagementStartEndDateFormField({
             }}
             min={getFormattedDate(engagement?.end_date)}
             max={getFormattedDate(getMaxRetirementDate())}
-            data-cy={'retirement_date_input'}
           />
         </InputGroup>
       </FormGroup>
