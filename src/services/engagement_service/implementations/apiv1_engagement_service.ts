@@ -64,8 +64,16 @@ export class Apiv1EngagementService extends EngagementService {
       `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
     );
 
-    console.log(response.headers);
+    return engagement['last_update'] !== response?.headers?.['last-update'];
+  }
 
-    return true;
+  async getEngagementByCustomerAndProjectName(
+    customer_name: string,
+    project_name: string
+  ): Promise<Engagement> {
+    const { data } = await this.axios.get(
+      `/engagements/customers/${customer_name}/projects/${project_name}`
+    );
+    return Apiv1EngagementService.engagementSerializer.deserialize(data);
   }
 }

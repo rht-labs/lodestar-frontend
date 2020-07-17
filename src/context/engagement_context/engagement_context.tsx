@@ -92,6 +92,31 @@ export const EngagementProvider = ({
       payload: getInitialState(currentEngagement),
     });
   }, [currentEngagement, formOptions]);
+
+  const _updateEngagementInPlace = useCallback(
+    engagement => {
+      const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
+        if (
+          engagement?.project_name &&
+          engagement?.customer_name &&
+          engagement?.project_name === comparisonEngagement?.project_name &&
+          engagement?.customer_name === comparisonEngagement?.customer_name
+        ) {
+          return true;
+        }
+        return false;
+      });
+      const oldEngagement = engagements[oldEngagementIndex];
+      if (oldEngagementIndex > -1) {
+        const newEngagements = [...engagements];
+        newEngagements.splice(oldEngagementIndex, 1, engagement);
+        setEngagements(newEngagements);
+      }
+      return oldEngagement;
+    },
+    [engagements]
+  );
+
   const fetchEngagements = useCallback(async () => {
     try {
       feedbackContext.showLoader();
@@ -110,9 +135,17 @@ export const EngagementProvider = ({
     }
   }, [engagementService, feedbackContext]);
 
-  const _refreshEngagementData = useCallback(() => {
-    console.log('refreshed');
-  }, []);
+  const _refreshEngagementData = useCallback(
+    async (engagement: Engagement) => {
+      const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+        engagement?.customer_name,
+        engagement?.project_name
+      );
+      _updateEngagementInPlace(refreshedEngagement);
+      setcurrentEngagement(refreshedEngagement);
+    },
+    [_updateEngagementInPlace, engagementService]
+  );
 
   const createEngagementPoll = (engagement: Engagement): EngagementPoll => {
     return new EngagementPoll(
@@ -122,17 +155,17 @@ export const EngagementProvider = ({
           const hasUpdates = await engagementService.checkHasUpdates(
             engagement
           );
-          console.log(
-            `Does ${engagement?.project_name} have an update? ${
-              hasUpdates ? 'yes' : 'no'
-            }`
-          );
           if (hasUpdates) {
             feedbackContext.showAlert(
               'Uh oh, we have a conflict',
               AlertType.error,
               false,
-              [{ title: 'Refresh', action: () => _refreshEngagementData }]
+              [
+                {
+                  title: 'Refresh',
+                  action: () => _refreshEngagementData(engagement),
+                },
+              ]
             );
           }
         }, 5000)
@@ -219,30 +252,6 @@ export const EngagementProvider = ({
         !currentEngagement?.[field]
     );
   }, [currentEngagement]);
-
-  const _updateEngagementInPlace = useCallback(
-    engagement => {
-      const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
-        if (
-          engagement?.project_name &&
-          engagement?.customer_name &&
-          engagement?.project_name === comparisonEngagement?.project_name &&
-          engagement?.customer_name === comparisonEngagement?.customer_name
-        ) {
-          return true;
-        }
-        return false;
-      });
-      const oldEngagement = engagements[oldEngagementIndex];
-      if (oldEngagementIndex > -1) {
-        const newEngagements = [...engagements];
-        newEngagements.splice(oldEngagementIndex, 1, engagement);
-        setEngagements(newEngagements);
-      }
-      return oldEngagement;
-    },
-    [engagements]
-  );
 
   const saveEngagement = useCallback(
     async (data: Engagement) => {

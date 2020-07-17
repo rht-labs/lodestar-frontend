@@ -8,4 +8,8 @@ export abstract class EngagementService {
   abstract async launchEngagement(data: Engagement): Promise<Engagement>;
   abstract async getConfig(): Promise<EngagementFormConfig>;
   abstract async checkHasUpdates(engagement: Engagement): Promise<boolean>;
+  abstract async getEngagementByCustomerAndProjectName(
+    customer_name: string,
+    project_name: string
+  ): Promise<Engagement>;
 }

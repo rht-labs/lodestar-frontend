@@ -15,6 +15,7 @@ export interface Engagement {
   engagement_lead_email: string;
   engagement_lead_name: string;
   engagement_users: Array<any>;
+  last_update: string;
   location: string;
   mongo_id?: string;
   ocp_cloud_provider_name: string;
