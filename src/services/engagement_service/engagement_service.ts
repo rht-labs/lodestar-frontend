@@ -7,4 +7,5 @@ export abstract class EngagementService {
   abstract async saveEngagement(data: Engagement): Promise<Engagement>;
   abstract async launchEngagement(data: Engagement): Promise<Engagement>;
   abstract async getConfig(): Promise<EngagementFormConfig>;
+  abstract async checkHasUpdates(engagement: Engagement): Promise<boolean>;
 }

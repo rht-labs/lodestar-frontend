@@ -19,4 +19,7 @@ export class FakedEngagementService extends EngagementService {
   async getConfig(): Promise<EngagementFormConfig> {
     return FakedSchema;
   }
+  async checkHasUpdates(engagement: Engagement): Promise<boolean> {
+    return false;
+  }
 }

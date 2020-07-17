@@ -4,11 +4,18 @@ import {
   AlertGroup,
   AlertActionCloseButton,
   Spinner,
+  AlertActionLink,
 } from '@patternfly/react-core';
 import { useFeedback } from '../context/feedback_context';
 
 export function Feedback() {
-  const { alertMsg, alertType, hideAlert, isLoaderVisible } = useFeedback();
+  const {
+    alertMsg,
+    alertType,
+    hideAlert,
+    isLoaderVisible,
+    alertActions,
+  } = useFeedback();
   const transitionDuration = 200;
   const modalStyle: React.CSSProperties = {
     backgroundColor: 'rgba(0, 0, 0)',
@@ -45,6 +52,15 @@ export function Feedback() {
             isInline
             variant={alertType}
             title={alertMsg}
+            actionLinks={
+              alertActions?.map(action => {
+                return (
+                  <AlertActionLink key={action?.title} onClick={action?.action}>
+                    {action.title}
+                  </AlertActionLink>
+                );
+              }) ?? undefined
+            }
             actionClose={<AlertActionCloseButton onClose={hideAlert} />}
           />
         </AlertGroup>

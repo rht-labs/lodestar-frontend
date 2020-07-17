@@ -8,22 +8,38 @@ import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementPageView } from './implementations/engagement_page_view';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
 }
 
-export function EngagementDetailView(props) {
+const EngagementDetailView = React.memo(function({
+  formOptions,
+  getConfig,
+  error: engagementFormRequestError,
+  setcurrentEngagement,
+  currentEngagement,
+  getEngagement,
+  createEngagementPoll,
+}: {
+  formOptions: EngagementFormConfig;
+  getConfig: () => void;
+  error: Error;
+  setcurrentEngagement: (engagement: Engagement) => void;
+  currentEngagement: Engagement;
+  createEngagementPoll: (engagement: Engagement) => { cancel: () => void };
+  getEngagement: (customer_name, project_name) => Promise<Engagement>;
+}) {
   const { project_name, customer_name } = useParams();
 
-  const {
-    formOptions,
-    getConfig,
-    error,
-    setcurrentEngagement,
-    currentEngagement,
-    getEngagement,
-  } = useEngagements();
+  useEffect(() => {
+    const engagementPoll = createEngagementPoll(currentEngagement);
+    return () => {
+      engagementPoll.cancel();
+    };
+    // eslint-disable-next-line
+  }, [currentEngagement]);
   useEffect(() => {
     if (!formOptions) {
       Logger.instance.info('getting config');
@@ -42,7 +58,6 @@ export function EngagementDetailView(props) {
       }
     });
   }, [customer_name, project_name, setcurrentEngagement, getEngagement]);
-  const engagementFormRequestError = error;
 
   const AlertMessage = () => {
     return engagementFormRequestError ? (
@@ -67,4 +82,27 @@ export function EngagementDetailView(props) {
       </EngagementDetailsViewTemplate>
     </ValidationProvider>
   );
-}
+});
+
+export const EngagementDetailViewContainer = () => {
+  const {
+    formOptions,
+    getConfig,
+    error,
+    setcurrentEngagement,
+    currentEngagement,
+    getEngagement,
+    createEngagementPoll,
+  } = useEngagements();
+  return (
+    <EngagementDetailView
+      formOptions={formOptions}
+      getConfig={getConfig}
+      createEngagementPoll={createEngagementPoll}
+      error={error}
+      setcurrentEngagement={setcurrentEngagement}
+      currentEngagement={currentEngagement}
+      getEngagement={getEngagement}
+    />
+  );
+};

@@ -59,4 +59,13 @@ export class Apiv1EngagementService extends EngagementService {
     });
     return data as EngagementFormConfig;
   }
+  async checkHasUpdates(engagement: Engagement): Promise<boolean> {
+    const response = await this.axios.head(
+      `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
+    );
+
+    console.log(response.headers);
+
+    return true;
+  }
 }

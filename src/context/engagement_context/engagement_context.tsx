@@ -10,6 +10,10 @@ import { useFeedback, AlertType } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
+import {
+  EngagementPoll,
+  EngagementPollIntervalStrategy,
+} from '../../schemas/engagement_poll';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -32,6 +36,7 @@ export interface EngagementContext {
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
+  createEngagementPoll: (engagement: Engagement) => EngagementPoll;
 }
 const requiredFields = [
   'customer_contact_email',
@@ -104,6 +109,36 @@ export const EngagementProvider = ({
       feedbackContext.hideLoader();
     }
   }, [engagementService, feedbackContext]);
+
+  const _refreshEngagementData = useCallback(() => {
+    console.log('refreshed');
+  }, []);
+
+  const createEngagementPoll = (engagement: Engagement): EngagementPoll => {
+    return new EngagementPoll(
+      new EngagementPollIntervalStrategy(
+        setInterval(async () => {
+          console.log('polling for changes');
+          const hasUpdates = await engagementService.checkHasUpdates(
+            engagement
+          );
+          console.log(
+            `Does ${engagement?.project_name} have an update? ${
+              hasUpdates ? 'yes' : 'no'
+            }`
+          );
+          if (hasUpdates) {
+            feedbackContext.showAlert(
+              'Uh oh, we have a conflict',
+              AlertType.error,
+              false,
+              [{ title: 'Refresh', action: () => _refreshEngagementData }]
+            );
+          }
+        }, 5000)
+      )
+    );
+  };
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
@@ -228,8 +263,16 @@ export const EngagementProvider = ({
         let errorMessage =
           'There was an issue with saving your changes. Please followup with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
-          errorMessage =
-            'The path that you input is already taken.  Please update and try saving again.';
+          // If there is no mongo id associated with the engagement, then it is being committed to the backend for the first time. It is a net new engagement.
+          if (!!data.mongo_id) {
+            errorMessage =
+              'The path that you input is already taken.  Please update and try saving again.';
+
+            // Otherwise, we are saving an existing engagement.
+          } else {
+            errorMessage =
+              'Your changes could not be saved. Another user has modified this data. Please refresh your data in order to make changes.';
+          }
         }
         feedbackContext.showAlert(errorMessage, AlertType.error);
       }
@@ -284,6 +327,7 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
+        createEngagementPoll,
         requiredFields,
         currentEngagement,
         missingRequiredFields: missingRequiredFields(),
@@ -310,3 +354,5 @@ export const EngagementProvider = ({
     </Provider>
   );
 };
+
+// EngagementProvider.whyDidYouRender = false;
