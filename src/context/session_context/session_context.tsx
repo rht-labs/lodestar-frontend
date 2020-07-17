@@ -1,8 +1,17 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import { AuthService } from '../../services/authentication_service/authentication_service';
 
 import { UserProfile } from '../../schemas/user_profile_schema';
-import { UserToken } from '../../schemas/user_token_schema';
+import {
+  UserToken,
+  LocalStoragePersistenceStrategy,
+} from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { Logger } from '../../utilities/logger';
@@ -46,6 +55,9 @@ export const SessionProvider = ({
   children: React.ReactChild;
   authenticationService?: AuthService;
 }) => {
+  useEffect(() => {
+    UserToken.setPersistenceStrategy(new LocalStoragePersistenceStrategy());
+  }, []);
   const { authenticationService } = useServiceProviders();
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(

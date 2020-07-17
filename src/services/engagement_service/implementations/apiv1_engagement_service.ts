@@ -1,18 +1,21 @@
 import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement_schema';
-import Axios, { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { AlreadyExistsError } from '../engagement_service_errors';
 import { EngagementJsonSerializer } from '../../../serializers/engagement/engagement_json_serializer';
 import { Logger } from '../../../utilities/logger';
 import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
+import { UserToken } from '../../../schemas/user_token_schema';
 
 export class Apiv1EngagementService extends EngagementService {
-  constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
+  constructor(baseURL: string) {
     super();
     this.axios = Axios.create({ baseURL });
-    this.axios.interceptors.request.use(onBeforeRequest);
-    this.axios.interceptors.response.use(onAfterRequest, onFailure);
+    this.axios.interceptors.request.use((request: AxiosRequestConfig) => {
+      request.headers.Authorization = `Bearer ${UserToken.token?.accessToken}`;
+      return request;
+    });
   }
   private static engagementSerializer = new EngagementJsonSerializer();
   axios?: AxiosInstance;

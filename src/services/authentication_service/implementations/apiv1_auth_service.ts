@@ -5,7 +5,6 @@ import { UserProfile } from '../../../schemas/user_profile_schema';
 import { AuthService } from '../authentication_service';
 import { Config } from '../../../schemas/config';
 import { Logger } from '../../../utilities/logger';
-const TOKEN_STORAGE_KEY = 'token';
 
 export class Apiv1AuthService implements AuthService {
   constructor(config: Config) {
@@ -17,30 +16,8 @@ export class Apiv1AuthService implements AuthService {
 
   axios: AxiosInstance;
 
-  /**
-   *
-   * @param {UserToken} tokenObject
-   */
-
   saveToken(tokenObject: UserToken) {
-    try {
-      if (
-        typeof tokenObject === 'object' &&
-        'accessToken' in tokenObject &&
-        'refreshToken' in tokenObject
-      ) {
-        localStorage.setItem(
-          TOKEN_STORAGE_KEY,
-          JSON.stringify(tokenObject.toMap())
-        );
-      } else {
-        throw TypeError(
-          'Token Object must be an object containing access and refresh tokens'
-        );
-      }
-    } catch (e) {
-      Logger.instance.error(e);
-    }
+    UserToken.token = tokenObject;
   }
 
   async clearSession() {
@@ -56,27 +33,14 @@ export class Apiv1AuthService implements AuthService {
         Accept: '*/*',
       },
     });
-    localStorage.setItem(TOKEN_STORAGE_KEY, '');
+    this.saveToken(null);
     return;
   }
 
   getToken = () => {
-    try {
-      const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY) || '';
-      if (!storedToken) {
-        return null;
-      }
-      const tokenMap = JSON.parse(storedToken);
-
-      return UserToken.fromMap(tokenMap);
-    } catch (e) {
-      return null;
-    }
+    return UserToken.token;
   };
 
-  /**
-   * @returns {Promise<boolean>}
-   */
   isLoggedIn = async (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       try {

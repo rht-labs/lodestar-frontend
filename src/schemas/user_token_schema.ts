@@ -1,4 +1,5 @@
 import faker from 'faker';
+import { Logger } from '../utilities/logger';
 
 export interface UserTokenParams {
   accessToken?: string;
@@ -19,6 +20,20 @@ export class UserToken {
     this.accessTokenExpiry = accessTokenExpiry;
     this.refreshTokenExpiry = refreshTokenExpiry;
   }
+
+  private static _persistenceStrategy: PersistenceStrategy;
+  public static setPersistenceStrategy(strategy: PersistenceStrategy) {
+    UserToken._persistenceStrategy = strategy;
+  }
+
+  public static get token() {
+    return UserToken._persistenceStrategy.getToken();
+  }
+
+  public static set token(token: UserToken) {
+    UserToken._persistenceStrategy.saveToken(token);
+  }
+
   accessToken: string;
   refreshToken: string;
   accessTokenExpiry = new Date();
@@ -53,5 +68,50 @@ export class UserToken {
       accessTokenExpiry: faker.date.future(),
       refreshTokenExpiry: faker.date.future(),
     });
+  }
+}
+
+interface PersistenceStrategy {
+  saveToken(token: UserToken): void;
+  getToken(): UserToken;
+}
+
+export class LocalStoragePersistenceStrategy implements PersistenceStrategy {
+  private static TOKEN_STORAGE_KEY: string = 'token';
+  saveToken(token: UserToken) {
+    try {
+      if (
+        typeof token === 'object' &&
+        'accessToken' in token &&
+        'refreshToken' in token
+      ) {
+        localStorage.setItem(
+          LocalStoragePersistenceStrategy.TOKEN_STORAGE_KEY,
+          JSON.stringify(token.toMap())
+        );
+      } else {
+        throw TypeError(
+          'Token Object must be an object containing access and refresh tokens'
+        );
+      }
+    } catch (e) {
+      Logger.instance.error(e);
+    }
+  }
+  getToken() {
+    try {
+      const storedToken =
+        localStorage.getItem(
+          LocalStoragePersistenceStrategy.TOKEN_STORAGE_KEY
+        ) || '';
+      if (!storedToken) {
+        return null;
+      }
+      const tokenMap = JSON.parse(storedToken);
+
+      return UserToken.fromMap(tokenMap);
+    } catch (e) {
+      return null;
+    }
   }
 }
