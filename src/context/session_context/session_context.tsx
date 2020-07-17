@@ -6,6 +6,7 @@ import { UserToken } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { Logger } from '../../utilities/logger';
+import { ErrorBoundary } from '../../components/error_boundary';
 
 export type AuthenticationState =
   | 'initial'
@@ -107,17 +108,19 @@ export const SessionProvider = ({
   }, [setAuthStatus, setSessionData, authenticationService]);
 
   return (
-    <Provider
-      value={{
-        checkAuthStatus,
-        sessionData,
-        handleLoginCallback,
-        authState: authStatus,
-        logout: logout,
-      }}
-    >
-      {children}
-    </Provider>
+    <ErrorBoundary>
+      <Provider
+        value={{
+          checkAuthStatus,
+          sessionData,
+          handleLoginCallback,
+          authState: authStatus,
+          logout: logout,
+        }}
+      >
+        {children}
+      </Provider>
+    </ErrorBoundary>
   );
 };
 

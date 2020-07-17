@@ -10,6 +10,8 @@ import { useFeedback, AlertType } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
+import { AuthenticationError } from '../session_context/session_errors';
+import { useSession } from '../session_context/session_context';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -75,6 +77,20 @@ export const EngagementProvider = ({
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
+  const sessionContext = useSession();
+
+  const _handleErrors = useCallback(
+    error => {
+      if (error instanceof AuthenticationError) {
+        console.log('handling error');
+        sessionContext.checkAuthStatus();
+      } else {
+        throw error;
+      }
+    },
+    [sessionContext]
+  );
+
   const getConfig = useCallback(async () => {
     const data = await engagementService.getConfig();
     setFormOptions(data);
@@ -100,10 +116,10 @@ export const EngagementProvider = ({
         AlertType.error,
         true
       );
-      Logger.instance.error(e);
       feedbackContext.hideLoader();
+      _handleErrors(e);
     }
-  }, [engagementService, feedbackContext]);
+  }, [engagementService, feedbackContext, _handleErrors]);
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
@@ -115,14 +131,17 @@ export const EngagementProvider = ({
             engagement?.project_name === projectName
         );
       } catch (e) {
-        Logger.instance.error(e);
-        feedbackContext.showAlert(
-          'There was a problem fetching this engagement',
-          AlertType.error
-        );
+        try {
+          _handleErrors(e);
+        } catch (e) {
+          feedbackContext.showAlert(
+            'There was a problem fetching this engagement',
+            AlertType.error
+          );
+        }
       }
     },
-    [engagements, fetchEngagements, feedbackContext]
+    [engagements, fetchEngagements, feedbackContext, _handleErrors]
   );
 
   const _addNewEngagement = useCallback(
@@ -131,11 +150,10 @@ export const EngagementProvider = ({
         const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
-        Logger.instance.error(e);
-        // TODO: Handle setting the error
+        _handleErrors(e);
       }
     },
-    [engagements]
+    [engagements, _handleErrors]
   );
 
   const createEngagement = useCallback(
@@ -152,18 +170,31 @@ export const EngagementProvider = ({
         );
         return engagement;
       } catch (e) {
-        Logger.instance.error(e);
         feedbackContext.hideLoader();
-        let errorMessage =
-          'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
+        let errorMessage;
         if (e instanceof AlreadyExistsError) {
           errorMessage =
             'This client already has a project with that name. Please choose a different project name.';
+        } else {
+          try {
+            _handleErrors(e);
+          } catch (e) {
+            errorMessage =
+              'There was an issue with creating your engagement. Please follow up with an administrator if this continues.';
+          }
         }
+
         feedbackContext.showAlert(errorMessage, AlertType.error);
+        _handleErrors(e);
       }
     },
-    [engagementService, _addNewEngagement, feedbackContext, engagements]
+    [
+      engagementService,
+      _addNewEngagement,
+      feedbackContext,
+      engagements,
+      _handleErrors,
+    ]
   );
 
   const _checkLaunchReady = useCallback(() => {
@@ -222,7 +253,6 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
-        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
@@ -230,11 +260,18 @@ export const EngagementProvider = ({
         if (e instanceof AlreadyExistsError) {
           errorMessage =
             'The path that you input is already taken.  Please update and try saving again.';
+        } else {
+          _handleErrors(e);
         }
         feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
-    [engagementService, _updateEngagementInPlace, feedbackContext]
+    [
+      engagementService,
+      _updateEngagementInPlace,
+      feedbackContext,
+      _handleErrors,
+    ]
   );
 
   const updateEngagementFormField = useCallback(
@@ -264,7 +301,7 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        Logger.instance.error(e);
+        _handleErrors(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
@@ -279,6 +316,7 @@ export const EngagementProvider = ({
       _checkLaunchReady,
       engagementService,
       feedbackContext,
+      _handleErrors,
     ]
   );
   return (
