@@ -23,6 +23,7 @@ export function Notification(props: NotificationProps) {
         onClick={onClick}
         title="Notifications"
         aria-label="Notifications"
+        data-cy={'notification_badge'}
       >
         <BellIcon />
       </NotificationBadge>

@@ -52,6 +52,7 @@ Object {
               style="margin-bottom: 1rem;"
             >
               <b
+                data-cy="upcoming"
                 style="color: rgb(236, 122, 8);"
               >
                 UPCOMING
@@ -267,6 +268,7 @@ Object {
             style="margin-bottom: 1rem;"
           >
             <b
+              data-cy="upcoming"
               style="color: rgb(236, 122, 8);"
             >
               UPCOMING
