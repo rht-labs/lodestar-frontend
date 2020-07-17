@@ -40,12 +40,13 @@ export function DashboardDataCard({
         <EmptyState>
           <EmptyStateIcon icon={icon}/>
           <TextContent>
-            <Text component={TextVariants.h1}>
+            <Text component={TextVariants.h1} data-cy={`numbers_of_${title[1]}`}>
               {numberOfEngagements}
             </Text>
             <Button variant="link"
                     isInline
-                    onClick={() => { history.push(url)} }>
+                    onClick={() => { history.push(url)} }
+                    data-cy={`button_${title[1]}`}>
               <Text component={TextVariants.h2}>
                 {title}
               </Text>

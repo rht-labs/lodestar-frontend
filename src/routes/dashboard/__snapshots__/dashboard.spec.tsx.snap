@@ -63,10 +63,12 @@ Object {
                   >
                     <h1
                       class=""
+                      data-cy="numbers_of_l"
                       data-pf-content="true"
                     />
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
+                      data-cy="button_l"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -121,10 +123,12 @@ Object {
                   >
                     <h1
                       class=""
+                      data-cy="numbers_of_p"
                       data-pf-content="true"
                     />
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
+                      data-cy="button_p"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -179,10 +183,12 @@ Object {
                   >
                     <h1
                       class=""
+                      data-cy="numbers_of_c"
                       data-pf-content="true"
                     />
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
+                      data-cy="button_c"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -237,10 +243,12 @@ Object {
                   >
                     <h1
                       class=""
+                      data-cy="numbers_of_a"
                       data-pf-content="true"
                     />
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
+                      data-cy="button_a"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -325,10 +333,12 @@ Object {
                 >
                   <h1
                     class=""
+                    data-cy="numbers_of_l"
                     data-pf-content="true"
                   />
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
+                    data-cy="button_l"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -383,10 +393,12 @@ Object {
                 >
                   <h1
                     class=""
+                    data-cy="numbers_of_p"
                     data-pf-content="true"
                   />
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
+                    data-cy="button_p"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -441,10 +453,12 @@ Object {
                 >
                   <h1
                     class=""
+                    data-cy="numbers_of_c"
                     data-pf-content="true"
                   />
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
+                    data-cy="button_c"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -499,10 +513,12 @@ Object {
                 >
                   <h1
                     class=""
+                    data-cy="numbers_of_a"
                     data-pf-content="true"
                   />
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
+                    data-cy="button_a"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"

@@ -1,5 +1,5 @@
 {
   "chromeWebSecurity": false,
   "waitForAnimations": false,
-  "animationDistanceThreshold": 50
+  "animationDistanceThreshold": 100
 }

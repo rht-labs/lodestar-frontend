@@ -2,12 +2,15 @@
 
 describe('new engagement', () => {
 
-  it('creates a new engagement', () => {
+  beforeEach('Login', () => {
     cy.login(
         Cypress.env('SSO_URL'),
         Cypress.env('SSO_USER'),
         Cypress.env('SSO_PASSWORD')
     );
+  });
+
+  it('creates a new engagement', () => {
     cy.server();
     cy.route({method: 'POST', url: 'engagements'}).as('createEngagement');
 
@@ -32,7 +35,7 @@ describe('new engagement', () => {
 
     const uuid = () => Cypress._.random(0, 1e6);
     const id = uuid();
-    const testEngagementName = `cypressio_${id}`
+    const testEngagementName = `cypressio_${id}`;
 
     cy.get('[data-cy=new_engagement_name]')
         .type(testEngagementName)
@@ -51,11 +54,6 @@ describe('new engagement', () => {
   });
 
   it('Edit engagement summary', () => {
-    cy.login(
-        Cypress.env('SSO_URL'),
-        Cypress.env('SSO_USER'),
-        Cypress.env('SSO_PASSWORD')
-    );
     cy.get('[data-cy=edit_summary_card]')
         .click();
 
@@ -91,11 +89,6 @@ describe('new engagement', () => {
   });
 
   it('Edit points of contact', () => {
-    cy.login(
-        Cypress.env('SSO_URL'),
-        Cypress.env('SSO_USER'),
-        Cypress.env('SSO_PASSWORD')
-    );
     cy.get('[data-cy="points_of_contact"]')
         .click();
 
@@ -129,11 +122,6 @@ describe('new engagement', () => {
 
 
   it('Edit hosting environment', () => {
-    cy.login(
-        Cypress.env('SSO_URL'),
-        Cypress.env('SSO_USER'),
-        Cypress.env('SSO_PASSWORD')
-    );
     cy.get('[data-cy="hosting_env_button"]')
         .click();
 
@@ -164,11 +152,6 @@ describe('new engagement', () => {
   });
 
   it('Edit engagement users', () => {
-    cy.login(
-        Cypress.env('SSO_URL'),
-        Cypress.env('SSO_USER'),
-        Cypress.env('SSO_PASSWORD')
-    );
     cy.server();
     cy.route({
       method: 'PUT',
@@ -200,11 +183,6 @@ describe('new engagement', () => {
   });
 
   it('Launch engagement', () => {
-    cy.login(
-        Cypress.env('SSO_URL'),
-        Cypress.env('SSO_USER'),
-        Cypress.env('SSO_PASSWORD')
-    );
     cy.server();
     cy.route({
       method: 'PUT',
