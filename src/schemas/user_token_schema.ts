@@ -76,7 +76,7 @@ interface PersistenceStrategy {
   getToken(): UserToken;
 }
 
-export class LocalStoragePersistenceStrategy implements PersistenceStrategy {
+export class LocalStoragePersistence implements PersistenceStrategy {
   private static TOKEN_STORAGE_KEY: string = 'token';
   saveToken(token: UserToken) {
     try {
@@ -86,7 +86,7 @@ export class LocalStoragePersistenceStrategy implements PersistenceStrategy {
         'refreshToken' in token
       ) {
         localStorage.setItem(
-          LocalStoragePersistenceStrategy.TOKEN_STORAGE_KEY,
+          LocalStoragePersistence.TOKEN_STORAGE_KEY,
           JSON.stringify(token.toMap())
         );
       } else {
@@ -101,9 +101,7 @@ export class LocalStoragePersistenceStrategy implements PersistenceStrategy {
   getToken() {
     try {
       const storedToken =
-        localStorage.getItem(
-          LocalStoragePersistenceStrategy.TOKEN_STORAGE_KEY
-        ) || '';
+        localStorage.getItem(LocalStoragePersistence.TOKEN_STORAGE_KEY) || '';
       if (!storedToken) {
         return null;
       }

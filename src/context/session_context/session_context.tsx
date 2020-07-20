@@ -10,12 +10,13 @@ import { AuthService } from '../../services/authentication_service/authenticatio
 import { UserProfile } from '../../schemas/user_profile_schema';
 import {
   UserToken,
-  LocalStoragePersistenceStrategy,
+  LocalStoragePersistence,
 } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { Logger } from '../../utilities/logger';
 import { ErrorBoundary } from '../../components/error_boundary';
+import { AuthenticationValidator } from '../../utilities/authentication_validator';
 
 export type AuthenticationState =
   | 'initial'
@@ -32,11 +33,13 @@ export interface SessionData {
 export interface SessionContext {
   sessionData?: SessionData;
   axios?: AxiosInstance;
-  checkAuthStatus: () => Promise<void>;
+  checkAuthStatus: () => Promise<boolean>;
   authState: AuthenticationState;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
+
+UserToken.setPersistenceStrategy(new LocalStoragePersistence());
 
 export const SessionContext = createContext<SessionContext>({
   sessionData: undefined,
@@ -55,9 +58,6 @@ export const SessionProvider = ({
   children: React.ReactChild;
   authenticationService?: AuthService;
 }) => {
-  useEffect(() => {
-    UserToken.setPersistenceStrategy(new LocalStoragePersistenceStrategy());
-  }, []);
   const { authenticationService } = useServiceProviders();
 
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
@@ -108,16 +108,23 @@ export const SessionProvider = ({
             });
             if (profile.groups ? profile.groups.includes('reader') : false) {
               setAuthStatus('authenticated');
+              return true;
             } else {
               setAuthStatus('unauthorized');
+              return false;
             }
           });
         } else {
           setAuthStatus('unauthenticated');
+          return false;
         }
       });
     }
   }, [setAuthStatus, setSessionData, authenticationService]);
+
+  useEffect(() => {
+    AuthenticationValidator.validator = checkAuthStatus;
+  });
 
   return (
     <ErrorBoundary>

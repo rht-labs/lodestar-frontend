@@ -2,6 +2,7 @@ import { VersionService } from '../version_service';
 import { Version } from '../../../schemas/version_schema';
 import Axios, { AxiosInstance } from 'axios';
 import { UserToken } from '../../../schemas/user_token_schema';
+import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
 
 export class Apiv1VersionService extends VersionService {
   constructor(baseURL: string) {
@@ -32,8 +33,13 @@ export class Apiv1VersionService extends VersionService {
   }
 
   async fetchVersion(): Promise<Version> {
-    const { data } = await this.axios.get(`${this.baseUrl}/api/v1/version`);
-    const fe = await this.fetchManifest();
-    return Version.fromMap({ ...data, fe });
+    try {
+      const { data } = await this.axios.get(`${this.baseUrl}/api/v1/version`);
+      const fe = await this.fetchManifest();
+      return Version.fromMap({ ...data, fe });
+    } catch (e) {
+      handleAxiosResponseErrors(e);
+      throw e;
+    }
   }
 }

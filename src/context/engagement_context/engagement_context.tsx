@@ -162,7 +162,7 @@ export const EngagementProvider = ({
       try {
         const engagement = await engagementService.createEngagement(data);
         _addNewEngagement(engagement);
-        setEngagements([...engagements, engagement]);
+        setEngagements([...(engagements ?? []), engagement]);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
