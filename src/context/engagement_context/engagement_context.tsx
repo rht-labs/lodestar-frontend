@@ -86,7 +86,6 @@ export const EngagementProvider = ({
   }, [engagementService]);
 
   useEffect(() => {
-    Logger.instance.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
       payload: getInitialState(currentEngagement),
@@ -156,7 +155,7 @@ export const EngagementProvider = ({
           );
           if (hasUpdates) {
             feedbackContext.showAlert(
-              'Your data is stale. You will need to refresh your data before you save. Refreshing data will cause current changes to be lost.',
+              'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
               AlertType.error,
               false,
               [
@@ -199,7 +198,6 @@ export const EngagementProvider = ({
         setEngagements(newEngagementList);
       } catch (e) {
         Logger.instance.error(e);
-        // TODO: Handle setting the error
       }
     },
     [engagements]
