@@ -44,14 +44,16 @@ describe('Engagement Context', () => {
       result.current.updateEngagementFormField('customer_name', 'spencer');
       await waitForNextUpdate();
     });
-    expect(result.current.currentEngagementChanges.customer_name).toEqual('spencer');
+    expect(result.current.currentEngagementChanges.customer_name).toEqual(
+      'spencer'
+    );
   });
 
   test('Can switch engagements', async () => {
     const { result, waitForNextUpdate } = getHook();
     expect(result.current.currentEngagement).toBe(undefined);
     await act(async () => {
-      result.current.setcurrentEngagement({ customer_name: 'spencer' } as any);
+      result.current.setCurrentEngagement({ customer_name: 'spencer' } as any);
       await waitForNextUpdate();
     });
     expect(result.current.currentEngagement.customer_name).toEqual('spencer');
@@ -79,7 +81,7 @@ describe('Engagement Context', () => {
   test('Form is launchable when required fields are filled', async () => {
     const { result, waitForNextUpdate } = getHook();
     await act(async () => {
-      result.current.setcurrentEngagement(Engagement.fromFake());
+      result.current.setCurrentEngagement(Engagement.fromFake());
       await waitForNextUpdate;
     });
     expect(result.current.isLaunchable).toBeTruthy();
@@ -90,7 +92,7 @@ describe('Engagement Context', () => {
     await act(async () => {
       const engagement = Engagement.fromFake();
       engagement.customer_contact_email = null;
-      result.current.setcurrentEngagement(engagement);
+      result.current.setCurrentEngagement(engagement);
       await waitForNextUpdate;
     });
     expect(result.current.isLaunchable).toBeFalsy();

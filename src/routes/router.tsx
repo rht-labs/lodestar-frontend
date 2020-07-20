@@ -13,7 +13,7 @@ import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
-import { EngagementDetailView } from './engagement_details';
+import { EngagementDetailViewContainer } from './engagement_details/engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { useNotification } from '../context/notification_context/notification_hook';
 import { EngagementStatus } from '../schemas/engagement_schema';
@@ -96,7 +96,7 @@ export function OMPRouter() {
                             </PrivateRoute>
                             <PrivateRoute
                               path="/app/engagements/:customer_name/:project_name"
-                              component={EngagementDetailView}
+                              component={EngagementDetailViewContainer}
                             />
                           </Switch>
                         </ModalVisibilityProvider>
