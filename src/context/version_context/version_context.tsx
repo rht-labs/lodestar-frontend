@@ -3,7 +3,10 @@ import { Version } from '../../schemas/version_schema';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { useFeedback } from '../feedback_context';
 import { useSession } from '../session_context/session_context';
-import { AuthorizationError } from '../session_context/session_errors';
+import {
+  AuthorizationError,
+  AuthenticationError,
+} from '../session_context/session_errors';
 
 export interface VersionContext {
   fetchVersions: () => void;
@@ -24,7 +27,7 @@ export const VersionProvider = ({
   const [versions, setVersions] = useState<Version | undefined>();
   const _handleErrors = useCallback(
     e => {
-      if (e instanceof AuthorizationError) {
+      if (e instanceof AuthorizationError || e instanceof AuthenticationError) {
         sessionContext.checkAuthStatus();
       } else {
         throw e;
