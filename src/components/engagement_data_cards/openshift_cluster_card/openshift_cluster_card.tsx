@@ -65,19 +65,19 @@ export function OpenShiftClusterSummaryCard({
             <EditButton
               onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)}
               text={'Edit'}
-            />
+              dataCy={'hosting_env_button'}/>
           </div>
         )}
         title="Hosting Environment"
       >
         <Grid hasGutter>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Hosting Type">
+            <TitledDataPoint title="Hosting Type" dataCy={'hosting_type'}>
               OpenShift Container Platform
             </TitledDataPoint>
           </GridItem>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Cloud Provider">
+            <TitledDataPoint title="Cloud Provider" dataCy={'cloud_provider'}>
               <span>
                 {getHumanReadableLabel(
                   formOptions?.cloud_options?.providers?.options,
@@ -87,7 +87,7 @@ export function OpenShiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="OpenShift Version">
+            <TitledDataPoint title="OpenShift Version" dataCy={'oc_version'}>
               <span>
                 {getHumanReadableLabel(
                   formOptions?.openshift_options?.versions?.options,
@@ -97,7 +97,7 @@ export function OpenShiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Storage Size">
+            <TitledDataPoint title="Storage Size" dataCy={'storage_size'}>
               <span>
                 {getHumanReadableLabel(
                   formOptions?.openshift_options?.persistent_storage?.options,
@@ -107,7 +107,7 @@ export function OpenShiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Cloud Region">
+            <TitledDataPoint title="Cloud Region" dataCy={'cloud_region'}>
               <span>
                 {getHumanReadableLabel(
                   formOptions?.cloud_options?.providers?.options?.find(
@@ -121,7 +121,7 @@ export function OpenShiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Cluster Size">
+            <TitledDataPoint title="Cluster Size" dataCy={'cluster_size'}>
               <span>
                 {getHumanReadableLabel(
                   formOptions?.openshift_options?.cluster_size?.options,
@@ -131,7 +131,7 @@ export function OpenShiftClusterSummaryCard({
             </TitledDataPoint>
           </GridItem>
           <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Subdomain">
+            <TitledDataPoint title="Subdomain" dataCy={'sub_domain'}>
               {currentEngagement?.ocp_sub_domain}.na-1.rht-labs.com
             </TitledDataPoint>
           </GridItem>

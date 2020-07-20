@@ -22,6 +22,7 @@ export function DescriptionFormField(props: DescriptionFormFieldProps) {
         placeholder="Description and notes for the Engagement"
         value={props.engagement.description || ''}
         onChange={e => props.onChange('description', e)}
+        data-cy={'description_field'}
       />
     </FormGroup>
   );

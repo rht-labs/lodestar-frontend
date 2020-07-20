@@ -39,10 +39,10 @@ Cypress.Commands.add('login', (url, email, password) => {
     const jwt = resp.body;
     const currentTime = new Date();
     const accessTokenExpiry = new Date(
-      currentTime.getTime() + jwt.expires_in * 1000
+      currentTime.getTime() + jwt.expires_in * 100000
     ).toISOString();
     const refreshTokenExpiry = new Date(
-      currentTime.getTime() + jwt.refresh_expires_in * 1000
+      currentTime.getTime() + jwt.refresh_expires_in * 100000
     ).toISOString();
 
     var elToken = {

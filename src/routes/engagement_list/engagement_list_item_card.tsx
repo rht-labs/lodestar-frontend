@@ -46,6 +46,7 @@ export function EngagementListItemCard(props: DataCardProps) {
                   history.push(url);
                 }}
                 variant="secondary"
+                data-cy={'view_engagement_button'}
               >
                 View Engagement
               </Button>

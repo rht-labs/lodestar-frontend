@@ -1,3 +1,5 @@
 {
-  "projectId": "dfi485"
+  "chromeWebSecurity": false,
+  "waitForAnimations": false,
+  "animationDistanceThreshold": 100
 }

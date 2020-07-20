@@ -132,6 +132,7 @@ export function EngagementStartEndDateFormField({
             onBlur={e =>
               onChange('start_date', parseDate(e.target.value, 'yyyy-MM-dd', 0))
             }
+            data-cy={'start_date_input'}
           />
           <TextInput
             isDisabled={!hasFeature(APP_FEATURES.writer)}
@@ -149,6 +150,7 @@ export function EngagementStartEndDateFormField({
               validate('end_date')(parsedDate);
               onChange('end_date', parsedDate);
             }}
+            data-cy={'end_date_input'}
           />
         </InputGroup>
       </FormGroup>
@@ -166,6 +168,7 @@ export function EngagementStartEndDateFormField({
           <TextInput
             id="archive_date"
             isDisabled={!hasFeature(APP_FEATURES.writer)}
+            data-cy={'retirement_date_input'}
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"

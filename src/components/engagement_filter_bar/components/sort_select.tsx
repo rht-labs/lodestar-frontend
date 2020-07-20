@@ -74,6 +74,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
           placeholderText="Sort by"
           isOpen={isSortSelectOpen}
           onToggle={() => setIsSortSelectOpen(!isSortSelectOpen)}
+          toggleId={'sort_dropdown'}
           selections={sortSelection}
           onSelect={(
             _,
@@ -95,6 +96,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
                   sortField: option?.sortField as EngagementSortFields,
                   isAscending: option?.isAscending,
                 })}
+                data-testid={option}
               >
                 {getSortDisplayValue(option?.sortField, option?.isAscending)}
               </SelectOption>,

@@ -50,10 +50,10 @@ export function Header(props: HeaderProps) {
                     itemId={2}
                     isActive={pathname === '/about'}
                   >
-                    <Link style={iconPad} to="/app/about">
+                    <Link style={iconPad} to="/app/about" data-cy={'about_link'}>
                       <Tooltip
                         content={'About'}
-                        entryDelay={10}
+                        entryDelay={0}
                         exitDelay={10}
                         position={TooltipPosition.bottom}>
                         <HelpIcon title="About" />
@@ -71,7 +71,7 @@ export function Header(props: HeaderProps) {
                     >
                       <Tooltip
                         content={'Feedback and Feature Request'}
-                        entryDelay={10}
+                        entryDelay={0}
                         exitDelay={10}
                         position={TooltipPosition.bottom}>
                         <LightbulbIcon />
@@ -81,7 +81,7 @@ export function Header(props: HeaderProps) {
                   <NavItem id="notifications" itemId={4}>
                     <Tooltip
                       content={'Notifications'}
-                      entryDelay={10}
+                      entryDelay={0}
                       exitDelay={10}
                       position={TooltipPosition.bottom}
                     >

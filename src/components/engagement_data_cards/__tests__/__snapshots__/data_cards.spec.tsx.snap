@@ -52,6 +52,7 @@ Object {
               style="margin-bottom: 1rem;"
             >
               <b
+                data-cy="upcoming"
                 style="color: rgb(236, 122, 8);"
               >
                 UPCOMING
@@ -68,6 +69,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="company_label"
                   >
                     <h6
                       class=""
@@ -89,6 +91,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="project_label"
                   >
                     <h6
                       class=""
@@ -110,6 +113,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="location_label"
                   >
                     <h6
                       class=""
@@ -131,6 +135,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="start_date_label"
                   >
                     <h6
                       class=""
@@ -152,6 +157,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="end_date_label"
                   >
                     <h6
                       class=""
@@ -173,6 +179,7 @@ Object {
                 >
                   <div
                     class="pf-c-content"
+                    data-cy="created_by_label"
                   >
                     <h6
                       class=""
@@ -191,6 +198,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="description_label"
               >
                 <h6
                   class=""
@@ -260,6 +268,7 @@ Object {
             style="margin-bottom: 1rem;"
           >
             <b
+              data-cy="upcoming"
               style="color: rgb(236, 122, 8);"
             >
               UPCOMING
@@ -276,6 +285,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="company_label"
                 >
                   <h6
                     class=""
@@ -297,6 +307,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="project_label"
                 >
                   <h6
                     class=""
@@ -318,6 +329,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="location_label"
                 >
                   <h6
                     class=""
@@ -339,6 +351,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="start_date_label"
                 >
                   <h6
                     class=""
@@ -360,6 +373,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="end_date_label"
                 >
                   <h6
                     class=""
@@ -381,6 +395,7 @@ Object {
               >
                 <div
                   class="pf-c-content"
+                  data-cy="created_by_label"
                 >
                   <h6
                     class=""
@@ -399,6 +414,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="description_label"
             >
               <h6
                 class=""
@@ -524,6 +540,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="hosting_type"
               >
                 <h6
                   class=""
@@ -545,6 +562,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_provider"
               >
                 <h6
                   class=""
@@ -561,6 +579,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="oc_version"
               >
                 <h6
                   class=""
@@ -577,6 +596,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="storage_size"
               >
                 <h6
                   class=""
@@ -593,6 +613,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_region"
               >
                 <h6
                   class=""
@@ -609,6 +630,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="cluster_size"
               >
                 <h6
                   class=""
@@ -625,6 +647,7 @@ Object {
             >
               <div
                 class="pf-c-content"
+                data-cy="sub_domain"
               >
                 <h6
                   class=""
@@ -691,6 +714,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="hosting_type"
             >
               <h6
                 class=""
@@ -712,6 +736,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_provider"
             >
               <h6
                 class=""
@@ -728,6 +753,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="oc_version"
             >
               <h6
                 class=""
@@ -744,6 +770,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="storage_size"
             >
               <h6
                 class=""
@@ -760,6 +787,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_region"
             >
               <h6
                 class=""
@@ -776,6 +804,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="cluster_size"
             >
               <h6
                 class=""
@@ -792,6 +821,7 @@ Object {
           >
             <div
               class="pf-c-content"
+              data-cy="sub_domain"
             >
               <h6
                 class=""
