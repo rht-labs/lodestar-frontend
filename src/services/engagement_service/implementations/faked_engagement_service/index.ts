@@ -19,4 +19,13 @@ export class FakedEngagementService extends EngagementService {
   async getConfig(): Promise<EngagementFormConfig> {
     return FakedSchema;
   }
+  async checkHasUpdates(engagement: Engagement): Promise<boolean> {
+    return false;
+  }
+  async getEngagementByCustomerAndProjectName(
+    customer_name: string,
+    project_name: string
+  ) {
+    return Engagement.fromFake();
+  }
 }
