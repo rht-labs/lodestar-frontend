@@ -108,6 +108,12 @@ export const EngagementProvider = ({
     });
   }, [currentEngagement, formOptions]);
 
+  const _validateAuthStatus = useCallback(async () => {
+    if (!(await authContext.checkAuthStatus())) {
+      throw new AuthenticationError();
+    }
+  }, [authContext]);
+
   const _updateEngagementInPlace = useCallback(
     engagement => {
       const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
@@ -134,6 +140,7 @@ export const EngagementProvider = ({
 
   const fetchEngagements = useCallback(async () => {
     try {
+      await _validateAuthStatus();
       feedbackContext.showLoader();
       const engagements = await engagementService.fetchEngagements();
       setEngagements(engagements);
@@ -148,10 +155,11 @@ export const EngagementProvider = ({
       feedbackContext.hideLoader();
       _handleErrors(e);
     }
-  }, [engagementService, feedbackContext, _handleErrors]);
+  }, [engagementService, feedbackContext, _handleErrors, _validateAuthStatus]);
 
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
+      await _validateAuthStatus();
       const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
         engagement?.customer_name,
         engagement?.project_name
@@ -159,7 +167,7 @@ export const EngagementProvider = ({
       _updateEngagementInPlace(refreshedEngagement);
       setCurrentEngagement(refreshedEngagement);
     },
-    [_updateEngagementInPlace, engagementService]
+    [_updateEngagementInPlace, engagementService, _validateAuthStatus]
   );
 
   const createEngagementPoll = (engagement: Engagement): EngagementPoll => {
@@ -227,6 +235,7 @@ export const EngagementProvider = ({
     async (data: any) => {
       feedbackContext.showLoader();
       try {
+        await _validateAuthStatus();
         const engagement = await engagementService.createEngagement(data);
         _addNewEngagement(engagement);
         setEngagements([...(engagements ?? []), engagement]);
@@ -261,6 +270,7 @@ export const EngagementProvider = ({
       feedbackContext,
       engagements,
       _handleErrors,
+      _validateAuthStatus,
     ]
   );
 
@@ -288,6 +298,7 @@ export const EngagementProvider = ({
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
+        await _validateAuthStatus();
         const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
@@ -321,6 +332,7 @@ export const EngagementProvider = ({
       _updateEngagementInPlace,
       feedbackContext,
       _handleErrors,
+      _validateAuthStatus,
     ]
   );
 
@@ -341,6 +353,7 @@ export const EngagementProvider = ({
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
+        await _validateAuthStatus();
         const returnedEngagement = await engagementService.launchEngagement(
           data
         );
@@ -367,6 +380,7 @@ export const EngagementProvider = ({
       engagementService,
       feedbackContext,
       _handleErrors,
+      _validateAuthStatus,
     ]
   );
   return (
