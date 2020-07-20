@@ -59,4 +59,21 @@ export class Apiv1EngagementService extends EngagementService {
     });
     return data as EngagementFormConfig;
   }
+  async checkHasUpdates(engagement: Engagement): Promise<boolean> {
+    const response = await this.axios.head(
+      `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
+    );
+
+    return engagement['last_update'] !== response?.headers?.['last-update'];
+  }
+
+  async getEngagementByCustomerAndProjectName(
+    customer_name: string,
+    project_name: string
+  ): Promise<Engagement> {
+    const { data } = await this.axios.get(
+      `/engagements/customers/${customer_name}/projects/${project_name}`
+    );
+    return Apiv1EngagementService.engagementSerializer.deserialize(data);
+  }
 }
