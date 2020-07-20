@@ -2,7 +2,7 @@ import React from 'react';
 
 import '@patternfly/react-core/dist/styles/base.css';
 
-import { SessionProvider } from '../context/auth_context/auth_context';
+import { AuthProvider } from '../context/auth_context/auth_context';
 import { VersionProvider } from '../context/version_context/version_context';
 import { EngagementProvider } from '../context/engagement_context/engagement_context';
 import { FeatureToggles } from '../context/feature_toggles/feature_toggles';
@@ -13,13 +13,13 @@ export const TestStateWrapper = ({ children = null }) => {
   return (
     <ServiceProvider shouldUseFaked={true}>
       <FeedbackProvider>
-        <SessionProvider>
+        <AuthProvider>
           <EngagementProvider>
             <VersionProvider>
               <FeatureToggles>{children}</FeatureToggles>
             </VersionProvider>
           </EngagementProvider>
-        </SessionProvider>
+        </AuthProvider>
       </FeedbackProvider>
     </ServiceProvider>
   );

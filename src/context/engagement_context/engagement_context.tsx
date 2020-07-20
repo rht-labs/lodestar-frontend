@@ -109,7 +109,9 @@ export const EngagementProvider = ({
   }, [currentEngagement, formOptions]);
 
   const _validateAuthStatus = useCallback(async () => {
-    if (!(await authContext.checkAuthStatus())) {
+    const authStatus = await authContext.checkAuthStatus();
+    console.log(authStatus);
+    if (!authStatus) {
       throw new AuthenticationError();
     }
   }, [authContext]);
