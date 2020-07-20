@@ -55,7 +55,13 @@ export function Feedback() {
             actionLinks={
               alertActions?.map(action => {
                 return (
-                  <AlertActionLink key={action?.title} onClick={action?.action}>
+                  <AlertActionLink
+                    key={action?.title}
+                    onClick={() => {
+                      action?.action();
+                      hideAlert();
+                    }}
+                  >
                     {action.title}
                   </AlertActionLink>
                 );
