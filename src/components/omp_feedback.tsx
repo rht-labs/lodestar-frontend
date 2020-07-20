@@ -6,7 +6,7 @@ import {
   Spinner,
   AlertActionLink,
 } from '@patternfly/react-core';
-import { useFeedback } from '../context/feedback_context';
+import { useFeedback } from '../context/feedback_context/feedback_context';
 
 export function Feedback() {
   const {

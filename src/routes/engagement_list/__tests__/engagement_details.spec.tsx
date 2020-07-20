@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import '@testing-library/jest-dom/extend-expect';
-import { EngagementDetails } from '../engagement_details';
+import { EngagementAtAGlance } from '../engagement_at_a_glance';
 import {
   upcomingEngagement,
   currentEngagement,
@@ -16,7 +16,7 @@ describe('Upcoming Engagement', () => {
   test('shows the right status and label', () => {
     const { getByTestId, getByText } = render(
       <MemoryRouter>
-        <EngagementDetails
+        <EngagementAtAGlance
           engagement={upcomingEngagement()}
           status={EngagementStatus.upcoming}
         />
@@ -29,7 +29,7 @@ describe('Upcoming Engagement', () => {
     expect(
       render(
         <MemoryRouter>
-          <EngagementDetails
+          <EngagementAtAGlance
             engagement={upcomingEngagement()}
             status={EngagementStatus.upcoming}
           />
@@ -43,7 +43,7 @@ describe('Active Engagement', () => {
   test('shows the right status and label', () => {
     const { getByTestId, getByText } = render(
       <MemoryRouter>
-        <EngagementDetails
+        <EngagementAtAGlance
           engagement={currentEngagement()}
           status={EngagementStatus.active}
         />
@@ -56,7 +56,7 @@ describe('Active Engagement', () => {
     expect(
       render(
         <MemoryRouter>
-          <EngagementDetails
+          <EngagementAtAGlance
             engagement={currentEngagement()}
             status={EngagementStatus.active}
           />
@@ -70,7 +70,7 @@ describe('Past Engagement', () => {
   test('shows the right status and label', () => {
     const { getByTestId, getByText } = render(
       <MemoryRouter>
-        <EngagementDetails
+        <EngagementAtAGlance
           engagement={pastEngagement()}
           status={EngagementStatus.past}
         />
@@ -83,7 +83,7 @@ describe('Past Engagement', () => {
     expect(
       render(
         <MemoryRouter>
-          <EngagementDetails
+          <EngagementAtAGlance
             engagement={pastEngagement()}
             status={EngagementStatus.past}
           />

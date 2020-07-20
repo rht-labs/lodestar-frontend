@@ -6,7 +6,7 @@ import {
   getInitialState,
 } from './engagement_form_reducer';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
-import { useFeedback, AlertType } from '../feedback_context';
+import { useFeedback, AlertType } from '../feedback_context/feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
@@ -85,10 +85,10 @@ export const EngagementProvider = ({
   const authContext = useSession();
 
   const _handleErrors = useCallback(
-    error => {
+    async error => {
       if (error instanceof AuthenticationError) {
         console.log('handling error');
-        authContext.checkAuthStatus();
+        await authContext.checkAuthStatus();
       } else {
         throw error;
       }
