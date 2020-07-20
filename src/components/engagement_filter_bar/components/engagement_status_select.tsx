@@ -32,6 +32,7 @@ export function EngagementStatusSelect({
         </Button>
         <Select
           placeholderText="Engagement Status"
+          toggleId={'filter_dropdown'}
           isOpen={isStatusSelectOpen}
           onToggle={() => setIsStatusSelectOpen(!isStatusSelectOpen)}
           selections={filter?.allowedStatuses}
@@ -48,7 +49,9 @@ export function EngagementStatusSelect({
             </SelectOption>,
           ].concat(
             Object.keys(EngagementStatus).map(statusKey => (
-              <SelectOption key={statusKey} value={EngagementStatus[statusKey]}>
+              <SelectOption key={statusKey}
+                            value={EngagementStatus[statusKey]}
+                            data-testid={EngagementStatus[statusKey]}>
                 {getStatusDisplayValue(EngagementStatus[statusKey])}
               </SelectOption>
             ))

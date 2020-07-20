@@ -39,6 +39,7 @@ export function EngagementFilterBar({
               value={searchTerm}
               onChange={searchTerm => onChange({ ...filter, searchTerm })}
               placeholder="Search for an engagement"
+              data-cy={'search_input'}
             />
           </InputGroup>
         </FlexItem>
@@ -52,6 +53,7 @@ export function EngagementFilterBar({
           <Button
             variant={ButtonVariant.secondary}
             onClick={() => onChange({})}
+            data-cy={'reset_button'}
           >
             Reset
           </Button>

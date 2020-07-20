@@ -26,7 +26,9 @@ export const EngagementStatusText = ({ status }: { status: EngagementStatus }) =
     }
   };
   return (
-    <b style={{ color: getStatusColor(status) }}>
+    <b style={{ color: getStatusColor(status) }}
+       data-cy={status}
+    >
       {getEngagementStatusText().toUpperCase()}
     </b>
   );

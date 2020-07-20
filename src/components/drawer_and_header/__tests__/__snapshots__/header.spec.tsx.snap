@@ -94,6 +94,7 @@ Object {
                   >
                     <a
                       class="pf-c-nav__link"
+                      data-cy="about_link"
                       href="/app/about"
                       style="padding-bottom: 0px; padding-top: 0px;"
                     >
@@ -148,6 +149,7 @@ Object {
                     <button
                       aria-label="Notifications"
                       class="pf-c-button pf-m-plain"
+                      data-cy="notification_badge"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       title="Notifications"
@@ -332,6 +334,7 @@ Object {
                 >
                   <a
                     class="pf-c-nav__link"
+                    data-cy="about_link"
                     href="/app/about"
                     style="padding-bottom: 0px; padding-top: 0px;"
                   >
@@ -386,6 +389,7 @@ Object {
                   <button
                     aria-label="Notifications"
                     class="pf-c-button pf-m-plain"
+                    data-cy="notification_badge"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     title="Notifications"
