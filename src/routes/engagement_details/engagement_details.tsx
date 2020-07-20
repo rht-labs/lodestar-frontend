@@ -18,7 +18,7 @@ const EngagementDetailView = React.memo(function({
   formOptions,
   getConfig,
   error: engagementFormRequestError,
-  setcurrentEngagement,
+  setCurrentEngagement,
   currentEngagement,
   getEngagement,
   createEngagementPoll,
@@ -26,7 +26,7 @@ const EngagementDetailView = React.memo(function({
   formOptions: EngagementFormConfig;
   getConfig: () => void;
   error: Error;
-  setcurrentEngagement: (engagement: Engagement) => void;
+  setCurrentEngagement: (engagement: Engagement) => void;
   currentEngagement: Engagement;
   createEngagementPoll: (engagement: Engagement) => { cancel: () => void };
   getEngagement: (customer_name, project_name) => Promise<Engagement>;
@@ -53,11 +53,11 @@ const EngagementDetailView = React.memo(function({
     }
     getEngagement(customer_name, project_name).then(engagement => {
       if (engagement) {
-        setcurrentEngagement(engagement);
+        setCurrentEngagement(engagement);
       } else {
       }
     });
-  }, [customer_name, project_name, setcurrentEngagement, getEngagement]);
+  }, [customer_name, project_name, setCurrentEngagement, getEngagement]);
 
   const AlertMessage = () => {
     return engagementFormRequestError ? (
@@ -89,7 +89,7 @@ export const EngagementDetailViewContainer = () => {
     formOptions,
     getConfig,
     error,
-    setcurrentEngagement,
+    setCurrentEngagement,
     currentEngagement,
     getEngagement,
     createEngagementPoll,
@@ -100,7 +100,7 @@ export const EngagementDetailViewContainer = () => {
       getConfig={getConfig}
       createEngagementPoll={createEngagementPoll}
       error={error}
-      setcurrentEngagement={setcurrentEngagement}
+      setCurrentEngagement={setCurrentEngagement}
       currentEngagement={currentEngagement}
       getEngagement={getEngagement}
     />

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { AlertVariant } from '@patternfly/react-core';
+import { uuid } from 'uuidv4';
 
 interface FeedbackContext {
   isLoaderVisible: boolean;
@@ -10,7 +11,7 @@ interface FeedbackContext {
     variant: AlertType,
     timed?: boolean,
     actions?: AlertAction[]
-  ) => void;
+  ) => () => void;
   hideLoader: () => void;
   showLoader: () => void;
   hideAlert: () => void;
@@ -22,7 +23,7 @@ export const FeedbackContext = React.createContext<FeedbackContext>({
   alertMsg: null,
   alertType: AlertVariant.success,
   hideAlert: () => {},
-  showAlert: (msg: string, variant: AlertType, timed: boolean) => {},
+  showAlert: (msg: string, variant: AlertType, timed: boolean) => () => null,
   hideLoader: () => {},
   showLoader: () => {},
   alertActions: [],
@@ -43,6 +44,7 @@ export interface Alert {
   type: AlertVariant;
   timer: NodeJS.Timer;
   actions?: AlertAction[];
+  id?: string;
 }
 
 export const FeedbackProvider = ({
@@ -52,6 +54,7 @@ export const FeedbackProvider = ({
 }) => {
   const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(false);
   const [alert, setAlert] = useState<Alert>(null);
+  const currentAlert = useRef<Alert>(null);
 
   const hideLoader = () => setIsLoaderVisible(false);
   const showLoader = () => setIsLoaderVisible(true);
@@ -71,7 +74,7 @@ export const FeedbackProvider = ({
     timed: boolean = true,
     actions: AlertAction[] = []
   ) => {
-    setAlert({
+    const newAlert: Alert = {
       message: msg,
       type:
         variant === AlertType.error
@@ -82,7 +85,15 @@ export const FeedbackProvider = ({
           ? setTimeout(hideAlertRef.current, 5000)
           : null,
       actions,
-    });
+      id: uuid(),
+    };
+    setAlert(newAlert);
+    currentAlert.current = newAlert;
+    return () => {
+      if (currentAlert.current?.id === newAlert?.id) {
+        setAlert(null);
+      }
+    };
   };
 
   return (

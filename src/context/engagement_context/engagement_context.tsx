@@ -19,7 +19,7 @@ export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
-  setcurrentEngagement: (Engagement: Engagement) => void;
+  setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
   requiredFields: string[];
   getEngagement: (
@@ -73,7 +73,7 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
-  const [currentEngagement, setcurrentEngagement] = useState<
+  const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
@@ -142,7 +142,7 @@ export const EngagementProvider = ({
         engagement?.project_name
       );
       _updateEngagementInPlace(refreshedEngagement);
-      setcurrentEngagement(refreshedEngagement);
+      setCurrentEngagement(refreshedEngagement);
     },
     [_updateEngagementInPlace, engagementService]
   );
@@ -157,7 +157,7 @@ export const EngagementProvider = ({
           );
           if (hasUpdates) {
             feedbackContext.showAlert(
-              'Uh oh, we have a conflict',
+              'Your data is stale. You will need to refresh your data before you save. Refreshing data will cause current changes to be lost.',
               AlertType.error,
               false,
               [
@@ -342,7 +342,7 @@ export const EngagementProvider = ({
         missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
-        setcurrentEngagement,
+        setCurrentEngagement,
         engagements,
         getEngagement,
         error,
