@@ -1,7 +1,7 @@
 import {
   AuthenticationError,
   AuthorizationError,
-} from '../../../context/session_context/session_errors';
+} from '../../auth_service/auth_errors';
 
 interface AxiosError {
   response: {

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
-import { AuthService } from '../../services/authentication_service/authentication_service';
+import { AuthService } from '../../services/auth_service/authentication_service';
 import { VersionService } from '../../services/version_service/version_service';
 import { Apiv1VersionService } from '../../services/version_service/implementations/apiv1_version_service';
 import { FakedVersionService } from '../../services/version_service/implementations/faked_version_service';
-import { Apiv1AuthService } from '../../services/authentication_service/implementations/apiv1_auth_service';
-import { FakedAuthService } from '../../services/authentication_service/implementations/faked_auth_service';
+import { Apiv1AuthService } from '../../services/auth_service/implementations/apiv1_auth_service';
+import { FakedAuthService } from '../../services/auth_service/implementations/faked_auth_service';
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
 import { useConfig } from '../config_context/config_hook';

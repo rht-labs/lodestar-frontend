@@ -2,7 +2,7 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import { SessionProvider } from './context/session_context/session_context';
+import { SessionProvider } from './context/auth_context/auth_context';
 import { VersionProvider } from './context/version_context/version_context';
 import { ConfigProvider } from './context/config_context/config_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';

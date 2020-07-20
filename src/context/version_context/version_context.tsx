@@ -2,11 +2,11 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Version } from '../../schemas/version_schema';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { useFeedback } from '../feedback_context';
-import { useSession } from '../session_context/session_context';
+import { useSession } from '../auth_context/auth_context';
 import {
   AuthorizationError,
   AuthenticationError,
-} from '../session_context/session_errors';
+} from '../../services/auth_service/auth_errors';
 
 export interface VersionContext {
   fetchVersions: () => void;
@@ -23,17 +23,17 @@ export const VersionProvider = ({
   children: React.ReactChild;
 }) => {
   const { versionService } = useServiceProviders();
-  const sessionContext = useSession();
+  const authContext = useSession();
   const [versions, setVersions] = useState<Version | undefined>();
   const _handleErrors = useCallback(
     e => {
       if (e instanceof AuthorizationError || e instanceof AuthenticationError) {
-        sessionContext.checkAuthStatus();
+        authContext.checkAuthStatus();
       } else {
         throw e;
       }
     },
-    [sessionContext]
+    [authContext]
   );
   const feedbackContext = useFeedback();
   const fetchVersions = useCallback(async () => {

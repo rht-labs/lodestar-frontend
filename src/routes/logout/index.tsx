@@ -1,5 +1,5 @@
 import React from 'react';
-import { SessionContext } from '../../context/session_context/session_context';
+import { SessionContext } from '../../context/auth_context/auth_context';
 
 class LogoutPage extends React.Component<{ session: SessionContext }> {
   componentDidMount(): void {

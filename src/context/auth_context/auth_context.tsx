@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import { AuthService } from '../../services/authentication_service/authentication_service';
+import { AuthService } from '../../services/auth_service/authentication_service';
 
 import { UserProfile } from '../../schemas/user_profile_schema';
 import {

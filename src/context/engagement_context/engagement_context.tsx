@@ -10,8 +10,8 @@ import { useFeedback, AlertType } from '../feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
-import { AuthenticationError } from '../session_context/session_errors';
-import { useSession } from '../session_context/session_context';
+import { AuthenticationError } from '../../services/auth_service/auth_errors';
+import { useSession } from '../auth_context/auth_context';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -77,18 +77,18 @@ export const EngagementProvider = ({
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
-  const sessionContext = useSession();
+  const authContext = useSession();
 
   const _handleErrors = useCallback(
     error => {
       if (error instanceof AuthenticationError) {
         console.log('handling error');
-        sessionContext.checkAuthStatus();
+        authContext.checkAuthStatus();
       } else {
         throw error;
       }
     },
-    [sessionContext]
+    [authContext]
   );
 
   const getConfig = useCallback(async () => {
