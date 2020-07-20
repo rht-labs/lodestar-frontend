@@ -20,7 +20,7 @@ import {
 import {
   PlusCircleIcon,
   ErrorCircleOIcon,
-  CubesIcon,
+  UsersIcon,
 } from '@patternfly/react-icons';
 import { Feature } from '../../components/feature';
 import { APP_FEATURES } from '../../common/app_features';
@@ -69,24 +69,24 @@ export function UserEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave}>Save</Button>
+            <Button onClick={onSave} data-cy={'save_users'} >Save</Button>
           </div>
         }
       >
         <div>
           {!engagement.engagement_users.length ? (
             <EmptyState>
-              <EmptyStateIcon icon={CubesIcon} />
+              <EmptyStateIcon icon={UsersIcon} />
               <Title headingLevel="h4" size="lg">
                 No Users Added
               </Title>
               <EmptyStateBody>
-                <p>No users have been added to this engagement's yet.</p>
+                <p>No users have been added to this engagement</p>
                 <p>
                   Select the 'add user' button below, to begin adding users.
                 </p>
               </EmptyStateBody>
-              <Button variant="primary" onClick={addUser}>
+              <Button variant="primary" onClick={addUser} data-cy={'add_new_user'}>
                 Add User
               </Button>
             </EmptyState>
@@ -128,6 +128,7 @@ export function UserEditModal({
                                   <TextInput
                                     aria-label="First Name"
                                     name="first-name"
+                                    data-cy={'input_user_firstname'}
                                     isDisabled={
                                       !hasFeature(APP_FEATURES.writer)
                                     }
@@ -149,6 +150,7 @@ export function UserEditModal({
                                   <TextInput
                                     aria-label="Last Name"
                                     name="last-name"
+                                    data-cy={'input_user_lastname'}
                                     isDisabled={
                                       !hasFeature(APP_FEATURES.writer)
                                     }
@@ -170,6 +172,7 @@ export function UserEditModal({
                                   <TextInput
                                     aria-label="email"
                                     name="email"
+                                    data-cy={'input_user_email'}
                                     isDisabled={
                                       !hasFeature(APP_FEATURES.writer)
                                     }
@@ -191,6 +194,7 @@ export function UserEditModal({
                                   <FormSelect
                                     name="role"
                                     aria-label="User Role"
+                                    id='user_role_dropdown'
                                     value={value.role || ''}
                                     isDisabled={
                                       !hasFeature(APP_FEATURES.writer)
@@ -222,6 +226,7 @@ export function UserEditModal({
                                           key={index}
                                           value={option.value}
                                           label={option.label}
+                                          data-cy={option.label}
                                         />
                                       ))
                                     )}
@@ -253,6 +258,7 @@ export function UserEditModal({
                   onClick={addUser}
                   variant="link"
                   icon={<PlusCircleIcon />}
+                  data-cy={'add_more_users'}
                 >
                   Add User
                 </Button>

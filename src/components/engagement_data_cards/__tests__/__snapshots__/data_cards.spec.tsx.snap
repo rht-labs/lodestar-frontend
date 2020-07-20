@@ -48,83 +48,157 @@ Object {
             class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
               style="margin-bottom: 1rem;"
             >
               <b
+                data-cy="upcoming"
                 style="color: rgb(236, 122, 8);"
               >
                 UPCOMING
               </b>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
             >
               <div
-                class="pf-c-content"
+                class="pf-l-grid pf-m-gutter"
               >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
                 >
-                  Company
-                </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
+                  <div
+                    class="pf-c-content"
+                    data-cy="company_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Company
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      NASA
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
                 >
-                  NASA
-                </p>
+                  <div
+                    class="pf-c-content"
+                    data-cy="project_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Project
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Boots on the Moon
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="location_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Location
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Nashville, TN
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="start_date_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Start Date
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Jun 01, 2020
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="end_date_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      End Date
+                    </h6>
+                    <p
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Jul 01, 2020
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="created_by_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Created By
+                    </h6>
+                    dwasinge
+                  </div>
+                </div>
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
             >
               <div
                 class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  Project
-                </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  Boots on the Moon
-                </p>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-3-col"
-            >
-              <div
-                class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  Location
-                </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  Nashville, TN
-                </p>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-3-col"
-            >
-              <div
-                class="pf-c-content"
+                data-cy="description_label"
               >
                 <h6
                   class=""
@@ -138,64 +212,6 @@ Object {
                 >
                   It's rocket science
                 </span>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-3-col"
-            >
-              <div
-                class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  Start Date
-                </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  Jun 01, 2020
-                </p>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-3-col"
-            >
-              <div
-                class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  End Date
-                </h6>
-                <p
-                  class=""
-                  data-pf-content="true"
-                >
-                  Jul 01, 2020
-                </p>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-3-col"
-            >
-              <div
-                class="pf-c-content"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  Created By
-                </h6>
-                dwasinge
               </div>
             </div>
           </div>
@@ -248,83 +264,157 @@ Object {
           class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid__item"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
             style="margin-bottom: 1rem;"
           >
             <b
+              data-cy="upcoming"
               style="color: rgb(236, 122, 8);"
             >
               UPCOMING
             </b>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
           >
             <div
-              class="pf-c-content"
+              class="pf-l-grid pf-m-gutter"
             >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
               >
-                Company
-              </h6>
-              <p
-                class=""
-                data-pf-content="true"
+                <div
+                  class="pf-c-content"
+                  data-cy="company_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Company
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    NASA
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
               >
-                NASA
-              </p>
+                <div
+                  class="pf-c-content"
+                  data-cy="project_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Project
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Boots on the Moon
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="location_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Location
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Nashville, TN
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="start_date_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Start Date
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Jun 01, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="end_date_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    End Date
+                  </h6>
+                  <p
+                    class=""
+                    data-pf-content="true"
+                  >
+                    Jul 01, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="created_by_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Created By
+                  </h6>
+                  dwasinge
+                </div>
+              </div>
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
           >
             <div
               class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                Project
-              </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                Boots on the Moon
-              </p>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-3-col"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                Location
-              </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                Nashville, TN
-              </p>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-3-col"
-          >
-            <div
-              class="pf-c-content"
+              data-cy="description_label"
             >
               <h6
                 class=""
@@ -338,64 +428,6 @@ Object {
               >
                 It's rocket science
               </span>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-3-col"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                Start Date
-              </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                Jun 01, 2020
-              </p>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-3-col"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                End Date
-              </h6>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                Jul 01, 2020
-              </p>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-3-col"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                Created By
-              </h6>
-              dwasinge
             </div>
           </div>
         </div>
@@ -504,10 +536,11 @@ Object {
             class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="hosting_type"
               >
                 <h6
                   class=""
@@ -525,10 +558,11 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_provider"
               >
                 <h6
                   class=""
@@ -541,10 +575,11 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="oc_version"
               >
                 <h6
                   class=""
@@ -557,10 +592,11 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="storage_size"
               >
                 <h6
                   class=""
@@ -573,10 +609,11 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="cloud_region"
               >
                 <h6
                   class=""
@@ -589,10 +626,11 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="cluster_size"
               >
                 <h6
                   class=""
@@ -605,10 +643,11 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-3-col"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <div
                 class="pf-c-content"
+                data-cy="sub_domain"
               >
                 <h6
                   class=""
@@ -671,10 +710,11 @@ Object {
           class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="hosting_type"
             >
               <h6
                 class=""
@@ -692,10 +732,11 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_provider"
             >
               <h6
                 class=""
@@ -708,10 +749,11 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="oc_version"
             >
               <h6
                 class=""
@@ -724,10 +766,11 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="storage_size"
             >
               <h6
                 class=""
@@ -740,10 +783,11 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="cloud_region"
             >
               <h6
                 class=""
@@ -756,10 +800,11 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="cluster_size"
             >
               <h6
                 class=""
@@ -772,10 +817,11 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-3-col"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <div
               class="pf-c-content"
+              data-cy="sub_domain"
             >
               <h6
                 class=""
@@ -894,7 +940,7 @@ Object {
             class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item pf-m-4-col"
+              class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
             >
               <div
                 class="pf-c-content"
@@ -915,7 +961,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-4-col"
+              class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
             >
               <div
                 class="pf-c-content"
@@ -936,7 +982,7 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-4-col"
+              class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
             >
               <div
                 class="pf-c-content"
@@ -1006,7 +1052,7 @@ Object {
           class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid__item pf-m-4-col"
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
           >
             <div
               class="pf-c-content"
@@ -1027,7 +1073,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-4-col"
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
           >
             <div
               class="pf-c-content"
@@ -1048,7 +1094,7 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-4-col"
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md"
           >
             <div
               class="pf-c-content"

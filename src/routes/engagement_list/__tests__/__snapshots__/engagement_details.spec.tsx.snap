@@ -9,7 +9,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -30,7 +30,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div
             class="pf-l-flex"
@@ -96,6 +96,7 @@ Object {
                 class=""
               >
                 <b
+                  data-cy="active"
                   style="color: green;"
                 >
                   ACTIVE
@@ -105,7 +106,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div />
         </div>
@@ -117,7 +118,7 @@ Object {
       class="pf-l-grid pf-m-gutter"
     >
       <div
-        class="pf-l-grid__item pf-m-12-col"
+        class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
       >
         <div
           class="pf-l-grid pf-m-gutter"
@@ -138,7 +139,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div
           class="pf-l-flex"
@@ -204,6 +205,7 @@ Object {
               class=""
             >
               <b
+                data-cy="active"
                 style="color: green;"
               >
                 ACTIVE
@@ -213,7 +215,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div />
       </div>
@@ -282,7 +284,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -303,7 +305,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div
             class="pf-l-flex"
@@ -369,6 +371,7 @@ Object {
                 class=""
               >
                 <b
+                  data-cy="past"
                   style="color: rgb(184, 187, 190);"
                 >
                   PAST
@@ -378,7 +381,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div />
         </div>
@@ -390,7 +393,7 @@ Object {
       class="pf-l-grid pf-m-gutter"
     >
       <div
-        class="pf-l-grid__item pf-m-12-col"
+        class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
       >
         <div
           class="pf-l-grid pf-m-gutter"
@@ -411,7 +414,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div
           class="pf-l-flex"
@@ -477,6 +480,7 @@ Object {
               class=""
             >
               <b
+                data-cy="past"
                 style="color: rgb(184, 187, 190);"
               >
                 PAST
@@ -486,7 +490,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div />
       </div>
@@ -555,7 +559,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col"
+          class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
         >
           <div
             class="pf-l-grid pf-m-gutter"
@@ -576,7 +580,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div
             class="pf-l-flex"
@@ -642,6 +646,7 @@ Object {
                 class=""
               >
                 <b
+                  data-cy="upcoming"
                   style="color: rgb(236, 122, 8);"
                 >
                   UPCOMING
@@ -651,7 +656,7 @@ Object {
           </div>
         </div>
         <div
-          class="pf-l-grid__item pf-m-6-col"
+          class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
         >
           <div />
         </div>
@@ -663,7 +668,7 @@ Object {
       class="pf-l-grid pf-m-gutter"
     >
       <div
-        class="pf-l-grid__item pf-m-12-col"
+        class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
       >
         <div
           class="pf-l-grid pf-m-gutter"
@@ -684,7 +689,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div
           class="pf-l-flex"
@@ -750,6 +755,7 @@ Object {
               class=""
             >
               <b
+                data-cy="upcoming"
                 style="color: rgb(236, 122, 8);"
               >
                 UPCOMING
@@ -759,7 +765,7 @@ Object {
         </div>
       </div>
       <div
-        class="pf-l-grid__item pf-m-6-col"
+        class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
       >
         <div />
       </div>

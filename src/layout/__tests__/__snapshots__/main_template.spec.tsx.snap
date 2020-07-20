@@ -20,7 +20,7 @@ Object {
             >
               <button
                 aria-controls="page-sidebar"
-                aria-expanded="true"
+                aria-expanded="false"
                 aria-label="Global navigation"
                 class="pf-c-button pf-m-plain"
                 data-ouia-component-type="PF4/Button"
@@ -98,6 +98,7 @@ Object {
                     >
                       <a
                         class="pf-c-nav__link"
+                        data-cy="about_link"
                         href="/app/about"
                         style="padding-bottom: 0px; padding-top: 0px;"
                       >
@@ -152,8 +153,10 @@ Object {
                       <button
                         aria-label="Notifications"
                         class="pf-c-button pf-m-plain"
+                        data-cy="notification_badge"
                         data-ouia-component-type="PF4/Button"
                         data-ouia-safe="true"
+                        title="Notifications"
                         type="button"
                       >
                         <span
@@ -244,7 +247,7 @@ Object {
           </div>
         </header>
         <div
-          class="pf-c-page__sidebar pf-m-expanded"
+          class="pf-c-page__sidebar pf-m-collapsed"
           id="page-sidebar"
         >
           <div
@@ -446,6 +449,7 @@ Object {
         >
           <div
             class="pf-c-drawer"
+            id="notification_drawer"
           >
             <div
               class="pf-c-drawer__main"
@@ -565,7 +569,7 @@ Object {
           >
             <button
               aria-controls="page-sidebar"
-              aria-expanded="true"
+              aria-expanded="false"
               aria-label="Global navigation"
               class="pf-c-button pf-m-plain"
               data-ouia-component-type="PF4/Button"
@@ -643,6 +647,7 @@ Object {
                   >
                     <a
                       class="pf-c-nav__link"
+                      data-cy="about_link"
                       href="/app/about"
                       style="padding-bottom: 0px; padding-top: 0px;"
                     >
@@ -697,8 +702,10 @@ Object {
                     <button
                       aria-label="Notifications"
                       class="pf-c-button pf-m-plain"
+                      data-cy="notification_badge"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
+                      title="Notifications"
                       type="button"
                     >
                       <span
@@ -789,7 +796,7 @@ Object {
         </div>
       </header>
       <div
-        class="pf-c-page__sidebar pf-m-expanded"
+        class="pf-c-page__sidebar pf-m-collapsed"
         id="page-sidebar"
       >
         <div
@@ -991,6 +998,7 @@ Object {
       >
         <div
           class="pf-c-drawer"
+          id="notification_drawer"
         >
           <div
             class="pf-c-drawer__main"

@@ -61,21 +61,22 @@ export function PointOfContactCard({
         actionButton={() => (
           <EditButton
             onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
-            text={'Edit'}/>
+            text={'Edit'}
+            dataCy={'points_of_contact'}/>
         )}
       >
         <Grid hasGutter>
-          <GridItem span={4}>
+          <GridItem sm={12} md={4}>
             <TitledDataPoint title="Engagement Lead">
               {currentEngagement?.engagement_lead_name}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem sm={12} md={4}>
             <TitledDataPoint title="Technical Lead">
               {currentEngagement?.technical_lead_name}
             </TitledDataPoint>
           </GridItem>
-          <GridItem span={4}>
+          <GridItem sm={12} md={4}>
             <TitledDataPoint title="Customer Contact">
               {currentEngagement?.customer_contact_name}
             </TitledDataPoint>

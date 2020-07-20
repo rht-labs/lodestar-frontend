@@ -6,7 +6,6 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
   Text,
   TextContent,
   TextVariants
@@ -32,7 +31,7 @@ export function DashboardDataCard({
   const history = useHistory();
 
   const cardShape: React.CSSProperties = {
-    minHeight: '50vh',
+    minHeight: '40vh',
   };
 
   return (
@@ -41,22 +40,21 @@ export function DashboardDataCard({
         <EmptyState>
           <EmptyStateIcon icon={icon}/>
           <TextContent>
-            <Text component={TextVariants.h1}>
+            <Text component={TextVariants.h1} data-cy={`numbers_of_${title[1]}`}>
               {numberOfEngagements}
             </Text>
-            <Text component={TextVariants.h2}>
-              {title}
-            </Text>
+            <Button variant="link"
+                    isInline
+                    onClick={() => { history.push(url)} }
+                    data-cy={`button_${title[1]}`}>
+              <Text component={TextVariants.h2}>
+                {title}
+              </Text>
+            </Button>
           </TextContent>
           <EmptyStateBody>
             {subtitle}
           </EmptyStateBody>
-          <EmptyStatePrimary>
-            <Button variant="link"
-                    onClick={() => { history.push(url)} }>
-              View all
-            </Button>
-          </EmptyStatePrimary>
         </EmptyState>
       </CardBody>
     </Card>

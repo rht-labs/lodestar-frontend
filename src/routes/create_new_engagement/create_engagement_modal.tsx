@@ -59,6 +59,7 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
           key="cancel"
           variant="link"
           onClick={() => props.onRequestClose()}
+          data-cy={'cancel_button'}
         >
           Cancel
         </Button>,

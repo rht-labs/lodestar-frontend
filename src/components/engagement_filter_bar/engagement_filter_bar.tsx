@@ -23,8 +23,8 @@ export function EngagementFilterBar({
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
   return (
-    <Flex justifyContent={{ default: 'justifyContentFlexStart' }}>
-      <Flex style={{ marginTop: '2rem' }}>
+    <Flex justifyContent={{ default: 'justifyContentFlexStart' }} >
+      <Flex style={{ marginTop: '2rem' }} direction={{ default: 'column', md: 'row' }}>
         <FlexItem grow={{ default: 'grow' }}>
           <InputGroup>
             <Button
@@ -39,6 +39,7 @@ export function EngagementFilterBar({
               value={searchTerm}
               onChange={searchTerm => onChange({ ...filter, searchTerm })}
               placeholder="Search for an engagement"
+              data-cy={'search_input'}
             />
           </InputGroup>
         </FlexItem>
@@ -52,6 +53,7 @@ export function EngagementFilterBar({
           <Button
             variant={ButtonVariant.secondary}
             onClick={() => onChange({})}
+            data-cy={'reset_button'}
           >
             Reset
           </Button>

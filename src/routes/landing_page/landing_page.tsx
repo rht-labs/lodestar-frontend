@@ -31,7 +31,7 @@ export const LandingPage = () => {
           <div className="cta">
             <span>LodeStar</span>
             <Link to="/app">
-              <Button>Get Started</Button>
+              <Button data-cy={'get_started_button'}>Get Started</Button>
             </Link>
           </div>
           <div className="background-image" />
