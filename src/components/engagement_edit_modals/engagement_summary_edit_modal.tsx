@@ -34,7 +34,10 @@ export function EngagementSummaryEditModal(
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave}>Save</Button>
+            <Button onClick={onSave}
+                    data-cy={"save_summary_card"}>
+              Save
+            </Button>
           </div>
         }
       >

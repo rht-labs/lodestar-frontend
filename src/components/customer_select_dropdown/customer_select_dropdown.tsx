@@ -28,6 +28,7 @@ export function _CustomerSelectDropdown(
       variant={SelectVariant.typeahead}
       placeholderText={props.placeholder}
       onClear={() => props.onSelect(undefined)}
+      toggleId="customer_dropdown"
     >
       {props.options
         ?.concat([props.selectedValue])

@@ -45,7 +45,9 @@ export const MainTemplate = (props: MainTemplateProps) => {
       }
       isManagedSidebar
     >
-      <Drawer isExpanded={isNotificationExpanded}>
+      <Drawer isExpanded={isNotificationExpanded}
+              id={'notification_drawer'}
+      >
         <DrawerContent panelContent={
           <NotificationContent onClose={onClose}
                                notifications={notifications}/>}>
