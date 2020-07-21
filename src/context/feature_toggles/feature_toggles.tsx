@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useSession } from '../session_context/session_context';
+import { useSession } from '../auth_context/auth_context';
 
 interface FeatureToggleContext {
   features: string[];
@@ -18,8 +18,8 @@ export const FeatureToggles = ({
   children: React.ReactNode;
   features?: string[];
 }) => {
-  const sessionContext = useSession();
-  const providedFeatures = features ?? sessionContext.sessionData?.roles ?? [];
+  const authContext = useSession();
+  const providedFeatures = features ?? authContext.sessionData?.roles ?? [];
   const hasFeature = useCallback(
     (name: string) => {
       return name && providedFeatures.includes(name);

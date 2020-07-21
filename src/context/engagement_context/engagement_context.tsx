@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useRef } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
 import { useState, useCallback, useReducer } from 'react';
 import {
@@ -6,16 +6,22 @@ import {
   getInitialState,
 } from './engagement_form_reducer';
 import { useServiceProviders } from '../service_provider_context/service_provider_context';
-import { useFeedback, AlertType } from '../feedback_context';
+import { useFeedback, AlertType } from '../feedback_context/feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
+import { AuthenticationError } from '../../services/auth_service/auth_errors';
+import { useSession } from '../auth_context/auth_context';
+import {
+  EngagementPoll,
+  EngagementPollIntervalStrategy,
+} from '../../schemas/engagement_poll';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
-  setcurrentEngagement: (Engagement: Engagement) => void;
+  setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
   requiredFields: string[];
   getEngagement: (
@@ -32,6 +38,7 @@ export interface EngagementContext {
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
+  createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
 }
 const requiredFields = [
   'customer_contact_email',
@@ -68,122 +75,49 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
-  const [currentEngagement, setcurrentEngagement] = useState<
+  const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
   >(engagementFormReducer, engagementFormReducer());
 
+  const authContext = useSession();
+
+  const _handleErrors = useCallback(
+    async error => {
+      if (error instanceof AuthenticationError) {
+        await authContext.checkAuthStatus();
+      } else {
+        throw error;
+      }
+    },
+    [authContext]
+  );
+
+  const _validateAuthStatus = useCallback(async () => {
+    const authStatus = await authContext.checkAuthStatus();
+    if (!authStatus) {
+      throw new AuthenticationError();
+    }
+  }, [authContext]);
+  const _validateAuthStatusRef = useRef(_validateAuthStatus);
+  useEffect(() => (_validateAuthStatusRef.current = _validateAuthStatus), [
+    _validateAuthStatus,
+  ]);
+
   const getConfig = useCallback(async () => {
+    await _validateAuthStatus();
     const data = await engagementService.getConfig();
     setFormOptions(data);
-  }, [engagementService]);
+  }, [engagementService, _validateAuthStatus]);
 
   useEffect(() => {
-    Logger.instance.info('change active engagement', currentEngagement);
     dispatch({
       type: 'switch_engagement',
       payload: getInitialState(currentEngagement),
     });
   }, [currentEngagement, formOptions]);
-  const fetchEngagements = useCallback(async () => {
-    try {
-      feedbackContext.showLoader();
-      const engagements = await engagementService.fetchEngagements();
-      setEngagements(engagements);
-      feedbackContext.hideLoader();
-      return engagements;
-    } catch (e) {
-      feedbackContext.showAlert(
-        'Something went wrong while getting the engagements',
-        AlertType.error,
-        true
-      );
-      Logger.instance.error(e);
-      feedbackContext.hideLoader();
-    }
-  }, [engagementService, feedbackContext]);
-
-  const getEngagement = useCallback(
-    async (customerName: string, projectName: string) => {
-      try {
-        let availableEngagements = engagements ?? (await fetchEngagements());
-        return availableEngagements?.find(
-          engagement =>
-            engagement?.customer_name === customerName &&
-            engagement?.project_name === projectName
-        );
-      } catch (e) {
-        Logger.instance.error(e);
-        feedbackContext.showAlert(
-          'There was a problem fetching this engagement',
-          AlertType.error
-        );
-      }
-    },
-    [engagements, fetchEngagements, feedbackContext]
-  );
-
-  const _addNewEngagement = useCallback(
-    (newEngagement: Engagement) => {
-      try {
-        const newEngagementList = [newEngagement, ...(engagements ?? [])];
-        setEngagements(newEngagementList);
-      } catch (e) {
-        Logger.instance.error(e);
-        // TODO: Handle setting the error
-      }
-    },
-    [engagements]
-  );
-
-  const createEngagement = useCallback(
-    async (data: any) => {
-      feedbackContext.showLoader();
-      try {
-        const engagement = await engagementService.createEngagement(data);
-        _addNewEngagement(engagement);
-        setEngagements([...engagements, engagement]);
-        feedbackContext.hideLoader();
-        feedbackContext.showAlert(
-          'Your engagement has been successfully created',
-          AlertType.success
-        );
-        return engagement;
-      } catch (e) {
-        Logger.instance.error(e);
-        feedbackContext.hideLoader();
-        let errorMessage =
-          'There was an issue with creating your engagement. Please followup with an administrator if this continues.';
-        if (e instanceof AlreadyExistsError) {
-          errorMessage =
-            'This client already has a project with that name. Please choose a different project name.';
-        }
-        feedbackContext.showAlert(errorMessage, AlertType.error);
-      }
-    },
-    [engagementService, _addNewEngagement, feedbackContext, engagements]
-  );
-
-  const _checkLaunchReady = useCallback(() => {
-    let result = requiredFields.every(
-      o =>
-        typeof currentEngagementChanges[o] === 'boolean' ||
-        typeof currentEngagementChanges[o] === 'number' ||
-        !!currentEngagementChanges[o]
-    );
-    return result;
-  }, [currentEngagementChanges]);
-
-  const missingRequiredFields = useCallback(() => {
-    return requiredFields.filter(
-      field =>
-        currentEngagement?.[field] !== 'boolean' &&
-        currentEngagement?.[field] !== 'number' &&
-        !currentEngagement?.[field]
-    );
-  }, [currentEngagement]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -209,11 +143,177 @@ export const EngagementProvider = ({
     [engagements]
   );
 
+  const fetchEngagements = useCallback(async () => {
+    try {
+      await _validateAuthStatus();
+      feedbackContext.showLoader();
+      const engagements = await engagementService.fetchEngagements();
+      setEngagements(engagements);
+      feedbackContext.hideLoader();
+      return engagements;
+    } catch (e) {
+      feedbackContext.showAlert(
+        'Something went wrong while getting the engagements',
+        AlertType.error,
+        true
+      );
+      feedbackContext.hideLoader();
+      _handleErrors(e);
+    }
+  }, [engagementService, feedbackContext, _handleErrors, _validateAuthStatus]);
+
+  const _refreshEngagementData = useCallback(
+    async (engagement: Engagement) => {
+      await _validateAuthStatus();
+      const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+        engagement?.customer_name,
+        engagement?.project_name
+      );
+      _updateEngagementInPlace(refreshedEngagement);
+      setCurrentEngagement(refreshedEngagement);
+    },
+    [_updateEngagementInPlace, engagementService, _validateAuthStatus]
+  );
+
+  const createEngagementPoll = useCallback(
+    async (engagement: Engagement): Promise<EngagementPoll> => {
+      await _validateAuthStatus();
+      return new EngagementPoll(
+        new EngagementPollIntervalStrategy(
+          setInterval(async () => {
+            await _validateAuthStatusRef.current();
+            const hasUpdates = await engagementService.checkHasUpdates(
+              engagement
+            );
+            if (hasUpdates) {
+              feedbackContext.showAlert(
+                'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
+                AlertType.error,
+                false,
+                [
+                  {
+                    title: 'Refresh',
+                    action: () => _refreshEngagementData(engagement),
+                  },
+                ]
+              );
+            }
+          }, 5000)
+        )
+      );
+    },
+    [
+      _validateAuthStatus,
+      _refreshEngagementData,
+      engagementService,
+      feedbackContext,
+    ]
+  );
+
+  const getEngagement = useCallback(
+    async (customerName: string, projectName: string) => {
+      try {
+        let availableEngagements = engagements ?? (await fetchEngagements());
+        return availableEngagements?.find(
+          engagement =>
+            engagement?.customer_name === customerName &&
+            engagement?.project_name === projectName
+        );
+      } catch (e) {
+        try {
+          _handleErrors(e);
+        } catch (e) {
+          feedbackContext.showAlert(
+            'There was a problem fetching this engagement',
+            AlertType.error
+          );
+        }
+      }
+    },
+    [engagements, fetchEngagements, feedbackContext, _handleErrors]
+  );
+
+  const _addNewEngagement = useCallback(
+    (newEngagement: Engagement) => {
+      try {
+        const newEngagementList = [newEngagement, ...(engagements ?? [])];
+        setEngagements(newEngagementList);
+      } catch (e) {
+        _handleErrors(e);
+        Logger.instance.error(e);
+      }
+    },
+    [engagements, _handleErrors]
+  );
+
+  const createEngagement = useCallback(
+    async (data: any) => {
+      feedbackContext.showLoader();
+      try {
+        await _validateAuthStatus();
+        const engagement = await engagementService.createEngagement(data);
+        _addNewEngagement(engagement);
+        setEngagements([...(engagements ?? []), engagement]);
+        feedbackContext.hideLoader();
+        feedbackContext.showAlert(
+          'Your engagement has been successfully created',
+          AlertType.success
+        );
+        return engagement;
+      } catch (e) {
+        feedbackContext.hideLoader();
+        let errorMessage;
+        if (e instanceof AlreadyExistsError) {
+          errorMessage =
+            'This client already has a project with that name. Please choose a different project name.';
+        } else {
+          try {
+            _handleErrors(e);
+          } catch (e) {
+            errorMessage =
+              'There was an issue with creating your engagement. Please follow up with an administrator if this continues.';
+          }
+        }
+
+        feedbackContext.showAlert(errorMessage, AlertType.error);
+        _handleErrors(e);
+      }
+    },
+    [
+      engagementService,
+      _addNewEngagement,
+      feedbackContext,
+      engagements,
+      _handleErrors,
+      _validateAuthStatus,
+    ]
+  );
+
+  const _checkLaunchReady = useCallback(() => {
+    let result = requiredFields.every(
+      o =>
+        typeof currentEngagementChanges[o] === 'boolean' ||
+        typeof currentEngagementChanges[o] === 'number' ||
+        !!currentEngagementChanges[o]
+    );
+    return result;
+  }, [currentEngagementChanges]);
+
+  const missingRequiredFields = useCallback(() => {
+    return requiredFields.filter(
+      field =>
+        currentEngagement?.[field] !== 'boolean' &&
+        currentEngagement?.[field] !== 'number' &&
+        !currentEngagement?.[field]
+    );
+  }, [currentEngagement]);
+
   const saveEngagement = useCallback(
     async (data: Engagement) => {
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
+        await _validateAuthStatus();
         const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
@@ -222,19 +322,33 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
       } catch (e) {
-        Logger.instance.error(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with saving your changes. Please followup with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
-          errorMessage =
-            'The path that you input is already taken.  Please update and try saving again.';
+          // If there is no mongo id associated with the engagement, then it is being committed to the backend for the first time. It is a net new engagement.
+          if (!!data.mongo_id) {
+            errorMessage =
+              'The path that you input is already taken.  Please update and try saving again.';
+
+            // Otherwise, we are saving an existing engagement.
+          } else {
+            _handleErrors(e);
+            errorMessage =
+              'Your changes could not be saved. Another user has modified this data. Please refresh your data in order to make changes.';
+          }
         }
         feedbackContext.showAlert(errorMessage, AlertType.error);
       }
     },
-    [engagementService, _updateEngagementInPlace, feedbackContext]
+    [
+      engagementService,
+      _updateEngagementInPlace,
+      feedbackContext,
+      _handleErrors,
+      _validateAuthStatus,
+    ]
   );
 
   const updateEngagementFormField = useCallback(
@@ -254,6 +368,7 @@ export const EngagementProvider = ({
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
+        await _validateAuthStatus();
         const returnedEngagement = await engagementService.launchEngagement(
           data
         );
@@ -264,7 +379,7 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        Logger.instance.error(e);
+        _handleErrors(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
@@ -279,17 +394,20 @@ export const EngagementProvider = ({
       _checkLaunchReady,
       engagementService,
       feedbackContext,
+      _handleErrors,
+      _validateAuthStatus,
     ]
   );
   return (
     <Provider
       value={{
+        createEngagementPoll,
         requiredFields,
         currentEngagement,
         missingRequiredFields: missingRequiredFields(),
         getConfig,
         isLaunchable: _checkLaunchReady(),
-        setcurrentEngagement,
+        setCurrentEngagement,
         engagements,
         getEngagement,
         error,
@@ -310,3 +428,5 @@ export const EngagementProvider = ({
     </Provider>
   );
 };
+
+// EngagementProvider.whyDidYouRender = false;
