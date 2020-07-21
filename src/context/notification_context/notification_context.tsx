@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Notification } from '../../schemas/notification_schema';
-import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { APP_FEATURES } from '../../common/app_features';
+import { NotificationService } from '../../services/notification_service/notification_service';
 
 interface NotificationContext {
   hasNotification: boolean;
@@ -17,12 +17,13 @@ export const NotificationContext = React.createContext<NotificationContext>({
 
 export const NotificationProvider = ({
   children,
+  notificationService,
 }: {
   children: React.ReactNode;
+  notificationService: NotificationService;
 }) => {
   const [hasNotification, setHasNotification] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const { notificationService } = useServiceProviders();
 
   const fetchNotifications = useCallback(async () => {
     const response = await notificationService.fetchNotifications();

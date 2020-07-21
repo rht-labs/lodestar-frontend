@@ -22,7 +22,7 @@ import {
   ErrorCircleOIcon,
   UsersIcon,
 } from '@patternfly/react-icons';
-import { Feature } from '../../components/feature';
+import { Feature } from '../feature/feature';
 import { APP_FEATURES } from '../../common/app_features';
 import { Engagement } from '../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../schemas/engagement_config';

@@ -1,4 +1,4 @@
-import { Engagement } from './engagement_schema';
+import { Engagement } from '../engagement_schema';
 
 const engagementProperties = [
   'archive_date',

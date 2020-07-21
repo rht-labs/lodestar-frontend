@@ -1,9 +1,9 @@
 import React from 'react';
 import { renderHook, act, cleanup } from '@testing-library/react-hooks';
-import { useEngagements } from './engagement_hook';
-import { getInitialState } from './engagement_form_reducer';
-import { Engagement } from '../../schemas/engagement_schema';
-import { TestStateWrapper } from '../../common/test_state_wrapper';
+import { useEngagements } from '../engagement_hook';
+import { getInitialState } from '../engagement_form_reducer';
+import { Engagement } from '../../../schemas/engagement_schema';
+import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
 describe('Engagement Context', () => {
   const getHook = () => {
