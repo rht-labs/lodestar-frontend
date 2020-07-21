@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import {
-  Card,
-  CardHeader,
   PageSection,
-  PageSectionVariants,
-  TextContent,
   Text,
   Page,
   SkipToContent,
   Grid,
   GridItem,
+  Title,
+  TextVariants
 } from '@patternfly/react-core';
 import { useVersion } from '../../context/version_context/version_context';
 import { ComponentVersions } from "./component_versions";
-import {LodeStarVersion} from "./lodeStar_version";
+import { LodeStarVersion } from "./lodeStar_version";
+import { AboutText } from "./about_text";
 
 export function About() {
   const versionContext = useVersion();
@@ -36,23 +35,25 @@ export function About() {
         skipToContent={PageSkipToContent}
         mainContainerId={pageId}
       >
-        <PageSection variant={PageSectionVariants.light}>
-          <TextContent>
-            <Text component="h1">About</Text>
-            <Text component="p">
-              This is where versions of the application can be tracked.
-            </Text>
-          </TextContent>
-        </PageSection>
         <PageSection>
-          <Grid>
-            <GridItem span={4}>
-              <Card isCompact={true}>
-                <CardHeader>LodeStar Version</CardHeader>
-                <LodeStarVersion versionContext={versionContext} />
-                <CardHeader>Component Versions</CardHeader>
-                <ComponentVersions />
-              </Card>
+          <Title headingLevel="h1" style={{fontWeight: 'normal', marginBottom: '1rem'}}>
+            Red Hat LodeStar ®
+          </Title>
+          <Grid hasGutter>
+            <GridItem span={9}>
+              <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
+                About
+              </Title>
+              <AboutText/>
+            </GridItem>
+            <GridItem span={9}>
+              <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
+                Version
+              </Title>
+              <Text component={TextVariants.small}>
+                <LodeStarVersion versionContext={versionContext}/>
+                <ComponentVersions versionContext={versionContext}/>
+              </Text>
             </GridItem>
           </Grid>
         </PageSection>

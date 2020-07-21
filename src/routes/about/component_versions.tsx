@@ -1,30 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   CardBody,
+  Grid,
+  GridItem,
 } from '@patternfly/react-core';
-import { useVersion } from '../../context/version_context/version_context';
 
-export function ComponentVersions() {
-  const versionContext = useVersion();
+interface ComponentVersionProps {
+  versionContext: any;
+}
 
-  useEffect(() => {
-    if (!versionContext.versions) {
-      versionContext.fetchVersions();
-    }
-  }, [versionContext]);
+export function ComponentVersions(props: ComponentVersionProps) {
 
   let cardItems = [];
 
-  if (!!versionContext?.versions?.versions) {
+  if (!!props.versionContext?.versions?.versions) {
 
-    cardItems = Object.keys(versionContext.versions?.versions).reduce(
+    cardItems = Object.keys(props.versionContext.versions?.versions).reduce(
       (previousComponents, currentKey, reduceIndex) => {
-        if (!Array.isArray(versionContext.versions.versions[currentKey])) {
+        if (!Array.isArray(props.versionContext.versions.versions[currentKey])) {
           return previousComponents;
         }
         return [
           ...previousComponents,
-          ...((versionContext?.versions?.versions[currentKey] ?? []).map(
+          ...((props.versionContext?.versions?.versions[currentKey] ?? []).map(
             (version, mapIndex) => {
               let label = '';
               if (
@@ -37,9 +35,14 @@ export function ComponentVersions() {
               }
               return (
                 <CardBody key={`${reduceIndex}${mapIndex}`}>
-                  <div>
-                    <b>{version?.application}</b>: <span>{label}</span>
-                  </div>
+                  <Grid hasGutter span={6}>
+                    <GridItem span={3}>
+                      <b>{version?.application}:</b>
+                    </GridItem>
+                    <GridItem span={9}>
+                      {label}
+                    </GridItem>
+                  </Grid>
                 </CardBody>
               );
             }

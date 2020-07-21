@@ -20,48 +20,96 @@ Object {
           tabindex="-1"
         >
           <section
-            class="pf-c-page__main-section pf-m-light"
-          >
-            <div
-              class="pf-c-content"
-            >
-              <h1
-                class=""
-                data-pf-content="true"
-              >
-                About
-              </h1>
-              <p
-                class=""
-                data-pf-content="true"
-              >
-                This is where versions of the application can be tracked.
-              </p>
-            </div>
-          </section>
-          <section
             class="pf-c-page__main-section"
           >
+            <h1
+              class="pf-c-title pf-m-2xl"
+              style="font-weight: normal; margin-bottom: 1rem;"
+            >
+              Red Hat LodeStar ®
+            </h1>
             <div
-              class="pf-l-grid"
+              class="pf-l-grid pf-m-gutter"
             >
               <div
-                class="pf-l-grid__item pf-m-4-col"
+                class="pf-l-grid__item pf-m-9-col"
               >
-                <article
-                  class="pf-c-card pf-m-compact"
+                <h2
+                  class="pf-c-title pf-m-xl"
+                  style="font-weight: lighter; margin: 0.5rem 0px;"
+                >
+                  About
+                </h2>
+                <small
+                  class=""
+                  data-pf-content="true"
+                  style="text-align: justify;"
+                >
+                  <a
+                    href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Overview"
+                  >
+                    LodeStar
+                  </a>
+                   is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform.
+                  <br />
+                  The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team.
+                  <br />
+                  <ul
+                    class="pf-c-list"
+                  >
+                    <li>
+                      <a
+                        href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
+                      >
+                        LodeStar User Guide
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
+                      >
+                        LodeStar FAQ
+                      </a>
+                    </li>
+                  </ul>
+                </small>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-9-col"
+              >
+                <h2
+                  class="pf-c-title pf-m-xl"
+                  style="font-weight: lighter; margin: 0.5rem 0px;"
+                >
+                  Version
+                </h2>
+                <small
+                  class=""
+                  data-pf-content="true"
                 >
                   <div
-                    class="pf-c-card__header"
+                    class="pf-c-card__body"
                   >
-                    LodeStar Version
+                    <div
+                      class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                    >
+                      <div
+                        class="pf-l-grid__item pf-m-3-col"
+                      >
+                        <b>
+                          LodeStar version: 
+                        </b>
+                      </div>
+                      <div
+                        class="pf-l-grid__item pf-m-9-col"
+                      >
+                        <a
+                          href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    class="pf-c-card__header"
-                  >
-                    Component Versions
-                  </div>
-                </article>
+                </small>
               </div>
             </div>
           </section>
@@ -85,48 +133,96 @@ Object {
         tabindex="-1"
       >
         <section
-          class="pf-c-page__main-section pf-m-light"
-        >
-          <div
-            class="pf-c-content"
-          >
-            <h1
-              class=""
-              data-pf-content="true"
-            >
-              About
-            </h1>
-            <p
-              class=""
-              data-pf-content="true"
-            >
-              This is where versions of the application can be tracked.
-            </p>
-          </div>
-        </section>
-        <section
           class="pf-c-page__main-section"
         >
+          <h1
+            class="pf-c-title pf-m-2xl"
+            style="font-weight: normal; margin-bottom: 1rem;"
+          >
+            Red Hat LodeStar ®
+          </h1>
           <div
-            class="pf-l-grid"
+            class="pf-l-grid pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item pf-m-4-col"
+              class="pf-l-grid__item pf-m-9-col"
             >
-              <article
-                class="pf-c-card pf-m-compact"
+              <h2
+                class="pf-c-title pf-m-xl"
+                style="font-weight: lighter; margin: 0.5rem 0px;"
+              >
+                About
+              </h2>
+              <small
+                class=""
+                data-pf-content="true"
+                style="text-align: justify;"
+              >
+                <a
+                  href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Overview"
+                >
+                  LodeStar
+                </a>
+                 is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform.
+                <br />
+                The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team.
+                <br />
+                <ul
+                  class="pf-c-list"
+                >
+                  <li>
+                    <a
+                      href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
+                    >
+                      LodeStar User Guide
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
+                    >
+                      LodeStar FAQ
+                    </a>
+                  </li>
+                </ul>
+              </small>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-9-col"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                style="font-weight: lighter; margin: 0.5rem 0px;"
+              >
+                Version
+              </h2>
+              <small
+                class=""
+                data-pf-content="true"
               >
                 <div
-                  class="pf-c-card__header"
+                  class="pf-c-card__body"
                 >
-                  LodeStar Version
+                  <div
+                    class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-3-col"
+                    >
+                      <b>
+                        LodeStar version: 
+                      </b>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-9-col"
+                    >
+                      <a
+                        href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="pf-c-card__header"
-                >
-                  Component Versions
-                </div>
-              </article>
+              </small>
             </div>
           </div>
         </section>

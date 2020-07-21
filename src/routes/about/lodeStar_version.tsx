@@ -1,9 +1,11 @@
 import React from 'react';
 import {
   CardBody,
+  Grid,
+  GridItem
 } from '@patternfly/react-core';
 
-export interface LodeStarVersionProps {
+interface LodeStarVersionProps {
   versionContext: any;
 }
 
@@ -15,21 +17,26 @@ export function LodeStarVersion(props: LodeStarVersionProps) {
     let lodestarVersion = props.versionContext.versions?.versions?.applications?.find(e => e.application === "lodestar");
 
     if (lodestarVersion) {
-      lodeStarVersion = <CardBody>
-        <div>
-          <b>LodeStar</b>: <span>{lodestarVersion.version}</span>
-        </div>
-      </CardBody>;
+      lodeStarVersion = lodestarVersion.version;
       // Remove it from the component version list
       const index = props.versionContext.versions?.versions.applications.indexOf(lodestarVersion);
       props.versionContext.versions?.versions.applications.splice(index, 1);
     } else {
-      lodeStarVersion = <CardBody>
-        <div>
-          <b>LodeStar</b>: <span>Unknown</span>
-        </div>
-      </CardBody>
+      lodeStarVersion = 'Unknown';
     }
   }
-  return lodeStarVersion;
+  return (
+    <CardBody>
+      <Grid hasGutter span={6}>
+        <GridItem span={3}>
+          <b>LodeStar version: </b>
+        </GridItem>
+        <GridItem span={9}>
+          <a href={'https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes'}>
+            { lodeStarVersion }
+          </a>
+        </GridItem>
+      </Grid>
+    </CardBody>
+  );
 }
