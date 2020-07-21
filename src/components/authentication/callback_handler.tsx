@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSession } from '../../context/session_context/session_context';
+import { useSession } from '../../context/auth_context/auth_context';
 import { useLocation, Redirect } from 'react-router';
 
 export const CallbackHandler = () => {
   const query = new URLSearchParams(useLocation().search);
-  const sessionContext = useSession();
+  const authContext = useSession();
   const [isHandlingCallback, setIsHandlingCallback] = useState<
     'initial' | 'handling' | 'completed'
   >('initial');
@@ -13,7 +13,7 @@ export const CallbackHandler = () => {
     const code: string | null = query.get('code');
     if (isHandlingCallback !== 'handling' && code) {
       setIsHandlingCallback('handling');
-      sessionContext.handleLoginCallback(code).then(() => {
+      authContext.handleLoginCallback(code).then(() => {
         if (mountedRef.current) {
           setIsHandlingCallback('completed');
         }
@@ -22,9 +22,9 @@ export const CallbackHandler = () => {
     return () => {
       mountedRef.current = false;
     };
-  }, [sessionContext, isHandlingCallback, query]);
+  }, [authContext, isHandlingCallback, query]);
 
-  if (!sessionContext.sessionData) {
+  if (!authContext.sessionData) {
     return <div />;
   }
   return <Redirect to="/app" />;

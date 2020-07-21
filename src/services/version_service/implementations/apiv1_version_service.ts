@@ -1,14 +1,18 @@
 import { VersionService } from '../version_service';
 import { Version } from '../../../schemas/version_schema';
 import Axios, { AxiosInstance } from 'axios';
+import { UserToken } from '../../../schemas/user_token_schema';
+import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
 
 export class Apiv1VersionService extends VersionService {
-  constructor(baseURL: string, onBeforeRequest, onAfterRequest, onFailure) {
+  constructor(baseURL: string) {
     super();
     this.axios = Axios.create();
     this.baseUrl = baseURL;
-    this.axios.interceptors.request.use(onBeforeRequest);
-    this.axios.interceptors.response.use(onAfterRequest, onFailure);
+    this.axios.interceptors.request.use(request => {
+      request.headers.Authorization = `Bearer ${UserToken.token?.accessToken}`;
+      return request;
+    });
   }
   baseUrl: string;
   axios?: AxiosInstance;
@@ -29,8 +33,13 @@ export class Apiv1VersionService extends VersionService {
   }
 
   async fetchVersion(): Promise<Version> {
-    const { data } = await this.axios.get(`${this.baseUrl}/api/v1/version`);
-    const fe = await this.fetchManifest();
-    return Version.fromMap({ ...data, fe });
+    try {
+      const { data } = await this.axios.get(`${this.baseUrl}/api/v1/version`);
+      const fe = await this.fetchManifest();
+      return Version.fromMap({ ...data, fe });
+    } catch (e) {
+      handleAxiosResponseErrors(e);
+      throw e;
+    }
   }
 }

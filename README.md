@@ -116,7 +116,7 @@ The logger can be set with values in `config.json`. Available log types are defi
 
 ### `Feeback System`
 
-User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context`.  
+User feedback is generated through the FeedbackContext which can be imported from `src/context/feedback_context/feedback_context`.  
 This exposes the following methods:
 
 - showLoader()
@@ -129,7 +129,7 @@ Import the context into your component like so:
 
 ```javascript
 import React, { useContext } from 'react';
-import { FeedbackContext } from './src/context/feedback_context';
+import { FeedbackContext } from './src/context/feedback_context/feedback_context';
 
 const feedbackContext = useContext(FeedbackContext);
 ```

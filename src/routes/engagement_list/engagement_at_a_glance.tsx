@@ -34,7 +34,7 @@ function DurationInWeeks({
   } else return <>0</>;
 }
 
-export function EngagementDetails({
+export function EngagementAtAGlance({
   engagement,
   status,
 }: {
