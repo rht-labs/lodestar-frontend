@@ -18,7 +18,7 @@ import {
   ErrorCircleOIcon,
   CubesIcon,
 } from '@patternfly/react-icons';
-import { Feature } from '../../../components/feature';
+import { Feature } from '../../../components/feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
@@ -64,7 +64,10 @@ export const ClusterUsers = ({
   }
 
   function removeUser(index: any) {
-    currentEngagementChanges?.engagement_users.splice(index.currentTarget.value, 1);
+    currentEngagementChanges?.engagement_users.splice(
+      index.currentTarget.value,
+      1
+    );
     onChange('user', currentEngagementChanges?.engagement_users);
   }
 

@@ -5,7 +5,6 @@ import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
-import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { useFeedback, AlertType } from '../feedback_context/feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -16,6 +15,7 @@ import {
   EngagementPoll,
   EngagementPollIntervalStrategy,
 } from '../../schemas/engagement_poll';
+import { EngagementService } from '../../services/engagement_service/engagement_service';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -64,11 +64,12 @@ const { Provider } = EngagementContext;
 
 export const EngagementProvider = ({
   children,
+  engagementService
 }: {
   children: React.ReactChild;
+  engagementService: EngagementService
 }) => {
   const feedbackContext = useFeedback();
-  const { engagementService } = useServiceProviders();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
 
   // TODO: Handle error/loading state

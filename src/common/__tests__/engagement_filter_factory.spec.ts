@@ -1,12 +1,12 @@
 import {
   engagementFilterFactory,
   engagementSortFactory,
-} from './engagement_filter_factory';
+} from '../engagement_filter_factory';
 import {
   EngagementFilter,
   EngagementSortFields,
-} from '../schemas/engagement_filter';
-import { Engagement, EngagementStatus } from '../schemas/engagement_schema';
+} from '../../schemas/engagement_filter';
+import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
 
 function mockEngagements(): Engagement[] {
   const engagementA = ({

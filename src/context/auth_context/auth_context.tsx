@@ -7,9 +7,8 @@ import {
   LocalStoragePersistence,
 } from '../../schemas/user_token_schema';
 import Axios, { AxiosInstance } from 'axios';
-import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { Logger } from '../../utilities/logger';
-import { ErrorBoundary } from '../../components/error_boundary';
+import { ErrorBoundary } from '../../components/error_boundary/error_boundary';
 
 export type AuthenticationState =
   | 'initial'
@@ -46,13 +45,11 @@ const { Provider } = AuthContext;
 
 export const AuthProvider = ({
   children,
-  authenticationService: authRepo,
+  authenticationService,
 }: {
   children: React.ReactChild;
-  authenticationService?: AuthService;
+  authenticationService: AuthService;
 }) => {
-  const { authenticationService } = useServiceProviders();
-
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
