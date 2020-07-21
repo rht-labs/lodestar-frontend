@@ -37,7 +37,7 @@ export function About() {
       >
         <PageSection>
           <Title headingLevel="h1" style={{fontWeight: 'normal', marginBottom: '1rem'}}>
-            Red Hat LodeStar ®
+            LodeStar
           </Title>
           <Grid hasGutter>
             <GridItem span={9}>
@@ -48,10 +48,17 @@ export function About() {
             </GridItem>
             <GridItem span={9}>
               <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
-                Version
+                LodeStar Version
               </Title>
               <Text component={TextVariants.small}>
                 <LodeStarVersion versionContext={versionContext}/>
+              </Text>
+            </GridItem>
+            <GridItem span={9}>
+              <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
+                Component Version
+              </Title>
+              <Text component={TextVariants.small}>
                 <ComponentVersions versionContext={versionContext}/>
               </Text>
             </GridItem>
