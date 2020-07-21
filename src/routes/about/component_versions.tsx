@@ -34,16 +34,14 @@ export function ComponentVersions(props: ComponentVersionProps) {
                 label = version.version;
               }
               return (
-                <CardBody key={`${reduceIndex}${mapIndex}`}>
-                  <Grid hasGutter span={6}>
-                    <GridItem span={3}>
-                      <b>{version?.application}:</b>
-                    </GridItem>
-                    <GridItem span={9}>
-                      {label}
-                    </GridItem>
-                  </Grid>
-                </CardBody>
+                <Grid hasGutter span={6} style={{marginLeft: '1rem'}}>
+                  <GridItem span={2}>
+                    <b>{version?.application}:</b>
+                  </GridItem>
+                  <GridItem span={6}>
+                    {label}
+                  </GridItem>
+                </Grid>
               );
             }
           ) ?? []),

@@ -28,10 +28,10 @@ export function LodeStarVersion(props: LodeStarVersionProps) {
   return (
     <CardBody>
       <Grid hasGutter span={6}>
-        <GridItem span={3}>
+        <GridItem span={2}>
           <b>LodeStar version: </b>
         </GridItem>
-        <GridItem span={9}>
+        <GridItem span={1}>
           <a href={'https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes'}>
             { lodeStarVersion }
           </a>

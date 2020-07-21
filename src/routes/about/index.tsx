@@ -13,6 +13,7 @@ import { useVersion } from '../../context/version_context/version_context';
 import { ComponentVersions } from "./component_versions";
 import { LodeStarVersion } from "./lodeStar_version";
 import { AboutText } from "./about_text";
+import { useConfig } from "../../context/config_context/config_hook";
 
 export function About() {
   const versionContext = useVersion();
@@ -23,6 +24,7 @@ export function About() {
     }
   }, [versionContext]);
 
+  const { appConfig } = useConfig();
   const pageId = 'main-content-page-layout-default-nav';
   const PageSkipToContent = (
     <SkipToContent href={`#${pageId}`}>Skip to content</SkipToContent>
@@ -39,27 +41,37 @@ export function About() {
           <Title headingLevel="h1" style={{fontWeight: 'normal', marginBottom: '1rem'}}>
             LodeStar
           </Title>
-          <Grid hasGutter>
-            <GridItem span={9}>
+          <Grid hasGutter span={10}>
+            <GridItem>
               <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
                 About
               </Title>
               <AboutText/>
             </GridItem>
-            <GridItem span={9}>
+            <GridItem>
               <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
                 LodeStar Version
               </Title>
               <Text component={TextVariants.small}>
                 <LodeStarVersion versionContext={versionContext}/>
+                <ComponentVersions versionContext={versionContext}/>
               </Text>
             </GridItem>
-            <GridItem span={9}>
+            <GridItem>
               <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
-                Component Version
+                Need Help?
               </Title>
               <Text component={TextVariants.small}>
-                <ComponentVersions versionContext={versionContext}/>
+                Have questions or need help? Please send an email to&nbsp;
+                <a
+                  href={
+                    appConfig?.supportEmailAddress
+                      ? `mailto:${appConfig?.supportEmailAddress}`
+                      : '#'
+                  }
+                >
+                  {appConfig?.supportEmailAddress ?? ''}
+                </a>
               </Text>
             </GridItem>
           </Grid>
