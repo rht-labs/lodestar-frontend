@@ -29,7 +29,9 @@ const EngagementDetailView = React.memo(function({
   error: Error;
   setCurrentEngagement: (engagement: Engagement) => void;
   currentEngagement: Engagement;
-  createEngagementPoll: (engagement: Engagement) => { cancel: () => void };
+  createEngagementPoll: (
+    engagement: Engagement
+  ) => Promise<{ cancel: () => void }>;
   getEngagement: (customer_name, project_name) => Promise<Engagement>;
 }) {
   const { project_name, customer_name } = useParams();
