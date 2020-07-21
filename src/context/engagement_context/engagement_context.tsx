@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useRef } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
 import { useState, useCallback, useReducer } from 'react';
 import {
@@ -101,6 +101,10 @@ export const EngagementProvider = ({
       throw new AuthenticationError();
     }
   }, [authContext]);
+  const _validateAuthStatusRef = useRef(_validateAuthStatus);
+  useEffect(() => (_validateAuthStatusRef.current = _validateAuthStatus), [
+    _validateAuthStatus,
+  ]);
 
   const getConfig = useCallback(async () => {
     await _validateAuthStatus();
@@ -177,6 +181,7 @@ export const EngagementProvider = ({
       return new EngagementPoll(
         new EngagementPollIntervalStrategy(
           setInterval(async () => {
+            await _validateAuthStatusRef.current();
             const hasUpdates = await engagementService.checkHasUpdates(
               engagement
             );
