@@ -1,6 +1,6 @@
 import React from 'react';
-import { Logger } from '../utilities/logger';
-import { ErrorFallbackUI } from './error_fallback_ui/error_fallback_ui';
+import { Logger } from '../../utilities/logger';
+import { ErrorFallbackUI } from '../error_fallback_ui/error_fallback_ui';
 
 export interface ErrorBoundaryProps {
   children: React.ReactChild;

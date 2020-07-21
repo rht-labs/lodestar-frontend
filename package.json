@@ -49,7 +49,8 @@
     "fix": "gts fix src/*.ts src/*.tsx",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "posttest": "npm run check",
+    "unimported": "npx unimported"
   },
   "eslintConfig": {
     "extends": "react-app"
