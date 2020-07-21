@@ -1,3 +1,5 @@
+import { Logger } from './logger';
+
 export const profileOnRender = (
   id, // the "id" prop of the Profiler tree that has just committed
   phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
@@ -7,5 +9,5 @@ export const profileOnRender = (
   commitTime, // when React committed this update
   interactions
 ) => {
-  console.log('render:', id, phase, actualDuration, interactions);
+  Logger.instance.debug('render:', id, phase, actualDuration, interactions);
 };

@@ -1,18 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
-import { AuthService } from '../../services/authentication_service/authentication_service';
+import { AuthService } from '../../services/auth_service/authentication_service';
 import { VersionService } from '../../services/version_service/version_service';
 import { Apiv1VersionService } from '../../services/version_service/implementations/apiv1_version_service';
 import { FakedVersionService } from '../../services/version_service/implementations/faked_version_service';
-import { Apiv1AuthService } from '../../services/authentication_service/implementations/apiv1_auth_service';
-import { FakedAuthService } from '../../services/authentication_service/implementations/faked_auth_service';
+import { Apiv1AuthService } from '../../services/auth_service/implementations/apiv1_auth_service';
+import { FakedAuthService } from '../../services/auth_service/implementations/faked_auth_service';
 import { Config } from '../../schemas/config';
 import { FakedEngagementService } from '../../services/engagement_service/implementations/faked_engagement_service';
-import { Request } from '../../utilities/request';
 import { useConfig } from '../config_context/config_hook';
 import { Apiv1EngagementService } from '../../services/engagement_service/implementations/apiv1_engagement_service';
-import { NotificationService } from "../../services/notification_service/notification_service";
-import { FakedNotificationService } from "../../services/notification_service/implementations/faked_notification_service";
+import { NotificationService } from '../../services/notification_service/notification_service';
+import { FakedNotificationService } from '../../services/notification_service/implementations/faked_notification_service';
 
 interface ServiceProvider {
   engagementService: EngagementService;
@@ -23,24 +22,11 @@ interface ServiceProvider {
 
 const ProductionServiceProviders = (config: Config) => {
   const authService = new Apiv1AuthService(config);
-  const { beforeRequest, onRequestSuccess, onRequestFailure } = new Request({
-    authenticationRepository: authService,
-  });
   return {
-    engagementService: new Apiv1EngagementService(
-      config.backendUrl,
-      beforeRequest,
-      onRequestSuccess,
-      onRequestFailure
-    ),
+    engagementService: new Apiv1EngagementService(config.backendUrl),
     authenticationService: authService,
-    versionService: new Apiv1VersionService(
-      config.backendUrl,
-      beforeRequest,
-      onRequestSuccess,
-      onRequestFailure
-    ),
-    notificationService: new FakedNotificationService()
+    versionService: new Apiv1VersionService(config.backendUrl),
+    notificationService: new FakedNotificationService(),
   };
 };
 
@@ -48,10 +34,12 @@ const FakedServiceProviders = (config?: Config | undefined) => ({
   engagementService: new FakedEngagementService(),
   authenticationService: new FakedAuthService(),
   versionService: new FakedVersionService(),
-  notificationService: new FakedNotificationService()
+  notificationService: new FakedNotificationService(),
 });
 
-export const ServiceProviderContext = React.createContext<ServiceProvider>( FakedServiceProviders() );
+export const ServiceProviderContext = React.createContext<ServiceProvider>(
+  FakedServiceProviders()
+);
 
 export const ServiceProvider = ({
   children,
