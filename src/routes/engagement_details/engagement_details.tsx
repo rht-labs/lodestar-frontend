@@ -36,22 +36,15 @@ const EngagementDetailView = React.memo(function({
 
   useEffect(() => {
     const engagementPoll = createEngagementPoll(currentEngagement);
-    return () => {
-      engagementPoll.cancel();
+    return async () => {
+      (await engagementPoll).cancel();
     };
-    /**
-     * We only want this effect to run once per mount. We override the effects dependencies lint so that we do not have to depend on createEngagementPoll's change.
-     * createEngagementPoll is idempotent, so it will not vary its output based on the state of the engagementContext. It is included in the engagement context
-     * for convenience.
-     */
-    // eslint-disable-next-line
-  }, [currentEngagement]);
+  }, [currentEngagement, createEngagementPoll]);
   useEffect(() => {
-    if (!formOptions) {
-      Logger.instance.info('getting config');
-      getConfig();
-    }
-  }, [formOptions, getConfig]);
+    Logger.instance.info('getting config');
+    getConfig();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!customer_name || !project_name) {
@@ -63,7 +56,9 @@ const EngagementDetailView = React.memo(function({
       } else {
       }
     });
-  }, [customer_name, project_name, setCurrentEngagement, getEngagement]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [customer_name, project_name]);
 
   const AlertMessage = () => {
     return engagementFormRequestError ? (
@@ -72,12 +67,6 @@ const EngagementDetailView = React.memo(function({
       </Alert>
     ) : null;
   };
-  useEffect(() => {
-    if (!formOptions) {
-      Logger.instance.info('getting config');
-      getConfig();
-    }
-  }, [formOptions, getConfig]);
 
   const validators = getValidatorsFromFormOptions(formOptions);
   return (

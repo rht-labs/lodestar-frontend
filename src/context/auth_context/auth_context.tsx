@@ -93,12 +93,17 @@ export const AuthProvider = ({
       const isLoggedIn = await authenticationService.isLoggedIn();
       const tokens = authenticationService.getToken();
       if (isLoggedIn && tokens) {
-        const profile = await authenticationService.getUserProfile();
-        setSessionData({
-          profile,
-          tokens,
-          roles: profile.groups,
-        });
+        let profile;
+        if (!sessionData?.profile) {
+          profile = await authenticationService.getUserProfile();
+          setSessionData({
+            profile,
+            tokens,
+            roles: profile.groups,
+          });
+        } else {
+          profile = sessionData?.profile;
+        }
         if (profile.groups && profile.groups.includes('reader')) {
           setAuthStatus('authenticated');
           return true;
@@ -111,7 +116,7 @@ export const AuthProvider = ({
         return false;
       }
     }
-  }, [setAuthStatus, setSessionData, authenticationService]);
+  }, [setAuthStatus, setSessionData, authenticationService, sessionData]);
 
   return (
     <ErrorBoundary>

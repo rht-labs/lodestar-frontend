@@ -38,7 +38,7 @@ export interface EngagementContext {
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
-  createEngagementPoll: (engagement: Engagement) => EngagementPoll;
+  createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
 }
 const requiredFields = [
   'customer_contact_email',
@@ -95,10 +95,18 @@ export const EngagementProvider = ({
     [authContext]
   );
 
+  const _validateAuthStatus = useCallback(async () => {
+    const authStatus = await authContext.checkAuthStatus();
+    if (!authStatus) {
+      throw new AuthenticationError();
+    }
+  }, [authContext]);
+
   const getConfig = useCallback(async () => {
+    await _validateAuthStatus();
     const data = await engagementService.getConfig();
     setFormOptions(data);
-  }, [engagementService]);
+  }, [engagementService, _validateAuthStatus]);
 
   useEffect(() => {
     dispatch({
@@ -106,13 +114,6 @@ export const EngagementProvider = ({
       payload: getInitialState(currentEngagement),
     });
   }, [currentEngagement, formOptions]);
-
-  const _validateAuthStatus = useCallback(async () => {
-    const authStatus = await authContext.checkAuthStatus();
-    if (!authStatus) {
-      throw new AuthenticationError();
-    }
-  }, [authContext]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -170,30 +171,39 @@ export const EngagementProvider = ({
     [_updateEngagementInPlace, engagementService, _validateAuthStatus]
   );
 
-  const createEngagementPoll = (engagement: Engagement): EngagementPoll => {
-    return new EngagementPoll(
-      new EngagementPollIntervalStrategy(
-        setInterval(async () => {
-          const hasUpdates = await engagementService.checkHasUpdates(
-            engagement
-          );
-          if (hasUpdates) {
-            feedbackContext.showAlert(
-              'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
-              AlertType.error,
-              false,
-              [
-                {
-                  title: 'Refresh',
-                  action: () => _refreshEngagementData(engagement),
-                },
-              ]
+  const createEngagementPoll = useCallback(
+    async (engagement: Engagement): Promise<EngagementPoll> => {
+      await _validateAuthStatus();
+      return new EngagementPoll(
+        new EngagementPollIntervalStrategy(
+          setInterval(async () => {
+            const hasUpdates = await engagementService.checkHasUpdates(
+              engagement
             );
-          }
-        }, 5000)
-      )
-    );
-  };
+            if (hasUpdates) {
+              feedbackContext.showAlert(
+                'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
+                AlertType.error,
+                false,
+                [
+                  {
+                    title: 'Refresh',
+                    action: () => _refreshEngagementData(engagement),
+                  },
+                ]
+              );
+            }
+          }, 5000)
+        )
+      );
+    },
+    [
+      _validateAuthStatus,
+      _refreshEngagementData,
+      engagementService,
+      feedbackContext,
+    ]
+  );
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
