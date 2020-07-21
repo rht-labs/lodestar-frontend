@@ -94,7 +94,6 @@ export const AuthProvider = ({
       const tokens = authenticationService.getToken();
       if (isLoggedIn && tokens) {
         const profile = await authenticationService.getUserProfile();
-        console.log(profile);
         setSessionData({
           profile,
           tokens,

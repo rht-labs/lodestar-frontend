@@ -87,7 +87,6 @@ export const EngagementProvider = ({
   const _handleErrors = useCallback(
     async error => {
       if (error instanceof AuthenticationError) {
-        console.log('handling error');
         await authContext.checkAuthStatus();
       } else {
         throw error;
@@ -110,7 +109,6 @@ export const EngagementProvider = ({
 
   const _validateAuthStatus = useCallback(async () => {
     const authStatus = await authContext.checkAuthStatus();
-    console.log(authStatus);
     if (!authStatus) {
       throw new AuthenticationError();
     }
