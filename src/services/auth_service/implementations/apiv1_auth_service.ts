@@ -8,7 +8,6 @@ import { Logger } from '../../../utilities/logger';
 
 export class Apiv1AuthService implements AuthService {
   constructor(config: Config) {
-    this.config = config;
     this.axios = Axios.create({ baseURL: config.authBaseUrl });
   }
 
