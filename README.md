@@ -190,9 +190,9 @@ For running the e2e test locally:
 
 ```
 export CYPRESS_BASE_URL=http://localhost:3000
-export CYPRESS_SSO_USER=e2e
+export CYPRESS_SSO_USER=<<e2e>>
 export CYPRESS_SSO_PASSWORD=****
-export CYPRESS_SSO_URL=https://sso-omp-jasee.apps.s11.core.rht-labs.com/auth/realms/omp/protocol/openid-connect/token
+export CYPRESS_SSO_URL=<<https://sso_host >>/auth/realms/<< realm name>>/protocol/openid-connect/token
 npm run e2e
 ```
 
