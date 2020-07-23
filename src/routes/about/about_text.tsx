@@ -1,5 +1,8 @@
 import React from 'react';
-import {ListItem, List, TextVariants, Text} from "@patternfly/react-core";
+import {
+  TextVariants,
+  Text
+} from "@patternfly/react-core";
 
 export function AboutText() {
 return(
@@ -11,19 +14,11 @@ return(
       <br/>
       The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency.
       This allows for better management of the engagements and enables more self-service for the delivery team.
-      <br/>
-      <List>
-        <ListItem>
-          <a href={'https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit'}>
-            LodeStar User Guide
-          </a>
-        </ListItem>
-        <ListItem>
-          <a href={'https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ'}>
-            LodeStar FAQ
-          </a>
-        </ListItem>
-      </List>
+      <br/> Please read&nbsp;
+      <a href={'https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit'}>
+        LodeStar User Guide
+      </a>
+      &nbsp;for more details.
     </Text>
   </>
 )

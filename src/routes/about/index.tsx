@@ -50,19 +50,14 @@ export function About() {
             </GridItem>
             <GridItem>
               <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
-                LodeStar Version
-              </Title>
-              <Text component={TextVariants.small}>
-                <LodeStarVersion versionContext={versionContext}/>
-                <ComponentVersions versionContext={versionContext}/>
-              </Text>
-            </GridItem>
-            <GridItem>
-              <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
                 Need Help?
               </Title>
               <Text component={TextVariants.small}>
-                Have questions or need help? Please send an email to&nbsp;
+                Have questions or need help? Please checkout&nbsp;
+                <a href={'https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ'}>
+                  LodeStar FAQ
+                </a>
+                &nbsp; or send an email to&nbsp;
                 <a
                   href={
                     appConfig?.supportEmailAddress
@@ -72,6 +67,15 @@ export function About() {
                 >
                   {appConfig?.supportEmailAddress ?? ''}
                 </a>
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
+                Version
+              </Title>
+              <Text component={TextVariants.small}>
+                <LodeStarVersion versionContext={versionContext}/>
+                <ComponentVersions versionContext={versionContext}/>
               </Text>
             </GridItem>
           </Grid>

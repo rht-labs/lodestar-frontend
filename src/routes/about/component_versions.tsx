@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  CardBody,
   Grid,
   GridItem,
 } from '@patternfly/react-core';

@@ -29,10 +29,10 @@ Object {
               LodeStar
             </h1>
             <div
-              class="pf-l-grid pf-m-gutter"
+              class="pf-l-grid pf-m-all-10-col pf-m-gutter"
             >
               <div
-                class="pf-l-grid__item pf-m-9-col"
+                class="pf-l-grid__item"
               >
                 <h2
                   class="pf-c-title pf-m-xl"
@@ -54,34 +54,48 @@ Object {
                   <br />
                   The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team.
                   <br />
-                  <ul
-                    class="pf-c-list"
+                   Please read 
+                  <a
+                    href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
                   >
-                    <li>
-                      <a
-                        href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
-                      >
-                        LodeStar User Guide
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
-                      >
-                        LodeStar FAQ
-                      </a>
-                    </li>
-                  </ul>
+                    LodeStar User Guide
+                  </a>
+                   for more details.
                 </small>
               </div>
               <div
-                class="pf-l-grid__item pf-m-9-col"
+                class="pf-l-grid__item"
               >
                 <h2
                   class="pf-c-title pf-m-xl"
                   style="font-weight: lighter; margin: 0.5rem 0px;"
                 >
-                  LodeStar Version
+                  Need Help?
+                </h2>
+                <small
+                  class=""
+                  data-pf-content="true"
+                >
+                  Have questions or need help? Please checkout 
+                  <a
+                    href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
+                  >
+                    LodeStar FAQ
+                  </a>
+                    or send an email to 
+                  <a
+                    href="#"
+                  />
+                </small>
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                <h2
+                  class="pf-c-title pf-m-xl"
+                  style="font-weight: lighter; margin: 0.5rem 0px;"
+                >
+                  Version
                 </h2>
                 <small
                   class=""
@@ -91,17 +105,17 @@ Object {
                     class="pf-c-card__body"
                   >
                     <div
-                      class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                      class="pf-l-grid pf-m-all-6-col"
                     >
                       <div
-                        class="pf-l-grid__item pf-m-3-col"
+                        class="pf-l-grid__item pf-m-2-col"
                       >
                         <b>
                           LodeStar version: 
                         </b>
                       </div>
                       <div
-                        class="pf-l-grid__item pf-m-9-col"
+                        class="pf-l-grid__item pf-m-2-col"
                       >
                         <a
                           href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes"
@@ -110,20 +124,6 @@ Object {
                     </div>
                   </div>
                 </small>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-9-col"
-              >
-                <h2
-                  class="pf-c-title pf-m-xl"
-                  style="font-weight: lighter; margin: 0.5rem 0px;"
-                >
-                  Component Version
-                </h2>
-                <small
-                  class=""
-                  data-pf-content="true"
-                />
               </div>
             </div>
           </section>
@@ -156,10 +156,10 @@ Object {
             LodeStar
           </h1>
           <div
-            class="pf-l-grid pf-m-gutter"
+            class="pf-l-grid pf-m-all-10-col pf-m-gutter"
           >
             <div
-              class="pf-l-grid__item pf-m-9-col"
+              class="pf-l-grid__item"
             >
               <h2
                 class="pf-c-title pf-m-xl"
@@ -181,34 +181,48 @@ Object {
                 <br />
                 The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team.
                 <br />
-                <ul
-                  class="pf-c-list"
+                 Please read 
+                <a
+                  href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
                 >
-                  <li>
-                    <a
-                      href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
-                    >
-                      LodeStar User Guide
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
-                    >
-                      LodeStar FAQ
-                    </a>
-                  </li>
-                </ul>
+                  LodeStar User Guide
+                </a>
+                 for more details.
               </small>
             </div>
             <div
-              class="pf-l-grid__item pf-m-9-col"
+              class="pf-l-grid__item"
             >
               <h2
                 class="pf-c-title pf-m-xl"
                 style="font-weight: lighter; margin: 0.5rem 0px;"
               >
-                LodeStar Version
+                Need Help?
+              </h2>
+              <small
+                class=""
+                data-pf-content="true"
+              >
+                Have questions or need help? Please checkout 
+                <a
+                  href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
+                >
+                  LodeStar FAQ
+                </a>
+                  or send an email to 
+                <a
+                  href="#"
+                />
+              </small>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                style="font-weight: lighter; margin: 0.5rem 0px;"
+              >
+                Version
               </h2>
               <small
                 class=""
@@ -218,17 +232,17 @@ Object {
                   class="pf-c-card__body"
                 >
                   <div
-                    class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                    class="pf-l-grid pf-m-all-6-col"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-3-col"
+                      class="pf-l-grid__item pf-m-2-col"
                     >
                       <b>
                         LodeStar version: 
                       </b>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-9-col"
+                      class="pf-l-grid__item pf-m-2-col"
                     >
                       <a
                         href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes"
@@ -237,20 +251,6 @@ Object {
                   </div>
                 </div>
               </small>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-9-col"
-            >
-              <h2
-                class="pf-c-title pf-m-xl"
-                style="font-weight: lighter; margin: 0.5rem 0px;"
-              >
-                Component Version
-              </h2>
-              <small
-                class=""
-                data-pf-content="true"
-              />
             </div>
           </div>
         </section>
