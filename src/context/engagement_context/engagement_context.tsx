@@ -64,10 +64,10 @@ const { Provider } = EngagementContext;
 
 export const EngagementProvider = ({
   children,
-  engagementService
+  engagementService,
 }: {
   children: React.ReactChild;
-  engagementService: EngagementService
+  engagementService: EngagementService;
 }) => {
   const feedbackContext = useFeedback();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
@@ -98,6 +98,7 @@ export const EngagementProvider = ({
 
   const _validateAuthStatus = useCallback(async () => {
     const authStatus = await authContext.checkAuthStatus();
+    console.log(authStatus);
     if (!authStatus) {
       throw new AuthenticationError();
     }

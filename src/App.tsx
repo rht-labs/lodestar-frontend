@@ -37,8 +37,12 @@ function ServiceProviderWrapper({ children }: { children: React.ReactChild }) {
       fetchConfig();
     }
   }, [appConfig, fetchConfig]);
+  if (!appConfig) {
+    return null;
+  }
+  const serviceProviders = new ApiV1ServiceFactory(appConfig);
   return (
-    <ServiceProvider serviceFactory={new ApiV1ServiceFactory(appConfig)}>
+    <ServiceProvider serviceFactory={serviceProviders}>
       {children}
     </ServiceProvider>
   );
@@ -51,6 +55,7 @@ function AppContexts() {
     notificationService,
     versionService,
   } = useServiceProviders();
+  console.log(authenticationService);
   return (
     <FeedbackProvider>
       <AuthProvider authenticationService={authenticationService}>

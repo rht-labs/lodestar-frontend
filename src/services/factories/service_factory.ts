@@ -21,7 +21,7 @@ export abstract class ServiceFactory {
 export class ApiV1ServiceFactory implements ServiceFactory {
   constructor(private config: Config) {}
   createEngagementService(): EngagementService {
-    return new Apiv1EngagementService(this.config.baseUrl);
+    return new Apiv1EngagementService(this.config.backendUrl);
   }
   createAuthService(): AuthService {
     return new Apiv1AuthService(this.config);

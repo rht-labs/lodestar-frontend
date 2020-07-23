@@ -23,15 +23,16 @@ export const ServiceProvider = ({
   children: any;
   serviceFactory?: ServiceFactory;
 }) => {
+  if (!serviceFactory) {
+    return null;
+  }
   const services: ServiceProvider = {
     engagementService: serviceFactory.createEngagementService(),
     authenticationService: serviceFactory.createAuthService(),
     versionService: serviceFactory.createVersionService(),
     notificationService: serviceFactory.createNotificationService(),
   };
-  if (!serviceFactory) {
-    return null;
-  }
+  console.log(services);
   return (
     <ServiceProviderContext.Provider value={services}>
       {children}
