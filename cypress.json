@@ -1,5 +1,6 @@
 {
   "chromeWebSecurity": false,
   "waitForAnimations": false,
-  "animationDistanceThreshold": 100
+  "animationDistanceThreshold": 100,
+  "projectId": "jc8w7r"
 }
