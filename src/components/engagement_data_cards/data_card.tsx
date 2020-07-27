@@ -7,7 +7,7 @@ import {
   Level,
   LevelItem,
 } from '@patternfly/react-core';
-import { Feature } from '../../components/feature';
+import { Feature } from '../feature/feature';
 import { APP_FEATURES } from '../../common/app_features';
 
 export interface DataCardProps {

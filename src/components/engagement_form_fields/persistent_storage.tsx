@@ -29,6 +29,7 @@ export function PersistentStorageFormField({
     >
       <FormSelect
         aria-label="Persistent Storage Needs"
+        id={'persistent_storage_dropdown'}
         isDisabled={
           formOptions?.openshift_options?.persistent_storage?.options
             ?.length === 1 || !hasFeature(APP_FEATURES.writer)
@@ -45,6 +46,7 @@ export function PersistentStorageFormField({
                 key={index}
                 label={option.label}
                 value={option.value}
+                data-cy={option.value}
               />
             )
           )

@@ -1,7 +1,7 @@
 import React from 'react';
-import { SessionContext } from '../../context/session_context/session_context';
+import { AuthContext } from '../../context/auth_context/auth_context';
 
-class LogoutPage extends React.Component<{ session: SessionContext }> {
+class LogoutPage extends React.Component<{ session: AuthContext }> {
   componentDidMount(): void {
     const { session } = this.props;
     session.logout().then(() =>
@@ -19,7 +19,7 @@ class LogoutPage extends React.Component<{ session: SessionContext }> {
 }
 
 export default React.forwardRef((props, ref) => (
-  <SessionContext.Consumer>
+  <AuthContext.Consumer>
     {session => <LogoutPage {...props} session={session} />}
-  </SessionContext.Consumer>
+  </AuthContext.Consumer>
 ));

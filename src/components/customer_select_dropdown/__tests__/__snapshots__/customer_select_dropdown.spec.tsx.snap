@@ -21,7 +21,7 @@ Object {
               aria-label=""
               autocomplete="off"
               class="pf-c-form-control pf-c-select__toggle-typeahead"
-              id="pf-toggle-id-0-select-typeahead"
+              id="customer_dropdown-select-typeahead"
               placeholder="Foobar"
               type="text"
               value=""
@@ -31,9 +31,9 @@ Object {
             aria-expanded="false"
             aria-haspopup="listbox"
             aria-label="Options menu"
-            aria-labelledby=" pf-toggle-id-0"
+            aria-labelledby=" customer_dropdown"
             class="pf-c-button pf-c-select__toggle-button pf-m-plain"
-            id="pf-toggle-id-0"
+            id="customer_dropdown"
             type="button"
           >
             <svg
@@ -73,7 +73,7 @@ Object {
             aria-label=""
             autocomplete="off"
             class="pf-c-form-control pf-c-select__toggle-typeahead"
-            id="pf-toggle-id-0-select-typeahead"
+            id="customer_dropdown-select-typeahead"
             placeholder="Foobar"
             type="text"
             value=""
@@ -83,9 +83,9 @@ Object {
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-label="Options menu"
-          aria-labelledby=" pf-toggle-id-0"
+          aria-labelledby=" customer_dropdown"
           class="pf-c-button pf-c-select__toggle-button pf-m-plain"
-          id="pf-toggle-id-0"
+          id="customer_dropdown"
           type="button"
         >
           <svg

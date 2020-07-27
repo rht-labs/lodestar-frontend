@@ -41,7 +41,6 @@ export function EngagementSummaryCard({
     'project_name',
   ];
   const status = getEngagementStatus(currentEngagement);
-
   return (
     <>
       <EngagementSummaryEditModal
@@ -66,6 +65,7 @@ export function EngagementSummaryCard({
           <EditButton
             onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
             text={'Edit'}
+            dataCy={'edit_summary_card'}
           />
         )}
         title="Engagement Summary"
@@ -77,37 +77,37 @@ export function EngagementSummaryCard({
           <GridItem md={12} lg={6}>
             <Grid hasGutter>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Company">
+                <TitledDataPoint title="Company" dataCy={'company_label'}>
                   {currentEngagement?.customer_name}
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Project">
+                <TitledDataPoint title="Project" dataCy={'project_label'}>
                   {currentEngagement?.project_name}
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Location">
+                <TitledDataPoint title="Location" dataCy={'location_label'}>
                   {currentEngagement?.location}
                 </TitledDataPoint>
               </GridItem>
 
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Start Date">
+                <TitledDataPoint title="Start Date" dataCy={'start_date_label'}>
                   {currentEngagement?.start_date
                     ? formatDate(currentEngagement?.start_date, 'MMM dd, yyyy')
                     : null}
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="End Date">
+                <TitledDataPoint title="End Date" dataCy={'end_date_label'}>
                   {currentEngagement?.end_date
                     ? formatDate(currentEngagement?.end_date, 'MMM dd, yyyy')
                     : null}
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Created By">
+                <TitledDataPoint title="Created By" dataCy={'created_by_label'}>
                   <DisplayCreatedByName
                     userFromServer={
                       currentEngagement?.creation_details?.created_by_user
@@ -119,7 +119,7 @@ export function EngagementSummaryCard({
             </Grid>
           </GridItem>
           <GridItem md={12} lg={4}>
-            <TitledDataPoint title="Description">
+            <TitledDataPoint title="Description"  dataCy={'description_label'}>
               <span style={{ whiteSpace: 'pre-line' }}>
                 {currentEngagement?.description}
               </span>

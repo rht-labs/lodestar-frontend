@@ -96,6 +96,7 @@ Object {
                 class=""
               >
                 <b
+                  data-cy="active"
                   style="color: green;"
                 >
                   ACTIVE
@@ -204,6 +205,7 @@ Object {
               class=""
             >
               <b
+                data-cy="active"
                 style="color: green;"
               >
                 ACTIVE
@@ -369,6 +371,7 @@ Object {
                 class=""
               >
                 <b
+                  data-cy="past"
                   style="color: rgb(184, 187, 190);"
                 >
                   PAST
@@ -477,6 +480,7 @@ Object {
               class=""
             >
               <b
+                data-cy="past"
                 style="color: rgb(184, 187, 190);"
               >
                 PAST
@@ -642,6 +646,7 @@ Object {
                 class=""
               >
                 <b
+                  data-cy="upcoming"
                   style="color: rgb(236, 122, 8);"
                 >
                   UPCOMING
@@ -750,6 +755,7 @@ Object {
               class=""
             >
               <b
+                data-cy="upcoming"
                 style="color: rgb(236, 122, 8);"
               >
                 UPCOMING

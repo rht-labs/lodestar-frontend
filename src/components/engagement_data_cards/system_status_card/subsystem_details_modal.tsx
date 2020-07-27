@@ -134,7 +134,7 @@ function MessageWidget({ subsystem }: HasSubsystem) {
   ]);
   return (
     <DetailsSection title="Messages">
-      <Table cells={columns} rows={rows}>
+      <Table aria-label="System Messages" cells={columns} rows={rows}>
         <TableHeader />
         <TableBody />
       </Table>

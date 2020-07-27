@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { FeatureRequest } from '../components/feature_request';
+import { FeatureRequest } from '../components/feature_request/feature_request';
 import { PrivateRoute } from '../components/authentication/private_route';
 import { CallbackHandler } from '../components/authentication/callback_handler';
 import { Dashboard } from './dashboard';
 import { About } from './about';
 import { UnauthorizedPage } from './unauthorized';
 import LogoutPage from './logout';
-import { Feature } from '../components/feature';
+import { Feature } from '../components/feature/feature';
 import { APP_FEATURES } from '../common/app_features';
 import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
 import { EngagementListRoute } from './engagement_list/engagement_list_route';
-import { EngagementDetailView } from './engagement_details';
+import { EngagementDetailViewContainer } from './engagement_details/engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { useNotification } from '../context/notification_context/notification_hook';
 import { EngagementStatus } from '../schemas/engagement_schema';
-import { Feedback } from '../components/omp_feedback';
-import { ErrorBoundary } from '../components/error_boundary';
+import { Feedback } from '../components/omp_feedback/omp_feedback';
+import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 
 export function OMPRouter() {
   const { fetchNotifications } = useNotification();
@@ -96,7 +96,7 @@ export function OMPRouter() {
                             </PrivateRoute>
                             <PrivateRoute
                               path="/app/engagements/:customer_name/:project_name"
-                              component={EngagementDetailView}
+                              component={EngagementDetailViewContainer}
                             />
                           </Switch>
                         </ModalVisibilityProvider>

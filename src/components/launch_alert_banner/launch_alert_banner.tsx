@@ -32,6 +32,7 @@ export function LaunchAlertBanner({
             <Button
               isDisabled={!isLaunchable}
               onClick={() => onLaunch(engagement)}
+              data-cy={'launch_button'}
             >
               Launch
             </Button>

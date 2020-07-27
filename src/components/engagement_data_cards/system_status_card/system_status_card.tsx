@@ -10,6 +10,7 @@ import {
 import { SystemStatusDetailsModal } from './system_status_details_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
+import { ClusterStatus } from '../../../schemas/cluster_status';
 
 export interface SystemStatusCardProps {
   currentEngagement: Engagement;
@@ -37,14 +38,25 @@ export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
         )}
         title="System Status"
       >
-        <Grid>
-          {status?.subsystems.map(subsystem => (
-            <GridItem key={subsystem.name} lg={2} md={6}>
-              <SubsystemDetails subsystem={subsystem} />
-            </GridItem>
-          ))}
-        </Grid>
+        <SubsystemStatuses status={status} />
       </DataCard>
     </>
+  );
+}
+
+function SubsystemStatuses({ status }: { status: ClusterStatus }) {
+  return (
+    <Grid>
+      {!status?.subsystems?.length && (
+        <span style={{ fontStyle: 'italic' }}>
+          No systems are reporting statuses
+        </span>
+      )}
+      {status?.subsystems.map(subsystem => (
+        <GridItem key={subsystem.name} span={2}>
+          <SubsystemDetails subsystem={subsystem} />
+        </GridItem>
+      ))}
+    </Grid>
   );
 }

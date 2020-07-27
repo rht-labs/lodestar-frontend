@@ -62,6 +62,7 @@ export function SubdomainFormField({
         type="text"
         id="ocp_sub_domain"
         name="ocp_sub_domain"
+        data-cy={'desired_subdomain_input'}
         value={getSubdomainFieldText()}
         onChange={e => {
           if (!editedByUser) {
