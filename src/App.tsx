@@ -55,7 +55,6 @@ function AppContexts() {
     notificationService,
     versionService,
   } = useServiceProviders();
-  console.log(authenticationService);
   return (
     <FeedbackProvider>
       <AuthProvider authenticationService={authenticationService}>

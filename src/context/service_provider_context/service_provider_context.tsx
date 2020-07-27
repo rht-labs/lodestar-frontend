@@ -32,7 +32,6 @@ export const ServiceProvider = ({
     versionService: serviceFactory.createVersionService(),
     notificationService: serviceFactory.createNotificationService(),
   };
-  console.log(services);
   return (
     <ServiceProviderContext.Provider value={services}>
       {children}
