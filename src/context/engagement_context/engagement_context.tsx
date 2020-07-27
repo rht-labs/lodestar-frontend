@@ -64,10 +64,10 @@ const { Provider } = EngagementContext;
 
 export const EngagementProvider = ({
   children,
-  engagementService
+  engagementService,
 }: {
   children: React.ReactChild;
-  engagementService: EngagementService
+  engagementService: EngagementService;
 }) => {
   const feedbackContext = useFeedback();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
