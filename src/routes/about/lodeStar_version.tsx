@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  CardBody,
   Grid,
   GridItem
 } from '@patternfly/react-core';
@@ -11,32 +10,41 @@ interface LodeStarVersionProps {
 
 export function LodeStarVersion(props: LodeStarVersionProps) {
   let lodeStarVersion = null;
+  let lodestar;
 
   if (!!props.versionContext?.versions?.versions) {
     // Find LodeStar app version (if it exists) and move it to the top
-    let lodestarVersion = props.versionContext.versions?.versions?.applications?.find(e => e.application === "lodestar");
+    lodestar = props.versionContext.versions?.versions?.applications?.find(e => e.application === "lodestar");
 
-    if (lodestarVersion) {
-      lodeStarVersion = lodestarVersion.version;
+    if (lodestar) {
+      lodeStarVersion = lodestar.version;
       // Remove it from the component version list
-      const index = props.versionContext.versions?.versions.applications.indexOf(lodestarVersion);
+      const index = props.versionContext.versions?.versions.applications.indexOf(lodestar);
       props.versionContext.versions?.versions.applications.splice(index, 1);
     } else {
       lodeStarVersion = 'Unknown';
     }
   }
   return (
-    <CardBody>
-      <Grid span={6}>
-        <GridItem span={2}>
+    <>
+      <Grid lg={6} md={12}>
+        <GridItem lg={2} md={6}>
           <b>LodeStar version: </b>
         </GridItem>
-        <GridItem span={2}>
-          <a href={'https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes'}>
-            { lodeStarVersion }
-          </a>
+        <GridItem lg={2} md={6}>
+          {
+            lodestar?.link_address ? (
+              <a href={lodestar?.link_address}>
+                { lodeStarVersion }
+              </a>
+            ) : (
+              <>
+                { lodeStarVersion }
+              </>
+            )
+          }
         </GridItem>
       </Grid>
-    </CardBody>
+    </>
   );
 }

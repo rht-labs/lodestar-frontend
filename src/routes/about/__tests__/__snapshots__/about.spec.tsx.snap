@@ -29,7 +29,7 @@ Object {
               LodeStar
             </h1>
             <div
-              class="pf-l-grid pf-m-all-10-col pf-m-gutter"
+              class="pf-l-grid pf-m-all-12-col pf-m-gutter"
             >
               <div
                 class="pf-l-grid__item"
@@ -45,21 +45,9 @@ Object {
                   data-pf-content="true"
                   style="text-align: justify;"
                 >
-                  <a
-                    href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Overview"
-                  >
-                    LodeStar
-                  </a>
-                   is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform.
-                  <br />
-                  The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team.
-                  <br />
-                   Please read 
-                  <a
-                    href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
-                  >
-                    LodeStar User Guide
-                  </a>
+                  LodeStar
+                   is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform. The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team. Please read 
+                  LodeStar User Guide
                    for more details.
                 </small>
               </div>
@@ -77,11 +65,7 @@ Object {
                   data-pf-content="true"
                 >
                   Have questions or need help? Please checkout 
-                  <a
-                    href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
-                  >
-                    LodeStar FAQ
-                  </a>
+                  LodeStar FAQ
                     or send an email to 
                   <a
                     href="#"
@@ -102,26 +86,18 @@ Object {
                   data-pf-content="true"
                 >
                   <div
-                    class="pf-c-card__body"
+                    class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
                   >
                     <div
-                      class="pf-l-grid pf-m-all-6-col"
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
                     >
-                      <div
-                        class="pf-l-grid__item pf-m-2-col"
-                      >
-                        <b>
-                          LodeStar version: 
-                        </b>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-2-col"
-                      >
-                        <a
-                          href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes"
-                        />
-                      </div>
+                      <b>
+                        LodeStar version: 
+                      </b>
                     </div>
+                    <div
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                    />
                   </div>
                 </small>
               </div>
@@ -156,7 +132,7 @@ Object {
             LodeStar
           </h1>
           <div
-            class="pf-l-grid pf-m-all-10-col pf-m-gutter"
+            class="pf-l-grid pf-m-all-12-col pf-m-gutter"
           >
             <div
               class="pf-l-grid__item"
@@ -172,21 +148,9 @@ Object {
                 data-pf-content="true"
                 style="text-align: justify;"
               >
-                <a
-                  href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Overview"
-                >
-                  LodeStar
-                </a>
-                 is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform.
-                <br />
-                The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team.
-                <br />
-                 Please read 
-                <a
-                  href="https://docs.google.com/document/d/1lMl1IxFFXiWztSDc8hTeesYkqn_vqpuAt2X2JrSgCB8/edit"
-                >
-                  LodeStar User Guide
-                </a>
+                LodeStar
+                 is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform. The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team. Please read 
+                LodeStar User Guide
                  for more details.
               </small>
             </div>
@@ -204,11 +168,7 @@ Object {
                 data-pf-content="true"
               >
                 Have questions or need help? Please checkout 
-                <a
-                  href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-FAQ"
-                >
-                  LodeStar FAQ
-                </a>
+                LodeStar FAQ
                   or send an email to 
                 <a
                   href="#"
@@ -229,26 +189,18 @@ Object {
                 data-pf-content="true"
               >
                 <div
-                  class="pf-c-card__body"
+                  class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
                 >
                   <div
-                    class="pf-l-grid pf-m-all-6-col"
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
                   >
-                    <div
-                      class="pf-l-grid__item pf-m-2-col"
-                    >
-                      <b>
-                        LodeStar version: 
-                      </b>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-2-col"
-                    >
-                      <a
-                        href="https://gitlab.consulting.redhat.com/rht-labs/labs-sre/documentation/-/wikis/LodeStar-Release-Notes"
-                      />
-                    </div>
+                    <b>
+                      LodeStar version: 
+                    </b>
                   </div>
+                  <div
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                  />
                 </div>
               </small>
             </div>
