@@ -186,6 +186,15 @@ export CYPRESS_SSO_PASSWORD=****
 export CYPRESS_SSO_URL=sso_url
 npm run e2e
 ```
+For running the e2e test locally:
+
+```
+export CYPRESS_BASE_URL=http://localhost:3000
+export CYPRESS_SSO_USER=<<e2e>>
+export CYPRESS_SSO_PASSWORD=****
+export CYPRESS_SSO_URL=<<https://sso_host >>/auth/realms/<< realm name>>/protocol/openid-connect/token
+npm run e2e
+```
 
 ### `npm run build`
 
