@@ -19,7 +19,9 @@ export const FeatureToggles = ({
   features?: string[];
 }) => {
   const authContext = useSession();
-  const providedFeatures = features ?? authContext.sessionData?.roles ?? [];
+  const providedFeatures = (authContext.sessionData?.roles ?? []).concat(
+    features ?? []
+  );
   const hasFeature = useCallback(
     (name: string) => {
       return name && providedFeatures.includes(name);

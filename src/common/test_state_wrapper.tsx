@@ -11,10 +11,11 @@ import {
   useServiceProviders,
 } from '../context/service_provider_context/service_provider_context';
 import { FeedbackProvider } from '../context/feedback_context/feedback_context';
+import { FakedServiceFactory } from '../services/factories/service_factory';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
-    <ServiceProvider shouldUseFaked={true}>
+    <ServiceProvider serviceFactory={new FakedServiceFactory()}>
       <TestContexts>{children}</TestContexts>
     </ServiceProvider>
   );
