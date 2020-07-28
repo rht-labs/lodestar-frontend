@@ -1,6 +1,10 @@
 import { LogVerbosity } from '../utilities/logger/logger';
 import { getLogVerbosityFromString } from '../utilities/logger';
 
+export interface BannerMessage {
+  message: string;
+  backgroundcolor: string;
+}
 export interface Config {
   baseUrl: string;
   clientId: string;
@@ -10,7 +14,9 @@ export interface Config {
   loggerType: string;
   logLevel: LogVerbosity;
   supportEmailAddress: string;
+  bannerMessages: BannerMessage[];
 }
+
 export class Config implements Config {
   constructor({
     baseUrl,
@@ -21,6 +27,7 @@ export class Config implements Config {
     logLevel,
     loggerType,
     supportEmailAddress,
+    bannerMessages,
   }: Config) {
     this.baseUrl = baseUrl;
     this.clientId = clientId;
@@ -30,8 +37,10 @@ export class Config implements Config {
     this.logLevel = logLevel;
     this.loggerType = loggerType;
     this.supportEmailAddress = supportEmailAddress;
+    this.bannerMessages = bannerMessages;
   }
 
+  bannerMessages: BannerMessage[];
   baseUrl: string;
   clientId: string;
   authBaseUrl: string;
@@ -51,6 +60,7 @@ export class Config implements Config {
       logLevel: getLogVerbosityFromString(map['logLevel'] as string),
       loggerType: map['loggerType'] as string,
       supportEmailAddress: map['supportEmailAddress'] as string,
+      bannerMessages: (map['bannerMessages'] as BannerMessage[]) ?? [],
     });
   }
 }
