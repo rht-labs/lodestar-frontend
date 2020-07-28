@@ -81,7 +81,7 @@ export const EngagementProvider = ({
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
-  >(engagementFormReducer, engagementFormReducer());
+  >(engagementFormReducer(formOptions), engagementFormReducer(formOptions)());
 
   const authContext = useSession();
 
