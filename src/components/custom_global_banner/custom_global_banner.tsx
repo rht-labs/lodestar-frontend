@@ -13,6 +13,7 @@ export default function CustomGlobalBanner(props: CustomGlobalBannerProps) {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         padding: '0 1.5rem',
       }}
     >
