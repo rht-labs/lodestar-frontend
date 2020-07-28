@@ -384,14 +384,14 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        await _handleErrors(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
-          'We were unable to launch your engagement. Please followup with an administrator if this continues.',
+          'We were unable to launch your engagement. Please follow up with an administrator if this continues.',
           AlertType.error,
           false
         );
+        await _handleErrors(e);
       }
     },
     [

@@ -11,6 +11,7 @@ import { UserToken } from '../../../schemas/user_token_schema';
 import { UserProfile } from '../../../schemas/user_profile_schema';
 import { AuthenticationError } from '../../../services/auth_service/auth_errors';
 import { AuthService } from '../../../services/auth_service/authentication_service';
+import { AlreadyExistsError } from '../../../services/engagement_service/engagement_service_errors';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -372,6 +373,165 @@ describe('Engagement Context', () => {
       'A Nashvillian'
     );
   });
+  test('a network error during launch reverts to the initial engagement object', async () => {
+    const initialEngagement = Engagement.fromFake(true);
+    const wrapper = ({ children }) => {
+      return (
+        <AuthProvider
+          authService={
+            ({
+              async isLoggedIn() {
+                return true;
+              },
+              getToken() {
+                return UserToken.fromFake();
+              },
+              async getUserProfile() {
+                return UserProfile.fromFake();
+              },
+            } as unknown) as AuthService
+          }
+        >
+          <EngagementProvider
+            engagementService={
+              ({
+                async fetchEngagements() {
+                  return [initialEngagement];
+                },
+                async launchEngagement(engagement) {
+                  throw Error('a generic network error');
+                },
+              } as unknown) as EngagementService
+            }
+          >
+            {children}
+          </EngagementProvider>
+        </AuthProvider>
+      );
+    };
+    const { result, waitForNextUpdate } = renderHook(() => useEngagements(), {
+      wrapper,
+    });
+    const onCatch = jest.fn();
+    await act(async () => {
+      result.current.getEngagements();
+      await waitForNextUpdate();
+    });
+    await act(async () => {
+      result.current.setCurrentEngagement(Engagement.fromFake(true));
+    });
+    await act(async () => {
+      result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
+      await waitForNextUpdate();
+    });
+    expect(onCatch).toHaveBeenCalled();
+    expect(result.current.currentEngagement.launch).toBeFalsy();
+  });
 
+  test('If an engagement already exists, an engagement should not be created', async () => {
+    const initialEngagement = Engagement.fromFake(true);
+    const wrapper = ({ children }) => {
+      return (
+        <AuthProvider
+          authService={
+            ({
+              async isLoggedIn() {
+                return true;
+              },
+              getToken() {
+                return UserToken.fromFake();
+              },
+              async getUserProfile() {
+                return UserProfile.fromFake();
+              },
+            } as unknown) as AuthService
+          }
+        >
+          <EngagementProvider
+            engagementService={
+              ({
+                async fetchEngagements() {
+                  return [initialEngagement];
+                },
+                async createEngagement(engagement) {
+                  throw new AlreadyExistsError();
+                },
+              } as unknown) as EngagementService
+            }
+          >
+            {children}
+          </EngagementProvider>
+        </AuthProvider>
+      );
+    };
+    const { result } = renderHook(() => useEngagements(), {
+      wrapper,
+    });
+    let error;
+    await act(async () => {
+      result.current
+        .createEngagement(Engagement.fromFake(true))
+        .catch(e => (error = e));
+    });
+    expect(error).toBeInstanceOf(AlreadyExistsError);
+  });
+
+  test('If an engagement has changed since the last update, the engagement should revert to the old engagement', async () => {
+    const initialEngagement = Engagement.fromFake(true);
+    const wrapper = ({ children }) => {
+      return (
+        <AuthProvider
+          authService={
+            ({
+              async isLoggedIn() {
+                return true;
+              },
+              getToken() {
+                return UserToken.fromFake();
+              },
+              async getUserProfile() {
+                return UserProfile.fromFake();
+              },
+            } as unknown) as AuthService
+          }
+        >
+          <EngagementProvider
+            engagementService={
+              ({
+                async fetchEngagements() {
+                  return [initialEngagement];
+                },
+                async saveEngagement(engagement) {
+                  throw new AlreadyExistsError();
+                },
+              } as unknown) as EngagementService
+            }
+          >
+            {children}
+          </EngagementProvider>
+        </AuthProvider>
+      );
+    };
+    const { result, waitForNextUpdate } = renderHook(() => useEngagements(), {
+      wrapper,
+    });
+    await act(async () => {
+      result.current.getEngagements();
+      await waitForNextUpdate();
+    });
+    await act(async () => {
+      result.current.setCurrentEngagement(result.current.engagements[0]);
+      await waitForNextUpdate();
+    });
+    const modifiedEngagement = {
+      ...initialEngagement,
+      customer_contact_email: 'madeup@example.com',
+    };
+    await act(async () => {
+      result.current.saveEngagement(modifiedEngagement);
+    });
+
+    expect(result.current.currentEngagement).toEqual(initialEngagement);
+  });
   afterAll(cleanup);
 });
