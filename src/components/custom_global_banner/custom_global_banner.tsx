@@ -16,7 +16,7 @@ export default function CustomGlobalBanner(props: CustomGlobalBannerProps) {
         padding: '0 1.5rem',
       }}
     >
-      {props.message} This is a warning message
+      {props.message}
     </div>
   );
 }
