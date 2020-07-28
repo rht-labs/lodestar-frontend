@@ -97,15 +97,17 @@ export const EngagementProvider = ({
   );
 
   const _validateAuthStatus = useCallback(async () => {
-    const authStatus = await authContext.checkAuthStatus();
-    if (!authStatus) {
-      throw new AuthenticationError();
-    }
+    const validate = async () => {
+      const authStatus = await authContext.checkAuthStatus();
+      if (!authStatus) {
+        throw new AuthenticationError();
+      }
+    };
+    _validateAuthStatusRef.current = validate;
+    return validate();
   }, [authContext]);
+  
   const _validateAuthStatusRef = useRef(_validateAuthStatus);
-  useEffect(() => (_validateAuthStatusRef.current = _validateAuthStatus), [
-    _validateAuthStatus,
-  ]);
 
   const getConfig = useCallback(async () => {
     await _validateAuthStatus();
