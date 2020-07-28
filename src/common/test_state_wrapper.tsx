@@ -11,11 +11,11 @@ import {
   useServiceProviders,
 } from '../context/service_provider_context/service_provider_context';
 import { FeedbackProvider } from '../context/feedback_context/feedback_context';
-import { FakedServiceFactory } from '../services/factories/service_factory';
+import { createFakedServices } from '../services/factories/service_factory';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
-    <ServiceProvider serviceFactory={new FakedServiceFactory()}>
+    <ServiceProvider serviceFactory={createFakedServices}>
       <TestContexts>{children}</TestContexts>
     </ServiceProvider>
   );
@@ -23,13 +23,13 @@ export const TestStateWrapper = ({ children = null }) => {
 
 function TestContexts({ children = null }) {
   const {
-    authenticationService,
+    authService,
     engagementService,
     versionService,
   } = useServiceProviders();
   return (
     <FeedbackProvider>
-      <AuthProvider authenticationService={authenticationService}>
+      <AuthProvider authService={authService}>
         <EngagementProvider engagementService={engagementService}>
           <VersionProvider versionService={versionService}>
             <FeatureToggles>{children}</FeatureToggles>
