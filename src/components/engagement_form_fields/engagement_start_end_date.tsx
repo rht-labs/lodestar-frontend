@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement_schema';
 import {
   FormGroup,
@@ -27,11 +27,6 @@ export function EngagementStartEndDateFormField({
   ...props
 }: EngagementStartEndDateProps) {
   const { validate, getValidationResult } = useValidation();
-  const [retirementDateChanged, setRetirementDateChanged] = useState(false);
-  const gracePeriodInDays: number =
-    (props.formOptions?.['logistics_options']?.[
-      'env_default_grace_period'
-    ] as number) ?? 0;
   const maxGracePeriodInDays: number =
     (props.formOptions?.['logistics_options']?.[
       'env_grace_period_max'
@@ -47,44 +42,6 @@ export function EngagementStartEndDateFormField({
   const [archiveDateText, setArchiveDateText] = useState(
     getFormattedDate(archive_date) || ''
   );
-
-  const normalizeRetirementDate = useCallback(
-    (retirementDate: Date) => {
-      if (!end_date || !(end_date instanceof Date)) {
-        return undefined;
-      } else if (end_date && retirementDate && retirementDate <= end_date) {
-        return addDays(end_date, gracePeriodInDays);
-      } else if (
-        retirementDate &&
-        end_date &&
-        retirementDate >= addDays(end_date, maxGracePeriodInDays)
-      ) {
-        return addDays(end_date, maxGracePeriodInDays);
-      } else if (retirementDate || retirementDateChanged) {
-        return retirementDate;
-      } else if (end_date) {
-        return addDays(end_date, gracePeriodInDays);
-      }
-      return startOfToday();
-    },
-    [end_date, gracePeriodInDays, maxGracePeriodInDays, retirementDateChanged]
-  );
-
-  // if the end date is less than the start date, set the end date to the start date
-  useEffect(() => {
-    if (end_date < start_date) {
-      onChange('end_date', start_date);
-    }
-  }, [start_date, end_date, onChange]);
-
-  // when the archive date or end date changes, check that it is within bounds. If not, update it
-  useEffect(() => {
-    const normalizedRetirementDate = normalizeRetirementDate(archive_date);
-
-    if (archive_date?.valueOf() !== normalizedRetirementDate?.valueOf()) {
-      onChange('archive_date', normalizedRetirementDate);
-    }
-  }, [archive_date, normalizeRetirementDate, onChange, end_date]);
 
   useEffect(() => {
     setEndDateText(getFormattedDate(end_date));
@@ -175,12 +132,10 @@ export function EngagementStartEndDateFormField({
             value={archiveDateText}
             onBlur={e => {
               const parsedDate = parseDate(e.target.value, 'yyyy-MM-dd', 0);
-              const retirementDate = normalizeRetirementDate(parsedDate);
-              validate('archive_date')(retirementDate);
-              onChange('archive_date', retirementDate);
+              validate('archive_date')(parsedDate);
+              onChange('archive_date', parsedDate);
             }}
             onChange={e => {
-              setRetirementDateChanged(true);
               setArchiveDateText(e);
             }}
             min={getFormattedDate(engagement?.end_date)}
