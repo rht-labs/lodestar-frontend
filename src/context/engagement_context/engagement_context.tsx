@@ -72,7 +72,6 @@ export const EngagementProvider = ({
   const feedbackContext = useFeedback();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
 
-  // TODO: Handle error/loading state
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
@@ -106,7 +105,7 @@ export const EngagementProvider = ({
     _validateAuthStatusRef.current = validate;
     return validate();
   }, [authContext]);
-  
+
   const _validateAuthStatusRef = useRef(_validateAuthStatus);
 
   const getConfig = useCallback(async () => {

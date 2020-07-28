@@ -4,8 +4,13 @@ import FakedSchema from './faked_schema.json';
 import { EngagementFormConfig } from '../../../../schemas/engagement_config';
 
 export class FakedEngagementService extends EngagementService {
+  constructor(private shouldUseStaticData: boolean = false) {
+    super();
+  }
   async fetchEngagements(): Promise<Engagement[]> {
-    return new Array(8).fill(null).map(() => Engagement.fromFake());
+    return new Array(8)
+      .fill(null)
+      .map(() => Engagement.fromFake(this.shouldUseStaticData));
   }
   async createEngagement(data: Engagement): Promise<Engagement> {
     return data;
@@ -26,6 +31,6 @@ export class FakedEngagementService extends EngagementService {
     customer_name: string,
     project_name: string
   ) {
-    return Engagement.fromFake();
+    return Engagement.fromFake(this.shouldUseStaticData);
   }
 }
