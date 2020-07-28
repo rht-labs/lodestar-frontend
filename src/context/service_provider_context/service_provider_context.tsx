@@ -7,7 +7,7 @@ import { ServiceFactory } from '../../services/factories/service_factory';
 
 interface ServiceProvider {
   engagementService: EngagementService;
-  authenticationService: AuthService;
+  authService: AuthService;
   versionService: VersionService;
   notificationService: NotificationService;
 }
@@ -26,12 +26,7 @@ export const ServiceProvider = ({
   if (!serviceFactory) {
     return null;
   }
-  const services: ServiceProvider = {
-    engagementService: serviceFactory.createEngagementService(),
-    authenticationService: serviceFactory.createAuthService(),
-    versionService: serviceFactory.createVersionService(),
-    notificationService: serviceFactory.createNotificationService(),
-  };
+  const services: ServiceProvider = serviceFactory();
   return (
     <ServiceProviderContext.Provider value={services}>
       {children}

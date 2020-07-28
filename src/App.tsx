@@ -16,7 +16,7 @@ import { FeedbackProvider } from './context/feedback_context/feedback_context';
 import { PublicConfigService } from './services/config_service/implementations/public_config_service';
 import { NotificationProvider } from './context/notification_context/notification_context';
 import { useConfig } from './context/config_context/config_hook';
-import { ApiV1ServiceFactory } from './services/factories/service_factory';
+import { createApiV1Services } from './services/factories/service_factory';
 
 export const App = () => {
   return (
@@ -40,7 +40,7 @@ function ServiceProviderWrapper({ children }: { children: React.ReactChild }) {
   if (!appConfig) {
     return null;
   }
-  const serviceProviders = new ApiV1ServiceFactory(appConfig);
+  const serviceProviders = createApiV1Services(appConfig);
   return (
     <ServiceProvider serviceFactory={serviceProviders}>
       {children}
@@ -50,14 +50,14 @@ function ServiceProviderWrapper({ children }: { children: React.ReactChild }) {
 
 function AppContexts() {
   const {
-    authenticationService,
+    authService,
     engagementService,
     notificationService,
     versionService,
   } = useServiceProviders();
   return (
     <FeedbackProvider>
-      <AuthProvider authenticationService={authenticationService}>
+      <AuthProvider authService={authService}>
         <NotificationProvider notificationService={notificationService}>
           <VersionProvider versionService={versionService}>
             <FeatureToggles>

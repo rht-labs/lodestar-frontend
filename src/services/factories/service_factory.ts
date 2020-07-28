@@ -11,40 +11,27 @@ import { Apiv1VersionService } from '../version_service/implementations/apiv1_ve
 import { FakedNotificationService } from '../notification_service/implementations/faked_notification_service';
 import { Config } from '../../schemas/config';
 
-export abstract class ServiceFactory {
-  abstract createEngagementService(): EngagementService;
-  abstract createAuthService(): AuthService;
-  abstract createVersionService(): VersionService;
-  abstract createNotificationService(): NotificationService;
-}
+export type ServiceFactory = () => {
+  engagementService: EngagementService;
+  authService: AuthService;
+  versionService: VersionService;
+  notificationService: NotificationService;
+};
 
-export class ApiV1ServiceFactory implements ServiceFactory {
-  constructor(private config: Config) {}
-  createEngagementService(): EngagementService {
-    return new Apiv1EngagementService(this.config.backendUrl);
-  }
-  createAuthService(): AuthService {
-    return new Apiv1AuthService(this.config);
-  }
-  createVersionService(): VersionService {
-    return new Apiv1VersionService(this.config.baseUrl);
-  }
-  createNotificationService(): NotificationService {
-    return new FakedNotificationService();
-  }
-}
+export const createApiV1Services = (config: Config): ServiceFactory => () => {
+  return {
+    authService: new Apiv1AuthService(config),
+    engagementService: new Apiv1EngagementService(config.backendUrl),
+    notificationService: new FakedNotificationService(),
+    versionService: new Apiv1VersionService(config.baseUrl),
+  };
+};
 
-export class FakedServiceFactory implements ServiceFactory {
-  createEngagementService(): EngagementService {
-    return new FakedEngagementService();
-  }
-  createAuthService(): AuthService {
-    return new FakedAuthService();
-  }
-  createVersionService(): VersionService {
-    return new FakedVersionService();
-  }
-  createNotificationService(): NotificationService {
-    return new FakedNotificationService();
-  }
-}
+export const createFakedServices: ServiceFactory = () => {
+  return {
+    authService: new FakedAuthService(),
+    engagementService: new FakedEngagementService(),
+    notificationService: new FakedNotificationService(),
+    versionService: new FakedVersionService(),
+  };
+};
