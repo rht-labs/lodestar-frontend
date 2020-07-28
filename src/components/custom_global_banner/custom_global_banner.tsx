@@ -4,7 +4,6 @@ export interface CustomGlobalBannerProps {
   color: string;
 }
 export default function CustomGlobalBanner(props: CustomGlobalBannerProps) {
-  console.log(props.color);
   return (
     <div
       style={{

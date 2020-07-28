@@ -85,7 +85,6 @@ function BannerMessages({ messages = [] }: { messages: BannerMessage[] }) {
   return (
     <>
       {messages.map(message => {
-        console.log(message);
         return (
           <CustomGlobalBanner
             color={message.backgroundcolor}
