@@ -10,6 +10,7 @@ import { EngagementService } from '../../../services/engagement_service/engageme
 import { EngagementProvider } from '../engagement_context';
 import { UserToken } from '../../../schemas/user_token_schema';
 import { UserProfile } from '../../../schemas/user_profile_schema';
+import { AuthenticationError } from '../../../services/auth_service/auth_errors';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -115,7 +116,43 @@ describe('Engagement Context', () => {
   });
 
   test('_handleErrors handles authentication errors', async () => {
-    const onCaught = jest.fn();
+    const isLoggedIn = jest.fn(async () => true);
+    const wrapper = ({ children }) => {
+      return (
+        <AuthProvider
+          authService={{
+            isLoggedIn,
+            getToken() {
+              return UserToken.fromFake();
+            },
+            async getUserProfile() {
+              return UserProfile.fromFake();
+            },
+          }}
+        >
+          <EngagementProvider
+            engagementService={
+              ({
+                async fetchEngagements() {
+                  throw new AuthenticationError();
+                },
+              } as unknown) as EngagementService
+            }
+          >
+            {children}
+          </EngagementProvider>
+        </AuthProvider>
+      );
+    };
+    const { result } = renderHook(() => useEngagements(), {
+      wrapper,
+    });
+    await act(async () => {
+      result.current.getEngagements();
+    });
+    expect(isLoggedIn).toHaveBeenCalledTimes(2);
+  });
+  test('_handleErrors rethrows errors that it does not recognize', async () => {
     const wrapper = ({ children }) => {
       return (
         <AuthProvider
@@ -135,7 +172,7 @@ describe('Engagement Context', () => {
             engagementService={
               ({
                 async fetchEngagements() {
-                  throw new Error('hello');
+                  throw new Error('just a random error');
                 },
               } as unknown) as EngagementService
             }
@@ -148,12 +185,51 @@ describe('Engagement Context', () => {
     const { result } = renderHook(() => useEngagements(), {
       wrapper,
     });
+    const onCaught = jest.fn();
     await act(async () => {
       result.current.getEngagements().catch(onCaught);
     });
-    expect(onCaught).toHaveBeenCalled();
+    expect(onCaught).toHaveBeenCalledTimes(1);
+  });
+  test('_validateAuthStatus throws an AuthenticationError if the user is not authenticated', async () => {
+    const wrapper = ({ children }) => {
+      return (
+        <AuthProvider
+          authService={{
+            async isLoggedIn() {
+              return false;
+            },
+            getToken() {
+              return UserToken.fromFake();
+            },
+            async getUserProfile() {
+              return UserProfile.fromFake();
+            },
+          }}
+        >
+          <EngagementProvider
+            engagementService={
+              ({
+                async fetchEngagements() {
+                  return [];
+                },
+              } as unknown) as EngagementService
+            }
+          >
+            {children}
+          </EngagementProvider>
+        </AuthProvider>
+      );
+    };
+    const { result } = renderHook(() => useEngagements(), {
+      wrapper,
+    });
+    let error;
 
-    // expect(onCaught).toHaveBeenCalled();
+    await act(async () => {
+      result.current.getEngagements().catch(e => (error = e));
+    });
+    expect(error).toBeInstanceOf(AuthenticationError);
   });
   afterAll(cleanup);
 });
