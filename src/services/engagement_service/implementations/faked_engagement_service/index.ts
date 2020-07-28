@@ -3,10 +3,8 @@ import { Engagement } from '../../../../schemas/engagement_schema';
 import FakedSchema from './faked_schema.json';
 import { EngagementFormConfig } from '../../../../schemas/engagement_config';
 
-export class FakedEngagementService extends EngagementService {
-  constructor(private shouldUseStaticData: boolean = false) {
-    super();
-  }
+export class FakedEngagementService implements EngagementService {
+  constructor(private shouldUseStaticData: boolean = false) {}
   async fetchEngagements(): Promise<Engagement[]> {
     return new Array(8)
       .fill(null)

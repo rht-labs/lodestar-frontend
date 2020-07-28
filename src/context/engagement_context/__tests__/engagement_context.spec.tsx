@@ -5,6 +5,11 @@ import { getInitialState } from '../engagement_form_reducer';
 import { Engagement } from '../../../schemas/engagement_schema';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { parse, addDays } from 'date-fns';
+import { AuthProvider } from '../../auth_context/auth_context';
+import { EngagementService } from '../../../services/engagement_service/engagement_service';
+import { EngagementProvider } from '../engagement_context';
+import { UserToken } from '../../../schemas/user_token_schema';
+import { UserProfile } from '../../../schemas/user_profile_schema';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -108,9 +113,53 @@ describe('Engagement Context', () => {
     });
     expect(result.current.engagements[0].customer_name).toEqual('spencer');
   });
+
+  test('_handleErrors handles authentication errors', async () => {
+    const onCaught = jest.fn();
+    const wrapper = ({ children }) => {
+      return (
+        <AuthProvider
+          authService={{
+            async isLoggedIn() {
+              return true;
+            },
+            getToken() {
+              return UserToken.fromFake();
+            },
+            async getUserProfile() {
+              return UserProfile.fromFake();
+            },
+          }}
+        >
+          <EngagementProvider
+            engagementService={
+              ({
+                async fetchEngagements() {
+                  throw new Error('hello');
+                },
+              } as unknown) as EngagementService
+            }
+          >
+            {children}
+          </EngagementProvider>
+        </AuthProvider>
+      );
+    };
+    const { result } = renderHook(() => useEngagements(), {
+      wrapper,
+    });
+    await act(async () => {
+      result.current.getEngagements().catch(onCaught);
+    });
+    expect(onCaught).toHaveBeenCalled();
+
+    // expect(onCaught).toHaveBeenCalled();
+  });
+  afterAll(cleanup);
 });
 
 describe('Engagement date change logic', () => {
+  afterEach(() => cleanup());
   const parseDate = (yyyyMMdd: string) => parse(yyyyMMdd, 'yyyy-MM-dd', 0);
   const getHook = () => {
     const wrapper = ({ children }) => (

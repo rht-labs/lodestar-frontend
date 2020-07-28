@@ -8,9 +8,8 @@ import { Logger } from '../../../utilities/logger';
 import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
 import { UserToken } from '../../../schemas/user_token_schema';
 
-export class Apiv1EngagementService extends EngagementService {
+export class Apiv1EngagementService implements EngagementService {
   constructor(baseURL: string) {
-    super();
     this.axios = Axios.create({ baseURL });
     this.axios.interceptors.request.use((request: AxiosRequestConfig) => {
       request.headers.Authorization = `Bearer ${UserToken.token?.accessToken}`;
