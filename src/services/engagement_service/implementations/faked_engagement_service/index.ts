@@ -17,7 +17,13 @@ export class FakedEngagementService implements EngagementService {
     return data as Engagement;
   }
   async launchEngagement(data: any): Promise<Engagement> {
-    return data as Engagement;
+    return {
+      ...data,
+      launch: {
+        launched_by: 'A Nashvillian',
+        launched_date_time: new Date(2020, 1, 1),
+      },
+    } as Engagement;
   }
   async getConfig(): Promise<EngagementFormConfig> {
     return FakedSchema;

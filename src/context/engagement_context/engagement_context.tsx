@@ -377,6 +377,7 @@ export const EngagementProvider = ({
           data
         );
         _updateEngagementInPlace(returnedEngagement);
+        setCurrentEngagement(returnedEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'You have successfully launched your engagement!',
