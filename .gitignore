@@ -32,3 +32,5 @@ report*.json
 .idea
 
 .adhoc
+
+test-report.xml
