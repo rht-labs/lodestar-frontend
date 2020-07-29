@@ -15,7 +15,9 @@ import { createFakedServices } from '../services/factories/service_factory';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
-    <ServiceProvider serviceFactory={createFakedServices}>
+    <ServiceProvider
+      serviceFactory={createFakedServices({ shouldUseStaticData: true })}
+    >
       <TestContexts>{children}</TestContexts>
     </ServiceProvider>
   );

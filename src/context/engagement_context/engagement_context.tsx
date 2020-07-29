@@ -72,7 +72,6 @@ export const EngagementProvider = ({
   const feedbackContext = useFeedback();
   const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
 
-  // TODO: Handle error/loading state
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>(undefined);
@@ -88,7 +87,9 @@ export const EngagementProvider = ({
   const _handleErrors = useCallback(
     async error => {
       if (error instanceof AuthenticationError) {
-        await authContext.checkAuthStatus();
+        if (!(await authContext.checkAuthStatus())) {
+          throw error;
+        }
       } else {
         throw error;
       }
@@ -161,7 +162,7 @@ export const EngagementProvider = ({
         true
       );
       feedbackContext.hideLoader();
-      _handleErrors(e);
+      await _handleErrors(e);
     }
   }, [engagementService, feedbackContext, _handleErrors, _validateAuthStatus]);
 
@@ -224,7 +225,7 @@ export const EngagementProvider = ({
         );
       } catch (e) {
         try {
-          _handleErrors(e);
+          await _handleErrors(e);
         } catch (e) {
           feedbackContext.showAlert(
             'There was a problem fetching this engagement',
@@ -237,12 +238,12 @@ export const EngagementProvider = ({
   );
 
   const _addNewEngagement = useCallback(
-    (newEngagement: Engagement) => {
+    async (newEngagement: Engagement) => {
       try {
         const newEngagementList = [newEngagement, ...(engagements ?? [])];
         setEngagements(newEngagementList);
       } catch (e) {
-        _handleErrors(e);
+        await _handleErrors(e);
         Logger.instance.error(e);
       }
     },
@@ -271,7 +272,7 @@ export const EngagementProvider = ({
             'This client already has a project with that name. Please choose a different project name.';
         } else {
           try {
-            _handleErrors(e);
+            await _handleErrors(e);
           } catch (e) {
             errorMessage =
               'There was an issue with creating your engagement. Please follow up with an administrator if this continues.';
@@ -279,7 +280,7 @@ export const EngagementProvider = ({
         }
 
         feedbackContext.showAlert(errorMessage, AlertType.error);
-        _handleErrors(e);
+        await _handleErrors(e);
       }
     },
     [
@@ -337,7 +338,7 @@ export const EngagementProvider = ({
 
             // Otherwise, we are saving an existing engagement.
           } else {
-            _handleErrors(e);
+            await _handleErrors(e);
             errorMessage =
               'Your changes could not be saved. Another user has modified this data. Please refresh your data in order to make changes.';
           }
@@ -376,20 +377,21 @@ export const EngagementProvider = ({
           data
         );
         _updateEngagementInPlace(returnedEngagement);
+        setCurrentEngagement(returnedEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'You have successfully launched your engagement!',
           AlertType.success
         );
       } catch (e) {
-        _handleErrors(e);
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
-          'We were unable to launch your engagement. Please followup with an administrator if this continues.',
+          'We were unable to launch your engagement. Please follow up with an administrator if this continues.',
           AlertType.error,
           false
         );
+        await _handleErrors(e);
       }
     },
     [

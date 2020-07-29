@@ -27,10 +27,16 @@ export const createApiV1Services = (config: Config): ServiceFactory => () => {
   };
 };
 
-export const createFakedServices: ServiceFactory = () => {
+export interface FakedServiceFactoryParams {
+  shouldUseStaticData: boolean;
+}
+
+export const createFakedServices = (
+  params: FakedServiceFactoryParams
+): ServiceFactory => () => {
   return {
     authService: new FakedAuthService(),
-    engagementService: new FakedEngagementService(),
+    engagementService: new FakedEngagementService(params.shouldUseStaticData),
     notificationService: new FakedNotificationService(),
     versionService: new FakedVersionService(),
   };
