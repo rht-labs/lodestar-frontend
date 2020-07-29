@@ -1,5 +1,4 @@
 import { LogVerbosity } from '../utilities/logger/logger';
-import { getLogVerbosityFromString } from '../utilities/logger';
 
 export interface BannerMessage {
   message: string;
