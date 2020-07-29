@@ -3,7 +3,7 @@ import { Config } from '../../../schemas/config';
 
 export class FakedConfigService extends ConfigService {
   async fetchConfig(): Promise<Config> {
-    return Config.fromMap({
+    return {
       baseUrl: 'http://localhost:3000',
       clientId: 'open-management-portal',
       authBaseUrl:
@@ -49,6 +49,6 @@ export class FakedConfigService extends ConfigService {
           backgroundcolor: 'indigo',
         },
       ],
-    });
+    };
   }
 }
