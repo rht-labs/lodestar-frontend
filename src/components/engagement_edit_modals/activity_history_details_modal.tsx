@@ -10,7 +10,7 @@ import { useModalVisibility } from '../../context/edit_modal_visibility_context/
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { GitCommit } from '../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../activity_history_line_item/activity_history_line_item';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 export interface ActivityHistoryDetailsModalProps {
   isOpen: boolean;
   engagement: Engagement;

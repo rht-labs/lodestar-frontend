@@ -1,11 +1,11 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 
 interface CloudProviderFormFieldProps {

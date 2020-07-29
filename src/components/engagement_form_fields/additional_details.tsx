@@ -1,8 +1,8 @@
 import React from 'react';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import { APP_FEATURES } from '../../common/app_features';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 
 export interface DescriptionFormFieldProps {
   engagement: Engagement;

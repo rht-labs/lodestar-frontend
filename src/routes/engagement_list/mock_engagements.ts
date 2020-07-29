@@ -1,4 +1,4 @@
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { HealthStatus } from '../../schemas/cluster_status';
 
 export function upcomingEngagement(): Engagement {
