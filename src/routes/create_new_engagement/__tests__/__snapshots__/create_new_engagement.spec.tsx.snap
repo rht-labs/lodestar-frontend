@@ -1,105 +1,117 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Engagement Tab View should match snapshot 1`] = `
+exports[`Create New Engagement Route should match snapshot 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": <body
+    class=""
+  >
     <div>
-      <div
-        class="pf-c-tabs pf-m-box"
-        data-ouia-component-id="1"
-        data-ouia-component-type="PF4/Tabs"
-        data-ouia-safe="true"
-      >
-        <button
-          aria-hidden="true"
-          aria-label="Scroll left"
-          class="pf-c-tabs__scroll-button"
-          disabled=""
+      <div>
+        <section
+          class="pf-c-page__main-section pf-m-light"
+          style="padding-bottom: 0px;"
         >
-          <svg
-            aria-hidden="true"
-            fill="currentColor"
-            height="1em"
-            role="img"
-            style="vertical-align: -0.125em;"
-            viewBox="0 0 256 512"
-            width="1em"
+          <div
+            class="pf-c-content"
           >
-            <path
-              d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
-              transform=""
+            <h1
+              class=""
+              data-pf-content="true"
             />
-          </svg>
-        </button>
-        <ul
-          class="pf-c-tabs__list"
-        >
-          <li
-            class="pf-c-tabs__item pf-m-current"
-          >
-            <button
-              aria-controls="pf-tab-section-overview-overview"
-              class="pf-c-tabs__link"
-              id="pf-tab-overview-overview"
-            >
-              Overview
-            </button>
-          </li>
-          <li
-            class="pf-c-tabs__item"
-          >
-            <button
-              aria-controls="pf-tab-section-users-users"
-              class="pf-c-tabs__link"
-              id="pf-tab-users-users"
-            >
-              Users
-            </button>
-          </li>
-          <li
-            class="pf-c-tabs__item"
-          >
-            <button
-              aria-controls="pf-tab-section-hosting_environment-hosting_environment"
-              class="pf-c-tabs__link"
-              id="pf-tab-hosting_environment-hosting_environment"
-            >
-              Hosting Environment
-            </button>
-          </li>
-        </ul>
-        <button
-          aria-hidden="true"
-          aria-label="Scroll right"
-          class="pf-c-tabs__scroll-button"
-          disabled=""
-        >
-          <svg
-            aria-hidden="true"
-            fill="currentColor"
-            height="1em"
-            role="img"
-            style="vertical-align: -0.125em;"
-            viewBox="0 0 256 512"
-            width="1em"
-          >
-            <path
-              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-              transform=""
+            <h3
+              class=""
+              data-pf-content="true"
             />
-          </svg>
-        </button>
-      </div>
-      <section
-        aria-labelledby="pf-tab-overview-overview"
-        class="pf-c-tab-content"
-        id="pf-tab-section-overview-overview"
-        role="tabpanel"
-        tabindex="0"
-      >
+          </div>
+        </section>
         <div
-          style="padding-top: 20px;"
+          style="margin-top: 1rem;"
+        >
+          <div
+            aria-label="Info Alert"
+            class="pf-c-alert pf-m-inline pf-m-info"
+            data-ouia-component-id="0"
+            data-ouia-component-type="PF4/Alert"
+            data-ouia-safe="true"
+          >
+            <div
+              class="pf-c-alert__icon"
+            >
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 512 512"
+                width="1em"
+              >
+                <path
+                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                  transform=""
+                />
+              </svg>
+            </div>
+            <h4
+              class="pf-c-alert__title"
+            >
+              <span
+                class="pf-u-screen-reader"
+              >
+                Info alert:
+              </span>
+              Engagement Not Launched
+            </h4>
+            <div
+              class="pf-c-alert__description"
+            >
+              <span>
+                This engagement has not been launched
+              </span>
+            </div>
+            <div
+              class="pf-c-alert__action-group"
+            >
+              <div>
+                <button
+                  class="pf-c-button pf-m-primary"
+                  data-cy="launch_button"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe="true"
+                  disabled=""
+                  type="button"
+                >
+                  Launch
+                </button>
+                <span
+                  style="margin: 0px 0.5rem;"
+                >
+                  <span
+                    aria-expanded="false"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="#EC7A08"
+                      height="1em"
+                      role="img"
+                      style="cursor: pointer;"
+                      viewBox="0 0 576 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+                        transform=""
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section
+          class="pf-c-page__main-section"
         >
           <div
             class="pf-c-content"
@@ -610,250 +622,8 @@ Object {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section
-        aria-labelledby="pf-tab-users-users"
-        class="pf-c-tab-content"
-        hidden=""
-        id="pf-tab-section-users-users"
-        role="tabpanel"
-        tabindex="0"
-      >
-        <div
-          style="padding-top: 20px;"
-        >
-          <div>
-            <div
-              class="pf-c-empty-state"
-            >
-              <div
-                class="pf-c-empty-state__content"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="pf-c-empty-state__icon"
-                  fill="currentColor"
-                  height="1em"
-                  role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 512 512"
-                  width="1em"
-                >
-                  <path
-                    d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"
-                    transform=""
-                  />
-                </svg>
-                <h4
-                  class="pf-c-title pf-m-lg"
-                >
-                  No Users Added
-                </h4>
-                <div
-                  class="pf-c-empty-state__body"
-                >
-                  <p>
-                    No users have been added to this engagement's yet.
-                  </p>
-                  <p>
-                    Select the 'add user' button below, to begin adding users.
-                  </p>
-                </div>
-                <button
-                  class="pf-c-button pf-m-primary"
-                  data-ouia-component-type="PF4/Button"
-                  data-ouia-safe="true"
-                  type="button"
-                >
-                  Add User
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        aria-labelledby="pf-tab-hosting_environment-hosting_environment"
-        class="pf-c-tab-content"
-        hidden=""
-        id="pf-tab-section-hosting_environment-hosting_environment"
-        role="tabpanel"
-        tabindex="0"
-      >
-        <div
-          style="padding-top: 20px;"
-        >
-          <div
-            class="pf-c-content"
-          >
-            <div
-              class="pf-l-grid pf-m-gutter"
-            >
-              <div
-                class="pf-l-grid__item pf-m-12-col"
-              >
-                <article
-                  class="pf-c-card pf-m-compact"
-                  style="padding: 1rem;"
-                >
-                  <div
-                    class="pf-c-card__title"
-                  >
-                    <div
-                      class="pf-l-level"
-                    >
-                      <div>
-                        <h3
-                          class="pf-c-title pf-m-lg"
-                          style="font-weight: normal;"
-                        >
-                          Hosting Environment
-                            
-                          <div />
-                        </h3>
-                      </div>
-                      <div />
-                    </div>
-                  </div>
-                  <div
-                    class="pf-c-card__body"
-                  >
-                    <div
-                      class="pf-l-grid pf-m-gutter"
-                    >
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="hosting_type"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Hosting Type
-                          </h6>
-                          <p
-                            class=""
-                            data-pf-content="true"
-                          >
-                            OpenShift Container Platform
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="cloud_provider"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Cloud Provider
-                          </h6>
-                          <span />
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="oc_version"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            OpenShift Version
-                          </h6>
-                          <span />
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="storage_size"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Storage Size
-                          </h6>
-                          <span />
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="cloud_region"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Cloud Region
-                          </h6>
-                          <span />
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="cluster_size"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Cluster Size
-                          </h6>
-                          <span />
-                        </div>
-                      </div>
-                      <div
-                        class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                      >
-                        <div
-                          class="pf-c-content"
-                          data-cy="sub_domain"
-                        >
-                          <h6
-                            class=""
-                            data-pf-content="true"
-                            style="margin-bottom: 0.1rem;"
-                          >
-                            Subdomain
-                          </h6>
-                          .na-1.rht-labs.com
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
     <div />
     <div />
@@ -863,101 +633,111 @@ Object {
     <div />
   </body>,
   "container": <div>
-    <div
-      class="pf-c-tabs pf-m-box"
-      data-ouia-component-id="1"
-      data-ouia-component-type="PF4/Tabs"
-      data-ouia-safe="true"
-    >
-      <button
-        aria-hidden="true"
-        aria-label="Scroll left"
-        class="pf-c-tabs__scroll-button"
-        disabled=""
+    <div>
+      <section
+        class="pf-c-page__main-section pf-m-light"
+        style="padding-bottom: 0px;"
       >
-        <svg
-          aria-hidden="true"
-          fill="currentColor"
-          height="1em"
-          role="img"
-          style="vertical-align: -0.125em;"
-          viewBox="0 0 256 512"
-          width="1em"
+        <div
+          class="pf-c-content"
         >
-          <path
-            d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
-            transform=""
+          <h1
+            class=""
+            data-pf-content="true"
           />
-        </svg>
-      </button>
-      <ul
-        class="pf-c-tabs__list"
-      >
-        <li
-          class="pf-c-tabs__item pf-m-current"
-        >
-          <button
-            aria-controls="pf-tab-section-overview-overview"
-            class="pf-c-tabs__link"
-            id="pf-tab-overview-overview"
-          >
-            Overview
-          </button>
-        </li>
-        <li
-          class="pf-c-tabs__item"
-        >
-          <button
-            aria-controls="pf-tab-section-users-users"
-            class="pf-c-tabs__link"
-            id="pf-tab-users-users"
-          >
-            Users
-          </button>
-        </li>
-        <li
-          class="pf-c-tabs__item"
-        >
-          <button
-            aria-controls="pf-tab-section-hosting_environment-hosting_environment"
-            class="pf-c-tabs__link"
-            id="pf-tab-hosting_environment-hosting_environment"
-          >
-            Hosting Environment
-          </button>
-        </li>
-      </ul>
-      <button
-        aria-hidden="true"
-        aria-label="Scroll right"
-        class="pf-c-tabs__scroll-button"
-        disabled=""
-      >
-        <svg
-          aria-hidden="true"
-          fill="currentColor"
-          height="1em"
-          role="img"
-          style="vertical-align: -0.125em;"
-          viewBox="0 0 256 512"
-          width="1em"
-        >
-          <path
-            d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-            transform=""
+          <h3
+            class=""
+            data-pf-content="true"
           />
-        </svg>
-      </button>
-    </div>
-    <section
-      aria-labelledby="pf-tab-overview-overview"
-      class="pf-c-tab-content"
-      id="pf-tab-section-overview-overview"
-      role="tabpanel"
-      tabindex="0"
-    >
+        </div>
+      </section>
       <div
-        style="padding-top: 20px;"
+        style="margin-top: 1rem;"
+      >
+        <div
+          aria-label="Info Alert"
+          class="pf-c-alert pf-m-inline pf-m-info"
+          data-ouia-component-id="0"
+          data-ouia-component-type="PF4/Alert"
+          data-ouia-safe="true"
+        >
+          <div
+            class="pf-c-alert__icon"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="1em"
+              role="img"
+              style="vertical-align: -0.125em;"
+              viewBox="0 0 512 512"
+              width="1em"
+            >
+              <path
+                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                transform=""
+              />
+            </svg>
+          </div>
+          <h4
+            class="pf-c-alert__title"
+          >
+            <span
+              class="pf-u-screen-reader"
+            >
+              Info alert:
+            </span>
+            Engagement Not Launched
+          </h4>
+          <div
+            class="pf-c-alert__description"
+          >
+            <span>
+              This engagement has not been launched
+            </span>
+          </div>
+          <div
+            class="pf-c-alert__action-group"
+          >
+            <div>
+              <button
+                class="pf-c-button pf-m-primary"
+                data-cy="launch_button"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                disabled=""
+                type="button"
+              >
+                Launch
+              </button>
+              <span
+                style="margin: 0px 0.5rem;"
+              >
+                <span
+                  aria-expanded="false"
+                >
+                  <svg
+                    aria-hidden="true"
+                    fill="#EC7A08"
+                    height="1em"
+                    role="img"
+                    style="cursor: pointer;"
+                    viewBox="0 0 576 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+                      transform=""
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section
+        class="pf-c-page__main-section"
       >
         <div
           class="pf-c-content"
@@ -1468,250 +1248,8 @@ Object {
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section
-      aria-labelledby="pf-tab-users-users"
-      class="pf-c-tab-content"
-      hidden=""
-      id="pf-tab-section-users-users"
-      role="tabpanel"
-      tabindex="0"
-    >
-      <div
-        style="padding-top: 20px;"
-      >
-        <div>
-          <div
-            class="pf-c-empty-state"
-          >
-            <div
-              class="pf-c-empty-state__content"
-            >
-              <svg
-                aria-hidden="true"
-                class="pf-c-empty-state__icon"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 512 512"
-                width="1em"
-              >
-                <path
-                  d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"
-                  transform=""
-                />
-              </svg>
-              <h4
-                class="pf-c-title pf-m-lg"
-              >
-                No Users Added
-              </h4>
-              <div
-                class="pf-c-empty-state__body"
-              >
-                <p>
-                  No users have been added to this engagement's yet.
-                </p>
-                <p>
-                  Select the 'add user' button below, to begin adding users.
-                </p>
-              </div>
-              <button
-                class="pf-c-button pf-m-primary"
-                data-ouia-component-type="PF4/Button"
-                data-ouia-safe="true"
-                type="button"
-              >
-                Add User
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section
-      aria-labelledby="pf-tab-hosting_environment-hosting_environment"
-      class="pf-c-tab-content"
-      hidden=""
-      id="pf-tab-section-hosting_environment-hosting_environment"
-      role="tabpanel"
-      tabindex="0"
-    >
-      <div
-        style="padding-top: 20px;"
-      >
-        <div
-          class="pf-c-content"
-        >
-          <div
-            class="pf-l-grid pf-m-gutter"
-          >
-            <div
-              class="pf-l-grid__item pf-m-12-col"
-            >
-              <article
-                class="pf-c-card pf-m-compact"
-                style="padding: 1rem;"
-              >
-                <div
-                  class="pf-c-card__title"
-                >
-                  <div
-                    class="pf-l-level"
-                  >
-                    <div>
-                      <h3
-                        class="pf-c-title pf-m-lg"
-                        style="font-weight: normal;"
-                      >
-                        Hosting Environment
-                          
-                        <div />
-                      </h3>
-                    </div>
-                    <div />
-                  </div>
-                </div>
-                <div
-                  class="pf-c-card__body"
-                >
-                  <div
-                    class="pf-l-grid pf-m-gutter"
-                  >
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="hosting_type"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Hosting Type
-                        </h6>
-                        <p
-                          class=""
-                          data-pf-content="true"
-                        >
-                          OpenShift Container Platform
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="cloud_provider"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Cloud Provider
-                        </h6>
-                        <span />
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="oc_version"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          OpenShift Version
-                        </h6>
-                        <span />
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="storage_size"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Storage Size
-                        </h6>
-                        <span />
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="cloud_region"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Cloud Region
-                        </h6>
-                        <span />
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="cluster_size"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Cluster Size
-                        </h6>
-                        <span />
-                      </div>
-                    </div>
-                    <div
-                      class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
-                    >
-                      <div
-                        class="pf-c-content"
-                        data-cy="sub_domain"
-                      >
-                        <h6
-                          class=""
-                          data-pf-content="true"
-                          style="margin-bottom: 0.1rem;"
-                        >
-                          Subdomain
-                        </h6>
-                        .na-1.rht-labs.com
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

@@ -8,7 +8,7 @@ import {
   currentEngagement,
   pastEngagement,
 } from '../mock_engagements';
-import { EngagementStatus } from '../../../schemas/engagement_schema';
+import { EngagementStatus } from '../../../schemas/engagement';
 
 afterEach(cleanup);
 

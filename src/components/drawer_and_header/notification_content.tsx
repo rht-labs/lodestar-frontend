@@ -8,7 +8,7 @@ import {
   EmptyState, EmptyStateBody, EmptyStateIcon,
   Text, Title
 } from '@patternfly/react-core';
-import {Notification} from "../../schemas/notification_schema";
+import {Notification} from "../../schemas/notification";
 import {BellIcon} from "@patternfly/react-icons";
 
 export interface NotificationContentProps {

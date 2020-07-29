@@ -1,15 +1,14 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/auth_service/authentication_service';
 
-import { UserProfile } from '../../schemas/user_profile_schema';
+import { UserProfile } from '../../schemas/user_profile';
 import {
   UserToken,
   LocalStoragePersistence,
-} from '../../schemas/user_token_schema';
+} from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
-import { useServiceProviders } from '../service_provider_context/service_provider_context';
 import { Logger } from '../../utilities/logger';
-import { ErrorBoundary } from '../../components/error_boundary';
+import { ErrorBoundary } from '../../components/error_boundary/error_boundary';
 
 export type AuthenticationState =
   | 'initial'
@@ -46,13 +45,11 @@ const { Provider } = AuthContext;
 
 export const AuthProvider = ({
   children,
-  authenticationService: authRepo,
+  authService,
 }: {
   children: React.ReactChild;
-  authenticationService?: AuthService;
+  authService: AuthService;
 }) => {
-  const { authenticationService } = useServiceProviders();
-
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
@@ -62,12 +59,12 @@ export const AuthProvider = ({
     async (authorizationCode: string) => {
       setAuthStatus('initial');
       try {
-        const userToken = await authenticationService.fetchToken(
+        const userToken = await authService.fetchToken(
           authorizationCode,
           'authorization_code'
         );
-        if (await authenticationService.isLoggedIn()) {
-          const profile = await authenticationService.getUserProfile();
+        if (await authService.isLoggedIn()) {
+          const profile = await authService.getUserProfile();
           setSessionData({
             profile,
             roles: profile.groups,
@@ -80,22 +77,22 @@ export const AuthProvider = ({
         setAuthStatus('unauthenticated');
       }
     },
-    [authenticationService]
+    [authService]
   );
 
   const logout = async () => {
-    await authenticationService.clearSession();
+    await authService.clearSession();
     return;
   };
 
   const checkAuthStatus = useCallback(async () => {
-    if (!!authenticationService) {
-      const isLoggedIn = await authenticationService.isLoggedIn();
-      const tokens = authenticationService.getToken();
+    if (!!authService) {
+      const isLoggedIn = await authService.isLoggedIn();
+      const tokens = authService.getToken();
       if (isLoggedIn && tokens) {
         let profile;
         if (!sessionData?.profile) {
-          profile = await authenticationService.getUserProfile();
+          profile = await authService.getUserProfile();
           setSessionData({
             profile,
             tokens,
@@ -116,7 +113,7 @@ export const AuthProvider = ({
         return false;
       }
     }
-  }, [setAuthStatus, setSessionData, authenticationService, sessionData]);
+  }, [setAuthStatus, setSessionData, authService, sessionData]);
 
   return (
     <ErrorBoundary>

@@ -2,7 +2,7 @@ import {
   EngagementFilter,
   EngagementSortFields,
 } from '../schemas/engagement_filter';
-import { Engagement, getEngagementStatus } from '../schemas/engagement_schema';
+import { Engagement, getEngagementStatus } from '../schemas/engagement';
 
 function hasSearchTermMatch(engagement: Engagement, searchTerm: string = '') {
   if (!searchTerm || !engagement) {

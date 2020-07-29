@@ -1,5 +1,5 @@
 import React from 'react';
-import {EngagementStatus} from "../../schemas/engagement_schema";
+import {EngagementStatus} from "../../schemas/engagement";
 
 export const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
   const getEngagementStatusText = () => {

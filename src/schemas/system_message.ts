@@ -23,18 +23,11 @@ export interface SystemMessage {
 }
 
 export abstract class SystemMessage {
-  static fromFake(): SystemMessage {
+  static fromFake(staticData = false): SystemMessage {
     return {
-      severity: Severity.info,
-      message: faker.lorem.sentence(),
-      updated: faker.date.recent(),
-    };
-  }
-  static staticFaked(): SystemMessage {
-    return {
-      severity: Severity.info,
-      message: 'System message',
-      updated: new Date(2020, 1, 1),
+      severity: staticData ? Severity.info : Severity.info,
+      message: staticData ? 'System Message' : faker.lorem.sentence(),
+      updated: staticData ? new Date(2020, 1, 1) : faker.date.recent(),
     };
   }
 }

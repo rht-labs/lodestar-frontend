@@ -1,7 +1,7 @@
 import './wdyr';
 import React, { Profiler } from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './App';
+import { App } from './app';
 import { unstable_trace as trace } from 'scheduler/tracing';
 import './assets/css/overrides.css';
 import { Validation } from './schemas/validators';

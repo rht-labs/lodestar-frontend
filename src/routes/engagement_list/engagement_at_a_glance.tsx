@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
+import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import { differenceInWeeks, format as formatDate, isValid } from 'date-fns';
 import {
   Flex,
@@ -18,7 +18,7 @@ import {
 } from '@patternfly/react-icons';
 import { ActivityHistoryLineItem } from '../../components/activity_history_line_item/activity_history_line_item';
 import { APP_FEATURES } from '../../common/app_features';
-import { Feature } from '../../components/feature';
+import { Feature } from '../../components/feature/feature';
 import { EngagementStatusText } from './engagement_status_text';
 import { DisplayCreatedByName } from '../../common/display_created_by_name';
 
