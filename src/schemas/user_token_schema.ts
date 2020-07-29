@@ -1,4 +1,6 @@
 import faker from 'faker';
+import { Serializer } from '../serializers/serializer';
+import { UserTokenJsonSerializer } from '../serializers/user_token/user_token_json_serializer';
 import { Logger } from '../utilities/logger';
 
 export interface UserTokenParams {
@@ -39,28 +41,6 @@ export class UserToken {
   accessTokenExpiry = new Date();
   refreshTokenExpiry = new Date();
 
-  toMap() {
-    return {
-      accessToken: this.accessToken,
-      refreshToken: this.refreshToken,
-      accessTokenExpiry: this.accessTokenExpiry.toISOString(),
-      refreshTokenExpiry: this.refreshTokenExpiry.toISOString(),
-    };
-  }
-
-  static fromMap(map: { [key: string]: unknown }) {
-    return new UserToken({
-      accessToken: map['accessToken'] as string,
-      refreshToken: map['refreshToken'] as string,
-      accessTokenExpiry: new Date(
-        Date.parse(map['accessTokenExpiry'] as string)
-      ),
-      refreshTokenExpiry: new Date(
-        Date.parse(map['refreshTokenExpiry'] as string)
-      ),
-    });
-  }
-
   static fromFake() {
     return new UserToken({
       accessToken: faker.random.uuid(),
@@ -78,6 +58,10 @@ interface PersistenceStrategy {
 
 export class LocalStoragePersistence implements PersistenceStrategy {
   private static TOKEN_STORAGE_KEY: string = 'token';
+  private static serializer: Serializer<
+    UserToken,
+    any
+  > = new UserTokenJsonSerializer();
   saveToken(token: UserToken) {
     try {
       if (
@@ -87,7 +71,7 @@ export class LocalStoragePersistence implements PersistenceStrategy {
       ) {
         localStorage.setItem(
           LocalStoragePersistence.TOKEN_STORAGE_KEY,
-          JSON.stringify(token.toMap())
+          JSON.stringify(LocalStoragePersistence.serializer.serialize(token))
         );
       } else {
         throw TypeError(
@@ -107,7 +91,7 @@ export class LocalStoragePersistence implements PersistenceStrategy {
       }
       const tokenMap = JSON.parse(storedToken);
 
-      return UserToken.fromMap(tokenMap);
+      return LocalStoragePersistence.serializer.deserialize(tokenMap);
     } catch (e) {
       return null;
     }
