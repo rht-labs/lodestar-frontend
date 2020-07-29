@@ -110,7 +110,7 @@ describe('Engagement Context', () => {
   });
 });
 
-describe('Engagement date change logic', async () => {
+describe('Engagement date change logic', () => {
   const parseDate = (yyyyMMdd: string) => parse(yyyyMMdd, 'yyyy-MM-dd', 0);
   const getHook = () => {
     const wrapper = ({ children }) => (
