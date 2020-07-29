@@ -27,6 +27,8 @@ jobs:
   code-quality:
     runs-on: ubuntu-latest
     steps:
+      - name: Run tests for coverage report
+        run: npm run test:ci
       - uses: actions/checkout@v2
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
@@ -35,7 +37,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   local-build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x]
