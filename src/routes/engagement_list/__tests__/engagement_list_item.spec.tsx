@@ -9,7 +9,7 @@ import {
 import {
   EngagementStatus,
   getEngagementStatus,
-} from '../../../schemas/engagement_schema';
+} from '../../../schemas/engagement';
 
 afterEach(cleanup);
 

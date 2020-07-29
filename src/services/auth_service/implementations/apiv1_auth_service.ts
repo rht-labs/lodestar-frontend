@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
-import { UserToken } from '../../../schemas/user_token_schema';
+import { UserToken } from '../../../schemas/user_token';
 import qs from 'querystring';
-import { UserProfile } from '../../../schemas/user_profile_schema';
+import { UserProfile } from '../../../schemas/user_profile';
 import { AuthService } from '../authentication_service';
 import { Config } from '../../../schemas/config';
 import { Logger } from '../../../utilities/logger';

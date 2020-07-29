@@ -3,7 +3,7 @@ import { DataCard } from '../data_card';
 import {
   Engagement,
   getEngagementStatus,
-} from '../../../schemas/engagement_schema';
+} from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { format as formatDate } from 'date-fns';

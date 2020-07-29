@@ -1,4 +1,4 @@
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { slugify } from 'transliteration';
 import { addDays, startOfToday } from 'date-fns';
 import { FormConfig } from '../../schemas/engagement_config';

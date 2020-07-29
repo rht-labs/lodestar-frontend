@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useRef } from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { useState, useCallback, useReducer } from 'react';
 import {
   engagementFormReducer,
@@ -106,7 +106,7 @@ export const EngagementProvider = ({
     _validateAuthStatusRef.current = validate;
     return validate();
   }, [authContext]);
-  
+
   const _validateAuthStatusRef = useRef(_validateAuthStatus);
 
   const getConfig = useCallback(async () => {

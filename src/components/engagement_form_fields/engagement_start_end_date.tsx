@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   InputGroup,

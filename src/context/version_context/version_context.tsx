@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { Version } from '../../schemas/version_schema';
+import { Version } from '../../schemas/version';
 import { useFeedback } from '../feedback_context/feedback_context';
 import { useSession } from '../auth_context/auth_context';
 import {

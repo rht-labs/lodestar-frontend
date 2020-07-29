@@ -1,5 +1,5 @@
 import { VersionService } from '../version_service';
-import { Version } from '../../../schemas/version_schema';
+import { Version } from '../../../schemas/version';
 
 export class FakedVersionService extends VersionService {
   async fetchVersion(): Promise<Version> {

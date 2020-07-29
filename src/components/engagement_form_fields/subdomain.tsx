@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   TextInput,

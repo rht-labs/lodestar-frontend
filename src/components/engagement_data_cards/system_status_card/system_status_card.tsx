@@ -6,7 +6,7 @@ import {
   Engagement,
   getEngagementStatus,
   EngagementStatus,
-} from '../../../schemas/engagement_schema';
+} from '../../../schemas/engagement';
 import { SystemStatusDetailsModal } from './system_status_details_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';

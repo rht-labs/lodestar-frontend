@@ -1,7 +1,7 @@
 import { VersionService } from '../version_service';
-import { Version } from '../../../schemas/version_schema';
+import { Version } from '../../../schemas/version';
 import Axios, { AxiosInstance } from 'axios';
-import { UserToken } from '../../../schemas/user_token_schema';
+import { UserToken } from '../../../schemas/user_token';
 import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
 
 export class Apiv1VersionService extends VersionService {
