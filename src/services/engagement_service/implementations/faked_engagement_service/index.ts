@@ -1,5 +1,5 @@
 import { EngagementService } from '../../engagement_service';
-import { Engagement } from '../../../../schemas/engagement_schema';
+import { Engagement } from '../../../../schemas/engagement';
 import FakedSchema from './faked_schema.json';
 import { EngagementFormConfig } from '../../../../schemas/engagement_config';
 

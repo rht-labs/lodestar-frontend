@@ -15,7 +15,7 @@ import {
   engagementFilterFactory,
   engagementSortFactory,
 } from '../../common/engagement_filter_factory';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { EngagementFilter } from '../../schemas/engagement_filter';
 import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 

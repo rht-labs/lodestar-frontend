@@ -5,7 +5,7 @@ import '@patternfly/react-core/dist/styles/base.css';
 import { AuthProvider } from '../context/auth_context/auth_context';
 import { VersionProvider } from '../context/version_context/version_context';
 import { EngagementProvider } from '../context/engagement_context/engagement_context';
-import { FeatureToggles } from '../context/feature_toggles/feature_toggles';
+import { FeatureToggles } from '../context/feature_context/feature_toggles';
 import {
   ServiceProvider,
   useServiceProviders,

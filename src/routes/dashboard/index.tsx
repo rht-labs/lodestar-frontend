@@ -15,7 +15,7 @@ import {
   TachometerAltIcon,
 } from '@patternfly/react-icons';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { EngagementStatus } from '../../schemas/engagement_schema';
+import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
 
 export function Dashboard() {

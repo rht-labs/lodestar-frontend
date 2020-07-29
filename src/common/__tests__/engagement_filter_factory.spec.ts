@@ -6,7 +6,7 @@ import {
   EngagementFilter,
   EngagementSortFields,
 } from '../../schemas/engagement_filter';
-import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
+import { Engagement, EngagementStatus } from '../../schemas/engagement';
 
 function mockEngagements(): Engagement[] {
   const engagementA = ({

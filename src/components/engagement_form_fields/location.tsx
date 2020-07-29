@@ -1,8 +1,8 @@
 import React from 'react';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormGroup, TextInput } from '@patternfly/react-core';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 
 interface LocationFormFieldProps {
   engagement: Engagement;

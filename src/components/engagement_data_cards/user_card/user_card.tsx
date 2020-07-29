@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';

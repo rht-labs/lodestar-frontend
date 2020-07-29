@@ -5,7 +5,7 @@ import {
   Select,
   SelectOption,
 } from '@patternfly/react-core';
-import { EngagementStatus } from '../../../schemas/engagement_schema';
+import { EngagementStatus } from '../../../schemas/engagement';
 import { EngagementFilterProps } from '../engagement_filter_bar';
 import { FilterIcon } from '@patternfly/react-icons';
 

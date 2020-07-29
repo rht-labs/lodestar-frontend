@@ -11,7 +11,7 @@ import { SystemMessage } from '../../../schemas/system_message';
 import { EditModalTemplate } from '../../../layout/edit_modal_template';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { StatusMessageItem } from './status_message_item';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../../schemas/engagement';
 export interface SystemStatusDetailsModalProps {
   isOpen: boolean;
   engagement: Engagement;

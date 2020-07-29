@@ -7,23 +7,27 @@ import { ConfigProvider } from './context/config_context/config_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary/error_boundary';
 import { OMPRouter } from './routes/router';
-import { FeatureToggles } from './context/feature_toggles/feature_toggles';
+import { FeatureToggles } from './context/feature_context/feature_toggles';
 import {
   ServiceProvider,
   useServiceProviders,
 } from './context/service_provider_context/service_provider_context';
 import { FeedbackProvider } from './context/feedback_context/feedback_context';
-import { PublicConfigService } from './services/config_service/implementations/public_config_service';
 import { NotificationProvider } from './context/notification_context/notification_context';
 import { useConfig } from './context/config_context/config_hook';
 import { createApiV1Services } from './services/factories/service_factory';
 import CustomGlobalBanner from './components/custom_global_banner/custom_global_banner';
 import { BannerMessage } from './schemas/config';
+import { createConfigService } from './services/factories/config_service_factory';
 
 export const App = () => {
   return (
     <ErrorBoundary>
-      <ConfigProvider configRepository={new PublicConfigService()}>
+      <ConfigProvider
+        configRepository={createConfigService(
+          process.env.REACT_APP_USE_FAKED === 'true'
+        )}
+      >
         <ServiceProviderWrapper>
           <AppContexts />
         </ServiceProviderWrapper>

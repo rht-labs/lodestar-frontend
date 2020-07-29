@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../../schemas/engagement';
 import { EngagementSummaryCard } from '../engagement_summary_card/engagement_summary_card';
 import { OpenShiftClusterSummaryCard } from '../openshift_cluster_card/openshift_cluster_card';
 import { PointOfContactCard } from '../point_of_contact_card/point_of_contact_card';

@@ -1,5 +1,5 @@
-import { UserToken } from '../../../schemas/user_token_schema';
-import { UserProfile } from '../../../schemas/user_profile_schema';
+import { UserToken } from '../../../schemas/user_token';
+import { UserProfile } from '../../../schemas/user_profile';
 import { AuthService } from '../authentication_service';
 
 export class FakedAuthService implements AuthService {

@@ -1,7 +1,7 @@
 import {
   Engagement,
   getEngagementStatus,
-} from '../../schemas/engagement_schema';
+} from '../../schemas/engagement';
 import React from 'react';
 import { EngagementListItemCard } from './engagement_list_item_card';
 import { EngagementAtAGlance } from './engagement_at_a_glance';
