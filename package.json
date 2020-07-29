@@ -68,7 +68,7 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/react-hooks": "^3.4.1",
     "cypress": "^4.6.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",

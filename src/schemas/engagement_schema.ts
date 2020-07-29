@@ -36,83 +36,76 @@ export interface Engagement {
   status: ClusterStatus;
 }
 export abstract class Engagement {
-  static fromFake(): Engagement {
+  static fromFake(staticData = false): Engagement {
     return {
-      additional_details: faker.lorem.paragraphs(2),
-      archive_date: faker.date.recent(),
+      additional_details: staticData
+        ? 'Additional information here'
+        : faker.lorem.paragraphs(2),
+      archive_date: staticData ? new Date(2020, 6, 30) : faker.date.recent(),
       commits: [],
-      customer_contact_email: faker.internet.email(),
-      customer_contact_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      customer_name: faker.company.companyName(),
-      description: faker.lorem.paragraphs(5),
-      end_date: faker.date.future(),
-      engagement_users: [],
-      engagement_lead_email: faker.internet.email(),
-      engagement_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      last_update: new Date().toString(),
-      location: `${faker.address.city()}, ${faker.address.stateAbbr()}`,
+      customer_contact_email: staticData
+        ? 'bob@doe.com'
+        : faker.internet.email(),
+      customer_contact_name: staticData
+        ? 'Bob Doe'
+        : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      customer_name: staticData ? 'NASA' : faker.company.companyName(),
+      description: staticData
+        ? "It's rocket science"
+        : faker.lorem.paragraphs(5),
+      end_date: staticData ? new Date(2020, 6, 1) : faker.date.future(),
+      engagement_users: staticData ? [] : [],
+      engagement_lead_email: staticData
+        ? 'alice@doe.com'
+        : faker.internet.email(),
+      engagement_lead_name: staticData
+        ? 'Alice Doe'
+        : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      last_update: staticData ? '2020-01-01' : new Date().toString(),
+      location: staticData
+        ? 'Nashville, TN'
+        : `${faker.address.city()}, ${faker.address.stateAbbr()}`,
       mongo_id: '1',
-      ocp_cloud_provider_name: 'AWS',
-      ocp_cloud_provider_region: faker.lorem.word(),
-      ocp_cluster_size: 'Large',
-      ocp_persistent_storage_size: `${faker.random.number()}G`,
-      ocp_sub_domain: faker.lorem.word(),
-      ocp_version: faker.random.number().toString(),
-      project_id: faker.random.number(),
-      project_name: faker.company.bsNoun(),
-      start_date: faker.date.recent(),
-      technical_lead_email: faker.internet.email(),
-      technical_lead_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      creation_details: {
-        created_by_email: faker.internet.email(),
-        created_by_user: `${faker.name.firstName()} ${faker.name.lastName()}`,
-        created_on: faker.date.recent(),
-      },
-      last_update_by_name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      launch: faker.random.boolean()
+      ocp_cloud_provider_name: staticData ? 'AWS' : 'AWS',
+      ocp_cloud_provider_region: staticData
+        ? 'N. Virginia'
+        : faker.lorem.word(),
+      ocp_cluster_size: staticData ? 'Large' : 'Large',
+      ocp_persistent_storage_size: staticData
+        ? '100G'
+        : `${faker.random.number()}G`,
+      ocp_sub_domain: staticData ? 'ordoabchao' : faker.lorem.word(),
+      ocp_version: staticData ? '4.4' : faker.random.number().toString(),
+      project_id: staticData ? 1 : faker.random.number(),
+      project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
+      start_date: staticData ? new Date(2020, 5, 1) : faker.date.recent(),
+      technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
+      technical_lead_name: staticData
+        ? 'Eve Doe'
+        : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      creation_details: staticData
+        ? {
+            created_by_email: 'dwasinger@redhat.com',
+            created_by_user: 'dwasinge',
+            created_on: new Date(2020, 1, 1),
+          }
+        : {
+            created_by_email: faker.internet.email(),
+            created_by_user: `${faker.name.firstName()} ${faker.name.lastName()}`,
+            created_on: faker.date.recent(),
+          },
+      last_update_by_name: staticData
+        ? 'James Doe'
+        : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      launch: staticData
+        ? null
+        : faker.random.boolean()
         ? {
             launched_by: faker.name.firstName(),
             launched_date_time: faker.date.recent(),
           }
         : null,
-      status: ClusterStatus.fromFake(),
-    };
-  }
-
-  static staticFaked(): Engagement {
-    return {
-      additional_details: 'Additional information here',
-      archive_date: new Date(),
-      commits: [],
-      customer_contact_email: 'bob@doe.com',
-      customer_contact_name: `Bob Doe`,
-      customer_name: 'NASA',
-      description: "It's rocket science",
-      end_date: new Date(2020, 6, 1),
-      engagement_users: [],
-      engagement_lead_email: 'alice@doe.com',
-      engagement_lead_name: `Alice Doe`,
-      last_update: '2020-01-01',
-      location: `Nashville, TN`,
-      ocp_cloud_provider_name: 'AWS',
-      ocp_cloud_provider_region: 'N. Virginia',
-      ocp_cluster_size: 'Large',
-      ocp_persistent_storage_size: `100G`,
-      ocp_sub_domain: 'ordoabchao',
-      ocp_version: '4.4',
-      project_id: 1,
-      project_name: 'Boots on the Moon',
-      start_date: new Date(2020, 5, 1),
-      technical_lead_email: 'eve@doe.com',
-      technical_lead_name: `Eve Doe`,
-      launch: null,
-      creation_details: {
-        created_by_email: 'dwasinge@redhat.com',
-        created_by_user: 'dwasinge',
-        created_on: new Date(2020, 1, 1),
-      },
-      last_update_by_name: `James Doe`,
-      status: ClusterStatus.staticFake(),
+      status: ClusterStatus.fromFake(staticData),
     };
   }
 }
