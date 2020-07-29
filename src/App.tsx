@@ -17,6 +17,8 @@ import { PublicConfigService } from './services/config_service/implementations/p
 import { NotificationProvider } from './context/notification_context/notification_context';
 import { useConfig } from './context/config_context/config_hook';
 import { createApiV1Services } from './services/factories/service_factory';
+import CustomGlobalBanner from './components/custom_global_banner/custom_global_banner';
+import { BannerMessage } from './schemas/config';
 
 export const App = () => {
   return (
@@ -55,21 +57,41 @@ function AppContexts() {
     notificationService,
     versionService,
   } = useServiceProviders();
+  const { appConfig } = useConfig();
+
   return (
-    <FeedbackProvider>
-      <AuthProvider authService={authService}>
-        <NotificationProvider notificationService={notificationService}>
-          <VersionProvider versionService={versionService}>
-            <FeatureToggles>
-              <Router>
-                <EngagementProvider engagementService={engagementService}>
-                  <OMPRouter />
-                </EngagementProvider>
-              </Router>
-            </FeatureToggles>
-          </VersionProvider>
-        </NotificationProvider>
-      </AuthProvider>
-    </FeedbackProvider>
+    <>
+      <BannerMessages messages={appConfig.bannerMessages} />
+      <FeedbackProvider>
+        <AuthProvider authService={authService}>
+          <NotificationProvider notificationService={notificationService}>
+            <VersionProvider versionService={versionService}>
+              <FeatureToggles>
+                <Router>
+                  <EngagementProvider engagementService={engagementService}>
+                    <OMPRouter />
+                  </EngagementProvider>
+                </Router>
+              </FeatureToggles>
+            </VersionProvider>
+          </NotificationProvider>
+        </AuthProvider>
+      </FeedbackProvider>
+    </>
+  );
+}
+
+function BannerMessages({ messages = [] }: { messages: BannerMessage[] }) {
+  return (
+    <>
+      {messages.map(message => {
+        return (
+          <CustomGlobalBanner
+            color={message.backgroundcolor}
+            message={message.message}
+          />
+        );
+      })}
+    </>
   );
 }

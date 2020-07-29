@@ -6,5 +6,43 @@
   "disableLaunch": true,
   "loggerType": "console",
   "logLevel": "error",
-  "supportEmailAddress": "example@example.com"
+  "supportEmailAddress": "example@example.com",
+  "bannerMessages": [
+    {
+      "message": "Hello message 1",
+      "backgroundcolor": "#FF0000"
+    },
+    {
+      "message": "Hello message 2",
+      "backgroundcolor": "#FFFF00"
+    },
+    {
+      "message": "Hello message 3",
+      "backgroundcolor": "darkpurple"
+    },
+    {
+      "message": "Hello message 4",
+      "backgroundcolor": "brown"
+    },
+    {
+      "message": "Hello message 5",
+      "backgroundcolor": "green"
+    },
+    {
+      "message": "Hello message 6",
+      "backgroundcolor": "blue"
+    },
+    {
+      "message": "Hello message 7",
+      "backgroundcolor": "grey"
+    },
+    {
+      "message": "Hello message 8",
+      "backgroundcolor": "white"
+    },
+    {
+      "message": "Hello message 9",
+      "backgroundcolor": "indigo"
+    }
+  ]
 }
