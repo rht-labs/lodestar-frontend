@@ -5,7 +5,7 @@ import {
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 
 interface CloudProviderRegionFormFieldProps {

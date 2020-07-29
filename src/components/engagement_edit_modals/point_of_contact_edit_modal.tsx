@@ -13,7 +13,7 @@ import {
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
 export interface PointOfContactEditModalProps {
