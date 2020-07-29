@@ -73,7 +73,6 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "gts": "^1.1.2",
-    "jest-sonar-reporter": "^2.0.0",
-    "sonarqube-scanner": "^2.7.0"
+    "jest-sonar-reporter": "^2.0.0"
   }
 }
