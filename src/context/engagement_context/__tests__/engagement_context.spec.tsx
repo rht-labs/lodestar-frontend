@@ -533,5 +533,19 @@ describe('Engagement Context', () => {
 
     expect(result.current.currentEngagement).toEqual(initialEngagement);
   });
+
+  test('When a new engagement is successfully created, it should be set as the current engagement', async () => {
+    const newEngagement: Partial<Engagement> = {
+      customer_name: 'New Customer name',
+      project_name: 'New Project',
+    };
+    const { result, waitForNextUpdate } = getHook();
+    await act(async () => {
+      result.current.createEngagement(newEngagement);
+      await waitForNextUpdate();
+    });
+    expect(result.current.currentEngagement).toEqual(newEngagement);
+  });
+
   afterAll(cleanup);
 });
