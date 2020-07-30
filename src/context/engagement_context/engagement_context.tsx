@@ -217,12 +217,21 @@ export const EngagementProvider = ({
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
       try {
-        let availableEngagements = engagements ?? (await fetchEngagements());
-        return availableEngagements?.find(
+        let availableEngagements = engagements ?? [];
+        let cachedEngagement = availableEngagements?.find(
           engagement =>
             engagement?.customer_name === customerName &&
             engagement?.project_name === projectName
         );
+        if (cachedEngagement) {
+          setCurrentEngagement(cachedEngagement);
+        }
+        let fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+          customerName,
+          projectName
+        );
+        setCurrentEngagement(fetchedEngagement);
+        return fetchedEngagement;
       } catch (e) {
         try {
           await _handleErrors(e);
@@ -234,7 +243,7 @@ export const EngagementProvider = ({
         }
       }
     },
-    [engagements, fetchEngagements, feedbackContext, _handleErrors]
+    [engagements, feedbackContext, _handleErrors, engagementService]
   );
 
   const _addNewEngagement = useCallback(
