@@ -37,7 +37,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:ci": "react-scripts build && mkdir -p package-contents && cp -vr build Dockerfile package-contents",
-    "test": "react-scripts test",
+    "test": "TZ=America/New_York react-scripts test",
     "test:ci": "npm test -- --watchAll=false --coverage --env=jsdom --testResultsProcessor jest-sonar-reporter",
     "e2e": "npx cypress open",
     "package": "zip -r package-contents.zip package-contents",

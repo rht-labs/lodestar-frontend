@@ -65,21 +65,21 @@ export abstract class Engagement {
       switch (options?.status) {
         case EngagementStatus.active:
           return {
-            start_date: new Date(2020, 1, 1),
-            end_date: new Date(2098, 1, 1),
-            archive_date: new Date(2099, 1, 1),
+            start_date: new Date(Date.UTC(2020, 1, 1).valueOf()),
+            end_date: new Date(Date.UTC(2098, 1, 1).valueOf()),
+            archive_date: new Date(Date.UTC(2099, 1, 1).valueOf()),
           };
         case EngagementStatus.past:
           return {
-            start_date: new Date(2020, 1, 1),
-            end_date: new Date(2020, 2, 1),
-            archive_date: new Date(2020, 2, 2),
+            start_date: new Date(Date.UTC(2020, 1, 1).valueOf()),
+            end_date: new Date(Date.UTC(2020, 2, 1).valueOf()),
+            archive_date: new Date(Date.UTC(2020, 2, 2).valueOf()),
           };
         case EngagementStatus.upcoming:
           return {
-            start_date: new Date(2098, 1, 1),
-            end_date: new Date(2099, 1, 1),
-            archive_date: new Date(2099, 1, 2),
+            start_date: new Date(Date.UTC(2098, 1, 1).valueOf()),
+            end_date: new Date(Date.UTC(2099, 1, 1).valueOf()),
+            archive_date: new Date(Date.UTC(2099, 1, 2).valueOf()),
           };
         default:
           return defaults;
