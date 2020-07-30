@@ -181,13 +181,11 @@ export const EngagementProvider = ({
 
   const _checkHasUpdateRef = useRef(async () => false);
 
-  // This
   useEffect(() => {
     const checkUpdate = async () => {
       return await engagementService.checkHasUpdates(currentEngagement);
     };
     _checkHasUpdateRef.current = checkUpdate;
-    // return checkUpdate();
   }, [currentEngagement, engagementService]);
 
   const createEngagementPoll = useCallback(
