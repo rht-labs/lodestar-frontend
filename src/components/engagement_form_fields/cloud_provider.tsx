@@ -38,6 +38,7 @@ export function CloudProviderFormField({
         >
           {[
             <FormSelectOption
+              key={'undefined provider'}
               label="Select a provider"
               value={undefined}
             />,
