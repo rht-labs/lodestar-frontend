@@ -62,15 +62,3 @@ describe('Point of Contact Card', () => {
     ).toMatchSnapshot();
   });
 });
-
-describe('System Status Card', () => {
-  test('matches snapshot', () => {
-    expect(
-      render(
-        <TestStateWrapper>
-          <SystemStatusCard currentEngagement={Engagement.fromFake(true)} />
-        </TestStateWrapper>
-      )
-    ).toMatchSnapshot();
-  });
-});

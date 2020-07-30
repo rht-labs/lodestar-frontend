@@ -3,6 +3,16 @@ import { LaunchData } from './launch_data';
 import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
+
+export enum EngagementStatus {
+  active = 'active',
+  past = 'past',
+  upcoming = 'upcoming',
+}
+
+export interface FakedEngagementOptions {
+  status: EngagementStatus;
+}
 export interface Engagement {
   additional_details?: string;
   archive_date: Date;
@@ -36,12 +46,51 @@ export interface Engagement {
   status: ClusterStatus;
 }
 export abstract class Engagement {
-  static fromFake(staticData = false): Engagement {
+  static fromFake(
+    staticData = false,
+    options: Partial<FakedEngagementOptions> = {}
+  ): Engagement {
+    const getEngagementDates = (): Pick<
+      Engagement,
+      'start_date' | 'end_date' | 'archive_date'
+    > => {
+      const defaults = {
+        archive_date: staticData ? new Date(2020, 6, 30) : faker.date.recent(),
+        end_date: staticData ? new Date(2020, 6, 1) : faker.date.future(),
+        start_date: staticData ? new Date(2020, 5, 1) : faker.date.recent(),
+      };
+      if (!options?.status) {
+        return defaults;
+      }
+      switch (options?.status) {
+        case EngagementStatus.active:
+          return {
+            start_date: new Date(2020, 1, 1),
+            end_date: new Date(2098, 1, 1),
+            archive_date: new Date(2099, 1, 1),
+          };
+        case EngagementStatus.past:
+          return {
+            start_date: new Date(2020, 1, 1),
+            end_date: new Date(2020, 2, 1),
+            archive_date: new Date(2020, 2, 2),
+          };
+        case EngagementStatus.upcoming:
+          return {
+            start_date: new Date(2098, 1, 1),
+            end_date: new Date(2099, 1, 1),
+            archive_date: new Date(2099, 1, 2),
+          };
+        default:
+          return defaults;
+      }
+    };
+    const dates = getEngagementDates();
     return {
+      ...dates,
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
-      archive_date: staticData ? new Date(2020, 6, 30) : faker.date.recent(),
       commits: [],
       customer_contact_email: staticData
         ? 'bob@doe.com'
@@ -53,7 +102,6 @@ export abstract class Engagement {
       description: staticData
         ? "It's rocket science"
         : faker.lorem.paragraphs(5),
-      end_date: staticData ? new Date(2020, 6, 1) : faker.date.future(),
       engagement_users: staticData ? [] : [],
       engagement_lead_email: staticData
         ? 'alice@doe.com'
@@ -78,7 +126,6 @@ export abstract class Engagement {
       ocp_version: staticData ? '4.4' : faker.random.number().toString(),
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
-      start_date: staticData ? new Date(2020, 5, 1) : faker.date.recent(),
       technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
       technical_lead_name: staticData
         ? 'Eve Doe'
@@ -108,12 +155,6 @@ export abstract class Engagement {
       status: ClusterStatus.fromFake(staticData),
     };
   }
-}
-
-export enum EngagementStatus {
-  active = 'active',
-  past = 'past',
-  upcoming = 'upcoming',
 }
 
 export const getEngagementStatus = (
