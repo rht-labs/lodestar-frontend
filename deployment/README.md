@@ -49,6 +49,21 @@ It accepts the following variables
 | `authBaseUrl`  | The url that your SSO server accepts OpenID Connect requests on - for Keycloak, something like `https://<keycloak-base-url>.com/auth/realms/<realm-id>/protocol/openid-connect`  |
 | `backendUrl`  | The url that the LodeStar backend accepts requests on  |
 
+
 This will spin up all of the usual resources that this service needs in production, plus a `BuildConfig` configured to build it from source from the Git repository specified. To trigger this build, use `oc start-build omp-frontend`.
 
 **Note**: Also check out the list of runtime variables in the [top level README](../README.md#runtime-configuration-variables)
+
+Included is the ability to run a job that can run the end to end tests and clean up persisted data. A number of values need to be set for this to work.
+
+| Variable  | Use |
+|--|--|
+| `e2eTestJob.env.logLevel`  | Sets the log level  |
+| `e2eTestJob.env.deleteAfterInHours`  | How stale should the data be to be deleted  |
+| `e2eTestJob.env.dryRun`  | Setting to true will delete e2e data  |
+| `e2eTestJob.env.gitlabApiUrl`  | The host url for gitlab  |
+| `e2eTestJob.env.parentGroupId`  | The repo id of the e2e customer   |
+| `e2eTestJob.env.gitlabToken`  | The token for gitlab access  |
+| `e2eTestJob.env.githubApiUrl`  | The api to the github action  |
+| `e2eTestJob.env.githubToken`  | The token ofr github access  |
+| `e2eTestJob.ref`  | The github ref of the repo to run the action against  |
