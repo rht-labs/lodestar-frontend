@@ -223,7 +223,7 @@ export const EngagementProvider = ({
             engagement?.customer_name === customerName &&
             engagement?.project_name === projectName
         );
-        if (cachedEngagement) {
+        if (cachedEngagement !== null) {
           setCurrentEngagement(cachedEngagement);
         }
         let fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
