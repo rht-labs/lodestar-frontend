@@ -263,6 +263,7 @@ export const EngagementProvider = ({
           'Your engagement has been successfully created',
           AlertType.success
         );
+        setCurrentEngagement(engagement);
         return engagement;
       } catch (e) {
         feedbackContext.hideLoader();
