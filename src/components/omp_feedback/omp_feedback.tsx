@@ -50,12 +50,14 @@ export function Feedback() {
         <AlertGroup isToast>
           <Alert
             isInline
+            data-testid="ls-feedback-alert"
             variant={alertType}
             title={alertMsg}
             actionLinks={
-              alertActions?.map(action => {
+              alertActions?.map((action, i) => {
                 return (
                   <AlertActionLink
+                    data-testid={`ls-feedback-alert-action-${i}`}
                     key={action?.title}
                     onClick={() => {
                       action?.action();
