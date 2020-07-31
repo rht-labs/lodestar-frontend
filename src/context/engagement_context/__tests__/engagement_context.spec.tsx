@@ -24,9 +24,9 @@ describe('Engagement Context', () => {
     cleanup();
   });
 
-  test('by default, engagements are undefined', () => {
+  test('by default, engagements are an empty array', () => {
     const { result } = getHook();
-    expect(result.current.engagements).toEqual(undefined);
+    expect(result.current.engagements).toEqual([]);
   });
 
   test('Fetch Engagements', async () => {
@@ -246,7 +246,11 @@ describe('Engagement Context', () => {
       result.current.getEngagements();
       await waitForNextUpdate();
     });
-    expect(result.current.engagements[0]).toEqual(initialEngagement);
+    await act(async () => {
+      result.current.setCurrentEngagement(result.current.engagements[0]);
+      await waitForNextUpdate();
+    });
+    expect(result.current.currentEngagement).toEqual(initialEngagement);
     let modifiedEngagement = {
       ...initialEngagement,
       customer_contact_email: 'tennessee@nasa.gov',
@@ -255,7 +259,7 @@ describe('Engagement Context', () => {
       result.current.saveEngagement(modifiedEngagement);
       await waitForNextUpdate();
     });
-    expect(result.current.engagements[0]).toEqual(modifiedEngagement);
+    expect(result.current.currentEngagement).toEqual(modifiedEngagement);
   });
   test('saveEngagement reverts to the initial engagement when the save was unsuccessful', async () => {
     const initialEngagement = Engagement.fromFake(true);
@@ -533,5 +537,19 @@ describe('Engagement Context', () => {
 
     expect(result.current.currentEngagement).toEqual(initialEngagement);
   });
+
+  test('When a new engagement is successfully created, it should be set as the current engagement', async () => {
+    const newEngagement: Partial<Engagement> = {
+      customer_name: 'New Customer name',
+      project_name: 'New Project',
+    };
+    const { result, waitForNextUpdate } = getHook();
+    await act(async () => {
+      result.current.createEngagement(newEngagement);
+      await waitForNextUpdate();
+    });
+    expect(result.current.currentEngagement).toEqual(newEngagement);
+  });
+
   afterAll(cleanup);
 });

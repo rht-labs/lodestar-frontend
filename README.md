@@ -1,5 +1,7 @@
 ![Build Container](https://github.com/rht-labs/open-management-portal-frontend/workflows/Build%20Container/badge.svg)
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rht-labs_open-management-portal-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=rht-labs_open-management-portal-frontend)
+
 # OMP Frontend Quickstart
 
 ## First things first

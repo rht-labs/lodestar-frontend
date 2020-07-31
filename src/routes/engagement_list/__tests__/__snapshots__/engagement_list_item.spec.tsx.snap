@@ -1,0 +1,388 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Engagement status matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <article
+        class="pf-c-card pf-m-compact"
+        style="margin: 1rem; padding: 2rem 0.5rem;"
+      >
+        <div
+          class="pf-c-card__body"
+          style="padding: 0px 2rem;"
+        >
+          <div
+            class="pf-l-grid pf-m-gutter"
+            style="align-items: center;"
+          >
+            <div
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
+            >
+              <button
+                class="pf-c-button pf-m-link pf-m-inline"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                style="white-space: normal; word-wrap: break-word; text-align: left;"
+                type="button"
+              >
+                <h3
+                  class="pf-c-title pf-m-lg"
+                  style="font-weight: bolder;"
+                >
+                  Boots on the Moon
+                </h3>
+              </button>
+              <h4
+                class="pf-c-title pf-m-md"
+                style="font-weight: normal;"
+              >
+                NASA
+              </h4>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"
+            >
+              <div
+                class="pf-l-grid pf-m-gutter"
+              >
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
+                >
+                  <div
+                    class="pf-l-grid pf-m-gutter"
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      Created by: 
+                      dwasinge
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      Target start date:
+                       
+                      Jun 01, 2020
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+                >
+                  <div
+                    class="pf-l-flex"
+                  >
+                    <div
+                      class="pf-l-flex"
+                    >
+                      <div
+                        class="pf-m-spacer-sm"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 448 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                            transform=""
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        class=""
+                      >
+                        0
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-flex"
+                    >
+                      <div
+                        class="pf-m-spacer-sm"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 512 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"
+                            transform=""
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        class=""
+                      >
+                        4
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-flex"
+                    >
+                      <div
+                        class=""
+                      >
+                        <b
+                          data-cy="upcoming"
+                          style="color: rgb(236, 122, 8);"
+                        >
+                          UPCOMING
+                        </b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+                >
+                  <div />
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md pf-m-2-col-on-lg"
+            >
+              <button
+                class="pf-c-button pf-m-secondary"
+                data-cy="view_engagement_button"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                View Engagement
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </body>,
+  "container": <div>
+    <article
+      class="pf-c-card pf-m-compact"
+      style="margin: 1rem; padding: 2rem 0.5rem;"
+    >
+      <div
+        class="pf-c-card__body"
+        style="padding: 0px 2rem;"
+      >
+        <div
+          class="pf-l-grid pf-m-gutter"
+          style="align-items: center;"
+        >
+          <div
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
+          >
+            <button
+              class="pf-c-button pf-m-link pf-m-inline"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              style="white-space: normal; word-wrap: break-word; text-align: left;"
+              type="button"
+            >
+              <h3
+                class="pf-c-title pf-m-lg"
+                style="font-weight: bolder;"
+              >
+                Boots on the Moon
+              </h3>
+            </button>
+            <h4
+              class="pf-c-title pf-m-md"
+              style="font-weight: normal;"
+            >
+              NASA
+            </h4>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"
+          >
+            <div
+              class="pf-l-grid pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-12-col-on-lg"
+              >
+                <div
+                  class="pf-l-grid pf-m-gutter"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-12-col"
+                  >
+                    Created by: 
+                    dwasinge
+                  </div>
+                  <div
+                    class="pf-l-grid__item"
+                  >
+                    Target start date:
+                     
+                    Jun 01, 2020
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+              >
+                <div
+                  class="pf-l-flex"
+                >
+                  <div
+                    class="pf-l-flex"
+                  >
+                    <div
+                      class="pf-m-spacer-sm"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 448 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                          transform=""
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      class=""
+                    >
+                      0
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-flex"
+                  >
+                    <div
+                      class="pf-m-spacer-sm"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 512 512"
+                        width="1em"
+                      >
+                        <path
+                          d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"
+                          transform=""
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      class=""
+                    >
+                      4
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-flex"
+                  >
+                    <div
+                      class=""
+                    >
+                      <b
+                        data-cy="upcoming"
+                        style="color: rgb(236, 122, 8);"
+                      >
+                        UPCOMING
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+              >
+                <div />
+              </div>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md pf-m-2-col-on-lg"
+          >
+            <button
+              class="pf-c-button pf-m-secondary"
+              data-cy="view_engagement_button"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
+            >
+              View Engagement
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

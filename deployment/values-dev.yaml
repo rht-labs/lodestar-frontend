@@ -7,10 +7,24 @@ imageName: "omp-frontend"
 imageTag: "latest"
 
 git:
-  uri: https://github.com/rht-labs/open-management-portal-frontend.git
+  uri: https://github.com/rht-labs/lodestar-frontend.git
   ref: master
 
 baseUrl: url
 clientId: secret
 authBaseUrl: url
 backendUrl: url
+
+e2eTestJob:
+  cleanUp:
+    image:
+      name: quay.io/redhat-cop/gitlab-cleanup
+      tag: v3.11.6
+  action:
+    image:
+      name: appropriate/curl
+      tag: 3.1
+  env:
+    logLevel: DEBUG
+    deleteAfterInHours: 1
+    dryRun: false

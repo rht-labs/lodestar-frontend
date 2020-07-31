@@ -74,7 +74,7 @@ export const EngagementProvider = ({
 
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
-  const [engagements, setEngagements] = useState<Engagement[]>(undefined);
+  const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -179,6 +179,15 @@ export const EngagementProvider = ({
     [_updateEngagementInPlace, engagementService, _validateAuthStatus]
   );
 
+  const _checkHasUpdateRef = useRef(async () => false);
+
+  useEffect(() => {
+    const checkUpdate = async () => {
+      return await engagementService.checkHasUpdates(currentEngagement);
+    };
+    _checkHasUpdateRef.current = checkUpdate;
+  }, [currentEngagement, engagementService]);
+
   const createEngagementPoll = useCallback(
     async (engagement: Engagement): Promise<EngagementPoll> => {
       await _validateAuthStatus();
@@ -186,9 +195,7 @@ export const EngagementProvider = ({
         new EngagementPollIntervalStrategy(
           setInterval(async () => {
             await _validateAuthStatusRef.current();
-            const hasUpdates = await engagementService.checkHasUpdates(
-              engagement
-            );
+            const hasUpdates = await _checkHasUpdateRef.current();
             if (hasUpdates) {
               feedbackContext.showAlert(
                 'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
@@ -206,23 +213,27 @@ export const EngagementProvider = ({
         )
       );
     },
-    [
-      _validateAuthStatus,
-      _refreshEngagementData,
-      engagementService,
-      feedbackContext,
-    ]
+    [_validateAuthStatus, _refreshEngagementData, feedbackContext]
   );
 
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
       try {
-        let availableEngagements = engagements ?? (await fetchEngagements());
-        return availableEngagements?.find(
+        let availableEngagements = engagements ?? [];
+        let cachedEngagement = availableEngagements?.find(
           engagement =>
             engagement?.customer_name === customerName &&
             engagement?.project_name === projectName
         );
+        if (cachedEngagement !== null) {
+          setCurrentEngagement(cachedEngagement);
+        }
+        let fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+          customerName,
+          projectName
+        );
+        setCurrentEngagement(fetchedEngagement);
+        return fetchedEngagement;
       } catch (e) {
         try {
           await _handleErrors(e);
@@ -234,7 +245,7 @@ export const EngagementProvider = ({
         }
       }
     },
-    [engagements, fetchEngagements, feedbackContext, _handleErrors]
+    [engagements, feedbackContext, _handleErrors, engagementService]
   );
 
   const _addNewEngagement = useCallback(
@@ -263,6 +274,7 @@ export const EngagementProvider = ({
           'Your engagement has been successfully created',
           AlertType.success
         );
+        setCurrentEngagement(engagement);
         return engagement;
       } catch (e) {
         feedbackContext.hideLoader();
@@ -325,6 +337,7 @@ export const EngagementProvider = ({
         );
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
+        setCurrentEngagement(returnedEngagement);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
