@@ -1,4 +1,4 @@
-{{- if not .Values.development }}
+{{- if .Values.development }}
 apiVersion: batch/v1
 kind: Job
 metadata:
