@@ -74,7 +74,7 @@ export const EngagementProvider = ({
 
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
-  const [engagements, setEngagements] = useState<Engagement[]>(undefined);
+  const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -179,6 +179,15 @@ export const EngagementProvider = ({
     [_updateEngagementInPlace, engagementService, _validateAuthStatus]
   );
 
+  const _checkHasUpdateRef = useRef(async () => false);
+
+  useEffect(() => {
+    const checkUpdate = async () => {
+      return await engagementService.checkHasUpdates(currentEngagement);
+    };
+    _checkHasUpdateRef.current = checkUpdate;
+  }, [currentEngagement, engagementService]);
+
   const createEngagementPoll = useCallback(
     async (engagement: Engagement): Promise<EngagementPoll> => {
       await _validateAuthStatus();
@@ -186,9 +195,7 @@ export const EngagementProvider = ({
         new EngagementPollIntervalStrategy(
           setInterval(async () => {
             await _validateAuthStatusRef.current();
-            const hasUpdates = await engagementService.checkHasUpdates(
-              engagement
-            );
+            const hasUpdates = await _checkHasUpdateRef.current();
             if (hasUpdates) {
               feedbackContext.showAlert(
                 'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
@@ -206,12 +213,7 @@ export const EngagementProvider = ({
         )
       );
     },
-    [
-      _validateAuthStatus,
-      _refreshEngagementData,
-      engagementService,
-      feedbackContext,
-    ]
+    [_validateAuthStatus, _refreshEngagementData, feedbackContext]
   );
 
   const getEngagement = useCallback(
@@ -335,6 +337,7 @@ export const EngagementProvider = ({
         );
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
+        setCurrentEngagement(returnedEngagement);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
