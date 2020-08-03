@@ -30,6 +30,7 @@ Object {
             aria-invalid="false"
             aria-label="Additional provisioning information"
             class="pf-c-form-control pf-m-resize-vertical"
+            data-testid="additional-details-text-area"
             disabled=""
             id="additional_details"
             name="additional_details"
@@ -68,6 +69,7 @@ Object {
           aria-invalid="false"
           aria-label="Additional provisioning information"
           class="pf-c-form-control pf-m-resize-vertical"
+          data-testid="additional-details-text-area"
           disabled=""
           id="additional_details"
           name="additional_details"
@@ -207,6 +209,7 @@ Object {
             aria-invalid="false"
             aria-label="Cloud Provider"
             class="pf-c-form-control"
+            data-testid="cloud-provider-select"
             disabled=""
             id="cloud_provider_dropdown"
             required=""
@@ -300,6 +303,7 @@ Object {
           aria-invalid="false"
           aria-label="Cloud Provider"
           class="pf-c-form-control"
+          data-testid="cloud-provider-select"
           disabled=""
           id="cloud_provider_dropdown"
           required=""
@@ -413,6 +417,7 @@ Object {
             aria-invalid="false"
             aria-label="Cloud provider region"
             class="pf-c-form-control"
+            data-testid="provider-region-select"
             disabled=""
             id="cloud_provider_region_dropdown"
           >
@@ -469,6 +474,7 @@ Object {
           aria-invalid="false"
           aria-label="Cloud provider region"
           class="pf-c-form-control"
+          data-testid="provider-region-select"
           disabled=""
           id="cloud_provider_region_dropdown"
         >
@@ -582,6 +588,7 @@ Object {
             aria-invalid="false"
             aria-label="Cluster Size"
             class="pf-c-form-control"
+            data-testid="cluster-size-select"
             disabled=""
             id="cluster_size_dropdown"
             required=""
@@ -591,6 +598,13 @@ Object {
               value=""
             >
               Select cluster size
+            </option>
+            <option
+              class=""
+              data-cy="Small"
+              value="small"
+            >
+              Small
             </option>
           </select>
           
@@ -631,6 +645,7 @@ Object {
           aria-invalid="false"
           aria-label="Cluster Size"
           class="pf-c-form-control"
+          data-testid="cluster-size-select"
           disabled=""
           id="cluster_size_dropdown"
           required=""
@@ -640,6 +655,13 @@ Object {
             value=""
           >
             Select cluster size
+          </option>
+          <option
+            class=""
+            data-cy="Small"
+            value="small"
+          >
+            Small
           </option>
         </select>
         
@@ -730,6 +752,7 @@ Object {
             aria-invalid="false"
             class="pf-c-form-control"
             data-cy="location_field"
+            data-testid="location-field"
             disabled=""
             id="location"
             name="location"
@@ -774,6 +797,7 @@ Object {
           aria-invalid="false"
           class="pf-c-form-control"
           data-cy="location_field"
+          data-testid="location-field"
           disabled=""
           id="location"
           name="location"
@@ -845,152 +869,7 @@ Object {
 }
 `;
 
-exports[`Engagement form fields Location form matches snapshot 2`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="pf-c-form__group"
-      >
-        <div
-          class="pf-c-form__group-label"
-        >
-          <label
-            class="pf-c-form__label"
-            for="engagement-location"
-          >
-            <span
-              class="pf-c-form__label-text"
-            >
-              Location
-            </span>
-          </label>
-           
-        </div>
-        <div
-          class="pf-c-form__group-control"
-        >
-          <input
-            aria-invalid="false"
-            class="pf-c-form-control"
-            data-cy="location_field"
-            disabled=""
-            id="location"
-            name="location"
-            placeholder="e.g. Pasadena, CA"
-            type="text"
-            value="Nashville, TN"
-          />
-          <div
-            aria-live="polite"
-            class="pf-c-form__helper-text"
-            id="engagement-location-helper"
-          >
-            Where will this be held?
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="pf-c-form__group"
-    >
-      <div
-        class="pf-c-form__group-label"
-      >
-        <label
-          class="pf-c-form__label"
-          for="engagement-location"
-        >
-          <span
-            class="pf-c-form__label-text"
-          >
-            Location
-          </span>
-        </label>
-         
-      </div>
-      <div
-        class="pf-c-form__group-control"
-      >
-        <input
-          aria-invalid="false"
-          class="pf-c-form-control"
-          data-cy="location_field"
-          disabled=""
-          id="location"
-          name="location"
-          placeholder="e.g. Pasadena, CA"
-          type="text"
-          value="Nashville, TN"
-        />
-        <div
-          aria-live="polite"
-          class="pf-c-form__helper-text"
-          id="engagement-location-helper"
-        >
-          Where will this be held?
-        </div>
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Engagement form fields OpenShift form matches snapshot 1`] = `
+exports[`Engagement form fields OpenShift Version form matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1027,6 +906,7 @@ Object {
             aria-invalid="false"
             aria-label="OpenShift Version"
             class="pf-c-form-control"
+            data-testid="oc-version-select"
             disabled=""
             id="oc_version_dropdown"
           >
@@ -1035,6 +915,34 @@ Object {
               value=""
             >
               Select OpenShift version
+            </option>
+            <option
+              class=""
+              data-cy="4.1.41"
+              value="4.1.41"
+            >
+              v4.1
+            </option>
+            <option
+              class=""
+              data-cy="4.2.34"
+              value="4.2.34"
+            >
+              v4.2
+            </option>
+            <option
+              class=""
+              data-cy="4.3.26"
+              value="4.3.26"
+            >
+              v4.3
+            </option>
+            <option
+              class=""
+              data-cy="4.4.10"
+              value="4.4.10"
+            >
+              v4.4
             </option>
           </select>
           
@@ -1075,6 +983,7 @@ Object {
           aria-invalid="false"
           aria-label="OpenShift Version"
           class="pf-c-form-control"
+          data-testid="oc-version-select"
           disabled=""
           id="oc_version_dropdown"
         >
@@ -1083,6 +992,34 @@ Object {
             value=""
           >
             Select OpenShift version
+          </option>
+          <option
+            class=""
+            data-cy="4.1.41"
+            value="4.1.41"
+          >
+            v4.1
+          </option>
+          <option
+            class=""
+            data-cy="4.2.34"
+            value="4.2.34"
+          >
+            v4.2
+          </option>
+          <option
+            class=""
+            data-cy="4.3.26"
+            value="4.3.26"
+          >
+            v4.3
+          </option>
+          <option
+            class=""
+            data-cy="4.4.10"
+            value="4.4.10"
+          >
+            v4.4
           </option>
         </select>
         
@@ -1180,13 +1117,45 @@ Object {
             aria-invalid="false"
             aria-label="Persistent Storage Needs"
             class="pf-c-form-control"
+            data-testid="persistent-storage-select"
             disabled=""
             id="persistent_storage_dropdown"
           >
             <option
               class=""
-              value=""
-            />
+              data-cy="none"
+              value="none"
+            >
+              None
+            </option>
+            <option
+              class=""
+              data-cy="50G"
+              value="50G"
+            >
+              50GB
+            </option>
+            <option
+              class=""
+              data-cy="100G"
+              value="100G"
+            >
+              100GB
+            </option>
+            <option
+              class=""
+              data-cy="250G"
+              value="250G"
+            >
+              250GB
+            </option>
+            <option
+              class=""
+              data-cy="500G"
+              value="500G"
+            >
+              500GB
+            </option>
           </select>
           
         </div>
@@ -1226,13 +1195,45 @@ Object {
           aria-invalid="false"
           aria-label="Persistent Storage Needs"
           class="pf-c-form-control"
+          data-testid="persistent-storage-select"
           disabled=""
           id="persistent_storage_dropdown"
         >
           <option
             class=""
-            value=""
-          />
+            data-cy="none"
+            value="none"
+          >
+            None
+          </option>
+          <option
+            class=""
+            data-cy="50G"
+            value="50G"
+          >
+            50GB
+          </option>
+          <option
+            class=""
+            data-cy="100G"
+            value="100G"
+          >
+            100GB
+          </option>
+          <option
+            class=""
+            data-cy="250G"
+            value="250G"
+          >
+            250GB
+          </option>
+          <option
+            class=""
+            data-cy="500G"
+            value="500G"
+          >
+            500GB
+          </option>
         </select>
         
       </div>
@@ -1329,6 +1330,7 @@ Object {
             aria-invalid="false"
             class="pf-c-form-control"
             data-cy="desired_subdomain_input"
+            data-testid="subdomain-input"
             disabled=""
             id="ocp_sub_domain"
             name="ocp_sub_domain"
@@ -1379,6 +1381,7 @@ Object {
           aria-invalid="false"
           class="pf-c-form-control"
           data-cy="desired_subdomain_input"
+          data-testid="subdomain-input"
           disabled=""
           id="ocp_sub_domain"
           name="ocp_sub_domain"

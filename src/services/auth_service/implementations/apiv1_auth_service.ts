@@ -104,7 +104,7 @@ export class Apiv1AuthService implements AuthService {
       refresh_expires_in,
     } = data;
     const currentTime = new Date();
-    const userToken = new UserToken({
+    const userToken: UserToken = {
       accessToken: access_token as string,
       refreshToken: refresh_token as string,
       accessTokenExpiry: new Date(
@@ -113,7 +113,7 @@ export class Apiv1AuthService implements AuthService {
       refreshTokenExpiry: new Date(
         (currentTime.getTime() + refresh_expires_in * 1000) as number
       ),
-    });
+    };
     this.saveToken(userToken);
     return userToken;
   }
@@ -127,12 +127,12 @@ export class Apiv1AuthService implements AuthService {
         },
       }
     );
-    return new UserProfile({
+    return {
       username: userProfileData.data.preferred_username,
       firstName: userProfileData.data.given_name,
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
       groups: userProfileData.data.groups,
-    });
+    };
   }
 }

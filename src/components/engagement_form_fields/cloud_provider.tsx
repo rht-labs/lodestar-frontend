@@ -29,6 +29,7 @@ export function CloudProviderFormField({
       </FormGroup>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
         <FormSelect
+          data-testid="cloud-provider-select"
           aria-label="Cloud Provider"
           id={'cloud_provider_dropdown'}
           isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}

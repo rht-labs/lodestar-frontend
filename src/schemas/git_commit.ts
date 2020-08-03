@@ -1,3 +1,4 @@
+import faker from 'faker';
 export interface GitCommit {
   added: any[];
   author_email: string;
@@ -16,41 +17,34 @@ export interface GitCommit {
 }
 
 export abstract class GitCommit {
-  static fromFake() {
+  static fromFake(useStatic = false) {
     return {
       added: [],
-      author_email: fakerStatic.internet.email(),
-      author_name: fakerStatic.name.firstName(),
-      authored_date: fakerStatic.date.recent(),
-      committed_date: fakerStatic.date.recent(),
-      committer_email: fakerStatic.internet.email(),
-      committer_name: fakerStatic.name.firstName(),
-      id: fakerStatic.random.uuid(),
-      message: fakerStatic.lorem.sentence(),
+      author_email: useStatic
+        ? 'random-user@example.com'
+        : faker.internet.email(),
+      author_name: useStatic
+        ? 'random-user@example.com'
+        : faker.name.firstName(),
+      authored_date: useStatic ? new Date(2020, 1, 1) : faker.date.recent(),
+      committed_date: useStatic ? new Date(2020, 1, 1) : faker.date.recent(),
+      committer_email: useStatic
+        ? 'random-user@example.com'
+        : faker.internet.email(),
+      committer_name: useStatic
+        ? 'random-user@example.com'
+        : faker.name.firstName(),
+      id: useStatic ? '1' : faker.random.uuid(),
+      message: useStatic ? 'A commit message' : faker.lorem.sentence(),
       modified: [],
       removed: [],
-      short_id: fakerStatic.random.uuid(),
-      title: fakerStatic.company.catchPhrase(),
-      web_url: fakerStatic.internet.url(),
-    };
-  }
-  static staticFaked(): GitCommit {
-    return {
-      added: [],
-      author_email: 'random-user@example.com',
-      author_name: 'random-user@example.com',
-      authored_date: new Date(2020, 1, 1),
-      committed_date: new Date(2020, 1, 1),
-      committer_email: 'random-user+gitlabbot@example.com',
-      committer_name: 'Innovation Labs Bot',
-      id: 'e169e7c04a9c180a7a75af124f0cbfc657fc47ae',
-      message: '💓 engagement update by git-api 📂 ',
-      modified: [],
-      removed: [],
-      short_id: 'e169e7c0',
-      title: '💓 engagement update by git-api 📂 ',
-      web_url:
-        'https://gitlab.example.com/my-org/engagements/company/project/iac/-/commit/e169e7c04a9c180a7a75af124f0cbfc657fc47ae',
+      short_id: useStatic ? '2' : faker.random.uuid(),
+      title: useStatic
+        ? '💓 engagement update by git-api 📂 '
+        : faker.company.catchPhrase(),
+      web_url: useStatic
+        ? 'https://gitlab.example.com/my-org/engagements/company/project/iac/-/commit/e169e7c04a9c180a7a75af124f0cbfc657fc47ae'
+        : faker.internet.url(),
     };
   }
 }

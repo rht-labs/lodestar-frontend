@@ -69,7 +69,13 @@ export function UserEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave} data-cy={'save_users'} >Save</Button>
+            <Button
+              data-testid="user-edit-save"
+              onClick={onSave}
+              data-cy={'save_users'}
+            >
+              Save
+            </Button>
           </div>
         }
       >
@@ -86,7 +92,11 @@ export function UserEditModal({
                   Select the 'add user' button below, to begin adding users.
                 </p>
               </EmptyStateBody>
-              <Button variant="primary" onClick={addUser} data-cy={'add_new_user'}>
+              <Button
+                variant="primary"
+                onClick={addUser}
+                data-cy={'add_new_user'}
+              >
                 Add User
               </Button>
             </EmptyState>
@@ -194,7 +204,7 @@ export function UserEditModal({
                                   <FormSelect
                                     name="role"
                                     aria-label="User Role"
-                                    id='user_role_dropdown'
+                                    id="user_role_dropdown"
                                     value={value.role || ''}
                                     isDisabled={
                                       !hasFeature(APP_FEATURES.writer)

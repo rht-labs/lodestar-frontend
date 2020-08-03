@@ -3,7 +3,9 @@ import {
   EmailAddressValidator,
   LengthValidator,
   NotNullValidator,
+  DateValidator,
 } from './standard_validators';
+import { startOfToday, startOfTomorrow, startOfYesterday } from 'date-fns';
 
 describe('email validator', () => {
   let validate;
@@ -66,5 +68,42 @@ describe('length validators', () => {
   });
   test('string with whitespace that, when trimmed, equals the max length', () => {
     expect(validate(' asdf')).toBe(null);
+  });
+});
+
+describe('Date validators', () => {
+  let validate;
+  beforeEach(() => {
+    validate = (input: string, dateParams: { min: string; max: string }) =>
+      _validate(input, [
+        DateValidator(
+          dateParams,
+          'This date does not meet the validation standard'
+        ),
+      ]);
+  });
+  test('@today keyword matches the start of today', () => {
+    expect(validate(startOfToday(), { min: '@today' })).toBe(null);
+    expect(validate(startOfTomorrow(), { min: '@today' })).toBe(null);
+    expect(validate(startOfYesterday(), { min: '@today' })).not.toBe(null);
+    expect(validate(startOfToday(), { max: '@today' })).toBe(null);
+    expect(validate(startOfTomorrow(), { max: '@today' })).not.toBe(null);
+    expect(validate(startOfYesterday(), { max: '@today' })).toBe(null);
+  });
+  test('@yesterday keyword matches the start of yesterday', () => {
+    expect(validate(startOfToday(), { min: '@yesterday' })).toBe(null);
+    expect(validate(startOfTomorrow(), { min: '@yesterday' })).toBe(null);
+    expect(validate(startOfYesterday(), { min: '@yesterday' })).toBe(null);
+    expect(validate(startOfToday(), { max: '@yesterday' })).not.toBe(null);
+    expect(validate(startOfTomorrow(), { max: '@yesterday' })).not.toBe(null);
+    expect(validate(startOfYesterday(), { max: '@yesterday' })).toBe(null);
+  });
+  test('@tomorrow keyword matches the start of tomorrow', () => {
+    expect(validate(startOfToday(), { min: '@tomorrow' })).not.toBe(null);
+    expect(validate(startOfTomorrow(), { min: '@tomorrow' })).toBe(null);
+    expect(validate(startOfYesterday(), { min: '@tomorrow' })).not.toBe(null);
+    expect(validate(startOfToday(), { max: '@tomorrow' })).toBe(null);
+    expect(validate(startOfTomorrow(), { max: '@tomorrow' })).toBe(null);
+    expect(validate(startOfYesterday(), { max: '@tomorrow' })).toBe(null);
   });
 });
