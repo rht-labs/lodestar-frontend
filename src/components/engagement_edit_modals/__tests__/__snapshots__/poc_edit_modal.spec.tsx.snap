@@ -1,0 +1,485 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Point of Contact edit modal matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body
+    class="pf-c-backdrop__open"
+  >
+    <div
+      aria-hidden="true"
+    />
+    <div>
+      <div
+        class="pf-c-backdrop"
+      >
+        <div
+          class="pf-l-bullseye"
+        >
+          <div
+            aria-describedby="pf-modal-part-2"
+            aria-labelledby="pf-modal-part-1"
+            aria-modal="true"
+            class="pf-c-modal-box pf-m-sm"
+            id="pf-modal-part-0"
+            role="dialog"
+          >
+            <button
+              aria-label="Close"
+              class="pf-c-button pf-m-plain"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  transform=""
+                />
+              </svg>
+            </button>
+            <header
+              class="pf-c-modal-box__header"
+            >
+              <h1
+                class="pf-c-modal-box__title"
+                id="pf-modal-part-1"
+              >
+                Points of Contact
+              </h1>
+            </header>
+            <div
+              class="pf-c-modal-box__body"
+              id="pf-modal-part-2"
+            >
+              <section
+                class="pf-c-page__main-section"
+              >
+                <form
+                  class="pf-c-form"
+                  novalidate=""
+                >
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
+                        for="engagement_lead"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Labs EL
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          class="pf-c-form__label-required"
+                        >
+                           
+                          *
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <div
+                        class="pf-c-input-group"
+                      >
+                        <label
+                          class="pf-c-input-group__text"
+                          for="engagement-lead"
+                          style="background-color: rgb(237, 237, 237);"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 448 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                              transform=""
+                            />
+                          </svg>
+                        </label>
+                        <input
+                          aria-invalid="false"
+                          aria-label="Engagement lead name"
+                          class="pf-c-form-control"
+                          data-cy="engagement_lead_name"
+                          data-testid="poc-edit-field"
+                          disabled=""
+                          id="name"
+                          name="engagement-lead-name"
+                          placeholder="Full Name"
+                          style="background-color: rgb(237, 237, 237);"
+                          type="text"
+                          value="Alice Doe"
+                        />
+                        <label
+                          class="pf-c-input-group__text"
+                          for="engagement-lead-email"
+                          style="background-color: rgb(237, 237, 237);"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+                              transform=""
+                            />
+                          </svg>
+                        </label>
+                        <input
+                          aria-invalid="false"
+                          aria-label="engagement lead email"
+                          class="pf-c-form-control"
+                          data-cy="engagement_lead_email"
+                          disabled=""
+                          id="email"
+                          name="engagement-lead-email"
+                          placeholder="Email Address"
+                          style="background-color: rgb(237, 237, 237);"
+                          type="email"
+                          value="alice@doe.com"
+                        />
+                      </div>
+                      <div
+                        aria-live="polite"
+                        class="pf-c-form__helper-text"
+                        id="engagement_lead-helper"
+                      >
+                        Who is the Engagement Lead?
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
+                        for="technical_lead"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Labs Technical Lead
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          class="pf-c-form__label-required"
+                        >
+                           
+                          *
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <div
+                        class="pf-c-input-group"
+                        label="Labs Tech Lead"
+                      >
+                        <label
+                          class="pf-c-input-group__text"
+                          for="tech-lead-name"
+                          style="background-color: rgb(237, 237, 237);"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 448 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                              transform=""
+                            />
+                          </svg>
+                        </label>
+                        <input
+                          aria-invalid="false"
+                          aria-label="Tech lead name"
+                          class="pf-c-form-control"
+                          data-cy="tech_lead_name"
+                          disabled=""
+                          id="tech-lead-name"
+                          name="tech-lead-name"
+                          placeholder="Full Name"
+                          style="background-color: rgb(237, 237, 237);"
+                          type="text"
+                          value="Eve Doe"
+                        />
+                        <label
+                          class="pf-c-input-group__text"
+                          for="tech-lead-email"
+                          style="background-color: rgb(237, 237, 237);"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+                              transform=""
+                            />
+                          </svg>
+                        </label>
+                        <input
+                          aria-invalid="false"
+                          aria-label="tech lead email"
+                          class="pf-c-form-control"
+                          data-cy="tech_lead_email"
+                          disabled=""
+                          id="tech-lead-email"
+                          name="tech-lead-email"
+                          placeholder="Email Address"
+                          style="background-color: rgb(237, 237, 237);"
+                          type="email"
+                          value="eve@doe.com"
+                        />
+                      </div>
+                      <div
+                        aria-live="polite"
+                        class="pf-c-form__helper-text"
+                        id="technical_lead-helper"
+                      >
+                        Who is the Tech Lead?
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
+                        for="customer-contact"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Customer Contact
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          class="pf-c-form__label-required"
+                        >
+                           
+                          *
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <div
+                        class="pf-c-input-group"
+                        label="Customer Contact"
+                      >
+                        <label
+                          class="pf-c-input-group__text"
+                          for="customer-contact-name"
+                          style="background-color: rgb(237, 237, 237);"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 448 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                              transform=""
+                            />
+                          </svg>
+                        </label>
+                        <input
+                          aria-invalid="false"
+                          aria-label="Customer contact name"
+                          class="pf-c-form-control"
+                          data-cy="customer_contact_name"
+                          disabled=""
+                          id="customer-contact-name"
+                          name="customer-contact-name"
+                          placeholder="Full Name"
+                          style="background-color: rgb(237, 237, 237);"
+                          type="text"
+                          value="Bob Doe"
+                        />
+                        <label
+                          class="pf-c-input-group__text"
+                          for="customer-contact-email"
+                          style="background-color: rgb(237, 237, 237);"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+                              transform=""
+                            />
+                          </svg>
+                        </label>
+                        <input
+                          aria-invalid="false"
+                          aria-label="customer contact email"
+                          class="pf-c-form-control"
+                          data-cy="customer_contact_email"
+                          disabled=""
+                          id="customer-contact-email"
+                          name="customer-contact-email"
+                          placeholder="Email Address"
+                          style="background-color: rgb(237, 237, 237);"
+                          type="email"
+                          value="bob@doe.com"
+                        />
+                      </div>
+                      <div
+                        aria-live="polite"
+                        class="pf-c-form__helper-text"
+                        id="customer-contact-helper"
+                      >
+                        Who is the point person for the project?
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </section>
+              <section
+                class="pf-c-page__main-section"
+              >
+                <div
+                  style="margin-top: 1rem;"
+                >
+                  <div
+                    class="pf-l-flex pf-m-justify-content-flex-end"
+                  >
+                    <div
+                      class=""
+                    >
+                      <div>
+                        <button
+                          class="pf-c-button pf-m-primary"
+                          data-cy="save_point_of_contact"
+                          data-ouia-component-type="PF4/Button"
+                          data-ouia-safe="true"
+                          data-testid="poc-edit-save"
+                          type="button"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div
+    aria-hidden="true"
+  />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

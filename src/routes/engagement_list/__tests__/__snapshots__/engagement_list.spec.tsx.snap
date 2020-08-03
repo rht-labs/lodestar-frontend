@@ -147,7 +147,18 @@ Object {
                 <div
                   class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
                 >
-                  <div />
+                  <p>
+                    <span>
+                      Updated by 
+                    </span>
+                    <b>
+                      random-user@example.com
+                       
+                    </b>
+                    <b>
+                      184 days ago
+                    </b>
+                  </p>
                 </div>
               </div>
             </div>
@@ -312,7 +323,18 @@ Object {
               <div
                 class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
               >
-                <div />
+                <p>
+                  <span>
+                    Updated by 
+                  </span>
+                  <b>
+                    random-user@example.com
+                     
+                  </b>
+                  <b>
+                    184 days ago
+                  </b>
+                </p>
               </div>
             </div>
           </div>
@@ -534,7 +556,18 @@ Object {
                 <div
                   class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
                 >
-                  <div />
+                  <p>
+                    <span>
+                      Updated by 
+                    </span>
+                    <b>
+                      random-user@example.com
+                       
+                    </b>
+                    <b>
+                      184 days ago
+                    </b>
+                  </p>
                 </div>
               </div>
             </div>

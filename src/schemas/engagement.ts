@@ -91,7 +91,7 @@ export abstract class Engagement {
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
-      commits: [],
+      commits: [GitCommit.fromFake(staticData)],
       customer_contact_email: staticData
         ? 'bob@doe.com'
         : faker.internet.email(),
