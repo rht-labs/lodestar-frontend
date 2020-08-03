@@ -23,7 +23,7 @@ export const createApiV1Services = (config: Config): ServiceFactory => () => {
     authService: new Apiv1AuthService(config),
     engagementService: new Apiv1EngagementService(config.backendUrl),
     notificationService: new FakedNotificationService(),
-    versionService: new Apiv1VersionService(config.baseUrl),
+    versionService: new Apiv1VersionService(config.backendUrl),
   };
 };
 
