@@ -28,6 +28,7 @@ export function OpenShiftVersionFormField({
       fieldId="openshift-provider"
     >
       <FormSelect
+      data-testid="oc-version-select"
         aria-label="OpenShift Version"
         id={'oc_version_dropdown'}
         value={engagement?.ocp_version || ''}

@@ -127,12 +127,12 @@ export class Apiv1AuthService implements AuthService {
         },
       }
     );
-    return new UserProfile({
+    return {
       username: userProfileData.data.preferred_username,
       firstName: userProfileData.data.given_name,
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
       groups: userProfileData.data.groups,
-    });
+    };
   }
 }

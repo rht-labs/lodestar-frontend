@@ -1,3 +1,5 @@
+import FakedSchema from './fixtures/engagement_form_config.json';
+
 export interface EngagementFormOption {
   label: string;
   value: string;
@@ -14,6 +16,12 @@ export interface FormConfig {
   validators?: EngagementFormValidator[];
 }
 
-export type EngagementFormConfig = {
+export interface EngagementFormConfig {
   [key: string]: { [key: string]: FormConfig };
-};
+}
+
+export abstract class EngagementFormConfig {
+  static fromFake(): EngagementFormConfig {
+    return FakedSchema;
+  }
+}

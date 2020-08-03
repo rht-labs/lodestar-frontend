@@ -128,6 +128,7 @@ Object {
                         aria-invalid="false"
                         class="pf-c-form-control"
                         data-cy="location_field"
+                        data-testid="location-field"
                         disabled=""
                         id="location"
                         name="location"

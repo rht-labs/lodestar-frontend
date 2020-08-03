@@ -14,6 +14,7 @@ export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
   return (
     <FormGroup label="Additional Information" fieldId="additional_details">
       <TextArea
+      data-testid="additional-details-text-area"
         disabled={!hasFeature(APP_FEATURES.writer)}
         name="additional_details"
         id="additional_details"

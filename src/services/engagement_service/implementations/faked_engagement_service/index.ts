@@ -1,6 +1,5 @@
 import { EngagementService } from '../../engagement_service';
 import { Engagement } from '../../../../schemas/engagement';
-import FakedSchema from './faked_schema.json';
 import { EngagementFormConfig } from '../../../../schemas/engagement_config';
 
 export class FakedEngagementService implements EngagementService {
@@ -26,7 +25,7 @@ export class FakedEngagementService implements EngagementService {
     } as Engagement;
   }
   async getConfig(): Promise<EngagementFormConfig> {
-    return FakedSchema;
+    return EngagementFormConfig.fromFake();
   }
   async checkHasUpdates(engagement: Engagement): Promise<boolean> {
     return false;
