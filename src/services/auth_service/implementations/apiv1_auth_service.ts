@@ -104,7 +104,7 @@ export class Apiv1AuthService implements AuthService {
       refresh_expires_in,
     } = data;
     const currentTime = new Date();
-    const userToken = new UserToken({
+    const userToken: UserToken = {
       accessToken: access_token as string,
       refreshToken: refresh_token as string,
       accessTokenExpiry: new Date(
@@ -113,7 +113,7 @@ export class Apiv1AuthService implements AuthService {
       refreshTokenExpiry: new Date(
         (currentTime.getTime() + refresh_expires_in * 1000) as number
       ),
-    });
+    };
     this.saveToken(userToken);
     return userToken;
   }
