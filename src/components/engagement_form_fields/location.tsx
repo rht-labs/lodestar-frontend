@@ -18,6 +18,7 @@ export function LocationFormField(props: LocationFormFieldProps) {
       helperText="Where will this be held?"
     >
       <TextInput
+        data-testid="location-field"
         isDisabled={!hasFeature(APP_FEATURES.writer)}
         type="text"
         id="location"

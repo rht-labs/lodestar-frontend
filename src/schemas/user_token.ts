@@ -3,26 +3,14 @@ import { Serializer } from '../serializers/serializer';
 import { UserTokenJsonSerializer } from '../serializers/user_token/user_token_json_serializer';
 import { Logger } from '../utilities/logger';
 
-export interface UserTokenParams {
+export interface UserToken {
   accessToken?: string;
   refreshToken?: string;
   accessTokenExpiry?: Date;
   refreshTokenExpiry?: Date;
 }
 
-export class UserToken {
-  constructor({
-    accessToken = '',
-    refreshToken = '',
-    accessTokenExpiry = new Date(),
-    refreshTokenExpiry = new Date(),
-  }: UserTokenParams = {}) {
-    this.accessToken = accessToken;
-    this.refreshToken = refreshToken;
-    this.accessTokenExpiry = accessTokenExpiry;
-    this.refreshTokenExpiry = refreshTokenExpiry;
-  }
-
+export abstract class UserToken {
   private static _persistenceStrategy: PersistenceStrategy;
   public static setPersistenceStrategy(strategy: PersistenceStrategy) {
     UserToken._persistenceStrategy = strategy;
@@ -36,18 +24,13 @@ export class UserToken {
     UserToken._persistenceStrategy.saveToken(token);
   }
 
-  accessToken: string;
-  refreshToken: string;
-  accessTokenExpiry = new Date();
-  refreshTokenExpiry = new Date();
-
-  static fromFake() {
-    return new UserToken({
+  static fromFake(): UserToken {
+    return {
       accessToken: faker.random.uuid(),
       refreshToken: faker.random.uuid(),
       accessTokenExpiry: faker.date.future(),
       refreshTokenExpiry: faker.date.future(),
-    });
+    };
   }
 }
 

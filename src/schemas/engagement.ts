@@ -10,6 +10,23 @@ export enum EngagementStatus {
   upcoming = 'upcoming',
 }
 
+export interface EngagementUser {
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
+}
+export abstract class EngagementUser {
+  static fromFake(staticData = false): EngagementUser {
+    return {
+      first_name: staticData ? 'John' : faker.name.firstName(),
+      last_name: staticData ? 'Doe' : faker.name.lastName(),
+      email: staticData ? 'jdoe@doe.co' : faker.internet.exampleEmail(),
+      role: 'developer',
+    };
+  }
+}
+
 export interface FakedEngagementOptions {
   status: EngagementStatus;
 }
@@ -24,7 +41,7 @@ export interface Engagement {
   end_date: Date;
   engagement_lead_email: string;
   engagement_lead_name: string;
-  engagement_users: Array<any>;
+  engagement_users: EngagementUser[];
   last_update: string;
   location: string;
   mongo_id?: string;
@@ -91,7 +108,7 @@ export abstract class Engagement {
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
-      commits: [],
+      commits: [GitCommit.fromFake(staticData)],
       customer_contact_email: staticData
         ? 'bob@doe.com'
         : faker.internet.email(),
@@ -102,7 +119,7 @@ export abstract class Engagement {
       description: staticData
         ? "It's rocket science"
         : faker.lorem.paragraphs(5),
-      engagement_users: staticData ? [] : [],
+      engagement_users: [EngagementUser.fromFake(staticData)],
       engagement_lead_email: staticData
         ? 'alice@doe.com'
         : faker.internet.email(),

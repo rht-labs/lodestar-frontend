@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-interface UserProfileParams {
+export interface UserProfile {
   username?: string;
   firstName?: string;
   lastName?: string;
@@ -8,25 +8,12 @@ interface UserProfileParams {
   groups?: string[];
 }
 
-export class UserProfile {
-  constructor({
-    username = '',
-    firstName = '',
-    lastName = '',
-    email = '',
-    groups = [],
-  }: UserProfileParams = {}) {
-    this.username = username;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.groups = groups;
-  }
-  get displayName(): string {
-    if (this.firstName) {
-      return this.firstName;
+export abstract class UserProfile {
+  static getDisplayName(userProfile: UserProfile): string {
+    if (userProfile?.firstName) {
+      return userProfile?.firstName;
     } else {
-      return this.email || '';
+      return userProfile?.email || '';
     }
   }
   groups?: string[];
@@ -36,12 +23,12 @@ export class UserProfile {
   email?: string;
 
   static fromFake() {
-    return new UserProfile({
+    return {
       username: faker.internet.userName(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       groups: ['reader', 'writer'],
-    });
+    };
   }
 }

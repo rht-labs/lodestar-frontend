@@ -28,6 +28,7 @@ export function PersistentStorageFormField({
       fieldId="persistent-storage-needs"
     >
       <FormSelect
+        data-testid="persistent-storage-select"
         aria-label="Persistent Storage Needs"
         id={'persistent_storage_dropdown'}
         isDisabled={
