@@ -2,20 +2,24 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { PointOfContactEditModal } from '../point_of_contact_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import MockDate from 'mockdate';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
+    MockDate.set(new Date(2020, 8, 3));
     expect(
       render(
         <PointOfContactEditModal
           onSave={() => {}}
-          formOptions={{}}
+          formOptions={EngagementFormConfig.fromFake()}
           isOpen={true}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
         />
       )
     ).toMatchSnapshot();
+    MockDate.reset();
   });
 
   test('When clicking the save button, the onSave method is called', async () => {

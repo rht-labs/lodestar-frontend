@@ -46,23 +46,19 @@ export class LocalStoragePersistence implements PersistenceStrategy {
     any
   > = new UserTokenJsonSerializer();
   saveToken(token: UserToken) {
-    try {
-      if (
-        typeof token === 'object' &&
-        'accessToken' in token &&
-        'refreshToken' in token
-      ) {
-        localStorage.setItem(
-          LocalStoragePersistence.TOKEN_STORAGE_KEY,
-          JSON.stringify(LocalStoragePersistence.serializer.serialize(token))
-        );
-      } else {
-        throw TypeError(
-          'Token Object must be an object containing access and refresh tokens'
-        );
-      }
-    } catch (e) {
-      Logger.instance.error(e);
+    if (
+      typeof token === 'object' &&
+      'accessToken' in token &&
+      'refreshToken' in token
+    ) {
+      localStorage.setItem(
+        LocalStoragePersistence.TOKEN_STORAGE_KEY,
+        JSON.stringify(LocalStoragePersistence.serializer.serialize(token))
+      );
+    } else {
+      throw TypeError(
+        'Token Object must be an object containing access and refresh tokens'
+      );
     }
   }
   getToken() {

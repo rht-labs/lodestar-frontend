@@ -95,6 +95,7 @@ export function UserEditModal({
               <Button
                 variant="primary"
                 onClick={addUser}
+                data-testid="add-new-user-button"
                 data-cy={'add_new_user'}
               >
                 Add User
@@ -269,6 +270,7 @@ export function UserEditModal({
                   variant="link"
                   icon={<PlusCircleIcon />}
                   data-cy={'add_more_users'}
+                  data-testid={'add-first-user'}
                 >
                   Add User
                 </Button>
