@@ -11,7 +11,7 @@ export class UserTokenJsonSerializer implements Serializer<UserToken, object> {
   }
 
   deserialize(data: object) {
-    return new UserToken({
+    return {
       accessToken: data['accessToken'] as string,
       refreshToken: data['refreshToken'] as string,
       accessTokenExpiry: new Date(
@@ -20,6 +20,6 @@ export class UserTokenJsonSerializer implements Serializer<UserToken, object> {
       refreshTokenExpiry: new Date(
         Date.parse(data['refreshTokenExpiry'] as string)
       ),
-    });
+    };
   }
 }

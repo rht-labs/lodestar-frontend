@@ -53,7 +53,13 @@ export function OpenShiftClusterEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave} data-cy={'hosting_env_save'}>Save</Button>
+            <Button
+              data-testid="oc-edit-save"
+              onClick={onSave}
+              data-cy={'hosting_env_save'}
+            >
+              Save
+            </Button>
           </div>
         }
       >

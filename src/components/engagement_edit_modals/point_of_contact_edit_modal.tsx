@@ -52,7 +52,11 @@ export function PointOfContactEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave} data-cy={'save_point_of_contact'}>
+            <Button
+              data-testid="poc-edit-save"
+              onClick={onSave}
+              data-cy={'save_point_of_contact'}
+            >
               Save
             </Button>
           </div>
@@ -82,6 +86,7 @@ export function PointOfContactEditModal({
                 <UserIcon />
               </InputGroupText>
               <TextInput
+                data-testid="poc-edit-field"
                 aria-label="Engagement lead name"
                 style={input}
                 isDisabled={!hasFeature(APP_FEATURES.writer)}

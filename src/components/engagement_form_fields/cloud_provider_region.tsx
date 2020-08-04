@@ -27,6 +27,7 @@ export function CloudProviderRegionFormField({
       fieldId="cloud-provider-region"
     >
       <FormSelect
+      data-testid="provider-region-select"
         aria-label="Cloud provider region"
         id={"cloud_provider_region_dropdown"}
         isDisabled={

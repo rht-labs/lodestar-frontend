@@ -28,8 +28,9 @@ export const DateValidator = (
       return message;
     }
   }
+
   if (value.max && value.max in DATE_EXPRESSIONS) {
-    if (input < DATE_EXPRESSIONS[value.max]()) {
+    if (input > DATE_EXPRESSIONS[value.max]()) {
       return message;
     }
   }
