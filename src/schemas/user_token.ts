@@ -1,7 +1,6 @@
 import faker from 'faker';
 import { Serializer } from '../serializers/serializer';
 import { UserTokenJsonSerializer } from '../serializers/user_token/user_token_json_serializer';
-import { Logger } from '../utilities/logger';
 
 export interface UserToken {
   accessToken?: string;

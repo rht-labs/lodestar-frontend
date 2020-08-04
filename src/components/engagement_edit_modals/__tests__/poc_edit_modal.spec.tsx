@@ -4,6 +4,8 @@ import { PointOfContactEditModal } from '../point_of_contact_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import MockDate from 'mockdate';
+import { ValidationContext } from '../../../context/validation_context/validation_context';
+import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
@@ -47,10 +49,65 @@ describe('Point of Contact edit modal', () => {
         onChange={onChange}
       />
     );
-    const textField = await getByTestId('poc-edit-field');
+    const textField = await getByTestId('el-email');
     await fireEvent.change(textField, {
       target: { value: 'bot' },
     });
     expect(onChange).toHaveBeenCalled();
+  });
+  test('Displays validation errors', async () => {
+    const { findAllByText } = render(
+      <TestStateWrapper>
+        <ValidationContext.Provider
+          value={{
+            clearValidationResults: () => {},
+            validationResults: {},
+            getValidationResult: () => ['Incorrect input'],
+          }}
+        >
+          <PointOfContactEditModal
+            onSave={() => {}}
+            engagement={Engagement.fromFake(true)}
+            formOptions={{}}
+            isOpen={true}
+            onChange={() => {}}
+          />
+        </ValidationContext.Provider>
+      </TestStateWrapper>
+    );
+    expect(await findAllByText('Incorrect input')).toHaveLength(3);
+  });
+  test('Modifying the email addresses calls validate', async () => {
+    const validationSpy = jest.fn();
+    const { getByTestId } = render(
+      <TestStateWrapper>
+        <ValidationContext.Provider
+          value={{
+            clearValidationResults: () => {},
+            validationResults: {},
+            getValidationResult: () => ['Incorrect input'],
+            validate: () => validationSpy,
+          }}
+        >
+          <PointOfContactEditModal
+            onSave={() => {}}
+            engagement={Engagement.fromFake(true)}
+            formOptions={{}}
+            isOpen={true}
+            onChange={() => {}}
+          />
+        </ValidationContext.Provider>
+      </TestStateWrapper>
+    );
+    await fireEvent.change(getByTestId('el-email'), {
+      target: { value: 'bot' },
+    });
+    await fireEvent.change(getByTestId('tech-email'), {
+      target: { value: 'bot' },
+    });
+    await fireEvent.change(getByTestId('customer-email'), {
+      target: { value: 'bot' },
+    });
+    expect(validationSpy).toHaveBeenCalledTimes(3);
   });
 });
