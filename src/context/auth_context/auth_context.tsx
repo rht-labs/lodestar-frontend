@@ -2,10 +2,7 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/auth_service/authentication_service';
 
 import { UserProfile } from '../../schemas/user_profile';
-import {
-  UserToken,
-  LocalStoragePersistence,
-} from '../../schemas/user_token';
+import { UserToken, LocalStoragePersistence } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
 import { Logger } from '../../utilities/logger';
 import { ErrorBoundary } from '../../components/error_boundary/error_boundary';
