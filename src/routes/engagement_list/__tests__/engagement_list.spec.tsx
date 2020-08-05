@@ -3,8 +3,11 @@ import { render } from '@testing-library/react';
 import { EngagementList } from '../engagement_list';
 import { Engagement } from '../../../schemas/engagement';
 import { MemoryRouter } from 'react-router';
+import MockDate from 'mockdate';
+
 describe('Engagement list', () => {
   test('matches snapshot', () => {
+    MockDate.set(new Date(2020, 8, 3));
     expect(
       render(
         <MemoryRouter>
@@ -19,5 +22,6 @@ describe('Engagement list', () => {
         </MemoryRouter>
       )
     ).toMatchSnapshot();
+    MockDate.reset();
   });
 });

@@ -198,6 +198,27 @@ Object {
                                     >
                                       Select a role
                                     </option>
+                                    <option
+                                      class=""
+                                      data-cy="Developer"
+                                      value="developer"
+                                    >
+                                      Developer
+                                    </option>
+                                    <option
+                                      class=""
+                                      data-cy="Observer"
+                                      value="observer"
+                                    >
+                                      Observer
+                                    </option>
+                                    <option
+                                      class=""
+                                      data-cy="Admin"
+                                      value="admin"
+                                    >
+                                      Admin
+                                    </option>
                                   </select>
                                 </div>
                                 <div
