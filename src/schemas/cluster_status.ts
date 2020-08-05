@@ -39,22 +39,17 @@ export interface ClusterStatus {
 }
 
 export abstract class ClusterStatus {
-  static fromFake(): ClusterStatus {
+  static fromFake(staticData = false): ClusterStatus {
     return {
-      overall_status: HealthStatus[HealthStatus[faker.random.number(2)]],
+      overall_status: staticData
+        ? HealthStatus.green
+        : HealthStatus[HealthStatus[faker.random.number(2)]],
       messages: Array.apply(null, new Array(4)).map(x =>
-        SystemMessage.fromFake()
+        SystemMessage.fromFake(staticData)
       ) as SystemMessage[],
       subsystems: Array.apply(null, new Array(4)).map(x =>
-        Subsystem.fromFake()
+        Subsystem.fromFake(staticData)
       ) as Subsystem[],
-    };
-  }
-  static staticFake(): ClusterStatus {
-    return {
-      overall_status: HealthStatus.green,
-      messages: [SystemMessage.staticFaked()],
-      subsystems: [Subsystem.staticFaked()],
     };
   }
 }

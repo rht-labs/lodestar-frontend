@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../../schemas/engagement';
 import { EngagementSummaryCard } from '../engagement_summary_card/engagement_summary_card';
 import { OpenShiftClusterSummaryCard } from '../openshift_cluster_card/openshift_cluster_card';
 import { PointOfContactCard } from '../point_of_contact_card/point_of_contact_card';
+import { SystemStatusCard } from '../system_status_card/system_status_card';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 describe('Engagement summary card', () => {
   test('matches snapshot', () => {
@@ -14,8 +15,8 @@ describe('Engagement summary card', () => {
             onSave={() => {}}
             formOptions={{}}
             onChange={() => {}}
-            currentEngagement={Engagement.staticFaked()}
-            currentEngagementChanges={Engagement.staticFaked()}
+            currentEngagement={Engagement.fromFake(true)}
+            currentEngagementChanges={Engagement.fromFake(true)}
             missingRequiredFields={[]}
           />
         </TestStateWrapper>
@@ -33,8 +34,8 @@ describe('OpenShift Cluster Summary', () => {
             onSave={() => {}}
             formOptions={{}}
             onChange={() => {}}
-            currentEngagement={Engagement.staticFaked()}
-            currentEngagementChanges={Engagement.staticFaked()}
+            currentEngagement={Engagement.fromFake(true)}
+            currentEngagementChanges={Engagement.fromFake(true)}
             missingRequiredFields={[]}
           />
         </TestStateWrapper>
@@ -52,8 +53,8 @@ describe('Point of Contact Card', () => {
             onSave={() => {}}
             formOptions={{}}
             onChange={() => {}}
-            currentEngagement={Engagement.staticFaked()}
-            currentEngagementChanges={Engagement.staticFaked()}
+            currentEngagement={Engagement.fromFake(true)}
+            currentEngagementChanges={Engagement.fromFake(true)}
             missingRequiredFields={[]}
           />
         </TestStateWrapper>

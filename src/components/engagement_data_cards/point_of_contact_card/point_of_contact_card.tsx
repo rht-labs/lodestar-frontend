@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataCard } from '../data_card';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';

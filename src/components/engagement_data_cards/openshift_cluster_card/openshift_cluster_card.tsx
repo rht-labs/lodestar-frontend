@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../../schemas/engagement_schema';
+import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';

@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import { AlertVariant } from '@patternfly/react-core';
 import { uuid } from 'uuidv4';
 
-interface FeedbackContext {
+export interface FeedbackContext {
   isLoaderVisible: boolean;
   alertMsg: string | null;
   alertType: AlertVariant;

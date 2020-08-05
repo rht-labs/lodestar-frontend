@@ -1,5 +1,7 @@
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { slugify } from 'transliteration';
+import { addDays, startOfToday } from 'date-fns';
+import { FormConfig } from '../../schemas/engagement_config';
 const generateSuggestedSubdomain = (
   project_name: string = '',
   customer_name: string = ''
@@ -18,7 +20,7 @@ const generateSuggestedSubdomain = (
   return slug;
 };
 
-const getInitialSubdomain = (engagement: Engagement) =>
+const getInitialSubdomain = (engagement: Partial<Engagement>) =>
   engagement?.project_name || engagement?.customer_name
     ? generateSuggestedSubdomain(
         engagement?.project_name,
@@ -26,7 +28,9 @@ const getInitialSubdomain = (engagement: Engagement) =>
       )
     : null;
 
-export const getInitialState = (engagement?: Engagement): Engagement => {
+export const getInitialState = (
+  engagement?: Partial<Engagement>
+): Partial<Engagement> => {
   return {
     project_id: engagement?.project_id ?? null,
     customer_name: engagement?.customer_name ?? null,
@@ -39,6 +43,8 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
     archive_date: engagement?.archive_date ?? null,
     engagement_users: engagement?.engagement_users ?? [],
     mongo_id: engagement?.mongo_id ?? undefined,
+    last_update: engagement?.last_update ?? '',
+    last_update_by_name: engagement?.last_update_by_name ?? '',
     engagement_lead_name: engagement?.engagement_lead_name ?? null,
     engagement_lead_email: engagement?.engagement_lead_email ?? null,
     technical_lead_name: engagement?.technical_lead_name ?? null,
@@ -63,10 +69,14 @@ export const getInitialState = (engagement?: Engagement): Engagement => {
   };
 };
 
-export const engagementFormReducer = (
-  state: Engagement = getInitialState(),
+export const engagementFormReducer = (formOptions: FormConfig) => (
+  state: Partial<Engagement> = getInitialState(),
   action?: { type: string; payload?: any }
 ) => {
+  const curriedEngagementDatesFunction = getEngagementDates(
+    formOptions?.['logistics_options']?.['env_default_grace_period'],
+    formOptions?.['logistics_options']?.['env_grace_period_max']
+  );
   if (!action) {
     return state;
   }
@@ -91,45 +101,90 @@ export const engagementFormReducer = (
           state?.customer_name ?? ''
         ),
       };
-    case 'additional_details':
-      return { ...state, additional_details: action.payload };
-    case 'description':
-      return { ...state, description: action.payload };
-    case 'location':
-      return { ...state, location: action.payload };
     case 'start_date':
-      return { ...state, start_date: action.payload };
     case 'end_date':
-      return { ...state, end_date: action.payload };
     case 'archive_date':
-      return { ...state, archive_date: action.payload };
+      const { end_date, start_date, archive_date } = state;
+      return {
+        ...state,
+        ...curriedEngagementDatesFunction({
+          start_date,
+          end_date,
+          archive_date,
+          // overwrite the current field that's being changed with the payload value
+          [action.type]: action.payload,
+        }),
+      };
+    case 'additional_details':
+    case 'description':
+    case 'location':
     case 'engagement_lead_name':
-      return { ...state, engagement_lead_name: action.payload };
     case 'engagement_lead_email':
-      return { ...state, engagement_lead_email: action.payload };
     case 'technical_lead_name':
-      return { ...state, technical_lead_name: action.payload };
     case 'technical_lead_email':
-      return { ...state, technical_lead_email: action.payload };
     case 'customer_contact_name':
-      return { ...state, customer_contact_name: action.payload };
     case 'customer_contact_email':
-      return { ...state, customer_contact_email: action.payload };
     case 'ocp_cloud_provider_name':
-      return { ...state, ocp_cloud_provider_name: action.payload };
     case 'ocp_cloud_provider_region':
-      return { ...state, ocp_cloud_provider_region: action.payload };
     case 'ocp_version':
-      return { ...state, ocp_version: action.payload };
     case 'ocp_sub_domain':
-      return { ...state, ocp_sub_domain: action.payload };
     case 'ocp_persistent_storage_size':
-      return { ...state, ocp_persistent_storage_size: action.payload };
     case 'ocp_cluster_size':
-      return { ...state, ocp_cluster_size: action.payload };
+      return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
       return { ...state, ...action.payload };
     default:
       return state;
   }
 };
+
+function getEngagementDates(gracePeriodInDays, maxGracePeriodInDays) {
+  return function({
+    start_date,
+    end_date,
+    archive_date,
+  }: Pick<Engagement, 'start_date' | 'end_date' | 'archive_date'>) {
+    let endDate = normalizeEndDate(end_date, start_date);
+    return {
+      start_date,
+      end_date: endDate,
+      archive_date: normalizeRetirementDate({
+        retirementDate: archive_date,
+        endDate,
+        gracePeriodInDays,
+        maxGracePeriodInDays,
+      }),
+    };
+  };
+}
+
+function normalizeEndDate(endDate, startDate) {
+  if (endDate < startDate) {
+    return startDate;
+  }
+  return endDate;
+}
+
+function normalizeRetirementDate({
+  retirementDate,
+  endDate,
+  gracePeriodInDays,
+  maxGracePeriodInDays,
+}) {
+  if (!endDate || !(endDate instanceof Date)) {
+    return undefined;
+  } else if (endDate && retirementDate && retirementDate <= endDate) {
+    return addDays(endDate, gracePeriodInDays);
+  } else if (
+    retirementDate &&
+    endDate &&
+    retirementDate >= addDays(endDate, maxGracePeriodInDays)
+  ) {
+    return addDays(endDate, maxGracePeriodInDays);
+  } else if (retirementDate) {
+    return retirementDate;
+  } else if (endDate) {
+    return addDays(endDate, gracePeriodInDays);
+  }
+  return startOfToday();
+}

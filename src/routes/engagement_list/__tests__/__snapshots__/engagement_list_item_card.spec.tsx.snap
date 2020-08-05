@@ -37,7 +37,9 @@ Object {
               <h4
                 class="pf-c-title pf-m-md"
                 style="font-weight: normal;"
-              />
+              >
+                NASA
+              </h4>
             </div>
             <div
               class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"
@@ -97,7 +99,9 @@ Object {
             <h4
               class="pf-c-title pf-m-md"
               style="font-weight: normal;"
-            />
+            >
+              NASA
+            </h4>
           </div>
           <div
             class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"

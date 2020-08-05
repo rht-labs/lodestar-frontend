@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSession } from '../../context/auth_context/auth_context';
 import { Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
+import { UserProfile } from '../../schemas/user_profile';
 
 export interface UserDropdown {}
 
@@ -33,7 +34,7 @@ export function UserDropdown(props: UserDropdown) {
         dropdownItems={dropdownItems}
         toggle={
           <DropdownToggle onToggle={() => setIsOpen(!isOpen)}>
-            {authContext?.sessionData?.profile?.displayName}
+            {UserProfile.getDisplayName(authContext?.sessionData?.profile)}
           </DropdownToggle>
         }
         isOpen={isOpen}

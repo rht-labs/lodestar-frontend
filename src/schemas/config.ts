@@ -1,56 +1,69 @@
 import { LogVerbosity } from '../utilities/logger/logger';
-import { getLogVerbosityFromString } from '../utilities/logger';
 
+export interface BannerMessage {
+  message: string;
+  backgroundcolor: string;
+}
 export interface Config {
   baseUrl: string;
   clientId: string;
   authBaseUrl: string;
   backendUrl: string;
   disableLaunch: boolean;
-  loggerType: string;
-  logLevel: LogVerbosity;
+  loggerType?: string;
+  logLevel?: LogVerbosity;
   supportEmailAddress: string;
+  bannerMessages?: BannerMessage[];
 }
-export class Config implements Config {
-  constructor({
-    baseUrl,
-    clientId,
-    authBaseUrl,
-    backendUrl,
-    disableLaunch,
-    logLevel,
-    loggerType,
-    supportEmailAddress,
-  }: Config) {
-    this.baseUrl = baseUrl;
-    this.clientId = clientId;
-    this.authBaseUrl = authBaseUrl;
-    this.backendUrl = backendUrl;
-    this.disableLaunch = disableLaunch;
-    this.logLevel = logLevel;
-    this.loggerType = loggerType;
-    this.supportEmailAddress = supportEmailAddress;
-  }
 
-  baseUrl: string;
-  clientId: string;
-  authBaseUrl: string;
-  backendUrl: string;
-  disableLaunch: boolean;
-  logLevel: LogVerbosity;
-  loggerType: string;
-  supportEmailAddress: string;
-
-  static fromMap(map: { [key: string]: unknown }) {
-    return new Config({
-      baseUrl: map['baseUrl'] as string,
-      clientId: map['clientId'] as string,
-      authBaseUrl: map['authBaseUrl'] as string,
-      backendUrl: map['backendUrl'] as string,
-      disableLaunch: map['disableLaunch'] as boolean,
-      logLevel: getLogVerbosityFromString(map['logLevel'] as string),
-      loggerType: map['loggerType'] as string,
-      supportEmailAddress: map['supportEmailAddress'] as string,
-    });
+export abstract class Config {
+  public static fromFake(): Config {
+    return {
+      baseUrl: 'http://localhost:3000',
+      clientId: 'open-management-portal',
+      authBaseUrl:
+        'https://sso.example.com/auth/realms/omp/protocol/openid-connect',
+      backendUrl: 'https://omp-backend.example.com',
+      disableLaunch: false,
+      supportEmailAddress: 'redhatsupport@redhat.com',
+      bannerMessages: [
+        {
+          message: 'Hello message 1',
+          backgroundcolor: '#FF0000',
+        },
+        {
+          message: 'Hello message 2',
+          backgroundcolor: '#FFFF00',
+        },
+        {
+          message: 'Hello message 3',
+          backgroundcolor: 'darkpurple',
+        },
+        {
+          message: 'Hello message 4',
+          backgroundcolor: 'brown',
+        },
+        {
+          message: 'Hello message 5',
+          backgroundcolor: 'green',
+        },
+        {
+          message: 'Hello message 6',
+          backgroundcolor: 'blue',
+        },
+        {
+          message: 'Hello message 7',
+          backgroundcolor: 'grey',
+        },
+        {
+          message: 'Hello message 8',
+          backgroundcolor: 'white',
+        },
+        {
+          message: 'Hello message 9',
+          backgroundcolor: 'indigo',
+        },
+      ],
+    };
   }
 }

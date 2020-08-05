@@ -16,7 +16,7 @@ import { EngagementListRoute } from './engagement_list/engagement_list_route';
 import { EngagementDetailViewContainer } from './engagement_details/engagement_details';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { useNotification } from '../context/notification_context/notification_hook';
-import { EngagementStatus } from '../schemas/engagement_schema';
+import { EngagementStatus } from '../schemas/engagement';
 import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 

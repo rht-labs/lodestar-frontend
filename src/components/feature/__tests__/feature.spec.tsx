@@ -1,5 +1,5 @@
 import React from 'react';
-import { FeatureToggles } from '../../../context/feature_toggles/feature_toggles';
+import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
 import '@testing-library/jest-dom/extend-expect';
 import { Feature } from '../feature';
 import { AppFeature } from '../../../common/app_features';

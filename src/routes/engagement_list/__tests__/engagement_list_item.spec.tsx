@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import {
   upcomingEngagement,
@@ -9,7 +9,11 @@ import {
 import {
   EngagementStatus,
   getEngagementStatus,
-} from '../../../schemas/engagement_schema';
+  Engagement,
+} from '../../../schemas/engagement';
+import { EngagementListItem } from '../engagement_list_item';
+import { MemoryRouter } from 'react-router';
+import MockDate from 'mockdate';
 
 afterEach(cleanup);
 
@@ -28,5 +32,17 @@ describe('Engagement status', () => {
     expect(getEngagementStatus(pastEngagement())).toEqual(
       EngagementStatus.past
     );
+  });
+
+  test('matches snapshot', () => {
+    MockDate.set(new Date(2020, 8, 3));
+    expect(
+      render(
+        <MemoryRouter>
+          <EngagementListItem engagement={Engagement.fromFake(true)} />
+        </MemoryRouter>
+      )
+    ).toMatchSnapshot();
+    MockDate.reset();
   });
 });

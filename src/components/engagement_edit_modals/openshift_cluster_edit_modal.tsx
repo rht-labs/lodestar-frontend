@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
@@ -53,7 +53,13 @@ export function OpenShiftClusterEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave} data-cy={'hosting_env_save'}>Save</Button>
+            <Button
+              data-testid="oc-edit-save"
+              onClick={onSave}
+              data-cy={'hosting_env_save'}
+            >
+              Save
+            </Button>
           </div>
         }
       >

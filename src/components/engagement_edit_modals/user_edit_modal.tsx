@@ -24,9 +24,9 @@ import {
 } from '@patternfly/react-icons';
 import { Feature } from '../feature/feature';
 import { APP_FEATURES } from '../../common/app_features';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 
@@ -69,7 +69,13 @@ export function UserEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave} data-cy={'save_users'} >Save</Button>
+            <Button
+              data-testid="user-edit-save"
+              onClick={onSave}
+              data-cy={'save_users'}
+            >
+              Save
+            </Button>
           </div>
         }
       >
@@ -86,7 +92,12 @@ export function UserEditModal({
                   Select the 'add user' button below, to begin adding users.
                 </p>
               </EmptyStateBody>
-              <Button variant="primary" onClick={addUser} data-cy={'add_new_user'}>
+              <Button
+                variant="primary"
+                onClick={addUser}
+                data-testid={'add-first-user'}
+                data-cy={'add_new_user'}
+              >
                 Add User
               </Button>
             </EmptyState>
@@ -194,7 +205,7 @@ export function UserEditModal({
                                   <FormSelect
                                     name="role"
                                     aria-label="User Role"
-                                    id='user_role_dropdown'
+                                    id="user_role_dropdown"
                                     value={value.role || ''}
                                     isDisabled={
                                       !hasFeature(APP_FEATURES.writer)
@@ -235,6 +246,7 @@ export function UserEditModal({
                                 <GridItem span={1}>
                                   <Feature name={APP_FEATURES.writer}>
                                     <Button
+                                      data-testid={`remove-user-button-${index}`}
                                       onClick={removeUser}
                                       value={index}
                                       variant="danger"
