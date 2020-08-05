@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
@@ -34,8 +34,11 @@ export function EngagementSummaryEditModal(
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave}
-                    data-cy={"save_summary_card"}>
+            <Button
+              data-testid="engagement-summary-save"
+              onClick={onSave}
+              data-cy={'save_summary_card'}
+            >
               Save
             </Button>
           </div>

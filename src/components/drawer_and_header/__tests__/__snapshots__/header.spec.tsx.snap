@@ -217,6 +217,7 @@ Object {
                     id="pf-toggle-id-0"
                     type="button"
                   >
+                    
                     <span
                       class="pf-c-dropdown__toggle-icon"
                     >
@@ -457,6 +458,7 @@ Object {
                   id="pf-toggle-id-0"
                   type="button"
                 >
+                  
                   <span
                     class="pf-c-dropdown__toggle-icon"
                   >

@@ -4,3 +4,13 @@ servicePort: 8080
 
 imageName: "quay.io/rht-labs/omp-frontend"
 imageTag: "latest" # This is intended to be overridden by the parent Helm chart.
+
+e2eTestJob:
+  cleanUp:
+    image:
+      name: quay.io/redhat-cop/gitlab-cleanup
+      tag: v3.11.6
+  action:
+    image:
+      name: appropriate/curl
+      tag: 3.1

@@ -25,37 +25,32 @@ const fakeSubsystemNames = [
 ];
 
 export abstract class Subsystem {
-  static fromFake(): Subsystem {
+  static fromFake(staticData = false): Subsystem {
     return {
-      name:
-        fakeSubsystemNames[faker.random.number(fakeSubsystemNames.length - 1)],
-      status:
-        HealthStatus[
-          Object.keys(HealthStatus)[
-            faker.random.number(Object.keys(HealthStatus).length - 1)
-          ]
-        ],
-      state: 'provisioned',
-      access_urls: Array.apply(null, new Array(3)).map(_ => ({
-        title: faker.lorem.word(),
-        url: faker.internet.url(),
-      })),
-      info: faker.lorem.sentence(),
-      updated: faker.date.recent(),
+      name: staticData
+        ? 'Openshift'
+        : fakeSubsystemNames[
+            faker.random.number(fakeSubsystemNames.length - 1)
+          ],
+      status: staticData
+        ? HealthStatus.green
+        : HealthStatus[
+            Object.keys(HealthStatus)[
+              faker.random.number(Object.keys(HealthStatus).length - 1)
+            ]
+          ],
+      state: staticData ? 'provisioned' : 'provisioned',
+      access_urls: staticData
+        ? []
+        : Array.apply(null, new Array(3)).map(_ => ({
+            title: faker.lorem.word(),
+            url: faker.internet.url(),
+          })),
+      info: staticData ? 'Deployment In Progress' : faker.lorem.sentence(),
+      updated: staticData ? new Date(2020, 1, 1) : faker.date.recent(),
       messages: Array.apply(null, new Array(5)).map(_ =>
-        SystemMessage.fromFake()
+        SystemMessage.fromFake(staticData)
       ),
-    };
-  }
-  static staticFaked(): Subsystem {
-    return {
-      name: 'Openshift',
-      status: HealthStatus.yellow,
-      access_urls: [],
-      state: 'provisioned',
-      info: 'Deployment In Progress',
-      updated: new Date(2020, 1, 1),
-      messages: [SystemMessage.staticFaked()],
     };
   }
 }

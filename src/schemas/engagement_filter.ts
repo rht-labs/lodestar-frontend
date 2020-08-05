@@ -1,4 +1,4 @@
-import { EngagementStatus } from './engagement_schema';
+import { EngagementStatus } from './engagement';
 
 export interface EngagementFilter {
   searchTerm?: string;

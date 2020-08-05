@@ -65,7 +65,9 @@ Object {
                       class=""
                       data-cy="numbers_of_l"
                       data-pf-content="true"
-                    />
+                    >
+                      0
+                    </h1>
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_l"
@@ -125,7 +127,9 @@ Object {
                       class=""
                       data-cy="numbers_of_p"
                       data-pf-content="true"
-                    />
+                    >
+                      0
+                    </h1>
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_p"
@@ -185,7 +189,9 @@ Object {
                       class=""
                       data-cy="numbers_of_c"
                       data-pf-content="true"
-                    />
+                    >
+                      0
+                    </h1>
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_c"
@@ -245,7 +251,9 @@ Object {
                       class=""
                       data-cy="numbers_of_a"
                       data-pf-content="true"
-                    />
+                    >
+                      0
+                    </h1>
                     <button
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_a"
@@ -335,7 +343,9 @@ Object {
                     class=""
                     data-cy="numbers_of_l"
                     data-pf-content="true"
-                  />
+                  >
+                    0
+                  </h1>
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_l"
@@ -395,7 +405,9 @@ Object {
                     class=""
                     data-cy="numbers_of_p"
                     data-pf-content="true"
-                  />
+                  >
+                    0
+                  </h1>
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_p"
@@ -455,7 +467,9 @@ Object {
                     class=""
                     data-cy="numbers_of_c"
                     data-pf-content="true"
-                  />
+                  >
+                    0
+                  </h1>
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_c"
@@ -515,7 +529,9 @@ Object {
                     class=""
                     data-cy="numbers_of_a"
                     data-pf-content="true"
-                  />
+                  >
+                    0
+                  </h1>
                   <button
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_a"

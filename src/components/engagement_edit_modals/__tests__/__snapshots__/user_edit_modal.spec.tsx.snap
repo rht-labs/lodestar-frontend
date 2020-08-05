@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Point of Contact edit modal matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body
+    class="pf-c-backdrop__open"
+  >
+    <div
+      aria-hidden="true"
+    />
+    <div>
+      <div
+        class="pf-c-backdrop"
+      >
+        <div
+          class="pf-l-bullseye"
+        >
+          <div
+            aria-describedby="pf-modal-part-2"
+            aria-labelledby="pf-modal-part-1"
+            aria-modal="true"
+            class="pf-c-modal-box pf-m-lg"
+            id="pf-modal-part-0"
+            role="dialog"
+          >
+            <button
+              aria-label="Close"
+              class="pf-c-button pf-m-plain"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  transform=""
+                />
+              </svg>
+            </button>
+            <header
+              class="pf-c-modal-box__header"
+            >
+              <h1
+                class="pf-c-modal-box__title"
+                id="pf-modal-part-1"
+              >
+                Engagement Users
+              </h1>
+            </header>
+            <div
+              class="pf-c-modal-box__body"
+              id="pf-modal-part-2"
+            >
+              <section
+                class="pf-c-page__main-section"
+              >
+                <div>
+                  <div>
+                    <div
+                      class="pf-l-grid"
+                    >
+                      <form
+                        class="pf-c-form pf-m-horizontal"
+                        novalidate=""
+                      >
+                        <ul>
+                          <li>
+                            <div
+                              class="pf-c-input-group"
+                            >
+                              <div
+                                class="pf-l-grid"
+                                style="width: 100%;"
+                              >
+                                <div
+                                  class="pf-l-grid__item pf-m-3-col"
+                                >
+                                  <p
+                                    class=""
+                                    data-pf-content="true"
+                                  >
+                                    First Name
+                                  </p>
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-3-col"
+                                >
+                                  <p
+                                    class=""
+                                    data-pf-content="true"
+                                  >
+                                    Last Name
+                                  </p>
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-3-col"
+                                >
+                                  <p
+                                    class=""
+                                    data-pf-content="true"
+                                  >
+                                    Email
+                                  </p>
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-2-col"
+                                >
+                                  <p
+                                    class=""
+                                    data-pf-content="true"
+                                  >
+                                    Role
+                                  </p>
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-1-col"
+                                />
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div
+                              class="pf-c-input-group"
+                            >
+                              <div
+                                class="pf-l-grid"
+                                style="width: 100%;"
+                              >
+                                <div
+                                  class="pf-l-grid__item pf-m-3-col"
+                                >
+                                  <input
+                                    aria-invalid="false"
+                                    aria-label="First Name"
+                                    class="pf-c-form-control"
+                                    data-cy="input_user_firstname"
+                                    disabled=""
+                                    name="first-name"
+                                    placeholder="First Name"
+                                    type="text"
+                                    value="John"
+                                  />
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-3-col"
+                                >
+                                  <input
+                                    aria-invalid="false"
+                                    aria-label="Last Name"
+                                    class="pf-c-form-control"
+                                    data-cy="input_user_lastname"
+                                    disabled=""
+                                    name="last-name"
+                                    placeholder="Last Name"
+                                    type="text"
+                                    value="Doe"
+                                  />
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-3-col"
+                                >
+                                  <input
+                                    aria-invalid="false"
+                                    aria-label="email"
+                                    class="pf-c-form-control"
+                                    data-cy="input_user_email"
+                                    disabled=""
+                                    name="email"
+                                    placeholder="Email Address"
+                                    type="email"
+                                    value="jdoe@doe.co"
+                                  />
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-2-col"
+                                >
+                                  <select
+                                    aria-invalid="false"
+                                    aria-label="User Role"
+                                    class="pf-c-form-control"
+                                    disabled=""
+                                    id="user_role_dropdown"
+                                    name="role"
+                                  >
+                                    <option
+                                      class=""
+                                      disabled=""
+                                      value=""
+                                    >
+                                      Select a role
+                                    </option>
+                                    <option
+                                      class=""
+                                      data-cy="Developer"
+                                      value="developer"
+                                    >
+                                      Developer
+                                    </option>
+                                    <option
+                                      class=""
+                                      data-cy="Observer"
+                                      value="observer"
+                                    >
+                                      Observer
+                                    </option>
+                                    <option
+                                      class=""
+                                      data-cy="Admin"
+                                      value="admin"
+                                    >
+                                      Admin
+                                    </option>
+                                  </select>
+                                </div>
+                                <div
+                                  class="pf-l-grid__item pf-m-1-col"
+                                />
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="pf-c-page__main-section"
+              >
+                <div
+                  style="margin-top: 1rem;"
+                >
+                  <div
+                    class="pf-l-flex pf-m-justify-content-flex-end"
+                  >
+                    <div
+                      class=""
+                    >
+                      <div>
+                        <button
+                          class="pf-c-button pf-m-primary"
+                          data-cy="save_users"
+                          data-ouia-component-type="PF4/Button"
+                          data-ouia-safe="true"
+                          data-testid="user-edit-save"
+                          type="button"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div
+    aria-hidden="true"
+  />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

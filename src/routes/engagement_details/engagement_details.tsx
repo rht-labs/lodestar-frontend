@@ -1,5 +1,5 @@
 import React, { useEffect, Profiler } from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';

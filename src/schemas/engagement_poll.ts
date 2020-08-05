@@ -27,7 +27,5 @@ export class EngagementPollWebsocketStrategy implements EngagementPollStrategy {
     this.socket = socket;
   }
   private socket;
-  public cancel() {
-    console.log('websocket cancelled');
-  }
+  public cancel() {}
 }

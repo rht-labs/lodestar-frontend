@@ -1,11 +1,11 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 
 interface CloudProviderFormFieldProps {
@@ -29,6 +29,7 @@ export function CloudProviderFormField({
       </FormGroup>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
         <FormSelect
+          data-testid="cloud-provider-select"
           aria-label="Cloud Provider"
           id={'cloud_provider_dropdown'}
           isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}
@@ -38,6 +39,7 @@ export function CloudProviderFormField({
         >
           {[
             <FormSelectOption
+              key={'undefined provider'}
               label="Select a provider"
               value={undefined}
             />,

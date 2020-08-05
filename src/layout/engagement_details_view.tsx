@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../schemas/engagement_schema';
+import { Engagement } from '../schemas/engagement';
 import {
   PageSection,
   TextContent,

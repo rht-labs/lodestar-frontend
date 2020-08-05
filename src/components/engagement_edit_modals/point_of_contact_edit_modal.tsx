@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   Modal,
   ModalVariant,
@@ -13,7 +13,7 @@ import {
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
 export interface PointOfContactEditModalProps {
@@ -52,7 +52,11 @@ export function PointOfContactEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Button onClick={onSave} data-cy={'save_point_of_contact'}>
+            <Button
+              data-testid="poc-edit-save"
+              onClick={onSave}
+              data-cy={'save_point_of_contact'}
+            >
               Save
             </Button>
           </div>
@@ -103,6 +107,7 @@ export function PointOfContactEditModal({
                 <EnvelopeIcon />
               </InputGroupText>
               <TextInput
+                data-testid="el-email"
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 aria-label="engagement lead email"
                 id="email"
@@ -162,6 +167,7 @@ export function PointOfContactEditModal({
                 <EnvelopeIcon />
               </InputGroupText>
               <TextInput
+                data-testid="tech-email"
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 style={input}
                 aria-label="tech lead email"
@@ -221,6 +227,7 @@ export function PointOfContactEditModal({
                 <EnvelopeIcon />
               </InputGroupText>
               <TextInput
+                data-testid="customer-email"
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 aria-label="customer contact email"
                 id="customer-contact-email"

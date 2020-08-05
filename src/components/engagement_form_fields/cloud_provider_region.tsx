@@ -1,11 +1,11 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 
 interface CloudProviderRegionFormFieldProps {
@@ -27,6 +27,7 @@ export function CloudProviderRegionFormField({
       fieldId="cloud-provider-region"
     >
       <FormSelect
+      data-testid="provider-region-select"
         aria-label="Cloud provider region"
         id={"cloud_provider_region_dropdown"}
         isDisabled={
