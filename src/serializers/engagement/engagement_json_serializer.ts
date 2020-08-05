@@ -1,5 +1,5 @@
 import { Serializer } from '../serializer';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import { parse, parseISO, isValid, formatISO } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
@@ -70,7 +70,7 @@ export class EngagementJsonSerializer
       engagement_users: data['engagement_users'],
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
-      last_update: data['last_updated'],
+      last_update: data['last_update'],
       location: data['location'],
       ocp_cloud_provider_name: data['ocp_cloud_provider_name'],
       ocp_cloud_provider_region: data['ocp_cloud_provider_region'],

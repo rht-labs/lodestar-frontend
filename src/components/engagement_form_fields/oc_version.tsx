@@ -1,11 +1,11 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
@@ -28,6 +28,7 @@ export function OpenShiftVersionFormField({
       fieldId="openshift-provider"
     >
       <FormSelect
+      data-testid="oc-version-select"
         aria-label="OpenShift Version"
         id={'oc_version_dropdown'}
         value={engagement?.ocp_version || ''}

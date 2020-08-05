@@ -1,11 +1,13 @@
 import { EngagementService } from '../../engagement_service';
-import { Engagement } from '../../../../schemas/engagement_schema';
-import FakedSchema from './faked_schema.json';
+import { Engagement } from '../../../../schemas/engagement';
 import { EngagementFormConfig } from '../../../../schemas/engagement_config';
 
-export class FakedEngagementService extends EngagementService {
+export class FakedEngagementService implements EngagementService {
+  constructor(private shouldUseStaticData: boolean = false) {}
   async fetchEngagements(): Promise<Engagement[]> {
-    return new Array(8).fill(null).map(() => Engagement.fromFake());
+    return new Array(8)
+      .fill(null)
+      .map(() => Engagement.fromFake(this.shouldUseStaticData));
   }
   async createEngagement(data: Engagement): Promise<Engagement> {
     return data;
@@ -14,10 +16,16 @@ export class FakedEngagementService extends EngagementService {
     return data as Engagement;
   }
   async launchEngagement(data: any): Promise<Engagement> {
-    return data as Engagement;
+    return {
+      ...data,
+      launch: {
+        launched_by: 'A Nashvillian',
+        launched_date_time: new Date(2020, 1, 1),
+      },
+    } as Engagement;
   }
   async getConfig(): Promise<EngagementFormConfig> {
-    return FakedSchema;
+    return EngagementFormConfig.fromFake();
   }
   async checkHasUpdates(engagement: Engagement): Promise<boolean> {
     return false;
@@ -26,6 +34,6 @@ export class FakedEngagementService extends EngagementService {
     customer_name: string,
     project_name: string
   ) {
-    return Engagement.fromFake();
+    return Engagement.fromFake(this.shouldUseStaticData);
   }
 }

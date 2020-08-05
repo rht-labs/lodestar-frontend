@@ -1,4 +1,4 @@
-import { Engagement } from '../engagement_schema';
+import { Engagement } from '../engagement';
 
 const engagementProperties = [
   'archive_date',
@@ -12,6 +12,7 @@ const engagementProperties = [
   'engagement_users',
   'engagement_lead_email',
   'engagement_lead_name',
+  'last_update',
   'location',
   'mongo_id',
   'ocp_cloud_provider_name',
@@ -27,7 +28,7 @@ const engagementProperties = [
   'technical_lead_name',
   'launch',
   'creation_details',
-  "last_update_by_name",
+  'last_update_by_name',
   'status',
 ];
 

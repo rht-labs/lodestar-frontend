@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Gallery,
   PageSection,
@@ -15,17 +15,19 @@ import {
   TachometerAltIcon,
 } from '@patternfly/react-icons';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { EngagementStatus } from '../../schemas/engagement_schema';
+import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
 
 export function Dashboard() {
   const { engagements, getEngagements } = useEngagements();
+  const [hasFetched, setHasFetched] = useState<boolean>(false);
 
   useEffect(() => {
-    if (engagements === undefined) {
+    if (!hasFetched) {
       getEngagements();
+      setHasFetched(true);
     }
-  }, [engagements, getEngagements]);
+  }, [engagements, getEngagements, hasFetched, setHasFetched]);
 
   const numberOfTotalEngagements = engagements?.length;
   const numberOfUpcomingEngagements = engagements?.filter(
@@ -49,45 +51,44 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-
         <Gallery hasGutter>
-            <DashboardDataCard
-              icon={TachometerAltIcon}
-              numberOfEngagements={numberOfTotalEngagements}
-              title={'All Engagements'}
-              subtitle={
-                'All available engagements in the system. Including upcoming, active and past ones'
-              }
-              url={'/app/engagements/all'}
-            />
+          <DashboardDataCard
+            icon={TachometerAltIcon}
+            numberOfEngagements={numberOfTotalEngagements}
+            title={'All Engagements'}
+            subtitle={
+              'All available engagements in the system. Including upcoming, active and past ones'
+            }
+            url={'/app/engagements/all'}
+          />
 
-            <DashboardDataCard
-              icon={PendingIcon}
-              numberOfEngagements={numberOfUpcomingEngagements}
-              title={'Upcoming Engagements'}
-              subtitle={
-                'Upcoming engagements in the future, and are not launched yet.'
-              }
-              url={'/app/engagements/upcoming'}
-            />
+          <DashboardDataCard
+            icon={PendingIcon}
+            numberOfEngagements={numberOfUpcomingEngagements}
+            title={'Upcoming Engagements'}
+            subtitle={
+              'Upcoming engagements in the future, and are not launched yet.'
+            }
+            url={'/app/engagements/upcoming'}
+          />
 
-            <DashboardDataCard
-              icon={OnRunningIcon}
-              numberOfEngagements={numberOfcurrentEngagements}
-              title={'Active Engagements'}
-              subtitle={
-                'Engagements that are already in progress and running at the moment.'
-              }
-              url={'/app/engagements/active'}
-            />
+          <DashboardDataCard
+            icon={OnRunningIcon}
+            numberOfEngagements={numberOfcurrentEngagements}
+            title={'Active Engagements'}
+            subtitle={
+              'Engagements that are already in progress and running at the moment.'
+            }
+            url={'/app/engagements/active'}
+          />
 
-            <DashboardDataCard
-              icon={AsleepIcon}
-              numberOfEngagements={numberOfPastEngagements}
-              title={'Past Engagements'}
-              subtitle={'Engagements that are finished, closed or archived.'}
-              url={'/app/engagements/past'}
-            />
+          <DashboardDataCard
+            icon={AsleepIcon}
+            numberOfEngagements={numberOfPastEngagements}
+            title={'Past Engagements'}
+            subtitle={'Engagements that are finished, closed or archived.'}
+            url={'/app/engagements/past'}
+          />
         </Gallery>
       </PageSection>
     </>

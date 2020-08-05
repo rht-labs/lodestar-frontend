@@ -1,11 +1,11 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement_schema';
+import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
   FormSelectOption,
 } from '@patternfly/react-core';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
@@ -28,6 +28,7 @@ export function PersistentStorageFormField({
       fieldId="persistent-storage-needs"
     >
       <FormSelect
+        data-testid="persistent-storage-select"
         aria-label="Persistent Storage Needs"
         id={'persistent_storage_dropdown'}
         isDisabled={

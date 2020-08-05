@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement, EngagementStatus } from '../../schemas/engagement_schema';
+import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import { differenceInWeeks, format as formatDate, isValid } from 'date-fns';
 import {
   Flex,

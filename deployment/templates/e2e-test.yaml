@@ -1,0 +1,37 @@
+{{- if .Values.development }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: e2e-test-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: e2e-cleanup
+        image: {{ .Values.e2eTestJob.cleanUp.image.name }}:{{ .Values.e2eTestJob.cleanUp.image.tag }}
+        envFrom:
+        - secretRef:
+            name: e2e-secret
+      - name: e2e-github-action
+        image: {{ .Values.e2eTestJob.action.image.name }}:{{ .Values.e2eTestJob.action.image.tag }}
+        envFrom:
+        - secretRef:
+            name: e2e-secret
+        args:
+          - "-v"
+          - "-X"
+          - "POST"
+          - "-H"
+          - "Accept: application/vnd.github.v3+json"
+          - "-H"
+          - "Authorization: token $(GITHUB_TOKEN)"
+          - "-d"
+          - "{ \"ref\": \"$(GITHUB_ACTION_REF)\" }"
+          - "$(GITHUB_API_URL)"
+      restartPolicy: Never
+  backoffLimit: 3
+{{- end }}
+

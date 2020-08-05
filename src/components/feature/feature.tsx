@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppFeature } from '../../common/app_features';
-import { useFeatures } from '../../context/feature_toggles/feature_hook';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 
 export interface FeatureProps {
   children: React.ReactNode;
