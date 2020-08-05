@@ -86,7 +86,6 @@ export function PointOfContactEditModal({
                 <UserIcon />
               </InputGroupText>
               <TextInput
-                data-testid="poc-edit-field"
                 aria-label="Engagement lead name"
                 style={input}
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
@@ -108,6 +107,7 @@ export function PointOfContactEditModal({
                 <EnvelopeIcon />
               </InputGroupText>
               <TextInput
+                data-testid="el-email"
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 aria-label="engagement lead email"
                 id="email"
@@ -167,6 +167,7 @@ export function PointOfContactEditModal({
                 <EnvelopeIcon />
               </InputGroupText>
               <TextInput
+                data-testid="tech-email"
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 style={input}
                 aria-label="tech lead email"
@@ -226,6 +227,7 @@ export function PointOfContactEditModal({
                 <EnvelopeIcon />
               </InputGroupText>
               <TextInput
+                data-testid="customer-email"
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 aria-label="customer contact email"
                 id="customer-contact-email"

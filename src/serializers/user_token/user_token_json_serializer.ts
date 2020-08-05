@@ -11,6 +11,14 @@ export class UserTokenJsonSerializer implements Serializer<UserToken, object> {
   }
 
   deserialize(data: object) {
+    if (
+      !data['accessToken'] ||
+      !data['refreshToken'] ||
+      !data['accessTokenExpiry'] ||
+      !data['refreshTokenExpiry']
+    ) {
+      throw new TypeError('not a valid token');
+    }
     return {
       accessToken: data['accessToken'] as string,
       refreshToken: data['refreshToken'] as string,
