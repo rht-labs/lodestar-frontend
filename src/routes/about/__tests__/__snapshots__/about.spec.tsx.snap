@@ -1,0 +1,264 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About UI should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="pf-c-page"
+      >
+        <a
+          class="pf-c-button pf-m-primary pf-c-skip-to-content"
+          href="#main-content-page-layout-default-nav"
+        >
+          Skip to content
+        </a>
+        <main
+          class="pf-c-page__main"
+          id="main-content-page-layout-default-nav"
+          tabindex="-1"
+        >
+          <section
+            class="pf-c-page__main-section"
+          >
+            <h1
+              class="pf-c-title pf-m-2xl"
+              style="font-weight: normal; margin-bottom: 1rem;"
+            >
+              LodeStar
+            </h1>
+            <div
+              class="pf-l-grid pf-m-all-12-col pf-m-gutter"
+            >
+              <div
+                class="pf-l-grid__item"
+              >
+                <h2
+                  class="pf-c-title pf-m-xl"
+                  style="font-weight: lighter; margin: 0.5rem 0px;"
+                >
+                  About
+                </h2>
+                <small
+                  class=""
+                  data-pf-content="true"
+                  style="text-align: justify;"
+                >
+                  LodeStar
+                   is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform. The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team. Please read 
+                  LodeStar User Guide
+                   for more details.
+                </small>
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                <h2
+                  class="pf-c-title pf-m-xl"
+                  style="font-weight: lighter; margin: 0.5rem 0px;"
+                >
+                  Need Help?
+                </h2>
+                <small
+                  class=""
+                  data-pf-content="true"
+                >
+                  Have questions or need help? Please checkout 
+                  LodeStar FAQ
+                    or send an email to 
+                  <a
+                    href="#"
+                  />
+                </small>
+              </div>
+              <div
+                class="pf-l-grid__item"
+              >
+                <h2
+                  class="pf-c-title pf-m-xl"
+                  style="font-weight: lighter; margin: 0.5rem 0px;"
+                >
+                  Version
+                </h2>
+                <small
+                  class=""
+                  data-pf-content="true"
+                >
+                  <div
+                    class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                    >
+                      <b>
+                        LodeStar version: 
+                      </b>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                    />
+                  </div>
+                </small>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="pf-c-page"
+    >
+      <a
+        class="pf-c-button pf-m-primary pf-c-skip-to-content"
+        href="#main-content-page-layout-default-nav"
+      >
+        Skip to content
+      </a>
+      <main
+        class="pf-c-page__main"
+        id="main-content-page-layout-default-nav"
+        tabindex="-1"
+      >
+        <section
+          class="pf-c-page__main-section"
+        >
+          <h1
+            class="pf-c-title pf-m-2xl"
+            style="font-weight: normal; margin-bottom: 1rem;"
+          >
+            LodeStar
+          </h1>
+          <div
+            class="pf-l-grid pf-m-all-12-col pf-m-gutter"
+          >
+            <div
+              class="pf-l-grid__item"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                style="font-weight: lighter; margin: 0.5rem 0px;"
+              >
+                About
+              </h2>
+              <small
+                class=""
+                data-pf-content="true"
+                style="text-align: justify;"
+              >
+                LodeStar
+                 is an application that provides an intuitive interface to allow team members to manage an Open Innovation Labs Engagement, including the provisioning and population of hosting environments, such as OpenShift Container Platform. The underlying orchestration automation will then process the input data and perform the necessary steps to build out the hosting environment, onboard users, etc. that will build the necessary toolset for the residency. This allows for better management of the engagements and enables more self-service for the delivery team. Please read 
+                LodeStar User Guide
+                 for more details.
+              </small>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                style="font-weight: lighter; margin: 0.5rem 0px;"
+              >
+                Need Help?
+              </h2>
+              <small
+                class=""
+                data-pf-content="true"
+              >
+                Have questions or need help? Please checkout 
+                LodeStar FAQ
+                  or send an email to 
+                <a
+                  href="#"
+                />
+              </small>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                style="font-weight: lighter; margin: 0.5rem 0px;"
+              >
+                Version
+              </h2>
+              <small
+                class=""
+                data-pf-content="true"
+              >
+                <div
+                  class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                  >
+                    <b>
+                      LodeStar version: 
+                    </b>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                  />
+                </div>
+              </small>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
