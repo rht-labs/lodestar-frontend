@@ -10,7 +10,8 @@ import {
   PageHeader,
   PageHeaderTools,
   PageHeaderToolsGroup,
-  PageHeaderToolsItem, TooltipPosition,
+  PageHeaderToolsItem,
+  TooltipPosition,
 } from '@patternfly/react-core';
 import { Tooltip } from '@patternfly/react-core';
 
