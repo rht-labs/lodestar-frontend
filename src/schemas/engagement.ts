@@ -67,9 +67,9 @@ export abstract class Engagement {
     staticData = false,
     options: Partial<FakedEngagementOptions> = {}
   ): Engagement {
-    const getEngagementDates = (): Pick<
+    const getStatusDeterminers = (): Pick<
       Engagement,
-      'start_date' | 'end_date' | 'archive_date'
+      'start_date' | 'end_date' | 'archive_date' | 'launch'
     > => {
       const defaults = {
         archive_date: staticData ? new Date(2020, 6, 30) : faker.date.recent(),
@@ -85,12 +85,20 @@ export abstract class Engagement {
             start_date: new Date(Date.UTC(2020, 1, 1).valueOf()),
             end_date: new Date(Date.UTC(2098, 1, 1).valueOf()),
             archive_date: new Date(Date.UTC(2099, 1, 1).valueOf()),
+            launch: {
+              launched_by: 'A random person',
+              launched_date_time: new Date(2020, 2, 1),
+            },
           };
         case EngagementStatus.past:
           return {
             start_date: new Date(Date.UTC(2020, 1, 1).valueOf()),
             end_date: new Date(Date.UTC(2020, 2, 1).valueOf()),
             archive_date: new Date(Date.UTC(2020, 2, 2).valueOf()),
+            launch: {
+              launched_by: 'A random person',
+              launched_date_time: new Date(2020, 3, 1),
+            },
           };
         case EngagementStatus.upcoming:
           return {
@@ -102,9 +110,7 @@ export abstract class Engagement {
           return defaults;
       }
     };
-    const dates = getEngagementDates();
     return {
-      ...dates,
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
@@ -170,6 +176,7 @@ export abstract class Engagement {
           }
         : null,
       status: ClusterStatus.fromFake(staticData),
+      ...getStatusDeterminers(),
     };
   }
 }

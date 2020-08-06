@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { SendToSSO } from './send_to_sso';
-import { useSession } from '../../context/auth_context/auth_context';
+import { useSession, AuthState } from '../../context/auth_context/auth_context';
 
 export const PrivateRoute = (props: RouteProps) => {
   const { checkAuthStatus, authState } = useSession();
@@ -13,11 +13,11 @@ export const PrivateRoute = (props: RouteProps) => {
     setAuthStatusChecked(true);
   }, [authState, checkAuthStatus, authStatusChecked]);
 
-  if (authState === 'authenticated') {
+  if (authState === AuthState.authenticated) {
     return <Route {...props} />;
-  } else if (authState === 'unauthorized') {
+  } else if (authState === AuthState.unauthorized) {
     return <Redirect to="/unauthorized" />;
-  } else if (authState === 'unauthenticated') {
+  } else if (authState === AuthState.unauthenticated) {
     return <SendToSSO />;
   } else {
     return <div />;
