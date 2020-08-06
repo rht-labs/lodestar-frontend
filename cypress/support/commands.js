@@ -24,34 +24,42 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (url, email, password) => {
-  cy.request({
-    form: true,
-    method: 'POST',
-    url: url,
-    body: {
-      username: email,
-      password: password,
-      grant_type: 'password',
-      client_id: 'open-management-portal',
-    },
-  }).then(resp => {
-    const jwt = resp.body;
-    const currentTime = new Date();
-    const accessTokenExpiry = new Date(
-      currentTime.getTime() + jwt.expires_in * 100000
-    ).toISOString();
-    const refreshTokenExpiry = new Date(
-      currentTime.getTime() + jwt.refresh_expires_in * 100000
-    ).toISOString();
+Cypress.Commands.add(
+  'login',
+  ({
+    url = Cypress.env('SSO_URL'),
+    email = Cypress.env('SSO_USER'),
+    password = Cypress.env('SSO_PASSWORD'),
+    client_id = Cypress.env('SSO_CLIENT_ID'),
+  }) => {
+    cy.request({
+      form: true,
+      method: 'POST',
+      url: url,
+      body: {
+        username: email,
+        password: password,
+        grant_type: 'password',
+        client_id,
+      },
+    }).then(resp => {
+      const jwt = resp.body;
+      const currentTime = new Date();
+      const accessTokenExpiry = new Date(
+        currentTime.getTime() + jwt.expires_in * 100000
+      ).toISOString();
+      const refreshTokenExpiry = new Date(
+        currentTime.getTime() + jwt.refresh_expires_in * 100000
+      ).toISOString();
 
-    var elToken = {
-      accessToken: jwt.access_token,
-      accessTokenExpiry: accessTokenExpiry,
-      refreshToken: jwt.refresh_token,
-      refreshTokenExpiry: refreshTokenExpiry,
-    };
+      var elToken = {
+        accessToken: jwt.access_token,
+        accessTokenExpiry: accessTokenExpiry,
+        refreshToken: jwt.refresh_token,
+        refreshTokenExpiry: refreshTokenExpiry,
+      };
 
-    window.localStorage.setItem('token', JSON.stringify(elToken));
-  });
-});
+      window.localStorage.setItem('token', JSON.stringify(elToken));
+    });
+  }
+);
