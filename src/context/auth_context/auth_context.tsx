@@ -34,8 +34,8 @@ export const AuthContext = createContext<AuthContext>({
   sessionData: undefined,
   axios: Axios.create(),
   authState: AuthState.initial,
-  handleLoginCallback: async () => { },
-  logout: async () => { },
+  handleLoginCallback: async () => {},
+  logout: async () => {},
   checkAuthStatus: async () => null,
 });
 const { Provider } = AuthContext;
@@ -67,7 +67,7 @@ export const AuthProvider = ({
             roles: profile.groups,
             tokens: userToken,
           });
-          setAuthStatus(AuthState.authenticated)
+          setAuthStatus(AuthState.authenticated);
         }
       } catch (e) {
         Logger.instance.error(e);
