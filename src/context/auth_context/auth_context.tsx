@@ -67,7 +67,6 @@ export const AuthProvider = ({
             roles: profile.groups,
             tokens: userToken,
           });
-          setAuthStatus(AuthState.authenticated);
         }
       } catch (e) {
         Logger.instance.error(e);
