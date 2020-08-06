@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Grid,
-  GridItem
+  GridItem, Text
 } from '@patternfly/react-core';
 
 interface LodeStarVersionProps {
@@ -34,13 +34,13 @@ export function LodeStarVersion(props: LodeStarVersionProps) {
         <GridItem lg={2} md={6}>
           {
             lodestar?.link_address ? (
-              <a href={lodestar?.link_address}>
+              <a href={lodestar?.link_address} data-cy="lodestar_version_linked">
                 { lodeStarVersion }
               </a>
             ) : (
-              <>
+              <Text data-cy="lodestar_version">
                 { lodeStarVersion }
-              </>
+              </Text>
             )
           }
         </GridItem>

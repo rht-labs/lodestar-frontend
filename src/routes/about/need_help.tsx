@@ -36,6 +36,7 @@ export function NeedHelp() {
               ? `mailto:${appConfig?.supportEmailAddress}`
               : '#'
           }
+          data-cy="support_email"
         >
           {appConfig?.supportEmailAddress ?? ''}
         </a>
