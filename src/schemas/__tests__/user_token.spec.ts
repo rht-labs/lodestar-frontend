@@ -20,12 +20,6 @@ describe('User Token', () => {
     expect(setSpy).toHaveBeenCalled();
     expect(getSpy).toHaveBeenCalled();
   });
-  test('throws an error if the token', () => {
-    UserToken.setPersistenceStrategy(new LocalStoragePersistence());
-    expect(() => (UserToken.token = 'invalid token')).toThrow(
-      'Token Object must be an object containing access and refresh tokens'
-    );
-  });
   test('returns null if stored token does not exist', () => {
     UserToken.setPersistenceStrategy(new LocalStoragePersistence());
     expect(UserToken.token).toBe(null);

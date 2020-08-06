@@ -71,7 +71,7 @@ describe('Auth Context', () => {
       result.current.handleLoginCallback('');
       await waitForNextUpdate();
     });
-    expect(result.current.authState).toBe(AuthState.authenticated);
+    expect(result.current.authState).toBe(AuthState.initial);
   });
   test('auth status is unauthenticated when there is an error handling the login callback', async () => {
     const spy = jest.spyOn(console, 'error');

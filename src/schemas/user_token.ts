@@ -58,7 +58,6 @@ export class LocalStoragePersistence implements PersistenceStrategy {
         return null;
       }
       const tokenMap = JSON.parse(storedToken);
-      console.log(tokenMap);
       return LocalStoragePersistence.serializer.deserialize(tokenMap);
     } catch (e) {
       return null;
