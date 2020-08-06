@@ -2,19 +2,9 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/auth_service/authentication_service';
 
 import { UserProfile } from '../../schemas/user_profile';
-import {
-  UserToken,
-  LocalStoragePersistence,
-} from '../../schemas/user_token';
+import { UserToken, LocalStoragePersistence } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
 import { Logger } from '../../utilities/logger';
-import { ErrorBoundary } from '../../components/error_boundary/error_boundary';
-
-export type AuthenticationState =
-  | 'initial'
-  | 'authenticated'
-  | 'unauthenticated'
-  | 'unauthorized';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -26,19 +16,26 @@ export interface AuthContext {
   sessionData?: SessionData;
   axios?: AxiosInstance;
   checkAuthStatus: () => Promise<boolean>;
-  authState: AuthenticationState;
+  authState: AuthState;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
 UserToken.setPersistenceStrategy(new LocalStoragePersistence());
 
+export enum AuthState {
+  initial,
+  authenticated,
+  unauthorized,
+  unauthenticated,
+}
+
 export const AuthContext = createContext<AuthContext>({
   sessionData: undefined,
   axios: Axios.create(),
-  authState: 'initial',
-  handleLoginCallback: async () => {},
-  logout: async () => {},
+  authState: AuthState.initial,
+  handleLoginCallback: async () => { },
+  logout: async () => { },
   checkAuthStatus: async () => null,
 });
 const { Provider } = AuthContext;
@@ -53,11 +50,11 @@ export const AuthProvider = ({
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
-  const [authStatus, setAuthStatus] = useState<AuthenticationState>('initial');
+  const [authStatus, setAuthStatus] = useState<AuthState>(AuthState.initial);
 
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
-      setAuthStatus('initial');
+      setAuthStatus(AuthState.initial);
       try {
         const userToken = await authService.fetchToken(
           authorizationCode,
@@ -70,11 +67,11 @@ export const AuthProvider = ({
             roles: profile.groups,
             tokens: userToken,
           });
-          return;
+          setAuthStatus(AuthState.authenticated)
         }
       } catch (e) {
         Logger.instance.error(e);
-        setAuthStatus('unauthenticated');
+        setAuthStatus(AuthState.unauthenticated);
       }
     },
     [authService]
@@ -102,33 +99,33 @@ export const AuthProvider = ({
           profile = sessionData?.profile;
         }
         if (profile.groups && profile.groups.includes('reader')) {
-          setAuthStatus('authenticated');
+          setAuthStatus(AuthState.authenticated);
           return true;
         } else {
-          setAuthStatus('unauthorized');
+          setAuthStatus(AuthState.unauthorized);
           return false;
         }
       } else {
-        setAuthStatus('unauthenticated');
+        setAuthStatus(AuthState.unauthenticated);
         return false;
       }
+    } else {
+      setAuthStatus(AuthState.unauthenticated);
     }
   }, [setAuthStatus, setSessionData, authService, sessionData]);
 
   return (
-    <ErrorBoundary>
-      <Provider
-        value={{
-          checkAuthStatus,
-          sessionData,
-          handleLoginCallback,
-          authState: authStatus,
-          logout: logout,
-        }}
-      >
-        {children}
-      </Provider>
-    </ErrorBoundary>
+    <Provider
+      value={{
+        checkAuthStatus,
+        sessionData,
+        handleLoginCallback,
+        authState: authStatus,
+        logout: logout,
+      }}
+    >
+      {children}
+    </Provider>
   );
 };
 
