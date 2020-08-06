@@ -68,6 +68,7 @@ Object {
                   LodeStar FAQ
                     or send an email to 
                   <a
+                    data-cy="support_email"
                     href="#"
                   />
                 </small>
@@ -97,7 +98,13 @@ Object {
                     </div>
                     <div
                       class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
-                    />
+                    >
+                      <p
+                        class=""
+                        data-cy="lodestar_version"
+                        data-pf-content="true"
+                      />
+                    </div>
                   </div>
                 </small>
               </div>
@@ -171,6 +178,7 @@ Object {
                 LodeStar FAQ
                   or send an email to 
                 <a
+                  data-cy="support_email"
                   href="#"
                 />
               </small>
@@ -200,7 +208,13 @@ Object {
                   </div>
                   <div
                     class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
-                  />
+                  >
+                    <p
+                      class=""
+                      data-cy="lodestar_version"
+                      data-pf-content="true"
+                    />
+                  </div>
                 </div>
               </small>
             </div>
