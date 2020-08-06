@@ -26,12 +26,12 @@
 
 Cypress.Commands.add(
   'login',
-  (
+  ({
     url = Cypress.env('SSO_URL'),
     email = Cypress.env('SSO_USER'),
     password = Cypress.env('SSO_PASSWORD'),
-    client_id = Cypress.env('SSO_CLIENT_ID')
-  ) => {
+    client_id = Cypress.env('SSO_CLIENT_ID'),
+  }) => {
     cy.request({
       form: true,
       method: 'POST',
