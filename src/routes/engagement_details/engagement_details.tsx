@@ -15,15 +15,7 @@ export interface EngagementViewProps {
   currentEngagement?: Engagement;
 }
 
-const EngagementDetailView = React.memo(function({
-  formOptions,
-  getConfig,
-  error: engagementFormRequestError,
-  setCurrentEngagement,
-  currentEngagement,
-  getEngagement,
-  createEngagementPoll,
-}: {
+export interface EngagementDetailViewProps {
   formOptions: EngagementFormConfig;
   getConfig: () => void;
   error: Error;
@@ -33,20 +25,35 @@ const EngagementDetailView = React.memo(function({
     engagement: Engagement
   ) => Promise<{ cancel: () => void }>;
   getEngagement: (customer_name, project_name) => Promise<Engagement>;
-}) {
+}
+
+const EngagementDetailView = React.memo(function({
+  formOptions,
+  getConfig,
+  error: engagementFormRequestError,
+  setCurrentEngagement,
+  currentEngagement,
+  getEngagement,
+  createEngagementPoll,
+}: EngagementDetailViewProps) {
   const { project_name, customer_name } = useParams();
 
   useEffect(() => {
-    const engagementPoll = createEngagementPoll(currentEngagement);
+    let engagementPoll;
+    if (currentEngagement?.project_name && currentEngagement?.customer_name) {
+      engagementPoll = createEngagementPoll(currentEngagement);
+    }
     return async () => {
-      (await engagementPoll).cancel();
+      (await engagementPoll)?.cancel?.();
     };
   }, [currentEngagement, createEngagementPoll]);
   useEffect(() => {
     Logger.instance.info('getting config');
-    getConfig();
+    if (!formOptions) {
+      getConfig();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [formOptions]);
 
   useEffect(() => {
     if (!customer_name || !project_name) {

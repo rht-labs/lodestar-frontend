@@ -31,7 +31,7 @@ Cypress.Commands.add(
     email = Cypress.env('SSO_USER'),
     password = Cypress.env('SSO_PASSWORD'),
     client_id = Cypress.env('SSO_CLIENT_ID'),
-  }) => {
+  } = {}) => {
     cy.request({
       form: true,
       method: 'POST',

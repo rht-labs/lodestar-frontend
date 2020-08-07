@@ -12,41 +12,9 @@ describe('Auth Context', () => {
       ),
     });
     await act(async () => {
-      result.current.checkAuthStatus();
-      await waitForNextUpdate();
+      expect(await result.current.checkIsAuthenticated()).toBe(false);
     });
-    expect(result.current.authState).toEqual(AuthState.unauthenticated);
   });
-
-  test('If the user does not have the reader role, the authState should be unauthorized', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useSession(), {
-      wrapper: ({ children }) => (
-        <AuthProvider
-          authService={{
-            async isLoggedIn() {
-              return true;
-            },
-            async getToken() {
-              return UserToken.fromFake();
-            },
-            async getUserProfile() {
-              let profile = UserProfile.fromFake();
-              profile.groups = [];
-              return profile;
-            },
-          }}
-        >
-          {children}
-        </AuthProvider>
-      ),
-    });
-    await act(async () => {
-      result.current.checkAuthStatus();
-      await waitForNextUpdate();
-    });
-    expect(result.current.authState).toEqual(AuthState.unauthorized);
-  });
-
   test('handle login callback logs in when an auth code successfully exchanges for a token', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useSession(), {
       wrapper: ({ children }) => (
@@ -61,6 +29,9 @@ describe('Auth Context', () => {
             async getUserProfile() {
               return UserProfile.fromFake();
             },
+            getToken() {
+              return UserToken.fromFake();
+            },
           }}
         >
           {children}
@@ -71,30 +42,7 @@ describe('Auth Context', () => {
       result.current.handleLoginCallback('');
       await waitForNextUpdate();
     });
-    expect(result.current.authState).toBe(AuthState.initial);
-  });
-  test('auth status is unauthenticated when there is an error handling the login callback', async () => {
-    const spy = jest.spyOn(console, 'error');
-    spy.mockImplementation(() => {});
-    const { result, waitForNextUpdate } = renderHook(() => useSession(), {
-      wrapper: ({ children }) => (
-        <AuthProvider
-          authService={{
-            async fetchToken() {
-              throw Error('an error');
-            },
-          }}
-        >
-          {children}
-        </AuthProvider>
-      ),
-    });
-    await act(async () => {
-      result.current.handleLoginCallback();
-      await waitForNextUpdate();
-    });
-    expect(result.current.authState).toEqual(AuthState.unauthenticated);
-    spy.mockReset();
+    expect(await result.current.checkIsAuthenticated()).toBe(true);
   });
   test('logout calls the auth service logout', async () => {
     const clearSession = jest.fn();
