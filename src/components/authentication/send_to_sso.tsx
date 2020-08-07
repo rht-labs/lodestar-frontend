@@ -1,15 +1,18 @@
 import React from 'react';
 import { useConfig } from '../../context/config_context/config_hook';
+import { useLocation } from 'react-router';
 
 export function SendToSSO() {
+  const { pathname } = useLocation();
   const configContext = useConfig();
   const OAUTH_CONFIG = {
     clientId: configContext.appConfig?.clientId,
     redirectUri: `${configContext.appConfig?.baseUrl}/auth_callback`,
     state: {
-      from: '/settings',
+      from: pathname,
     },
   };
+  console.log(pathname);
 
   const OAUTH_URL = `${configContext.appConfig?.authBaseUrl}/auth?client_id=${
     OAUTH_CONFIG.clientId

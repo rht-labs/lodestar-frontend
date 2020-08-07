@@ -18,9 +18,10 @@ export const CallbackHandler = () => {
       });
     }
   }, [authContext, hasRunCheck, query]);
-
   if (!isAuthed) {
     return <div />;
   }
-  return <Redirect to="/app" />;
+  console.log(query.get('state'))
+  const state = query.get('state') ? JSON.parse(query.get('state')) : null
+  return <Redirect to={state?.from ? state?.from : '/app'} />;
 };

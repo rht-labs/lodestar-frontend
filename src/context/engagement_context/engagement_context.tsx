@@ -88,7 +88,7 @@ export const EngagementProvider = ({
     async error => {
       if (error instanceof AuthenticationError) {
         if (!(await authContext.checkIsAuthenticated())) {
-          throw error;
+          authContext.setAuthError(error);
         }
       } else {
         throw error;
@@ -166,14 +166,18 @@ export const EngagementProvider = ({
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
       await _validateAuthStatusRef.current();
-      const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-        engagement?.customer_name,
-        engagement?.project_name
-      );
-      _updateEngagementInPlace(refreshedEngagement);
-      setCurrentEngagement(refreshedEngagement);
+      try {
+        const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+          engagement?.customer_name,
+          engagement?.project_name
+        );
+        _updateEngagementInPlace(refreshedEngagement);
+        setCurrentEngagement(refreshedEngagement);
+      } catch (e) {
+        _handleErrors(e);
+      }
     },
-    [_updateEngagementInPlace, engagementService]
+    [_updateEngagementInPlace, engagementService, _handleErrors]
   );
 
   const _checkHasUpdateRef = useRef(async () => false);

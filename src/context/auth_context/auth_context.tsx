@@ -13,6 +13,8 @@ export interface SessionData {
 }
 
 export interface AuthContext {
+  authError?: any;
+  setAuthError: (error: any) => void;
   sessionData?: SessionData;
   axios?: AxiosInstance;
   checkIsAuthenticated: () => Promise<boolean>;
@@ -24,6 +26,8 @@ UserToken.setPersistenceStrategy(new LocalStoragePersistence());
 
 export const AuthContext = createContext<AuthContext>({
   sessionData: undefined,
+  authError: null,
+  setAuthError: (error: any) => {},
   axios: Axios.create(),
   checkIsAuthenticated: async () => false,
   handleLoginCallback: async () => {},
@@ -41,6 +45,7 @@ export const AuthProvider = ({
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
+  const [authError, setAuthError] = useState<any>(null);
   const createSessionData = (profile: UserProfile, tokens: UserToken) => ({
     profile,
     roles: profile.groups,
@@ -93,6 +98,8 @@ export const AuthProvider = ({
   return (
     <Provider
       value={{
+        authError,
+        setAuthError,
         checkIsAuthenticated,
         sessionData,
         handleLoginCallback,
