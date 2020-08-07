@@ -22,6 +22,7 @@ export function _CustomerSelectDropdown(
       isOpen={isOpen}
       onToggle={() => setIsOpen(!isOpen)}
       onSelect={handleSelect}
+      maxHeight={400}
       isCreatable={true}
       selections={props.selectedValue}
       variant={SelectVariant.typeahead}
