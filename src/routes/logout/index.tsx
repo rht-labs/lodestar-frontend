@@ -1,16 +1,23 @@
 import React from 'react';
 import { AuthContext } from '../../context/auth_context/auth_context';
+import { ConfigContext } from '../../context/config_context/config_context';
 
-class LogoutPage extends React.Component<{ session: AuthContext }> {
+class LogoutPage extends React.Component<{
+  session: AuthContext;
+  config: ConfigContext;
+}> {
   componentDidMount(): void {
     const { session } = this.props;
-    session.logout().then(() =>
-      // not my favorite solution... but SSO seems to need a second after /logout is hit before it actually "takes"...
-      setTimeout(() => {
-        // retrigger forward to SSO
-        window.location.href = '/';
-      }, 500)
-    );
+    session
+      .logout()
+      .then(
+        () =>
+          (window.location.href = `${
+            this.props.config.appConfig.authBaseUrl
+          }/logout?redirect_uri=${encodeURI(
+            this.props.config.appConfig.baseUrl
+          )}`)
+      );
   }
 
   render() {
@@ -19,7 +26,11 @@ class LogoutPage extends React.Component<{ session: AuthContext }> {
 }
 
 export default React.forwardRef((props, ref) => (
-  <AuthContext.Consumer>
-    {session => <LogoutPage {...props} session={session} />}
-  </AuthContext.Consumer>
+  <ConfigContext.Consumer>
+    {config => (
+      <AuthContext.Consumer>
+        {session => <LogoutPage {...props} session={session} config={config} />}
+      </AuthContext.Consumer>
+    )}
+  </ConfigContext.Consumer>
 ));

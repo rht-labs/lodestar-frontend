@@ -10,7 +10,7 @@ export function UserDropdown(props: UserDropdown) {
   const authContext = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownItems = [
-    <DropdownItem value="logOut" key="logout" component={Link} to="/Logout">
+    <DropdownItem value="logOut" key="logout" component={Link} to="/logout">
       Log Out
     </DropdownItem>,
   ];

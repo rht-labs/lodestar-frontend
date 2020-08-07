@@ -111,9 +111,17 @@ export class Apiv1EngagementService implements EngagementService {
     customer_name: string,
     project_name: string
   ): Promise<Engagement> {
-    const { data } = await this.axios.get(
-      `/engagements/customers/${customer_name}/projects/${project_name}`
-    );
-    return Apiv1EngagementService.engagementSerializer.deserialize(data);
+    try {
+      const { data } = await this.axios.get(
+        `/engagements/customers/${customer_name}/projects/${project_name}`
+      );
+      return Apiv1EngagementService.engagementSerializer.deserialize(data);
+    } catch (e) {
+      if (e.isAxiosError) {
+        handleAxiosResponseErrors(e);
+      } else {
+        throw e;
+      }
+    }
   }
 }
