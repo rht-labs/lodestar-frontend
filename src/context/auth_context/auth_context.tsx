@@ -15,28 +15,19 @@ export interface SessionData {
 export interface AuthContext {
   sessionData?: SessionData;
   axios?: AxiosInstance;
-  checkAuthStatus: () => Promise<boolean>;
-  authState: AuthState;
+  checkIsAuthenticated: () => Promise<boolean>;
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
 UserToken.setPersistenceStrategy(new LocalStoragePersistence());
 
-export enum AuthState {
-  initial,
-  authenticated,
-  unauthorized,
-  unauthenticated,
-}
-
 export const AuthContext = createContext<AuthContext>({
   sessionData: undefined,
   axios: Axios.create(),
-  authState: AuthState.initial,
+  checkIsAuthenticated: async () => false,
   handleLoginCallback: async () => {},
   logout: async () => {},
-  checkAuthStatus: async () => null,
 });
 const { Provider } = AuthContext;
 
@@ -50,11 +41,13 @@ export const AuthProvider = ({
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
   );
-  const [authStatus, setAuthStatus] = useState<AuthState>(AuthState.initial);
-
+  const createSessionData = (profile: UserProfile, tokens: UserToken) => ({
+    profile,
+    roles: profile.groups,
+    tokens,
+  });
   const handleLoginCallback = useCallback(
     async (authorizationCode: string) => {
-      setAuthStatus(AuthState.initial);
       try {
         const userToken = await authService.fetchToken(
           authorizationCode,
@@ -62,15 +55,11 @@ export const AuthProvider = ({
         );
         if (await authService.isLoggedIn()) {
           const profile = await authService.getUserProfile();
-          setSessionData({
-            profile,
-            roles: profile.groups,
-            tokens: userToken,
-          });
+          setSessionData(createSessionData(profile, userToken));
+          return;
         }
       } catch (e) {
         Logger.instance.error(e);
-        setAuthStatus(AuthState.unauthenticated);
       }
     },
     [authService]
@@ -81,45 +70,28 @@ export const AuthProvider = ({
     return;
   };
 
-  const checkAuthStatus = useCallback(async () => {
-    if (!!authService) {
-      const isLoggedIn = await authService.isLoggedIn();
-      const tokens = authService.getToken();
-      if (isLoggedIn && tokens) {
-        let profile;
-        if (!sessionData?.profile) {
-          profile = await authService.getUserProfile();
-          setSessionData({
-            profile,
-            tokens,
-            roles: profile.groups,
-          });
-        } else {
-          profile = sessionData?.profile;
-        }
-        if (profile.groups && profile.groups.includes('reader')) {
-          setAuthStatus(AuthState.authenticated);
-          return true;
-        } else {
-          setAuthStatus(AuthState.unauthorized);
-          return false;
-        }
-      } else {
-        setAuthStatus(AuthState.unauthenticated);
-        return false;
-      }
-    } else {
-      setAuthStatus(AuthState.unauthenticated);
+  const checkIsAuthenticated = useCallback(async () => {
+    if (!authService) {
+      return false;
     }
-  }, [setAuthStatus, setSessionData, authService, sessionData]);
+    const isLoggedIn = await authService.isLoggedIn();
+    const tokens = authService.getToken();
+    if (!sessionData?.profile || !sessionData?.roles || !sessionData?.tokens) {
+      const profile = await authService.getUserProfile();
+      setSessionData(createSessionData(profile, tokens));
+    }
+    if (isLoggedIn && tokens) {
+      return true;
+    }
+    return false;
+  }, [authService, sessionData]);
 
   return (
     <Provider
       value={{
-        checkAuthStatus,
+        checkIsAuthenticated,
         sessionData,
         handleLoginCallback,
-        authState: authStatus,
         logout: logout,
       }}
     >

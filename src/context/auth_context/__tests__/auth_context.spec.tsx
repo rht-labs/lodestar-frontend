@@ -17,7 +17,6 @@ describe('Auth Context', () => {
     });
     expect(result.current.authState).toEqual(AuthState.unauthenticated);
   });
-
   test('If the user does not have the reader role, the authState should be unauthorized', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useSession(), {
       wrapper: ({ children }) => (
@@ -26,7 +25,7 @@ describe('Auth Context', () => {
             async isLoggedIn() {
               return true;
             },
-            async getToken() {
+            getToken() {
               return UserToken.fromFake();
             },
             async getUserProfile() {

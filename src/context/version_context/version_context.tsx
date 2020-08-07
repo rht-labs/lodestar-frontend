@@ -19,17 +19,17 @@ export const VersionContext = createContext<VersionContext>({
 const { Provider } = VersionContext;
 export const VersionProvider = ({
   children,
-  versionService
+  versionService,
 }: {
   children: React.ReactChild;
-  versionService: VersionService
+  versionService: VersionService;
 }) => {
   const authContext = useSession();
   const [versions, setVersions] = useState<Version | undefined>();
   const _handleErrors = useCallback(
     e => {
       if (e instanceof AuthorizationError || e instanceof AuthenticationError) {
-        authContext.checkAuthStatus();
+        authContext.isAuthenticated();
       } else {
         throw e;
       }

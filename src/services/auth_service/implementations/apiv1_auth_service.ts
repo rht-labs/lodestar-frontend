@@ -24,15 +24,15 @@ export class Apiv1AuthService implements AuthService {
     const logoutUrl = `${this?.config.authBaseUrl}/logout`;
     const token = this.getToken();
     const requestParams = {
-      client_id: this?.config.clientId,
+      client_id: this.config?.clientId,
       refresh_token: token?.refreshToken ? token.refreshToken : '',
     };
-    await Axios.post(logoutUrl, qs.stringify(requestParams), {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: '*/*',
-      },
-    });
+    // await Axios.post(logoutUrl, qs.stringify(requestParams), {
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //     Accept: '*/*',
+    //   },
+    // });
     this.saveToken(null);
     return;
   }
