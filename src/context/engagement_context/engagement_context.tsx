@@ -98,7 +98,6 @@ export const EngagementProvider = ({
   );
 
   useEffect(() => {
-    console.log('authc ontext');
     _validateAuthStatusRef.current = async () => {
       if (!(await authContext.checkIsAuthenticated())) {
         throw new AuthenticationError();

@@ -60,6 +60,7 @@ export const AuthProvider = ({
         }
       } catch (e) {
         Logger.instance.error(e);
+        throw e;
       }
     },
     [authService]
