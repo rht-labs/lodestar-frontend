@@ -12,7 +12,6 @@ export function SendToSSO() {
       from: pathname,
     },
   };
-  console.log(pathname);
 
   const OAUTH_URL = `${configContext.appConfig?.authBaseUrl}/auth?client_id=${
     OAUTH_CONFIG.clientId

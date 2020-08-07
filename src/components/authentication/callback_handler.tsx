@@ -21,7 +21,6 @@ export const CallbackHandler = () => {
   if (!isAuthed) {
     return <div />;
   }
-  console.log(query.get('state'))
   const state = query.get('state') ? JSON.parse(query.get('state')) : null
   return <Redirect to={state?.from ? state?.from : '/app'} />;
 };
