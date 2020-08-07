@@ -24,7 +24,6 @@ export function _CustomerSelectDropdown(
       onSelect={handleSelect}
       isCreatable={true}
       selections={props.selectedValue}
-      maxHeight={100}
       variant={SelectVariant.typeahead}
       placeholderText={props.placeholder}
       onClear={() => props.onSelect(undefined)}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Modal,
   Button,
   Form,
   FormGroup,
@@ -11,24 +10,31 @@ import { useEngagements } from '../../context/engagement_context/engagement_hook
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 import { useValidation } from '../../context/validation_context/validation_hook';
 
-export interface CreateEngagementModalProps {
-  isOpen: boolean;
-  onRequestClose: (customerName?: string, projectName?: string) => void;
+export interface CreateEngagementPageProps {
+  onSubmit: (customerName?: string, projectName?: string) => void;
 }
 
-export function CreateEngagementModal(props: CreateEngagementModalProps) {
-  const { currentEngagement } = useEngagements();
-
+export function CreateEngagementPage(props: CreateEngagementPageProps) {
+  const { currentEngagement, getEngagements, engagements } = useEngagements();
+  const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
+    false
+  );
   const [customerName, setCustomerName] = useState(null);
   const [projectName, setProjectName] = useState(null);
   const { getValidationResult, validate } = useValidation();
+  useEffect(() => {
+    if (engagements.length === 0 && !hasFetchedEngagements) {
+      setHasFetchedEngagements(true);
+      getEngagements();
+    }
+  });
   useEffect(() => {
     setCustomerName(null);
     setProjectName(null);
   }, [currentEngagement]);
 
   const createNewEngagement = () => {
-    props.onRequestClose(customerName, projectName);
+    props.onSubmit(customerName, projectName);
   };
   const hasValidInput =
     !!customerName &&
@@ -36,31 +42,7 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
     getValidationResult('project_name')?.length === 0 &&
     getValidationResult('customer_name')?.length === 0;
   return (
-    <Modal
-      width={'50%'}
-      title="Create New Engagement"
-      isOpen={props.isOpen}
-      onClose={props.onRequestClose}
-      actions={[
-        <Button
-          key="confirm"
-          variant="primary"
-          onClick={createNewEngagement}
-          data-cy="createNewEngagement"
-          isDisabled={!hasValidInput}
-        >
-          Submit
-        </Button>,
-        <Button
-          key="cancel"
-          variant="link"
-          onClick={() => props.onRequestClose()}
-          data-cy={'cancel_button'}
-        >
-          Cancel
-        </Button>,
-      ]}
-    >
+    <>
       <Text component="h6">
         To create a new Engagement, please enter a client and product name then
         click submit.
@@ -109,6 +91,9 @@ export function CreateEngagementModal(props: CreateEngagementModalProps) {
           />
         </FormGroup>
       </Form>
-    </Modal>
+      <Button isDisabled={!hasValidInput} onClick={createNewEngagement}>
+        Submit
+      </Button>
+    </>
   );
 }

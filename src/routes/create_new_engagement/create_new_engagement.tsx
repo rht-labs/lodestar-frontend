@@ -1,15 +1,23 @@
 import React from 'react';
-import { CreateEngagementModal } from './create_engagement_modal';
 import { useHistory } from 'react-router';
-import { EngagementDetailViewContainer } from '../engagement_details/engagement_details';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { CreateEngagementPage } from './create_engagement_page';
+import { PageSection, Title } from '@patternfly/react-core';
 
-export function CreateNewEngagement(props) {
+export function CreateNewEngagement() {
   const history = useHistory();
-  const handleModalClose = (customerName, projectName) => {
+  const { createEngagement } = useEngagements();
+  const submitNewEngagement = async (
+    customerName?: string,
+    projectName?: string
+  ) => {
     if (customerName && projectName) {
+      await createEngagement({
+        customer_name: customerName,
+        project_name: projectName,
+      });
       history.push(`/app/engagements/${customerName}/${projectName}`);
     } else {
       history.push('/app/engagements');
@@ -19,16 +27,15 @@ export function CreateNewEngagement(props) {
   const { formOptions } = useEngagements();
 
   return (
-    <div>
+    <div >
       <ValidationProvider
         validators={getValidatorsFromFormOptions(formOptions)}
       >
-        <CreateEngagementModal
-          onRequestClose={handleModalClose}
-          isOpen={true}
-        />
+        <PageSection >
+          <Title headingLevel="h1">Create New Engagement</Title>
+          <CreateEngagementPage onSubmit={submitNewEngagement} />
+        </PageSection>
       </ValidationProvider>
-      <EngagementDetailViewContainer />
     </div>
   );
 }
