@@ -39,9 +39,12 @@ const EngagementDetailView = React.memo(function({
   const { project_name, customer_name } = useParams();
 
   useEffect(() => {
-    const engagementPoll = createEngagementPoll(currentEngagement);
+    let engagementPoll;
+    if (currentEngagement?.project_name && currentEngagement?.customer_name) {
+      engagementPoll = createEngagementPoll(currentEngagement);
+    }
     return async () => {
-      (await engagementPoll).cancel();
+      (await engagementPoll)?.cancel?.();
     };
   }, [currentEngagement, createEngagementPoll]);
   useEffect(() => {
