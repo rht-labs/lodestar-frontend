@@ -4,7 +4,7 @@ import { useEngagements } from '../engagement_hook';
 import { getInitialState } from '../engagement_form_reducer';
 import { Engagement } from '../../../schemas/engagement';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { AuthProvider } from '../../auth_context/auth_context';
+import { AuthProvider, useSession } from '../../auth_context/auth_context';
 import { EngagementService } from '../../../services/engagement_service/engagement_service';
 import { EngagementProvider } from '../engagement_context';
 import { UserToken } from '../../../schemas/user_token';
@@ -196,7 +196,7 @@ describe('Engagement Context', () => {
     });
     expect(onCaught).toHaveBeenCalledTimes(1);
   });
-  test('_validateAuthStatus throws an AuthenticationError if the user is not authenticated', async () => {
+  test("_validateAuthStatus updates authContext's hasError if it encounters an AuthenticationError", async () => {
     const wrapper = ({ children }) => {
       return (
         <AuthProvider
@@ -228,15 +228,19 @@ describe('Engagement Context', () => {
         </AuthProvider>
       );
     };
-    const { result } = renderHook(() => useEngagements(), {
-      wrapper,
-    });
+    const { result, waitForNextUpdate } = renderHook(
+      () => ({ engagements: useEngagements(), auth: useSession() }),
+      {
+        wrapper,
+      }
+    );
     let error;
 
     await act(async () => {
-      result.current.getEngagements().catch(e => (error = e));
+      result.current.engagements.getEngagements();
+      await waitForNextUpdate();
     });
-    expect(error).toBeInstanceOf(AuthenticationError);
+    expect(result.current.auth.authError).toBeInstanceOf(AuthenticationError);
   });
 
   test('saveEngagement updates the current engagement when the save was successful', async () => {
