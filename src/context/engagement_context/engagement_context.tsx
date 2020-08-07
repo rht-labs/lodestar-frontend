@@ -187,7 +187,7 @@ export const EngagementProvider = ({
 
   const createEngagementPoll = useCallback(
     async (engagement: Engagement): Promise<EngagementPoll> => {
-      // await _validateAuthStatusRef.current();
+      await _validateAuthStatusRef.current();
       return new EngagementPoll(
         new EngagementPollIntervalStrategy(
           setInterval(async () => {
