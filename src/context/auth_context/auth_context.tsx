@@ -76,6 +76,9 @@ export const AuthProvider = ({
       return false;
     }
     const isLoggedIn = await authService.isLoggedIn();
+    if (!isLoggedIn) {
+      return false;
+    }
     const tokens = authService.getToken();
     if (!sessionData?.profile || !sessionData?.roles || !sessionData?.tokens) {
       const profile = await authService.getUserProfile();
