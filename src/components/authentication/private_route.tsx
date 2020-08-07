@@ -18,11 +18,7 @@ export const PrivateRoute = (props: RouteProps) => {
 
   if (isAuthed) {
     return <Route {...props} />;
-  }
-  // else if (authState === AuthState.unauthorized) {
-  //   return <Redirect to="/unauthorized" />;
-  // }
-  else if (isAuthed === false) {
+  } else if (isAuthed === false) {
     return <SendToSSO />;
   } else {
     return <div />;
