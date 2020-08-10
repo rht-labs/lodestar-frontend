@@ -106,7 +106,7 @@ export function CreateNewEngagement() {
                 <FormGroup
                   label={
                     <SectionTitle>
-                      Customer Name&nbsp;&nbsp;
+                      Client Name&nbsp;&nbsp;
                       <CheckCircleIcon
                         color={
                           getValidationResult('customer_name').length === 0 &&
@@ -118,7 +118,6 @@ export function CreateNewEngagement() {
                     </SectionTitle>
                   }
                   fieldId="customer-name"
-                  helperText="What client is this for?"
                   helperTextInvalid={getValidationResult('customer_name').join(
                     ' '
                   )}
@@ -130,7 +129,7 @@ export function CreateNewEngagement() {
                 >
                   <div data-testid="customer-name">
                     <CustomerSelectDropdown
-                      placeholder="e.g. NASA"
+                      placeholder="NASA"
                       selectedValue={customerName}
                       onSelect={value =>
                         validate('customer_name')(value) &&
@@ -142,7 +141,7 @@ export function CreateNewEngagement() {
                 <FormGroup
                   label={
                     <SectionTitle>
-                      Project Name&nbsp;&nbsp;
+                      Engagement Name&nbsp;&nbsp;
                       <CheckCircleIcon
                         color={
                           getValidationResult('project_name').length === 0 &&
@@ -154,7 +153,7 @@ export function CreateNewEngagement() {
                     </SectionTitle>
                   }
                   fieldId="project-name"
-                  helperText="The name of the solution being worked on."
+                  helperText="A descriptive name to idenitfy your engagement"
                   helperTextInvalid={getValidationResult('project_name').join(
                     ' '
                   )}
@@ -169,7 +168,7 @@ export function CreateNewEngagement() {
                     type="text"
                     id="project_name"
                     name="project_name"
-                    placeholder="e.g. Mars Probe"
+                    placeholder="Mars Probe"
                     value={projectName || ''}
                     onChange={value =>
                       validate('project_name')(value) && setProjectName(value)
@@ -191,7 +190,7 @@ export function CreateNewEngagement() {
                     </SectionTitle>
                   }
                   fieldId="region"
-                  helperText="In what region will this engagement take place?"
+                  helperText="The region sponsoring the engagement"
                   helperTextInvalid={getValidationResult('region').join(' ')}
                   validated={
                     getValidationResult('region').length > 0
@@ -209,7 +208,7 @@ export function CreateNewEngagement() {
                     {[
                       <FormSelectOption
                         value={undefined}
-                        label="Select Region"
+                        label="Select a region"
                         key="undefined region"
                       />,
                     ].concat(
