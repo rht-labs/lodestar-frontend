@@ -86,6 +86,7 @@ export const EngagementProvider = ({
 
   const _handleErrors = useCallback(
     async error => {
+      Logger.instance.debug('EngagementContext:_handleErrors', error);
       if (error instanceof AuthenticationError) {
         if (!(await authContext.checkIsAuthenticated())) {
           authContext.setAuthError(error);
