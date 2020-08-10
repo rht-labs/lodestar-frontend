@@ -1,5 +1,5 @@
 {
-  "name": "omp-frontend",
+  "name": "lodestar-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -44,7 +44,7 @@
     "test:ci": "npm test -- --watchAll=false --coverage --env=jsdom --testResultsProcessor jest-sonar-reporter",
     "e2e": "npx cypress open",
     "package": "zip -r package-contents.zip package-contents",
-    "publish": "curl -vvv -u admin:admin123 --upload-file package-contents.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/omp-frontend/${JOB_NAME}.${BUILD_NUMBER}/package-contents.zip",
+    "publish": "curl -vvv -u admin:admin123 --upload-file package-contents.zip http://${NEXUS_SERVICE_HOST}:${NEXUS_SERVICE_PORT}/repository/zip/com/redhat/lodestar-frontend/${JOB_NAME}.${BUILD_NUMBER}/package-contents.zip",
     "eject": "react-scripts eject",
     "check": "gts check src/*.tsx src/*.ts",
     "clean": "gts clean",
