@@ -6,8 +6,6 @@ import {
   PageSection,
   Title,
   PageSectionVariants,
-  Select,
-  SelectOption,
   FormSelect,
   FormSelectOption,
   Grid,
@@ -39,11 +37,14 @@ const REGIONS = [
 
 export function CreateNewEngagement() {
   const history = useHistory();
-  const { createEngagement } = useEngagements();
-  const submitNewEngagement = async (
-    customerName?: string,
-    projectName?: string
-  ) => {
+  const {
+    createEngagement,
+    formOptions,
+    currentEngagement,
+    getEngagements,
+    engagements,
+  } = useEngagements();
+  const submitNewEngagement = async () => {
     if (customerName && projectName) {
       await createEngagement({
         customer_name: customerName,
@@ -55,8 +56,6 @@ export function CreateNewEngagement() {
     }
   };
 
-  const { formOptions } = useEngagements();
-  const { currentEngagement, getEngagements, engagements } = useEngagements();
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
@@ -69,7 +68,12 @@ export function CreateNewEngagement() {
       setHasFetchedEngagements(true);
       getEngagements();
     }
-  }, [setHasFetchedEngagements, getEngagements]);
+  }, [
+    setHasFetchedEngagements,
+    getEngagements,
+    engagements.length,
+    hasFetchedEngagements,
+  ]);
   useEffect(() => {
     setCustomerName(null);
     setProjectName(null);
@@ -124,13 +128,16 @@ export function CreateNewEngagement() {
                       : 'default'
                   }
                 >
-                  <CustomerSelectDropdown
-                    placeholder="e.g. NASA"
-                    selectedValue={customerName}
-                    onSelect={value =>
-                      validate('customer_name')(value) && setCustomerName(value)
-                    }
-                  />
+                  <div data-testid="customer-name">
+                    <CustomerSelectDropdown
+                      placeholder="e.g. NASA"
+                      selectedValue={customerName}
+                      onSelect={value =>
+                        validate('customer_name')(value) &&
+                        setCustomerName(value)
+                      }
+                    />
+                  </div>
                 </FormGroup>
                 <FormGroup
                   label={
@@ -158,6 +165,7 @@ export function CreateNewEngagement() {
                   }
                 >
                   <TextInput
+                    data-testid="project-name"
                     type="text"
                     id="project_name"
                     name="project_name"
@@ -192,6 +200,7 @@ export function CreateNewEngagement() {
                   }
                 >
                   <FormSelect
+                    data-testid="region"
                     value={region}
                     onChange={e => {
                       setRegion(e);
@@ -218,9 +227,10 @@ export function CreateNewEngagement() {
                 </FormGroup>
               </Form>
               <Button
+                data-testid="create-engagement-button"
                 style={{ margin: '1rem 0' }}
                 isDisabled={!hasValidInput}
-                onClick={() => submitNewEngagement(customerName, projectName)}
+                onClick={submitNewEngagement}
               >
                 Submit
               </Button>

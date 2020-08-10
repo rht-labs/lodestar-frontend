@@ -52,8 +52,10 @@ Object {
         >
           <div>
             <button
+              aria-disabled="false"
               class="pf-c-button pf-m-primary"
               data-cy="launch_button"
+              data-ouia-component-id="1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -64,6 +66,7 @@ Object {
               style="margin: 0px 0.5rem;"
             >
               <svg
+                aria-describedby="pf-tooltip-1"
                 aria-hidden="true"
                 fill="green"
                 height="1em"
@@ -131,8 +134,10 @@ Object {
       >
         <div>
           <button
+            aria-disabled="false"
             class="pf-c-button pf-m-primary"
             data-cy="launch_button"
+            data-ouia-component-id="1"
             data-ouia-component-type="PF4/Button"
             data-ouia-safe="true"
             type="button"
@@ -143,6 +148,7 @@ Object {
             style="margin: 0px 0.5rem;"
           >
             <svg
+              aria-describedby="pf-tooltip-1"
               aria-hidden="true"
               fill="green"
               height="1em"
