@@ -1,6 +1,6 @@
-![Build Container](https://github.com/rht-labs/open-management-portal-frontend/workflows/Build%20Container/badge.svg)
+![Build Container](https://github.com/rht-labs/lodestar-frontend/workflows/Build%20Container/badge.svg)
 
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rht-labs_open-management-portal-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=rht-labs_open-management-portal-frontend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rht-lodestar-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=rht-lodestar-frontend)
 
 # OMP Frontend Quickstart
 
@@ -273,7 +273,7 @@ Depending on the type of deployment, the way of setting these variables may vary
 | **baseUrl**       | string  | Target URL for the deployment of **this** Frontend App                                 | Yes      | N/A     |
 | **authBaseUrl**   | string  | URI for SSO integration                                                                | Yes      | N/A     |
 | **clientId**      | string  | Identification of the client application for SSO integration                           | Yes      | N/A     |
-| **backendUrl**    | string  | URI for [Backend](https://github.com/rht-labs/open-management-portal-backend.git) APIs | Yes      | N/A     |
+| **backendUrl**    | string  | URI for [Backend](https://github.com/rht-labs/lodestar-backend.git) APIs | Yes      | N/A     |
 | **disableLaunch** | boolean | Flag to toggle launch functionality on/off                                             | Yes      | N/A     |
 
 # Learn More
