@@ -2,7 +2,7 @@
 
 echo "omp s2i"
 
-sed -i 's@v0.0.1-local@'"$OMP_FRONTEND_GIT_TAG"'@' manifest.json
+sed -i 's@v0.0.1-local@'"$LODESTAR_FRONTEND_GIT_TAG"'@' manifest.json
 
 cat manifest.json
 

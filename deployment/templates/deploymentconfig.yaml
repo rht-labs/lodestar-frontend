@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - env:
-        - name: OMP_FRONTEND_GIT_TAG
+        - name: LODESTAR_FRONTEND_GIT_TAG
           value: {{ .Values.imageTag }}
         image: {{ .Values.name }}:{{ .Values.imageTag }}
         imagePullPolicy: Always
