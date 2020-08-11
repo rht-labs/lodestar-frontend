@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "omp s2i"
+echo "lodestar s2i"
 
 sed -i 's@v0.0.1-local@'"$LODESTAR_FRONTEND_GIT_TAG"'@' manifest.json
 
