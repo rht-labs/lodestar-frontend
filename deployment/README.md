@@ -58,6 +58,9 @@ Included is the ability to run a job that can run the end to end tests and clean
 
 | Variable  | Use |
 |--|--|
+| `e2eTestJob.enabled`  | If true it will try to create the job  |
+| `e2eTestJob.createSecret` | If true it will try to create the secrets needed for the job  |
+| `e2eTestJob.ref`  | The github ref of the repo to run the action against  |
 | `e2eTestJob.env.logLevel`  | Sets the log level  |
 | `e2eTestJob.env.deleteAfterInHours`  | How stale should the data be to be deleted  |
 | `e2eTestJob.env.dryRun`  | Setting to true will delete e2e data  |
@@ -66,4 +69,3 @@ Included is the ability to run a job that can run the end to end tests and clean
 | `e2eTestJob.env.gitlabToken`  | The token for gitlab access  |
 | `e2eTestJob.env.githubApiUrl`  | The api to the github action  |
 | `e2eTestJob.env.githubToken`  | The token ofr github access  |
-| `e2eTestJob.ref`  | The github ref of the repo to run the action against  |

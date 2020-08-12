@@ -1,7 +1,6 @@
 import faker from 'faker';
 import { Serializer } from '../serializers/serializer';
 import { UserTokenJsonSerializer } from '../serializers/user_token/user_token_json_serializer';
-import { Logger } from '../utilities/logger';
 
 export interface UserToken {
   accessToken?: string;
@@ -45,25 +44,11 @@ export class LocalStoragePersistence implements PersistenceStrategy {
     UserToken,
     any
   > = new UserTokenJsonSerializer();
-  saveToken(token: UserToken) {
-    try {
-      if (
-        typeof token === 'object' &&
-        'accessToken' in token &&
-        'refreshToken' in token
-      ) {
-        localStorage.setItem(
-          LocalStoragePersistence.TOKEN_STORAGE_KEY,
-          JSON.stringify(LocalStoragePersistence.serializer.serialize(token))
-        );
-      } else {
-        throw TypeError(
-          'Token Object must be an object containing access and refresh tokens'
-        );
-      }
-    } catch (e) {
-      Logger.instance.error(e);
-    }
+  saveToken(token?: UserToken) {
+    localStorage.setItem(
+      LocalStoragePersistence.TOKEN_STORAGE_KEY,
+      JSON.stringify(LocalStoragePersistence.serializer.serialize(token))
+    );
   }
   getToken() {
     try {
@@ -73,7 +58,6 @@ export class LocalStoragePersistence implements PersistenceStrategy {
         return null;
       }
       const tokenMap = JSON.parse(storedToken);
-
       return LocalStoragePersistence.serializer.deserialize(tokenMap);
     } catch (e) {
       return null;

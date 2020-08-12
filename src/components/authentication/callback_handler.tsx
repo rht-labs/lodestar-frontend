@@ -5,27 +5,22 @@ import { useLocation, Redirect } from 'react-router';
 export const CallbackHandler = () => {
   const query = new URLSearchParams(useLocation().search);
   const authContext = useSession();
-  const [isHandlingCallback, setIsHandlingCallback] = useState<
-    'initial' | 'handling' | 'completed'
-  >('initial');
-  const mountedRef = React.useRef(true);
+  const [hasRunCheck, setHasRunCheck] = useState<boolean>(false);
+  const [isAuthed, setIsAuthed] = useState<boolean>(null);
   useEffect(() => {
     const code: string | null = query.get('code');
-    if (isHandlingCallback !== 'handling' && code) {
-      setIsHandlingCallback('handling');
-      authContext.handleLoginCallback(code).then(() => {
-        if (mountedRef.current) {
-          setIsHandlingCallback('completed');
+    if (!hasRunCheck && code) {
+      setHasRunCheck(true);
+      authContext.handleLoginCallback(code).then(async () => {
+        if (await authContext.checkIsAuthenticated()) {
+          setIsAuthed(true);
         }
       });
     }
-    return () => {
-      mountedRef.current = false;
-    };
-  }, [authContext, isHandlingCallback, query]);
-
-  if (!authContext.sessionData) {
+  }, [authContext, hasRunCheck, query]);
+  if (!isAuthed) {
     return <div />;
   }
-  return <Redirect to="/app" />;
+  const state = query.get('state') ? JSON.parse(query.get('state')) : null
+  return <Redirect to={state?.from ? state?.from : '/app'} />;
 };

@@ -19,6 +19,7 @@
     "@types/react-router-dom",
     "@types/scheduler",
     "@welldone-software/why-did-you-render",
+    "mockdate",
     "prettier",
     "react-scripts"
   ],

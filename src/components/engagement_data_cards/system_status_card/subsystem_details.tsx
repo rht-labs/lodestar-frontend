@@ -25,6 +25,7 @@ export function SubsystemDetails({ subsystem }: SubsystemDetailsProps) {
         </FlexItem>
         <FlexItem>
           <Button
+            data-testid="subsystem-item"
             variant={ButtonVariant.link}
             onClick={() => requestOpen(SYSTEM_STATUS_MODAL_KEY)}
           >

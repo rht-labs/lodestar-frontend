@@ -13,6 +13,7 @@ import {
 } from '../../../schemas/engagement';
 import { EngagementListItem } from '../engagement_list_item';
 import { MemoryRouter } from 'react-router';
+import MockDate from 'mockdate';
 
 afterEach(cleanup);
 
@@ -34,6 +35,7 @@ describe('Engagement status', () => {
   });
 
   test('matches snapshot', () => {
+    MockDate.set(new Date(2020, 8, 3));
     expect(
       render(
         <MemoryRouter>
@@ -41,5 +43,6 @@ describe('Engagement status', () => {
         </MemoryRouter>
       )
     ).toMatchSnapshot();
+    MockDate.reset();
   });
 });
