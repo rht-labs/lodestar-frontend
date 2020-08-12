@@ -153,15 +153,18 @@
       "options": [
         {
           "label": "Developer",
-          "value": "developer"
+          "value": "developer",
+          "description": "Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges."
         },
         {
           "label": "Observer",
-          "value": "observer"
+          "value": "observer",
+          "description": "Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes."
         },
         {
           "label": "Admin",
-          "value": "admin"
+          "value": "admin",
+          "description": "Role with the highest level of access rights (e.g.: elevated privileges), that allows for full control over most systems that. are part of the engagement. Careful: this role allows for the user to potential apply breaking changes within the environment! Please use selectively."
         }
       ]
     }
