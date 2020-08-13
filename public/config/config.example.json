@@ -1,6 +1,6 @@
 {
   "baseUrl": "http://my-base.url",
-  "clientId": "open-management-portal",
+  "clientId": "lodestar",
   "authBaseUrl": "https://my-sso-endpoint.url",
   "backendUrl": "http://my-backend.url/api",
   "disableLaunch": true,
