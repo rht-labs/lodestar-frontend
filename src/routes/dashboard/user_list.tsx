@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Card, CardActions, CardBody, CardHeader, CardHeaderMain, TooltipPosition,
 } from '@patternfly/react-core';
@@ -18,37 +18,25 @@ interface UserListProps{
 
 export function UserList(props: UserListProps) {
 
-  const columns = [
-    { title: 'First name'},
-    { title: 'Last name' },
-    { title: 'Email' },
-    { title:
-        <>
-          Role
-          <Tooltip
-            content=
-              {
-                <>
-                  <b style={{color: '#73BCF7'}}>Developer:</b>
-                    <br/> Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges.
-                  <br/><br/>
-                  <b style={{color: '#73BCF7'}}>Observer:</b>
-                    <br/> Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes.
-                  <br/><br/>
-                  <b style={{color: '#73BCF7'}}>Admin:</b>
-                    <br/> Role with the highest level of access rights (e.g.: elevated privileges), that allows for full control over most systems that are part of the engagement. Careful: this role allows for the user to potential apply breaking changes within the environment! Please use selectively.
-                </>
-              }
-            entryDelay={0}
-            exitDelay={10}
-            maxWidth={'45rem'}
-            isContentLeftAligned={true}
-            position={TooltipPosition.top}>
-            <InfoCircleIcon style={{fontSize: 'small', marginLeft: '1rem'}}/>
-          </Tooltip>
-        </>
-    },
-  ];
+  const defaultPerPage = 5;
+  const [perPage, setPerPage] = useState(5);
+  const [page, setPage] = useState(1);
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    setRows(props.defaultRows.slice(0, defaultPerPage));
+  }, [props.defaultRows]);
+
+  function handleSetPage(_evt, newPage, perPage, startIdx, endIdx) {
+    setPage(newPage);
+    setRows(props.defaultRows.slice(startIdx, endIdx));
+  }
+
+  function handlePerPageSelect(_evt, newPerPage, newPage, startIdx, endIdx) {
+    setPerPage(newPerPage);
+    setPage(newPage);
+    setRows(props.defaultRows.slice(startIdx, endIdx));
+  }
 
   function renderPagination() {
     return (
@@ -69,21 +57,37 @@ export function UserList(props: UserListProps) {
     );
   }
 
-  const defaultPerPage = 5;
-  const [perPage, setPerPage] = useState(5);
-  const [page, setPage] = useState(1);
-  const [rows, setRows] = useState(props.defaultRows.slice(0, defaultPerPage));
-
-  function handleSetPage(_evt, newPage, perPage, startIdx, endIdx) {
-    setPage(newPage);
-    setRows(props.defaultRows.slice(startIdx, endIdx));
-  }
-
-  function handlePerPageSelect(_evt, newPerPage, newPage, startIdx, endIdx) {
-    setPerPage(newPerPage);
-    setPage(newPage);
-    setRows(props.defaultRows.slice(startIdx, endIdx));
-  }
+  const columns = [
+    { title: 'First name'},
+    { title: 'Last name' },
+    { title: 'Email' },
+    { title:
+        <>
+          Role
+          <Tooltip
+            content=
+              {
+                <>
+                  <b style={{color: '#73BCF7'}}>Developer:</b>
+                  <br/> Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges.
+                  <br/><br/>
+                  <b style={{color: '#73BCF7'}}>Observer:</b>
+                  <br/> Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes.
+                  <br/><br/>
+                  <b style={{color: '#73BCF7'}}>Admin:</b>
+                  <br/> Role with the highest level of access rights (e.g.: elevated privileges), that allows for full control over most systems that are part of the engagement. Careful: this role allows for the user to potential apply breaking changes within the environment! Please use selectively.
+                </>
+              }
+            entryDelay={0}
+            exitDelay={10}
+            maxWidth={'45rem'}
+            isContentLeftAligned={true}
+            position={TooltipPosition.top}>
+            <InfoCircleIcon style={{fontSize: 'small', marginLeft: '1rem'}}/>
+          </Tooltip>
+        </>
+    },
+  ];
 
   const customRowWrapper = ({
                               trRef,

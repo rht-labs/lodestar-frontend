@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import { Brand, Grid, GridItem, Level, LevelItem } from '@patternfly/react-core';
@@ -89,29 +89,24 @@ const UserTable = ({
   formOptions: EngagementFormConfig;
 }) => {
 
-  // const allRows: Array<string>[] = [];
-  // users.forEach((user: any) => (
-  //   allRows.push([user.first_name,  user.last_name, user.email, user.role])
-  // ));
-
-  const [allRows] = useState(
-    [['Sarah',  'test2', 'test3@redhat.com', 'Admin'],
-    ['Joe',  'test2', 'test3@redhat.com', 'Admin']]
-  );
+  const allRows: string[][] = [];
+  users.map((user: any) => (
+    allRows.push([user.first_name,  user.last_name, user.email, user.role])
+  ));
 
   return (
     <Grid hasGutter>
       <GridItem span={10}>
-        <UserList title={redHatUsers}
-                  formOptions={formOptions}
-                  defaultRows=
-                    { allRows.filter( row => ( row[2].toLowerCase().indexOf("redhat.com")) !== -1 ) }
-        />
-        <UserList title={externalUsers}
-                  formOptions={formOptions}
-                  defaultRows=
-                    { allRows.filter( row => ( row[2].toLowerCase().indexOf("redhat.com")) === -1 ) }
-        />
+          <UserList title={redHatUsers}
+                    formOptions={formOptions}
+                    defaultRows=
+                      { allRows.filter( row => ( row[2].toLowerCase().indexOf("redhat.com")) !== -1 ) }
+          />
+          <UserList title={externalUsers}
+                    formOptions={formOptions}
+                    defaultRows=
+                      { allRows.filter( row => ( row[2].toLowerCase().indexOf("redhat.com")) === -1 ) }
+          />
       </GridItem>
     </Grid>
   );
