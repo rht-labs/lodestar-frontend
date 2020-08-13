@@ -22,8 +22,8 @@ export abstract class Config {
       baseUrl: 'http://localhost:3000',
       clientId: 'lodestar',
       authBaseUrl:
-        'https://sso.example.com/auth/realms/omp/protocol/openid-connect',
-      backendUrl: 'https://omp-backend.example.com',
+        'https://sso.example.com/auth/realms/lodestar/protocol/openid-connect',
+      backendUrl: 'https://lodestar-backend.example.com',
       disableLaunch: false,
       supportEmailAddress: 'redhatsupport@redhat.com',
       bannerMessages: [
