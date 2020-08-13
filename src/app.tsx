@@ -5,7 +5,7 @@ import { AuthProvider } from './context/auth_context/auth_context';
 import { VersionProvider } from './context/version_context/version_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary/error_boundary';
-import { OMPRouter } from './routes/router';
+import { LodestarRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_context/feature_toggles';
 import {
   ServiceProvider,
@@ -56,7 +56,7 @@ function AppContexts() {
               <FeatureToggles>
                 <Router>
                   <EngagementProvider engagementService={engagementService}>
-                    <OMPRouter />
+                    <LodestarRouter />
                   </EngagementProvider>
                 </Router>
               </FeatureToggles>

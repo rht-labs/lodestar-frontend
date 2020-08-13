@@ -20,7 +20,7 @@ import { EngagementStatus } from '../schemas/engagement';
 import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 
-export function OMPRouter() {
+export function LodestarRouter() {
   const { fetchNotifications } = useNotification();
   useEffect(() => {
     fetchNotifications();
