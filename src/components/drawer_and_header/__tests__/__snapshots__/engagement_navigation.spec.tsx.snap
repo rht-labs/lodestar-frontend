@@ -27,7 +27,7 @@ Object {
               </a>
             </li>
             <li
-              class="pf-c-nav__item pf-m-expandable pf-m-expanded"
+              class="pf-c-nav__item pf-m-expanded"
             >
               <a
                 aria-expanded="true"
@@ -218,7 +218,7 @@ Object {
             </a>
           </li>
           <li
-            class="pf-c-nav__item pf-m-expandable pf-m-expanded"
+            class="pf-c-nav__item pf-m-expanded"
           >
             <a
               aria-expanded="true"

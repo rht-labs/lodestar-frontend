@@ -16,11 +16,9 @@ Object {
           >
             <button
               aria-controls="page-sidebar"
-              aria-disabled="false"
               aria-expanded="true"
               aria-label="Global navigation"
               class="pf-c-button pf-m-plain"
-              data-ouia-component-id="0"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               id="nav-toggle"
@@ -64,7 +62,7 @@ Object {
               <nav
                 aria-label="Global"
                 class="pf-c-nav pf-m-horizontal"
-                data-ouia-component-id="4"
+                data-ouia-component-id="2"
                 data-ouia-component-type="PF4/Nav"
                 data-ouia-safe="true"
               >
@@ -101,7 +99,6 @@ Object {
                       style="padding-bottom: 0px; padding-top: 0px;"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-1"
                         aria-labelledby="icon-title-0"
                         fill="currentColor"
                         height="1em"
@@ -131,7 +128,6 @@ Object {
                       title="Feedback and Feature Request"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-2"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -151,11 +147,9 @@ Object {
                     class="pf-c-nav__item"
                   >
                     <button
-                      aria-disabled="false"
                       aria-label="Notifications"
                       class="pf-c-button pf-m-plain"
                       data-cy="notification_badge"
-                      data-ouia-component-id="5"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       title="Notifications"
@@ -212,7 +206,7 @@ Object {
               >
                 <div
                   class="pf-c-dropdown"
-                  data-ouia-component-id="3"
+                  data-ouia-component-id="1"
                   data-ouia-component-type="PF4/Dropdown"
                   data-ouia-safe="true"
                 >
@@ -220,7 +214,7 @@ Object {
                     aria-expanded="false"
                     aria-haspopup="true"
                     class="pf-c-dropdown__toggle pf-m-plain"
-                    id="pf-dropdown-toggle-id-0"
+                    id="pf-toggle-id-0"
                     type="button"
                   >
                     
@@ -263,11 +257,9 @@ Object {
         >
           <button
             aria-controls="page-sidebar"
-            aria-disabled="false"
             aria-expanded="true"
             aria-label="Global navigation"
             class="pf-c-button pf-m-plain"
-            data-ouia-component-id="0"
             data-ouia-component-type="PF4/Button"
             data-ouia-safe="true"
             id="nav-toggle"
@@ -311,7 +303,7 @@ Object {
             <nav
               aria-label="Global"
               class="pf-c-nav pf-m-horizontal"
-              data-ouia-component-id="4"
+              data-ouia-component-id="2"
               data-ouia-component-type="PF4/Nav"
               data-ouia-safe="true"
             >
@@ -348,7 +340,6 @@ Object {
                     style="padding-bottom: 0px; padding-top: 0px;"
                   >
                     <svg
-                      aria-describedby="pf-tooltip-1"
                       aria-labelledby="icon-title-0"
                       fill="currentColor"
                       height="1em"
@@ -378,7 +369,6 @@ Object {
                     title="Feedback and Feature Request"
                   >
                     <svg
-                      aria-describedby="pf-tooltip-2"
                       aria-hidden="true"
                       fill="currentColor"
                       height="1em"
@@ -398,11 +388,9 @@ Object {
                   class="pf-c-nav__item"
                 >
                   <button
-                    aria-disabled="false"
                     aria-label="Notifications"
                     class="pf-c-button pf-m-plain"
                     data-cy="notification_badge"
-                    data-ouia-component-id="5"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     title="Notifications"
@@ -459,7 +447,7 @@ Object {
             >
               <div
                 class="pf-c-dropdown"
-                data-ouia-component-id="3"
+                data-ouia-component-id="1"
                 data-ouia-component-type="PF4/Dropdown"
                 data-ouia-safe="true"
               >
@@ -467,7 +455,7 @@ Object {
                   aria-expanded="false"
                   aria-haspopup="true"
                   class="pf-c-dropdown__toggle pf-m-plain"
-                  id="pf-dropdown-toggle-id-0"
+                  id="pf-toggle-id-0"
                   type="button"
                 >
                   

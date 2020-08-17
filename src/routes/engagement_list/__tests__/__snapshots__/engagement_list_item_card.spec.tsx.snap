@@ -7,9 +7,6 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
-        data-ouia-component-id="3"
-        data-ouia-component-type="PF4/Card"
-        data-ouia-safe="true"
         style="margin: 1rem; padding: 2rem 0.5rem;"
       >
         <div
@@ -24,9 +21,7 @@ Object {
               class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
             >
               <button
-                aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline"
-                data-ouia-component-id="4"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 style="white-space: normal; word-wrap: break-word; text-align: left;"
@@ -57,10 +52,8 @@ Object {
               class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md pf-m-2-col-on-lg"
             >
               <button
-                aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
                 data-cy="view_engagement_button"
-                data-ouia-component-id="5"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 type="button"
@@ -76,9 +69,6 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
-      data-ouia-component-id="3"
-      data-ouia-component-type="PF4/Card"
-      data-ouia-safe="true"
       style="margin: 1rem; padding: 2rem 0.5rem;"
     >
       <div
@@ -93,9 +83,7 @@ Object {
             class="pf-l-grid__item pf-m-12-col-on-md pf-m-3-col-on-lg"
           >
             <button
-              aria-disabled="false"
               class="pf-c-button pf-m-link pf-m-inline"
-              data-ouia-component-id="4"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               style="white-space: normal; word-wrap: break-word; text-align: left;"
@@ -126,10 +114,8 @@ Object {
             class="pf-l-grid__item pf-m-12-col-on-sm pf-m-4-col-on-md pf-m-2-col-on-lg"
           >
             <button
-              aria-disabled="false"
               class="pf-c-button pf-m-secondary"
               data-cy="view_engagement_button"
-              data-ouia-component-id="5"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"

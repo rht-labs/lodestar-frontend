@@ -111,7 +111,6 @@ Object {
                             aria-labelledby=" customer_dropdown"
                             class="pf-c-button pf-c-select__toggle-button pf-m-plain"
                             id="customer_dropdown"
-                            tabindex="-1"
                             type="button"
                           >
                             <svg
@@ -245,9 +244,6 @@ Object {
                     <select
                       aria-invalid="false"
                       class="pf-c-form-control"
-                      data-ouia-component-id="1"
-                      data-ouia-component-type="PF4/FormSelect"
-                      data-ouia-safe="true"
                       data-testid="region"
                     >
                       <option
@@ -268,9 +264,7 @@ Object {
                 </div>
               </form>
               <button
-                aria-disabled="true"
-                class="pf-c-button pf-m-primary pf-m-disabled"
-                data-ouia-component-id="2"
+                class="pf-c-button pf-m-primary"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="create-engagement-button"
@@ -393,7 +387,6 @@ Object {
                           aria-labelledby=" customer_dropdown"
                           class="pf-c-button pf-c-select__toggle-button pf-m-plain"
                           id="customer_dropdown"
-                          tabindex="-1"
                           type="button"
                         >
                           <svg
@@ -527,9 +520,6 @@ Object {
                   <select
                     aria-invalid="false"
                     class="pf-c-form-control"
-                    data-ouia-component-id="1"
-                    data-ouia-component-type="PF4/FormSelect"
-                    data-ouia-safe="true"
                     data-testid="region"
                   >
                     <option
@@ -550,9 +540,7 @@ Object {
               </div>
             </form>
             <button
-              aria-disabled="true"
-              class="pf-c-button pf-m-primary pf-m-disabled"
-              data-ouia-component-id="2"
+              class="pf-c-button pf-m-primary"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               data-testid="create-engagement-button"

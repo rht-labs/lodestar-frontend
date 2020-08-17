@@ -148,10 +148,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -172,19 +170,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -217,10 +211,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -241,19 +233,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -391,10 +379,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -415,19 +401,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -460,10 +442,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -484,19 +464,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -600,10 +576,8 @@ initialize {
                                   "children": Array [
                                     Object {
                                       "attribs": Object {
-                                        "aria-disabled": "false",
                                         "class": "pf-c-button pf-m-primary",
                                         "data-cy": "get_started_button",
-                                        "data-ouia-component-id": "0",
                                         "data-ouia-component-type": "PF4/Button",
                                         "data-ouia-safe": "true",
                                         "type": "button",
@@ -624,19 +598,15 @@ initialize {
                                       "prev": null,
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
-                                        "aria-disabled": undefined,
                                         "class": undefined,
                                         "data-cy": undefined,
-                                        "data-ouia-component-id": undefined,
                                         "data-ouia-component-type": undefined,
                                         "data-ouia-safe": undefined,
                                         "type": undefined,
                                       },
                                       "x-attribsPrefix": Object {
-                                        "aria-disabled": undefined,
                                         "class": undefined,
                                         "data-cy": undefined,
-                                        "data-ouia-component-id": undefined,
                                         "data-ouia-component-type": undefined,
                                         "data-ouia-safe": undefined,
                                         "type": undefined,
@@ -669,10 +639,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -693,19 +661,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -847,10 +811,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -871,19 +833,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -916,10 +874,8 @@ initialize {
                           "children": Array [
                             Object {
                               "attribs": Object {
-                                "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
                                 "data-cy": "get_started_button",
-                                "data-ouia-component-id": "0",
                                 "data-ouia-component-type": "PF4/Button",
                                 "data-ouia-safe": "true",
                                 "type": "button",
@@ -940,19 +896,15 @@ initialize {
                               "prev": null,
                               "type": "tag",
                               "x-attribsNamespace": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
                               },
                               "x-attribsPrefix": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
@@ -1090,10 +1042,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -1114,19 +1064,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -1159,10 +1105,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -1183,19 +1127,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -1299,10 +1239,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -1323,19 +1261,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -1368,10 +1302,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -1392,19 +1324,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -1582,10 +1510,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -1606,19 +1532,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -1651,10 +1573,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -1675,19 +1595,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -1825,10 +1741,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -1849,19 +1763,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -1894,10 +1804,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -1918,19 +1826,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -2034,10 +1938,8 @@ initialize {
                                   "children": Array [
                                     Object {
                                       "attribs": Object {
-                                        "aria-disabled": "false",
                                         "class": "pf-c-button pf-m-primary",
                                         "data-cy": "get_started_button",
-                                        "data-ouia-component-id": "0",
                                         "data-ouia-component-type": "PF4/Button",
                                         "data-ouia-safe": "true",
                                         "type": "button",
@@ -2058,19 +1960,15 @@ initialize {
                                       "prev": null,
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
-                                        "aria-disabled": undefined,
                                         "class": undefined,
                                         "data-cy": undefined,
-                                        "data-ouia-component-id": undefined,
                                         "data-ouia-component-type": undefined,
                                         "data-ouia-safe": undefined,
                                         "type": undefined,
                                       },
                                       "x-attribsPrefix": Object {
-                                        "aria-disabled": undefined,
                                         "class": undefined,
                                         "data-cy": undefined,
-                                        "data-ouia-component-id": undefined,
                                         "data-ouia-component-type": undefined,
                                         "data-ouia-safe": undefined,
                                         "type": undefined,
@@ -2103,10 +2001,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -2127,19 +2023,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -2360,10 +2252,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -2384,19 +2274,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -2429,10 +2315,8 @@ initialize {
                           "children": Array [
                             Object {
                               "attribs": Object {
-                                "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
                                 "data-cy": "get_started_button",
-                                "data-ouia-component-id": "0",
                                 "data-ouia-component-type": "PF4/Button",
                                 "data-ouia-safe": "true",
                                 "type": "button",
@@ -2453,19 +2337,15 @@ initialize {
                               "prev": null,
                               "type": "tag",
                               "x-attribsNamespace": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
                               },
                               "x-attribsPrefix": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
@@ -2603,10 +2483,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -2627,19 +2505,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -2672,10 +2546,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -2696,19 +2568,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -2812,10 +2680,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -2836,19 +2702,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -2881,10 +2743,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -2905,19 +2765,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -3059,10 +2915,8 @@ initialize {
                           "children": Array [
                             Object {
                               "attribs": Object {
-                                "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
                                 "data-cy": "get_started_button",
-                                "data-ouia-component-id": "0",
                                 "data-ouia-component-type": "PF4/Button",
                                 "data-ouia-safe": "true",
                                 "type": "button",
@@ -3083,19 +2937,15 @@ initialize {
                               "prev": null,
                               "type": "tag",
                               "x-attribsNamespace": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
                               },
                               "x-attribsPrefix": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
@@ -3128,10 +2978,8 @@ initialize {
                         "children": Array [
                           Object {
                             "attribs": Object {
-                              "aria-disabled": "false",
                               "class": "pf-c-button pf-m-primary",
                               "data-cy": "get_started_button",
-                              "data-ouia-component-id": "0",
                               "data-ouia-component-type": "PF4/Button",
                               "data-ouia-safe": "true",
                               "type": "button",
@@ -3152,19 +3000,15 @@ initialize {
                             "prev": null,
                             "type": "tag",
                             "x-attribsNamespace": Object {
-                              "aria-disabled": undefined,
                               "class": undefined,
                               "data-cy": undefined,
-                              "data-ouia-component-id": undefined,
                               "data-ouia-component-type": undefined,
                               "data-ouia-safe": undefined,
                               "type": undefined,
                             },
                             "x-attribsPrefix": Object {
-                              "aria-disabled": undefined,
                               "class": undefined,
                               "data-cy": undefined,
-                              "data-ouia-component-id": undefined,
                               "data-ouia-component-type": undefined,
                               "data-ouia-safe": undefined,
                               "type": undefined,
@@ -3302,10 +3146,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -3326,19 +3168,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -3371,10 +3209,8 @@ initialize {
                           "children": Array [
                             Object {
                               "attribs": Object {
-                                "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
                                 "data-cy": "get_started_button",
-                                "data-ouia-component-id": "0",
                                 "data-ouia-component-type": "PF4/Button",
                                 "data-ouia-safe": "true",
                                 "type": "button",
@@ -3395,19 +3231,15 @@ initialize {
                               "prev": null,
                               "type": "tag",
                               "x-attribsNamespace": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
                               },
                               "x-attribsPrefix": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
@@ -3511,10 +3343,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -3535,19 +3365,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -3580,10 +3406,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -3604,19 +3428,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -3794,10 +3614,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -3818,19 +3636,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -3863,10 +3677,8 @@ initialize {
                           "children": Array [
                             Object {
                               "attribs": Object {
-                                "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
                                 "data-cy": "get_started_button",
-                                "data-ouia-component-id": "0",
                                 "data-ouia-component-type": "PF4/Button",
                                 "data-ouia-safe": "true",
                                 "type": "button",
@@ -3887,19 +3699,15 @@ initialize {
                               "prev": null,
                               "type": "tag",
                               "x-attribsNamespace": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
                               },
                               "x-attribsPrefix": Object {
-                                "aria-disabled": undefined,
                                 "class": undefined,
                                 "data-cy": undefined,
-                                "data-ouia-component-id": undefined,
                                 "data-ouia-component-type": undefined,
                                 "data-ouia-safe": undefined,
                                 "type": undefined,
@@ -4037,10 +3845,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -4061,19 +3867,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
@@ -4106,10 +3908,8 @@ initialize {
                             "children": Array [
                               Object {
                                 "attribs": Object {
-                                  "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
                                   "data-cy": "get_started_button",
-                                  "data-ouia-component-id": "0",
                                   "data-ouia-component-type": "PF4/Button",
                                   "data-ouia-safe": "true",
                                   "type": "button",
@@ -4130,19 +3930,15 @@ initialize {
                                 "prev": null,
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
                                 },
                                 "x-attribsPrefix": Object {
-                                  "aria-disabled": undefined,
                                   "class": undefined,
                                   "data-cy": undefined,
-                                  "data-ouia-component-id": undefined,
                                   "data-ouia-component-type": undefined,
                                   "data-ouia-safe": undefined,
                                   "type": undefined,
@@ -4246,10 +4042,8 @@ initialize {
                                 "children": Array [
                                   Object {
                                     "attribs": Object {
-                                      "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
                                       "data-cy": "get_started_button",
-                                      "data-ouia-component-id": "0",
                                       "data-ouia-component-type": "PF4/Button",
                                       "data-ouia-safe": "true",
                                       "type": "button",
@@ -4270,19 +4064,15 @@ initialize {
                                     "prev": null,
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
                                     },
                                     "x-attribsPrefix": Object {
-                                      "aria-disabled": undefined,
                                       "class": undefined,
                                       "data-cy": undefined,
-                                      "data-ouia-component-id": undefined,
                                       "data-ouia-component-type": undefined,
                                       "data-ouia-safe": undefined,
                                       "type": undefined,
@@ -4315,10 +4105,8 @@ initialize {
                               "children": Array [
                                 Object {
                                   "attribs": Object {
-                                    "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
                                     "data-cy": "get_started_button",
-                                    "data-ouia-component-id": "0",
                                     "data-ouia-component-type": "PF4/Button",
                                     "data-ouia-safe": "true",
                                     "type": "button",
@@ -4339,19 +4127,15 @@ initialize {
                                   "prev": null,
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,
                                   },
                                   "x-attribsPrefix": Object {
-                                    "aria-disabled": undefined,
                                     "class": undefined,
                                     "data-cy": undefined,
-                                    "data-ouia-component-id": undefined,
                                     "data-ouia-component-type": undefined,
                                     "data-ouia-safe": undefined,
                                     "type": undefined,

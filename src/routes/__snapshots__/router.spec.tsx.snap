@@ -54,10 +54,8 @@ Object {
                   href="/app"
                 >
                   <button
-                    aria-disabled="false"
                     class="pf-c-button pf-m-primary"
                     data-cy="get_started_button"
-                    data-ouia-component-id="0"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -131,10 +129,8 @@ Object {
                 href="/app"
               >
                 <button
-                  aria-disabled="false"
                   class="pf-c-button pf-m-primary"
                   data-cy="get_started_button"
-                  data-ouia-component-id="0"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   type="button"
