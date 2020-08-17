@@ -1,4 +1,4 @@
-{{- if .Values.development }}
+{{- if .Values.e2eTestJob.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
