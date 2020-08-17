@@ -6,10 +6,10 @@ import {
   act,
   fireEvent,
   queryByAttribute,
-  waitForDomChange,
 } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 const getById = queryByAttribute.bind(null, 'id');
 
 describe('Create New Engagement Route', () => {
@@ -49,12 +49,15 @@ describe('Create New Engagement Route', () => {
             engagements: [{ customer_name: 'a' }],
             getEngagements: async () => [],
             createEngagement,
+            getConfig: () => {},
+            formOptions: EngagementFormConfig.fromFake(),
           }}
         >
           <CreateNewEngagement />
         </EngagementContext.Provider>
       </MemoryRouter>
     );
+
     const wrapper = render(<Component />);
     await act(async () => {
       const customerNameField = wrapper
@@ -71,7 +74,7 @@ describe('Create New Engagement Route', () => {
         target: { value: 'Mars Rover' },
       });
       await fireEvent.change(wrapper.getByTestId('region'), {
-        target: { value: 'NA' },
+        target: { value: 'na' },
       });
       wrapper.rerender(<Component />);
       const createButton = wrapper.getByTestId('create-engagement-button');

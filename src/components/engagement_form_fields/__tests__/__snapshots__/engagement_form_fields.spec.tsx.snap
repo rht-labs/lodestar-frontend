@@ -945,31 +945,24 @@ Object {
             </option>
             <option
               class=""
-              data-cy="4.1.41"
-              value="4.1.41"
-            >
-              v4.1
-            </option>
-            <option
-              class=""
-              data-cy="4.2.34"
-              value="4.2.34"
-            >
-              v4.2
-            </option>
-            <option
-              class=""
-              data-cy="4.3.26"
-              value="4.3.26"
+              data-cy="4.3.31"
+              value="4.3.31"
             >
               v4.3
             </option>
             <option
               class=""
-              data-cy="4.4.10"
-              value="4.4.10"
+              data-cy="4.4.15"
+              value="4.4.15"
             >
               v4.4
+            </option>
+            <option
+              class=""
+              data-cy="4.5.4"
+              value="4.5.4"
+            >
+              v4.5
             </option>
           </select>
           
@@ -1025,31 +1018,24 @@ Object {
           </option>
           <option
             class=""
-            data-cy="4.1.41"
-            value="4.1.41"
-          >
-            v4.1
-          </option>
-          <option
-            class=""
-            data-cy="4.2.34"
-            value="4.2.34"
-          >
-            v4.2
-          </option>
-          <option
-            class=""
-            data-cy="4.3.26"
-            value="4.3.26"
+            data-cy="4.3.31"
+            value="4.3.31"
           >
             v4.3
           </option>
           <option
             class=""
-            data-cy="4.4.10"
-            value="4.4.10"
+            data-cy="4.4.15"
+            value="4.4.15"
           >
             v4.4
+          </option>
+          <option
+            class=""
+            data-cy="4.5.4"
+            value="4.5.4"
+          >
+            v4.5
           </option>
         </select>
         

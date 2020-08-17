@@ -55,7 +55,7 @@ Object {
                           <h2
                             class="pf-c-title pf-m-xl"
                           >
-                            Customer Name  
+                            Client Name  
                             <svg
                               aria-hidden="true"
                               fill="lightgrey"
@@ -99,7 +99,7 @@ Object {
                               autocomplete="off"
                               class="pf-c-form-control pf-c-select__toggle-typeahead"
                               id="customer_dropdown-select-typeahead"
-                              placeholder="e.g. NASA"
+                              placeholder="NASA"
                               type="text"
                               value=""
                             />
@@ -133,13 +133,7 @@ Object {
                         </div>
                       </div>
                     </div>
-                    <div
-                      aria-live="polite"
-                      class="pf-c-form__helper-text"
-                      id="customer-name-helper"
-                    >
-                      What client is this for?
-                    </div>
+                    
                   </div>
                 </div>
                 <div
@@ -161,7 +155,7 @@ Object {
                           <h2
                             class="pf-c-title pf-m-xl"
                           >
-                            Project Name  
+                            Engagement Name  
                             <svg
                               aria-hidden="true"
                               fill="lightgrey"
@@ -192,7 +186,7 @@ Object {
                       data-testid="project-name"
                       id="project_name"
                       name="project_name"
-                      placeholder="e.g. Mars Probe"
+                      placeholder="Mars Probe"
                       type="text"
                       value=""
                     />
@@ -201,7 +195,7 @@ Object {
                       class="pf-c-form__helper-text"
                       id="project-name-helper"
                     >
-                      The name of the solution being worked on.
+                      A descriptive name to idenitfy your engagement
                     </div>
                   </div>
                 </div>
@@ -260,37 +254,7 @@ Object {
                         class=""
                         value=""
                       >
-                        Select Region
-                      </option>
-                      <option
-                        class=""
-                        value="APAC"
-                      >
-                        APAC
-                      </option>
-                      <option
-                        class=""
-                        value="EMEA"
-                      >
-                        EMEA
-                      </option>
-                      <option
-                        class=""
-                        value="NA"
-                      >
-                        NA
-                      </option>
-                      <option
-                        class=""
-                        value="LATAM"
-                      >
-                        LATAM
-                      </option>
-                      <option
-                        class=""
-                        value="global"
-                      >
-                        Global
+                        Select a region
                       </option>
                     </select>
                     <div
@@ -298,7 +262,7 @@ Object {
                       class="pf-c-form__helper-text"
                       id="region-helper"
                     >
-                      In what region will this engagement take place?
+                      The region sponsoring the engagement
                     </div>
                   </div>
                 </div>
@@ -373,7 +337,7 @@ Object {
                         <h2
                           class="pf-c-title pf-m-xl"
                         >
-                          Customer Name  
+                          Client Name  
                           <svg
                             aria-hidden="true"
                             fill="lightgrey"
@@ -417,7 +381,7 @@ Object {
                             autocomplete="off"
                             class="pf-c-form-control pf-c-select__toggle-typeahead"
                             id="customer_dropdown-select-typeahead"
-                            placeholder="e.g. NASA"
+                            placeholder="NASA"
                             type="text"
                             value=""
                           />
@@ -451,13 +415,7 @@ Object {
                       </div>
                     </div>
                   </div>
-                  <div
-                    aria-live="polite"
-                    class="pf-c-form__helper-text"
-                    id="customer-name-helper"
-                  >
-                    What client is this for?
-                  </div>
+                  
                 </div>
               </div>
               <div
@@ -479,7 +437,7 @@ Object {
                         <h2
                           class="pf-c-title pf-m-xl"
                         >
-                          Project Name  
+                          Engagement Name  
                           <svg
                             aria-hidden="true"
                             fill="lightgrey"
@@ -510,7 +468,7 @@ Object {
                     data-testid="project-name"
                     id="project_name"
                     name="project_name"
-                    placeholder="e.g. Mars Probe"
+                    placeholder="Mars Probe"
                     type="text"
                     value=""
                   />
@@ -519,7 +477,7 @@ Object {
                     class="pf-c-form__helper-text"
                     id="project-name-helper"
                   >
-                    The name of the solution being worked on.
+                    A descriptive name to idenitfy your engagement
                   </div>
                 </div>
               </div>
@@ -578,37 +536,7 @@ Object {
                       class=""
                       value=""
                     >
-                      Select Region
-                    </option>
-                    <option
-                      class=""
-                      value="APAC"
-                    >
-                      APAC
-                    </option>
-                    <option
-                      class=""
-                      value="EMEA"
-                    >
-                      EMEA
-                    </option>
-                    <option
-                      class=""
-                      value="NA"
-                    >
-                      NA
-                    </option>
-                    <option
-                      class=""
-                      value="LATAM"
-                    >
-                      LATAM
-                    </option>
-                    <option
-                      class=""
-                      value="global"
-                    >
-                      Global
+                      Select a region
                     </option>
                   </select>
                   <div
@@ -616,7 +544,7 @@ Object {
                     class="pf-c-form__helper-text"
                     id="region-helper"
                   >
-                    In what region will this engagement take place?
+                    The region sponsoring the engagement
                   </div>
                 </div>
               </div>
