@@ -1,189 +1,221 @@
 {
-  "basic_information": {
-    "project_name": {
-      "validators": [
-        {
-          "kind": "regex",
-          "value": "^[a-zA-Z0-9 ]*$",
-          "message": "Only alphanumeric characters and spaces are allowed"
-        }
-      ]
-    },
-    "customer_name": {
-      "validators": [
-        {
-          "kind": "regex",
-          "value": "^[a-zA-Z0-9 ]*$",
-          "message": "Only alphanumeric characters and spaces are allowed"
-        }
-      ]
-    }
-  },
-  "cloud_options": {
-    "providers": {
-      "options": [
-        {
-          "label": "AWS",
-          "value": "ec2",
-          "options": [
+   "basic_information": {
+      "engagement_regions": {
+         "options": [
             {
-              "label": "Asia Pacific (Hong Kong)",
-              "value": "ap-east-1"
+               "label": "NA",
+               "value": "na"
             },
             {
-              "label": "Asia Pacific (Singapore)",
-              "value": "ap-southeast-1"
+               "label": "LATAM",
+               "value": "latam"
             },
             {
-              "label": "Asia Pacific (Sydney)",
-              "value": "ap-southeast-2"
+               "label": "EMEA",
+               "value": "emea"
             },
             {
-              "label": "Europe (Frankfurt)",
-              "value": "eu-central-1"
-            },
-            {
-              "label": "Europe (Ireland)",
-              "value": "eu-west-1"
-            },
-            {
-              "label": "Europe (London)",
-              "value": "eu-west-2"
-            },
-            {
-              "label": "Europe (Paris)",
-              "value": "eu-west-3"
-            },
-            {
-              "label": "Europe (Stockholm)",
-              "value": "eu-north-1"
-            },
-            {
-              "label": "US East 1 (N. Virginia)",
-              "value": "us-east-1"
-            },
-            {
-              "label": "US East 2 (Ohio)",
-              "value": "us-east-2"
-            },
-            {
-              "label": "US West 1 (N. California)",
-              "value": "us-west-1"
-            },
-            {
-              "label": "US West 2 (Oregon)",
-              "value": "us-west-2"
+               "label": "APAC",
+               "value": "apac"
             }
-          ]
-        },
-        {
-          "label": "Other",
-          "value": "other",
-          "options": [
+         ]
+      },
+      "project_name": {
+         "validators": [
             {
-              "label": "Other",
-              "value": "other"
+               "kind": "regex",
+               "value": "^\\w+[\\w- ()]*$",
+               "message": "Only alphanumeric characters and spaces are allowed"
             }
-          ]
-        }
-      ]
-    }
-  },
-  "openshift_options": {
-    "versions": {
-      "options": [
-        {
-          "label": "v4.1",
-          "value": "4.1.41"
-        },
-        {
-          "label": "v4.2",
-          "value": "4.2.34"
-        },
-        {
-          "label": "v4.3",
-          "value": "4.3.26"
-        },
-        {
-          "label": "v4.4",
-          "value": "4.4.10"
-        }
-      ]
-    },
-    "persistent_storage": {
-      "validators": [
-        {
-          "kind": "notnull"
-        }
-      ],
-      "options": [
-        {
-          "label": "None",
-          "value": "none"
-        },
-        {
-          "label": "50GB",
-          "value": "50G"
-        },
-        {
-          "label": "100GB",
-          "value": "100G"
-        },
-        {
-          "label": "250GB",
-          "value": "250G"
-        },
-        {
-          "label": "500GB",
-          "value": "500G"
-        }
-      ]
-    },
-    "cluster_size": {
-      "options": [
-        {
-          "label": "Small",
-          "value": "small"
-        }
-      ]
-    }
-  },
-  "user_options": {
-    "user_roles": {
-      "options": [
-        {
-          "label": "Developer",
-          "value": "developer",
-          "description": "Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges."
-        },
-        {
-          "label": "Observer",
-          "value": "observer",
-          "description": "Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes."
-        },
-        {
-          "label": "Admin",
-          "value": "admin",
-          "description": "Role with the highest level of access rights (e.g.: elevated privileges), that allows for full control over most systems that. are part of the engagement. Careful: this role allows for the user to potential apply breaking changes within the environment! Please use selectively."
-        }
-      ]
-    }
-  },
-  "logistics_options": {
-    "start_date": null,
-    "end_date": {
-      "validators": [
-        {
-          "kind": "date",
-          "value": {
-            "min": "@today"
-          },
-          "message": "End date must be after today"
-        }
-      ]
-    },
-    "technical_contact_email": null,
-    "env_default_grace_period": 30,
-    "env_grace_period_max": 180
-  }
+         ]
+      },
+      "customer_name": {
+         "validators": [
+            {
+               "kind": "regex",
+               "value": "^\\w+[\\w- ()]*$",
+               "message": "Only alphanumeric characters and spaces are allowed"
+            }
+         ]
+      }
+   },
+   "cloud_options": {
+      "providers": {
+         "options": [
+            {
+               "label": "AWS",
+               "value": "ec2",
+               "options": [
+                  {
+                     "label": "Asia Pacific (Mumbai)",
+                     "value": "ap-south-1"
+                  },
+                  {
+                     "label": "Asia Pacific (Seoul)",
+                     "value": "ap-northeast-2"
+                  },
+                  {
+                     "label": "Asia Pacific (Singapore)",
+                     "value": "ap-southeast-1"
+                  },
+                  {
+                     "label": "Asia Pacific (Sydney)",
+                     "value": "ap-southeast-2"
+                  },
+                  {
+                     "label": "Asia Pacific (Tokyo)",
+                     "value": "ap-northeast-1"
+                  },
+                  {
+                     "label": "Canada (Central)",
+                     "value": "ca-central-1"
+                  },
+                  {
+                     "label": "Europe (Frankfurt)",
+                     "value": "eu-central-1"
+                  },
+                  {
+                     "label": "Europe (Ireland)",
+                     "value": "eu-west-1"
+                  },
+                  {
+                     "label": "Europe (London)",
+                     "value": "eu-west-2"
+                  },
+                  {
+                     "label": "Europe (Paris)",
+                     "value": "eu-west-3"
+                  },
+                  {
+                     "label": "Europe (Stockholm)",
+                     "value": "eu-north-1"
+                  },
+                  {
+                     "label": "South America (São Paulo)",
+                     "value": "sa-east-1"
+                  },
+                  {
+                     "label": "US East 1 (N. Virginia)",
+                     "value": "us-east-1"
+                  },
+                  {
+                     "label": "US East 2 (Ohio)",
+                     "value": "us-east-2"
+                  },
+                  {
+                     "label": "US West 1 (N. California)",
+                     "value": "us-west-1"
+                  },
+                  {
+                     "label": "US West 2 (Oregon)",
+                     "value": "us-west-2"
+                  }
+               ]
+            },
+            {
+               "label": "Other",
+               "value": "other",
+               "options": [
+                  {
+                     "label": "Other",
+                     "value": "other"
+                  }
+               ]
+            }
+         ]
+      }
+   },
+   "openshift_options": {
+      "versions": {
+         "options": [
+            {
+               "label": "v4.3",
+               "value": "4.3.31"
+            },
+            {
+               "label": "v4.4",
+               "value": "4.4.15"
+            },
+            {
+               "label": "v4.5",
+               "value": "4.5.4"
+            }
+         ]
+      },
+      "persistent_storage": {
+         "validators": [
+            {
+               "kind": "notnull"
+            }
+         ],
+         "options": [
+            {
+               "label": "None",
+               "value": "none"
+            },
+            {
+               "label": "50GB",
+               "value": "50G"
+            },
+            {
+               "label": "100GB",
+               "value": "100G"
+            },
+            {
+               "label": "250GB",
+               "value": "250G"
+            },
+            {
+               "label": "500GB",
+               "value": "500G"
+            }
+         ]
+      },
+      "cluster_size": {
+         "options": [
+            {
+               "label": "Small",
+               "value": "small"
+            }
+         ]
+      }
+   },
+   "user_options": {
+      "user_roles": {
+         "options": [
+            {
+               "label": "Developer",
+               "value": "developer",
+               "description": "Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges."
+            },
+            {
+               "label": "Observer",
+               "value": "observer",
+               "description": "Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes."
+            },
+            {
+               "label": "Admin",
+               "value": "admin",
+               "description": "Role with elevated privileges that allows for full control over most systems that are part of the engagement. Careful: this role allows the user to potentially apply breaking changes within the environment! Please use selectively."
+            }
+         ]
+      }
+   },
+   "logistics_options": {
+      "start_date": null,
+      "end_date": {
+         "validators": [
+            {
+               "kind": "date",
+               "value": {
+                  "min": "@today"
+               },
+               "message": "End date must be after today"
+            }
+         ]
+      },
+      "technical_contact_email": null,
+      "env_default_grace_period": 30,
+      "env_grace_period_max": 180
+   }
 }

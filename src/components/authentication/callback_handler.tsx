@@ -18,9 +18,12 @@ export const CallbackHandler = () => {
       });
     }
   }, [authContext, hasRunCheck, query]);
+  if (authContext.authError) {
+    return <Redirect to="/logout" />;
+  }
   if (!isAuthed) {
     return <div />;
   }
-  const state = query.get('state') ? JSON.parse(query.get('state')) : null
+  const state = query.get('state') ? JSON.parse(query.get('state')) : null;
   return <Redirect to={state?.from ? state?.from : '/app'} />;
 };

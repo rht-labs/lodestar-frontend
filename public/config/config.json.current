@@ -1,0 +1,10 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "clientId": "LodeStar-Dev",
+  "authBaseUrl": "https://sso.etl.rht-labs.com/auth/realms/ETL/protocol/openid-connect",
+  "backendUrl": "https://omp-backend-omp-frontend.apps.test.lodestar.rht-labs.com",
+  "disableLaunch": false,
+  "supportEmailAddress": "lodestar-support@redhat.com",
+  "loggerType": "console",
+  "logLevel": "debug"
+}
