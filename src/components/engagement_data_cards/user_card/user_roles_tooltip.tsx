@@ -11,13 +11,13 @@ interface UserRolesTooltipProps {
 
 export function UserRolesTooltip({formOptions}: UserRolesTooltipProps) {
 
-  function createTooltipText (formOptions: any) {
-    let text = [<></>];
-    (formOptions?.user_options?.user_roles?.options ?? []).map((option: any) => {
+  function createTooltipText (formOptions: EngagementFormConfig) {
+    let text = [<div key={'tooltipText'}/>];
+    (formOptions?.user_options?.user_roles?.options ?? []).map((option: any, index: number) => {
       return text.push(
-        <>
+        <div key={index}>
           { descriptionText(option) }
-        </>
+        </div>
       )
     });
     return text;
