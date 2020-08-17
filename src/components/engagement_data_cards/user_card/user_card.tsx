@@ -91,7 +91,7 @@ const UserTable = ({
 
   const allRows: string[][] = [];
   users.map((user: any) => (
-    allRows.push([user.first_name,  user.last_name, user.email, user.role])
+    allRows.push([user.first_name + " " + user.last_name, user.email, user.role])
   ));
 
   return (
@@ -100,12 +100,12 @@ const UserTable = ({
           <UserList title={redHatUsers}
                     formOptions={formOptions}
                     defaultRows=
-                      { allRows.filter( row => ( row[2].toLowerCase().indexOf("redhat.com")) !== -1 ) }
+                      { allRows.filter( row => ( row[1].toLowerCase().indexOf("redhat.com")) !== -1 ) }
           />
           <UserList title={externalUsers}
                     formOptions={formOptions}
                     defaultRows=
-                      { allRows.filter( row => ( row[2].toLowerCase().indexOf("redhat.com")) === -1 ) }
+                      { allRows.filter( row => ( row[1].toLowerCase().indexOf("redhat.com")) === -1 ) }
           />
       </GridItem>
     </Grid>

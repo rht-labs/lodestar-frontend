@@ -57,8 +57,7 @@ export function UserList(props: UserListProps) {
   }
 
   const columns = [
-    { title: 'First name'},
-    { title: 'Last name' },
+    { title: 'Full name'},
     { title: 'Email' },
     { title:
         <>
