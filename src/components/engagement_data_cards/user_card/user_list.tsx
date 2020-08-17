@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Card, CardActions, CardBody, CardHeader, CardHeaderMain, TooltipPosition,
+  Card, CardActions, CardBody, CardHeader, CardHeaderMain,
 } from '@patternfly/react-core';
 import { TableBody, TableHeader, TableVariant, Table } from "@patternfly/react-table";
 import { Pagination } from "@patternfly/react-core";
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Table/table';
-import { InfoCircleIcon } from "@patternfly/react-icons";
-import { Tooltip } from '@patternfly/react-core';
-import {EngagementFormConfig} from "../../schemas/engagement_config";
+import { EngagementFormConfig } from "../../../schemas/engagement_config";
+import { UserRolesTooltip } from "./user_roles_tooltip";
 
 interface UserListProps{
   defaultRows: string[][];
@@ -64,27 +63,7 @@ export function UserList(props: UserListProps) {
     { title:
         <>
           Role
-          <Tooltip
-            content=
-              {
-                <>
-                  <b style={{color: '#73BCF7'}}>Developer:</b>
-                  <br/> Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges.
-                  <br/><br/>
-                  <b style={{color: '#73BCF7'}}>Observer:</b>
-                  <br/> Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes.
-                  <br/><br/>
-                  <b style={{color: '#73BCF7'}}>Admin:</b>
-                  <br/> Role with the highest level of access rights (e.g.: elevated privileges), that allows for full control over most systems that are part of the engagement. Careful: this role allows for the user to potential apply breaking changes within the environment! Please use selectively.
-                </>
-              }
-            entryDelay={0}
-            exitDelay={10}
-            maxWidth={'45rem'}
-            isContentLeftAligned={true}
-            position={TooltipPosition.top}>
-            <InfoCircleIcon style={{fontSize: 'small', marginLeft: '1rem'}}/>
-          </Tooltip>
+          <UserRolesTooltip formOptions={props.formOptions}/>
         </>
     },
   ];

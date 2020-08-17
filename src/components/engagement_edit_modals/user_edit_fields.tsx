@@ -15,6 +15,7 @@ import { APP_FEATURES } from "../../common/app_features";
 import { Feature } from "../feature/feature";
 import { EngagementFormConfig } from "../../schemas/engagement_config";
 import { useFeatures } from "../../context/feature_context/feature_hook";
+import {UserRolesTooltip} from "../engagement_data_cards/user_card/user_roles_tooltip";
 
 export interface UserEditFieldsProps {
   users: any;
@@ -27,7 +28,6 @@ export const UserEditFields = ({
   formOptions,
   onChange
 }: UserEditFieldsProps) => {
-  console.log(">>>", (formOptions?.user_options?.user_roles));
 
   const { hasFeature } = useFeatures();
   function removeUser(index: any) {
@@ -60,7 +60,10 @@ export const UserEditFields = ({
                       <Text>Email</Text>
                     </GridItem>
                     <GridItem span={2}>
-                      <Text>Role</Text>
+                      <Text>
+                        Role
+                        <UserRolesTooltip formOptions={formOptions}/>
+                      </Text>
                     </GridItem>
                     <GridItem span={1}>
                       <Feature name={APP_FEATURES.writer}>

@@ -6,7 +6,7 @@ import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { UserList } from "../../../routes/dashboard/user_list";
+import { UserList } from "./user_list";
 import { UserIcon } from "@patternfly/react-icons";
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
