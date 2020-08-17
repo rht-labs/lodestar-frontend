@@ -24,17 +24,6 @@ import { useValidation } from '../../context/validation_context/validation_hook'
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
 
-const REGIONS = [
-  {
-    label: 'APAC',
-    value: 'APAC',
-  },
-  { label: 'EMEA', value: 'EMEA' },
-  { label: 'NA', value: 'NA' },
-  { label: 'LATAM', value: 'LATAM' },
-  { label: 'Global', value: 'global' },
-];
-
 export function CreateNewEngagement() {
   const history = useHistory();
   const {
@@ -43,18 +32,28 @@ export function CreateNewEngagement() {
     currentEngagement,
     getEngagements,
     engagements,
+    getConfig,
   } = useEngagements();
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
       await createEngagement({
         customer_name: customerName,
         project_name: projectName,
+        engagement_region: region,
       });
       history.push(`/app/engagements/${customerName}/${projectName}`);
     } else {
       history.push('/app/engagements');
     }
   };
+
+  const [hasFetchedConfig, setHasFetchedConfig] = useState<boolean>(false);
+  useEffect(() => {
+    if (!formOptions && !hasFetchedConfig) {
+      getConfig();
+      setHasFetchedConfig(true);
+    }
+  }, [formOptions, getConfig, hasFetchedConfig]);
 
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
@@ -77,13 +76,17 @@ export function CreateNewEngagement() {
   useEffect(() => {
     setCustomerName(null);
     setProjectName(null);
+    setRegion(null);
   }, [currentEngagement]);
 
   const hasValidInput =
     !!customerName &&
     !!projectName &&
+    !!region &&
     getValidationResult('project_name')?.length === 0 &&
-    getValidationResult('customer_name')?.length === 0;
+    getValidationResult('customer_name')?.length === 0 &&
+    getValidationResult('engagement_region')?.length === 0;
+  console.log(formOptions);
 
   return (
     <div
@@ -182,7 +185,8 @@ export function CreateNewEngagement() {
                       Region&nbsp;&nbsp;
                       <CheckCircleIcon
                         color={
-                          getValidationResult('region').length === 0 && !!region
+                          getValidationResult('engagement_region').length ===
+                            0 && !!region
                             ? 'green'
                             : 'lightgrey'
                         }
@@ -191,9 +195,11 @@ export function CreateNewEngagement() {
                   }
                   fieldId="region"
                   helperText="The region sponsoring the engagement"
-                  helperTextInvalid={getValidationResult('region').join(' ')}
+                  helperTextInvalid={getValidationResult(
+                    'engagement_region'
+                  ).join(' ')}
                   validated={
-                    getValidationResult('region').length > 0
+                    getValidationResult('engagement_region').length > 0
                       ? 'error'
                       : 'default'
                   }
@@ -212,15 +218,17 @@ export function CreateNewEngagement() {
                         key="undefined region"
                       />,
                     ].concat(
-                      REGIONS.map(r => {
-                        return (
-                          <FormSelectOption
-                            label={r.label}
-                            key={r.value}
-                            value={r.value}
-                          ></FormSelectOption>
-                        );
-                      })
+                      formOptions?.basic_information?.engagement_regions?.options?.map(
+                        r => {
+                          return (
+                            <FormSelectOption
+                              label={r.label}
+                              key={r.value}
+                              value={r.value}
+                            ></FormSelectOption>
+                          );
+                        }
+                      )
                     )}
                   </FormSelect>
                 </FormGroup>

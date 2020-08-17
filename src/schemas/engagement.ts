@@ -53,6 +53,7 @@ export interface Engagement {
   ocp_version: string;
   project_id: number;
   project_name: string;
+  engagement_region: string;
   start_date: Date;
   technical_lead_email: string;
   technical_lead_name: string;
@@ -62,6 +63,7 @@ export interface Engagement {
   suggested_subdomain?: string;
   status: ClusterStatus;
 }
+const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
   static fromFake(
     staticData = false,
@@ -149,6 +151,7 @@ export abstract class Engagement {
       ocp_version: staticData ? '4.4' : faker.random.number().toString(),
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
+      engagement_region: regions[0],
       technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
       technical_lead_name: staticData
         ? 'Eve Doe'

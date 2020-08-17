@@ -40,6 +40,12 @@ export interface EngagementContext {
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
 }
+
+export type CreateEngagementParams = Pick<
+  Engagement,
+  'project_name' | 'customer_name' | 'engagement_region'
+>;
+
 const requiredFields = [
   'customer_contact_email',
   'customer_contact_name',
@@ -263,7 +269,7 @@ export const EngagementProvider = ({
   );
 
   const createEngagement = useCallback(
-    async (data: any) => {
+    async (data: CreateEngagementParams) => {
       feedbackContext.showLoader();
       try {
         await _validateAuthStatusRef.current();
