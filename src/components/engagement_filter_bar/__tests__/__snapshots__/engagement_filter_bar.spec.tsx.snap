@@ -19,8 +19,10 @@ Object {
               class="pf-c-input-group"
             >
               <button
+                aria-disabled="false"
                 aria-label="search button for search input"
                 class="pf-c-button pf-m-control"
+                data-ouia-component-id="0"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 type="button"
@@ -59,8 +61,10 @@ Object {
               class="pf-c-input-group"
             >
               <button
+                aria-disabled="false"
                 aria-label="search button for search input"
                 class="pf-c-button pf-m-control"
+                data-ouia-component-id="1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 type="button"
@@ -82,7 +86,7 @@ Object {
               </button>
               <div
                 class="pf-c-select"
-                data-ouia-component-id="0"
+                data-ouia-component-id="2"
                 data-ouia-component-type="PF4/Select"
                 data-ouia-safe="true"
               >
@@ -132,8 +136,10 @@ Object {
               class="pf-c-input-group"
             >
               <button
+                aria-disabled="false"
                 aria-label="search button for search input"
                 class="pf-c-button pf-m-control"
+                data-ouia-component-id="3"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 type="button"
@@ -155,7 +161,7 @@ Object {
               </button>
               <div
                 class="pf-c-select"
-                data-ouia-component-id="1"
+                data-ouia-component-id="4"
                 data-ouia-component-type="PF4/Select"
                 data-ouia-safe="true"
               >
@@ -202,8 +208,10 @@ Object {
             class=""
           >
             <button
+              aria-disabled="false"
               class="pf-c-button pf-m-secondary"
               data-cy="reset_button"
+              data-ouia-component-id="5"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -230,8 +238,10 @@ Object {
             class="pf-c-input-group"
           >
             <button
+              aria-disabled="false"
               aria-label="search button for search input"
               class="pf-c-button pf-m-control"
+              data-ouia-component-id="0"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -270,8 +280,10 @@ Object {
             class="pf-c-input-group"
           >
             <button
+              aria-disabled="false"
               aria-label="search button for search input"
               class="pf-c-button pf-m-control"
+              data-ouia-component-id="1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -293,7 +305,7 @@ Object {
             </button>
             <div
               class="pf-c-select"
-              data-ouia-component-id="0"
+              data-ouia-component-id="2"
               data-ouia-component-type="PF4/Select"
               data-ouia-safe="true"
             >
@@ -343,8 +355,10 @@ Object {
             class="pf-c-input-group"
           >
             <button
+              aria-disabled="false"
               aria-label="search button for search input"
               class="pf-c-button pf-m-control"
+              data-ouia-component-id="3"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -366,7 +380,7 @@ Object {
             </button>
             <div
               class="pf-c-select"
-              data-ouia-component-id="1"
+              data-ouia-component-id="4"
               data-ouia-component-type="PF4/Select"
               data-ouia-safe="true"
             >
@@ -413,8 +427,10 @@ Object {
           class=""
         >
           <button
+            aria-disabled="false"
             class="pf-c-button pf-m-secondary"
             data-cy="reset_button"
+            data-ouia-component-id="5"
             data-ouia-component-type="PF4/Button"
             data-ouia-safe="true"
             type="button"
