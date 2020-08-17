@@ -7,6 +7,9 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
+        data-ouia-component-id="0"
+        data-ouia-component-type="PF4/Card"
+        data-ouia-safe="true"
         style="padding: 1rem;"
       >
         <div
@@ -23,6 +26,7 @@ Object {
                 Engagement Summary
                   
                 <svg
+                  aria-describedby="pf-tooltip-1"
                   aria-hidden="true"
                   fill="green"
                   height="1em"
@@ -223,6 +227,9 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
+      data-ouia-component-id="0"
+      data-ouia-component-type="PF4/Card"
+      data-ouia-safe="true"
       style="padding: 1rem;"
     >
       <div
@@ -239,6 +246,7 @@ Object {
               Engagement Summary
                 
               <svg
+                aria-describedby="pf-tooltip-1"
                 aria-hidden="true"
                 fill="green"
                 height="1em"
@@ -495,6 +503,9 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
+        data-ouia-component-id="1"
+        data-ouia-component-type="PF4/Card"
+        data-ouia-safe="true"
         style="padding: 1rem;"
       >
         <div
@@ -511,6 +522,7 @@ Object {
                 Hosting Environment
                   
                 <svg
+                  aria-describedby="pf-tooltip-2"
                   aria-hidden="true"
                   fill="green"
                   height="1em"
@@ -669,6 +681,9 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
+      data-ouia-component-id="1"
+      data-ouia-component-type="PF4/Card"
+      data-ouia-safe="true"
       style="padding: 1rem;"
     >
       <div
@@ -685,6 +700,7 @@ Object {
               Hosting Environment
                 
               <svg
+                aria-describedby="pf-tooltip-2"
                 aria-hidden="true"
                 fill="green"
                 height="1em"
@@ -899,6 +915,9 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
+        data-ouia-component-id="2"
+        data-ouia-component-type="PF4/Card"
+        data-ouia-safe="true"
         style="padding: 1rem;"
       >
         <div
@@ -915,6 +934,7 @@ Object {
                 Points of Contact
                   
                 <svg
+                  aria-describedby="pf-tooltip-3"
                   aria-hidden="true"
                   fill="green"
                   height="1em"
@@ -1011,6 +1031,9 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
+      data-ouia-component-id="2"
+      data-ouia-component-type="PF4/Card"
+      data-ouia-safe="true"
       style="padding: 1rem;"
     >
       <div
@@ -1027,6 +1050,7 @@ Object {
               Points of Contact
                 
               <svg
+                aria-describedby="pf-tooltip-3"
                 aria-hidden="true"
                 fill="green"
                 height="1em"
