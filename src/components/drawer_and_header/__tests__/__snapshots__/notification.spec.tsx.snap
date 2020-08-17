@@ -6,9 +6,11 @@ Object {
   "baseElement": <body>
     <div>
       <button
+        aria-disabled="false"
         aria-label="Notifications"
         class="pf-c-button pf-m-plain"
         data-cy="notification_badge"
+        data-ouia-component-id="0"
         data-ouia-component-type="PF4/Button"
         data-ouia-safe="true"
         title="Notifications"
@@ -37,9 +39,11 @@ Object {
   </body>,
   "container": <div>
     <button
+      aria-disabled="false"
       aria-label="Notifications"
       class="pf-c-button pf-m-plain"
       data-cy="notification_badge"
+      data-ouia-component-id="0"
       data-ouia-component-type="PF4/Button"
       data-ouia-safe="true"
       title="Notifications"
