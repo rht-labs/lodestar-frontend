@@ -36,11 +36,12 @@ Cypress.Commands.add(
       form: true,
       method: 'POST',
       url: url,
+      failOnStatusCode: false,
       body: {
         username: email,
         password: password,
         grant_type: 'password',
-        client_id,
+        client_id: client_id,
       },
     }).then(resp => {
       const jwt = resp.body;
