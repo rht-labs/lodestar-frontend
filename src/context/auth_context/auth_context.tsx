@@ -4,7 +4,6 @@ import { AuthService } from '../../services/auth_service/authentication_service'
 import { UserProfile } from '../../schemas/user_profile';
 import { UserToken, LocalStoragePersistence } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
-import { Logger } from '../../utilities/logger';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -64,7 +63,7 @@ export const AuthProvider = ({
           return;
         }
       } catch (e) {
-        Logger.instance.error(e);
+        setAuthError(e);
         throw e;
       }
     },
@@ -77,22 +76,30 @@ export const AuthProvider = ({
   };
 
   const checkIsAuthenticated = useCallback(async () => {
-    if (!authService) {
+    try {
+      if (!authService) {
+        return false;
+      }
+      const isLoggedIn = await authService.isLoggedIn();
+      if (!isLoggedIn) {
+        return false;
+      }
+      const tokens = authService.getToken();
+      if (
+        !sessionData?.profile ||
+        !sessionData?.roles ||
+        !sessionData?.tokens
+      ) {
+        const profile = await authService.getUserProfile();
+        setSessionData(createSessionData(profile, tokens));
+      }
+      if (isLoggedIn && tokens) {
+        return true;
+      }
+      return false;
+    } catch (e) {
       return false;
     }
-    const isLoggedIn = await authService.isLoggedIn();
-    if (!isLoggedIn) {
-      return false;
-    }
-    const tokens = authService.getToken();
-    if (!sessionData?.profile || !sessionData?.roles || !sessionData?.tokens) {
-      const profile = await authService.getUserProfile();
-      setSessionData(createSessionData(profile, tokens));
-    }
-    if (isLoggedIn && tokens) {
-      return true;
-    }
-    return false;
   }, [authService, sessionData]);
 
   return (

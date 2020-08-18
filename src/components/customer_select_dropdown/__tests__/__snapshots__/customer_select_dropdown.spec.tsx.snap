@@ -34,6 +34,7 @@ Object {
             aria-labelledby=" customer_dropdown"
             class="pf-c-button pf-c-select__toggle-button pf-m-plain"
             id="customer_dropdown"
+            tabindex="-1"
             type="button"
           >
             <svg
@@ -86,6 +87,7 @@ Object {
           aria-labelledby=" customer_dropdown"
           class="pf-c-button pf-c-select__toggle-button pf-m-plain"
           id="customer_dropdown"
+          tabindex="-1"
           type="button"
         >
           <svg
