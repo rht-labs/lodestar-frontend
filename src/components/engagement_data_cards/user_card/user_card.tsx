@@ -1,13 +1,14 @@
 import React from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
-import { Brand, Grid, GridItem, Level, LevelItem } from '@patternfly/react-core';
+import { Grid, GridItem } from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { UserList } from "./user_list";
-import { UserIcon } from "@patternfly/react-icons";
+import { RedhatIcon, UserIcon } from "@patternfly/react-icons";
+import { UserTableTitleIcon } from "./user_table_title_icon";
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -53,28 +54,12 @@ export function UserCard({
 }
 
 const redHatUsers =
-  <Level>
-    <LevelItem>
-      Red Hat users
-    </LevelItem>
-    <LevelItem>
-      <Brand
-        alt="Red Hat Users"
-        src={`${process.env.PUBLIC_URL}/rh.png`}
-        style={{ height: '50px' }}
-      />
-    </LevelItem>
-  </Level>;
+  <UserTableTitleIcon text={ 'Red Hat users' }
+                      icon={ <RedhatIcon style={{ fontSize: '1.3rem', marginLeft: '1rem' }}/> }/>;
 
 const externalUsers =
-  <Level>
-    <LevelItem>
-      External users
-    </LevelItem>
-    <LevelItem>
-      <UserIcon style={{ height: '50px', marginLeft: '1rem' }}/>
-    </LevelItem>
-  </Level>;
+  <UserTableTitleIcon text={ 'External users' }
+                      icon={ <UserIcon style={{ height: '50px', marginLeft: '1rem' }}/> }/>;
 
 const UserTable = ({
   users,
