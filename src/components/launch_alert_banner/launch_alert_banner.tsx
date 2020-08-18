@@ -1,6 +1,6 @@
 import React from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { Alert, AlertVariant, Button, Title } from '@patternfly/react-core';
+import { Alert, AlertVariant, Button } from '@patternfly/react-core';
 import { format } from 'date-fns';
 import { RequiredFieldsWarning } from '../required_fields_warning/required_fields_warning';
 import { HealthStatus } from '../../schemas/cluster_status';

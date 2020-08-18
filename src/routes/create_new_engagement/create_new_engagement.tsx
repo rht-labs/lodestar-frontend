@@ -86,7 +86,6 @@ export function CreateNewEngagement() {
     getValidationResult('project_name')?.length === 0 &&
     getValidationResult('customer_name')?.length === 0 &&
     getValidationResult('engagement_region')?.length === 0;
-  console.log(formOptions);
 
   return (
     <div
