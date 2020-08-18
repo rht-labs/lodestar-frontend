@@ -14,7 +14,7 @@ interface LaunchAlertBannerProps {
   missingRequiredFields: string[];
 }
 const ENGAGEMENT_CARDS = {
-  engagement_summary_card: 'Engagement Summary Card',
+  engagement_summary_card: 'Engagement Summary',
   poc_card: 'Point of Contact',
   oc_summary_card: 'Hosting Environment',
   user_card: 'Users',
