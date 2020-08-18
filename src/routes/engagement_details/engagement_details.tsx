@@ -7,7 +7,7 @@ import { getValidatorsFromFormOptions } from '../../common/config_validator_adap
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
-import { EngagementPageView } from './implementations/engagement_page_view';
+import { EngagementPageView } from './engagement_page_view';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { profileOnRender } from '../../utilities/profiler_callbacks';
 

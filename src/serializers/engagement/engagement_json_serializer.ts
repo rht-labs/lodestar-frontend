@@ -37,7 +37,24 @@ export class EngagementJsonSerializer
       ...engagement,
       project_name: engagement?.project_name?.trim?.(),
       customer_name: engagement?.customer_name?.trim?.(),
+      customer_contact_email: engagement?.customer_contact_email?.trim?.(),
+      customer_contact_name: engagement?.customer_contact_name?.trim?.(),
+      description: engagement?.description?.trim?.(),
+      engagement_lead_email: engagement?.engagement_lead_email?.trim?.(),
+      engagement_lead_name: engagement?.engagement_lead_name?.trim?.(),
+      location: engagement?.location?.trim?.(),
+      ocp_cloud_provider_name: engagement?.ocp_cloud_provider_name?.trim?.(),
+      ocp_cloud_provider_region: engagement?.ocp_cloud_provider_region?.trim?.(),
+      ocp_cluster_size: engagement?.ocp_cluster_size?.trim?.(),
+      ocp_persistent_storage_size: engagement?.ocp_persistent_storage_size?.trim?.(),
+      ocp_sub_domain: engagement?.ocp_sub_domain?.trim?.(),
+      ocp_version: engagement?.ocp_version?.trim?.(),
+      engagement_region: engagement?.engagement_region?.trim?.(),
       additional_details: (engagement.additional_details ?? '').trim(),
+      technical_lead_email: engagement?.technical_lead_email?.trim?.(),
+      technical_lead_name: engagement?.technical_lead_name?.trim?.(),
+      last_update_by_name: engagement?.last_update_by_name?.trim?.(),
+      suggested_subdomain: engagement?.suggested_subdomain?.trim?.(),
       archive_date: engagement.archive_date
         ? EngagementJsonSerializer.formatDate(engagement.archive_date)
         : null,
@@ -48,7 +65,14 @@ export class EngagementJsonSerializer
         ? EngagementJsonSerializer.formatDate(engagement.start_date)
         : null,
     };
-    return e;
+    const trimmedValues = Object.keys(e).reduce((acc, currKey) => {
+      acc[currKey] = e[currKey]
+      if (typeof acc[currKey] === 'string') {
+        acc[currKey] = acc[currKey]?.trim?.()
+      }
+      return acc
+    }, {})
+    return trimmedValues;
   }
   deserialize(data: object): Engagement {
     return {
