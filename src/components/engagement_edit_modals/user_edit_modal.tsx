@@ -2,33 +2,21 @@ import React from 'react';
 import {
   Button,
   EmptyStateIcon,
-  Form,
-  FormSelect,
-  FormSelectOption,
-  InputGroup,
-  Text,
-  TextInput,
   EmptyState,
   Title,
   EmptyStateBody,
   Modal,
   ModalVariant,
-  Grid,
-  GridItem,
 } from '@patternfly/react-core';
 
 import {
-  PlusCircleIcon,
-  ErrorCircleOIcon,
   UsersIcon,
 } from '@patternfly/react-icons';
-import { Feature } from '../feature/feature';
-import { APP_FEATURES } from '../../common/app_features';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { useFeatures } from '../../context/feature_context/feature_hook';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
+import { UserEditFields } from "./user_edit_fields";
 
 export interface UserEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -45,7 +33,6 @@ export function UserEditModal({
   onSave: propsOnSave,
 }: UserEditModalProps) {
   const { requestClose } = useModalVisibility();
-  const { hasFeature } = useFeatures();
   const onSave = () => {
     propsOnSave(engagement);
     requestClose();
@@ -55,10 +42,7 @@ export function UserEditModal({
     engagement.engagement_users.push(newUser);
     onChange('user', engagement.engagement_users);
   }
-  function removeUser(index: any) {
-    engagement.engagement_users.splice(index.currentTarget.value, 1);
-    onChange('user', engagement.engagement_users);
-  }
+
   return (
     <Modal
       variant={ModalVariant.large}
@@ -101,182 +85,11 @@ export function UserEditModal({
                 Add User
               </Button>
             </EmptyState>
-          ) : (
-            <div>
-              <Grid>
-                <Form isHorizontal>
-                  <ul>
-                    <li>
-                      <InputGroup>
-                        <Grid style={{ width: '100%' }}>
-                          <GridItem span={3}>
-                            <Text>First Name</Text>
-                          </GridItem>
-                          <GridItem span={3}>
-                            <Text>Last Name</Text>
-                          </GridItem>
-                          <GridItem span={3}>
-                            <Text>Email</Text>
-                          </GridItem>
-                          <GridItem span={2}>
-                            <Text>Role</Text>
-                          </GridItem>
-                          <GridItem span={1}>
-                            <Feature name={APP_FEATURES.writer}>
-                              <Text>Del</Text>
-                            </Feature>
-                          </GridItem>
-                        </Grid>
-                      </InputGroup>
-                    </li>
-                    {engagement.engagement_users.map(
-                      (value: any, index: any) => {
-                        return (
-                          <li key={index}>
-                            <InputGroup>
-                              <Grid style={{ width: '100%' }}>
-                                <GridItem span={3}>
-                                  <TextInput
-                                    aria-label="First Name"
-                                    name="first-name"
-                                    data-cy={'input_user_firstname'}
-                                    isDisabled={
-                                      !hasFeature(APP_FEATURES.writer)
-                                    }
-                                    onChange={e => {
-                                      engagement.engagement_users[
-                                        index
-                                      ].first_name = e;
-                                      onChange(
-                                        'user',
-                                        engagement.engagement_users
-                                      );
-                                    }}
-                                    placeholder="First Name"
-                                    type="text"
-                                    value={value.first_name || ''}
-                                  />
-                                </GridItem>
-                                <GridItem span={3}>
-                                  <TextInput
-                                    aria-label="Last Name"
-                                    name="last-name"
-                                    data-cy={'input_user_lastname'}
-                                    isDisabled={
-                                      !hasFeature(APP_FEATURES.writer)
-                                    }
-                                    onChange={e => {
-                                      engagement.engagement_users[
-                                        index
-                                      ].last_name = e;
-                                      onChange(
-                                        'user',
-                                        engagement.engagement_users
-                                      );
-                                    }}
-                                    placeholder="Last Name"
-                                    type="text"
-                                    value={value.last_name || ''}
-                                  />
-                                </GridItem>
-                                <GridItem span={3}>
-                                  <TextInput
-                                    aria-label="email"
-                                    name="email"
-                                    data-cy={'input_user_email'}
-                                    isDisabled={
-                                      !hasFeature(APP_FEATURES.writer)
-                                    }
-                                    onChange={e => {
-                                      engagement.engagement_users[
-                                        index
-                                      ].email = e;
-                                      onChange(
-                                        'user',
-                                        engagement.engagement_users
-                                      );
-                                    }}
-                                    placeholder="Email Address"
-                                    type="email"
-                                    value={value.email || ''}
-                                  />
-                                </GridItem>
-                                <GridItem span={2}>
-                                  <FormSelect
-                                    name="role"
-                                    aria-label="User Role"
-                                    id="user_role_dropdown"
-                                    value={value.role || ''}
-                                    isDisabled={
-                                      !hasFeature(APP_FEATURES.writer)
-                                    }
-                                    onChange={e => {
-                                      engagement.engagement_users[
-                                        index
-                                      ].role = e;
-                                      onChange(
-                                        'user',
-                                        engagement.engagement_users
-                                      );
-                                    }}
-                                  >
-                                    {[
-                                      <FormSelectOption
-                                        isDisabled={true}
-                                        key={'placeholder'}
-                                        value={undefined}
-                                        label={'Select a role'}
-                                      />,
-                                    ].concat(
-                                      (
-                                        formOptions?.user_options?.user_roles
-                                          ?.options ?? []
-                                      )?.map((option: any, index: number) => (
-                                        <FormSelectOption
-                                          isDisabled={option.disabled}
-                                          key={index}
-                                          value={option.value}
-                                          label={option.label}
-                                          data-cy={option.label}
-                                        />
-                                      ))
-                                    )}
-                                  </FormSelect>
-                                </GridItem>
-                                <GridItem span={1}>
-                                  <Feature name={APP_FEATURES.writer}>
-                                    <Button
-                                      data-testid={`remove-user-button-${index}`}
-                                      onClick={removeUser}
-                                      value={index}
-                                      variant="danger"
-                                      isInline
-                                    >
-                                      <ErrorCircleOIcon />
-                                    </Button>
-                                  </Feature>
-                                </GridItem>
-                              </Grid>
-                            </InputGroup>
-                          </li>
-                        );
-                      }
-                    )}
-                  </ul>
-                </Form>
-              </Grid>
-              <Feature name={APP_FEATURES.writer}>
-                <Button
-                  onClick={addUser}
-                  variant="link"
-                  icon={<PlusCircleIcon />}
-                  data-cy={'add_more_users'}
-                >
-                  Add User
-                </Button>
-              </Feature>
-            </div>
-          )}
+          ) :
+           <UserEditFields users={engagement.engagement_users}
+                           onChange={onChange}
+                           formOptions={formOptions}/>
+          }
         </div>
       </EditModalTemplate>
     </Modal>
