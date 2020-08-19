@@ -25,7 +25,6 @@ spec:
           containerName: {{ .Values.name }}
           command:
           - curl
-          - "-v"
           - "-X"
           - "POST"
           - "-H"
