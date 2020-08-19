@@ -1,4 +1,5 @@
-{{- if .Values.e2eTestJob.enabled }}
+{{- if false }}
+{{- /* Deprecating. Once e2e is ironed remove / fix / replace */ -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
