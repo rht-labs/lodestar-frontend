@@ -29,52 +29,64 @@ export function EngagementOverview({
     <TextContent>
       <Grid hasGutter>
         <GridItem span={12}>
-          <EngagementSummaryCard
-            currentEngagementChanges={currentEngagementChanges}
-            currentEngagement={currentEngagement}
-            onSave={onSave}
-            onChange={onChange}
-            formOptions={formOptions}
-            missingRequiredFields={missingRequiredFields}
-          />
+          <div id="engagement_summary_card">
+            <EngagementSummaryCard
+              currentEngagementChanges={currentEngagementChanges}
+              currentEngagement={currentEngagement}
+              onSave={onSave}
+              onChange={onChange}
+              formOptions={formOptions}
+              missingRequiredFields={missingRequiredFields}
+            />
+          </div>
         </GridItem>
         <GridItem span={12}>
           {currentEngagement?.launch ? (
-            <SystemStatusCard currentEngagement={currentEngagement} />
+            <div id="system_status_card">
+              <SystemStatusCard currentEngagement={currentEngagement} />
+            </div>
           ) : (
             <></>
           )}
         </GridItem>
         <GridItem span={12}>
-          <PointOfContactCard
-            onSave={onSave}
-            onChange={onChange}
-            formOptions={formOptions}
-            currentEngagement={currentEngagement}
-            currentEngagementChanges={currentEngagementChanges}
-            missingRequiredFields={missingRequiredFields}
-          />
+          <div id="poc_card">
+            <PointOfContactCard
+              onSave={onSave}
+              onChange={onChange}
+              formOptions={formOptions}
+              currentEngagement={currentEngagement}
+              currentEngagementChanges={currentEngagementChanges}
+              missingRequiredFields={missingRequiredFields}
+            />
+          </div>
         </GridItem>
         <GridItem span={12}>
-          <OpenShiftClusterSummaryCard
-            onSave={onSave}
-            onChange={onChange}
-            formOptions={formOptions}
-            currentEngagement={currentEngagement}
-            currentEngagementChanges={currentEngagementChanges}
-            missingRequiredFields={missingRequiredFields}
-          />
+          <div id="oc_summary_card">
+            <OpenShiftClusterSummaryCard
+              onSave={onSave}
+              onChange={onChange}
+              formOptions={formOptions}
+              currentEngagement={currentEngagement}
+              currentEngagementChanges={currentEngagementChanges}
+              missingRequiredFields={missingRequiredFields}
+            />
+          </div>
         </GridItem>
         <GridItem span={12}>
-          <UserCard
-            onSave={onSave}
-            onChange={onChange}
-            formOptions={formOptions}
-            engagement={currentEngagementChanges}
-          />
+          <div id="user_card">
+            <UserCard
+              onSave={onSave}
+              onChange={onChange}
+              formOptions={formOptions}
+              engagement={currentEngagementChanges}
+            />
+          </div>
         </GridItem>
         <GridItem span={12}>
-          <ActivityHistoryCard engagement={currentEngagement} />
+          <div id="activity_card">
+            <ActivityHistoryCard engagement={currentEngagement} />
+          </div>
         </GridItem>
       </Grid>
     </TextContent>
