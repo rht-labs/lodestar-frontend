@@ -18,6 +18,40 @@ spec:
       maxUnavailable: 25%
       timeoutSeconds: 600
       updatePeriodSeconds: 1
+{{- if .Values.e2eTestJob.enabled }}
+      post:
+        failurePolicy: Ignore
+        execNewPod:
+          containerName: {{ .Values.name }}
+          command:
+          - curl
+          - "-v"
+          - "-X"
+          - "POST"
+          - "-H"
+          - "Accept: application/vnd.github.v3+json"
+          - "-H"
+          - "Authorization: token $(GITHUB_TOKEN)"
+          - "-d"
+          - "{ \"ref\": \"$(GITHUB_ACTION_REF)\" }"
+          - "$(GITHUB_API_URL)"
+          env:
+          - name: GITHUB_API_URL
+            valueFrom:
+              secretKeyRef:
+                key: GITHUB_API_URL
+                name: e2e-secret
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: GITHUB_TOKEN
+                name: e2e-secret
+          - name: GITHUB_ACTION_REF
+            valueFrom:
+              secretKeyRef:
+                key: GITHUB_ACTION_REF
+                name: e2e-secret
+{{- end }}
     type: Rolling
   template:
     metadata:
