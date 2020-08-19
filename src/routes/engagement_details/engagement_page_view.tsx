@@ -1,6 +1,6 @@
 import React from 'react';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import { EngagementOverviewTab } from '../tab_views/overview';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { EngagementOverview } from './overview';
 
 export function EngagementPageView() {
   const {
@@ -14,7 +14,7 @@ export function EngagementPageView() {
 
   return (
     <>
-      <EngagementOverviewTab
+      <EngagementOverview
         currentEngagement={currentEngagement}
         missingRequiredFields={missingRequiredFields}
         onSave={saveEngagement}

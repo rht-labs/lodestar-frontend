@@ -46,7 +46,7 @@ export const ValidationProvider = ({
           .reduce(
             (accumulatedErrors, currentValidator) => [
               ...accumulatedErrors,
-              currentValidator(value),
+              currentValidator?.(value),
             ],
             []
           )
