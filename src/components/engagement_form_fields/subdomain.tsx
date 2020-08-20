@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import {
-  FormGroup,
-  TextInput,
-} from '@patternfly/react-core';
+import { FormGroup, TextInput } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
@@ -52,7 +49,8 @@ export function SubdomainFormField({
       helperText={
         <div>
           Applications will live at:&nbsp;
-          <strong>{`${getSubdomainHelperText()}.na-1.rht-labs.com`}</strong>
+          <strong>{`${getSubdomainHelperText()}.${engagement.engagement_region ??
+            'na'}-1.rht-labs.com`}</strong>
         </div>
       }
     >

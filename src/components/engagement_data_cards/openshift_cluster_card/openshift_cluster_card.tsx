@@ -65,7 +65,8 @@ export function OpenShiftClusterSummaryCard({
             <EditButton
               onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)}
               text={'Edit'}
-              dataCy={'hosting_env_button'}/>
+              dataCy={'hosting_env_button'}
+            />
           </div>
         )}
         title="Hosting Environment"
@@ -132,7 +133,9 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem md={12} lg={3}>
             <TitledDataPoint title="Subdomain" dataCy={'sub_domain'}>
-              {currentEngagement?.ocp_sub_domain}.na-1.rht-labs.com
+              {currentEngagement?.ocp_sub_domain}.
+              {currentEngagement?.engagement_region ?? 'na'}
+              -1.rht-labs.com
             </TitledDataPoint>
           </GridItem>
         </Grid>
