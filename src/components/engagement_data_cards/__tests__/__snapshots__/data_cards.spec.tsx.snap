@@ -669,7 +669,9 @@ Object {
                   Subdomain
                 </h6>
                 ordoabchao
-                .na-1.rht-labs.com
+                .
+                emea
+                -1.rht-labs.com
               </div>
             </div>
           </div>
@@ -847,7 +849,9 @@ Object {
                 Subdomain
               </h6>
               ordoabchao
-              .na-1.rht-labs.com
+              .
+              emea
+              -1.rht-labs.com
             </div>
           </div>
         </div>
