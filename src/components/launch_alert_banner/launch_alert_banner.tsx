@@ -6,6 +6,7 @@ import { RequiredFieldsWarning } from '../required_fields_warning/required_field
 import { HealthStatus } from '../../schemas/cluster_status';
 import { useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
+
 interface LaunchAlertBannerProps {
   engagement: Engagement;
   onLaunch: (engagement: Engagement) => void;
@@ -13,12 +14,14 @@ interface LaunchAlertBannerProps {
   requiredFields: string[];
   missingRequiredFields: string[];
 }
+
 const ENGAGEMENT_CARDS = {
   engagement_summary_card: 'Engagement Summary',
   poc_card: 'Point of Contact',
   oc_summary_card: 'Hosting Environment',
   user_card: 'Users',
 };
+
 const ENGAGEMENT_FIELD_MAP = {
   description: 'engagement_summary_card',
   location: 'engagement_summary_card',
@@ -41,6 +44,7 @@ const ENGAGEMENT_FIELD_MAP = {
   ocp_cluster_size: 'oc_summary_card',
   suggested_subdomain: 'oc_summary_card',
 };
+
 export function LaunchAlertBanner({
   engagement,
   onLaunch,
@@ -109,6 +113,7 @@ export function LaunchAlertBanner({
 interface LaunchMessageProps {
   engagement: Engagement;
 }
+
 export function LaunchMessage({ engagement }: LaunchMessageProps) {
   let launchMessage = '';
   if (!engagement?.launch) {

@@ -207,6 +207,7 @@ export function CreateNewEngagementForm() {
               >
                 <FormSelect
                   data-testid="region"
+                  data-cy="new_engagement_region"
                   value={region}
                   onChange={e => {
                     setRegion(e);
@@ -236,6 +237,7 @@ export function CreateNewEngagementForm() {
             </Form>
             <Button
               data-testid="create-engagement-button"
+              data-cy="createNewEngagement"
               style={{ margin: '1rem 0' }}
               isDisabled={!hasValidInput}
               onClick={submitNewEngagement}
