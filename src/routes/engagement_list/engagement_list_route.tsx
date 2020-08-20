@@ -72,8 +72,11 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
             </TextContent>
           </FlexItem>
           <FlexItem>
-            <Button onClick={() => history.push('/app/engagements/new')}
-                    id={'button_create_new_engagement'}>
+            <Button
+              onClick={() => history.push('/app/engagements/new')}
+              id={'button_create_new_engagement'}
+              data-cy="create-new-engagement"
+            >
               Create New Engagement
             </Button>
           </FlexItem>
