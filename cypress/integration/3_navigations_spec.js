@@ -30,7 +30,7 @@ describe('navigation', () => {
     cy.visit('/app/dashboard');
     cy.contains('Dashboard');
 
-    cy.get('#nav-toggle').click();
+    cy.toggleNav();
 
     cy.contains('Engagements');
     cy.contains('Active').click();
