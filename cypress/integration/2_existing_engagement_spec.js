@@ -18,9 +18,7 @@ describe('existing engagement engagement', () => {
   });
 
   it('can create new engagement by clicking the button', () => {
-    cy.get('#button_create_new_engagement').click({ force: true });
-
-    cy.get('[data-cy=cancel_button]').click();
+    cy.get('[data-cy=create-new-engagement]').click();
   });
 
   it('searches for an engagement', () => {
