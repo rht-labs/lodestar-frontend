@@ -13,14 +13,15 @@ describe('new engagement', () => {
     cy.request('/app');
 
     cy.get('[data-cy=get_started_button]').click();
+    cy.waitForLoadingBackdropToDisappear();
 
     cy.request('/app/dashboard');
 
-    cy.get('#nav-toggle').click();
+    cy.toggleNav();
 
     cy.contains('Engagements');
     cy.contains('Create New').click();
-    cy.get('#nav-toggle').click();
+    cy.toggleNav();
     cy.wait(2000);
 
     cy.get('#customer_dropdown')
@@ -78,6 +79,7 @@ describe('new engagement', () => {
     //     .contains('Your updates have been successfully saved.');
 
     cy.get('.pf-c-alert__action > .pf-c-button').click();
+    cy.waitForLoadingBackdropToDisappear();
   });
 
   it('Edit points of contact', () => {
