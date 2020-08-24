@@ -49,7 +49,6 @@ export function LaunchAlertBanner({
   engagement,
   onLaunch,
   isLaunchable,
-  requiredFields,
   missingRequiredFields,
 }: LaunchAlertBannerProps) {
   const overallStatus = engagement?.status?.overall_status;
@@ -64,24 +63,28 @@ export function LaunchAlertBanner({
       actionLinks={
         !engagement?.launch ? (
           <div>
+            <Button
+              isDisabled={!isLaunchable}
+              onClick={() => onLaunch(engagement)}
+              data-cy={'launch_button'}
+            >
+              Launch
+            </Button>
+          </div>
+        ) : (
+          undefined
+        )
+      }
+    >
+      <div>
+        <LaunchMessage engagement={engagement} />
+        {!engagement?.launch ? (
+          <div>
             <div>
-              <Button
-                isDisabled={!isLaunchable}
-                onClick={() => onLaunch(engagement)}
-                data-cy={'launch_button'}
-              >
-                Launch
-              </Button>
-              <span style={{ margin: '0 0.5rem' }}>
-                <RequiredFieldsWarning
-                  missingRequiredFields={missingRequiredFields}
-                  requiredFields={requiredFields}
-                />
-              </span>
-            </div>
-            <div style={{ margin: '0.5rem 0' }}>
-              <span>
-                Required fields are missing in the following sections:
+              <span style={{ fontStyle: 'italic' }}>
+                {missingRequiredFields?.length !== 0
+                  ? 'Required fields are missing in the following sections:'
+                  : null}
               </span>
               <ul>
                 {Array.from(
@@ -102,10 +105,8 @@ export function LaunchAlertBanner({
           </div>
         ) : (
           undefined
-        )
-      }
-    >
-      <LaunchMessage engagement={engagement} />
+        )}
+      </div>
     </Alert>
   );
 }
@@ -117,14 +118,18 @@ interface LaunchMessageProps {
 export function LaunchMessage({ engagement }: LaunchMessageProps) {
   let launchMessage = '';
   if (!engagement?.launch) {
-    launchMessage = 'This engagement has not been launched';
+    launchMessage = '';
   } else {
     launchMessage = `This engagement was launched on ${format(
       engagement?.launch?.launched_date_time,
       'MMM d, yyyy'
     )} by ${engagement?.launch?.launched_by}`;
   }
-  return <span>{launchMessage}</span>;
+  return (
+    <span style={{ marginBottom: !!engagement?.launch ? '0.5rem' : 0 }}>
+      {launchMessage}
+    </span>
+  );
 }
 
 const statusAlert = (overallStatus?: HealthStatus) => {
