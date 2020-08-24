@@ -32,7 +32,7 @@ spec:
           - "-H"
           - "Authorization: token $(GITHUB_TOKEN)"
           - "-d"
-          - "{ \"ref\": \"$(GITHUB_ACTION_REF)\" }"
+          - "{ \"ref\": \"$(GITHUB_ACTION_REF)\", \"inputs\": { \"cypressTag\": \"lodestar-frontend\" } }"
           - "$(GITHUB_API_URL)"
           env:
           - name: GITHUB_API_URL
