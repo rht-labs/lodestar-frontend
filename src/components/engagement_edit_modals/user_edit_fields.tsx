@@ -15,7 +15,7 @@ import { APP_FEATURES } from "../../common/app_features";
 import { Feature } from "../feature/feature";
 import { EngagementFormConfig } from "../../schemas/engagement_config";
 import { useFeatures } from "../../context/feature_context/feature_hook";
-import {UserRolesTooltip} from "../engagement_data_cards/user_card/user_roles_tooltip";
+import { UserRolesTooltip } from "../engagement_data_cards/user_card/user_roles_tooltip";
 
 export interface UserEditFieldsProps {
   users: any;

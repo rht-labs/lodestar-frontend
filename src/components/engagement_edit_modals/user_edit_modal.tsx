@@ -17,6 +17,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from "./user_edit_fields";
+import { UserEditTable } from "./user_edit_table";
 
 export interface UserEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -77,18 +78,19 @@ export function UserEditModal({
                 </p>
               </EmptyStateBody>
               <Button
-                variant="primary"
+                variant="secondary"
                 onClick={addUser}
                 data-testid={'add-first-user'}
                 data-cy={'add_new_user'}
+                style={{margin: '1rem'}}
               >
                 Add User
               </Button>
             </EmptyState>
           ) :
-           <UserEditFields users={engagement.engagement_users}
-                           onChange={onChange}
-                           formOptions={formOptions}/>
+           <UserEditTable users={engagement.engagement_users}
+                          onChange={onChange}
+                          formOptions={formOptions}/>
           }
         </div>
       </EditModalTemplate>
