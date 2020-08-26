@@ -1,7 +1,7 @@
 import React from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
-import { Grid, GridItem } from '@patternfly/react-core';
+import { Grid, GridItem, Tooltip } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
 import {
@@ -11,6 +11,7 @@ import {
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
+import { InfoCircleIcon } from '@patternfly/react-icons';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
@@ -133,9 +134,20 @@ export function OpenShiftClusterSummaryCard({
           </GridItem>
           <GridItem md={12} lg={3}>
             <TitledDataPoint title="Subdomain" dataCy={'sub_domain'}>
-              {currentEngagement?.ocp_sub_domain}.
-              {currentEngagement?.engagement_region ?? 'na'}
-              -1.rht-labs.com
+              <span
+                style={{
+                  fontWeight: 'bolder',
+                }}
+              >
+                {currentEngagement?.ocp_sub_domain}
+              </span>
+              <span style={{ fontStyle: 'italic' }}>
+                {'.region.example.com'}
+              </span>
+              &nbsp;
+              <Tooltip content="The full domain is shown as an example. The actual domain(s) used within the environment(s) will be available as part of the status once the engagement is launched">
+                <InfoCircleIcon></InfoCircleIcon>
+              </Tooltip>
             </TitledDataPoint>
           </GridItem>
         </Grid>
