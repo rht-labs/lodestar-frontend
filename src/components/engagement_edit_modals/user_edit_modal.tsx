@@ -10,6 +10,7 @@ import {
 } from '@patternfly/react-core';
 
 import {
+  PlusIcon,
   UsersIcon,
 } from '@patternfly/react-icons';
 import { Engagement } from '../../schemas/engagement';
@@ -17,7 +18,8 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from "./user_edit_fields";
-import { UserEditTable } from "./user_edit_table";
+import { APP_FEATURES } from "../../common/app_features";
+import { Feature } from "../feature/feature";
 
 export interface UserEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -54,6 +56,17 @@ export function UserEditModal({
       <EditModalTemplate
         actions={
           <div>
+            <Feature name={APP_FEATURES.writer}>
+              <Button
+                variant="secondary"
+                onClick={addUser}
+                data-testid={'add-first-user'}
+                data-cy={'add_new_user'}
+                style={{margin: '1rem'}}
+              >
+                <PlusIcon style={{fontSize: 'small'}}/> Add User
+              </Button>
+            </Feature>
             <Button
               data-testid="user-edit-save"
               onClick={onSave}
@@ -80,7 +93,7 @@ export function UserEditModal({
               <Button
                 variant="secondary"
                 onClick={addUser}
-                data-testid={'add-first-user'}
+                data-testid={'add-user'}
                 data-cy={'add_new_user'}
                 style={{margin: '1rem'}}
               >
@@ -88,7 +101,7 @@ export function UserEditModal({
               </Button>
             </EmptyState>
           ) :
-           <UserEditTable users={engagement.engagement_users}
+           <UserEditFields users={engagement.engagement_users}
                           onChange={onChange}
                           formOptions={formOptions}/>
           }
