@@ -44,7 +44,7 @@ In order to facilitate serialization of common interfaces across services, a sha
 
 As a high-level overview, data flow through the system typically follows this pattern:
 
-[Front End data flow](./documentation/FE_architecture.png)
+[Front End data flow](/documentation/FE_architecture.png?raw=true)
 
 ## Tests
 
