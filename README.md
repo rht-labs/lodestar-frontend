@@ -2,7 +2,7 @@
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rht-labs_open-management-portal-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=rht-labs_open-management-portal-frontend)
 
-# OMP Frontend Quickstart
+# Frontend Quickstart
 
 ## First things first
 
@@ -27,6 +27,31 @@ Before submitting a PR, confirm that your code passes the style check by running
 
 Additionally, you can attempt to automatically fix any style errors in your code by running:
 `npm run fix`. _Pro tip: commit any changes you have before running any script that may modify your source files._
+
+## General Architecture
+
+This application follows a typical three-tier application design. These three terms can be generally divided into Services which manage communication with external data sources (e.g. REST APIs); Contexts, which contain business logic; and Presentation, which contains the user interface and associated presentation state. 
+
+Contexts are the mediator between the presentation and the services providing data. Data manipulation should be handled to the extent reasonable in the Context layer.
+
+Services should only return data with known interfaces. That is, it is the services responsibility to serialize data from an external source's format into an interface that is recognized within the application. 
+
+By extension, Contexts should not work with unknown data types, nor should they be responsible for preparing data to be sent to an external service.
+
+Once data has reached a Context, its shape should be known in the application. The Context and Presentation layer uses this known data to perform their respective roles.
+
+In order to facilitate serialization of common interfaces across services, a shared serializer interface has been created which can be extended for new data types as they become available. Services can define serializers for their service within their own service module, or within the `serializers/` directory.
+
+As a high-level overview, data flow through the system typically follows this pattern:
+
+[Front End data flow](./documentation/FE_architecture.png)
+
+## Tests
+
+Unit Tests are contained within the source code, rather than in a separate root `test` directory. Typically, tests will be included in a directory `__tests__` at the level of the code they are testing. 
+As contexts are responsible for most data manipulation operations that occur in the application, special care should be taken to ensure high test coverage of the contexts.
+
+Integration tests are contained in their own root level directory `e2e`.
 
 ## Organization
 

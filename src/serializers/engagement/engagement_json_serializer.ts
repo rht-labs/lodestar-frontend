@@ -71,6 +71,7 @@ export class EngagementJsonSerializer
       end_date: data['end_date']
         ? EngagementJsonSerializer.parseDate(data['end_date'])
         : undefined,
+      engagement_region: data['engagement_region'],
       engagement_users: data['engagement_users'],
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
