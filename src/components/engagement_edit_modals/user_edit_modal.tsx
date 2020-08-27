@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   EmptyStateIcon,
@@ -18,8 +18,6 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from "./user_edit_fields";
-import { APP_FEATURES } from "../../common/app_features";
-import { Feature } from "../feature/feature";
 
 export interface UserEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -36,10 +34,38 @@ export function UserEditModal({
   onSave: propsOnSave,
 }: UserEditModalProps) {
   const { requestClose } = useModalVisibility();
+  const [deletedUsers, setDeletedUsers] = useState <string[]>([]);
+
+  function toggleDeleted(email: string) {
+    if (deletedUsers.indexOf(email) < 0){
+      setDeletedUsers([...deletedUsers, email]);
+    }
+    else {
+      const newDeletedUsers = [...deletedUsers];
+      newDeletedUsers.splice(deletedUsers.indexOf(email), 1);
+      setDeletedUsers(newDeletedUsers);
+    }
+  }
+
+  function removeUser() {
+    deletedUsers?.map((userEmail) => {
+      engagement.engagement_users.splice(
+        engagement.engagement_users.findIndex(
+          (user) => {
+             return user.email === userEmail
+            }
+          ), 1)
+    });
+    onChange('user', engagement.engagement_users);
+    setDeletedUsers([]);
+  }
+
   const onSave = () => {
+    removeUser();
     propsOnSave(engagement);
     requestClose();
   };
+
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     engagement.engagement_users.push(newUser);
@@ -56,21 +82,11 @@ export function UserEditModal({
       <EditModalTemplate
         actions={
           <div>
-            <Feature name={APP_FEATURES.writer}>
-              <Button
-                variant="secondary"
-                onClick={addUser}
-                data-testid={'add-first-user'}
-                data-cy={'add_new_user'}
-                style={{margin: '1rem'}}
-              >
-                <PlusIcon style={{fontSize: 'small'}}/> Add User
-              </Button>
-            </Feature>
             <Button
               data-testid="user-edit-save"
               onClick={onSave}
               data-cy={'save_users'}
+              style={{margin: '1rem'}}
             >
               Save
             </Button>
@@ -93,17 +109,20 @@ export function UserEditModal({
               <Button
                 variant="secondary"
                 onClick={addUser}
-                data-testid={'add-user'}
+                data-testid={'add-first-user'}
                 data-cy={'add_new_user'}
                 style={{margin: '1rem'}}
               >
-                Add User
+                <PlusIcon style={{fontSize: 'small'}}/> Add User
               </Button>
             </EmptyState>
           ) :
            <UserEditFields users={engagement.engagement_users}
-                          onChange={onChange}
-                          formOptions={formOptions}/>
+                           onChange={onChange}
+                           toggleDeleted={toggleDeleted}
+                           deletedUsers={deletedUsers}
+                           addUser={addUser}
+                           formOptions={formOptions}/>
           }
         </div>
       </EditModalTemplate>
