@@ -15,13 +15,13 @@ If you are not familiar with Helm - how to configure it and run - you can start 
 1. Clone the target repo:
 
 ```
-git clone https://github.com/rht-labs/open-management-portal-frontend
+git clone https://github.com/rht-labs/lodestar-frontend
 ```
 
 2. Change into to the `deployment` directory:
 
 ```
-cd open-management-portal-frontend/deployment
+cd lodestar-frontend/deployment
 ```
 
 3. Deploy using the following Helm command:
@@ -29,7 +29,7 @@ cd open-management-portal-frontend/deployment
 ```shell script
 helm template . \
   --values values-dev.yaml \
-  --set git.uri=https://github.com/rht-labs/open-management-portal-frontend.git \
+  --set git.uri=https://github.com/rht-labs/lodestar-frontend.git \
   --set git.ref=master \
   --set baseUrl=<your-base-url> \
   --set clientId=<your-sso-client-id> \
