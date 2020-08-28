@@ -36,11 +36,12 @@ Cypress.Commands.add(
       form: true,
       method: 'POST',
       url: url,
+      failOnStatusCode: false,
       body: {
         username: email,
         password: password,
         grant_type: 'password',
-        client_id,
+        client_id: client_id,
       },
     }).then(resp => {
       const jwt = resp.body;
@@ -63,3 +64,38 @@ Cypress.Commands.add(
     });
   }
 );
+
+Cypress.Commands.add('toggleNav', () => {
+  try {
+    cy.get('#nav-toggle').click();
+  } catch (e) {
+    console.warn('the nav toggle was not found');
+  }
+});
+
+Cypress.Commands.add('waitForLoadingBackdropToDisappear', () => {
+  return new Promise(async (resolve, reject) => {
+    let timeout;
+    let interval;
+    try {
+      const loaderChecker = await new Promise((resolve, reject) => {
+        interval = setInterval(() => {
+          try {
+            cy.get('#omp-loader-backdrop');
+          } catch (e) {
+            clearInterval(loaderChecker);
+            resolve();
+          }
+        }, 500);
+      });
+      timeout = setTimeout(() => {
+        clearInterval(interval);
+        resolve();
+      }, 5000);
+    } finally {
+      clearTimeout(timeout);
+      clearInterval(interval);
+      resolve();
+    }
+  });
+});
