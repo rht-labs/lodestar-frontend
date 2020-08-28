@@ -85,12 +85,12 @@ const UserTable = ({
           <UserList title={redHatUsers}
                     formOptions={formOptions}
                     defaultRows=
-                      { allRows.filter( row => ( row[1].toLowerCase().indexOf("redhat.com")) !== -1 ) }
+                      { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) !== -1 ) }
           />
           <UserList title={externalUsers}
                     formOptions={formOptions}
                     defaultRows=
-                      { allRows.filter( row => ( row[1].toLowerCase().indexOf("redhat.com")) === -1 ) }
+                      { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) === -1 ) }
           />
       </GridItem>
     </Grid>
