@@ -2,7 +2,7 @@ name: omp-frontend
 
 servicePort: 8080
 
-imageName: "quay.io/rht-labs/omp-frontend"
+imageName: "quay.io/rht-labs/lodestar-frontend"
 imageTag: "latest" # This is intended to be overridden by the parent Helm chart.
 
 e2eTestJob:
