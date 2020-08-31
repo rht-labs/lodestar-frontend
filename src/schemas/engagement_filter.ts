@@ -4,6 +4,7 @@ export interface EngagementFilter {
   searchTerm?: string;
   allowedStatuses?: EngagementStatus[];
   sort?: SortOption<EngagementSortFields>;
+  engagementRegions?: string[];
 }
 
 export enum EngagementSortFields {
