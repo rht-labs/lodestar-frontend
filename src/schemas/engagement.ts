@@ -53,6 +53,7 @@ export interface Engagement {
   ocp_version: string;
   project_id: number;
   project_name: string;
+  engagement_region: string;
   start_date: Date;
   technical_lead_email: string;
   technical_lead_name: string;
@@ -62,14 +63,15 @@ export interface Engagement {
   suggested_subdomain?: string;
   status: ClusterStatus;
 }
+const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
   static fromFake(
     staticData = false,
     options: Partial<FakedEngagementOptions> = {}
   ): Engagement {
-    const getEngagementDates = (): Pick<
+    const getStatusDeterminers = (): Pick<
       Engagement,
-      'start_date' | 'end_date' | 'archive_date'
+      'start_date' | 'end_date' | 'archive_date' | 'launch'
     > => {
       const defaults = {
         archive_date: staticData ? new Date(2020, 6, 30) : faker.date.recent(),
@@ -85,12 +87,20 @@ export abstract class Engagement {
             start_date: new Date(Date.UTC(2020, 1, 1).valueOf()),
             end_date: new Date(Date.UTC(2098, 1, 1).valueOf()),
             archive_date: new Date(Date.UTC(2099, 1, 1).valueOf()),
+            launch: {
+              launched_by: 'A random person',
+              launched_date_time: new Date(2020, 2, 1),
+            },
           };
         case EngagementStatus.past:
           return {
             start_date: new Date(Date.UTC(2020, 1, 1).valueOf()),
             end_date: new Date(Date.UTC(2020, 2, 1).valueOf()),
             archive_date: new Date(Date.UTC(2020, 2, 2).valueOf()),
+            launch: {
+              launched_by: 'A random person',
+              launched_date_time: new Date(2020, 3, 1),
+            },
           };
         case EngagementStatus.upcoming:
           return {
@@ -102,9 +112,7 @@ export abstract class Engagement {
           return defaults;
       }
     };
-    const dates = getEngagementDates();
     return {
-      ...dates,
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
@@ -143,6 +151,7 @@ export abstract class Engagement {
       ocp_version: staticData ? '4.4' : faker.random.number().toString(),
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
+      engagement_region: regions[0],
       technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
       technical_lead_name: staticData
         ? 'Eve Doe'
@@ -170,6 +179,7 @@ export abstract class Engagement {
           }
         : null,
       status: ClusterStatus.fromFake(staticData),
+      ...getStatusDeterminers(),
     };
   }
 }

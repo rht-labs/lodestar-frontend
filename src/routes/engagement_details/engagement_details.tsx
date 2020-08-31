@@ -7,12 +7,24 @@ import { getValidatorsFromFormOptions } from '../../common/config_validator_adap
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
-import { EngagementPageView } from './implementations/engagement_page_view';
+import { EngagementPageView } from './engagement_page_view';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { profileOnRender } from '../../utilities/profiler_callbacks';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
+}
+
+export interface EngagementDetailViewProps {
+  formOptions: EngagementFormConfig;
+  getConfig: () => void;
+  error: Error;
+  setCurrentEngagement: (engagement: Engagement) => void;
+  currentEngagement: Engagement;
+  createEngagementPoll: (
+    engagement: Engagement
+  ) => Promise<{ cancel: () => void }>;
+  getEngagement: (customer_name, project_name) => Promise<Engagement>;
 }
 
 const EngagementDetailView = React.memo(function({
@@ -23,30 +35,25 @@ const EngagementDetailView = React.memo(function({
   currentEngagement,
   getEngagement,
   createEngagementPoll,
-}: {
-  formOptions: EngagementFormConfig;
-  getConfig: () => void;
-  error: Error;
-  setCurrentEngagement: (engagement: Engagement) => void;
-  currentEngagement: Engagement;
-  createEngagementPoll: (
-    engagement: Engagement
-  ) => Promise<{ cancel: () => void }>;
-  getEngagement: (customer_name, project_name) => Promise<Engagement>;
-}) {
+}: EngagementDetailViewProps) {
   const { project_name, customer_name } = useParams();
 
   useEffect(() => {
-    const engagementPoll = createEngagementPoll(currentEngagement);
+    let engagementPoll;
+    if (currentEngagement?.project_name && currentEngagement?.customer_name) {
+      engagementPoll = createEngagementPoll(currentEngagement);
+    }
     return async () => {
-      (await engagementPoll).cancel();
+      (await engagementPoll)?.cancel?.();
     };
   }, [currentEngagement, createEngagementPoll]);
   useEffect(() => {
     Logger.instance.info('getting config');
-    getConfig();
+    if (!formOptions) {
+      getConfig();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [formOptions]);
 
   useEffect(() => {
     if (!customer_name || !project_name) {

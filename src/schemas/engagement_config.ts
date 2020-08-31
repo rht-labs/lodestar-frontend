@@ -3,6 +3,7 @@ import FakedSchema from './fixtures/engagement_form_config.json';
 export interface EngagementFormOption {
   label: string;
   value: string;
+  description: string;
   options?: EngagementFormOption[];
 }
 

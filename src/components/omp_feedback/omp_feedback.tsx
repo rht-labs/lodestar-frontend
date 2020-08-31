@@ -73,7 +73,10 @@ export function Feedback() {
           />
         </AlertGroup>
       )}
-      <div style={{ ...modalStyle, ...(isLoaderVisible ? {} : hiddenStyle) }}>
+      <div
+        id="omp-loader-backdrop"
+        style={{ ...modalStyle, ...(isLoaderVisible ? {} : hiddenStyle) }}
+      >
         <Spinner style={spinnerStyle} />
       </div>
     </React.Fragment>

@@ -38,7 +38,7 @@ export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
         )}
         title="System Status"
       >
-        <SubsystemStatuses status={status} />
+        <SubsystemStatuses status={status} data-testid="status-card" />
       </DataCard>
     </>
   );
@@ -52,11 +52,17 @@ function SubsystemStatuses({ status }: { status: ClusterStatus }) {
           No systems are reporting statuses
         </span>
       )}
-      {status?.subsystems.map(subsystem => (
-        <GridItem key={subsystem.name} span={2}>
-          <SubsystemDetails subsystem={subsystem} />
-        </GridItem>
-      ))}
+
+      {status?.subsystems.map((subsystem, index) => {
+        return (
+          <GridItem key={subsystem.name} span={2}>
+            <SubsystemDetails
+            data-testid={`subsystem-details-${index}`}
+              subsystem={subsystem}
+            />
+          </GridItem>
+        )
+      })}
     </Grid>
   );
 }

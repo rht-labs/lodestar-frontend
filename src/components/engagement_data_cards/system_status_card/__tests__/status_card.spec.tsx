@@ -1,8 +1,12 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { SystemStatusCard } from '../system_status_card';
 import { TestStateWrapper } from '../../../../common/test_state_wrapper';
-import { Engagement, EngagementStatus } from '../../../../schemas/engagement';
+import {
+  Engagement,
+  EngagementStatus,
+  getEngagementStatus,
+} from '../../../../schemas/engagement';
 import { StatusMessageItem } from '../status_message_item';
 import { Severity } from '../../../../schemas/system_message';
 import { SubsystemDetailsModal } from '../subsystem_details_modal';
@@ -11,6 +15,7 @@ import { SubsystemDetails } from '../subsystem_details';
 import { SystemStatusDetailsModal } from '../system_status_details_modal';
 import { StatusIcon } from '../status_icons';
 import { HealthStatus } from '../../../../schemas/cluster_status';
+import { ModalVisibilityContext } from '../../../../context/edit_modal_visibility_context/edit_modal_visibility_context';
 
 describe('System Status Card', () => {
   test('Card matches snapshot', () => {
@@ -73,5 +78,20 @@ describe('System Status Card', () => {
       render(<StatusIcon status={HealthStatus.yellow} />)
     ).toMatchSnapshot();
     expect(render(<StatusIcon status={HealthStatus.red} />)).toMatchSnapshot();
+  });
+
+  test('Clicking a subsystem requests a modal to open', async () => {
+    const onRequestOpen = jest.fn();
+    const wrapper = render(
+      <ModalVisibilityContext.Provider value={{ requestOpen: onRequestOpen }} >
+        <SystemStatusCard
+          currentEngagement={Engagement.fromFake(true, {
+            status: EngagementStatus.active,
+          })}
+        />
+      </ModalVisibilityContext.Provider>
+    );
+    fireEvent.click(wrapper.getAllByTestId('subsystem-item')[0]);
+    expect(onRequestOpen).toHaveBeenCalled();
   });
 });

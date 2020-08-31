@@ -35,9 +35,6 @@ export class EngagementJsonSerializer
   serialize(engagement: Engagement): object {
     const e = {
       ...engagement,
-      project_name: engagement?.project_name?.trim?.(),
-      customer_name: engagement?.customer_name?.trim?.(),
-      additional_details: (engagement.additional_details ?? '').trim(),
       archive_date: engagement.archive_date
         ? EngagementJsonSerializer.formatDate(engagement.archive_date)
         : null,
@@ -48,7 +45,14 @@ export class EngagementJsonSerializer
         ? EngagementJsonSerializer.formatDate(engagement.start_date)
         : null,
     };
-    return e;
+    const trimmedValues = Object.keys(e).reduce((acc, currKey) => {
+      acc[currKey] = e[currKey]
+      if (typeof acc[currKey] === 'string' && typeof acc[currKey]?.trim === 'function') {
+        acc[currKey] = acc[currKey].trim()
+      }
+      return acc
+    }, {})
+    return trimmedValues;
   }
   deserialize(data: object): Engagement {
     return {

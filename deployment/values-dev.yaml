@@ -16,6 +16,8 @@ authBaseUrl: url
 backendUrl: url
 
 e2eTestJob:
+  enabled: false
+  createSecret: false
   cleanUp:
     image:
       name: quay.io/redhat-cop/gitlab-cleanup

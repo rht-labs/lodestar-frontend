@@ -5,8 +5,10 @@ import { Grid, GridItem } from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
+import { UserList } from "./user_list";
+import { RedhatIcon, UserIcon } from "@patternfly/react-icons";
+import { UserTableTitleIcon } from "./user_table_title_icon";
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -43,45 +45,54 @@ export function UserCard({
         )}
         title="Engagement Users"
       >
-        <Grid hasGutter>
-          <UserGrid engagement={engagement} />
-        </Grid>
+        <UserTable users={engagement?.engagement_users}
+                   formOptions={formOptions}
+        />
       </DataCard>
     </>
   );
 }
 
-const UserGrid = ({ engagement }: { engagement: Engagement }) => {
-  const hasAnyUsers= (engagement?.engagement_users.length > 0);
+const redHatUsers =
+  <UserTableTitleIcon text={ 'Red Hat users' }
+                      icon={ <RedhatIcon style={{ fontSize: '1.3rem', marginLeft: '1rem' }}/> }/>;
 
-  return (
-    <>
-      { hasAnyUsers
-        ? engagement?.engagement_users?.map((user, i) => (
-            <UserTile key={i} user={user} />
-          ))
-        : <GridItem span={12}>
-            <p style={{fontStyle: 'italic'}}> No users have been added to this engagement </p>
-          </GridItem>
-      }
-    </>
-  );
-};
+const externalUsers =
+  <UserTableTitleIcon text={ 'External users' }
+                      icon={ <UserIcon style={{ height: '50px', marginLeft: '1rem' }}/> }/>;
 
-const UserTile = ({
-  user,
+const UserTable = ({
+  users,
+  formOptions
 }: {
-  user: {
+  users: {
     first_name: string;
     last_name: string;
     email: string;
-  };
+    role: string;
+  }[];
+  formOptions: EngagementFormConfig;
 }) => {
+
+  const allRows: string[][] = [];
+  users.map((user: any) => (
+    allRows.push([user.first_name + " " + user.last_name, user.email, user.role])
+  ));
+
   return (
-    <GridItem lg={3} md={6} sm={12}>
-      <TitledDataPoint title={`${user.first_name} ${user.last_name}`}>
-        {user.email}
-      </TitledDataPoint>
-    </GridItem>
+    <Grid hasGutter>
+      <GridItem span={10}>
+          <UserList title={redHatUsers}
+                    formOptions={formOptions}
+                    defaultRows=
+                      { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) !== -1 ) }
+          />
+          <UserList title={externalUsers}
+                    formOptions={formOptions}
+                    defaultRows=
+                      { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) === -1 ) }
+          />
+      </GridItem>
+    </Grid>
   );
 };

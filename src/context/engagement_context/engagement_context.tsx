@@ -40,6 +40,12 @@ export interface EngagementContext {
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
 }
+
+export type CreateEngagementParams = Pick<
+  Engagement,
+  'project_name' | 'customer_name' | 'engagement_region'
+>;
+
 const requiredFields = [
   'customer_contact_email',
   'customer_contact_name',
@@ -86,9 +92,10 @@ export const EngagementProvider = ({
 
   const _handleErrors = useCallback(
     async error => {
+      Logger.instance.debug('EngagementContext:_handleErrors', error);
       if (error instanceof AuthenticationError) {
-        if (!(await authContext.checkAuthStatus())) {
-          throw error;
+        if (!(await authContext.checkIsAuthenticated())) {
+          authContext.setAuthError(error);
         }
       } else {
         throw error;
@@ -97,24 +104,21 @@ export const EngagementProvider = ({
     [authContext]
   );
 
-  const _validateAuthStatus = useCallback(async () => {
-    const validate = async () => {
-      const authStatus = await authContext.checkAuthStatus();
-      if (!authStatus) {
+  useEffect(() => {
+    _validateAuthStatusRef.current = async () => {
+      if (!(await authContext.checkIsAuthenticated())) {
         throw new AuthenticationError();
       }
     };
-    _validateAuthStatusRef.current = validate;
-    return validate();
   }, [authContext]);
 
-  const _validateAuthStatusRef = useRef(_validateAuthStatus);
+  const _validateAuthStatusRef = useRef(async () => {});
 
   const getConfig = useCallback(async () => {
-    await _validateAuthStatus();
+    await _validateAuthStatusRef.current();
     const data = await engagementService.getConfig();
     setFormOptions(data);
-  }, [engagementService, _validateAuthStatus]);
+  }, [engagementService]);
 
   useEffect(() => {
     dispatch({
@@ -149,7 +153,7 @@ export const EngagementProvider = ({
 
   const fetchEngagements = useCallback(async () => {
     try {
-      await _validateAuthStatus();
+      await _validateAuthStatusRef.current();
       feedbackContext.showLoader();
       const engagements = await engagementService.fetchEngagements();
       setEngagements(engagements);
@@ -164,19 +168,23 @@ export const EngagementProvider = ({
       feedbackContext.hideLoader();
       await _handleErrors(e);
     }
-  }, [engagementService, feedbackContext, _handleErrors, _validateAuthStatus]);
+  }, [engagementService, feedbackContext, _handleErrors]);
 
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
-      await _validateAuthStatus();
-      const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-        engagement?.customer_name,
-        engagement?.project_name
-      );
-      _updateEngagementInPlace(refreshedEngagement);
-      setCurrentEngagement(refreshedEngagement);
+      await _validateAuthStatusRef.current();
+      try {
+        const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+          engagement?.customer_name,
+          engagement?.project_name
+        );
+        _updateEngagementInPlace(refreshedEngagement);
+        setCurrentEngagement(refreshedEngagement);
+      } catch (e) {
+        _handleErrors(e);
+      }
     },
-    [_updateEngagementInPlace, engagementService, _validateAuthStatus]
+    [_updateEngagementInPlace, engagementService, _handleErrors]
   );
 
   const _checkHasUpdateRef = useRef(async () => false);
@@ -190,7 +198,7 @@ export const EngagementProvider = ({
 
   const createEngagementPoll = useCallback(
     async (engagement: Engagement): Promise<EngagementPoll> => {
-      await _validateAuthStatus();
+      await _validateAuthStatusRef.current();
       return new EngagementPoll(
         new EngagementPollIntervalStrategy(
           setInterval(async () => {
@@ -213,7 +221,7 @@ export const EngagementProvider = ({
         )
       );
     },
-    [_validateAuthStatus, _refreshEngagementData, feedbackContext]
+    [_refreshEngagementData, feedbackContext]
   );
 
   const getEngagement = useCallback(
@@ -262,10 +270,10 @@ export const EngagementProvider = ({
   );
 
   const createEngagement = useCallback(
-    async (data: any) => {
+    async (data: CreateEngagementParams) => {
       feedbackContext.showLoader();
       try {
-        await _validateAuthStatus();
+        await _validateAuthStatusRef.current();
         const engagement = await engagementService.createEngagement(data);
         _addNewEngagement(engagement);
         setEngagements([...(engagements ?? []), engagement]);
@@ -301,7 +309,6 @@ export const EngagementProvider = ({
       feedbackContext,
       engagements,
       _handleErrors,
-      _validateAuthStatus,
     ]
   );
 
@@ -329,7 +336,7 @@ export const EngagementProvider = ({
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        await _validateAuthStatus();
+        await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.saveEngagement(data);
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
@@ -364,7 +371,6 @@ export const EngagementProvider = ({
       _updateEngagementInPlace,
       feedbackContext,
       _handleErrors,
-      _validateAuthStatus,
     ]
   );
 
@@ -385,7 +391,7 @@ export const EngagementProvider = ({
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        await _validateAuthStatus();
+        await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.launchEngagement(
           data
         );
@@ -413,7 +419,6 @@ export const EngagementProvider = ({
       engagementService,
       feedbackContext,
       _handleErrors,
-      _validateAuthStatus,
     ]
   );
   return (
