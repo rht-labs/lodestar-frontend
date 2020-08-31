@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EngagementFilter } from './schemas/engagement_filter';
+import { EngagementFilter } from '../../../schemas/engagement_filter';
 import {
   InputGroup,
   Button,
@@ -10,7 +10,7 @@ import { GlobeIcon } from '@patternfly/react-icons';
 
 export interface EngagementRegionSelectProps {
   filter: EngagementFilter;
-  regions: { label: string; value: string }[];
+  regions: Array<{ label: string; value: string }>;
   onChange: (filter: EngagementFilter) => void;
 }
 export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
@@ -21,6 +21,7 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
         <GlobeIcon />
       </Button>
       <Select
+        data-testid="region"
         placeholderText="Engagement Region"
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
@@ -44,7 +45,12 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
           <SelectOption value="any">Any</SelectOption>,
           ...props.regions.map(region => {
             return (
-              <SelectOption value={region.value}>{region.label}</SelectOption>
+              <SelectOption
+                data-testid={`engagement_region`}
+                value={region.value}
+              >
+                {region.label}
+              </SelectOption>
             );
           }),
         ]}

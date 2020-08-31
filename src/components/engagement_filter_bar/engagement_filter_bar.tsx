@@ -11,7 +11,7 @@ import { EngagementFilter } from '../../schemas/engagement_filter';
 import { SortSelect } from './components/sort_select';
 import { EngagementStatusSelect } from './components/engagement_status_select';
 import { SearchIcon } from '@patternfly/react-icons';
-import { EngagementRegionSelect } from '../../region_select';
+import { EngagementRegionSelect } from './components/region_select';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 export interface EngagementFilterProps {
