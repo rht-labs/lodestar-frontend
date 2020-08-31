@@ -60,7 +60,7 @@ describe('Point of Contact edit modal', () => {
       },
     ]);
   });
-  test('Clicking the removeUser button calls onChange', async () => {
+  test('Clicking the Save button calls onChange for removing users (if any)', async () => {
     const onChange = jest.fn();
     const { getByTestId } = render(
       <FeatureToggleContext.Provider
@@ -75,7 +75,7 @@ describe('Point of Contact edit modal', () => {
         />
       </FeatureToggleContext.Provider>
     );
-    await fireEvent.click(getByTestId('remove-user-button-0'));
-    expect(onChange).toHaveBeenCalledWith('user', []);
+    await fireEvent.click(getByTestId('user-edit-save'));
+    expect(onChange).toHaveBeenCalled();
   });
 });
