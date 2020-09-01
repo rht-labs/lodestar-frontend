@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { OMPRouter } from './router';
+import { LodestarRouter } from './router';
 import { MemoryRouter } from 'react-router';
 
 describe('Router component', () => {
@@ -8,7 +8,7 @@ describe('Router component', () => {
     expect(
       render(
         <MemoryRouter>
-          <OMPRouter />
+          <LodestarRouter />
         </MemoryRouter>
       )
     ).toMatchSnapshot();
