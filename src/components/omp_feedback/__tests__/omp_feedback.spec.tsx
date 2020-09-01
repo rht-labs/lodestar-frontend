@@ -3,7 +3,7 @@ import { FeedbackContext } from '../../../context/feedback_context/feedback_cont
 import { Feedback } from '../omp_feedback';
 import { render, fireEvent } from '@testing-library/react';
 
-describe('OMP Feedback Component', () => {
+describe('Lodestar Feedback Component', () => {
   test('Feedback modal shows', async () => {
     const { getByText } = render(
       <FeedbackContext.Provider

@@ -1,8 +1,8 @@
-![Build Container](https://github.com/rht-labs/open-management-portal-frontend/workflows/Build%20Container/badge.svg)
+![Build Container](https://github.com/rht-labs/lodestar-frontend/workflows/Build%20Container/badge.svg)
 
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rht-labs_open-management-portal-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=rht-labs_open-management-portal-frontend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rht-lodestar-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=rht-lodestar-frontend)
 
-# OMP Frontend Quickstart
+# Lodestar Frontend Quickstart
 
 ## First things first
 
@@ -34,13 +34,13 @@ The application is separated into several main components. All of these componen
 
 ### `src/components`
 
-`src/components` contains shared components that can be reused across the application. These include custom components built for OMP specifically, or wrapped components from a third-party library.
+`src/components` contains shared components that can be reused across the application. These include custom components built for Lodestar specifically, or wrapped components from a third-party library.
 
 In this application, components should be stateless as much as possible. They should not contain business logic.
 
 ### `src/context`
 
-`src/context` contains the application contexts. Contexts hold all of the global state and business logic for OMP. For the React docs on Contexts, [see here](https://reactjs.org/docs/context.html).
+`src/context` contains the application contexts. Contexts hold all of the global state and business logic for Lodestar. For the React docs on Contexts, [see here](https://reactjs.org/docs/context.html).
 
 Contexts serve as the central nervous system for the application. They handle the dirty business of retrieving data from services, processing that data, handling exceptions, storing data, and notifying children of changes. All business logic should flow through a context.
 
@@ -273,7 +273,7 @@ Depending on the type of deployment, the way of setting these variables may vary
 | **baseUrl**       | string  | Target URL for the deployment of **this** Frontend App                                 | Yes      | N/A     |
 | **authBaseUrl**   | string  | URI for SSO integration                                                                | Yes      | N/A     |
 | **clientId**      | string  | Identification of the client application for SSO integration                           | Yes      | N/A     |
-| **backendUrl**    | string  | URI for [Backend](https://github.com/rht-labs/open-management-portal-backend.git) APIs | Yes      | N/A     |
+| **backendUrl**    | string  | URI for [Backend](https://github.com/rht-labs/lodestar-backend.git) APIs | Yes      | N/A     |
 | **disableLaunch** | boolean | Flag to toggle launch functionality on/off                                             | Yes      | N/A     |
 
 # Learn More
