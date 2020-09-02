@@ -59,6 +59,12 @@ export function EngagementAtAGlance({
                 ? formatDate(engagement?.start_date, 'MMM dd, yyyy')
                 : 'TBA'}
             </GridItem>
+            <GridItem>
+              {engagement?.engagement_region
+                ? 'Engagement Region: ' +
+                  engagement?.engagement_region?.toUpperCase?.()
+                : null}
+            </GridItem>
           </Grid>
         </GridItem>
         <GridItem md={12} lg={6}>
