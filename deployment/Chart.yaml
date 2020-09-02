@@ -1,5 +1,5 @@
 apiVersion: v2
-name: omp-frontend
+name: lodestar-frontend
 description: A Helm chart to deploy the frontend of the LodeStar
 
 # A chart can be either an 'application' or a 'library' chart.

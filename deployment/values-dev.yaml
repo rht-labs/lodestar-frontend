@@ -1,9 +1,9 @@
-name: omp-frontend
+name: lodestar-frontend
 development: true
 
 servicePort: 8080
 
-imageName: "omp-frontend"
+imageName: "lodestar-frontend"
 imageTag: "latest"
 
 git:

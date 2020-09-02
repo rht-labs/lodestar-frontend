@@ -15,13 +15,13 @@ If you are not familiar with Helm - how to configure it and run - you can start 
 1. Clone the target repo:
 
 ```
-git clone https://github.com/rht-labs/open-management-portal-frontend
+git clone https://github.com/rht-labs/lodestar-frontend
 ```
 
 2. Change into to the `deployment` directory:
 
 ```
-cd open-management-portal-frontend/deployment
+cd lodestar-frontend/deployment
 ```
 
 3. Deploy using the following Helm command:
@@ -29,7 +29,7 @@ cd open-management-portal-frontend/deployment
 ```shell script
 helm template . \
   --values values-dev.yaml \
-  --set git.uri=https://github.com/rht-labs/open-management-portal-frontend.git \
+  --set git.uri=https://github.com/rht-labs/lodestar-frontend.git \
   --set git.ref=master \
   --set baseUrl=<your-base-url> \
   --set clientId=<your-sso-client-id> \
@@ -50,7 +50,7 @@ It accepts the following variables
 | `backendUrl`  | The url that the LodeStar backend accepts requests on  |
 
 
-This will spin up all of the usual resources that this service needs in production, plus a `BuildConfig` configured to build it from source from the Git repository specified. To trigger this build, use `oc start-build omp-frontend`.
+This will spin up all of the usual resources that this service needs in production, plus a `BuildConfig` configured to build it from source from the Git repository specified. To trigger this build, use `oc start-build lodestar-frontend`.
 
 **Note**: Also check out the list of runtime variables in the [top level README](../README.md#runtime-configuration-variables)
 
