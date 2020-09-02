@@ -28,13 +28,20 @@ export interface EngagementListRouteProps {
 
 export function EngagementListRoute(props: EngagementListRouteProps) {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
-  const { engagements: contextEngagements, getEngagements } = useEngagements();
+  const {
+    engagements: contextEngagements,
+    getEngagements,
+    getConfig,
+    formOptions,
+  } = useEngagements();
+
   useEffect(() => {
     if (!hasFetched) {
       setHasFetched(true);
+      getConfig();
       getEngagements();
     }
-  }, [contextEngagements, getEngagements, hasFetched]);
+  }, [contextEngagements, getEngagements, hasFetched, getConfig]);
   const { filterDefinition: propsFilter } = props;
   const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
     props.filterDefinition
@@ -87,6 +94,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
           <EngagementFilterBar
             filter={filterDefinition}
             onChange={handleChange}
+            formOptions={formOptions}
           />
         </div>
       </PageSection>

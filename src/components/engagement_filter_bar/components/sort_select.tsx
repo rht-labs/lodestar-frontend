@@ -11,7 +11,7 @@ import {
   SortOption,
 } from '../../../schemas/engagement_filter';
 import { EngagementFilterProps } from '../engagement_filter_bar';
-import { SortAmountDownIcon } from "@patternfly/react-icons";
+import { SortAmountDownIcon } from '@patternfly/react-icons';
 export function SortSelect({ filter, onChange }: EngagementFilterProps) {
   const [isSortSelectOpen, setIsSortSelectOpen] = useState<boolean>(false);
 
@@ -38,7 +38,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
     return {
       sortField: option?.sortField,
       isAscending: option.isAscending,
-      toString: function () {
+      toString: function() {
         return getSortDisplayValue(option?.sortField, option?.isAscending);
       },
     } as any;
