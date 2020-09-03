@@ -78,7 +78,6 @@ describe('Create New Engagement Route', () => {
       });
       wrapper.rerender(<Component />);
       const createButton = wrapper.getByTestId('create-engagement-button');
-      console.log(createButton);
       fireEvent.click(createButton);
       expect(createEngagement).toHaveBeenCalledWith({
         customer_name: 'a',
