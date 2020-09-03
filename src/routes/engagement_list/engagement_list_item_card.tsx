@@ -4,7 +4,7 @@ import {
   Card,
   CardBody,
   Title,
-  Grid, GridItem,
+  Grid, GridItem, Label,
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router';
 
@@ -18,6 +18,9 @@ export interface DataCardProps {
 export function EngagementListItemCard(props: DataCardProps) {
   const url = `/app/engagements/${props.customer}/${props.project}`;
   const history = useHistory();
+
+  //todo: read chips from service
+  const chips= ['Chip one', 'Long long long Chip two', 'Chip1 three', 'Chip 2three', 'Chip2 three', 'Chip 3three'];
 
   return (
     <>
@@ -50,6 +53,15 @@ export function EngagementListItemCard(props: DataCardProps) {
               >
                 View Engagement
               </Button>
+            </GridItem>
+            <GridItem>
+              {chips.map(currentChip => (
+                <Label key={currentChip}
+                       style={{marginRight: '0.5rem'}}
+                       color="blue">
+                  {currentChip}
+                </Label>
+              ))}
             </GridItem>
           </Grid>
         </CardBody>

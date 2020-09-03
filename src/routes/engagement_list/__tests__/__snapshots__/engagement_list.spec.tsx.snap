@@ -184,6 +184,70 @@ Object {
                 View Engagement
               </button>
             </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip one
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Long long long Chip two
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip1 three
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip 2three
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip2 three
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip 3three
+                </span>
+              </span>
+            </div>
           </div>
         </div>
       </article>
@@ -368,6 +432,70 @@ Object {
             >
               View Engagement
             </button>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-right: 0.5rem;"
+            >
+              <span
+                class="pf-c-label__content"
+              >
+                Chip one
+              </span>
+            </span>
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-right: 0.5rem;"
+            >
+              <span
+                class="pf-c-label__content"
+              >
+                Long long long Chip two
+              </span>
+            </span>
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-right: 0.5rem;"
+            >
+              <span
+                class="pf-c-label__content"
+              >
+                Chip1 three
+              </span>
+            </span>
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-right: 0.5rem;"
+            >
+              <span
+                class="pf-c-label__content"
+              >
+                Chip 2three
+              </span>
+            </span>
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-right: 0.5rem;"
+            >
+              <span
+                class="pf-c-label__content"
+              >
+                Chip2 three
+              </span>
+            </span>
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-right: 0.5rem;"
+            >
+              <span
+                class="pf-c-label__content"
+              >
+                Chip 3three
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -610,6 +738,70 @@ Object {
               >
                 View Engagement
               </button>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip one
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Long long long Chip two
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip1 three
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip 2three
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip2 three
+                </span>
+              </span>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-right: 0.5rem;"
+              >
+                <span
+                  class="pf-c-label__content"
+                >
+                  Chip 3three
+                </span>
+              </span>
             </div>
           </div>
         </div>
