@@ -14,12 +14,18 @@ import {
 import { FeedbackProvider } from './context/feedback_context/feedback_context';
 import { NotificationProvider } from './context/notification_context/notification_context';
 import { useConfig } from './context/config_context/config_hook';
-import { createApiV1Services } from './services/factories/service_factory';
+import {
+  createApiV1Services,
+  createFakedServices,
+} from './services/factories/service_factory';
 import CustomGlobalBanner from './components/custom_global_banner/custom_global_banner';
 import { Config } from './schemas/config';
 
 export const App = ({ config }: { config: Config }) => {
-  const serviceProviders = createApiV1Services(config);
+  const serviceProviders =
+    process.env.REACT_APP_USE_FAKED === 'true'
+      ? createFakedServices({ shouldUseStaticData: false })
+      : createApiV1Services(config);
 
   return (
     <ErrorBoundary>

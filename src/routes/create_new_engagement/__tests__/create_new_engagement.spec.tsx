@@ -59,7 +59,7 @@ describe('Create New Engagement Route', () => {
     );
 
     const wrapper = render(<Component />);
-    await act(async () => {
+    act(async () => {
       const customerNameField = wrapper
         .getByTestId('customer-name')
         .getElementsByTagName('input')[0];
@@ -78,8 +78,14 @@ describe('Create New Engagement Route', () => {
       });
       wrapper.rerender(<Component />);
       const createButton = wrapper.getByTestId('create-engagement-button');
+      console.log(createButton);
       fireEvent.click(createButton);
+      expect(createEngagement).toHaveBeenCalledWith({
+        customer_name: 'a',
+        engagement_region: 'na',
+        engagement_type: 'Residency',
+        project_name: 'Mars Rover',
+      });
     });
-    expect(createEngagement).toHaveBeenCalled();
   });
 });
