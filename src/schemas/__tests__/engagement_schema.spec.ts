@@ -31,6 +31,7 @@ const engagementProperties = [
   'creation_details',
   'last_update_by_name',
   'status',
+  'engagement_categories'
 ];
 
 describe('Engagement Schema', () => {

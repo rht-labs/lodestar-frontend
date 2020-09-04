@@ -4,21 +4,32 @@ import {
   ChipGroup,
   Label,
 } from '@patternfly/react-core';
+import { PencilAltIcon } from "@patternfly/react-icons";
+import { AddNewCategory } from "./add_new_category_bar";
+import { EngagementCategory } from "../../schemas/engagement_category";
+import {useEngagements} from "../../context/engagement_context/engagement_hook";
 import {Engagement} from "../../schemas/engagement";
-import {PencilAltIcon} from "@patternfly/react-icons";
-import {AddNewCategory} from "./add_new_category_bar";
 
-export function EngagementCategories ({
-  engagement,
+export function EngagementEditableCategories ({
+  categories,
+  onChange,
+  onSave
 }: {
-  engagement: Engagement;
+  categories: EngagementCategory[];
+  onChange: (fieldName: string, value: any) => void;
+  onSave: (engagement: Engagement) => void;
 }) {
 
   const [chips, setChips] = useState <string[]>([]);
   const [editMode, setEditMode] = useState(false);
+  const formattedItems: string[] = [];
 
   useEffect(() => {
-    setChips(['Chip one', 'Long long long Chip two', 'Chip1 three', 'Chip 2three', 'Chip2 three', 'Chip 3three']);
+    categories?.map( (item) => {
+      formattedItems.push(item.name);
+      }
+    );
+    setChips(formattedItems);
   }, []);
 
   const CategoriesReadOnly = () => {
@@ -72,6 +83,7 @@ export function EngagementCategories ({
     const copyOfChips = [...chips];
     copyOfChips.push(newCategory);
     setChips(copyOfChips);
+    onChange('categories', copyOfChips);
   }
 
   function deleteCategory(category: string) {
@@ -81,6 +93,7 @@ export function EngagementCategories ({
       copyOfChips.splice(chips.indexOf(category), 1);
       setChips(copyOfChips);
    }
+    onChange('categories', copyOfChips);
   };
 
   return (

@@ -36,6 +36,7 @@ export function upcomingEngagement(): Engagement {
     technical_lead_email: 'eve@doe.com',
     technical_lead_name: `Eve Doe`,
     launch: null,
+    engagement_categories: [{name: 'Finance'}],
   };
 }
 
@@ -77,6 +78,7 @@ export function currentEngagement(): Engagement {
       launched_by: 'John Doe',
       launched_date_time: new Date(2020, 3, 21),
     },
+    engagement_categories: [{name: 'Finance'}],
   };
 }
 
@@ -118,5 +120,6 @@ export function pastEngagement(): Engagement {
       launched_by: 'John Doe',
       launched_date_time: new Date(2020, 1, 2),
     },
+    engagement_categories: [{name: 'Finance'}],
   };
 }

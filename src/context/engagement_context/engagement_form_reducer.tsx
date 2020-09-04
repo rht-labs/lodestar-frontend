@@ -66,6 +66,7 @@ export const getInitialState = (
             engagement?.customer_name
           )
         : null,
+    engagement_categories: engagement?.engagement_categories ?? [],
   };
 };
 
@@ -129,6 +130,8 @@ export const engagementFormReducer = (formOptions: FormConfig) => (
     case 'ocp_version':
     case 'ocp_sub_domain':
     case 'ocp_persistent_storage_size':
+    case 'engagement_categories':
+      // return { ...state, engagement_categories: action.payload };
     case 'ocp_cluster_size':
       return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
