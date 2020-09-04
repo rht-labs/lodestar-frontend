@@ -7,7 +7,6 @@ import {
 import { PencilAltIcon } from "@patternfly/react-icons";
 import { AddNewCategory } from "./add_new_category_bar";
 import { EngagementCategory } from "../../schemas/engagement_category";
-import {useEngagements} from "../../context/engagement_context/engagement_hook";
 import {Engagement} from "../../schemas/engagement";
 
 export function EngagementEditableCategories ({

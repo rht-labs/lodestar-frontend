@@ -71,6 +71,11 @@ Object {
                        
                       Jun 01, 2020
                     </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      Engagement Region: EMEA
+                    </div>
                   </div>
                 </div>
                 <div
@@ -319,6 +324,11 @@ Object {
                     Target start date:
                      
                     Jun 01, 2020
+                  </div>
+                  <div
+                    class="pf-l-grid__item"
+                  >
+                    Engagement Region: EMEA
                   </div>
                 </div>
               </div>
@@ -625,6 +635,11 @@ Object {
                       Target start date:
                        
                       Jun 01, 2020
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      Engagement Region: EMEA
                     </div>
                   </div>
                 </div>
