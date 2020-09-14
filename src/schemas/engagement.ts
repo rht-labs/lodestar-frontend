@@ -41,6 +41,7 @@ export interface Engagement {
   end_date: Date;
   engagement_lead_email: string;
   engagement_lead_name: string;
+  engagement_type: string;
   engagement_users: EngagementUser[];
   last_update: string;
   location: string;
@@ -134,6 +135,7 @@ export abstract class Engagement {
       engagement_lead_name: staticData
         ? 'Alice Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      engagement_type: 'Residency',
       last_update: staticData ? '2020-01-01' : new Date().toString(),
       location: staticData
         ? 'Nashville, TN'
