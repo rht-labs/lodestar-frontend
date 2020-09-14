@@ -4,6 +4,7 @@ export interface EngagementFormOption {
   label: string;
   value: string;
   description: string;
+  default?: boolean;
   options?: EngagementFormOption[];
 }
 
