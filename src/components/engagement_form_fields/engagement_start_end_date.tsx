@@ -28,7 +28,7 @@ export function EngagementStartEndDateFormField({
 }: EngagementStartEndDateProps) {
   const { validate, getValidationResult } = useValidation();
   const maxGracePeriodInDays: number =
-    props.engagementFormConfig?.logistics_options.env_grace_period_max ?? 0;
+    props.engagementFormConfig?.logistics_options?.env_grace_period_max ?? 0;
   const { start_date, end_date, archive_date } = engagement ?? {};
 
   const [startDateText, setStartDateText] = useState(
