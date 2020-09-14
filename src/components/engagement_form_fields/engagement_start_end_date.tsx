@@ -17,7 +17,7 @@ import { useValidation } from '../../context/validation_context/validation_hook'
 import { max } from 'date-fns';
 interface EngagementStartEndDateProps {
   engagement: Engagement;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onChange: (fieldName: string, value: any) => void;
 }
 
@@ -28,9 +28,7 @@ export function EngagementStartEndDateFormField({
 }: EngagementStartEndDateProps) {
   const { validate, getValidationResult } = useValidation();
   const maxGracePeriodInDays: number =
-    (props.formOptions?.['logistics_options']?.[
-      'env_grace_period_max'
-    ] as number) ?? 0;
+    props.engagementFormConfig?.logistics_options.env_grace_period_max ?? 0;
   const { start_date, end_date, archive_date } = engagement ?? {};
 
   const [startDateText, setStartDateText] = useState(

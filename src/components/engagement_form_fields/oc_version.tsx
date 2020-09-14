@@ -11,14 +11,14 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 interface OpenShiftVersionFormFieldProps {
   engagement: Engagement;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onChange: (fieldName: string, value: any) => void;
 }
 
 export function OpenShiftVersionFormField({
   onChange,
   engagement,
-  formOptions,
+  engagementFormConfig,
 }: OpenShiftVersionFormFieldProps) {
   const { hasFeature } = useFeatures();
   return (
@@ -33,7 +33,7 @@ export function OpenShiftVersionFormField({
         id={'oc_version_dropdown'}
         value={engagement?.ocp_version || ''}
         isDisabled={
-          formOptions?.openshift_options?.versions?.options?.length === 1 ||
+          engagementFormConfig?.openshift_options?.versions?.options?.length === 1 ||
           !hasFeature(APP_FEATURES.writer) ||
           !!engagement?.launch
         }
@@ -42,7 +42,7 @@ export function OpenShiftVersionFormField({
         {[
           <FormSelectOption value={undefined} label="Select OpenShift version" />,
         ].concat(
-          formOptions?.openshift_options?.versions?.options?.map(
+          engagementFormConfig?.openshift_options?.versions?.options?.map(
             (option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}

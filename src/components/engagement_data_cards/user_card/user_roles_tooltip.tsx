@@ -6,14 +6,14 @@ import { Tooltip, TooltipPosition } from '@patternfly/react-core';
 import { EngagementFormConfig } from "../../../schemas/engagement_config";
 
 interface UserRolesTooltipProps {
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
 }
 
-export function UserRolesTooltip({formOptions}: UserRolesTooltipProps) {
+export function UserRolesTooltip({engagementFormConfig}: UserRolesTooltipProps) {
 
-  function createTooltipText (formOptions: EngagementFormConfig) {
+  function createTooltipText (engagementFormConfig: EngagementFormConfig) {
     let text = [<div key={'tooltipText'}/>];
-    (formOptions?.user_options?.user_roles?.options ?? []).map((option: any, index: number) => {
+    (engagementFormConfig?.user_options?.user_roles?.options ?? []).map((option: any, index: number) => {
       return text.push(
         <div key={index}>
           { descriptionText(option) }
@@ -36,7 +36,7 @@ export function UserRolesTooltip({formOptions}: UserRolesTooltipProps) {
   return (
     <>
       <Tooltip
-        content= { createTooltipText(formOptions) }
+        content= { createTooltipText(engagementFormConfig) }
         entryDelay={0}
         exitDelay={10}
         maxWidth={'45rem'}

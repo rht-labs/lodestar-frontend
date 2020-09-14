@@ -21,14 +21,14 @@ import { UserEditFields } from "./user_edit_fields";
 
 export interface UserEditModalProps {
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
 }
 export function UserEditModal({
   engagement,
-  formOptions,
+  engagementFormConfig,
   onChange,
   isOpen,
   onSave: propsOnSave,
@@ -122,7 +122,7 @@ export function UserEditModal({
                            toggleDeleted={toggleDeleted}
                            deletedUsers={deletedUsers}
                            addUser={addUser}
-                           formOptions={formOptions}/>
+                           engagementFormConfig={engagementFormConfig}/>
           }
         </div>
       </EditModalTemplate>

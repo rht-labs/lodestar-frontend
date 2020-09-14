@@ -12,7 +12,7 @@ export interface EngagementOverviewTabProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
 }
@@ -21,7 +21,7 @@ export function EngagementOverview({
   currentEngagement,
   currentEngagementChanges,
   missingRequiredFields,
-  formOptions,
+  engagementFormConfig,
   onChange,
   onSave,
 }: EngagementOverviewTabProps) {
@@ -35,7 +35,7 @@ export function EngagementOverview({
               currentEngagement={currentEngagement}
               onSave={onSave}
               onChange={onChange}
-              formOptions={formOptions}
+              engagementFormConfig={engagementFormConfig}
               missingRequiredFields={missingRequiredFields}
             />
           </div>
@@ -54,7 +54,7 @@ export function EngagementOverview({
             <PointOfContactCard
               onSave={onSave}
               onChange={onChange}
-              formOptions={formOptions}
+              engagementFormConfig={engagementFormConfig}
               currentEngagement={currentEngagement}
               currentEngagementChanges={currentEngagementChanges}
               missingRequiredFields={missingRequiredFields}
@@ -66,7 +66,7 @@ export function EngagementOverview({
             <OpenShiftClusterSummaryCard
               onSave={onSave}
               onChange={onChange}
-              formOptions={formOptions}
+              engagementFormConfig={engagementFormConfig}
               currentEngagement={currentEngagement}
               currentEngagementChanges={currentEngagementChanges}
               missingRequiredFields={missingRequiredFields}
@@ -78,7 +78,7 @@ export function EngagementOverview({
             <UserCard
               onSave={onSave}
               onChange={onChange}
-              formOptions={formOptions}
+              engagementFormConfig={engagementFormConfig}
               engagement={currentEngagementChanges}
             />
           </div>

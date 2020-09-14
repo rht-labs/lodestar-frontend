@@ -12,7 +12,7 @@ describe('Point of Contact edit modal', () => {
       render(
         <UserEditModal
           onSave={() => {}}
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
@@ -27,7 +27,7 @@ describe('Point of Contact edit modal', () => {
       <UserEditModal
         onSave={onSave}
         engagement={Engagement.fromFake(true)}
-        formOptions={EngagementFormConfig.fromFake()}
+        engagementFormConfig={EngagementFormConfig.fromFake()}
         isOpen={true}
         onChange={() => {}}
       />
@@ -44,7 +44,7 @@ describe('Point of Contact edit modal', () => {
         <UserEditModal
           onSave={() => {}}
           engagement={({ engagement_users: [] } as unknown) as Engagement}
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           onChange={onChange}
         />
@@ -69,7 +69,7 @@ describe('Point of Contact edit modal', () => {
         <UserEditModal
           onSave={() => {}}
           engagement={Engagement.fromFake(true)}
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           onChange={onChange}
         />

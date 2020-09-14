@@ -50,7 +50,7 @@ describe('Create New Engagement Route', () => {
             getEngagements: async () => [],
             createEngagement,
             getConfig: () => {},
-            formOptions: EngagementFormConfig.fromFake(),
+            engagementFormConfig: EngagementFormConfig.fromFake(),
           }}
         >
           <CreateNewEngagement />

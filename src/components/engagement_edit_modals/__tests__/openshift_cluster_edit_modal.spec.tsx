@@ -9,7 +9,7 @@ describe('Point of Contact edit modal', () => {
       render(
         <OpenShiftClusterEditModal
           onSave={() => {}}
-          formOptions={{}}
+          engagementFormConfig={{}}
           isOpen={true}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
@@ -24,7 +24,7 @@ describe('Point of Contact edit modal', () => {
       <OpenShiftClusterEditModal
         onSave={onSave}
         engagement={Engagement.fromFake(true)}
-        formOptions={{}}
+        engagementFormConfig={{}}
         isOpen={true}
         onChange={() => {}}
       />

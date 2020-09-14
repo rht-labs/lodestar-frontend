@@ -3,7 +3,7 @@ import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
-import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
+import { getValidatorsFromengagementFormConfig } from '../../common/config_validator_adapter';
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
@@ -16,7 +16,7 @@ export interface EngagementViewProps {
 }
 
 export interface EngagementDetailViewProps {
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   getConfig: () => void;
   error: Error;
   setCurrentEngagement: (engagement: Engagement) => void;
@@ -28,7 +28,7 @@ export interface EngagementDetailViewProps {
 }
 
 const EngagementDetailView = React.memo(function({
-  formOptions,
+  engagementFormConfig,
   getConfig,
   error: engagementFormRequestError,
   setCurrentEngagement,
@@ -49,11 +49,11 @@ const EngagementDetailView = React.memo(function({
   }, [currentEngagement, createEngagementPoll]);
   useEffect(() => {
     Logger.instance.info('getting config');
-    if (!formOptions) {
+    if (!engagementFormConfig) {
       getConfig();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formOptions]);
+  }, [engagementFormConfig]);
 
   useEffect(() => {
     if (!customer_name || !project_name) {
@@ -77,7 +77,7 @@ const EngagementDetailView = React.memo(function({
     ) : null;
   };
 
-  const validators = getValidatorsFromFormOptions(formOptions);
+  const validators = getValidatorsFromengagementFormConfig(engagementFormConfig);
   return (
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate engagement={currentEngagement}>
@@ -90,7 +90,7 @@ const EngagementDetailView = React.memo(function({
 
 export const EngagementDetailViewContainer = () => {
   const {
-    formOptions,
+    engagementFormConfig,
     getConfig,
     error,
     setCurrentEngagement,
@@ -101,7 +101,7 @@ export const EngagementDetailViewContainer = () => {
   return (
     <Profiler id="Engagement Details" onRender={profileOnRender}>
       <EngagementDetailView
-        formOptions={formOptions}
+        engagementFormConfig={engagementFormConfig}
         getConfig={getConfig}
         createEngagementPoll={createEngagementPoll}
         error={error}

@@ -4,7 +4,7 @@ import { EngagementOverview } from './overview';
 
 export function EngagementPageView() {
   const {
-    formOptions,
+    engagementFormConfig,
     currentEngagementChanges,
     updateEngagementFormField,
     saveEngagement,
@@ -18,7 +18,7 @@ export function EngagementPageView() {
         currentEngagement={currentEngagement}
         missingRequiredFields={missingRequiredFields}
         onSave={saveEngagement}
-        formOptions={formOptions}
+        engagementFormConfig={engagementFormConfig}
         onChange={updateEngagementFormField}
         currentEngagementChanges={currentEngagementChanges}
       />
