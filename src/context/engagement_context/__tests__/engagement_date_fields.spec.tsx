@@ -45,7 +45,7 @@ describe('Engagement date change logic', () => {
     await act(async () => {
       let archive_date = addDays(
         start_date,
-        result.current.formOptions.logistics_options
+        result.current.engagementFormConfig.logistics_options
           .env_default_grace_period as number
       );
       result.current.updateEngagementFormField('start_date', start_date);
@@ -74,7 +74,7 @@ describe('Engagement date change logic', () => {
       expect(result.current.currentEngagementChanges.archive_date).toEqual(
         addDays(
           end_date,
-          result.current.formOptions.logistics_options
+          result.current.engagementFormConfig.logistics_options
             .env_default_grace_period as number
         )
       );
@@ -87,8 +87,8 @@ describe('Engagement date change logic', () => {
       result.current.getConfig();
       await waitForNextUpdate();
     });
-    const maxGracePeriod = result.current.formOptions.logistics_options
-      .env_grace_period_max as number;
+    const maxGracePeriod = result.current.engagementFormConfig.logistics_options
+      .env_grace_period_max;
     let end_date = parseDate('2020-01-02');
     let archive_date = addDays(end_date, maxGracePeriod);
     await act(async () => {

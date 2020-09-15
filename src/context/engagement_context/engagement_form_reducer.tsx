@@ -1,7 +1,7 @@
 import { Engagement } from '../../schemas/engagement';
 import { slugify } from 'transliteration';
 import { addDays, startOfToday } from 'date-fns';
-import { FormConfig } from '../../schemas/engagement_config';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 const generateSuggestedSubdomain = (
   project_name: string = '',
   customer_name: string = ''
@@ -69,13 +69,15 @@ export const getInitialState = (
   };
 };
 
-export const engagementFormReducer = (formOptions: FormConfig) => (
+export const engagementFormReducer = (
+  engagementFormConfig: EngagementFormConfig
+) => (
   state: Partial<Engagement> = getInitialState(),
   action?: { type: string; payload?: any }
 ) => {
   const curriedEngagementDatesFunction = getEngagementDates(
-    formOptions?.['logistics_options']?.['env_default_grace_period'],
-    formOptions?.['logistics_options']?.['env_grace_period_max']
+    engagementFormConfig?.logistics_options?.env_default_grace_period,
+    engagementFormConfig?.logistics_options?.env_grace_period_max
   );
   if (!action) {
     return state;

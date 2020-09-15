@@ -32,7 +32,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
     engagements: contextEngagements,
     getEngagements,
     getConfig,
-    formOptions,
+    engagementFormConfig,
   } = useEngagements();
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
           <EngagementFilterBar
             filter={filterDefinition}
             onChange={handleChange}
-            formOptions={formOptions}
+            engagementFormConfig={engagementFormConfig}
           />
         </div>
       </PageSection>

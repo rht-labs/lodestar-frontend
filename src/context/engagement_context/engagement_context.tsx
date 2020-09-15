@@ -34,7 +34,7 @@ export interface EngagementContext {
   updateEngagementFormField: (fieldName: string, payload: any) => void;
   missingRequiredFields: string[];
   isLaunchable: boolean;
-  formOptions?: EngagementFormConfig;
+  engagementFormConfig?: EngagementFormConfig;
   error: any;
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
@@ -76,7 +76,7 @@ export const EngagementProvider = ({
   engagementService: EngagementService;
 }) => {
   const feedbackContext = useFeedback();
-  const [formOptions, setFormOptions] = useState<EngagementFormConfig>();
+  const [engagementFormConfig, setengagementFormConfig] = useState<EngagementFormConfig>();
 
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
@@ -86,7 +86,7 @@ export const EngagementProvider = ({
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
-  >(engagementFormReducer(formOptions), engagementFormReducer(formOptions)());
+  >(engagementFormReducer(engagementFormConfig), engagementFormReducer(engagementFormConfig)());
 
   const authContext = useSession();
 
@@ -117,7 +117,7 @@ export const EngagementProvider = ({
   const getConfig = useCallback(async () => {
     await _validateAuthStatusRef.current();
     const data = await engagementService.getConfig();
-    setFormOptions(data);
+    setengagementFormConfig(data);
   }, [engagementService]);
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export const EngagementProvider = ({
       type: 'switch_engagement',
       payload: getInitialState(currentEngagement),
     });
-  }, [currentEngagement, formOptions]);
+  }, [currentEngagement, engagementFormConfig]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -438,7 +438,7 @@ export const EngagementProvider = ({
           ...currentEngagement,
           ...currentEngagementChanges,
         },
-        formOptions,
+        engagementFormConfig,
         isLoading,
         updateEngagementFormField,
         getEngagements: fetchEngagements,

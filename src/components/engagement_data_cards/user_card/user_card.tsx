@@ -15,7 +15,7 @@ const USER_EDIT_MODAL_KEY = 'user_modal';
 export interface UserCardProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
 }
 
@@ -23,7 +23,7 @@ export function UserCard({
   engagement,
   onSave,
   onChange,
-  formOptions,
+  engagementFormConfig,
 }: UserCardProps) {
   const { requestOpen, activeModalKey } = useModalVisibility();
   return (
@@ -31,7 +31,7 @@ export function UserCard({
       <UserEditModal
         onChange={onChange}
         onSave={onSave}
-        formOptions={formOptions}
+        engagementFormConfig={engagementFormConfig}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         engagement={engagement}
       />
@@ -46,7 +46,7 @@ export function UserCard({
         title="Engagement Users"
       >
         <UserTable users={engagement?.engagement_users}
-                   formOptions={formOptions}
+                   engagementFormConfig={engagementFormConfig}
         />
       </DataCard>
     </>
@@ -63,7 +63,7 @@ const externalUsers =
 
 const UserTable = ({
   users,
-  formOptions
+  engagementFormConfig
 }: {
   users: {
     first_name: string;
@@ -71,7 +71,7 @@ const UserTable = ({
     email: string;
     role: string;
   }[];
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
 }) => {
 
   const allRows: string[][] = [];
@@ -83,12 +83,12 @@ const UserTable = ({
     <Grid hasGutter>
       <GridItem span={10}>
           <UserList title={redHatUsers}
-                    formOptions={formOptions}
+                    engagementFormConfig={engagementFormConfig}
                     defaultRows=
                       { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) !== -1 ) }
           />
           <UserList title={externalUsers}
-                    formOptions={formOptions}
+                    engagementFormConfig={engagementFormConfig}
                     defaultRows=
                       { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) === -1 ) }
           />

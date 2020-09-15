@@ -12,13 +12,13 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 interface ClusterSizeFormFieldProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
 }
 
 export function ClusterSizeFormField({
   engagement,
   onChange,
-  formOptions,
+  engagementFormConfig,
 }: ClusterSizeFormFieldProps) {
   const { hasFeature } = useFeatures();
   return (
@@ -39,7 +39,7 @@ export function ClusterSizeFormField({
             label="Select cluster size"
           />,
         ].concat(
-          formOptions?.openshift_options?.cluster_size?.options.map(
+          engagementFormConfig?.openshift_options?.cluster_size?.options.map(
             (option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}

@@ -16,7 +16,7 @@ import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 export interface OpenShiftClusterEditModalProps {
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
@@ -24,14 +24,14 @@ export interface OpenShiftClusterEditModalProps {
 
 export function OpenShiftClusterEditModal({
   engagement,
-  formOptions,
+  engagementFormConfig,
   onChange,
   isOpen,
   onSave: propsOnSave,
 }: OpenShiftClusterEditModalProps) {
   const { requestClose } = useModalVisibility();
-  const availableProviders = getAvailableProviders(engagement, formOptions);
-  const provider = formOptions?.cloud_options?.providers?.options?.find(
+  const availableProviders = getAvailableProviders(engagement, engagementFormConfig);
+  const provider = engagementFormConfig?.cloud_options?.providers?.options?.find(
     p => p.value === engagement?.ocp_cloud_provider_name
   );
   const availableProviderRegionOptions = getAvailableRegionOptions(
@@ -76,22 +76,22 @@ export function OpenShiftClusterEditModal({
           />
           <OpenShiftVersionFormField
             onChange={onChange}
-            formOptions={formOptions}
+            engagementFormConfig={engagementFormConfig}
             engagement={engagement}
           />
           <SubdomainFormField
             onChange={onChange}
-            formOptions={formOptions}
+            engagementFormConfig={engagementFormConfig}
             engagement={engagement}
           />
           <PersistentStorageFormField
             onChange={onChange}
-            formOptions={formOptions}
+            engagementFormConfig={engagementFormConfig}
             engagement={engagement}
           />
           <ClusterSizeFormField
             onChange={onChange}
-            formOptions={formOptions}
+            engagementFormConfig={engagementFormConfig}
             engagement={engagement}
           />
           <AdditionalDetailsFormField
@@ -106,10 +106,10 @@ export function OpenShiftClusterEditModal({
 
 function getAvailableProviders(
   engagement: Engagement,
-  formOptions: EngagementFormConfig
+  engagementFormConfig: EngagementFormConfig
 ) {
   const availableProviders =
-    formOptions?.cloud_options?.providers?.options ?? [];
+    engagementFormConfig?.cloud_options?.providers?.options ?? [];
   if (
     engagement?.ocp_cloud_provider_name &&
     !availableProviders.find(
