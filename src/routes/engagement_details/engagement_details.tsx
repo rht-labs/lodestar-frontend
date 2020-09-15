@@ -1,4 +1,4 @@
-import React, { useEffect, Profiler } from 'react';
+import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Logger } from '../../utilities/logger';
@@ -52,7 +52,6 @@ export const EngagementDetailView = () => {
     };
   }, [currentEngagement, createEngagementPoll]);
   useEffect(() => {
-    Logger.instance.info('getting config');
     if (!engagementFormConfig) {
       getConfig();
     }
