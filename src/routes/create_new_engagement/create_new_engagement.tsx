@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { getValidatorsFromengagementFormConfig } from '../../common/config_validator_adapter';
+import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import {
   PageSection,
   Title,
@@ -34,7 +34,7 @@ export function CreateNewEngagement() {
     }
   }, [hasFetchedConfig, engagementFormConfig, getConfig]);
   return (
-    <ValidationProvider validators={getValidatorsFromengagementFormConfig(engagementFormConfig)}>
+    <ValidationProvider validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}>
       <CreateNewEngagementForm />
     </ValidationProvider>
   );

@@ -1,7 +1,7 @@
 import { ValidatorFactory } from '../schemas/validators';
 import { EngagementFormConfig } from '../schemas/engagement_config';
 
-export const getValidatorsFromengagementFormConfig = (
+export const getValidatorsFromEngagementFormConfig = (
   engagementFormConfig: EngagementFormConfig = null
 ) =>
   Object.keys(engagementFormConfig || {}).reduce(

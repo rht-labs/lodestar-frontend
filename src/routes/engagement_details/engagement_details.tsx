@@ -3,7 +3,7 @@ import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
-import { getValidatorsFromengagementFormConfig } from '../../common/config_validator_adapter';
+import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
@@ -77,7 +77,7 @@ const EngagementDetailView = React.memo(function({
     ) : null;
   };
 
-  const validators = getValidatorsFromengagementFormConfig(engagementFormConfig);
+  const validators = getValidatorsFromEngagementFormConfig(engagementFormConfig);
   return (
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate engagement={currentEngagement}>
