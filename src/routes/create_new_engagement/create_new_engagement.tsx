@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
+import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import {
   PageSection,
   Title,
@@ -25,16 +25,16 @@ import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
 
 export function CreateNewEngagement() {
-  const { formOptions, getConfig } = useEngagements();
+  const { engagementFormConfig, getConfig } = useEngagements();
   const [hasFetchedConfig, setHasFetchedConfig] = useState<boolean>(false);
   useEffect(() => {
-    if (!hasFetchedConfig && !formOptions) {
+    if (!hasFetchedConfig && !engagementFormConfig) {
       getConfig();
       setHasFetchedConfig(true);
     }
-  }, [hasFetchedConfig, formOptions, getConfig]);
+  }, [hasFetchedConfig, engagementFormConfig, getConfig]);
   return (
-    <ValidationProvider validators={getValidatorsFromFormOptions(formOptions)}>
+    <ValidationProvider validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}>
       <CreateNewEngagementForm />
     </ValidationProvider>
   );
@@ -42,7 +42,7 @@ export function CreateNewEngagement() {
 export function CreateNewEngagementForm() {
   const {
     createEngagement,
-    formOptions,
+    engagementFormConfig,
     currentEngagement,
     getEngagements,
     engagements,
@@ -60,7 +60,7 @@ export function CreateNewEngagementForm() {
         engagement_region: region,
         engagement_type:
           engagementType ??
-          formOptions?.basic_information?.engagement_type?.options?.find?.(
+          engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
             e => e.default
           )?.value,
       });
@@ -76,14 +76,14 @@ export function CreateNewEngagementForm() {
   useEffect(() => {
     if (
       engagementType === undefined &&
-      formOptions?.basic_information?.engagement_types
+      engagementFormConfig?.basic_information?.engagement_types
     ) {
-      const defaultType = formOptions?.basic_information?.engagement_types?.options?.find?.(
+      const defaultType = engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
         e => e.default
       )?.value;
       setEngagementType(defaultType ? defaultType : null);
     }
-  }, [formOptions, engagementType]);
+  }, [engagementFormConfig, engagementType]);
   const { getValidationResult, validate } = useValidation();
   useEffect(() => {
     if (engagements.length === 0 && !hasFetchedEngagements) {
@@ -237,7 +237,7 @@ export function CreateNewEngagementForm() {
                       key="undefined region"
                     />,
                   ].concat(
-                    formOptions?.basic_information?.engagement_regions?.options?.map(
+                    engagementFormConfig?.basic_information?.engagement_regions?.options?.map(
                       r => {
                         return (
                           <FormSelectOption
@@ -271,7 +271,7 @@ export function CreateNewEngagementForm() {
                     setEngagementType(e);
                   }}
                 >
-                  {formOptions?.basic_information?.engagement_types?.options?.map(
+                  {engagementFormConfig?.basic_information?.engagement_types?.options?.map(
                     r => {
                       return (
                         <FormSelectOption

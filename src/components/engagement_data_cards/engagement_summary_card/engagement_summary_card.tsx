@@ -19,7 +19,7 @@ export interface EngagementSummaryCardProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
 }
@@ -29,7 +29,7 @@ export function EngagementSummaryCard({
   currentEngagement,
   currentEngagementChanges,
   onChange = () => null,
-  formOptions,
+  engagementFormConfig,
   missingRequiredFields,
   onSave,
 }: EngagementSummaryCardProps) {
@@ -45,7 +45,7 @@ export function EngagementSummaryCard({
     <>
       <EngagementSummaryEditModal
         onSave={onSave}
-        formOptions={formOptions}
+        engagementFormConfig={engagementFormConfig}
         onChange={onChange}
         engagement={currentEngagementChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}

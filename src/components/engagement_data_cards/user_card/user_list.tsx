@@ -11,7 +11,7 @@ import { UserRolesTooltip } from "./user_roles_tooltip";
 
 interface UserListProps{
   defaultRows: string[][];
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   title: any;
 }
 
@@ -62,7 +62,7 @@ export function UserList(props: UserListProps) {
     { title:
         <>
           Role
-          <UserRolesTooltip formOptions={props.formOptions}/>
+          <UserRolesTooltip engagementFormConfig={props.engagementFormConfig}/>
         </>
     },
   ];

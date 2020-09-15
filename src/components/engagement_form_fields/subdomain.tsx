@@ -8,7 +8,7 @@ import { slugify } from 'transliteration';
 
 interface SubdomainFormFieldProps {
   engagement: Engagement;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onChange: (fieldName: string, value: any) => void;
 }
 

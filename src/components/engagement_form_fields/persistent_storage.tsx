@@ -12,13 +12,13 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 interface PersistentStorageFormFieldProps {
   engagement: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
 }
 
 export function PersistentStorageFormField({
   engagement,
   onChange,
-  formOptions,
+  engagementFormConfig,
 }: PersistentStorageFormFieldProps) {
   const { hasFeature } = useFeatures();
   return (
@@ -32,15 +32,15 @@ export function PersistentStorageFormField({
         aria-label="Persistent Storage Needs"
         id={'persistent_storage_dropdown'}
         isDisabled={
-          formOptions?.openshift_options?.persistent_storage?.options
+          engagementFormConfig?.openshift_options?.persistent_storage?.options
             ?.length === 1 || !hasFeature(APP_FEATURES.writer)
         }
         onChange={e => onChange('ocp_persistent_storage_size', e)}
         value={engagement?.ocp_persistent_storage_size || ''}
       >
-        {formOptions?.openshift_options?.persistent_storage?.options?.length >
+        {engagementFormConfig?.openshift_options?.persistent_storage?.options?.length >
         0 ? (
-          formOptions?.openshift_options?.persistent_storage?.options?.map(
+          engagementFormConfig?.openshift_options?.persistent_storage?.options?.map(
             (option: any, index: any) => (
               <FormSelectOption
                 isDisabled={option.disabled}

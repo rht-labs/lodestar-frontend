@@ -1,19 +1,19 @@
 import { ValidatorFactory } from '../schemas/validators';
 import { EngagementFormConfig } from '../schemas/engagement_config';
 
-export const getValidatorsFromFormOptions = (
-  formOptions: EngagementFormConfig = {}
+export const getValidatorsFromEngagementFormConfig = (
+  engagementFormConfig: EngagementFormConfig = null
 ) =>
-  Object.keys(formOptions || {}).reduce(
+  Object.keys(engagementFormConfig || {}).reduce(
     (previousSchemaGroups, currentGroupKey) => {
       return {
         ...previousSchemaGroups,
-        ...Object.keys(formOptions[currentGroupKey] ?? {}).reduce(
+        ...Object.keys(engagementFormConfig[currentGroupKey] ?? {}).reduce(
           (previousGroupFields, currentFieldKey) => ({
             ...previousGroupFields,
             [currentFieldKey]: (
-              formOptions?.[currentGroupKey]?.[currentFieldKey]?.validators ||
-              []
+              engagementFormConfig?.[currentGroupKey]?.[currentFieldKey]
+                ?.validators || []
             ).map(ValidatorFactory),
           }),
           {}
