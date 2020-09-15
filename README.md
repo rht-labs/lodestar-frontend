@@ -67,7 +67,7 @@ In this application, components should be stateless as much as possible. They sh
 
 `src/context` contains the application contexts. Contexts hold all of the global state and business logic for Lodestar. For the React docs on Contexts, [see here](https://reactjs.org/docs/context.html).
 
-Contexts serve as the central nervous system for the application. They handle the dirty business of retrieving data from services, processing that data, handling exceptions, storing data, and notifying children of changes. All business logic should flow through a context.
+Contexts serve as the central nervous system for the application. They handle the dirty business of interacting with services, managing global state, and handling business logic. All business logic should flow through a context.
 
 #### Feature Context
 
