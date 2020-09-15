@@ -9,7 +9,7 @@ import { LodestarRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_context/feature_toggles';
 import {
   ServiceProvider,
-  useServiceProviders,
+  ServiceProviderContext,
 } from './context/service_provider_context/service_provider_context';
 import { FeedbackProvider } from './context/feedback_context/feedback_context';
 import { NotificationProvider } from './context/notification_context/notification_context';
@@ -27,49 +27,52 @@ export const App = ({ config }: { config: Config }) => {
       ? createFakedServices({ shouldUseStaticData: false })
       : createApiV1Services(config);
 
+  const { appConfig } = useConfig();
+
   return (
     <ErrorBoundary>
       <ServiceProvider serviceFactory={serviceProviders}>
-        <AppContexts />
+        <ServiceProviderContext.Consumer>
+          {({
+            authService,
+            notificationService,
+            versionService,
+            engagementService,
+          }) => {
+            return (
+              <>
+                {appConfig?.bannerMessages?.map(message => {
+                  return (
+                    <CustomGlobalBanner
+                      color={message.backgroundcolor}
+                      message={message.message}
+                    />
+                  );
+                })}
+                <FeedbackProvider>
+                  <AuthProvider authService={authService}>
+                    <NotificationProvider
+                      notificationService={notificationService}
+                    >
+                      <VersionProvider versionService={versionService}>
+                        <FeatureToggles>
+                          <Router>
+                            <EngagementProvider
+                              engagementService={engagementService}
+                            >
+                              <LodestarRouter />
+                            </EngagementProvider>
+                          </Router>
+                        </FeatureToggles>
+                      </VersionProvider>
+                    </NotificationProvider>
+                  </AuthProvider>
+                </FeedbackProvider>
+              </>
+            );
+          }}
+        </ServiceProviderContext.Consumer>
       </ServiceProvider>
     </ErrorBoundary>
   );
 };
-
-function AppContexts() {
-  const {
-    authService,
-    engagementService,
-    notificationService,
-    versionService,
-  } = useServiceProviders();
-  const { appConfig } = useConfig();
-
-  return (
-    <>
-      {appConfig?.bannerMessages?.map(message => {
-        return (
-          <CustomGlobalBanner
-            color={message.backgroundcolor}
-            message={message.message}
-          />
-        );
-      })}
-      <FeedbackProvider>
-        <AuthProvider authService={authService}>
-          <NotificationProvider notificationService={notificationService}>
-            <VersionProvider versionService={versionService}>
-              <FeatureToggles>
-                <Router>
-                  <EngagementProvider engagementService={engagementService}>
-                    <LodestarRouter />
-                  </EngagementProvider>
-                </Router>
-              </FeatureToggles>
-            </VersionProvider>
-          </NotificationProvider>
-        </AuthProvider>
-      </FeedbackProvider>
-    </>
-  );
-}
