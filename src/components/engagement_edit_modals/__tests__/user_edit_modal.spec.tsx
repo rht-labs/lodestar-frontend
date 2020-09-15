@@ -12,7 +12,7 @@ describe('Point of Contact edit modal', () => {
       render(
         <UserEditModal
           onSave={() => {}}
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
@@ -27,7 +27,7 @@ describe('Point of Contact edit modal', () => {
       <UserEditModal
         onSave={onSave}
         engagement={Engagement.fromFake(true)}
-        formOptions={EngagementFormConfig.fromFake()}
+        engagementFormConfig={EngagementFormConfig.fromFake()}
         isOpen={true}
         onChange={() => {}}
       />
@@ -44,7 +44,7 @@ describe('Point of Contact edit modal', () => {
         <UserEditModal
           onSave={() => {}}
           engagement={({ engagement_users: [] } as unknown) as Engagement}
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           onChange={onChange}
         />
@@ -60,7 +60,7 @@ describe('Point of Contact edit modal', () => {
       },
     ]);
   });
-  test('Clicking the removeUser button calls onChange', async () => {
+  test('Clicking the Save button calls onChange for removing users (if any)', async () => {
     const onChange = jest.fn();
     const { getByTestId } = render(
       <FeatureToggleContext.Provider
@@ -69,13 +69,13 @@ describe('Point of Contact edit modal', () => {
         <UserEditModal
           onSave={() => {}}
           engagement={Engagement.fromFake(true)}
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           onChange={onChange}
         />
       </FeatureToggleContext.Provider>
     );
-    await fireEvent.click(getByTestId('remove-user-button-0'));
-    expect(onChange).toHaveBeenCalledWith('user', []);
+    await fireEvent.click(getByTestId('user-edit-save'));
+    expect(onChange).toHaveBeenCalled();
   });
 });

@@ -12,14 +12,14 @@ import { useModalVisibility } from '../../../context/edit_modal_visibility_conte
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import { EngagementStatusText } from '../../../routes/engagement_list/engagement_status_text';
+import { EngagementStatusText } from '../../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 
 export interface EngagementSummaryCardProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
 }
@@ -29,7 +29,7 @@ export function EngagementSummaryCard({
   currentEngagement,
   currentEngagementChanges,
   onChange = () => null,
-  formOptions,
+  engagementFormConfig,
   missingRequiredFields,
   onSave,
 }: EngagementSummaryCardProps) {
@@ -45,7 +45,7 @@ export function EngagementSummaryCard({
     <>
       <EngagementSummaryEditModal
         onSave={onSave}
-        formOptions={formOptions}
+        engagementFormConfig={engagementFormConfig}
         onChange={onChange}
         engagement={currentEngagementChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}

@@ -23,7 +23,7 @@ export class Apiv1VersionService extends VersionService {
     );
     const rObject = [
       {
-        application: 'omp-frontend',
+        application: 'lodestar-frontend',
         git_commit: data.git_commit,
         git_tag: data.git_tag,
         version: data.git_tag,

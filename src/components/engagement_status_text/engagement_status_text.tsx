@@ -1,7 +1,11 @@
 import React from 'react';
-import {EngagementStatus} from "../../schemas/engagement";
+import { EngagementStatus } from '../../schemas/engagement';
 
-export const EngagementStatusText = ({ status }: { status: EngagementStatus }) => {
+export const EngagementStatusText = ({
+  status,
+}: {
+  status: EngagementStatus;
+}) => {
   const getEngagementStatusText = () => {
     if (status === EngagementStatus.active) {
       return 'Active';
@@ -26,9 +30,7 @@ export const EngagementStatusText = ({ status }: { status: EngagementStatus }) =
     }
   };
   return (
-    <b style={{ color: getStatusColor(status) }}
-       data-cy={status}
-    >
+    <b style={{ color: getStatusColor(status) }} data-cy={status}>
       {getEngagementStatusText().toUpperCase()}
     </b>
   );

@@ -40,6 +40,11 @@ export const engagementFilterFactory = (
         hasSearchTermMatch(engagement, filter?.searchTerm)
       );
     }
+    if (filter.engagementRegions) {
+      filterTestResults.push(
+        filter.engagementRegions.includes(engagement.engagement_region)
+      );
+    }
     /**
      * If filterTestResult has a length of 0, this means no tests were performed.
      * The default behavior of the filter should be to show engagements.

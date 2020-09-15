@@ -11,7 +11,7 @@ describe('Engagement Summary edit modal', () => {
       render(
         <EngagementSummaryEditModal
           onSave={() => {}}
-          formOptions={{}}
+          engagementFormConfig={{}}
           isOpen={true}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
@@ -27,7 +27,7 @@ describe('Engagement Summary edit modal', () => {
       <EngagementSummaryEditModal
         onSave={onSave}
         engagement={Engagement.fromFake(true)}
-        formOptions={{}}
+        engagementFormConfig={{}}
         isOpen={true}
         onChange={() => {}}
       />

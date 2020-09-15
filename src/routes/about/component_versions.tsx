@@ -25,7 +25,7 @@ export function ComponentVersions(props: ComponentVersionProps) {
             (version, mapIndex) => {
               let label = '';
               if (
-                version.application === 'omp-frontend' &&
+                version.application === 'lodestar-frontend' &&
                 version.version.charAt(0) !== 'v'
               ) {
                 label = version.git_tag;

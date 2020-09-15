@@ -14,7 +14,7 @@ export interface PointOfContactCardProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
-  formOptions: object;
+  engagementFormConfig: object;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
 }
@@ -22,7 +22,7 @@ export interface PointOfContactCardProps {
 export function PointOfContactCard({
   currentEngagement,
   currentEngagementChanges,
-  formOptions,
+  engagementFormConfig,
   onChange,
   onSave,
   missingRequiredFields,
@@ -40,7 +40,7 @@ export function PointOfContactCard({
   return (
     <>
       <PointOfContactEditModal
-        formOptions={formOptions}
+        engagementFormConfig={engagementFormConfig}
         onChange={onChange}
         engagement={currentEngagementChanges}
         onSave={onSave}

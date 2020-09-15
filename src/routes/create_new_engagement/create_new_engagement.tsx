@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { getValidatorsFromFormOptions } from '../../common/config_validator_adapter';
+import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import {
   PageSection,
   Title,
@@ -25,35 +25,44 @@ import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
 
 export function CreateNewEngagement() {
-  const { formOptions, getConfig } = useEngagements();
+  const { engagementFormConfig, getConfig } = useEngagements();
   const [hasFetchedConfig, setHasFetchedConfig] = useState<boolean>(false);
   useEffect(() => {
-    if (!hasFetchedConfig && !formOptions) {
+    if (!hasFetchedConfig && !engagementFormConfig) {
       getConfig();
       setHasFetchedConfig(true);
     }
-  }, [hasFetchedConfig, formOptions, getConfig]);
+  }, [hasFetchedConfig, engagementFormConfig, getConfig]);
   return (
-    <ValidationProvider validators={getValidatorsFromFormOptions(formOptions)}>
+    <ValidationProvider validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}>
       <CreateNewEngagementForm />
     </ValidationProvider>
   );
 }
 export function CreateNewEngagementForm() {
-  const history = useHistory();
   const {
     createEngagement,
-    formOptions,
+    engagementFormConfig,
     currentEngagement,
     getEngagements,
     engagements,
   } = useEngagements();
+  const history = useHistory();
+  const [customerName, setCustomerName] = useState(null);
+  const [projectName, setProjectName] = useState(null);
+  const [region, setRegion] = useState<string>();
+  const [engagementType, setEngagementType] = useState<string>();
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
       await createEngagement({
         customer_name: customerName,
         project_name: projectName,
         engagement_region: region,
+        engagement_type:
+          engagementType ??
+          engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+            e => e.default
+          )?.value,
       });
       history.push(`/app/engagements/${customerName}/${projectName}`);
     } else {
@@ -64,9 +73,17 @@ export function CreateNewEngagementForm() {
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(
     false
   );
-  const [customerName, setCustomerName] = useState(null);
-  const [projectName, setProjectName] = useState(null);
-  const [region, setRegion] = useState<string>();
+  useEffect(() => {
+    if (
+      engagementType === undefined &&
+      engagementFormConfig?.basic_information?.engagement_types
+    ) {
+      const defaultType = engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
+        e => e.default
+      )?.value;
+      setEngagementType(defaultType ? defaultType : null);
+    }
+  }, [engagementFormConfig, engagementType]);
   const { getValidationResult, validate } = useValidation();
   useEffect(() => {
     if (engagements.length === 0 && !hasFetchedEngagements) {
@@ -220,7 +237,7 @@ export function CreateNewEngagementForm() {
                       key="undefined region"
                     />,
                   ].concat(
-                    formOptions?.basic_information?.engagement_regions?.options?.map(
+                    engagementFormConfig?.basic_information?.engagement_regions?.options?.map(
                       r => {
                         return (
                           <FormSelectOption
@@ -231,6 +248,39 @@ export function CreateNewEngagementForm() {
                         );
                       }
                     )
+                  )}
+                </FormSelect>
+              </FormGroup>
+              <FormGroup
+                label={<SectionTitle>Type&nbsp;&nbsp;</SectionTitle>}
+                fieldId="region"
+                helperTextInvalid={getValidationResult('engagement_type').join(
+                  ' '
+                )}
+                validated={
+                  getValidationResult('engagement_type').length > 0
+                    ? 'error'
+                    : 'default'
+                }
+              >
+                <FormSelect
+                  data-testid="new-engagement-type"
+                  data-cy="new_engagement_type"
+                  value={engagementType}
+                  onChange={e => {
+                    setEngagementType(e);
+                  }}
+                >
+                  {engagementFormConfig?.basic_information?.engagement_types?.options?.map(
+                    r => {
+                      return (
+                        <FormSelectOption
+                          label={r.label}
+                          key={r.value}
+                          value={r.value}
+                        ></FormSelectOption>
+                      );
+                    }
                   )}
                 </FormSelect>
               </FormGroup>

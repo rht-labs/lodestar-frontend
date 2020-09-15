@@ -46,12 +46,15 @@ export class EngagementJsonSerializer
         : null,
     };
     const trimmedValues = Object.keys(e).reduce((acc, currKey) => {
-      acc[currKey] = e[currKey]
-      if (typeof acc[currKey] === 'string' && typeof acc[currKey]?.trim === 'function') {
-        acc[currKey] = acc[currKey].trim()
+      acc[currKey] = e[currKey];
+      if (
+        typeof acc[currKey] === 'string' &&
+        typeof acc[currKey]?.trim === 'function'
+      ) {
+        acc[currKey] = acc[currKey].trim();
       }
-      return acc
-    }, {})
+      return acc;
+    }, {});
     return trimmedValues;
   }
   deserialize(data: object): Engagement {
@@ -75,6 +78,8 @@ export class EngagementJsonSerializer
       engagement_users: data['engagement_users'],
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
+      engagement_region: data['engagement_region'],
+      engagement_type: data['engagement_type'],
       last_update: data['last_update'],
       location: data['location'],
       ocp_cloud_provider_name: data['ocp_cloud_provider_name'],

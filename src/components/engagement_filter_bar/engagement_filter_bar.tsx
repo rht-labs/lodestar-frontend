@@ -11,15 +11,19 @@ import { EngagementFilter } from '../../schemas/engagement_filter';
 import { SortSelect } from './components/sort_select';
 import { EngagementStatusSelect } from './components/engagement_status_select';
 import { SearchIcon } from '@patternfly/react-icons';
+import { EngagementRegionSelect } from './components/region_select';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 export interface EngagementFilterProps {
   onChange: (filter: EngagementFilter) => void;
   filter: EngagementFilter;
+  engagementFormConfig?: EngagementFormConfig;
 }
 
 export function EngagementFilterBar({
   onChange,
   filter,
+  engagementFormConfig,
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
   return (
@@ -48,6 +52,15 @@ export function EngagementFilterBar({
         </FlexItem>
         <FlexItem>
           <EngagementStatusSelect onChange={onChange} filter={filter} />
+        </FlexItem>
+        <FlexItem>
+          <EngagementRegionSelect
+            regions={
+              engagementFormConfig?.basic_information?.engagement_regions?.options ?? []
+            }
+            onChange={onChange}
+            filter={filter}
+          />
         </FlexItem>
         <FlexItem>
           <SortSelect onChange={onChange} filter={filter} />

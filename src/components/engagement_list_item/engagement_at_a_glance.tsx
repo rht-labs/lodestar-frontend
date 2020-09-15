@@ -16,10 +16,10 @@ import {
   OutlinedClockIcon,
   UserIcon,
 } from '@patternfly/react-icons';
-import { ActivityHistoryLineItem } from '../../components/activity_history_line_item/activity_history_line_item';
+import { ActivityHistoryLineItem } from '../activity_history_line_item/activity_history_line_item';
 import { APP_FEATURES } from '../../common/app_features';
-import { Feature } from '../../components/feature/feature';
-import { EngagementStatusText } from './engagement_status_text';
+import { Feature } from '../feature/feature';
+import { EngagementStatusText } from '../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../common/display_created_by_name';
 
 function DurationInWeeks({
@@ -58,6 +58,12 @@ export function EngagementAtAGlance({
               {!!engagement?.start_date && isValid(engagement?.start_date)
                 ? formatDate(engagement?.start_date, 'MMM dd, yyyy')
                 : 'TBA'}
+            </GridItem>
+            <GridItem>
+              {engagement?.engagement_region
+                ? 'Engagement Region: ' +
+                  engagement?.engagement_region?.toUpperCase?.()
+                : null}
             </GridItem>
           </Grid>
         </GridItem>

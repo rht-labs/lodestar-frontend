@@ -10,7 +10,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
@@ -55,7 +55,7 @@ export function EngagementSummaryEditModal(
           />
           <EngagementStartEndDateFormField
             onChange={props.onChange}
-            formOptions={props.formOptions}
+            engagementFormConfig={props.engagementFormConfig}
             engagement={props.engagement}
           />
         </Form>
