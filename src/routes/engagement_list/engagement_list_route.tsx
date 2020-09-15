@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { EngagementList } from './engagement_list';
 import {
   PageSection,
   Text,
@@ -18,6 +17,7 @@ import {
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFilter } from '../../schemas/engagement_filter';
 import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
+import { EngagementList } from '../../components/engagement_list/engagement_list';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
