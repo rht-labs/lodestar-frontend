@@ -2,7 +2,7 @@
   "ignoreUnresolved": [],
   "ignoreUnimported": [
     "src/common/test_state_wrapper.tsx",
-    "src/routes/engagement_list/mock_engagements.ts",
+    "src/components/engagement_list_item/mock_engagements.ts",
     "src/setupTests.js"
   ],
   "ignoreUnused": [
@@ -17,6 +17,7 @@
     "@types/react",
     "@types/react-dom",
     "@types/react-router-dom",
+    "@types/react-router-hash-link",
     "@types/scheduler",
     "@welldone-software/why-did-you-render",
     "mockdate",
