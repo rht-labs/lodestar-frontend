@@ -10,6 +10,7 @@ afterEach(cleanup);
 describe('Engagement Card', () => {
   test('renders the components', () => {
     const engagement = Engagement.fromFake(true);
+    engagement.commits[0].committed_date = new Date()
     const { getByText } = render(
       <MemoryRouter>
         <EngagementListItem engagement={engagement}></EngagementListItem>
@@ -20,6 +21,7 @@ describe('Engagement Card', () => {
 
   test('matches the snapshot', () => {
     const engagement = Engagement.fromFake(true);
+    engagement.commits[0].committed_date = new Date()
     expect(
       render(
         <MemoryRouter>
