@@ -6,9 +6,9 @@ import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { UserList } from "./user_list";
-import { RedhatIcon, UserIcon } from "@patternfly/react-icons";
-import { UserTableTitleIcon } from "./user_table_title_icon";
+import { UserList } from './user_list';
+import { RedhatIcon, UserIcon } from '@patternfly/react-icons';
+import { UserTableTitleIcon } from './user_table_title_icon';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -45,25 +45,32 @@ export function UserCard({
         )}
         title="Engagement Users"
       >
-        <UserTable users={engagement?.engagement_users}
-                   engagementFormConfig={engagementFormConfig}
+        <UserTable
+          users={engagement?.engagement_users}
+          engagementFormConfig={engagementFormConfig}
         />
       </DataCard>
     </>
   );
 }
 
-const redHatUsers =
-  <UserTableTitleIcon text={ 'Red Hat users' }
-                      icon={ <RedhatIcon style={{ fontSize: '1.3rem', marginLeft: '1rem' }}/> }/>;
+const redHatUsers = (
+  <UserTableTitleIcon
+    text={'Red Hat users'}
+    icon={<RedhatIcon style={{ fontSize: '1.3rem', marginLeft: '1rem' }} />}
+  />
+);
 
-const externalUsers =
-  <UserTableTitleIcon text={ 'External users' }
-                      icon={ <UserIcon style={{ height: '50px', marginLeft: '1rem' }}/> }/>;
+const externalUsers = (
+  <UserTableTitleIcon
+    text={'External users'}
+    icon={<UserIcon style={{ height: '50px', marginLeft: '1rem' }} />}
+  />
+);
 
 const UserTable = ({
   users,
-  engagementFormConfig
+  engagementFormConfig,
 }: {
   users: {
     first_name: string;
@@ -73,25 +80,36 @@ const UserTable = ({
   }[];
   engagementFormConfig: EngagementFormConfig;
 }) => {
-
+  const getRoleName = (userRole: string) =>
+    engagementFormConfig?.user_options?.user_roles?.options?.find?.(
+      role => role.value === userRole
+    )?.label ?? userRole;
   const allRows: string[][] = [];
-  users.map((user: any) => (
-    allRows.push([user.first_name + " " + user.last_name, user.email, user.role])
-  ));
+  users.map((user: any) =>
+    allRows.push([
+      user.first_name + ' ' + user.last_name,
+      user.email,
+      getRoleName(user.role),
+    ])
+  );
 
   return (
     <Grid hasGutter>
       <GridItem span={10}>
-          <UserList title={redHatUsers}
-                    engagementFormConfig={engagementFormConfig}
-                    defaultRows=
-                      { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) !== -1 ) }
-          />
-          <UserList title={externalUsers}
-                    engagementFormConfig={engagementFormConfig}
-                    defaultRows=
-                      { allRows.filter( row => ( row[1]?.toLowerCase().indexOf("redhat.com")) === -1 ) }
-          />
+        <UserList
+          title={redHatUsers}
+          engagementFormConfig={engagementFormConfig}
+          defaultRows={allRows.filter(
+            row => row[1]?.toLowerCase().indexOf('redhat.com') !== -1
+          )}
+        />
+        <UserList
+          title={externalUsers}
+          engagementFormConfig={engagementFormConfig}
+          defaultRows={allRows.filter(
+            row => row[1]?.toLowerCase().indexOf('redhat.com') === -1
+          )}
+        />
       </GridItem>
     </Grid>
   );
