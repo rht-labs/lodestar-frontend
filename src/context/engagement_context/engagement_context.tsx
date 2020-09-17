@@ -18,7 +18,7 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 
 export interface EngagementContext {
-  fieldRegistrant: (groupName: string) => (fieldName: string) => void;
+  setFieldGroups: () => void;
   getEngagements: () => Promise<Engagement[]>;
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
@@ -84,7 +84,8 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [fieldMap, setFieldMap] = useState<{ [key: string]: string[] }>();
+  const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
+  console.log(fieldGroups);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -440,7 +441,7 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
-        fieldRegistrant,
+        setFieldGroups,
         createEngagementPoll,
         requiredFields,
         currentEngagement,

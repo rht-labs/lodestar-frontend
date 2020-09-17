@@ -12,7 +12,7 @@ export interface DescriptionFormFieldProps {
 
 export function DescriptionFormField(props: DescriptionFormFieldProps) {
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormManager();
+  const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('description'), [registerField]);
   return (
     <FormGroup label="Description" fieldId="description">

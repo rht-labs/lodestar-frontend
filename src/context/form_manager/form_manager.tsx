@@ -59,5 +59,6 @@ const FormManagerGroupProvider = ({
 export const FormManager = {
   Manager: FormManagerProvider,
   Group: FormManagerGroupProvider,
-  useFormManager: () => useContext(FormManagerGroupContext),
+  useFormGroupManager: () => useContext(FormManagerGroupContext),
+  useFormManager: () => useContext(FormManagerContext),
 };
