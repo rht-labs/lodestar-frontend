@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DataCard } from '../data_card';
 import { Engagement } from '../../../schemas/engagement';
-import { Grid, GridItem } from '@patternfly/react-core';
+import { Grid, GridItem, Accordion } from '@patternfly/react-core';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { GitCommit } from '../../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
@@ -46,23 +46,38 @@ export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
 }
 
 function ActivityList({ commits }: { commits: GitCommit[] }) {
-  const anyActivities = (commits?.length > 0);
+  const anyActivities = commits?.length > 0;
+  const [expandedItems, _setExpandedItems] = useState<string[]>([]);
+  const toggleItem = (commitId: string) => {
+    if (expandedItems.includes(commitId)) {
+      const expandedItemsClone = [...expandedItems];
+      expandedItemsClone.splice(expandedItemsClone.indexOf(commitId), 1);
+      _setExpandedItems(expandedItemsClone);
+    } else {
+      _setExpandedItems([...expandedItems, commitId]);
+    }
+  };
   if (anyActivities) {
     return (
-      <>
-        {commits.map(commit => (
-          <ActivityListItem key={commit.id} commit={commit} />
-        ))}
-      </>
+      <div>
+        <Accordion asDefinitionList={false}>
+          {commits.map((commit: GitCommit) => {
+            if (!commit) {
+              return <div />;
+            } else {
+              return (
+                <ActivityHistoryLineItem
+                  isExpanded={expandedItems.includes(commit.id)}
+                  isAccordionItem={true}
+                  onToggle={toggleItem}
+                  commit={commit}
+                />
+              );
+            }
+          })}
+        </Accordion>
+      </div>
     );
   }
-  return <p style={{fontStyle: 'italic'}}> No activity to display</p>;
-}
-
-function ActivityListItem({ commit }: { commit: GitCommit }) {
-  if (!commit) {
-    return <div />;
-  } else {
-    return <ActivityHistoryLineItem commit={commit} />;
-  }
+  return <p style={{ fontStyle: 'italic' }}> No activity to display</p>;
 }

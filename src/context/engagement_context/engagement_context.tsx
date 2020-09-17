@@ -18,6 +18,7 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 
 export interface EngagementContext {
+  fieldRegistrant: (groupName: string) => (fieldName: string) => void;
   getEngagements: () => Promise<Engagement[]>;
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
@@ -76,17 +77,23 @@ export const EngagementProvider = ({
   engagementService: EngagementService;
 }) => {
   const feedbackContext = useFeedback();
-  const [engagementFormConfig, setengagementFormConfig] = useState<EngagementFormConfig>();
+  const [engagementFormConfig, setengagementFormConfig] = useState<
+    EngagementFormConfig
+  >();
 
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
+  const [fieldMap, setFieldMap] = useState<{ [key: string]: string[] }>();
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
-  >(engagementFormReducer(engagementFormConfig), engagementFormReducer(engagementFormConfig)());
+  >(
+    engagementFormReducer(engagementFormConfig),
+    engagementFormReducer(engagementFormConfig)()
+  );
 
   const authContext = useSession();
 
@@ -322,6 +329,15 @@ export const EngagementProvider = ({
     return result;
   }, [currentEngagementChanges]);
 
+  const fieldRegistrant = (groupName: string) => {
+    return (fieldName: string) => {
+      const fields = fieldMap[groupName] ?? [];
+      if (!fields.includes(fieldName)) {
+        fields.push(fieldName);
+      }
+    };
+  };
+
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
@@ -424,6 +440,7 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
+        fieldRegistrant,
         createEngagementPoll,
         requiredFields,
         currentEngagement,
