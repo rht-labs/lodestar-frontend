@@ -69,14 +69,14 @@ function ActivityHistoryAccordionItem({
         component="div"
       >
         <Flex>
-          <FlexItem flex={{ default: 'flex_1' }}>
+          <FlexItem>
             <span>{commit.committed_date.toLocaleString()}</span>
           </FlexItem>
           <FlexItem>
             {commit.author_name}&nbsp;{commit.author_email}
           </FlexItem>
           <FlexItem>
-            <span style={{ minWidth: '50%' }}>{commit.message}</span>
+            <span>{commit.message}</span>
           </FlexItem>
         </Flex>
       </AccordionToggle>

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   ModalVariant,
   Button,
   Grid,
   GridItem,
+  Accordion,
+  AccordionItem,
 } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
@@ -19,7 +21,7 @@ export function ActivityHistoryDetailsModal(
   props: ActivityHistoryDetailsModalProps
 ) {
   const { requestClose } = useModalVisibility();
-  const anyActivities = (props.engagement?.commits?.length > 0);
+  const anyActivities = props.engagement?.commits?.length > 0;
   return (
     <Modal
       variant={ModalVariant.small}
@@ -34,24 +36,30 @@ export function ActivityHistoryDetailsModal(
           </div>
         }
       >
-        {
-          anyActivities
-          ? <DetailedActivityHistoryList commits={props.engagement?.commits} />
-          : <p style={{fontStyle: 'italic'}}> No activity to display</p>
-        }
+        {anyActivities ? (
+          <DetailedActivityHistoryList commits={props.engagement?.commits} />
+        ) : (
+          <p style={{ fontStyle: 'italic' }}> No activity to display</p>
+        )}
       </EditModalTemplate>
     </Modal>
   );
 }
 
 function DetailedActivityHistoryList({ commits }: { commits: GitCommit[] }) {
+  const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
   return (
-    <Grid hasGutter>
+    <Accordion>
       {commits?.map(commit => (
-        <GridItem span={12}>
-          <ActivityHistoryLineItem commit={commit} />
-        </GridItem>
+        <ActivityHistoryLineItem
+          commit={commit}
+          isAccordionItem
+          onToggle={commitId =>
+            setExpanded({ ...expanded, [commitId]: !expanded[commitId] })
+          }
+          isExpanded={!!expanded[commit.id]}
+        />
       ))}
-    </Grid>
+    </Accordion>
   );
 }
