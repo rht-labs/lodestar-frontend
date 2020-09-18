@@ -20,7 +20,7 @@ export const EngagementErrorContextProvider = ({
   children,
   authContext,
 }: EngagementErrorContextProps) => {
-  const [error, setError] = useState<string>(null);
+  const [error] = useState<string>(null);
   const checkErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { FeedbackContext } from '../../feedback_context/feedback_context';
 export interface EngagementLaunchContext {

@@ -161,11 +161,11 @@ export const EngagementResourceContextProvider = ({
     async (customerName: string, projectName: string) => {
       try {
         let availableEngagements = engagements ?? [];
-        let cachedEngagement = availableEngagements?.find(
-          engagement =>
-            engagement?.customer_name === customerName &&
-            engagement?.project_name === projectName
-        );
+        // let cachedEngagement = availableEngagements?.find(
+        //   engagement =>
+        //     engagement?.customer_name === customerName &&
+        //     engagement?.project_name === projectName
+        // );
         // TODO: reimplement
         // if (cachedEngagement !== null) {
         //   setCurrentEngagement(cachedEngagement);

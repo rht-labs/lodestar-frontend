@@ -32,9 +32,9 @@ export interface CurrentEngagementContext {
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
 }
 
-export const CurrentEngagementContext = React.createContext<CurrentEngagementContext>(
-  null
-);
+export const CurrentEngagementContext = React.createContext<
+  CurrentEngagementContext
+>(null);
 
 interface CurrentEngagementContextProviderProps {
   children: any;
@@ -46,7 +46,7 @@ export const CurrentEngagementContextProvider = ({
   engagementFormConfig,
   engagementService,
 }: CurrentEngagementContextProviderProps) => {
-  const { checkErrors, error } = useContext(EngagementErrorContext);
+  const { checkErrors } = useContext(EngagementErrorContext);
   const { validateAuthStatus } = useContext(EngagementAuthMediatorContext);
   const feedbackContext = useFeedback();
   const [currentEngagementChanges, dispatch] = useReducer<
@@ -92,7 +92,7 @@ export const CurrentEngagementContextProvider = ({
     )}\nThe following fields were changed: ${changedFields.join('\n')}`;
     return commitMessage;
   };
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading] = useState<boolean>(false);
   const _checkHasUpdateRef = useRef(async () => false);
 
   useEffect(() => {

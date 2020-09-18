@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useFeedback } from '../feedback_context/feedback_context';
 import { useSession } from '../auth_context/auth_context';
