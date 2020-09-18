@@ -9,7 +9,7 @@ export interface EngagementService {
       'customer_name' | 'project_name' | 'engagement_region'
     >
   ): Promise<Engagement>;
-  saveEngagement(data: Engagement): Promise<Engagement>;
+  saveEngagement(data: Engagement, commitMessage?: string): Promise<Engagement>;
   launchEngagement(data: Engagement): Promise<Engagement>;
   getConfig(): Promise<EngagementFormConfig>;
   checkHasUpdates(engagement: Engagement): Promise<boolean>;
