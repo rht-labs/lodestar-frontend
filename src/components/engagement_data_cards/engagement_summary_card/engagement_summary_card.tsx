@@ -1,9 +1,6 @@
 import React from 'react';
 import { DataCard } from '../data_card';
-import {
-  Engagement,
-  getEngagementStatus,
-} from '../../../schemas/engagement';
+import { Engagement, getEngagementStatus } from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { format as formatDate } from 'date-fns';
@@ -119,7 +116,7 @@ export function EngagementSummaryCard({
             </Grid>
           </GridItem>
           <GridItem md={12} lg={4}>
-            <TitledDataPoint title="Description"  dataCy={'description_label'}>
+            <TitledDataPoint title="Description" dataCy={'description_label'}>
               <span style={{ whiteSpace: 'pre-line' }}>
                 {currentEngagement?.description}
               </span>
