@@ -160,7 +160,7 @@ export const EngagementResourceContextProvider = ({
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
       try {
-        let availableEngagements = engagements ?? [];
+        // let availableEngagements = engagements ?? [];
         // let cachedEngagement = availableEngagements?.find(
         //   engagement =>
         //     engagement?.customer_name === customerName &&
@@ -186,7 +186,7 @@ export const EngagementResourceContextProvider = ({
         }
       }
     },
-    [engagements, engagementService, checkErrors, feedbackContext]
+    [engagementService, checkErrors, feedbackContext]
   );
   const _addNewEngagement = useCallback(
     async (newEngagement: Engagement) => {
