@@ -10,6 +10,8 @@ import {
   DataListItemRow,
   DataListItemCells,
   DataListCell,
+  Flex,
+  FlexItem,
 } from '@patternfly/react-core';
 
 export interface ActivityHistoryLineItemProps {
@@ -64,8 +66,19 @@ function ActivityHistoryAccordionItem({
         onClick={() => onToggle(commit.id)}
         id={commit.id}
         isExpanded={isExpanded}
+        component="div"
       >
-        {commit.message}
+        <Flex>
+          <FlexItem flex={{ default: 'flex_1' }}>
+            <span>{commit.committed_date.toLocaleString()}</span>
+          </FlexItem>
+          <FlexItem>
+            {commit.author_name}&nbsp;{commit.author_email}
+          </FlexItem>
+          <FlexItem>
+            <span style={{ minWidth: '50%' }}>{commit.message}</span>
+          </FlexItem>
+        </Flex>
       </AccordionToggle>
       <AccordionContent isHidden={!isExpanded}>
         <CommitData commit={commit} />
