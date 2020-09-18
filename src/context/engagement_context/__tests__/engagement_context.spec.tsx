@@ -257,7 +257,7 @@ describe('Engagement Context', () => {
     expect(result.current.currentEngagement).toEqual(initialEngagement);
     let modifiedEngagement = {
       ...initialEngagement,
-      customer_contact_email: 'tennessee@nasa.gov',
+      customer_contact_email: 'bob@doe.com',
     };
     await act(async () => {
       result.current.saveEngagement(modifiedEngagement);
@@ -311,7 +311,7 @@ describe('Engagement Context', () => {
     expect(result.current.engagements[0]).toEqual(initialEngagement);
     let modifiedEngagement = {
       ...initialEngagement,
-      customer_contact_email: 'tennessee@nasa.gov',
+      customer_contact_email: 'bob@doe.com',
     };
     await act(async () => {
       result.current.saveEngagement(modifiedEngagement);

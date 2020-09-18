@@ -1,94 +1,262 @@
-import React, { createContext, useEffect, useRef } from 'react';
+import React, { createContext, useEffect, useRef, useContext } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useState, useCallback, useReducer } from 'react';
 import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
-import { useFeedback, AlertType } from '../feedback_context/feedback_context';
+import {
+  useFeedback,
+  AlertType,
+  FeedbackContext,
+} from '../feedback_context/feedback_context';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 import { AuthenticationError } from '../../services/auth_service/auth_errors';
-import { useSession } from '../auth_context/auth_context';
+import { useSession, AuthContext } from '../auth_context/auth_context';
 import {
   EngagementPoll,
   EngagementPollIntervalStrategy,
 } from '../../schemas/engagement_poll';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 
-export interface EngagementContext {
+interface EngagementAuthMediatorContext {
+  validateAuthStatus: () => Promise<void>;
+}
+const EngagementAuthMediatorContext = React.createContext<
+  EngagementAuthMediatorContext
+>(null);
+interface EngagementAuthMediatorContextProviderProps {
+  children: any;
+  authContext: AuthContext;
+}
+
+const EngagementAuthMediatorContextProvider = ({
+  children,
+  authContext,
+}: EngagementAuthMediatorContextProviderProps) => {
+  const validateAuthStatus = useCallback(async () => {
+    if (!(await authContext.checkIsAuthenticated())) {
+      authContext.setAuthError(new AuthenticationError());
+      throw new AuthenticationError();
+    }
+  }, [authContext]);
+  return (
+    <EngagementAuthMediatorContext.Provider value={{ validateAuthStatus }}>
+      {children}
+    </EngagementAuthMediatorContext.Provider>
+  );
+};
+
+interface EngagementFieldManagerContext {
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
-  getEngagements: () => Promise<Engagement[]>;
+  fieldGroups: { [key: string]: string[] };
+}
+
+const EngagementFieldManagerContext = React.createContext<
+  EngagementFieldManagerContext
+>(null);
+
+interface EngagementFieldManagerContextProviderProps {
+  children: any;
+}
+
+const EngagementFieldManagerContextProvider = ({
+  children,
+}: EngagementFieldManagerContextProviderProps) => {
+  const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>(
+    {}
+  );
+  return (
+    <EngagementFieldManagerContext.Provider
+      value={{ setFieldGroups, fieldGroups }}
+    >
+      {children}
+    </EngagementFieldManagerContext.Provider>
+  );
+};
+interface EngagementLaunchContext {
+  isLaunchable: boolean;
+  requiredFields: string[];
+  missingRequiredFields: string[];
+  launchEngagement: (data: any) => Promise<Engagement>;
+}
+
+const EngagementLaunchContext = React.createContext<EngagementLaunchContext>(
+  null
+);
+
+interface EngagementLaunchContextProviderProps {
+  children: any;
+  currentEngagementChanges: Engagement;
+  feedbackContext: FeedbackContext;
+  onLaunch: (data: Engagement) => Promise<Engagement>;
+}
+
+const EngagementLaunchContextProvider = ({
+  children,
+  currentEngagementChanges,
+  feedbackContext,
+  onLaunch,
+}: EngagementLaunchContextProviderProps) => {
+  const requiredFields = [
+    'customer_contact_email',
+    'customer_contact_name',
+    'customer_name',
+    'end_date',
+    'start_date',
+    'engagement_lead_email',
+    'technical_lead_email',
+    'engagement_lead_name',
+    'technical_lead_name',
+    'ocp_cloud_provider_name',
+    'ocp_cloud_provider_region',
+    'ocp_version',
+    'ocp_cluster_size',
+    'ocp_persistent_storage_size',
+    'ocp_sub_domain',
+    'project_name',
+  ];
+  const missingRequiredFields = useCallback(() => {
+    return requiredFields.filter(
+      field =>
+        currentEngagementChanges?.[field] !== 'boolean' &&
+        currentEngagementChanges?.[field] !== 'number' &&
+        !currentEngagementChanges?.[field]
+    );
+  }, [currentEngagementChanges, requiredFields]);
+  const isLaunchable = useCallback(() => {
+    let result = requiredFields.every(
+      o =>
+        typeof currentEngagementChanges[o] === 'boolean' ||
+        typeof currentEngagementChanges[o] === 'number' ||
+        !!currentEngagementChanges[o]
+    );
+    return result;
+  }, [currentEngagementChanges, requiredFields]);
+  const launchEngagement = async (data: any) => {
+    if (!isLaunchable()) {
+      throw Error(
+        'This engagement does not have the required fields to launch'
+      );
+    }
+    feedbackContext.showLoader();
+    return await onLaunch(data);
+  };
+  return (
+    <EngagementLaunchContext.Provider
+      value={{
+        isLaunchable: isLaunchable(),
+        requiredFields,
+        missingRequiredFields: missingRequiredFields(),
+        launchEngagement,
+      }}
+    >
+      {children}
+    </EngagementLaunchContext.Provider>
+  );
+};
+
+interface EngagementConfigContext {
+  getConfig: () => void;
+  engagementFormConfig?: EngagementFormConfig;
+}
+
+interface EngagementConfigContextProviderProps {
+  children: any;
+  engagementService: EngagementService;
+}
+
+const EngagementConfigContext = React.createContext<EngagementConfigContext>(
+  null
+);
+
+const EngagementConfigContextProvider = ({
+  children,
+  engagementService,
+}: EngagementConfigContextProviderProps) => {
+  const [engagementFormConfig, setEngagementFormConfig] = useState<
+    EngagementFormConfig
+  >(undefined);
+  const { validateAuthStatus } = useContext(EngagementAuthMediatorContext);
+  const getConfig = useCallback(async () => {
+    await validateAuthStatus();
+    const data = await engagementService.getConfig();
+    setEngagementFormConfig(data);
+  }, [engagementService, validateAuthStatus]);
+  return (
+    <EngagementConfigContext.Provider
+      value={{ getConfig, engagementFormConfig }}
+    >
+      {children}
+    </EngagementConfigContext.Provider>
+  );
+};
+
+interface EngagementErrorContext {
+  checkErrors(e: any): Promise<void>;
+  error: any;
+}
+
+const EngagementErrorContext = React.createContext<EngagementErrorContext>(
+  null
+);
+interface EngagementErrorContextProps {
+  authContext: AuthContext;
+  children: any;
+}
+const EngagementErrorContextProvider = ({
+  children,
+  authContext,
+}: EngagementErrorContextProps) => {
+  const [error, setError] = useState<string>(null);
+  const checkErrors = useCallback(
+    async error => {
+      Logger.instance.debug('EngagementContext:_handleErrors', error);
+      if (error instanceof AuthenticationError) {
+        if (!(await authContext.checkIsAuthenticated())) {
+          authContext.setAuthError(error);
+        }
+      } else {
+        throw error;
+      }
+    },
+    [authContext]
+  );
+  return (
+    <EngagementErrorContext.Provider value={{ error, checkErrors }}>
+      {children}
+    </EngagementErrorContext.Provider>
+  );
+};
+
+interface CurrentEngagementContext {
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
-  setCurrentEngagement: (Engagement: Engagement) => void;
-  engagements?: Engagement[];
-  requiredFields: string[];
-  getEngagement: (
-    customerName: string,
-    projectName: string
-  ) => Promise<Engagement>;
-  getConfig: () => void;
-  createEngagement: (data: any) => Promise<Engagement>;
-  saveEngagement: (data: any) => Promise<void>;
-  updateEngagementFormField: (fieldName: string, payload: any) => void;
-  missingRequiredFields: string[];
-  isLaunchable: boolean;
-  engagementFormConfig?: EngagementFormConfig;
-  error: any;
   isLoading: boolean;
-  launchEngagement: (data: any) => Promise<void>;
+  setCurrentEngagement: (Engagement: Engagement) => void;
+  updateEngagementFormField: (fieldName: string, payload: any) => void;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
 }
 
-export type CreateEngagementParams = Pick<
-  Engagement,
-  'project_name' | 'customer_name' | 'engagement_region'
->;
+const CurrentEngagementContext = React.createContext<CurrentEngagementContext>(
+  null
+);
 
-const requiredFields = [
-  'customer_contact_email',
-  'customer_contact_name',
-  'customer_name',
-  'end_date',
-  'start_date',
-  'engagement_lead_email',
-  'technical_lead_email',
-  'engagement_lead_name',
-  'technical_lead_name',
-  'ocp_cloud_provider_name',
-  'ocp_cloud_provider_region',
-  'ocp_version',
-  'ocp_cluster_size',
-  'ocp_persistent_storage_size',
-  'ocp_sub_domain',
-  'project_name',
-];
-export const EngagementContext = createContext<EngagementContext>(null);
-
-const { Provider } = EngagementContext;
-
-export const EngagementProvider = ({
-  children,
-  engagementService,
-}: {
-  children: React.ReactChild;
+interface CurrentEngagementContextProviderProps {
+  children: any;
+  engagementFormConfig: EngagementFormConfig;
   engagementService: EngagementService;
-}) => {
+}
+const CurrentEngagementContextProvider = ({
+  children,
+  engagementFormConfig,
+  engagementService,
+}: CurrentEngagementContextProviderProps) => {
+  const { checkErrors, error } = useContext(EngagementErrorContext);
+  const { validateAuthStatus } = useContext(EngagementAuthMediatorContext);
   const feedbackContext = useFeedback();
-  const [engagementFormConfig, setengagementFormConfig] = useState<
-    EngagementFormConfig
-  >();
-
-  const [error] = useState<any>();
-  const [isLoading] = useState<boolean>(false);
-  const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
-  const [changedFields, setChangedFields] = useState<string[]>([]);
-  const [currentEngagement, setCurrentEngagement] = useState<
-    Engagement | undefined
-  >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
   >(
@@ -96,8 +264,26 @@ export const EngagementProvider = ({
     engagementFormReducer(engagementFormConfig)()
   );
 
-  const authContext = useSession();
+  const [currentEngagement, setCurrentEngagement] = useState<Engagement>(
+    undefined
+  );
 
+  useEffect(() => {
+    dispatch({
+      type: 'switch_engagement',
+      payload: getInitialState(currentEngagement),
+    });
+  }, [currentEngagement, engagementFormConfig]);
+
+  const updateEngagementFormField = useCallback(
+    (fieldName: string, value: any) => {
+      //     if (!changedFields.includes(fieldName)) {
+      //        setChangedFields([...changedFields, fieldName]);
+      //     }
+      dispatch({ type: fieldName, payload: value });
+    },
+    []
+  );
   const _createCommitMessage = (
     changedFields: string[],
     fieldGroupings: { [key: string]: string[] }
@@ -114,43 +300,134 @@ export const EngagementProvider = ({
     )}\nThe following fields were changed: ${changedFields.join('\n')}`;
     return commitMessage;
   };
-  const _handleErrors = useCallback(
-    async error => {
-      Logger.instance.debug('EngagementContext:_handleErrors', error);
-      if (error instanceof AuthenticationError) {
-        if (!(await authContext.checkIsAuthenticated())) {
-          authContext.setAuthError(error);
-        }
-      } else {
-        throw error;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const _checkHasUpdateRef = useRef(async () => false);
+
+  useEffect(() => {
+    const checkUpdate = async () => {
+      return await engagementService.checkHasUpdates(currentEngagement);
+    };
+    _checkHasUpdateRef.current = checkUpdate;
+  }, [currentEngagement, engagementService]);
+
+  const _refreshEngagementData = useCallback(
+    async (engagement: Engagement) => {
+      await validateAuthStatus();
+      try {
+        const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+          engagement?.customer_name,
+          engagement?.project_name
+        );
+        // TODO: Reimplement this
+        // _updateEngagementInPlace(refreshedEngagement);
+
+        setCurrentEngagement(refreshedEngagement);
+      } catch (e) {
+        checkErrors(e);
       }
     },
-    [authContext]
+    [checkErrors, engagementService, validateAuthStatus]
+  );
+  const createEngagementPoll = useCallback(
+    async (engagement: Engagement): Promise<EngagementPoll> => {
+      await validateAuthStatus();
+      return new EngagementPoll(
+        new EngagementPollIntervalStrategy(
+          setInterval(async () => {
+            await validateAuthStatus();
+            const hasUpdates = await _checkHasUpdateRef.current();
+            if (hasUpdates) {
+              feedbackContext.showAlert(
+                'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
+                AlertType.error,
+                false,
+                [
+                  {
+                    title: 'Refresh',
+                    action: () => _refreshEngagementData(engagement),
+                  },
+                ]
+              );
+            }
+          }, 5000)
+        )
+      );
+    },
+    [_refreshEngagementData, feedbackContext, validateAuthStatus]
   );
 
-  useEffect(() => {
-    _validateAuthStatusRef.current = async () => {
-      if (!(await authContext.checkIsAuthenticated())) {
-        throw new AuthenticationError();
-      }
-    };
-  }, [authContext]);
+  return (
+    <CurrentEngagementContext.Provider
+      value={{
+        currentEngagementChanges: {
+          ...currentEngagement,
+          ...currentEngagementChanges,
+        },
+        setCurrentEngagement,
+        currentEngagement,
+        updateEngagementFormField,
+        isLoading,
+        createEngagementPoll,
+      }}
+    >
+      {children}
+    </CurrentEngagementContext.Provider>
+  );
+};
 
-  const _validateAuthStatusRef = useRef(async () => {});
+interface EngagementResourceContext {
+  saveEngagement: (data: any) => Promise<Engagement>;
+  getEngagements: () => Promise<Engagement[]>;
+  engagements?: Engagement[];
+  getEngagement: (
+    customerName: string,
+    projectName: string
+  ) => Promise<Engagement>;
+  createEngagement: (data: any) => Promise<Engagement>;
+  launchEngagement: (data: Engagement) => Promise<Engagement>;
+}
 
-  const getConfig = useCallback(async () => {
-    await _validateAuthStatusRef.current();
-    const data = await engagementService.getConfig();
-    setengagementFormConfig(data);
-  }, [engagementService]);
+const EngagementResourceContext = React.createContext<
+  EngagementResourceContext
+>(null);
 
-  useEffect(() => {
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  }, [currentEngagement, engagementFormConfig]);
+interface EngagementResourceContextProvider {
+  children: any;
+  engagementService: EngagementService;
+  feedbackContext: FeedbackContext;
+}
+const EngagementResourceContextProvider = ({
+  children,
+  feedbackContext,
+  engagementService,
+}: EngagementResourceContextProvider) => {
+  const { validateAuthStatus } = useContext(EngagementAuthMediatorContext);
+  const { checkErrors } = useContext(EngagementErrorContext);
+  const [engagements, setEngagements] = useState<Engagement[]>([]);
 
+  const launchEngagement = async (data: Engagement) => {
+    const oldEngagement = _updateEngagementInPlace(data);
+    try {
+      await validateAuthStatus();
+      const returnedEngagement = await engagementService.launchEngagement(data);
+      _updateEngagementInPlace(returnedEngagement);
+      feedbackContext.hideLoader();
+      feedbackContext.showAlert(
+        'You have successfully launched your engagement!',
+        AlertType.success
+      );
+      return returnedEngagement;
+    } catch (e) {
+      _updateEngagementInPlace(oldEngagement);
+      feedbackContext.hideLoader();
+      feedbackContext.showAlert(
+        'We were unable to launch your engagement. Please follow up with an administrator if this continues.',
+        AlertType.error,
+        false
+      );
+      await checkErrors(e);
+    }
+  };
   const _updateEngagementInPlace = useCallback(
     engagement => {
       const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
@@ -174,197 +451,18 @@ export const EngagementProvider = ({
     },
     [engagements]
   );
-
-  const fetchEngagements = useCallback(async () => {
-    try {
-      await _validateAuthStatusRef.current();
-      feedbackContext.showLoader();
-      const engagements = await engagementService.fetchEngagements();
-      setEngagements(engagements);
-      feedbackContext.hideLoader();
-      return engagements;
-    } catch (e) {
-      feedbackContext.showAlert(
-        'Something went wrong while getting the engagements',
-        AlertType.error,
-        true
-      );
-      feedbackContext.hideLoader();
-      await _handleErrors(e);
-    }
-  }, [engagementService, feedbackContext, _handleErrors]);
-
-  const _refreshEngagementData = useCallback(
-    async (engagement: Engagement) => {
-      await _validateAuthStatusRef.current();
-      try {
-        const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-          engagement?.customer_name,
-          engagement?.project_name
-        );
-        _updateEngagementInPlace(refreshedEngagement);
-        setCurrentEngagement(refreshedEngagement);
-      } catch (e) {
-        _handleErrors(e);
-      }
-    },
-    [_updateEngagementInPlace, engagementService, _handleErrors]
-  );
-
-  const _checkHasUpdateRef = useRef(async () => false);
-
-  useEffect(() => {
-    const checkUpdate = async () => {
-      return await engagementService.checkHasUpdates(currentEngagement);
-    };
-    _checkHasUpdateRef.current = checkUpdate;
-  }, [currentEngagement, engagementService]);
-
-  const createEngagementPoll = useCallback(
-    async (engagement: Engagement): Promise<EngagementPoll> => {
-      await _validateAuthStatusRef.current();
-      return new EngagementPoll(
-        new EngagementPollIntervalStrategy(
-          setInterval(async () => {
-            await _validateAuthStatusRef.current();
-            const hasUpdates = await _checkHasUpdateRef.current();
-            if (hasUpdates) {
-              feedbackContext.showAlert(
-                'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
-                AlertType.error,
-                false,
-                [
-                  {
-                    title: 'Refresh',
-                    action: () => _refreshEngagementData(engagement),
-                  },
-                ]
-              );
-            }
-          }, 5000)
-        )
-      );
-    },
-    [_refreshEngagementData, feedbackContext]
-  );
-
-  const getEngagement = useCallback(
-    async (customerName: string, projectName: string) => {
-      try {
-        let availableEngagements = engagements ?? [];
-        let cachedEngagement = availableEngagements?.find(
-          engagement =>
-            engagement?.customer_name === customerName &&
-            engagement?.project_name === projectName
-        );
-        if (cachedEngagement !== null) {
-          setCurrentEngagement(cachedEngagement);
-        }
-        let fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-          customerName,
-          projectName
-        );
-        setCurrentEngagement(fetchedEngagement);
-        return fetchedEngagement;
-      } catch (e) {
-        try {
-          await _handleErrors(e);
-        } catch (e) {
-          feedbackContext.showAlert(
-            'There was a problem fetching this engagement',
-            AlertType.error
-          );
-        }
-      }
-    },
-    [engagements, feedbackContext, _handleErrors, engagementService]
-  );
-
-  const _addNewEngagement = useCallback(
-    async (newEngagement: Engagement) => {
-      try {
-        const newEngagementList = [newEngagement, ...(engagements ?? [])];
-        setEngagements(newEngagementList);
-      } catch (e) {
-        await _handleErrors(e);
-        Logger.instance.error(e);
-      }
-    },
-    [engagements, _handleErrors]
-  );
-
-  const createEngagement = useCallback(
-    async (data: CreateEngagementParams) => {
-      feedbackContext.showLoader();
-      try {
-        await _validateAuthStatusRef.current();
-        const engagement = await engagementService.createEngagement(data);
-        _addNewEngagement(engagement);
-        setEngagements([...(engagements ?? []), engagement]);
-        feedbackContext.hideLoader();
-        feedbackContext.showAlert(
-          'Your engagement has been successfully created',
-          AlertType.success
-        );
-        setCurrentEngagement(engagement);
-        return engagement;
-      } catch (e) {
-        feedbackContext.hideLoader();
-        let errorMessage;
-        if (e instanceof AlreadyExistsError) {
-          errorMessage =
-            'This client already has a project with that name. Please choose a different project name.';
-        } else {
-          try {
-            await _handleErrors(e);
-          } catch (e) {
-            errorMessage =
-              'There was an issue with creating your engagement. Please follow up with an administrator if this continues.';
-          }
-        }
-
-        feedbackContext.showAlert(errorMessage, AlertType.error);
-        await _handleErrors(e);
-      }
-    },
-    [
-      engagementService,
-      _addNewEngagement,
-      feedbackContext,
-      engagements,
-      _handleErrors,
-    ]
-  );
-
-  const _checkLaunchReady = useCallback(() => {
-    let result = requiredFields.every(
-      o =>
-        typeof currentEngagementChanges[o] === 'boolean' ||
-        typeof currentEngagementChanges[o] === 'number' ||
-        !!currentEngagementChanges[o]
-    );
-    return result;
-  }, [currentEngagementChanges]);
-
-  const missingRequiredFields = useCallback(() => {
-    return requiredFields.filter(
-      field =>
-        currentEngagement?.[field] !== 'boolean' &&
-        currentEngagement?.[field] !== 'number' &&
-        !currentEngagement?.[field]
-    );
-  }, [currentEngagement]);
-
   const saveEngagement = useCallback(
     async (data: Engagement) => {
       feedbackContext.showLoader();
-      const commitMessage = _createCommitMessage(changedFields, fieldGroups);
+      // TODO: Reimplement
+      // const commitMessage = _createCommitMessage(changedFields, fieldGroups);
       const oldEngagement = _updateEngagementInPlace(data);
       try {
-        await _validateAuthStatusRef.current();
+        await validateAuthStatus();
         const returnedEngagement = await engagementService.saveEngagement(
           data,
-          commitMessage
+          //    commitMessage
+          ''
         );
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
@@ -372,7 +470,7 @@ export const EngagementProvider = ({
         );
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
-        setCurrentEngagement(returnedEngagement);
+        return returnedEngagement;
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
@@ -386,7 +484,7 @@ export const EngagementProvider = ({
 
             // Otherwise, we are saving an existing engagement.
           } else {
-            await _handleErrors(e);
+            await checkErrors(e);
             errorMessage =
               'Your changes could not be saved. Another user has modified this data. Please refresh your data in order to make changes.';
           }
@@ -395,65 +493,203 @@ export const EngagementProvider = ({
       }
     },
     [
-      feedbackContext,
-      changedFields,
-      fieldGroups,
       _updateEngagementInPlace,
+      checkErrors,
       engagementService,
-      _handleErrors,
+      feedbackContext,
+      validateAuthStatus,
     ]
   );
-
-  const updateEngagementFormField = useCallback(
-    (fieldName: string, value: any) => {
-      if (!changedFields.includes(fieldName)) {
-        setChangedFields([...changedFields, fieldName]);
+  const authContext = useSession();
+  const getEngagements = useCallback(async () => {
+    try {
+      await validateAuthStatus();
+      feedbackContext.showLoader();
+      const engagements = await engagementService.fetchEngagements();
+      setEngagements(engagements);
+      feedbackContext.hideLoader();
+      console.log(await authContext.checkIsAuthenticated());
+      console.log('NO ERROR!!');
+      return engagements;
+    } catch (e) {
+      feedbackContext.showAlert(
+        'Something went wrong while getting the engagements',
+        AlertType.error,
+        true
+      );
+      feedbackContext.hideLoader();
+      await checkErrors(e);
+    }
+  }, [checkErrors, engagementService, feedbackContext, validateAuthStatus]);
+  const getEngagement = useCallback(
+    async (customerName: string, projectName: string) => {
+      try {
+        let availableEngagements = engagements ?? [];
+        let cachedEngagement = availableEngagements?.find(
+          engagement =>
+            engagement?.customer_name === customerName &&
+            engagement?.project_name === projectName
+        );
+        // TODO: reimplement
+        // if (cachedEngagement !== null) {
+        //   setCurrentEngagement(cachedEngagement);
+        // }
+        let fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+          customerName,
+          projectName
+        );
+        return fetchedEngagement;
+      } catch (e) {
+        try {
+          await checkErrors(e);
+        } catch (e) {
+          feedbackContext.showAlert(
+            'There was a problem fetching this engagement',
+            AlertType.error
+          );
+        }
       }
-      dispatch({ type: fieldName, payload: value });
     },
-    [changedFields]
+    [engagements, engagementService, checkErrors, feedbackContext]
+  );
+  const _addNewEngagement = useCallback(
+    async (newEngagement: Engagement) => {
+      try {
+        const newEngagementList = [newEngagement, ...(engagements ?? [])];
+        setEngagements(newEngagementList);
+      } catch (e) {
+        await checkErrors(e);
+        Logger.instance.error(e);
+      }
+    },
+    [checkErrors, engagements]
   );
 
-  const launchEngagement = useCallback(
-    async (data: any) => {
-      if (!_checkLaunchReady()) {
-        throw Error(
-          'This engagement does not have the required fields to launch'
-        );
-      }
+  const createEngagement = useCallback(
+    async (data: CreateEngagementParams) => {
       feedbackContext.showLoader();
-      const oldEngagement = _updateEngagementInPlace(data);
       try {
-        await _validateAuthStatusRef.current();
-        const returnedEngagement = await engagementService.launchEngagement(
-          data
-        );
-        _updateEngagementInPlace(returnedEngagement);
-        setCurrentEngagement(returnedEngagement);
+        await validateAuthStatus();
+        const engagement = await engagementService.createEngagement(data);
+        _addNewEngagement(engagement);
+        setEngagements([...(engagements ?? []), engagement]);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
-          'You have successfully launched your engagement!',
+          'Your engagement has been successfully created',
           AlertType.success
         );
+        return engagement;
       } catch (e) {
-        _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
-        feedbackContext.showAlert(
-          'We were unable to launch your engagement. Please follow up with an administrator if this continues.',
-          AlertType.error,
-          false
-        );
-        await _handleErrors(e);
+        let errorMessage;
+        if (e instanceof AlreadyExistsError) {
+          errorMessage =
+            'This client already has a project with that name. Please choose a different project name.';
+        } else {
+          try {
+            await checkErrors(e);
+          } catch (e) {
+            errorMessage =
+              'There was an issue with creating your engagement. Please follow up with an administrator if this continues.';
+          }
+        }
+
+        feedbackContext.showAlert(errorMessage, AlertType.error);
+        await checkErrors(e);
       }
     },
     [
-      _updateEngagementInPlace,
-      _checkLaunchReady,
-      engagementService,
       feedbackContext,
-      _handleErrors,
+      validateAuthStatus,
+      engagementService,
+      _addNewEngagement,
+      engagements,
+      checkErrors,
     ]
   );
+  return (
+    <EngagementResourceContext.Provider
+      value={{
+        saveEngagement,
+        getEngagement,
+        createEngagement,
+        getEngagements,
+        launchEngagement,
+        engagements,
+      }}
+    >
+      {children}
+    </EngagementResourceContext.Provider>
+  );
+};
+
+export interface EngagementContext
+  extends Omit<EngagementResourceContext, 'launchEngagement'>,
+    CurrentEngagementContext,
+    EngagementLaunchContext,
+    EngagementConfigContext,
+    EngagementErrorContext,
+    EngagementFieldManagerContext {}
+
+interface EngagementContextWrapperProps {
+  engagementService: EngagementService;
+  children: any;
+}
+
+export type CreateEngagementParams = Pick<
+  Engagement,
+  'project_name' | 'customer_name' | 'engagement_region'
+>;
+
+export const EngagementContext = createContext<EngagementContext>(null);
+
+const { Provider } = EngagementContext;
+
+export const EngagementMediator = ({
+  children,
+}: {
+  children: React.ReactChild;
+  engagementService: EngagementService;
+}) => {
+  const { getConfig, engagementFormConfig } = useContext(
+    EngagementConfigContext
+  );
+  const {
+    requiredFields,
+    isLaunchable,
+    missingRequiredFields,
+    launchEngagement,
+  } = useContext(EngagementLaunchContext);
+  const {
+    currentEngagementChanges,
+    createEngagementPoll,
+    setCurrentEngagement,
+    updateEngagementFormField,
+    currentEngagement,
+    isLoading,
+  } = useContext(CurrentEngagementContext);
+  const { setFieldGroups, fieldGroups } = useContext(
+    EngagementFieldManagerContext
+  );
+  const {
+    createEngagement,
+    getEngagement,
+    getEngagements,
+    saveEngagement,
+    engagements,
+  } = useContext(EngagementResourceContext);
+  const { error, checkErrors } = useContext(EngagementErrorContext);
+
+  const _setCurrentEngagement = <T extends any[]>(
+    engagementGetter: (...params: T) => Promise<Engagement>
+  ) => {
+    return async (...params: T) => {
+      const engagement = await engagementGetter(...params);
+      setCurrentEngagement(engagement);
+      return engagement;
+    };
+  };
+
   return (
     <Provider
       value={{
@@ -461,24 +697,23 @@ export const EngagementProvider = ({
         createEngagementPoll,
         requiredFields,
         currentEngagement,
-        missingRequiredFields: missingRequiredFields(),
+        missingRequiredFields,
         getConfig,
-        isLaunchable: _checkLaunchReady(),
+        isLaunchable,
         setCurrentEngagement,
         engagements,
-        getEngagement,
+        getEngagement: _setCurrentEngagement(getEngagement),
         error,
-        currentEngagementChanges: {
-          ...currentEngagement,
-          ...currentEngagementChanges,
-        },
+        currentEngagementChanges,
         engagementFormConfig,
         isLoading,
         updateEngagementFormField,
-        getEngagements: fetchEngagements,
-        createEngagement,
+        getEngagements,
+        createEngagement: _setCurrentEngagement(createEngagement),
         saveEngagement,
-        launchEngagement,
+        checkErrors,
+        fieldGroups,
+        launchEngagement: _setCurrentEngagement(launchEngagement),
       }}
     >
       {children}
@@ -487,3 +722,59 @@ export const EngagementProvider = ({
 };
 
 // EngagementProvider.whyDidYouRender = false;
+export const EngagementProvider = ({
+  children,
+  engagementService,
+}: EngagementContextWrapperProps) => {
+  const feedbackContext = useFeedback();
+  const authContext = useSession();
+  return (
+    <EngagementErrorContextProvider authContext={authContext}>
+      <EngagementAuthMediatorContextProvider authContext={authContext}>
+        <EngagementConfigContextProvider engagementService={engagementService}>
+          <EngagementFieldManagerContextProvider>
+            <EngagementResourceContextProvider
+              feedbackContext={feedbackContext}
+              engagementService={engagementService}
+            >
+              <EngagementResourceContext.Consumer>
+                {({ launchEngagement }) => (
+                  <EngagementConfigContext.Consumer>
+                    {({ engagementFormConfig }) => (
+                      <CurrentEngagementContextProvider
+                        engagementService={engagementService}
+                        engagementFormConfig={engagementFormConfig}
+                      >
+                        <CurrentEngagementContext.Consumer>
+                          {({
+                            currentEngagement,
+                            currentEngagementChanges,
+                          }) => (
+                            <EngagementLaunchContextProvider
+                              feedbackContext={feedbackContext}
+                              onLaunch={launchEngagement}
+                              currentEngagementChanges={{
+                                ...currentEngagementChanges,
+                                ...currentEngagement,
+                              }}
+                            >
+                              <EngagementMediator
+                                engagementService={engagementService}
+                              >
+                                {children}
+                              </EngagementMediator>
+                            </EngagementLaunchContextProvider>
+                          )}
+                        </CurrentEngagementContext.Consumer>
+                      </CurrentEngagementContextProvider>
+                    )}
+                  </EngagementConfigContext.Consumer>
+                )}
+              </EngagementResourceContext.Consumer>
+            </EngagementResourceContextProvider>
+          </EngagementFieldManagerContextProvider>
+        </EngagementConfigContextProvider>
+      </EngagementAuthMediatorContextProvider>
+    </EngagementErrorContextProvider>
+  );
+};
