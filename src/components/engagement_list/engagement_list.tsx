@@ -7,7 +7,6 @@ import {
   Title,
   EmptyStateBody,
   Button,
-  Accordion,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
 import { useHistory } from 'react-router';

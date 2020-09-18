@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Modal,
-  ModalVariant,
-  Button,
-  Grid,
-  GridItem,
-  Accordion,
-  AccordionItem,
-} from '@patternfly/react-core';
+import { Modal, ModalVariant, Button, Accordion } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { GitCommit } from '../../schemas/git_commit';

@@ -346,15 +346,6 @@ export const EngagementProvider = ({
     return result;
   }, [currentEngagementChanges]);
 
-  const fieldRegistrant = (groupName: string) => {
-    return (fieldName: string) => {
-      const fields = fieldMap[groupName] ?? [];
-      if (!fields.includes(fieldName)) {
-        fields.push(fieldName);
-      }
-    };
-  };
-
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
       field =>
