@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormGroup, TextInput } from '@patternfly/react-core';
 import { Engagement } from '../../schemas/engagement';
+import { FormManager } from '../../context/form_manager/form_manager';
 
 interface LocationFormFieldProps {
   engagement: Engagement;
@@ -11,6 +12,10 @@ interface LocationFormFieldProps {
 
 export function LocationFormField(props: LocationFormFieldProps) {
   const { hasFeature } = useFeatures();
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => {
+    registerField('location');
+  }, [registerField]);
   return (
     <FormGroup
       label="Location"
