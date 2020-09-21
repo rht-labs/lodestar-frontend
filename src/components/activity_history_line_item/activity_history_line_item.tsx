@@ -76,7 +76,7 @@ function ActivityHistoryAccordionItem({
             {commit.author_name}&nbsp;{commit.author_email}
           </FlexItem>
           <FlexItem>
-            <span>{commit.message}</span>
+            <span>{commit.message.split('\n')[0]}</span>
           </FlexItem>
         </Flex>
       </AccordionToggle>
@@ -89,21 +89,24 @@ function ActivityHistoryAccordionItem({
 
 function CommitData({ commit }: { commit: GitCommit }) {
   return (
-    <DataList aria-label="commit details">
-      <DataListItem aria-labelledby="weburl">
-        <DataListItemRow>
-          <DataListItemCells
-            dataListCells={[
-              <DataListCell>
-                <b id="weburl">Commit Url</b>
-              </DataListCell>,
-              <DataListCell>
-                <a href={commit.web_url}>{commit.web_url}</a>
-              </DataListCell>,
-            ]}
-          />
-        </DataListItemRow>
-      </DataListItem>
-    </DataList>
+    <div>
+      <span style={{ whiteSpace: 'pre-wrap' }}>{commit.message}</span>
+      <DataList aria-label="commit details">
+        <DataListItem aria-labelledby="weburl">
+          <DataListItemRow>
+            <DataListItemCells
+              dataListCells={[
+                <DataListCell>
+                  <b id="weburl">Commit Url</b>
+                </DataListCell>,
+                <DataListCell>
+                  <a href={commit.web_url}>{commit.web_url}</a>
+                </DataListCell>,
+              ]}
+            />
+          </DataListItemRow>
+        </DataListItem>
+      </DataList>
+    </div>
   );
 }
