@@ -34,13 +34,21 @@ export function EngagementEditableCategories ({
   const CategoriesReadOnly = () => {
     return (
       <>
-        {chips.map(currentChip => (
-          <Label key={currentChip}
-                 style={{marginRight: '0.5rem'}}
-                 color="blue">
-            {currentChip}
+        {
+          chips.length > 0
+          ? chips.map(currentChip => (
+            <Label key={currentChip}
+                   style={{marginRight: '0.5rem'}}
+                   color="blue">
+              {currentChip}
+            </Label>
+          ))
+          : <Label key={'addNew'}
+                    style={{marginRight: '0.5rem'}}
+                    color="blue">
+            Add new tag
           </Label>
-        ))}
+        }
         <PencilAltIcon onClick={e => setEditMode(!editMode)}
                        style={{
                          fontSize: 'small',

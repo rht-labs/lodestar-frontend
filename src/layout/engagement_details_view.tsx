@@ -40,6 +40,11 @@ export function EngagementDetailsViewTemplate({
               <Text component="h1" style={{marginTop: '1rem'}}>{engagement?.project_name}</Text>
               <Text component="h3" style={{marginTop: '1rem'}}>{engagement?.customer_name}</Text>
             </TextContent>
+            <div style={{marginTop:'1.5rem'}}>
+              <EngagementEditableCategories categories={engagement?.engagement_categories}
+                                          onChange={updateEngagementFormField}
+                                          onSave={saveEngagement}/>
+            </div>
           </FlexItem>
           <Flex
             alignSelf={{ default: 'alignSelfStretch' }}
@@ -50,11 +55,6 @@ export function EngagementDetailsViewTemplate({
             </FlexItem>
           </Flex>
         </Flex>
-        <div style={{marginTop: '1rem'}}>
-          <EngagementEditableCategories categories={engagement?.engagement_categories}
-                                        onChange={updateEngagementFormField}
-                                        onSave={saveEngagement}/>
-        </div>
       </PageSection>
       <div style={{ marginTop: '1rem' }}>
         <LaunchAlertBanner

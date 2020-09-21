@@ -17,13 +17,13 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 export interface EngagementFilterProps {
   onChange: (filter: EngagementFilter) => void;
   filter: EngagementFilter;
-  formOptions?: EngagementFormConfig;
+  engagementFormConfig?: EngagementFormConfig;
 }
 
 export function EngagementFilterBar({
   onChange,
   filter,
-  formOptions,
+  engagementFormConfig,
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
   return (
@@ -56,7 +56,7 @@ export function EngagementFilterBar({
         <FlexItem>
           <EngagementRegionSelect
             regions={
-              formOptions?.basic_information?.engagement_regions?.options ?? []
+              engagementFormConfig?.basic_information?.engagement_regions?.options ?? []
             }
             onChange={onChange}
             filter={filter}

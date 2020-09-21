@@ -12,7 +12,7 @@ describe('Engagement summary card', () => {
         <TestStateWrapper>
           <EngagementSummaryCard
             onSave={() => {}}
-            formOptions={{}}
+            engagementFormConfig={{}}
             onChange={() => {}}
             currentEngagement={Engagement.fromFake(true)}
             currentEngagementChanges={Engagement.fromFake(true)}
@@ -31,7 +31,7 @@ describe('OpenShift Cluster Summary', () => {
         <TestStateWrapper>
           <OpenShiftClusterSummaryCard
             onSave={() => {}}
-            formOptions={{}}
+            engagementFormConfig={{}}
             onChange={() => {}}
             currentEngagement={Engagement.fromFake(true)}
             currentEngagementChanges={Engagement.fromFake(true)}
@@ -50,7 +50,7 @@ describe('Point of Contact Card', () => {
         <TestStateWrapper>
           <PointOfContactCard
             onSave={() => {}}
-            formOptions={{}}
+            engagementFormConfig={{}}
             onChange={() => {}}
             currentEngagement={Engagement.fromFake(true)}
             currentEngagementChanges={Engagement.fromFake(true)}

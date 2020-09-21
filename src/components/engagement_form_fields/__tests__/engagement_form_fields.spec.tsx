@@ -89,7 +89,7 @@ describe('Engagement form fields', () => {
     expect(
       render(
         <ClusterSizeFormField
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
         />
@@ -100,7 +100,7 @@ describe('Engagement form fields', () => {
     const onChange = jest.fn();
     const wrapper = render(
       <ClusterSizeFormField
-        formOptions={EngagementFormConfig.fromFake()}
+        engagementFormConfig={EngagementFormConfig.fromFake()}
         engagement={Engagement.fromFake(true)}
         onChange={onChange}
       />
@@ -135,7 +135,7 @@ describe('Engagement form fields', () => {
     expect(
       render(
         <OpenShiftVersionFormField
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
         />
@@ -146,7 +146,7 @@ describe('Engagement form fields', () => {
     const onChange = jest.fn();
     const wrapper = render(
       <OpenShiftVersionFormField
-        formOptions={EngagementFormConfig.fromFake()}
+        engagementFormConfig={EngagementFormConfig.fromFake()}
         engagement={Engagement.fromFake(true)}
         onChange={onChange}
       />
@@ -159,7 +159,7 @@ describe('Engagement form fields', () => {
     expect(
       render(
         <PersistentStorageFormField
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
         />
@@ -170,7 +170,7 @@ describe('Engagement form fields', () => {
     const onChange = jest.fn();
     const wrapper = render(
       <PersistentStorageFormField
-        formOptions={EngagementFormConfig.fromFake()}
+        engagementFormConfig={EngagementFormConfig.fromFake()}
         engagement={Engagement.fromFake(true)}
         onChange={onChange}
       />
@@ -183,7 +183,7 @@ describe('Engagement form fields', () => {
     expect(
       render(
         <SubdomainFormField
-          formOptions={EngagementFormConfig.fromFake()}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
           engagement={Engagement.fromFake(true)}
           onChange={() => {}}
         />
@@ -194,7 +194,7 @@ describe('Engagement form fields', () => {
     const onChange = jest.fn();
     const wrapper = render(
       <SubdomainFormField
-        formOptions={EngagementFormConfig.fromFake()}
+        engagementFormConfig={EngagementFormConfig.fromFake()}
         engagement={Engagement.fromFake(true)}
         onChange={onChange}
       />

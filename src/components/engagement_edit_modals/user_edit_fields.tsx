@@ -18,7 +18,7 @@ import { Table, TableBody, TableHeader, TableVariant } from "@patternfly/react-t
 
 export interface UserEditFieldsProps {
   users: any;
-  formOptions: EngagementFormConfig;
+  engagementFormConfig: EngagementFormConfig;
   onChange: (fieldName: string, value: any) => void;
   deletedUsers: string[];
   toggleDeleted: (email: string) => void;
@@ -27,7 +27,7 @@ export interface UserEditFieldsProps {
 
 export const UserEditFields = ({
   users,
-  formOptions,
+  engagementFormConfig,
   onChange,
   deletedUsers,
   toggleDeleted,
@@ -42,7 +42,7 @@ export const UserEditFields = ({
     { title:
         <>
           Role
-          <UserRolesTooltip formOptions={formOptions}/>
+          <UserRolesTooltip engagementFormConfig={engagementFormConfig}/>
         </>
     },
   ];
@@ -149,7 +149,7 @@ export const UserEditFields = ({
                                       />,
                                     ].concat(
                                       (
-                                        formOptions?.user_options?.user_roles
+                                        engagementFormConfig?.user_options?.user_roles
                                           ?.options ?? []
                                       )?.map((option: any, index: number) => (
                                         <FormSelectOption

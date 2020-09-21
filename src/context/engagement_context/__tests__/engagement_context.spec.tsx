@@ -68,7 +68,7 @@ describe('Engagement Context', () => {
 
   test('form options are undefined by default', () => {
     const { result } = getHook();
-    expect(result.current.formOptions).toBe(undefined);
+    expect(result.current.engagementFormConfig).toBe(undefined);
   });
 
   test('Form options update when setting active engagement', async () => {
@@ -77,7 +77,7 @@ describe('Engagement Context', () => {
       result.current.getConfig();
       await waitForNextUpdate();
     });
-    expect(result.current.formOptions).toHaveProperty('cloud_options');
+    expect(result.current.engagementFormConfig).toHaveProperty('cloud_options');
   });
 
   test('Form completeness for launch', async () => {

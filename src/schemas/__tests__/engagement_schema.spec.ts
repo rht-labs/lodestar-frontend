@@ -11,6 +11,7 @@ const engagementProperties = [
   'end_date',
   'engagement_users',
   'engagement_region',
+  'engagement_type',
   'engagement_lead_email',
   'engagement_lead_name',
   'last_update',
