@@ -56,50 +56,60 @@ export function EngagementOverview({
             </GridItem>
             <GridItem span={12}>
               {currentEngagement?.launch ? (
-                <div id="system_status_card">
-                  <SystemStatusCard currentEngagement={currentEngagement} />
-                </div>
+                <FormManager.Group groupName="System Status">
+                  <div id="system_status_card">
+                    <SystemStatusCard currentEngagement={currentEngagement} />
+                  </div>
+                </FormManager.Group>
               ) : (
                 <></>
               )}
             </GridItem>
             <GridItem span={12}>
               <div id="poc_card">
-                <PointOfContactCard
-                  onSave={onSave}
-                  onChange={onChange}
-                  engagementFormConfig={engagementFormConfig}
-                  currentEngagement={currentEngagement}
-                  currentEngagementChanges={currentEngagementChanges}
-                  missingRequiredFields={missingRequiredFields}
-                />
+                <FormManager.Group groupName="Point of Contact">
+                  <PointOfContactCard
+                    onSave={onSave}
+                    onChange={onChange}
+                    engagementFormConfig={engagementFormConfig}
+                    currentEngagement={currentEngagement}
+                    currentEngagementChanges={currentEngagementChanges}
+                    missingRequiredFields={missingRequiredFields}
+                  />
+                </FormManager.Group>
               </div>
             </GridItem>
             <GridItem span={12}>
               <div id="oc_summary_card">
-                <OpenShiftClusterSummaryCard
-                  onSave={onSave}
-                  onChange={onChange}
-                  engagementFormConfig={engagementFormConfig}
-                  currentEngagement={currentEngagement}
-                  currentEngagementChanges={currentEngagementChanges}
-                  missingRequiredFields={missingRequiredFields}
-                />
+                <FormManager.Group groupName="Hosting Environment">
+                  <OpenShiftClusterSummaryCard
+                    onSave={onSave}
+                    onChange={onChange}
+                    engagementFormConfig={engagementFormConfig}
+                    currentEngagement={currentEngagement}
+                    currentEngagementChanges={currentEngagementChanges}
+                    missingRequiredFields={missingRequiredFields}
+                  />
+                </FormManager.Group>
               </div>
             </GridItem>
             <GridItem span={12}>
               <div id="user_card">
-                <UserCard
-                  onSave={onSave}
-                  onChange={onChange}
-                  engagementFormConfig={engagementFormConfig}
-                  engagement={currentEngagementChanges}
-                />
+                <FormManager.Group groupName="Users">
+                  <UserCard
+                    onSave={onSave}
+                    onChange={onChange}
+                    engagementFormConfig={engagementFormConfig}
+                    engagement={currentEngagementChanges}
+                  />
+                </FormManager.Group>
               </div>
             </GridItem>
             <GridItem span={12}>
               <div id="activity_card">
-                <ActivityHistoryCard engagement={currentEngagement} />
+                <FormManager.Group groupName="Activity History">
+                  <ActivityHistoryCard engagement={currentEngagement} />
+                </FormManager.Group>
               </div>
             </GridItem>
           </Grid>

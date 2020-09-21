@@ -80,16 +80,20 @@ export const CurrentEngagementContextProvider = ({
     changedFields: string[],
     fieldGroupings: { [key: string]: string[] }
   ): string => {
-    const changedGroups = changedFields
-      .map(field =>
-        Object.keys(fieldGroupings).find(group =>
-          fieldGroupings[group].includes(field)
-        )
+    const changedGroups = Array.from(
+      new Set(
+        changedFields
+          .map(field =>
+            Object.keys(fieldGroupings).find(group =>
+              fieldGroupings[group].includes(field)
+            )
+          )
+          .filter(group => !!group)
       )
-      .filter(group => !!group);
+    );
     const commitMessage = `Changed ${changedGroups.join(
       ', '
-    )}\nThe following fields were changed: ${changedFields.join('\n')}`;
+    )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
     return commitMessage;
   };
   const [isLoading] = useState<boolean>(false);

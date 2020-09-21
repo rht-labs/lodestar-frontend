@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
+import { FormManager } from '../../context/form_manager/form_manager';
 
 interface CloudProviderRegionFormFieldProps {
   availableProviderRegionOptions: { label: string; value: string }[];
@@ -20,6 +21,8 @@ export function CloudProviderRegionFormField({
   onChange,
 }: CloudProviderRegionFormFieldProps) {
   const { hasFeature } = useFeatures();
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => registerField('ocp_cloud_provider_region'), [registerField]);
   return (
     <FormGroup
       label="Provider Region"
@@ -27,9 +30,9 @@ export function CloudProviderRegionFormField({
       fieldId="cloud-provider-region"
     >
       <FormSelect
-      data-testid="provider-region-select"
+        data-testid="provider-region-select"
         aria-label="Cloud provider region"
-        id={"cloud_provider_region_dropdown"}
+        id={'cloud_provider_region_dropdown'}
         isDisabled={
           availableProviderRegionOptions?.length === 0 ||
           !hasFeature(APP_FEATURES.writer) ||

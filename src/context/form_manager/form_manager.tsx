@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 
 export interface FormManagerContext {
   registerField: (groupName: string, fieldName: string) => void;
@@ -10,23 +10,27 @@ const FormManagerContext = React.createContext<FormManagerContext>(null);
 export interface FormManagerGroupContext {
   registerField: (fieldName: string) => void;
 }
-const FormManagerGroupContext = React.createContext<any>(null);
+const FormManagerGroupContext = React.createContext<FormManagerGroupContext>({
+  registerField: () => {},
+});
 
 const FormManagerProvider = ({ children }) => {
   const [fieldGroups, setFieldGroups] = useState({});
-  const registerField = (groupName: string, fieldName: string) => {
-    console.log(`attempting to register ${fieldName} to ${groupName}`);
-    if (!fieldGroups[groupName]) {
-      setFieldGroups({ ...fieldGroups, [groupName]: [fieldName] });
-    } else {
-      if (!fieldGroups[groupName].includes(fieldName)) {
-        setFieldGroups({
-          ...fieldGroups,
-          groupName: [...fieldGroups[groupName], fieldName],
-        });
+  const registerField = useCallback(
+    (groupName: string, fieldName: string) => {
+      if (!fieldGroups[groupName]) {
+        setFieldGroups({ ...fieldGroups, [groupName]: [fieldName] });
+      } else {
+        if (!fieldGroups[groupName].includes(fieldName)) {
+          setFieldGroups({
+            ...fieldGroups,
+            [groupName]: [...fieldGroups[groupName], fieldName],
+          });
+        }
       }
-    }
-  };
+    },
+    [fieldGroups]
+  );
   return (
     <FormManagerContext.Provider value={{ registerField, fieldGroups }}>
       {children}
