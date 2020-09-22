@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { Logger } from '../../utilities/logger';
 import { useParams } from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import { Alert } from '@patternfly/react-core';

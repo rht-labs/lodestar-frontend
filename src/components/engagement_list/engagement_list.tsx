@@ -1,6 +1,6 @@
 import React from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { EngagementListItem } from '../../components/engagement_list_item/engagement_list_item';
+import { EngagementListItem } from '../engagement_list_item/engagement_list_item';
 import {
   EmptyState,
   EmptyStateIcon,

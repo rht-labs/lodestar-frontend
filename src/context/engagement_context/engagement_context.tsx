@@ -18,6 +18,7 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 
 export interface EngagementContext {
+  setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
   getEngagements: () => Promise<Engagement[]>;
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
@@ -76,20 +77,47 @@ export const EngagementProvider = ({
   engagementService: EngagementService;
 }) => {
   const feedbackContext = useFeedback();
-  const [engagementFormConfig, setengagementFormConfig] = useState<EngagementFormConfig>();
+  const [engagementFormConfig, setengagementFormConfig] = useState<
+    EngagementFormConfig
+  >();
 
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
+  const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
+  const [changedFields, setChangedFields] = useState<string[]>([]);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => any
-  >(engagementFormReducer(engagementFormConfig), engagementFormReducer(engagementFormConfig)());
+  >(
+    engagementFormReducer(engagementFormConfig),
+    engagementFormReducer(engagementFormConfig)()
+  );
 
   const authContext = useSession();
 
+  const _createCommitMessage = (
+    changedFields: string[],
+    fieldGroupings: { [key: string]: string[] }
+  ): string => {
+    const changedGroups = Array.from(
+      new Set(
+        changedFields
+          .map(field =>
+            Object.keys(fieldGroupings).find(group =>
+              fieldGroupings[group].includes(field)
+            )
+          )
+          .filter(group => !!group)
+      )
+    );
+    const commitMessage = `Changed ${changedGroups.join(
+      ', '
+    )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
+    return commitMessage;
+  };
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);
@@ -334,10 +362,14 @@ export const EngagementProvider = ({
   const saveEngagement = useCallback(
     async (data: Engagement) => {
       feedbackContext.showLoader();
+      const commitMessage = _createCommitMessage(changedFields, fieldGroups);
       const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
-        const returnedEngagement = await engagementService.saveEngagement(data);
+        const returnedEngagement = await engagementService.saveEngagement(
+          data,
+          commitMessage
+        );
         feedbackContext.showAlert(
           'Your updates have been successfully saved.',
           AlertType.success
@@ -367,18 +399,23 @@ export const EngagementProvider = ({
       }
     },
     [
-      engagementService,
-      _updateEngagementInPlace,
       feedbackContext,
+      changedFields,
+      fieldGroups,
+      _updateEngagementInPlace,
+      engagementService,
       _handleErrors,
     ]
   );
 
   const updateEngagementFormField = useCallback(
     (fieldName: string, value: any) => {
+      if (!changedFields.includes(fieldName)) {
+        setChangedFields([...changedFields, fieldName]);
+      }
       dispatch({ type: fieldName, payload: value });
     },
-    [dispatch]
+    [changedFields]
   );
 
   const launchEngagement = useCallback(
@@ -424,6 +461,7 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
+        setFieldGroups,
         createEngagementPoll,
         requiredFields,
         currentEngagement,
