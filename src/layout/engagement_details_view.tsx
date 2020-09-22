@@ -12,8 +12,6 @@ import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_aler
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
 import { EngagementEditableCategories } from "../components/engagement_categories/engagement_editable_categories";
-import {useVersion} from "../context/version_context/version_context";
-import {useCategories} from "../context/categories_context/categories_context";
 
 export function EngagementDetailsViewTemplate({
   engagement,
@@ -31,13 +29,12 @@ export function EngagementDetailsViewTemplate({
     saveEngagement,
   } = useEngagements();
 
-  const categoriesContext = useCategories();
+  const { categories , fetchCategories } = useEngagements();
   useEffect(() => {
-    if (!categoriesContext.categories) {
-      categoriesContext.fetchCategories();
+    if (categories === undefined) {
+      fetchCategories();
     }
-  }, [categoriesContext]);
-
+  }, [categories, fetchCategories]);
   return (
     <>
       <PageSection
@@ -50,9 +47,9 @@ export function EngagementDetailsViewTemplate({
               <Text component="h3" style={{marginTop: '1rem'}}>{engagement?.customer_name}</Text>
             </TextContent>
             <div style={{marginTop:'1.5rem'}}>
-              <EngagementEditableCategories categories={categoriesContext}
+              <EngagementEditableCategories categories={categories}
                                             onChange={updateEngagementFormField}
-                                            onSave={saveEngagement}/>
+                                            />
             </div>
           </FlexItem>
           <Flex
