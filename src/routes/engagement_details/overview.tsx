@@ -10,6 +10,7 @@ import { ActivityHistoryCard } from '../../components/engagement_data_cards/acti
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { EngagementTimelineCard } from '../../components/engagement_data_cards/engagement_timeline_card/engagement_timeline_card';
 export interface EngagementOverviewTabProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
@@ -101,6 +102,20 @@ export function EngagementOverview({
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     engagement={currentEngagementChanges}
+                  />
+                </FormManager.Group>
+              </div>
+            </GridItem>
+            <GridItem span={12}>
+              <div id="timeline_card">
+                <FormManager.Group groupName="Activity Timeline">
+                  <EngagementTimelineCard
+                    engagementFormConfig={engagementFormConfig}
+                    artifacts={currentEngagementChanges.artifacts}
+                    onSave={() => onSave(currentEngagementChanges)}
+                    onChangeArtifacts={value =>
+                      onChange('engagement_artifacts', value)
+                    }
                   />
                 </FormManager.Group>
               </div>

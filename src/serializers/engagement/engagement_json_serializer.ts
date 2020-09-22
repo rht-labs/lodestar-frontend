@@ -1,5 +1,5 @@
 import { Serializer } from '../serializer';
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, Artifact, ArtifactType } from '../../schemas/engagement';
 import { parse, parseISO, isValid, formatISO } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
@@ -57,6 +57,14 @@ export class EngagementJsonSerializer
     }, {});
     return trimmedValues;
   }
+
+  private static serializeArtifact(data: object): Artifact {
+    return {
+      type: ArtifactType[data['type']],
+      title: data['title'],
+      linkAddress: data['linkAddress'],
+    };
+  }
   deserialize(data: object): Engagement {
     return {
       ...data,
@@ -64,6 +72,9 @@ export class EngagementJsonSerializer
       archive_date: data['archive_date']
         ? EngagementJsonSerializer.parseDate(data['archive_date'])
         : undefined,
+      artifacts: (data['artifacts'] ?? []).map(
+        EngagementJsonSerializer.serializeArtifact
+      ),
       commits: (data['commits'] as any[])
         ?.filter(d => !(d['author_email'] === 'bot@bot.com'))
         ?.map(d => EngagementJsonSerializer.gitCommitSerializer.deserialize(d)),

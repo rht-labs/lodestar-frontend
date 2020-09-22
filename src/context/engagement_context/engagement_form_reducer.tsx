@@ -32,6 +32,7 @@ export const getInitialState = (
   engagement?: Partial<Engagement>
 ): Partial<Engagement> => {
   return {
+    artifacts: engagement?.artifacts ?? [],
     project_id: engagement?.project_id ?? null,
     customer_name: engagement?.customer_name ?? null,
     project_name: engagement?.project_name ?? null,
@@ -74,7 +75,7 @@ export const engagementFormReducer = (
 ) => (
   state: Partial<Engagement> = getInitialState(),
   action?: { type: string; payload?: any }
-) => {
+): Partial<Engagement> => {
   const curriedEngagementDatesFunction = getEngagementDates(
     engagementFormConfig?.logistics_options?.env_default_grace_period,
     engagementFormConfig?.logistics_options?.env_grace_period_max
@@ -85,6 +86,8 @@ export const engagementFormReducer = (
   switch (action.type) {
     case 'user':
       return { ...state, engagement_users: action.payload };
+    case 'artifact':
+      return { ...state, artifacts: action.payload };
     case 'customer_name':
       return {
         ...state,
