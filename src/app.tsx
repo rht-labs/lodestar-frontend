@@ -20,6 +20,7 @@ import {
 } from './services/factories/service_factory';
 import CustomGlobalBanner from './components/custom_global_banner/custom_global_banner';
 import { Config } from './schemas/config';
+import { CategoriesProvider } from "./context/categories_context/categories_context";
 
 export const App = ({ config }: { config: Config }) => {
   const serviceProviders =
@@ -38,6 +39,7 @@ export const App = ({ config }: { config: Config }) => {
             notificationService,
             versionService,
             engagementService,
+            categoriesService
           }) => {
             return (
               <>
@@ -60,7 +62,9 @@ export const App = ({ config }: { config: Config }) => {
                             <EngagementProvider
                               engagementService={engagementService}
                             >
-                              <LodestarRouter />
+                              <CategoriesProvider categoriesService={categoriesService}>
+                                <LodestarRouter />
+                              </CategoriesProvider>
                             </EngagementProvider>
                           </Router>
                         </FeatureToggles>

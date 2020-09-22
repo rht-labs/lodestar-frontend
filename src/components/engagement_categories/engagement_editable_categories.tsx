@@ -8,17 +8,15 @@ import { PencilAltIcon } from "@patternfly/react-icons";
 import { AddNewCategory } from "./add_new_category_bar";
 import { EngagementCategory } from "../../schemas/engagement_category";
 import {Engagement} from "../../schemas/engagement";
+import {useEngagements} from "../../context/engagement_context/engagement_hook";
 
 export function EngagementEditableCategories ({
   categories,
   onChange,
-  onSave
 }: {
-  categories: EngagementCategory[];
+  categories?: EngagementCategory[];
   onChange: (fieldName: string, value: any) => void;
-  onSave: (engagement: Engagement) => void;
 }) {
-
   const [chips, setChips] = useState <string[]>([]);
   const [editMode, setEditMode] = useState(false);
   const formattedItems: string[] = [];
@@ -30,7 +28,6 @@ export function EngagementEditableCategories ({
     );
     setChips(formattedItems);
   }, []);
-
   const CategoriesReadOnly = () => {
     return (
       <>
@@ -105,6 +102,13 @@ export function EngagementEditableCategories ({
 
   return (
     <>
+      {
+        console.log(">>>>>>>")
+      }
+      {
+        console.log(categories)
+      }
+
       {
         editMode
         ? <CategoriesEditMode />
