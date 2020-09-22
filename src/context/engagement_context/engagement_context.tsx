@@ -464,10 +464,10 @@ export const EngagementProvider = ({
 
   const fetchCategories = useCallback(async () => {
     try {
-      feedbackContext.showLoader();
+      // feedbackContext.showLoader();
       const categories = await categoryService.fetchCategories();
       setCategories(categories);
-      feedbackContext.hideLoader();
+      // feedbackContext.hideLoader();
       console.log('*******');
       console.log(categories);
     } catch (e) {

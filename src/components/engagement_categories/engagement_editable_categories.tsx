@@ -27,7 +27,7 @@ export function EngagementEditableCategories ({
       }
     );
     setChips(formattedItems);
-  }, []);
+  }, [categories]);
   const CategoriesReadOnly = () => {
     return (
       <>
@@ -102,13 +102,6 @@ export function EngagementEditableCategories ({
 
   return (
     <>
-      {
-        console.log(">>>>>>>")
-      }
-      {
-        console.log(categories)
-      }
-
       {
         editMode
         ? <CategoriesEditMode />

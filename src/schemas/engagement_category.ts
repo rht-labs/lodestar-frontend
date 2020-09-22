@@ -1,15 +1,13 @@
 import faker from 'faker/locale/en_US';
 
 export interface EngagementCategory {
-  name: string,
-  count: number
+  name: string
 }
 
 export abstract class EngagementCategory {
   static fromFake(staticData = false): EngagementCategory {
     return {
-      name: staticData ? 'DO500' : faker.lorem.word(),
-      count: staticData ? 1 : faker.random.number(15),
+      name: staticData ? 'DO500' : faker.lorem.word()
     };
   }
 }

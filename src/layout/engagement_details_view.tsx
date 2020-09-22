@@ -29,7 +29,7 @@ export function EngagementDetailsViewTemplate({
     saveEngagement,
   } = useEngagements();
 
-  const { categories , fetchCategories } = useEngagements();
+  const { categories , fetchCategories} = useEngagements();
   useEffect(() => {
     if (categories === undefined) {
       fetchCategories();
@@ -48,7 +48,7 @@ export function EngagementDetailsViewTemplate({
               <Text component="h3" style={{marginTop: '1rem'}}>{engagement?.customer_name}</Text>
             </TextContent>
             <div style={{marginTop:'1.5rem'}}>
-              <EngagementEditableCategories categories={categories}
+              <EngagementEditableCategories categories={engagement?.engagement_categories}
                                             onChange={updateEngagementFormField}
                                             />
             </div>
