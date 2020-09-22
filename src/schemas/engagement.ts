@@ -46,7 +46,7 @@ export abstract class Artifact {
   static fromFake(staticData = false): Artifact {
     return {
       linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
-      title: faker.lorem.words(3),
+      title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
       type: ArtifactType.demo,
     };
   }

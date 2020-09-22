@@ -29,20 +29,28 @@ export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
   onChangeArtifacts: (value: Artifact[]) => void;
   engagementFormConfig: EngagementFormConfig;
-  onSave: () => void;
+  onSave: (artifacts: Array<Artifact>) => void;
 }
 
 const ARTIFACT_CRUD_MODAL = 'artifact_crud_modal';
 
-export interface ArtifactEditModalProps extends EngagementTimelineCardProps {
+export interface ArtifactEditModalProps
+  extends Omit<EngagementTimelineCardProps, 'onSave'> {
   onClose: () => void;
   isOpen: boolean;
   artifact: Artifact;
+  onSave(artifact: Artifact): void;
 }
 
 function ArtifactEditModal(props: ArtifactEditModalProps) {
-  const { artifact: artifactEdits = {} } = props;
-  const setArtifactEdits = () => {};
+  const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
+  useEffect(() => setArtifactEdits(props.artifact), [props.artifact]);
+
+  const onSave = () => {
+    props.onSave({ ...(props.artifact ?? {}), ...artifactEdits } as Artifact);
+    props.onClose();
+  };
+
   return (
     <Modal
       variant={ModalVariant.small}
@@ -54,7 +62,7 @@ function ArtifactEditModal(props: ArtifactEditModalProps) {
         actions={
           <Button
             data-testid="save-artifact"
-            onClick={props.onSave}
+            onClick={onSave}
             data-cy={'save-artifact-button'}
           >
             Save
@@ -113,28 +121,47 @@ function ArtifactEditModal(props: ArtifactEditModalProps) {
 export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifact, setCurrentArtifact] = useState<Artifact>();
+  const _getUniqueArtifacts = (artifacts: Array<Artifact>): Array<Artifact> => {
+    const uniqueArtifactMap = artifacts.reduce<{ [key: string]: Artifact }>(
+      (prev, curr) => {
+        return {
+          ...prev,
+          [curr.linkAddress]: curr,
+        };
+      },
+      {}
+    );
+    return Object.keys(uniqueArtifactMap).map(k => uniqueArtifactMap[k]);
+  };
 
   const onEditArtifact = (artifact: Artifact) => {
-    console.log(artifact);
     setCurrentArtifact(artifact);
     requestOpen(ARTIFACT_CRUD_MODAL);
   };
+
+  const addArtifact = () => {
+    requestOpen(ARTIFACT_CRUD_MODAL);
+    setCurrentArtifact({} as Artifact);
+  };
+
+  const _onSave = (artifact: Artifact) => {
+    props.onSave(_getUniqueArtifacts([...props.artifacts, artifact]));
+  };
+
   return (
     <>
       <ArtifactEditModal
         artifact={currentArtifact}
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
         onClose={requestClose}
+        onSave={artifact => _onSave(artifact)}
         {...props}
       ></ArtifactEditModal>
       <DataCard
         title="Engagement Timeline"
         trailingIcon={() => <div />}
         actionButton={() => (
-          <EditButton
-            text="Add an Artifact"
-            onClick={() => requestOpen(ARTIFACT_CRUD_MODAL)}
-          />
+          <EditButton text="Add an Artifact" onClick={addArtifact} />
         )}
       >
         <EngagementTimelineCardBody editArtifact={onEditArtifact} {...props} />
