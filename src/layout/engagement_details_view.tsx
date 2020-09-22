@@ -35,6 +35,7 @@ export function EngagementDetailsViewTemplate({
       fetchCategories();
     }
   }, [categories, fetchCategories]);
+
   return (
     <>
       <PageSection

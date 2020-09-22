@@ -4,14 +4,14 @@ import { AuthService } from '../../services/auth_service/authentication_service'
 import { VersionService } from '../../services/version_service/version_service';
 import { NotificationService } from '../../services/notification_service/notification_service';
 import { ServiceFactory } from '../../services/factories/service_factory';
-import { CategoriesService } from "../../services/categories_service/categories_service";
+import { CategoryService } from "../../services/category_service/category_service";
 
 interface ServiceProvider {
   engagementService: EngagementService;
   authService: AuthService;
   versionService: VersionService;
   notificationService: NotificationService;
-  categoriesService: CategoriesService;
+  categoryService: CategoryService;
 }
 
 export const ServiceProviderContext = React.createContext<ServiceProvider>(

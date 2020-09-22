@@ -1,7 +1,7 @@
-import { CategoriesService } from '../categories_service';
+import { CategoryService } from '../category_service';
 import { EngagementCategory } from '../../../schemas/engagement_category';
 
-export class FakedCategoriesService extends CategoriesService {
+export class FakedCategoryService extends CategoryService {
   async fetchCategories(): Promise<EngagementCategory[]> {
     return [{
       name: 'category1',

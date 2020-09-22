@@ -17,7 +17,7 @@ import {
 } from '../../schemas/engagement_poll';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { EngagementCategory } from "../../schemas/engagement_category";
-import {CategoriesService} from "../../services/categories_service/categories_service";
+import { CategoryService } from "../../services/category_service/category_service";
 
 export interface EngagementContext {
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
@@ -76,11 +76,11 @@ const { Provider } = EngagementContext;
 export const EngagementProvider = ({
   children,
   engagementService,
-  categoriesService,
+  categoryService,
 }: {
   children: React.ReactChild;
   engagementService: EngagementService;
-  categoriesService: CategoriesService;
+  categoryService: CategoryService;
 }) => {
   const feedbackContext = useFeedback();
   const [engagementFormConfig, setengagementFormConfig] = useState<
@@ -465,9 +465,11 @@ export const EngagementProvider = ({
   const fetchCategories = useCallback(async () => {
     try {
       feedbackContext.showLoader();
-      const categories = await categoriesService.fetchCategories();
+      const categories = await categoryService.fetchCategories();
       setCategories(categories);
       feedbackContext.hideLoader();
+      console.log('*******');
+      console.log(categories);
     } catch (e) {
       try {
         _handleErrors(e);
@@ -475,7 +477,7 @@ export const EngagementProvider = ({
         throw e;
       }
     }
-  }, [categoriesService, feedbackContext, _handleErrors]);
+  }, [categoryService, feedbackContext, _handleErrors]);
 
   return (
     <Provider
