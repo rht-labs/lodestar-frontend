@@ -5,11 +5,6 @@ import {
   AccordionItem,
   AccordionToggle,
   AccordionContent,
-  DataList,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
-  DataListCell,
   Flex,
   FlexItem,
 } from '@patternfly/react-core';
@@ -56,7 +51,7 @@ export function ActivityHistoryLineItem({
   );
 }
 const timeString = (date: Date): string => {
-  return formatDate(date, 'PPppX');
+  return formatDate(date, "d MMM  y, HH:mm 'UTC'X");
 };
 
 function ActivityHistoryAccordionItem({
@@ -96,22 +91,7 @@ function CommitData({ commit }: { commit: GitCommit }) {
         <span style={{ whiteSpace: 'pre-wrap' }}>{commit.message}</span>
       </div>
       <div>
-        <DataList isCompact={true} aria-label="commit details">
-          <DataListItem aria-labelledby="weburl">
-            <DataListItemRow>
-              <DataListItemCells
-                dataListCells={[
-                  <DataListCell>
-                    <b id="weburl">Commit Url</b>
-                  </DataListCell>,
-                  <DataListCell>
-                    <a href={commit.web_url}>{commit.web_url}</a>
-                  </DataListCell>,
-                ]}
-              />
-            </DataListItemRow>
-          </DataListItem>
-        </DataList>
+        <a href={commit.web_url}>See in GitLab</a>
       </div>
     </div>
   );
