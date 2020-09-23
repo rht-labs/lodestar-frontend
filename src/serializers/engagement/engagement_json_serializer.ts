@@ -61,7 +61,7 @@ export class EngagementJsonSerializer
 
   private static serializeArtifact(data: object): Artifact {
     return {
-      guid: data['guid'] ?? uuid(),
+      id: data['id'] ?? uuid(),
       type: ArtifactType[data['type']],
       title: data['title'],
       linkAddress: data['linkAddress'],

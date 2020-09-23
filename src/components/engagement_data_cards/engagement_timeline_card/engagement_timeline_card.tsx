@@ -29,7 +29,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
       (prev, curr) => {
         return {
           ...prev,
-          [curr.guid]: curr,
+          [curr.id]: curr,
         };
       },
       {}
@@ -44,7 +44,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
 
   const addArtifact = () => {
     requestOpen(ARTIFACT_CRUD_MODAL);
-    setCurrentArtifact({ guid: uuid() } as Artifact);
+    setCurrentArtifact({ id: uuid() } as Artifact);
   };
 
   const _onSave = (artifact: Artifact) => {
