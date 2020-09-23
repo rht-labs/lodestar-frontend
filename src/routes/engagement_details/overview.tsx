@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, Artifact } from '../../schemas/engagement';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
@@ -112,7 +112,9 @@ export function EngagementOverview({
                   <EngagementTimelineCard
                     engagementFormConfig={engagementFormConfig}
                     artifacts={currentEngagementChanges.artifacts}
-                    onSave={() => onSave(currentEngagementChanges)}
+                    onSave={(artifacts: Artifact[]) =>
+                      onSave({ ...currentEngagementChanges, artifacts })
+                    }
                     onChangeArtifacts={value =>
                       onChange('engagement_artifacts', value)
                     }

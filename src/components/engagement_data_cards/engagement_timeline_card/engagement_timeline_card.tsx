@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
-import { Artifact, ArtifactType } from '../../../schemas/engagement';
+import { Artifact } from '../../../schemas/engagement';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
@@ -10,20 +11,8 @@ import {
   TableHeader,
   TableBody,
 } from '@patternfly/react-table';
-import {
-  Dropdown,
-  KebabToggle,
-  DropdownItem,
-  Modal,
-  ModalVariant,
-  Button,
-  Form,
-  FormSelect,
-  FormGroup,
-  FormSelectOption,
-  TextInput,
-} from '@patternfly/react-core';
-import { EditModalTemplate } from '../../../layout/edit_modal_template';
+import { Dropdown, KebabToggle, DropdownItem } from '@patternfly/react-core';
+import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
@@ -34,90 +23,6 @@ export interface EngagementTimelineCardProps {
 
 const ARTIFACT_CRUD_MODAL = 'artifact_crud_modal';
 
-export interface ArtifactEditModalProps
-  extends Omit<EngagementTimelineCardProps, 'onSave'> {
-  onClose: () => void;
-  isOpen: boolean;
-  artifact: Artifact;
-  onSave(artifact: Artifact): void;
-}
-
-function ArtifactEditModal(props: ArtifactEditModalProps) {
-  const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
-  useEffect(() => setArtifactEdits(props.artifact), [props.artifact]);
-
-  const onSave = () => {
-    props.onSave({ ...(props.artifact ?? {}), ...artifactEdits } as Artifact);
-    props.onClose();
-  };
-
-  return (
-    <Modal
-      variant={ModalVariant.small}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
-      title="Engagement Artifact"
-    >
-      <EditModalTemplate
-        actions={
-          <Button
-            data-testid="save-artifact"
-            onClick={onSave}
-            data-cy={'save-artifact-button'}
-          >
-            Save
-          </Button>
-        }
-      >
-        <Form>
-          <FormGroup label="Artifact Type" isRequired fieldId="artifact-type">
-            <FormSelect
-              data-testid="artifact-type-select"
-              aria-label="Artifact Type"
-              id="artifact-type-select"
-              value={artifactEdits?.type}
-              onChange={(value: ArtifactType) =>
-                setArtifactEdits({ ...artifactEdits, type: value })
-              }
-            >
-              {Object.keys(ArtifactType).map(artifactTypeKey => (
-                <FormSelectOption
-                  value={artifactTypeKey}
-                  label={ArtifactType[artifactTypeKey]}
-                >
-                  {ArtifactType[artifactTypeKey]}
-                </FormSelectOption>
-              ))}
-            </FormSelect>
-          </FormGroup>
-          <FormGroup label="Artifact Title" isRequired fieldId="artifact-title">
-            <TextInput
-              isRequired
-              data-testid="artifact-title-input"
-              name="artifact_title"
-              data-cy="artifact-title-input"
-              value={artifactEdits?.title}
-              onChange={e => setArtifactEdits({ ...artifactEdits, title: e })}
-            />
-          </FormGroup>
-          <FormGroup label="Artifact Link" isRequired fieldId="artifact-link">
-            <TextInput
-              isRequired
-              data-testid="artifact-link-input"
-              name="artifact_link"
-              data-cy="artifact-link-input"
-              value={artifactEdits?.linkAddress}
-              onChange={e =>
-                setArtifactEdits({ ...artifactEdits, linkAddress: e })
-              }
-            />
-          </FormGroup>
-        </Form>
-      </EditModalTemplate>
-    </Modal>
-  );
-}
-
 export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifact, setCurrentArtifact] = useState<Artifact>();
@@ -126,7 +31,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
       (prev, curr) => {
         return {
           ...prev,
-          [curr.linkAddress]: curr,
+          [curr.guid]: curr,
         };
       },
       {}
@@ -141,7 +46,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
 
   const addArtifact = () => {
     requestOpen(ARTIFACT_CRUD_MODAL);
-    setCurrentArtifact({} as Artifact);
+    setCurrentArtifact({ guid: uuid() } as Artifact);
   };
 
   const _onSave = (artifact: Artifact) => {
@@ -154,9 +59,8 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         artifact={currentArtifact}
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
         onClose={requestClose}
-        onSave={artifact => _onSave(artifact)}
-        {...props}
-      ></ArtifactEditModal>
+        onSave={_onSave}
+      />
       <DataCard
         title="Engagement Timeline"
         trailingIcon={() => <div />}

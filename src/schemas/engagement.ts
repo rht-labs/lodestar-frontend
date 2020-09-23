@@ -32,19 +32,21 @@ export interface FakedEngagementOptions {
 }
 
 export interface Artifact {
+  guid: string;
   linkAddress: string;
   title: string;
   type: ArtifactType;
 }
 
 export enum ArtifactType {
-  demo = 'demo',
-  weeklyReport = 'weeklyReport',
+  demo = 'Demo',
+  weeklyReport = 'Weekly Report',
 }
 
 export abstract class Artifact {
   static fromFake(staticData = false): Artifact {
     return {
+      guid: staticData ? '1' : faker.random.uuid(),
       linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
       title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
       type: ArtifactType.demo,

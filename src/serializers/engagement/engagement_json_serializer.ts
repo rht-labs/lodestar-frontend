@@ -5,6 +5,7 @@ import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
 import { Logger } from '../../utilities/logger';
+import { uuid } from 'uuidv4';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
@@ -60,6 +61,7 @@ export class EngagementJsonSerializer
 
   private static serializeArtifact(data: object): Artifact {
     return {
+      guid: data['guid'] ?? uuid(),
       type: ArtifactType[data['type']],
       title: data['title'],
       linkAddress: data['linkAddress'],
