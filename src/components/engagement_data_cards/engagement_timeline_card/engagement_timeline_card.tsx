@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
 import { Artifact } from '../../../schemas/engagement';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import {
@@ -17,7 +16,6 @@ import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_mod
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
   onChangeArtifacts: (value: Artifact[]) => void;
-  engagementFormConfig: EngagementFormConfig;
   onSave: (artifacts: Array<Artifact>) => void;
 }
 
@@ -54,7 +52,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
   };
 
   return (
-    <>
+    <div>
       <ArtifactEditModal
         artifact={currentArtifact}
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
@@ -65,12 +63,16 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         title="Engagement Timeline"
         trailingIcon={() => <div />}
         actionButton={() => (
-          <EditButton text="Add an Artifact" onClick={addArtifact} />
+          <EditButton
+            text="Add an Artifact"
+            onClick={addArtifact}
+            data-testid="add-artifact-button"
+          />
         )}
       >
-        <EngagementTimelineCardBody editArtifact={onEditArtifact} {...props} />
+        <EngagementTimelineCardBody {...props} editArtifact={onEditArtifact} />
       </DataCard>
-    </>
+    </div>
   );
 }
 
@@ -86,7 +88,11 @@ function EngagementTimelineCardBody(
     { title: 'Link to Resource' },
     { title: 'Actions' },
   ];
-  const actionItems = [<DropdownItem key="edit">Edit</DropdownItem>];
+  const actionItems = [
+    <DropdownItem key="edit">
+      <span data-testid="artifact-edit-button">Edit</span>
+    </DropdownItem>,
+  ];
   const rows = props.artifacts.map((artifact, idx) => [
     artifact.type,
     artifact.title,
@@ -109,7 +115,8 @@ function EngagementTimelineCardBody(
                   : setCurrentOpenDropdown(idx)
               }
               id={`toggle-id-${idx}`}
-            />
+              data-testid="artifact-action-kebab"
+            ></KebabToggle>
           }
         />
       ),
