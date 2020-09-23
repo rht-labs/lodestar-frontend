@@ -12,10 +12,12 @@ import {useEngagements} from "../../context/engagement_context/engagement_hook";
 
 export function EngagementEditableCategories ({
   categories,
-  onChange,
+  onSave: propsOnSave,
+  engagement,
 }: {
   categories?: EngagementCategory[];
-  onChange: (fieldName: string, value: any) => void;
+  onSave: (engagement: Engagement) => void;
+  engagement: Engagement;
 }) {
   const [chips, setChips] = useState <string[]>([]);
   const [editMode, setEditMode] = useState(false);
@@ -62,7 +64,7 @@ export function EngagementEditableCategories ({
                  numChips={20}
                  isClosable
                  key={'test'}
-                 onClick={e => setEditMode(!editMode)}
+                 onClick={SaveAndCloseEditMode}
       >
         {chips.map(currentChip => (
           <Label key={currentChip}
@@ -87,7 +89,6 @@ export function EngagementEditableCategories ({
     const copyOfChips = [...chips];
     copyOfChips.push(newCategory);
     setChips(copyOfChips);
-    onChange('categories', copyOfChips);
   }
 
   function deleteCategory(category: string) {
@@ -97,8 +98,18 @@ export function EngagementEditableCategories ({
       copyOfChips.splice(chips.indexOf(category), 1);
       setChips(copyOfChips);
    }
-    onChange('categories', copyOfChips);
   };
+
+  function SaveAndCloseEditMode() {
+    setEditMode(!editMode);
+    const newCategories =
+      chips.map(chip => [{
+        name: chip
+      }])
+        .flat();
+    engagement.engagement_categories = newCategories;
+    propsOnSave(engagement);
+  }
 
   return (
     <>

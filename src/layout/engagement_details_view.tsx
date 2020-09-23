@@ -15,9 +15,11 @@ import { EngagementEditableCategories } from "../components/engagement_categorie
 
 export function EngagementDetailsViewTemplate({
   engagement,
+  onSave,
   children,
 }: {
   engagement: Engagement;
+  onSave: (engagement: Engagement) => void;
   children: any;
 }) {
   const {
@@ -25,16 +27,7 @@ export function EngagementDetailsViewTemplate({
     missingRequiredFields,
     isLaunchable,
     requiredFields,
-    updateEngagementFormField,
-    saveEngagement,
   } = useEngagements();
-
-  const { categories , fetchCategories} = useEngagements();
-  useEffect(() => {
-    if (categories === undefined) {
-      fetchCategories();
-    }
-  }, [categories, fetchCategories]);
 
   return (
     <>
@@ -49,7 +42,8 @@ export function EngagementDetailsViewTemplate({
             </TextContent>
             <div style={{marginTop:'1.5rem'}}>
               <EngagementEditableCategories categories={engagement?.engagement_categories}
-                                            onChange={updateEngagementFormField}
+                                            onSave={onSave}
+                                            engagement={engagement}
                                             />
             </div>
           </FlexItem>
