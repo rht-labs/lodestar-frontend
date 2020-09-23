@@ -59,10 +59,13 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               data-testid="artifact-type-select"
               aria-label="Artifact Type"
               id="artifact-type-select"
-              value={ArtifactType[artifactEdits?.type]}
-              onChange={(value: ArtifactType) =>
-                setArtifactEdits({ ...artifactEdits, type: value })
-              }
+              value={artifactEdits?.type}
+              onChange={(value: ArtifactType) => {
+                setArtifactEdits({
+                  ...artifactEdits,
+                  type: value,
+                });
+              }}
             >
               {Object.keys(ArtifactType).map(artifactTypeKey => (
                 <FormSelectOption

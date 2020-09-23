@@ -59,7 +59,7 @@ export class EngagementJsonSerializer
     return trimmedValues;
   }
 
-  private static serializeArtifact(data: object): Artifact {
+  private static deserializeArtifact(data: object): Artifact {
     return {
       id: data['id'] ?? uuid(),
       type: ArtifactType[data['type']],
@@ -75,7 +75,7 @@ export class EngagementJsonSerializer
         ? EngagementJsonSerializer.parseDate(data['archive_date'])
         : undefined,
       artifacts: (data['artifacts'] ?? []).map(
-        EngagementJsonSerializer.serializeArtifact
+        EngagementJsonSerializer.deserializeArtifact
       ),
       commits: (data['commits'] as any[])
         ?.filter(d => !(d['author_email'] === 'bot@bot.com'))

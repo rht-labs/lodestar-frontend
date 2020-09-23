@@ -110,11 +110,10 @@ export function EngagementOverview({
               <div id="timeline_card">
                 <FormManager.Group groupName="Activity Timeline">
                   <EngagementTimelineCard
-                    engagementFormConfig={engagementFormConfig}
                     artifacts={currentEngagementChanges.artifacts}
-                    onSave={(artifacts: Artifact[]) =>
-                      onSave({ ...currentEngagementChanges, artifacts })
-                    }
+                    onSave={(artifacts: Artifact[]) => {
+                      onSave({ ...currentEngagementChanges, artifacts });
+                    }}
                     onChangeArtifacts={value =>
                       onChange('engagement_artifacts', value)
                     }
