@@ -23,7 +23,10 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
   useEffect(
     () =>
-      setArtifactEdits({ type: ArtifactType.weeklyReport, ...props.artifact }),
+      setArtifactEdits({
+        type: ArtifactType.demo,
+        ...props.artifact,
+      }),
     [props.artifact]
   );
 
@@ -70,7 +73,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               {Object.keys(ArtifactType).map(artifactTypeKey => (
                 <FormSelectOption
                   key={ArtifactType[artifactTypeKey]}
-                  value={artifactTypeKey}
+                  value={ArtifactType[artifactTypeKey]}
                   label={ArtifactType[artifactTypeKey]}
                 >
                   {ArtifactType[artifactTypeKey]}

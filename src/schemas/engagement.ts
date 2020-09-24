@@ -41,6 +41,7 @@ export interface Artifact {
 export enum ArtifactType {
   demo = 'Demo',
   weeklyReport = 'Weekly Report',
+  other = 'Other',
 }
 
 export abstract class Artifact {

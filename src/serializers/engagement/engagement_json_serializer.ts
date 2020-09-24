@@ -1,5 +1,5 @@
 import { Serializer } from '../serializer';
-import { Engagement, Artifact, ArtifactType } from '../../schemas/engagement';
+import { Engagement, Artifact } from '../../schemas/engagement';
 import { parse, parseISO, isValid, formatISO } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
@@ -45,6 +45,10 @@ export class EngagementJsonSerializer
       start_date: engagement.start_date
         ? EngagementJsonSerializer.formatDate(engagement.start_date)
         : null,
+      artifacts: engagement?.artifacts?.map?.(a => ({
+        ...a,
+        link_address: a.linkAddress,
+      })),
     };
     const trimmedValues = Object.keys(e).reduce((acc, currKey) => {
       acc[currKey] = e[currKey];
@@ -62,9 +66,9 @@ export class EngagementJsonSerializer
   private static deserializeArtifact(data: object): Artifact {
     return {
       id: data['id'] ?? uuid(),
-      type: ArtifactType[data['type']],
+      type: data['type'],
       title: data['title'],
-      linkAddress: data['linkAddress'],
+      linkAddress: data['link_address'],
     };
   }
   deserialize(data: object): Engagement {
