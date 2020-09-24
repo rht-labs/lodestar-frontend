@@ -48,7 +48,7 @@ Object {
               >
                 <tr>
                   <th
-                    class=""
+                    class="pf-m-width-10"
                     data-key="0"
                     data-label="Type"
                     scope="col"
@@ -66,14 +66,6 @@ Object {
                   <th
                     class=""
                     data-key="2"
-                    data-label="Link to Resource"
-                    scope="col"
-                  >
-                    Link to Resource
-                  </th>
-                  <th
-                    class=""
-                    data-key="3"
                     data-label="Actions"
                     scope="col"
                   >
@@ -102,22 +94,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -171,22 +156,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -240,22 +218,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -309,22 +280,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -378,22 +342,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -447,22 +404,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -516,22 +466,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -585,22 +528,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -654,22 +590,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -723,22 +652,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -792,22 +714,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -861,22 +776,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -930,22 +838,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -999,22 +900,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1068,22 +962,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1137,22 +1024,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1206,22 +1086,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1275,22 +1148,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1344,22 +1210,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1413,22 +1272,15 @@ Object {
                     data-key="1"
                     data-label="Title"
                   >
-                    An engagement artifact
-                  </td>
-                  <td
-                    class=""
-                    data-key="2"
-                    data-label="Link to Resource"
-                  >
                     <a
                       href="https://example.com"
                     >
-                      https://example.com
+                      An engagement artifact
                     </a>
                   </td>
                   <td
                     class=""
-                    data-key="3"
+                    data-key="2"
                     data-label="Actions"
                   >
                     <div
@@ -1516,7 +1368,7 @@ Object {
             >
               <tr>
                 <th
-                  class=""
+                  class="pf-m-width-10"
                   data-key="0"
                   data-label="Type"
                   scope="col"
@@ -1534,14 +1386,6 @@ Object {
                 <th
                   class=""
                   data-key="2"
-                  data-label="Link to Resource"
-                  scope="col"
-                >
-                  Link to Resource
-                </th>
-                <th
-                  class=""
-                  data-key="3"
                   data-label="Actions"
                   scope="col"
                 >
@@ -1570,22 +1414,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -1639,22 +1476,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -1708,22 +1538,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -1777,22 +1600,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -1846,22 +1662,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -1915,22 +1724,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -1984,22 +1786,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2053,22 +1848,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2122,22 +1910,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2191,22 +1972,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2260,22 +2034,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2329,22 +2096,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2398,22 +2158,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2467,22 +2220,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2536,22 +2282,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2605,22 +2344,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2674,22 +2406,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2743,22 +2468,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2812,22 +2530,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
@@ -2881,22 +2592,15 @@ Object {
                   data-key="1"
                   data-label="Title"
                 >
-                  An engagement artifact
-                </td>
-                <td
-                  class=""
-                  data-key="2"
-                  data-label="Link to Resource"
-                >
                   <a
                     href="https://example.com"
                   >
-                    https://example.com
+                    An engagement artifact
                   </a>
                 </td>
                 <td
                   class=""
-                  data-key="3"
+                  data-key="2"
                   data-label="Actions"
                 >
                   <div
