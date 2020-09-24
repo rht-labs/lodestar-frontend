@@ -9,6 +9,7 @@ import {
   TableVariant,
   TableHeader,
   TableBody,
+  cellWidth,
 } from '@patternfly/react-table';
 import { Dropdown, KebabToggle, DropdownItem } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
@@ -60,7 +61,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         onSave={_onSave}
       />
       <DataCard
-        title="Engagement Timeline"
+        title="Engagement Artifacts"
         trailingIcon={() => <div />}
         actionButton={() => (
           <EditButton
@@ -83,9 +84,8 @@ function EngagementTimelineCardBody(
 ) {
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const columns = [
-    { title: 'Type' },
-    { title: 'Title' },
-    { title: 'Link to Resource' },
+    { title: 'Type', transforms: [cellWidth(10)] },
+    { title: 'Title', transforms: [cellWidth('max')] },
     { title: 'Actions' },
   ];
   const actionItems = [
@@ -95,8 +95,9 @@ function EngagementTimelineCardBody(
   ];
   const rows = props.artifacts.map((artifact, idx) => [
     artifact.type,
-    artifact.title,
-    { title: <a href={artifact.linkAddress}>{artifact.linkAddress}</a> },
+    {
+      title: <a href={artifact.linkAddress}>{artifact.title}</a>,
+    },
     {
       title: (
         <Dropdown
@@ -124,7 +125,7 @@ function EngagementTimelineCardBody(
   ]);
   return (
     <Table
-      aria-label="Engagement Timeline"
+      aria-label="Engagement Artifacts"
       variant={TableVariant.compact}
       cells={columns}
       rows={rows}

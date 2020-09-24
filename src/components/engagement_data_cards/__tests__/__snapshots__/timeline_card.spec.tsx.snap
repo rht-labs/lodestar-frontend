@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Engagement Timeline Card matches snapshot 1`] = `
+exports[`Engagement Artifact Card matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -24,7 +24,7 @@ Object {
                   class="pf-c-title pf-m-lg"
                   style="font-weight: normal;"
                 >
-                  Engagement Timeline
+                  Engagement Artifacts
                     
                   <div />
                 </h3>
@@ -36,7 +36,7 @@ Object {
             class="pf-c-card__body"
           >
             <table
-              aria-label="Engagement Timeline"
+              aria-label="Engagement Artifacts"
               class="pf-c-table pf-m-grid-md pf-m-compact"
               data-ouia-component-id="0"
               data-ouia-component-type="PF4/Table"
@@ -1492,7 +1492,7 @@ Object {
                 class="pf-c-title pf-m-lg"
                 style="font-weight: normal;"
               >
-                Engagement Timeline
+                Engagement Artifacts
                   
                 <div />
               </h3>
@@ -1504,7 +1504,7 @@ Object {
           class="pf-c-card__body"
         >
           <table
-            aria-label="Engagement Timeline"
+            aria-label="Engagement Artifacts"
             class="pf-c-table pf-m-grid-md pf-m-compact"
             data-ouia-component-id="0"
             data-ouia-component-type="PF4/Table"

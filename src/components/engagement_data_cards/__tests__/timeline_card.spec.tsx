@@ -12,7 +12,7 @@ import { ModalVisibilityContext } from '../../../context/edit_modal_visibility_c
 import { FeatureToggleContext } from '../../../context/feature_context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
 
-describe('Engagement Timeline Card', () => {
+describe('Engagement Artifact Card', () => {
   test('matches snapshot', () => {
     const timelineCard = render(
       <EngagementTimelineCard
