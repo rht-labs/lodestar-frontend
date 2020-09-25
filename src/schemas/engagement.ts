@@ -53,7 +53,7 @@ export abstract class Artifact {
       linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
       title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
       type: ArtifactType.demo,
-      description: faker.lorem.paragraph(),
+      description: staticData ? 'Artifact Description' : faker.lorem.paragraph(),
     };
   }
 }

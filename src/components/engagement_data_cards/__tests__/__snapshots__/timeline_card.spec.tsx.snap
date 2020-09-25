@@ -56,7 +56,7 @@ Object {
                     Type
                   </th>
                   <th
-                    class=""
+                    class="pf-m-width-20"
                     data-key="1"
                     data-label="Title"
                     scope="col"
@@ -66,6 +66,14 @@ Object {
                   <th
                     class=""
                     data-key="2"
+                    data-label="Description"
+                    scope="col"
+                  >
+                    Description
+                  </th>
+                  <th
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                     scope="col"
                   >
@@ -103,6 +111,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -165,6 +180,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -227,6 +249,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -289,6 +318,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -351,6 +387,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -413,6 +456,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -475,6 +525,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -537,6 +594,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -599,6 +663,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -661,6 +732,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -723,6 +801,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -785,6 +870,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -847,6 +939,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -909,6 +1008,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -971,6 +1077,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -1033,6 +1146,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -1095,6 +1215,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -1157,6 +1284,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -1219,6 +1353,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -1281,6 +1422,13 @@ Object {
                   <td
                     class=""
                     data-key="2"
+                    data-label="Description"
+                  >
+                    Artifact Description
+                  </td>
+                  <td
+                    class=""
+                    data-key="3"
                     data-label="Actions"
                   >
                     <div
@@ -1376,7 +1524,7 @@ Object {
                   Type
                 </th>
                 <th
-                  class=""
+                  class="pf-m-width-20"
                   data-key="1"
                   data-label="Title"
                   scope="col"
@@ -1386,6 +1534,14 @@ Object {
                 <th
                   class=""
                   data-key="2"
+                  data-label="Description"
+                  scope="col"
+                >
+                  Description
+                </th>
+                <th
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                   scope="col"
                 >
@@ -1423,6 +1579,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1485,6 +1648,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1547,6 +1717,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1609,6 +1786,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1671,6 +1855,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1733,6 +1924,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1795,6 +1993,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1857,6 +2062,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1919,6 +2131,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -1981,6 +2200,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2043,6 +2269,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2105,6 +2338,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2167,6 +2407,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2229,6 +2476,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2291,6 +2545,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2353,6 +2614,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2415,6 +2683,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2477,6 +2752,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2539,6 +2821,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
@@ -2601,6 +2890,13 @@ Object {
                 <td
                   class=""
                   data-key="2"
+                  data-label="Description"
+                >
+                  Artifact Description
+                </td>
+                <td
+                  class=""
+                  data-key="3"
                   data-label="Actions"
                 >
                   <div
