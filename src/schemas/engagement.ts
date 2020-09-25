@@ -3,6 +3,7 @@ import { LaunchData } from './launch_data';
 import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
+import { EngagementCategory } from './engagement_category';
 
 export enum EngagementStatus {
   active = 'active',
@@ -89,6 +90,7 @@ export interface Engagement {
   last_update_by_name: string;
   suggested_subdomain?: string;
   status: ClusterStatus;
+  engagement_categories: EngagementCategory[];
 }
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
@@ -199,6 +201,7 @@ export abstract class Engagement {
       last_update_by_name: staticData
         ? 'James Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      engagement_categories:[EngagementCategory.fromFake(staticData)],
       launch: staticData
         ? null
         : faker.random.boolean()

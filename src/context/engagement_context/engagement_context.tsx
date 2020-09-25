@@ -16,6 +16,8 @@ import {
   EngagementPollIntervalStrategy,
 } from '../../schemas/engagement_poll';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
+import { EngagementCategory } from "../../schemas/engagement_category";
+import { CategoryService } from "../../services/category_service/category_service";
 
 export interface EngagementContext {
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
@@ -40,6 +42,8 @@ export interface EngagementContext {
   isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
+  fetchCategories: () => void;
+  categories?: EngagementCategory[]
 }
 
 export type CreateEngagementParams = Pick<
@@ -72,9 +76,11 @@ const { Provider } = EngagementContext;
 export const EngagementProvider = ({
   children,
   engagementService,
+  categoryService,
 }: {
   children: React.ReactChild;
   engagementService: EngagementService;
+  categoryService: CategoryService;
 }) => {
   const feedbackContext = useFeedback();
   const [engagementFormConfig, setengagementFormConfig] = useState<
@@ -86,6 +92,7 @@ export const EngagementProvider = ({
   const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
   const [changedFields, setChangedFields] = useState<string[]>([]);
+  const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -458,6 +465,22 @@ export const EngagementProvider = ({
       _handleErrors,
     ]
   );
+
+  const fetchCategories = useCallback(async () => {
+    try {
+      // feedbackContext.showLoader();
+      const categories = await categoryService.fetchCategories();
+      setCategories(categories);
+      // feedbackContext.hideLoader();
+    } catch (e) {
+      try {
+        _handleErrors(e);
+      } catch (e) {
+        throw e;
+      }
+    }
+  }, [categoryService, _handleErrors]);
+
   return (
     <Provider
       value={{
@@ -483,6 +506,8 @@ export const EngagementProvider = ({
         createEngagement,
         saveEngagement,
         launchEngagement,
+        fetchCategories,
+        categories
       }}
     >
       {children}
