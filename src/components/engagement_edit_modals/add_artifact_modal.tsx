@@ -105,6 +105,23 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               }
             />
           </FormGroup>
+          <FormGroup
+            label="Artifact Description"
+            isRequired
+            fieldId="artifact-description"
+          >
+            <TextInput
+              isRequired
+              data-testid="artifact-description-input"
+              name="artifact_description"
+              data-cy="artifact-description-input"
+              aria-label="Artifact Description"
+              value={artifactEdits?.description ?? ''}
+              onChange={e =>
+                setArtifactEdits({ ...artifactEdits, description: e })
+              }
+            />
+          </FormGroup>
         </Form>
       </EditModalTemplate>
     </Modal>
