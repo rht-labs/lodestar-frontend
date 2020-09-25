@@ -1,35 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Chip,
-  ChipGroup,
+  Flex,
   Label,
 } from '@patternfly/react-core';
 import { PencilAltIcon } from "@patternfly/react-icons";
-import { AddNewCategory } from "./add_new_category_bar";
 import { EngagementCategory } from "../../schemas/engagement_category";
 import {Engagement} from "../../schemas/engagement";
+import {CategoryTypehead} from "./category_typehead";
 import {useEngagements} from "../../context/engagement_context/engagement_hook";
 
 export function EngagementEditableCategories ({
-  categories,
+  engagementCategories,
   onSave: propsOnSave,
   engagement,
 }: {
-  categories?: EngagementCategory[];
+  engagementCategories?: EngagementCategory[];
   onSave: (engagement: Engagement) => void;
   engagement: Engagement;
 }) {
   const [chips, setChips] = useState <string[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const formattedItems: string[] = [];
+  const [hasFetched, setHasFetched] = useState(false);
+  const { categories, fetchCategories } = useEngagements();
 
   useEffect(() => {
-    categories?.map( (item) => {
-      formattedItems.push(item.name);
-      }
-    );
-    setChips(formattedItems);
-  }, [categories]);
+    if (!hasFetched && categories === undefined) {
+      setHasFetched(true);
+      fetchCategories();
+    }
+  }, [categories , hasFetched, setHasFetched,fetchCategories]);
+
+  useEffect(() => {
+    const formatedItem = engagementCategories?.map( (item) => item.name);
+
+    setChips(formatedItem ? formatedItem : []);
+  }, [engagementCategories]);
+
   const CategoriesReadOnly = () => {
     return (
       <>
@@ -57,66 +63,25 @@ export function EngagementEditableCategories ({
       </>
     )};
 
-  const CategoriesEditMode = () => {
-    return (
-      <ChipGroup categoryName=" "
-                 defaultIsOpen
-                 numChips={20}
-                 isClosable
-                 key={'test'}
-                 onClick={SaveAndCloseEditMode}
-      >
-        {chips.map(currentChip => (
-          <Label key={currentChip}
-                 onClick={() => deleteCategory(currentChip)}
-                 style={{marginRight: '0.5rem'}}
-                 variant={"outline"}
-                 onClose={Function.prototype}
-                 color="blue">
-           {currentChip}
-          </Label>
-        ))}
-        <Chip key="addNew"
-              style={{borderRadius: '25px', borderColor:'red'}}
-              isOverflowChip
-        >
-          <AddNewCategory addCategory={addCategory} />
-        </Chip>
-      </ChipGroup>
-  )};
-
-  function addCategory(newCategory: string) {
-    const copyOfChips = [...chips];
-    copyOfChips.push(newCategory);
-    setChips(copyOfChips);
-  }
-
-  function deleteCategory(category: string) {
-    const copyOfChips = [...chips];
-    const index = copyOfChips.indexOf(category);
-    if (index !== -1) {
-      copyOfChips.splice(chips.indexOf(category), 1);
-      setChips(copyOfChips);
-   }
-  };
-
-  function SaveAndCloseEditMode() {
+  const SaveAndCloseEditMode = (selectedChips: string[]) => {
     setEditMode(!editMode);
-    const newCategories =
-      chips.map(chip => [{
-        name: chip
-      }])
-        .flat();
-    engagement.engagement_categories = newCategories;
+    engagement.engagement_categories = selectedChips
+      .map(chip => [{name: chip }])
+      .flat();
     propsOnSave(engagement);
-  }
+  };
 
   return (
     <>
       {
         editMode
-        ? <CategoriesEditMode />
-        : <CategoriesReadOnly />
+          ?
+            <Flex>
+              <CategoryTypehead engagementCategories={chips}
+                                allCategories={categories}
+                                SaveAndCloseEditMode={SaveAndCloseEditMode}/>
+            </Flex>
+          : <CategoriesReadOnly />
       }
     </>
   )

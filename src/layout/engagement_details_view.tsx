@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Engagement } from '../schemas/engagement';
 import {
   PageSection,
@@ -41,7 +41,7 @@ export function EngagementDetailsViewTemplate({
               <Text component="h3" style={{marginTop: '1rem'}}>{engagement?.customer_name}</Text>
             </TextContent>
             <div style={{marginTop:'1.5rem'}}>
-              <EngagementEditableCategories categories={engagement?.engagement_categories}
+              <EngagementEditableCategories engagementCategories={engagement?.engagement_categories}
                                             onSave={onSave}
                                             engagement={engagement}
                                             />

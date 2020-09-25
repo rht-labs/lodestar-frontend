@@ -92,7 +92,7 @@ export const EngagementProvider = ({
   const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
   const [changedFields, setChangedFields] = useState<string[]>([]);
-  const [categories, setCategories] = useState<EngagementCategory[]>([]);
+  const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -477,7 +477,7 @@ export const EngagementProvider = ({
         throw e;
       }
     }
-  }, [categoryService, feedbackContext, _handleErrors]);
+  }, [categoryService, _handleErrors]);
 
   return (
     <Provider
