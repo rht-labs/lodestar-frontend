@@ -37,6 +37,7 @@ export interface Artifact {
   linkAddress: string;
   title: string;
   type: ArtifactType;
+  description: string;
 }
 
 export enum ArtifactType {
@@ -52,6 +53,7 @@ export abstract class Artifact {
       linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
       title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
       type: ArtifactType.demo,
+      description: faker.lorem.paragraph(),
     };
   }
 }
@@ -201,7 +203,7 @@ export abstract class Engagement {
       last_update_by_name: staticData
         ? 'James Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
-      engagement_categories:[EngagementCategory.fromFake(staticData)],
+      engagement_categories: [EngagementCategory.fromFake(staticData)],
       launch: staticData
         ? null
         : faker.random.boolean()

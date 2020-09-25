@@ -69,6 +69,7 @@ export class EngagementJsonSerializer
       type: data['type'],
       title: data['title'],
       linkAddress: data['link_address'],
+      description: data['description'],
     };
   }
   deserialize(data: object): Engagement {
