@@ -85,7 +85,8 @@ function EngagementTimelineCardBody(
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const columns = [
     { title: 'Type', transforms: [cellWidth(10)] },
-    { title: 'Title', transforms: [cellWidth('max')] },
+    { title: 'Title', transforms: [cellWidth(20)] },
+    { title: 'Description', transforms: [cellWidth('max')] },
     { title: 'Actions' },
   ];
   const actionItems = [
@@ -98,6 +99,7 @@ function EngagementTimelineCardBody(
     {
       title: <a href={artifact.linkAddress}>{artifact.title}</a>,
     },
+    artifact.description,
     {
       title: (
         <Dropdown
