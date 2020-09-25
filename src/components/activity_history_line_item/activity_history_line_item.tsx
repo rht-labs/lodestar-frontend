@@ -5,14 +5,10 @@ import {
   AccordionItem,
   AccordionToggle,
   AccordionContent,
-  DataList,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
-  DataListCell,
   Flex,
   FlexItem,
 } from '@patternfly/react-core';
+import { format as formatDate } from 'date-fns';
 
 export interface ActivityHistoryLineItemProps {
   commit: GitCommit;
@@ -54,6 +50,9 @@ export function ActivityHistoryLineItem({
     </p>
   );
 }
+const timeString = (date: Date): string => {
+  return formatDate(date, "d MMM  y, HH:mm 'UTC'X");
+};
 
 function ActivityHistoryAccordionItem({
   commit,
@@ -70,14 +69,12 @@ function ActivityHistoryAccordionItem({
       >
         <Flex>
           <FlexItem>
-            <span>{commit.committed_date.toLocaleString()}</span>
-          </FlexItem>
-          <FlexItem>
-            {commit.author_name}&nbsp;{commit.author_email}
+            <span>{timeString(commit.committed_date)}</span>
           </FlexItem>
           <FlexItem>
             <span>{commit.message.split('\n')[0]}</span>
           </FlexItem>
+          <FlexItem>{commit.author_name}</FlexItem>
         </Flex>
       </AccordionToggle>
       <AccordionContent isHidden={!isExpanded}>
@@ -90,23 +87,12 @@ function ActivityHistoryAccordionItem({
 function CommitData({ commit }: { commit: GitCommit }) {
   return (
     <div>
-      <span style={{ whiteSpace: 'pre-wrap' }}>{commit.message}</span>
-      <DataList aria-label="commit details">
-        <DataListItem aria-labelledby="weburl">
-          <DataListItemRow>
-            <DataListItemCells
-              dataListCells={[
-                <DataListCell>
-                  <b id="weburl">Commit Url</b>
-                </DataListCell>,
-                <DataListCell>
-                  <a href={commit.web_url}>{commit.web_url}</a>
-                </DataListCell>,
-              ]}
-            />
-          </DataListItemRow>
-        </DataListItem>
-      </DataList>
+      <div>
+        <span style={{ whiteSpace: 'pre-wrap' }}>{commit.message}</span>
+      </div>
+      <div>
+        <a href={commit.web_url}>See in GitLab</a>
+      </div>
     </div>
   );
 }

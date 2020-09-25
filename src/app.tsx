@@ -38,6 +38,7 @@ export const App = ({ config }: { config: Config }) => {
             notificationService,
             versionService,
             engagementService,
+            categoryService,
           }) => {
             return (
               <>
@@ -59,6 +60,7 @@ export const App = ({ config }: { config: Config }) => {
                           <Router>
                             <EngagementProvider
                               engagementService={engagementService}
+                              categoryService={categoryService}
                             >
                               <LodestarRouter />
                             </EngagementProvider>

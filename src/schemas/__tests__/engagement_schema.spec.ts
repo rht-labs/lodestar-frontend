@@ -2,6 +2,7 @@ import { Engagement } from '../engagement';
 
 const engagementProperties = [
   'archive_date',
+  'artifacts',
   'additional_details',
   'commits',
   'customer_contact_email',
@@ -32,6 +33,7 @@ const engagementProperties = [
   'creation_details',
   'last_update_by_name',
   'status',
+  'engagement_categories'
 ];
 
 describe('Engagement Schema', () => {

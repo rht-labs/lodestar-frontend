@@ -10,12 +10,16 @@ import { FakedVersionService } from '../version_service/implementations/faked_ve
 import { Apiv1VersionService } from '../version_service/implementations/apiv1_version_service';
 import { FakedNotificationService } from '../notification_service/implementations/faked_notification_service';
 import { Config } from '../../schemas/config';
+import { CategoryService } from "../category_service/category_service";
+import { Apiv1CategoryService } from "../category_service/implementations/apiv1_category_service";
+import { FakedCategoryService } from "../category_service/implementations/faked_category_service";
 
 export type ServiceFactory = () => {
   engagementService: EngagementService;
   authService: AuthService;
   versionService: VersionService;
   notificationService: NotificationService;
+  categoryService: CategoryService;
 };
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
@@ -24,6 +28,7 @@ export const createApiV1Services = (config: Config): ServiceFactory => () => {
     engagementService: new Apiv1EngagementService(config.backendUrl),
     notificationService: new FakedNotificationService(),
     versionService: new Apiv1VersionService(config.backendUrl),
+    categoryService: new Apiv1CategoryService(config.backendUrl),
   };
 };
 
@@ -39,5 +44,6 @@ export const createFakedServices = (
     engagementService: new FakedEngagementService(params.shouldUseStaticData),
     notificationService: new FakedNotificationService(),
     versionService: new FakedVersionService(),
+    categoryService: new FakedCategoryService(),
   };
 };
