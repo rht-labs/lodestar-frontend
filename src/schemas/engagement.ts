@@ -30,9 +30,35 @@ export abstract class EngagementUser {
 export interface FakedEngagementOptions {
   status: EngagementStatus;
 }
+
+export interface Artifact {
+  id: string;
+  linkAddress: string;
+  title: string;
+  type: ArtifactType;
+}
+
+export enum ArtifactType {
+  demo = 'Demo',
+  weeklyReport = 'Weekly Report',
+  other = 'Other',
+}
+
+export abstract class Artifact {
+  static fromFake(staticData = false): Artifact {
+    return {
+      id: staticData ? '1' : faker.random.uuid(),
+      linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
+      title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
+      type: ArtifactType.demo,
+    };
+  }
+}
+
 export interface Engagement {
   additional_details?: string;
   archive_date: Date;
+  artifacts: Artifact[];
   commits: GitCommit[];
   customer_contact_email: string;
   customer_contact_name: string;
@@ -117,6 +143,7 @@ export abstract class Engagement {
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
+      artifacts: [Artifact.fromFake(staticData)],
       commits: [GitCommit.fromFake(staticData)],
       customer_contact_email: staticData
         ? 'bob@doe.com'

@@ -21,7 +21,7 @@ export function DataCard({
   children,
   title,
   trailingIcon: TrailingIcon = () => <div />,
-  actionButton: ActionButton,
+  actionButton: ActionButton = () => <div />,
 }: DataCardProps) {
   return (
     <Card isCompact style={{ padding: '1rem' }}>
@@ -36,7 +36,7 @@ export function DataCard({
           <LevelItem>
             <Feature name={APP_FEATURES.writer}>
               <div style={{ marginRight: '1rem' }}>
-                {ActionButton ? <ActionButton /> : <div />}
+                <ActionButton />
               </div>
             </Feature>
           </LevelItem>

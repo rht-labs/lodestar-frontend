@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, Artifact } from '../../schemas/engagement';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
@@ -10,6 +10,7 @@ import { ActivityHistoryCard } from '../../components/engagement_data_cards/acti
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { EngagementTimelineCard } from '../../components/engagement_data_cards/engagement_timeline_card/engagement_timeline_card';
 export interface EngagementOverviewTabProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
@@ -101,6 +102,21 @@ export function EngagementOverview({
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     engagement={currentEngagementChanges}
+                  />
+                </FormManager.Group>
+              </div>
+            </GridItem>
+            <GridItem span={12}>
+              <div id="timeline_card">
+                <FormManager.Group groupName="Activity Timeline">
+                  <EngagementTimelineCard
+                    artifacts={currentEngagementChanges.artifacts}
+                    onSave={(artifacts: Artifact[]) => {
+                      onSave({ ...currentEngagementChanges, artifacts });
+                    }}
+                    onChangeArtifacts={value =>
+                      onChange('engagement_artifacts', value)
+                    }
                   />
                 </FormManager.Group>
               </div>
