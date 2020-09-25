@@ -468,8 +468,6 @@ export const EngagementProvider = ({
       const categories = await categoryService.fetchCategories();
       setCategories(categories);
       // feedbackContext.hideLoader();
-      console.log('*******');
-      console.log(categories);
     } catch (e) {
       try {
         _handleErrors(e);
