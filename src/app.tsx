@@ -38,7 +38,7 @@ export const App = ({ config }: { config: Config }) => {
             notificationService,
             versionService,
             engagementService,
-            categoryService
+            categoryService,
           }) => {
             return (
               <>
