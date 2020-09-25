@@ -11,12 +11,15 @@ import {
 import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_alert_banner';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
+import { EngagementEditableCategories } from "../components/engagement_categories/engagement_editable_categories";
 
 export function EngagementDetailsViewTemplate({
   engagement,
+  onSave,
   children,
 }: {
   engagement: Engagement;
+  onSave: (engagement: Engagement) => void;
   children: any;
 }) {
   const {
@@ -30,14 +33,19 @@ export function EngagementDetailsViewTemplate({
     <>
       <PageSection
         variant={PageSectionVariants.light}
-        style={{ paddingBottom: 0 }}
       >
         <Flex>
           <FlexItem grow={{ default: 'grow' }}>
             <TextContent>
-              <Text component="h1">{engagement?.project_name}</Text>
-              <Text component="h3">{engagement?.customer_name}</Text>
+              <Text component="h1" style={{marginTop: '1rem'}}>{engagement?.project_name}</Text>
+              <Text component="h3" style={{marginTop: '1rem'}}>{engagement?.customer_name}</Text>
             </TextContent>
+            <div style={{marginTop:'1.5rem'}}>
+              <EngagementEditableCategories engagementCategories={engagement?.engagement_categories}
+                                            onSave={onSave}
+                                            engagement={engagement}
+                                            />
+            </div>
           </FlexItem>
           <Flex
             alignSelf={{ default: 'alignSelfStretch' }}

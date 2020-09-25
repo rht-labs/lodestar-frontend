@@ -84,7 +84,9 @@ export const EngagementDetailView = () => {
   );
   return (
     <ValidationProvider validators={validators}>
-      <EngagementDetailsViewTemplate engagement={currentEngagement}>
+      <EngagementDetailsViewTemplate engagement={currentEngagement}
+                                     onSave={saveEngagement}
+                                     >
         <AlertMessage />
         <EngagementOverview
           currentEngagement={currentEngagement}

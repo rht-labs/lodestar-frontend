@@ -115,6 +115,7 @@ export class EngagementJsonSerializer
       ),
       creation_details: data['creation_details'],
       last_update_by_name: data['last_update_by_name'],
+      engagement_categories: data['engagement_categories'],
     };
   }
 
