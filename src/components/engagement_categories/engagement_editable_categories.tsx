@@ -49,8 +49,10 @@ export function EngagementEditableCategories ({
             </Label>
           ))
           : <Label key={'addNew'}
-                    style={{marginRight: '0.5rem'}}
-                    color="blue">
+                   style={{marginRight: '0.5rem'}}
+                   variant="outline"
+                   onClick={cancelEdit}
+                   color="blue">
             Add new tag
           </Label>
         }
@@ -71,6 +73,10 @@ export function EngagementEditableCategories ({
     propsOnSave(engagement);
   };
 
+  const cancelEdit = () => {
+    setEditMode(!editMode);
+  };
+
   return (
     <>
       {
@@ -79,7 +85,8 @@ export function EngagementEditableCategories ({
             <Flex>
               <CategoryTypehead engagementCategories={chips}
                                 allCategories={categories}
-                                SaveAndCloseEditMode={SaveAndCloseEditMode}/>
+                                cancelEdit={cancelEdit}
+                                saveAndCloseEditMode={SaveAndCloseEditMode}/>
             </Flex>
           : <CategoriesReadOnly />
       }

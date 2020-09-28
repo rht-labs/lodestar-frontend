@@ -5,7 +5,8 @@ import {
   CardBody,
   Title,
   Grid,
-  GridItem, Label,
+  GridItem,
+  Label,
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router';
 import { EngagementAtAGlance } from './engagement_at_a_glance';
@@ -51,7 +52,7 @@ export function EngagementListItem(props: DataCardProps) {
                   ? engagement?.engagement_categories.map(currentChip => (
                     <>
                       <Label key={currentChip.name}
-                             style={{marginTop: '1rem'}}
+                             style={{marginTop: '1rem', marginRight:'0.5rem'}}
                              color="blue">
                         {currentChip.name}
                       </Label>

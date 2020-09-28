@@ -5,10 +5,14 @@ import {EngagementCategory} from "../../schemas/engagement_category";
 export interface CategoryTypeheadProps {
   engagementCategories: string[];
   allCategories: EngagementCategory[];
-  SaveAndCloseEditMode: ( selectedChips: string[]) => void;
+  saveAndCloseEditMode: ( selectedChips: string[]) => void;
+  cancelEdit: () => void;
 }
 
-export function CategoryTypehead({engagementCategories, SaveAndCloseEditMode, allCategories} : CategoryTypeheadProps) {
+export function CategoryTypehead({engagementCategories,
+                                  cancelEdit,
+                                  saveAndCloseEditMode,
+                                  allCategories} : CategoryTypeheadProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(engagementCategories);
 
@@ -23,10 +27,6 @@ export function CategoryTypehead({engagementCategories, SaveAndCloseEditMode, al
     }
   };
 
-  function onClose() {
-    SaveAndCloseEditMode(selected);
-  }
-
   return (
     <Flex>
       <FlexItem>
@@ -35,7 +35,7 @@ export function CategoryTypehead({engagementCategories, SaveAndCloseEditMode, al
           typeAheadAriaLabel="Add new tag"
           onToggle={onToggle}
           onSelect={onSelect}
-          onClear={onClose}
+          onClear={cancelEdit}
           clearSelectionsAriaLabel={'Clear all'}
           selections={selected}
           isOpen={isOpen}
@@ -54,7 +54,7 @@ export function CategoryTypehead({engagementCategories, SaveAndCloseEditMode, al
                 isInline
                 key={'saveCategories'}
                 style={{ minWidth: '2rem'}}
-                onClick={() => SaveAndCloseEditMode(selected)}
+                onClick={() => saveAndCloseEditMode(selected)}
         >
           Save
         </Button>
