@@ -11,7 +11,7 @@ import {
 import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_alert_banner';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
-import { EngagementEditableCategories } from "../components/engagement_categories/engagement_editable_categories";
+import { EngagementEditableCategories } from '../components/engagement_categories/engagement_editable_categories';
 
 export function EngagementDetailsViewTemplate({
   engagement,
@@ -31,26 +31,38 @@ export function EngagementDetailsViewTemplate({
 
   return (
     <>
-      <PageSection
-        variant={PageSectionVariants.light}
-      >
+      <PageSection variant={PageSectionVariants.light}>
         <Flex>
           <FlexItem grow={{ default: 'grow' }}>
             <TextContent>
-              <Text component="h1" style={{marginTop: '1rem'}}>{engagement?.project_name}</Text>
-              <Text component="h3" style={{marginTop: '1rem'}}>{engagement?.customer_name}</Text>
+              <Text component="h1" style={{ marginTop: '1rem' }}>
+                {engagement?.project_name}
+              </Text>
+              <Text component="h3" style={{ marginTop: '1rem' }}>
+                {engagement?.customer_name}
+              </Text>
             </TextContent>
-            <div style={{marginTop:'1.5rem'}}>
-              <EngagementEditableCategories engagementCategories={engagement?.engagement_categories}
-                                            onSave={onSave}
-                                            engagement={engagement}
-                                            />
+            <div style={{ marginTop: '1.5rem' }}>
+              <EngagementEditableCategories
+                engagementCategories={engagement?.engagement_categories}
+                onSave={onSave}
+                engagement={engagement}
+              />
             </div>
           </FlexItem>
           <Flex
             alignSelf={{ default: 'alignSelfStretch' }}
             justifyContent={{ default: 'justifyContentCenter' }}
+            alignItems={{ default: 'alignItemsCenter' }}
+            direction={{ default: 'column' }}
           >
+            <FlexItem>
+              <TextContent>
+                <Text component="h3" style={{ marginTop: '0.5rem' }}>
+                  {engagement?.engagement_type}
+                </Text>
+              </TextContent>
+            </FlexItem>
             <FlexItem>
               <Region region={engagement?.engagement_region} />
             </FlexItem>
