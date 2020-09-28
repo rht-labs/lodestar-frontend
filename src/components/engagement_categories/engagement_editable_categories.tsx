@@ -49,8 +49,10 @@ export function EngagementEditableCategories ({
             </Label>
           ))
           : <Label key={'addNew'}
-                    style={{marginRight: '0.5rem'}}
-                    color="blue">
+                   style={{marginRight: '0.5rem'}}
+                   variant="outline"
+                   onClick={cancelEdit}
+                   color="blue">
             Add new tag
           </Label>
         }
