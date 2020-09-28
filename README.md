@@ -28,6 +28,31 @@ Before submitting a PR, confirm that your code passes the style check by running
 Additionally, you can attempt to automatically fix any style errors in your code by running:
 `npm run fix`. _Pro tip: commit any changes you have before running any script that may modify your source files._
 
+## General Architecture
+
+This application follows a typical three-tier application design. These three terms can be generally divided into Services which manage communication with external data sources (e.g. REST APIs); Contexts, which contain business logic; and Presentation, which contains the user interface and associated presentation state. 
+
+Contexts are the mediator between the presentation and the services providing data. Data manipulation should be handled to the extent reasonable in the Context layer.
+
+Services should only return data with known interfaces. That is, it is the services responsibility to serialize data from an external source's format into an interface that is recognized within the application. 
+
+By extension, Contexts should not work with unknown data types, nor should they be responsible for preparing data to be sent to an external service.
+
+Once data has reached a Context, its shape should be known in the application. The Context and Presentation layer uses this known data to perform their respective roles.
+
+In order to facilitate serialization of common interfaces across services, a shared serializer interface has been created which can be extended for new data types as they become available. Services can define serializers for their service within their own service module, or within the `serializers/` directory.
+
+As a high-level overview, data flow through the system typically follows this pattern:
+
+![Front End data flow](/documentation/FE_architecture.png?raw=true)
+
+## Tests
+
+Unit Tests are contained within the source code, rather than in a separate root `test` directory. Typically, tests will be included in a directory `__tests__` at the level of the code they are testing. 
+As contexts are responsible for most data manipulation operations that occur in the application, special care should be taken to ensure high test coverage of the contexts.
+
+Integration tests are contained in their own root level directory `e2e`.
+
 ## Organization
 
 The application is separated into several main components. All of these components are located in folders within `src/`.
@@ -42,7 +67,7 @@ In this application, components should be stateless as much as possible. They sh
 
 `src/context` contains the application contexts. Contexts hold all of the global state and business logic for Lodestar. For the React docs on Contexts, [see here](https://reactjs.org/docs/context.html).
 
-Contexts serve as the central nervous system for the application. They handle the dirty business of retrieving data from services, processing that data, handling exceptions, storing data, and notifying children of changes. All business logic should flow through a context.
+Contexts serve as the central nervous system for the application. They handle the dirty business of interacting with services, managing global state, and handling business logic. All business logic should flow through a context.
 
 #### Feature Context
 
@@ -258,7 +283,7 @@ An engagement cannot be launched until the following fields are populated for th
 
 Because environment variables are compiled into the built source code of the frontend at build time, it is not possible to dynamically change these values at load time on the client side. In order to allow for dynamic updating of configuration variables, these values must be loaded through a network request from the client side from a static file served separate from the client javascript.
 
-Configuration is set using a json file stored in `config/config.json` of the build directory. The JSON file is loaded via network request on page load. Once the configuration has loaded, the web application renders. This allows a volume to be mounted to `config/config.json` and provide dynamic configuration variables to the client depending on the environment in which the frontend is deployed.
+Configuration is set using a json file stored in `config/config.json` of the `public` directory. The JSON file is loaded via network request on page load. Once the configuration has loaded, the web application renders. This allows a volume to be mounted to `config/config.json` and provide dynamic configuration variables to the client depending on the environment in which the frontend is deployed.
 
 An example `config.json` can be seen in [public/config/config.example.json](public/config/config.example.json).
 

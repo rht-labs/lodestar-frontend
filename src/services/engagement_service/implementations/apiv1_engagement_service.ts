@@ -56,14 +56,14 @@ export class Apiv1EngagementService implements EngagementService {
     commitMessage?: string
   ): Promise<Engagement> {
     try {
-      const { data } = await this.axios.put(
+      const serializedEngagement = Apiv1EngagementService.engagementSerializer.serialize(
+        engagementData
+      );
+      const {
+        data,
+      } = await this.axios.put(
         `/engagements/customers/${engagementData.customer_name}/projects/${engagementData.project_name}`,
-        {
-          ...Apiv1EngagementService.engagementSerializer.serialize(
-            engagementData
-          ),
-          commit_message: commitMessage,
-        }
+        { ...serializedEngagement, commit_message: commitMessage }
       );
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {

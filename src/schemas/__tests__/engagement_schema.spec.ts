@@ -2,6 +2,7 @@ import { Engagement } from '../engagement';
 
 const engagementProperties = [
   'archive_date',
+  'artifacts',
   'additional_details',
   'commits',
   'customer_contact_email',

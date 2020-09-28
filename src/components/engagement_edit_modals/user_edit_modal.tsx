@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   EmptyStateIcon,
@@ -9,15 +9,12 @@ import {
   ModalVariant,
 } from '@patternfly/react-core';
 
-import {
-  PlusIcon,
-  UsersIcon,
-} from '@patternfly/react-icons';
+import { PlusIcon, UsersIcon } from '@patternfly/react-icons';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { UserEditFields } from "./user_edit_fields";
+import { UserEditFields } from './user_edit_fields';
 
 export interface UserEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -34,13 +31,12 @@ export function UserEditModal({
   onSave: propsOnSave,
 }: UserEditModalProps) {
   const { requestClose } = useModalVisibility();
-  const [deletedUsers, setDeletedUsers] = useState <string[]>([]);
+  const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
   function toggleDeleted(email: string) {
-    if (deletedUsers.indexOf(email) < 0){
+    if (deletedUsers.indexOf(email) < 0) {
       setDeletedUsers([...deletedUsers, email]);
-    }
-    else {
+    } else {
       const newDeletedUsers = [...deletedUsers];
       newDeletedUsers.splice(deletedUsers.indexOf(email), 1);
       setDeletedUsers(newDeletedUsers);
@@ -48,13 +44,13 @@ export function UserEditModal({
   }
 
   function removeUser() {
-    deletedUsers?.map((userEmail) => {
+    deletedUsers?.map(userEmail => {
       engagement.engagement_users.splice(
-        engagement.engagement_users.findIndex(
-          (user) => {
-             return user.email === userEmail
-            }
-          ), 1)
+        engagement.engagement_users.findIndex(user => {
+          return user.email === userEmail;
+        }),
+        1
+      );
     });
     onChange('user', engagement.engagement_users);
     setDeletedUsers([]);
@@ -86,7 +82,7 @@ export function UserEditModal({
               data-testid="user-edit-save"
               onClick={onSave}
               data-cy={'save_users'}
-              style={{margin: '1rem'}}
+              style={{ margin: '1rem' }}
             >
               Save
             </Button>
@@ -111,21 +107,24 @@ export function UserEditModal({
                 onClick={addUser}
                 data-testid={'add-first-user'}
                 data-cy={'add_new_user'}
-                style={{margin: '1rem'}}
+                style={{ margin: '1rem' }}
               >
-                <PlusIcon style={{fontSize: 'small'}}/> Add User
+                <PlusIcon style={{ fontSize: 'small' }} /> Add User
               </Button>
             </EmptyState>
-          ) :
-           <UserEditFields users={engagement.engagement_users}
-                           onChange={onChange}
-                           toggleDeleted={toggleDeleted}
-                           deletedUsers={deletedUsers}
-                           addUser={addUser}
-                           engagementFormConfig={engagementFormConfig}/>
-          }
+          ) : (
+            <UserEditFields
+              users={engagement.engagement_users}
+              onChange={onChange}
+              toggleDeleted={toggleDeleted}
+              deletedUsers={deletedUsers}
+              addUser={addUser}
+              engagementFormConfig={engagementFormConfig}
+            />
+          )}
         </div>
       </EditModalTemplate>
     </Modal>
   );
 }
+

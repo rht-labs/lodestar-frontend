@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { FormGroup, TextInput } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { slugify } from 'transliteration';
+import { FormManager } from '../../context/form_manager/form_manager';
 
 interface SubdomainFormFieldProps {
   engagement: Engagement;
@@ -40,6 +41,8 @@ export function SubdomainFormField({
       }
     }
   };
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => registerField('subdomain'), [registerField]);
 
   return (
     <FormGroup

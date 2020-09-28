@@ -15,6 +15,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { addDays } from 'date-fns';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { max } from 'date-fns';
+import { FormManager } from '../../context/form_manager/form_manager';
 interface EngagementStartEndDateProps {
   engagement: Engagement;
   engagementFormConfig: EngagementFormConfig;
@@ -58,6 +59,10 @@ export function EngagementStartEndDateFormField({
   };
 
   const { hasFeature } = useFeatures();
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => {
+    registerField('Engagement Dates');
+  }, [registerField]);
   return (
     <>
       <FormGroup

@@ -5,7 +5,8 @@ import {
   CardBody,
   Title,
   Grid,
-  GridItem, Label,
+  GridItem,
+  Label,
 } from '@patternfly/react-core';
 import { useHistory } from 'react-router';
 import { EngagementAtAGlance } from './engagement_at_a_glance';
