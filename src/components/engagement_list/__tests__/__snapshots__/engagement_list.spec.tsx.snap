@@ -47,7 +47,7 @@ Object {
               </h4>
               <span
                 class="pf-c-label pf-m-blue"
-                style="margin-top: 1rem;"
+                style="margin-top: 1rem; margin-right: 0.5rem;"
               >
                 <span
                   class="pf-c-label__content"
@@ -247,7 +247,7 @@ Object {
             </h4>
             <span
               class="pf-c-label pf-m-blue"
-              style="margin-top: 1rem;"
+              style="margin-top: 1rem; margin-right: 0.5rem;"
             >
               <span
                 class="pf-c-label__content"
@@ -504,7 +504,7 @@ Object {
               </h4>
               <span
                 class="pf-c-label pf-m-blue"
-                style="margin-top: 1rem;"
+                style="margin-top: 1rem; margin-right: 0.5rem;"
               >
                 <span
                   class="pf-c-label__content"

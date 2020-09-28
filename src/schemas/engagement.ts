@@ -203,7 +203,7 @@ export abstract class Engagement {
       last_update_by_name: staticData
         ? 'James Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
-      engagement_categories: [EngagementCategory.fromFake(staticData)],
+      engagement_categories:[EngagementCategory.fromFake(staticData)],
       launch: staticData
         ? null
         : faker.random.boolean()

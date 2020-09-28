@@ -57,15 +57,13 @@ export function EngagementDetailsViewTemplate({
           </Flex>
         </Flex>
       </PageSection>
-      <div style={{ marginTop: '1rem' }}>
-        <LaunchAlertBanner
-          requiredFields={requiredFields}
-          isLaunchable={isLaunchable}
-          missingRequiredFields={missingRequiredFields}
-          onLaunch={launchEngagement}
-          engagement={engagement}
-        />
-      </div>
+      <LaunchAlertBanner
+        requiredFields={requiredFields}
+        isLaunchable={isLaunchable}
+        missingRequiredFields={missingRequiredFields}
+        onLaunch={launchEngagement}
+        engagement={engagement}
+      />
       <PageSection variant={PageSectionVariants.default}>
         {children}
       </PageSection>
