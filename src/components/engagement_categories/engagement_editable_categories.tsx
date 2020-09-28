@@ -71,6 +71,10 @@ export function EngagementEditableCategories ({
     propsOnSave(engagement);
   };
 
+  const cancelEdit = () => {
+    setEditMode(!editMode);
+  };
+
   return (
     <>
       {
@@ -79,7 +83,8 @@ export function EngagementEditableCategories ({
             <Flex>
               <CategoryTypehead engagementCategories={chips}
                                 allCategories={categories}
-                                SaveAndCloseEditMode={SaveAndCloseEditMode}/>
+                                cancelEdit={cancelEdit}
+                                saveAndCloseEditMode={SaveAndCloseEditMode}/>
             </Flex>
           : <CategoriesReadOnly />
       }
