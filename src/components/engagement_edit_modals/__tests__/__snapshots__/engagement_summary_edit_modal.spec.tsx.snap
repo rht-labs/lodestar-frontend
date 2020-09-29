@@ -294,6 +294,22 @@ Any changes to this field should be coordinated with Labs leadership."
                       
                     </div>
                   </div>
+                  <div
+                    class="pf-c-check"
+                  >
+                    <input
+                      aria-invalid="false"
+                      class="pf-c-check__input"
+                      id="public-reference"
+                      type="checkbox"
+                    />
+                    <label
+                      class="pf-c-check__label"
+                      for="public-reference"
+                    >
+                      Can this be used as a public reference?
+                    </label>
+                  </div>
                 </form>
               </section>
               <section

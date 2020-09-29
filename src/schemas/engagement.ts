@@ -81,6 +81,7 @@ export interface Engagement {
   ocp_version: string;
   project_id: number;
   project_name: string;
+  public_reference: boolean;
   engagement_region: string;
   start_date: Date;
   technical_lead_email: string;
@@ -182,6 +183,7 @@ export abstract class Engagement {
       ocp_version: staticData ? '4.4' : faker.random.number().toString(),
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
+      public_reference: staticData ? false : faker.random.boolean(),
       engagement_region: regions[0],
       technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
       technical_lead_name: staticData
@@ -201,7 +203,7 @@ export abstract class Engagement {
       last_update_by_name: staticData
         ? 'James Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
-      engagement_categories:[EngagementCategory.fromFake(staticData)],
+      engagement_categories: [EngagementCategory.fromFake(staticData)],
       launch: staticData
         ? null
         : faker.random.boolean()
