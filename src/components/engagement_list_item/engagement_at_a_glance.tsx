@@ -99,21 +99,22 @@ export function EngagementAtAGlance({
                 />
               </FlexItem>
             </Flex>
+            <Flex>
+              <FlexItem spacer={{ default: 'spacerSm' }}>
+                <Tooltip
+                  position={TooltipPosition.bottom}
+                  entryDelay={0}
+                  content={'Number of available artifacts'}
+                >
+                  <ClipboardCheckIcon />
+                </Tooltip>
+              </FlexItem>
+              <FlexItem>
+                {engagement?.artifacts?.length || 0}
+              </FlexItem>
+            </Flex>
             <Feature name={APP_FEATURES.engagementCardIcons}>
               <>
-                <Flex>
-                  <FlexItem spacer={{ default: 'spacerSm' }}>
-                    <Tooltip
-                      position={TooltipPosition.bottom}
-                      entryDelay={0}
-                      content={'Number of available reports'}
-                    >
-                      <ClipboardCheckIcon />
-                    </Tooltip>
-                  </FlexItem>
-                  <FlexItem>-</FlexItem>
-                </Flex>
-
                 <Flex>
                   <FlexItem spacer={{ default: 'spacerSm' }}>
                     <Tooltip
