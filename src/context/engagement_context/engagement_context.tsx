@@ -16,8 +16,8 @@ import {
   EngagementPollIntervalStrategy,
 } from '../../schemas/engagement_poll';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
-import { EngagementCategory } from "../../schemas/engagement_category";
-import { CategoryService } from "../../services/category_service/category_service";
+import { EngagementCategory } from '../../schemas/engagement_category';
+import { CategoryService } from '../../services/category_service/category_service';
 
 export interface EngagementContext {
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
@@ -43,7 +43,7 @@ export interface EngagementContext {
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
   fetchCategories: () => void;
-  categories?: EngagementCategory[]
+  categories?: EngagementCategory[];
 }
 
 export type CreateEngagementParams = Pick<
@@ -120,6 +120,7 @@ export const EngagementProvider = ({
           .filter(group => !!group)
       )
     );
+    console.log(changedGroups);
     const commitMessage = `Changed ${changedGroups.join(
       ', '
     )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
@@ -384,6 +385,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
+        setChangedFields([]);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
@@ -507,7 +509,7 @@ export const EngagementProvider = ({
         saveEngagement,
         launchEngagement,
         fetchCategories,
-        categories
+        categories,
       }}
     >
       {children}

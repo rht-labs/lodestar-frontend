@@ -85,9 +85,9 @@ export const engagementFormReducer = (
     return state;
   }
   switch (action.type) {
-    case 'user':
+    case 'engagement_users':
       return { ...state, engagement_users: action.payload };
-    case 'artifact':
+    case 'artifacts':
       return { ...state, artifacts: action.payload };
     case 'customer_name':
       return {

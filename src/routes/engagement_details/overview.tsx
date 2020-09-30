@@ -108,15 +108,13 @@ export function EngagementOverview({
             </GridItem>
             <GridItem span={12}>
               <div id="timeline_card">
-                <FormManager.Group groupName="Activity Timeline">
+                <FormManager.Group groupName="Engagement Artifacts">
                   <EngagementTimelineCard
                     artifacts={currentEngagementChanges.artifacts}
                     onSave={(artifacts: Artifact[]) => {
                       onSave({ ...currentEngagementChanges, artifacts });
                     }}
-                    onChangeArtifacts={value =>
-                      onChange('engagement_artifacts', value)
-                    }
+                    onChangeArtifacts={value => onChange('artifacts', value)}
                   />
                 </FormManager.Group>
               </div>
