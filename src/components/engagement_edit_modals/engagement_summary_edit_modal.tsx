@@ -7,6 +7,7 @@ import { DescriptionFormField } from '../engagement_form_fields/description';
 import { LocationFormField } from '../engagement_form_fields/location';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_start_end_date';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -57,6 +58,10 @@ export function EngagementSummaryEditModal(
             onChange={props.onChange}
             engagementFormConfig={props.engagementFormConfig}
             engagement={props.engagement}
+          />
+          <PublicReferenceField
+            engagement={props.engagement}
+            onChange={props.onChange}
           />
         </Form>
       </EditModalTemplate>
