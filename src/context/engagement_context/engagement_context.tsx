@@ -120,7 +120,6 @@ export const EngagementProvider = ({
           .filter(group => !!group)
       )
     );
-    console.log(changedGroups);
     const commitMessage = `Changed ${changedGroups.join(
       ', '
     )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
