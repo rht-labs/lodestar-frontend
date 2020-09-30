@@ -122,6 +122,7 @@ export const engagementFormReducer = (
         }),
       };
     case 'additional_details':
+    case 'public_reference':
     case 'description':
     case 'location':
     case 'engagement_lead_name':
