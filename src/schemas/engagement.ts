@@ -44,6 +44,12 @@ export enum ArtifactType {
   demo = 'Demo',
   weeklyReport = 'Weekly Report',
   other = 'Other',
+  blog = 'Blog',
+  multimedia = 'Photo/Video',
+  news = 'News Article',
+  social = 'Social Media Post',
+  whitepaper = 'Whitepaper',
+  successStory = 'Success Story/Use Case',
 }
 
 export abstract class Artifact {
@@ -53,7 +59,9 @@ export abstract class Artifact {
       linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
       title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
       type: ArtifactType.demo,
-      description: staticData ? 'Artifact Description' : faker.lorem.paragraph(),
+      description: staticData
+        ? 'Artifact Description'
+        : faker.lorem.paragraph(),
     };
   }
 }

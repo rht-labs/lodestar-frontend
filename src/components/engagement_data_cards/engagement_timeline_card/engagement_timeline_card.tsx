@@ -17,6 +17,7 @@ import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_mod
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
   onChangeArtifacts: (value: Artifact[]) => void;
+  onClear: () => void
   onSave: (artifacts: Array<Artifact>) => void;
 }
 

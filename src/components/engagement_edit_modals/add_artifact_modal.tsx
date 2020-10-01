@@ -40,7 +40,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
       ...(props.artifact ?? {}),
       ...artifactEdits,
     } as Artifact);
-    props.onClose();
+    props.onClose?.();
   };
 
   return (

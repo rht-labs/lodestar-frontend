@@ -16,6 +16,7 @@ describe('Engagement Artifact Card', () => {
   test('matches snapshot', () => {
     const timelineCard = render(
       <EngagementTimelineCard
+        onClear={() => {}}
         onChangeArtifacts={() => {}}
         onSave={() => {}}
         artifacts={new Array(20).fill(null).map(() => Artifact.fromFake(true))}
@@ -36,6 +37,7 @@ describe('Engagement Artifact Card', () => {
           value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
         >
           <EngagementTimelineCard
+            onClear={() => {}}
             onSave={() => {}}
             onChangeArtifacts={() => {}}
             artifacts={[]}
@@ -61,6 +63,7 @@ describe('Engagement Artifact Card', () => {
           value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
         >
           <EngagementTimelineCard
+            onClear={() => {}}
             onSave={() => {}}
             onChangeArtifacts={() => {}}
             artifacts={[Artifact.fromFake(true)]}
