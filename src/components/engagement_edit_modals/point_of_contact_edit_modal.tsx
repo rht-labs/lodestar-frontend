@@ -10,7 +10,6 @@ import {
   FormGroup,
   Form,
 } from '@patternfly/react-core';
-import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
@@ -23,14 +22,15 @@ export interface PointOfContactEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
+  onClose: () => void;
 }
 export function PointOfContactEditModal({
   onChange,
   engagement,
   isOpen,
+  onClose = () => {},
   onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
-  const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
 
   const input: React.CSSProperties = {
@@ -48,14 +48,14 @@ export function PointOfContactEditModal({
   useEffect(() => registerField('customer_contact_email'), [registerField]);
   const onSave = () => {
     propsOnSave(engagement);
-    requestClose();
+    onClose();
   };
 
   return (
     <Modal
       variant={ModalVariant.small}
       isOpen={isOpen}
-      onClose={requestClose}
+      onClose={onClose}
       title="Points of Contact"
     >
       <EditModalTemplate

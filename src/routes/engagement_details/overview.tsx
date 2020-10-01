@@ -12,6 +12,7 @@ import { FormManager } from '../../context/form_manager/form_manager';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { EngagementTimelineCard } from '../../components/engagement_data_cards/engagement_timeline_card/engagement_timeline_card';
 export interface EngagementOverviewTabProps {
+  clearCurrentChanges: () => void;
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
@@ -29,6 +30,7 @@ function EngagementFormManagerMediator({ children }) {
 }
 
 export function EngagementOverview({
+  clearCurrentChanges,
   currentEngagement,
   currentEngagementChanges,
   missingRequiredFields,
@@ -51,6 +53,7 @@ export function EngagementOverview({
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     missingRequiredFields={missingRequiredFields}
+                    onClear={clearCurrentChanges}
                   />
                 </FormManager.Group>
               </div>
@@ -71,6 +74,7 @@ export function EngagementOverview({
                 <FormManager.Group groupName="Point of Contact">
                   <PointOfContactCard
                     onSave={onSave}
+                    onClear={clearCurrentChanges}
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     currentEngagement={currentEngagement}
@@ -85,6 +89,7 @@ export function EngagementOverview({
                 <FormManager.Group groupName="Hosting Environment">
                   <OpenShiftClusterSummaryCard
                     onSave={onSave}
+                    onClear={clearCurrentChanges}
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     currentEngagement={currentEngagement}
@@ -99,6 +104,7 @@ export function EngagementOverview({
                 <FormManager.Group groupName="Users">
                   <UserCard
                     onSave={onSave}
+                    onClear={clearCurrentChanges}
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     engagement={currentEngagementChanges}
@@ -111,6 +117,7 @@ export function EngagementOverview({
                 <FormManager.Group groupName="Engagement Artifacts">
                   <EngagementTimelineCard
                     artifacts={currentEngagementChanges.artifacts}
+                    onClear={clearCurrentChanges}
                     onSave={(artifacts: Artifact[]) => {
                       onSave({ ...currentEngagementChanges, artifacts });
                     }}
