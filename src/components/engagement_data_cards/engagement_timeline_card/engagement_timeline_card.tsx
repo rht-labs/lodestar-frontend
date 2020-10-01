@@ -49,7 +49,9 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
   };
 
   const _onSave = (artifact: Artifact) => {
-    props.onSave(_getUniqueArtifacts([...props.artifacts, artifact]));
+    const artifacts = _getUniqueArtifacts([...props.artifacts, artifact]);
+    props.onChangeArtifacts(artifacts);
+    props.onSave(artifacts);
   };
 
   return (
