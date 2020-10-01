@@ -1,7 +1,6 @@
 import React from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
-import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { DescriptionFormField } from '../engagement_form_fields/description';
 import { LocationFormField } from '../engagement_form_fields/location';
@@ -15,21 +14,22 @@ export interface EngagementSummaryEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
+  onClose: () => void;
 }
 export function EngagementSummaryEditModal(
   props: EngagementSummaryEditModalProps
 ) {
-  const { requestClose } = useModalVisibility();
-
   const onSave = () => {
     props.onSave(props.engagement);
-    requestClose();
+    props.onClose?.();
   };
   return (
     <Modal
       variant={ModalVariant.small}
       isOpen={props.isOpen}
-      onClose={requestClose}
+      onClose={() => {
+        props.onClose?.();
+      }}
       title="Engagement Summary"
     >
       <EditModalTemplate

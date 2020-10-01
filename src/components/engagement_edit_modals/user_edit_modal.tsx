@@ -12,7 +12,6 @@ import {
 import { PlusIcon, UsersIcon } from '@patternfly/react-icons';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from './user_edit_fields';
 
@@ -22,15 +21,16 @@ export interface UserEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
+  onClose: () => void;
 }
 export function UserEditModal({
   engagement,
   engagementFormConfig,
   onChange,
+  onClose = () => {},
   isOpen,
   onSave: propsOnSave,
 }: UserEditModalProps) {
-  const { requestClose } = useModalVisibility();
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
   function toggleDeleted(email: string) {
@@ -59,7 +59,7 @@ export function UserEditModal({
   const onSave = () => {
     removeUser();
     propsOnSave(engagement);
-    requestClose();
+    onClose();
   };
 
   function addUser() {
@@ -72,7 +72,7 @@ export function UserEditModal({
     <Modal
       variant={ModalVariant.large}
       isOpen={isOpen}
-      onClose={requestClose}
+      onClose={onClose}
       title="Engagement Users"
     >
       <EditModalTemplate
@@ -127,4 +127,3 @@ export function UserEditModal({
     </Modal>
   );
 }
-

@@ -22,6 +22,7 @@ import { CategoryService } from '../../services/category_service/category_servic
 export interface EngagementContext {
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
   getEngagements: () => Promise<Engagement[]>;
+  clearCurrentChanges: () => void;
   currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
@@ -105,6 +106,11 @@ export const EngagementProvider = ({
 
   const authContext = useSession();
 
+  const clearCurrentChanges = () =>
+    dispatch({
+      type: 'switch_engagement',
+      payload: getInitialState(currentEngagement),
+    });
   const _createCommitMessage = (
     changedFields: string[],
     fieldGroupings: { [key: string]: string[] }
@@ -486,6 +492,7 @@ export const EngagementProvider = ({
     <Provider
       value={{
         setFieldGroups,
+        clearCurrentChanges,
         createEngagementPoll,
         requiredFields,
         currentEngagement,

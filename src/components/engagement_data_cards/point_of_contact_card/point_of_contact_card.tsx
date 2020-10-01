@@ -17,9 +17,11 @@ export interface PointOfContactCardProps {
   engagementFormConfig: object;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
+  onClear: () => void
 }
 
 export function PointOfContactCard({
+  onClear,
   currentEngagement,
   currentEngagementChanges,
   engagementFormConfig,
@@ -27,7 +29,7 @@ export function PointOfContactCard({
   onSave,
   missingRequiredFields,
 }: PointOfContactCardProps) {
-  const { requestOpen, activeModalKey } = useModalVisibility();
+  const { requestOpen, activeModalKey , requestClose} = useModalVisibility();
 
   const pointOfContactRequiredFields = [
     'engagement_lead_email',
@@ -44,6 +46,10 @@ export function PointOfContactCard({
         onChange={onChange}
         engagement={currentEngagementChanges}
         onSave={onSave}
+        onClose={() => {
+          requestClose()
+          onClear()
+        }}
         isOpen={activeModalKey === POINT_OF_CONTACT_MODAL_KEY}
       />
       <DataCard
