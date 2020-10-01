@@ -11,13 +11,23 @@ import {
   TableBody,
   cellWidth,
 } from '@patternfly/react-table';
-import { Dropdown, KebabToggle, DropdownItem } from '@patternfly/react-core';
+import {
+  Dropdown,
+  KebabToggle,
+  DropdownItem,
+  EmptyState,
+  EmptyStateIcon,
+  Title,
+  EmptyStateBody,
+  Button,
+} from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
+import { PlusIcon, ClipboardCheckIcon } from '@patternfly/react-icons';
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
   onChangeArtifacts: (value: Artifact[]) => void;
-  onClear: () => void
+  onClear: () => void;
   onSave: (artifacts: Array<Artifact>) => void;
 }
 
@@ -74,7 +84,11 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
           />
         )}
       >
-        <EngagementTimelineCardBody {...props} editArtifact={onEditArtifact} />
+        <EngagementTimelineCardBody
+          {...props}
+          onAdd={addArtifact}
+          editArtifact={onEditArtifact}
+        />
       </DataCard>
     </div>
   );
@@ -83,6 +97,7 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
 function EngagementTimelineCardBody(
   props: EngagementTimelineCardProps & {
     editArtifact(artifact: Artifact): void;
+    onAdd(): void;
   }
 ) {
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
@@ -128,7 +143,8 @@ function EngagementTimelineCardBody(
       ),
     },
   ]);
-  return (
+
+  return props.artifacts.length > 0 ? (
     <Table
       aria-label="Engagement Artifacts"
       variant={TableVariant.compact}
@@ -138,5 +154,25 @@ function EngagementTimelineCardBody(
       <TableHeader />
       <TableBody />
     </Table>
+  ) : (
+    <EmptyState>
+      <EmptyStateIcon icon={ClipboardCheckIcon} />
+      <Title headingLevel="h4" size="lg">
+        No Artifacts Added
+      </Title>
+      <EmptyStateBody>
+        <p>No artifacts have been added to this engagement</p>
+        <p>Click below to start adding artifacts</p>
+      </EmptyStateBody>
+      <Button
+        variant="secondary"
+        onClick={props.onAdd}
+        data-testid={'add-first-artifact'}
+        data-cy={'add_new_artifact'}
+        style={{ margin: '1rem' }}
+      >
+        <PlusIcon style={{ fontSize: 'small' }} /> Add Artifact
+      </Button>
+    </EmptyState>
   );
 }

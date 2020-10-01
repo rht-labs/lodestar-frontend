@@ -114,9 +114,11 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
             label="Artifact Description"
             isRequired
             fieldId="artifact-description"
+            helperText={`${artifactEdits?.description?.length ?? 0}/250`}
           >
             <TextInput
               isRequired
+              maxLength={250}
               data-testid="artifact-description-input"
               name="artifact_description"
               data-cy="artifact-description-input"
