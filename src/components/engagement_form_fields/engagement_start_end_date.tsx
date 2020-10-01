@@ -61,7 +61,9 @@ export function EngagementStartEndDateFormField({
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => {
-    registerField('Engagement Dates');
+    registerField('start_date');
+    registerField('end_date')
+    registerField('archive_date')
   }, [registerField]);
   return (
     <>
