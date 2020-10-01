@@ -12,7 +12,6 @@ import {
 import { PlusIcon, UsersIcon } from '@patternfly/react-icons';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from './user_edit_fields';
 
