@@ -195,6 +195,25 @@ Object {
                     dwasinge
                   </div>
                 </div>
+                <div
+                  class="pf-l-grid__item pf-m-12-col-on-md"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="use_cases"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Use Cases
+                    </h6>
+                    <p>
+                      an engagement use case
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <div
@@ -413,6 +432,25 @@ Object {
                     Created By
                   </h6>
                   dwasinge
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-12-col-on-md"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="use_cases"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Use Cases
+                  </h6>
+                  <p>
+                    an engagement use case
+                  </p>
                 </div>
               </div>
             </div>

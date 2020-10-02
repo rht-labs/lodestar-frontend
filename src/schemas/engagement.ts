@@ -32,6 +32,11 @@ export interface FakedEngagementOptions {
   status: EngagementStatus;
 }
 
+export interface EngagementUseCase {
+  description?: string;
+  id: string;
+}
+
 export interface Artifact {
   id: string;
   linkAddress: string;
@@ -49,7 +54,7 @@ export enum ArtifactType {
   news = 'News Article',
   social = 'Social Media Post',
   whitepaper = 'Whitepaper',
-  successStory = 'Success Story/Use Case',
+  successStory = 'Success Story/Case Study',
 }
 
 export abstract class Artifact {
@@ -101,6 +106,7 @@ export interface Engagement {
   last_update_by_name: string;
   suggested_subdomain?: string;
   status: ClusterStatus;
+  use_cases: EngagementUseCase[];
   engagement_categories: EngagementCategory[];
 }
 const regions = ['emea', 'latam', 'na', 'apac'];
@@ -223,6 +229,12 @@ export abstract class Engagement {
           }
         : null,
       status: ClusterStatus.fromFake(staticData),
+      use_cases: staticData
+        ? [{ id: '1', description: 'an engagement use case' }]
+        : new Array(3).fill(null).map(() => ({
+            description: faker.lorem.sentence(),
+            id: faker.random.uuid().toString(),
+          })),
       ...getStatusDeterminers(),
     };
   }

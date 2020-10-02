@@ -68,6 +68,7 @@ export const getInitialState = (
           )
         : null,
     engagement_categories: engagement?.engagement_categories ?? [],
+    use_cases: engagement?.use_cases ?? [],
   };
 };
 
@@ -85,10 +86,6 @@ export const engagementFormReducer = (
     return state;
   }
   switch (action.type) {
-    case 'engagement_users':
-      return { ...state, engagement_users: action.payload };
-    case 'artifacts':
-      return { ...state, artifacts: action.payload };
     case 'customer_name':
       return {
         ...state,
@@ -130,8 +127,11 @@ export const engagementFormReducer = (
     case 'technical_lead_name':
     case 'technical_lead_email':
     case 'customer_contact_name':
+    case 'engagement_users':
+    case 'artifacts':
     case 'customer_contact_email':
     case 'ocp_cloud_provider_name':
+    case 'use_cases':
     case 'ocp_cloud_provider_region':
     case 'ocp_version':
     case 'ocp_sub_domain':
