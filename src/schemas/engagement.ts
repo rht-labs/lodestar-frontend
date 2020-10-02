@@ -49,7 +49,7 @@ export enum ArtifactType {
   news = 'News Article',
   social = 'Social Media Post',
   whitepaper = 'Whitepaper',
-  successStory = 'Success Story/Use Case',
+  successStory = 'Success Story/Case Study',
 }
 
 export abstract class Artifact {
