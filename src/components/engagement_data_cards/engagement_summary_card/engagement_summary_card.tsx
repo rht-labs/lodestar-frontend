@@ -120,6 +120,15 @@ export function EngagementSummaryCard({
                   />
                 </TitledDataPoint>
               </GridItem>
+              <GridItem md={12}>
+                <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
+                  <>
+                    {currentEngagement?.use_cases?.map?.(useCase => (
+                      <p>{useCase.description}</p>
+                    ))}
+                  </>
+                </TitledDataPoint>
+              </GridItem>
             </Grid>
           </GridItem>
           <GridItem md={12} lg={4}>
