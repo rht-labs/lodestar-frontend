@@ -17,11 +17,11 @@ export function LodeStarVersion(props: LodeStarVersionProps) {
 
   return (
     <>
-      <Grid lg={6} md={12}>
-        <GridItem lg={2} md={6}>
+      <Grid hasGutter span={6} style={{marginLeft: '1rem'}}>
+        <GridItem span={2}>
           <b>LodeStar version: </b>
         </GridItem>
-        <GridItem lg={2} md={6}>
+        <GridItem span={4}>
           <Text data-cy="lodestar_version">{lodeStar()?.value}</Text>
         </GridItem>
       </Grid>

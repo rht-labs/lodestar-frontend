@@ -29,12 +29,16 @@ export function ComponentVersions(props: ComponentVersionProps) {
             {
               allComponents().map( component =>
                 <>
-                  <GridItem>
-                    <b>
-                      { component.name }:
-                    </b>
-                    { component.value }
-                  </GridItem>
+                  <Grid hasGutter span={6} style={{marginLeft: '1rem'}}>
+                    <GridItem span={2}>
+                      <b>
+                        { component.name }:
+                      </b>
+                    </GridItem>
+                    <GridItem span={2}>
+                      { component.value }
+                    </GridItem>
+                  </Grid>
                 </>
               )
             }
