@@ -8,7 +8,6 @@ import { ValidationProvider } from '../../context/validation_context/validation_
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EngagementOverview } from './overview';
-import { stringify } from 'querystring';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
