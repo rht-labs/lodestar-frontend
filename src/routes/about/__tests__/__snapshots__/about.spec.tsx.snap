@@ -106,6 +106,35 @@ Object {
                       />
                     </div>
                   </div>
+                  <div
+                    class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                    style="margin-top: 1rem;"
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      <b>
+                        Components versions: 
+                      </b>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      <div
+                        class="pf-l-grid pf-m-all-12-col"
+                      >
+                        <div
+                          class="pf-l-grid__item"
+                        >
+                          <b>
+                            
+                            :
+                          </b>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </small>
               </div>
             </div>
@@ -214,6 +243,35 @@ Object {
                       data-cy="lodestar_version"
                       data-pf-content="true"
                     />
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                  style="margin-top: 1rem;"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-12-col"
+                  >
+                    <b>
+                      Components versions: 
+                    </b>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-12-col"
+                  >
+                    <div
+                      class="pf-l-grid pf-m-all-12-col"
+                    >
+                      <div
+                        class="pf-l-grid__item"
+                      >
+                        <b>
+                          
+                          :
+                        </b>
+                        
+                      </div>
+                    </div>
                   </div>
                 </div>
               </small>

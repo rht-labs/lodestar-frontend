@@ -52,6 +52,8 @@ export function About() {
                 Version
               </Title>
               <Text component={TextVariants.small}>
+                { console.log('>>>>>') }
+                { console.log(versionContext) }
                 <LodeStarVersion versionContext={versionContext}/>
                 <ComponentVersions versionContext={versionContext}/>
               </Text>
