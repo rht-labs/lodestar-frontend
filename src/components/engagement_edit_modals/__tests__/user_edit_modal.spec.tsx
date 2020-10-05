@@ -51,7 +51,7 @@ describe('Point of Contact edit modal', () => {
       </FeatureToggleContext.Provider>
     );
     await fireEvent.click(getByTestId('add-first-user'));
-    expect(onChange).toHaveBeenCalledWith('user', [
+    expect(onChange).toHaveBeenCalledWith([
       {
         email: '',
         first_name: '',
