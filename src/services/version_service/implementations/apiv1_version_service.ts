@@ -34,7 +34,8 @@ export class Apiv1VersionService extends VersionService {
 
   async fetchVersion(): Promise<Version> {
     try {
-      const { data } = await this.axios.get(`${this.baseUrl}/api/v1/version`);
+      const { data } = await this.axios.get(`${this.baseUrl}api/version/manifest`);
+
       const fe = await this.fetchManifest();
       return { versions: { ...data, fe } };
     } catch (e) {
