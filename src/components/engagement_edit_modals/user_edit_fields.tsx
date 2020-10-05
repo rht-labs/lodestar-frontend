@@ -25,11 +25,12 @@ import {
   TableVariant,
 } from '@patternfly/react-table';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { EngagementUser } from '../../schemas/engagement';
 
 export interface UserEditFieldsProps {
   users: any;
   engagementFormConfig: EngagementFormConfig;
-  onChange: (fieldName: string, value: any) => void;
+  onChange: (users: EngagementUser[]) => void;
   deletedUsers: string[];
   toggleDeleted: (email: string) => void;
   addUser: any;
@@ -95,7 +96,7 @@ export const UserEditFields = ({
                                 }
                                 onChange={e => {
                                   users[index].email = e;
-                                  onChange('user', users);
+                                  onChange(users);
                                 }}
                                 placeholder="Email Address"
                                 type="email"
@@ -118,7 +119,7 @@ export const UserEditFields = ({
                                 }
                                 onChange={e => {
                                   users[index].first_name = e;
-                                  onChange('user', users);
+                                  onChange(users);
                                 }}
                                 placeholder="First Name"
                                 type="text"
@@ -141,7 +142,7 @@ export const UserEditFields = ({
                                 }
                                 onChange={e => {
                                   users[index].last_name = e;
-                                  onChange('user', users);
+                                  onChange(users);
                                 }}
                                 placeholder="Last Name"
                                 type="text"
@@ -165,7 +166,7 @@ export const UserEditFields = ({
                                 }
                                 onChange={e => {
                                   users[index].role = e;
-                                  onChange('user', users);
+                                  onChange(users);
                                 }}
                                 style={
                                   isUserDeleted
