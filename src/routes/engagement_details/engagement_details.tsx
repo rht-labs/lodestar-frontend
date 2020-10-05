@@ -8,6 +8,7 @@ import { ValidationProvider } from '../../context/validation_context/validation_
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EngagementOverview } from './overview';
+import { stringify } from 'querystring';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
@@ -26,7 +27,10 @@ export interface EngagementDetailViewProps {
 }
 
 export const EngagementDetailView = () => {
-  const { project_name, customer_name } = useParams();
+  const { project_name, customer_name } = useParams<{
+    customer_name: string;
+    project_name: string;
+  }>();
 
   const {
     engagementFormConfig,
