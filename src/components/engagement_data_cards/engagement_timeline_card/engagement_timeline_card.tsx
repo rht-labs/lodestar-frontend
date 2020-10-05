@@ -123,7 +123,7 @@ function EngagementTimelineCardBody(
     artifact.type,
     {
       title: (
-        <a target="_blank" href={getAbsoluteUrl(artifact.linkAddress)}>
+        <a target="_blank" rel="noopener noreferrer" href={getAbsoluteUrl(artifact.linkAddress)}>
           {artifact.title}
         </a>
       ),
