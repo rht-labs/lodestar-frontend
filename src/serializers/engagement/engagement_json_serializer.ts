@@ -1,10 +1,11 @@
 import { Serializer } from '../serializer';
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, Artifact } from '../../schemas/engagement';
 import { parse, parseISO, isValid, formatISO } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
 import { Logger } from '../../utilities/logger';
+import { uuid } from 'uuidv4';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
@@ -44,6 +45,10 @@ export class EngagementJsonSerializer
       start_date: engagement.start_date
         ? EngagementJsonSerializer.formatDate(engagement.start_date)
         : null,
+      artifacts: engagement?.artifacts?.map?.(a => ({
+        ...a,
+        link_address: a.linkAddress,
+      })),
     };
     const trimmedValues = Object.keys(e).reduce((acc, currKey) => {
       acc[currKey] = e[currKey];
@@ -57,6 +62,16 @@ export class EngagementJsonSerializer
     }, {});
     return trimmedValues;
   }
+
+  private static deserializeArtifact(data: object): Artifact {
+    return {
+      id: data['id'] ?? uuid(),
+      type: data['type'],
+      title: data['title'],
+      linkAddress: data['link_address'],
+      description: data['description'],
+    };
+  }
   deserialize(data: object): Engagement {
     return {
       ...data,
@@ -64,6 +79,9 @@ export class EngagementJsonSerializer
       archive_date: data['archive_date']
         ? EngagementJsonSerializer.parseDate(data['archive_date'])
         : undefined,
+      artifacts: (data['artifacts'] ?? []).map(
+        EngagementJsonSerializer.deserializeArtifact
+      ),
       commits: (data['commits'] as any[])
         ?.filter(d => !(d['author_email'] === 'bot@bot.com'))
         ?.map(d => EngagementJsonSerializer.gitCommitSerializer.deserialize(d)),
@@ -74,10 +92,10 @@ export class EngagementJsonSerializer
       end_date: data['end_date']
         ? EngagementJsonSerializer.parseDate(data['end_date'])
         : undefined,
+      engagement_region: data['engagement_region'],
       engagement_users: data['engagement_users'],
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
-      engagement_region: data['engagement_region'],
       engagement_type: data['engagement_type'],
       last_update: data['last_update'],
       location: data['location'],
@@ -98,6 +116,7 @@ export class EngagementJsonSerializer
       ),
       creation_details: data['creation_details'],
       last_update_by_name: data['last_update_by_name'],
+      engagement_categories: data['engagement_categories'],
     };
   }
 

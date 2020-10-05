@@ -3,6 +3,7 @@ import { LaunchData } from './launch_data';
 import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
+import { EngagementCategory } from './engagement_category';
 
 export enum EngagementStatus {
   active = 'active',
@@ -30,9 +31,50 @@ export abstract class EngagementUser {
 export interface FakedEngagementOptions {
   status: EngagementStatus;
 }
+
+export interface EngagementUseCase {
+  description?: string;
+  id: string;
+}
+
+export interface Artifact {
+  id: string;
+  linkAddress: string;
+  title: string;
+  type: ArtifactType;
+  description: string;
+}
+
+export enum ArtifactType {
+  demo = 'Demo',
+  weeklyReport = 'Weekly Report',
+  other = 'Other',
+  blog = 'Blog',
+  multimedia = 'Photo/Video',
+  news = 'News Article',
+  social = 'Social Media Post',
+  whitepaper = 'Whitepaper',
+  successStory = 'Success Story/Case Study',
+}
+
+export abstract class Artifact {
+  static fromFake(staticData = false): Artifact {
+    return {
+      id: staticData ? '1' : faker.random.uuid(),
+      linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
+      title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
+      type: ArtifactType.demo,
+      description: staticData
+        ? 'Artifact Description'
+        : faker.lorem.paragraph(),
+    };
+  }
+}
+
 export interface Engagement {
   additional_details?: string;
   archive_date: Date;
+  artifacts: Artifact[];
   commits: GitCommit[];
   customer_contact_email: string;
   customer_contact_name: string;
@@ -54,6 +96,7 @@ export interface Engagement {
   ocp_version: string;
   project_id: number;
   project_name: string;
+  public_reference: boolean;
   engagement_region: string;
   start_date: Date;
   technical_lead_email: string;
@@ -63,6 +106,8 @@ export interface Engagement {
   last_update_by_name: string;
   suggested_subdomain?: string;
   status: ClusterStatus;
+  use_cases: EngagementUseCase[];
+  engagement_categories: EngagementCategory[];
 }
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
@@ -117,6 +162,7 @@ export abstract class Engagement {
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
+      artifacts: [Artifact.fromFake(staticData)],
       commits: [GitCommit.fromFake(staticData)],
       customer_contact_email: staticData
         ? 'bob@doe.com'
@@ -153,6 +199,7 @@ export abstract class Engagement {
       ocp_version: staticData ? '4.4' : faker.random.number().toString(),
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
+      public_reference: staticData ? false : faker.random.boolean(),
       engagement_region: regions[0],
       technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
       technical_lead_name: staticData
@@ -172,6 +219,7 @@ export abstract class Engagement {
       last_update_by_name: staticData
         ? 'James Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
+      engagement_categories: [EngagementCategory.fromFake(staticData)],
       launch: staticData
         ? null
         : faker.random.boolean()
@@ -181,6 +229,12 @@ export abstract class Engagement {
           }
         : null,
       status: ClusterStatus.fromFake(staticData),
+      use_cases: staticData
+        ? [{ id: '1', description: 'an engagement use case' }]
+        : new Array(3).fill(null).map(() => ({
+            description: faker.lorem.sentence(),
+            id: faker.random.uuid().toString(),
+          })),
       ...getStatusDeterminers(),
     };
   }

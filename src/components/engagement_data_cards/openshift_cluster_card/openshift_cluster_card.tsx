@@ -19,6 +19,7 @@ export interface OpenShiftClusterSummaryCardProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
   onChange: (fieldName: string, value: any) => void;
+  onClear: () => void
   engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
@@ -26,6 +27,7 @@ export interface OpenShiftClusterSummaryCardProps {
 
 export function OpenShiftClusterSummaryCard({
   currentEngagement,
+  onClear,
   currentEngagementChanges,
   onSave,
   onChange,
@@ -40,13 +42,18 @@ export function OpenShiftClusterSummaryCard({
     'ocp_persistent_storage_size',
     'ocp_sub_domain',
   ];
-  const { requestOpen, activeModalKey } = useModalVisibility();
+  const { requestOpen, activeModalKey ,requestClose} = useModalVisibility();
+  const onClose = () => {
+    onClear()
+    requestClose()
+  }
   return (
     <>
       <OpenShiftClusterEditModal
         engagementFormConfig={engagementFormConfig}
         onChange={onChange}
         onSave={onSave}
+        onClose={onClose}
         engagement={currentEngagementChanges}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />

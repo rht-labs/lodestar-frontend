@@ -1,7 +1,6 @@
 import React from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
-import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import {
   EngagementFormConfig,
@@ -20,17 +19,21 @@ export interface OpenShiftClusterEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
+  onClose: () => void;
 }
 
 export function OpenShiftClusterEditModal({
+  onClose = () => {},
   engagement,
   engagementFormConfig,
   onChange,
   isOpen,
   onSave: propsOnSave,
 }: OpenShiftClusterEditModalProps) {
-  const { requestClose } = useModalVisibility();
-  const availableProviders = getAvailableProviders(engagement, engagementFormConfig);
+  const availableProviders = getAvailableProviders(
+    engagement,
+    engagementFormConfig
+  );
   const provider = engagementFormConfig?.cloud_options?.providers?.options?.find(
     p => p.value === engagement?.ocp_cloud_provider_name
   );
@@ -41,13 +44,13 @@ export function OpenShiftClusterEditModal({
 
   const onSave = () => {
     propsOnSave(engagement);
-    requestClose();
+    onClose();
   };
   return (
     <Modal
       variant={ModalVariant.large}
       isOpen={isOpen}
-      onClose={requestClose}
+      onClose={onClose}
       title="Hosting Environment"
     >
       <EditModalTemplate

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import {
   Modal,
@@ -10,43 +10,52 @@ import {
   FormGroup,
   Form,
 } from '@patternfly/react-core';
-import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
+import { FormManager } from '../../context/form_manager/form_manager';
 export interface PointOfContactEditModalProps {
   onChange: (fieldName: string, value: any) => void;
   engagementFormConfig: object;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
+  onClose: () => void;
 }
 export function PointOfContactEditModal({
   onChange,
   engagement,
   isOpen,
+  onClose = () => {},
   onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
-  const { requestClose } = useModalVisibility();
   const { hasFeature } = useFeatures();
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
   const { validate, getValidationResult } = useValidation();
-
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => {
+    registerField('engagement_lead_email');
+  }, [registerField]);
+  useEffect(() => registerField('engagement_lead_name'), [registerField]);
+  useEffect(() => registerField('technical_lead_email'), [registerField]);
+  useEffect(() => registerField('technical_lead_name'), [registerField]);
+  useEffect(() => registerField('customer_contact_name'), [registerField]);
+  useEffect(() => registerField('customer_contact_email'), [registerField]);
   const onSave = () => {
     propsOnSave(engagement);
-    requestClose();
+    onClose();
   };
 
   return (
     <Modal
       variant={ModalVariant.small}
       isOpen={isOpen}
-      onClose={requestClose}
+      onClose={onClose}
       title="Points of Contact"
     >
       <EditModalTemplate

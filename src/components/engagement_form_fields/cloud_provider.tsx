@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
+import { FormManager } from '../../context/form_manager/form_manager';
 
 interface CloudProviderFormFieldProps {
   engagement: Engagement;
@@ -20,6 +21,8 @@ export function CloudProviderFormField({
   availableProviders,
 }: CloudProviderFormFieldProps) {
   const { hasFeature } = useFeatures();
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => registerField('cloud_provider_dropdown'), [registerField]);
   return (
     <>
       <FormGroup fieldId="Hosting Platform" label="Hosting Type">

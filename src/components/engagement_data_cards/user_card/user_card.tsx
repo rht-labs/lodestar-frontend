@@ -17,15 +17,21 @@ export interface UserCardProps {
   onChange: (fieldName: string, value: any) => void;
   engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
+  onClear: () => void;
 }
 
 export function UserCard({
   engagement,
   onSave,
+  onClear,
   onChange,
   engagementFormConfig,
 }: UserCardProps) {
-  const { requestOpen, activeModalKey } = useModalVisibility();
+  const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
+  const onClose = () => {
+    requestClose();
+    onClear();
+  };
   return (
     <>
       <UserEditModal
@@ -33,6 +39,7 @@ export function UserCard({
         onSave={onSave}
         engagementFormConfig={engagementFormConfig}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
+        onClose={onClose}
         engagement={engagement}
       />
       <DataCard

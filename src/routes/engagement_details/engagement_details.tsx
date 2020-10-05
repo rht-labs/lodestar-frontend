@@ -40,6 +40,7 @@ export const EngagementDetailView = () => {
     getEngagement,
     currentEngagement,
     missingRequiredFields,
+    clearCurrentChanges,
   } = useEngagements();
   useEffect(() => {
     let engagementPoll;
@@ -84,7 +85,10 @@ export const EngagementDetailView = () => {
   );
   return (
     <ValidationProvider validators={validators}>
-      <EngagementDetailsViewTemplate engagement={currentEngagement}>
+      <EngagementDetailsViewTemplate
+        engagement={currentEngagement}
+        onSave={saveEngagement}
+      >
         <AlertMessage />
         <EngagementOverview
           currentEngagement={currentEngagement}
@@ -93,6 +97,7 @@ export const EngagementDetailView = () => {
           engagementFormConfig={engagementFormConfig}
           onChange={updateEngagementFormField}
           currentEngagementChanges={currentEngagementChanges}
+          clearCurrentChanges={clearCurrentChanges}
         />
       </EngagementDetailsViewTemplate>
     </ValidationProvider>

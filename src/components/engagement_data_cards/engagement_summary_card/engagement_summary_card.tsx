@@ -18,11 +18,13 @@ export interface EngagementSummaryCardProps {
   onChange: (fieldName: string, value: any) => void;
   engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
+  onClear: () => void;
   missingRequiredFields: string[];
 }
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
 export function EngagementSummaryCard({
+  onClear,
   currentEngagement,
   currentEngagementChanges,
   onChange = () => null,
@@ -30,7 +32,7 @@ export function EngagementSummaryCard({
   missingRequiredFields,
   onSave,
 }: EngagementSummaryCardProps) {
-  const { requestOpen, activeModalKey } = useModalVisibility();
+  const { requestClose, requestOpen, activeModalKey } = useModalVisibility();
   const engagementSummaryRequiredFields = [
     'customer_name',
     'end_date',
@@ -38,9 +40,14 @@ export function EngagementSummaryCard({
     'project_name',
   ];
   const status = getEngagementStatus(currentEngagement);
+  const onClose = () => {
+    requestClose();
+    onClear();
+  };
   return (
     <>
       <EngagementSummaryEditModal
+        onClose={onClose}
         onSave={onSave}
         engagementFormConfig={engagementFormConfig}
         onChange={onChange}
@@ -111,6 +118,15 @@ export function EngagementSummaryCard({
                     }
                     lastUpdatedBy={currentEngagement?.last_update_by_name}
                   />
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={12}>
+                <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
+                  <>
+                    {currentEngagement?.use_cases?.map?.(useCase => (
+                      <p>{useCase.description}</p>
+                    ))}
+                  </>
                 </TitledDataPoint>
               </GridItem>
             </Grid>

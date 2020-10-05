@@ -32,6 +32,7 @@ export const getInitialState = (
   engagement?: Partial<Engagement>
 ): Partial<Engagement> => {
   return {
+    artifacts: engagement?.artifacts ?? [],
     project_id: engagement?.project_id ?? null,
     customer_name: engagement?.customer_name ?? null,
     project_name: engagement?.project_name ?? null,
@@ -66,6 +67,8 @@ export const getInitialState = (
             engagement?.customer_name
           )
         : null,
+    engagement_categories: engagement?.engagement_categories ?? [],
+    use_cases: engagement?.use_cases ?? [],
   };
 };
 
@@ -74,7 +77,7 @@ export const engagementFormReducer = (
 ) => (
   state: Partial<Engagement> = getInitialState(),
   action?: { type: string; payload?: any }
-) => {
+): Partial<Engagement> => {
   const curriedEngagementDatesFunction = getEngagementDates(
     engagementFormConfig?.logistics_options?.env_default_grace_period,
     engagementFormConfig?.logistics_options?.env_grace_period_max
@@ -83,8 +86,6 @@ export const engagementFormReducer = (
     return state;
   }
   switch (action.type) {
-    case 'user':
-      return { ...state, engagement_users: action.payload };
     case 'customer_name':
       return {
         ...state,
@@ -118,6 +119,7 @@ export const engagementFormReducer = (
         }),
       };
     case 'additional_details':
+    case 'public_reference':
     case 'description':
     case 'location':
     case 'engagement_lead_name':
@@ -125,12 +127,16 @@ export const engagementFormReducer = (
     case 'technical_lead_name':
     case 'technical_lead_email':
     case 'customer_contact_name':
+    case 'engagement_users':
+    case 'artifacts':
     case 'customer_contact_email':
     case 'ocp_cloud_provider_name':
+    case 'use_cases':
     case 'ocp_cloud_provider_region':
     case 'ocp_version':
     case 'ocp_sub_domain':
     case 'ocp_persistent_storage_size':
+    case 'engagement_categories':
     case 'ocp_cluster_size':
       return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
