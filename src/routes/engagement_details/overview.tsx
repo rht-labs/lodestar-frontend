@@ -58,17 +58,17 @@ export function EngagementOverview({
                 </FormManager.Group>
               </div>
             </GridItem>
-            <GridItem span={12}>
-              {currentEngagement?.launch ? (
+            {currentEngagement?.launch ? (
+              <GridItem span={12}>
                 <FormManager.Group groupName="System Status">
                   <div id="system_status_card">
                     <SystemStatusCard currentEngagement={currentEngagement} />
                   </div>
                 </FormManager.Group>
-              ) : (
-                <></>
-              )}
-            </GridItem>
+              </GridItem>
+            ) : (
+              <></>
+            )}
             <GridItem span={12}>
               <div id="poc_card">
                 <FormManager.Group groupName="Point of Contact">
