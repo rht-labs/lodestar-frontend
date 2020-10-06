@@ -110,6 +110,13 @@ function EngagementTimelineCardBody(
     { title: 'Description', transforms: [cellWidth('max')] },
     { title: 'Actions' },
   ];
+  function getAbsoluteUrl(url: string): string {
+    if (url.includes('://')) {
+      return url;
+    } else {
+      return `//${url}`;
+    }
+  }
   const actionItems = [
     <DropdownItem key="edit">
       <span data-testid="artifact-edit-button">Edit</span>
@@ -118,7 +125,11 @@ function EngagementTimelineCardBody(
   const rows = props.artifacts.map((artifact, idx) => [
     artifact.type,
     {
-      title: <a href={artifact.linkAddress}>{artifact.title}</a>,
+      title: (
+        <a target="_blank" rel="noopener noreferrer" href={getAbsoluteUrl(artifact.linkAddress)}>
+          {artifact.title}
+        </a>
+      ),
     },
     artifact.description,
     {

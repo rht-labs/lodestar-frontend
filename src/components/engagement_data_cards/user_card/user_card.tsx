@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement } from '../../../schemas/engagement';
+import { Engagement, EngagementUser } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
@@ -35,7 +35,7 @@ export function UserCard({
   return (
     <>
       <UserEditModal
-        onChange={onChange}
+        onChange={(users) => onChange('engagement_users', users)}
         onSave={onSave}
         engagementFormConfig={engagementFormConfig}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
@@ -92,7 +92,7 @@ const UserTable = ({
       role => role.value === userRole
     )?.label ?? userRole;
   const allRows: string[][] = [];
-  users.map((user: any) =>
+  users.map((user: EngagementUser) =>
     allRows.push([
       user.first_name + ' ' + user.last_name,
       user.email,
