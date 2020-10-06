@@ -10,13 +10,13 @@ import {
 } from '@patternfly/react-core';
 
 import { PlusIcon, UsersIcon } from '@patternfly/react-icons';
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, EngagementUser } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from './user_edit_fields';
 
 export interface UserEditModalProps {
-  onChange: (fieldName: string, value: any) => void;
+  onChange: (users: EngagementUser[]) => void;
   engagementFormConfig: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
@@ -52,7 +52,7 @@ export function UserEditModal({
         1
       );
     });
-    onChange('user', engagement.engagement_users);
+    onChange(engagement.engagement_users);
     setDeletedUsers([]);
   }
 
@@ -65,7 +65,7 @@ export function UserEditModal({
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     engagement.engagement_users.push(newUser);
-    onChange('user', engagement.engagement_users);
+    onChange(engagement.engagement_users);
   }
 
   return (
