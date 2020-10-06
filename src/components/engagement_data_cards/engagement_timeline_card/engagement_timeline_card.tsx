@@ -70,7 +70,10 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
       <ArtifactEditModal
         artifact={currentArtifact}
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
-        onClose={requestClose}
+        onClose={() => {
+          requestClose();
+          props.onClear();
+        }}
         onSave={_onSave}
       />
       <DataCard
