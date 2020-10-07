@@ -12,7 +12,7 @@ export class PublicConfigService extends ConfigService {
   }
   async fetchConfig(): Promise<Config> {
     const { data } = await Axios.get(
-      `${process.env.PUBLIC_URL}/config/config.json`
+      `${process.env.PUBLIC_URL}/config/config.json?${new Date().getTime()}`
     );
     return this.serializer.deserialize(data);
   }
