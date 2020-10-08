@@ -26,7 +26,10 @@ export interface EngagementDetailViewProps {
 }
 
 export const EngagementDetailView = () => {
-  const { project_name, customer_name } = useParams();
+  const { project_name, customer_name } = useParams<{
+    customer_name: string;
+    project_name: string;
+  }>();
 
   const {
     engagementFormConfig,
