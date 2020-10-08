@@ -11,8 +11,8 @@ interface ComponentVersionProps {
 export function ComponentVersions(props: ComponentVersionProps) {
 
   function allComponents() {
-    if (!!props.versionContext?.versions?.versions?.component_versions) {
-      return props.versionContext?.versions?.versions?.component_versions;
+    if (!!props.versionContext?.versions?.component_versions) {
+      return props.versionContext?.versions?.component_versions;
     }
     else
       return [{name: '', value:''}]
@@ -20,9 +20,9 @@ export function ComponentVersions(props: ComponentVersionProps) {
 
   return (
     <>
-      <Grid lg={6} md={12} style={{marginTop: '1rem'}}>
-        <GridItem span={12}>
-          <b>Components versions: </b>
+      <Grid span={6} style={{marginTop: '1rem'}}>
+        <GridItem span={12} style={{marginLeft: '1rem'}}>
+          <b>Components versions </b>
         </GridItem>
         <GridItem span={12}>
           <Grid span={12}>
@@ -31,9 +31,7 @@ export function ComponentVersions(props: ComponentVersionProps) {
                 <>
                   <Grid hasGutter span={6} style={{marginLeft: '1rem'}}>
                     <GridItem span={2}>
-                      <b>
-                        { component.name }:
-                      </b>
+                      { component.name }
                     </GridItem>
                     <GridItem span={2}>
                       { component.value }

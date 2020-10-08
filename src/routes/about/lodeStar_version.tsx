@@ -8,18 +8,18 @@ interface LodeStarVersionProps {
 export function LodeStarVersion(props: LodeStarVersionProps) {
 
   function lodeStar() {
-    if (!!props.versionContext?.versions?.versions?.main_version) {
-      return props.versionContext?.versions?.versions?.main_version;
+    if (!!props.versionContext?.versions?.main_version) {
+      return props.versionContext?.versions?.main_version;
     }
     else
-      return ''
+      return 'Unknown'
   };
 
   return (
     <>
       <Grid hasGutter span={6} style={{marginLeft: '1rem'}}>
         <GridItem span={2}>
-          <b>LodeStar version: </b>
+          <b>LodeStar version </b>
         </GridItem>
         <GridItem span={4}>
           <Text data-cy="lodestar_version">{lodeStar()?.value}</Text>

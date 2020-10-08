@@ -3,6 +3,7 @@ import { Version } from '../../../schemas/version';
 import Axios, { AxiosInstance } from 'axios';
 import { UserToken } from '../../../schemas/user_token';
 import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
+import {VersionJsonSerializer} from "../../../serializers/version/version_json_serializer";
 
 export class Apiv1VersionService extends VersionService {
   constructor(baseURL: string) {
@@ -15,6 +16,7 @@ export class Apiv1VersionService extends VersionService {
     });
   }
   baseUrl: string;
+  private static versionSerializer = new VersionJsonSerializer();
   axios?: AxiosInstance;
 
   private async fetchManifest(): Promise<object> {
@@ -36,11 +38,15 @@ export class Apiv1VersionService extends VersionService {
     try {
       const { data } = await this.axios.get(`${this.baseUrl}/api/version/manifest`);
 
-      const fe = await this.fetchManifest();
-      return { versions: { ...data, fe } };
+      const serializedVersion = Apiv1VersionService.versionSerializer.deserialize(data);
+      return serializedVersion;
+
     } catch (e) {
-      handleAxiosResponseErrors(e);
-      throw e;
+      if (e.isAxiosError) {
+        handleAxiosResponseErrors(e);
+      } else {
+        throw e;
+      }
     }
   }
 }
