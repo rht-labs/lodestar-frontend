@@ -4,6 +4,7 @@ import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 import { EngagementCategory } from './engagement_category';
+import { Cluster } from 'cluster';
 
 export enum EngagementStatus {
   active = 'active',
@@ -71,44 +72,68 @@ export abstract class Artifact {
   }
 }
 
-export interface Engagement {
-  additional_details?: string;
-  archive_date: Date;
-  artifacts: Artifact[];
-  commits: GitCommit[];
-  customer_contact_email: string;
-  customer_contact_name: string;
-  customer_name: string;
-  description: string;
-  end_date: Date;
-  engagement_lead_email: string;
-  engagement_lead_name: string;
-  engagement_type: string;
-  engagement_users: EngagementUser[];
-  last_update: string;
-  location: string;
-  mongo_id?: string;
+export interface HostingProvider {
   ocp_cloud_provider_name: string;
+  suggested_subdomain?: string;
   ocp_cloud_provider_region: string;
   ocp_cluster_size: string;
   ocp_persistent_storage_size: string;
   ocp_sub_domain: string;
   ocp_version: string;
+}
+
+export interface EngagementOverview {
+  additional_details: string;
+  use_cases: EngagementUseCase[];
+  location: string;
   project_id: number;
   project_name: string;
+  customer_name: string;
+  engagement_type: string;
+  description: string;
   public_reference: boolean;
+  engagement_categories: EngagementCategory[];
   engagement_region: string;
+}
+
+export interface EngagementHistory {
+  commits: GitCommit[];
+  last_update_by_name: string;
+  last_update: string;
+}
+
+export interface EngagementDates {
   start_date: Date;
+  end_date: Date;
+  archive_date: Date;
+}
+
+export interface EngagementContacts {
+  engagement_lead_email: string;
+  engagement_lead_name: string;
   technical_lead_email: string;
   technical_lead_name: string;
+  customer_contact_email: string;
+  customer_contact_name: string;
+}
+
+export interface EngagementState {
+  status: ClusterStatus;
   launch?: LaunchData;
   creation_details: CreationDetails;
-  last_update_by_name: string;
-  suggested_subdomain?: string;
-  status: ClusterStatus;
-  use_cases: EngagementUseCase[];
-  engagement_categories: EngagementCategory[];
+  mongo_id: string;
 }
+export interface Engagement
+  extends HostingProvider,
+    EngagementOverview,
+    EngagementState,
+    EngagementDates,
+    EngagementContacts,
+    EngagementHistory {
+  artifacts: Artifact[];
+  engagement_users: EngagementUser[];
+}
+
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
   static fromFake(
