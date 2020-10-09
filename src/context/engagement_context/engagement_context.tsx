@@ -20,7 +20,6 @@ import { CategoryService } from '../../services/category_service/category_servic
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
-  currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
@@ -117,7 +116,7 @@ export const EngagementProvider = ({
     };
   }, [authContext]);
 
-  const _validateAuthStatusRef = useRef(async () => {});
+  const _validateAuthStatusRef = useRef(async () => { });
 
   const getConfig = useCallback(async () => {
     await _validateAuthStatusRef.current();
@@ -311,6 +310,9 @@ export const EngagementProvider = ({
   );
 
   const _checkLaunchReady = useCallback(() => {
+    if (!currentEngagement) {
+      return false
+    }
     let result = requiredFields.every(
       o =>
         typeof currentEngagement[o] === 'boolean' ||

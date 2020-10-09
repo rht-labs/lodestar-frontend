@@ -4,7 +4,6 @@ import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 import { EngagementCategory } from './engagement_category';
-import { Cluster } from 'cluster';
 
 export enum EngagementStatus {
   active = 'active',

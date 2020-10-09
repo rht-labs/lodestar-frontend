@@ -11,7 +11,10 @@ import {
   ServiceProvider,
   ServiceProviderContext,
 } from './context/service_provider_context/service_provider_context';
-import { FeedbackProvider } from './context/feedback_context/feedback_context';
+import {
+  FeedbackContext,
+  FeedbackProvider,
+} from './context/feedback_context/feedback_context';
 import { NotificationProvider } from './context/notification_context/notification_context';
 import { useConfig } from './context/config_context/config_hook';
 import {
@@ -58,12 +61,17 @@ export const App = ({ config }: { config: Config }) => {
                       <VersionProvider versionService={versionService}>
                         <FeatureToggles>
                           <Router>
-                            <EngagementProvider
-                              engagementService={engagementService}
-                              categoryService={categoryService}
-                            >
-                              <LodestarRouter />
-                            </EngagementProvider>
+                            <FeedbackContext.Consumer>
+                              {feedbackContext => (
+                                <EngagementProvider
+                                  feedbackContext={feedbackContext}
+                                  engagementService={engagementService}
+                                  categoryService={categoryService}
+                                >
+                                  <LodestarRouter />
+                                </EngagementProvider>
+                              )}
+                            </FeedbackContext.Consumer>
                           </Router>
                         </FeatureToggles>
                       </VersionProvider>

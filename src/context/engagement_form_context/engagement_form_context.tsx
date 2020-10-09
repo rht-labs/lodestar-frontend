@@ -15,7 +15,7 @@ import {
 export interface EngagementFormContext {
   currentChanges: Engagement;
   clearCurrentChanges: () => void;
-  updateEngagementFormField: (fieldName: string, payload: any) => void;
+  updateEngagementFormField: (fieldName: keyof Engagement, payload: any) => void;
   fieldGroups: { [key: string]: string[] };
   saveChanges: () => void;
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
@@ -66,7 +66,7 @@ export const EngagementFormProvider = ({
   );
   const _createCommitMessage = (
     changedFields: string[],
-    fieldGroupings: { [key: string]: string[] }
+    fieldGroupings: { [key: string]: string[] } = {}
   ): string => {
     const changedGroups = Array.from(
       new Set(
@@ -91,6 +91,8 @@ export const EngagementFormProvider = ({
       commitMessage
     );
     setChangedFields([]);
+    dispatch({ type: 'switch_engagement', payload: getInitialState(currentEngagement) })
+
   };
   return (
     <EngagementFormContext.Provider
