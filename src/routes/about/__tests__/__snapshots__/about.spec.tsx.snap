@@ -94,7 +94,7 @@ Object {
                       class="pf-l-grid__item pf-m-2-col"
                     >
                       <b>
-                        LodeStar version: 
+                        LodeStar version 
                       </b>
                     </div>
                     <div
@@ -108,14 +108,15 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                    class="pf-l-grid pf-m-all-6-col"
                     style="margin-top: 1rem;"
                   >
                     <div
                       class="pf-l-grid__item pf-m-12-col"
+                      style="margin-left: 1rem;"
                     >
                       <b>
-                        Components versions: 
+                        Components versions 
                       </b>
                     </div>
                     <div
@@ -130,12 +131,7 @@ Object {
                         >
                           <div
                             class="pf-l-grid__item pf-m-2-col"
-                          >
-                            <b>
-                              
-                              :
-                            </b>
-                          </div>
+                          />
                           <div
                             class="pf-l-grid__item pf-m-2-col"
                           />
@@ -241,7 +237,7 @@ Object {
                     class="pf-l-grid__item pf-m-2-col"
                   >
                     <b>
-                      LodeStar version: 
+                      LodeStar version 
                     </b>
                   </div>
                   <div
@@ -255,14 +251,15 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                  class="pf-l-grid pf-m-all-6-col"
                   style="margin-top: 1rem;"
                 >
                   <div
                     class="pf-l-grid__item pf-m-12-col"
+                    style="margin-left: 1rem;"
                   >
                     <b>
-                      Components versions: 
+                      Components versions 
                     </b>
                   </div>
                   <div
@@ -277,12 +274,7 @@ Object {
                       >
                         <div
                           class="pf-l-grid__item pf-m-2-col"
-                        >
-                          <b>
-                            
-                            :
-                          </b>
-                        </div>
+                        />
                         <div
                           class="pf-l-grid__item pf-m-2-col"
                         />
