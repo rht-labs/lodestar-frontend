@@ -1,8 +1,9 @@
 import React from 'react';
 import { renderHook, act, cleanup } from '@testing-library/react-hooks';
-import { useEngagements } from '../engagement_hook';
+import { useEngagements } from '../../engagement_context/engagement_hook';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { parse, addDays } from 'date-fns';
+import { useEngagementForm } from '../engagement_form_hook';
 
 describe('Engagement date change logic', () => {
   afterEach(() => cleanup());
@@ -11,7 +12,7 @@ describe('Engagement date change logic', () => {
     const wrapper = ({ children }) => (
       <TestStateWrapper>{children}</TestStateWrapper>
     );
-    return renderHook(() => useEngagements(), { wrapper });
+    return renderHook(() => ({ ...useEngagementForm(), ...useEngagements() }), { wrapper });
   };
 
   afterEach(() => {
@@ -25,12 +26,12 @@ describe('Engagement date change logic', () => {
       result.current.updateEngagementFormField('end_date', end_date);
       await waitForNextUpdate();
     });
-    expect(result.current.currentEngagementChanges.end_date).toEqual(end_date);
+    expect(result.current.currentChanges.end_date).toEqual(end_date);
     await act(async () => {
       result.current.updateEngagementFormField('start_date', start_date);
       await waitForNextUpdate();
     });
-    expect(result.current.currentEngagementChanges.end_date).toEqual(
+    expect(result.current.currentChanges.end_date).toEqual(
       start_date
     );
   });
@@ -50,7 +51,7 @@ describe('Engagement date change logic', () => {
       );
       result.current.updateEngagementFormField('start_date', start_date);
       await waitForNextUpdate();
-      expect(result.current.currentEngagementChanges.archive_date).toEqual(
+      expect(result.current.currentChanges.archive_date).toEqual(
         archive_date
       );
     });
@@ -71,7 +72,7 @@ describe('Engagement date change logic', () => {
       let end_date = addDays(archive_date, 1);
       result.current.updateEngagementFormField('end_date', end_date);
       await waitForNextUpdate();
-      expect(result.current.currentEngagementChanges.archive_date).toEqual(
+      expect(result.current.currentChanges.archive_date).toEqual(
         addDays(
           end_date,
           result.current.engagementFormConfig.logistics_options
@@ -103,7 +104,7 @@ describe('Engagement date change logic', () => {
       end_date = addDays(end_date, -1);
       result.current.updateEngagementFormField('end_date', end_date);
       await waitForNextUpdate();
-      expect(result.current.currentEngagementChanges.archive_date).toEqual(
+      expect(result.current.currentChanges.archive_date).toEqual(
         addDays(end_date, maxGracePeriod)
       );
     });
