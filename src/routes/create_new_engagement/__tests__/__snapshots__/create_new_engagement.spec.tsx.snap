@@ -309,20 +309,6 @@ Object {
                   </div>
                 </div>
               </form>
-              <button
-                aria-disabled="true"
-                class="pf-c-button pf-m-primary pf-m-disabled"
-                data-cy="createNewEngagement"
-                data-ouia-component-id="3"
-                data-ouia-component-type="PF4/Button"
-                data-ouia-safe="true"
-                data-testid="create-engagement-button"
-                disabled=""
-                style="margin: 1rem 0px;"
-                type="button"
-              >
-                Submit
-              </button>
             </div>
           </div>
         </section>
@@ -634,20 +620,6 @@ Object {
                 </div>
               </div>
             </form>
-            <button
-              aria-disabled="true"
-              class="pf-c-button pf-m-primary pf-m-disabled"
-              data-cy="createNewEngagement"
-              data-ouia-component-id="3"
-              data-ouia-component-type="PF4/Button"
-              data-ouia-safe="true"
-              data-testid="create-engagement-button"
-              disabled=""
-              style="margin: 1rem 0px;"
-              type="button"
-            >
-              Submit
-            </button>
           </div>
         </div>
       </section>

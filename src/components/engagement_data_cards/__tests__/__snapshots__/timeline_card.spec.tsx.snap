@@ -121,39 +121,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="1"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-0"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -192,39 +160,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="2"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-1"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -263,39 +199,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="3"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-2"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -334,39 +238,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="4"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-3"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -405,39 +277,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="5"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-4"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -476,39 +316,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="6"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-5"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -547,39 +355,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="7"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-6"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -618,39 +394,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="8"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-7"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -689,39 +433,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="9"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-8"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -760,39 +472,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="10"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-9"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -831,39 +511,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="11"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-10"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -902,39 +550,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="12"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-11"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -973,39 +589,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="13"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-12"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1044,39 +628,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="14"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-13"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1115,39 +667,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="15"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-14"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1186,39 +706,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="16"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-15"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1257,39 +745,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="17"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-16"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1328,39 +784,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="18"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-17"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1399,39 +823,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="19"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-18"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
                 <tr
                   class=""
@@ -1470,39 +862,7 @@ Object {
                     class=""
                     data-key="3"
                     data-label="Actions"
-                  >
-                    <div
-                      class="pf-c-dropdown"
-                      data-ouia-component-id="20"
-                      data-ouia-component-type="PF4/Dropdown"
-                      data-ouia-safe="true"
-                    >
-                      <button
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        aria-label="Actions"
-                        class="pf-c-dropdown__toggle pf-m-plain"
-                        data-testid="artifact-action-kebab"
-                        id="toggle-id-19"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          fill="currentColor"
-                          height="1em"
-                          role="img"
-                          style="vertical-align: -0.125em;"
-                          viewBox="0 0 192 512"
-                          width="1em"
-                        >
-                          <path
-                            d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                            transform=""
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
+                  />
                 </tr>
               </tbody>
             </table>
@@ -1629,39 +989,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="1"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-0"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -1700,39 +1028,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="2"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-1"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -1771,39 +1067,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="3"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-2"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -1842,39 +1106,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="4"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-3"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -1913,39 +1145,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="5"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-4"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -1984,39 +1184,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="6"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-5"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2055,39 +1223,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="7"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-6"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2126,39 +1262,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="8"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-7"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2197,39 +1301,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="9"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-8"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2268,39 +1340,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="10"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-9"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2339,39 +1379,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="11"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-10"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2410,39 +1418,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="12"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-11"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2481,39 +1457,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="13"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-12"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2552,39 +1496,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="14"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-13"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2623,39 +1535,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="15"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-14"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2694,39 +1574,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="16"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-15"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2765,39 +1613,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="17"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-16"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2836,39 +1652,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="18"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-17"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2907,39 +1691,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="19"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-18"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
               <tr
                 class=""
@@ -2978,39 +1730,7 @@ Object {
                   class=""
                   data-key="3"
                   data-label="Actions"
-                >
-                  <div
-                    class="pf-c-dropdown"
-                    data-ouia-component-id="20"
-                    data-ouia-component-type="PF4/Dropdown"
-                    data-ouia-safe="true"
-                  >
-                    <button
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      aria-label="Actions"
-                      class="pf-c-dropdown__toggle pf-m-plain"
-                      data-testid="artifact-action-kebab"
-                      id="toggle-id-19"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        fill="currentColor"
-                        height="1em"
-                        role="img"
-                        style="vertical-align: -0.125em;"
-                        viewBox="0 0 192 512"
-                        width="1em"
-                      >
-                        <path
-                          d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
-                          transform=""
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
+                />
               </tr>
             </tbody>
           </table>
