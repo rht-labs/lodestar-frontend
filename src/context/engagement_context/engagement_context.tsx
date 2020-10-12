@@ -1,14 +1,13 @@
 import React, { createContext, useEffect, useRef } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { useState, useCallback, useReducer } from 'react';
-import {
-  engagementFormReducer,
-  getInitialState,
-} from './engagement_form_reducer';
-import { useFeedback, AlertType } from '../feedback_context/feedback_context';
+import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
+import {
+  FeedbackContext,
+  AlertType,
+} from '../feedback_context/feedback_context';
 import { AuthenticationError } from '../../services/auth_service/auth_errors';
 import { useSession } from '../auth_context/auth_context';
 import {
@@ -20,10 +19,7 @@ import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 
 export interface EngagementContext {
-  setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
   getEngagements: () => Promise<Engagement[]>;
-  clearCurrentChanges: () => void;
-  currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
@@ -34,8 +30,7 @@ export interface EngagementContext {
   ) => Promise<Engagement>;
   getConfig: () => void;
   createEngagement: (data: any) => Promise<Engagement>;
-  saveEngagement: (data: any) => Promise<void>;
-  updateEngagementFormField: (fieldName: string, payload: any) => void;
+  saveEngagement: (data: Engagement, commitMessage?: string) => Promise<void>;
   missingRequiredFields: string[];
   isLaunchable: boolean;
   engagementFormConfig?: EngagementFormConfig;
@@ -78,12 +73,13 @@ export const EngagementProvider = ({
   children,
   engagementService,
   categoryService,
+  feedbackContext,
 }: {
   children: React.ReactChild;
   engagementService: EngagementService;
   categoryService: CategoryService;
+  feedbackContext: FeedbackContext;
 }) => {
-  const feedbackContext = useFeedback();
   const [engagementFormConfig, setengagementFormConfig] = useState<
     EngagementFormConfig
   >();
@@ -91,46 +87,13 @@ export const EngagementProvider = ({
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
-  const [changedFields, setChangedFields] = useState<string[]>([]);
   const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
-  const [currentEngagementChanges, dispatch] = useReducer<
-    (state: any, action: any) => any
-  >(
-    engagementFormReducer(engagementFormConfig),
-    engagementFormReducer(engagementFormConfig)()
-  );
 
   const authContext = useSession();
 
-  const clearCurrentChanges = () =>
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  const _createCommitMessage = (
-    changedFields: string[],
-    fieldGroupings: { [key: string]: string[] }
-  ): string => {
-    const changedGroups = Array.from(
-      new Set(
-        changedFields
-          .map(field =>
-            Object.keys(fieldGroupings).find(group =>
-              fieldGroupings[group].includes(field)
-            )
-          )
-          .filter(group => !!group)
-      )
-    );
-    const commitMessage = `Changed ${changedGroups.join(
-      ', '
-    )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
-    return commitMessage;
-  };
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);
@@ -153,20 +116,13 @@ export const EngagementProvider = ({
     };
   }, [authContext]);
 
-  const _validateAuthStatusRef = useRef(async () => {});
+  const _validateAuthStatusRef = useRef(async () => { });
 
   const getConfig = useCallback(async () => {
     await _validateAuthStatusRef.current();
     const data = await engagementService.getConfig();
     setengagementFormConfig(data);
   }, [engagementService]);
-
-  useEffect(() => {
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  }, [currentEngagement, engagementFormConfig]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -354,14 +310,17 @@ export const EngagementProvider = ({
   );
 
   const _checkLaunchReady = useCallback(() => {
+    if (!currentEngagement) {
+      return false
+    }
     let result = requiredFields.every(
       o =>
-        typeof currentEngagementChanges[o] === 'boolean' ||
-        typeof currentEngagementChanges[o] === 'number' ||
-        !!currentEngagementChanges[o]
+        typeof currentEngagement[o] === 'boolean' ||
+        typeof currentEngagement[o] === 'number' ||
+        !!currentEngagement[o]
     );
     return result;
-  }, [currentEngagementChanges]);
+  }, [currentEngagement]);
 
   const missingRequiredFields = useCallback(() => {
     return requiredFields.filter(
@@ -373,9 +332,8 @@ export const EngagementProvider = ({
   }, [currentEngagement]);
 
   const saveEngagement = useCallback(
-    async (data: Engagement) => {
+    async (data: Engagement, commitMessage?: string) => {
       feedbackContext.showLoader();
-      const commitMessage = _createCommitMessage(changedFields, fieldGroups);
       const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
@@ -390,7 +348,6 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
-        setChangedFields([]);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
@@ -414,22 +371,10 @@ export const EngagementProvider = ({
     },
     [
       feedbackContext,
-      changedFields,
-      fieldGroups,
       _updateEngagementInPlace,
       engagementService,
       _handleErrors,
     ]
-  );
-
-  const updateEngagementFormField = useCallback(
-    (fieldName: string, value: any) => {
-      if (!changedFields.includes(fieldName)) {
-        setChangedFields([...changedFields, fieldName]);
-      }
-      dispatch({ type: fieldName, payload: value });
-    },
-    [changedFields]
   );
 
   const launchEngagement = useCallback(
@@ -491,8 +436,6 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
-        setFieldGroups,
-        clearCurrentChanges,
         createEngagementPoll,
         requiredFields,
         currentEngagement,
@@ -503,13 +446,8 @@ export const EngagementProvider = ({
         engagements,
         getEngagement,
         error,
-        currentEngagementChanges: {
-          ...currentEngagement,
-          ...currentEngagementChanges,
-        },
         engagementFormConfig,
         isLoading,
-        updateEngagementFormField,
         getEngagements: fetchEngagements,
         createEngagement,
         saveEngagement,

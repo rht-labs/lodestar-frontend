@@ -8,6 +8,7 @@ import { ValidationProvider } from '../../context/validation_context/validation_
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EngagementOverview } from './overview';
+import { useEngagementForm } from '../../context/engagement_form_context/engagement_form_hook';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
@@ -33,8 +34,6 @@ export const EngagementDetailView = () => {
 
   const {
     engagementFormConfig,
-    currentEngagementChanges,
-    updateEngagementFormField,
     saveEngagement,
     getConfig,
     createEngagementPoll,
@@ -43,8 +42,9 @@ export const EngagementDetailView = () => {
     getEngagement,
     currentEngagement,
     missingRequiredFields,
-    clearCurrentChanges,
   } = useEngagements();
+
+  const { currentChanges, updateEngagementFormField, clearCurrentChanges } = useEngagementForm()
   useEffect(() => {
     let engagementPoll;
     if (currentEngagement?.project_name && currentEngagement?.customer_name) {
@@ -99,7 +99,7 @@ export const EngagementDetailView = () => {
           onSave={saveEngagement}
           engagementFormConfig={engagementFormConfig}
           onChange={updateEngagementFormField}
-          currentEngagementChanges={currentEngagementChanges}
+          currentEngagementChanges={currentChanges}
           clearCurrentChanges={clearCurrentChanges}
         />
       </EngagementDetailsViewTemplate>
