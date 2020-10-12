@@ -21,6 +21,7 @@ import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 import { EngagementFormProvider } from '../context/engagement_form_context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context/engagement_context';
+import { NavigationAnalytics } from '../components/navigation_analytics/navigation_analytics';
 
 export function LodestarRouter() {
   const { fetchNotifications } = useNotification();
@@ -29,91 +30,105 @@ export function LodestarRouter() {
   }, [fetchNotifications]);
 
   return (
-    <Switch>
-      <Route path="/" exact component={LandingPage} />
-      <Route path="/auth_callback" component={CallbackHandler} />
-      <Route path="/unauthorized" component={UnauthorizedPage} />
-      <Route path="/logout" component={LogoutPage} />
-      <PrivateRoute path="/app">
-        <MainTemplate>
-          <ErrorBoundary>
-            <>
-              <Feedback />
-              <Switch>
-                {/* all other routes should be considered private */}
-                <PrivateRoute path="/">
-                  <Feature
-                    name={APP_FEATURES.reader}
-                    inactiveComponent={UnauthorizedPage}
-                  >
-                    {/* if a user is not authorized, show the unauthorized page */}
-                    <Switch>
-                      {/* else, show an authorized route */}
-                      <Redirect exact from="/app" to="/app/dashboard" />
-                      <Route
-                        path="/app/requestfeature"
-                        component={FeatureRequest}
-                      />
-                      <PrivateRoute
-                        path="/app/dashboard"
-                        component={Dashboard}
-                      />
-                      <PrivateRoute path="/app/engagements">
-                        <ModalVisibilityProvider>
-                          <Switch>
-                            <Redirect
-                              exact
-                              from="/app/engagements"
-                              to="/app/engagements/all"
-                            />
-                            <PrivateRoute path="/app/engagements/all">
-                              <EngagementListRoute title="Engagements" />
-                            </PrivateRoute>
-                            <PrivateRoute path="/app/engagements/upcoming">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [EngagementStatus.upcoming],
-                                }}
-                                title="Engagements"
+    <NavigationAnalytics>
+      <Switch>
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/auth_callback" component={CallbackHandler} />
+        <Route path="/unauthorized" component={UnauthorizedPage} />
+        <Route path="/logout" component={LogoutPage} />
+        <PrivateRoute path="/app">
+          <MainTemplate>
+            <ErrorBoundary>
+              <>
+                <Feedback />
+                <Switch>
+                  {/* all other routes should be considered private */}
+                  <PrivateRoute path="/">
+                    <Feature
+                      name={APP_FEATURES.reader}
+                      inactiveComponent={UnauthorizedPage}
+                    >
+                      {/* if a user is not authorized, show the unauthorized page */}
+                      <Switch>
+                        {/* else, show an authorized route */}
+                        <Redirect exact from="/app" to="/app/dashboard" />
+                        <Route
+                          path="/app/requestfeature"
+                          component={FeatureRequest}
+                        />
+                        <PrivateRoute
+                          path="/app/dashboard"
+                          component={Dashboard}
+                        />
+                        <PrivateRoute path="/app/engagements">
+                          <ModalVisibilityProvider>
+                            <Switch>
+                              <Redirect
+                                exact
+                                from="/app/engagements"
+                                to="/app/engagements/all"
                               />
-                            </PrivateRoute>
-                            <PrivateRoute path="/app/engagements/active">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [EngagementStatus.active],
-                                }}
-                                title="Engagements"
+                              <PrivateRoute path="/app/engagements/all">
+                                <EngagementListRoute title="Engagements" />
+                              </PrivateRoute>
+                              <PrivateRoute path="/app/engagements/upcoming">
+                                <EngagementListRoute
+                                  filterDefinition={{
+                                    allowedStatuses: [
+                                      EngagementStatus.upcoming,
+                                    ],
+                                  }}
+                                  title="Engagements"
+                                />
+                              </PrivateRoute>
+                              <PrivateRoute path="/app/engagements/active">
+                                <EngagementListRoute
+                                  filterDefinition={{
+                                    allowedStatuses: [EngagementStatus.active],
+                                  }}
+                                  title="Engagements"
+                                />
+                              </PrivateRoute>
+                              <PrivateRoute path="/app/engagements/past">
+                                <EngagementListRoute
+                                  filterDefinition={{
+                                    allowedStatuses: [EngagementStatus.past],
+                                  }}
+                                  title="Engagements"
+                                />
+                              </PrivateRoute>
+                              <PrivateRoute path="/app/engagements/new">
+                                <CreateNewEngagement />
+                              </PrivateRoute>
+                              <PrivateRoute
+                                path="/app/engagements/:customer_name/:project_name"
+                                component={() => (
+                                  <EngagementContext.Consumer>
+                                    {engagementContext => (
+                                      <EngagementFormProvider
+                                        engagementContext={engagementContext}
+                                      >
+                                        <EngagementDetailView />
+                                      </EngagementFormProvider>
+                                    )}
+                                  </EngagementContext.Consumer>
+                                )}
                               />
-                            </PrivateRoute>
-                            <PrivateRoute path="/app/engagements/past">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [EngagementStatus.past],
-                                }}
-                                title="Engagements"
-                              />
-                            </PrivateRoute>
-                            <PrivateRoute path="/app/engagements/new">
-                              <CreateNewEngagement />
-                            </PrivateRoute>
-                            <PrivateRoute
-                              path="/app/engagements/:customer_name/:project_name"
-                              component={() => <EngagementContext.Consumer>{(engagementContext) => <EngagementFormProvider engagementContext={engagementContext} ><EngagementDetailView /></EngagementFormProvider>}</EngagementContext.Consumer>}
-                            />
-                          </Switch>
-                        </ModalVisibilityProvider>
-                      </PrivateRoute>
-                      <PrivateRoute exact path="/app/about">
-                        <About />
-                      </PrivateRoute>
-                    </Switch>
-                  </Feature>
-                </PrivateRoute>
-              </Switch>
-            </>
-          </ErrorBoundary>
-        </MainTemplate>
-      </PrivateRoute>
-    </Switch>
+                            </Switch>
+                          </ModalVisibilityProvider>
+                        </PrivateRoute>
+                        <PrivateRoute exact path="/app/about">
+                          <About />
+                        </PrivateRoute>
+                      </Switch>
+                    </Feature>
+                  </PrivateRoute>
+                </Switch>
+              </>
+            </ErrorBoundary>
+          </MainTemplate>
+        </PrivateRoute>
+      </Switch>
+    </NavigationAnalytics>
   );
 }
