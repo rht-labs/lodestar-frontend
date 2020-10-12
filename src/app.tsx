@@ -24,6 +24,7 @@ import {
 } from './services/factories/service_factory';
 import CustomGlobalBanner from './components/custom_global_banner/custom_global_banner';
 import { Config } from './schemas/config';
+import { NavigationAnalytics } from './components/navigation_analytics/navigation_analytics';
 
 export const App = ({ config }: { config: Config }) => {
   const serviceProviders =
@@ -71,7 +72,9 @@ export const App = ({ config }: { config: Config }) => {
                                     engagementService={engagementService}
                                     categoryService={categoryService}
                                   >
-                                    <LodestarRouter />
+                                    <NavigationAnalytics>
+                                      <LodestarRouter />
+                                    </NavigationAnalytics>
                                   </EngagementProvider>
                                 )}
                               </FeedbackContext.Consumer>

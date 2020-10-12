@@ -2,7 +2,7 @@ import React from 'react';
 import { AnalyticsService } from '../../services/analytics_service/analytics_service';
 
 export interface AnalyticsContext {
-  logEvent(): void;
+  logEvent(eventName: string, data: object): void;
   logPageView(path: string): void;
 }
 
@@ -10,13 +10,13 @@ export const AnalyticsContext = React.createContext<AnalyticsContext>(null);
 
 export const AnalyticsProvider = ({
   children,
-  analyticsService: analyticsRepository,
+  analyticsService,
 }: {
   children: any;
   analyticsService: AnalyticsService;
 }) => {
   return (
-    <AnalyticsContext.Provider value={analyticsRepository}>
+    <AnalyticsContext.Provider value={analyticsService}>
       {children}
     </AnalyticsContext.Provider>
   );

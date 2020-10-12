@@ -1,4 +1,4 @@
 export interface AnalyticsService {
-  logEvent(): void;
+  logEvent(eventName: string, data: object): void;
   logPageView(path: string): void;
 }
