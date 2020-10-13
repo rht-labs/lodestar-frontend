@@ -1,7 +1,13 @@
 import React from 'react';
 import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
 import { Link, useLocation } from 'react-router-dom';
-import {AsleepIcon, OnRunningIcon, PendingIcon, TachometerAltIcon, PlusIcon} from "@patternfly/react-icons";
+import {
+  AsleepIcon,
+  OnRunningIcon,
+  PendingIcon,
+  TachometerAltIcon,
+  PlusIcon,
+} from '@patternfly/react-icons';
 
 export const EngagementNavigation = () => {
   const { pathname } = useLocation();
@@ -29,7 +35,7 @@ export const EngagementNavigation = () => {
               isActive={pathname === '/app/engagements/all'}
             >
               <Link to="/app/engagements/all">
-                <TachometerAltIcon style={{marginRight: '1rem'}}/>
+                <TachometerAltIcon style={{ marginRight: '1rem' }} />
                 Overview
               </Link>
             </NavItem>
@@ -39,7 +45,7 @@ export const EngagementNavigation = () => {
               isActive={pathname === '/app/engagements/upcoming'}
             >
               <Link to="/app/engagements/upcoming">
-                <PendingIcon style={{marginRight: '1rem'}}/>
+                <PendingIcon style={{ marginRight: '1rem' }} />
                 Upcoming
               </Link>
             </NavItem>
@@ -49,7 +55,7 @@ export const EngagementNavigation = () => {
               isActive={pathname === '/app/engagements/active'}
             >
               <Link to="/app/engagements/active">
-                <OnRunningIcon style={{marginRight: '1rem'}}/>
+                <OnRunningIcon style={{ marginRight: '1rem' }} />
                 Active
               </Link>
             </NavItem>
@@ -59,7 +65,7 @@ export const EngagementNavigation = () => {
               isActive={pathname === '/app/engagements/past'}
             >
               <Link to="/app/engagements/past">
-                <AsleepIcon style={{marginRight: '1rem'}}/>
+                <AsleepIcon style={{ marginRight: '1rem' }} />
                 Past
               </Link>
             </NavItem>
@@ -69,7 +75,7 @@ export const EngagementNavigation = () => {
               isActive={pathname === '/app/engagements/new'}
             >
               <Link to="/app/engagements/new">
-                <PlusIcon style={{marginRight: '1rem'}}/>
+                <PlusIcon style={{ marginRight: '1rem' }} />
                 Create New
               </Link>
             </NavItem>

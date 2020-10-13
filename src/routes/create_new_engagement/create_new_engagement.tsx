@@ -18,6 +18,7 @@ import {
   TextInput,
   Text,
 } from '@patternfly/react-core';
+import { useAnalytics } from '../../context/analytics_context/analytics_hook';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 import { useValidation } from '../../context/validation_context/validation_hook';
@@ -34,7 +35,9 @@ export function CreateNewEngagement() {
     }
   }, [hasFetchedConfig, engagementFormConfig, getConfig]);
   return (
-    <ValidationProvider validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}>
+    <ValidationProvider
+      validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}
+    >
       <CreateNewEngagementForm />
     </ValidationProvider>
   );
@@ -52,6 +55,7 @@ export function CreateNewEngagementForm() {
   const [projectName, setProjectName] = useState(null);
   const [region, setRegion] = useState<string>();
   const [engagementType, setEngagementType] = useState<string>();
+  const { logEvent } = useAnalytics();
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
       await createEngagement({
@@ -63,6 +67,10 @@ export function CreateNewEngagementForm() {
           engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
             e => e.default
           )?.value,
+      });
+      logEvent({
+        action: 'Create New Engagement',
+        category: 'Engagements',
       });
       history.push(`/app/engagements/${customerName}/${projectName}`);
     } else {
