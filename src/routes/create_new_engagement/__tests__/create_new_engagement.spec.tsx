@@ -9,6 +9,7 @@ import {
 } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import { AnalyticsProvider } from '../../../context/analytics_context/analytics_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 const getById = queryByAttribute.bind(null, 'id');
 
@@ -32,35 +33,37 @@ describe('Create New Engagement Route', () => {
     await act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('project-name')).toBeDefined();
-    })
+    });
   });
   test('should have a field for a customer name', async () => {
     await act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('customer-name')).toBeDefined();
-    })
+    });
   });
   test('should have a field for a region name', async () => {
     await act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('region')).toBeDefined();
-    })
+    });
   });
   test('clicking the submit button creates a new engagement', async () => {
     const createEngagement = jest.fn();
     const Component = () => (
       <MemoryRouter>
-        <EngagementContext.Provider
-          value={{
-            engagements: [{ customer_name: 'a' }],
-            getEngagements: async () => [],
-            createEngagement,
-            getConfig: () => { },
-            engagementFormConfig: EngagementFormConfig.fromFake(),
-          }}
-        >
-          <CreateNewEngagement />
-        </EngagementContext.Provider>
+        <AnalyticsProvider analyticsService={{ logEvent: () => {} }}>
+          <EngagementContext.Provider
+            value={{
+              engagements: [{ customer_name: 'a' }],
+              getEngagements: async () => [],
+              createEngagement,
+              getConfig: () => {},
+              engagementFormConfig: EngagementFormConfig.fromFake(),
+            }}
+          >
+            <CreateNewEngagement />
+          </EngagementContext.Provider>
+        </AnalyticsProvider>
       </MemoryRouter>
     );
 
