@@ -6,7 +6,6 @@ on:
       - deployment/**
       - design/**
       - README.md
-
 jobs:
   local-build:
     runs-on: ubuntu-latest
