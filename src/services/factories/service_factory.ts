@@ -10,9 +10,12 @@ import { FakedVersionService } from '../version_service/implementations/faked_ve
 import { Apiv1VersionService } from '../version_service/implementations/apiv1_version_service';
 import { FakedNotificationService } from '../notification_service/implementations/faked_notification_service';
 import { Config } from '../../schemas/config';
-import { CategoryService } from "../category_service/category_service";
-import { Apiv1CategoryService } from "../category_service/implementations/apiv1_category_service";
-import { FakedCategoryService } from "../category_service/implementations/faked_category_service";
+import { CategoryService } from '../category_service/category_service';
+import { Apiv1CategoryService } from '../category_service/implementations/apiv1_category_service';
+import { FakedCategoryService } from '../category_service/implementations/faked_category_service';
+import { AnalyticsService } from '../analytics_service/analytics_service';
+import { GoogleAnalytics } from '../analytics_service/google_analytics';
+import { FakedAnalytics } from '../analytics_service/faked_analytics';
 
 export type ServiceFactory = () => {
   engagementService: EngagementService;
@@ -20,10 +23,14 @@ export type ServiceFactory = () => {
   versionService: VersionService;
   notificationService: NotificationService;
   categoryService: CategoryService;
+  analyticsService: AnalyticsService;
 };
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
   return {
+    analyticsService: new GoogleAnalytics({
+      trackingCode: config.analyticsTrackingCode,
+    }),
     authService: new Apiv1AuthService(config),
     engagementService: new Apiv1EngagementService(config.backendUrl),
     notificationService: new FakedNotificationService(),
@@ -40,6 +47,7 @@ export const createFakedServices = (
   params: FakedServiceFactoryParams
 ): ServiceFactory => () => {
   return {
+    analyticsService: new FakedAnalytics(),
     authService: new FakedAuthService(),
     engagementService: new FakedEngagementService(params.shouldUseStaticData),
     notificationService: new FakedNotificationService(),

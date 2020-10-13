@@ -98,7 +98,17 @@ export function LodestarRouter() {
                             </PrivateRoute>
                             <PrivateRoute
                               path="/app/engagements/:customer_name/:project_name"
-                              component={() => <EngagementContext.Consumer>{(engagementContext) => <EngagementFormProvider engagementContext={engagementContext} ><EngagementDetailView /></EngagementFormProvider>}</EngagementContext.Consumer>}
+                              component={() => (
+                                <EngagementContext.Consumer>
+                                  {engagementContext => (
+                                    <EngagementFormProvider
+                                      engagementContext={engagementContext}
+                                    >
+                                      <EngagementDetailView />
+                                    </EngagementFormProvider>
+                                  )}
+                                </EngagementContext.Consumer>
+                              )}
                             />
                           </Switch>
                         </ModalVisibilityProvider>
