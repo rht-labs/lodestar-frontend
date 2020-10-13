@@ -8,22 +8,6 @@ on:
       - README.md
 
 jobs:
-  check-links:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-  #    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
-  # fails with message TypeError: Cannot read property 'get' of undefined
-  linting:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-  #     - name: run-linter
-  #       run: |
-  #         yarn install
-  #         yarn lint
-  #       env:
-  #         CI: true
   local-build:
     runs-on: ubuntu-latest
 
@@ -61,7 +45,7 @@ jobs:
           path: build/
       - uses: vrutkovs/action-s2i@master
         with:
-          path: "./build"
+          path: './build'
           base: registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4
           image: lodestar-frontend:latest
       - name: Export Container Image
@@ -71,39 +55,4 @@ jobs:
         with:
           name: lodestar-frontend.tar
           path: lodestar-frontend.tar
-#  security-scan:
-#    runs-on: ubuntu-latest
-#    needs: local-build
-#    steps:
-#    - uses: actions/download-artifact@v2
-#      with:
-#        name: lodestar-frontend.tar
-#    - name: Load Container Image
-#      run: |
-#        docker load --input lodestar-frontend.tar
-#    - uses: anchore/scan-action@master
-#      with:
-#        image-reference: "lodestar-frontend:latest"
-#        fail-build: false
-#        include-app-packages: true
-#      id: vuln_scan
-#    - run: |
-#        echo ::set-output name=numVuln::$(jq --raw-output '.vulnerabilities | length' ${{steps.vuln_scan.outputs.vulnerabilities}})
-#        echo ::set-output name=highVuln::$(jq 'reduce .vulnerabilities[] as $s(0; if $s.severity == "High" then .+1 else . end)' ${{steps.vuln_scan.outputs.vulnerabilities}})
-#        echo ::set-output name=medVuln::$(jq 'reduce .vulnerabilities[] as $s(0; if $s.severity == "Medium" then .+1 else . end)' ${{steps.vuln_scan.outputs.vulnerabilities}})
-#        echo ::set-output name=lowVuln::$(jq 'reduce .vulnerabilities[] as $s(0; if $s.severity == "Low" then .+1 else . end)' ${{steps.vuln_scan.outputs.vulnerabilities}})
-#        echo ::set-output name=highPkg::$(jq --raw-output '.vulnerabilities[] | select(.severity == "High") | "|" + .package + "|" + .vuln + "|" + .url + "|\n"' ${{steps.vuln_scan.outputs.vulnerabilities}})
-#      id: vuln_out
-#    - run: |
-#        echo ${{secrets.ACTIONS_TOKEN}}
-#    - uses: actions/github-script@0.9.0
-#      with:
-#        github-token: ${{secrets.ACTIONS_TOKEN}}
-#        script: |
-#          github.issues.createComment({
-#            issue_number: context.issue.number,
-#            owner: context.repo.owner,
-#            repo: context.repo.repo,
-#            body: "There are ${{steps.vuln_out.outputs.numVuln}} vulnerabilities present in this image\n\n🟡 There are ${{steps.vuln_out.outputs.lowVuln}} low vulnerabilities\n🟠 There are ${{steps.vuln_out.outputs.medVuln}} medium vulnerabilities\n🔴 There are ${{steps.vuln_out.outputs.highVuln}} high vulnerabilities"
-#          })
 
