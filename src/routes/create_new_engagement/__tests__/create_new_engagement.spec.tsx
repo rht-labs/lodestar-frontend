@@ -9,9 +9,10 @@ import {
 } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import { AnalyticsProvider } from '../../../context/analytics_context/analytics_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import {APP_FEATURES} from "../../../common/app_features";
-import {FeatureToggles} from "../../../context/feature_context/feature_toggles";
+import { APP_FEATURES } from '../../../common/app_features';
+import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
 const getById = queryByAttribute.bind(null, 'id');
 
 describe('Create New Engagement Route', () => {
@@ -34,37 +35,41 @@ describe('Create New Engagement Route', () => {
     await act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('project-name')).toBeDefined();
-    })
+    });
   });
   test('should have a field for a customer name', async () => {
     await act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('customer-name')).toBeDefined();
-    })
+    });
   });
   test('should have a field for a region name', async () => {
     await act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('region')).toBeDefined();
-    })
+    });
   });
   test('clicking the submit button creates a new engagement', async () => {
     const createEngagement = jest.fn();
     const Component = () => (
       <MemoryRouter>
-        <EngagementContext.Provider
-          value={{
-            engagements: [{ customer_name: 'a' }],
-            getEngagements: async () => [],
-            createEngagement,
-            getConfig: () => { },
-            engagementFormConfig: EngagementFormConfig.fromFake(),
-          }}
-        >
-          <FeatureToggles features={[APP_FEATURES.writer, APP_FEATURES.reader]}>
-            <CreateNewEngagement />
-          </FeatureToggles>
-        </EngagementContext.Provider>
+        <AnalyticsProvider analyticsService={{ logEvent: () => {} }}>
+          <EngagementContext.Provider
+            value={{
+              engagements: [{ customer_name: 'a' }],
+              getEngagements: async () => [],
+              createEngagement,
+              getConfig: () => {},
+              engagementFormConfig: EngagementFormConfig.fromFake(),
+            }}
+          >
+            <FeatureToggles
+              features={[APP_FEATURES.writer, APP_FEATURES.reader]}
+            >
+              <CreateNewEngagement />
+            </FeatureToggles>
+          </EngagementContext.Provider>
+        </AnalyticsProvider>
       </MemoryRouter>
     );
 
@@ -87,7 +92,7 @@ describe('Create New Engagement Route', () => {
         target: { value: 'na' },
       });
 
-      wrapper.rerender(<Component />)
+      wrapper.rerender(<Component />);
 
       const createButton = wrapper.getByTestId('create-engagement-button');
       fireEvent.click(createButton);

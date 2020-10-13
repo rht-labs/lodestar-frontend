@@ -1,4 +1,5 @@
+import { AnalyticsEvent } from '../../schemas/analytics';
 export interface AnalyticsService {
-  logEvent(eventName: string, data: object): void;
+  logEvent(event: AnalyticsEvent): void;
   logPageView(path: string): void;
 }

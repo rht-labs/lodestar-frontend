@@ -1,8 +1,9 @@
 import React from 'react';
 import { AnalyticsService } from '../../services/analytics_service/analytics_service';
+import { AnalyticsEvent } from '../../schemas/analytics';
 
 export interface AnalyticsContext {
-  logEvent(eventName: string, data: object): void;
+  logEvent(event: AnalyticsEvent): void;
   logPageView(path: string): void;
 }
 

@@ -21,6 +21,12 @@ import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 import { EngagementFormProvider } from '../context/engagement_form_context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context/engagement_context';
+import { useSession } from '../context/auth_context/auth_context';
+
+function WhatsMyToken() {
+  const { sessionData } = useSession();
+  return <pre>{sessionData?.tokens?.accessToken}</pre>;
+}
 
 export function LodestarRouter() {
   const { fetchNotifications } = useNotification();
@@ -34,6 +40,7 @@ export function LodestarRouter() {
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
+      <PrivateRoute path="/whatsmytoken" component={WhatsMyToken} />
       <PrivateRoute path="/app">
         <MainTemplate>
           <ErrorBoundary>
