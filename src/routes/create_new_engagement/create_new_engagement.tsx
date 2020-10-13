@@ -23,6 +23,8 @@ import { CustomerSelectDropdown } from '../../components/customer_select_dropdow
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
+import {APP_FEATURES} from "../../common/app_features";
+import {Feature} from "../../components/feature/feature";
 
 export function CreateNewEngagement() {
   const { engagementFormConfig, getConfig } = useEngagements();
@@ -244,7 +246,7 @@ export function CreateNewEngagementForm() {
                             label={r.label}
                             key={r.value}
                             value={r.value}
-                          ></FormSelectOption>
+                          />
                         );
                       }
                     )
@@ -278,22 +280,24 @@ export function CreateNewEngagementForm() {
                           label={r.label}
                           key={r.value}
                           value={r.value}
-                        ></FormSelectOption>
+                        />
                       );
                     }
                   )}
                 </FormSelect>
               </FormGroup>
             </Form>
-            <Button
-              data-testid="create-engagement-button"
-              data-cy="createNewEngagement"
-              style={{ margin: '1rem 0' }}
-              isDisabled={!hasValidInput}
-              onClick={submitNewEngagement}
-            >
-              Submit
-            </Button>
+            <Feature name={APP_FEATURES.writer}>
+              <Button
+                data-testid="create-engagement-button"
+                data-cy="createNewEngagement"
+                style={{ margin: '1rem 0' }}
+                isDisabled={!hasValidInput}
+                onClick={submitNewEngagement}
+              >
+                Submit
+              </Button>
+            </Feature>
           </GridItem>
         </Grid>
       </PageSection>
