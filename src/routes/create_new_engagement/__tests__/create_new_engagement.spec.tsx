@@ -30,17 +30,23 @@ describe('Create New Engagement Route', () => {
       expect(rendered).toMatchSnapshot();
     });
   });
-  test('should have a field for a project name', () => {
-    const wrapper = render(getComponent());
-    expect(wrapper.getByTestId('project-name')).toBeDefined();
+  test('should have a field for a project name', async () => {
+    await act(async () => {
+      const wrapper = render(getComponent());
+      expect(wrapper.getByTestId('project-name')).toBeDefined();
+    })
   });
-  test('should have a field for a customer name', () => {
-    const wrapper = render(getComponent());
-    expect(wrapper.getByTestId('customer-name')).toBeDefined();
+  test('should have a field for a customer name', async () => {
+    await act(async () => {
+      const wrapper = render(getComponent());
+      expect(wrapper.getByTestId('customer-name')).toBeDefined();
+    })
   });
-  test('should have a field for a region name', () => {
-    const wrapper = render(getComponent());
-    expect(wrapper.getByTestId('region')).toBeDefined();
+  test('should have a field for a region name', async () => {
+    await act(async () => {
+      const wrapper = render(getComponent());
+      expect(wrapper.getByTestId('region')).toBeDefined();
+    })
   });
   test('clicking the submit button creates a new engagement', async () => {
     const createEngagement = jest.fn();
@@ -51,7 +57,7 @@ describe('Create New Engagement Route', () => {
             engagements: [{ customer_name: 'a' }],
             getEngagements: async () => [],
             createEngagement,
-            getConfig: () => {},
+            getConfig: () => { },
             engagementFormConfig: EngagementFormConfig.fromFake(),
           }}
         >
@@ -62,8 +68,8 @@ describe('Create New Engagement Route', () => {
       </MemoryRouter>
     );
 
-    const wrapper = render(<Component />);
-    act(async () => {
+    await act(async () => {
+      const wrapper = render(<Component />);
       const customerNameField = wrapper
         .getByTestId('customer-name')
         .getElementsByTagName('input')[0];
