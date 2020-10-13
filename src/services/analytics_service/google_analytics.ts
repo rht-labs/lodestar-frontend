@@ -6,6 +6,7 @@ export interface GoogleAnalyticsOptions {
 }
 export class GoogleAnalytics implements AnalyticsService {
   constructor(options: GoogleAnalyticsOptions) {
+    console.log(options);
     ReactGA.initialize(options.trackingCode);
   }
   logEvent(eventName: string, data: object) {
@@ -13,5 +14,6 @@ export class GoogleAnalytics implements AnalyticsService {
   }
   logPageView(path: string) {
     console.log('page view', path);
+    ReactGA.pageview(path);
   }
 }
