@@ -8,6 +8,8 @@ import {
   TachometerAltIcon,
   PlusIcon,
 } from '@patternfly/react-icons';
+import { Feature } from '../feature/feature';
+import { APP_FEATURES } from '../../common/app_features';
 
 export const EngagementNavigation = () => {
   const { pathname } = useLocation();
@@ -69,16 +71,18 @@ export const EngagementNavigation = () => {
                 Past
               </Link>
             </NavItem>
-            <NavItem
-              id="New"
-              itemId={0}
-              isActive={pathname === '/app/engagements/new'}
-            >
-              <Link to="/app/engagements/new">
-                <PlusIcon style={{ marginRight: '1rem' }} />
-                Create New
-              </Link>
-            </NavItem>
+            <Feature name={APP_FEATURES.writer}>
+              <NavItem
+                id="New"
+                itemId={0}
+                isActive={pathname === '/app/engagements/new'}
+              >
+                <Link to="/app/engagements/new">
+                  <PlusIcon style={{ marginRight: '1rem' }} />
+                  Create New
+                </Link>
+              </NavItem>
+            </Feature>
           </NavExpandable>
         </NavList>
       </Nav>
