@@ -10,6 +10,8 @@ import {
 import { MemoryRouter } from 'react-router';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import {APP_FEATURES} from "../../../common/app_features";
+import {FeatureToggles} from "../../../context/feature_context/feature_toggles";
 const getById = queryByAttribute.bind(null, 'id');
 
 describe('Create New Engagement Route', () => {
@@ -53,7 +55,9 @@ describe('Create New Engagement Route', () => {
             engagementFormConfig: EngagementFormConfig.fromFake(),
           }}
         >
-          <CreateNewEngagement />
+          <FeatureToggles features={[APP_FEATURES.writer, APP_FEATURES.reader]}>
+            <CreateNewEngagement />
+          </FeatureToggles>
         </EngagementContext.Provider>
       </MemoryRouter>
     );
@@ -76,7 +80,9 @@ describe('Create New Engagement Route', () => {
       await fireEvent.change(wrapper.getByTestId('region'), {
         target: { value: 'na' },
       });
-      wrapper.rerender(<Component />);
+
+      wrapper.rerender(<Component />)
+
       const createButton = wrapper.getByTestId('create-engagement-button');
       fireEvent.click(createButton);
       expect(createEngagement).toHaveBeenCalledWith({
