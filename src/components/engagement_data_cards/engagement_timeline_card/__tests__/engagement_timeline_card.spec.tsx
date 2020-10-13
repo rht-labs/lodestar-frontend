@@ -20,7 +20,6 @@ describe('Engagement timeline card', () => {
     );
 
     const wrapper = render(<Component />);
-    // expect(wrapper.findByTestId('artifact-action-kebab')).
     expect(wrapper.findByTestId('artifact-action-kebab')).toMatchObject({})
   });
 
