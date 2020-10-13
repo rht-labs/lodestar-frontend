@@ -8,6 +8,8 @@ import { EngagementCategory } from "../../schemas/engagement_category";
 import {Engagement} from "../../schemas/engagement";
 import {CategoryTypehead} from "./category_typehead";
 import {useEngagements} from "../../context/engagement_context/engagement_hook";
+import {APP_FEATURES} from "../../common/app_features";
+import {Feature} from "../feature/feature";
 
 export function EngagementEditableCategories ({
   engagementCategories,
@@ -56,12 +58,14 @@ export function EngagementEditableCategories ({
             Add new tag
           </Label>
         }
-        <PencilAltIcon onClick={e => setEditMode(!editMode)}
-                       style={{
-                         fontSize: 'small',
-                         margin: '-0.1rem 0.5rem',
-                         cursor: 'pointer',
-                         color: '#0066CC'}}/>
+        <Feature name={APP_FEATURES.writer}>
+          <PencilAltIcon onClick={e => setEditMode(!editMode)}
+                         style={{
+                           fontSize: 'small',
+                           margin: '-0.1rem 0.5rem',
+                           cursor: 'pointer',
+                           color: '#0066CC'}}/>
+        </Feature>
       </>
     )};
 

@@ -60,19 +60,7 @@ Object {
         <div
           class="pf-c-alert__action-group"
         >
-          <div>
-            <button
-              aria-disabled="false"
-              class="pf-c-button pf-m-primary"
-              data-cy="launch_button"
-              data-ouia-component-id="1"
-              data-ouia-component-type="PF4/Button"
-              data-ouia-safe="true"
-              type="button"
-            >
-              Launch
-            </button>
-          </div>
+          <div />
         </div>
       </div>
     </div>
@@ -133,19 +121,7 @@ Object {
       <div
         class="pf-c-alert__action-group"
       >
-        <div>
-          <button
-            aria-disabled="false"
-            class="pf-c-button pf-m-primary"
-            data-cy="launch_button"
-            data-ouia-component-id="1"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            type="button"
-          >
-            Launch
-          </button>
-        </div>
+        <div />
       </div>
     </div>
   </div>,
