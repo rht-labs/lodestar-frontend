@@ -19,7 +19,7 @@ import {
   TextInput,
   Text,
 } from '@patternfly/react-core';
-import { useAnalytics } from '../../context/analytics_context/analytics_hook';
+import { useAnalytics } from '../../context/analytics_context/analytics_context';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 import { useValidation } from '../../context/validation_context/validation_hook';

@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
-import {Button, Flex, FlexItem, Select, SelectOption, SelectVariant} from '@patternfly/react-core';
-import {EngagementCategory} from "../../schemas/engagement_category";
+import {
+  Button,
+  Flex,
+  FlexItem,
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core';
+import { EngagementCategory } from '../../schemas/engagement_category';
 
 export interface CategoryTypeheadProps {
   engagementCategories: string[];
   allCategories: EngagementCategory[];
-  saveAndCloseEditMode: ( selectedChips: string[]) => void;
+  saveAndCloseEditMode: (selectedChips: string[]) => void;
   cancelEdit: () => void;
 }
 
-export function CategoryTypehead({engagementCategories,
-                                  cancelEdit,
-                                  saveAndCloseEditMode,
-                                  allCategories} : CategoryTypeheadProps) {
+export function CategoryTypehead({
+  engagementCategories,
+  cancelEdit,
+  saveAndCloseEditMode,
+  allCategories,
+}: CategoryTypeheadProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(engagementCategories);
 
-  const onToggle = isOpen => { setIsOpen(isOpen) };
+  const onToggle = isOpen => {
+    setIsOpen(isOpen);
+  };
 
   const onSelect = (event, selection) => {
     if (selected.includes(selection)) {
       setSelected([...selected.filter(item => item !== selection)]);
-    }
-    else {
+    } else {
       setSelected([...selected, selection]);
     }
   };
@@ -45,20 +55,22 @@ export function CategoryTypehead({engagementCategories,
           isCreatable={true}
         >
           {allCategories?.map((category, index) => (
-            <SelectOption key={index} value={category.name}/>
+            <SelectOption key={index} value={category.name} />
           ))}
         </Select>
       </FlexItem>
       <FlexItem>
-        <Button variant="secondary"
-                isInline
-                key={'saveCategories'}
-                style={{ minWidth: '2rem'}}
-                onClick={() => saveAndCloseEditMode(selected)}
+        <Button
+          variant="secondary"
+          isInline
+          key={'saveCategories'}
+          style={{ minWidth: '2rem' }}
+          onClick={() => saveAndCloseEditMode(selected)}
         >
           Save
         </Button>
       </FlexItem>
     </Flex>
   );
-};
+}
+

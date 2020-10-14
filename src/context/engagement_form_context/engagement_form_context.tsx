@@ -8,6 +8,10 @@ import React, {
 import { Engagement } from '../../schemas/engagement';
 import { EngagementContext } from '../engagement_context/engagement_context';
 import {
+  AnalyticsContext,
+  AnalyticsCategory,
+} from '../analytics_context/analytics_context';
+import {
   engagementFormReducer,
   getInitialState,
 } from '../engagement_context/engagement_form_reducer';
@@ -15,7 +19,10 @@ import {
 export interface EngagementFormContext {
   currentChanges: Engagement;
   clearCurrentChanges: () => void;
-  updateEngagementFormField: (fieldName: keyof Engagement, payload: any) => void;
+  updateEngagementFormField: (
+    fieldName: keyof Engagement,
+    payload: any
+  ) => void;
   fieldGroups: { [key: string]: string[] };
   saveChanges: () => void;
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
@@ -26,9 +33,11 @@ export const EngagementFormContext = createContext<EngagementFormContext>(null);
 export const EngagementFormProvider = ({
   children,
   engagementContext,
+  analyticsContext,
 }: {
   children: any;
   engagementContext: EngagementContext;
+  analyticsContext?: AnalyticsContext;
 }) => {
   const {
     saveEngagement,
@@ -61,8 +70,14 @@ export const EngagementFormProvider = ({
         setChangedFields([...changedFields, fieldName]);
       }
       dispatch({ type: fieldName, payload: value });
+      try {
+        analyticsContext.logEvent({
+          category: AnalyticsCategory.engagements,
+          action: 'Update Engagement',
+        });
+      } catch (e) {}
     },
-    [changedFields]
+    [analyticsContext, changedFields]
   );
   const _createCommitMessage = (
     changedFields: string[],
@@ -91,8 +106,10 @@ export const EngagementFormProvider = ({
       commitMessage
     );
     setChangedFields([]);
-    dispatch({ type: 'switch_engagement', payload: getInitialState(currentEngagement) })
-
+    dispatch({
+      type: 'switch_engagement',
+      payload: getInitialState(currentEngagement),
+    });
   };
   return (
     <EngagementFormContext.Provider
