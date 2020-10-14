@@ -15,7 +15,10 @@ import {
   FeedbackContext,
   FeedbackProvider,
 } from './context/feedback_context/feedback_context';
-import { AnalyticsProvider } from './context/analytics_context/analytics_context';
+import {
+  AnalyticsProvider,
+  AnalyticsContext,
+} from './context/analytics_context/analytics_context';
 import { NotificationProvider } from './context/notification_context/notification_context';
 import { useConfig } from './context/config_context/config_hook';
 import {
@@ -57,33 +60,40 @@ export const App = ({ config }: { config: Config }) => {
                       />
                     );
                   })}
-                  <FeedbackProvider>
-                    <AuthProvider authService={authService}>
-                      <NotificationProvider
-                        notificationService={notificationService}
-                      >
-                        <VersionProvider versionService={versionService}>
-                          <FeatureToggles>
-                            <Router>
-                              <FeedbackContext.Consumer>
-                                {feedbackContext => (
-                                  <EngagementProvider
-                                    feedbackContext={feedbackContext}
-                                    engagementService={engagementService}
-                                    categoryService={categoryService}
-                                  >
-                                    <NavigationAnalytics>
-                                      <LodestarRouter />
-                                    </NavigationAnalytics>
-                                  </EngagementProvider>
-                                )}
-                              </FeedbackContext.Consumer>
-                            </Router>
-                          </FeatureToggles>
-                        </VersionProvider>
-                      </NotificationProvider>
-                    </AuthProvider>
-                  </FeedbackProvider>
+                  <AnalyticsContext.Consumer>
+                    {analyticsContext => (
+                      <FeedbackProvider>
+                        <AuthProvider
+                          authService={authService}
+                          analyticsContext={analyticsContext}
+                        >
+                          <NotificationProvider
+                            notificationService={notificationService}
+                          >
+                            <VersionProvider versionService={versionService}>
+                              <FeatureToggles>
+                                <Router>
+                                  <FeedbackContext.Consumer>
+                                    {feedbackContext => (
+                                      <EngagementProvider
+                                        feedbackContext={feedbackContext}
+                                        engagementService={engagementService}
+                                        categoryService={categoryService}
+                                      >
+                                        <NavigationAnalytics>
+                                          <LodestarRouter />
+                                        </NavigationAnalytics>
+                                      </EngagementProvider>
+                                    )}
+                                  </FeedbackContext.Consumer>
+                                </Router>
+                              </FeatureToggles>
+                            </VersionProvider>
+                          </NotificationProvider>
+                        </AuthProvider>
+                      </FeedbackProvider>
+                    )}
+                  </AnalyticsContext.Consumer>
                 </>
               </AnalyticsProvider>
             );

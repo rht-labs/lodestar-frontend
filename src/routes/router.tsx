@@ -40,7 +40,6 @@ export function LodestarRouter() {
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
-      <PrivateRoute path="/whatsmytoken" component={WhatsMyToken} />
       <PrivateRoute path="/app">
         <MainTemplate>
           <ErrorBoundary>
@@ -57,6 +56,10 @@ export function LodestarRouter() {
                     <Switch>
                       {/* else, show an authorized route */}
                       <Redirect exact from="/app" to="/app/dashboard" />
+                      <PrivateRoute
+                        path="/app/whatsmytoken"
+                        component={WhatsMyToken}
+                      />
                       <Route
                         path="/app/requestfeature"
                         component={FeatureRequest}
