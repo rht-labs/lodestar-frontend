@@ -13,8 +13,7 @@ import { EngagementStatusSelect } from './components/engagement_status_select';
 import { SearchIcon } from '@patternfly/react-icons';
 import { EngagementRegionSelect } from './components/region_select';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { useAnalytics } from '../../context/analytics_context/analytics_hook';
-import { AnalyticsCategory } from '../../schemas/analytics';
+import { useAnalytics, AnalyticsCategory } from '../../context/analytics_context/analytics_context';
 
 export interface EngagementFilterProps {
   onChange: (filter: EngagementFilter) => void;

@@ -12,6 +12,10 @@ import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_aler
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
 import { EngagementEditableCategories } from '../components/engagement_categories/engagement_editable_categories';
+import {
+  useAnalytics,
+  AnalyticsCategory,
+} from '../context/analytics_context/analytics_context';
 
 export function EngagementDetailsViewTemplate({
   engagement,
@@ -29,6 +33,8 @@ export function EngagementDetailsViewTemplate({
     requiredFields,
   } = useEngagements();
 
+  const { logEvent } = useAnalytics();
+
   return (
     <>
       <PageSection variant={PageSectionVariants.light}>
@@ -45,7 +51,13 @@ export function EngagementDetailsViewTemplate({
             <div style={{ marginTop: '1.5rem' }}>
               <EngagementEditableCategories
                 engagementCategories={engagement?.engagement_categories}
-                onSave={onSave}
+                onSave={engagement => {
+                  onSave(engagement);
+                  logEvent({
+                    category: AnalyticsCategory.engagements,
+                    action: 'Modified Engagement Tags',
+                  });
+                }}
                 engagement={engagement}
               />
             </div>

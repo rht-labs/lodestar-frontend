@@ -3,8 +3,10 @@ import { useSession } from '../../context/auth_context/auth_context';
 import { Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { UserProfile } from '../../schemas/user_profile';
-import { useAnalytics } from '../../context/analytics_context/analytics_hook';
-import { AnalyticsCategory } from '../../schemas/analytics';
+import {
+  useAnalytics,
+  AnalyticsCategory,
+} from '../../context/analytics_context/analytics_context';
 
 export interface UserDropdown {}
 

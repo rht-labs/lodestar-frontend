@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import { Header } from '../components/drawer_and_header/header';
 import { BlackDrawer } from '../components/drawer_and_header/black_drawer';
 import { EngagementNavigation } from '../components/drawer_and_header/engagement_navigation';
 import { Drawer, DrawerContent, Page } from '@patternfly/react-core';
-import { NotificationContent } from "../components/drawer_and_header/notification_content";
+import { NotificationContent } from '../components/drawer_and_header/notification_content';
 import { useNotification } from '../context/notification_context/notification_hook';
 
 export interface MainTemplateProps {
@@ -11,7 +11,6 @@ export interface MainTemplateProps {
 }
 
 export const MainTemplate = (props: MainTemplateProps) => {
-
   const { notifications } = useNotification();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true);
   const [isNotificationExpanded, setIsNotificationExpanded] = useState(false);
@@ -30,27 +29,30 @@ export const MainTemplate = (props: MainTemplateProps) => {
 
   return (
     <Page
-      header=
-        {
-          <Header isDrawerOpen={isDrawerOpen}
-                  onNavToggle={onNavToggle}
-                  onNotificationClick={onClick}
-          />
-        }
+      header={
+        <Header
+          isDrawerOpen={isDrawerOpen}
+          onNavToggle={onNavToggle}
+          onNotificationClick={onClick}
+        />
+      }
       style={{ height: '100vh' }}
       sidebar={
         <BlackDrawer isDrawerOpen={isDrawerOpen}>
-          <EngagementNavigation/>
+          <EngagementNavigation />
         </BlackDrawer>
       }
       isManagedSidebar
     >
-      <Drawer isExpanded={isNotificationExpanded}
-              id={'notification_drawer'}
-      >
-        <DrawerContent panelContent={
-          <NotificationContent onClose={onClose}
-                               notifications={notifications}/>}>
+      <Drawer isExpanded={isNotificationExpanded} id={'notification_drawer'}>
+        <DrawerContent
+          panelContent={
+            <NotificationContent
+              onClose={onClose}
+              notifications={notifications}
+            />
+          }
+        >
           {props.children}
         </DrawerContent>
       </Drawer>
