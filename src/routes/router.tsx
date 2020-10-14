@@ -57,6 +57,10 @@ export function LodestarRouter() {
                     <Switch>
                       {/* else, show an authorized route */}
                       <Redirect exact from="/app" to="/app/dashboard" />
+                      <PrivateRoute
+                        path="/app/whatsmytoken"
+                        component={WhatsMyToken}
+                      />
                       <Route
                         path="/app/requestfeature"
                         component={FeatureRequest}
