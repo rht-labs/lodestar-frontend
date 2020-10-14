@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
+import { AnalyticsCategory } from '../../schemas/analytics';
 import {
   PageSection,
   Title,
@@ -24,8 +25,8 @@ import { CustomerSelectDropdown } from '../../components/customer_select_dropdow
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
-import {APP_FEATURES} from "../../common/app_features";
-import {Feature} from "../../components/feature/feature";
+import { APP_FEATURES } from '../../common/app_features';
+import { Feature } from '../../components/feature/feature';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig, getConfig } = useEngagements();
@@ -72,7 +73,7 @@ export function CreateNewEngagementForm() {
       });
       logEvent({
         action: 'Create New Engagement',
-        category: 'Engagements',
+        category: AnalyticsCategory.engagements,
       });
       history.push(`/app/engagements/${customerName}/${projectName}`);
     } else {

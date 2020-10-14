@@ -40,16 +40,16 @@ function TestContexts({ children = null }) {
     analyticsService,
   } = useServiceProviders();
   return (
-    <FeedbackProvider>
-      <FeedbackContext.Consumer>
-        {feedbackContext => (
-          <AuthProvider authService={authService}>
-            <EngagementProvider
-              categoryService={categoryService}
-              feedbackContext={feedbackContext}
-              engagementService={engagementService}
-            >
-              <AnalyticsProvider analyticsService={analyticsService}>
+    <AnalyticsProvider analyticsService={analyticsService}>
+      <FeedbackProvider>
+        <FeedbackContext.Consumer>
+          {feedbackContext => (
+            <AuthProvider authService={authService}>
+              <EngagementProvider
+                categoryService={categoryService}
+                feedbackContext={feedbackContext}
+                engagementService={engagementService}
+              >
                 <VersionProvider versionService={versionService}>
                   <EngagementContext.Consumer>
                     {engagementContext => (
@@ -61,11 +61,11 @@ function TestContexts({ children = null }) {
                     )}
                   </EngagementContext.Consumer>
                 </VersionProvider>
-              </AnalyticsProvider>
-            </EngagementProvider>
-          </AuthProvider>
-        )}
-      </FeedbackContext.Consumer>
-    </FeedbackProvider>
+              </EngagementProvider>
+            </AuthProvider>
+          )}
+        </FeedbackContext.Consumer>
+      </FeedbackProvider>
+    </AnalyticsProvider>
   );
 }

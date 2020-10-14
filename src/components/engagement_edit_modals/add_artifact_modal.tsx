@@ -12,6 +12,8 @@ import {
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { Artifact, ArtifactType } from '../../schemas/engagement';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { useAnalytics } from '../../context/analytics_context/analytics_hook';
+import { AnalyticsCategory } from '../../schemas/analytics';
 
 export interface ArtifactEditModalProps {
   onClose: () => void;
@@ -23,6 +25,7 @@ export interface ArtifactEditModalProps {
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
   const { registerField } = FormManager.useFormGroupManager();
+  const { logEvent } = useAnalytics();
 
   useEffect(() => registerField('artifacts'), [registerField]);
 
@@ -40,6 +43,10 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
       ...(props.artifact ?? {}),
       ...artifactEdits,
     } as Artifact);
+    logEvent({
+      action: 'Add Artifact',
+      category: AnalyticsCategory.engagements,
+    });
     props.onClose?.();
   };
 

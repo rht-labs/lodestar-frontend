@@ -7,7 +7,10 @@ export interface AnalyticsContext {
   logPageView(path: string): void;
 }
 
-export const AnalyticsContext = React.createContext<AnalyticsContext>(null);
+export const AnalyticsContext = React.createContext<AnalyticsContext>({
+  logEvent: () => {},
+  logPageView: () => {},
+});
 
 export const AnalyticsProvider = ({
   children,
