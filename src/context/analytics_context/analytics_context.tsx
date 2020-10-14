@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AnalyticsService } from '../../services/analytics_service/analytics_service';
 import { AnalyticsEvent } from '../../schemas/analytics';
+
+export { AnalyticsCategory } from '../../schemas/analytics';
 
 export interface AnalyticsContext {
   logEvent(event: AnalyticsEvent): void;
@@ -25,3 +27,5 @@ export const AnalyticsProvider = ({
     </AnalyticsContext.Provider>
   );
 };
+
+export const useAnalytics = () => useContext(AnalyticsContext);

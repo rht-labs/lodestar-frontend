@@ -12,8 +12,7 @@ import {
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { Artifact, ArtifactType } from '../../schemas/engagement';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { useAnalytics } from '../../context/analytics_context/analytics_hook';
-import { AnalyticsCategory } from '../../schemas/analytics';
+import { useAnalytics, AnalyticsCategory } from '../../context/analytics_context/analytics_context';
 
 export interface ArtifactEditModalProps {
   onClose: () => void;
