@@ -40,6 +40,7 @@ export function LodestarRouter() {
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
+      <PrivateRoute path="/whatsmytoken" component={WhatsMyToken} />
       <PrivateRoute path="/app">
         <MainTemplate>
           <ErrorBoundary>
