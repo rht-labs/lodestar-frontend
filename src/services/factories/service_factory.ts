@@ -14,6 +14,7 @@ import { CategoryService } from '../category_service/category_service';
 import { Apiv1CategoryService } from '../category_service/implementations/apiv1_category_service';
 import { FakedCategoryService } from '../category_service/implementations/faked_category_service';
 import { AnalyticsService } from '../analytics_service/analytics_service';
+// import { GoogleAnalytics } from '../analytics_service/google_analytics';
 import { FakedAnalytics } from '../analytics_service/faked_analytics';
 import { MatomoAnalytics } from '../analytics_service/matomo_analytics';
 
