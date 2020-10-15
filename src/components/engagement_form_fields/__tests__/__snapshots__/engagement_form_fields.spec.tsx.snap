@@ -1142,10 +1142,9 @@ Object {
           >
             <option
               class=""
-              data-cy="none"
-              value="none"
+              value=""
             >
-              None
+              Select storage size
             </option>
             <option
               class=""
@@ -1223,10 +1222,9 @@ Object {
         >
           <option
             class=""
-            data-cy="none"
-            value="none"
+            value=""
           >
-            None
+            Select storage size
           </option>
           <option
             class=""

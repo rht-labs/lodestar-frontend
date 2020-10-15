@@ -365,7 +365,9 @@ Object {
                         <option
                           class=""
                           value=""
-                        />
+                        >
+                          Select storage size
+                        </option>
                       </select>
                       
                     </div>
