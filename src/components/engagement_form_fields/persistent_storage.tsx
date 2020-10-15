@@ -44,8 +44,13 @@ export function PersistentStorageFormField({
         onChange={e => onChange('ocp_persistent_storage_size', e)}
         value={engagement?.ocp_persistent_storage_size || ''}
       >
-        {engagementFormConfig?.openshift_options?.persistent_storage?.options
-          ?.length > 0 ? (
+        {[
+          <FormSelectOption
+            key={'undefined storage'}
+            label="Select storage size"
+            value={undefined}
+          />,
+        ].concat(
           engagementFormConfig?.openshift_options?.persistent_storage?.options?.map(
             (option: any, index: any) => (
               <FormSelectOption
@@ -56,10 +61,8 @@ export function PersistentStorageFormField({
                 data-cy={option.value}
               />
             )
-          )
-        ) : (
-          <FormSelectOption label={''} value={''} />
-        )}
+          ))
+        }
       </FormSelect>
     </FormGroup>
   );
