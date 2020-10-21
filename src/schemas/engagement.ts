@@ -4,6 +4,7 @@ import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 import { EngagementCategory } from './engagement_category';
+import { HostingProvider } from './hosting_provider';
 
 export enum EngagementStatus {
   active = 'active',
@@ -71,16 +72,6 @@ export abstract class Artifact {
   }
 }
 
-export interface HostingProvider {
-  ocp_cloud_provider_name: string;
-  suggested_subdomain?: string;
-  ocp_cloud_provider_region: string;
-  ocp_cluster_size: string;
-  ocp_persistent_storage_size: string;
-  ocp_sub_domain: string;
-  ocp_version: string;
-}
-
 export interface EngagementOverview {
   additional_details: string;
   use_cases: EngagementUseCase[];
@@ -123,14 +114,14 @@ export interface EngagementState {
   mongo_id: string;
 }
 export interface Engagement
-  extends HostingProvider,
-    EngagementOverview,
+  extends EngagementOverview,
     EngagementState,
     EngagementDates,
     EngagementContacts,
     EngagementHistory {
   artifacts: Artifact[];
   engagement_users: EngagementUser[];
+  hosting_providers: HostingProvider[];
 }
 
 const regions = ['emea', 'latam', 'na', 'apac'];
@@ -211,16 +202,7 @@ export abstract class Engagement {
         ? 'Nashville, TN'
         : `${faker.address.city()}, ${faker.address.stateAbbr()}`,
       mongo_id: '1',
-      ocp_cloud_provider_name: staticData ? 'AWS' : 'AWS',
-      ocp_cloud_provider_region: staticData
-        ? 'N. Virginia'
-        : faker.lorem.word(),
-      ocp_cluster_size: staticData ? 'Large' : 'Large',
-      ocp_persistent_storage_size: staticData
-        ? '100G'
-        : `${faker.random.number()}G`,
-      ocp_sub_domain: staticData ? 'ordoabchao' : faker.lorem.word(),
-      ocp_version: staticData ? '4.4' : faker.random.number().toString(),
+      hosting_providers: [HostingProvider.fromFake(staticData)],
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
       public_reference: staticData ? false : faker.random.boolean(),

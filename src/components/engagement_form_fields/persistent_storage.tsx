@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
@@ -9,17 +8,20 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { HostingProvider } from '../../schemas/hosting_provider';
 
 interface PersistentStorageFormFieldProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
+  hostingProvider: HostingProvider;
+  onChange: (value: string) => void;
   engagementFormConfig: EngagementFormConfig;
+  isEngagementLaunched: boolean;
 }
 
 export function PersistentStorageFormField({
-  engagement,
+  hostingProvider,
   onChange,
   engagementFormConfig,
+  isEngagementLaunched,
 }: PersistentStorageFormFieldProps) {
   const { hasFeature } = useFeatures();
 
@@ -39,10 +41,12 @@ export function PersistentStorageFormField({
         id={'persistent_storage_dropdown'}
         isDisabled={
           engagementFormConfig?.openshift_options?.persistent_storage?.options
-            ?.length === 1 || !hasFeature(APP_FEATURES.writer)
+            ?.length === 1 ||
+          !hasFeature(APP_FEATURES.writer) ||
+          isEngagementLaunched
         }
-        onChange={e => onChange('ocp_persistent_storage_size', e)}
-        value={engagement?.ocp_persistent_storage_size || ''}
+        onChange={onChange}
+        value={hostingProvider?.ocp_persistent_storage_size || ''}
       >
         {[
           <FormSelectOption
@@ -61,8 +65,8 @@ export function PersistentStorageFormField({
                 data-cy={option.value}
               />
             )
-          ))
-        }
+          )
+        )}
       </FormSelect>
     </FormGroup>
   );

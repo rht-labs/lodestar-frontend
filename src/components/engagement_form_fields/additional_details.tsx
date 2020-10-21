@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import { APP_FEATURES } from '../../common/app_features';
-import { Engagement } from '../../schemas/engagement';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { HostingProvider } from '../../schemas/hosting_provider';
 
 export interface DescriptionFormFieldProps {
-  engagement: Engagement;
+  hostingProvider: HostingProvider;
   onChange: (fieldName: string, value: any) => void;
 }
 
@@ -25,9 +25,9 @@ export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
         id="additional_details"
         aria-label="Additional provisioning information"
         placeholder="Provide additional details"
-        value={props.engagement.additional_details || ''}
+        value={props.hostingProvider.additional_details || ''}
         resizeOrientation="vertical"
-        onChange={e => props.onChange('additional_details', e)}
+        onChange={e => props.onChange('', e)}
       />
     </FormGroup>
   );
