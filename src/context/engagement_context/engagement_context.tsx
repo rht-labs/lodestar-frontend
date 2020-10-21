@@ -8,6 +8,7 @@ import {
   FeedbackContext,
   AlertType,
 } from '../feedback_context/feedback_context';
+import { AnalyticsContext } from '../analytics_context/analytics_context';
 import { AuthenticationError } from '../../services/auth_service/auth_errors';
 import { useSession } from '../auth_context/auth_context';
 import {
@@ -79,6 +80,7 @@ export const EngagementProvider = ({
   engagementService: EngagementService;
   categoryService: CategoryService;
   feedbackContext: FeedbackContext;
+  analyticsContext?: AnalyticsContext;
 }) => {
   const [engagementFormConfig, setengagementFormConfig] = useState<
     EngagementFormConfig
@@ -116,7 +118,7 @@ export const EngagementProvider = ({
     };
   }, [authContext]);
 
-  const _validateAuthStatusRef = useRef(async () => { });
+  const _validateAuthStatusRef = useRef(async () => {});
 
   const getConfig = useCallback(async () => {
     await _validateAuthStatusRef.current();
@@ -311,7 +313,7 @@ export const EngagementProvider = ({
 
   const _checkLaunchReady = useCallback(() => {
     if (!currentEngagement) {
-      return false
+      return false;
     }
     let result = requiredFields.every(
       o =>

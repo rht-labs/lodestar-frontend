@@ -13,6 +13,7 @@ import { EngagementStatusSelect } from './components/engagement_status_select';
 import { SearchIcon } from '@patternfly/react-icons';
 import { EngagementRegionSelect } from './components/region_select';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { useAnalytics, AnalyticsCategory } from '../../context/analytics_context/analytics_context';
 
 export interface EngagementFilterProps {
   onChange: (filter: EngagementFilter) => void;
@@ -21,11 +22,19 @@ export interface EngagementFilterProps {
 }
 
 export function EngagementFilterBar({
-  onChange,
+  onChange: _propsOnChange,
   filter,
   engagementFormConfig,
 }: EngagementFilterProps) {
   const { searchTerm = '' } = filter ?? {};
+  const { logEvent } = useAnalytics();
+  const onChange = (filter: EngagementFilter) => {
+    _propsOnChange(filter);
+    logEvent({
+      category: AnalyticsCategory.search,
+      action: 'Filtered engagement list',
+    });
+  };
   return (
     <Flex justifyContent={{ default: 'justifyContentFlexStart' }}>
       <Flex
@@ -56,14 +65,22 @@ export function EngagementFilterBar({
         <FlexItem>
           <EngagementRegionSelect
             regions={
-              engagementFormConfig?.basic_information?.engagement_regions?.options ?? []
+              engagementFormConfig?.basic_information?.engagement_regions
+                ?.options ?? []
             }
-            onChange={onChange}
+            onChange={sortFilter => {
+              onChange(sortFilter);
+            }}
             filter={filter}
           />
         </FlexItem>
         <FlexItem>
-          <SortSelect onChange={onChange} filter={filter} />
+          <SortSelect
+            onChange={sortFilter => {
+              onChange(sortFilter);
+            }}
+            filter={filter}
+          />
         </FlexItem>
         <FlexItem>
           <Button

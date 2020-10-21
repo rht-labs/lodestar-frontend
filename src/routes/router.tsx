@@ -21,6 +21,12 @@ import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 import { EngagementFormProvider } from '../context/engagement_form_context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context/engagement_context';
+import { useSession } from '../context/auth_context/auth_context';
+
+function WhatsMyToken() {
+  const { sessionData } = useSession();
+  return <pre>{sessionData?.tokens?.accessToken}</pre>;
+}
 
 export function LodestarRouter() {
   const { fetchNotifications } = useNotification();
@@ -34,6 +40,7 @@ export function LodestarRouter() {
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
+      <PrivateRoute path="/whatsmytoken" component={WhatsMyToken} />
       <PrivateRoute path="/app">
         <MainTemplate>
           <ErrorBoundary>
@@ -50,6 +57,10 @@ export function LodestarRouter() {
                     <Switch>
                       {/* else, show an authorized route */}
                       <Redirect exact from="/app" to="/app/dashboard" />
+                      <PrivateRoute
+                        path="/app/whatsmytoken"
+                        component={WhatsMyToken}
+                      />
                       <Route
                         path="/app/requestfeature"
                         component={FeatureRequest}
@@ -98,7 +109,17 @@ export function LodestarRouter() {
                             </PrivateRoute>
                             <PrivateRoute
                               path="/app/engagements/:customer_name/:project_name"
-                              component={() => <EngagementContext.Consumer>{(engagementContext) => <EngagementFormProvider engagementContext={engagementContext} ><EngagementDetailView /></EngagementFormProvider>}</EngagementContext.Consumer>}
+                              component={() => (
+                                <EngagementContext.Consumer>
+                                  {engagementContext => (
+                                    <EngagementFormProvider
+                                      engagementContext={engagementContext}
+                                    >
+                                      <EngagementDetailView />
+                                    </EngagementFormProvider>
+                                  )}
+                                </EngagementContext.Consumer>
+                              )}
                             />
                           </Switch>
                         </ModalVisibilityProvider>

@@ -5,6 +5,8 @@ import { format } from 'date-fns';
 import { HealthStatus } from '../../schemas/cluster_status';
 import { useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
+import {APP_FEATURES} from "../../common/app_features";
+import {Feature} from "../feature/feature";
 
 interface LaunchAlertBannerProps {
   engagement: Engagement;
@@ -62,13 +64,15 @@ export function LaunchAlertBanner({
       actionLinks={
         !engagement?.launch ? (
           <div>
-            <Button
-              isDisabled={!isLaunchable}
-              onClick={() => onLaunch(engagement)}
-              data-cy={'launch_button'}
-            >
-              Launch
-            </Button>
+            <Feature name={APP_FEATURES.writer}>
+              <Button
+                isDisabled={!isLaunchable}
+                onClick={() => onLaunch(engagement)}
+                data-cy={'launch_button'}
+              >
+                Launch
+              </Button>
+            </Feature>
           </div>
         ) : (
           undefined

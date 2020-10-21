@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/auth_service/authentication_service';
+import { AnalyticsContext } from '../analytics_context/analytics_context';
+import { AnalyticsCategory } from '../../schemas/analytics';
 
 import { UserProfile } from '../../schemas/user_profile';
 import { UserToken, LocalStoragePersistence } from '../../schemas/user_token';
@@ -37,9 +39,11 @@ const { Provider } = AuthContext;
 export const AuthProvider = ({
   children,
   authService,
+  analyticsContext,
 }: {
   children: React.ReactChild;
   authService: AuthService;
+  analyticsContext?: AnalyticsContext;
 }) => {
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -62,12 +66,16 @@ export const AuthProvider = ({
           setSessionData(createSessionData(profile, userToken));
           return;
         }
+        analyticsContext?.logEvent?.({
+          category: AnalyticsCategory.profile,
+          action: 'Log In',
+        });
       } catch (e) {
         setAuthError(e);
         throw e;
       }
     },
-    [authService]
+    [analyticsContext, authService]
   );
 
   const logout = async () => {
