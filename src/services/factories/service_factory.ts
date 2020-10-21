@@ -14,9 +14,8 @@ import { CategoryService } from '../category_service/category_service';
 import { Apiv1CategoryService } from '../category_service/implementations/apiv1_category_service';
 import { FakedCategoryService } from '../category_service/implementations/faked_category_service';
 import { AnalyticsService } from '../analytics_service/analytics_service';
-// import { GoogleAnalytics } from '../analytics_service/google_analytics';
+import { GoogleAnalytics } from '../analytics_service/google_analytics';
 import { FakedAnalytics } from '../analytics_service/faked_analytics';
-import { MatomoAnalytics } from '../analytics_service/matomo_analytics';
 
 export type ServiceFactory = () => {
   engagementService: EngagementService;
@@ -29,10 +28,9 @@ export type ServiceFactory = () => {
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
   return {
-    //analyticsService: new GoogleAnalytics({
-    //trackingCode: config.analyticsTrackingCode,
-    //}),
-    analyticsService: new MatomoAnalytics(),
+    analyticsService: new GoogleAnalytics({
+      trackingCode: config.analyticsTrackingCode,
+    }),
     authService: new Apiv1AuthService(config),
     engagementService: new Apiv1EngagementService(config.backendUrl),
     notificationService: new FakedNotificationService(),
