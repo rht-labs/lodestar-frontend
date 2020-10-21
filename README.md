@@ -46,6 +46,8 @@ As a high-level overview, data flow through the system typically follows this pa
 
 ![Front End data flow](/documentation/FE_architecture.png?raw=true)
 
+The Redux documentation has an excellent [list of questions to ask](https://redux.js.org/faq/organizing-state) when determining if something should be considered global or component state.
+
 ## Tests
 
 Unit Tests are contained within the source code, rather than in a separate root `test` directory. Typically, tests will be included in a directory `__tests__` at the level of the code they are testing. 

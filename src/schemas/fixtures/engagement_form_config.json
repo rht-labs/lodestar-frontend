@@ -156,10 +156,6 @@
       ],
       "options": [
         {
-          "label": "None",
-          "value": "none"
-        },
-        {
           "label": "50GB",
           "value": "50G"
         },
