@@ -23,6 +23,8 @@ import {
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { PlusIcon, ClipboardCheckIcon } from '@patternfly/react-icons';
+import {APP_FEATURES} from "../../../common/app_features";
+import {Feature} from "../../feature/feature";
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
@@ -134,26 +136,28 @@ function EngagementTimelineCardBody(
     artifact.description,
     {
       title: (
-        <Dropdown
-          isPlain
-          dropdownItems={actionItems}
-          isOpen={idx === currentOpenDropdown}
-          onSelect={() => {
-            setCurrentOpenDropdown(undefined);
-            props.editArtifact(artifact);
-          }}
-          toggle={
-            <KebabToggle
-              onToggle={() =>
-                currentOpenDropdown === idx
-                  ? setCurrentOpenDropdown(undefined)
-                  : setCurrentOpenDropdown(idx)
+          <Feature name={APP_FEATURES.writer}>
+            <Dropdown
+              isPlain
+              dropdownItems={actionItems}
+              isOpen={idx === currentOpenDropdown}
+              onSelect={() => {
+                setCurrentOpenDropdown(undefined);
+                props.editArtifact(artifact);
+              }}
+              toggle={
+                <KebabToggle
+                  onToggle={() =>
+                    currentOpenDropdown === idx
+                      ? setCurrentOpenDropdown(undefined)
+                      : setCurrentOpenDropdown(idx)
+                  }
+                  id={`toggle-id-${idx}`}
+                  data-testid="artifact-action-kebab"
+                />
               }
-              id={`toggle-id-${idx}`}
-              data-testid="artifact-action-kebab"
-            ></KebabToggle>
-          }
-        />
+            />
+          </Feature>
       ),
     },
   ]);

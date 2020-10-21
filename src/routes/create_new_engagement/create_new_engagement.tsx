@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
+import { AnalyticsCategory } from '../../schemas/analytics';
 import {
   PageSection,
   Title,
@@ -18,11 +19,14 @@ import {
   TextInput,
   Text,
 } from '@patternfly/react-core';
+import { useAnalytics } from '../../context/analytics_context/analytics_context';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
+import { APP_FEATURES } from '../../common/app_features';
+import { Feature } from '../../components/feature/feature';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig, getConfig } = useEngagements();
@@ -34,7 +38,9 @@ export function CreateNewEngagement() {
     }
   }, [hasFetchedConfig, engagementFormConfig, getConfig]);
   return (
-    <ValidationProvider validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}>
+    <ValidationProvider
+      validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}
+    >
       <CreateNewEngagementForm />
     </ValidationProvider>
   );
@@ -52,6 +58,7 @@ export function CreateNewEngagementForm() {
   const [projectName, setProjectName] = useState(null);
   const [region, setRegion] = useState<string>();
   const [engagementType, setEngagementType] = useState<string>();
+  const { logEvent } = useAnalytics();
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
       await createEngagement({
@@ -63,6 +70,10 @@ export function CreateNewEngagementForm() {
           engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
             e => e.default
           )?.value,
+      });
+      logEvent({
+        action: 'Create New Engagement',
+        category: AnalyticsCategory.engagements,
       });
       history.push(`/app/engagements/${customerName}/${projectName}`);
     } else {
@@ -244,7 +255,7 @@ export function CreateNewEngagementForm() {
                             label={r.label}
                             key={r.value}
                             value={r.value}
-                          ></FormSelectOption>
+                          />
                         );
                       }
                     )
@@ -278,22 +289,24 @@ export function CreateNewEngagementForm() {
                           label={r.label}
                           key={r.value}
                           value={r.value}
-                        ></FormSelectOption>
+                        />
                       );
                     }
                   )}
                 </FormSelect>
               </FormGroup>
             </Form>
-            <Button
-              data-testid="create-engagement-button"
-              data-cy="createNewEngagement"
-              style={{ margin: '1rem 0' }}
-              isDisabled={!hasValidInput}
-              onClick={submitNewEngagement}
-            >
-              Submit
-            </Button>
+            <Feature name={APP_FEATURES.writer}>
+              <Button
+                data-testid="create-engagement-button"
+                data-cy="createNewEngagement"
+                style={{ margin: '1rem 0' }}
+                isDisabled={!hasValidInput}
+                onClick={submitNewEngagement}
+              >
+                Submit
+              </Button>
+            </Feature>
           </GridItem>
         </Grid>
       </PageSection>

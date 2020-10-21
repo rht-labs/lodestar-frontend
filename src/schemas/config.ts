@@ -5,6 +5,7 @@ export interface BannerMessage {
   backgroundcolor: string;
 }
 export interface Config {
+  analyticsTrackingCode: string;
   baseUrl: string;
   clientId: string;
   authBaseUrl: string;
@@ -19,6 +20,7 @@ export interface Config {
 export abstract class Config {
   public static fromFake(): Config {
     return {
+      analyticsTrackingCode: 'UA-FAKED',
       baseUrl: 'http://localhost:3000',
       clientId: 'lodestar',
       authBaseUrl:

@@ -18,6 +18,8 @@ import { Engagement } from '../../schemas/engagement';
 import { EngagementFilter } from '../../schemas/engagement_filter';
 import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 import { EngagementList } from '../../components/engagement_list/engagement_list';
+import {APP_FEATURES} from "../../common/app_features";
+import {Feature} from "../../components/feature/feature";
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
@@ -78,15 +80,17 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
               <Text component="p">{subtitle}</Text>
             </TextContent>
           </FlexItem>
-          <FlexItem>
-            <Button
-              onClick={() => history.push('/app/engagements/new')}
-              id={'button_create_new_engagement'}
-              data-cy="create-new-engagement"
-            >
-              Create New Engagement
-            </Button>
-          </FlexItem>
+          <Feature name={APP_FEATURES.writer}>
+            <FlexItem>
+                <Button
+                onClick={() => history.push('/app/engagements/new')}
+                id={'button_create_new_engagement'}
+                data-cy="create-new-engagement"
+              >
+                Create New Engagement
+              </Button>
+            </FlexItem>
+          </Feature>
         </Flex>
       </PageSection>
       <PageSection>
