@@ -8,6 +8,8 @@ import { EngagementStartEndDateFormField } from '../engagement_form_fields/engag
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 import { EngagementUseCaseField } from '../engagement_form_fields/use_case';
+import { CustomerNameFormField } from "../engagement_form_fields/customer_name";
+import { EngagementNameFormField } from "../engagement_form_fields/engagement_name";
 
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -47,6 +49,14 @@ export function EngagementSummaryEditModal(
         }
       >
         <Form>
+          <CustomerNameFormField
+            onChange={props.onChange}
+            engagement={props.engagement}
+          />
+          <EngagementNameFormField
+            onChange={props.onChange}
+            engagement={props.engagement}
+          />
           <EngagementUseCaseField
             onChange={(useCases: EngagementUseCase[]) =>
               props.onChange('use_cases', useCases)
