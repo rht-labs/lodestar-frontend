@@ -14,7 +14,6 @@ import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 import { HostingProvider } from '../../schemas/hosting_provider';
 export interface OpenShiftClusterEditModalProps {
-  onChange: (fieldName: string, value: any) => void;
   engagementFormConfig: EngagementFormConfig;
   hostingProvider: HostingProvider;
   isOpen: boolean;
@@ -52,7 +51,7 @@ export function OpenShiftClusterEditModal({
   );
 
   const onSave = () => {
-    propsOnSave(hostingProvider);
+    propsOnSave({ ...(propsHostingProvider ?? {}), ...hostingProvider });
     onClose();
   };
 
