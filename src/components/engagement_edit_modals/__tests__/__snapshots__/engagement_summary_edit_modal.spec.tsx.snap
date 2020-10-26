@@ -80,6 +80,76 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
+                        for="customerName"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Client Name
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <input
+                        aria-invalid="false"
+                        aria-label="engagement customer_name"
+                        class="pf-c-form-control"
+                        data-cy="customer_name_field"
+                        disabled=""
+                        id="customer_name"
+                        name="customer_name"
+                        type="text"
+                        value="NASA"
+                      />
+                      
+                    </div>
+                  </div>
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
+                        for="engagementName"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Engagement Name
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <input
+                        aria-invalid="false"
+                        aria-label="engagement_name"
+                        class="pf-c-form-control"
+                        data-cy="engagement_name_field"
+                        disabled=""
+                        id="engagement_name"
+                        name="engagement_name"
+                        type="text"
+                        value="Boots on the Moon"
+                      />
+                      
+                    </div>
+                  </div>
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
                         for="Engagement Use Cases"
                       >
                         <span
