@@ -13,7 +13,7 @@ export class FakedEngagementService implements EngagementService {
     return data;
   }
   async saveEngagement(data: Engagement): Promise<Engagement> {
-    return data as Engagement;
+    return data;
   }
   async launchEngagement(data: any): Promise<Engagement> {
     return {

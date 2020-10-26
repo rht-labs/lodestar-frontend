@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@patternfly/react-core": "^4.32.1",
+    "@patternfly/react-core": "^4.63.3",
     "@patternfly/react-icons": "^3.14.30",
     "@patternfly/react-table": "^4.15.5",
     "@testing-library/jest-dom": "^4.2.4",

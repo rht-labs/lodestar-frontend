@@ -7,7 +7,7 @@ import { HostingProvider } from '../../schemas/hosting_provider';
 
 export interface DescriptionFormFieldProps {
   hostingProvider: HostingProvider;
-  onChange: (fieldName: string, value: any) => void;
+  onChange: (value: string) => void;
 }
 
 export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
@@ -27,7 +27,7 @@ export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
         placeholder="Provide additional details"
         value={props.hostingProvider.additional_details || ''}
         resizeOrientation="vertical"
-        onChange={e => props.onChange('', e)}
+        onChange={props.onChange}
       />
     </FormGroup>
   );

@@ -1,5 +1,7 @@
 import faker from 'faker';
+import { uuid } from 'uuidv4';
 export interface HostingProvider {
+  id: string;
   additional_details?: string;
   ocp_cloud_provider_name: string;
   suggested_subdomain?: string;
@@ -13,6 +15,7 @@ export interface HostingProvider {
 export abstract class HostingProvider {
   static fromFake(staticData = false) {
     return {
+      id: uuid(),
       additional_details: staticData ? 'details' : faker.lorem.paragraph(),
       ocp_cloud_provider_name: staticData ? 'AWS' : 'AWS',
       ocp_cloud_provider_region: staticData

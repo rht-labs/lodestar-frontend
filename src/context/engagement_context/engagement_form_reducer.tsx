@@ -86,24 +86,6 @@ export const engagementFormReducer = (
     return state;
   }
   switch (action.type) {
-    case 'customer_name':
-      return {
-        ...state,
-        customer_name: action.payload,
-        suggested_subdomain: generateSuggestedSubdomain(
-          state?.project_name ?? '',
-          action.payload
-        ),
-      };
-    case 'project_name':
-      return {
-        ...state,
-        project_name: action.payload,
-        suggested_subdomain: generateSuggestedSubdomain(
-          action.payload,
-          state?.customer_name ?? ''
-        ),
-      };
     case 'start_date':
     case 'end_date':
     case 'archive_date':
@@ -119,6 +101,8 @@ export const engagementFormReducer = (
         }),
       };
     case 'additional_details':
+    case 'customer_name':
+    case 'project_name':
     case 'public_reference':
     case 'description':
     case 'location':
@@ -130,14 +114,10 @@ export const engagementFormReducer = (
     case 'engagement_users':
     case 'artifacts':
     case 'customer_contact_email':
-    case 'ocp_cloud_provider_name':
     case 'use_cases':
-    case 'ocp_cloud_provider_region':
-    case 'ocp_version':
-    case 'ocp_sub_domain':
-    case 'ocp_persistent_storage_size':
+    case 'hosting_providers':
     case 'engagement_categories':
-    case 'ocp_cluster_size':
+      console.log(action);
       return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
       return { ...state, ...action.payload };
