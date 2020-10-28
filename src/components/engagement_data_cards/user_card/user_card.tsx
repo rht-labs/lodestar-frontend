@@ -35,7 +35,7 @@ export function UserCard({
   return (
     <>
       <UserEditModal
-        onChange={(users) => onChange('engagement_users', users)}
+        onChange={users => onChange('engagement_users', users)}
         onSave={onSave}
         engagementFormConfig={engagementFormConfig}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
@@ -53,7 +53,7 @@ export function UserCard({
         title="Engagement Users"
       >
         <UserTable
-          users={engagement?.engagement_users}
+          users={engagement?.engagement_users ?? []}
           engagementFormConfig={engagementFormConfig}
         />
       </DataCard>
