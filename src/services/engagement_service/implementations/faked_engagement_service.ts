@@ -1,6 +1,6 @@
-import { EngagementService } from '../../engagement_service';
-import { Engagement } from '../../../../schemas/engagement';
-import { EngagementFormConfig } from '../../../../schemas/engagement_config';
+import { EngagementService } from '../engagement_service';
+import { Engagement } from '../../../schemas/engagement';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 export class FakedEngagementService implements EngagementService {
   constructor(private shouldUseStaticData: boolean = false) {}

@@ -90,7 +90,7 @@ export function UserEditModal({
         }
       >
         <div>
-          {!engagement.engagement_users.length ? (
+          {!engagement?.engagement_users?.length ? (
             <EmptyState>
               <EmptyStateIcon icon={UsersIcon} />
               <Title headingLevel="h4" size="lg">

@@ -101,16 +101,14 @@ export function EngagementOverview({
               <div id="oc_summary_card">
                 <FormManager.Group groupName="Hosting Environment">
                   <OpenShiftClusterSummaryCard
-                    onSave={hostingProviders =>
-                      {}
-                      // onSave({
-                      //   ...currentEngagementChanges,
-                      //   hosting_providers: hostingProviders,
-                      // })
-                    }
+                    onSave={hostingProviders => {
+                      onSave({
+                        ...currentEngagementChanges,
+                        hosting_providers: hostingProviders,
+                      });
+                    }}
                     onClear={clearCurrentChanges}
                     onChange={hostingProviders => {
-                      console.log('hosting providers', hostingProviders);
                       onChange('hosting_providers', hostingProviders);
                     }}
                     engagementFormConfig={engagementFormConfig}
