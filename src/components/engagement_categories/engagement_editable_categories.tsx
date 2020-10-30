@@ -17,6 +17,7 @@ export function EngagementEditableCategories({
   onSave: (engagement: Engagement) => void;
   engagement: Engagement;
 }) {
+  const { saveEngagement } = useEngagements();
   const [chips, setChips] = useState<string[]>([]);
   const [editMode, setEditMode] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
@@ -76,10 +77,10 @@ export function EngagementEditableCategories({
 
   const SaveAndCloseEditMode = (selectedChips: string[]) => {
     setEditMode(!editMode);
-    engagement.engagement_categories = selectedChips
-      .map(chip => [{ name: chip }])
-      .flat();
-    propsOnSave(engagement);
+    saveEngagement({
+      ...engagement,
+      engagement_categories: selectedChips.map(chip => ({ name: chip })),
+    });
   };
 
   const cancelEdit = () => {
@@ -103,4 +104,3 @@ export function EngagementEditableCategories({
     </>
   );
 }
-

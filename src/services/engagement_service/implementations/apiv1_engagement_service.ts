@@ -56,6 +56,7 @@ export class Apiv1EngagementService implements EngagementService {
     commitMessage?: string
   ): Promise<Engagement> {
     try {
+      console.log(engagementData);
       const serializedEngagement = Apiv1EngagementService.engagementSerializer.serialize(
         engagementData
       );
