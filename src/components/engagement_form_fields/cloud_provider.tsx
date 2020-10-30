@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
@@ -8,15 +7,16 @@ import {
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { HostingProvider } from '../../schemas/hosting_provider';
 
 interface CloudProviderFormFieldProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
+  hostingProvider: HostingProvider;
+  onChange: (value: string) => void;
   availableProviders: { label: string; value: string }[];
 }
 
 export function CloudProviderFormField({
-  engagement,
+  hostingProvider,
   onChange,
   availableProviders,
 }: CloudProviderFormFieldProps) {
@@ -35,10 +35,10 @@ export function CloudProviderFormField({
           data-testid="cloud-provider-select"
           aria-label="Cloud Provider"
           id={'cloud_provider_dropdown'}
-          isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}
+          isDisabled={!hasFeature(APP_FEATURES.writer)} // TODO: Disable field after launch
           isRequired
-          value={engagement?.ocp_cloud_provider_name || ''}
-          onChange={e => onChange('ocp_cloud_provider_name', e)}
+          value={hostingProvider?.ocp_cloud_provider_name || ''}
+          onChange={onChange}
         >
           {[
             <FormSelectOption

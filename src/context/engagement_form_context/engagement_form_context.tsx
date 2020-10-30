@@ -11,10 +11,6 @@ import {
   AnalyticsContext,
   AnalyticsCategory,
 } from '../analytics_context/analytics_context';
-import {
-  engagementFormReducer,
-  getInitialState,
-} from '../engagement_context/engagement_form_reducer';
 
 export interface EngagementFormContext {
   currentChanges: Engagement;
@@ -44,32 +40,25 @@ export const EngagementFormProvider = ({
     currentEngagement,
     engagementFormConfig,
   } = engagementContext;
+  const [currentEngagementChanges, setCurrentEngagementChanges] = useState<
+    Partial<Engagement>
+  >({});
   useEffect(() => {
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
+    setCurrentEngagementChanges({});
   }, [currentEngagement, engagementFormConfig]);
   const [changedFields, setChangedFields] = useState<string[]>([]);
   const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
 
-  const [currentEngagementChanges, dispatch] = useReducer<
-    (state: any, action: any) => any
-  >(
-    engagementFormReducer(engagementFormConfig),
-    engagementFormReducer(engagementFormConfig)()
-  );
-  const clearCurrentChanges = () =>
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
+  const clearCurrentChanges = () => setCurrentEngagementChanges({});
   const updateEngagementFormField = useCallback(
     (fieldName: string, value: any) => {
       if (!changedFields.includes(fieldName)) {
         setChangedFields([...changedFields, fieldName]);
       }
-      dispatch({ type: fieldName, payload: value });
+      setCurrentEngagementChanges({
+        ...currentEngagementChanges,
+        [fieldName]: value,
+      });
       try {
         analyticsContext.logEvent({
           category: AnalyticsCategory.engagements,
@@ -99,18 +88,23 @@ export const EngagementFormProvider = ({
     )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
     return commitMessage;
   };
-  const saveChanges = () => {
+  const saveChanges = useCallback(() => {
     const commitMessage = _createCommitMessage(changedFields, fieldGroups);
+    console.log('cahnage!!!!!', currentEngagementChanges);
     saveEngagement(
       { ...currentEngagement, ...currentEngagementChanges },
       commitMessage
     );
     setChangedFields([]);
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  };
+    setCurrentEngagementChanges({});
+  }, [
+    _createCommitMessage,
+    setCurrentEngagementChanges,
+    setChangedFields,
+    saveEngagement,
+    currentEngagement,
+    currentEngagementChanges,
+  ]);
   return (
     <EngagementFormContext.Provider
       value={{

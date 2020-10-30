@@ -23,8 +23,8 @@ import {
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { PlusIcon, ClipboardCheckIcon } from '@patternfly/react-icons';
-import {APP_FEATURES} from "../../../common/app_features";
-import {Feature} from "../../feature/feature";
+import { APP_FEATURES } from '../../../common/app_features';
+import { Feature } from '../../feature/feature';
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
@@ -124,18 +124,23 @@ function EngagementTimelineCardBody(
       <span data-testid="artifact-edit-button">Edit</span>
     </DropdownItem>,
   ];
-  const rows = props.artifacts.map((artifact, idx) => [
-    artifact.type,
-    {
-      title: (
-        <a target="_blank" rel="noopener noreferrer" href={getAbsoluteUrl(artifact.linkAddress)}>
-          {artifact.title}
-        </a>
-      ),
-    },
-    artifact.description,
-    {
-      title: (
+  const rows =
+    props?.artifacts?.map?.((artifact, idx) => [
+      artifact.type,
+      {
+        title: (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={getAbsoluteUrl(artifact.linkAddress)}
+          >
+            {artifact.title}
+          </a>
+        ),
+      },
+      artifact.description,
+      {
+        title: (
           <Feature name={APP_FEATURES.writer}>
             <Dropdown
               isPlain
@@ -158,11 +163,11 @@ function EngagementTimelineCardBody(
               }
             />
           </Feature>
-      ),
-    },
-  ]);
+        ),
+      },
+    ]) ?? [];
 
-  return props.artifacts.length > 0 ? (
+  return props?.artifacts?.length > 0 ? (
     <Table
       aria-label="Engagement Artifacts"
       variant={TableVariant.compact}

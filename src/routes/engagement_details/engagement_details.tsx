@@ -34,7 +34,6 @@ export const EngagementDetailView = () => {
 
   const {
     engagementFormConfig,
-    saveEngagement,
     getConfig,
     createEngagementPoll,
     error: engagementFormRequestError,
@@ -44,7 +43,12 @@ export const EngagementDetailView = () => {
     missingRequiredFields,
   } = useEngagements();
 
-  const { currentChanges, updateEngagementFormField, clearCurrentChanges } = useEngagementForm()
+  const {
+    currentChanges,
+    updateEngagementFormField,
+    clearCurrentChanges,
+    saveChanges,
+  } = useEngagementForm();
   useEffect(() => {
     let engagementPoll;
     if (currentEngagement?.project_name && currentEngagement?.customer_name) {
@@ -90,13 +94,13 @@ export const EngagementDetailView = () => {
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate
         engagement={currentEngagement}
-        onSave={saveEngagement}
+        onSave={saveChanges}
       >
         <AlertMessage />
         <EngagementOverview
           currentEngagement={currentEngagement}
           missingRequiredFields={missingRequiredFields}
-          onSave={saveEngagement}
+          onSave={saveChanges}
           engagementFormConfig={engagementFormConfig}
           onChange={updateEngagementFormField}
           currentEngagementChanges={currentChanges}
