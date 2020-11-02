@@ -11,6 +11,7 @@ import {
   FormSelectOption,
   Grid,
   GridItem,
+  FormSelectOptionGroup,
 } from '@patternfly/react-core';
 import {
   Button,
@@ -27,6 +28,7 @@ import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature/feature';
+import { Engagement } from "../../schemas/engagement";
 
 export function CreateNewEngagement() {
   const { engagementFormConfig, getConfig } = useEngagements();
@@ -58,24 +60,63 @@ export function CreateNewEngagementForm() {
   const [projectName, setProjectName] = useState(null);
   const [region, setRegion] = useState<string>();
   const [engagementType, setEngagementType] = useState<string>();
+  const [searchTerm, setSearchTerm] = useState<string>();
+  const [copiedEngagement, setCopiedEngagement] = useState<Engagement>();
   const { logEvent } = useAnalytics();
+
+  useEffect(() =>{
+      setCopiedEngagement(findEngagementToCopy(engagements, searchTerm))
+  }, [searchTerm, engagements]);
+
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
-      await createEngagement({
-        customer_name: customerName,
-        project_name: projectName,
-        engagement_region: region,
-        engagement_type:
-          engagementType ??
-          engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
-            e => e.default
-          )?.value,
-      });
+      if (searchTerm) {
+        await createEngagement({
+          customer_name: customerName,
+          project_name: projectName,
+          engagement_region: region,
+          location: copiedEngagement?.location,
+          engagement_type:
+            engagementType ??
+              engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+                e => e.default
+              )?.value,
+          additional_details: copiedEngagement?.additional_details,
+          use_cases: copiedEngagement?.use_cases,
+          description: copiedEngagement?.description,
+          engagement_categories: copiedEngagement?.engagement_categories,
+          ocp_cloud_provider_name: copiedEngagement?.ocp_cloud_provider_name,
+          ocp_cloud_provider_region: copiedEngagement?.ocp_cloud_provider_region,
+          ocp_cluster_size: copiedEngagement?.ocp_cluster_size,
+          ocp_persistent_storage_size: copiedEngagement?.ocp_persistent_storage_size,
+          ocp_version: copiedEngagement?.ocp_version,
+          engagement_lead_email: copiedEngagement?.engagement_lead_email,
+          engagement_lead_name: copiedEngagement?.engagement_lead_name,
+          customer_contact_email: copiedEngagement?.customer_contact_email,
+          customer_contact_name: copiedEngagement?.customer_contact_name,
+        });
+      }
+        else
+          {
+            await createEngagement({
+              customer_name: customerName,
+              project_name: projectName,
+              engagement_region: region,
+              engagement_type:
+                engagementType ??
+                  engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+                    e => e.default
+                  )?.value,
+            });
+          }
+
       logEvent({
         action: 'Create New Engagement',
         category: AnalyticsCategory.engagements,
       });
-      history.push(`/app/engagements/${customerName}/${projectName}`);
+      history.push({
+        pathname: `/app/engagements/${customerName}/${projectName}`
+      })
     } else {
       history.push('/app/engagements');
     }
@@ -120,6 +161,13 @@ export function CreateNewEngagementForm() {
     getValidationResult('project_name')?.length === 0 &&
     getValidationResult('customer_name')?.length === 0 &&
     getValidationResult('engagement_region')?.length === 0;
+
+  function findEngagementToCopy(engagements: Engagement[], searchTerm?: string ) {
+    const cleanedSearchTerm = searchTerm?.trim()?.toLowerCase();
+    return engagements.find(engagement =>
+      engagement?.project_name.toLowerCase().trim() === cleanedSearchTerm
+    );
+  }
 
   return (
     <div
@@ -293,6 +341,47 @@ export function CreateNewEngagementForm() {
                       );
                     }
                   )}
+                </FormSelect>
+              </FormGroup>
+              <FormGroup
+                label={<SectionTitle>Copy engagement from&nbsp;&nbsp;</SectionTitle>}
+                fieldId="copyFrom"
+              >
+                <FormSelect
+                  data-testid="new-engagement-copy-from"
+                  data-cy="new-engagement-copy-from"
+                  value={searchTerm}
+                  onChange={e => {
+                    setSearchTerm(e);
+                  }}
+                >
+                  <FormSelectOptionGroup label={'Existing engagements'}>
+                    {[
+                      <FormSelectOption
+                        value={undefined}
+                        label="None"
+                        key="undefined engagement"
+                      />,
+                    ].concat(
+                      engagements?.map(
+                        engagement => {
+                          return (
+                            <FormSelectOption
+                              label={engagement.project_name}
+                              key={engagement.project_name}
+                              value={engagement.project_name}
+                            />
+                          );
+                        })
+                    )}
+                  </FormSelectOptionGroup>
+                  <FormSelectOptionGroup label={'Templates'}>
+                    <FormSelectOption
+                      value={undefined}
+                      label="No templates available"
+                      key="undefined template"
+                    />
+                  </FormSelectOptionGroup>
                 </FormSelect>
               </FormGroup>
             </Form>

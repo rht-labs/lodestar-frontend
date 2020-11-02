@@ -308,6 +308,70 @@ Object {
                     
                   </div>
                 </div>
+                <div
+                  class="pf-c-form__group"
+                >
+                  <div
+                    class="pf-c-form__group-label"
+                  >
+                    <label
+                      class="pf-c-form__label"
+                      for="copyFrom"
+                    >
+                      <span
+                        class="pf-c-form__label-text"
+                      >
+                        <div
+                          style="display: inline-block;"
+                        >
+                          <h2
+                            class="pf-c-title pf-m-xl"
+                          >
+                            Copy engagement from  
+                          </h2>
+                        </div>
+                      </span>
+                    </label>
+                     
+                  </div>
+                  <div
+                    class="pf-c-form__group-control"
+                  >
+                    <select
+                      aria-invalid="false"
+                      class="pf-c-form-control"
+                      data-cy="new-engagement-copy-from"
+                      data-ouia-component-id="3"
+                      data-ouia-component-type="PF4/FormSelect"
+                      data-ouia-safe="true"
+                      data-testid="new-engagement-copy-from"
+                    >
+                      <optgroup
+                        class=""
+                        label="Existing engagements"
+                      >
+                        <option
+                          class=""
+                          value=""
+                        >
+                          None
+                        </option>
+                      </optgroup>
+                      <optgroup
+                        class=""
+                        label="Templates"
+                      >
+                        <option
+                          class=""
+                          value=""
+                        >
+                          No templates available
+                        </option>
+                      </optgroup>
+                    </select>
+                    
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -616,6 +680,70 @@ Object {
                     data-ouia-safe="true"
                     data-testid="new-engagement-type"
                   />
+                  
+                </div>
+              </div>
+              <div
+                class="pf-c-form__group"
+              >
+                <div
+                  class="pf-c-form__group-label"
+                >
+                  <label
+                    class="pf-c-form__label"
+                    for="copyFrom"
+                  >
+                    <span
+                      class="pf-c-form__label-text"
+                    >
+                      <div
+                        style="display: inline-block;"
+                      >
+                        <h2
+                          class="pf-c-title pf-m-xl"
+                        >
+                          Copy engagement from  
+                        </h2>
+                      </div>
+                    </span>
+                  </label>
+                   
+                </div>
+                <div
+                  class="pf-c-form__group-control"
+                >
+                  <select
+                    aria-invalid="false"
+                    class="pf-c-form-control"
+                    data-cy="new-engagement-copy-from"
+                    data-ouia-component-id="3"
+                    data-ouia-component-type="PF4/FormSelect"
+                    data-ouia-safe="true"
+                    data-testid="new-engagement-copy-from"
+                  >
+                    <optgroup
+                      class=""
+                      label="Existing engagements"
+                    >
+                      <option
+                        class=""
+                        value=""
+                      >
+                        None
+                      </option>
+                    </optgroup>
+                    <optgroup
+                      class=""
+                      label="Templates"
+                    >
+                      <option
+                        class=""
+                        value=""
+                      >
+                        No templates available
+                      </option>
+                    </optgroup>
+                  </select>
                   
                 </div>
               </div>
