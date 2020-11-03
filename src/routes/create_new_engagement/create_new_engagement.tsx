@@ -338,7 +338,7 @@ export function CreateNewEngagementForm() {
               <FormGroup
                 label={<SectionTitle>Copy From&nbsp;&nbsp;</SectionTitle>}
                 fieldId="copyFrom"
-                helperText="Prepopulate details of this engagement based on selected template or existing engagement"
+                helperText="Prepopulate details of this engagement based on a selected template or an existing engagement"
               >
                 <FormSelect
                   data-testid="new-engagement-copy-from"
