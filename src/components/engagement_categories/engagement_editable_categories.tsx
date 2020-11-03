@@ -10,13 +10,13 @@ import { Feature } from '../feature/feature';
 
 export function EngagementEditableCategories({
   engagementCategories,
-  onSave: propsOnSave,
   engagement,
 }: {
   engagementCategories?: EngagementCategory[];
   onSave: (engagement: Engagement) => void;
   engagement: Engagement;
 }) {
+  // TODO: This should come from props. This is a hotfix and should be replaced to use the save method that is passed from props.
   const { saveEngagement } = useEngagements();
   const [chips, setChips] = useState<string[]>([]);
   const [editMode, setEditMode] = useState(false);
