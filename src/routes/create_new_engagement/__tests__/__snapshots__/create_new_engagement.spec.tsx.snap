@@ -327,7 +327,7 @@ Object {
                           <h2
                             class="pf-c-title pf-m-xl"
                           >
-                            Copy engagement from  
+                            Copy From  
                           </h2>
                         </div>
                       </span>
@@ -346,30 +346,36 @@ Object {
                       data-ouia-safe="true"
                       data-testid="new-engagement-copy-from"
                     >
-                      <optgroup
+                      <option
                         class=""
-                        label="Existing engagements"
+                        value=""
                       >
-                        <option
-                          class=""
-                          value=""
-                        >
-                          None
-                        </option>
-                      </optgroup>
+                        None
+                      </option>
                       <optgroup
                         class=""
                         label="Templates"
                       >
                         <option
                           class=""
+                          disabled=""
                           value=""
                         >
                           No templates available
                         </option>
                       </optgroup>
+                      <optgroup
+                        class=""
+                        label="Existing engagements"
+                      />
                     </select>
-                    
+                    <div
+                      aria-live="polite"
+                      class="pf-c-form__helper-text"
+                      id="copyFrom-helper"
+                    >
+                      Prepopulate details of this engagement based on selected template or existing engagement
+                    </div>
                   </div>
                 </div>
               </form>
@@ -702,7 +708,7 @@ Object {
                         <h2
                           class="pf-c-title pf-m-xl"
                         >
-                          Copy engagement from  
+                          Copy From  
                         </h2>
                       </div>
                     </span>
@@ -721,30 +727,36 @@ Object {
                     data-ouia-safe="true"
                     data-testid="new-engagement-copy-from"
                   >
-                    <optgroup
+                    <option
                       class=""
-                      label="Existing engagements"
+                      value=""
                     >
-                      <option
-                        class=""
-                        value=""
-                      >
-                        None
-                      </option>
-                    </optgroup>
+                      None
+                    </option>
                     <optgroup
                       class=""
                       label="Templates"
                     >
                       <option
                         class=""
+                        disabled=""
                         value=""
                       >
                         No templates available
                       </option>
                     </optgroup>
+                    <optgroup
+                      class=""
+                      label="Existing engagements"
+                    />
                   </select>
-                  
+                  <div
+                    aria-live="polite"
+                    class="pf-c-form__helper-text"
+                    id="copyFrom-helper"
+                  >
+                    Prepopulate details of this engagement based on selected template or existing engagement
+                  </div>
                 </div>
               </div>
             </form>

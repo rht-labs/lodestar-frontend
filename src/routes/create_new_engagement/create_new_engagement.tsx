@@ -75,25 +75,17 @@ export function CreateNewEngagementForm() {
           customer_name: customerName,
           project_name: projectName,
           engagement_region: region,
-          location: copiedEngagement?.location,
           engagement_type:
             engagementType ??
               engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
                 e => e.default
               )?.value,
-          additional_details: copiedEngagement?.additional_details,
-          use_cases: copiedEngagement?.use_cases,
-          description: copiedEngagement?.description,
           engagement_categories: copiedEngagement?.engagement_categories,
           ocp_cloud_provider_name: copiedEngagement?.ocp_cloud_provider_name,
           ocp_cloud_provider_region: copiedEngagement?.ocp_cloud_provider_region,
           ocp_cluster_size: copiedEngagement?.ocp_cluster_size,
           ocp_persistent_storage_size: copiedEngagement?.ocp_persistent_storage_size,
           ocp_version: copiedEngagement?.ocp_version,
-          engagement_lead_email: copiedEngagement?.engagement_lead_email,
-          engagement_lead_name: copiedEngagement?.engagement_lead_name,
-          customer_contact_email: copiedEngagement?.customer_contact_email,
-          customer_contact_name: copiedEngagement?.customer_contact_name,
         });
       }
         else
@@ -164,8 +156,8 @@ export function CreateNewEngagementForm() {
 
   function findEngagementToCopy(engagements: Engagement[], searchTerm?: string ) {
     const cleanedSearchTerm = searchTerm?.trim()?.toLowerCase();
-    return engagements.find(engagement =>
-      engagement?.project_name.toLowerCase().trim() === cleanedSearchTerm
+    return engagements?.find(engagement =>
+      engagement?.project_name?.toLowerCase().trim() === cleanedSearchTerm
     );
   }
 
@@ -344,8 +336,9 @@ export function CreateNewEngagementForm() {
                 </FormSelect>
               </FormGroup>
               <FormGroup
-                label={<SectionTitle>Copy engagement from&nbsp;&nbsp;</SectionTitle>}
+                label={<SectionTitle>Copy From&nbsp;&nbsp;</SectionTitle>}
                 fieldId="copyFrom"
+                helperText="Prepopulate details of this engagement based on selected template or existing engagement"
               >
                 <FormSelect
                   data-testid="new-engagement-copy-from"
@@ -355,32 +348,42 @@ export function CreateNewEngagementForm() {
                     setSearchTerm(e);
                   }}
                 >
-                  <FormSelectOptionGroup label={'Existing engagements'}>
-                    {[
+                  <FormSelectOption
+                    value={undefined}
+                    label="None"
+                    key="undefined engagement"
+                  />
+                  <FormSelectOptionGroup label={'Templates'}>
+                    {
                       <FormSelectOption
+                        isDisabled={true}
                         value={undefined}
-                        label="None"
-                        key="undefined engagement"
-                      />,
-                    ].concat(
-                      engagements?.map(
+                        label="No templates available"
+                        key="undefined template"
+                      />
+                    }
+                  </FormSelectOptionGroup>
+                  <FormSelectOptionGroup label={'Existing engagements'}>
+                    {
+                      engagements?.
+                      sort(
+                        function(a, b){
+                          if(a.customer_name < b.customer_name) { return -1; }
+                          if(a.customer_name > b.customer_name) { return 1; }
+                          return 0;
+                        }
+                      ).
+                      map(
                         engagement => {
                           return (
                             <FormSelectOption
-                              label={engagement.project_name}
+                              label={engagement.customer_name + ' - ' + engagement.project_name }
                               key={engagement.project_name}
                               value={engagement.project_name}
                             />
                           );
                         })
-                    )}
-                  </FormSelectOptionGroup>
-                  <FormSelectOptionGroup label={'Templates'}>
-                    <FormSelectOption
-                      value={undefined}
-                      label="No templates available"
-                      key="undefined template"
-                    />
+                    }
                   </FormSelectOptionGroup>
                 </FormSelect>
               </FormGroup>
