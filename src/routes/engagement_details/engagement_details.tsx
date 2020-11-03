@@ -44,10 +44,10 @@ export const EngagementDetailView = () => {
   } = useEngagements();
 
   const {
+    saveChanges,
     currentChanges,
     updateEngagementFormField,
     clearCurrentChanges,
-    saveChanges,
   } = useEngagementForm();
   useEffect(() => {
     let engagementPoll;
