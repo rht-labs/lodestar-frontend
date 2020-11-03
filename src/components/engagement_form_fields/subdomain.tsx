@@ -5,10 +5,10 @@ import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { slugify } from 'transliteration';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { HostingProvider } from '../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface SubdomainFormFieldProps {
-  hostingProvider: HostingProvider;
+  hostingEnvironment: HostingEnvironment;
   engagementFormConfig: EngagementFormConfig;
   onChange: (value: string) => void;
   isEngagementLaunched: boolean;
@@ -16,30 +16,30 @@ interface SubdomainFormFieldProps {
 
 export function SubdomainFormField({
   onChange,
-  hostingProvider,
+  hostingEnvironment,
   isEngagementLaunched,
 }: SubdomainFormFieldProps) {
   const { hasFeature } = useFeatures();
   const [editedByUser, setEditedByUser] = useState(false);
   const getSubdomainFieldText = () => {
     if (editedByUser) {
-      return hostingProvider?.ocp_sub_domain;
+      return hostingEnvironment?.ocp_sub_domain;
     } else {
       return (
-        hostingProvider?.ocp_sub_domain ||
-        hostingProvider?.suggested_subdomain ||
+        hostingEnvironment?.ocp_sub_domain ||
+        hostingEnvironment?.suggested_subdomain ||
         ''
       );
     }
   };
   const getSubdomainHelperText = () => {
     if (editedByUser) {
-      return hostingProvider?.ocp_sub_domain;
+      return hostingEnvironment?.ocp_sub_domain;
     } else {
-      if (hostingProvider?.ocp_sub_domain) {
-        return slugify(hostingProvider?.ocp_sub_domain);
-      } else if (hostingProvider?.suggested_subdomain) {
-        return hostingProvider?.suggested_subdomain;
+      if (hostingEnvironment?.ocp_sub_domain) {
+        return slugify(hostingEnvironment?.ocp_sub_domain);
+      } else if (hostingEnvironment?.suggested_subdomain) {
+        return hostingEnvironment?.suggested_subdomain;
       } else {
         return '<desired-subdomain>';
       }

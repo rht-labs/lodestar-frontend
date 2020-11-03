@@ -7,11 +7,11 @@ import {
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { HostingProvider } from '../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface CloudProviderRegionFormFieldProps {
   availableProviderRegionOptions: { label: string; value: string }[];
-  hostingProvider: HostingProvider;
+  hostingEnvironment: HostingEnvironment;
   onChange: (fieldName: string, value: any) => void;
   isEngagementLaunched: boolean;
 }
@@ -19,7 +19,7 @@ interface CloudProviderRegionFormFieldProps {
 export function CloudProviderRegionFormField({
   availableProviderRegionOptions,
   isEngagementLaunched,
-  hostingProvider,
+  hostingEnvironment,
   onChange,
 }: CloudProviderRegionFormFieldProps) {
   const { hasFeature } = useFeatures();
@@ -41,7 +41,7 @@ export function CloudProviderRegionFormField({
           isEngagementLaunched
         }
         readOnly={availableProviderRegionOptions?.length === 0}
-        value={hostingProvider?.ocp_cloud_provider_region || ''}
+        value={hostingEnvironment?.ocp_cloud_provider_region || ''}
         onChange={onChange}
       >
         {[

@@ -4,7 +4,7 @@ import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 import { EngagementCategory } from './engagement_category';
-import { HostingProvider } from './hosting_provider';
+import { HostingEnvironment } from './hosting_environment';
 
 export enum EngagementStatus {
   active = 'active',
@@ -121,7 +121,7 @@ export interface Engagement
     EngagementHistory {
   artifacts: Artifact[];
   engagement_users: EngagementUser[];
-  hosting_providers: HostingProvider[];
+  hosting_environments: HostingEnvironment[];
 }
 
 const regions = ['emea', 'latam', 'na', 'apac'];
@@ -202,7 +202,7 @@ export abstract class Engagement {
         ? 'Nashville, TN'
         : `${faker.address.city()}, ${faker.address.stateAbbr()}`,
       mongo_id: '1',
-      hosting_providers: [HostingProvider.fromFake(staticData)],
+      hosting_environments: [HostingEnvironment.fromFake(staticData)],
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
       public_reference: staticData ? false : faker.random.boolean(),

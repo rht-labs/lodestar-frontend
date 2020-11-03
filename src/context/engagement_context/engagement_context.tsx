@@ -335,6 +335,7 @@ export const EngagementProvider = ({
 
   const saveEngagement = useCallback(
     async (data: Engagement, commitMessage?: string) => {
+      console.log(data);
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {

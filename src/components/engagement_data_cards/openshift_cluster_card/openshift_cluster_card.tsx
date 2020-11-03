@@ -20,7 +20,7 @@ import { useModalVisibility } from '../../../context/edit_modal_visibility_conte
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
-import { HostingProvider } from '../../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import {
   Table,
   TableBody,
@@ -30,15 +30,16 @@ import {
 import { Feature } from '../../feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
 export interface OpenShiftClusterSummaryCardProps {
   currentEngagementChanges: Engagement;
-  onChange: (hostingProviders: HostingProvider[]) => void;
+  onChange: (hostingEnvironments: HostingEnvironment[]) => void;
   onClear: () => void;
   engagementFormConfig: EngagementFormConfig;
-  onSave: (hostingProviders: HostingProvider[]) => void;
+  onSave: (hostingEnvironments: HostingEnvironment[]) => void;
   missingRequiredFields: string[];
 }
 
@@ -50,8 +51,8 @@ export function OpenShiftClusterSummaryCard({
   engagementFormConfig,
   missingRequiredFields,
 }: OpenShiftClusterSummaryCardProps) {
-  const [currentHostingProvider, setCurrentHostingProvider] = useState<
-    HostingProvider
+  const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
+    HostingEnvironment
   >(null);
   const openshiftRequiredFields = [
     'ocp_cloud_provider_name',
@@ -63,48 +64,62 @@ export function OpenShiftClusterSummaryCard({
   ];
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
+  const { saveEngagement } = useEngagements();
   const onClose = () => {
     onClear();
     requestClose();
   };
   const getUniqueProviders = (
-    providers: HostingProvider[]
-  ): HostingProvider[] => {
+    providers: HostingEnvironment[]
+  ): HostingEnvironment[] => {
     return Object.values(
       providers.reduce((prev, curr) => ({ ...prev, [curr.id]: curr }), {})
     );
   };
-  const onSave = (hostingProvider: HostingProvider) => {
-    const hostingProviders = getUniqueProviders([
-      ...currentEngagementChanges.hosting_providers,
-      hostingProvider,
+  const onSave = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = getUniqueProviders([
+      ...currentEngagementChanges.hosting_environments,
+      hostingEnvironment,
     ]);
-    onChange(hostingProviders);
-    propsOnSave(hostingProviders);
+    console.log(hostingEnvironments);
+    onChange(hostingEnvironments);
+    // propsOnSave(hostingEnvironments);
+    saveEngagement({
+      ...currentEngagementChanges,
+      hosting_environments: hostingEnvironments,
+    });
   };
-  const openHostingProviderModal = (hostingProvider: HostingProvider) => {
-    setCurrentHostingProvider(hostingProvider);
+  const openHostingEnvironmentModal = (
+    hostingEnvironment: HostingEnvironment
+  ) => {
+    setCurrentHostingEnvironment(hostingEnvironment);
     requestOpen(OPENSHIFT_MODAL_KEY);
   };
-  const onDelete = (hostingProvider: HostingProvider) => {
-    const hostingProviders = [...currentEngagementChanges.hosting_providers];
-    hostingProviders.splice(
-      hostingProviders.findIndex(p => p.id === hostingProvider.id),
+  const onDelete = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = [
+      ...currentEngagementChanges.hosting_environments,
+    ];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
       1
     );
-    onChange(hostingProviders);
-    propsOnSave(hostingProviders);
+    onChange(hostingEnvironments);
+    propsOnSave(hostingEnvironments);
+    saveEngagement({
+      ...currentEngagementChanges,
+      hosting_environments: hostingEnvironments,
+    });
   };
   const addProvider = () => {
-    openHostingProviderModal({ id: uuid() } as HostingProvider);
+    openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
   };
-  const actionItems = (hostingEnvironment: HostingProvider) => [
+  const actionItems = (hostingEnvironment: HostingEnvironment) => [
     <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
       Delete
     </DropdownItem>,
     <DropdownItem
       key="edit"
-      onClick={() => openHostingProviderModal(hostingEnvironment)}
+      onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
     >
       Edit
     </DropdownItem>,
@@ -114,30 +129,30 @@ export function OpenShiftClusterSummaryCard({
     currentEngagementChanges.launch = null;
   }
   const columns = [
-    { title: 'Hosting Name' },
+    { title: 'Environment Name' },
     { title: 'Hosting Type' },
     { title: 'Version' },
     { title: 'Cloud Provider' },
     { title: 'Actions' },
   ];
-  const rows = currentEngagementChanges?.hosting_providers?.map?.(
-    (hostingProvider, idx) => [
-      '',
+  const rows = currentEngagementChanges?.hosting_environments?.map?.(
+    (hostingEnvironment, idx) => [
+      hostingEnvironment.environment_name,
       'Openshift Container Platform',
       getHumanReadableLabel(
         engagementFormConfig?.openshift_options?.versions?.options,
-        hostingProvider?.ocp_version
+        hostingEnvironment?.ocp_version
       ),
       getHumanReadableLabel(
         engagementFormConfig?.cloud_options?.providers?.options,
-        hostingProvider.ocp_cloud_provider_name
+        hostingEnvironment.ocp_cloud_provider_name
       ),
       {
         title: (
           <Feature name={APP_FEATURES.writer}>
             <Dropdown
               isPlain
-              dropdownItems={actionItems(hostingProvider)}
+              dropdownItems={actionItems(hostingEnvironment)}
               isOpen={idx === currentOpenDropdown}
               onSelect={() => {
                 setCurrentOpenDropdown(undefined);
@@ -166,7 +181,7 @@ export function OpenShiftClusterSummaryCard({
         engagementFormConfig={engagementFormConfig}
         onSave={onSave}
         onClose={onClose}
-        hostingProvider={currentHostingProvider}
+        hostingEnvironment={currentHostingEnvironment}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
@@ -191,7 +206,7 @@ export function OpenShiftClusterSummaryCard({
         )}
         title="Hosting Environment"
       >
-        {currentEngagementChanges?.hosting_providers?.length > 0 ? (
+        {currentEngagementChanges?.hosting_environments?.length > 0 ? (
           <Table
             aria-label="Engagement Hosting Providers"
             variant={TableVariant.compact}

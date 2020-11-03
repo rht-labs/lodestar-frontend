@@ -8,17 +8,17 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { HostingProvider } from '../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface ClusterSizeFormFieldProps {
-  hostingProvider: HostingProvider;
+  hostingEnvironment: HostingEnvironment;
   onChange: (value: string) => void;
   engagementFormConfig: EngagementFormConfig;
   isEngagementLaunched: boolean;
 }
 
 export function ClusterSizeFormField({
-  hostingProvider,
+  hostingEnvironment,
   isEngagementLaunched,
   onChange,
   engagementFormConfig,
@@ -33,7 +33,7 @@ export function ClusterSizeFormField({
         data-testid="cluster-size-select"
         id="cluster_size_dropdown"
         aria-label="Cluster Size"
-        value={hostingProvider?.ocp_cluster_size || ''}
+        value={hostingEnvironment?.ocp_cluster_size || ''}
         isDisabled={!hasFeature(APP_FEATURES.writer) || isEngagementLaunched}
         onChange={e => onChange('ocp_cluster_size', e)}
       >

@@ -3,10 +3,10 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { HostingProvider } from '../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export interface DescriptionFormFieldProps {
-  hostingProvider: HostingProvider;
+  hostingEnvironment: HostingEnvironment;
   onChange: (value: string) => void;
 }
 
@@ -25,7 +25,7 @@ export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
         id="additional_details"
         aria-label="Additional provisioning information"
         placeholder="Provide additional details"
-        value={props.hostingProvider.additional_details || ''}
+        value={props.hostingEnvironment.additional_details || ''}
         resizeOrientation="vertical"
         onChange={props.onChange}
       />

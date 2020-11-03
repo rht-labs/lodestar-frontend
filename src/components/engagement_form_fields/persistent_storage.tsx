@@ -8,17 +8,17 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { HostingProvider } from '../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface PersistentStorageFormFieldProps {
-  hostingProvider: HostingProvider;
+  hostingEnvironment: HostingEnvironment;
   onChange: (value: string) => void;
   engagementFormConfig: EngagementFormConfig;
   isEngagementLaunched: boolean;
 }
 
 export function PersistentStorageFormField({
-  hostingProvider,
+  hostingEnvironment,
   onChange,
   engagementFormConfig,
   isEngagementLaunched,
@@ -46,7 +46,7 @@ export function PersistentStorageFormField({
           isEngagementLaunched
         }
         onChange={onChange}
-        value={hostingProvider?.ocp_persistent_storage_size || ''}
+        value={hostingEnvironment?.ocp_persistent_storage_size || ''}
       >
         {[
           <FormSelectOption

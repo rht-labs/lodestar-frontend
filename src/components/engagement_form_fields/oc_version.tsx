@@ -8,10 +8,10 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { FormManager } from '../../context/form_manager/form_manager';
-import { HostingProvider } from '../../schemas/hosting_provider';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface OpenShiftVersionFormFieldProps {
-  hostingProvider: HostingProvider;
+  hostingEnvironment: HostingEnvironment;
   isEngagementLaunched: boolean;
   engagementFormConfig: EngagementFormConfig;
   onChange: (value: string) => void;
@@ -19,7 +19,7 @@ interface OpenShiftVersionFormFieldProps {
 
 export function OpenShiftVersionFormField({
   onChange,
-  hostingProvider,
+  hostingEnvironment,
   engagementFormConfig,
   isEngagementLaunched,
 }: OpenShiftVersionFormFieldProps) {
@@ -36,7 +36,7 @@ export function OpenShiftVersionFormField({
         data-testid="oc-version-select"
         aria-label="OpenShift Version"
         id={'oc_version_dropdown'}
-        value={hostingProvider?.ocp_version || ''}
+        value={hostingEnvironment?.ocp_version || ''}
         isDisabled={
           engagementFormConfig?.openshift_options?.versions?.options?.length ===
             1 ||
