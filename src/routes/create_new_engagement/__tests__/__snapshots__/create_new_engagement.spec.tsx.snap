@@ -374,7 +374,7 @@ Object {
                       class="pf-c-form__helper-text"
                       id="copyFrom-helper"
                     >
-                      Prepopulate details of this engagement based on selected template or existing engagement
+                      Prepopulate details of this engagement based on a selected template or an existing engagement
                     </div>
                   </div>
                 </div>
@@ -755,7 +755,7 @@ Object {
                     class="pf-c-form__helper-text"
                     id="copyFrom-helper"
                   >
-                    Prepopulate details of this engagement based on selected template or existing engagement
+                    Prepopulate details of this engagement based on a selected template or an existing engagement
                   </div>
                 </div>
               </div>
