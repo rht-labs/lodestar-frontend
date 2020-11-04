@@ -75,6 +75,9 @@ export class EngagementJsonSerializer
   deserialize(data: object): Engagement {
     return {
       ...data,
+      use_cases: data['use_cases'],
+      mongo_id: data['mongo_id'],
+      public_reference: data['public_reference'],
       additional_details: data['additional_details'],
       archive_date: data['archive_date']
         ? EngagementJsonSerializer.parseDate(data['archive_date'])
