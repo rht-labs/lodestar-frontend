@@ -54,14 +54,7 @@ export function OpenShiftClusterSummaryCard({
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
-  const openshiftRequiredFields = [
-    'ocp_cloud_provider_name',
-    'ocp_cloud_provider_region',
-    'ocp_version',
-    'ocp_cluster_size',
-    'ocp_persistent_storage_size',
-    'ocp_sub_domain',
-  ];
+  const openshiftRequiredFields = [];
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const { saveEngagement } = useEngagements();

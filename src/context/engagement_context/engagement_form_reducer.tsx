@@ -52,21 +52,6 @@ export const getInitialState = (
     technical_lead_email: engagement?.technical_lead_email ?? null,
     customer_contact_name: engagement?.customer_contact_name ?? null,
     customer_contact_email: engagement?.customer_contact_email ?? null,
-    ocp_cloud_provider_name: engagement?.ocp_cloud_provider_name ?? null,
-    ocp_cloud_provider_region: engagement?.ocp_cloud_provider_region ?? null,
-    ocp_version: engagement?.ocp_version ?? null,
-    ocp_sub_domain:
-      engagement?.ocp_sub_domain ?? getInitialSubdomain(engagement) ?? null,
-    ocp_persistent_storage_size:
-      engagement?.ocp_persistent_storage_size ?? null,
-    ocp_cluster_size: engagement?.ocp_cluster_size ?? null,
-    suggested_subdomain:
-      engagement?.project_name || engagement?.customer_name
-        ? generateSuggestedSubdomain(
-            engagement?.project_name,
-            engagement?.customer_name
-          )
-        : null,
     engagement_categories: engagement?.engagement_categories ?? [],
     use_cases: engagement?.use_cases ?? [],
   };
@@ -86,24 +71,6 @@ export const engagementFormReducer = (
     return state;
   }
   switch (action.type) {
-    case 'customer_name':
-      return {
-        ...state,
-        customer_name: action.payload,
-        suggested_subdomain: generateSuggestedSubdomain(
-          state?.project_name ?? '',
-          action.payload
-        ),
-      };
-    case 'project_name':
-      return {
-        ...state,
-        project_name: action.payload,
-        suggested_subdomain: generateSuggestedSubdomain(
-          action.payload,
-          state?.customer_name ?? ''
-        ),
-      };
     case 'start_date':
     case 'end_date':
     case 'archive_date':
@@ -118,6 +85,8 @@ export const engagementFormReducer = (
           [action.type]: action.payload,
         }),
       };
+    case 'customer_name':
+    case 'project_name':
     case 'additional_details':
     case 'public_reference':
     case 'description':
@@ -130,14 +99,10 @@ export const engagementFormReducer = (
     case 'engagement_users':
     case 'artifacts':
     case 'customer_contact_email':
-    case 'ocp_cloud_provider_name':
     case 'use_cases':
-    case 'ocp_cloud_provider_region':
-    case 'ocp_version':
-    case 'ocp_sub_domain':
     case 'ocp_persistent_storage_size':
     case 'engagement_categories':
-    case 'ocp_cluster_size':
+    case 'hosting_environments':
       return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
       return { ...state, ...action.payload };

@@ -1,11 +1,20 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+  useReducer,
+} from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementContext } from '../engagement_context/engagement_context';
 import {
   AnalyticsContext,
   AnalyticsCategory,
 } from '../analytics_context/analytics_context';
-
+import {
+  engagementFormReducer,
+  getInitialState,
+} from '../engagement_context/engagement_form_reducer';
 export interface EngagementFormContext {
   currentChanges: Engagement;
   clearCurrentChanges: () => void;
@@ -34,25 +43,33 @@ export const EngagementFormProvider = ({
     currentEngagement,
     engagementFormConfig,
   } = engagementContext;
-  const [currentEngagementChanges, setCurrentEngagementChanges] = useState<
-    Partial<Engagement>
-  >({});
+  const [currentEngagementChanges, dispatch] = useReducer<
+    (state: any, action: any) => any
+  >(
+    engagementFormReducer(engagementFormConfig),
+    engagementFormReducer(engagementFormConfig)()
+  );
+  const clearCurrentChanges = () =>
+    dispatch({
+      type: 'switch_engagement',
+      payload: getInitialState(currentEngagement),
+    });
+  // const [currentEngagementChanges, setCurrentEngagementChanges] = useState<
+  //   Partial<Engagement>
+  // >({});
   useEffect(() => {
-    setCurrentEngagementChanges({});
+    clearCurrentChanges();
   }, [currentEngagement, engagementFormConfig]);
   const [changedFields, setChangedFields] = useState<string[]>([]);
   const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
 
-  const clearCurrentChanges = () => setCurrentEngagementChanges({});
   const updateEngagementFormField = useCallback(
     (fieldName: string, value: any) => {
       if (!changedFields.includes(fieldName)) {
         setChangedFields([...changedFields, fieldName]);
       }
-      setCurrentEngagementChanges({
-        ...currentEngagementChanges,
-        [fieldName]: value,
-      });
+      dispatch({ type: fieldName, payload: value });
+
       try {
         analyticsContext.logEvent({
           category: AnalyticsCategory.engagements,
@@ -89,11 +106,11 @@ export const EngagementFormProvider = ({
       commitMessage
     );
     setChangedFields([]);
-    setCurrentEngagementChanges({});
+    clearCurrentChanges();
   }, [
     changedFields,
     fieldGroups,
-    setCurrentEngagementChanges,
+    clearCurrentChanges,
     setChangedFields,
     saveEngagement,
     currentEngagement,

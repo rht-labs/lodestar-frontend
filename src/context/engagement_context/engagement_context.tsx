@@ -58,12 +58,6 @@ const requiredFields = [
   'technical_lead_email',
   'engagement_lead_name',
   'technical_lead_name',
-  'ocp_cloud_provider_name',
-  'ocp_cloud_provider_region',
-  'ocp_version',
-  'ocp_cluster_size',
-  'ocp_persistent_storage_size',
-  'ocp_sub_domain',
   'project_name',
 ];
 export const EngagementContext = createContext<EngagementContext>(null);

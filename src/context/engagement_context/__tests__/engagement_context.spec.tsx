@@ -444,10 +444,13 @@ describe('Engagement Context', () => {
       result.current.getEngagements();
       await waitForNextUpdate();
     });
-    result.current.setCurrentEngagement(Engagement.fromFake(true));
-    result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
-    expect(onCatch).toHaveBeenCalled();
-    expect(result.current.currentEngagement.launch).toBeFalsy();
+    await act(async () => {
+      result.current.setCurrentEngagement(Engagement.fromFake(true));
+      result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
+      await waitForNextUpdate();
+      expect(onCatch).toHaveBeenCalled();
+      expect(result.current.currentEngagement.launch).toBeFalsy();
+    });
   });
 
   test('If an engagement already exists, an engagement should not be created', async () => {
