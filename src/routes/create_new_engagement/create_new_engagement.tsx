@@ -60,17 +60,17 @@ export function CreateNewEngagementForm() {
   const [projectName, setProjectName] = useState(null);
   const [region, setRegion] = useState<string>();
   const [engagementType, setEngagementType] = useState<string>();
-  const [searchTerm, setSearchTerm] = useState<string>();
+  const [selectedProjectNameToFind, setSelectedProjectNameToFind] = useState<string>();
   const [copiedEngagement, setCopiedEngagement] = useState<Engagement>();
   const { logEvent } = useAnalytics();
 
   useEffect(() =>{
-      setCopiedEngagement(findEngagementToCopy(engagements, searchTerm))
-  }, [searchTerm, engagements]);
+      setCopiedEngagement(findEngagementToCopy(engagements, selectedProjectNameToFind))
+  }, [selectedProjectNameToFind, engagements]);
 
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
-      if (searchTerm) {
+      if (selectedProjectNameToFind) {
         await createEngagement({
           customer_name: customerName,
           project_name: projectName,
@@ -154,10 +154,9 @@ export function CreateNewEngagementForm() {
     getValidationResult('customer_name')?.length === 0 &&
     getValidationResult('engagement_region')?.length === 0;
 
-  function findEngagementToCopy(engagements: Engagement[], searchTerm?: string ) {
-    const cleanedSearchTerm = searchTerm?.trim()?.toLowerCase();
+  function findEngagementToCopy(engagements: Engagement[], selectedProjectNameToFind?: string ) {
     return engagements?.find(engagement =>
-      engagement?.project_name?.toLowerCase().trim() === cleanedSearchTerm
+      engagement?.project_name?.toLowerCase().trim() === selectedProjectNameToFind?.trim()?.toLowerCase()
     );
   }
 
@@ -343,9 +342,9 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="new-engagement-copy-from"
                   data-cy="new-engagement-copy-from"
-                  value={searchTerm}
+                  value={selectedProjectNameToFind}
                   onChange={e => {
-                    setSearchTerm(e);
+                    setSelectedProjectNameToFind(e);
                   }}
                 >
                   <FormSelectOption
@@ -378,7 +377,7 @@ export function CreateNewEngagementForm() {
                           return (
                             <FormSelectOption
                               label={engagement.customer_name + ' - ' + engagement.project_name }
-                              key={engagement.project_name}
+                              key={engagement.project_name + engagement.customer_name}
                               value={engagement.project_name}
                             />
                           );
