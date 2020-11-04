@@ -1,32 +1,6 @@
 import { Engagement } from '../../schemas/engagement';
-import { slugify } from 'transliteration';
 import { addDays, startOfToday } from 'date-fns';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-const generateSuggestedSubdomain = (
-  project_name: string = '',
-  customer_name: string = ''
-): string => {
-  let slug = '';
-  const maxLen = 8;
-  if (project_name.length > 2) {
-    slug = project_name;
-  } else if (customer_name.length > 2) {
-    slug = customer_name;
-  }
-  if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
-    slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
-  }
-  slug = slugify(slug.substring(0, maxLen));
-  return slug;
-};
-
-const getInitialSubdomain = (engagement: Partial<Engagement>) =>
-  engagement?.project_name || engagement?.customer_name
-    ? generateSuggestedSubdomain(
-        engagement?.project_name,
-        engagement?.customer_name
-      )
-    : null;
 
 export const getInitialState = (
   engagement?: Partial<Engagement>

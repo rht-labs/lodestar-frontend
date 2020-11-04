@@ -49,17 +49,17 @@ export const EngagementFormProvider = ({
     engagementFormReducer(engagementFormConfig),
     engagementFormReducer(engagementFormConfig)()
   );
-  const clearCurrentChanges = () =>
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  // const [currentEngagementChanges, setCurrentEngagementChanges] = useState<
-  //   Partial<Engagement>
-  // >({});
+  const clearCurrentChanges = useCallback(
+    () =>
+      dispatch({
+        type: 'switch_engagement',
+        payload: getInitialState(currentEngagement),
+      }),
+    [dispatch, currentEngagement]
+  );
   useEffect(() => {
     clearCurrentChanges();
-  }, [currentEngagement, engagementFormConfig]);
+  }, [currentEngagement, engagementFormConfig, clearCurrentChanges]);
   const [changedFields, setChangedFields] = useState<string[]>([]);
   const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
 
@@ -77,7 +77,7 @@ export const EngagementFormProvider = ({
         });
       } catch (e) {}
     },
-    [analyticsContext, changedFields, currentEngagementChanges]
+    [analyticsContext, changedFields]
   );
   const saveChanges = useCallback(() => {
     const _createCommitMessage = (
