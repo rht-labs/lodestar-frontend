@@ -1356,12 +1356,12 @@ Object {
             name="ocp_sub_domain"
             required=""
             type="text"
-            value="ordoabchao"
+            value=""
           />
           <div>
             Applications will live at: 
             <strong>
-              ordoabchao.emea-1.rht-labs.com
+              &lt;desired-subdomain&gt;.na-1.rht-labs.com
             </strong>
           </div>
         </div>
@@ -1407,12 +1407,12 @@ Object {
           name="ocp_sub_domain"
           required=""
           type="text"
-          value="ordoabchao"
+          value=""
         />
         <div>
           Applications will live at: 
           <strong>
-            ordoabchao.emea-1.rht-labs.com
+            &lt;desired-subdomain&gt;.na-1.rht-labs.com
           </strong>
         </div>
       </div>

@@ -83,11 +83,11 @@ export function OpenShiftClusterSummaryCard({
     ]);
     console.log(hostingEnvironments);
     onChange(hostingEnvironments);
-    // propsOnSave(hostingEnvironments);
-    saveEngagement({
-      ...currentEngagementChanges,
-      hosting_environments: hostingEnvironments,
-    });
+    propsOnSave(hostingEnvironments);
+    // saveEngagement({
+    //   ...currentEngagementChanges,
+    //   hosting_environments: hostingEnvironments,
+    // });
   };
   const openHostingEnvironmentModal = (
     hostingEnvironment: HostingEnvironment

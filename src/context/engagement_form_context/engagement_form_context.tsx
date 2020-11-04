@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useReducer,
-  useState,
-} from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementContext } from '../engagement_context/engagement_context';
 import {
@@ -66,31 +60,30 @@ export const EngagementFormProvider = ({
         });
       } catch (e) {}
     },
-    [analyticsContext, changedFields]
+    [analyticsContext, changedFields, currentEngagementChanges]
   );
-  const _createCommitMessage = (
-    changedFields: string[],
-    fieldGroupings: { [key: string]: string[] } = {}
-  ): string => {
-    const changedGroups = Array.from(
-      new Set(
-        changedFields
-          .map(field =>
-            Object.keys(fieldGroupings).find(group =>
-              fieldGroupings[group].includes(field)
-            )
-          )
-          .filter(group => !!group)
-      )
-    );
-    const commitMessage = `Changed ${changedGroups.join(
-      ', '
-    )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
-    return commitMessage;
-  };
   const saveChanges = useCallback(() => {
+    const _createCommitMessage = (
+      changedFields: string[],
+      fieldGroupings: { [key: string]: string[] } = {}
+    ): string => {
+      const changedGroups = Array.from(
+        new Set(
+          changedFields
+            .map(field =>
+              Object.keys(fieldGroupings).find(group =>
+                fieldGroupings[group].includes(field)
+              )
+            )
+            .filter(group => !!group)
+        )
+      );
+      const commitMessage = `Changed ${changedGroups.join(
+        ', '
+      )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
+      return commitMessage;
+    };
     const commitMessage = _createCommitMessage(changedFields, fieldGroups);
-    console.log('cahnage!!!!!', currentEngagementChanges);
     saveEngagement(
       { ...currentEngagement, ...currentEngagementChanges },
       commitMessage
@@ -98,7 +91,8 @@ export const EngagementFormProvider = ({
     setChangedFields([]);
     setCurrentEngagementChanges({});
   }, [
-    _createCommitMessage,
+    changedFields,
+    fieldGroups,
     setCurrentEngagementChanges,
     setChangedFields,
     saveEngagement,

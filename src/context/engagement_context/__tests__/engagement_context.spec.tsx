@@ -11,7 +11,10 @@ import { UserProfile } from '../../../schemas/user_profile';
 import { AuthenticationError } from '../../../services/auth_service/auth_errors';
 import { AuthService } from '../../../services/auth_service/authentication_service';
 import { AlreadyExistsError } from '../../../services/engagement_service/engagement_service_errors';
-import { FeedbackContext, FeedbackProvider } from '../../feedback_context/feedback_context';
+import {
+  FeedbackContext,
+  FeedbackProvider,
+} from '../../feedback_context/feedback_context';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -27,12 +30,12 @@ describe('Engagement Context', () => {
     alertActions: [],
     alertMsg: '',
     alertType: null,
-    hideAlert: () => { },
-    hideLoader: () => { },
+    hideAlert: () => {},
+    hideLoader: () => {},
     isLoaderVisible: false,
-    showAlert: () => () => { },
-    showLoader: () => { }
-  }
+    showAlert: () => () => {},
+    showLoader: () => {},
+  };
 
   test('by default, engagements are an empty array', () => {
     const { result } = getHook();
@@ -47,9 +50,7 @@ describe('Engagement Context', () => {
       await waitForNextUpdate();
       expect(result.current.engagements.length).toBeGreaterThan(0);
     });
-
   });
-
 
   test('Can switch engagements', async () => {
     const { result, waitForNextUpdate } = getHook();
@@ -117,9 +118,8 @@ describe('Engagement Context', () => {
       return (
         <FeedbackProvider>
           <FeedbackContext.Consumer>
-            {(feedbackContext) =>
+            {feedbackContext => (
               <AuthProvider
-
                 authService={
                   ({
                     isLoggedIn,
@@ -145,7 +145,8 @@ describe('Engagement Context', () => {
                   {children}
                 </EngagementProvider>
               </AuthProvider>
-            }</FeedbackContext.Consumer>
+            )}
+          </FeedbackContext.Consumer>
         </FeedbackProvider>
       );
     };
@@ -162,7 +163,7 @@ describe('Engagement Context', () => {
       return (
         <FeedbackProvider>
           <FeedbackContext.Consumer>
-            {(feedbackContext) =>
+            {feedbackContext => (
               <AuthProvider
                 authService={
                   ({
@@ -191,7 +192,7 @@ describe('Engagement Context', () => {
                   {children}
                 </EngagementProvider>
               </AuthProvider>
-            }
+            )}
           </FeedbackContext.Consumer>
         </FeedbackProvider>
       );
@@ -210,7 +211,7 @@ describe('Engagement Context', () => {
       return (
         <FeedbackProvider>
           <FeedbackContext.Consumer>
-            {(feedbackContext) =>
+            {feedbackContext => (
               <AuthProvider
                 authService={
                   ({
@@ -239,8 +240,9 @@ describe('Engagement Context', () => {
                   {children}
                 </EngagementProvider>
               </AuthProvider>
-            }
-          </FeedbackContext.Consumer></FeedbackProvider>
+            )}
+          </FeedbackContext.Consumer>
+        </FeedbackProvider>
       );
     };
     const { result, waitForNextUpdate } = renderHook(
@@ -301,7 +303,6 @@ describe('Engagement Context', () => {
         >
           <EngagementProvider
             feedbackContext={fakedFeedbackContext}
-
             engagementService={
               ({
                 async fetchEngagements() {
@@ -443,13 +444,8 @@ describe('Engagement Context', () => {
       result.current.getEngagements();
       await waitForNextUpdate();
     });
-    await act(async () => {
-      result.current.setCurrentEngagement(Engagement.fromFake(true));
-    });
-    await act(async () => {
-      result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
-      await waitForNextUpdate();
-    });
+    result.current.setCurrentEngagement(Engagement.fromFake(true));
+    result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
     expect(onCatch).toHaveBeenCalled();
     expect(result.current.currentEngagement.launch).toBeFalsy();
   });

@@ -16,7 +16,7 @@ export interface HostingEnvironment {
 export abstract class HostingEnvironment {
   static fromFake(staticData = false) {
     return {
-      id: uuid(),
+      id: staticData ? 'id' : uuid(),
       environment_name: staticData ? 'name' : faker.lorem.words(3),
       additional_details: staticData ? 'details' : faker.lorem.paragraph(),
       ocp_cloud_provider_name: staticData ? 'AWS' : 'AWS',
