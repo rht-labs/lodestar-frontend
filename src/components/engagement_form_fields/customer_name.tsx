@@ -23,7 +23,7 @@ export function CustomerNameFormField(props: CustomerNameFormFieldProps) {
         aria-label="engagement customer_name"
         value={props.engagement.customer_name || ''}
         onChange={e => props.onChange('customer_name', e)}
-        data-cy={'customer_name_field'}wrapper
+        data-cy={'customer_name_field'}
       />
     </FormGroup>
   );
