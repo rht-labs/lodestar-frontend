@@ -4,12 +4,14 @@ import { EngagementSummaryEditModal } from '../engagement_summary_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
 import { FormManager } from '../../../context/form_manager/form_manager';
+import { MemoryRouter } from 'react-router';
 
 describe('Engagement Summary edit modal', () => {
   test('matches snapshot', () => {
     MockDate.set(new Date(2020, 8, 3));
     expect(
       render(
+        <MemoryRouter>
         <FormManager.Manager>
           <FormManager.Group groupName="test">
             <EngagementSummaryEditModal
@@ -21,6 +23,7 @@ describe('Engagement Summary edit modal', () => {
             />
           </FormManager.Group>
         </FormManager.Manager>
+        </MemoryRouter>
       )
     ).toMatchSnapshot();
     MockDate.reset();
@@ -29,6 +32,7 @@ describe('Engagement Summary edit modal', () => {
   test('When clicking the save button, the onSave method is called', async () => {
     const onSave = jest.fn();
     const { getByTestId } = render(
+      <MemoryRouter>
       <FormManager.Manager>
         <FormManager.Group groupName="test">
           <EngagementSummaryEditModal
@@ -40,6 +44,7 @@ describe('Engagement Summary edit modal', () => {
           />
         </FormManager.Group>
       </FormManager.Manager>
+      </MemoryRouter>
     );
     await fireEvent.click(getByTestId('engagement-summary-save'));
     expect(onSave).toHaveBeenCalled();

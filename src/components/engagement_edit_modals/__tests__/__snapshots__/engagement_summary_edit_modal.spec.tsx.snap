@@ -87,6 +87,13 @@ Object {
                         >
                           Client Name
                         </span>
+                        <span
+                          aria-hidden="true"
+                          class="pf-c-form__label-required"
+                        >
+                           
+                          *
+                        </span>
                       </label>
                        
                     </div>
@@ -98,7 +105,6 @@ Object {
                         aria-label="engagement customer_name"
                         class="pf-c-form-control"
                         data-cy="customer_name_field"
-                        disabled=""
                         id="customer_name"
                         name="customer_name"
                         type="text"
@@ -122,6 +128,13 @@ Object {
                         >
                           Engagement Name
                         </span>
+                        <span
+                          aria-hidden="true"
+                          class="pf-c-form__label-required"
+                        >
+                           
+                          *
+                        </span>
                       </label>
                        
                     </div>
@@ -133,7 +146,6 @@ Object {
                         aria-label="engagement_name"
                         class="pf-c-form-control"
                         data-cy="engagement_name_field"
-                        disabled=""
                         id="engagement_name"
                         name="engagement_name"
                         type="text"
