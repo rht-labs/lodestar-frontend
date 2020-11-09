@@ -367,8 +367,8 @@ export function CreateNewEngagementForm() {
                       engagements?.
                       sort(
                         function(a, b){
-                          if(a.customer_name < b.customer_name) { return -1; }
-                          if(a.customer_name > b.customer_name) { return 1; }
+                          if(a.customer_name.toUpperCase() < b.customer_name.toUpperCase()) { return -1; }
+                          if(a.customer_name.toUpperCase() > b.customer_name.toUpperCase()) { return 1; }
                           return 0;
                         }
                       ).
