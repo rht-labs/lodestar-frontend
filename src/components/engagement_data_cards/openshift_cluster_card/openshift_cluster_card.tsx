@@ -12,10 +12,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
-import {
-  EngagementFormConfig,
-  EngagementFormOption,
-} from '../../../schemas/engagement_config';
+import { EngagementFormOption } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
@@ -30,6 +27,7 @@ import { Feature } from '../../feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagementConfig } from '../../../context/engagement_context/engagement_config_hook';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
@@ -37,7 +35,6 @@ export interface OpenShiftClusterSummaryCardProps {
   currentEngagementChanges: Engagement;
   onChange: (hostingEnvironments: HostingEnvironment[]) => void;
   onClear: () => void;
-  engagementFormConfig: EngagementFormConfig;
   onSave: (hostingEnvironments: HostingEnvironment[]) => void;
   missingRequiredFields: string[];
 }
@@ -47,11 +44,11 @@ export function OpenShiftClusterSummaryCard({
   onClear,
   onSave: propsOnSave,
   onChange,
-  engagementFormConfig,
 }: OpenShiftClusterSummaryCardProps) {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
+  const { engagementFormConfig } = useEngagementConfig();
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const { saveEngagement } = useEngagements();

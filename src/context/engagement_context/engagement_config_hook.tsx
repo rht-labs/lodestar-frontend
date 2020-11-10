@@ -8,11 +8,12 @@ export const useEngagementConfig = () => {
     EngagementFormConfig
   >();
 
-  const _getEngagementFormConfig = async () => {
+  const _getEngagementFormConfig = () => {
     if (!engagementFormConfig) {
-      setEngagementFormConfig(await engagementService.getConfig());
+      engagementService
+        .getConfig()
+        .then(config => setEngagementFormConfig(config));
     }
-
     return engagementFormConfig;
   };
 
