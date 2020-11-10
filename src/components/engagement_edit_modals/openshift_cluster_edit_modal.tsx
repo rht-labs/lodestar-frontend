@@ -139,7 +139,10 @@ export function OpenShiftClusterEditModal({
             isEngagementLaunched={isEngagementLaunched}
           />
           <ClusterSizeFormField
-            onChange={value => onChange('ocp_cluster_size', value)}
+            onChange={value => {
+              onChange('ocp_cluster_size', value);
+              console.log(value);
+            }}
             engagementFormConfig={engagementFormConfig}
             hostingEnvironment={hostingEnvironment}
             isEngagementLaunched={isEngagementLaunched}

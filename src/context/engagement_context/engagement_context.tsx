@@ -18,6 +18,7 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -306,6 +307,20 @@ export const EngagementProvider = ({
   );
 
   const _checkLaunchReady = useCallback(() => {
+    const notNullOrUndefined = x => x !== null && x !== undefined;
+    const _validateHostingEnvironment = (
+      hostingEnvironment: HostingEnvironment
+    ): boolean => {
+      return (
+        notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_name) &&
+        notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_name) &&
+        notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_region) &&
+        notNullOrUndefined(hostingEnvironment.ocp_cluster_size) &&
+        notNullOrUndefined(hostingEnvironment.ocp_persistent_storage_size) &&
+        notNullOrUndefined(hostingEnvironment.ocp_sub_domain) &&
+        notNullOrUndefined(hostingEnvironment.ocp_version)
+      );
+    };
     if (!currentEngagement) {
       return false;
     }
@@ -315,7 +330,13 @@ export const EngagementProvider = ({
         typeof currentEngagement[o] === 'number' ||
         !!currentEngagement[o]
     );
-    return result;
+    if (!result) {
+      return result;
+    }
+    const areEnvironmentsValid = currentEngagement?.hosting_environments?.every(
+      e => _validateHostingEnvironment(e)
+    );
+    return areEnvironmentsValid;
   }, [currentEngagement]);
 
   const missingRequiredFields = useCallback(() => {
@@ -329,7 +350,6 @@ export const EngagementProvider = ({
 
   const saveEngagement = useCallback(
     async (data: Engagement, commitMessage?: string) => {
-      console.log(data);
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {

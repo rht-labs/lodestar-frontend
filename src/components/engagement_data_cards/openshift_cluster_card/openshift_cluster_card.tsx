@@ -18,7 +18,6 @@ import {
 } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import {
@@ -49,12 +48,10 @@ export function OpenShiftClusterSummaryCard({
   onSave: propsOnSave,
   onChange,
   engagementFormConfig,
-  missingRequiredFields,
 }: OpenShiftClusterSummaryCardProps) {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
-  const openshiftRequiredFields = [];
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const { saveEngagement } = useEngagements();
@@ -74,13 +71,11 @@ export function OpenShiftClusterSummaryCard({
       ...currentEngagementChanges.hosting_environments,
       hostingEnvironment,
     ]);
-    console.log(hostingEnvironments);
     onChange(hostingEnvironments);
-    propsOnSave(hostingEnvironments);
-    // saveEngagement({
-    //   ...currentEngagementChanges,
-    //   hosting_environments: hostingEnvironments,
-    // });
+    saveEngagement({
+      ...currentEngagementChanges,
+      hosting_environments: hostingEnvironments,
+    });
   };
   const openHostingEnvironmentModal = (
     hostingEnvironment: HostingEnvironment
@@ -117,10 +112,6 @@ export function OpenShiftClusterSummaryCard({
       Edit
     </DropdownItem>,
   ];
-  // TODO Remove
-  if (currentEngagementChanges) {
-    currentEngagementChanges.launch = null;
-  }
   const columns = [
     { title: 'Environment Name' },
     { title: 'Hosting Type' },
@@ -178,21 +169,16 @@ export function OpenShiftClusterSummaryCard({
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
-        trailingIcon={() =>
-          !currentEngagementChanges || currentEngagementChanges?.launch ? (
-            <div />
-          ) : (
-            <RequiredFieldsWarning
-              missingRequiredFields={missingRequiredFields}
-              requiredFields={openshiftRequiredFields}
-            />
-          )
-        }
         actionButton={() => (
           <div>
             <EditButton
+              isDisabled={
+                currentEngagementChanges?.hosting_environments?.length >=
+                (engagementFormConfig?.logistics_options
+                  ?.max_hosting_env_count ?? 1)
+              }
               onClick={addProvider}
-              text={'Add Provider'}
+              text={'Add Hosting Environment'}
               dataCy={'hosting_env_button'}
             />
           </div>
@@ -201,7 +187,7 @@ export function OpenShiftClusterSummaryCard({
       >
         {currentEngagementChanges?.hosting_environments?.length > 0 ? (
           <Table
-            aria-label="Engagement Hosting Providers"
+            aria-label="Engagement Hosting Environments"
             variant={TableVariant.compact}
             cells={columns}
             rows={rows}
@@ -213,11 +199,11 @@ export function OpenShiftClusterSummaryCard({
           <EmptyState>
             <EmptyStateIcon icon={DatabaseIcon} />
             <Title headingLevel="h4" size="lg">
-              No Hosting Providers Added
+              No Hosting Environments Added
             </Title>
             <EmptyStateBody>
-              <p>No hosting providers have been added to this engagement</p>
-              <p>Click below to start adding hosting providers</p>
+              <p>No hosting environments have been added to this engagement</p>
+              <p>Click below to start adding hosting environments</p>
             </EmptyStateBody>
             <Button
               variant="secondary"
