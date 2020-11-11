@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import {
@@ -28,6 +28,7 @@ import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementConfig } from '../../../context/engagement_context/engagement_config_hook';
+import { FormManager } from '../../../context/form_manager/form_manager';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
@@ -52,6 +53,8 @@ export function OpenShiftClusterSummaryCard({
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const { saveEngagement } = useEngagements();
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => registerField('hosting_environments'), [registerField]);
   const onClose = () => {
     onClear();
     requestClose();
@@ -99,14 +102,14 @@ export function OpenShiftClusterSummaryCard({
     openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
   };
   const actionItems = (hostingEnvironment: HostingEnvironment) => [
-    <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
-      Delete
-    </DropdownItem>,
     <DropdownItem
       key="edit"
       onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
     >
       Edit
+    </DropdownItem>,
+    <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
+      Delete
     </DropdownItem>,
   ];
   const columns = [

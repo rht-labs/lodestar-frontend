@@ -305,12 +305,9 @@ export const EngagementProvider = ({
       _handleErrors,
     ]
   );
-
-  const _checkLaunchReady = useCallback(() => {
-    const notNullOrUndefined = x => x !== null && x !== undefined;
-    const _validateHostingEnvironment = (
-      hostingEnvironment: HostingEnvironment
-    ): boolean => {
+  const notNullOrUndefined = x => x !== null && x !== undefined && x !== '';
+  const _validateHostingEnvironment = useCallback(
+    (hostingEnvironment: HostingEnvironment): boolean => {
       return (
         notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_name) &&
         notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_name) &&
@@ -320,7 +317,11 @@ export const EngagementProvider = ({
         notNullOrUndefined(hostingEnvironment.ocp_sub_domain) &&
         notNullOrUndefined(hostingEnvironment.ocp_version)
       );
-    };
+    },
+    []
+  );
+
+  const _checkLaunchReady = useCallback(() => {
     if (!currentEngagement) {
       return false;
     }
@@ -332,21 +333,29 @@ export const EngagementProvider = ({
     );
     if (!result) {
       return result;
+    } else {
+      return currentEngagement?.hosting_environments?.every(e =>
+        _validateHostingEnvironment(e)
+      );
     }
-    const areEnvironmentsValid = currentEngagement?.hosting_environments?.every(
-      e => _validateHostingEnvironment(e)
-    );
-    return areEnvironmentsValid;
-  }, [currentEngagement]);
+  }, [currentEngagement, _validateHostingEnvironment]);
 
   const missingRequiredFields = useCallback(() => {
-    return requiredFields.filter(
-      field =>
-        currentEngagement?.[field] !== 'boolean' &&
-        currentEngagement?.[field] !== 'number' &&
-        !currentEngagement?.[field]
-    );
-  }, [currentEngagement]);
+    return requiredFields
+      .filter(
+        field =>
+          currentEngagement?.[field] !== 'boolean' &&
+          currentEngagement?.[field] !== 'number' &&
+          !currentEngagement?.[field]
+      )
+      .concat(
+        !!currentEngagement?.hosting_environments?.every?.(
+          _validateHostingEnvironment
+        )
+          ? []
+          : ['hosting_environments']
+      );
+  }, [currentEngagement, _validateHostingEnvironment]);
 
   const saveEngagement = useCallback(
     async (data: Engagement, commitMessage?: string) => {
