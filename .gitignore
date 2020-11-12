@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+public/config/*
+!public/config/config.example.json
+
 # production
 /build
 /package-contents

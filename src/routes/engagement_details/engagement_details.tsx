@@ -44,7 +44,7 @@ export const EngagementDetailView = () => {
   } = useEngagements();
 
   const {
-    saveChanges: saveEngagement,
+    saveChanges,
     currentChanges,
     updateEngagementFormField,
     clearCurrentChanges,
@@ -94,13 +94,13 @@ export const EngagementDetailView = () => {
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate
         engagement={currentEngagement}
-        onSave={saveEngagement}
+        onSave={saveChanges}
       >
         <AlertMessage />
         <EngagementOverview
           currentEngagement={currentEngagement}
           missingRequiredFields={missingRequiredFields}
-          onSave={saveEngagement}
+          onSave={saveChanges}
           engagementFormConfig={engagementFormConfig}
           onChange={updateEngagementFormField}
           currentEngagementChanges={currentChanges}

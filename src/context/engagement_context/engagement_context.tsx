@@ -18,6 +18,7 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export interface EngagementContext {
   getEngagements: () => Promise<Engagement[]>;
@@ -58,12 +59,6 @@ const requiredFields = [
   'technical_lead_email',
   'engagement_lead_name',
   'technical_lead_name',
-  'ocp_cloud_provider_name',
-  'ocp_cloud_provider_region',
-  'ocp_version',
-  'ocp_cluster_size',
-  'ocp_persistent_storage_size',
-  'ocp_sub_domain',
   'project_name',
 ];
 export const EngagementContext = createContext<EngagementContext>(null);
@@ -310,6 +305,21 @@ export const EngagementProvider = ({
       _handleErrors,
     ]
   );
+  const notNullOrUndefined = x => x !== null && x !== undefined && x !== '';
+  const _validateHostingEnvironment = useCallback(
+    (hostingEnvironment: HostingEnvironment): boolean => {
+      return (
+        notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_name) &&
+        notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_name) &&
+        notNullOrUndefined(hostingEnvironment.ocp_cloud_provider_region) &&
+        notNullOrUndefined(hostingEnvironment.ocp_cluster_size) &&
+        notNullOrUndefined(hostingEnvironment.ocp_persistent_storage_size) &&
+        notNullOrUndefined(hostingEnvironment.ocp_sub_domain) &&
+        notNullOrUndefined(hostingEnvironment.ocp_version)
+      );
+    },
+    []
+  );
 
   const _checkLaunchReady = useCallback(() => {
     if (!currentEngagement) {
@@ -321,17 +331,31 @@ export const EngagementProvider = ({
         typeof currentEngagement[o] === 'number' ||
         !!currentEngagement[o]
     );
-    return result;
-  }, [currentEngagement]);
+    if (!result) {
+      return result;
+    } else {
+      return currentEngagement?.hosting_environments?.every(e =>
+        _validateHostingEnvironment(e)
+      );
+    }
+  }, [currentEngagement, _validateHostingEnvironment]);
 
   const missingRequiredFields = useCallback(() => {
-    return requiredFields.filter(
-      field =>
-        currentEngagement?.[field] !== 'boolean' &&
-        currentEngagement?.[field] !== 'number' &&
-        !currentEngagement?.[field]
-    );
-  }, [currentEngagement]);
+    return requiredFields
+      .filter(
+        field =>
+          currentEngagement?.[field] !== 'boolean' &&
+          currentEngagement?.[field] !== 'number' &&
+          !currentEngagement?.[field]
+      )
+      .concat(
+        !!currentEngagement?.hosting_environments?.every?.(
+          _validateHostingEnvironment
+        )
+          ? []
+          : ['hosting_environments']
+      );
+  }, [currentEngagement, _validateHostingEnvironment]);
 
   const saveEngagement = useCallback(
     async (data: Engagement, commitMessage?: string) => {
