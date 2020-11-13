@@ -212,7 +212,7 @@ export function OpenShiftClusterSummaryCard({
               data-cy={'add_new_environment'}
               style={{ margin: '1rem' }}
             >
-              <PlusIcon style={{ fontSize: 'small' }} /> Add Hosting Provider
+              <PlusIcon style={{ fontSize: 'small' }} /> Add Hosting Environment
             </Button>
           </EmptyState>
         )}
