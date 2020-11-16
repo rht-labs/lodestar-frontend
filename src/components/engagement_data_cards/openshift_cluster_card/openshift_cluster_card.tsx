@@ -18,6 +18,7 @@ import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import {
+  cellWidth,
   Table,
   TableBody,
   TableHeader,
@@ -29,6 +30,7 @@ import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementConfig } from '../../../context/engagement_context/engagement_config_hook';
 import { FormManager } from '../../../context/form_manager/form_manager';
+import { ReadyCheck } from '../../ready_check/ready_check';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
@@ -113,6 +115,7 @@ export function OpenShiftClusterSummaryCard({
     </DropdownItem>,
   ];
   const columns = [
+    { title: '', transforms: [cellWidth(10)] },
     { title: 'Environment Name' },
     { title: 'Hosting Type' },
     { title: 'Version' },
@@ -121,6 +124,7 @@ export function OpenShiftClusterSummaryCard({
   ];
   const rows = currentEngagementChanges?.hosting_environments?.map?.(
     (hostingEnvironment, idx) => [
+      { title: <ReadyCheck isReady={false} /> },
       hostingEnvironment.environment_name,
       'Openshift Container Platform',
       getHumanReadableLabel(
@@ -162,7 +166,6 @@ export function OpenShiftClusterSummaryCard({
     <>
       <OpenShiftClusterEditModal
         isEngagementLaunched={!!currentEngagementChanges?.launch}
-        engagementFormConfig={engagementFormConfig}
         onSave={onSave}
         onClose={onClose}
         hostingEnvironment={currentHostingEnvironment}

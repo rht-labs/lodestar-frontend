@@ -1,7 +1,6 @@
 import React from 'react';
-import { CheckCircleIcon } from '@patternfly/react-icons';
-import { Tooltip } from '@patternfly/react-core';
 import { getHumanReadableFieldName } from '../../common/human_readable_engagement_field';
+import { ReadyCheck } from '../ready_check/ready_check';
 interface RequiredFieldsWarningProps {
   requiredFields: string[];
   missingRequiredFields: string[];
@@ -13,37 +12,25 @@ export function RequiredFieldsWarning({
   const neededFields = requiredFields
     .filter(field => missingRequiredFields.includes(field))
     .map(field => getHumanReadableFieldName(field));
-  if (!neededFields?.length) {
-    return (
-      <Tooltip
-        content="All required fields are completed"
-        entryDelay={10}
-        exitDelay={10}
-      >
-        <CheckCircleIcon color="green" />
-      </Tooltip>
-    );
-  }
+  const isReady = neededFields?.length === 0;
+  const notReadyTooltip = (
+    <div>
+      <div>Missing required fields:</div>
+      <div>
+        <ul>
+          {neededFields.map(field => (
+            <li>{field}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+  const readyTooltip = 'All required fields are completed';
   return (
-    <span>
-      <Tooltip
-        content={
-          <div>
-            <div>Missing required fields:</div>
-            <div>
-              <ul>
-                {neededFields.map(field => (
-                  <li>{field}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        }
-        entryDelay={10}
-        exitDelay={10}
-      >
-        <CheckCircleIcon color="lightgrey" />
-      </Tooltip>
-    </span>
+    <ReadyCheck
+      isReady={isReady}
+      notReadyTooltip={notReadyTooltip}
+      readyTooltip={readyTooltip}
+    />
   );
 }
