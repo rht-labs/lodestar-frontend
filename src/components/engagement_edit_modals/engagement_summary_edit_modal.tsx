@@ -8,6 +8,9 @@ import { EngagementStartEndDateFormField } from '../engagement_form_fields/engag
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 import { EngagementUseCaseField } from '../engagement_form_fields/use_case';
+import { CustomerNameFormField } from "../engagement_form_fields/customer_name";
+import { EngagementNameFormField } from "../engagement_form_fields/engagement_name";
+import { useHistory } from "react-router";
 
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
@@ -20,10 +23,18 @@ export interface EngagementSummaryEditModalProps {
 export function EngagementSummaryEditModal(
   props: EngagementSummaryEditModalProps
 ) {
+  const history = useHistory();
   const onSave = () => {
+    reRoute();
     props.onSave(props.engagement);
     props.onClose?.();
   };
+  const reRoute = () => {
+    if (props.engagement.customer_name && props.engagement.project_name) {
+      history.push(`/app/engagements/${props.engagement.customer_name}/${props.engagement.project_name}`);
+    }
+  };
+
   return (
     <Modal
       variant={ModalVariant.small}
@@ -47,6 +58,14 @@ export function EngagementSummaryEditModal(
         }
       >
         <Form>
+          <CustomerNameFormField
+            onChange={props.onChange}
+            engagement={props.engagement}
+          />
+          <EngagementNameFormField
+            onChange={props.onChange}
+            engagement={props.engagement}
+          />
           <EngagementUseCaseField
             onChange={(useCases: EngagementUseCase[]) =>
               props.onChange('use_cases', useCases)

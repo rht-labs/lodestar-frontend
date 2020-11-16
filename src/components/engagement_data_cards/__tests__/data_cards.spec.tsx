@@ -14,6 +14,7 @@ describe('Engagement summary card', () => {
   test('matches snapshot', () => {
     expect(
       render(
+        <MemoryRouter>
         <TestStateWrapper>
           <EngagementSummaryCard
             onSave={() => {}}
@@ -24,6 +25,7 @@ describe('Engagement summary card', () => {
             missingRequiredFields={[]}
           />
         </TestStateWrapper>
+        </MemoryRouter>
       )
     ).toMatchSnapshot();
   });

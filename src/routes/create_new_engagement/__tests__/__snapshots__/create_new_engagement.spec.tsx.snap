@@ -308,6 +308,76 @@ Object {
                     
                   </div>
                 </div>
+                <div
+                  class="pf-c-form__group"
+                >
+                  <div
+                    class="pf-c-form__group-label"
+                  >
+                    <label
+                      class="pf-c-form__label"
+                      for="copyFrom"
+                    >
+                      <span
+                        class="pf-c-form__label-text"
+                      >
+                        <div
+                          style="display: inline-block;"
+                        >
+                          <h2
+                            class="pf-c-title pf-m-xl"
+                          >
+                            Copy From  
+                          </h2>
+                        </div>
+                      </span>
+                    </label>
+                     
+                  </div>
+                  <div
+                    class="pf-c-form__group-control"
+                  >
+                    <select
+                      aria-invalid="false"
+                      class="pf-c-form-control"
+                      data-cy="new-engagement-copy-from"
+                      data-ouia-component-id="3"
+                      data-ouia-component-type="PF4/FormSelect"
+                      data-ouia-safe="true"
+                      data-testid="new-engagement-copy-from"
+                    >
+                      <option
+                        class=""
+                        value=""
+                      >
+                        None
+                      </option>
+                      <optgroup
+                        class=""
+                        label="Templates"
+                      >
+                        <option
+                          class=""
+                          disabled=""
+                          value=""
+                        >
+                          No templates available
+                        </option>
+                      </optgroup>
+                      <optgroup
+                        class=""
+                        label="Existing engagements"
+                      />
+                    </select>
+                    <div
+                      aria-live="polite"
+                      class="pf-c-form__helper-text"
+                      id="copyFrom-helper"
+                    >
+                      Prepopulate details of this engagement based on a selected template or an existing engagement
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -617,6 +687,76 @@ Object {
                     data-testid="new-engagement-type"
                   />
                   
+                </div>
+              </div>
+              <div
+                class="pf-c-form__group"
+              >
+                <div
+                  class="pf-c-form__group-label"
+                >
+                  <label
+                    class="pf-c-form__label"
+                    for="copyFrom"
+                  >
+                    <span
+                      class="pf-c-form__label-text"
+                    >
+                      <div
+                        style="display: inline-block;"
+                      >
+                        <h2
+                          class="pf-c-title pf-m-xl"
+                        >
+                          Copy From  
+                        </h2>
+                      </div>
+                    </span>
+                  </label>
+                   
+                </div>
+                <div
+                  class="pf-c-form__group-control"
+                >
+                  <select
+                    aria-invalid="false"
+                    class="pf-c-form-control"
+                    data-cy="new-engagement-copy-from"
+                    data-ouia-component-id="3"
+                    data-ouia-component-type="PF4/FormSelect"
+                    data-ouia-safe="true"
+                    data-testid="new-engagement-copy-from"
+                  >
+                    <option
+                      class=""
+                      value=""
+                    >
+                      None
+                    </option>
+                    <optgroup
+                      class=""
+                      label="Templates"
+                    >
+                      <option
+                        class=""
+                        disabled=""
+                        value=""
+                      >
+                        No templates available
+                      </option>
+                    </optgroup>
+                    <optgroup
+                      class=""
+                      label="Existing engagements"
+                    />
+                  </select>
+                  <div
+                    aria-live="polite"
+                    class="pf-c-form__helper-text"
+                    id="copyFrom-helper"
+                  >
+                    Prepopulate details of this engagement based on a selected template or an existing engagement
+                  </div>
                 </div>
               </div>
             </form>

@@ -5,8 +5,8 @@ import { format } from 'date-fns';
 import { HealthStatus } from '../../schemas/cluster_status';
 import { useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
-import {APP_FEATURES} from "../../common/app_features";
-import {Feature} from "../feature/feature";
+import { APP_FEATURES } from '../../common/app_features';
+import { Feature } from '../feature/feature';
 
 interface LaunchAlertBannerProps {
   engagement: Engagement;
@@ -37,6 +37,7 @@ const ENGAGEMENT_FIELD_MAP = {
   technical_lead_email: 'poc_card',
   customer_contact_name: 'poc_card',
   customer_contact_email: 'poc_card',
+  hosting_environments: 'oc_summary_card',
   ocp_cloud_provider_name: 'oc_summary_card',
   ocp_cloud_provider_region: 'oc_summary_card',
   ocp_version: 'oc_summary_card',

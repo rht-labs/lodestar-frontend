@@ -1,6 +1,12 @@
-import React from 'react';
-import { Engagement } from '../../schemas/engagement';
-import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
+import React, { useEffect, useState } from 'react';
+import {
+  Modal,
+  ModalVariant,
+  Button,
+  Form,
+  FormGroup,
+  TextInput,
+} from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import {
   EngagementFormConfig,
@@ -13,39 +19,59 @@ import { SubdomainFormField } from '../engagement_form_fields/subdomain';
 import { PersistentStorageFormField } from '../engagement_form_fields/persistent_storage';
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 export interface OpenShiftClusterEditModalProps {
-  onChange: (fieldName: string, value: any) => void;
   engagementFormConfig: EngagementFormConfig;
-  engagement: Engagement;
+  hostingEnvironment: HostingEnvironment;
   isOpen: boolean;
-  onSave: (engagement: Engagement) => void;
+  onSave: (hostingEnvironment: HostingEnvironment) => void;
   onClose: () => void;
+  isEngagementLaunched: boolean;
 }
 
 export function OpenShiftClusterEditModal({
   onClose = () => {},
-  engagement,
+  hostingEnvironment: propsHostingEnvironment,
   engagementFormConfig,
-  onChange,
   isOpen,
   onSave: propsOnSave,
+  isEngagementLaunched,
 }: OpenShiftClusterEditModalProps) {
+  const [hostingEnvironment, setHostingEnvironment] = useState<
+    HostingEnvironment
+  >();
+
+  useEffect(() => {
+    setHostingEnvironment(propsHostingEnvironment);
+  }, [propsHostingEnvironment, setHostingEnvironment]);
+
   const availableProviders = getAvailableProviders(
-    engagement,
+    hostingEnvironment,
     engagementFormConfig
   );
+
   const provider = engagementFormConfig?.cloud_options?.providers?.options?.find(
-    p => p.value === engagement?.ocp_cloud_provider_name
+    p => p.value === hostingEnvironment?.ocp_cloud_provider_name
   );
+
   const availableProviderRegionOptions = getAvailableRegionOptions(
     provider,
-    engagement
+    hostingEnvironment
   );
 
   const onSave = () => {
-    propsOnSave(engagement);
+    propsOnSave({ ...(propsHostingEnvironment ?? {}), ...hostingEnvironment });
     onClose();
   };
+
+  const onChange = (field, value) => {
+    setHostingEnvironment({ ...hostingEnvironment, [field]: value });
+  };
+
+  if (!hostingEnvironment) {
+    return <div />;
+  }
+
   return (
     <Modal
       variant={ModalVariant.large}
@@ -67,39 +93,63 @@ export function OpenShiftClusterEditModal({
         }
       >
         <Form isHorizontal>
+          <FormGroup label="Environment Name" isRequired fieldId="subdomain">
+            <TextInput
+              isRequired
+              data-testid="subdomain-input"
+              type="text"
+              id="ocp_sub_domain"
+              name="ocp_sub_domain"
+              data-cy={'desired_subdomain_input'}
+              value={hostingEnvironment.environment_name}
+              onChange={e => {
+                onChange('environment_name', e);
+              }}
+            />
+          </FormGroup>
           <CloudProviderFormField
-            onChange={onChange}
+            onChange={(value: string) =>
+              onChange('ocp_cloud_provider_name', value)
+            }
             availableProviders={availableProviders}
-            engagement={engagement}
+            hostingEnvironment={hostingEnvironment}
           />
           <CloudProviderRegionFormField
-            onChange={onChange}
+            isEngagementLaunched={isEngagementLaunched}
+            onChange={value => onChange('ocp_cloud_provider_region', value)}
             availableProviderRegionOptions={availableProviderRegionOptions}
-            engagement={engagement}
+            hostingEnvironment={hostingEnvironment}
           />
           <OpenShiftVersionFormField
-            onChange={onChange}
+            onChange={value => onChange('ocp_version', value)}
+            isEngagementLaunched={isEngagementLaunched}
             engagementFormConfig={engagementFormConfig}
-            engagement={engagement}
+            hostingEnvironment={hostingEnvironment}
           />
           <SubdomainFormField
-            onChange={onChange}
+            isEngagementLaunched={isEngagementLaunched}
+            onChange={value => onChange('ocp_sub_domain', value)}
             engagementFormConfig={engagementFormConfig}
-            engagement={engagement}
+            hostingEnvironment={hostingEnvironment}
           />
           <PersistentStorageFormField
-            onChange={onChange}
+            onChange={value => onChange('ocp_persistent_storage_size', value)}
             engagementFormConfig={engagementFormConfig}
-            engagement={engagement}
+            hostingEnvironment={hostingEnvironment}
+            isEngagementLaunched={isEngagementLaunched}
           />
           <ClusterSizeFormField
-            onChange={onChange}
+            onChange={value => {
+              onChange('ocp_cluster_size', value);
+              console.log(value);
+            }}
             engagementFormConfig={engagementFormConfig}
-            engagement={engagement}
+            hostingEnvironment={hostingEnvironment}
+            isEngagementLaunched={isEngagementLaunched}
           />
           <AdditionalDetailsFormField
-            onChange={onChange}
-            engagement={engagement}
+            onChange={value => onChange('additional_details', value)}
+            hostingEnvironment={hostingEnvironment}
           />
         </Form>
       </EditModalTemplate>
@@ -108,21 +158,22 @@ export function OpenShiftClusterEditModal({
 }
 
 function getAvailableProviders(
-  engagement: Engagement,
+  hostingEnvironment: HostingEnvironment,
   engagementFormConfig: EngagementFormConfig
 ) {
   const availableProviders =
     engagementFormConfig?.cloud_options?.providers?.options ?? [];
   if (
-    engagement?.ocp_cloud_provider_name &&
+    hostingEnvironment?.ocp_cloud_provider_name &&
     !availableProviders.find(
       option =>
-        option.value && option.value === engagement?.ocp_cloud_provider_name
+        option.value &&
+        option.value === hostingEnvironment?.ocp_cloud_provider_name
     )
   ) {
     availableProviders.push({
-      value: engagement?.ocp_cloud_provider_name,
-      label: engagement?.ocp_cloud_provider_name,
+      value: hostingEnvironment?.ocp_cloud_provider_name,
+      label: hostingEnvironment?.ocp_cloud_provider_name,
     });
   }
   return availableProviders;
@@ -130,17 +181,17 @@ function getAvailableProviders(
 
 function getAvailableRegionOptions(
   provider: EngagementFormOption,
-  engagement: Engagement
+  hostingEnvironment: HostingEnvironment
 ) {
   const availableProviderRegionOptions = provider?.options ?? [];
 
   if (
     availableProviderRegionOptions?.length === 0 &&
-    engagement?.ocp_cloud_provider_region
+    hostingEnvironment?.ocp_cloud_provider_region
   ) {
     availableProviderRegionOptions.push({
-      value: engagement?.ocp_cloud_provider_region,
-      label: engagement?.ocp_cloud_provider_region,
+      value: hostingEnvironment?.ocp_cloud_provider_region,
+      label: hostingEnvironment?.ocp_cloud_provider_region,
     });
   }
   return availableProviderRegionOptions;

@@ -10,12 +10,13 @@ import { PersistentStorageFormField } from '../persistent_storage';
 import { SubdomainFormField } from '../subdomain';
 import { render, fireEvent } from '@testing-library/react';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { HostingEnvironment } from '../../../schemas/hosting_environment';
 describe('Engagement form fields', () => {
   test('Additional details form matches snapshot', () => {
     expect(
       render(
         <AdditionalDetailsFormField
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
           onChange={() => {}}
         />
       )
@@ -25,7 +26,7 @@ describe('Engagement form fields', () => {
     const onChange = jest.fn();
     const wrapper = render(
       <AdditionalDetailsFormField
-        engagement={Engagement.fromFake(true)}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
         onChange={onChange}
       />
     );
@@ -38,7 +39,7 @@ describe('Engagement form fields', () => {
       render(
         <CloudProviderFormField
           availableProviders={[{ label: 'AWS', value: 'ec2' }]}
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
           onChange={() => {}}
         />
       )
@@ -49,7 +50,7 @@ describe('Engagement form fields', () => {
     const wrapper = render(
       <CloudProviderFormField
         availableProviders={[{ label: 'AWS', value: 'ec2' }]}
-        engagement={Engagement.fromFake(true)}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
         onChange={onChange}
       />
     );
@@ -61,10 +62,11 @@ describe('Engagement form fields', () => {
     expect(
       render(
         <CloudProviderRegionFormField
+          isEngagementLaunched={false}
           availableProviderRegionOptions={[
             { label: 'N. Virginia', value: 'nva' },
           ]}
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
           onChange={() => {}}
         />
       )
@@ -77,8 +79,9 @@ describe('Engagement form fields', () => {
         availableProviderRegionOptions={[
           { label: 'N. Virginia', value: 'nva' },
         ]}
-        engagement={Engagement.fromFake(true)}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
         onChange={onChange}
+        isEngagementLaunched={true}
       />
     );
     const textArea = await wrapper.findByTestId('provider-region-select');
@@ -90,8 +93,9 @@ describe('Engagement form fields', () => {
       render(
         <ClusterSizeFormField
           engagementFormConfig={EngagementFormConfig.fromFake()}
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
           onChange={() => {}}
+          isEngagementLaunched={true}
         />
       )
     ).toMatchSnapshot();
@@ -101,7 +105,8 @@ describe('Engagement form fields', () => {
     const wrapper = render(
       <ClusterSizeFormField
         engagementFormConfig={EngagementFormConfig.fromFake()}
-        engagement={Engagement.fromFake(true)}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
+        isEngagementLaunched={true}
         onChange={onChange}
       />
     );
@@ -136,7 +141,8 @@ describe('Engagement form fields', () => {
       render(
         <OpenShiftVersionFormField
           engagementFormConfig={EngagementFormConfig.fromFake()}
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          isEngagementLaunched={true}
           onChange={() => {}}
         />
       )
@@ -147,7 +153,8 @@ describe('Engagement form fields', () => {
     const wrapper = render(
       <OpenShiftVersionFormField
         engagementFormConfig={EngagementFormConfig.fromFake()}
-        engagement={Engagement.fromFake(true)}
+        isEngagementLaunched={true}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
         onChange={onChange}
       />
     );
@@ -160,7 +167,8 @@ describe('Engagement form fields', () => {
       render(
         <PersistentStorageFormField
           engagementFormConfig={EngagementFormConfig.fromFake()}
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          isEngagementLaunched={true}
           onChange={() => {}}
         />
       )
@@ -171,7 +179,8 @@ describe('Engagement form fields', () => {
     const wrapper = render(
       <PersistentStorageFormField
         engagementFormConfig={EngagementFormConfig.fromFake()}
-        engagement={Engagement.fromFake(true)}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
+        isEngagementLaunched={true}
         onChange={onChange}
       />
     );
@@ -184,7 +193,8 @@ describe('Engagement form fields', () => {
       render(
         <SubdomainFormField
           engagementFormConfig={EngagementFormConfig.fromFake()}
-          engagement={Engagement.fromFake(true)}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          isEngagementLaunched={true}
           onChange={() => {}}
         />
       )
@@ -195,7 +205,8 @@ describe('Engagement form fields', () => {
     const wrapper = render(
       <SubdomainFormField
         engagementFormConfig={EngagementFormConfig.fromFake()}
-        engagement={Engagement.fromFake(true)}
+        hostingEnvironment={HostingEnvironment.fromFake(true)}
+        isEngagementLaunched={true}
         onChange={onChange}
       />
     );

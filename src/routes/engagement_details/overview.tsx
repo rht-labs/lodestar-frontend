@@ -67,27 +67,12 @@ export function EngagementOverview({
                 </FormManager.Group>
               </GridItem>
             ) : (
-                <></>
-              )}
+              <></>
+            )}
             <GridItem span={12}>
               <div id="poc_card">
                 <FormManager.Group groupName="Point of Contact">
                   <PointOfContactCard
-                    onSave={onSave}
-                    onClear={clearCurrentChanges}
-                    onChange={onChange}
-                    engagementFormConfig={engagementFormConfig}
-                    currentEngagement={currentEngagement}
-                    currentEngagementChanges={currentEngagementChanges}
-                    missingRequiredFields={missingRequiredFields}
-                  />
-                </FormManager.Group>
-              </div>
-            </GridItem>
-            <GridItem span={12}>
-              <div id="oc_summary_card">
-                <FormManager.Group groupName="Hosting Environment">
-                  <OpenShiftClusterSummaryCard
                     onSave={onSave}
                     onClear={clearCurrentChanges}
                     onChange={onChange}
@@ -108,6 +93,27 @@ export function EngagementOverview({
                     onChange={onChange}
                     engagementFormConfig={engagementFormConfig}
                     engagement={currentEngagementChanges}
+                  />
+                </FormManager.Group>
+              </div>
+            </GridItem>
+            <GridItem span={12}>
+              <div id="oc_summary_card">
+                <FormManager.Group groupName="Hosting Environment">
+                  <OpenShiftClusterSummaryCard
+                    onSave={hostingEnvironments => {
+                      onSave({
+                        ...currentEngagementChanges,
+                        hosting_environments: hostingEnvironments,
+                      });
+                    }}
+                    onClear={clearCurrentChanges}
+                    onChange={hostingEnvironments => {
+                      onChange('hosting_environments', hostingEnvironments);
+                    }}
+                    engagementFormConfig={engagementFormConfig}
+                    currentEngagementChanges={currentEngagementChanges}
+                    missingRequiredFields={missingRequiredFields}
                   />
                 </FormManager.Group>
               </div>

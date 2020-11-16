@@ -1,163 +1,221 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
-import { Grid, GridItem, Tooltip } from '@patternfly/react-core';
-import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
-import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
 import {
-  EngagementFormConfig,
-  EngagementFormOption,
-} from '../../../schemas/engagement_config';
+  Button,
+  Dropdown,
+  DropdownItem,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  KebabToggle,
+  Title,
+} from '@patternfly/react-core';
+import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
+import { EngagementFormOption } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
-import { InfoCircleIcon } from '@patternfly/react-icons';
+import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
+import { HostingEnvironment } from '../../../schemas/hosting_environment';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableVariant,
+} from '@patternfly/react-table';
+import { Feature } from '../../feature/feature';
+import { APP_FEATURES } from '../../../common/app_features';
+import { uuid } from 'uuidv4';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagementConfig } from '../../../context/engagement_context/engagement_config_hook';
+import { FormManager } from '../../../context/form_manager/form_manager';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
 export interface OpenShiftClusterSummaryCardProps {
-  currentEngagement: Engagement;
   currentEngagementChanges: Engagement;
-  onChange: (fieldName: string, value: any) => void;
-  onClear: () => void
-  engagementFormConfig: EngagementFormConfig;
-  onSave: (engagement: Engagement) => void;
+  onChange: (hostingEnvironments: HostingEnvironment[]) => void;
+  onClear: () => void;
+  onSave: (hostingEnvironments: HostingEnvironment[]) => void;
   missingRequiredFields: string[];
 }
 
 export function OpenShiftClusterSummaryCard({
-  currentEngagement,
-  onClear,
   currentEngagementChanges,
-  onSave,
+  onClear,
+  onSave: propsOnSave,
   onChange,
-  engagementFormConfig,
-  missingRequiredFields,
 }: OpenShiftClusterSummaryCardProps) {
-  const openshiftRequiredFields = [
-    'ocp_cloud_provider_name',
-    'ocp_cloud_provider_region',
-    'ocp_version',
-    'ocp_cluster_size',
-    'ocp_persistent_storage_size',
-    'ocp_sub_domain',
-  ];
-  const { requestOpen, activeModalKey ,requestClose} = useModalVisibility();
+  const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
+    HostingEnvironment
+  >(null);
+  const { engagementFormConfig } = useEngagementConfig();
+  const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
+  const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
+  const { saveEngagement } = useEngagements();
+  const { registerField } = FormManager.useFormGroupManager();
+  useEffect(() => registerField('hosting_environments'), [registerField]);
   const onClose = () => {
-    onClear()
-    requestClose()
-  }
+    onClear();
+    requestClose();
+  };
+  const getUniqueProviders = (
+    providers: HostingEnvironment[]
+  ): HostingEnvironment[] => {
+    return Object.values(
+      providers.reduce((prev, curr) => ({ ...prev, [curr.id]: curr }), {})
+    );
+  };
+  const onSave = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = getUniqueProviders([
+      ...currentEngagementChanges.hosting_environments,
+      hostingEnvironment,
+    ]);
+    onChange(hostingEnvironments);
+    saveEngagement({
+      ...currentEngagementChanges,
+      hosting_environments: hostingEnvironments,
+    });
+  };
+  const openHostingEnvironmentModal = (
+    hostingEnvironment: HostingEnvironment
+  ) => {
+    setCurrentHostingEnvironment(hostingEnvironment);
+    requestOpen(OPENSHIFT_MODAL_KEY);
+  };
+  const onDelete = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = [
+      ...currentEngagementChanges.hosting_environments,
+    ];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      1
+    );
+    onChange(hostingEnvironments);
+    propsOnSave(hostingEnvironments);
+    saveEngagement({
+      ...currentEngagementChanges,
+      hosting_environments: hostingEnvironments,
+    });
+  };
+  const addProvider = () => {
+    openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
+  };
+  const actionItems = (hostingEnvironment: HostingEnvironment) => [
+    <DropdownItem
+      key="edit"
+      onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
+    >
+      Edit
+    </DropdownItem>,
+    <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
+      Delete
+    </DropdownItem>,
+  ];
+  const columns = [
+    { title: 'Environment Name' },
+    { title: 'Hosting Type' },
+    { title: 'Version' },
+    { title: 'Cloud Provider' },
+    { title: 'Actions' },
+  ];
+  const rows = currentEngagementChanges?.hosting_environments?.map?.(
+    (hostingEnvironment, idx) => [
+      hostingEnvironment.environment_name,
+      'Openshift Container Platform',
+      getHumanReadableLabel(
+        engagementFormConfig?.openshift_options?.versions?.options,
+        hostingEnvironment?.ocp_version
+      ),
+      getHumanReadableLabel(
+        engagementFormConfig?.cloud_options?.providers?.options,
+        hostingEnvironment.ocp_cloud_provider_name
+      ),
+      {
+        title: (
+          <Feature name={APP_FEATURES.writer}>
+            <Dropdown
+              isPlain
+              dropdownItems={actionItems(hostingEnvironment)}
+              isOpen={idx === currentOpenDropdown}
+              onSelect={() => {
+                setCurrentOpenDropdown(undefined);
+              }}
+              toggle={
+                <KebabToggle
+                  onToggle={() =>
+                    currentOpenDropdown === idx
+                      ? setCurrentOpenDropdown(undefined)
+                      : setCurrentOpenDropdown(idx)
+                  }
+                  id={`toggle-id-${idx}`}
+                  data-testid="hosting-provider-action-kebab"
+                />
+              }
+            />
+          </Feature>
+        ),
+      },
+    ]
+  );
   return (
     <>
       <OpenShiftClusterEditModal
+        isEngagementLaunched={!!currentEngagementChanges?.launch}
         engagementFormConfig={engagementFormConfig}
-        onChange={onChange}
         onSave={onSave}
         onClose={onClose}
-        engagement={currentEngagementChanges}
+        hostingEnvironment={currentHostingEnvironment}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
       />
       <DataCard
-        trailingIcon={() =>
-          !currentEngagement || currentEngagement?.launch ? (
-            <div />
-          ) : (
-            <RequiredFieldsWarning
-              missingRequiredFields={missingRequiredFields}
-              requiredFields={openshiftRequiredFields}
-            />
-          )
-        }
         actionButton={() => (
           <div>
             <EditButton
-              onClick={() => requestOpen(OPENSHIFT_MODAL_KEY)}
-              text={'Edit'}
+              isDisabled={
+                currentEngagementChanges?.hosting_environments?.length >=
+                (engagementFormConfig?.logistics_options
+                  ?.max_hosting_env_count ?? 1)
+              }
+              onClick={addProvider}
+              text={'Add Hosting Environment'}
               dataCy={'hosting_env_button'}
             />
           </div>
         )}
         title="Hosting Environment"
       >
-        <Grid hasGutter>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Hosting Type" dataCy={'hosting_type'}>
-              OpenShift Container Platform
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Cloud Provider" dataCy={'cloud_provider'}>
-              <span>
-                {getHumanReadableLabel(
-                  engagementFormConfig?.cloud_options?.providers?.options,
-                  currentEngagement?.ocp_cloud_provider_name
-                )}
-              </span>
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="OpenShift Version" dataCy={'oc_version'}>
-              <span>
-                {getHumanReadableLabel(
-                  engagementFormConfig?.openshift_options?.versions?.options,
-                  currentEngagement?.ocp_version
-                )}
-              </span>
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Storage Size" dataCy={'storage_size'}>
-              <span>
-                {getHumanReadableLabel(
-                  engagementFormConfig?.openshift_options?.persistent_storage?.options,
-                  currentEngagement?.ocp_persistent_storage_size
-                )}
-              </span>
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Cloud Region" dataCy={'cloud_region'}>
-              <span>
-                {getHumanReadableLabel(
-                  engagementFormConfig?.cloud_options?.providers?.options?.find(
-                    option =>
-                      option.value ===
-                      currentEngagement?.ocp_cloud_provider_name
-                  )?.options ?? [],
-                  currentEngagement?.ocp_cloud_provider_region
-                )}
-              </span>
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Cluster Size" dataCy={'cluster_size'}>
-              <span>
-                {getHumanReadableLabel(
-                  engagementFormConfig?.openshift_options?.cluster_size?.options,
-                  currentEngagement?.ocp_cluster_size
-                )}
-              </span>
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem md={12} lg={3}>
-            <TitledDataPoint title="Subdomain" dataCy={'sub_domain'}>
-              <span
-                style={{
-                  fontWeight: 'bolder',
-                }}
-              >
-                {currentEngagement?.ocp_sub_domain}
-              </span>
-              <span style={{ fontStyle: 'italic' }}>
-                {'.region.example.com'}
-              </span>
-              &nbsp;
-              <Tooltip content="The full domain is shown as an example. The actual domain(s) used within the environment(s) will be available as part of the status once the engagement is launched">
-                <InfoCircleIcon></InfoCircleIcon>
-              </Tooltip>
-            </TitledDataPoint>
-          </GridItem>
-        </Grid>
+        {currentEngagementChanges?.hosting_environments?.length > 0 ? (
+          <Table
+            aria-label="Engagement Hosting Environments"
+            variant={TableVariant.compact}
+            cells={columns}
+            rows={rows}
+          >
+            <TableHeader />
+            <TableBody />
+          </Table>
+        ) : (
+          <EmptyState>
+            <EmptyStateIcon icon={DatabaseIcon} />
+            <Title headingLevel="h4" size="lg">
+              No Hosting Environments Added
+            </Title>
+            <EmptyStateBody>
+              <p>No hosting environments have been added to this engagement</p>
+              <p>Click below to start adding hosting environments</p>
+            </EmptyStateBody>
+            <Button
+              variant="secondary"
+              onClick={addProvider}
+              data-testid={'add-first-hosting-environment'}
+              data-cy={'add_new_environment'}
+              style={{ margin: '1rem' }}
+            >
+              <PlusIcon style={{ fontSize: 'small' }} /> Add Hosting Environment
+            </Button>
+          </EmptyState>
+        )}
       </DataCard>
     </>
   );
@@ -167,5 +225,5 @@ function getHumanReadableLabel(
   lookupArray: EngagementFormOption[] = [],
   value: string
 ) {
-  return lookupArray?.find(option => option.value === value)?.label;
+  return lookupArray?.find(option => option.value === value)?.label ?? value;
 }

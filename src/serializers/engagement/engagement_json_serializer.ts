@@ -6,6 +6,7 @@ import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serialize
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
 import { Logger } from '../../utilities/logger';
 import { uuid } from 'uuidv4';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
@@ -62,6 +63,20 @@ export class EngagementJsonSerializer
     }, {});
     return trimmedValues;
   }
+  private static deserializeHostingEnvironment(
+    data: object
+  ): HostingEnvironment {
+    return {
+      id: data['id'] || uuid(),
+      environment_name: data['environment_name'],
+      ocp_cloud_provider_name: data['ocp_cloud_provider_name'],
+      ocp_cloud_provider_region: data['ocp_cloud_provider_region'],
+      ocp_cluster_size: data['ocp_cluster_size'],
+      ocp_persistent_storage_size: data['ocp_persistent_storage_size'],
+      ocp_sub_domain: data['ocp_sub_domain'],
+      ocp_version: data['ocp_version'],
+    };
+  }
 
   private static deserializeArtifact(data: object): Artifact {
     return {
@@ -100,14 +115,12 @@ export class EngagementJsonSerializer
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
       engagement_type: data['engagement_type'],
+      hosting_environments:
+        data['hosting_environments']?.map?.(
+          EngagementJsonSerializer.deserializeHostingEnvironment
+        ) ?? [],
       last_update: data['last_update'],
       location: data['location'],
-      ocp_cloud_provider_name: data['ocp_cloud_provider_name'],
-      ocp_cloud_provider_region: data['ocp_cloud_provider_region'],
-      ocp_cluster_size: data['ocp_cluster_size'],
-      ocp_persistent_storage_size: data['ocp_persistent_storage_size'],
-      ocp_sub_domain: data['ocp_sub_domain'],
-      ocp_version: data['ocp_version'],
       project_id: data['project_id'],
       project_name: data['project_name'],
       start_date: EngagementJsonSerializer.parseDate(data['start_date']),
