@@ -439,6 +439,7 @@ Object {
             >
               <div
                 class="pf-c-drawer__content"
+                id="main-application-content"
               >
                 <div
                   data-testid="mainTemplateContent"
@@ -891,6 +892,7 @@ Object {
           >
             <div
               class="pf-c-drawer__content"
+              id="main-application-content"
             >
               <div
                 data-testid="mainTemplateContent"
