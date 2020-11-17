@@ -39,9 +39,7 @@ export function OpenShiftVersionFormField({
         value={hostingEnvironment?.ocp_version || ''}
         isDisabled={
           engagementFormConfig?.openshift_options?.versions?.options?.length ===
-            1 ||
-          !hasFeature(APP_FEATURES.writer) ||
-          isEngagementLaunched
+            1 || !hasFeature(APP_FEATURES.writer)
         }
         onChange={onChange}
       >
