@@ -20,8 +20,8 @@ import { PersistentStorageFormField } from '../engagement_form_fields/persistent
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
+import { useEngagementConfig } from '../../context/engagement_context/engagement_config_hook';
 export interface OpenShiftClusterEditModalProps {
-  engagementFormConfig: EngagementFormConfig;
   hostingEnvironment: HostingEnvironment;
   isOpen: boolean;
   onSave: (hostingEnvironment: HostingEnvironment) => void;
@@ -32,7 +32,6 @@ export interface OpenShiftClusterEditModalProps {
 export function OpenShiftClusterEditModal({
   onClose = () => {},
   hostingEnvironment: propsHostingEnvironment,
-  engagementFormConfig,
   isOpen,
   onSave: propsOnSave,
   isEngagementLaunched,
@@ -40,6 +39,7 @@ export function OpenShiftClusterEditModal({
   const [hostingEnvironment, setHostingEnvironment] = useState<
     HostingEnvironment
   >();
+  const { engagementFormConfig } = useEngagementConfig();
 
   useEffect(() => {
     setHostingEnvironment(propsHostingEnvironment);

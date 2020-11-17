@@ -33,6 +33,14 @@ import { FormManager } from '../../../context/form_manager/form_manager';
 import { ReadyCheck } from '../../ready_check/ready_check';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
+const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
+  'ocp_cloud_provider_name',
+  'ocp_cloud_provider_region',
+  'ocp_persistent_storage_size',
+  'ocp_sub_domain',
+  'ocp_version',
+  'environment_name',
+];
 
 export interface OpenShiftClusterSummaryCardProps {
   currentEngagementChanges: Engagement;
@@ -124,7 +132,18 @@ export function OpenShiftClusterSummaryCard({
   ];
   const rows = currentEngagementChanges?.hosting_environments?.map?.(
     (hostingEnvironment, idx) => [
-      { title: <ReadyCheck isReady={false} /> },
+      {
+        title: (
+          <ReadyCheck
+            isReady={requiredHostingEnvironmentFields.every(
+              f =>
+                hostingEnvironment[f] !== undefined &&
+                hostingEnvironment[f] !== null &&
+                hostingEnvironment[f] !== ''
+            )}
+          />
+        ),
+      },
       hostingEnvironment.environment_name,
       'Openshift Container Platform',
       getHumanReadableLabel(

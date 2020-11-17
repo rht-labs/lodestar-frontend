@@ -34,7 +34,7 @@ export function ClusterSizeFormField({
         id="cluster_size_dropdown"
         aria-label="Cluster Size"
         value={hostingEnvironment?.ocp_cluster_size || ''}
-        isDisabled={!hasFeature(APP_FEATURES.writer) || isEngagementLaunched}
+        isDisabled={!hasFeature(APP_FEATURES.writer)}
         onChange={onChange}
       >
         {[
