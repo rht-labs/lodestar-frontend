@@ -63,25 +63,23 @@ export const UserEditFields = ({
     },
   ];
 
-  const [validEmail, setValidEmail] = useState(false);
-  const [validName, setValidName] = useState(false);
+  const [validEmail, setValidEmail] = useState<boolean | null>(null);
+  const [validName, setValidName] = useState<boolean | null>(null);
+  const [validLastName, setValidLastName] = useState<boolean | null>(null);
 
-  let validateEmail = ( email:string ) => {
+  let validateEmail = ( email: string ) => {
     let regexEmail = /(^$|^.*@.*\..*$)/;
     return !!regexEmail.test(email);
   };
 
-  let validateString = ( name:string ) => {
+  let validateString = ( name: string ) => {
     let regexString = /(^$|^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]*$)/;
     return !!regexString.test(name);
   };
 
   useEffect(() => {
-    setHasValidInput(validEmail && validName);
-    console.log(validEmail);
-    console.log(validName);
-    console.log(setHasValidInput(validEmail && validName));
-  }, [validEmail, validName]);
+    setHasValidInput(validEmail && validName && validLastName);
+  }, [validEmail, validName, validLastName, setHasValidInput]);
 
   return (
     <>
@@ -105,7 +103,11 @@ export const UserEditFields = ({
                     {users.map((value: any, index: any) => {
                       const isUserDeleted =
                         deletedUsers.indexOf(users[index].email) > -1;
-
+                      if(validEmail === null || validName === null || validLastName === null) {
+                        setValidEmail(validateEmail(value.email));
+                        setValidName(validateString(value.first_name));
+                        setValidLastName(validateString(value.last_name));
+                      }
                       return (
                         <div key={index}>
                           <Grid hasGutter style={{ marginTop: '1rem' }}>
@@ -133,7 +135,7 @@ export const UserEditFields = ({
                                   }}
                                   placeholder="Email Address"
                                   type="email"
-                                  value={value.email || ''}
+                                  value={value.email|| ''}
                                   style={
                                     isUserDeleted
                                       ? { textDecorationLine: 'line-through' }
@@ -194,7 +196,7 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].last_name = e;
-                                    setValidName(validateString(value.last_name));
+                                    setValidLastName(validateString(value.last_name));
                                     onChange(users);
                                   }}
                                   placeholder="Last Name"
@@ -282,6 +284,7 @@ export const UserEditFields = ({
                       onClick={addUser}
                       data-testid={'add-first-user'}
                       data-cy={'add_new_user'}
+                      isDisabled={!(validEmail && validName && validLastName)}
                     >
                       <PlusIcon style={{ fontSize: 'small' }} /> Add User
                     </Button>
