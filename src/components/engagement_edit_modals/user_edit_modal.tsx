@@ -32,6 +32,7 @@ export function UserEditModal({
   onSave: propsOnSave,
 }: UserEditModalProps) {
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
+  const [hasValidInput, setHasValidInput] = useState(false);
 
   function toggleDeleted(email: string) {
     if (deletedUsers.indexOf(email) < 0) {
@@ -83,6 +84,7 @@ export function UserEditModal({
               onClick={onSave}
               data-cy={'save_users'}
               style={{ margin: '1rem' }}
+              isDisabled={!hasValidInput}
             >
               Save
             </Button>
@@ -120,6 +122,7 @@ export function UserEditModal({
               deletedUsers={deletedUsers}
               addUser={addUser}
               engagementFormConfig={engagementFormConfig}
+              setHasValidInput={setHasValidInput}
             />
           )}
         </div>

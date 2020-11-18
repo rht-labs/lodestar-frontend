@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Form,
   FormSelect,
@@ -10,7 +10,7 @@ import {
   CardBody,
   Flex,
   FlexItem,
-  Button,
+  Button, FormGroup,
 } from '@patternfly/react-core';
 import { PlusIcon, TrashIcon, UndoIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../common/app_features';
@@ -34,6 +34,7 @@ export interface UserEditFieldsProps {
   deletedUsers: string[];
   toggleDeleted: (email: string) => void;
   addUser: any;
+  setHasValidInput: any;
 }
 
 export const UserEditFields = ({
@@ -43,6 +44,7 @@ export const UserEditFields = ({
   deletedUsers,
   toggleDeleted,
   addUser,
+  setHasValidInput
 }: UserEditFieldsProps) => {
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
@@ -60,6 +62,27 @@ export const UserEditFields = ({
       ),
     },
   ];
+
+  const [validEmail, setValidEmail] = useState(false);
+  const [validName, setValidName] = useState(false);
+
+  let validateEmail = ( email:string ) => {
+    let regexEmail = /(^$|^.*@.*\..*$)/;
+    return !!regexEmail.test(email);
+  };
+
+  let validateString = ( name:string ) => {
+    let regexString = /(^$|^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]*$)/;
+    return !!regexString.test(name);
+  };
+
+  useEffect(() => {
+    setHasValidInput(validEmail && validName);
+    console.log(validEmail);
+    console.log(validName);
+    console.log(setHasValidInput(validEmail && validName));
+  }, [validEmail, validName]);
+
   return (
     <>
       <Flex direction={{ default: 'column' }}>
@@ -77,82 +100,113 @@ export const UserEditFields = ({
                 <TableBody />
               </Table>
               <Grid hasGutter>
-                <Form isHorizontal>
+                <Form>
                   <GridItem>
                     {users.map((value: any, index: any) => {
                       const isUserDeleted =
                         deletedUsers.indexOf(users[index].email) > -1;
+
                       return (
                         <div key={index}>
                           <Grid hasGutter style={{ marginTop: '1rem' }}>
                             <GridItem span={3}>
-                              <TextInput
-                                aria-label="email"
-                                name="email"
-                                data-cy={'input_user_email'}
-                                isDisabled={
-                                  !hasFeature(APP_FEATURES.writer) ||
-                                  isUserDeleted
-                                }
-                                onChange={e => {
-                                  users[index].email = e;
-                                  onChange(users);
-                                }}
-                                placeholder="Email Address"
-                                type="email"
-                                value={value.email || ''}
-                                style={
-                                  isUserDeleted
-                                    ? { textDecorationLine: 'line-through' }
-                                    : {}
-                                }
-                              />
+                              <FormGroup
+                                fieldId={'user_email'}
+                                helperTextInvalid={'Enter valid email address'}
+                                validated={
+                                  validateEmail(value.email)
+                                    ? 'default'
+                                    : 'error' }
+                              >
+                                <TextInput
+                                  aria-label="email"
+                                  name="email"
+                                  data-cy={'input_user_email'}
+                                  isDisabled={
+                                    !hasFeature(APP_FEATURES.writer) ||
+                                    isUserDeleted
+                                  }
+                                  onChange={e => {
+                                    users[index].email = e;
+                                    setValidEmail(validateEmail(value.email));
+                                    onChange(users);
+                                  }}
+                                  placeholder="Email Address"
+                                  type="email"
+                                  value={value.email || ''}
+                                  style={
+                                    isUserDeleted
+                                      ? { textDecorationLine: 'line-through' }
+                                      : {}
+                                  }
+                                />
+                              </FormGroup>
                             </GridItem>
                             <GridItem span={3}>
-                              <TextInput
-                                aria-label="First Name"
-                                name="first-name"
-                                data-cy={'input_user_firstname'}
-                                isDisabled={
-                                  !hasFeature(APP_FEATURES.writer) ||
-                                  isUserDeleted
-                                }
-                                onChange={e => {
-                                  users[index].first_name = e;
-                                  onChange(users);
-                                }}
-                                placeholder="First Name"
-                                type="text"
-                                value={value.first_name || ''}
-                                style={
-                                  isUserDeleted
-                                    ? { textDecorationLine: 'line-through' }
-                                    : {}
-                                }
-                              />
+                              <FormGroup
+                                fieldId={'user_first_name'}
+                                helperTextInvalid={'Enter valid first name'}
+                                validated={
+                                  validateString(value.first_name)
+                                    ? 'default'
+                                    : 'error' }
+                              >
+                                <TextInput
+                                  aria-label="First Name"
+                                  name="first-name"
+                                  data-cy={'input_user_firstname'}
+                                  isDisabled={
+                                    !hasFeature(APP_FEATURES.writer) ||
+                                    isUserDeleted
+                                  }
+                                  onChange={e => {
+                                    users[index].first_name = e;
+                                    setValidName(validateString(value.first_name));
+                                    onChange(users);
+                                  }}
+                                  placeholder="First Name"
+                                  type="text"
+                                  value={value.first_name || ''}
+                                  style={
+                                    isUserDeleted
+                                      ? { textDecorationLine: 'line-through' }
+                                      : {}
+                                  }
+                                />
+                              </FormGroup>
                             </GridItem>
                             <GridItem span={3}>
-                              <TextInput
-                                aria-label="Last Name"
-                                name="last-name"
-                                data-cy={'input_user_lastname'}
-                                isDisabled={
-                                  !hasFeature(APP_FEATURES.writer) ||
-                                  isUserDeleted
-                                }
-                                onChange={e => {
-                                  users[index].last_name = e;
-                                  onChange(users);
-                                }}
-                                placeholder="Last Name"
-                                type="text"
-                                value={value.last_name || ''}
-                                style={
-                                  isUserDeleted
-                                    ? { textDecorationLine: 'line-through' }
-                                    : {}
-                                }
-                              />
+                              <FormGroup
+                                fieldId={'user_last_name'}
+                                helperTextInvalid={'Enter valid last name'}
+                                validated={
+                                  validateString(value.last_name)
+                                    ? 'default'
+                                    : 'error' }
+                              >
+                                <TextInput
+                                  aria-label="Last Name"
+                                  name="last-name"
+                                  data-cy={'input_user_lastname'}
+                                  isDisabled={
+                                    !hasFeature(APP_FEATURES.writer) ||
+                                    isUserDeleted
+                                  }
+                                  onChange={e => {
+                                    users[index].last_name = e;
+                                    setValidName(validateString(value.last_name));
+                                    onChange(users);
+                                  }}
+                                  placeholder="Last Name"
+                                  type="text"
+                                  value={value.last_name || ''}
+                                  style={
+                                    isUserDeleted
+                                      ? { textDecorationLine: 'line-through' }
+                                      : {}
+                                  }
+                                />
+                              </FormGroup>
                             </GridItem>
                             <GridItem span={2}>
                               <FormSelect

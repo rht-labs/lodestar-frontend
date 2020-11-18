@@ -154,7 +154,7 @@ Object {
                             class="pf-l-grid pf-m-gutter"
                           >
                             <form
-                              class="pf-c-form pf-m-horizontal"
+                              class="pf-c-form"
                               novalidate=""
                             >
                               <div
@@ -168,47 +168,74 @@ Object {
                                     <div
                                       class="pf-l-grid__item pf-m-3-col"
                                     >
-                                      <input
-                                        aria-invalid="false"
-                                        aria-label="email"
-                                        class="pf-c-form-control"
-                                        data-cy="input_user_email"
-                                        disabled=""
-                                        name="email"
-                                        placeholder="Email Address"
-                                        type="email"
-                                        value="jdoe@doe.co"
-                                      />
+                                      <div
+                                        class="pf-c-form__group"
+                                      >
+                                        <div
+                                          class="pf-c-form__group-control"
+                                        >
+                                          <input
+                                            aria-invalid="false"
+                                            aria-label="email"
+                                            class="pf-c-form-control"
+                                            data-cy="input_user_email"
+                                            disabled=""
+                                            name="email"
+                                            placeholder="Email Address"
+                                            type="email"
+                                            value="jdoe@doe.co"
+                                          />
+                                          
+                                        </div>
+                                      </div>
                                     </div>
                                     <div
                                       class="pf-l-grid__item pf-m-3-col"
                                     >
-                                      <input
-                                        aria-invalid="false"
-                                        aria-label="First Name"
-                                        class="pf-c-form-control"
-                                        data-cy="input_user_firstname"
-                                        disabled=""
-                                        name="first-name"
-                                        placeholder="First Name"
-                                        type="text"
-                                        value="John"
-                                      />
+                                      <div
+                                        class="pf-c-form__group"
+                                      >
+                                        <div
+                                          class="pf-c-form__group-control"
+                                        >
+                                          <input
+                                            aria-invalid="false"
+                                            aria-label="First Name"
+                                            class="pf-c-form-control"
+                                            data-cy="input_user_firstname"
+                                            disabled=""
+                                            name="first-name"
+                                            placeholder="First Name"
+                                            type="text"
+                                            value="John"
+                                          />
+                                          
+                                        </div>
+                                      </div>
                                     </div>
                                     <div
                                       class="pf-l-grid__item pf-m-3-col"
                                     >
-                                      <input
-                                        aria-invalid="false"
-                                        aria-label="Last Name"
-                                        class="pf-c-form-control"
-                                        data-cy="input_user_lastname"
-                                        disabled=""
-                                        name="last-name"
-                                        placeholder="Last Name"
-                                        type="text"
-                                        value="Doe"
-                                      />
+                                      <div
+                                        class="pf-c-form__group"
+                                      >
+                                        <div
+                                          class="pf-c-form__group-control"
+                                        >
+                                          <input
+                                            aria-invalid="false"
+                                            aria-label="Last Name"
+                                            class="pf-c-form-control"
+                                            data-cy="input_user_lastname"
+                                            disabled=""
+                                            name="last-name"
+                                            placeholder="Last Name"
+                                            type="text"
+                                            value="Doe"
+                                          />
+                                          
+                                        </div>
+                                      </div>
                                     </div>
                                     <div
                                       class="pf-l-grid__item pf-m-2-col"
@@ -283,13 +310,14 @@ Object {
                     >
                       <div>
                         <button
-                          aria-disabled="false"
-                          class="pf-c-button pf-m-primary"
+                          aria-disabled="true"
+                          class="pf-c-button pf-m-primary pf-m-disabled"
                           data-cy="save_users"
                           data-ouia-component-id="4"
                           data-ouia-component-type="PF4/Button"
                           data-ouia-safe="true"
                           data-testid="user-edit-save"
+                          disabled=""
                           style="margin: 1rem;"
                           type="button"
                         >
