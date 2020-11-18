@@ -378,7 +378,7 @@ export const EngagementProvider = ({
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
-          'There was an issue with saving your changes. Please followup with an administrator if this continues.';
+          'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
           // If there is no mongo id associated with the engagement, then it is being committed to the backend for the first time. It is a net new engagement.
           if (!!data.mongo_id) {
