@@ -84,7 +84,7 @@ Object {
                     >
                       <div
                         class="pf-c-select"
-                        data-ouia-component-id="0"
+                        data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                         data-ouia-component-type="PF4/Select"
                         data-ouia-safe="true"
                       >
@@ -126,7 +126,6 @@ Object {
                             >
                               <path
                                 d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                                transform=""
                               />
                             </svg>
                           </button>
@@ -246,7 +245,7 @@ Object {
                       aria-invalid="false"
                       class="pf-c-form-control"
                       data-cy="new_engagement_region"
-                      data-ouia-component-id="1"
+                      data-ouia-component-id="OUIA-Generated-FormSelect-default-1"
                       data-ouia-component-type="PF4/FormSelect"
                       data-ouia-safe="true"
                       data-testid="region"
@@ -300,7 +299,7 @@ Object {
                       aria-invalid="false"
                       class="pf-c-form-control"
                       data-cy="new_engagement_type"
-                      data-ouia-component-id="2"
+                      data-ouia-component-id="OUIA-Generated-FormSelect-default-2"
                       data-ouia-component-type="PF4/FormSelect"
                       data-ouia-safe="true"
                       data-testid="new-engagement-type"
@@ -341,7 +340,7 @@ Object {
                       aria-invalid="false"
                       class="pf-c-form-control"
                       data-cy="new-engagement-copy-from"
-                      data-ouia-component-id="3"
+                      data-ouia-component-id="OUIA-Generated-FormSelect-default-3"
                       data-ouia-component-type="PF4/FormSelect"
                       data-ouia-safe="true"
                       data-testid="new-engagement-copy-from"
@@ -465,7 +464,7 @@ Object {
                   >
                     <div
                       class="pf-c-select"
-                      data-ouia-component-id="0"
+                      data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                       data-ouia-component-type="PF4/Select"
                       data-ouia-safe="true"
                     >
@@ -507,7 +506,6 @@ Object {
                           >
                             <path
                               d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                              transform=""
                             />
                           </svg>
                         </button>
@@ -627,7 +625,7 @@ Object {
                     aria-invalid="false"
                     class="pf-c-form-control"
                     data-cy="new_engagement_region"
-                    data-ouia-component-id="1"
+                    data-ouia-component-id="OUIA-Generated-FormSelect-default-1"
                     data-ouia-component-type="PF4/FormSelect"
                     data-ouia-safe="true"
                     data-testid="region"
@@ -681,7 +679,7 @@ Object {
                     aria-invalid="false"
                     class="pf-c-form-control"
                     data-cy="new_engagement_type"
-                    data-ouia-component-id="2"
+                    data-ouia-component-id="OUIA-Generated-FormSelect-default-2"
                     data-ouia-component-type="PF4/FormSelect"
                     data-ouia-safe="true"
                     data-testid="new-engagement-type"
@@ -722,7 +720,7 @@ Object {
                     aria-invalid="false"
                     class="pf-c-form-control"
                     data-cy="new-engagement-copy-from"
-                    data-ouia-component-id="3"
+                    data-ouia-component-id="OUIA-Generated-FormSelect-default-3"
                     data-ouia-component-type="PF4/FormSelect"
                     data-ouia-safe="true"
                     data-testid="new-engagement-copy-from"

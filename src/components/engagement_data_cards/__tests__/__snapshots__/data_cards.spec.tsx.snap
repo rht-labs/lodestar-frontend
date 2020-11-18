@@ -7,7 +7,7 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
-        data-ouia-component-id="0"
+        data-ouia-component-id="OUIA-Generated-Card-1"
         data-ouia-component-type="PF4/Card"
         data-ouia-safe="true"
         style="padding: 1rem;"
@@ -246,7 +246,7 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
-      data-ouia-component-id="0"
+      data-ouia-component-id="OUIA-Generated-Card-1"
       data-ouia-component-type="PF4/Card"
       data-ouia-safe="true"
       style="padding: 1rem;"
@@ -542,7 +542,7 @@ Object {
       <div />
       <article
         class="pf-c-card pf-m-compact"
-        data-ouia-component-id="1"
+        data-ouia-component-id="OUIA-Generated-Card-2"
         data-ouia-component-type="PF4/Card"
         data-ouia-safe="true"
         style="padding: 1rem;"
@@ -701,7 +701,7 @@ Object {
     <div />
     <article
       class="pf-c-card pf-m-compact"
-      data-ouia-component-id="1"
+      data-ouia-component-id="OUIA-Generated-Card-2"
       data-ouia-component-type="PF4/Card"
       data-ouia-safe="true"
       style="padding: 1rem;"
@@ -916,7 +916,7 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
-        data-ouia-component-id="3"
+        data-ouia-component-id="OUIA-Generated-Card-3"
         data-ouia-component-type="PF4/Card"
         data-ouia-safe="true"
         style="padding: 1rem;"
@@ -1032,7 +1032,7 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
-      data-ouia-component-id="3"
+      data-ouia-component-id="OUIA-Generated-Card-3"
       data-ouia-component-type="PF4/Card"
       data-ouia-safe="true"
       style="padding: 1rem;"
