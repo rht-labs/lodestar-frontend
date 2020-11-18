@@ -129,7 +129,9 @@ export class Apiv1AuthService implements AuthService {
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
       groups: Array.from(
-        new Set(userProfileData.data.groups?.map?.(group => rolesMap[group]))
+        new Set(
+          userProfileData.data.groups?.map?.(group => rolesMap[group]) ?? []
+        )
       ),
     };
   }
