@@ -32,7 +32,7 @@ Object {
         >
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            data-ouia-component-id="OUIA-Generated-Card-1"
+            data-ouia-component-id="0"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             style="min-height: 40vh;"
@@ -75,7 +75,7 @@ Object {
                       aria-disabled="false"
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_l"
-                      data-ouia-component-id="OUIA-Generated-Button-link-1"
+                      data-ouia-component-id="1"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -99,7 +99,7 @@ Object {
           </article>
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            data-ouia-component-id="OUIA-Generated-Card-2"
+            data-ouia-component-id="2"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             style="min-height: 40vh;"
@@ -142,7 +142,7 @@ Object {
                       aria-disabled="false"
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_p"
-                      data-ouia-component-id="OUIA-Generated-Button-link-2"
+                      data-ouia-component-id="3"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -166,7 +166,7 @@ Object {
           </article>
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            data-ouia-component-id="OUIA-Generated-Card-3"
+            data-ouia-component-id="4"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             style="min-height: 40vh;"
@@ -209,7 +209,7 @@ Object {
                       aria-disabled="false"
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_c"
-                      data-ouia-component-id="OUIA-Generated-Button-link-3"
+                      data-ouia-component-id="5"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -233,7 +233,7 @@ Object {
           </article>
           <article
             class="pf-c-card pf-m-hoverable pf-m-compact"
-            data-ouia-component-id="OUIA-Generated-Card-4"
+            data-ouia-component-id="6"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             style="min-height: 40vh;"
@@ -276,7 +276,7 @@ Object {
                       aria-disabled="false"
                       class="pf-c-button pf-m-link pf-m-inline"
                       data-cy="button_a"
-                      data-ouia-component-id="OUIA-Generated-Button-link-4"
+                      data-ouia-component-id="7"
                       data-ouia-component-type="PF4/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -330,7 +330,7 @@ Object {
       >
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-1"
+          data-ouia-component-id="0"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           style="min-height: 40vh;"
@@ -373,7 +373,7 @@ Object {
                     aria-disabled="false"
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_l"
-                    data-ouia-component-id="OUIA-Generated-Button-link-1"
+                    data-ouia-component-id="1"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -397,7 +397,7 @@ Object {
         </article>
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-2"
+          data-ouia-component-id="2"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           style="min-height: 40vh;"
@@ -440,7 +440,7 @@ Object {
                     aria-disabled="false"
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_p"
-                    data-ouia-component-id="OUIA-Generated-Button-link-2"
+                    data-ouia-component-id="3"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -464,7 +464,7 @@ Object {
         </article>
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-3"
+          data-ouia-component-id="4"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           style="min-height: 40vh;"
@@ -507,7 +507,7 @@ Object {
                     aria-disabled="false"
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_c"
-                    data-ouia-component-id="OUIA-Generated-Button-link-3"
+                    data-ouia-component-id="5"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -531,7 +531,7 @@ Object {
         </article>
         <article
           class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-4"
+          data-ouia-component-id="6"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           style="min-height: 40vh;"
@@ -574,7 +574,7 @@ Object {
                     aria-disabled="false"
                     class="pf-c-button pf-m-link pf-m-inline"
                     data-cy="button_a"
-                    data-ouia-component-id="OUIA-Generated-Button-link-4"
+                    data-ouia-component-id="7"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"

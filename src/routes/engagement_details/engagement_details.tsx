@@ -95,6 +95,17 @@ export const EngagementDetailView = () => {
   );
   const { url } = useRouteMatch();
   const serializer = new EngagementJsonSerializer();
+  const {
+    commits,
+    uuid,
+    project_id,
+    mongo_id,
+    creation_details,
+    status,
+    launch,
+    ...editableFields
+  } = currentEngagement ?? {};
+
   return (
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate
@@ -106,7 +117,7 @@ export const EngagementDetailView = () => {
           <Route path={`${url}/json`}>
             <EngagementJsonDump
               json={JSON.stringify(
-                serializer.serialize(currentEngagement ?? ({} as Engagement)),
+                serializer.serialize((editableFields ?? {}) as Engagement),
                 null,
                 2
               )}
