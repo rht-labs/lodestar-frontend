@@ -5,6 +5,7 @@ import { UserProfile } from '../../../schemas/user_profile';
 import { AuthService } from '../authentication_service';
 import { Config } from '../../../schemas/config';
 import { Logger } from '../../../utilities/logger';
+import { AppFeature } from '../../../common/app_features';
 
 export class Apiv1AuthService implements AuthService {
   constructor(config: Config) {
@@ -105,6 +106,13 @@ export class Apiv1AuthService implements AuthService {
     return userToken;
   }
 
+  private async getRolesMap(): Promise<{ [key: string]: AppFeature }> {
+    return {
+      reader: 'reader',
+      writer: 'writer',
+    };
+  }
+
   async getUserProfile(): Promise<UserProfile> {
     const userProfileData = await this.axios.get(
       `${this?.config.authBaseUrl}/userinfo`,
@@ -114,12 +122,15 @@ export class Apiv1AuthService implements AuthService {
         },
       }
     );
+    const rolesMap = await this.getRolesMap();
     return {
       username: userProfileData.data.preferred_username,
       firstName: userProfileData.data.given_name,
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
-      groups: userProfileData.data.groups,
+      groups: Array.from(
+        new Set(userProfileData.data.groups?.map?.(group => rolesMap[group]))
+      ),
     };
   }
 }
