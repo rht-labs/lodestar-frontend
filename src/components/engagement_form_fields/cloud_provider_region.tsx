@@ -37,8 +37,7 @@ export function CloudProviderRegionFormField({
         id={'cloud_provider_region_dropdown'}
         isDisabled={
           availableProviderRegionOptions?.length === 0 ||
-          !hasFeature(APP_FEATURES.writer) ||
-          isEngagementLaunched
+          !hasFeature(APP_FEATURES.writer)
         }
         readOnly={availableProviderRegionOptions?.length === 0}
         value={hostingEnvironment?.ocp_cloud_provider_region || ''}

@@ -41,9 +41,7 @@ export function PersistentStorageFormField({
         id={'persistent_storage_dropdown'}
         isDisabled={
           engagementFormConfig?.openshift_options?.persistent_storage?.options
-            ?.length === 1 ||
-          !hasFeature(APP_FEATURES.writer) ||
-          isEngagementLaunched
+            ?.length === 1 || !hasFeature(APP_FEATURES.writer)
         }
         onChange={onChange}
         value={hostingEnvironment?.ocp_persistent_storage_size || ''}
