@@ -22,7 +22,7 @@ export function getHumanReadableFieldName(field: string): string {
     start_date: 'Start Date',
     technical_lead_email: 'Technical Lead Email',
     technical_lead_name: 'Technical Lead Name',
-    engagement_categories: `Engagement Categories`
+    engagement_categories: `Engagement Categories`,
   };
   if (field in humanReadableFieldMap) {
     return humanReadableFieldMap[field];

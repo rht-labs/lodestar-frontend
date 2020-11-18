@@ -45,7 +45,7 @@ export interface EngagementFormLogisticsOptions {
   technical_contact_email: FormConfig;
   env_default_grace_period: number;
   env_grace_period_max: number;
-  max_hosting_env_count: number
+  max_hosting_env_count: number;
 }
 export interface EngagementFormConfig {
   basic_information: EngagementFormBasicInformation;
