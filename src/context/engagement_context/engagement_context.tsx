@@ -20,7 +20,7 @@ import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
-export interface EngagementContext {
+export interface IEngagementContext {
   getEngagements: () => Promise<Engagement[]>;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
@@ -61,7 +61,7 @@ const requiredFields = [
   'technical_lead_name',
   'project_name',
 ];
-export const EngagementContext = createContext<EngagementContext>(null);
+export const EngagementContext = createContext<IEngagementContext>(null);
 
 const { Provider } = EngagementContext;
 

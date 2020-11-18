@@ -6,11 +6,11 @@ export interface ConfigContextParams {
   appConfig: Config | null;
 }
 
-export interface ConfigContext extends ConfigContextParams {
+export interface IConfigContext extends ConfigContextParams {
   fetchConfig: () => void;
 }
 
-export const ConfigContext = createContext<ConfigContext>({
+export const ConfigContext = createContext<IConfigContext>({
   appConfig: null,
   fetchConfig: () => null,
 });

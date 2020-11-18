@@ -1,16 +1,16 @@
 import React, { useContext, useState, useCallback } from 'react';
 
-export interface FormManagerContext {
+export interface IFormManagerContext {
   registerField: (groupName: string, fieldName: string) => void;
   fieldGroups: { [key: string]: string[] };
 }
 
-const FormManagerContext = React.createContext<FormManagerContext>(null);
+const FormManagerContext = React.createContext<IFormManagerContext>(null);
 
-export interface FormManagerGroupContext {
+export interface IFormManagerGroupContext {
   registerField: (fieldName: string) => void;
 }
-const FormManagerGroupContext = React.createContext<FormManagerGroupContext>({
+const FormManagerGroupContext = React.createContext<IFormManagerGroupContext>({
   registerField: () => {},
 });
 

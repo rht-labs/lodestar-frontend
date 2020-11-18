@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import { AlertVariant } from '@patternfly/react-core';
 import { uuid } from 'uuidv4';
 
-export interface FeedbackContext {
+export interface IFeedbackContext {
   isLoaderVisible: boolean;
   alertMsg: string | null;
   alertType: AlertVariant;
@@ -18,7 +18,7 @@ export interface FeedbackContext {
   alertActions: AlertAction[];
 }
 
-export const FeedbackContext = React.createContext<FeedbackContext>({
+export const FeedbackContext = React.createContext<IFeedbackContext>({
   isLoaderVisible: false,
   alertMsg: null,
   alertType: AlertVariant.success,

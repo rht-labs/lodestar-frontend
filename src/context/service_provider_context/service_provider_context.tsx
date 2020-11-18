@@ -7,7 +7,7 @@ import { ServiceFactory } from '../../services/factories/service_factory';
 import { CategoryService } from '../../services/category_service/category_service';
 import { AnalyticsService } from '../../services/analytics_service/analytics_service';
 
-interface ServiceProvider {
+interface IServiceProvider {
   analyticsService: AnalyticsService;
   engagementService: EngagementService;
   authService: AuthService;
@@ -16,7 +16,7 @@ interface ServiceProvider {
   categoryService: CategoryService;
 }
 
-export const ServiceProviderContext = React.createContext<ServiceProvider>(
+export const ServiceProviderContext = React.createContext<IServiceProvider>(
   null
 );
 
@@ -30,7 +30,7 @@ export const ServiceProvider = ({
   if (!serviceFactory) {
     return null;
   }
-  const services: ServiceProvider = serviceFactory();
+  const services: IServiceProvider = serviceFactory();
   return (
     <ServiceProviderContext.Provider value={services}>
       {children}

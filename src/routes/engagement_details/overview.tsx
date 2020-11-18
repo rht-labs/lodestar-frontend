@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Engagement, Artifact } from '../../schemas/engagement';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
