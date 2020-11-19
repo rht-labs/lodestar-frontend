@@ -642,7 +642,7 @@ Object {
                   data-key="0"
                 >
                   <svg
-                    aria-describedby="pf-tooltip-2"
+                    aria-describedby="pf-tooltip-3"
                     aria-hidden="true"
                     fill="green"
                     height="1em"
@@ -801,7 +801,7 @@ Object {
                 data-key="0"
               >
                 <svg
-                  aria-describedby="pf-tooltip-2"
+                  aria-describedby="pf-tooltip-3"
                   aria-hidden="true"
                   fill="green"
                   height="1em"
@@ -935,7 +935,7 @@ Object {
                 Points of Contact
                   
                 <svg
-                  aria-describedby="pf-tooltip-4"
+                  aria-describedby="pf-tooltip-6"
                   aria-hidden="true"
                   fill="green"
                   height="1em"
@@ -1051,7 +1051,7 @@ Object {
               Points of Contact
                 
               <svg
-                aria-describedby="pf-tooltip-4"
+                aria-describedby="pf-tooltip-6"
                 aria-hidden="true"
                 fill="green"
                 height="1em"
