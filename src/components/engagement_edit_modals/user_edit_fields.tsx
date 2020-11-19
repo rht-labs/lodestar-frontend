@@ -67,16 +67,6 @@ export const UserEditFields = ({
   const [validName, setValidName] = useState<boolean | null>(null);
   const [validLastName, setValidLastName] = useState<boolean | null>(null);
 
-  let validateEmail = ( email: string ) => {
-    let regexEmail = /(^$|^.*@.*\..*$)/;
-    return !!regexEmail.test(email);
-  };
-
-  let validateString = ( name: string ) => {
-    let regexString = /(^$|^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]*$)/;
-    return !!regexString.test(name);
-  };
-
   useEffect(() => {
     setHasValidInput(validEmail && validName && validLastName);
   }, [validEmail, validName, validLastName, setHasValidInput]);
@@ -297,4 +287,14 @@ export const UserEditFields = ({
       </Flex>
     </>
   );
+
+  function validateEmail ( email: string ) {
+    let regexEmail = /^$|^.*@.*\..*$/;
+    return !!regexEmail.test(email);
+  };
+
+  function validateString ( name: string ) {
+    let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]*$/;
+    return !!regexString.test(name);
+  };
 };
