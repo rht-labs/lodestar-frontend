@@ -1,5 +1,4 @@
 import React from 'react';
-import { UserDropdown } from './user_dropdown';
 import { Link, useLocation } from 'react-router-dom';
 import { Notification } from './notification';
 import {
@@ -16,6 +15,7 @@ import {
 import { Tooltip } from '@patternfly/react-core';
 
 import { HelpIcon, LightbulbIcon } from '@patternfly/react-icons';
+import { UserDropdown } from './user_dropdown';
 
 export interface HeaderProps {
   isDrawerOpen: boolean;
@@ -51,12 +51,17 @@ export function Header(props: HeaderProps) {
                     itemId={2}
                     isActive={pathname === '/about'}
                   >
-                    <Link style={iconPad} to="/app/about" data-cy={'about_link'}>
+                    <Link
+                      style={iconPad}
+                      to="/app/about"
+                      data-cy={'about_link'}
+                    >
                       <Tooltip
                         content={'About'}
                         entryDelay={0}
                         exitDelay={10}
-                        position={TooltipPosition.bottom}>
+                        position={TooltipPosition.bottom}
+                      >
                         <HelpIcon title="About" />
                       </Tooltip>
                     </Link>
@@ -74,7 +79,8 @@ export function Header(props: HeaderProps) {
                         content={'Feedback and Feature Request'}
                         entryDelay={0}
                         exitDelay={10}
-                        position={TooltipPosition.bottom}>
+                        position={TooltipPosition.bottom}
+                      >
                         <LightbulbIcon />
                       </Tooltip>
                     </Link>

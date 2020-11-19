@@ -13,7 +13,7 @@ export interface SessionData {
   roles?: any[];
 }
 
-export interface AuthContext {
+export interface IAuthContext {
   authError?: any;
   setAuthError: (error: any) => void;
   sessionData?: SessionData;
@@ -25,7 +25,7 @@ export interface AuthContext {
 
 UserToken.setPersistenceStrategy(new LocalStoragePersistence());
 
-export const AuthContext = createContext<AuthContext>({
+export const AuthContext = createContext<IAuthContext>({
   sessionData: undefined,
   authError: null,
   setAuthError: (error: any) => {},

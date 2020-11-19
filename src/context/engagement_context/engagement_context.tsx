@@ -20,7 +20,7 @@ import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
-export interface EngagementContext {
+export interface IEngagementContext {
   getEngagements: () => Promise<Engagement[]>;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
@@ -61,7 +61,7 @@ const requiredFields = [
   'technical_lead_name',
   'project_name',
 ];
-export const EngagementContext = createContext<EngagementContext>(null);
+export const EngagementContext = createContext<IEngagementContext>(null);
 
 const { Provider } = EngagementContext;
 
@@ -378,7 +378,7 @@ export const EngagementProvider = ({
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
-          'There was an issue with saving your changes. Please followup with an administrator if this continues.';
+          'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
           // If there is no mongo id associated with the engagement, then it is being committed to the backend for the first time. It is a net new engagement.
           if (!!data.mongo_id) {
