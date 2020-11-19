@@ -29,7 +29,6 @@ import { Feature } from '../../feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import { useEngagementConfig } from '../../../context/engagement_context/engagement_config_hook';
 import { FormManager } from '../../../context/form_manager/form_manager';
 import { ReadyCheck } from '../../ready_check/ready_check';
 
@@ -44,7 +43,7 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
 ];
 
 export interface OpenShiftClusterSummaryCardProps {
-  currentEngagementChanges: Engagement;
+  currentEngagementChanges: Partial<Engagement>;
   onChange: (hostingEnvironments: HostingEnvironment[]) => void;
   onClear: () => void;
   onSave: (hostingEnvironments: HostingEnvironment[]) => void;
@@ -54,16 +53,14 @@ export interface OpenShiftClusterSummaryCardProps {
 export function OpenShiftClusterSummaryCard({
   currentEngagementChanges,
   onClear,
-  onSave: propsOnSave,
   onChange,
 }: OpenShiftClusterSummaryCardProps) {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
-  const { engagementFormConfig } = useEngagementConfig();
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
-  const { saveEngagement } = useEngagements();
+  const { saveEngagement, engagementFormConfig } = useEngagements();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('hosting_environments'), [registerField]);
   const onClose = () => {

@@ -12,24 +12,22 @@ const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
 export interface PointOfContactCardProps {
   currentEngagement: Engagement;
-  currentEngagementChanges: Engagement;
+  currentEngagementChanges: Partial<Engagement>;
   onChange: (fieldName: string, value: any) => void;
-  engagementFormConfig: object;
   onSave: (engagement: Engagement) => void;
   missingRequiredFields: string[];
-  onClear: () => void
+  onClear: () => void;
 }
 
 export function PointOfContactCard({
   onClear,
   currentEngagement,
   currentEngagementChanges,
-  engagementFormConfig,
   onChange,
   onSave,
   missingRequiredFields,
 }: PointOfContactCardProps) {
-  const { requestOpen, activeModalKey , requestClose} = useModalVisibility();
+  const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
 
   const pointOfContactRequiredFields = [
     'engagement_lead_email',
@@ -42,13 +40,12 @@ export function PointOfContactCard({
   return (
     <>
       <PointOfContactEditModal
-        engagementFormConfig={engagementFormConfig}
         onChange={onChange}
         engagement={currentEngagementChanges}
         onSave={onSave}
         onClose={() => {
-          requestClose()
-          onClear()
+          requestClose();
+          onClear();
         }}
         isOpen={activeModalKey === POINT_OF_CONTACT_MODAL_KEY}
       />
@@ -68,7 +65,8 @@ export function PointOfContactCard({
           <EditButton
             onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
             text={'Edit'}
-            dataCy={'points_of_contact'}/>
+            dataCy={'points_of_contact'}
+          />
         )}
       >
         <Grid hasGutter>

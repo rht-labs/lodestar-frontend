@@ -3,7 +3,11 @@ import { renderHook, act, cleanup } from '@testing-library/react-hooks';
 import { useEngagements } from '../engagement_hook';
 import { Engagement } from '../../../schemas/engagement';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { AuthProvider, useSession } from '../../auth_context/auth_context';
+import {
+  AuthContext,
+  AuthProvider,
+  useSession,
+} from '../../auth_context/auth_context';
 import { EngagementService } from '../../../services/engagement_service/engagement_service';
 import { EngagementProvider } from '../engagement_context';
 import { UserToken } from '../../../schemas/user_token';
@@ -15,6 +19,7 @@ import {
   FeedbackContext,
   FeedbackProvider,
 } from '../../feedback_context/feedback_context';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -65,15 +70,6 @@ describe('Engagement Context', () => {
   test('form options are undefined by default', () => {
     const { result } = getHook();
     expect(result.current.engagementFormConfig).toBe(undefined);
-  });
-
-  test('Form options update when setting active engagement', async () => {
-    const { result, waitForNextUpdate } = getHook();
-    await act(async () => {
-      result.current.getConfig();
-      await waitForNextUpdate();
-    });
-    expect(result.current.engagementFormConfig).toHaveProperty('cloud_options');
   });
 
   test('Form completeness for launch', async () => {
@@ -132,18 +128,23 @@ describe('Engagement Context', () => {
                   } as unknown) as AuthService
                 }
               >
-                <EngagementProvider
-                  feedbackContext={feedbackContext}
-                  engagementService={
-                    ({
-                      async fetchEngagements() {
-                        throw new AuthenticationError();
-                      },
-                    } as unknown) as EngagementService
-                  }
-                >
-                  {children}
-                </EngagementProvider>
+                <AuthContext.Consumer>
+                  {authContext => (
+                    <EngagementProvider
+                      authContext={authContext}
+                      feedbackContext={feedbackContext}
+                      engagementService={
+                        ({
+                          async fetchEngagements() {
+                            throw new AuthenticationError();
+                          },
+                        } as unknown) as EngagementService
+                      }
+                    >
+                      {children}
+                    </EngagementProvider>
+                  )}
+                </AuthContext.Consumer>
               </AuthProvider>
             )}
           </FeedbackContext.Consumer>
@@ -227,18 +228,23 @@ describe('Engagement Context', () => {
                   } as unknown) as AuthService
                 }
               >
-                <EngagementProvider
-                  feedbackContext={feedbackContext}
-                  engagementService={
-                    ({
-                      async fetchEngagements() {
-                        return [];
-                      },
-                    } as unknown) as EngagementService
-                  }
-                >
-                  {children}
-                </EngagementProvider>
+                <AuthContext.Consumer>
+                  {authContext => (
+                    <EngagementProvider
+                      feedbackContext={feedbackContext}
+                      authContext={authContext}
+                      engagementService={
+                        ({
+                          async fetchEngagements() {
+                            return [];
+                          },
+                        } as unknown) as EngagementService
+                      }
+                    >
+                      {children}
+                    </EngagementProvider>
+                  )}
+                </AuthContext.Consumer>
               </AuthProvider>
             )}
           </FeedbackContext.Consumer>
@@ -301,21 +307,26 @@ describe('Engagement Context', () => {
             } as unknown) as AuthService
           }
         >
-          <EngagementProvider
-            feedbackContext={fakedFeedbackContext}
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async saveEngagement(engagement) {
-                  throw Error();
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
+          <AuthContext.Consumer>
+            {authContext => (
+              <EngagementProvider
+                authContext={authContext}
+                feedbackContext={fakedFeedbackContext}
+                engagementService={
+                  ({
+                    async fetchEngagements() {
+                      return [initialEngagement];
+                    },
+                    async saveEngagement(engagement) {
+                      throw Error();
+                    },
+                  } as unknown) as EngagementService
+                }
+              >
+                {children}
+              </EngagementProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       );
     };
@@ -323,8 +334,7 @@ describe('Engagement Context', () => {
       wrapper,
     });
     await act(async () => {
-      result.current.getEngagements();
-      await waitForNextUpdate();
+      await result.current.getEngagements();
     });
     expect(result.current.engagements[0]).toEqual(initialEngagement);
     let modifiedEngagement = {
@@ -418,21 +428,26 @@ describe('Engagement Context', () => {
             } as unknown) as AuthService
           }
         >
-          <EngagementProvider
-            feedbackContext={fakedFeedbackContext}
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async launchEngagement(engagement) {
-                  throw Error('a generic network error');
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
+          <AuthContext.Consumer>
+            {authContext => (
+              <EngagementProvider
+                authContext={authContext}
+                feedbackContext={fakedFeedbackContext}
+                engagementService={
+                  ({
+                    async fetchEngagements() {
+                      return [initialEngagement];
+                    },
+                    async launchEngagement(engagement) {
+                      throw Error('a generic network error');
+                    },
+                  } as unknown) as EngagementService
+                }
+              >
+                {children}
+              </EngagementProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       );
     };
@@ -472,21 +487,26 @@ describe('Engagement Context', () => {
             } as unknown) as AuthService
           }
         >
-          <EngagementProvider
-            feedbackContext={fakedFeedbackContext}
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async createEngagement(engagement) {
-                  throw new AlreadyExistsError();
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
+          <AuthContext.Consumer>
+            {authContext => (
+              <EngagementProvider
+                authContext={authContext}
+                feedbackContext={fakedFeedbackContext}
+                engagementService={
+                  ({
+                    async fetchEngagements() {
+                      return [initialEngagement];
+                    },
+                    async createEngagement(engagement) {
+                      throw new AlreadyExistsError();
+                    },
+                  } as unknown) as EngagementService
+                }
+              >
+                {children}
+              </EngagementProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       );
     };
