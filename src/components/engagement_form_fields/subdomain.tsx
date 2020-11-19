@@ -12,12 +12,13 @@ interface SubdomainFormFieldProps {
   engagementFormConfig: EngagementFormConfig;
   onChange: (value: string) => void;
   isEngagementLaunched: boolean;
+  suggestedSubdomain: string;
 }
 
 export function SubdomainFormField({
   onChange,
   hostingEnvironment,
-  isEngagementLaunched,
+  suggestedSubdomain,
 }: SubdomainFormFieldProps) {
   const { hasFeature } = useFeatures();
   const [editedByUser, setEditedByUser] = useState(false);
@@ -25,11 +26,7 @@ export function SubdomainFormField({
     if (editedByUser) {
       return hostingEnvironment?.ocp_sub_domain;
     } else {
-      return (
-        hostingEnvironment?.ocp_sub_domain ||
-        hostingEnvironment?.suggested_subdomain ||
-        ''
-      );
+      return hostingEnvironment?.ocp_sub_domain || suggestedSubdomain || '';
     }
   };
   const getSubdomainHelperText = () => {
@@ -39,7 +36,7 @@ export function SubdomainFormField({
       if (hostingEnvironment?.ocp_sub_domain) {
         return slugify(hostingEnvironment?.ocp_sub_domain);
       } else if (hostingEnvironment?.suggested_subdomain) {
-        return hostingEnvironment?.suggested_subdomain;
+        return suggestedSubdomain;
       } else {
         return '<desired-subdomain>';
       }
