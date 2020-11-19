@@ -27,6 +27,7 @@ export interface OpenShiftClusterEditModalProps {
   onSave: (hostingEnvironment: HostingEnvironment) => void;
   onClose: () => void;
   isEngagementLaunched: boolean;
+  suggestedSubdomain?: string;
 }
 
 export function OpenShiftClusterEditModal({
@@ -34,6 +35,7 @@ export function OpenShiftClusterEditModal({
   hostingEnvironment: propsHostingEnvironment,
   isOpen,
   onSave: propsOnSave,
+  suggestedSubdomain,
   isEngagementLaunched,
 }: OpenShiftClusterEditModalProps) {
   const [hostingEnvironment, setHostingEnvironment] = useState<
@@ -131,6 +133,7 @@ export function OpenShiftClusterEditModal({
             onChange={value => onChange('ocp_sub_domain', value)}
             engagementFormConfig={engagementFormConfig}
             hostingEnvironment={hostingEnvironment}
+            suggestedSubdomain={suggestedSubdomain}
           />
           <PersistentStorageFormField
             onChange={value => onChange('ocp_persistent_storage_size', value)}
