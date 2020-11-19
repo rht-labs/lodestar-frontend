@@ -3,19 +3,18 @@ import { Engagement, EngagementUser } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { UserList } from './user_list';
 import { RedhatIcon, UserIcon } from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
 export interface UserCardProps {
-  engagement: Engagement;
+  engagement: Partial<Engagement>;
   onChange: (fieldName: string, value: any) => void;
-  engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
   onClear: () => void;
 }
@@ -25,7 +24,6 @@ export function UserCard({
   onSave,
   onClear,
   onChange,
-  engagementFormConfig,
 }: UserCardProps) {
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const onClose = () => {
@@ -37,7 +35,6 @@ export function UserCard({
       <UserEditModal
         onChange={users => onChange('engagement_users', users)}
         onSave={onSave}
-        engagementFormConfig={engagementFormConfig}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
         engagement={engagement}
@@ -52,10 +49,7 @@ export function UserCard({
         )}
         title="Engagement Users"
       >
-        <UserTable
-          users={engagement?.engagement_users ?? []}
-          engagementFormConfig={engagementFormConfig}
-        />
+        <UserTable users={engagement?.engagement_users ?? []} />
       </DataCard>
     </>
   );
@@ -77,7 +71,6 @@ const externalUsers = (
 
 const UserTable = ({
   users,
-  engagementFormConfig,
 }: {
   users: {
     first_name: string;
@@ -85,8 +78,8 @@ const UserTable = ({
     email: string;
     role: string;
   }[];
-  engagementFormConfig: EngagementFormConfig;
 }) => {
+  const { engagementFormConfig } = useEngagements();
   const getRoleName = (userRole: string) =>
     engagementFormConfig?.user_options?.user_roles?.options?.find?.(
       role => role.value === userRole
@@ -105,14 +98,12 @@ const UserTable = ({
       <GridItem span={10}>
         <UserList
           title={redHatUsers}
-          engagementFormConfig={engagementFormConfig}
           defaultRows={allRows.filter(
             row => row[1]?.toLowerCase().indexOf('redhat.com') !== -1
           )}
         />
         <UserList
           title={externalUsers}
-          engagementFormConfig={engagementFormConfig}
           defaultRows={allRows.filter(
             row => row[1]?.toLowerCase().indexOf('redhat.com') === -1
           )}

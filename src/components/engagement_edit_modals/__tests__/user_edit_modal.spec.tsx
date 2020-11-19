@@ -5,18 +5,22 @@ import { Engagement } from '../../../schemas/engagement';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { FeatureToggleContext } from '../../../context/feature_context/feature_toggles';
+import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
     expect(
       render(
-        <UserEditModal
-          onSave={() => {}}
-          engagementFormConfig={EngagementFormConfig.fromFake()}
-          isOpen={true}
-          engagement={Engagement.fromFake(true)}
-          onChange={() => {}}
-        />
+        <EngagementContext.Provider
+          value={{ engagementFormConfig: EngagementFormConfig.fromFake() }}
+        >
+          <UserEditModal
+            onSave={() => {}}
+            isOpen={true}
+            engagement={Engagement.fromFake(true)}
+            onChange={() => {}}
+          />
+        </EngagementContext.Provider>
       )
     ).toMatchSnapshot();
   });

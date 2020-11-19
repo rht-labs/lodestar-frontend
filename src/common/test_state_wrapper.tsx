@@ -51,15 +51,7 @@ function TestContexts({ children = null }) {
                 engagementService={engagementService}
               >
                 <VersionProvider versionService={versionService}>
-                  <EngagementContext.Consumer>
-                    {engagementContext => (
-                      <EngagementFormProvider
-                        engagementContext={engagementContext}
-                      >
-                        <FeatureToggles>{children}</FeatureToggles>
-                      </EngagementFormProvider>
-                    )}
-                  </EngagementContext.Consumer>
+                  <FeatureToggles>{children}</FeatureToggles>
                 </VersionProvider>
               </EngagementProvider>
             </AuthProvider>

@@ -15,6 +15,7 @@ import {
   FeedbackContext,
   FeedbackProvider,
 } from '../../feedback_context/feedback_context';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (

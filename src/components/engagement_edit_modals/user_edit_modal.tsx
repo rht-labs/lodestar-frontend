@@ -11,13 +11,11 @@ import {
 
 import { PlusIcon, UsersIcon } from '@patternfly/react-icons';
 import { Engagement, EngagementUser } from '../../schemas/engagement';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from './user_edit_fields';
 
 export interface UserEditModalProps {
   onChange: (users: EngagementUser[]) => void;
-  engagementFormConfig: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
@@ -25,7 +23,6 @@ export interface UserEditModalProps {
 }
 export function UserEditModal({
   engagement,
-  engagementFormConfig,
   onChange,
   onClose = () => {},
   isOpen,
@@ -119,7 +116,6 @@ export function UserEditModal({
               toggleDeleted={toggleDeleted}
               deletedUsers={deletedUsers}
               addUser={addUser}
-              engagementFormConfig={engagementFormConfig}
             />
           )}
         </div>

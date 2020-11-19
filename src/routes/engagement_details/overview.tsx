@@ -3,7 +3,6 @@ import { Engagement, Artifact } from '../../schemas/engagement';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { OpenShiftClusterSummaryCard } from '../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
 import { UserCard } from '../../components/engagement_data_cards/user_card/user_card';
 import { ActivityHistoryCard } from '../../components/engagement_data_cards/activity_history_card/activity_history_card';
@@ -13,10 +12,9 @@ import { EngagementTimelineCard } from '../../components/engagement_data_cards/e
 export interface EngagementOverviewTabProps {
   clearCurrentChanges: () => void;
   currentEngagement: Engagement;
-  currentEngagementChanges: Engagement;
+  currentEngagementChanges: Partial<Engagement>;
   onChange: (fieldName: string, value: any) => void;
-  engagementFormConfig: EngagementFormConfig;
-  onSave: (engagement: Engagement) => void;
+  onSave: (engagement: Partial<Engagement>) => void;
   missingRequiredFields: string[];
 }
 
@@ -25,7 +23,6 @@ export function EngagementOverview({
   currentEngagement,
   currentEngagementChanges,
   missingRequiredFields,
-  engagementFormConfig,
   onChange,
   onSave,
 }: EngagementOverviewTabProps) {
@@ -41,7 +38,6 @@ export function EngagementOverview({
                   currentEngagement={currentEngagement}
                   onSave={onSave}
                   onChange={onChange}
-                  engagementFormConfig={engagementFormConfig}
                   missingRequiredFields={missingRequiredFields}
                   onClear={clearCurrentChanges}
                 />
@@ -66,7 +62,6 @@ export function EngagementOverview({
                   onSave={onSave}
                   onClear={clearCurrentChanges}
                   onChange={onChange}
-                  engagementFormConfig={engagementFormConfig}
                   currentEngagement={currentEngagement}
                   currentEngagementChanges={currentEngagementChanges}
                   missingRequiredFields={missingRequiredFields}
@@ -81,7 +76,6 @@ export function EngagementOverview({
                   onSave={onSave}
                   onClear={clearCurrentChanges}
                   onChange={onChange}
-                  engagementFormConfig={engagementFormConfig}
                   engagement={currentEngagementChanges}
                 />
               </FormManager.Group>
@@ -101,7 +95,6 @@ export function EngagementOverview({
                   onChange={hostingEnvironments => {
                     onChange('hosting_environments', hostingEnvironments);
                   }}
-                  engagementFormConfig={engagementFormConfig}
                   currentEngagementChanges={currentEngagementChanges}
                   missingRequiredFields={missingRequiredFields}
                 />

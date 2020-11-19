@@ -11,25 +11,24 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { getFormattedDate } from '../../common/patternfly_date_adapter';
 import { parse as parseDate, startOfToday } from 'date-fns';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { addDays } from 'date-fns';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { max } from 'date-fns';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 interface EngagementStartEndDateProps {
   engagement: Engagement;
-  engagementFormConfig: EngagementFormConfig;
   onChange: (fieldName: string, value: any) => void;
 }
 
 export function EngagementStartEndDateFormField({
   onChange,
   engagement,
-  ...props
 }: EngagementStartEndDateProps) {
+  const { engagementFormConfig } = useEngagements();
   const { validate, getValidationResult } = useValidation();
   const maxGracePeriodInDays: number =
-    props.engagementFormConfig?.logistics_options?.env_grace_period_max ?? 0;
+    engagementFormConfig?.logistics_options?.env_grace_period_max ?? 0;
   const { start_date, end_date, archive_date } = engagement ?? {};
 
   const [startDateText, setStartDateText] = useState(
@@ -62,8 +61,8 @@ export function EngagementStartEndDateFormField({
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => {
     registerField('start_date');
-    registerField('end_date')
-    registerField('archive_date')
+    registerField('end_date');
+    registerField('archive_date');
   }, [registerField]);
   return (
     <>

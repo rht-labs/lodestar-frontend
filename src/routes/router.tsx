@@ -19,8 +19,6 @@ import { useNotification } from '../context/notification_context/notification_ho
 import { EngagementStatus } from '../schemas/engagement';
 import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
-import { EngagementFormProvider } from '../context/engagement_form_context/engagement_form_context';
-import { EngagementContext } from '../context/engagement_context/engagement_context';
 import { useSession } from '../context/auth_context/auth_context';
 import ScrollToTop from './scroll_to_top';
 
@@ -111,17 +109,9 @@ export function LodestarRouter() {
                             <PrivateRoute
                               path="/app/engagements/:customer_name/:project_name/"
                               component={() => (
-                                <EngagementContext.Consumer>
-                                  {engagementContext => (
-                                    <EngagementFormProvider
-                                      engagementContext={engagementContext}
-                                    >
-                                      <ScrollToTop>
-                                        <EngagementDetailView />
-                                      </ScrollToTop>
-                                    </EngagementFormProvider>
-                                  )}
-                                </EngagementContext.Consumer>
+                                <ScrollToTop>
+                                  <EngagementDetailView />
+                                </ScrollToTop>
                               )}
                             />
                           </Switch>

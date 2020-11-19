@@ -6,9 +6,7 @@ import { getValidatorsFromEngagementFormConfig } from '../../common/config_valid
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EngagementOverview } from './overview';
-import { useEngagementForm } from '../../context/engagement_form_context/engagement_form_hook';
 import { EngagementJsonDump } from './json_dump';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 
@@ -17,8 +15,6 @@ export interface EngagementViewProps {
 }
 
 export interface EngagementDetailViewProps {
-  engagementFormConfig: EngagementFormConfig;
-  getConfig: () => void;
   error: Error;
   setCurrentEngagement: (engagement: Engagement) => void;
   currentEngagement: Engagement;
@@ -35,23 +31,20 @@ export const EngagementDetailView = () => {
   }>();
 
   const {
-    engagementFormConfig,
-    getConfig,
     createEngagementPoll,
     saveEngagement,
     error: engagementFormRequestError,
     setCurrentEngagement,
     getEngagement,
     currentEngagement,
+    engagementFormConfig,
     missingRequiredFields,
+    saveChanges,
+    updateEngagementFormField,
+    currentChanges,
+    clearCurrentChanges,
   } = useEngagements();
 
-  const {
-    saveChanges,
-    currentChanges,
-    updateEngagementFormField,
-    clearCurrentChanges,
-  } = useEngagementForm();
   useEffect(() => {
     let engagementPoll;
     if (currentEngagement?.project_name && currentEngagement?.customer_name) {
@@ -61,12 +54,6 @@ export const EngagementDetailView = () => {
       (await engagementPoll)?.cancel?.();
     };
   }, [currentEngagement, createEngagementPoll]);
-  useEffect(() => {
-    if (!engagementFormConfig) {
-      getConfig();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [engagementFormConfig]);
 
   useEffect(() => {
     if (!customer_name || !project_name) {
@@ -78,8 +65,6 @@ export const EngagementDetailView = () => {
       } else {
       }
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customer_name, project_name]);
 
   const AlertMessage = () => {
@@ -131,7 +116,6 @@ export const EngagementDetailView = () => {
               currentEngagement={currentEngagement}
               missingRequiredFields={missingRequiredFields}
               onSave={saveChanges}
-              engagementFormConfig={engagementFormConfig}
               onChange={updateEngagementFormField}
               currentEngagementChanges={currentChanges}
               clearCurrentChanges={clearCurrentChanges}
