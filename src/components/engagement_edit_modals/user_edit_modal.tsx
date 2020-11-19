@@ -22,12 +22,14 @@ export interface UserEditModalProps {
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
   onClose: () => void;
+  onCancel: () => void;
 }
 export function UserEditModal({
   engagement,
   engagementFormConfig,
   onChange,
   onClose = () => {},
+  onCancel = () => {},
   isOpen,
   onSave: propsOnSave,
 }: UserEditModalProps) {
@@ -79,6 +81,15 @@ export function UserEditModal({
       <EditModalTemplate
         actions={
           <div>
+            <Button
+              data-testid="user-edit-cancel"
+              onClick={onCancel}
+              data-cy={'cancel_edit_users'}
+              style={{ margin: '1rem' }}
+              variant="link"
+            >
+              Cancel
+            </Button>
             <Button
               data-testid="user-edit-save"
               onClick={onSave}

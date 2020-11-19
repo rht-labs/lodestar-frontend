@@ -66,10 +66,11 @@ export const UserEditFields = ({
   const [validEmail, setValidEmail] = useState<boolean | null>(null);
   const [validName, setValidName] = useState<boolean | null>(null);
   const [validLastName, setValidLastName] = useState<boolean | null>(null);
+  const [validRole, setValidRole] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setHasValidInput(validEmail && validName && validLastName);
-  }, [validEmail, validName, validLastName, setHasValidInput]);
+    setHasValidInput(validEmail && validName && validLastName && validRole);
+  }, [validEmail, validName, validLastName, validRole, setHasValidInput]);
 
   return (
     <>
@@ -93,10 +94,11 @@ export const UserEditFields = ({
                     {users.map((value: any, index: any) => {
                       const isUserDeleted =
                         deletedUsers.indexOf(users[index].email) > -1;
-                      if(validEmail === null || validName === null || validLastName === null) {
+                      if(validEmail === null || validName === null || validLastName === null || validRole === null) {
                         setValidEmail(validateEmail(value.email));
                         setValidName(validateString(value.first_name));
                         setValidLastName(validateString(value.last_name));
+                        setValidRole(validateRole(value.role));
                       }
                       return (
                         <div key={index}>
@@ -114,6 +116,7 @@ export const UserEditFields = ({
                                   aria-label="email"
                                   name="email"
                                   data-cy={'input_user_email'}
+                                  isRequired
                                   isDisabled={
                                     !hasFeature(APP_FEATURES.writer) ||
                                     isUserDeleted
@@ -147,6 +150,7 @@ export const UserEditFields = ({
                                   aria-label="First Name"
                                   name="first-name"
                                   data-cy={'input_user_firstname'}
+                                  isRequired
                                   isDisabled={
                                     !hasFeature(APP_FEATURES.writer) ||
                                     isUserDeleted
@@ -180,6 +184,7 @@ export const UserEditFields = ({
                                   aria-label="Last Name"
                                   name="last-name"
                                   data-cy={'input_user_lastname'}
+                                  isRequired
                                   isDisabled={
                                     !hasFeature(APP_FEATURES.writer) ||
                                     isUserDeleted
@@ -201,47 +206,58 @@ export const UserEditFields = ({
                               </FormGroup>
                             </GridItem>
                             <GridItem span={2}>
-                              <FormSelect
-                                name="role"
-                                aria-label="User Role"
-                                id="user_role_dropdown"
-                                value={value.role || ''}
-                                isDisabled={
-                                  !hasFeature(APP_FEATURES.writer) ||
-                                  isUserDeleted
-                                }
-                                onChange={e => {
-                                  users[index].role = e;
-                                  onChange(users);
-                                }}
-                                style={
-                                  isUserDeleted
-                                    ? { textDecorationLine: 'line-through' }
-                                    : {}
-                                }
+                              <FormGroup
+                                fieldId={'user_role'}
+                                helperTextInvalid={'Select valid role'}
+                                validated={
+                                  validateRole(value.role)
+                                    ? 'default'
+                                    : 'error' }
                               >
-                                {[
-                                  <FormSelectOption
-                                    isDisabled={true}
-                                    key={'placeholder'}
-                                    value={undefined}
-                                    label={'Select a role'}
-                                  />,
-                                ].concat(
-                                  (
-                                    engagementFormConfig?.user_options
-                                      ?.user_roles?.options ?? []
-                                  )?.map((option: any, index: number) => (
+                                <FormSelect
+                                  name="role"
+                                  aria-label="User Role"
+                                  id="user_role_dropdown"
+                                  value={value.role || ''}
+                                  isDisabled={
+                                    !hasFeature(APP_FEATURES.writer) ||
+                                    isUserDeleted
+                                  }
+                                  onChange={e => {
+                                    users[index].role = e;
+                                    setValidRole(validateRole(value.role));
+                                    onChange(users);
+                                  }}
+                                  style={
+                                    isUserDeleted
+                                      ? { textDecorationLine: 'line-through' }
+                                      : {}
+                                  }
+                                  isRequired
+                                >
+                                  {[
                                     <FormSelectOption
-                                      isDisabled={option.disabled}
-                                      key={index}
-                                      value={option.value}
-                                      label={option.label}
-                                      data-cy={option.label}
-                                    />
-                                  ))
-                                )}
-                              </FormSelect>
+                                      isDisabled={true}
+                                      key={'placeholder'}
+                                      value={undefined}
+                                      label={'Select a role'}
+                                    />,
+                                  ].concat(
+                                    (
+                                      engagementFormConfig?.user_options
+                                        ?.user_roles?.options ?? []
+                                    )?.map((option: any, index: number) => (
+                                      <FormSelectOption
+                                        isDisabled={option.disabled}
+                                        key={index}
+                                        value={option.value}
+                                        label={option.label}
+                                        data-cy={option.label}
+                                      />
+                                    ))
+                                  )}
+                                </FormSelect>
+                              </FormGroup>
                             </GridItem>
                             <GridItem span={1} style={{ paddingTop: '0.5rem' }}>
                               <Feature name={APP_FEATURES.writer}>
@@ -274,7 +290,7 @@ export const UserEditFields = ({
                       onClick={addUser}
                       data-testid={'add-first-user'}
                       data-cy={'add_new_user'}
-                      isDisabled={!(validEmail && validName && validLastName)}
+                      isDisabled={!(validEmail && validName && validLastName && validRole)}
                     >
                       <PlusIcon style={{ fontSize: 'small' }} /> Add User
                     </Button>
@@ -291,10 +307,14 @@ export const UserEditFields = ({
   function validateEmail ( email: string ) {
     let regexEmail = /^$|^.*@.*\..*$/;
     return !!regexEmail.test(email);
-  };
+  }
 
   function validateString ( name: string ) {
     let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]*$/;
     return !!regexString.test(name);
-  };
+  }
+
+  function validateRole (role: string){
+    return !(role === undefined || role === '');
+  }
 };
