@@ -22,7 +22,7 @@ import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 import { EngagementFormProvider } from '../context/engagement_form_context/engagement_form_context';
 import { EngagementContext } from '../context/engagement_context/engagement_context';
 import { useSession } from '../context/auth_context/auth_context';
-import ScrollToTop from "./scroll_to_top";
+import ScrollToTop from './scroll_to_top';
 
 function WhatsMyToken() {
   const { sessionData } = useSession();
@@ -109,7 +109,7 @@ export function LodestarRouter() {
                               <CreateNewEngagement />
                             </PrivateRoute>
                             <PrivateRoute
-                              path="/app/engagements/:customer_name/:project_name"
+                              path="/app/engagements/:customer_name/:project_name/"
                               component={() => (
                                 <EngagementContext.Consumer>
                                   {engagementContext => (

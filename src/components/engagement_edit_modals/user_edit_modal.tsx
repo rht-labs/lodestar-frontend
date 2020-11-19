@@ -44,7 +44,7 @@ export function UserEditModal({
   }
 
   function removeUser() {
-    deletedUsers?.map(userEmail => {
+    deletedUsers?.forEach(userEmail => {
       engagement.engagement_users.splice(
         engagement.engagement_users.findIndex(user => {
           return user.email === userEmail;

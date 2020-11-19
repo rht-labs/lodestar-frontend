@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSession } from '../../context/auth_context/auth_context';
 import { useLocation, Redirect } from 'react-router';
 
 export const CallbackHandler = () => {
-  const query = new URLSearchParams(useLocation().search);
+  const { search } = useLocation();
+  const query = useMemo(() => new URLSearchParams(search), [search]);
   const authContext = useSession();
   const [hasRunCheck, setHasRunCheck] = useState<boolean>(false);
   const [isAuthed, setIsAuthed] = useState<boolean>(null);

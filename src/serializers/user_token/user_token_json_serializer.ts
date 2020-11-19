@@ -3,7 +3,7 @@ import { UserToken } from '../../schemas/user_token';
 export class UserTokenJsonSerializer implements Serializer<UserToken, object> {
   serialize(token: UserToken) {
     if (!token) {
-      return null
+      return null;
     }
     return {
       accessToken: token.accessToken,

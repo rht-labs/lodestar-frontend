@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from 'react';
 
-export interface ModalVisibilityContext {
+export interface IModalVisibilityContext {
   activeModalKey: string;
   requestOpen: (requestingModalKey: string) => void;
   requestClose: () => void;
 }
 
 export const ModalVisibilityContext = React.createContext<
-  ModalVisibilityContext
+  IModalVisibilityContext
 >({
   activeModalKey: null,
   requestOpen: () => null,

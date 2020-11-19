@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import { useSession } from '../auth_context/auth_context';
 
-interface FeatureToggleContext {
+interface IFeatureToggleContext {
   features: string[];
   hasFeature: (name: string) => boolean;
 }
 
-export const FeatureToggleContext = React.createContext<FeatureToggleContext>({
+export const FeatureToggleContext = React.createContext<IFeatureToggleContext>({
   features: [],
   hasFeature: () => false,
 });

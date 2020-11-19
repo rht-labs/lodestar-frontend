@@ -1,4 +1,4 @@
-import { Notification } from "../../schemas/notification";
+import { Notification } from '../../schemas/notification';
 
 export abstract class NotificationService {
   abstract async fetchNotifications(): Promise<Notification[]>;

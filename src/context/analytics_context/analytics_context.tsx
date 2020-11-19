@@ -4,12 +4,12 @@ import { AnalyticsEvent } from '../../schemas/analytics';
 
 export { AnalyticsCategory } from '../../schemas/analytics';
 
-export interface AnalyticsContext {
+export interface IAnalyticsContext {
   logEvent(event: AnalyticsEvent): void;
   logPageView(path: string): void;
 }
 
-export const AnalyticsContext = React.createContext<AnalyticsContext>({
+export const AnalyticsContext = React.createContext<IAnalyticsContext>({
   logEvent: () => {},
   logPageView: () => {},
 });

@@ -8,12 +8,12 @@ import {
 } from '../../services/auth_service/auth_errors';
 import { VersionService } from '../../services/version_service/version_service';
 
-export interface VersionContext {
+export interface IVersionContext {
   fetchVersions: () => void;
   versions?: Version;
 }
 
-export const VersionContext = createContext<VersionContext>({
+export const VersionContext = createContext<IVersionContext>({
   fetchVersions: async () => {},
 });
 const { Provider } = VersionContext;

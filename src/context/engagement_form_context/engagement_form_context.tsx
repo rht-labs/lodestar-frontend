@@ -6,7 +6,7 @@ import React, {
   useReducer,
 } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { EngagementContext } from '../engagement_context/engagement_context';
+import { IEngagementContext } from '../engagement_context/engagement_context';
 import {
   AnalyticsContext,
   AnalyticsCategory,
@@ -15,7 +15,7 @@ import {
   engagementFormReducer,
   getInitialState,
 } from '../engagement_context/engagement_form_reducer';
-export interface EngagementFormContext {
+export interface IEngagementFormContext {
   currentChanges: Engagement;
   clearCurrentChanges: () => void;
   updateEngagementFormField: (
@@ -27,7 +27,9 @@ export interface EngagementFormContext {
   setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
 }
 
-export const EngagementFormContext = createContext<EngagementFormContext>(null);
+export const EngagementFormContext = createContext<IEngagementFormContext>(
+  null
+);
 
 export const EngagementFormProvider = ({
   children,
@@ -35,7 +37,7 @@ export const EngagementFormProvider = ({
   analyticsContext,
 }: {
   children: any;
-  engagementContext: EngagementContext;
+  engagementContext: IEngagementContext;
   analyticsContext?: AnalyticsContext;
 }) => {
   const {

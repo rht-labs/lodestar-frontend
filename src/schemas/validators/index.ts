@@ -1,12 +1,12 @@
 import { Validator } from './validator';
 
-type ValidatorFactory = (validationOptions: any) => Validator;
+type ValidatorFactoryMethod = (validationOptions: any) => Validator;
 
 export abstract class Validation {
-  private static _validators: { [key: string]: ValidatorFactory } = {};
+  private static _validators: { [key: string]: ValidatorFactoryMethod } = {};
   public static registerValidator(
     key: string,
-    validatorFactory: ValidatorFactory
+    validatorFactory: ValidatorFactoryMethod
   ) {
     if (key in Validation._validators) {
       throw Error('A validator with this key has already been registered.');

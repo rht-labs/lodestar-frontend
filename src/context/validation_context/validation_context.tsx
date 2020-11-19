@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Validator } from '../../schemas/validators/validator';
 
-export interface ValidationContext {
+export interface IValidationContext {
   validate: (fieldName: string) => (value: any) => string[];
   getValidationResult: (fieldName: string) => string[];
   validationResults: { [key: string]: any };
@@ -10,7 +10,7 @@ export interface ValidationContext {
 
 export type FormValidator = { [key: string]: Validator[] };
 
-export const ValidationContext = React.createContext<ValidationContext>({
+export const ValidationContext = React.createContext<IValidationContext>({
   validate: (fieldName: string) => (value: any) => [],
   getValidationResult: (fieldName: string) => [],
   clearValidationResults: () => {},
