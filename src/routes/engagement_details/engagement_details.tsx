@@ -65,7 +65,7 @@ export const EngagementDetailView = () => {
       } else {
       }
     });
-  }, [customer_name, project_name]);
+  }, [customer_name, project_name, getEngagement, setCurrentEngagement]);
 
   const AlertMessage = () => {
     return engagementFormRequestError ? (
