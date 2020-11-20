@@ -30,6 +30,12 @@ export function UserCard({
     requestClose();
     onClear();
   };
+
+  function onCancel() {
+    requestClose();
+    window.location.reload();
+  }
+
   return (
     <>
       <UserEditModal
@@ -38,6 +44,7 @@ export function UserCard({
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
         engagement={engagement}
+        onCancel={onCancel}
       />
       <DataCard
         actionButton={() => (
