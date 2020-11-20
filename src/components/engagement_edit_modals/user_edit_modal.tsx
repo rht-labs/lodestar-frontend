@@ -69,13 +69,14 @@ export function UserEditModal({
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     engagement.engagement_users.push(newUser);
     onChange(engagement.engagement_users);
+    setHasValidInput(false);
   }
 
   return (
     <Modal
       variant={ModalVariant.large}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={onCancel}
       title="Engagement Users"
     >
       <EditModalTemplate
@@ -134,6 +135,7 @@ export function UserEditModal({
               addUser={addUser}
               engagementFormConfig={engagementFormConfig}
               setHasValidInput={setHasValidInput}
+              hasValidInput={hasValidInput}
             />
           )}
         </div>

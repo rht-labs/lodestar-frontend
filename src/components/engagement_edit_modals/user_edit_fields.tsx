@@ -35,6 +35,7 @@ export interface UserEditFieldsProps {
   toggleDeleted: (email: string) => void;
   addUser: any;
   setHasValidInput: any;
+  hasValidInput: boolean;
 }
 
 export const UserEditFields = ({
@@ -44,7 +45,8 @@ export const UserEditFields = ({
   deletedUsers,
   toggleDeleted,
   addUser,
-  setHasValidInput
+  setHasValidInput,
+  hasValidInput
 }: UserEditFieldsProps) => {
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
@@ -124,6 +126,9 @@ export const UserEditFields = ({
                                   onChange={e => {
                                     users[index].email = e;
                                     setValidEmail(validateEmail(value.email));
+                                    setValidName(validateString(value.first_name));
+                                    setValidLastName(validateString(value.last_name));
+                                    setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
                                   placeholder="Email Address"
@@ -157,7 +162,10 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].first_name = e;
+                                    setValidEmail(validateEmail(value.email));
                                     setValidName(validateString(value.first_name));
+                                    setValidLastName(validateString(value.last_name));
+                                    setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
                                   placeholder="First Name"
@@ -191,7 +199,10 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].last_name = e;
+                                    setValidEmail(validateEmail(value.email));
+                                    setValidName(validateString(value.first_name));
                                     setValidLastName(validateString(value.last_name));
+                                    setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
                                   placeholder="Last Name"
@@ -225,6 +236,9 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].role = e;
+                                    setValidEmail(validateEmail(value.email));
+                                    setValidName(validateString(value.first_name));
+                                    setValidLastName(validateString(value.last_name));
                                     setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
@@ -290,7 +304,7 @@ export const UserEditFields = ({
                       onClick={addUser}
                       data-testid={'add-first-user'}
                       data-cy={'add_new_user'}
-                      isDisabled={!(validEmail && validName && validLastName && validRole)}
+                      isDisabled={!(hasValidInput)}
                     >
                       <PlusIcon style={{ fontSize: 'small' }} /> Add User
                     </Button>
@@ -305,13 +319,13 @@ export const UserEditFields = ({
   );
 
   function validateEmail ( email: string ) {
-    let regexEmail = /^$|^.*@.*\..*$/;
-    return !!regexEmail.test(email);
+    let regexEmail = /^.*@.*\..*$/;
+    return regexEmail.test(email);
   }
 
   function validateString ( name: string ) {
-    let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]*$/;
-    return !!regexString.test(name);
+    let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]+$/;
+    return regexString.test(name);
   }
 
   function validateRole (role: string){
