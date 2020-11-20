@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   Form,
   FormSelect,
@@ -33,19 +33,22 @@ export interface UserEditFieldsProps {
   deletedUsers: string[];
   toggleDeleted: (email: string) => void;
   addUser: any;
-  setHasValidInput: any;
-  hasValidInput: boolean;
+  validateEmail: (email: string) => boolean,
+  validateString: (name: string) => boolean,
+  validateRole: (role: string) => boolean
 }
 
 export const UserEditFields = ({
-  users,
+  users: propsUsers =[],
   onChange,
   deletedUsers,
   toggleDeleted,
   addUser,
-  setHasValidInput,
-  hasValidInput
+  validateEmail,
+  validateString,
+  validateRole
 }: UserEditFieldsProps) => {
+  const users = [...propsUsers];
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
@@ -63,15 +66,6 @@ export const UserEditFields = ({
       ),
     },
   ];
-
-  const [validEmail, setValidEmail] = useState<boolean | null>(null);
-  const [validName, setValidName] = useState<boolean | null>(null);
-  const [validLastName, setValidLastName] = useState<boolean | null>(null);
-  const [validRole, setValidRole] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setHasValidInput(validEmail && validName && validLastName && validRole);
-  }, [validEmail, validName, validLastName, validRole, setHasValidInput]);
 
   return (
     <>
@@ -95,12 +89,7 @@ export const UserEditFields = ({
                     {users.map((value: any, index: any) => {
                       const isUserDeleted =
                         deletedUsers.indexOf(users[index].email) > -1;
-                      if(validEmail === null || validName === null || validLastName === null || validRole === null) {
-                        setValidEmail(validateEmail(value.email));
-                        setValidName(validateString(value.first_name));
-                        setValidLastName(validateString(value.last_name));
-                        setValidRole(validateRole(value.role));
-                      }
+
                       return (
                         <div key={index}>
                           <Grid hasGutter style={{ marginTop: '1rem' }}>
@@ -124,10 +113,6 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].email = e;
-                                    setValidEmail(validateEmail(value.email));
-                                    setValidName(validateString(value.first_name));
-                                    setValidLastName(validateString(value.last_name));
-                                    setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
                                   placeholder="Email Address"
@@ -161,10 +146,6 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].first_name = e;
-                                    setValidEmail(validateEmail(value.email));
-                                    setValidName(validateString(value.first_name));
-                                    setValidLastName(validateString(value.last_name));
-                                    setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
                                   placeholder="First Name"
@@ -198,10 +179,6 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].last_name = e;
-                                    setValidEmail(validateEmail(value.email));
-                                    setValidName(validateString(value.first_name));
-                                    setValidLastName(validateString(value.last_name));
-                                    setValidRole(validateRole(value.role));
                                     onChange(users);
                                   }}
                                   placeholder="Last Name"
@@ -235,10 +212,7 @@ export const UserEditFields = ({
                                   }
                                   onChange={e => {
                                     users[index].role = e;
-                                    setValidEmail(validateEmail(value.email));
-                                    setValidName(validateString(value.first_name));
-                                    setValidLastName(validateString(value.last_name));
-                                    setValidRole(validateRole(value.role));
+
                                     onChange(users);
                                   }}
                                   style={
@@ -303,7 +277,6 @@ export const UserEditFields = ({
                       onClick={addUser}
                       data-testid={'add-first-user'}
                       data-cy={'add_new_user'}
-                      isDisabled={!(hasValidInput)}
                     >
                       <PlusIcon style={{ fontSize: 'small' }} /> Add User
                     </Button>
@@ -316,18 +289,4 @@ export const UserEditFields = ({
       </Flex>
     </>
   );
-
-  function validateEmail ( email: string ) {
-    let regexEmail = /^.*@.*\..*$/;
-    return regexEmail.test(email);
-  }
-
-  function validateString ( name: string ) {
-    let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]+$/;
-    return regexString.test(name);
-  }
-
-  function validateRole (role: string){
-    return !(role === undefined || role === '');
-  }
 };

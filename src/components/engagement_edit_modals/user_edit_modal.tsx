@@ -20,18 +20,15 @@ export interface UserEditModalProps {
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
   onClose: () => void;
-  onCancel: () => void;
 }
 export function UserEditModal({
   engagement,
   onChange,
   onClose = () => {},
-  onCancel = () => {},
   isOpen,
   onSave: propsOnSave,
 }: UserEditModalProps) {
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
-  const [hasValidInput, setHasValidInput] = useState(false);
 
   function toggleDeleted(email: string) {
     if (deletedUsers.indexOf(email) < 0) {
@@ -66,14 +63,18 @@ export function UserEditModal({
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     engagement.engagement_users.push(newUser);
     onChange(engagement.engagement_users);
-    setHasValidInput(false);
   }
+
+  const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
+    if(!acc) return acc;
+    return validateEmail(user.email) && validateString(user.first_name) && validateString(user.last_name) && validateRole(user.role)
+  }, true);
 
   return (
     <Modal
       variant={ModalVariant.large}
       isOpen={isOpen}
-      onClose={onCancel}
+      onClose={onClose}
       title="Engagement Users"
     >
       <EditModalTemplate
@@ -81,7 +82,7 @@ export function UserEditModal({
           <div>
             <Button
               data-testid="user-edit-cancel"
-              onClick={onCancel}
+              onClick={onClose}
               data-cy={'cancel_edit_users'}
               style={{ margin: '1rem' }}
               variant="link"
@@ -93,7 +94,7 @@ export function UserEditModal({
               onClick={onSave}
               data-cy={'save_users'}
               style={{ margin: '1rem' }}
-              isDisabled={!hasValidInput}
+              isDisabled={!areFieldsValid}
             >
               Save
             </Button>
@@ -130,12 +131,27 @@ export function UserEditModal({
               toggleDeleted={toggleDeleted}
               deletedUsers={deletedUsers}
               addUser={addUser}
-              setHasValidInput={setHasValidInput}
-              hasValidInput={hasValidInput}
+              validateEmail={validateEmail}
+              validateString={validateString}
+              validateRole={validateRole}
             />
           )}
         </div>
       </EditModalTemplate>
     </Modal>
   );
+}
+
+function validateEmail ( email: string ) {
+  let regexEmail = /^.*@.*\..*$/;
+  return regexEmail.test(email);
+}
+
+function validateString ( name: string ) {
+  let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]+$/;
+  return regexString.test(name);
+}
+
+function validateRole (role: string){
+  return !(role === undefined || role === '');
 }
