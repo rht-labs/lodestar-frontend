@@ -1,22 +1,20 @@
 import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { useParams } from 'react-router';
+import { Route, useParams, Switch, useRouteMatch } from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EngagementOverview } from './overview';
-import { useEngagementForm } from '../../context/engagement_form_context/engagement_form_hook';
+import { EngagementJsonDump } from './json_dump';
+import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
 }
 
 export interface EngagementDetailViewProps {
-  engagementFormConfig: EngagementFormConfig;
-  getConfig: () => void;
   error: Error;
   setCurrentEngagement: (engagement: Engagement) => void;
   currentEngagement: Engagement;
@@ -33,22 +31,20 @@ export const EngagementDetailView = () => {
   }>();
 
   const {
-    engagementFormConfig,
-    getConfig,
     createEngagementPoll,
+    saveEngagement,
     error: engagementFormRequestError,
     setCurrentEngagement,
     getEngagement,
     currentEngagement,
+    engagementFormConfig,
     missingRequiredFields,
+    saveChanges,
+    updateEngagementFormField,
+    currentChanges,
+    clearCurrentChanges,
   } = useEngagements();
 
-  const {
-    saveChanges,
-    currentChanges,
-    updateEngagementFormField,
-    clearCurrentChanges,
-  } = useEngagementForm();
   useEffect(() => {
     let engagementPoll;
     if (currentEngagement?.project_name && currentEngagement?.customer_name) {
@@ -58,12 +54,6 @@ export const EngagementDetailView = () => {
       (await engagementPoll)?.cancel?.();
     };
   }, [currentEngagement, createEngagementPoll]);
-  useEffect(() => {
-    if (!engagementFormConfig) {
-      getConfig();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [engagementFormConfig]);
 
   useEffect(() => {
     if (!customer_name || !project_name) {
@@ -75,9 +65,7 @@ export const EngagementDetailView = () => {
       } else {
       }
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customer_name, project_name]);
+  }, [customer_name, project_name, getEngagement, setCurrentEngagement]);
 
   const AlertMessage = () => {
     return engagementFormRequestError ? (
@@ -90,6 +78,19 @@ export const EngagementDetailView = () => {
   const validators = getValidatorsFromEngagementFormConfig(
     engagementFormConfig
   );
+  const { url } = useRouteMatch();
+  const serializer = new EngagementJsonSerializer();
+  const {
+    commits,
+    uuid,
+    project_id,
+    mongo_id,
+    creation_details,
+    status,
+    launch,
+    ...editableFields
+  } = currentEngagement ?? {};
+
   return (
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate
@@ -97,15 +98,30 @@ export const EngagementDetailView = () => {
         onSave={saveChanges}
       >
         <AlertMessage />
-        <EngagementOverview
-          currentEngagement={currentEngagement}
-          missingRequiredFields={missingRequiredFields}
-          onSave={saveChanges}
-          engagementFormConfig={engagementFormConfig}
-          onChange={updateEngagementFormField}
-          currentEngagementChanges={currentChanges}
-          clearCurrentChanges={clearCurrentChanges}
-        />
+        <Switch>
+          <Route path={`${url}/json`}>
+            <EngagementJsonDump
+              json={JSON.stringify(
+                serializer.serialize((editableFields ?? {}) as Engagement),
+                null,
+                2
+              )}
+              onSave={value => {
+                saveEngagement(serializer.deserialize(JSON.parse(value)));
+              }}
+            />
+          </Route>
+          <Route path={`${url}/`}>
+            <EngagementOverview
+              currentEngagement={currentEngagement}
+              missingRequiredFields={missingRequiredFields}
+              onSave={saveChanges}
+              onChange={updateEngagementFormField}
+              currentEngagementChanges={currentChanges}
+              clearCurrentChanges={clearCurrentChanges}
+            />
+          </Route>
+        </Switch>
       </EngagementDetailsViewTemplate>
     </ValidationProvider>
   );

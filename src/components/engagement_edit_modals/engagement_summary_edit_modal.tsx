@@ -5,16 +5,14 @@ import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { DescriptionFormField } from '../engagement_form_fields/description';
 import { LocationFormField } from '../engagement_form_fields/location';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_start_end_date';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 import { EngagementUseCaseField } from '../engagement_form_fields/use_case';
-import { CustomerNameFormField } from "../engagement_form_fields/customer_name";
-import { EngagementNameFormField } from "../engagement_form_fields/engagement_name";
-import { useHistory } from "react-router";
+import { CustomerNameFormField } from '../engagement_form_fields/customer_name';
+import { EngagementNameFormField } from '../engagement_form_fields/engagement_name';
+import { useHistory } from 'react-router';
 
 export interface EngagementSummaryEditModalProps {
   onChange: (fieldName: string, value: any) => void;
-  engagementFormConfig: EngagementFormConfig;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
@@ -31,7 +29,9 @@ export function EngagementSummaryEditModal(
   };
   const reRoute = () => {
     if (props.engagement.customer_name && props.engagement.project_name) {
-      history.push(`/app/engagements/${props.engagement.customer_name}/${props.engagement.project_name}`);
+      history.push(
+        `/app/engagements/${props.engagement.customer_name}/${props.engagement.project_name}`
+      );
     }
   };
 
@@ -82,7 +82,6 @@ export function EngagementSummaryEditModal(
           />
           <EngagementStartEndDateFormField
             onChange={props.onChange}
-            engagementFormConfig={props.engagementFormConfig}
             engagement={props.engagement}
           />
           <PublicReferenceField

@@ -9,26 +9,30 @@ import { OpenShiftVersionFormField } from '../oc_version';
 import { PersistentStorageFormField } from '../persistent_storage';
 import { SubdomainFormField } from '../subdomain';
 import { render, fireEvent } from '@testing-library/react';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
+import { TestStateWrapper } from '../../../common/test_state_wrapper';
 describe('Engagement form fields', () => {
   test('Additional details form matches snapshot', () => {
     expect(
       render(
-        <AdditionalDetailsFormField
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          onChange={() => {}}
-        />
+        <TestStateWrapper>
+          <AdditionalDetailsFormField
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            onChange={() => {}}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('Additional details form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <AdditionalDetailsFormField
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        onChange={onChange}
-      />
+      <TestStateWrapper>
+        <AdditionalDetailsFormField
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          onChange={onChange}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('additional-details-text-area');
     await fireEvent.change(textArea, { target: { value: 'bot' } });
@@ -37,22 +41,26 @@ describe('Engagement form fields', () => {
   test('Cloud provider form matches snapshot', () => {
     expect(
       render(
-        <CloudProviderFormField
-          availableProviders={[{ label: 'AWS', value: 'ec2' }]}
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          onChange={() => {}}
-        />
+        <TestStateWrapper>
+          <CloudProviderFormField
+            availableProviders={[{ label: 'AWS', value: 'ec2' }]}
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            onChange={() => {}}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('Cloud provider form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <CloudProviderFormField
-        availableProviders={[{ label: 'AWS', value: 'ec2' }]}
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        onChange={onChange}
-      />
+      <TestStateWrapper>
+        <CloudProviderFormField
+          availableProviders={[{ label: 'AWS', value: 'ec2' }]}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          onChange={onChange}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('cloud-provider-select');
     await fireEvent.change(textArea, { target: { value: 'bot' } });
@@ -61,28 +69,32 @@ describe('Engagement form fields', () => {
   test('Cloud provider region form matches snapshot', () => {
     expect(
       render(
-        <CloudProviderRegionFormField
-          isEngagementLaunched={false}
-          availableProviderRegionOptions={[
-            { label: 'N. Virginia', value: 'nva' },
-          ]}
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          onChange={() => {}}
-        />
+        <TestStateWrapper>
+          <CloudProviderRegionFormField
+            isEngagementLaunched={false}
+            availableProviderRegionOptions={[
+              { label: 'N. Virginia', value: 'nva' },
+            ]}
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            onChange={() => {}}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('Cloud provider region form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <CloudProviderRegionFormField
-        availableProviderRegionOptions={[
-          { label: 'N. Virginia', value: 'nva' },
-        ]}
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        onChange={onChange}
-        isEngagementLaunched={true}
-      />
+      <TestStateWrapper>
+        <CloudProviderRegionFormField
+          availableProviderRegionOptions={[
+            { label: 'N. Virginia', value: 'nva' },
+          ]}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          onChange={onChange}
+          isEngagementLaunched={true}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('provider-region-select');
     await fireEvent.change(textArea, { target: { value: 'nva' } });
@@ -91,24 +103,26 @@ describe('Engagement form fields', () => {
   test('Cluster size form matches snapshot', () => {
     expect(
       render(
-        <ClusterSizeFormField
-          engagementFormConfig={EngagementFormConfig.fromFake()}
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          onChange={() => {}}
-          isEngagementLaunched={true}
-        />
+        <TestStateWrapper>
+          <ClusterSizeFormField
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            onChange={() => {}}
+            isEngagementLaunched={true}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('Cloud provider form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <ClusterSizeFormField
-        engagementFormConfig={EngagementFormConfig.fromFake()}
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        isEngagementLaunched={true}
-        onChange={onChange}
-      />
+      <TestStateWrapper>
+        <ClusterSizeFormField
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          isEngagementLaunched={true}
+          onChange={onChange}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('cluster-size-select');
     await fireEvent.change(textArea, { target: { value: '1' } });
@@ -139,24 +153,26 @@ describe('Engagement form fields', () => {
   test('OpenShift Version form matches snapshot', () => {
     expect(
       render(
-        <OpenShiftVersionFormField
-          engagementFormConfig={EngagementFormConfig.fromFake()}
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          isEngagementLaunched={true}
-          onChange={() => {}}
-        />
+        <TestStateWrapper>
+          <OpenShiftVersionFormField
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            isEngagementLaunched={true}
+            onChange={() => {}}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('OpenShift Version form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <OpenShiftVersionFormField
-        engagementFormConfig={EngagementFormConfig.fromFake()}
-        isEngagementLaunched={true}
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        onChange={onChange}
-      />
+      <TestStateWrapper>
+        <OpenShiftVersionFormField
+          isEngagementLaunched={true}
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          onChange={onChange}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('oc-version-select');
     await fireEvent.change(textArea, { target: { value: '4.1.41' } });
@@ -165,24 +181,26 @@ describe('Engagement form fields', () => {
   test('Persistent storage form matches snapshot', () => {
     expect(
       render(
-        <PersistentStorageFormField
-          engagementFormConfig={EngagementFormConfig.fromFake()}
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          isEngagementLaunched={true}
-          onChange={() => {}}
-        />
+        <TestStateWrapper>
+          <PersistentStorageFormField
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            isEngagementLaunched={true}
+            onChange={() => {}}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('Persistent Storage form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <PersistentStorageFormField
-        engagementFormConfig={EngagementFormConfig.fromFake()}
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        isEngagementLaunched={true}
-        onChange={onChange}
-      />
+      <TestStateWrapper>
+        <PersistentStorageFormField
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          isEngagementLaunched={true}
+          onChange={onChange}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('persistent-storage-select');
     await fireEvent.change(textArea, { target: { value: '50G' } });
@@ -191,24 +209,26 @@ describe('Engagement form fields', () => {
   test('Subdomain form matches snapshot', () => {
     expect(
       render(
-        <SubdomainFormField
-          engagementFormConfig={EngagementFormConfig.fromFake()}
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          isEngagementLaunched={true}
-          onChange={() => {}}
-        />
+        <TestStateWrapper>
+          <SubdomainFormField
+            hostingEnvironment={HostingEnvironment.fromFake(true)}
+            isEngagementLaunched={true}
+            onChange={() => {}}
+          />
+        </TestStateWrapper>
       )
     ).toMatchSnapshot();
   });
   test('Subdomain form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <SubdomainFormField
-        engagementFormConfig={EngagementFormConfig.fromFake()}
-        hostingEnvironment={HostingEnvironment.fromFake(true)}
-        isEngagementLaunched={true}
-        onChange={onChange}
-      />
+      <TestStateWrapper>
+        <SubdomainFormField
+          hostingEnvironment={HostingEnvironment.fromFake(true)}
+          isEngagementLaunched={true}
+          onChange={onChange}
+        />
+      </TestStateWrapper>
     );
     const textArea = await wrapper.findByTestId('subdomain-input');
     await fireEvent.change(textArea, {

@@ -8,10 +8,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import {
-  EngagementFormConfig,
-  EngagementFormOption,
-} from '../../schemas/engagement_config';
+import { EngagementFormOption } from '../../schemas/engagement_config';
 import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider';
 import { CloudProviderRegionFormField } from '../engagement_form_fields/cloud_provider_region';
 import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version';
@@ -20,13 +17,14 @@ import { PersistentStorageFormField } from '../engagement_form_fields/persistent
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
-import { useEngagementConfig } from '../../context/engagement_context/engagement_config_hook';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: HostingEnvironment;
   isOpen: boolean;
   onSave: (hostingEnvironment: HostingEnvironment) => void;
   onClose: () => void;
   isEngagementLaunched: boolean;
+  suggestedSubdomain?: string;
 }
 
 export function OpenShiftClusterEditModal({
@@ -34,12 +32,13 @@ export function OpenShiftClusterEditModal({
   hostingEnvironment: propsHostingEnvironment,
   isOpen,
   onSave: propsOnSave,
+  suggestedSubdomain,
   isEngagementLaunched,
 }: OpenShiftClusterEditModalProps) {
+  const { engagementFormConfig } = useEngagements();
   const [hostingEnvironment, setHostingEnvironment] = useState<
     HostingEnvironment
   >();
-  const { engagementFormConfig } = useEngagementConfig();
 
   useEffect(() => {
     setHostingEnvironment(propsHostingEnvironment);
@@ -123,18 +122,16 @@ export function OpenShiftClusterEditModal({
           <OpenShiftVersionFormField
             onChange={value => onChange('ocp_version', value)}
             isEngagementLaunched={isEngagementLaunched}
-            engagementFormConfig={engagementFormConfig}
             hostingEnvironment={hostingEnvironment}
           />
           <SubdomainFormField
             isEngagementLaunched={isEngagementLaunched}
             onChange={value => onChange('ocp_sub_domain', value)}
-            engagementFormConfig={engagementFormConfig}
             hostingEnvironment={hostingEnvironment}
+            suggestedSubdomain={suggestedSubdomain}
           />
           <PersistentStorageFormField
             onChange={value => onChange('ocp_persistent_storage_size', value)}
-            engagementFormConfig={engagementFormConfig}
             hostingEnvironment={hostingEnvironment}
             isEngagementLaunched={isEngagementLaunched}
           />
@@ -143,7 +140,6 @@ export function OpenShiftClusterEditModal({
               onChange('ocp_cluster_size', value);
               console.log(value);
             }}
-            engagementFormConfig={engagementFormConfig}
             hostingEnvironment={hostingEnvironment}
             isEngagementLaunched={isEngagementLaunched}
           />

@@ -122,6 +122,7 @@ export interface Engagement
   artifacts: Artifact[];
   engagement_users: EngagementUser[];
   hosting_environments: HostingEnvironment[];
+  uuid?: string;
 }
 
 const regions = ['emea', 'latam', 'na', 'apac'];
@@ -242,6 +243,7 @@ export abstract class Engagement {
             id: faker.random.uuid().toString(),
           })),
       ...getStatusDeterminers(),
+      uuid: staticData ? 'uuid' : faker.random.uuid(),
     };
   }
 }

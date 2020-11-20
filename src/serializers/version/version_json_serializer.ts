@@ -14,14 +14,14 @@ export class VersionJsonSerializer implements Serializer<Version, object> {
             link_address: data['link_address'],
             name: data['name'],
             value: data['value'],
-          }
+          },
         ],
-          mainVersion: {
-            link_address: data['link_address'],
-            name: data['name'],
-            value: data['value'],
-          }
-        }
+        mainVersion: {
+          link_address: data['link_address'],
+          name: data['name'],
+          value: data['value'],
+        },
+      },
     };
   }
 }

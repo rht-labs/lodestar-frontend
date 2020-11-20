@@ -12,20 +12,22 @@ import { SortSelect } from './components/sort_select';
 import { EngagementStatusSelect } from './components/engagement_status_select';
 import { SearchIcon } from '@patternfly/react-icons';
 import { EngagementRegionSelect } from './components/region_select';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { useAnalytics, AnalyticsCategory } from '../../context/analytics_context/analytics_context';
+import {
+  useAnalytics,
+  AnalyticsCategory,
+} from '../../context/analytics_context/analytics_context';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface EngagementFilterProps {
   onChange: (filter: EngagementFilter) => void;
   filter: EngagementFilter;
-  engagementFormConfig?: EngagementFormConfig;
 }
 
 export function EngagementFilterBar({
   onChange: _propsOnChange,
   filter,
-  engagementFormConfig,
 }: EngagementFilterProps) {
+  const { engagementFormConfig } = useEngagements();
   const { searchTerm = '' } = filter ?? {};
   const { logEvent } = useAnalytics();
   const onChange = (filter: EngagementFilter) => {

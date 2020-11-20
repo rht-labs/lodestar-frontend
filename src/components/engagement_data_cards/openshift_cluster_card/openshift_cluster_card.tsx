@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
+import slugify from 'slugify';
 import {
   Button,
   Dropdown,
@@ -28,7 +29,6 @@ import { Feature } from '../../feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import { useEngagementConfig } from '../../../context/engagement_context/engagement_config_hook';
 import { FormManager } from '../../../context/form_manager/form_manager';
 import { ReadyCheck } from '../../ready_check/ready_check';
 
@@ -43,7 +43,7 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
 ];
 
 export interface OpenShiftClusterSummaryCardProps {
-  currentEngagementChanges: Engagement;
+  currentEngagementChanges: Partial<Engagement>;
   onChange: (hostingEnvironments: HostingEnvironment[]) => void;
   onClear: () => void;
   onSave: (hostingEnvironments: HostingEnvironment[]) => void;
@@ -53,16 +53,14 @@ export interface OpenShiftClusterSummaryCardProps {
 export function OpenShiftClusterSummaryCard({
   currentEngagementChanges,
   onClear,
-  onSave: propsOnSave,
   onChange,
 }: OpenShiftClusterSummaryCardProps) {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
-  const { engagementFormConfig } = useEngagementConfig();
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
-  const { saveEngagement } = useEngagements();
+  const { saveEngagement, engagementFormConfig } = useEngagements();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('hosting_environments'), [registerField]);
   const onClose = () => {
@@ -181,6 +179,31 @@ export function OpenShiftClusterSummaryCard({
       },
     ]
   );
+  const generateSuggestedSubdomain = (
+    project_name: string = '',
+    customer_name: string = '',
+    randomizer: string = ''
+  ): string => {
+    let slug = '';
+    const maxLen = 8;
+    if (project_name?.length > 2) {
+      slug = project_name;
+    } else if (customer_name?.length > 2) {
+      slug = customer_name;
+    }
+    if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
+      slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
+    }
+    slug = slugify(slug.substring(0, maxLen));
+    if (randomizer?.length > 0) {
+      slug = `${slug}-${randomizer}`;
+    }
+    console.log(slug);
+    return slug;
+  };
+  const currentEnvironmentIndex = currentEngagementChanges?.hosting_environments?.findIndex(
+    he => currentHostingEnvironment?.id === he?.id
+  );
   return (
     <>
       <OpenShiftClusterEditModal
@@ -189,6 +212,13 @@ export function OpenShiftClusterSummaryCard({
         onClose={onClose}
         hostingEnvironment={currentHostingEnvironment}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
+        suggestedSubdomain={generateSuggestedSubdomain(
+          currentEngagementChanges?.project_name,
+          currentEngagementChanges?.customer_name,
+          currentEnvironmentIndex + 1 > 0
+            ? (currentEnvironmentIndex + 1)?.toString()
+            : '1'
+        )}
       />
       <DataCard
         actionButton={() => (

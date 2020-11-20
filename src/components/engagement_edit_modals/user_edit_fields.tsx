@@ -15,7 +15,6 @@ import {
 import { PlusIcon, TrashIcon, UndoIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { UserRolesTooltip } from '../engagement_data_cards/user_card/user_roles_tooltip';
 import {
@@ -26,10 +25,10 @@ import {
 } from '@patternfly/react-table';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { EngagementUser } from '../../schemas/engagement';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface UserEditFieldsProps {
   users: any;
-  engagementFormConfig: EngagementFormConfig;
   onChange: (users: EngagementUser[]) => void;
   deletedUsers: string[];
   toggleDeleted: (email: string) => void;
@@ -40,7 +39,6 @@ export interface UserEditFieldsProps {
 
 export const UserEditFields = ({
   users,
-  engagementFormConfig,
   onChange,
   deletedUsers,
   toggleDeleted,
@@ -48,6 +46,7 @@ export const UserEditFields = ({
   setHasValidInput,
   hasValidInput
 }: UserEditFieldsProps) => {
+  const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('engagement_users'), [registerField]);
@@ -59,7 +58,7 @@ export const UserEditFields = ({
       title: (
         <>
           Role
-          <UserRolesTooltip engagementFormConfig={engagementFormConfig} />
+          <UserRolesTooltip />
         </>
       ),
     },
