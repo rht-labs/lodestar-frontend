@@ -31,11 +31,6 @@ export function UserCard({
     onClear();
   };
 
-  function onCancel() {
-    requestClose();
-    window.location.reload();
-  }
-
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     engagement?.engagement_users?.push(newUser);
@@ -57,7 +52,6 @@ export function UserCard({
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
         engagement={engagement}
-        onCancel={onCancel}
         addUser={addUser}
       />
       <DataCard
