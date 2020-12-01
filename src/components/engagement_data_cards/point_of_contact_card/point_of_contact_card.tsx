@@ -1,12 +1,13 @@
 import React from 'react';
 import { DataCard } from '../data_card';
 import { Engagement } from '../../../schemas/engagement';
-import { Grid, GridItem } from '@patternfly/react-core';
+import {Button, EmptyState, EmptyStateBody, EmptyStateIcon, Grid, GridItem, Title} from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { PointOfContactEditModal } from '../../engagement_edit_modals/point_of_contact_edit_modal';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
+import {PlusIcon, UsersIcon} from "@patternfly/react-icons";
 
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
@@ -37,6 +38,10 @@ export function PointOfContactCard({
     'customer_contact_email',
     'customer_contact_name',
   ];
+
+  function handleAddUserOrEdit() {
+    requestOpen(POINT_OF_CONTACT_MODAL_KEY);
+  }
   return (
     <>
       <PointOfContactEditModal
@@ -69,23 +74,50 @@ export function PointOfContactCard({
           />
         )}
       >
-        <Grid hasGutter>
-          <GridItem sm={12} md={4}>
-            <TitledDataPoint title="Engagement Lead">
-              {currentEngagement?.engagement_lead_name}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem sm={12} md={4}>
-            <TitledDataPoint title="Technical Lead">
-              {currentEngagement?.technical_lead_name}
-            </TitledDataPoint>
-          </GridItem>
-          <GridItem sm={12} md={4}>
-            <TitledDataPoint title="Customer Contact">
-              {currentEngagement?.customer_contact_name}
-            </TitledDataPoint>
-          </GridItem>
-        </Grid>
+        {
+          currentEngagement?.engagement_lead_name || currentEngagement?.technical_lead_name || currentEngagement?.customer_contact_name
+          ? (<Grid hasGutter>
+                <GridItem sm={12} md={4}>
+                  <TitledDataPoint title="Engagement Lead">
+                    {currentEngagement?.engagement_lead_name}
+                  </TitledDataPoint>
+                </GridItem>
+                <GridItem sm={12} md={4}>
+                  <TitledDataPoint title="Technical Lead">
+                    {currentEngagement?.technical_lead_name}
+                  </TitledDataPoint>
+                </GridItem>
+                <GridItem sm={12} md={4}>
+                  <TitledDataPoint title="Customer Contact">
+                    {currentEngagement?.customer_contact_name}
+                  </TitledDataPoint>
+                </GridItem>
+              </Grid>)
+            : (
+              <EmptyState>
+                <EmptyStateIcon icon={UsersIcon} />
+                <Title headingLevel="h4" size="lg">
+                  No Points of Contact Added
+                </Title>
+                <EmptyStateBody>
+                  <p>No users have been added to this engagement as points of contact</p>
+                  <p>
+                    Select the 'add user' button below, to begin adding point of contacts.
+                  </p>
+                </EmptyStateBody>
+                <Button
+                  variant="secondary"
+                  data-testid={'add_new_point_of_contact'}
+                  data-cy={'add_new_point_of_contact'}
+                  style={{ margin: '1rem' }}
+                  onClick={handleAddUserOrEdit}
+                >
+                  <PlusIcon style={{ fontSize: 'small' }} /> Add User
+                </Button>
+              </EmptyState>
+            )
+        }
+
       </DataCard>
     </>
   );
