@@ -6,23 +6,22 @@ import {
 } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 interface OpenShiftVersionFormFieldProps {
   hostingEnvironment: HostingEnvironment;
   isEngagementLaunched: boolean;
-  engagementFormConfig: EngagementFormConfig;
   onChange: (value: string) => void;
 }
 
 export function OpenShiftVersionFormField({
   onChange,
   hostingEnvironment,
-  engagementFormConfig,
   isEngagementLaunched,
 }: OpenShiftVersionFormFieldProps) {
+  const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('ocp_version'), [registerField]);

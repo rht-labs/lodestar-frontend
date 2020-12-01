@@ -31,14 +31,7 @@ import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
 
 export function CreateNewEngagement() {
-  const { engagementFormConfig, getConfig } = useEngagements();
-  const [hasFetchedConfig, setHasFetchedConfig] = useState<boolean>(false);
-  useEffect(() => {
-    if (!hasFetchedConfig && !engagementFormConfig) {
-      getConfig();
-      setHasFetchedConfig(true);
-    }
-  }, [hasFetchedConfig, engagementFormConfig, getConfig]);
+  const { engagementFormConfig } = useEngagements();
   return (
     <ValidationProvider
       validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}

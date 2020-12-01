@@ -1,7 +1,7 @@
 import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider } from './context/auth_context/auth_context';
+import { AuthContext, AuthProvider } from './context/auth_context/auth_context';
 import { VersionProvider } from './context/version_context/version_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary/error_boundary';
@@ -67,29 +67,38 @@ export const App = ({ config }: { config: Config }) => {
                           authService={authService}
                           analyticsContext={analyticsContext}
                         >
-                          <NotificationProvider
-                            notificationService={notificationService}
-                          >
-                            <VersionProvider versionService={versionService}>
-                              <FeatureToggles>
-                                <Router>
-                                  <FeedbackContext.Consumer>
-                                    {feedbackContext => (
-                                      <EngagementProvider
-                                        feedbackContext={feedbackContext}
-                                        engagementService={engagementService}
-                                        categoryService={categoryService}
-                                      >
-                                        <NavigationAnalytics>
-                                          <LodestarRouter />
-                                        </NavigationAnalytics>
-                                      </EngagementProvider>
-                                    )}
-                                  </FeedbackContext.Consumer>
-                                </Router>
-                              </FeatureToggles>
-                            </VersionProvider>
-                          </NotificationProvider>
+                          <AuthContext.Consumer>
+                            {authContext => (
+                              <NotificationProvider
+                                notificationService={notificationService}
+                              >
+                                <VersionProvider
+                                  versionService={versionService}
+                                >
+                                  <FeatureToggles>
+                                    <Router>
+                                      <FeedbackContext.Consumer>
+                                        {feedbackContext => (
+                                          <EngagementProvider
+                                            authContext={authContext}
+                                            feedbackContext={feedbackContext}
+                                            engagementService={
+                                              engagementService
+                                            }
+                                            categoryService={categoryService}
+                                          >
+                                            <NavigationAnalytics>
+                                              <LodestarRouter />
+                                            </NavigationAnalytics>
+                                          </EngagementProvider>
+                                        )}
+                                      </FeedbackContext.Consumer>
+                                    </Router>
+                                  </FeatureToggles>
+                                </VersionProvider>
+                              </NotificationProvider>
+                            )}
+                          </AuthContext.Consumer>
                         </AuthProvider>
                       </FeedbackProvider>
                     )}

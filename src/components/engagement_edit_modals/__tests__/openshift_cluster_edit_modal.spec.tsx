@@ -11,11 +11,11 @@ describe('Point of Contact edit modal', () => {
       render(
         <TestStateWrapper>
           <OpenShiftClusterEditModal
+            onSave={() => {}}
+            isOpen={true}
             hostingEnvironment={HostingEnvironment.fromFake(true)}
             isEngagementLaunched={false}
             onClose={() => {}}
-            onSave={() => {}}
-            isOpen={true}
           />
         </TestStateWrapper>
       )

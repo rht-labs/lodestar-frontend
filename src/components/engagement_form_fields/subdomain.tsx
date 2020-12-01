@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { FormGroup, TextInput } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { slugify } from 'transliteration';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface SubdomainFormFieldProps {
   hostingEnvironment: HostingEnvironment;
-  engagementFormConfig: EngagementFormConfig;
   onChange: (value: string) => void;
   isEngagementLaunched: boolean;
   suggestedSubdomain: string;

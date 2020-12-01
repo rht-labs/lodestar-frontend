@@ -606,7 +606,7 @@ Object {
             aria-invalid="false"
             aria-label="Cluster Size"
             class="pf-c-form-control"
-            data-ouia-component-id="6"
+            data-ouia-component-id="7"
             data-ouia-component-type="PF4/FormSelect"
             data-ouia-safe="true"
             data-testid="cluster-size-select"
@@ -619,13 +619,6 @@ Object {
               value=""
             >
               Select cluster size
-            </option>
-            <option
-              class=""
-              data-cy="Small"
-              value="small"
-            >
-              Small
             </option>
           </select>
           
@@ -666,7 +659,7 @@ Object {
           aria-invalid="false"
           aria-label="Cluster Size"
           class="pf-c-form-control"
-          data-ouia-component-id="6"
+          data-ouia-component-id="7"
           data-ouia-component-type="PF4/FormSelect"
           data-ouia-safe="true"
           data-testid="cluster-size-select"
@@ -679,13 +672,6 @@ Object {
             value=""
           >
             Select cluster size
-          </option>
-          <option
-            class=""
-            data-cy="Small"
-            value="small"
-          >
-            Small
           </option>
         </select>
         
@@ -930,7 +916,7 @@ Object {
             aria-invalid="false"
             aria-label="OpenShift Version"
             class="pf-c-form-control"
-            data-ouia-component-id="8"
+            data-ouia-component-id="15"
             data-ouia-component-type="PF4/FormSelect"
             data-ouia-safe="true"
             data-testid="oc-version-select"
@@ -942,27 +928,6 @@ Object {
               value=""
             >
               Select OpenShift version
-            </option>
-            <option
-              class=""
-              data-cy="4.3.31"
-              value="4.3.31"
-            >
-              v4.3
-            </option>
-            <option
-              class=""
-              data-cy="4.4.15"
-              value="4.4.15"
-            >
-              v4.4
-            </option>
-            <option
-              class=""
-              data-cy="4.5.4"
-              value="4.5.4"
-            >
-              v4.5
             </option>
           </select>
           
@@ -1003,7 +968,7 @@ Object {
           aria-invalid="false"
           aria-label="OpenShift Version"
           class="pf-c-form-control"
-          data-ouia-component-id="8"
+          data-ouia-component-id="15"
           data-ouia-component-type="PF4/FormSelect"
           data-ouia-safe="true"
           data-testid="oc-version-select"
@@ -1015,27 +980,6 @@ Object {
             value=""
           >
             Select OpenShift version
-          </option>
-          <option
-            class=""
-            data-cy="4.3.31"
-            value="4.3.31"
-          >
-            v4.3
-          </option>
-          <option
-            class=""
-            data-cy="4.4.15"
-            value="4.4.15"
-          >
-            v4.4
-          </option>
-          <option
-            class=""
-            data-cy="4.5.4"
-            value="4.5.4"
-          >
-            v4.5
           </option>
         </select>
         
@@ -1133,7 +1077,7 @@ Object {
             aria-invalid="false"
             aria-label="Persistent Storage Needs"
             class="pf-c-form-control"
-            data-ouia-component-id="10"
+            data-ouia-component-id="23"
             data-ouia-component-type="PF4/FormSelect"
             data-ouia-safe="true"
             data-testid="persistent-storage-select"
@@ -1145,34 +1089,6 @@ Object {
               value=""
             >
               Select storage size
-            </option>
-            <option
-              class=""
-              data-cy="50G"
-              value="50G"
-            >
-              50GB
-            </option>
-            <option
-              class=""
-              data-cy="100G"
-              value="100G"
-            >
-              100GB
-            </option>
-            <option
-              class=""
-              data-cy="250G"
-              value="250G"
-            >
-              250GB
-            </option>
-            <option
-              class=""
-              data-cy="500G"
-              value="500G"
-            >
-              500GB
             </option>
           </select>
           
@@ -1213,7 +1129,7 @@ Object {
           aria-invalid="false"
           aria-label="Persistent Storage Needs"
           class="pf-c-form-control"
-          data-ouia-component-id="10"
+          data-ouia-component-id="23"
           data-ouia-component-type="PF4/FormSelect"
           data-ouia-safe="true"
           data-testid="persistent-storage-select"
@@ -1225,34 +1141,6 @@ Object {
             value=""
           >
             Select storage size
-          </option>
-          <option
-            class=""
-            data-cy="50G"
-            value="50G"
-          >
-            50GB
-          </option>
-          <option
-            class=""
-            data-cy="100G"
-            value="100G"
-          >
-            100GB
-          </option>
-          <option
-            class=""
-            data-cy="250G"
-            value="250G"
-          >
-            250GB
-          </option>
-          <option
-            class=""
-            data-cy="500G"
-            value="500G"
-          >
-            500GB
           </option>
         </select>
         
