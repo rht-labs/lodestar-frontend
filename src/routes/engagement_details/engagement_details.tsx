@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { Route, useParams, Switch, useRouteMatch } from 'react-router';
+import {
+  Route,
+  useParams,
+  Switch,
+  useRouteMatch,
+  Redirect,
+} from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
@@ -11,6 +17,8 @@ import { EngagementOverview } from './overview';
 import { useEngagementForm } from '../../context/engagement_form_context/engagement_form_hook';
 import { EngagementJsonDump } from './json_dump';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
+import { Feature } from '../../components/feature/feature';
+import {APP_FEATURES} from '../../common/app_features';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
@@ -115,16 +123,21 @@ export const EngagementDetailView = () => {
         <AlertMessage />
         <Switch>
           <Route path={`${url}/json`}>
-            <EngagementJsonDump
-              json={JSON.stringify(
-                serializer.serialize((editableFields ?? {}) as Engagement),
-                null,
-                2
-              )}
-              onSave={value => {
-                saveEngagement(serializer.deserialize(JSON.parse(value)));
-              }}
-            />
+            <Feature
+              inactiveComponent={() => <Redirect to={url} />}
+              name={APP_FEATURES.admin}
+            >
+              <EngagementJsonDump
+                json={JSON.stringify(
+                  serializer.serialize((editableFields ?? {}) as Engagement),
+                  null,
+                  2
+                )}
+                onSave={value => {
+                  saveEngagement(serializer.deserialize(JSON.parse(value)));
+                }}
+              />
+            </Feature>
           </Route>
           <Route path={`${url}/`}>
             <EngagementOverview
