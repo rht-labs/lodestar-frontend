@@ -18,7 +18,7 @@ import { useEngagementForm } from '../../context/engagement_form_context/engagem
 import { EngagementJsonDump } from './json_dump';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { Feature } from '../../components/feature/feature';
-import {APP_FEATURES} from '../../common/app_features';
+import { APP_FEATURES } from '../../common/app_features';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
