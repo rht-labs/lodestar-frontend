@@ -134,12 +134,11 @@ const UserTable = ({
               </Grid>
             )
           : ( <EmptyState>
-                <EmptyStateIcon icon={UsersIcon} />
-                <Title headingLevel="h4" size="lg">
+                <EmptyStateIcon icon={UsersIcon} style={{fontSize: '34px', margin: '0'}}/>
+                <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
                   No Users Added
                 </Title>
                 <EmptyStateBody>
-                  <p>No users have been added to this engagement</p>
                   <p>
                     Select the 'add user' button below, to begin adding users.
                   </p>

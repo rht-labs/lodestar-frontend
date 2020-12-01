@@ -95,15 +95,12 @@ export function PointOfContactCard({
               </Grid>)
             : (
               <EmptyState>
-                <EmptyStateIcon icon={UsersIcon} />
-                <Title headingLevel="h4" size="lg">
+                <EmptyStateIcon icon={UsersIcon} style={{fontSize: '34px', margin: '0'}}/>
+                <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
                   No Points of Contact Added
                 </Title>
                 <EmptyStateBody>
-                  <p>No users have been added to this engagement as points of contact</p>
-                  <p>
-                    Select the 'add user' button below, to begin adding point of contacts.
-                  </p>
+                  <p>Select the 'add user' button below, to begin adding point of contacts.</p>
                 </EmptyStateBody>
                 <Button
                   variant="secondary"

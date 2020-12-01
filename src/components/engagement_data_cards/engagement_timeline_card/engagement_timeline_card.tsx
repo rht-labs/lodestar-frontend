@@ -179,12 +179,11 @@ function EngagementTimelineCardBody(
     </Table>
   ) : (
     <EmptyState>
-      <EmptyStateIcon icon={ClipboardCheckIcon} />
-      <Title headingLevel="h4" size="lg">
+      <EmptyStateIcon icon={ClipboardCheckIcon} style={{fontSize: '34px', margin: '0'}}/>
+      <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
         No Artifacts Added
       </Title>
       <EmptyStateBody>
-        <p>No artifacts have been added to this engagement</p>
         <p>Click below to start adding artifacts</p>
       </EmptyStateBody>
       <Button

@@ -249,12 +249,11 @@ export function OpenShiftClusterSummaryCard({
           </Table>
         ) : (
           <EmptyState>
-            <EmptyStateIcon icon={DatabaseIcon} />
-            <Title headingLevel="h4" size="lg">
+            <EmptyStateIcon icon={DatabaseIcon} style={{fontSize: '34px', margin: '0'}}/>
+            <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
               No Hosting Environments Added
             </Title>
             <EmptyStateBody>
-              <p>No hosting environments have been added to this engagement</p>
               <p>Click below to start adding hosting environments</p>
             </EmptyStateBody>
             <Button
