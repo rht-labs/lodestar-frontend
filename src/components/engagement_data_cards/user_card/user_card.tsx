@@ -1,12 +1,12 @@
 import React from 'react';
 import { Engagement, EngagementUser } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
-import {Button, EmptyState, EmptyStateBody, EmptyStateIcon, Grid, GridItem, Title} from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, EmptyStateIcon, Grid, GridItem, Title} from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { UserList } from './user_list';
-import {PlusIcon, RedhatIcon, UserIcon, UsersIcon} from '@patternfly/react-icons';
+import { RedhatIcon, UserIcon, UsersIcon} from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
@@ -117,7 +117,7 @@ const UserTable = ({
         {(users?.length > 0)
           ? (
               <Grid hasGutter>
-                <GridItem span={10}>
+                <GridItem>
                   <UserList
                     title={redHatUsers}
                     defaultRows={allRows.filter(
@@ -140,18 +140,9 @@ const UserTable = ({
                 </Title>
                 <EmptyStateBody>
                   <p>
-                    Select the 'add user' button below, to begin adding users.
+                    Click the 'Edit' button, to begin adding users
                   </p>
                 </EmptyStateBody>
-                <Button
-                  variant="secondary"
-                  data-testid={'add-first-user'}
-                  data-cy={'add_new_user'}
-                  style={{ margin: '1rem' }}
-                  onClick={handleAddNewUserOrEdit}
-                >
-                  <PlusIcon style={{ fontSize: 'small' }} /> Add User
-                </Button>
           </EmptyState>)
         }
       </div>

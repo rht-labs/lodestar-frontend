@@ -254,17 +254,8 @@ export function OpenShiftClusterSummaryCard({
               No Hosting Environments Added
             </Title>
             <EmptyStateBody>
-              <p>Click below to start adding hosting environments</p>
+              <p>Click 'Add Hosting Environment' to start adding hosting environments</p>
             </EmptyStateBody>
-            <Button
-              variant="secondary"
-              onClick={addProvider}
-              data-testid={'add-first-hosting-environment'}
-              data-cy={'add_new_environment'}
-              style={{ margin: '1rem' }}
-            >
-              <PlusIcon style={{ fontSize: 'small' }} /> Add Hosting Environment
-            </Button>
           </EmptyState>
         )}
       </DataCard>

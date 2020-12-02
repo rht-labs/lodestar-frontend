@@ -100,17 +100,8 @@ export function PointOfContactCard({
                   No Points of Contact Added
                 </Title>
                 <EmptyStateBody>
-                  <p>Select the 'add user' button below, to begin adding point of contacts.</p>
+                  <p>Click the 'Edit' button, to begin adding point of contacts</p>
                 </EmptyStateBody>
-                <Button
-                  variant="secondary"
-                  data-testid={'add_new_point_of_contact'}
-                  data-cy={'add_new_point_of_contact'}
-                  style={{ margin: '1rem' }}
-                  onClick={handleAddUserOrEdit}
-                >
-                  <PlusIcon style={{ fontSize: 'small' }} /> Add User
-                </Button>
               </EmptyState>
             )
         }
