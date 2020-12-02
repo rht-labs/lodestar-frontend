@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   Card, CardActions, CardBody, CardHeader, CardHeaderMain,
 } from '@patternfly/react-core';
-import { TableBody, TableHeader, TableVariant, Table } from "@patternfly/react-table";
+import {TableBody, TableHeader, TableVariant, Table, cellWidth} from "@patternfly/react-table";
 import { Pagination } from "@patternfly/react-core";
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Table/table';
@@ -55,14 +55,14 @@ export function UserList(props: UserListProps) {
   }
 
   const columns = [
-    { title: 'Full name'},
-    { title: 'Email' },
+    { title: 'Full name', transforms: [cellWidth(10)]},
+    { title: 'Email', transforms: [cellWidth(10)] },
     { title:
         <>
           Role
           <UserRolesTooltip />
         </>
-    },
+      , transforms: [cellWidth(10)]},
   ];
 
   const customRowWrapper = ({
