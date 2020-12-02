@@ -1,13 +1,13 @@
 import React from 'react';
 import { DataCard } from '../data_card';
 import { Engagement } from '../../../schemas/engagement';
-import {Button, EmptyState, EmptyStateBody, EmptyStateIcon, Grid, GridItem, Title} from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, EmptyStateIcon, Grid, GridItem, Title } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { PointOfContactEditModal } from '../../engagement_edit_modals/point_of_contact_edit_modal';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
-import {PlusIcon, UsersIcon} from "@patternfly/react-icons";
+import { UsersIcon } from "@patternfly/react-icons";
 
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
@@ -39,9 +39,6 @@ export function PointOfContactCard({
     'customer_contact_name',
   ];
 
-  function handleAddUserOrEdit() {
-    requestOpen(POINT_OF_CONTACT_MODAL_KEY);
-  }
   return (
     <>
       <PointOfContactEditModal

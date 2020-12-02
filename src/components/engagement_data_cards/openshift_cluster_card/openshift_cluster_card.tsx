@@ -3,7 +3,6 @@ import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import slugify from 'slugify';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   EmptyState,
@@ -16,7 +15,7 @@ import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshif
 import { EngagementFormOption } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
+import { DatabaseIcon } from '@patternfly/react-icons';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import {
   cellWidth,
