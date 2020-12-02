@@ -1,12 +1,12 @@
 import React from 'react';
 import { Engagement, EngagementUser } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
-import { Grid, GridItem } from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, EmptyStateIcon, Grid, GridItem, Title} from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { UserList } from './user_list';
-import { RedhatIcon, UserIcon } from '@patternfly/react-icons';
+import { RedhatIcon, UserIcon, UsersIcon} from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
@@ -31,9 +31,17 @@ export function UserCard({
     onClear();
   };
 
-  function onCancel() {
-    requestClose();
-    window.location.reload();
+  function addUser() {
+    const newUser = { first_name: '', last_name: '', email: '', role: '' };
+    engagement?.engagement_users?.push(newUser);
+    onChange('engagement_users', engagement?.engagement_users);
+  }
+
+  function handleAddNewUserOrEdit() {
+    if (engagement?.engagement_users?.length === 0) {
+      addUser();
+    }
+    requestOpen(USER_EDIT_MODAL_KEY);
   }
 
   return (
@@ -44,19 +52,20 @@ export function UserCard({
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
         engagement={engagement}
-        onCancel={onCancel}
+        addUser={addUser}
       />
       <DataCard
         actionButton={() => (
           <EditButton
-            onClick={() => requestOpen(USER_EDIT_MODAL_KEY)}
+            onClick={handleAddNewUserOrEdit}
             text={'Edit'}
             dataCy={'edit_user_button'}
           />
         )}
         title="Engagement Users"
       >
-        <UserTable users={engagement?.engagement_users ?? []} />
+        <UserTable users={engagement?.engagement_users ?? []}
+                   handleAddNewUserOrEdit={handleAddNewUserOrEdit}/>
       </DataCard>
     </>
   );
@@ -78,6 +87,7 @@ const externalUsers = (
 
 const UserTable = ({
   users,
+  handleAddNewUserOrEdit
 }: {
   users: {
     first_name: string;
@@ -85,6 +95,7 @@ const UserTable = ({
     email: string;
     role: string;
   }[];
+  handleAddNewUserOrEdit: ()=> void;
 }) => {
   const { engagementFormConfig } = useEngagements();
   const getRoleName = (userRole: string) =>
@@ -101,21 +112,40 @@ const UserTable = ({
   );
 
   return (
-    <Grid hasGutter>
-      <GridItem span={10}>
-        <UserList
-          title={redHatUsers}
-          defaultRows={allRows.filter(
-            row => row[1]?.toLowerCase().indexOf('redhat.com') !== -1
-          )}
-        />
-        <UserList
-          title={externalUsers}
-          defaultRows={allRows.filter(
-            row => row[1]?.toLowerCase().indexOf('redhat.com') === -1
-          )}
-        />
-      </GridItem>
-    </Grid>
+    <>
+      <div>
+        {(users?.length > 0)
+          ? (
+              <Grid hasGutter>
+                <GridItem>
+                  <UserList
+                    title={redHatUsers}
+                    defaultRows={allRows.filter(
+                      row => row[1]?.toLowerCase().indexOf('redhat.com') !== -1
+                    )}
+                  />
+                  <UserList
+                    title={externalUsers}
+                    defaultRows={allRows.filter(
+                      row => row[1]?.toLowerCase().indexOf('redhat.com') === -1
+                    )}
+                  />
+                </GridItem>
+              </Grid>
+            )
+          : ( <EmptyState>
+                <EmptyStateIcon icon={UsersIcon} style={{fontSize: '34px', margin: '0'}}/>
+                <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
+                  No Users Added
+                </Title>
+                <EmptyStateBody>
+                  <p>
+                    Click the 'Edit' button, to begin adding users
+                  </p>
+                </EmptyStateBody>
+          </EmptyState>)
+        }
+      </div>
+    </>
   );
 };

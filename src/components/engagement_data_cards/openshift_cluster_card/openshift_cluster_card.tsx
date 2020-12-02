@@ -3,7 +3,6 @@ import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import slugify from 'slugify';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   EmptyState,
@@ -16,7 +15,7 @@ import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshif
 import { EngagementFormOption } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
+import { DatabaseIcon } from '@patternfly/react-icons';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import {
   cellWidth,
@@ -249,23 +248,13 @@ export function OpenShiftClusterSummaryCard({
           </Table>
         ) : (
           <EmptyState>
-            <EmptyStateIcon icon={DatabaseIcon} />
-            <Title headingLevel="h4" size="lg">
+            <EmptyStateIcon icon={DatabaseIcon} style={{fontSize: '34px', margin: '0'}}/>
+            <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
               No Hosting Environments Added
             </Title>
             <EmptyStateBody>
-              <p>No hosting environments have been added to this engagement</p>
-              <p>Click below to start adding hosting environments</p>
+              <p>Click 'Add Hosting Environment' to start adding hosting environments</p>
             </EmptyStateBody>
-            <Button
-              variant="secondary"
-              onClick={addProvider}
-              data-testid={'add-first-hosting-environment'}
-              data-cy={'add_new_environment'}
-              style={{ margin: '1rem' }}
-            >
-              <PlusIcon style={{ fontSize: 'small' }} /> Add Hosting Environment
-            </Button>
           </EmptyState>
         )}
       </DataCard>

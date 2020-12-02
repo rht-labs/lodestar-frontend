@@ -19,10 +19,9 @@ import {
   EmptyStateIcon,
   Title,
   EmptyStateBody,
-  Button,
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
-import { PlusIcon, ClipboardCheckIcon } from '@patternfly/react-icons';
+import { ClipboardCheckIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Feature } from '../../feature/feature';
 
@@ -179,23 +178,13 @@ function EngagementTimelineCardBody(
     </Table>
   ) : (
     <EmptyState>
-      <EmptyStateIcon icon={ClipboardCheckIcon} />
-      <Title headingLevel="h4" size="lg">
+      <EmptyStateIcon icon={ClipboardCheckIcon} style={{fontSize: '34px', margin: '0'}}/>
+      <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
         No Artifacts Added
       </Title>
       <EmptyStateBody>
-        <p>No artifacts have been added to this engagement</p>
-        <p>Click below to start adding artifacts</p>
+        <p>Click 'Add Artifact' button to start adding artifacts</p>
       </EmptyStateBody>
-      <Button
-        variant="secondary"
-        onClick={props.onAdd}
-        data-testid={'add-first-artifact'}
-        data-cy={'add_new_artifact'}
-        style={{ margin: '1rem' }}
-      >
-        <PlusIcon style={{ fontSize: 'small' }} /> Add Artifact
-      </Button>
     </EmptyState>
   );
 }

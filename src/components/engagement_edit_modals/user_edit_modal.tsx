@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import {
   Button,
-  EmptyStateIcon,
-  EmptyState,
-  Title,
-  EmptyStateBody,
   Modal,
   ModalVariant,
 } from '@patternfly/react-core';
 
-import { PlusIcon, UsersIcon } from '@patternfly/react-icons';
 import { Engagement, EngagementUser } from '../../schemas/engagement';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { UserEditFields } from './user_edit_fields';
@@ -20,6 +15,7 @@ export interface UserEditModalProps {
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
   onClose: () => void;
+  addUser: () => void;
 }
 export function UserEditModal({
   engagement,
@@ -27,6 +23,7 @@ export function UserEditModal({
   onClose = () => {},
   isOpen,
   onSave: propsOnSave,
+  addUser
 }: UserEditModalProps) {
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
@@ -58,12 +55,6 @@ export function UserEditModal({
     propsOnSave(engagement);
     onClose();
   };
-
-  function addUser() {
-    const newUser = { first_name: '', last_name: '', email: '', role: '' };
-    engagement.engagement_users.push(newUser);
-    onChange(engagement.engagement_users);
-  }
 
   const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
     if(!acc) return acc;
@@ -102,29 +93,7 @@ export function UserEditModal({
         }
       >
         <div>
-          {!engagement?.engagement_users?.length ? (
-            <EmptyState>
-              <EmptyStateIcon icon={UsersIcon} />
-              <Title headingLevel="h4" size="lg">
-                No Users Added
-              </Title>
-              <EmptyStateBody>
-                <p>No users have been added to this engagement</p>
-                <p>
-                  Select the 'add user' button below, to begin adding users.
-                </p>
-              </EmptyStateBody>
-              <Button
-                variant="secondary"
-                onClick={addUser}
-                data-testid={'add-first-user'}
-                data-cy={'add_new_user'}
-                style={{ margin: '1rem' }}
-              >
-                <PlusIcon style={{ fontSize: 'small' }} /> Add User
-              </Button>
-            </EmptyState>
-          ) : (
+          {
             <UserEditFields
               users={engagement.engagement_users}
               onChange={onChange}
@@ -135,7 +104,7 @@ export function UserEditModal({
               validateString={validateString}
               validateRole={validateRole}
             />
-          )}
+          }
         </div>
       </EditModalTemplate>
     </Modal>
