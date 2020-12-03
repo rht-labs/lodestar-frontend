@@ -11,6 +11,7 @@ import {
   EmptyStateIcon,
   KebabToggle,
   Title,
+  Tooltip,
 } from '@patternfly/react-core';
 import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
 import { EngagementFormOption } from '../../../schemas/engagement_config';
@@ -204,6 +205,9 @@ export function OpenShiftClusterSummaryCard({
   const currentEnvironmentIndex = currentEngagementChanges?.hosting_environments?.findIndex(
     he => currentHostingEnvironment?.id === he?.id
   );
+  const isAddHostingButtonDisabled =
+    currentEngagementChanges?.hosting_environments?.length >=
+    (engagementFormConfig?.logistics_options?.max_hosting_env_count ?? 1);
   return (
     <>
       <OpenShiftClusterEditModal
@@ -222,18 +226,12 @@ export function OpenShiftClusterSummaryCard({
       />
       <DataCard
         actionButton={() => (
-          <div>
-            <EditButton
-              isDisabled={
-                currentEngagementChanges?.hosting_environments?.length >=
-                (engagementFormConfig?.logistics_options
-                  ?.max_hosting_env_count ?? 1)
-              }
-              onClick={addProvider}
-              text={'Add Hosting Environment'}
-              dataCy={'hosting_env_button'}
-            />
-          </div>
+          <EditButton
+            isDisabled={isAddHostingButtonDisabled}
+            onClick={addProvider}
+            text={'Add Hosting Environment'}
+            dataCy={'hosting_env_button'}
+          />
         )}
         title="Hosting Environment"
       >
