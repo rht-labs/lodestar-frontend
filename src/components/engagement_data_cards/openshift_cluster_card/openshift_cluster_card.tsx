@@ -11,7 +11,6 @@ import {
   EmptyStateIcon,
   KebabToggle,
   Title,
-  Tooltip,
 } from '@patternfly/react-core';
 import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
 import { EngagementFormOption } from '../../../schemas/engagement_config';
