@@ -4,6 +4,7 @@ import { GitCommit } from './git_commit';
 import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 import { EngagementCategory } from './engagement_category';
+import { HostingEnvironment } from './hosting_environment';
 
 export enum EngagementStatus {
   active = 'active',
@@ -30,6 +31,11 @@ export abstract class EngagementUser {
 
 export interface FakedEngagementOptions {
   status: EngagementStatus;
+}
+
+export interface EngagementUseCase {
+  description?: string;
+  id: string;
 }
 
 export interface Artifact {
@@ -66,43 +72,59 @@ export abstract class Artifact {
   }
 }
 
-export interface Engagement {
-  additional_details?: string;
-  archive_date: Date;
-  artifacts: Artifact[];
-  commits: GitCommit[];
-  customer_contact_email: string;
-  customer_contact_name: string;
-  customer_name: string;
-  description: string;
-  end_date: Date;
-  engagement_lead_email: string;
-  engagement_lead_name: string;
-  engagement_type: string;
-  engagement_users: EngagementUser[];
-  last_update: string;
+export interface EngagementOverview {
+  additional_details: string;
+  use_cases: EngagementUseCase[];
   location: string;
-  mongo_id?: string;
-  ocp_cloud_provider_name: string;
-  ocp_cloud_provider_region: string;
-  ocp_cluster_size: string;
-  ocp_persistent_storage_size: string;
-  ocp_sub_domain: string;
-  ocp_version: string;
   project_id: number;
   project_name: string;
+  customer_name: string;
+  engagement_type: string;
+  description: string;
   public_reference: boolean;
+  engagement_categories: EngagementCategory[];
   engagement_region: string;
+}
+
+export interface EngagementHistory {
+  commits: GitCommit[];
+  last_update_by_name: string;
+  last_update: string;
+}
+
+export interface EngagementDates {
   start_date: Date;
+  end_date: Date;
+  archive_date: Date;
+}
+
+export interface EngagementContacts {
+  engagement_lead_email: string;
+  engagement_lead_name: string;
   technical_lead_email: string;
   technical_lead_name: string;
+  customer_contact_email: string;
+  customer_contact_name: string;
+}
+
+export interface EngagementState {
+  status: ClusterStatus;
   launch?: LaunchData;
   creation_details: CreationDetails;
-  last_update_by_name: string;
-  suggested_subdomain?: string;
-  status: ClusterStatus;
-  engagement_categories: EngagementCategory[];
+  mongo_id: string;
 }
+export interface Engagement
+  extends EngagementOverview,
+    EngagementState,
+    EngagementDates,
+    EngagementContacts,
+    EngagementHistory {
+  artifacts: Artifact[];
+  engagement_users: EngagementUser[];
+  hosting_environments: HostingEnvironment[];
+  uuid?: string;
+}
+
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
   static fromFake(
@@ -181,16 +203,7 @@ export abstract class Engagement {
         ? 'Nashville, TN'
         : `${faker.address.city()}, ${faker.address.stateAbbr()}`,
       mongo_id: '1',
-      ocp_cloud_provider_name: staticData ? 'AWS' : 'AWS',
-      ocp_cloud_provider_region: staticData
-        ? 'N. Virginia'
-        : faker.lorem.word(),
-      ocp_cluster_size: staticData ? 'Large' : 'Large',
-      ocp_persistent_storage_size: staticData
-        ? '100G'
-        : `${faker.random.number()}G`,
-      ocp_sub_domain: staticData ? 'ordoabchao' : faker.lorem.word(),
-      ocp_version: staticData ? '4.4' : faker.random.number().toString(),
+      hosting_environments: [HostingEnvironment.fromFake(staticData)],
       project_id: staticData ? 1 : faker.random.number(),
       project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
       public_reference: staticData ? false : faker.random.boolean(),
@@ -223,7 +236,14 @@ export abstract class Engagement {
           }
         : null,
       status: ClusterStatus.fromFake(staticData),
+      use_cases: staticData
+        ? [{ id: '1', description: 'an engagement use case' }]
+        : new Array(3).fill(null).map(() => ({
+            description: faker.lorem.sentence(),
+            id: faker.random.uuid().toString(),
+          })),
       ...getStatusDeterminers(),
+      uuid: staticData ? 'uuid' : faker.random.uuid(),
     };
   }
 }

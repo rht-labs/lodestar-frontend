@@ -3,13 +3,13 @@ import { Notification } from '../../schemas/notification';
 import { APP_FEATURES } from '../../common/app_features';
 import { NotificationService } from '../../services/notification_service/notification_service';
 
-interface NotificationContext {
+export interface INotificationContext {
   hasNotification: boolean;
   notifications: Notification[];
   fetchNotifications: () => void;
 }
 
-export const NotificationContext = React.createContext<NotificationContext>({
+export const NotificationContext = React.createContext<INotificationContext>({
   hasNotification: false,
   notifications: [],
   fetchNotifications: () => {},

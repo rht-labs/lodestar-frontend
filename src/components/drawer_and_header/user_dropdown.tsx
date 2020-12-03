@@ -3,13 +3,32 @@ import { useSession } from '../../context/auth_context/auth_context';
 import { Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { UserProfile } from '../../schemas/user_profile';
+import {
+  useAnalytics,
+  AnalyticsCategory,
+} from '../../context/analytics_context/analytics_context';
 
-export interface UserDropdown {}
+export interface UserDropdownProps {}
 
-export function UserDropdown(props: UserDropdown) {
+export function UserDropdown(props: UserDropdownProps) {
   const authContext = useSession();
   const [isOpen, setIsOpen] = useState(false);
+  const { logEvent } = useAnalytics();
   const dropdownItems = [
+    <DropdownItem
+      value="token"
+      key="token"
+      component={Link}
+      onClick={() =>
+        logEvent({
+          action: 'See user token',
+          category: AnalyticsCategory.profile,
+        })
+      }
+      to="/app/whatsmytoken"
+    >
+      See User Token
+    </DropdownItem>,
     <DropdownItem value="logOut" key="logout" component={Link} to="/logout">
       Log Out
     </DropdownItem>,

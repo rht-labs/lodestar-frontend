@@ -1,6 +1,8 @@
 import React from 'react';
 import { AuthContext } from '../../context/auth_context/auth_context';
 import { ConfigContext } from '../../context/config_context/config_context';
+import { AnalyticsContext } from '../../context/analytics_context/analytics_context';
+import { AnalyticsCategory } from '../../schemas/analytics';
 
 class LogoutPage extends React.Component<{
   session: AuthContext;
@@ -18,12 +20,18 @@ class LogoutPage extends React.Component<{
             this.props.config.appConfig.baseUrl
           )}`)
       );
+    this.context?.logEvent?.({
+      category: AnalyticsCategory.profile,
+      action: 'Log Out',
+    });
   }
 
   render() {
     return <></>;
   }
 }
+
+LogoutPage.contextType = AnalyticsContext;
 
 export default React.forwardRef((props, ref) => (
   <ConfigContext.Consumer>

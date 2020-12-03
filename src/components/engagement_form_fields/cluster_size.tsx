@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
@@ -7,20 +6,22 @@ import {
 } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 interface ClusterSizeFormFieldProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
-  engagementFormConfig: EngagementFormConfig;
+  hostingEnvironment: HostingEnvironment;
+  onChange: (value: string) => void;
+  isEngagementLaunched: boolean;
 }
 
 export function ClusterSizeFormField({
-  engagement,
+  hostingEnvironment,
+  isEngagementLaunched,
   onChange,
-  engagementFormConfig,
 }: ClusterSizeFormFieldProps) {
+  const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('ocp_cluster_size'), [registerField]);
@@ -31,9 +32,9 @@ export function ClusterSizeFormField({
         data-testid="cluster-size-select"
         id="cluster_size_dropdown"
         aria-label="Cluster Size"
-        value={engagement?.ocp_cluster_size || ''}
-        isDisabled={!hasFeature(APP_FEATURES.writer) || !!engagement?.launch}
-        onChange={e => onChange('ocp_cluster_size', e)}
+        value={hostingEnvironment?.ocp_cluster_size || ''}
+        isDisabled={!hasFeature(APP_FEATURES.writer)}
+        onChange={onChange}
       >
         {[
           <FormSelectOption

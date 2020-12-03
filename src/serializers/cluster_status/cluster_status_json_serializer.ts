@@ -1,8 +1,5 @@
 import { Serializer } from '../serializer';
-import {
-  ClusterStatus,
-  HealthStatus,
-} from '../../schemas/cluster_status';
+import { ClusterStatus, HealthStatus } from '../../schemas/cluster_status';
 import { SystemMessage, Severity } from '../../schemas/system_message';
 import { Subsystem } from '../../schemas/subsystem';
 import parseISO from 'date-fns/parseISO';

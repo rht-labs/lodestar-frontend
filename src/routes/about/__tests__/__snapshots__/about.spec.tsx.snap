@@ -87,23 +87,56 @@ Object {
                   data-pf-content="true"
                 >
                   <div
-                    class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                    class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                    style="margin-left: 1rem;"
                   >
                     <div
-                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                      class="pf-l-grid__item pf-m-2-col"
                     >
                       <b>
-                        LodeStar version: 
+                        LodeStar version 
                       </b>
                     </div>
                     <div
-                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                      class="pf-l-grid__item pf-m-4-col"
                     >
                       <p
                         class=""
                         data-cy="lodestar_version"
                         data-pf-content="true"
                       />
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-grid pf-m-all-6-col"
+                    style="margin-top: 1rem;"
+                  >
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                      style="margin-left: 1rem;"
+                    >
+                      <b>
+                        Components versions 
+                      </b>
+                    </div>
+                    <div
+                      class="pf-l-grid__item pf-m-12-col"
+                    >
+                      <div
+                        class="pf-l-grid pf-m-all-12-col"
+                      >
+                        <div
+                          class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                          style="margin-left: 1rem;"
+                        >
+                          <div
+                            class="pf-l-grid__item pf-m-2-col"
+                          />
+                          <div
+                            class="pf-l-grid__item pf-m-2-col"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </small>
@@ -197,23 +230,56 @@ Object {
                 data-pf-content="true"
               >
                 <div
-                  class="pf-l-grid pf-m-all-12-col-on-md pf-m-all-6-col-on-lg"
+                  class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                  style="margin-left: 1rem;"
                 >
                   <div
-                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                    class="pf-l-grid__item pf-m-2-col"
                   >
                     <b>
-                      LodeStar version: 
+                      LodeStar version 
                     </b>
                   </div>
                   <div
-                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-2-col-on-lg"
+                    class="pf-l-grid__item pf-m-4-col"
                   >
                     <p
                       class=""
                       data-cy="lodestar_version"
                       data-pf-content="true"
                     />
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid pf-m-all-6-col"
+                  style="margin-top: 1rem;"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-12-col"
+                    style="margin-left: 1rem;"
+                  >
+                    <b>
+                      Components versions 
+                    </b>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-12-col"
+                  >
+                    <div
+                      class="pf-l-grid pf-m-all-12-col"
+                    >
+                      <div
+                        class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                        style="margin-left: 1rem;"
+                      >
+                        <div
+                          class="pf-l-grid__item pf-m-2-col"
+                        />
+                        <div
+                          class="pf-l-grid__item pf-m-2-col"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </small>

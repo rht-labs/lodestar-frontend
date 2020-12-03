@@ -35,7 +35,7 @@ export function DataCard({
           </LevelItem>
           <LevelItem>
             <Feature name={APP_FEATURES.writer}>
-              <div style={{ marginRight: '1rem' }}>
+              <div style={{ marginRight: '1rem' }} data-testId={'data-card-button'}>
                 <ActionButton />
               </div>
             </Feature>

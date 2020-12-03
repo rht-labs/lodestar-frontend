@@ -418,30 +418,6 @@ Object {
                             Past
                           </a>
                         </li>
-                        <li
-                          class="pf-c-nav__item"
-                        >
-                          <a
-                            class="pf-c-nav__link"
-                            href="/app/engagements/new"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              fill="currentColor"
-                              height="1em"
-                              role="img"
-                              style="margin-right: 1rem;"
-                              viewBox="0 0 448 512"
-                              width="1em"
-                            >
-                              <path
-                                d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                                transform=""
-                              />
-                            </svg>
-                            Create New
-                          </a>
-                        </li>
                       </ul>
                     </section>
                   </li>
@@ -463,6 +439,7 @@ Object {
             >
               <div
                 class="pf-c-drawer__content"
+                id="main-application-content"
               >
                 <div
                   data-testid="mainTemplateContent"
@@ -894,30 +871,6 @@ Object {
                           Past
                         </a>
                       </li>
-                      <li
-                        class="pf-c-nav__item"
-                      >
-                        <a
-                          class="pf-c-nav__link"
-                          href="/app/engagements/new"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style="margin-right: 1rem;"
-                            viewBox="0 0 448 512"
-                            width="1em"
-                          >
-                            <path
-                              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                              transform=""
-                            />
-                          </svg>
-                          Create New
-                        </a>
-                      </li>
                     </ul>
                   </section>
                 </li>
@@ -939,6 +892,7 @@ Object {
           >
             <div
               class="pf-c-drawer__content"
+              id="main-application-content"
             >
               <div
                 data-testid="mainTemplateContent"

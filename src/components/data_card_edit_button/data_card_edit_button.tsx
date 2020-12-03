@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, ButtonVariant } from '@patternfly/react-core';
 export function EditButton({
   text,
+  isDisabled = false,
   onClick,
   dataCy,
   ...props
@@ -9,6 +10,7 @@ export function EditButton({
   text: string;
   onClick: () => void;
   dataCy?: string;
+  isDisabled?: boolean;
 }) {
   return (
     <Button
@@ -17,6 +19,7 @@ export function EditButton({
       onClick={onClick}
       style={{ minWidth: '7rem' }}
       data-cy={dataCy}
+      isDisabled={isDisabled}
     >
       {text}
     </Button>

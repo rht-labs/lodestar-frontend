@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
+import { AnalyticsCategory } from '../../schemas/analytics';
 import {
   PageSection,
   Title,
@@ -10,6 +11,7 @@ import {
   FormSelectOption,
   Grid,
   GridItem,
+  FormSelectOptionGroup,
 } from '@patternfly/react-core';
 import {
   Button,
@@ -18,23 +20,22 @@ import {
   TextInput,
   Text,
 } from '@patternfly/react-core';
+import { useAnalytics } from '../../context/analytics_context/analytics_context';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
+import { APP_FEATURES } from '../../common/app_features';
+import { Feature } from '../../components/feature/feature';
+import { Engagement } from '../../schemas/engagement';
 
 export function CreateNewEngagement() {
-  const { engagementFormConfig, getConfig } = useEngagements();
-  const [hasFetchedConfig, setHasFetchedConfig] = useState<boolean>(false);
-  useEffect(() => {
-    if (!hasFetchedConfig && !engagementFormConfig) {
-      getConfig();
-      setHasFetchedConfig(true);
-    }
-  }, [hasFetchedConfig, engagementFormConfig, getConfig]);
+  const { engagementFormConfig } = useEngagements();
   return (
-    <ValidationProvider validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}>
+    <ValidationProvider
+      validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}
+    >
       <CreateNewEngagementForm />
     </ValidationProvider>
   );
@@ -52,19 +53,59 @@ export function CreateNewEngagementForm() {
   const [projectName, setProjectName] = useState(null);
   const [region, setRegion] = useState<string>();
   const [engagementType, setEngagementType] = useState<string>();
+  const [selectedProjectNameToFind, setSelectedProjectNameToFind] = useState<
+    string
+  >();
+  const [copiedEngagement, setCopiedEngagement] = useState<Engagement>();
+  const { logEvent } = useAnalytics();
+
+  useEffect(() => {
+    setCopiedEngagement(
+      findEngagementToCopy(engagements, selectedProjectNameToFind)
+    );
+  }, [selectedProjectNameToFind, engagements]);
+
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
-      await createEngagement({
-        customer_name: customerName,
-        project_name: projectName,
-        engagement_region: region,
-        engagement_type:
-          engagementType ??
-          engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
-            e => e.default
-          )?.value,
+      if (selectedProjectNameToFind) {
+        await createEngagement({
+          customer_name: customerName,
+          project_name: projectName,
+          engagement_region: region,
+          engagement_type:
+            engagementType ??
+            engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+              e => e.default
+            )?.value,
+          engagement_categories: copiedEngagement?.engagement_categories,
+          ocp_cloud_provider_name: copiedEngagement?.ocp_cloud_provider_name,
+          ocp_cloud_provider_region:
+            copiedEngagement?.ocp_cloud_provider_region,
+          ocp_cluster_size: copiedEngagement?.ocp_cluster_size,
+          ocp_persistent_storage_size:
+            copiedEngagement?.ocp_persistent_storage_size,
+          ocp_version: copiedEngagement?.ocp_version,
+        });
+      } else {
+        await createEngagement({
+          customer_name: customerName,
+          project_name: projectName,
+          engagement_region: region,
+          engagement_type:
+            engagementType ??
+            engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+              e => e.default
+            )?.value,
+        });
+      }
+
+      logEvent({
+        action: 'Create New Engagement',
+        category: AnalyticsCategory.engagements,
       });
-      history.push(`/app/engagements/${customerName}/${projectName}`);
+      history.push({
+        pathname: `/app/engagements/${customerName}/${projectName}`,
+      });
     } else {
       history.push('/app/engagements');
     }
@@ -109,6 +150,17 @@ export function CreateNewEngagementForm() {
     getValidationResult('project_name')?.length === 0 &&
     getValidationResult('customer_name')?.length === 0 &&
     getValidationResult('engagement_region')?.length === 0;
+
+  function findEngagementToCopy(
+    engagements: Engagement[],
+    selectedProjectNameToFind?: string
+  ) {
+    return engagements?.find(
+      engagement =>
+        engagement?.project_name?.toLowerCase().trim() ===
+        selectedProjectNameToFind?.trim()?.toLowerCase()
+    );
+  }
 
   return (
     <div
@@ -244,7 +296,7 @@ export function CreateNewEngagementForm() {
                             label={r.label}
                             key={r.value}
                             value={r.value}
-                          ></FormSelectOption>
+                          />
                         );
                       }
                     )
@@ -278,22 +330,87 @@ export function CreateNewEngagementForm() {
                           label={r.label}
                           key={r.value}
                           value={r.value}
-                        ></FormSelectOption>
+                        />
                       );
                     }
                   )}
                 </FormSelect>
               </FormGroup>
+              <FormGroup
+                label={<SectionTitle>Copy From&nbsp;&nbsp;</SectionTitle>}
+                fieldId="copyFrom"
+                helperText="Prepopulate details of this engagement based on a selected template or an existing engagement"
+              >
+                <FormSelect
+                  data-testid="new-engagement-copy-from"
+                  data-cy="new-engagement-copy-from"
+                  value={selectedProjectNameToFind}
+                  onChange={e => {
+                    setSelectedProjectNameToFind(e);
+                  }}
+                >
+                  <FormSelectOption
+                    value={undefined}
+                    label="None"
+                    key="undefined engagement"
+                  />
+                  <FormSelectOptionGroup label={'Templates'}>
+                    {
+                      <FormSelectOption
+                        isDisabled={true}
+                        value={undefined}
+                        label="No templates available"
+                        key="undefined template"
+                      />
+                    }
+                  </FormSelectOptionGroup>
+                  <FormSelectOptionGroup label={'Existing engagements'}>
+                    {engagements
+                      ?.sort(function(a, b) {
+                        if (
+                          a.customer_name.toUpperCase() <
+                          b.customer_name.toUpperCase()
+                        ) {
+                          return -1;
+                        }
+                        if (
+                          a.customer_name.toUpperCase() >
+                          b.customer_name.toUpperCase()
+                        ) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      .map(engagement => {
+                        return (
+                          <FormSelectOption
+                            label={
+                              engagement.customer_name +
+                              ' - ' +
+                              engagement.project_name
+                            }
+                            key={
+                              engagement.project_name + engagement.customer_name
+                            }
+                            value={engagement.project_name}
+                          />
+                        );
+                      })}
+                  </FormSelectOptionGroup>
+                </FormSelect>
+              </FormGroup>
             </Form>
-            <Button
-              data-testid="create-engagement-button"
-              data-cy="createNewEngagement"
-              style={{ margin: '1rem 0' }}
-              isDisabled={!hasValidInput}
-              onClick={submitNewEngagement}
-            >
-              Submit
-            </Button>
+            <Feature name={APP_FEATURES.writer}>
+              <Button
+                data-testid="create-engagement-button"
+                data-cy="createNewEngagement"
+                style={{ margin: '1rem 0' }}
+                isDisabled={!hasValidInput}
+                onClick={submitNewEngagement}
+              >
+                Submit
+              </Button>
+            </Feature>
           </GridItem>
         </Grid>
       </PageSection>

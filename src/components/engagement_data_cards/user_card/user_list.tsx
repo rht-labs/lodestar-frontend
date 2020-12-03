@@ -6,12 +6,10 @@ import { TableBody, TableHeader, TableVariant, Table } from "@patternfly/react-t
 import { Pagination } from "@patternfly/react-core";
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Table/table';
-import { EngagementFormConfig } from "../../../schemas/engagement_config";
 import { UserRolesTooltip } from "./user_roles_tooltip";
 
 interface UserListProps{
   defaultRows: string[][];
-  engagementFormConfig: EngagementFormConfig;
   title: any;
 }
 
@@ -62,7 +60,7 @@ export function UserList(props: UserListProps) {
     { title:
         <>
           Role
-          <UserRolesTooltip engagementFormConfig={props.engagementFormConfig}/>
+          <UserRolesTooltip />
         </>
     },
   ];

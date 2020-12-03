@@ -1,6 +1,6 @@
-import { EngagementService } from '../../engagement_service';
-import { Engagement } from '../../../../schemas/engagement';
-import { EngagementFormConfig } from '../../../../schemas/engagement_config';
+import { EngagementService } from '../engagement_service';
+import { Engagement } from '../../../schemas/engagement';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 export class FakedEngagementService implements EngagementService {
   constructor(private shouldUseStaticData: boolean = false) {}
@@ -13,7 +13,7 @@ export class FakedEngagementService implements EngagementService {
     return data;
   }
   async saveEngagement(data: Engagement): Promise<Engagement> {
-    return data as Engagement;
+    return data;
   }
   async launchEngagement(data: any): Promise<Engagement> {
     return {

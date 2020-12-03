@@ -8,15 +8,13 @@ import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagem
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { EngagementStatusText } from '../../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 
 export interface EngagementSummaryCardProps {
   currentEngagement: Engagement;
-  currentEngagementChanges: Engagement;
+  currentEngagementChanges: Partial<Engagement>;
   onChange: (fieldName: string, value: any) => void;
-  engagementFormConfig: EngagementFormConfig;
   onSave: (engagement: Engagement) => void;
   onClear: () => void;
   missingRequiredFields: string[];
@@ -28,7 +26,6 @@ export function EngagementSummaryCard({
   currentEngagement,
   currentEngagementChanges,
   onChange = () => null,
-  engagementFormConfig,
   missingRequiredFields,
   onSave,
 }: EngagementSummaryCardProps) {
@@ -49,7 +46,6 @@ export function EngagementSummaryCard({
       <EngagementSummaryEditModal
         onClose={onClose}
         onSave={onSave}
-        engagementFormConfig={engagementFormConfig}
         onChange={onChange}
         engagement={currentEngagementChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
@@ -118,6 +114,15 @@ export function EngagementSummaryCard({
                     }
                     lastUpdatedBy={currentEngagement?.last_update_by_name}
                   />
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={12}>
+                <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
+                  <>
+                    {currentEngagement?.use_cases?.map?.(useCase => (
+                      <p>{useCase.description}</p>
+                    ))}
+                  </>
                 </TitledDataPoint>
               </GridItem>
             </Grid>

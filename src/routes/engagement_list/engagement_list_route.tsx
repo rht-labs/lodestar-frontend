@@ -18,6 +18,8 @@ import { Engagement } from '../../schemas/engagement';
 import { EngagementFilter } from '../../schemas/engagement_filter';
 import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 import { EngagementList } from '../../components/engagement_list/engagement_list';
+import { APP_FEATURES } from '../../common/app_features';
+import { Feature } from '../../components/feature/feature';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
@@ -28,20 +30,14 @@ export interface EngagementListRouteProps {
 
 export function EngagementListRoute(props: EngagementListRouteProps) {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
-  const {
-    engagements: contextEngagements,
-    getEngagements,
-    getConfig,
-    engagementFormConfig,
-  } = useEngagements();
+  const { engagements: contextEngagements, getEngagements } = useEngagements();
 
   useEffect(() => {
     if (!hasFetched) {
       setHasFetched(true);
-      getConfig();
       getEngagements();
     }
-  }, [contextEngagements, getEngagements, hasFetched, getConfig]);
+  }, [contextEngagements, getEngagements, hasFetched]);
   const { filterDefinition: propsFilter } = props;
   const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
     props.filterDefinition
@@ -78,15 +74,17 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
               <Text component="p">{subtitle}</Text>
             </TextContent>
           </FlexItem>
-          <FlexItem>
-            <Button
-              onClick={() => history.push('/app/engagements/new')}
-              id={'button_create_new_engagement'}
-              data-cy="create-new-engagement"
-            >
-              Create New Engagement
-            </Button>
-          </FlexItem>
+          <Feature name={APP_FEATURES.writer}>
+            <FlexItem>
+              <Button
+                onClick={() => history.push('/app/engagements/new')}
+                id={'button_create_new_engagement'}
+                data-cy="create-new-engagement"
+              >
+                Create New Engagement
+              </Button>
+            </FlexItem>
+          </Feature>
         </Flex>
       </PageSection>
       <PageSection>
@@ -94,7 +92,6 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
           <EngagementFilterBar
             filter={filterDefinition}
             onChange={handleChange}
-            engagementFormConfig={engagementFormConfig}
           />
         </div>
       </PageSection>

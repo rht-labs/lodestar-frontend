@@ -1,16 +1,19 @@
-import React, { createContext, useEffect, useRef } from 'react';
+import React, { createContext, useEffect, useReducer, useRef } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { useState, useCallback, useReducer } from 'react';
-import {
-  engagementFormReducer,
-  getInitialState,
-} from './engagement_form_reducer';
-import { useFeedback, AlertType } from '../feedback_context/feedback_context';
+import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
+import {
+  FeedbackContext,
+  AlertType,
+} from '../feedback_context/feedback_context';
+import {
+  AnalyticsCategory,
+  AnalyticsContext,
+} from '../analytics_context/analytics_context';
 import { AuthenticationError } from '../../services/auth_service/auth_errors';
-import { useSession } from '../auth_context/auth_context';
+import { AuthContext } from '../auth_context/auth_context';
 import {
   EngagementPoll,
   EngagementPollIntervalStrategy,
@@ -18,24 +21,30 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
+import {
+  engagementFormReducer,
+  getInitialState,
+} from './engagement_form_reducer';
+export type FieldGroup = { [key: string]: string[] };
 
-export interface EngagementContext {
-  setFieldGroups: (fieldGroups: { [key: string]: string[] }) => void;
+export interface IEngagementContext {
   getEngagements: () => Promise<Engagement[]>;
-  clearCurrentChanges: () => void;
-  currentEngagementChanges?: Engagement;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
+  updateEngagementFormField: (field: string, value: any) => void;
+  fieldGroups: FieldGroup;
+  currentChanges: Partial<Engagement>;
+  setFieldGroups: (groups: FieldGroup) => void;
+  clearCurrentChanges: () => void;
   requiredFields: string[];
   getEngagement: (
     customerName: string,
     projectName: string
   ) => Promise<Engagement>;
-  getConfig: () => void;
   createEngagement: (data: any) => Promise<Engagement>;
-  saveEngagement: (data: any) => Promise<void>;
-  updateEngagementFormField: (fieldName: string, payload: any) => void;
+  saveEngagement: (data: Engagement, commitMessage?: string) => Promise<void>;
   missingRequiredFields: string[];
   isLaunchable: boolean;
   engagementFormConfig?: EngagementFormConfig;
@@ -44,6 +53,7 @@ export interface EngagementContext {
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
   fetchCategories: () => void;
+  saveChanges: () => void;
   categories?: EngagementCategory[];
 }
 
@@ -62,15 +72,9 @@ const requiredFields = [
   'technical_lead_email',
   'engagement_lead_name',
   'technical_lead_name',
-  'ocp_cloud_provider_name',
-  'ocp_cloud_provider_region',
-  'ocp_version',
-  'ocp_cluster_size',
-  'ocp_persistent_storage_size',
-  'ocp_sub_domain',
   'project_name',
 ];
-export const EngagementContext = createContext<EngagementContext>(null);
+export const EngagementContext = createContext<IEngagementContext>(null);
 
 const { Provider } = EngagementContext;
 
@@ -78,59 +82,25 @@ export const EngagementProvider = ({
   children,
   engagementService,
   categoryService,
+  feedbackContext,
+  analyticsContext,
+  authContext,
 }: {
   children: React.ReactChild;
+  authContext: AuthContext;
   engagementService: EngagementService;
   categoryService: CategoryService;
+  feedbackContext: FeedbackContext;
+  analyticsContext?: AnalyticsContext;
 }) => {
-  const feedbackContext = useFeedback();
-  const [engagementFormConfig, setengagementFormConfig] = useState<
-    EngagementFormConfig
-  >();
-
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [fieldGroups, setFieldGroups] = useState<{ [key: string]: string[] }>();
-  const [changedFields, setChangedFields] = useState<string[]>([]);
   const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
   >();
-  const [currentEngagementChanges, dispatch] = useReducer<
-    (state: any, action: any) => any
-  >(
-    engagementFormReducer(engagementFormConfig),
-    engagementFormReducer(engagementFormConfig)()
-  );
 
-  const authContext = useSession();
-
-  const clearCurrentChanges = () =>
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  const _createCommitMessage = (
-    changedFields: string[],
-    fieldGroupings: { [key: string]: string[] }
-  ): string => {
-    const changedGroups = Array.from(
-      new Set(
-        changedFields
-          .map(field =>
-            Object.keys(fieldGroupings).find(group =>
-              fieldGroupings[group].includes(field)
-            )
-          )
-          .filter(group => !!group)
-      )
-    );
-    const commitMessage = `Changed ${changedGroups.join(
-      ', '
-    )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
-    return commitMessage;
-  };
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);
@@ -154,19 +124,6 @@ export const EngagementProvider = ({
   }, [authContext]);
 
   const _validateAuthStatusRef = useRef(async () => {});
-
-  const getConfig = useCallback(async () => {
-    await _validateAuthStatusRef.current();
-    const data = await engagementService.getConfig();
-    setengagementFormConfig(data);
-  }, [engagementService]);
-
-  useEffect(() => {
-    dispatch({
-      type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
-    });
-  }, [currentEngagement, engagementFormConfig]);
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -352,30 +309,67 @@ export const EngagementProvider = ({
       _handleErrors,
     ]
   );
+  const notNullOrUndefined = x => x !== null && x !== undefined && x !== '';
+  const _validateHostingEnvironment = useCallback(
+    ({
+      ocp_cloud_provider_name,
+      ocp_cloud_provider_region,
+      ocp_cluster_size,
+      ocp_persistent_storage_size,
+      ocp_sub_domain,
+      ocp_version,
+    }: HostingEnvironment): boolean => {
+      return [
+        ocp_cloud_provider_name,
+        ocp_cloud_provider_region,
+        ocp_cluster_size,
+        ocp_persistent_storage_size,
+        ocp_sub_domain,
+        ocp_version,
+      ].every(notNullOrUndefined);
+    },
+    []
+  );
 
   const _checkLaunchReady = useCallback(() => {
+    if (!currentEngagement) {
+      return false;
+    }
     let result = requiredFields.every(
       o =>
-        typeof currentEngagementChanges[o] === 'boolean' ||
-        typeof currentEngagementChanges[o] === 'number' ||
-        !!currentEngagementChanges[o]
+        typeof currentEngagement[o] === 'boolean' ||
+        typeof currentEngagement[o] === 'number' ||
+        !!currentEngagement[o]
     );
-    return result;
-  }, [currentEngagementChanges]);
+    if (!result) {
+      return result;
+    } else {
+      return currentEngagement?.hosting_environments?.every(e =>
+        _validateHostingEnvironment(e)
+      );
+    }
+  }, [currentEngagement, _validateHostingEnvironment]);
 
   const missingRequiredFields = useCallback(() => {
-    return requiredFields.filter(
-      field =>
-        currentEngagement?.[field] !== 'boolean' &&
-        currentEngagement?.[field] !== 'number' &&
-        !currentEngagement?.[field]
-    );
-  }, [currentEngagement]);
+    return requiredFields
+      .filter(
+        field =>
+          currentEngagement?.[field] !== 'boolean' &&
+          currentEngagement?.[field] !== 'number' &&
+          !currentEngagement?.[field]
+      )
+      .concat(
+        !!currentEngagement?.hosting_environments?.every?.(
+          _validateHostingEnvironment
+        )
+          ? []
+          : ['hosting_environments']
+      );
+  }, [currentEngagement, _validateHostingEnvironment]);
 
   const saveEngagement = useCallback(
-    async (data: Engagement) => {
+    async (data: Engagement, commitMessage?: string) => {
       feedbackContext.showLoader();
-      const commitMessage = _createCommitMessage(changedFields, fieldGroups);
       const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
@@ -390,12 +384,11 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
-        setChangedFields([]);
       } catch (e) {
         _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
-          'There was an issue with saving your changes. Please followup with an administrator if this continues.';
+          'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
         if (e instanceof AlreadyExistsError) {
           // If there is no mongo id associated with the engagement, then it is being committed to the backend for the first time. It is a net new engagement.
           if (!!data.mongo_id) {
@@ -414,22 +407,10 @@ export const EngagementProvider = ({
     },
     [
       feedbackContext,
-      changedFields,
-      fieldGroups,
       _updateEngagementInPlace,
       engagementService,
       _handleErrors,
     ]
-  );
-
-  const updateEngagementFormField = useCallback(
-    (fieldName: string, value: any) => {
-      if (!changedFields.includes(fieldName)) {
-        setChangedFields([...changedFields, fieldName]);
-      }
-      dispatch({ type: fieldName, payload: value });
-    },
-    [changedFields]
   );
 
   const launchEngagement = useCallback(
@@ -487,35 +468,121 @@ export const EngagementProvider = ({
       }
     }
   }, [categoryService, _handleErrors]);
+  const [engagementFormConfig, setEngagementFormConfig] = useState<
+    EngagementFormConfig
+  >();
 
+  const _getEngagementFormConfig = () => {
+    if (!engagementFormConfig) {
+      engagementService
+        ?.getConfig?.()
+        ?.then?.(config => setEngagementFormConfig(config));
+    }
+    return engagementFormConfig;
+  };
+
+  const [currentEngagementChanges, dispatch] = useReducer<
+    (state: any, action: any) => any
+  >(
+    engagementFormReducer(engagementFormConfig),
+    engagementFormReducer(engagementFormConfig)()
+  );
+  const clearCurrentChanges = useCallback(
+    () =>
+      dispatch({
+        type: 'switch_engagement',
+        payload: getInitialState(currentEngagement),
+      }),
+    [dispatch, currentEngagement]
+  );
+  useEffect(() => {
+    clearCurrentChanges();
+  }, [currentEngagement, engagementFormConfig, clearCurrentChanges]);
+  const [changedFields, setChangedFields] = useState<string[]>([]);
+  const [fieldGroups, setFieldGroups] = useState<FieldGroup>();
+
+  const updateEngagementFormField = useCallback(
+    (fieldName: string, value: any) => {
+      if (!changedFields.includes(fieldName)) {
+        setChangedFields([...changedFields, fieldName]);
+      }
+      dispatch({ type: fieldName, payload: value });
+
+      try {
+        analyticsContext.logEvent({
+          category: AnalyticsCategory.engagements,
+          action: 'Update Engagement',
+        });
+      } catch (e) {}
+    },
+    [analyticsContext, changedFields]
+  );
+  const saveChanges = useCallback(() => {
+    const _createCommitMessage = (
+      changedFields: string[],
+      fieldGroupings: { [key: string]: string[] } = {}
+    ): string => {
+      const changedGroups = Array.from(
+        new Set(
+          changedFields
+            .map(field =>
+              Object.keys(fieldGroupings).find(group =>
+                fieldGroupings[group].includes(field)
+              )
+            )
+            .filter(group => !!group)
+        )
+      );
+      const commitMessage = `Changed ${changedGroups.join(
+        ', '
+      )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
+      return commitMessage;
+    };
+    const commitMessage = _createCommitMessage(changedFields, fieldGroups);
+    saveEngagement(
+      { ...currentEngagement, ...currentEngagementChanges },
+      commitMessage
+    );
+    setChangedFields([]);
+    clearCurrentChanges();
+  }, [
+    changedFields,
+    fieldGroups,
+    clearCurrentChanges,
+    setChangedFields,
+    saveEngagement,
+    currentEngagement,
+    currentEngagementChanges,
+  ]);
   return (
     <Provider
       value={{
-        setFieldGroups,
-        clearCurrentChanges,
         createEngagementPoll,
+        engagementFormConfig: _getEngagementFormConfig(),
         requiredFields,
         currentEngagement,
         missingRequiredFields: missingRequiredFields(),
-        getConfig,
         isLaunchable: _checkLaunchReady(),
         setCurrentEngagement,
         engagements,
         getEngagement,
         error,
-        currentEngagementChanges: {
-          ...currentEngagement,
-          ...currentEngagementChanges,
-        },
-        engagementFormConfig,
         isLoading,
-        updateEngagementFormField,
         getEngagements: fetchEngagements,
         createEngagement,
         saveEngagement,
         launchEngagement,
         fetchCategories,
         categories,
+        fieldGroups,
+        currentChanges: {
+          ...currentEngagement,
+          ...currentEngagementChanges,
+        },
+        clearCurrentChanges,
+        updateEngagementFormField,
+        saveChanges,
+        setFieldGroups,
       }}
     >
       {children}

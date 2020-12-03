@@ -80,6 +80,48 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
+                        for="subdomain"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Environment Name
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          class="pf-c-form__label-required"
+                        >
+                           
+                          *
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <input
+                        aria-invalid="false"
+                        class="pf-c-form-control"
+                        data-cy="desired_subdomain_input"
+                        data-testid="subdomain-input"
+                        id="ocp_sub_domain"
+                        name="ocp_sub_domain"
+                        required=""
+                        type="text"
+                        value="name"
+                      />
+                      
+                    </div>
+                  </div>
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
                         for="Hosting Platform"
                       >
                         <span
@@ -318,7 +360,7 @@ Object {
                       <div>
                         Applications will live at: 
                         <strong>
-                          ordoabchao.emea-1.rht-labs.com
+                          ordoabchao.na-1.rht-labs.com
                         </strong>
                       </div>
                     </div>
@@ -365,7 +407,9 @@ Object {
                         <option
                           class=""
                           value=""
-                        />
+                        >
+                          Select storage size
+                        </option>
                       </select>
                       
                     </div>
@@ -451,7 +495,7 @@ Object {
                         name="additional_details"
                         placeholder="Provide additional details"
                       >
-                        Additional information here
+                        details
                       </textarea>
                       
                     </div>

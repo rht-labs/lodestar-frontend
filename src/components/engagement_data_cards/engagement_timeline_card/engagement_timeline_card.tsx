@@ -23,6 +23,8 @@ import {
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { PlusIcon, ClipboardCheckIcon } from '@patternfly/react-icons';
+import { APP_FEATURES } from '../../../common/app_features';
+import { Feature } from '../../feature/feature';
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
@@ -70,7 +72,10 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
       <ArtifactEditModal
         artifact={currentArtifact}
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
-        onClose={requestClose}
+        onClose={() => {
+          requestClose();
+          props.onClear();
+        }}
         onSave={_onSave}
       />
       <DataCard
@@ -107,44 +112,62 @@ function EngagementTimelineCardBody(
     { title: 'Description', transforms: [cellWidth('max')] },
     { title: 'Actions' },
   ];
+  function getAbsoluteUrl(url: string): string {
+    if (url.includes('://')) {
+      return url;
+    } else {
+      return `//${url}`;
+    }
+  }
   const actionItems = [
     <DropdownItem key="edit">
       <span data-testid="artifact-edit-button">Edit</span>
     </DropdownItem>,
   ];
-  const rows = props.artifacts.map((artifact, idx) => [
-    artifact.type,
-    {
-      title: <a href={artifact.linkAddress}>{artifact.title}</a>,
-    },
-    artifact.description,
-    {
-      title: (
-        <Dropdown
-          isPlain
-          dropdownItems={actionItems}
-          isOpen={idx === currentOpenDropdown}
-          onSelect={() => {
-            setCurrentOpenDropdown(undefined);
-            props.editArtifact(artifact);
-          }}
-          toggle={
-            <KebabToggle
-              onToggle={() =>
-                currentOpenDropdown === idx
-                  ? setCurrentOpenDropdown(undefined)
-                  : setCurrentOpenDropdown(idx)
+  const rows =
+    props?.artifacts?.map?.((artifact, idx) => [
+      artifact.type,
+      {
+        title: (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={getAbsoluteUrl(artifact.linkAddress)}
+          >
+            {artifact.title}
+          </a>
+        ),
+      },
+      artifact.description,
+      {
+        title: (
+          <Feature name={APP_FEATURES.writer}>
+            <Dropdown
+              isPlain
+              dropdownItems={actionItems}
+              isOpen={idx === currentOpenDropdown}
+              onSelect={() => {
+                setCurrentOpenDropdown(undefined);
+                props.editArtifact(artifact);
+              }}
+              toggle={
+                <KebabToggle
+                  onToggle={() =>
+                    currentOpenDropdown === idx
+                      ? setCurrentOpenDropdown(undefined)
+                      : setCurrentOpenDropdown(idx)
+                  }
+                  id={`toggle-id-${idx}`}
+                  data-testid="artifact-action-kebab"
+                />
               }
-              id={`toggle-id-${idx}`}
-              data-testid="artifact-action-kebab"
-            ></KebabToggle>
-          }
-        />
-      ),
-    },
-  ]);
+            />
+          </Feature>
+        ),
+      },
+    ]) ?? [];
 
-  return props.artifacts.length > 0 ? (
+  return props?.artifacts?.length > 0 ? (
     <Table
       aria-label="Engagement Artifacts"
       variant={TableVariant.compact}

@@ -1,48 +1,43 @@
 import React from 'react';
-import {
-  InfoCircleIcon,
-} from '@patternfly/react-icons';
+import { InfoCircleIcon } from '@patternfly/react-icons';
 import { Tooltip, TooltipPosition } from '@patternfly/react-core';
-import { EngagementFormConfig } from "../../../schemas/engagement_config";
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
-interface UserRolesTooltipProps {
-  engagementFormConfig: EngagementFormConfig;
-}
+export function UserRolesTooltip() {
+  const { engagementFormConfig } = useEngagements();
 
-export function UserRolesTooltip({engagementFormConfig}: UserRolesTooltipProps) {
-
-  function createTooltipText (engagementFormConfig: EngagementFormConfig) {
-    let text = [<div key={'tooltipText'}/>];
-    (engagementFormConfig?.user_options?.user_roles?.options ?? []).map((option: any, index: number) => {
-      return text.push(
-        <div key={index}>
-          { descriptionText(option) }
-        </div>
-      )
-    });
+  function createTooltipText(engagementFormConfig: EngagementFormConfig) {
+    let text = [<div key={'tooltipText'} />];
+    (engagementFormConfig?.user_options?.user_roles?.options ?? []).map(
+      (option: any, index: number) => {
+        return text.push(<div key={index}>{descriptionText(option)}</div>);
+      }
+    );
     return text;
   }
 
-  function descriptionText (option?: any) {
+  function descriptionText(option?: any) {
     return (
       <>
-        <b style={{color: '#73BCF7'}}> {option.label} </b>
-        <br/> {option.description}
-        <br/>
+        <b style={{ color: '#73BCF7' }}> {option.label} </b>
+        <br /> {option.description}
+        <br />
       </>
-    )
+    );
   }
 
   return (
     <>
       <Tooltip
-        content= { createTooltipText(engagementFormConfig) }
+        content={createTooltipText(engagementFormConfig)}
         entryDelay={0}
         exitDelay={10}
         maxWidth={'45rem'}
         isContentLeftAligned={true}
-        position={TooltipPosition.top}>
-        <InfoCircleIcon style={{fontSize: 'small', marginLeft: '1rem'}}/>
+        position={TooltipPosition.top}
+      >
+        <InfoCircleIcon style={{ fontSize: 'small', marginLeft: '1rem' }} />
       </Tooltip>
     </>
   );

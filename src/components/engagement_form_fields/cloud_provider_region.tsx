@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   FormSelect,
@@ -8,16 +7,19 @@ import {
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormManager } from '../../context/form_manager/form_manager';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface CloudProviderRegionFormFieldProps {
   availableProviderRegionOptions: { label: string; value: string }[];
-  engagement: Engagement;
+  hostingEnvironment: HostingEnvironment;
   onChange: (fieldName: string, value: any) => void;
+  isEngagementLaunched: boolean;
 }
 
 export function CloudProviderRegionFormField({
   availableProviderRegionOptions,
-  engagement,
+  isEngagementLaunched,
+  hostingEnvironment,
   onChange,
 }: CloudProviderRegionFormFieldProps) {
   const { hasFeature } = useFeatures();
@@ -35,12 +37,11 @@ export function CloudProviderRegionFormField({
         id={'cloud_provider_region_dropdown'}
         isDisabled={
           availableProviderRegionOptions?.length === 0 ||
-          !hasFeature(APP_FEATURES.writer) ||
-          !!engagement?.launch
+          !hasFeature(APP_FEATURES.writer)
         }
         readOnly={availableProviderRegionOptions?.length === 0}
-        value={engagement?.ocp_cloud_provider_region || ''}
-        onChange={e => onChange('ocp_cloud_provider_region', e)}
+        value={hostingEnvironment?.ocp_cloud_provider_region || ''}
+        onChange={onChange}
       >
         {[
           <FormSelectOption label={'Select a region'} value={undefined} />,

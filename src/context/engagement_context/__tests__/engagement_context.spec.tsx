@@ -1,10 +1,13 @@
 import React from 'react';
 import { renderHook, act, cleanup } from '@testing-library/react-hooks';
 import { useEngagements } from '../engagement_hook';
-import { getInitialState } from '../engagement_form_reducer';
 import { Engagement } from '../../../schemas/engagement';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { AuthProvider, useSession } from '../../auth_context/auth_context';
+import {
+  AuthContext,
+  AuthProvider,
+  useSession,
+} from '../../auth_context/auth_context';
 import { EngagementService } from '../../../services/engagement_service/engagement_service';
 import { EngagementProvider } from '../engagement_context';
 import { UserToken } from '../../../schemas/user_token';
@@ -12,6 +15,11 @@ import { UserProfile } from '../../../schemas/user_profile';
 import { AuthenticationError } from '../../../services/auth_service/auth_errors';
 import { AuthService } from '../../../services/auth_service/authentication_service';
 import { AlreadyExistsError } from '../../../services/engagement_service/engagement_service_errors';
+import {
+  FeedbackContext,
+  FeedbackProvider,
+} from '../../feedback_context/feedback_context';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -23,6 +31,16 @@ describe('Engagement Context', () => {
   afterEach(() => {
     cleanup();
   });
+  const fakedFeedbackContext: FeedbackContext = {
+    alertActions: [],
+    alertMsg: '',
+    alertType: null,
+    hideAlert: () => {},
+    hideLoader: () => {},
+    isLoaderVisible: false,
+    showAlert: () => () => {},
+    showLoader: () => {},
+  };
 
   test('by default, engagements are an empty array', () => {
     const { result } = getHook();
@@ -32,28 +50,11 @@ describe('Engagement Context', () => {
   test('Fetch Engagements', async () => {
     const { result, waitForNextUpdate } = getHook();
 
-    act(() => {
-      result.current.getEngagements();
-    });
-    await waitForNextUpdate();
-
-    expect(result.current.engagements.length).toBeGreaterThan(0);
-  });
-
-  test('by default, engagement form equals initial state', () => {
-    const { result } = getHook();
-    expect(result.current.currentEngagementChanges).toEqual(getInitialState());
-  });
-
-  test('Can Modify Engagement Form', async () => {
-    const { result, waitForNextUpdate } = getHook();
     await act(async () => {
-      result.current.updateEngagementFormField('customer_name', 'spencer');
+      result.current.getEngagements();
       await waitForNextUpdate();
+      expect(result.current.engagements.length).toBeGreaterThan(0);
     });
-    expect(result.current.currentEngagementChanges.customer_name).toEqual(
-      'spencer'
-    );
   });
 
   test('Can switch engagements', async () => {
@@ -69,15 +70,6 @@ describe('Engagement Context', () => {
   test('form options are undefined by default', () => {
     const { result } = getHook();
     expect(result.current.engagementFormConfig).toBe(undefined);
-  });
-
-  test('Form options update when setting active engagement', async () => {
-    const { result, waitForNextUpdate } = getHook();
-    await act(async () => {
-      result.current.getConfig();
-      await waitForNextUpdate();
-    });
-    expect(result.current.engagementFormConfig).toHaveProperty('cloud_options');
   });
 
   test('Form completeness for launch', async () => {
@@ -120,31 +112,43 @@ describe('Engagement Context', () => {
     const isLoggedIn = jest.fn(async () => true);
     const wrapper = ({ children }) => {
       return (
-        <AuthProvider
-          authService={
-            ({
-              isLoggedIn,
-              getToken() {
-                return UserToken.fromFake();
-              },
-              async getUserProfile() {
-                return UserProfile.fromFake();
-              },
-            } as unknown) as AuthService
-          }
-        >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  throw new AuthenticationError();
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
-        </AuthProvider>
+        <FeedbackProvider>
+          <FeedbackContext.Consumer>
+            {feedbackContext => (
+              <AuthProvider
+                authService={
+                  ({
+                    isLoggedIn,
+                    getToken() {
+                      return UserToken.fromFake();
+                    },
+                    async getUserProfile() {
+                      return UserProfile.fromFake();
+                    },
+                  } as unknown) as AuthService
+                }
+              >
+                <AuthContext.Consumer>
+                  {authContext => (
+                    <EngagementProvider
+                      authContext={authContext}
+                      feedbackContext={feedbackContext}
+                      engagementService={
+                        ({
+                          async fetchEngagements() {
+                            throw new AuthenticationError();
+                          },
+                        } as unknown) as EngagementService
+                      }
+                    >
+                      {children}
+                    </EngagementProvider>
+                  )}
+                </AuthContext.Consumer>
+              </AuthProvider>
+            )}
+          </FeedbackContext.Consumer>
+        </FeedbackProvider>
       );
     };
     const { result } = renderHook(() => useEngagements(), {
@@ -158,33 +162,40 @@ describe('Engagement Context', () => {
   test('_handleErrors rethrows errors that it does not recognize', async () => {
     const wrapper = ({ children }) => {
       return (
-        <AuthProvider
-          authService={
-            ({
-              async isLoggedIn() {
-                return true;
-              },
-              getToken() {
-                return UserToken.fromFake();
-              },
-              async getUserProfile() {
-                return UserProfile.fromFake();
-              },
-            } as unknown) as AuthService
-          }
-        >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  throw new Error('just a random error');
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
-        </AuthProvider>
+        <FeedbackProvider>
+          <FeedbackContext.Consumer>
+            {feedbackContext => (
+              <AuthProvider
+                authService={
+                  ({
+                    async isLoggedIn() {
+                      return true;
+                    },
+                    getToken() {
+                      return UserToken.fromFake();
+                    },
+                    async getUserProfile() {
+                      return UserProfile.fromFake();
+                    },
+                  } as unknown) as AuthService
+                }
+              >
+                <EngagementProvider
+                  feedbackContext={feedbackContext}
+                  engagementService={
+                    ({
+                      async fetchEngagements() {
+                        throw new Error('just a random error');
+                      },
+                    } as unknown) as EngagementService
+                  }
+                >
+                  {children}
+                </EngagementProvider>
+              </AuthProvider>
+            )}
+          </FeedbackContext.Consumer>
+        </FeedbackProvider>
       );
     };
     const { result } = renderHook(() => useEngagements(), {
@@ -199,33 +210,45 @@ describe('Engagement Context', () => {
   test("_validateAuthStatus updates authContext's hasError if it encounters an AuthenticationError", async () => {
     const wrapper = ({ children }) => {
       return (
-        <AuthProvider
-          authService={
-            ({
-              async isLoggedIn() {
-                return false;
-              },
-              getToken() {
-                return UserToken.fromFake();
-              },
-              async getUserProfile() {
-                return UserProfile.fromFake();
-              },
-            } as unknown) as AuthService
-          }
-        >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [];
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
-        </AuthProvider>
+        <FeedbackProvider>
+          <FeedbackContext.Consumer>
+            {feedbackContext => (
+              <AuthProvider
+                authService={
+                  ({
+                    async isLoggedIn() {
+                      return false;
+                    },
+                    getToken() {
+                      return UserToken.fromFake();
+                    },
+                    async getUserProfile() {
+                      return UserProfile.fromFake();
+                    },
+                  } as unknown) as AuthService
+                }
+              >
+                <AuthContext.Consumer>
+                  {authContext => (
+                    <EngagementProvider
+                      feedbackContext={feedbackContext}
+                      authContext={authContext}
+                      engagementService={
+                        ({
+                          async fetchEngagements() {
+                            return [];
+                          },
+                        } as unknown) as EngagementService
+                      }
+                    >
+                      {children}
+                    </EngagementProvider>
+                  )}
+                </AuthContext.Consumer>
+              </AuthProvider>
+            )}
+          </FeedbackContext.Consumer>
+        </FeedbackProvider>
       );
     };
     const { result, waitForNextUpdate } = renderHook(
@@ -284,20 +307,26 @@ describe('Engagement Context', () => {
             } as unknown) as AuthService
           }
         >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async saveEngagement(engagement) {
-                  throw Error();
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
+          <AuthContext.Consumer>
+            {authContext => (
+              <EngagementProvider
+                authContext={authContext}
+                feedbackContext={fakedFeedbackContext}
+                engagementService={
+                  ({
+                    async fetchEngagements() {
+                      return [initialEngagement];
+                    },
+                    async saveEngagement(engagement) {
+                      throw Error();
+                    },
+                  } as unknown) as EngagementService
+                }
+              >
+                {children}
+              </EngagementProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       );
     };
@@ -305,8 +334,7 @@ describe('Engagement Context', () => {
       wrapper,
     });
     await act(async () => {
-      result.current.getEngagements();
-      await waitForNextUpdate();
+      await result.current.getEngagements();
     });
     expect(result.current.engagements[0]).toEqual(initialEngagement);
     let modifiedEngagement = {
@@ -400,20 +428,26 @@ describe('Engagement Context', () => {
             } as unknown) as AuthService
           }
         >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async launchEngagement(engagement) {
-                  throw Error('a generic network error');
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
+          <AuthContext.Consumer>
+            {authContext => (
+              <EngagementProvider
+                authContext={authContext}
+                feedbackContext={fakedFeedbackContext}
+                engagementService={
+                  ({
+                    async fetchEngagements() {
+                      return [initialEngagement];
+                    },
+                    async launchEngagement(engagement) {
+                      throw Error('a generic network error');
+                    },
+                  } as unknown) as EngagementService
+                }
+              >
+                {children}
+              </EngagementProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       );
     };
@@ -427,13 +461,11 @@ describe('Engagement Context', () => {
     });
     await act(async () => {
       result.current.setCurrentEngagement(Engagement.fromFake(true));
-    });
-    await act(async () => {
       result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
       await waitForNextUpdate();
+      expect(onCatch).toHaveBeenCalled();
+      expect(result.current.currentEngagement.launch).toBeFalsy();
     });
-    expect(onCatch).toHaveBeenCalled();
-    expect(result.current.currentEngagement.launch).toBeFalsy();
   });
 
   test('If an engagement already exists, an engagement should not be created', async () => {
@@ -455,20 +487,26 @@ describe('Engagement Context', () => {
             } as unknown) as AuthService
           }
         >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async createEngagement(engagement) {
-                  throw new AlreadyExistsError();
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
+          <AuthContext.Consumer>
+            {authContext => (
+              <EngagementProvider
+                authContext={authContext}
+                feedbackContext={fakedFeedbackContext}
+                engagementService={
+                  ({
+                    async fetchEngagements() {
+                      return [initialEngagement];
+                    },
+                    async createEngagement(engagement) {
+                      throw new AlreadyExistsError();
+                    },
+                  } as unknown) as EngagementService
+                }
+              >
+                {children}
+              </EngagementProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       );
     };
@@ -482,64 +520,6 @@ describe('Engagement Context', () => {
         .catch(e => (error = e));
     });
     expect(error).toBeInstanceOf(AlreadyExistsError);
-  });
-
-  test('If an engagement has changed since the last update, the engagement should revert to the old engagement', async () => {
-    const initialEngagement = Engagement.fromFake(true);
-    const wrapper = ({ children }) => {
-      return (
-        <AuthProvider
-          authService={
-            ({
-              async isLoggedIn() {
-                return true;
-              },
-              getToken() {
-                return UserToken.fromFake();
-              },
-              async getUserProfile() {
-                return UserProfile.fromFake();
-              },
-            } as unknown) as AuthService
-          }
-        >
-          <EngagementProvider
-            engagementService={
-              ({
-                async fetchEngagements() {
-                  return [initialEngagement];
-                },
-                async saveEngagement(engagement) {
-                  throw new AlreadyExistsError();
-                },
-              } as unknown) as EngagementService
-            }
-          >
-            {children}
-          </EngagementProvider>
-        </AuthProvider>
-      );
-    };
-    const { result, waitForNextUpdate } = renderHook(() => useEngagements(), {
-      wrapper,
-    });
-    await act(async () => {
-      result.current.getEngagements();
-      await waitForNextUpdate();
-    });
-    await act(async () => {
-      result.current.setCurrentEngagement(result.current.engagements[0]);
-      await waitForNextUpdate();
-    });
-    const modifiedEngagement = {
-      ...initialEngagement,
-      customer_contact_email: 'madeup@example.com',
-    };
-    await act(async () => {
-      result.current.saveEngagement(modifiedEngagement);
-    });
-
-    expect(result.current.currentEngagement).toEqual(initialEngagement);
   });
 
   test('When a new engagement is successfully created, it should be set as the current engagement', async () => {

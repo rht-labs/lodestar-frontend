@@ -19,6 +19,13 @@ import { useNotification } from '../context/notification_context/notification_ho
 import { EngagementStatus } from '../schemas/engagement';
 import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
+import { useSession } from '../context/auth_context/auth_context';
+import ScrollToTop from './scroll_to_top';
+
+function WhatsMyToken() {
+  const { sessionData } = useSession();
+  return <pre>{sessionData?.tokens?.accessToken}</pre>;
+}
 
 export function LodestarRouter() {
   const { fetchNotifications } = useNotification();
@@ -32,6 +39,7 @@ export function LodestarRouter() {
       <Route path="/auth_callback" component={CallbackHandler} />
       <Route path="/unauthorized" component={UnauthorizedPage} />
       <Route path="/logout" component={LogoutPage} />
+      <PrivateRoute path="/whatsmytoken" component={WhatsMyToken} />
       <PrivateRoute path="/app">
         <MainTemplate>
           <ErrorBoundary>
@@ -48,6 +56,10 @@ export function LodestarRouter() {
                     <Switch>
                       {/* else, show an authorized route */}
                       <Redirect exact from="/app" to="/app/dashboard" />
+                      <PrivateRoute
+                        path="/app/whatsmytoken"
+                        component={WhatsMyToken}
+                      />
                       <Route
                         path="/app/requestfeature"
                         component={FeatureRequest}
@@ -95,8 +107,12 @@ export function LodestarRouter() {
                               <CreateNewEngagement />
                             </PrivateRoute>
                             <PrivateRoute
-                              path="/app/engagements/:customer_name/:project_name"
-                              component={EngagementDetailView}
+                              path="/app/engagements/:customer_name/:project_name/"
+                              component={() => (
+                                <ScrollToTop>
+                                  <EngagementDetailView />
+                                </ScrollToTop>
+                              )}
                             />
                           </Switch>
                         </ModalVisibilityProvider>
