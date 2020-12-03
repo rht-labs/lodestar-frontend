@@ -81,7 +81,7 @@ export function OpenShiftClusterSummaryCard({
     ]);
     onChange(hostingEnvironments);
     saveEngagement({
-      ...currentEngagementChanges,
+      ...(currentEngagementChanges as Engagement),
       hosting_environments: hostingEnvironments,
     });
   };
@@ -91,35 +91,41 @@ export function OpenShiftClusterSummaryCard({
     setCurrentHostingEnvironment(hostingEnvironment);
     requestOpen(OPENSHIFT_MODAL_KEY);
   };
-  // const onDelete = (hostingEnvironment: HostingEnvironment) => {
-  //   const hostingEnvironments = [
-  //     ...currentEngagementChanges.hosting_environments,
-  //   ];
-  //   hostingEnvironments.splice(
-  //     hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
-  //     1
-  //   );
-  //   onChange(hostingEnvironments);
-  //   propsOnSave(hostingEnvironments);
-  //   saveEngagement({
-  //     ...currentEngagementChanges,
-  //     hosting_environments: hostingEnvironments,
-  //   });
-  // };
+  const onDelete = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = [
+      ...currentEngagementChanges.hosting_environments,
+    ];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      1
+    );
+    onChange(hostingEnvironments);
+    saveEngagement({
+      ...(currentEngagementChanges as Engagement),
+      hosting_environments: hostingEnvironments,
+    });
+  };
   const addProvider = () => {
     openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
   };
-  const actionItems = (hostingEnvironment: HostingEnvironment) => [
-    <DropdownItem
-      key="edit"
-      onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
-    >
-      Edit
-    </DropdownItem>,
-    // <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
-    //   Delete
-    // </DropdownItem>,
-  ];
+  const actionItems = (hostingEnvironment: HostingEnvironment) => {
+    const items = [
+      <DropdownItem
+        key="edit"
+        onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
+      >
+        Edit
+      </DropdownItem>,
+    ];
+    if (!currentEngagementChanges.launch) {
+      items.push(
+        <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
+          Delete
+        </DropdownItem>
+      );
+    }
+    return items;
+  };
   const columns = [
     { title: '', transforms: [cellWidth(10)] },
     { title: 'Environment Name' },
