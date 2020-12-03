@@ -43,6 +43,7 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
 ];
 
 export interface OpenShiftClusterSummaryCardProps {
+  currentEngagement: Engagement;
   currentEngagementChanges: Partial<Engagement>;
   onChange: (hostingEnvironments: HostingEnvironment[]) => void;
   onClear: () => void;
@@ -51,6 +52,7 @@ export interface OpenShiftClusterSummaryCardProps {
 }
 
 export function OpenShiftClusterSummaryCard({
+  currentEngagement,
   currentEngagementChanges,
   onClear,
   onChange,
@@ -117,12 +119,13 @@ export function OpenShiftClusterSummaryCard({
         Edit
       </DropdownItem>,
     ];
-    if (!currentEngagementChanges.launch) {
-      items.push(
+    if (!currentEngagement?.launch) {
+      return [
+        ...items,
         <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
           Delete
-        </DropdownItem>
-      );
+        </DropdownItem>,
+      ];
     }
     return items;
   };
@@ -204,7 +207,6 @@ export function OpenShiftClusterSummaryCard({
     if (randomizer?.length > 0) {
       slug = `${slug}-${randomizer}`;
     }
-    console.log(slug);
     return slug;
   };
   const currentEnvironmentIndex = currentEngagementChanges?.hosting_environments?.findIndex(
