@@ -85,6 +85,7 @@ export function EngagementOverview({
             <div id="oc_summary_card">
               <FormManager.Group groupName="Hosting Environment">
                 <OpenShiftClusterSummaryCard
+                  currentEngagement={currentEngagement}
                   onSave={hostingEnvironments => {
                     onSave({
                       ...currentEngagementChanges,

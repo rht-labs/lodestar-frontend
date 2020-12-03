@@ -42,6 +42,7 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
 ];
 
 export interface OpenShiftClusterSummaryCardProps {
+  currentEngagement: Engagement;
   currentEngagementChanges: Partial<Engagement>;
   onChange: (hostingEnvironments: HostingEnvironment[]) => void;
   onClear: () => void;
@@ -50,6 +51,7 @@ export interface OpenShiftClusterSummaryCardProps {
 }
 
 export function OpenShiftClusterSummaryCard({
+  currentEngagement,
   currentEngagementChanges,
   onClear,
   onChange,
@@ -80,7 +82,7 @@ export function OpenShiftClusterSummaryCard({
     ]);
     onChange(hostingEnvironments);
     saveEngagement({
-      ...currentEngagementChanges,
+      ...(currentEngagementChanges as Engagement),
       hosting_environments: hostingEnvironments,
     });
   };
@@ -90,35 +92,42 @@ export function OpenShiftClusterSummaryCard({
     setCurrentHostingEnvironment(hostingEnvironment);
     requestOpen(OPENSHIFT_MODAL_KEY);
   };
-  // const onDelete = (hostingEnvironment: HostingEnvironment) => {
-  //   const hostingEnvironments = [
-  //     ...currentEngagementChanges.hosting_environments,
-  //   ];
-  //   hostingEnvironments.splice(
-  //     hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
-  //     1
-  //   );
-  //   onChange(hostingEnvironments);
-  //   propsOnSave(hostingEnvironments);
-  //   saveEngagement({
-  //     ...currentEngagementChanges,
-  //     hosting_environments: hostingEnvironments,
-  //   });
-  // };
+  const onDelete = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = [
+      ...currentEngagementChanges.hosting_environments,
+    ];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      1
+    );
+    onChange(hostingEnvironments);
+    saveEngagement({
+      ...(currentEngagementChanges as Engagement),
+      hosting_environments: hostingEnvironments,
+    });
+  };
   const addProvider = () => {
     openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
   };
-  const actionItems = (hostingEnvironment: HostingEnvironment) => [
-    <DropdownItem
-      key="edit"
-      onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
-    >
-      Edit
-    </DropdownItem>,
-    // <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
-    //   Delete
-    // </DropdownItem>,
-  ];
+  const actionItems = (hostingEnvironment: HostingEnvironment) => {
+    const items = [
+      <DropdownItem
+        key="edit"
+        onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
+      >
+        Edit
+      </DropdownItem>,
+    ];
+    if (!currentEngagement?.launch) {
+      return [
+        ...items,
+        <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
+          Delete
+        </DropdownItem>,
+      ];
+    }
+    return items;
+  };
   const columns = [
     { title: '', transforms: [cellWidth(10)] },
     { title: 'Environment Name' },
@@ -197,12 +206,14 @@ export function OpenShiftClusterSummaryCard({
     if (randomizer?.length > 0) {
       slug = `${slug}-${randomizer}`;
     }
-    console.log(slug);
     return slug;
   };
   const currentEnvironmentIndex = currentEngagementChanges?.hosting_environments?.findIndex(
     he => currentHostingEnvironment?.id === he?.id
   );
+  const isAddHostingButtonDisabled =
+    currentEngagementChanges?.hosting_environments?.length >=
+    (engagementFormConfig?.logistics_options?.max_hosting_env_count ?? 1);
   return (
     <>
       <OpenShiftClusterEditModal
@@ -221,18 +232,12 @@ export function OpenShiftClusterSummaryCard({
       />
       <DataCard
         actionButton={() => (
-          <div>
-            <EditButton
-              isDisabled={
-                currentEngagementChanges?.hosting_environments?.length >=
-                (engagementFormConfig?.logistics_options
-                  ?.max_hosting_env_count ?? 1)
-              }
-              onClick={addProvider}
-              text={'Add Hosting Environment'}
-              dataCy={'hosting_env_button'}
-            />
-          </div>
+          <EditButton
+            isDisabled={isAddHostingButtonDisabled}
+            onClick={addProvider}
+            text={'Add Hosting Environment'}
+            dataCy={'hosting_env_button'}
+          />
         )}
         title="Hosting Environment"
       >
