@@ -5,15 +5,14 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 import {
-  FeedbackContext,
   AlertType,
+  IFeedbackContext,
 } from '../feedback_context/feedback_context';
 import {
   AnalyticsCategory,
-  AnalyticsContext,
+  IAnalyticsContext,
 } from '../analytics_context/analytics_context';
 import { AuthenticationError } from '../../services/auth_service/auth_errors';
-import { AuthContext } from '../auth_context/auth_context';
 import {
   EngagementPoll,
   EngagementPollIntervalStrategy,
@@ -26,6 +25,7 @@ import {
   engagementFormReducer,
   getInitialState,
 } from './engagement_form_reducer';
+import { IAuthContext } from '../auth_context/auth_context';
 export type FieldGroup = { [key: string]: string[] };
 
 export interface IEngagementContext {
@@ -87,11 +87,11 @@ export const EngagementProvider = ({
   authContext,
 }: {
   children: React.ReactChild;
-  authContext: AuthContext;
+  authContext: IAuthContext;
   engagementService: EngagementService;
   categoryService: CategoryService;
-  feedbackContext: FeedbackContext;
-  analyticsContext?: AnalyticsContext;
+  feedbackContext: IFeedbackContext;
+  analyticsContext?: IAnalyticsContext;
 }) => {
   const [error] = useState<any>();
   const [isLoading] = useState<boolean>(false);
@@ -99,6 +99,9 @@ export const EngagementProvider = ({
   const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
   const [currentEngagement, setCurrentEngagement] = useState<
     Engagement | undefined
+  >();
+  const [engagementFormConfig, setEngagementFormConfig] = useState<
+    EngagementFormConfig
   >();
 
   const _handleErrors = useCallback(
@@ -453,7 +456,12 @@ export const EngagementProvider = ({
       _handleErrors,
     ]
   );
-
+  useEffect(() => {
+    dispatch({
+      type: 'switch_engagement',
+      payload: getInitialState(currentEngagement),
+    });
+  }, [currentEngagement, engagementFormConfig]);
   const fetchCategories = useCallback(async () => {
     try {
       // feedbackContext.showLoader();
@@ -468,9 +476,6 @@ export const EngagementProvider = ({
       }
     }
   }, [categoryService, _handleErrors]);
-  const [engagementFormConfig, setEngagementFormConfig] = useState<
-    EngagementFormConfig
-  >();
 
   const _getEngagementFormConfig = () => {
     if (!engagementFormConfig) {
@@ -495,29 +500,24 @@ export const EngagementProvider = ({
       }),
     [dispatch, currentEngagement]
   );
-  useEffect(() => {
-    clearCurrentChanges();
-  }, [currentEngagement, engagementFormConfig, clearCurrentChanges]);
+
   const [changedFields, setChangedFields] = useState<string[]>([]);
   const [fieldGroups, setFieldGroups] = useState<FieldGroup>();
 
-  const updateEngagementFormField = useCallback(
-    (fieldName: string, value: any) => {
-      if (!changedFields.includes(fieldName)) {
-        setChangedFields([...changedFields, fieldName]);
-      }
-      dispatch({ type: fieldName, payload: value });
+  const updateEngagementFormField = (fieldName: string, value: any) => {
+    if (!changedFields.includes(fieldName)) {
+      setChangedFields([...changedFields, fieldName]);
+    }
+    dispatch({ type: fieldName, payload: value });
 
-      try {
-        analyticsContext.logEvent({
-          category: AnalyticsCategory.engagements,
-          action: 'Update Engagement',
-        });
-      } catch (e) {}
-    },
-    [analyticsContext, changedFields]
-  );
-  const saveChanges = useCallback(() => {
+    try {
+      analyticsContext.logEvent({
+        category: AnalyticsCategory.engagements,
+        action: 'Update Engagement',
+      });
+    } catch (e) {}
+  };
+  const saveChanges = () => {
     const _createCommitMessage = (
       changedFields: string[],
       fieldGroupings: { [key: string]: string[] } = {}
@@ -545,15 +545,7 @@ export const EngagementProvider = ({
     );
     setChangedFields([]);
     clearCurrentChanges();
-  }, [
-    changedFields,
-    fieldGroups,
-    clearCurrentChanges,
-    setChangedFields,
-    saveEngagement,
-    currentEngagement,
-    currentEngagementChanges,
-  ]);
+  };
   return (
     <Provider
       value={{

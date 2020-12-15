@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement, Artifact } from '../../schemas/engagement';
+import { Engagement } from '../../schemas/engagement';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
@@ -14,7 +14,7 @@ export interface EngagementOverviewTabProps {
   currentEngagement: Engagement;
   currentEngagementChanges: Partial<Engagement>;
   onChange: (fieldName: string, value: any) => void;
-  onSave: (engagement: Partial<Engagement>) => void;
+  onSave: () => void;
   missingRequiredFields: string[];
 }
 
@@ -86,12 +86,7 @@ export function EngagementOverview({
               <FormManager.Group groupName="Hosting Environment">
                 <OpenShiftClusterSummaryCard
                   currentEngagement={currentEngagement}
-                  onSave={hostingEnvironments => {
-                    onSave({
-                      ...currentEngagementChanges,
-                      hosting_environments: hostingEnvironments,
-                    });
-                  }}
+                  onSave={onSave}
                   onClear={clearCurrentChanges}
                   onChange={hostingEnvironments => {
                     onChange('hosting_environments', hostingEnvironments);
@@ -108,9 +103,7 @@ export function EngagementOverview({
                 <EngagementTimelineCard
                   artifacts={currentEngagementChanges.artifacts}
                   onClear={clearCurrentChanges}
-                  onSave={(artifacts: Artifact[]) => {
-                    onSave({ ...currentEngagementChanges, artifacts });
-                  }}
+                  onSave={onSave}
                   onChangeArtifacts={value => onChange('artifacts', value)}
                 />
               </FormManager.Group>
