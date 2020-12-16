@@ -1,11 +1,12 @@
 import faker from 'faker';
+import { AppFeature } from '../common/app_features';
 
 export interface UserProfile {
   username?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
-  groups?: string[];
+  groups?: AppFeature[];
 }
 
 export abstract class UserProfile {
@@ -16,11 +17,6 @@ export abstract class UserProfile {
       return userProfile?.email || '';
     }
   }
-  groups?: string[];
-  username?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
 
   static fromFake() {
     return {

@@ -89,7 +89,6 @@ const externalUsers = (
 
 const UserTable = ({
   users,
-  handleAddNewUserOrEdit
 }: {
   users: {
     first_name: string;
@@ -97,7 +96,6 @@ const UserTable = ({
     email: string;
     role: string;
   }[];
-  handleAddNewUserOrEdit: ()=> void;
 }) => {
   const { engagementFormConfig } = useEngagements();
   const getRoleName = (userRole: string) =>

@@ -19,14 +19,23 @@ export function ReadyCheck(props: ReadyCheckProps) {
     readyColor = 'green',
     notReadyColor = 'lightgrey',
   } = props;
-
+  const TooltipWrapper = ({ children }) => {
+    if ((isReady && !!readyTooltip) || (!isReady && !!notReadyTooltip)) {
+      return (
+        <Tooltip
+          content={isReady ? readyTooltip : notReadyTooltip}
+          entryDelay={10}
+          exitDelay={10}
+        >
+          {children}
+        </Tooltip>
+      );
+    }
+    return children;
+  };
   return (
-    <Tooltip
-      content={isReady ? readyTooltip : notReadyTooltip}
-      entryDelay={10}
-      exitDelay={10}
-    >
+    <TooltipWrapper>
       <CheckCircleIcon color={isReady ? readyColor : notReadyColor} />
-    </Tooltip>
+    </TooltipWrapper>
   );
 }
