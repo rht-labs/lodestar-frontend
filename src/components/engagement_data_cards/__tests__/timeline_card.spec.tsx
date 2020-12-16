@@ -11,16 +11,22 @@ import { Artifact } from '../../../schemas/engagement';
 import { ModalVisibilityContext } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { FeatureToggleContext } from '../../../context/feature_context/feature_toggles';
 import { APP_FEATURES } from '../../../common/app_features';
+import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 
 describe('Engagement Artifact Card', () => {
   test('matches snapshot', () => {
     const timelineCard = render(
-      <EngagementTimelineCard
-        onClear={() => {}}
-        onChangeArtifacts={() => {}}
-        onSave={() => {}}
-        artifacts={new Array(20).fill(null).map(() => Artifact.fromFake(true))}
-      />
+      <EngagementContext.Provider
+        value={{
+          currentEngagement: {
+            artifacts: new Array(20)
+              .fill(null)
+              .map(() => Artifact.fromFake(true)),
+          },
+        }}
+      >
+        <EngagementTimelineCard />
+      </EngagementContext.Provider>
     );
     expect(timelineCard).toMatchSnapshot();
   });
@@ -36,12 +42,7 @@ describe('Engagement Artifact Card', () => {
         <ModalVisibilityContext.Provider
           value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
         >
-          <EngagementTimelineCard
-            onClear={() => {}}
-            onSave={() => {}}
-            onChangeArtifacts={() => {}}
-            artifacts={[]}
-          ></EngagementTimelineCard>
+          <EngagementTimelineCard></EngagementTimelineCard>
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
     );
@@ -62,12 +63,13 @@ describe('Engagement Artifact Card', () => {
         <ModalVisibilityContext.Provider
           value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
         >
-          <EngagementTimelineCard
-            onClear={() => {}}
-            onSave={() => {}}
-            onChangeArtifacts={() => {}}
-            artifacts={[Artifact.fromFake(true)]}
-          ></EngagementTimelineCard>
+          <EngagementContext.Provider
+            value={{
+              currentEngagement: { artifacts: [Artifact.fromFake(true)] },
+            }}
+          >
+            <EngagementTimelineCard></EngagementTimelineCard>
+          </EngagementContext.Provider>
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
     );

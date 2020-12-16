@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalVariant,
@@ -8,11 +8,14 @@ import {
   FormGroup,
   FormSelectOption,
   TextInput,
-} from '@patternfly/react-core';
-import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { Artifact, ArtifactType } from '../../schemas/engagement';
-import { FormManager } from '../../context/form_manager/form_manager';
-import { useAnalytics, AnalyticsCategory } from '../../context/analytics_context/analytics_context';
+} from "@patternfly/react-core";
+import { EditModalTemplate } from "../../layout/edit_modal_template";
+import { Artifact, ArtifactType } from "../../schemas/engagement";
+import { FormManager } from "../../context/form_manager/form_manager";
+import {
+  useAnalytics,
+  AnalyticsCategory,
+} from "../../context/analytics_context/analytics_context";
 
 export interface ArtifactEditModalProps {
   onClose: () => void;
@@ -26,7 +29,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const { registerField } = FormManager.useFormGroupManager();
   const { logEvent } = useAnalytics();
 
-  useEffect(() => registerField('artifacts'), [registerField]);
+  useEffect(() => registerField("artifacts"), [registerField]);
 
   useEffect(
     () =>
@@ -38,12 +41,10 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
   );
 
   const onSave = () => {
-    props.onSave({
-      ...(props.artifact ?? {}),
-      ...artifactEdits,
-    } as Artifact);
+    const newArtifacts = { ...(props.artifact ?? {}), ...artifactEdits };
+    props.onSave(newArtifacts as Artifact);
     logEvent({
-      action: 'Add Artifact',
+      action: "Add Artifact",
       category: AnalyticsCategory.engagements,
     });
     props.onClose?.();
@@ -61,7 +62,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
           <Button
             data-testid="save-artifact"
             onClick={onSave}
-            data-cy={'save-artifact-button'}
+            data-cy={"save-artifact-button"}
           >
             Save
           </Button>
@@ -81,7 +82,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
                 });
               }}
             >
-              {Object.keys(ArtifactType).map(artifactTypeKey => (
+              {Object.keys(ArtifactType).map((artifactTypeKey) => (
                 <FormSelectOption
                   key={ArtifactType[artifactTypeKey]}
                   value={ArtifactType[artifactTypeKey]}
@@ -99,8 +100,8 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               name="artifact_title"
               data-cy="artifact-title-input"
               aria-label="Artifact Title"
-              value={artifactEdits?.title ?? ''}
-              onChange={e => setArtifactEdits({ ...artifactEdits, title: e })}
+              value={artifactEdits?.title ?? ""}
+              onChange={(e) => setArtifactEdits({ ...artifactEdits, title: e })}
             />
           </FormGroup>
           <FormGroup label="Artifact Link" isRequired fieldId="artifact-link">
@@ -110,8 +111,8 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               name="artifact_link"
               aria-label="Artifact Link"
               data-cy="artifact-link-input"
-              value={artifactEdits?.linkAddress ?? ''}
-              onChange={e =>
+              value={artifactEdits?.linkAddress ?? ""}
+              onChange={(e) =>
                 setArtifactEdits({ ...artifactEdits, linkAddress: e })
               }
             />
@@ -129,8 +130,8 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               name="artifact_description"
               data-cy="artifact-description-input"
               aria-label="Artifact Description"
-              value={artifactEdits?.description ?? ''}
-              onChange={e =>
+              value={artifactEdits?.description ?? ""}
+              onChange={(e) =>
                 setArtifactEdits({ ...artifactEdits, description: e })
               }
             />
