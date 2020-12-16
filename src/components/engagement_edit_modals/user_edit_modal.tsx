@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Modal,
-  ModalVariant,
-} from '@patternfly/react-core';
+import { Button, Modal, ModalVariant } from '@patternfly/react-core';
 
 import { Engagement, EngagementUser } from '../../schemas/engagement';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
@@ -13,7 +9,7 @@ export interface UserEditModalProps {
   onChange: (users: EngagementUser[]) => void;
   engagement: Engagement;
   isOpen: boolean;
-  onSave: (engagement: Engagement) => void;
+  onSave: (users: EngagementUser[]) => void;
   onClose: () => void;
   addUser: () => void;
 }
@@ -23,7 +19,7 @@ export function UserEditModal({
   onClose = () => {},
   isOpen,
   onSave: propsOnSave,
-  addUser
+  addUser,
 }: UserEditModalProps) {
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
@@ -52,13 +48,18 @@ export function UserEditModal({
 
   const onSave = () => {
     removeUser();
-    propsOnSave(engagement);
+    propsOnSave(engagement.engagement_users);
     onClose();
   };
 
   const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
-    if(!acc) return acc;
-    return validateEmail(user.email) && validateString(user.first_name) && validateString(user.last_name) && validateRole(user.role)
+    if (!acc) return acc;
+    return (
+      validateEmail(user.email) &&
+      validateString(user.first_name) &&
+      validateString(user.last_name) &&
+      validateRole(user.role)
+    );
   }, true);
 
   return (
@@ -111,17 +112,17 @@ export function UserEditModal({
   );
 }
 
-function validateEmail ( email: string ) {
+function validateEmail(email: string) {
   // eslint-disable-next-line
   let regexEmail = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
   return regexEmail.test(email);
 }
 
-function validateString ( name: string ) {
+function validateString(name: string) {
   let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]+$/;
   return regexString.test(name);
 }
 
-function validateRole (role: string){
+function validateRole(role: string) {
   return !(role === undefined || role === '');
 }

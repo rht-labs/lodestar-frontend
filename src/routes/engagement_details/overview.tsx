@@ -1,5 +1,4 @@
 import React from 'react';
-import { Engagement } from '../../schemas/engagement';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
@@ -9,23 +8,10 @@ import { ActivityHistoryCard } from '../../components/engagement_data_cards/acti
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { EngagementTimelineCard } from '../../components/engagement_data_cards/engagement_timeline_card/engagement_timeline_card';
-export interface EngagementOverviewTabProps {
-  clearCurrentChanges: () => void;
-  currentEngagement: Engagement;
-  currentEngagementChanges: Partial<Engagement>;
-  onChange: (fieldName: string, value: any) => void;
-  onSave: () => void;
-  missingRequiredFields: string[];
-}
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
-export function EngagementOverview({
-  clearCurrentChanges,
-  currentEngagement,
-  currentEngagementChanges,
-  missingRequiredFields,
-  onChange,
-  onSave,
-}: EngagementOverviewTabProps) {
+export function EngagementOverview() {
+  const { currentEngagement } = useEngagements();
   return (
     <TextContent>
       <FormManager.Manager>
@@ -33,14 +19,7 @@ export function EngagementOverview({
           <GridItem span={12}>
             <div id="engagement_summary_card">
               <FormManager.Group groupName="Engagement Summary">
-                <EngagementSummaryCard
-                  currentEngagementChanges={currentEngagementChanges}
-                  currentEngagement={currentEngagement}
-                  onSave={onSave}
-                  onChange={onChange}
-                  missingRequiredFields={missingRequiredFields}
-                  onClear={clearCurrentChanges}
-                />
+                <EngagementSummaryCard />
               </FormManager.Group>
             </div>
           </GridItem>
@@ -58,61 +37,35 @@ export function EngagementOverview({
           <GridItem span={12}>
             <div id="poc_card">
               <FormManager.Group groupName="Point of Contact">
-                <PointOfContactCard
-                  onSave={onSave}
-                  onClear={clearCurrentChanges}
-                  onChange={onChange}
-                  currentEngagement={currentEngagement}
-                  currentEngagementChanges={currentEngagementChanges}
-                  missingRequiredFields={missingRequiredFields}
-                />
+                <PointOfContactCard />
               </FormManager.Group>
             </div>
           </GridItem>
           <GridItem span={12}>
             <div id="user_card">
               <FormManager.Group groupName="Users">
-                <UserCard
-                  onSave={onSave}
-                  onClear={clearCurrentChanges}
-                  onChange={onChange}
-                  engagement={currentEngagementChanges}
-                />
+                <UserCard />
               </FormManager.Group>
             </div>
           </GridItem>
           <GridItem span={12}>
             <div id="oc_summary_card">
               <FormManager.Group groupName="Hosting Environment">
-                <OpenShiftClusterSummaryCard
-                  currentEngagement={currentEngagement}
-                  onSave={onSave}
-                  onClear={clearCurrentChanges}
-                  onChange={hostingEnvironments => {
-                    onChange('hosting_environments', hostingEnvironments);
-                  }}
-                  currentEngagementChanges={currentEngagementChanges}
-                  missingRequiredFields={missingRequiredFields}
-                />
+                <OpenShiftClusterSummaryCard />
               </FormManager.Group>
             </div>
           </GridItem>
           <GridItem span={12}>
             <div id="timeline_card">
               <FormManager.Group groupName="Engagement Artifacts">
-                <EngagementTimelineCard
-                  artifacts={currentEngagementChanges.artifacts}
-                  onClear={clearCurrentChanges}
-                  onSave={onSave}
-                  onChangeArtifacts={value => onChange('artifacts', value)}
-                />
+                <EngagementTimelineCard />
               </FormManager.Group>
             </div>
           </GridItem>
           <GridItem span={12}>
             <div id="activity_card">
               <FormManager.Group groupName="Activity History">
-                <ActivityHistoryCard engagement={currentEngagement} />
+                <ActivityHistoryCard />
               </FormManager.Group>
             </div>
           </GridItem>

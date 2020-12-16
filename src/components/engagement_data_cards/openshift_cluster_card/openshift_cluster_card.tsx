@@ -41,31 +41,27 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
   'environment_name',
 ];
 
-export interface OpenShiftClusterSummaryCardProps {
-  currentEngagement: Engagement;
-  currentEngagementChanges: Partial<Engagement>;
-  onChange: (hostingEnvironments: HostingEnvironment[]) => void;
-  onClear: () => void;
-  onSave: (hostingEnvironments: HostingEnvironment[]) => void;
-  missingRequiredFields: string[];
-}
-
-export function OpenShiftClusterSummaryCard({
-  currentEngagement,
-  currentEngagementChanges,
-  onClear,
-  onChange,
-}: OpenShiftClusterSummaryCardProps) {
+export function OpenShiftClusterSummaryCard() {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
+  const {
+    currentEngagement,
+    currentChanges: currentEngagementChanges,
+    updateEngagementFormField,
+    saveEngagement,
+    engagementFormConfig,
+    clearCurrentChanges,
+  } = useEngagements();
+  const onChange = (hostingEnvironments: HostingEnvironment[]) => {
+    updateEngagementFormField('hosting_environments', hostingEnvironments);
+  };
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
-  const { saveEngagement, engagementFormConfig } = useEngagements();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('hosting_environments'), [registerField]);
   const onClose = () => {
-    onClear();
+    clearCurrentChanges();
     requestClose();
   };
   const getUniqueProviders = (
@@ -253,12 +249,18 @@ export function OpenShiftClusterSummaryCard({
           </Table>
         ) : (
           <EmptyState>
-            <EmptyStateIcon icon={DatabaseIcon} style={{fontSize: '34px', margin: '0'}}/>
-            <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
+            <EmptyStateIcon
+              icon={DatabaseIcon}
+              style={{ fontSize: '34px', margin: '0' }}
+            />
+            <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
               No Hosting Environments Added
             </Title>
             <EmptyStateBody>
-              <p>Click 'Add Hosting Environment' to start adding hosting environments</p>
+              <p>
+                Click 'Add Hosting Environment' to start adding hosting
+                environments
+              </p>
             </EmptyStateBody>
           </EmptyState>
         )}
