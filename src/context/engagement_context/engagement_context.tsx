@@ -51,7 +51,6 @@ export interface IEngagementContext {
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
   fetchCategories: () => void;
-  saveChanges: () => void;
   categories?: EngagementCategory[];
 }
 
@@ -403,7 +402,28 @@ export const EngagementProvider = ({
   }, [currentEngagement, _validateHostingEnvironment]);
 
   const saveEngagement = useCallback(
-    async (data: Engagement, commitMessage?: string) => {
+    async (data: Engagement) => {
+      const _createCommitMessage = (
+        changedFields: string[],
+        fieldGroupings: { [key: string]: string[] } = {}
+      ): string => {
+        const changedGroups = Array.from(
+          new Set(
+            changedFields
+              .map(field =>
+                Object.keys(fieldGroupings).find(group =>
+                  fieldGroupings[group].includes(field)
+                )
+              )
+              .filter(group => !!group)
+          )
+        );
+        const commitMessage = `Changed ${changedGroups.join(
+          ', '
+        )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
+        return commitMessage;
+      };
+      const commitMessage = _createCommitMessage(changedFields, fieldGroups);
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
@@ -445,6 +465,8 @@ export const EngagementProvider = ({
       _updateEngagementInPlace,
       engagementService,
       _handleErrors,
+      changedFields,
+      fieldGroups,
       setCurrentEngagement,
     ]
   );
@@ -529,35 +551,6 @@ export const EngagementProvider = ({
       });
     } catch (e) {}
   };
-  const saveChanges = () => {
-    const _createCommitMessage = (
-      changedFields: string[],
-      fieldGroupings: { [key: string]: string[] } = {}
-    ): string => {
-      const changedGroups = Array.from(
-        new Set(
-          changedFields
-            .map(field =>
-              Object.keys(fieldGroupings).find(group =>
-                fieldGroupings[group].includes(field)
-              )
-            )
-            .filter(group => !!group)
-        )
-      );
-      const commitMessage = `Changed ${changedGroups.join(
-        ', '
-      )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
-      return commitMessage;
-    };
-    const commitMessage = _createCommitMessage(changedFields, fieldGroups);
-    saveEngagement(
-      { ...currentEngagement, ...currentEngagementChanges },
-      commitMessage
-    );
-    setChangedFields([]);
-    clearCurrentChanges();
-  };
   return (
     <Provider
       value={{
@@ -583,7 +576,6 @@ export const EngagementProvider = ({
         },
         clearCurrentChanges,
         updateEngagementFormField,
-        saveChanges,
         setFieldGroups,
       }}
     >
