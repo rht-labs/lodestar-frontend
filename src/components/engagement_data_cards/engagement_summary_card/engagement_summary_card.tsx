@@ -10,25 +10,19 @@ import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { EngagementStatusText } from '../../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
-export interface EngagementSummaryCardProps {
-  currentEngagement: Engagement;
-  currentEngagementChanges: Partial<Engagement>;
-  onChange: (fieldName: string, value: any) => void;
-  onSave: (engagement: Engagement) => void;
-  onClear: () => void;
-  missingRequiredFields: string[];
-}
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
-export function EngagementSummaryCard({
-  onClear,
-  currentEngagement,
-  currentEngagementChanges,
-  onChange = () => null,
-  missingRequiredFields,
-  onSave,
-}: EngagementSummaryCardProps) {
+export function EngagementSummaryCard() {
+  const {
+    clearCurrentChanges,
+    currentEngagement,
+    missingRequiredFields,
+    currentChanges,
+    saveEngagement,
+    updateEngagementFormField,
+  } = useEngagements();
   const { requestClose, requestOpen, activeModalKey } = useModalVisibility();
   const engagementSummaryRequiredFields = [
     'customer_name',
@@ -39,15 +33,18 @@ export function EngagementSummaryCard({
   const status = getEngagementStatus(currentEngagement);
   const onClose = () => {
     requestClose();
-    onClear();
+    clearCurrentChanges();
+  };
+  const onSave = (engagement: Engagement) => {
+    saveEngagement(engagement);
   };
   return (
     <>
       <EngagementSummaryEditModal
         onClose={onClose}
         onSave={onSave}
-        onChange={onChange}
-        engagement={currentEngagementChanges}
+        onChange={updateEngagementFormField}
+        engagement={currentChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard

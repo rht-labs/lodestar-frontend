@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { Route, useParams, Switch, useRouteMatch } from 'react-router';
-import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
-import { Alert } from '@patternfly/react-core';
-import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
-import { EngagementOverview } from './overview';
-import { EngagementJsonDump } from './json_dump';
-import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
+import React, { useEffect } from "react";
+import { Engagement } from "../../schemas/engagement";
+import { useEngagements } from "../../context/engagement_context/engagement_hook";
+import { Route, useParams, Switch, useRouteMatch } from "react-router";
+import { getValidatorsFromEngagementFormConfig } from "../../common/config_validator_adapter";
+import { ValidationProvider } from "../../context/validation_context/validation_context";
+import { EngagementDetailsViewTemplate } from "../../layout/engagement_details_view";
+import { EngagementOverview } from "./overview";
+import { EngagementJsonDump } from "./json_dump";
+import { EngagementJsonSerializer } from "../../serializers/engagement/engagement_json_serializer";
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
@@ -33,7 +32,6 @@ export const EngagementDetailView = () => {
   const {
     createEngagementPoll,
     saveEngagement,
-    error: engagementFormRequestError,
     setCurrentEngagement,
     getEngagement,
     currentEngagement,
@@ -59,21 +57,13 @@ export const EngagementDetailView = () => {
     if (!customer_name || !project_name) {
       return;
     }
-    getEngagement(customer_name, project_name).then(engagement => {
+    getEngagement(customer_name, project_name).then((engagement) => {
       if (engagement) {
         setCurrentEngagement(engagement);
       } else {
       }
     });
   }, [customer_name, project_name, getEngagement, setCurrentEngagement]);
-
-  const AlertMessage = () => {
-    return engagementFormRequestError ? (
-      <Alert isInline title="We encountered an error." variant="danger">
-        {engagementFormRequestError.message}
-      </Alert>
-    ) : null;
-  };
 
   const validators = getValidatorsFromEngagementFormConfig(
     engagementFormConfig
@@ -97,7 +87,6 @@ export const EngagementDetailView = () => {
         engagement={currentEngagement}
         onSave={saveChanges}
       >
-        <AlertMessage />
         <Switch>
           <Route path={`${url}/json`}>
             <EngagementJsonDump
@@ -106,7 +95,7 @@ export const EngagementDetailView = () => {
                 null,
                 2
               )}
-              onSave={value => {
+              onSave={(value) => {
                 saveEngagement(serializer.deserialize(JSON.parse(value)));
               }}
             />

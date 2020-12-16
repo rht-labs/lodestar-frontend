@@ -1,19 +1,18 @@
-import React, { createContext, useEffect, useReducer, useRef } from 'react';
+import React, { createContext, useEffect, useRef } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 import {
-  FeedbackContext,
   AlertType,
+  IFeedbackContext,
 } from '../feedback_context/feedback_context';
 import {
   AnalyticsCategory,
-  AnalyticsContext,
+  IAnalyticsContext,
 } from '../analytics_context/analytics_context';
 import { AuthenticationError } from '../../services/auth_service/auth_errors';
-import { AuthContext } from '../auth_context/auth_context';
 import {
   EngagementPoll,
   EngagementPollIntervalStrategy,
@@ -22,10 +21,8 @@ import { EngagementService } from '../../services/engagement_service/engagement_
 import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
-import {
-  engagementFormReducer,
-  getInitialState,
-} from './engagement_form_reducer';
+import { getInitialState } from './engagement_form_reducer';
+import { IAuthContext } from '../auth_context/auth_context';
 export type FieldGroup = { [key: string]: string[] };
 
 export interface IEngagementContext {
@@ -33,9 +30,9 @@ export interface IEngagementContext {
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
-  updateEngagementFormField: (field: string, value: any) => void;
+  updateEngagementFormField: (field: keyof Engagement, value: any) => void;
   fieldGroups: FieldGroup;
-  currentChanges: Partial<Engagement>;
+  currentChanges: Engagement;
   setFieldGroups: (groups: FieldGroup) => void;
   clearCurrentChanges: () => void;
   requiredFields: string[];
@@ -48,8 +45,6 @@ export interface IEngagementContext {
   missingRequiredFields: string[];
   isLaunchable: boolean;
   engagementFormConfig?: EngagementFormConfig;
-  error: any;
-  isLoading: boolean;
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
   fetchCategories: () => void;
@@ -83,24 +78,40 @@ export const EngagementProvider = ({
   engagementService,
   categoryService,
   feedbackContext,
-  analyticsContext,
   authContext,
+  analyticsContext,
 }: {
   children: React.ReactChild;
-  authContext: AuthContext;
+  authContext: IAuthContext;
   engagementService: EngagementService;
   categoryService: CategoryService;
-  feedbackContext: FeedbackContext;
-  analyticsContext?: AnalyticsContext;
+  feedbackContext: IFeedbackContext;
+  analyticsContext?: IAnalyticsContext;
 }) => {
-  const [error] = useState<any>();
-  const [isLoading] = useState<boolean>(false);
   const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
-  const [currentEngagement, setCurrentEngagement] = useState<
+  const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
+  const setCurrentEngagement = useCallback(
+    (engagement: Engagement) => {
+      setCurrentEngagementChanges(getInitialState(engagement));
+      _setCurrentEngagement(engagement);
+    },
+    [_setCurrentEngagement]
+  );
+  const [engagementFormConfig, setEngagementFormConfig] = useState<
+    EngagementFormConfig
+  >();
+  const [currentEngagementChanges, setCurrentEngagementChanges] = useState<
+    Partial<Engagement>
+  >(getInitialState(currentEngagement));
 
+  const [changedFields, setChangedFields] = useState<string[]>([]);
+  const [fieldGroups, setFieldGroups] = useState<FieldGroup>();
+  const clearCurrentChanges = useCallback(() => {
+    setCurrentEngagementChanges(getInitialState(currentEngagement));
+  }, [setCurrentEngagementChanges, currentEngagement]);
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);
@@ -182,7 +193,12 @@ export const EngagementProvider = ({
         _handleErrors(e);
       }
     },
-    [_updateEngagementInPlace, engagementService, _handleErrors]
+    [
+      _updateEngagementInPlace,
+      engagementService,
+      _handleErrors,
+      setCurrentEngagement,
+    ]
   );
 
   const _checkHasUpdateRef = useRef(async () => false);
@@ -251,7 +267,13 @@ export const EngagementProvider = ({
         }
       }
     },
-    [engagements, feedbackContext, _handleErrors, engagementService]
+    [
+      engagements,
+      feedbackContext,
+      _handleErrors,
+      engagementService,
+      setCurrentEngagement,
+    ]
   );
 
   const _addNewEngagement = useCallback(
@@ -306,6 +328,7 @@ export const EngagementProvider = ({
       _addNewEngagement,
       feedbackContext,
       engagements,
+      setCurrentEngagement,
       _handleErrors,
     ]
   );
@@ -410,6 +433,7 @@ export const EngagementProvider = ({
       _updateEngagementInPlace,
       engagementService,
       _handleErrors,
+      setCurrentEngagement,
     ]
   );
 
@@ -451,9 +475,9 @@ export const EngagementProvider = ({
       engagementService,
       feedbackContext,
       _handleErrors,
+      setCurrentEngagement,
     ]
   );
-
   const fetchCategories = useCallback(async () => {
     try {
       // feedbackContext.showLoader();
@@ -468,9 +492,6 @@ export const EngagementProvider = ({
       }
     }
   }, [categoryService, _handleErrors]);
-  const [engagementFormConfig, setEngagementFormConfig] = useState<
-    EngagementFormConfig
-  >();
 
   const _getEngagementFormConfig = () => {
     if (!engagementFormConfig) {
@@ -481,43 +502,28 @@ export const EngagementProvider = ({
     return engagementFormConfig;
   };
 
-  const [currentEngagementChanges, dispatch] = useReducer<
-    (state: any, action: any) => any
-  >(
-    engagementFormReducer(engagementFormConfig),
-    engagementFormReducer(engagementFormConfig)()
-  );
-  const clearCurrentChanges = useCallback(
-    () =>
-      dispatch({
-        type: 'switch_engagement',
-        payload: getInitialState(currentEngagement),
-      }),
-    [dispatch, currentEngagement]
-  );
-  useEffect(() => {
-    clearCurrentChanges();
-  }, [currentEngagement, engagementFormConfig, clearCurrentChanges]);
-  const [changedFields, setChangedFields] = useState<string[]>([]);
-  const [fieldGroups, setFieldGroups] = useState<FieldGroup>();
+  const updateEngagementFormField = (
+    fieldName: keyof Engagement,
+    value: any
+  ) => {
+    if (!changedFields.includes(fieldName)) {
+      setChangedFields([...changedFields, fieldName]);
+    }
+    const newChanges = {
+      ...currentEngagementChanges,
+      [fieldName]: value,
+    };
+    setCurrentEngagementChanges(newChanges);
+    console.log(newChanges);
 
-  const updateEngagementFormField = useCallback(
-    (fieldName: string, value: any) => {
-      if (!changedFields.includes(fieldName)) {
-        setChangedFields([...changedFields, fieldName]);
-      }
-      dispatch({ type: fieldName, payload: value });
-
-      try {
-        analyticsContext.logEvent({
-          category: AnalyticsCategory.engagements,
-          action: 'Update Engagement',
-        });
-      } catch (e) {}
-    },
-    [analyticsContext, changedFields]
-  );
-  const saveChanges = useCallback(() => {
+    try {
+      analyticsContext.logEvent({
+        category: AnalyticsCategory.engagements,
+        action: 'Update Engagement',
+      });
+    } catch (e) {}
+  };
+  const saveChanges = () => {
     const _createCommitMessage = (
       changedFields: string[],
       fieldGroupings: { [key: string]: string[] } = {}
@@ -545,15 +551,7 @@ export const EngagementProvider = ({
     );
     setChangedFields([]);
     clearCurrentChanges();
-  }, [
-    changedFields,
-    fieldGroups,
-    clearCurrentChanges,
-    setChangedFields,
-    saveEngagement,
-    currentEngagement,
-    currentEngagementChanges,
-  ]);
+  };
   return (
     <Provider
       value={{
@@ -566,8 +564,6 @@ export const EngagementProvider = ({
         setCurrentEngagement,
         engagements,
         getEngagement,
-        error,
-        isLoading,
         getEngagements: fetchEngagements,
         createEngagement,
         saveEngagement,

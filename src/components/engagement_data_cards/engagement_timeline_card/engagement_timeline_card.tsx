@@ -24,6 +24,7 @@ import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_mod
 import { ClipboardCheckIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Feature } from '../../feature/feature';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
@@ -34,7 +35,15 @@ export interface EngagementTimelineCardProps {
 
 const ARTIFACT_CRUD_MODAL = 'artifact_crud_modal';
 
-export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
+export function EngagementTimelineCard() {
+  const {
+    currentChanges,
+    currentEngagement,
+    updateEngagementFormField,
+    saveEngagement,
+    clearCurrentChanges,
+  } = useEngagements();
+  const { artifacts } = currentEngagement;
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifact, setCurrentArtifact] = useState<Artifact>();
   const _getUniqueArtifacts = (artifacts: Array<Artifact>): Array<Artifact> => {
@@ -60,10 +69,17 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
     setCurrentArtifact({ id: uuid() } as Artifact);
   };
 
-  const _onSave = (artifact: Artifact) => {
-    const artifacts = _getUniqueArtifacts([...props.artifacts, artifact]);
-    props.onChangeArtifacts(artifacts);
-    props.onSave(artifacts);
+  const onChangeArtifacts = (artifacts: Artifact[]) => {
+    updateEngagementFormField('artifacts', artifacts);
+  };
+
+  const onSave = (artifacts: Artifact[]) =>
+    saveEngagement({ ...currentChanges, artifacts });
+
+  const onFinishArtifactEdit = (artifact: Artifact) => {
+    const newArtifacts = _getUniqueArtifacts([...artifacts, artifact]);
+    onChangeArtifacts(newArtifacts);
+    onSave(newArtifacts);
   };
 
   return (
@@ -73,9 +89,9 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
         onClose={() => {
           requestClose();
-          props.onClear();
+          // props.onClear();
         }}
-        onSave={_onSave}
+        onSave={onFinishArtifactEdit}
       />
       <DataCard
         title="Engagement Artifacts"
@@ -89,7 +105,10 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         )}
       >
         <EngagementTimelineCardBody
-          {...props}
+          artifacts={currentEngagement?.artifacts}
+          onChangeArtifacts={onChangeArtifacts}
+          onClear={clearCurrentChanges}
+          onSave={artifacts => saveEngagement({ ...currentChanges, artifacts })}
           onAdd={addArtifact}
           editArtifact={onEditArtifact}
         />
@@ -178,8 +197,11 @@ function EngagementTimelineCardBody(
     </Table>
   ) : (
     <EmptyState>
-      <EmptyStateIcon icon={ClipboardCheckIcon} style={{fontSize: '34px', margin: '0'}}/>
-      <Title headingLevel="h5" size="md" style={{marginTop: '0'}}>
+      <EmptyStateIcon
+        icon={ClipboardCheckIcon}
+        style={{ fontSize: '34px', margin: '0' }}
+      />
+      <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
         No Artifacts Added
       </Title>
       <EmptyStateBody>
