@@ -69,7 +69,7 @@ const requiredFields = [
   'technical_lead_name',
   'project_name',
 ];
-export const EngagementContext = createContext<IEngagementContext>(null);
+export const EngagementContext = createContext<IEngagementContext>({});
 
 const { Provider } = EngagementContext;
 
