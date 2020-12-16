@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FormSelect,
   FormSelectOption,
@@ -16,44 +16,40 @@ import { EngagementUser } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface UserRowProps {
-  users: any,
-  user: any;
-  onChange: (users: EngagementUser[]) => void;
+  user: EngagementUser;
+  onChange: (user: EngagementUser) => void;
   toggleDeleted: (email: string) => void;
   validateEmail: (email: string) => boolean,
   validateString: (name: string) => boolean,
   validateRole: (role: string) => boolean,
-  deletedUsers: string[];
-  key: number
+  isDeleted: boolean;
 }
 
 export const UserRow = ({
-  users,
   user,
   onChange,
   toggleDeleted,
   validateEmail,
   validateString,
   validateRole,
-  deletedUsers,
-  key
+  isDeleted: isUserDeleted,
 }: UserRowProps) => {
+  const copiedUser = {...user};
   const { engagementFormConfig } = useEngagements();
+  const [userEdits, setUserEdits] = useState<Partial<EngagementUser>>({});
   const { hasFeature } = useFeatures();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('engagement_users'), [registerField]);
 
-  const isUserDeleted = deletedUsers.indexOf(user.email) > -1;
-
   return (
-    <div key={key}>
+    <>
       <Grid hasGutter style={{ marginTop: '1rem' }}>
         <GridItem span={3}>
           <FormGroup
             fieldId={'user_email'}
             helperTextInvalid={'Enter valid email address'}
             validated={
-              validateEmail(user.email)
+              validateEmail(copiedUser.email)
                 ? 'default'
                 : 'error' }
           >
@@ -67,12 +63,12 @@ export const UserRow = ({
                 isUserDeleted
               }
               onChange={e => {
-                user.email = e;
-                onChange(users);
+                setUserEdits({...userEdits, email: e});
+                onChange({...copiedUser, ...userEdits});
               }}
               placeholder="Email Address"
               type="email"
-              value={user.email|| ''}
+              value={userEdits.email ?? copiedUser.email ?? ''}
               style={
                 isUserDeleted
                   ? { textDecorationLine: 'line-through' }
@@ -86,7 +82,7 @@ export const UserRow = ({
             fieldId={'user_first_name'}
             helperTextInvalid={'Enter valid first name'}
             validated={
-              validateString(user.first_name)
+              validateString(copiedUser.first_name)
                 ? 'default'
                 : 'error' }
           >
@@ -100,12 +96,12 @@ export const UserRow = ({
                 isUserDeleted
               }
               onChange={e => {
-                user.first_name = e;
-                onChange(users);
+                setUserEdits({...userEdits, first_name: e});
+                onChange({...copiedUser, ...userEdits});
               }}
               placeholder="First Name"
               type="text"
-              value={user.first_name || ''}
+              value={userEdits.first_name?? copiedUser.first_name ?? ''}
               style={
                 isUserDeleted
                   ? { textDecorationLine: 'line-through' }
@@ -119,7 +115,7 @@ export const UserRow = ({
             fieldId={'user_last_name'}
             helperTextInvalid={'Enter valid last name'}
             validated={
-              validateString(user.last_name)
+              validateString(copiedUser.last_name)
                 ? 'default'
                 : 'error' }
           >
@@ -133,12 +129,12 @@ export const UserRow = ({
                 isUserDeleted
               }
               onChange={e => {
-                user.last_name = e;
-                onChange(users);
+                setUserEdits({...userEdits, last_name: e});
+                onChange({...copiedUser, ...userEdits});
               }}
               placeholder="Last Name"
               type="text"
-              value={user.last_name || ''}
+              value={userEdits.last_name ?? copiedUser.last_name ?? ''}
               style={
                 isUserDeleted
                   ? { textDecorationLine: 'line-through' }
@@ -152,7 +148,7 @@ export const UserRow = ({
             fieldId={'user_role'}
             helperTextInvalid={'Select valid role'}
             validated={
-              validateRole(user.role)
+              validateRole(copiedUser.role)
                 ? 'default'
                 : 'error' }
           >
@@ -160,15 +156,14 @@ export const UserRow = ({
               name="role"
               aria-label="User Role"
               id="user_role_dropdown"
-              value={user.role || ''}
+              value={userEdits.role ?? copiedUser.role ?? ''}
               isDisabled={
                 !hasFeature(APP_FEATURES.writer) ||
                 isUserDeleted
               }
               onChange={e => {
-                user.role = e;
-
-                onChange(users);
+                setUserEdits({...userEdits, role: e});
+                  onChange({...copiedUser, ...userEdits});
               }}
               style={
                 isUserDeleted
@@ -206,7 +201,7 @@ export const UserRow = ({
             {isUserDeleted ? (
               <UndoIcon
                 onClick={() => {
-                  toggleDeleted(user.email);
+                  toggleDeleted(copiedUser.email);
                 }}
                 data-test-id={`remove-user-button`}
                 style={{ fontSize: 'small' }}
@@ -214,7 +209,7 @@ export const UserRow = ({
             ) : (
               <TrashIcon
                 onClick={() => {
-                  toggleDeleted(user.email);
+                  toggleDeleted(copiedUser.email);
                 }}
                 style={{ fontSize: 'small' }}
               />
@@ -222,6 +217,6 @@ export const UserRow = ({
           </Feature>
         </GridItem>
       </Grid>
-    </div>
+    </>
   );
 };

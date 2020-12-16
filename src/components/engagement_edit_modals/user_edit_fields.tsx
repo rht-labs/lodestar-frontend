@@ -61,6 +61,12 @@ export const UserEditFields = ({
     },
   ];
 
+  const handleUserEdit = (editedUser: EngagementUser) => {
+    const editedUserIndex = users.findIndex(user => user.uuid === editedUser.uuid);
+    users.splice(editedUserIndex, 1, editedUser);
+    onChange(users);
+  };
+
   return (
     <>
       <Flex direction={{ default: 'column' }}>
@@ -81,17 +87,16 @@ export const UserEditFields = ({
                 <Form>
                   <GridItem>
                     {
-                      users.map((user: any, index: number) => {
+                      users.map((user: any) => {
+                        const isDeleted = deletedUsers.indexOf(user.email) > -1;
                         return(
-                          <UserRow users={users}
-                                   user={user}
-                                   deletedUsers={deletedUsers}
+                          <UserRow user={user}
                                    toggleDeleted={toggleDeleted}
-                                   onChange={onChange}
+                                   onChange={handleUserEdit}
                                    validateEmail={validateEmail}
                                    validateRole={validateRole}
                                    validateString={validateString}
-                                   key={index}
+                                   isDeleted={isDeleted}
                           />
                         )})}
                   </GridItem>
