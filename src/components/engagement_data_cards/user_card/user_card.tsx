@@ -31,6 +31,8 @@ export function UserCard({
     onClear();
   };
 
+  const { currentEngagement } = useEngagements();
+
   function addUser() {
     const newUser = { first_name: '', last_name: '', email: '', role: '' };
     engagement?.engagement_users?.push(newUser);
@@ -64,7 +66,7 @@ export function UserCard({
         )}
         title="Engagement Users"
       >
-        <UserTable users={engagement?.engagement_users ?? []}
+        <UserTable users={currentEngagement?.engagement_users ?? []}
                    handleAddNewUserOrEdit={handleAddNewUserOrEdit}/>
       </DataCard>
     </>
