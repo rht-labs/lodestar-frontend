@@ -1,9 +1,36 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalVariant } from '@patternfly/react-core';
-
+import {
+  Button,
+  Card,
+  CardBody,
+  Flex,
+  FlexItem,
+  Form,
+  Grid,
+  GridItem,
+  Modal,
+  ModalVariant,
+} from '@patternfly/react-core';
+import {
+  validateEmail,
+  validateRole,
+  validateString,
+} from '../../common/user_validation';
+import { UserRolesTooltip } from '../engagement_data_cards/user_card/user_roles_tooltip';
 import { Engagement, EngagementUser } from '../../schemas/engagement';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { UserEditFields } from './user_edit_fields';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableVariant,
+} from '@patternfly/react-table';
+import { UserRow } from './user_row';
+import { Feature } from '../feature/feature';
+import { APP_FEATURES } from '../../common/app_features';
+import { uuid } from 'uuidv4';
+import { PlusIcon } from '@patternfly/react-icons';
+import { useEngagementUserManager } from '../../context/engagement_context/engagement_context';
 
 export interface UserEditModalProps {
   onChange: (users: EngagementUser[]) => void;
@@ -15,52 +42,56 @@ export interface UserEditModalProps {
 }
 export function UserEditModal({
   engagement,
-  onChange,
   onClose = () => {},
   isOpen,
   onSave: propsOnSave,
-  addUser,
 }: UserEditModalProps) {
+  const { users, addUser, updateUser } = useEngagementUserManager();
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
-  function toggleDeleted(email: string) {
-    if (deletedUsers.indexOf(email) < 0) {
-      setDeletedUsers([...deletedUsers, email]);
+  function toggleDeleted(user: EngagementUser) {
+    if (deletedUsers.indexOf(user.uuid) < 0) {
+      setDeletedUsers([...deletedUsers, user.uuid]);
     } else {
       const newDeletedUsers = [...deletedUsers];
-      newDeletedUsers.splice(deletedUsers.indexOf(email), 1);
+      newDeletedUsers.splice(deletedUsers.indexOf(user.uuid), 1);
       setDeletedUsers(newDeletedUsers);
     }
   }
-
-  function removeUser() {
-    deletedUsers?.forEach(userEmail => {
-      engagement.engagement_users.splice(
-        engagement.engagement_users.findIndex(user => {
-          return user.email === userEmail;
-        }),
-        1
-      );
-    });
-    onChange(engagement.engagement_users);
-    setDeletedUsers([]);
-  }
+  const deletedUsersFilter = (u: EngagementUser) =>
+    !deletedUsers.includes(u.uuid);
 
   const onSave = () => {
-    removeUser();
-    propsOnSave(engagement.engagement_users);
+    const newUsers = users.filter(deletedUsersFilter);
+    propsOnSave(newUsers);
     onClose();
   };
 
-  const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
-    if (!acc) return acc;
-    return (
-      validateEmail(user.email) &&
-      validateString(user.first_name) &&
-      validateString(user.last_name) &&
-      validateRole(user.role)
-    );
-  }, true);
+  const columns = [
+    { title: 'Email' },
+    { title: 'First name' },
+    { title: 'Last name' },
+    {
+      title: (
+        <>
+          Role
+          <UserRolesTooltip />
+        </>
+      ),
+    },
+  ];
+
+  const areFieldsValid = engagement?.engagement_users
+    ?.filter(deletedUsersFilter)
+    ?.reduce?.((acc, user) => {
+      if (!acc) return acc;
+      return (
+        validateEmail(user.email) &&
+        validateString(user.first_name) &&
+        validateString(user.last_name) &&
+        validateRole(user.role)
+      );
+    }, true);
 
   return (
     <Modal
@@ -93,36 +124,59 @@ export function UserEditModal({
           </div>
         }
       >
-        <div>
-          {
-            <UserEditFields
-              users={engagement.engagement_users}
-              onChange={onChange}
-              toggleDeleted={toggleDeleted}
-              deletedUsers={deletedUsers}
-              addUser={addUser}
-              validateEmail={validateEmail}
-              validateString={validateString}
-              validateRole={validateRole}
-            />
-          }
-        </div>
+        <>
+          <Flex direction={{ default: 'column' }}>
+            <FlexItem>
+              <Card isFlat style={{ borderWidth: 0, padding: '1rem' }}>
+                <CardBody>
+                  <Table
+                    aria-label="Engagement users table"
+                    variant={TableVariant.compact}
+                    borders={true}
+                    cells={columns}
+                    rows={[]}
+                  >
+                    <TableHeader />
+                    <TableBody />
+                  </Table>
+                  <Grid hasGutter>
+                    <Form>
+                      <GridItem>
+                        {users.map(user => {
+                          const isDeleted =
+                            deletedUsers.indexOf(user.uuid) > -1;
+                          console.log(user.email);
+                          return (
+                            <UserRow
+                              key={user.uuid}
+                              user={user}
+                              toggleDeleted={toggleDeleted}
+                              onChange={updateUser}
+                              isDeleted={isDeleted}
+                            />
+                          );
+                        })}
+                      </GridItem>
+                      <Feature name={APP_FEATURES.writer}>
+                        <Button
+                          variant="secondary"
+                          onClick={() =>
+                            addUser({ uuid: uuid() } as EngagementUser)
+                          }
+                          data-testid={'add-first-user'}
+                          data-cy={'add_new_user'}
+                        >
+                          <PlusIcon style={{ fontSize: 'small' }} /> Add User
+                        </Button>
+                      </Feature>
+                    </Form>
+                  </Grid>
+                </CardBody>
+              </Card>
+            </FlexItem>
+          </Flex>
+        </>
       </EditModalTemplate>
     </Modal>
   );
-}
-
-function validateEmail(email: string) {
-  // eslint-disable-next-line
-  let regexEmail = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
-  return regexEmail.test(email);
-}
-
-function validateString(name: string) {
-  let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]+$/;
-  return regexString.test(name);
-}
-
-function validateRole(role: string) {
-  return !(role === undefined || role === '');
 }

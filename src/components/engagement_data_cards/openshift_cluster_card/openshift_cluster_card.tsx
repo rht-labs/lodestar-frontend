@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import slugify from 'slugify';
@@ -28,8 +28,8 @@ import { Feature } from '../../feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import { FormManager } from '../../../context/form_manager/form_manager';
 import { ReadyCheck } from '../../ready_check/ready_check';
+import { useEngagementFormField } from '../../../context/engagement_context/engagement_context';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
@@ -58,8 +58,9 @@ export function OpenShiftClusterSummaryCard() {
   };
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('hosting_environments'), [registerField]);
+  const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
+    'hosting_environments'
+  );
   const onClose = () => {
     clearCurrentChanges();
     requestClose();
@@ -72,14 +73,14 @@ export function OpenShiftClusterSummaryCard() {
     );
   };
   const onSave = (hostingEnvironment: HostingEnvironment) => {
-    const hostingEnvironments = getUniqueProviders([
-      ...currentEngagementChanges.hosting_environments,
+    const newEnvironments = getUniqueProviders([
+      ...hostingEnvironments,
       hostingEnvironment,
     ]);
-    onChange(hostingEnvironments);
+    setHostingEnvironments(newEnvironments);
     saveEngagement({
       ...(currentEngagementChanges as Engagement),
-      hosting_environments: hostingEnvironments,
+      hosting_environments: newEnvironments,
     });
   };
   const openHostingEnvironmentModal = (

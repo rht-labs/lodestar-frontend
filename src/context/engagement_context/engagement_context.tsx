@@ -1,5 +1,11 @@
-import React, { createContext, useEffect, useRef, useReducer } from 'react';
-import { Engagement } from '../../schemas/engagement';
+import React, {
+  createContext,
+  useEffect,
+  useRef,
+  useReducer,
+  useContext,
+} from 'react';
+import { Artifact, Engagement, EngagementUser } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -584,4 +590,127 @@ export const EngagementProvider = ({
   );
 };
 
-// EngagementProvider.whyDidYouRender = false;
+export const useEngagementFormConfig = () => {
+  const engagementContext = useContext(EngagementContext);
+  return {
+    engagementFormConfig: engagementContext.engagementFormConfig,
+  };
+};
+
+export const useEngagementDetails = () => {
+  const engagementContext = useContext(EngagementContext);
+  return {
+    startDate: engagementContext.currentEngagement.start_date,
+    endDate: engagementContext.currentEngagement.end_date,
+    archiveDate: engagementContext.currentEngagement.archive_date,
+  };
+};
+
+export const useEngagement = (customerName: string, projectName: string) => {
+  const engagementContext = useContext(EngagementContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    setIsLoading(true);
+    engagementContext
+      .getEngagement(customerName, projectName)
+      .then(engagement => engagementContext.setCurrentEngagement(engagement))
+      .catch(error => setError(error))
+      .finally(() => setIsLoading(false));
+  }, [engagementContext, customerName, projectName]);
+  return [engagementContext.currentEngagement, error, isLoading];
+};
+
+export const useEngagementFormField = <K extends keyof Engagement>(
+  formField: K,
+  group?: string
+): [Engagement[K], (value: Engagement[K]) => void] => {
+  const engagementContext = useContext(EngagementContext);
+
+  const value = engagementContext?.currentChanges?.[formField];
+
+  const updateValue = (value: Engagement[K]) => {
+    engagementContext.updateEngagementFormField(formField, value);
+  };
+
+  return [value, updateValue];
+};
+
+export const useEngagementArtifacts = () => {
+  const { currentEngagement, updateEngagementFormField } = useContext(
+    EngagementContext
+  );
+  const { artifacts } = currentEngagement ?? {};
+  const addArtifact = (artifact: Artifact) => {
+    updateEngagementFormField('artifacts', [...artifacts, artifact]);
+    return [...artifacts, artifact];
+  };
+  const removeArtifact = (artifact: Artifact) => {
+    const artifactsClone = [...artifacts];
+    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    artifactsClone.splice(removeIndex, 1);
+    updateEngagementFormField('artifacts', artifactsClone);
+    return artifactsClone;
+  };
+  return {
+    artifacts: artifacts ?? [],
+    addArtifact,
+    removeArtifact,
+  };
+};
+
+export const useEngagementUserManager = () => {
+  const {
+    currentChanges = {} as Partial<Engagement>,
+    updateEngagementFormField,
+  } = useContext(EngagementContext);
+  const { engagement_users: users = [] } = currentChanges;
+
+  const addUser = (user: EngagementUser) => {
+    const newUsers = [...users, user];
+    updateEngagementFormField('engagement_users', newUsers);
+    return newUsers;
+  };
+
+  const updateUser = (user: EngagementUser) => {
+    const updateIndex = users.findIndex(u => u.uuid === user.uuid);
+    const newUsers = [...users];
+    newUsers.splice(updateIndex, 1, user);
+    updateEngagementFormField('engagement_users', newUsers);
+    return newUsers;
+  };
+
+  return {
+    addUser,
+    updateUser,
+    users,
+  };
+};
+
+export const useEngagementUser = (user: EngagementUser) => {
+  function validateEmail(email: string) {
+    // eslint-disable-next-line
+    let regexEmail = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
+    return regexEmail.test(email);
+  }
+
+  function validateString(name: string) {
+    let regexString = /^[\w'\-,.]*[^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]+$/;
+    return regexString.test(name);
+  }
+
+  function validateRole(role: string) {
+    return !(role === undefined || role === '');
+  }
+  const [currentUserEdits, _setUser] = useState(user);
+  const setUser = (user: Partial<EngagementUser>) => {
+    _setUser({ ...currentUserEdits, ...user });
+  };
+  const isValid =
+    validateEmail(user.email) &&
+    validateString(user.first_name) &&
+    validateString(user.last_name) &&
+    validateRole(user.role);
+  return [currentUserEdits, isValid, setUser];
+};
