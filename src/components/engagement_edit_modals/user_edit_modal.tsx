@@ -41,6 +41,10 @@ export function UserEditModal({
   isOpen,
   onSave: propsOnSave,
 }: UserEditModalProps) {
+  const { engagement_users: users = [] } = engagement;
+  // const { users, addUser, removeUser, updateUser } = useEngagementUserManager(
+  //   engagement.engagement_users
+  // );
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
   function toggleDeleted(user: EngagementUser) {
@@ -61,7 +65,6 @@ export function UserEditModal({
     onClose();
   };
 
-  const { addUser, users } = useEngagementUserManager();
   const columns = [
     { title: 'Email' },
     { title: 'First name' },
@@ -77,20 +80,17 @@ export function UserEditModal({
   ];
 
   const handleUserEdit = (editedUser: EngagementUser) => {
-    const editedUserIndex = users.findIndex(
-      user => user.uuid === editedUser.uuid
-    );
-    users.splice(editedUserIndex, 1, editedUser);
+    //
   };
-  const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
-    if (!acc) return acc;
-    return (
-      validateEmail(user.email) &&
-      validateString(user.first_name) &&
-      validateString(user.last_name) &&
-      validateRole(user.role)
-    );
-  }, true);
+  // const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
+  //   if (!acc) return acc;
+  //   return (
+  //     validateEmail(user.email) &&
+  //     validateString(user.first_name) &&
+  //     validateString(user.last_name) &&
+  //     validateRole(user.role)
+  //   );
+  // }, true);
 
   return (
     <Modal
@@ -116,7 +116,7 @@ export function UserEditModal({
               onClick={onSave}
               data-cy={'save_users'}
               style={{ margin: '1rem' }}
-              isDisabled={!areFieldsValid}
+              isDisabled={false}
             >
               Save
             </Button>
@@ -150,9 +150,6 @@ export function UserEditModal({
                               user={user}
                               toggleDeleted={toggleDeleted}
                               onChange={handleUserEdit}
-                              validateEmail={validateEmail}
-                              validateRole={validateRole}
-                              validateString={validateString}
                               isDeleted={isDeleted}
                             />
                           );

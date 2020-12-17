@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FormSelect,
   FormSelectOption,
@@ -11,17 +11,14 @@ import { TrashIcon, UndoIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 import { useFeatures } from '../../context/feature_context/feature_hook';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { EngagementUser } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagementUser } from '../../context/engagement_context/engagement_context';
 
 export interface UserRowProps {
   user: EngagementUser;
   onChange: (user: EngagementUser) => void;
   toggleDeleted: (user: EngagementUser) => void;
-  validateEmail: (email: string) => boolean;
-  validateString: (name: string) => boolean;
-  validateRole: (role: string) => boolean;
   isDeleted: boolean;
 }
 
@@ -29,11 +26,9 @@ export const UserRow = ({
   user,
   onChange,
   toggleDeleted,
-  validateEmail,
-  validateString,
-  validateRole,
   isDeleted: isUserDeleted,
 }: UserRowProps) => {
+  const [engagementUser, isValid, modifyUser] = useEngagementUser(user);
   const copiedUser = { ...user };
   const { engagementFormConfig } = useEngagements();
   const [userEdits, setUserEdits] = useState<Partial<EngagementUser>>({});
@@ -46,7 +41,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_email'}
             helperTextInvalid={'Enter valid email address'}
-            validated={validateEmail(copiedUser.email) ? 'default' : 'error'}
+            validated={'default'}
           >
             <TextInput
               aria-label="email"
@@ -72,9 +67,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_first_name'}
             helperTextInvalid={'Enter valid first name'}
-            validated={
-              validateString(copiedUser.first_name) ? 'default' : 'error'
-            }
+            validated={'default'}
           >
             <TextInput
               aria-label="First Name"
@@ -100,9 +93,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_last_name'}
             helperTextInvalid={'Enter valid last name'}
-            validated={
-              validateString(copiedUser.last_name) ? 'default' : 'error'
-            }
+            validated={'default'}
           >
             <TextInput
               aria-label="Last Name"
@@ -128,7 +119,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_role'}
             helperTextInvalid={'Select valid role'}
-            validated={validateRole(copiedUser.role) ? 'default' : 'error'}
+            validated={'default'}
           >
             <FormSelect
               name="role"
