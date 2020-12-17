@@ -5,7 +5,7 @@ import React, {
   useReducer,
   useContext,
 } from 'react';
-import { Artifact, Engagement } from '../../schemas/engagement';
+import { Artifact, Engagement, EngagementUser } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -659,3 +659,38 @@ export const useEngagementArtifacts = () => {
     removeArtifact,
   };
 };
+
+export const useEngagementUser = () => {
+  const {
+    updateEngagementFormField,
+    currentChanges = {} as Engagement,
+  } = useContext(EngagementContext);
+  const { engagement_users: users = [] } = currentChanges;
+  const addUser = (user: EngagementUser) => {
+    updateEngagementFormField('engagement_users', [
+      ...currentChanges.engagement_users,
+      user,
+    ]);
+  };
+  function removeUser(user: EngagementUser) {
+    const userCopy = [...users];
+    const deleteIndex = users.findIndex(u => u.uuid === user.uuid);
+    userCopy.splice(deleteIndex, 1);
+    updateEngagementFormField('engagement_users', userCopy);
+    return userCopy;
+  }
+  const updateUser = (user: EngagementUser) => {};
+
+  return {
+    addUser,
+    removeUser,
+    updateUser,
+    users,
+  };
+};
+
+// export const useEngagementUser = (user: EngagementUser) => {
+//   const [currentUserEdits, setUser] = useState(user);
+
+//   return [currentUserEdits, setUser];
+// };

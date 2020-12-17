@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FormSelect,
   FormSelectOption,
@@ -18,10 +18,10 @@ import { useEngagements } from '../../context/engagement_context/engagement_hook
 export interface UserRowProps {
   user: EngagementUser;
   onChange: (user: EngagementUser) => void;
-  toggleDeleted: (email: string) => void;
-  validateEmail: (email: string) => boolean,
-  validateString: (name: string) => boolean,
-  validateRole: (role: string) => boolean,
+  toggleDeleted: (user: EngagementUser) => void;
+  validateEmail: (email: string) => boolean;
+  validateString: (name: string) => boolean;
+  validateRole: (role: string) => boolean;
   isDeleted: boolean;
 }
 
@@ -34,12 +34,10 @@ export const UserRow = ({
   validateRole,
   isDeleted: isUserDeleted,
 }: UserRowProps) => {
-  const copiedUser = {...user};
+  const copiedUser = { ...user };
   const { engagementFormConfig } = useEngagements();
   const [userEdits, setUserEdits] = useState<Partial<EngagementUser>>({});
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('engagement_users'), [registerField]);
 
   return (
     <>
@@ -48,32 +46,24 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_email'}
             helperTextInvalid={'Enter valid email address'}
-            validated={
-              validateEmail(copiedUser.email)
-                ? 'default'
-                : 'error' }
+            validated={validateEmail(copiedUser.email) ? 'default' : 'error'}
           >
             <TextInput
               aria-label="email"
               name="email"
               data-cy={'input_user_email'}
               isRequired
-              isDisabled={
-                !hasFeature(APP_FEATURES.writer) ||
-                isUserDeleted
-              }
-              onChange={ e => {
-                const newEdit = {...userEdits, email: e};
+              isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+              onChange={e => {
+                const newEdit = { ...userEdits, email: e };
                 setUserEdits(newEdit);
-                onChange({...copiedUser, ...newEdit})
+                onChange({ ...copiedUser, ...newEdit });
               }}
               placeholder="Email Address"
               type="email"
               value={userEdits.email ?? copiedUser.email ?? ''}
               style={
-                isUserDeleted
-                  ? { textDecorationLine: 'line-through' }
-                  : {}
+                isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
             />
           </FormGroup>
@@ -83,30 +73,25 @@ export const UserRow = ({
             fieldId={'user_first_name'}
             helperTextInvalid={'Enter valid first name'}
             validated={
-              validateString(copiedUser.first_name)
-                ? 'default'
-                : 'error' }
+              validateString(copiedUser.first_name) ? 'default' : 'error'
+            }
           >
             <TextInput
               aria-label="First Name"
               name="first-name"
               data-cy={'input_user_firstname'}
               isRequired
-              isDisabled={
-                !hasFeature(APP_FEATURES.writer) ||
-                isUserDeleted
-              }
-              onChange={ e => {
-                const newEdit = {...userEdits, first_name: e};
+              isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+              onChange={e => {
+                const newEdit = { ...userEdits, first_name: e };
                 setUserEdits(newEdit);
-                onChange({...copiedUser, ...newEdit})
-              }}              placeholder="First Name"
+                onChange({ ...copiedUser, ...newEdit });
+              }}
+              placeholder="First Name"
               type="text"
-              value={userEdits.first_name?? copiedUser.first_name ?? ''}
+              value={userEdits.first_name ?? copiedUser.first_name ?? ''}
               style={
-                isUserDeleted
-                  ? { textDecorationLine: 'line-through' }
-                  : {}
+                isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
             />
           </FormGroup>
@@ -116,31 +101,25 @@ export const UserRow = ({
             fieldId={'user_last_name'}
             helperTextInvalid={'Enter valid last name'}
             validated={
-              validateString(copiedUser.last_name)
-                ? 'default'
-                : 'error' }
+              validateString(copiedUser.last_name) ? 'default' : 'error'
+            }
           >
             <TextInput
               aria-label="Last Name"
               name="last-name"
               data-cy={'input_user_lastname'}
               isRequired
-              isDisabled={
-                !hasFeature(APP_FEATURES.writer) ||
-                isUserDeleted
-              }
-              onChange={ e => {
-                const newEdit = {...userEdits, last_name: e};
+              isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+              onChange={e => {
+                const newEdit = { ...userEdits, last_name: e };
                 setUserEdits(newEdit);
-                onChange({...copiedUser, ...newEdit})
+                onChange({ ...copiedUser, ...newEdit });
               }}
               placeholder="Last Name"
               type="text"
               value={userEdits.last_name ?? copiedUser.last_name ?? ''}
               style={
-                isUserDeleted
-                  ? { textDecorationLine: 'line-through' }
-                  : {}
+                isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
             />
           </FormGroup>
@@ -149,29 +128,21 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_role'}
             helperTextInvalid={'Select valid role'}
-            validated={
-              validateRole(copiedUser.role)
-                ? 'default'
-                : 'error' }
+            validated={validateRole(copiedUser.role) ? 'default' : 'error'}
           >
             <FormSelect
               name="role"
               aria-label="User Role"
               id="user_role_dropdown"
               value={userEdits.role ?? copiedUser.role ?? ''}
-              isDisabled={
-                !hasFeature(APP_FEATURES.writer) ||
-                isUserDeleted
-              }
-              onChange={ e => {
-                const newEdit = {...userEdits, role: e};
+              isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+              onChange={e => {
+                const newEdit = { ...userEdits, role: e };
                 setUserEdits(newEdit);
-                onChange({...copiedUser, ...newEdit})
+                onChange({ ...copiedUser, ...newEdit });
               }}
               style={
-                isUserDeleted
-                  ? { textDecorationLine: 'line-through' }
-                  : {}
+                isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
               isRequired
             >
@@ -184,8 +155,7 @@ export const UserRow = ({
                 />,
               ].concat(
                 (
-                  engagementFormConfig?.user_options
-                    ?.user_roles?.options ?? []
+                  engagementFormConfig?.user_options?.user_roles?.options ?? []
                 )?.map((option: any, index: number) => (
                   <FormSelectOption
                     isDisabled={option.disabled}
@@ -204,7 +174,7 @@ export const UserRow = ({
             {isUserDeleted ? (
               <UndoIcon
                 onClick={() => {
-                  toggleDeleted(copiedUser.email);
+                  toggleDeleted(copiedUser);
                 }}
                 data-test-id={`remove-user-button`}
                 style={{ fontSize: 'small' }}
@@ -212,7 +182,7 @@ export const UserRow = ({
             ) : (
               <TrashIcon
                 onClick={() => {
-                  toggleDeleted(copiedUser.email);
+                  toggleDeleted(copiedUser);
                 }}
                 style={{ fontSize: 'small' }}
               />
