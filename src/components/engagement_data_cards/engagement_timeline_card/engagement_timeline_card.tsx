@@ -43,7 +43,7 @@ export function EngagementTimelineCard() {
     saveEngagement,
     clearCurrentChanges,
   } = useEngagements();
-  const { artifacts } = currentEngagement;
+  const { artifacts = [] } = currentEngagement;
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifact, setCurrentArtifact] = useState<Artifact>();
   const _getUniqueArtifacts = (artifacts: Array<Artifact>): Array<Artifact> => {

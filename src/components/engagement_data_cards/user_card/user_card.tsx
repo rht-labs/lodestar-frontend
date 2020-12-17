@@ -42,7 +42,7 @@ export function UserCard() {
   };
 
   function addUser() {
-    const newUser = { first_name: '', last_name: '', email: '', role: '', uuid: uuid() };
+    const newUser = { first_name: '', last_name: '', email: '', role: '' , uuid: uuid()};
     const engagementUsers = [...(engagement?.engagement_users ?? [])];
     engagementUsers.push(newUser);
     updateEngagementFormField('engagement_users', engagementUsers);
@@ -116,14 +116,13 @@ const UserTable = ({
     engagementFormConfig?.user_options?.user_roles?.options?.find?.(
       role => role.value === userRole
     )?.label ?? userRole;
-
-  const allRows = users.map((user: EngagementUser) =>
-    {
-      return [
+  const allRows: string[][] = [];
+  users.map((user: EngagementUser) =>
+    allRows.push([
       user.first_name + ' ' + user.last_name,
       user.email,
       getRoleName(user.role),
-    ]}
+    ])
   );
 
   return (
