@@ -62,9 +62,10 @@ export const UserRow = ({
                 !hasFeature(APP_FEATURES.writer) ||
                 isUserDeleted
               }
-              onChange={e => {
-                setUserEdits({...userEdits, email: e});
-                onChange({...copiedUser, ...userEdits});
+              onChange={ e => {
+                const newEdit = {...userEdits, email: e};
+                setUserEdits(newEdit);
+                onChange({...copiedUser, ...newEdit})
               }}
               placeholder="Email Address"
               type="email"
@@ -95,11 +96,11 @@ export const UserRow = ({
                 !hasFeature(APP_FEATURES.writer) ||
                 isUserDeleted
               }
-              onChange={e => {
-                setUserEdits({...userEdits, first_name: e});
-                onChange({...copiedUser, ...userEdits});
-              }}
-              placeholder="First Name"
+              onChange={ e => {
+                const newEdit = {...userEdits, first_name: e};
+                setUserEdits(newEdit);
+                onChange({...copiedUser, ...newEdit})
+              }}              placeholder="First Name"
               type="text"
               value={userEdits.first_name?? copiedUser.first_name ?? ''}
               style={
@@ -128,9 +129,10 @@ export const UserRow = ({
                 !hasFeature(APP_FEATURES.writer) ||
                 isUserDeleted
               }
-              onChange={e => {
-                setUserEdits({...userEdits, last_name: e});
-                onChange({...copiedUser, ...userEdits});
+              onChange={ e => {
+                const newEdit = {...userEdits, last_name: e};
+                setUserEdits(newEdit);
+                onChange({...copiedUser, ...newEdit})
               }}
               placeholder="Last Name"
               type="text"
@@ -161,9 +163,10 @@ export const UserRow = ({
                 !hasFeature(APP_FEATURES.writer) ||
                 isUserDeleted
               }
-              onChange={e => {
-                setUserEdits({...userEdits, role: e});
-                  onChange({...copiedUser, ...userEdits});
+              onChange={ e => {
+                const newEdit = {...userEdits, role: e};
+                setUserEdits(newEdit);
+                onChange({...copiedUser, ...newEdit})
               }}
               style={
                 isUserDeleted
