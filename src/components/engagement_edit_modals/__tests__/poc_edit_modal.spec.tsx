@@ -6,6 +6,7 @@ import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import MockDate from 'mockdate';
 import { ValidationContext } from '../../../context/validation_context/validation_context';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
+import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
@@ -41,13 +42,18 @@ describe('Point of Contact edit modal', () => {
   test('When editing a field, the onChange method is called', async () => {
     const onChange = jest.fn();
     const { getByTestId } = render(
-      <PointOfContactEditModal
-        onSave={() => {}}
-        engagement={Engagement.fromFake(true)}
-        engagementFormConfig={{}}
-        isOpen={true}
-        onChange={onChange}
-      />
+      <EngagementContext.Provider
+        value={{
+          updateEngagementFormField: onChange,
+        }}
+      >
+        <PointOfContactEditModal
+          onSave={() => {}}
+          engagement={Engagement.fromFake(true)}
+          engagementFormConfig={{}}
+          isOpen={true}
+        />
+      </EngagementContext.Provider>
     );
     const textField = await getByTestId('el-email');
     await fireEvent.change(textField, {

@@ -30,11 +30,11 @@ export function PointOfContactEditModal({
   onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
   const { hasFeature } = useFeatures();
+  const { validate, getValidationResult } = useValidation();
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
-  const { getValidationResult } = useValidation();
   const [engagementLeadName, setEngagementLeadName] = useEngagementFormField(
     'engagement_lead_name'
   );
@@ -128,7 +128,10 @@ export function PointOfContactEditModal({
                 id="email"
                 style={input}
                 name="engagement-lead-email"
-                onChange={setEngagementLeadEmail}
+                onChange={e => {
+                  validate('engagement_lead_email')(e);
+                  setEngagementLeadEmail(e);
+                }}
                 placeholder="Email Address"
                 type="email"
                 value={engagementLeadEmail}
@@ -185,7 +188,10 @@ export function PointOfContactEditModal({
                 aria-label="tech lead email"
                 id="tech-lead-email"
                 name="tech-lead-email"
-                onChange={setTechnicalLeadEmail}
+                onChange={e => {
+                  setTechnicalLeadEmail(e);
+                  validate('technical_lead_email')(e);
+                }}
                 placeholder="Email Address"
                 type="email"
                 value={technicalLeadEmail}
@@ -242,7 +248,10 @@ export function PointOfContactEditModal({
                 id="customer-contact-email"
                 name="customer-contact-email"
                 style={input}
-                onChange={setCustomerContactEmail}
+                onChange={e => {
+                  setCustomerContactEmail(e);
+                  validate('customer_contact_email')(e);
+                }}
                 placeholder="Email Address"
                 type="email"
                 value={customerContactEmail}

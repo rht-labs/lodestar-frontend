@@ -618,7 +618,7 @@ export const useEngagement = (customerName: string, projectName: string) => {
       .then(engagement => engagementContext.setCurrentEngagement(engagement))
       .catch(error => setError(error))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [engagementContext, customerName, projectName]);
   return [engagementContext.currentEngagement, error, isLoading];
 };
 
@@ -628,7 +628,7 @@ export const useEngagementFormField = <K extends keyof Engagement>(
 ): [Engagement[K], (value: Engagement[K]) => void] => {
   const engagementContext = useContext(EngagementContext);
 
-  const value = engagementContext.currentChanges[formField];
+  const value = engagementContext?.currentChanges?.[formField];
 
   const updateValue = (value: Engagement[K]) => {
     engagementContext.updateEngagementFormField(formField, value);
