@@ -1,5 +1,5 @@
 import { Serializer } from '../serializer';
-import { Engagement, Artifact } from '../../schemas/engagement';
+import {Engagement, Artifact, EngagementUser} from '../../schemas/engagement';
 import { parse, parseISO, isValid, formatISO } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
@@ -111,7 +111,7 @@ export class EngagementJsonSerializer
         ? EngagementJsonSerializer.parseDate(data['end_date'])
         : undefined,
       engagement_region: data['engagement_region'],
-      engagement_users: data['engagement_users'],
+      engagement_users: data['engagement_users']?.map?.(EngagementJsonSerializer.deserializeEngagementUser) ?? [],
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
       engagement_type: data['engagement_type'],
@@ -144,5 +144,11 @@ export class EngagementJsonSerializer
       launched_date_time: parseISO(launchData['launched_date_time']),
       launched_by: launchData['launched_by'],
     };
+  }
+
+  private static deserializeEngagementUser(data: object): EngagementUser {
+    return {
+      ...data, uuid: data["uuid"] ?? uuid()
+    }
   }
 }

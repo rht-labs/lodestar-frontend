@@ -160,145 +160,143 @@ Object {
                               <div
                                 class="pf-l-grid__item"
                               >
-                                <div>
+                                <div
+                                  class="pf-l-grid pf-m-gutter"
+                                  style="margin-top: 1rem;"
+                                >
                                   <div
-                                    class="pf-l-grid pf-m-gutter"
-                                    style="margin-top: 1rem;"
+                                    class="pf-l-grid__item pf-m-3-col"
                                   >
                                     <div
-                                      class="pf-l-grid__item pf-m-3-col"
+                                      class="pf-c-form__group"
                                     >
                                       <div
-                                        class="pf-c-form__group"
+                                        class="pf-c-form__group-control"
                                       >
-                                        <div
-                                          class="pf-c-form__group-control"
-                                        >
-                                          <input
-                                            aria-invalid="false"
-                                            aria-label="email"
-                                            class="pf-c-form-control"
-                                            data-cy="input_user_email"
-                                            disabled=""
-                                            name="email"
-                                            placeholder="Email Address"
-                                            required=""
-                                            type="email"
-                                            value="jdoe@doe.co"
-                                          />
-                                          
-                                        </div>
+                                        <input
+                                          aria-invalid="false"
+                                          aria-label="email"
+                                          class="pf-c-form-control"
+                                          data-cy="input_user_email"
+                                          disabled=""
+                                          name="email"
+                                          placeholder="Email Address"
+                                          required=""
+                                          type="email"
+                                          value="jdoe@doe.co"
+                                        />
+                                        
                                       </div>
                                     </div>
-                                    <div
-                                      class="pf-l-grid__item pf-m-3-col"
-                                    >
-                                      <div
-                                        class="pf-c-form__group"
-                                      >
-                                        <div
-                                          class="pf-c-form__group-control"
-                                        >
-                                          <input
-                                            aria-invalid="false"
-                                            aria-label="First Name"
-                                            class="pf-c-form-control"
-                                            data-cy="input_user_firstname"
-                                            disabled=""
-                                            name="first-name"
-                                            placeholder="First Name"
-                                            required=""
-                                            type="text"
-                                            value="John"
-                                          />
-                                          
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div
-                                      class="pf-l-grid__item pf-m-3-col"
-                                    >
-                                      <div
-                                        class="pf-c-form__group"
-                                      >
-                                        <div
-                                          class="pf-c-form__group-control"
-                                        >
-                                          <input
-                                            aria-invalid="false"
-                                            aria-label="Last Name"
-                                            class="pf-c-form-control"
-                                            data-cy="input_user_lastname"
-                                            disabled=""
-                                            name="last-name"
-                                            placeholder="Last Name"
-                                            required=""
-                                            type="text"
-                                            value="Doe"
-                                          />
-                                          
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div
-                                      class="pf-l-grid__item pf-m-2-col"
-                                    >
-                                      <div
-                                        class="pf-c-form__group"
-                                      >
-                                        <div
-                                          class="pf-c-form__group-control"
-                                        >
-                                          <select
-                                            aria-invalid="false"
-                                            aria-label="User Role"
-                                            class="pf-c-form-control"
-                                            data-ouia-component-id="3"
-                                            data-ouia-component-type="PF4/FormSelect"
-                                            data-ouia-safe="true"
-                                            disabled=""
-                                            id="user_role_dropdown"
-                                            name="role"
-                                            required=""
-                                          >
-                                            <option
-                                              class=""
-                                              disabled=""
-                                              value=""
-                                            >
-                                              Select a role
-                                            </option>
-                                            <option
-                                              class=""
-                                              data-cy="Developer"
-                                              value="developer"
-                                            >
-                                              Developer
-                                            </option>
-                                            <option
-                                              class=""
-                                              data-cy="Observer"
-                                              value="observer"
-                                            >
-                                              Observer
-                                            </option>
-                                            <option
-                                              class=""
-                                              data-cy="Admin"
-                                              value="admin"
-                                            >
-                                              Admin
-                                            </option>
-                                          </select>
-                                          
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div
-                                      class="pf-l-grid__item pf-m-1-col"
-                                      style="padding-top: 0.5rem;"
-                                    />
                                   </div>
+                                  <div
+                                    class="pf-l-grid__item pf-m-3-col"
+                                  >
+                                    <div
+                                      class="pf-c-form__group"
+                                    >
+                                      <div
+                                        class="pf-c-form__group-control"
+                                      >
+                                        <input
+                                          aria-invalid="false"
+                                          aria-label="First Name"
+                                          class="pf-c-form-control"
+                                          data-cy="input_user_firstname"
+                                          disabled=""
+                                          name="first-name"
+                                          placeholder="First Name"
+                                          required=""
+                                          type="text"
+                                          value="John"
+                                        />
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="pf-l-grid__item pf-m-3-col"
+                                  >
+                                    <div
+                                      class="pf-c-form__group"
+                                    >
+                                      <div
+                                        class="pf-c-form__group-control"
+                                      >
+                                        <input
+                                          aria-invalid="false"
+                                          aria-label="Last Name"
+                                          class="pf-c-form-control"
+                                          data-cy="input_user_lastname"
+                                          disabled=""
+                                          name="last-name"
+                                          placeholder="Last Name"
+                                          required=""
+                                          type="text"
+                                          value="Doe"
+                                        />
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="pf-l-grid__item pf-m-2-col"
+                                  >
+                                    <div
+                                      class="pf-c-form__group"
+                                    >
+                                      <div
+                                        class="pf-c-form__group-control"
+                                      >
+                                        <select
+                                          aria-invalid="false"
+                                          aria-label="User Role"
+                                          class="pf-c-form-control"
+                                          data-ouia-component-id="3"
+                                          data-ouia-component-type="PF4/FormSelect"
+                                          data-ouia-safe="true"
+                                          disabled=""
+                                          id="user_role_dropdown"
+                                          name="role"
+                                          required=""
+                                        >
+                                          <option
+                                            class=""
+                                            disabled=""
+                                            value=""
+                                          >
+                                            Select a role
+                                          </option>
+                                          <option
+                                            class=""
+                                            data-cy="Developer"
+                                            value="developer"
+                                          >
+                                            Developer
+                                          </option>
+                                          <option
+                                            class=""
+                                            data-cy="Observer"
+                                            value="observer"
+                                          >
+                                            Observer
+                                          </option>
+                                          <option
+                                            class=""
+                                            data-cy="Admin"
+                                            value="admin"
+                                          >
+                                            Admin
+                                          </option>
+                                        </select>
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="pf-l-grid__item pf-m-1-col"
+                                    style="padding-top: 0.5rem;"
+                                  />
                                 </div>
                               </div>
                             </form>
