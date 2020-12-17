@@ -1,4 +1,10 @@
-import React, { createContext, useEffect, useRef, useReducer } from 'react';
+import React, {
+  createContext,
+  useEffect,
+  useRef,
+  useReducer,
+  useContext,
+} from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
@@ -584,4 +590,53 @@ export const EngagementProvider = ({
   );
 };
 
-// EngagementProvider.whyDidYouRender = false;
+export const useEngagementFormConfig = () => {
+  const engagementContext = useContext(EngagementContext);
+  return {
+    engagementFormConfig: engagementContext.engagementFormConfig,
+  };
+};
+
+export const useEngagementDetails = () => {
+  const engagementContext = useContext(EngagementContext);
+  return {
+    startDate: engagementContext.currentEngagement.start_date,
+    endDate: engagementContext.currentEngagement.end_date,
+    archiveDate: engagementContext.currentEngagement.archive_date,
+  };
+};
+
+export const useEngagementOperations = () => {
+  const engagementContext = useContext(EngagementContext);
+};
+
+export const useEngagement = (customerName: string, projectName: string) => {
+  const engagementContext = useContext(EngagementContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    setIsLoading(true);
+    engagementContext
+      .getEngagement(customerName, projectName)
+      .then(engagement => engagementContext.setCurrentEngagement(engagement))
+      .catch(error => setError(error))
+      .finally(() => setIsLoading(false));
+  }, []);
+  return [engagementContext.currentEngagement, error, isLoading];
+};
+
+export const useEngagementFormField = <T extends Engagement, K extends keyof T>(
+  formField: K,
+  group?: string
+): [T[K], (value: T[K]) => void] => {
+  const engagementContext = useContext(EngagementContext);
+
+  const value = engagementContext.currentChanges[formField];
+
+  const updateValue = (value: T[K]) => {
+    engagementContext.updateEngagementFormField(formField, value);
+  };
+
+  return [value, updateValue];
+};
