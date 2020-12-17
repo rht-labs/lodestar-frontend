@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   Form,
   Grid,
@@ -22,29 +22,26 @@ import {
 import { FormManager } from '../../context/form_manager/form_manager';
 import { EngagementUser } from '../../schemas/engagement';
 import { UserRow } from './user_row';
+import { useEngagementUser } from '../../context/engagement_context/engagement_context';
+import { uuid } from 'uuidv4';
 
 export interface UserEditFieldsProps {
   users: any;
-  onChange: (users: EngagementUser[]) => void;
   deletedUsers: string[];
-  toggleDeleted: (email: string) => void;
-  addUser: any;
-  validateEmail: (email: string) => boolean,
-  validateString: (name: string) => boolean,
-  validateRole: (role: string) => boolean
+  toggleDeleted: (user: EngagementUser) => void;
+  validateEmail: (email: string) => boolean;
+  validateString: (name: string) => boolean;
+  validateRole: (role: string) => boolean;
 }
 
 export const UserEditFields = ({
-  users: propsUsers =[],
-  onChange,
   deletedUsers,
   toggleDeleted,
-  addUser,
   validateEmail,
   validateString,
-  validateRole
+  validateRole,
 }: UserEditFieldsProps) => {
-  const users = [...propsUsers];
+  const { addUser, users } = useEngagementUser();
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('engagement_users'), [registerField]);
   const columns = [
@@ -62,9 +59,10 @@ export const UserEditFields = ({
   ];
 
   const handleUserEdit = (editedUser: EngagementUser) => {
-    const editedUserIndex = users.findIndex(user => user.uuid === editedUser.uuid);
+    const editedUserIndex = users.findIndex(
+      user => user.uuid === editedUser.uuid
+    );
     users.splice(editedUserIndex, 1, editedUser);
-    onChange(users);
   };
 
   return (
@@ -86,24 +84,28 @@ export const UserEditFields = ({
               <Grid hasGutter>
                 <Form>
                   <GridItem>
-                    {
-                      users.map((user: any) => {
-                        const isDeleted = deletedUsers.indexOf(user.email) > -1;
-                        return(
-                          <UserRow user={user}
-                                   toggleDeleted={toggleDeleted}
-                                   onChange={handleUserEdit}
-                                   validateEmail={validateEmail}
-                                   validateRole={validateRole}
-                                   validateString={validateString}
-                                   isDeleted={isDeleted}
-                          />
-                        )})}
+                    {users.map((user: any) => {
+                      const isDeleted = deletedUsers.indexOf(user.uuid) > -1;
+                      return (
+                        <UserRow
+                          key={user.uuid}
+                          user={user}
+                          toggleDeleted={toggleDeleted}
+                          onChange={handleUserEdit}
+                          validateEmail={validateEmail}
+                          validateRole={validateRole}
+                          validateString={validateString}
+                          isDeleted={isDeleted}
+                        />
+                      );
+                    })}
                   </GridItem>
                   <Feature name={APP_FEATURES.writer}>
                     <Button
                       variant="secondary"
-                      onClick={addUser}
+                      onClick={() =>
+                        addUser({ uuid: uuid() } as EngagementUser)
+                      }
                       data-testid={'add-first-user'}
                       data-cy={'add_new_user'}
                     >

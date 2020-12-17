@@ -23,32 +23,21 @@ export function UserEditModal({
 }: UserEditModalProps) {
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
 
-  function toggleDeleted(email: string) {
-    if (deletedUsers.indexOf(email) < 0) {
-      setDeletedUsers([...deletedUsers, email]);
+  function toggleDeleted(user: EngagementUser) {
+    if (deletedUsers.indexOf(user.uuid) < 0) {
+      setDeletedUsers([...deletedUsers, user.uuid]);
     } else {
       const newDeletedUsers = [...deletedUsers];
-      newDeletedUsers.splice(deletedUsers.indexOf(email), 1);
+      newDeletedUsers.splice(deletedUsers.indexOf(user.uuid), 1);
       setDeletedUsers(newDeletedUsers);
     }
   }
 
-  function removeUser() {
-    deletedUsers?.forEach(userEmail => {
-      engagement.engagement_users.splice(
-        engagement.engagement_users.findIndex(user => {
-          return user.email === userEmail;
-        }),
-        1
-      );
-    });
-    onChange(engagement.engagement_users);
-    setDeletedUsers([]);
-  }
-
   const onSave = () => {
-    removeUser();
-    propsOnSave(engagement.engagement_users);
+    const users = engagement.engagement_users.filter(
+      u => !deletedUsers.includes(u.uuid)
+    );
+    propsOnSave(users);
     onClose();
   };
 

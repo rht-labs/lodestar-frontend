@@ -1,5 +1,11 @@
-import React, { createContext, useEffect, useRef, useReducer } from 'react';
-import { Engagement } from '../../schemas/engagement';
+import React, {
+  createContext,
+  useEffect,
+  useRef,
+  useReducer,
+  useContext,
+} from 'react';
+import { Artifact, Engagement, EngagementUser } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -584,4 +590,107 @@ export const EngagementProvider = ({
   );
 };
 
-// EngagementProvider.whyDidYouRender = false;
+export const useEngagementFormConfig = () => {
+  const engagementContext = useContext(EngagementContext);
+  return {
+    engagementFormConfig: engagementContext.engagementFormConfig,
+  };
+};
+
+export const useEngagementDetails = () => {
+  const engagementContext = useContext(EngagementContext);
+  return {
+    startDate: engagementContext.currentEngagement.start_date,
+    endDate: engagementContext.currentEngagement.end_date,
+    archiveDate: engagementContext.currentEngagement.archive_date,
+  };
+};
+
+export const useEngagement = (customerName: string, projectName: string) => {
+  const engagementContext = useContext(EngagementContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    setIsLoading(true);
+    engagementContext
+      .getEngagement(customerName, projectName)
+      .then(engagement => engagementContext.setCurrentEngagement(engagement))
+      .catch(error => setError(error))
+      .finally(() => setIsLoading(false));
+  }, []);
+  return [engagementContext.currentEngagement, error, isLoading];
+};
+
+export const useEngagementFormField = <K extends keyof Engagement>(
+  formField: K,
+  group?: string
+): [Engagement[K], (value: Engagement[K]) => void] => {
+  const engagementContext = useContext(EngagementContext);
+
+  const value = engagementContext.currentChanges[formField];
+
+  const updateValue = (value: Engagement[K]) => {
+    engagementContext.updateEngagementFormField(formField, value);
+  };
+
+  return [value, updateValue];
+};
+
+export const useEngagementArtifacts = () => {
+  const { currentEngagement, updateEngagementFormField } = useContext(
+    EngagementContext
+  );
+  const { artifacts } = currentEngagement ?? {};
+  const addArtifact = (artifact: Artifact) => {
+    updateEngagementFormField('artifacts', [...artifacts, artifact]);
+    return [...artifacts, artifact];
+  };
+  const removeArtifact = (artifact: Artifact) => {
+    const artifactsClone = [...artifacts];
+    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    artifactsClone.splice(removeIndex, 1);
+    updateEngagementFormField('artifacts', artifactsClone);
+    return artifactsClone;
+  };
+  return {
+    artifacts: artifacts ?? [],
+    addArtifact,
+    removeArtifact,
+  };
+};
+
+export const useEngagementUser = () => {
+  const {
+    updateEngagementFormField,
+    currentChanges = {} as Engagement,
+  } = useContext(EngagementContext);
+  const { engagement_users: users = [] } = currentChanges;
+  const addUser = (user: EngagementUser) => {
+    updateEngagementFormField('engagement_users', [
+      ...currentChanges.engagement_users,
+      user,
+    ]);
+  };
+  function removeUser(user: EngagementUser) {
+    const userCopy = [...users];
+    const deleteIndex = users.findIndex(u => u.uuid === user.uuid);
+    userCopy.splice(deleteIndex, 1);
+    updateEngagementFormField('engagement_users', userCopy);
+    return userCopy;
+  }
+  const updateUser = (user: EngagementUser) => {};
+
+  return {
+    addUser,
+    removeUser,
+    updateUser,
+    users,
+  };
+};
+
+// export const useEngagementUser = (user: EngagementUser) => {
+//   const [currentUserEdits, setUser] = useState(user);
+
+//   return [currentUserEdits, setUser];
+// };
