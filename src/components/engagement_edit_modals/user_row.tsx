@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormSelect,
   FormSelectOption,
@@ -7,6 +7,11 @@ import {
   GridItem,
   FormGroup,
 } from '@patternfly/react-core';
+import {
+  validateEmail,
+  validateRole,
+  validateString,
+} from '../../common/user_validation';
 import { TrashIcon, UndoIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
@@ -37,7 +42,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_email'}
             helperTextInvalid={'Enter valid email address'}
-            validated={'default'}
+            validated={validateEmail(user.email) ? 'default' : 'error'}
           >
             <TextInput
               aria-label="email"
@@ -61,7 +66,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_first_name'}
             helperTextInvalid={'Enter valid first name'}
-            validated={'default'}
+            validated={validateString(user.first_name) ? 'default' : 'error'}
           >
             <TextInput
               aria-label="First Name"
@@ -85,7 +90,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_last_name'}
             helperTextInvalid={'Enter valid last name'}
-            validated={'default'}
+            validated={validateString(user.last_name) ? 'default' : 'error'}
           >
             <TextInput
               aria-label="Last Name"
@@ -109,7 +114,7 @@ export const UserRow = ({
           <FormGroup
             fieldId={'user_role'}
             helperTextInvalid={'Select valid role'}
-            validated={'default'}
+            validated={validateRole(user.role) ? 'default' : 'error'}
           >
             <FormSelect
               name="role"
