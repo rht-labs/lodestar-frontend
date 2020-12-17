@@ -42,10 +42,9 @@ export function UserCard() {
   };
 
   function addUser() {
-    const newUser = { first_name: '', last_name: '', email: '', role: '' , uuid: uuid()};
-    const engagementUsers = [...(engagement?.engagement_users ?? [])];
-    engagementUsers.push(newUser);
-    updateEngagementFormField('engagement_users', engagementUsers);
+    const newUser = { first_name: '', last_name: '', email: '', role: '', uuid: uuid() };
+    engagement?.engagement_users?.push(newUser);
+    updateEngagementFormField('engagement_users', engagement?.engagement_users);
   }
 
   function handleAddNewUserOrEdit() {
@@ -80,7 +79,6 @@ export function UserCard() {
       >
         <UserTable
           users={engagement?.engagement_users ?? []}
-          handleAddNewUserOrEdit={handleAddNewUserOrEdit}
         />
       </DataCard>
     </>
@@ -116,13 +114,13 @@ const UserTable = ({
     engagementFormConfig?.user_options?.user_roles?.options?.find?.(
       role => role.value === userRole
     )?.label ?? userRole;
-  const allRows: string[][] = [];
-  users.map((user: EngagementUser) =>
-    allRows.push([
-      user.first_name + ' ' + user.last_name,
-      user.email,
-      getRoleName(user.role),
-    ])
+
+  const allRows = users.map((user: EngagementUser) =>
+    { return [
+        user.first_name + ' ' + user.last_name,
+        user.email,
+        getRoleName(user.role),
+      ]}
   );
 
   return (
