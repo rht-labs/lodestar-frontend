@@ -13,7 +13,6 @@ import { Feature } from '../feature/feature';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { EngagementUser } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { useEngagementUser } from '../../context/engagement_context/engagement_context';
 
 export interface UserRowProps {
   user: EngagementUser;
@@ -28,10 +27,7 @@ export const UserRow = ({
   toggleDeleted,
   isDeleted: isUserDeleted,
 }: UserRowProps) => {
-  const [engagementUser, isValid, modifyUser] = useEngagementUser(user);
-  const copiedUser = { ...user };
   const { engagementFormConfig } = useEngagements();
-  const [userEdits, setUserEdits] = useState<Partial<EngagementUser>>({});
   const { hasFeature } = useFeatures();
 
   return (
@@ -50,13 +46,11 @@ export const UserRow = ({
               isRequired
               isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
               onChange={e => {
-                const newEdit = { ...userEdits, email: e };
-                setUserEdits(newEdit);
-                onChange({ ...copiedUser, ...newEdit });
+                onChange({ ...user, email: e });
               }}
               placeholder="Email Address"
               type="email"
-              value={userEdits.email ?? copiedUser.email ?? ''}
+              value={user.email}
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
@@ -76,13 +70,11 @@ export const UserRow = ({
               isRequired
               isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
               onChange={e => {
-                const newEdit = { ...userEdits, first_name: e };
-                setUserEdits(newEdit);
-                onChange({ ...copiedUser, ...newEdit });
+                onChange({ ...user, first_name: e });
               }}
               placeholder="First Name"
               type="text"
-              value={userEdits.first_name ?? copiedUser.first_name ?? ''}
+              value={user.first_name}
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
@@ -102,13 +94,11 @@ export const UserRow = ({
               isRequired
               isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
               onChange={e => {
-                const newEdit = { ...userEdits, last_name: e };
-                setUserEdits(newEdit);
-                onChange({ ...copiedUser, ...newEdit });
+                onChange({ ...user, last_name: e });
               }}
               placeholder="Last Name"
               type="text"
-              value={userEdits.last_name ?? copiedUser.last_name ?? ''}
+              value={user.last_name}
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
@@ -125,12 +115,10 @@ export const UserRow = ({
               name="role"
               aria-label="User Role"
               id="user_role_dropdown"
-              value={userEdits.role ?? copiedUser.role ?? ''}
+              value={user.role}
               isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
               onChange={e => {
-                const newEdit = { ...userEdits, role: e };
-                setUserEdits(newEdit);
-                onChange({ ...copiedUser, ...newEdit });
+                onChange({ ...user, role: e });
               }}
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
@@ -165,7 +153,7 @@ export const UserRow = ({
             {isUserDeleted ? (
               <UndoIcon
                 onClick={() => {
-                  toggleDeleted(copiedUser);
+                  toggleDeleted(user);
                 }}
                 data-test-id={`remove-user-button`}
                 style={{ fontSize: 'small' }}
@@ -173,7 +161,7 @@ export const UserRow = ({
             ) : (
               <TrashIcon
                 onClick={() => {
-                  toggleDeleted(copiedUser);
+                  toggleDeleted(user);
                 }}
                 style={{ fontSize: 'small' }}
               />

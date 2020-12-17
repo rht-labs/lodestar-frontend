@@ -660,31 +660,29 @@ export const useEngagementArtifacts = () => {
   };
 };
 
-export const useEngagementUserManager = (
-  initialUsers: EngagementUser[] = []
-) => {
-  const [users, setUsers] = useState(initialUsers);
+export const useEngagementUserManager = () => {
+  const {
+    currentChanges = {} as Partial<Engagement>,
+    updateEngagementFormField,
+  } = useContext(EngagementContext);
+  const { engagement_users: users = [] } = currentChanges;
 
   const addUser = (user: EngagementUser) => {
-    setUsers([...users, user]);
+    const newUsers = [...users, user];
+    updateEngagementFormField('engagement_users', newUsers);
+    return newUsers;
   };
 
-  function removeUser(user: EngagementUser) {
-    const userCopy = [...users];
-    const deleteIndex = users.findIndex(u => u.uuid === user.uuid);
-    userCopy.splice(deleteIndex, 1);
-
-    return userCopy;
-  }
   const updateUser = (user: EngagementUser) => {
     const updateIndex = users.findIndex(u => u.uuid === user.uuid);
     const newUsers = [...users];
     newUsers.splice(updateIndex, 1, user);
+    updateEngagementFormField('engagement_users', newUsers);
+    return newUsers;
   };
 
   return {
     addUser,
-    removeUser,
     updateUser,
     users,
   };

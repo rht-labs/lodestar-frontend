@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -41,11 +41,9 @@ export function UserEditModal({
   isOpen,
   onSave: propsOnSave,
 }: UserEditModalProps) {
-  const { engagement_users: users = [] } = engagement;
-  // const { users, addUser, removeUser, updateUser } = useEngagementUserManager(
-  //   engagement.engagement_users
-  // );
+  const { users, addUser, updateUser } = useEngagementUserManager();
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
+  useEffect(() => onClose, []);
 
   function toggleDeleted(user: EngagementUser) {
     if (deletedUsers.indexOf(user.uuid) < 0) {
@@ -58,10 +56,8 @@ export function UserEditModal({
   }
 
   const onSave = () => {
-    const users = engagement.engagement_users.filter(
-      u => !deletedUsers.includes(u.uuid)
-    );
-    propsOnSave(users);
+    const newUsers = users.filter(u => !deletedUsers.includes(u.uuid));
+    propsOnSave(newUsers);
     onClose();
   };
 
@@ -79,9 +75,6 @@ export function UserEditModal({
     },
   ];
 
-  const handleUserEdit = (editedUser: EngagementUser) => {
-    //
-  };
   // const areFieldsValid = engagement?.engagement_users?.reduce?.((acc, user) => {
   //   if (!acc) return acc;
   //   return (
@@ -141,15 +134,16 @@ export function UserEditModal({
                   <Grid hasGutter>
                     <Form>
                       <GridItem>
-                        {users.map((user: any) => {
+                        {users.map(user => {
                           const isDeleted =
                             deletedUsers.indexOf(user.uuid) > -1;
+                          console.log(user.email);
                           return (
                             <UserRow
                               key={user.uuid}
                               user={user}
                               toggleDeleted={toggleDeleted}
-                              onChange={handleUserEdit}
+                              onChange={updateUser}
                               isDeleted={isDeleted}
                             />
                           );
