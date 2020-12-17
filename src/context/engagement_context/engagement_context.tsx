@@ -5,7 +5,7 @@ import React, {
   useReducer,
   useContext,
 } from 'react';
-import { Engagement } from '../../schemas/engagement';
+import { Artifact, Engagement } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -606,10 +606,6 @@ export const useEngagementDetails = () => {
   };
 };
 
-export const useEngagementOperations = () => {
-  const engagementContext = useContext(EngagementContext);
-};
-
 export const useEngagement = (customerName: string, projectName: string) => {
   const engagementContext = useContext(EngagementContext);
 
@@ -626,17 +622,40 @@ export const useEngagement = (customerName: string, projectName: string) => {
   return [engagementContext.currentEngagement, error, isLoading];
 };
 
-export const useEngagementFormField = <T extends Engagement, K extends keyof T>(
+export const useEngagementFormField = <K extends keyof Engagement>(
   formField: K,
   group?: string
-): [T[K], (value: T[K]) => void] => {
+): [Engagement[K], (value: Engagement[K]) => void] => {
   const engagementContext = useContext(EngagementContext);
 
   const value = engagementContext.currentChanges[formField];
 
-  const updateValue = (value: T[K]) => {
+  const updateValue = (value: Engagement[K]) => {
     engagementContext.updateEngagementFormField(formField, value);
   };
 
   return [value, updateValue];
+};
+
+export const useEngagementArtifacts = () => {
+  const { currentEngagement, updateEngagementFormField } = useContext(
+    EngagementContext
+  );
+  const { artifacts } = currentEngagement ?? {};
+  const addArtifact = (artifact: Artifact) => {
+    updateEngagementFormField('artifacts', [...artifacts, artifact]);
+    return [...artifacts, artifact];
+  };
+  const removeArtifact = (artifact: Artifact) => {
+    const artifactsClone = [...artifacts];
+    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    artifactsClone.splice(removeIndex, 1);
+    updateEngagementFormField('artifacts', artifactsClone);
+    return artifactsClone;
+  };
+  return {
+    artifacts: artifacts ?? [],
+    addArtifact,
+    removeArtifact,
+  };
 };
