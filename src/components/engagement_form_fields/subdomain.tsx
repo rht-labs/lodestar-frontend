@@ -22,9 +22,13 @@ export function SubdomainFormField({
   const [editedByUser, setEditedByUser] = useState(false);
   const getSubdomainFieldText = () => {
     if (editedByUser) {
-      return hostingEnvironment?.ocp_sub_domain;
+      return hostingEnvironment?.ocp_sub_domain?.toLowerCase?.();
     } else {
-      return hostingEnvironment?.ocp_sub_domain || suggestedSubdomain || '';
+      return (
+        hostingEnvironment?.ocp_sub_domain ??
+        suggestedSubdomain ??
+        ''
+      )?.toLowerCase?.();
     }
   };
   const getSubdomainHelperText = () => {
@@ -33,7 +37,7 @@ export function SubdomainFormField({
     } else {
       if (hostingEnvironment?.ocp_sub_domain) {
         return slugify(hostingEnvironment?.ocp_sub_domain);
-      } else if (hostingEnvironment?.suggested_subdomain) {
+      } else if (suggestedSubdomain) {
         return suggestedSubdomain;
       } else {
         return '<desired-subdomain>';

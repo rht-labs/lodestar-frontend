@@ -95,6 +95,16 @@ export function LodestarRouter() {
                                 title="Engagements"
                               />
                             </PrivateRoute>
+                            <PrivateRoute path="/app/engagements/terminating">
+                              <EngagementListRoute
+                                filterDefinition={{
+                                  allowedStatuses: [
+                                    EngagementStatus.terminating,
+                                  ],
+                                }}
+                                title="Engagements"
+                              />
+                            </PrivateRoute>
                             <PrivateRoute path="/app/engagements/past">
                               <EngagementListRoute
                                 filterDefinition={{
