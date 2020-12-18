@@ -52,8 +52,7 @@ export function SubdomainFormField({
         <div>
           Applications will live at:&nbsp;
           <strong>{`${getSubdomainHelperText()}`}</strong>
-          <span style={{ fontStyle: 'italic' }}>{`.<region>`}</span>
-          <span>{`.rht-labs.com`}</span>
+          <span style={{ fontStyle: 'italic' }}>{`.region.rht-labs.com`}</span>
         </div>
       }
     >
