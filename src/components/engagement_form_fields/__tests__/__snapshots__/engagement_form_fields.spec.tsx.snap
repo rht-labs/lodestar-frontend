@@ -1254,10 +1254,7 @@ Object {
             <span
               style="font-style: italic;"
             >
-              .&lt;region&gt;
-            </span>
-            <span>
-              .rht-labs.com
+              .region.rht-labs.com
             </span>
           </div>
         </div>
@@ -1313,10 +1310,7 @@ Object {
           <span
             style="font-style: italic;"
           >
-            .&lt;region&gt;
-          </span>
-          <span>
-            .rht-labs.com
+            .region.rht-labs.com
           </span>
         </div>
       </div>
