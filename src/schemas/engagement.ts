@@ -10,6 +10,7 @@ export enum EngagementStatus {
   active = 'active',
   past = 'past',
   upcoming = 'upcoming',
+  terminating = 'terminating',
 }
 
 export interface EngagementUser {
@@ -264,10 +265,12 @@ export const getEngagementStatus = (
     return null;
   }
   const Today = new Date();
-  const { launch, end_date } = engagement;
+  const { launch, end_date, archive_date } = engagement;
   const hasLaunched = !!launch?.launched_date_time;
   if (hasLaunched && end_date >= Today) {
     return EngagementStatus.active;
+  } else if (hasLaunched && end_date < Today && archive_date > Today) {
+    return EngagementStatus.terminating;
   } else if (hasLaunched && end_date < Today) {
     return EngagementStatus.past;
   } else {
