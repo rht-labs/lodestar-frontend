@@ -28,6 +28,7 @@ export const getInitialState = (
     customer_contact_email: engagement?.customer_contact_email ?? null,
     engagement_categories: engagement?.engagement_categories ?? [],
     use_cases: engagement?.use_cases ?? [],
+    hosting_environments: engagement?.hosting_environments ?? [],
   };
 };
 

@@ -360,8 +360,16 @@ Object {
                       <div>
                         Applications will live at: 
                         <strong>
-                          ordoabchao.na-1.rht-labs.com
+                          ordoabchao
                         </strong>
+                        <span
+                          style="font-style: italic;"
+                        >
+                          .&lt;region&gt;
+                        </span>
+                        <span>
+                          .rht-labs.com
+                        </span>
                       </div>
                     </div>
                   </div>

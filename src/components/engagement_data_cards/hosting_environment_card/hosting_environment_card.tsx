@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import slugify from 'slugify';
@@ -41,18 +41,18 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
   'environment_name',
 ];
 
-export function OpenShiftClusterSummaryCard() {
-  const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
-    HostingEnvironment
-  >(null);
+export function HostingEnvironmentCard() {
   const {
     currentEngagement,
-    currentChanges: currentEngagementChanges,
+    currentChanges,
     updateEngagementFormField,
     saveEngagement,
     engagementFormConfig,
     clearCurrentChanges,
   } = useEngagements();
+  const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
+    HostingEnvironment
+  >(null);
   const onChange = (hostingEnvironments: HostingEnvironment[]) => {
     updateEngagementFormField('hosting_environments', hostingEnvironments);
   };
@@ -61,6 +61,10 @@ export function OpenShiftClusterSummaryCard() {
   const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
     'hosting_environments'
   );
+
+  useEffect(() => {
+    setCurrentHostingEnvironment(null);
+  }, [currentEngagement]);
   const onClose = () => {
     clearCurrentChanges();
     requestClose();
@@ -79,7 +83,7 @@ export function OpenShiftClusterSummaryCard() {
     ]);
     setHostingEnvironments(newEnvironments);
     saveEngagement({
-      ...(currentEngagementChanges as Engagement),
+      ...(currentChanges as Engagement),
       hosting_environments: newEnvironments,
     });
   };
@@ -90,16 +94,14 @@ export function OpenShiftClusterSummaryCard() {
     requestOpen(OPENSHIFT_MODAL_KEY);
   };
   const onDelete = (hostingEnvironment: HostingEnvironment) => {
-    const hostingEnvironments = [
-      ...currentEngagementChanges.hosting_environments,
-    ];
+    const hostingEnvironments = [...currentChanges.hosting_environments];
     hostingEnvironments.splice(
       hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
       1
     );
     onChange(hostingEnvironments);
     saveEngagement({
-      ...(currentEngagementChanges as Engagement),
+      ...(currentChanges as Engagement),
       hosting_environments: hostingEnvironments,
     });
   };
@@ -133,7 +135,7 @@ export function OpenShiftClusterSummaryCard() {
     { title: 'Cloud Provider' },
     { title: 'Actions' },
   ];
-  const rows = currentEngagementChanges?.hosting_environments?.map?.(
+  const rows = currentChanges?.hosting_environments?.map?.(
     (hostingEnvironment, idx) => [
       {
         title: (
@@ -205,23 +207,23 @@ export function OpenShiftClusterSummaryCard() {
     }
     return slug;
   };
-  const currentEnvironmentIndex = currentEngagementChanges?.hosting_environments?.findIndex(
+  const currentEnvironmentIndex = currentChanges?.hosting_environments?.findIndex(
     he => currentHostingEnvironment?.id === he?.id
   );
   const isAddHostingButtonDisabled =
-    currentEngagementChanges?.hosting_environments?.length >=
+    currentChanges?.hosting_environments?.length >=
     (engagementFormConfig?.logistics_options?.max_hosting_env_count ?? 1);
   return (
     <>
       <OpenShiftClusterEditModal
-        isEngagementLaunched={!!currentEngagementChanges?.launch}
+        isEngagementLaunched={!!currentChanges?.launch}
         onSave={onSave}
         onClose={onClose}
         hostingEnvironment={currentHostingEnvironment}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
         suggestedSubdomain={generateSuggestedSubdomain(
-          currentEngagementChanges?.project_name,
-          currentEngagementChanges?.customer_name,
+          currentChanges?.project_name,
+          currentChanges?.customer_name,
           currentEnvironmentIndex + 1 > 0
             ? (currentEnvironmentIndex + 1)?.toString()
             : '1'
@@ -238,7 +240,7 @@ export function OpenShiftClusterSummaryCard() {
         )}
         title="Hosting Environment"
       >
-        {currentEngagementChanges?.hosting_environments?.length > 0 ? (
+        {currentChanges?.hosting_environments?.length > 0 ? (
           <Table
             aria-label="Engagement Hosting Environments"
             variant={TableVariant.compact}

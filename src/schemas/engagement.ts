@@ -10,6 +10,7 @@ export enum EngagementStatus {
   active = 'active',
   past = 'past',
   upcoming = 'upcoming',
+  terminating = 'terminating',
 }
 
 export interface EngagementUser {
@@ -129,6 +130,13 @@ export interface Engagement
 
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
+  static equals(a?: Engagement, b?: Engagement): boolean {
+    return (
+      a?.uuid === b?.uuid ||
+      (a?.customer_name === b?.customer_name &&
+        a?.project_name === b?.customer_name)
+    );
+  }
   static fromFake(
     staticData = false,
     options: Partial<FakedEngagementOptions> = {}
@@ -257,10 +265,12 @@ export const getEngagementStatus = (
     return null;
   }
   const Today = new Date();
-  const { launch, end_date } = engagement;
+  const { launch, end_date, archive_date } = engagement;
   const hasLaunched = !!launch?.launched_date_time;
   if (hasLaunched && end_date >= Today) {
     return EngagementStatus.active;
+  } else if (hasLaunched && end_date < Today && archive_date > Today) {
+    return EngagementStatus.terminating;
   } else if (hasLaunched && end_date < Today) {
     return EngagementStatus.past;
   } else {
