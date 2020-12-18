@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FormGroup, TextInput } from '@patternfly/react-core';
+import { FormGroup, TextInput, Tooltip } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { slugify } from 'transliteration';
 import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
+import { InfoCircleIcon } from '@patternfly/react-icons';
 
 interface SubdomainFormFieldProps {
   hostingEnvironment: HostingEnvironment;
@@ -57,6 +58,10 @@ export function SubdomainFormField({
           Applications will live at:&nbsp;
           <strong>{`${getSubdomainHelperText()}`}</strong>
           <span style={{ fontStyle: 'italic' }}>{`.region.rht-labs.com`}</span>
+          &nbsp;&nbsp;
+          <Tooltip content="The full domain is shown as an example. The actual domain(s) used within the environment(s) will be available as part of the status once the engagement is launched">
+            <InfoCircleIcon></InfoCircleIcon>
+          </Tooltip>
         </div>
       }
     >
