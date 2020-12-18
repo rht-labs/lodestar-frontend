@@ -2,7 +2,7 @@ import React from 'react';
 import { TextContent, Grid, GridItem } from '@patternfly/react-core';
 import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
-import { OpenShiftClusterSummaryCard } from '../../components/engagement_data_cards/openshift_cluster_card/openshift_cluster_card';
+import { HostingEnvironmentCard } from '../../components/engagement_data_cards/hosting_environment_card/hosting_environment_card';
 import { UserCard } from '../../components/engagement_data_cards/user_card/user_card';
 import { ActivityHistoryCard } from '../../components/engagement_data_cards/activity_history_card/activity_history_card';
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
@@ -51,7 +51,7 @@ export function EngagementOverview() {
           <GridItem span={12}>
             <div id="oc_summary_card">
               <FormManager.Group groupName="Hosting Environment">
-                <OpenShiftClusterSummaryCard />
+                <HostingEnvironmentCard />
               </FormManager.Group>
             </div>
           </GridItem>

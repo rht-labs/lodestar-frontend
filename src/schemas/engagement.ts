@@ -129,6 +129,13 @@ export interface Engagement
 
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
+  static equals(a?: Engagement, b?: Engagement): boolean {
+    return (
+      a?.uuid === b?.uuid ||
+      (a?.customer_name === b?.customer_name &&
+        a?.project_name === b?.customer_name)
+    );
+  }
   static fromFake(
     staticData = false,
     options: Partial<FakedEngagementOptions> = {}
