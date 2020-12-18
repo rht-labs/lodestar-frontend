@@ -22,6 +22,8 @@ export function EngagementStatusSelect({
       return 'Past';
     } else if (status === EngagementStatus.upcoming) {
       return 'Upcoming';
+    } else if (status === EngagementStatus.terminating) {
+      return 'Terminating';
     }
   };
   return (
@@ -49,9 +51,11 @@ export function EngagementStatusSelect({
             </SelectOption>,
           ].concat(
             Object.keys(EngagementStatus).map(statusKey => (
-              <SelectOption key={statusKey}
-                            value={EngagementStatus[statusKey]}
-                            data-testid={EngagementStatus[statusKey]}>
+              <SelectOption
+                key={statusKey}
+                value={EngagementStatus[statusKey]}
+                data-testid={EngagementStatus[statusKey]}
+              >
                 {getStatusDisplayValue(EngagementStatus[statusKey])}
               </SelectOption>
             ))

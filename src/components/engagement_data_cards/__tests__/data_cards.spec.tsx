@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Engagement } from '../../../schemas/engagement';
 import { EngagementSummaryCard } from '../engagement_summary_card/engagement_summary_card';
 import { HostingEnvironmentCard } from '../hosting_environment_card/hosting_environment_card';
 import { PointOfContactCard } from '../point_of_contact_card/point_of_contact_card';
@@ -16,13 +15,7 @@ describe('Engagement summary card', () => {
       render(
         <MemoryRouter>
           <TestStateWrapper>
-            <EngagementSummaryCard
-              onSave={() => {}}
-              onChange={() => {}}
-              currentEngagement={Engagement.fromFake(true)}
-              currentEngagementChanges={Engagement.fromFake(true)}
-              missingRequiredFields={[]}
-            />
+            <EngagementSummaryCard />
           </TestStateWrapper>
         </MemoryRouter>
       )
@@ -35,13 +28,7 @@ describe('OpenShift Cluster Summary', () => {
     expect(
       render(
         <TestStateWrapper>
-          <HostingEnvironmentCard
-            onSave={() => {}}
-            onChange={() => {}}
-            currentEngagement={Engagement.fromFake(true)}
-            currentEngagementChanges={Engagement.fromFake(true)}
-            missingRequiredFields={[]}
-          />
+          <HostingEnvironmentCard />
         </TestStateWrapper>
       )
     ).toMatchSnapshot();
@@ -53,13 +40,7 @@ describe('Point of Contact Card', () => {
     expect(
       render(
         <TestStateWrapper>
-          <PointOfContactCard
-            onSave={() => {}}
-            onChange={() => {}}
-            currentEngagement={Engagement.fromFake(true)}
-            currentEngagementChanges={Engagement.fromFake(true)}
-            missingRequiredFields={[]}
-          />
+          <PointOfContactCard />
         </TestStateWrapper>
       )
     ).toMatchSnapshot();
