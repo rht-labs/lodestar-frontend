@@ -40,6 +40,7 @@ export interface UserEditModalProps {
   onClose: () => void;
   addUser: () => void;
 }
+
 export function UserEditModal({
   engagement,
   onClose = () => {},
@@ -161,7 +162,12 @@ export function UserEditModal({
                         <Button
                           variant="secondary"
                           onClick={() =>
-                            addUser({ uuid: uuid() } as EngagementUser)
+                            addUser({
+                              uuid: uuid(),
+                              first_name: '',
+                              last_name: '',
+                              role: '',
+                            } as EngagementUser)
                           }
                           data-testid={'add-first-user'}
                           data-cy={'add_new_user'}

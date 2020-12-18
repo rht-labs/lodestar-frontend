@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react';
 import { UserEditModal } from '../user_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import { FeatureToggleContext } from '../../../context/feature_context/feature_toggles';
 import {
   EngagementContext,
   IEngagementContext,
