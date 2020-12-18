@@ -1249,8 +1249,13 @@ Object {
           <div>
             Applications will live at: 
             <strong>
-              ordoabchao.na-1.rht-labs.com
+              ordoabchao
             </strong>
+            <span
+              style="font-style: italic;"
+            >
+              .region.rht-labs.com
+            </span>
           </div>
         </div>
       </div>
@@ -1300,8 +1305,13 @@ Object {
         <div>
           Applications will live at: 
           <strong>
-            ordoabchao.na-1.rht-labs.com
+            ordoabchao
           </strong>
+          <span
+            style="font-style: italic;"
+          >
+            .region.rht-labs.com
+          </span>
         </div>
       </div>
     </div>
