@@ -63,9 +63,7 @@ export function HostingEnvironmentCard() {
   );
 
   useEffect(() => {
-    if (currentEngagement) {
-      setCurrentHostingEnvironment(null);
-    }
+    setCurrentHostingEnvironment(null);
   }, [currentEngagement]);
   const onClose = () => {
     clearCurrentChanges();
