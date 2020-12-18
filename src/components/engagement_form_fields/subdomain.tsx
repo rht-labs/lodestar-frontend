@@ -51,7 +51,9 @@ export function SubdomainFormField({
       helperText={
         <div>
           Applications will live at:&nbsp;
-          <strong>{`${getSubdomainHelperText()}.${'na'}-1.rht-labs.com`}</strong>
+          <strong>{`${getSubdomainHelperText()}`}</strong>
+          <span style={{ fontStyle: 'italic' }}>{`.<region>`}</span>
+          <span>{`.rht-labs.com`}</span>
         </div>
       }
     >
