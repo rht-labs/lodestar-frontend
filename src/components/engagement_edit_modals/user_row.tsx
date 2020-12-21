@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FormSelect,
   FormSelectOption,
@@ -25,8 +25,6 @@ export interface UserRowProps {
   onChange: (user: EngagementUser) => void;
   toggleDeleted: (user: EngagementUser) => void;
   isDeleted: boolean;
-  isReset: boolean;
-  toggleReset: (user: EngagementUser) => void;
 }
 
 export const UserRow = ({
@@ -34,11 +32,10 @@ export const UserRow = ({
   onChange,
   toggleDeleted,
   isDeleted: isUserDeleted,
-  isReset,
-  toggleReset
 }: UserRowProps) => {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
+  const [ isReset, setIsReset ] = useState(false);
 
   return (
     <>
@@ -162,10 +159,11 @@ export const UserRow = ({
           <GridItem span={2} style={{ paddingTop: '0.5rem' }}>
             <Checkbox label="Reset user"
                       isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
-                      onChange={() => {
-                        toggleReset(user);
-                      }}
                       isChecked={isReset}
+                      onChange={e => {
+                        setIsReset(e);
+                        onChange({ ...user, reset: e });
+                      }}
                       id={user.uuid} />
           </GridItem>
           <GridItem span={1} style={{ paddingTop: '0.5rem' }}>
