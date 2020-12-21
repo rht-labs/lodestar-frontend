@@ -25,6 +25,8 @@ export interface UserRowProps {
   onChange: (user: EngagementUser) => void;
   toggleDeleted: (user: EngagementUser) => void;
   isDeleted: boolean;
+  isReset: boolean;
+  toggleReset: (user: EngagementUser) => void;
 }
 
 export const UserRow = ({
@@ -32,6 +34,8 @@ export const UserRow = ({
   onChange,
   toggleDeleted,
   isDeleted: isUserDeleted,
+  isReset,
+  toggleReset
 }: UserRowProps) => {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
@@ -158,6 +162,10 @@ export const UserRow = ({
           <GridItem span={2} style={{ paddingTop: '0.5rem' }}>
             <Checkbox label="Reset user"
                       isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+                      onChange={() => {
+                        toggleReset(user);
+                      }}
+                      isChecked={isReset}
                       id={user.uuid} />
           </GridItem>
           <GridItem span={1} style={{ paddingTop: '0.5rem' }}>

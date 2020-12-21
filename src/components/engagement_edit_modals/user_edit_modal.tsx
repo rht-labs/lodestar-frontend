@@ -24,7 +24,7 @@ import {
   Table,
   TableBody,
   TableHeader,
-  TableVariant, textCenter,
+  TableVariant,
 } from '@patternfly/react-table';
 import { UserRow } from './user_row';
 import { Feature } from '../feature/feature';
@@ -51,6 +51,7 @@ export function UserEditModal({
 }: UserEditModalProps) {
   const { users, addUser, updateUser } = useEngagementUserManager();
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
+  const [usersToBeReset, setUsersToBeReset] = useState<string[]>([]);
 
   function toggleDeleted(user: EngagementUser) {
     if (deletedUsers.indexOf(user.uuid) < 0) {
@@ -66,9 +67,21 @@ export function UserEditModal({
 
   const onSave = () => {
     const newUsers = users.filter(deletedUsersFilter);
+    console.log('users to be reset are:');
+    console.log(usersToBeReset);
     propsOnSave(newUsers);
     onClose();
   };
+
+  function toggleReset(user: EngagementUser) {
+    if (usersToBeReset.indexOf(user.uuid) < 0) {
+      setUsersToBeReset([...usersToBeReset, user.uuid]);
+    } else {
+      const newUsersToBeReset = [...usersToBeReset];
+      newUsersToBeReset.splice(usersToBeReset.indexOf(user.uuid), 1);
+      setUsersToBeReset(newUsersToBeReset);
+    }
+  }
 
   const columns = [
     { title: 'Email' , transforms: [cellWidth(25)]},
@@ -157,7 +170,8 @@ export function UserEditModal({
                         {users.map(user => {
                           const isDeleted =
                             deletedUsers.indexOf(user.uuid) > -1;
-                          console.log(user.email);
+                          const isReset =
+                            usersToBeReset.indexOf(user.uuid) > -1;
                           return (
                             <UserRow
                               key={user.uuid}
@@ -165,6 +179,8 @@ export function UserEditModal({
                               toggleDeleted={toggleDeleted}
                               onChange={updateUser}
                               isDeleted={isDeleted}
+                              isReset={isReset}
+                              toggleReset={toggleReset}
                             />
                           );
                         })}
