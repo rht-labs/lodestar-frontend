@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement, EngagementUseCase } from '../../schemas/engagement';
+import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { DescriptionFormField } from '../engagement_form_fields/description';
@@ -58,36 +58,13 @@ export function EngagementSummaryEditModal(
         }
       >
         <Form>
-          <CustomerNameFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <EngagementNameFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <EngagementUseCaseField
-            onChange={(useCases: EngagementUseCase[]) =>
-              props.onChange('use_cases', useCases)
-            }
-            engagement={props.engagement}
-          />
-          <DescriptionFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <LocationFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <EngagementStartEndDateFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <PublicReferenceField
-            engagement={props.engagement}
-            onChange={props.onChange}
-          />
+          <CustomerNameFormField />
+          <EngagementNameFormField />
+          <EngagementUseCaseField />
+          <DescriptionFormField />
+          <LocationFormField />
+          <EngagementStartEndDateFormField />
+          <PublicReferenceField />
         </Form>
       </EditModalTemplate>
     </Modal>

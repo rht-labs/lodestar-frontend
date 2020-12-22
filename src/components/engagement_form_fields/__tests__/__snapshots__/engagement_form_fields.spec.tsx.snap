@@ -768,7 +768,7 @@ Object {
             name="location"
             placeholder="e.g. Pasadena, CA"
             type="text"
-            value="Nashville, TN"
+            value=""
           />
           <div
             aria-live="polite"
@@ -813,7 +813,7 @@ Object {
           name="location"
           placeholder="e.g. Pasadena, CA"
           type="text"
-          value="Nashville, TN"
+          value=""
         />
         <div
           aria-live="polite"
