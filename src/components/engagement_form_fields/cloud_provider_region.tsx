@@ -12,12 +12,10 @@ interface CloudProviderRegionFormFieldProps {
   availableProviderRegionOptions: { label: string; value: string }[];
   hostingEnvironment: HostingEnvironment;
   onChange: (fieldName: string, value: any) => void;
-  isEngagementLaunched: boolean;
 }
 
 export function CloudProviderRegionFormField({
   availableProviderRegionOptions,
-  isEngagementLaunched,
   hostingEnvironment,
   onChange,
 }: CloudProviderRegionFormFieldProps) {

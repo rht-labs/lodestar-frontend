@@ -220,19 +220,12 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="cloud-provider-region"
+                        for=""
                       >
                         <span
                           class="pf-c-form__label-text"
                         >
                           Provider Region
-                        </span>
-                        <span
-                          aria-hidden="true"
-                          class="pf-c-form__label-required"
-                        >
-                           
-                          *
                         </span>
                       </label>
                        
@@ -242,14 +235,13 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="Cloud provider region"
                         class="pf-c-form-control"
+                        data-cy=""
                         data-ouia-component-id="4"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
-                        data-testid="provider-region-select"
+                        data-testid=""
                         disabled=""
-                        id="cloud_provider_region_dropdown"
                       >
                         <option
                           class=""
@@ -260,7 +252,6 @@ Object {
                         <option
                           class=""
                           data-cy="N. Virginia"
-                          disabled=""
                           value="N. Virginia"
                         >
                           N. Virginia
@@ -277,7 +268,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="openshift-provider"
+                        for="openshift-version"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -299,20 +290,18 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="OpenShift Version"
                         class="pf-c-form-control"
+                        data-cy="oc-version-select"
                         data-ouia-component-id="5"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="oc-version-select"
-                        disabled=""
-                        id="oc_version_dropdown"
                       >
                         <option
                           class=""
                           value=""
                         >
-                          Select OpenShift version
+                          Select a version
                         </option>
                       </select>
                       

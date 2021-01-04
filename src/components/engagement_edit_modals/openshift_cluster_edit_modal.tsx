@@ -15,6 +15,9 @@ import { AdditionalDetailsFormField } from '../engagement_form_fields/additional
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { TextFormField } from '../form_fields/text_form_field';
+import { SelectFormField } from '../form_fields/select_form_field';
+import { useFeatures } from '../../context/feature_context/feature_hook';
+import { APP_FEATURES } from '../../common/app_features';
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: HostingEnvironment;
   isOpen: boolean;
@@ -37,6 +40,7 @@ export function OpenShiftClusterEditModal({
     HostingEnvironment
   >();
 
+  const { hasFeature } = useFeatures();
   useEffect(() => {
     setHostingEnvironment(propsHostingEnvironment);
   }, [propsHostingEnvironment, setHostingEnvironment]);
@@ -60,7 +64,7 @@ export function OpenShiftClusterEditModal({
     onClose();
   };
 
-  const onChange = (field, value) => {
+  const onChange = (field: keyof HostingEnvironment, value) => {
     setHostingEnvironment({ ...hostingEnvironment, [field]: value });
   };
 
@@ -108,16 +112,41 @@ export function OpenShiftClusterEditModal({
             availableProviders={availableProviders}
             hostingEnvironment={hostingEnvironment}
           />
-          <CloudProviderRegionFormField
-            isEngagementLaunched={isEngagementLaunched}
+          <SelectFormField
+            label="Provider Region"
+            isDisabled={
+              availableProviderRegionOptions?.length === 0 ||
+              !hasFeature(APP_FEATURES.writer)
+            }
+            data-testid="provider-region-select"
+            options={[
+              {
+                disabled: false,
+                value: undefined,
+                label: 'Select a region',
+              },
+            ].concat(
+              availableProviderRegionOptions?.map?.(o => ({
+                disabled: o.disabled,
+                value: o.value,
+                label: o.label,
+              }))
+            )}
             onChange={value => onChange('ocp_cloud_provider_region', value)}
-            availableProviderRegionOptions={availableProviderRegionOptions}
-            hostingEnvironment={hostingEnvironment}
+            value={hostingEnvironment?.ocp_cloud_provider_region}
           />
-          <OpenShiftVersionFormField
+          <SelectFormField
+            value={hostingEnvironment?.ocp_version || ''}
+            testId="oc-version-select"
+            options={[{ value: undefined, label: 'Select a version' }].concat(
+              engagementFormConfig?.openshift_options?.versions?.options?.map?.(
+                v => ({ label: v.label, disabled: v.disabled, value: v.value })
+              )
+            )}
+            label={'OpenShift Version'}
+            fieldId="openshift-version"
+            isRequired={true}
             onChange={value => onChange('ocp_version', value)}
-            isEngagementLaunched={isEngagementLaunched}
-            hostingEnvironment={hostingEnvironment}
           />
           <SubdomainFormField
             isEngagementLaunched={isEngagementLaunched}

@@ -11,14 +11,12 @@ import { useEngagements } from '../../context/engagement_context/engagement_hook
 
 interface OpenShiftVersionFormFieldProps {
   hostingEnvironment: HostingEnvironment;
-  isEngagementLaunched: boolean;
   onChange: (value: string) => void;
 }
 
 export function OpenShiftVersionFormField({
   onChange,
   hostingEnvironment,
-  isEngagementLaunched,
 }: OpenShiftVersionFormFieldProps) {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
