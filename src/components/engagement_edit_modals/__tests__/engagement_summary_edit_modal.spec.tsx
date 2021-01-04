@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react';
 import { EngagementSummaryEditModal } from '../engagement_summary_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
-import { FormManager } from '../../../context/form_manager/form_manager';
 import { MemoryRouter } from 'react-router';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
@@ -14,16 +13,13 @@ describe('Engagement Summary edit modal', () => {
       render(
         <MemoryRouter>
           <TestStateWrapper>
-            <FormManager.Manager>
-              <FormManager.Group groupName="test">
-                <EngagementSummaryEditModal
-                  onSave={() => {}}
-                  isOpen={true}
-                  engagement={Engagement.fromFake(true)}
-                  onChange={() => {}}
-                />
-              </FormManager.Group>
-            </FormManager.Manager>
+            <EngagementSummaryEditModal
+              onClose={() => {}}
+              onSave={() => {}}
+              isOpen={true}
+              engagement={Engagement.fromFake(true)}
+              onChange={() => {}}
+            />
           </TestStateWrapper>
         </MemoryRouter>
       )
@@ -36,17 +32,13 @@ describe('Engagement Summary edit modal', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <TestStateWrapper>
-          <FormManager.Manager>
-            <FormManager.Group groupName="test">
-              <EngagementSummaryEditModal
-                onSave={onSave}
-                engagement={Engagement.fromFake(true)}
-                engagementFormConfig={{}}
-                isOpen={true}
-                onChange={() => {}}
-              />
-            </FormManager.Group>
-          </FormManager.Manager>
+          <EngagementSummaryEditModal
+            onClose={() => {}}
+            onSave={onSave}
+            engagement={Engagement.fromFake(true)}
+            isOpen={true}
+            onChange={() => {}}
+          />
         </TestStateWrapper>
       </MemoryRouter>
     );

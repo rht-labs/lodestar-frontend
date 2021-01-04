@@ -110,7 +110,6 @@ describe('Engagement form fields', () => {
           <ClusterSizeFormField
             hostingEnvironment={HostingEnvironment.fromFake(true)}
             onChange={() => {}}
-            isEngagementLaunched={true}
           />
         </TestStateWrapper>
       )
@@ -122,7 +121,6 @@ describe('Engagement form fields', () => {
       <TestStateWrapper>
         <ClusterSizeFormField
           hostingEnvironment={HostingEnvironment.fromFake(true)}
-          isEngagementLaunched={true}
           onChange={onChange}
         />
       </TestStateWrapper>

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FormGroup, TextInput, Tooltip } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { slugify } from 'transliteration';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 
@@ -45,8 +44,6 @@ export function SubdomainFormField({
       }
     }
   };
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('subdomain'), [registerField]);
 
   return (
     <FormGroup

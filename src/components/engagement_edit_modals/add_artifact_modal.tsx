@@ -11,7 +11,6 @@ import {
 } from "@patternfly/react-core";
 import { EditModalTemplate } from "../../layout/edit_modal_template";
 import { Artifact, ArtifactType } from "../../schemas/engagement";
-import { FormManager } from "../../context/form_manager/form_manager";
 import {
   useAnalytics,
   AnalyticsCategory,
@@ -26,10 +25,8 @@ export interface ArtifactEditModalProps {
 
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
-  const { registerField } = FormManager.useFormGroupManager();
   const { logEvent } = useAnalytics();
 
-  useEffect(() => registerField("artifacts"), [registerField]);
 
   useEffect(
     () =>
