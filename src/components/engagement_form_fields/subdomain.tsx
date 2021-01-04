@@ -64,7 +64,7 @@ export function SubdomainFormField({
     >
       <TextInput
         isRequired
-        data-testid="subdomain-input"
+        data-testid="desired_subdomain_input"
         isDisabled={!hasFeature(APP_FEATURES.writer)}
         type="text"
         id="ocp_sub_domain"

@@ -80,7 +80,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="customerName"
+                        for="customer_name"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -102,11 +102,13 @@ Object {
                     >
                       <input
                         aria-invalid="false"
-                        aria-label="engagement customer_name"
                         class="pf-c-form-control"
                         data-cy="customer_name_field"
+                        data-testid="customer_name_field"
                         id="customer_name"
                         name="customer_name"
+                        placeholder=""
+                        required=""
                         type="text"
                         value=""
                       />
@@ -121,7 +123,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="engagementName"
+                        for="engagement_name"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -143,11 +145,13 @@ Object {
                     >
                       <input
                         aria-invalid="false"
-                        aria-label="engagement_name"
                         class="pf-c-form-control"
                         data-cy="engagement_name_field"
+                        data-testid="engagement_name_field"
                         id="engagement_name"
                         name="engagement_name"
+                        placeholder=""
+                        required=""
                         type="text"
                         value=""
                       />
@@ -209,15 +213,14 @@ Object {
                     <div
                       class="pf-c-form__group-control"
                     >
-                      <textarea
+                      <input
                         aria-invalid="false"
-                        aria-label="engagement description"
-                        class="pf-c-form-control pf-m-resize-vertical"
-                        data-cy="description_field"
-                        disabled=""
+                        class="pf-c-form-control"
                         id="description"
                         name="description"
                         placeholder="Description and notes for the Engagement"
+                        type="text"
+                        value=""
                       />
                       
                     </div>
@@ -230,7 +233,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="engagement-location"
+                        for="location"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -246,9 +249,8 @@ Object {
                       <input
                         aria-invalid="false"
                         class="pf-c-form-control"
-                        data-cy="location_field"
+                        data-cy="location-field"
                         data-testid="location-field"
-                        disabled=""
                         id="location"
                         name="location"
                         placeholder="e.g. Pasadena, CA"
@@ -258,7 +260,7 @@ Object {
                       <div
                         aria-live="polite"
                         class="pf-c-form__helper-text"
-                        id="engagement-location-helper"
+                        id="location-helper"
                       >
                         Where will this be held?
                       </div>

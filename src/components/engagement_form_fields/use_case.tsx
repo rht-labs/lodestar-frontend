@@ -10,16 +10,14 @@ import {
 } from '@patternfly/react-core';
 import { TrashAltIcon } from '@patternfly/react-icons';
 import { uuid } from 'uuidv4';
-import {
-  EngagementGroupings,
-  useEngagementFormField,
-} from '../../context/engagement_context/engagement_context';
 
-export function EngagementUseCaseField() {
-  const [useCases, setUseCases] = useEngagementFormField(
-    'use_cases',
-    EngagementGroupings.engagementSummary
-  );
+export function EngagementUseCaseField({
+  useCases,
+  setUseCases,
+}: {
+  useCases: EngagementUseCase[];
+  setUseCases: (useCases: EngagementUseCase[]) => void;
+}) {
   const addUseCase = () => {
     setUseCases([...useCases, { id: uuid() }]);
   };

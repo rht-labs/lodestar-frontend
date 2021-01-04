@@ -3,18 +3,12 @@ import { AdditionalDetailsFormField } from '../additional_details';
 import { CloudProviderFormField } from '../cloud_provider';
 import { CloudProviderRegionFormField } from '../cloud_provider_region';
 import { ClusterSizeFormField } from '../cluster_size';
-import { LocationFormField } from '../location';
 import { OpenShiftVersionFormField } from '../oc_version';
 import { PersistentStorageFormField } from '../persistent_storage';
 import { SubdomainFormField } from '../subdomain';
 import { render, fireEvent } from '@testing-library/react';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import {
-  EngagementContext,
-  EngagementGroupings,
-  IEngagementContext,
-} from '../../../context/engagement_context/engagement_context';
 describe('Engagement form fields', () => {
   test('Additional details form matches snapshot', () => {
     expect(
@@ -130,30 +124,6 @@ describe('Engagement form fields', () => {
     await fireEvent.change(textArea, { target: { value: '1' } });
     expect(onChange).toHaveBeenCalled();
   });
-  test('Location form matches snapshot', () => {
-    expect(render(<LocationFormField />)).toMatchSnapshot();
-  });
-  test('Location form fires onChange', async () => {
-    const onChange = jest.fn();
-    const wrapper = render(
-      <EngagementContext.Provider
-        value={
-          ({
-            updateEngagementFormField: onChange,
-          } as unknown) as IEngagementContext
-        }
-      >
-        <LocationFormField />
-      </EngagementContext.Provider>
-    );
-    const textArea = await wrapper.findByTestId('location-field');
-    await fireEvent.change(textArea, { target: { value: 'nva' } });
-    expect(onChange).toHaveBeenCalledWith(
-      'location',
-      'nva',
-      EngagementGroupings.engagementSummary
-    );
-  });
   test('OpenShift Version form matches snapshot', () => {
     expect(
       render(
@@ -236,7 +206,7 @@ describe('Engagement form fields', () => {
         />
       </TestStateWrapper>
     );
-    const textArea = await wrapper.findByTestId('subdomain-input');
+    const textArea = await wrapper.findByTestId('desired_subdomain_input');
     await fireEvent.change(textArea, {
       target: { value: 'example-subdomain' },
     });

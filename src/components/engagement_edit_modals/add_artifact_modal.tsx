@@ -7,7 +7,6 @@ import {
   FormSelect,
   FormGroup,
   FormSelectOption,
-  TextInput,
 } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { Artifact, ArtifactType } from '../../schemas/engagement';
@@ -15,6 +14,7 @@ import {
   useAnalytics,
   AnalyticsCategory,
 } from '../../context/analytics_context/analytics_context';
+import { TextFormField } from '../form_fields/text_form_field';
 
 export interface ArtifactEditModalProps {
   onClose: () => void;
@@ -71,10 +71,10 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               aria-label="Artifact Type"
               id="artifact-type-select"
               value={artifactEdits?.type}
-              onChange={(value: ArtifactType) => {
+              onChange={(value: string, _) => {
                 setArtifactEdits({
                   ...artifactEdits,
-                  type: value,
+                  type: ArtifactType[value],
                 });
               }}
             >
@@ -89,49 +89,33 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               ))}
             </FormSelect>
           </FormGroup>
-          <FormGroup label="Artifact Title" isRequired fieldId="artifact-title">
-            <TextInput
-              isRequired
-              data-testid="artifact-title-input"
-              name="artifact_title"
-              data-cy="artifact-title-input"
-              aria-label="Artifact Title"
-              value={artifactEdits?.title ?? ''}
-              onChange={e => setArtifactEdits({ ...artifactEdits, title: e })}
-            />
-          </FormGroup>
-          <FormGroup label="Artifact Link" isRequired fieldId="artifact-link">
-            <TextInput
-              isRequired
-              data-testid="artifact-link-input"
-              name="artifact_link"
-              aria-label="Artifact Link"
-              data-cy="artifact-link-input"
-              value={artifactEdits?.linkAddress ?? ''}
-              onChange={e =>
-                setArtifactEdits({ ...artifactEdits, linkAddress: e })
-              }
-            />
-          </FormGroup>
-          <FormGroup
-            label="Artifact Description"
-            isRequired
+          <TextFormField
+            value={artifactEdits?.title}
+            label="Artifact Title"
+            isRequired={true}
+            onChange={e => setArtifactEdits({ ...artifactEdits, title: e })}
+            fieldId="artifact_title"
+            testId="artifact-title-input"
+          />
+          <TextFormField
+            label="Artifact Link"
+            value={artifactEdits?.linkAddress ?? ''}
+            testId="artifact-link-input"
+            fieldId="artifact_link"
+            isRequired={true}
+            onChange={e =>
+              setArtifactEdits({ ...artifactEdits, linkAddress: e })
+            }
+          />
+          <TextFormField
+            value={artifactEdits?.description}
+            onChange={description =>
+              setArtifactEdits({ ...artifactEdits, description })
+            }
+            isRequired={true}
             fieldId="artifact-description"
             helperText={`${artifactEdits?.description?.length ?? 0}/250`}
-          >
-            <TextInput
-              isRequired
-              maxLength={250}
-              data-testid="artifact-description-input"
-              name="artifact_description"
-              data-cy="artifact-description-input"
-              aria-label="Artifact Description"
-              value={artifactEdits?.description ?? ''}
-              onChange={e =>
-                setArtifactEdits({ ...artifactEdits, description: e })
-              }
-            />
-          </FormGroup>
+          />
         </Form>
       </EditModalTemplate>
     </Modal>

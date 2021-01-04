@@ -80,7 +80,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="subdomain"
+                        for="hosting_environment_name"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -103,10 +103,11 @@ Object {
                       <input
                         aria-invalid="false"
                         class="pf-c-form-control"
-                        data-cy="desired_subdomain_input"
-                        data-testid="subdomain-input"
-                        id="ocp_sub_domain"
-                        name="ocp_sub_domain"
+                        data-cy="hosting_environment_name"
+                        data-testid="hosting_environment_name"
+                        id="hosting_environment_name"
+                        name="hosting_environment_name"
+                        placeholder=""
                         required=""
                         type="text"
                         value="name"
@@ -349,7 +350,7 @@ Object {
                         aria-invalid="false"
                         class="pf-c-form-control"
                         data-cy="desired_subdomain_input"
-                        data-testid="subdomain-input"
+                        data-testid="desired_subdomain_input"
                         disabled=""
                         id="ocp_sub_domain"
                         name="ocp_sub_domain"

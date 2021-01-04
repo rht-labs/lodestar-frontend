@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Modal,
-  ModalVariant,
-  Button,
-  Form,
-  FormGroup,
-  TextInput,
-} from '@patternfly/react-core';
+import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { EngagementFormOption } from '../../schemas/engagement_config';
+import {
+  EngagementFormConfig,
+  EngagementFormOption,
+} from '../../schemas/engagement_config';
 import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider';
 import { CloudProviderRegionFormField } from '../engagement_form_fields/cloud_provider_region';
 import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version';
@@ -18,6 +14,7 @@ import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { TextFormField } from '../form_fields/text_form_field';
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: HostingEnvironment;
   isOpen: boolean;
@@ -92,20 +89,18 @@ export function OpenShiftClusterEditModal({
         }
       >
         <Form isHorizontal>
-          <FormGroup label="Environment Name" isRequired fieldId="subdomain">
-            <TextInput
-              isRequired
-              data-testid="subdomain-input"
-              type="text"
-              id="ocp_sub_domain"
-              name="ocp_sub_domain"
-              data-cy={'desired_subdomain_input'}
-              value={hostingEnvironment.environment_name}
-              onChange={e => {
-                onChange('environment_name', e);
-              }}
-            />
-          </FormGroup>
+          <TextFormField
+            isRequired
+            data-testid="hosting_environment_name"
+            type="text"
+            fieldId="hosting_environment_name"
+            testId={'hosting_environment_name'}
+            value={hostingEnvironment.environment_name}
+            onChange={e => {
+              onChange('environment_name', e);
+            }}
+            label="Environment Name"
+          />
           <CloudProviderFormField
             onChange={(value: string) =>
               onChange('ocp_cloud_provider_name', value)
@@ -141,7 +136,6 @@ export function OpenShiftClusterEditModal({
               console.log(value);
             }}
             hostingEnvironment={hostingEnvironment}
-            isEngagementLaunched={isEngagementLaunched}
           />
           <AdditionalDetailsFormField
             onChange={value => onChange('additional_details', value)}
