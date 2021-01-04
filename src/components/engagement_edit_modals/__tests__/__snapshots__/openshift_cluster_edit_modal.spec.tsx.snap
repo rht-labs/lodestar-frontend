@@ -242,6 +242,7 @@ Object {
                         data-ouia-safe="true"
                         data-testid=""
                         disabled=""
+                        id=""
                       >
                         <option
                           class=""
@@ -296,6 +297,7 @@ Object {
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="oc-version-select"
+                        id="openshift-version"
                       >
                         <option
                           class=""
@@ -384,7 +386,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="persistent-storage-needs"
+                        for="persistent_storage_dropdown"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -406,22 +408,14 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="Persistent Storage Needs"
                         class="pf-c-form-control"
+                        data-cy="persistent-storage-select"
                         data-ouia-component-id="6"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="persistent-storage-select"
-                        disabled=""
                         id="persistent_storage_dropdown"
-                      >
-                        <option
-                          class=""
-                          value=""
-                        >
-                          Select storage size
-                        </option>
-                      </select>
+                      />
                       
                     </div>
                   </div>
@@ -433,7 +427,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="cluster-size"
+                        for="cluster_size_dropdown"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -455,23 +449,15 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="Cluster Size"
                         class="pf-c-form-control"
+                        data-cy="cluster-size-select"
                         data-ouia-component-id="7"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="cluster-size-select"
                         disabled=""
                         id="cluster_size_dropdown"
-                        required=""
-                      >
-                        <option
-                          class=""
-                          value=""
-                        >
-                          Select cluster size
-                        </option>
-                      </select>
+                      />
                       
                     </div>
                   </div>

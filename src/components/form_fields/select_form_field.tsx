@@ -11,7 +11,8 @@ export interface SelectFormFieldOption<T> {
   disabled?: boolean;
 }
 export interface SelectFormFieldProps<T> {
-  options: SelectFormFieldOption<T>[];
+  emptyValue?: Pick<SelectFormFieldOption<T>, 'label'>;
+  options: Partial<SelectFormFieldOption<T>>[];
   testId?: string;
   fieldId?: string;
   isRequired?: boolean;
@@ -30,7 +31,14 @@ export function SelectFormField<T>({
   testId = '',
   label = '',
   value,
+  emptyValue,
 }: SelectFormFieldProps<T>) {
+  let finalOptions = options;
+  if (!!emptyValue) {
+    finalOptions = ([emptyValue] as Partial<SelectFormFieldOption<T>>[]).concat(
+      finalOptions
+    );
+  }
   return (
     <FormGroup label={label} isRequired={isRequired} fieldId={fieldId}>
       <FormSelect
@@ -39,8 +47,9 @@ export function SelectFormField<T>({
         value={value}
         isDisabled={isDisabled}
         readOnly={readOnly}
+        id={fieldId}
       >
-        {options
+        {finalOptions
           .filter(o => !!o)
           .map(o => (
             <FormSelectOption

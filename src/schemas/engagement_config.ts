@@ -1,7 +1,7 @@
 import FakedSchema from './fixtures/engagement_form_config.json';
 
 export interface EngagementFormOption {
-  disabled: boolean;
+  disabled?: boolean;
   label: string;
   value: string;
   description?: string;

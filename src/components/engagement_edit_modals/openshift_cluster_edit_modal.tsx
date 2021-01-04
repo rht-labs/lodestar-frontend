@@ -7,8 +7,6 @@ import {
 } from '../../schemas/engagement_config';
 import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider';
 import { SubdomainFormField } from '../engagement_form_fields/subdomain';
-import { PersistentStorageFormField } from '../engagement_form_fields/persistent_storage';
-import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
@@ -117,29 +115,23 @@ export function OpenShiftClusterEditModal({
               !hasFeature(APP_FEATURES.writer)
             }
             data-testid="provider-region-select"
-            options={[
-              {
-                disabled: false,
-                value: undefined,
-                label: 'Select a region',
-              },
-            ].concat(
-              availableProviderRegionOptions?.map?.(o => ({
-                disabled: o.disabled,
-                value: o.value,
-                label: o.label,
-              }))
-            )}
+            emptyValue={{
+              label: 'Select a region',
+            }}
+            options={availableProviderRegionOptions?.map?.(o => ({
+              disabled: o.disabled,
+              value: o.value,
+              label: o.label,
+            }))}
             onChange={value => onChange('ocp_cloud_provider_region', value)}
             value={hostingEnvironment?.ocp_cloud_provider_region}
           />
           <SelectFormField
             value={hostingEnvironment?.ocp_version || ''}
             testId="oc-version-select"
-            options={[{ value: undefined, label: 'Select a version' }].concat(
-              engagementFormConfig?.openshift_options?.versions?.options?.map?.(
-                v => ({ label: v.label, disabled: v.disabled, value: v.value })
-              )
+            emptyValue={{ label: 'Select a version' }}
+            options={engagementFormConfig?.openshift_options?.versions?.options?.map?.(
+              v => ({ label: v.label, disabled: v.disabled, value: v.value })
             )}
             label={'OpenShift Version'}
             fieldId="openshift-version"
@@ -152,17 +144,28 @@ export function OpenShiftClusterEditModal({
             hostingEnvironment={hostingEnvironment}
             suggestedSubdomain={suggestedSubdomain}
           />
-          <PersistentStorageFormField
-            onChange={value => onChange('ocp_persistent_storage_size', value)}
-            hostingEnvironment={hostingEnvironment}
-            isEngagementLaunched={isEngagementLaunched}
+          <SelectFormField
+            value={hostingEnvironment?.ocp_persistent_storage_size || ''}
+            testId="persistent-storage-select"
+            label="Persistent Storage Needs"
+            options={engagementFormConfig?.openshift_options?.persistent_storage?.options?.map?.(
+              v => ({ label: v.label, disabled: v.disabled, value: v.value })
+            )}
+            fieldId="persistent_storage_dropdown"
+            isRequired={true}
+            onChange={value => onChange('ocp_version', value)}
           />
-          <ClusterSizeFormField
-            onChange={value => {
-              onChange('ocp_cluster_size', value);
-              console.log(value);
-            }}
-            hostingEnvironment={hostingEnvironment}
+          <SelectFormField
+            isRequired
+            options={engagementFormConfig?.openshift_options?.cluster_size?.options?.map?.(
+              v => ({ label: v.label, disabled: v.disabled, value: v.value })
+            )}
+            testId="cluster-size-select"
+            fieldId="cluster_size_dropdown"
+            value={hostingEnvironment?.ocp_cluster_size || ''}
+            label="Cluster Size"
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
+            onChange={value => onChange('ocp_cluster_size', value)}
           />
           <AdditionalDetailsFormField
             onChange={value => onChange('additional_details', value)}
