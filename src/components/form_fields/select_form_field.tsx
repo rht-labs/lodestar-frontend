@@ -5,24 +5,24 @@ import {
 } from '@patternfly/react-core';
 import React from 'react';
 
-export interface SelectFormFieldOption<T> {
-  value: T;
+export interface SelectFormFieldOption {
+  value: string;
   label: string;
   disabled?: boolean;
 }
-export interface SelectFormFieldProps<T> {
-  emptyValue?: Pick<SelectFormFieldOption<T>, 'label'>;
-  options: Partial<SelectFormFieldOption<T>>[];
+export interface SelectFormFieldProps {
+  emptyValue?: Pick<SelectFormFieldOption, 'label'>;
+  options: Partial<SelectFormFieldOption>[];
   testId?: string;
   fieldId?: string;
   isRequired?: boolean;
   label: string;
   isDisabled?: boolean;
   readOnly?: boolean;
-  value: T;
-  onChange: (value: T) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
-export function SelectFormField<T>({
+export function SelectFormField({
   options = [],
   isRequired = false,
   fieldId = '',
@@ -30,12 +30,13 @@ export function SelectFormField<T>({
   readOnly = false,
   testId = '',
   label = '',
+  onChange,
   value,
   emptyValue,
-}: SelectFormFieldProps<T>) {
+}: SelectFormFieldProps) {
   let finalOptions = options;
   if (!!emptyValue) {
-    finalOptions = ([emptyValue] as Partial<SelectFormFieldOption<T>>[]).concat(
+    finalOptions = ([emptyValue] as Partial<SelectFormFieldOption>[]).concat(
       finalOptions
     );
   }
@@ -43,6 +44,7 @@ export function SelectFormField<T>({
     <FormGroup label={label} isRequired={isRequired} fieldId={fieldId}>
       <FormSelect
         data-testid={testId}
+        onChange={v => onChange(v)}
         data-cy={testId}
         value={value}
         isDisabled={isDisabled}
