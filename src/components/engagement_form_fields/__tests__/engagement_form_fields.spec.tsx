@@ -11,6 +11,7 @@ import { SubdomainFormField } from '../subdomain';
 import { render, fireEvent } from '@testing-library/react';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
+import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 describe('Engagement form fields', () => {
   test('Additional details form matches snapshot', () => {
     expect(
@@ -141,14 +142,15 @@ describe('Engagement form fields', () => {
   test('Location form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <LocationFormField
-        engagement={Engagement.fromFake(true)}
-        onChange={onChange}
-      />
+      <EngagementContext.Provider
+        value={{ updateEngagementFormField: onChange }}
+      >
+        <LocationFormField />
+      </EngagementContext.Provider>
     );
     const textArea = await wrapper.findByTestId('location-field');
     await fireEvent.change(textArea, { target: { value: 'nva' } });
-    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith('location', 'nva');
   });
   test('OpenShift Version form matches snapshot', () => {
     expect(
