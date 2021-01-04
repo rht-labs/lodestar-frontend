@@ -12,6 +12,7 @@ import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import {
   EngagementContext,
+  EngagementGroupings,
   IEngagementContext,
 } from '../../../context/engagement_context/engagement_context';
 describe('Engagement form fields', () => {
@@ -147,7 +148,11 @@ describe('Engagement form fields', () => {
     );
     const textArea = await wrapper.findByTestId('location-field');
     await fireEvent.change(textArea, { target: { value: 'nva' } });
-    expect(onChange).toHaveBeenCalledWith('location', 'nva');
+    expect(onChange).toHaveBeenCalledWith(
+      'location',
+      'nva',
+      EngagementGroupings.engagementSummary
+    );
   });
   test('OpenShift Version form matches snapshot', () => {
     expect(
