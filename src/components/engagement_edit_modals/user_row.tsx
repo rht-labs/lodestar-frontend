@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FormSelect,
   FormSelectOption,
@@ -6,6 +6,7 @@ import {
   Grid,
   GridItem,
   FormGroup,
+  Checkbox
 } from '@patternfly/react-core';
 import {
   validateEmail,
@@ -34,10 +35,11 @@ export const UserRow = ({
 }: UserRowProps) => {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
+  const [ isReset, setIsReset ] = useState(false);
 
   return (
     <>
-      <Grid hasGutter style={{ marginTop: '1rem' }}>
+      <Grid hasGutter style={{ marginTop: '1rem' , marginLeft:'1rem'}}>
         <GridItem span={3}>
           <FormGroup
             fieldId={'user_email'}
@@ -62,7 +64,7 @@ export const UserRow = ({
             />
           </FormGroup>
         </GridItem>
-        <GridItem span={3}>
+        <GridItem span={2}>
           <FormGroup
             fieldId={'user_first_name'}
             helperTextInvalid={'Enter valid first name'}
@@ -86,7 +88,7 @@ export const UserRow = ({
             />
           </FormGroup>
         </GridItem>
-        <GridItem span={3}>
+        <GridItem span={2}>
           <FormGroup
             fieldId={'user_last_name'}
             helperTextInvalid={'Enter valid last name'}
@@ -153,8 +155,18 @@ export const UserRow = ({
             </FormSelect>
           </FormGroup>
         </GridItem>
-        <GridItem span={1} style={{ paddingTop: '0.5rem' }}>
-          <Feature name={APP_FEATURES.writer}>
+        <Feature name={APP_FEATURES.writer}>
+          <GridItem span={2} style={{ paddingTop: '0.5rem' }}>
+            <Checkbox label="Reset user"
+                      isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+                      isChecked={isReset}
+                      onChange={e => {
+                        setIsReset(e);
+                        onChange({ ...user, reset: e });
+                      }}
+                      id={user.uuid} />
+          </GridItem>
+          <GridItem span={1} style={{ paddingTop: '0.5rem' }}>
             {isUserDeleted ? (
               <UndoIcon
                 onClick={() => {
@@ -168,11 +180,11 @@ export const UserRow = ({
                 onClick={() => {
                   toggleDeleted(user);
                 }}
-                style={{ fontSize: 'small' }}
+                style={{ fontSize: 'small'}}
               />
             )}
-          </Feature>
-        </GridItem>
+          </GridItem>
+        </Feature>
       </Grid>
     </>
   );
