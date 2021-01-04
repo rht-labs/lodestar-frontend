@@ -3,9 +3,15 @@ import { render, fireEvent } from '@testing-library/react';
 import { PointOfContactEditModal } from '../point_of_contact_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
-import { ValidationContext } from '../../../context/validation_context/validation_context';
+import {
+  IValidationContext,
+  ValidationContext,
+} from '../../../context/validation_context/validation_context';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import {
+  EngagementContext,
+  IEngagementContext,
+} from '../../../context/engagement_context/engagement_context';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
@@ -40,9 +46,11 @@ describe('Point of Contact edit modal', () => {
     const onChange = jest.fn();
     const { getByTestId } = render(
       <EngagementContext.Provider
-        value={{
-          updateEngagementFormField: onChange,
-        }}
+        value={
+          ({
+            updateEngagementFormField: onChange,
+          } as unknown) as IEngagementContext
+        }
       >
         <PointOfContactEditModal
           onClose={() => {}}
@@ -62,11 +70,13 @@ describe('Point of Contact edit modal', () => {
     const { findAllByText } = render(
       <TestStateWrapper>
         <ValidationContext.Provider
-          value={{
-            clearValidationResults: () => {},
-            validationResults: {},
-            getValidationResult: () => ['Incorrect input'],
-          }}
+          value={
+            ({
+              clearValidationResults: () => {},
+              validationResults: {},
+              getValidationResult: () => ['Incorrect input'],
+            } as unknown) as IValidationContext
+          }
         >
           <PointOfContactEditModal
             onSave={() => {}}
