@@ -45,7 +45,6 @@ export function HostingEnvironmentCard() {
   const {
     currentEngagement,
     currentChanges,
-    updateEngagementFormField,
     saveEngagement,
     engagementFormConfig,
     clearCurrentChanges,
@@ -53,9 +52,6 @@ export function HostingEnvironmentCard() {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
-  const onChange = (hostingEnvironments: HostingEnvironment[]) => {
-    updateEngagementFormField('hosting_environments', hostingEnvironments);
-  };
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
@@ -99,7 +95,7 @@ export function HostingEnvironmentCard() {
       hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
       1
     );
-    onChange(hostingEnvironments);
+    setHostingEnvironments(hostingEnvironments);
     saveEngagement({
       ...(currentChanges as Engagement),
       hosting_environments: hostingEnvironments,

@@ -17,7 +17,6 @@ import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
 export interface PointOfContactEditModalProps {
-  onChange: (fieldName: keyof Engagement, value: any) => void;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;

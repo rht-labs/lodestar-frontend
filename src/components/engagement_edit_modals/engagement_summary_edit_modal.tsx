@@ -12,7 +12,6 @@ import { EngagementNameFormField } from '../engagement_form_fields/engagement_na
 import { useHistory } from 'react-router';
 
 export interface EngagementSummaryEditModalProps {
-  onChange: (fieldName: keyof Engagement, value: any) => void;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
