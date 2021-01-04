@@ -19,6 +19,7 @@ export interface EngagementUser {
   email: string;
   role: string;
   uuid: string;
+  reset: boolean
 }
 export abstract class EngagementUser {
   static fromFake(staticData = false): EngagementUser {
@@ -28,6 +29,7 @@ export abstract class EngagementUser {
       email: staticData ? 'jdoe@doe.co' : faker.internet.exampleEmail(),
       role: 'developer',
       uuid: staticData ? '123' : faker.random.uuid(),
+      reset: false
     };
   }
 }
