@@ -9,6 +9,7 @@ import {
   FlexItem,
 } from '@patternfly/react-core';
 import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_alert_banner';
+import { useConfig } from '../context/config_context/config_hook';
 import { useEngagements } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
 import { EngagementEditableCategories } from '../components/engagement_categories/engagement_editable_categories';
@@ -32,6 +33,8 @@ export function EngagementDetailsViewTemplate({
     isLaunchable,
     requiredFields,
   } = useEngagements();
+
+  const { appConfig } = useConfig();
 
   const { logEvent } = useAnalytics();
 
@@ -83,7 +86,7 @@ export function EngagementDetailsViewTemplate({
       </PageSection>
       <LaunchAlertBanner
         requiredFields={requiredFields}
-        isLaunchable={isLaunchable}
+        isLaunchable={isLaunchable && !appConfig.disableLaunch}
         missingRequiredFields={missingRequiredFields}
         onLaunch={launchEngagement}
         engagement={engagement}
