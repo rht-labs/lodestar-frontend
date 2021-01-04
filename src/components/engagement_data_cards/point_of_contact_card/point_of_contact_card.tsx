@@ -20,7 +20,6 @@ const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
 export function PointOfContactCard() {
   const {
-    updateEngagementFormField,
     saveEngagement,
     clearCurrentChanges,
     currentChanges,
@@ -41,7 +40,6 @@ export function PointOfContactCard() {
   return (
     <>
       <PointOfContactEditModal
-        onChange={updateEngagementFormField}
         engagement={currentChanges}
         onSave={saveEngagement}
         onClose={() => {
