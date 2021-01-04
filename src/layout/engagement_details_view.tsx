@@ -30,7 +30,7 @@ export function EngagementDetailsViewTemplate({
   const {
     launchEngagement,
     missingRequiredFields,
-    isLaunchable,
+    isLaunchable: isEngagementLaunchable,
     requiredFields,
   } = useEngagements();
 
@@ -86,7 +86,7 @@ export function EngagementDetailsViewTemplate({
       </PageSection>
       <LaunchAlertBanner
         requiredFields={requiredFields}
-        isLaunchable={isLaunchable && !appConfig.disableLaunch}
+        isLaunchable={isEngagementLaunchable && !appConfig.disableLaunch}
         missingRequiredFields={missingRequiredFields}
         onLaunch={launchEngagement}
         engagement={engagement}
