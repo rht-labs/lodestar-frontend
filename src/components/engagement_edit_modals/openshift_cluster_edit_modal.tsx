@@ -6,8 +6,6 @@ import {
   EngagementFormOption,
 } from '../../schemas/engagement_config';
 import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider';
-import { CloudProviderRegionFormField } from '../engagement_form_fields/cloud_provider_region';
-import { OpenShiftVersionFormField } from '../engagement_form_fields/oc_version';
 import { SubdomainFormField } from '../engagement_form_fields/subdomain';
 import { PersistentStorageFormField } from '../engagement_form_fields/persistent_storage';
 import { ClusterSizeFormField } from '../engagement_form_fields/cluster_size';

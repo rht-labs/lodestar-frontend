@@ -392,183 +392,6 @@ Object {
 }
 `;
 
-exports[`Engagement form fields Cloud provider region form matches snapshot 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="pf-c-form__group"
-      >
-        <div
-          class="pf-c-form__group-label"
-        >
-          <label
-            class="pf-c-form__label"
-            for="cloud-provider-region"
-          >
-            <span
-              class="pf-c-form__label-text"
-            >
-              Provider Region
-            </span>
-            <span
-              aria-hidden="true"
-              class="pf-c-form__label-required"
-            >
-               
-              *
-            </span>
-          </label>
-           
-        </div>
-        <div
-          class="pf-c-form__group-control"
-        >
-          <select
-            aria-invalid="false"
-            aria-label="Cloud provider region"
-            class="pf-c-form-control"
-            data-ouia-component-id="4"
-            data-ouia-component-type="PF4/FormSelect"
-            data-ouia-safe="true"
-            data-testid="provider-region-select"
-            disabled=""
-            id="cloud_provider_region_dropdown"
-          >
-            <option
-              class=""
-              value=""
-            >
-              Select a region
-            </option>
-            <option
-              class=""
-              data-cy="nva"
-              disabled=""
-              value="nva"
-            >
-              N. Virginia
-            </option>
-          </select>
-          
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="pf-c-form__group"
-    >
-      <div
-        class="pf-c-form__group-label"
-      >
-        <label
-          class="pf-c-form__label"
-          for="cloud-provider-region"
-        >
-          <span
-            class="pf-c-form__label-text"
-          >
-            Provider Region
-          </span>
-          <span
-            aria-hidden="true"
-            class="pf-c-form__label-required"
-          >
-             
-            *
-          </span>
-        </label>
-         
-      </div>
-      <div
-        class="pf-c-form__group-control"
-      >
-        <select
-          aria-invalid="false"
-          aria-label="Cloud provider region"
-          class="pf-c-form-control"
-          data-ouia-component-id="4"
-          data-ouia-component-type="PF4/FormSelect"
-          data-ouia-safe="true"
-          data-testid="provider-region-select"
-          disabled=""
-          id="cloud_provider_region_dropdown"
-        >
-          <option
-            class=""
-            value=""
-          >
-            Select a region
-          </option>
-          <option
-            class=""
-            data-cy="nva"
-            disabled=""
-            value="nva"
-          >
-            N. Virginia
-          </option>
-        </select>
-        
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
 exports[`Engagement form fields Cluster size form matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
@@ -606,7 +429,7 @@ Object {
             aria-invalid="false"
             aria-label="Cluster Size"
             class="pf-c-form-control"
-            data-ouia-component-id="7"
+            data-ouia-component-id="5"
             data-ouia-component-type="PF4/FormSelect"
             data-ouia-safe="true"
             data-testid="cluster-size-select"
@@ -659,7 +482,7 @@ Object {
           aria-invalid="false"
           aria-label="Cluster Size"
           class="pf-c-form-control"
-          data-ouia-component-id="7"
+          data-ouia-component-id="5"
           data-ouia-component-type="PF4/FormSelect"
           data-ouia-safe="true"
           data-testid="cluster-size-select"
@@ -672,167 +495,6 @@ Object {
             value=""
           >
             Select cluster size
-          </option>
-        </select>
-        
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Engagement form fields OpenShift Version form matches snapshot 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="pf-c-form__group"
-      >
-        <div
-          class="pf-c-form__group-label"
-        >
-          <label
-            class="pf-c-form__label"
-            for="openshift-provider"
-          >
-            <span
-              class="pf-c-form__label-text"
-            >
-              OpenShift Version
-            </span>
-            <span
-              aria-hidden="true"
-              class="pf-c-form__label-required"
-            >
-               
-              *
-            </span>
-          </label>
-           
-        </div>
-        <div
-          class="pf-c-form__group-control"
-        >
-          <select
-            aria-invalid="false"
-            aria-label="OpenShift Version"
-            class="pf-c-form-control"
-            data-ouia-component-id="13"
-            data-ouia-component-type="PF4/FormSelect"
-            data-ouia-safe="true"
-            data-testid="oc-version-select"
-            disabled=""
-            id="oc_version_dropdown"
-          >
-            <option
-              class=""
-              value=""
-            >
-              Select OpenShift version
-            </option>
-          </select>
-          
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="pf-c-form__group"
-    >
-      <div
-        class="pf-c-form__group-label"
-      >
-        <label
-          class="pf-c-form__label"
-          for="openshift-provider"
-        >
-          <span
-            class="pf-c-form__label-text"
-          >
-            OpenShift Version
-          </span>
-          <span
-            aria-hidden="true"
-            class="pf-c-form__label-required"
-          >
-             
-            *
-          </span>
-        </label>
-         
-      </div>
-      <div
-        class="pf-c-form__group-control"
-      >
-        <select
-          aria-invalid="false"
-          aria-label="OpenShift Version"
-          class="pf-c-form-control"
-          data-ouia-component-id="13"
-          data-ouia-component-type="PF4/FormSelect"
-          data-ouia-safe="true"
-          data-testid="oc-version-select"
-          disabled=""
-          id="oc_version_dropdown"
-        >
-          <option
-            class=""
-            value=""
-          >
-            Select OpenShift version
           </option>
         </select>
         
@@ -930,7 +592,7 @@ Object {
             aria-invalid="false"
             aria-label="Persistent Storage Needs"
             class="pf-c-form-control"
-            data-ouia-component-id="19"
+            data-ouia-component-id="11"
             data-ouia-component-type="PF4/FormSelect"
             data-ouia-safe="true"
             data-testid="persistent-storage-select"
@@ -982,7 +644,7 @@ Object {
           aria-invalid="false"
           aria-label="Persistent Storage Needs"
           class="pf-c-form-control"
-          data-ouia-component-id="19"
+          data-ouia-component-id="11"
           data-ouia-component-type="PF4/FormSelect"
           data-ouia-safe="true"
           data-testid="persistent-storage-select"
