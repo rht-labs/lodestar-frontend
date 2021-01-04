@@ -14,16 +14,28 @@ import { addDays } from 'date-fns';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { max } from 'date-fns';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export function EngagementStartEndDateFormField() {
   const { engagementFormConfig, currentEngagement } = useEngagements();
   const { validate, getValidationResult } = useValidation();
   const maxGracePeriodInDays: number =
     engagementFormConfig?.logistics_options?.env_grace_period_max ?? 0;
-  const [startDate, setStartDate] = useEngagementFormField('start_date');
-  const [endDate, setEndDate] = useEngagementFormField('end_date');
-  const [archiveDate, setArchiveDate] = useEngagementFormField('archive_date');
+  const [startDate, setStartDate] = useEngagementFormField(
+    'start_date',
+    EngagementGroupings.engagementSummary
+  );
+  const [endDate, setEndDate] = useEngagementFormField(
+    'end_date',
+    EngagementGroupings.engagementSummary
+  );
+  const [archiveDate, setArchiveDate] = useEngagementFormField(
+    'archive_date',
+    EngagementGroupings.engagementSummary
+  );
 
   const [startDateText, setStartDateText] = useState(
     getFormattedDate(startDate) || ''

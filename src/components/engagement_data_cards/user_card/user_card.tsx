@@ -17,7 +17,10 @@ import { RedhatIcon, UserIcon, UsersIcon } from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { uuid } from 'uuidv4';
-import { useEngagementFormField } from '../../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../../context/engagement_context/engagement_context';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -36,7 +39,10 @@ export function UserCard() {
     currentEngagement: engagement,
     saveEngagement,
   } = useEngagements();
-  const [users, setUsers] = useEngagementFormField('engagement_users');
+  const [users, setUsers] = useEngagementFormField(
+    'engagement_users',
+    EngagementGroupings.users
+  );
   const onClose = () => {
     requestClose();
     clearCurrentChanges();
@@ -84,7 +90,7 @@ export function UserCard() {
         )}
         title="Engagement Users"
       >
-        <UserTable users={engagement?.engagement_users ?? []} />
+        <UserTable users={users ?? []} />
       </DataCard>
     </>
   );

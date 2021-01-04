@@ -29,7 +29,10 @@ import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { ReadyCheck } from '../../ready_check/ready_check';
-import { useEngagementFormField } from '../../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../../context/engagement_context/engagement_context';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
@@ -55,7 +58,8 @@ export function HostingEnvironmentCard() {
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
-    'hosting_environments'
+    'hosting_environments',
+    EngagementGroupings.hostingEnvironment
   );
 
   useEffect(() => {

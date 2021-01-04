@@ -2,11 +2,17 @@ import React from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import { APP_FEATURES } from '../../common/app_features';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export function DescriptionFormField() {
   const { hasFeature } = useFeatures();
-  const [description, setDescription] = useEngagementFormField('description');
+  const [description, setDescription] = useEngagementFormField(
+    'description',
+    EngagementGroupings.engagementSummary
+  );
   return (
     <FormGroup label="Description" fieldId="description">
       <TextArea

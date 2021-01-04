@@ -2,11 +2,17 @@ import React from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormGroup, TextInput } from '@patternfly/react-core';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export function LocationFormField() {
   const { hasFeature } = useFeatures();
-  const [location, setLocation] = useEngagementFormField('location');
+  const [location, setLocation] = useEngagementFormField(
+    'location',
+    EngagementGroupings.engagementSummary
+  );
   return (
     <FormGroup
       label="Location"

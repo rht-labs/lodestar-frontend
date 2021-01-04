@@ -1,10 +1,14 @@
 import React from 'react';
 import { FormGroup, TextInput } from '@patternfly/react-core';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export function CustomerNameFormField() {
   const [customerName, setCustomerName] = useEngagementFormField(
-    'customer_name'
+    'customer_name',
+    EngagementGroupings.engagementSummary
   );
   return (
     <FormGroup label="Client Name" fieldId="customerName" isRequired>

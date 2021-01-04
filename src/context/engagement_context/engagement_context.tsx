@@ -60,6 +60,16 @@ export interface IEngagementContext {
   categories?: EngagementCategory[];
 }
 
+export enum EngagementGroupings {
+  hostingEnvironment = 'Hosting Environment',
+  engagementSummary = 'Engagement Summary',
+  pointOfContact = 'Point of Contact',
+  systemStatus = 'System Status',
+  users = 'Engagement Users',
+  artifacts = 'Engagement Artifacts',
+  activityHistory = 'Activity History',
+}
+
 export type CreateEngagementParams = Pick<
   Engagement,
   'project_name' | 'customer_name' | 'engagement_region'
@@ -624,7 +634,7 @@ export const useEngagement = (customerName: string, projectName: string) => {
 
 export const useEngagementFormField = <K extends keyof Engagement>(
   formField: K,
-  group?: string
+  group?: EngagementGroupings
 ): [Engagement[K], (value: Engagement[K]) => void] => {
   const engagementContext = useContext(EngagementContext);
 

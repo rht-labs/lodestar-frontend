@@ -1,10 +1,14 @@
 import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export function PublicReferenceField() {
   const [isPublicReference, setIsPublicReference] = useEngagementFormField(
-    'public_reference'
+    'public_reference',
+    EngagementGroupings.engagementSummary
   );
   return (
     <Checkbox

@@ -1,10 +1,14 @@
 import React from 'react';
 import { FormGroup, TextInput } from '@patternfly/react-core';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export function EngagementNameFormField() {
   const [engagementName, setEngagementName] = useEngagementFormField(
-    'project_name'
+    'project_name',
+    EngagementGroupings.engagementSummary
   );
   return (
     <FormGroup label="Engagement Name" fieldId="engagementName" isRequired>

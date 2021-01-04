@@ -15,7 +15,10 @@ import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
-import { useEngagementFormField } from '../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 export interface PointOfContactEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
@@ -35,19 +38,24 @@ export function PointOfContactEditModal({
     backgroundColor: '#EDEDED',
   };
   const [engagementLeadName, setEngagementLeadName] = useEngagementFormField(
-    'engagement_lead_name'
+    'engagement_lead_name',
+    EngagementGroupings.pointOfContact
   );
   const [engagementLeadEmail, setEngagementLeadEmail] = useEngagementFormField(
-    'engagement_lead_email'
+    'engagement_lead_email',
+    EngagementGroupings.pointOfContact
   );
   const [technicalLeadEmail, setTechnicalLeadEmail] = useEngagementFormField(
-    'technical_lead_email'
+    'technical_lead_email',
+    EngagementGroupings.pointOfContact
   );
   const [technicalLeadName, setTechnicalLeadName] = useEngagementFormField(
-    'technical_lead_name'
+    'technical_lead_name',
+    EngagementGroupings.pointOfContact
   );
   const [customerContactName, setCustomerContactName] = useEngagementFormField(
-    'customer_contact_name'
+    'customer_contact_name',
+    EngagementGroupings.pointOfContact
   );
   const [
     customerContactEmail,
