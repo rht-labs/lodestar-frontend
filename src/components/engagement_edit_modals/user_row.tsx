@@ -6,7 +6,7 @@ import {
   Grid,
   GridItem,
   FormGroup,
-  Checkbox
+  Checkbox, Tooltip, TooltipPosition
 } from '@patternfly/react-core';
 import {
   validateEmail,
@@ -39,7 +39,7 @@ export const UserRow = ({
 
   return (
     <>
-      <Grid hasGutter style={{ marginTop: '1rem' , marginLeft:'1rem'}}>
+      <Grid hasGutter style={{ marginTop: '1rem' , marginLeft:'0rem'}}>
         <GridItem span={3}>
           <FormGroup
             fieldId={'user_email'}
@@ -156,17 +156,24 @@ export const UserRow = ({
           </FormGroup>
         </GridItem>
         <Feature name={APP_FEATURES.writer}>
-          <GridItem span={2} style={{ paddingTop: '0.5rem' }}>
-            <Checkbox label="Reset user"
-                      isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
-                      isChecked={isReset}
-                      onChange={e => {
-                        setIsReset(e);
-                        onChange({ ...user, reset: e });
-                      }}
-                      id={user.uuid} />
+          <GridItem span={1} style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}>
+            <Tooltip
+              content={'Select user to be reset'}
+              entryDelay={0}
+              exitDelay={10}
+              isContentLeftAligned={true}
+              position={TooltipPosition.top}
+            >
+              <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+                        isChecked={isReset}
+                        onChange={e => {
+                          setIsReset(e);
+                          onChange({ ...user, reset: e });
+                        }}
+                        id={user.uuid} />
+            </Tooltip>
           </GridItem>
-          <GridItem span={1} style={{ paddingTop: '0.5rem' }}>
+          <GridItem span={1} style={{ paddingTop: '0.5rem', paddingLeft: '3.5rem'  }}>
             {isUserDeleted ? (
               <UndoIcon
                 onClick={() => {
