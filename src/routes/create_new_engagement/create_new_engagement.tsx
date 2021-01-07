@@ -78,13 +78,15 @@ export function CreateNewEngagementForm() {
               e => e.default
             )?.value,
           engagement_categories: copiedEngagement?.engagement_categories,
-          ocp_cloud_provider_name: copiedEngagement?.ocp_cloud_provider_name,
-          ocp_cloud_provider_region:
-            copiedEngagement?.ocp_cloud_provider_region,
-          ocp_cluster_size: copiedEngagement?.ocp_cluster_size,
-          ocp_persistent_storage_size:
-            copiedEngagement?.ocp_persistent_storage_size,
-          ocp_version: copiedEngagement?.ocp_version,
+          hosting_environments: copiedEngagement?.hosting_environments.map( hosting_env => {
+            return {
+              ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
+              ocp_cloud_provider_region: hosting_env.ocp_cloud_provider_region,
+              ocp_cluster_size: hosting_env.ocp_cluster_size,
+              ocp_persistent_storage_size: hosting_env.ocp_persistent_storage_size,
+              ocp_version: hosting_env.ocp_version,
+            }
+          }),
         });
       } else {
         await createEngagement({
@@ -337,7 +339,7 @@ export function CreateNewEngagementForm() {
                 </FormSelect>
               </FormGroup>
               <FormGroup
-                label={<SectionTitle>Copy From&nbsp;&nbsp;</SectionTitle>}
+                label={<SectionTitle>Copy From</SectionTitle>}
                 fieldId="copyFrom"
                 helperText="Prepopulate details of this engagement based on a selected template or an existing engagement"
               >
