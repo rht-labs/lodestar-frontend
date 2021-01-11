@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FormGroup, TextInput, Tooltip } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { slugify } from 'transliteration';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 
@@ -38,16 +37,13 @@ export function SubdomainFormField({
     } else {
       if (hostingEnvironment?.ocp_sub_domain) {
         return slugify(hostingEnvironment?.ocp_sub_domain);
-      } else if (suggestedSubdomain) {
-        return suggestedSubdomain;
       } else {
         return '<desired-subdomain>';
       }
     }
   };
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('subdomain'), [registerField]);
 
+  const subdomainValue = getSubdomainFieldText();
   return (
     <FormGroup
       label="Desired Subdomain"
@@ -67,18 +63,18 @@ export function SubdomainFormField({
     >
       <TextInput
         isRequired
-        data-testid="subdomain-input"
+        data-testid="desired_subdomain_input"
         isDisabled={!hasFeature(APP_FEATURES.writer)}
         type="text"
         id="ocp_sub_domain"
         name="ocp_sub_domain"
         data-cy={'desired_subdomain_input'}
-        value={getSubdomainFieldText()}
+        value={subdomainValue}
         onChange={e => {
           if (!editedByUser) {
             setEditedByUser(true);
           }
-          onChange(e);
+          onChange(e.toLowerCase());
         }}
       />
     </FormGroup>

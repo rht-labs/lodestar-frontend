@@ -29,7 +29,10 @@ import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { ReadyCheck } from '../../ready_check/ready_check';
-import { useEngagementFormField } from '../../../context/engagement_context/engagement_context';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../../context/engagement_context/engagement_context';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
@@ -45,7 +48,6 @@ export function HostingEnvironmentCard() {
   const {
     currentEngagement,
     currentChanges,
-    updateEngagementFormField,
     saveEngagement,
     engagementFormConfig,
     clearCurrentChanges,
@@ -53,13 +55,11 @@ export function HostingEnvironmentCard() {
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
-  const onChange = (hostingEnvironments: HostingEnvironment[]) => {
-    updateEngagementFormField('hosting_environments', hostingEnvironments);
-  };
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
-    'hosting_environments'
+    'hosting_environments',
+    EngagementGroupings.hostingEnvironment
   );
 
   useEffect(() => {
@@ -99,14 +99,16 @@ export function HostingEnvironmentCard() {
       hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
       1
     );
-    onChange(hostingEnvironments);
+    setHostingEnvironments(hostingEnvironments);
     saveEngagement({
       ...(currentChanges as Engagement),
       hosting_environments: hostingEnvironments,
     });
   };
   const addProvider = () => {
-    openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
+    openHostingEnvironmentModal({
+      id: uuid(),
+    } as HostingEnvironment);
   };
   const actionItems = (hostingEnvironment: HostingEnvironment) => {
     const items = [
@@ -219,15 +221,17 @@ export function HostingEnvironmentCard() {
         isEngagementLaunched={!!currentChanges?.launch}
         onSave={onSave}
         onClose={onClose}
-        hostingEnvironment={currentHostingEnvironment}
+        hostingEnvironment={{
+          ocp_sub_domain: generateSuggestedSubdomain(
+            currentChanges?.project_name,
+            currentChanges?.customer_name,
+            currentEnvironmentIndex + 1 > 0
+              ? (currentEnvironmentIndex + 1)?.toString()
+              : '1'
+          ),
+          ...currentHostingEnvironment,
+        }}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
-        suggestedSubdomain={generateSuggestedSubdomain(
-          currentChanges?.project_name,
-          currentChanges?.customer_name,
-          currentEnvironmentIndex + 1 > 0
-            ? (currentEnvironmentIndex + 1)?.toString()
-            : '1'
-        )}
       />
       <DataCard
         actionButton={() => (

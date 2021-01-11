@@ -21,7 +21,6 @@ export function EngagementSummaryCard() {
     missingRequiredFields,
     currentChanges,
     saveEngagement,
-    updateEngagementFormField,
   } = useEngagements();
   const { requestClose, requestOpen, activeModalKey } = useModalVisibility();
   const engagementSummaryRequiredFields = [
@@ -43,7 +42,6 @@ export function EngagementSummaryCard() {
       <EngagementSummaryEditModal
         onClose={onClose}
         onSave={onSave}
-        onChange={updateEngagementFormField}
         engagement={currentChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />

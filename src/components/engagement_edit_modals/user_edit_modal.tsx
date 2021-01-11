@@ -71,8 +71,8 @@ export function UserEditModal({
   };
 
   const columns = [
-    { title: 'Email' , transforms: [cellWidth(25)]},
-    { title: 'First name', transforms: [cellWidth(20)] },
+    { title: 'Email' , transforms: [cellWidth(20)]},
+    { title: 'First name', transforms: [cellWidth(15)] },
     { title: 'Last name', transforms: [cellWidth(15)] },
     {
       title: (
@@ -88,7 +88,7 @@ export function UserEditModal({
           Reset
           <UserResetTooltip />
         </>
-      ),transforms: [cellWidth(15)],
+      ),transforms: [cellWidth(10)],
     },
     { title: ('Delete'),transforms: [cellWidth(10)] },
   ];

@@ -16,7 +16,11 @@ import { UserList } from './user_list';
 import { RedhatIcon, UserIcon, UsersIcon } from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import {uuid} from "uuidv4";
+import { uuid } from 'uuidv4';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../../context/engagement_context/engagement_context';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -33,18 +37,27 @@ export function UserCard() {
     clearCurrentChanges,
     currentChanges,
     currentEngagement: engagement,
-    updateEngagementFormField,
     saveEngagement,
   } = useEngagements();
+  const [users, setUsers] = useEngagementFormField(
+    'engagement_users',
+    EngagementGroupings.users
+  );
   const onClose = () => {
     requestClose();
     clearCurrentChanges();
   };
 
   function addUser() {
-    const newUser = { first_name: '', last_name: '', email: '', role: '', uuid: uuid() };
+    const newUser = {
+      first_name: '',
+      last_name: '',
+      email: '',
+      role: '',
+      uuid: uuid(),
+    };
     engagement?.engagement_users?.push(newUser);
-    updateEngagementFormField('engagement_users', engagement?.engagement_users);
+    setUsers(engagement?.engagement_users);
   }
 
   function handleAddNewUserOrEdit() {
@@ -60,7 +73,7 @@ export function UserCard() {
   return (
     <>
       <UserEditModal
-        onChange={users => updateEngagementFormField('engagement_users', users)}
+        onChange={setUsers}
         onSave={onSave}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
@@ -77,9 +90,7 @@ export function UserCard() {
         )}
         title="Engagement Users"
       >
-        <UserTable
-          users={engagement?.engagement_users ?? []}
-        />
+        <UserTable users={users ?? []} />
       </DataCard>
     </>
   );
@@ -99,29 +110,20 @@ const externalUsers = (
   />
 );
 
-const UserTable = ({
-  users,
-}: {
-  users: {
-    first_name: string;
-    last_name: string;
-    email: string;
-    role: string;
-  }[];
-}) => {
+const UserTable = ({ users }: { users: EngagementUser[] }) => {
   const { engagementFormConfig } = useEngagements();
   const getRoleName = (userRole: string) =>
     engagementFormConfig?.user_options?.user_roles?.options?.find?.(
       role => role.value === userRole
     )?.label ?? userRole;
 
-  const allRows = users.map((user: EngagementUser) =>
-    { return [
-        user.first_name + ' ' + user.last_name,
-        user.email,
-        getRoleName(user.role),
-      ]}
-  );
+  const allRows = users.map((user: EngagementUser) => {
+    return [
+      user.first_name + ' ' + user.last_name,
+      user.email,
+      getRoleName(user.role),
+    ];
+  });
 
   return (
     <>

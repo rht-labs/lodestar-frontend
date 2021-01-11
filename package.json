@@ -56,7 +56,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix src/*.ts src/*.tsx",
-    "prettify": "npx prettier --config prettier.config.js src/**/*.ts --write",
+    "prettify": "npx prettier --config prettier.config.js src/**/*.ts src/**/*.tsx --write",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check src/*.ts src/*.tsx",
