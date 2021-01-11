@@ -45,6 +45,7 @@ export function SubdomainFormField({
     }
   };
 
+  const subdomainValue = getSubdomainFieldText();
   return (
     <FormGroup
       label="Desired Subdomain"
@@ -70,12 +71,12 @@ export function SubdomainFormField({
         id="ocp_sub_domain"
         name="ocp_sub_domain"
         data-cy={'desired_subdomain_input'}
-        value={getSubdomainFieldText()}
+        value={subdomainValue}
         onChange={e => {
           if (!editedByUser) {
             setEditedByUser(true);
           }
-          onChange(e);
+          onChange(e.toLowerCase());
         }}
       />
     </FormGroup>

@@ -97,7 +97,7 @@ Object {
                           >
                             <tr>
                               <th
-                                class="pf-m-width-25"
+                                class="pf-m-width-20"
                                 data-key="0"
                                 data-label="Email"
                                 scope="col"
@@ -105,7 +105,7 @@ Object {
                                 Email
                               </th>
                               <th
-                                class="pf-m-width-20"
+                                class="pf-m-width-15"
                                 data-key="1"
                                 data-label="First name"
                                 scope="col"
@@ -144,7 +144,7 @@ Object {
                                 </svg>
                               </th>
                               <th
-                                class="pf-m-width-15"
+                                class="pf-m-width-10"
                                 data-key="4"
                                 data-label="column-4"
                                 scope="col"
