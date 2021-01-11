@@ -47,12 +47,17 @@ export function SubdomainFormField({
   };
   const { registerField } = FormManager.useFormGroupManager();
   useEffect(() => registerField('subdomain'), [registerField]);
+  const hasUpperCase = (s: string) => {
+    return /A-Z/.test(s);
+  };
 
+  const subdomainValue = getSubdomainFieldText();
   return (
     <FormGroup
       label="Desired Subdomain"
       isRequired
       fieldId="subdomain"
+      validated={hasUpperCase(subdomainValue) ? 'error' : 'default'}
       helperText={
         <div>
           Applications will live at:&nbsp;
@@ -73,12 +78,12 @@ export function SubdomainFormField({
         id="ocp_sub_domain"
         name="ocp_sub_domain"
         data-cy={'desired_subdomain_input'}
-        value={getSubdomainFieldText()}
+        value={subdomainValue}
         onChange={e => {
           if (!editedByUser) {
             setEditedByUser(true);
           }
-          onChange(e);
+          onChange(e.toLowerCase());
         }}
       />
     </FormGroup>
