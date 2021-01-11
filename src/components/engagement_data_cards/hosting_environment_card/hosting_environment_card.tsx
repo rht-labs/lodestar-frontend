@@ -106,7 +106,9 @@ export function HostingEnvironmentCard() {
     });
   };
   const addProvider = () => {
-    openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
+    openHostingEnvironmentModal({
+      id: uuid(),
+    } as HostingEnvironment);
   };
   const actionItems = (hostingEnvironment: HostingEnvironment) => {
     const items = [
@@ -219,15 +221,17 @@ export function HostingEnvironmentCard() {
         isEngagementLaunched={!!currentChanges?.launch}
         onSave={onSave}
         onClose={onClose}
-        hostingEnvironment={currentHostingEnvironment}
+        hostingEnvironment={{
+          ocp_sub_domain: generateSuggestedSubdomain(
+            currentChanges?.project_name,
+            currentChanges?.customer_name,
+            currentEnvironmentIndex + 1 > 0
+              ? (currentEnvironmentIndex + 1)?.toString()
+              : '1'
+          ),
+          ...currentHostingEnvironment,
+        }}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
-        suggestedSubdomain={generateSuggestedSubdomain(
-          currentChanges?.project_name,
-          currentChanges?.customer_name,
-          currentEnvironmentIndex + 1 > 0
-            ? (currentEnvironmentIndex + 1)?.toString()
-            : '1'
-        )}
       />
       <DataCard
         actionButton={() => (

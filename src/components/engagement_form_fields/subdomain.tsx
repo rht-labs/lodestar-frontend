@@ -37,8 +37,6 @@ export function SubdomainFormField({
     } else {
       if (hostingEnvironment?.ocp_sub_domain) {
         return slugify(hostingEnvironment?.ocp_sub_domain);
-      } else if (suggestedSubdomain) {
-        return suggestedSubdomain;
       } else {
         return '<desired-subdomain>';
       }

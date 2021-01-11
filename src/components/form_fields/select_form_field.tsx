@@ -44,7 +44,7 @@ export function SelectFormField({
     <FormGroup label={label} isRequired={isRequired} fieldId={fieldId}>
       <FormSelect
         data-testid={testId}
-        onChange={v => onChange(v)}
+        onChange={onChange}
         data-cy={testId}
         value={value}
         isDisabled={isDisabled}
@@ -56,7 +56,7 @@ export function SelectFormField({
           .map(o => (
             <FormSelectOption
               isDisabled={o.disabled}
-              key={o.label}
+              key={o.value}
               value={o.value}
               label={o.label}
               data-cy={o.value}

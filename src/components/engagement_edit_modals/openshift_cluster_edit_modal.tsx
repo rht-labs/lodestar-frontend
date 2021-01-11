@@ -145,15 +145,16 @@ export function OpenShiftClusterEditModal({
             suggestedSubdomain={suggestedSubdomain}
           />
           <SelectFormField
-            value={hostingEnvironment?.ocp_persistent_storage_size || ''}
+            value={hostingEnvironment?.ocp_persistent_storage_size}
             testId="persistent-storage-select"
             label="Persistent Storage Needs"
             options={engagementFormConfig?.openshift_options?.persistent_storage?.options?.map?.(
               v => ({ label: v.label, disabled: v.disabled, value: v.value })
             )}
+            emptyValue={{ label: 'Select a storage size' }}
             fieldId="persistent_storage_dropdown"
             isRequired={true}
-            onChange={value => onChange('ocp_version', value)}
+            onChange={value => onChange('ocp_persistent_storage_size', value)}
           />
           <SelectFormField
             isRequired
@@ -163,6 +164,7 @@ export function OpenShiftClusterEditModal({
             testId="cluster-size-select"
             fieldId="cluster_size_dropdown"
             value={hostingEnvironment?.ocp_cluster_size || ''}
+            emptyValue={{ label: 'Select cluster size' }}
             label="Cluster Size"
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             onChange={value => onChange('ocp_cluster_size', value)}
