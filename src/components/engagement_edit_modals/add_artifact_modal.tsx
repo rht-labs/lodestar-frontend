@@ -71,10 +71,10 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               aria-label="Artifact Type"
               id="artifact-type-select"
               value={artifactEdits?.type}
-              onChange={(value: ArtifactType) => {
+              onChange={(value: string, _) => {
                 setArtifactEdits({
                   ...artifactEdits,
-                  type: value,
+                  type: ArtifactType[value],
                 });
               }}
             >

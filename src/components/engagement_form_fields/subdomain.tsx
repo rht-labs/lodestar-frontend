@@ -37,18 +37,10 @@ export function SubdomainFormField({
     } else {
       if (hostingEnvironment?.ocp_sub_domain) {
         return slugify(hostingEnvironment?.ocp_sub_domain);
-      } else if (suggestedSubdomain) {
-        return suggestedSubdomain;
       } else {
         return '<desired-subdomain>';
       }
     }
-  };
-
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('subdomain'), [registerField]);
-  const hasUpperCase = (s: string) => {
-    return /A-Z/.test(s);
   };
 
   const subdomainValue = getSubdomainFieldText();
@@ -57,7 +49,6 @@ export function SubdomainFormField({
       label="Desired Subdomain"
       isRequired
       fieldId="subdomain"
-      validated={hasUpperCase(subdomainValue) ? 'error' : 'default'}
       helperText={
         <div>
           Applications will live at:&nbsp;
@@ -72,7 +63,7 @@ export function SubdomainFormField({
     >
       <TextInput
         isRequired
-        data-testid="subdomain-input"
+        data-testid="desired_subdomain_input"
         isDisabled={!hasFeature(APP_FEATURES.writer)}
         type="text"
         id="ocp_sub_domain"

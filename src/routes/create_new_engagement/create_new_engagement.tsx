@@ -13,13 +13,7 @@ import {
   GridItem,
   FormSelectOptionGroup,
 } from '@patternfly/react-core';
-import {
-  Button,
-  Form,
-  FormGroup,
-  TextInput,
-  Text,
-} from '@patternfly/react-core';
+import { Button, Form, FormGroup, Text } from '@patternfly/react-core';
 import { useAnalytics } from '../../context/analytics_context/analytics_context';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
@@ -29,6 +23,7 @@ import { SectionTitle } from '../../components/section_title/section_title';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
+import { TextFormField } from '../../components/form_fields/text_form_field';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig } = useEngagements();
@@ -238,17 +233,15 @@ export function CreateNewEngagementForm() {
                     : 'default'
                 }
               >
-                <TextInput
-                  data-testid="project-name"
+                <TextFormField
+                  testId="project-name"
                   type="text"
-                  id="project_name"
-                  name="project_name"
+                  fieldId="project_name"
                   placeholder="Mars Probe"
                   value={projectName || ''}
                   onChange={value =>
                     validate('project_name')(value) && setProjectName(value)
                   }
-                  data-cy="new_engagement_name"
                 />
               </FormGroup>
               <FormGroup

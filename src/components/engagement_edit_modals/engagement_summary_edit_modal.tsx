@@ -2,14 +2,15 @@ import React from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { DescriptionFormField } from '../engagement_form_fields/description';
-import { LocationFormField } from '../engagement_form_fields/location';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_start_end_date';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 import { EngagementUseCaseField } from '../engagement_form_fields/use_case';
-import { CustomerNameFormField } from '../engagement_form_fields/customer_name';
-import { EngagementNameFormField } from '../engagement_form_fields/engagement_name';
 import { useHistory } from 'react-router';
+import { TextFormField } from '../form_fields/text_form_field';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
 export interface EngagementSummaryEditModalProps {
   engagement: Engagement;
@@ -33,6 +34,26 @@ export function EngagementSummaryEditModal(
       );
     }
   };
+  const [customerName, setCustomerName] = useEngagementFormField(
+    'customer_name',
+    EngagementGroupings.engagementSummary
+  );
+  const [engagementName, setEngagementName] = useEngagementFormField(
+    'project_name',
+    EngagementGroupings.engagementSummary
+  );
+  const [useCases, setUseCases] = useEngagementFormField(
+    'use_cases',
+    EngagementGroupings.engagementSummary
+  );
+  const [description, setDescription] = useEngagementFormField(
+    'description',
+    EngagementGroupings.engagementSummary
+  );
+  const [location, setLocation] = useEngagementFormField(
+    'location',
+    EngagementGroupings.engagementSummary
+  );
 
   return (
     <Modal
@@ -57,11 +78,42 @@ export function EngagementSummaryEditModal(
         }
       >
         <Form>
-          <CustomerNameFormField />
-          <EngagementNameFormField />
-          <EngagementUseCaseField />
-          <DescriptionFormField />
-          <LocationFormField />
+          <TextFormField
+            value={customerName}
+            onChange={setCustomerName}
+            fieldId="customer_name"
+            testId="customer_name_field"
+            label="Client Name"
+            isRequired={true}
+          />
+          <TextFormField
+            value={engagementName}
+            onChange={setEngagementName}
+            fieldId="engagement_name"
+            testId="engagement_name_field"
+            label="Engagement Name"
+            isRequired={true}
+          />
+          <EngagementUseCaseField
+            useCases={useCases}
+            setUseCases={setUseCases}
+          />
+          <TextFormField
+            value={description}
+            onChange={setDescription}
+            fieldId="description"
+            label="Description"
+            placeholder="Description and notes for the Engagement"
+          />
+          <TextFormField
+            value={location}
+            onChange={setLocation}
+            placeholder="e.g. Pasadena, CA"
+            fieldId="location"
+            testId="location-field"
+            helperText="Where will this be held?"
+            label="Location"
+          />
           <EngagementStartEndDateFormField />
           <PublicReferenceField />
         </Form>
