@@ -17,7 +17,7 @@ import {
   validateString,
 } from '../../common/user_validation';
 import { UserRolesTooltip } from '../engagement_data_cards/user_card/user_roles_tooltip';
-import { Engagement, EngagementUser } from '../../schemas/engagement';
+import {Engagement, EngagementUser, getEngagementStatus} from '../../schemas/engagement';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import {
   cellWidth,
@@ -70,6 +70,7 @@ export function UserEditModal({
     onClose();
   };
 
+  const status = getEngagementStatus(engagement);
   const columns = [
     { title: 'Email' , transforms: [cellWidth(20)]},
     { title: 'First name', transforms: [cellWidth(15)] },
@@ -164,6 +165,7 @@ export function UserEditModal({
                               toggleDeleted={toggleDeleted}
                               onChange={updateUser}
                               isDeleted={isDeleted}
+                              status={status}
                             />
                           );
                         })}

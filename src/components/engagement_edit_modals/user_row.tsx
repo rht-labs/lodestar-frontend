@@ -17,7 +17,7 @@ import { TrashIcon, UndoIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 import { useFeatures } from '../../context/feature_context/feature_hook';
-import { EngagementUser } from '../../schemas/engagement';
+import {EngagementStatus, EngagementUser} from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface UserRowProps {
@@ -25,6 +25,7 @@ export interface UserRowProps {
   onChange: (user: EngagementUser) => void;
   toggleDeleted: (user: EngagementUser) => void;
   isDeleted: boolean;
+  status: EngagementStatus
 }
 
 export const UserRow = ({
@@ -32,6 +33,7 @@ export const UserRow = ({
   onChange,
   toggleDeleted,
   isDeleted: isUserDeleted,
+  status,
 }: UserRowProps) => {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
@@ -158,13 +160,13 @@ export const UserRow = ({
         <Feature name={APP_FEATURES.writer}>
           <GridItem span={1} style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}>
             <Tooltip
-              content={'Select user to be reset'}
+              content={"Select users you want to reset (Active Engagements only)"}
               entryDelay={0}
               exitDelay={10}
               isContentLeftAligned={true}
               position={TooltipPosition.top}
             >
-              <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+              <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted || status !== EngagementStatus.active}
                         isChecked={isReset}
                         onChange={e => {
                           setIsReset(e);

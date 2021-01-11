@@ -7,7 +7,7 @@ export function UserResetTooltip() {
   return (
     <>
       <Tooltip
-        content={'Select users you want to reset'}
+        content={"Select users you want to reset (Active Engagements only)"}
         entryDelay={0}
         exitDelay={10}
         maxWidth={'45rem'}
