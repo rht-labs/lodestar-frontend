@@ -1,8 +1,6 @@
 import React from 'react';
 import { AdditionalDetailsFormField } from '../additional_details';
 import { CloudProviderFormField } from '../cloud_provider';
-import { ClusterSizeFormField } from '../cluster_size';
-import { PersistentStorageFormField } from '../persistent_storage';
 import { SubdomainFormField } from '../subdomain';
 import { render, fireEvent } from '@testing-library/react';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
@@ -60,60 +58,6 @@ describe('Engagement form fields', () => {
     );
     const textArea = await wrapper.findByTestId('cloud-provider-select');
     await fireEvent.change(textArea, { target: { value: 'bot' } });
-    expect(onChange).toHaveBeenCalled();
-  });
-  test('Cluster size form matches snapshot', () => {
-    expect(
-      render(
-        <TestStateWrapper>
-          <ClusterSizeFormField
-            hostingEnvironment={HostingEnvironment.fromFake(true)}
-            onChange={() => {}}
-          />
-        </TestStateWrapper>
-      )
-    ).toMatchSnapshot();
-  });
-  test('Cloud provider form fires onChange', async () => {
-    const onChange = jest.fn();
-    const wrapper = render(
-      <TestStateWrapper>
-        <ClusterSizeFormField
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          onChange={onChange}
-        />
-      </TestStateWrapper>
-    );
-    const textArea = await wrapper.findByTestId('cluster-size-select');
-    await fireEvent.change(textArea, { target: { value: '1' } });
-    expect(onChange).toHaveBeenCalled();
-  });
-  test('Persistent storage form matches snapshot', () => {
-    expect(
-      render(
-        <TestStateWrapper>
-          <PersistentStorageFormField
-            hostingEnvironment={HostingEnvironment.fromFake(true)}
-            isEngagementLaunched={true}
-            onChange={() => {}}
-          />
-        </TestStateWrapper>
-      )
-    ).toMatchSnapshot();
-  });
-  test('Persistent Storage form fires onChange', async () => {
-    const onChange = jest.fn();
-    const wrapper = render(
-      <TestStateWrapper>
-        <PersistentStorageFormField
-          hostingEnvironment={HostingEnvironment.fromFake(true)}
-          isEngagementLaunched={true}
-          onChange={onChange}
-        />
-      </TestStateWrapper>
-    );
-    const textArea = await wrapper.findByTestId('persistent-storage-select');
-    await fireEvent.change(textArea, { target: { value: '50G' } });
     expect(onChange).toHaveBeenCalled();
   });
   test('Subdomain form matches snapshot', () => {

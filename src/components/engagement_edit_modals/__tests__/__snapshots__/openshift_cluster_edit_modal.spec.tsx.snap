@@ -415,7 +415,14 @@ Object {
                         data-ouia-safe="true"
                         data-testid="persistent-storage-select"
                         id="persistent_storage_dropdown"
-                      />
+                      >
+                        <option
+                          class=""
+                          value=""
+                        >
+                          Select a storage size
+                        </option>
+                      </select>
                       
                     </div>
                   </div>
@@ -457,7 +464,14 @@ Object {
                         data-testid="cluster-size-select"
                         disabled=""
                         id="cluster_size_dropdown"
-                      />
+                      >
+                        <option
+                          class=""
+                          value=""
+                        >
+                          Select cluster size
+                        </option>
+                      </select>
                       
                     </div>
                   </div>
