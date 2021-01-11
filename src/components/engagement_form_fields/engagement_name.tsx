@@ -1,28 +1,24 @@
-import React, { useEffect } from 'react';
-import {FormGroup, TextInput} from '@patternfly/react-core';
-import { Engagement } from '../../schemas/engagement';
-import { FormManager } from '../../context/form_manager/form_manager';
+import React from 'react';
+import { FormGroup, TextInput } from '@patternfly/react-core';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
-export interface EngagementNameFormFieldProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
-}
-
-export function EngagementNameFormField(props: EngagementNameFormFieldProps) {
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('engagement_name'), [registerField]);
+export function EngagementNameFormField() {
+  const [engagementName, setEngagementName] = useEngagementFormField(
+    'project_name',
+    EngagementGroupings.engagementSummary
+  );
   return (
-    <FormGroup label="Engagement Name"
-               fieldId="engagementName"
-               isRequired
-    >
+    <FormGroup label="Engagement Name" fieldId="engagementName" isRequired>
       <TextInput
         type="text"
         name="engagement_name"
         id="engagement_name"
         aria-label="engagement_name"
-        value={props.engagement.project_name || ''}
-        onChange={e => props.onChange('project_name', e)}
+        value={engagementName}
+        onChange={setEngagementName}
         data-cy={'engagement_name_field'}
       />
     </FormGroup>

@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import { APP_FEATURES } from '../../common/app_features';
-import { Engagement } from '../../schemas/engagement';
-import { FormManager } from '../../context/form_manager/form_manager';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
-export interface DescriptionFormFieldProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
-}
-
-export function DescriptionFormField(props: DescriptionFormFieldProps) {
+export function DescriptionFormField() {
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('description'), [registerField]);
+  const [description, setDescription] = useEngagementFormField(
+    'description',
+    EngagementGroupings.engagementSummary
+  );
   return (
     <FormGroup label="Description" fieldId="description">
       <TextArea
@@ -23,8 +22,8 @@ export function DescriptionFormField(props: DescriptionFormFieldProps) {
         resizeOrientation="vertical"
         aria-label="engagement description"
         placeholder="Description and notes for the Engagement"
-        value={props.engagement.description || ''}
-        onChange={e => props.onChange('description', e)}
+        value={description}
+        onChange={setDescription}
         data-cy={'description_field'}
       />
     </FormGroup>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Engagement } from '../../schemas/engagement';
 import {
   FormGroup,
   InputGroup,
@@ -14,56 +13,57 @@ import { parse as parseDate, startOfToday } from 'date-fns';
 import { addDays } from 'date-fns';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { max } from 'date-fns';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-interface EngagementStartEndDateProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
-}
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
-export function EngagementStartEndDateFormField({
-  onChange,
-  engagement,
-}: EngagementStartEndDateProps) {
-  const { engagementFormConfig } = useEngagements();
+export function EngagementStartEndDateFormField() {
+  const { engagementFormConfig, currentEngagement } = useEngagements();
   const { validate, getValidationResult } = useValidation();
   const maxGracePeriodInDays: number =
     engagementFormConfig?.logistics_options?.env_grace_period_max ?? 0;
-  const { start_date, end_date, archive_date } = engagement ?? {};
+  const [startDate, setStartDate] = useEngagementFormField(
+    'start_date',
+    EngagementGroupings.engagementSummary
+  );
+  const [endDate, setEndDate] = useEngagementFormField(
+    'end_date',
+    EngagementGroupings.engagementSummary
+  );
+  const [archiveDate, setArchiveDate] = useEngagementFormField(
+    'archive_date',
+    EngagementGroupings.engagementSummary
+  );
 
   const [startDateText, setStartDateText] = useState(
-    getFormattedDate(start_date) || ''
+    getFormattedDate(startDate) || ''
   );
   const [endDateText, setEndDateText] = useState(
-    getFormattedDate(end_date) || ''
+    getFormattedDate(endDate) || ''
   );
   const [archiveDateText, setArchiveDateText] = useState(
-    getFormattedDate(archive_date) || ''
+    getFormattedDate(archiveDate) || ''
   );
 
   useEffect(() => {
-    setEndDateText(getFormattedDate(end_date));
-  }, [end_date]);
+    setEndDateText(getFormattedDate(endDate));
+  }, [endDate]);
   useEffect(() => {
-    setStartDateText(getFormattedDate(start_date));
-  }, [start_date]);
+    setStartDateText(getFormattedDate(startDate));
+  }, [startDate]);
   useEffect(() => {
-    setArchiveDateText(getFormattedDate(archive_date));
-  }, [archive_date]);
+    setArchiveDateText(getFormattedDate(archiveDate));
+  }, [archiveDate]);
 
   const getMaxRetirementDate = () => {
     return maxGracePeriodInDays
-      ? addDays(engagement?.end_date, maxGracePeriodInDays)
+      ? addDays(endDate, maxGracePeriodInDays)
       : undefined;
   };
 
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => {
-    registerField('start_date');
-    registerField('end_date');
-    registerField('archive_date');
-  }, [registerField]);
   return (
     <>
       <FormGroup
@@ -82,7 +82,7 @@ export function EngagementStartEndDateFormField({
           </InputGroupText>
           <TextInput
             isDisabled={
-              !hasFeature(APP_FEATURES.writer) || !!engagement?.launch
+              !hasFeature(APP_FEATURES.writer) || !!currentEngagement?.launch
             }
             name="start_date"
             id="start_date"
@@ -91,7 +91,7 @@ export function EngagementStartEndDateFormField({
             value={startDateText}
             onChange={setStartDateText}
             onBlur={e =>
-              onChange('start_date', parseDate(e.target.value, 'yyyy-MM-dd', 0))
+              setStartDate(parseDate(e.target.value, 'yyyy-MM-dd', 0))
             }
             data-cy={'start_date_input'}
           />
@@ -103,13 +103,13 @@ export function EngagementStartEndDateFormField({
             aria-label="The end date"
             value={endDateText}
             min={getFormattedDate(
-              max([startOfToday(), engagement?.start_date ?? startOfToday()])
+              max([startOfToday(), startDate ?? startOfToday()])
             )}
             onChange={setEndDateText}
             onBlur={e => {
               const parsedDate = parseDate(e.target.value, 'yyyy-MM-dd', 0);
               validate('end_date')(parsedDate);
-              onChange('end_date', parsedDate);
+              setEndDate(parsedDate);
             }}
             data-cy={'end_date_input'}
           />
@@ -137,12 +137,12 @@ export function EngagementStartEndDateFormField({
             onBlur={e => {
               const parsedDate = parseDate(e.target.value, 'yyyy-MM-dd', 0);
               validate('archive_date')(parsedDate);
-              onChange('archive_date', parsedDate);
+              setArchiveDate(parsedDate);
             }}
             onChange={e => {
               setArchiveDateText(e);
             }}
-            min={getFormattedDate(engagement?.end_date)}
+            min={getFormattedDate(endDate)}
             max={getFormattedDate(getMaxRetirementDate())}
           />
         </InputGroup>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement, EngagementUseCase } from '../../schemas/engagement';
+import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { DescriptionFormField } from '../engagement_form_fields/description';
@@ -12,7 +12,6 @@ import { EngagementNameFormField } from '../engagement_form_fields/engagement_na
 import { useHistory } from 'react-router';
 
 export interface EngagementSummaryEditModalProps {
-  onChange: (fieldName: keyof Engagement, value: any) => void;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
@@ -58,36 +57,13 @@ export function EngagementSummaryEditModal(
         }
       >
         <Form>
-          <CustomerNameFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <EngagementNameFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <EngagementUseCaseField
-            onChange={(useCases: EngagementUseCase[]) =>
-              props.onChange('use_cases', useCases)
-            }
-            engagement={props.engagement}
-          />
-          <DescriptionFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <LocationFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <EngagementStartEndDateFormField
-            onChange={props.onChange}
-            engagement={props.engagement}
-          />
-          <PublicReferenceField
-            engagement={props.engagement}
-            onChange={props.onChange}
-          />
+          <CustomerNameFormField />
+          <EngagementNameFormField />
+          <EngagementUseCaseField />
+          <DescriptionFormField />
+          <LocationFormField />
+          <EngagementStartEndDateFormField />
+          <PublicReferenceField />
         </Form>
       </EditModalTemplate>
     </Modal>

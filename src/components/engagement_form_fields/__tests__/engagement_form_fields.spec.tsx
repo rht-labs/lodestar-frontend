@@ -1,6 +1,5 @@
 import React from 'react';
 import { AdditionalDetailsFormField } from '../additional_details';
-import { Engagement } from '../../../schemas/engagement';
 import { CloudProviderFormField } from '../cloud_provider';
 import { CloudProviderRegionFormField } from '../cloud_provider_region';
 import { ClusterSizeFormField } from '../cluster_size';
@@ -11,6 +10,11 @@ import { SubdomainFormField } from '../subdomain';
 import { render, fireEvent } from '@testing-library/react';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
+import {
+  EngagementContext,
+  EngagementGroupings,
+  IEngagementContext,
+} from '../../../context/engagement_context/engagement_context';
 describe('Engagement form fields', () => {
   test('Additional details form matches snapshot', () => {
     expect(
@@ -107,7 +111,6 @@ describe('Engagement form fields', () => {
           <ClusterSizeFormField
             hostingEnvironment={HostingEnvironment.fromFake(true)}
             onChange={() => {}}
-            isEngagementLaunched={true}
           />
         </TestStateWrapper>
       )
@@ -119,7 +122,6 @@ describe('Engagement form fields', () => {
       <TestStateWrapper>
         <ClusterSizeFormField
           hostingEnvironment={HostingEnvironment.fromFake(true)}
-          isEngagementLaunched={true}
           onChange={onChange}
         />
       </TestStateWrapper>
@@ -129,26 +131,28 @@ describe('Engagement form fields', () => {
     expect(onChange).toHaveBeenCalled();
   });
   test('Location form matches snapshot', () => {
-    expect(
-      render(
-        <LocationFormField
-          engagement={Engagement.fromFake(true)}
-          onChange={() => {}}
-        />
-      )
-    ).toMatchSnapshot();
+    expect(render(<LocationFormField />)).toMatchSnapshot();
   });
   test('Location form fires onChange', async () => {
     const onChange = jest.fn();
     const wrapper = render(
-      <LocationFormField
-        engagement={Engagement.fromFake(true)}
-        onChange={onChange}
-      />
+      <EngagementContext.Provider
+        value={
+          ({
+            updateEngagementFormField: onChange,
+          } as unknown) as IEngagementContext
+        }
+      >
+        <LocationFormField />
+      </EngagementContext.Provider>
     );
     const textArea = await wrapper.findByTestId('location-field');
     await fireEvent.change(textArea, { target: { value: 'nva' } });
-    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith(
+      'location',
+      'nva',
+      EngagementGroupings.engagementSummary
+    );
   });
   test('OpenShift Version form matches snapshot', () => {
     expect(
@@ -214,6 +218,7 @@ describe('Engagement form fields', () => {
             hostingEnvironment={HostingEnvironment.fromFake(true)}
             isEngagementLaunched={true}
             onChange={() => {}}
+            suggestedSubdomain={''}
           />
         </TestStateWrapper>
       )
@@ -227,6 +232,7 @@ describe('Engagement form fields', () => {
           hostingEnvironment={HostingEnvironment.fromFake(true)}
           isEngagementLaunched={true}
           onChange={onChange}
+          suggestedSubdomain={''}
         />
       </TestStateWrapper>
     );

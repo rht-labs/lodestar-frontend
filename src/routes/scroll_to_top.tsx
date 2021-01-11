@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { APPLICATION_CONTENT_CONTAINER_ID } from '../common/constants'
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { APPLICATION_CONTENT_CONTAINER_ID } from '../common/constants';
 
-export default function ScrollToTop({children}) {
+export default function ScrollToTop({ children }) {
   const { pathname } = useLocation();
 
   useEffect(() => {

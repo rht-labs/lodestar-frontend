@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   FormGroup,
   FormSelect,
@@ -6,25 +6,20 @@ import {
 } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 interface ClusterSizeFormFieldProps {
   hostingEnvironment: HostingEnvironment;
   onChange: (value: string) => void;
-  isEngagementLaunched: boolean;
 }
 
 export function ClusterSizeFormField({
   hostingEnvironment,
-  isEngagementLaunched,
   onChange,
 }: ClusterSizeFormFieldProps) {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('ocp_cluster_size'), [registerField]);
   return (
     <FormGroup label="Cluster Size" isRequired fieldId="cluster-size">
       <FormSelect

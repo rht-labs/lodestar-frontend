@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   FormGroup,
   FormSelect,
@@ -6,7 +6,6 @@ import {
 } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface CloudProviderRegionFormFieldProps {
@@ -23,8 +22,6 @@ export function CloudProviderRegionFormField({
   onChange,
 }: CloudProviderRegionFormFieldProps) {
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('ocp_cloud_provider_region'), [registerField]);
   return (
     <FormGroup
       label="Provider Region"

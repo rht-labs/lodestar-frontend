@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { FormGroup, TextInput } from '@patternfly/react-core';
-import { Engagement } from '../../schemas/engagement';
-import { FormManager } from '../../context/form_manager/form_manager';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
-interface LocationFormFieldProps {
-  engagement: Engagement;
-  onChange: (fieldName: string, value: any) => void;
-}
-
-export function LocationFormField(props: LocationFormFieldProps) {
+export function LocationFormField() {
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => {
-    registerField('location');
-  }, [registerField]);
+  const [location, setLocation] = useEngagementFormField(
+    'location',
+    EngagementGroupings.engagementSummary
+  );
   return (
     <FormGroup
       label="Location"
@@ -29,8 +26,8 @@ export function LocationFormField(props: LocationFormFieldProps) {
         id="location"
         name="location"
         placeholder="e.g. Pasadena, CA"
-        value={props.engagement.location || ''}
-        onChange={e => props.onChange('location', e)}
+        value={location}
+        onChange={setLocation}
         data-cy={'location_field'}
       />
     </FormGroup>

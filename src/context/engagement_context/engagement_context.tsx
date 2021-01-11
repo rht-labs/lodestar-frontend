@@ -39,10 +39,12 @@ export interface IEngagementContext {
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
-  updateEngagementFormField: (field: keyof Engagement, value: any) => void;
-  fieldGroups: FieldGroup;
+  updateEngagementFormField: (
+    field: keyof Engagement,
+    value: any,
+    group?: EngagementGroupings
+  ) => void;
   currentChanges: Engagement;
-  setFieldGroups: (groups: FieldGroup) => void;
   clearCurrentChanges: () => void;
   requiredFields: string[];
   getEngagement: (
@@ -58,6 +60,16 @@ export interface IEngagementContext {
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
   fetchCategories: () => void;
   categories?: EngagementCategory[];
+}
+
+export enum EngagementGroupings {
+  hostingEnvironment = 'Hosting Environment',
+  engagementSummary = 'Engagement Summary',
+  pointOfContact = 'Point of Contact',
+  systemStatus = 'System Status',
+  users = 'Engagement Users',
+  artifacts = 'Engagement Artifacts',
+  activityHistory = 'Activity History',
 }
 
 export type CreateEngagementParams = Pick<
@@ -77,7 +89,9 @@ const requiredFields = [
   'technical_lead_name',
   'project_name',
 ];
-export const EngagementContext = createContext<IEngagementContext>({});
+export const EngagementContext = createContext<IEngagementContext>(
+  ({} as unknown) as IEngagementContext
+);
 
 const { Provider } = EngagementContext;
 
@@ -118,13 +132,19 @@ export const EngagementProvider = ({
     engagementFormReducer(engagementFormConfig)()
   );
 
-  const [changedFields, setChangedFields] = useState<string[]>([]);
-  const [fieldGroups, setFieldGroups] = useState<FieldGroup>();
+  const [changedFields, setChangedFields] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const [changedGroups, setChangedGroups] = useState<{
+    [key: string]: boolean;
+  }>({});
   const clearCurrentChanges = useCallback(() => {
     dispatch({
       type: 'switch_engagement',
       payload: getInitialState(currentEngagement),
     });
+    setChangedFields({});
+    setChangedGroups({});
   }, [dispatch, currentEngagement]);
   useEffect(() => {
     clearCurrentChanges();
@@ -411,25 +431,17 @@ export const EngagementProvider = ({
     async (data: Engagement) => {
       const _createCommitMessage = (
         changedFields: string[],
-        fieldGroupings: { [key: string]: string[] } = {}
+        changedGroups: string[]
       ): string => {
-        const changedGroups = Array.from(
-          new Set(
-            changedFields
-              .map(field =>
-                Object.keys(fieldGroupings).find(group =>
-                  fieldGroupings[group].includes(field)
-                )
-              )
-              .filter(group => !!group)
-          )
-        );
         const commitMessage = `Changed ${changedGroups.join(
           ', '
         )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
         return commitMessage;
       };
-      const commitMessage = _createCommitMessage(changedFields, fieldGroups);
+      const commitMessage = _createCommitMessage(
+        Object.keys(changedFields).filter(k => changedFields[k]),
+        Object.keys(changedGroups).filter(k => changedGroups[k])
+      );
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
       try {
@@ -443,6 +455,8 @@ export const EngagementProvider = ({
           AlertType.success
         );
         feedbackContext.hideLoader();
+        setChangedFields({});
+        setChangedGroups({});
         _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
       } catch (e) {
@@ -472,7 +486,7 @@ export const EngagementProvider = ({
       engagementService,
       _handleErrors,
       changedFields,
-      fieldGroups,
+      changedGroups,
       setCurrentEngagement,
     ]
   );
@@ -544,11 +558,11 @@ export const EngagementProvider = ({
 
   const updateEngagementFormField = (
     fieldName: keyof Engagement,
-    value: any
+    value: any,
+    group?: EngagementGroupings
   ) => {
-    if (!changedFields.includes(fieldName)) {
-      setChangedFields([...changedFields, fieldName]);
-    }
+    setChangedFields({ ...changedFields, [fieldName]: true });
+    setChangedGroups({ ...changedGroups, [group]: true });
     dispatch({ type: fieldName, payload: value });
     try {
       analyticsContext.logEvent({
@@ -575,14 +589,12 @@ export const EngagementProvider = ({
         launchEngagement,
         fetchCategories,
         categories,
-        fieldGroups,
         currentChanges: {
           ...currentEngagement,
           ...currentEngagementChanges,
         },
         clearCurrentChanges,
         updateEngagementFormField,
-        setFieldGroups,
       }}
     >
       {children}
@@ -624,14 +636,14 @@ export const useEngagement = (customerName: string, projectName: string) => {
 
 export const useEngagementFormField = <K extends keyof Engagement>(
   formField: K,
-  group?: string
+  group?: EngagementGroupings
 ): [Engagement[K], (value: Engagement[K]) => void] => {
   const engagementContext = useContext(EngagementContext);
 
   const value = engagementContext?.currentChanges?.[formField];
 
   const updateValue = (value: Engagement[K]) => {
-    engagementContext.updateEngagementFormField(formField, value);
+    engagementContext.updateEngagementFormField(formField, value, group);
   };
 
   return [value, updateValue];
