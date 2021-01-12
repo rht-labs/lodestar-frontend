@@ -433,7 +433,6 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div />
       <article
         class="pf-c-card pf-m-compact"
         data-ouia-component-id="4"
@@ -502,9 +501,9 @@ Object {
         </div>
       </article>
     </div>
+    <div />
   </body>,
   "container": <div>
-    <div />
     <article
       class="pf-c-card pf-m-compact"
       data-ouia-component-id="4"

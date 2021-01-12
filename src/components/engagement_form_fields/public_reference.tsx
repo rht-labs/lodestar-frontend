@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
-import { Engagement } from '../../schemas/engagement';
-import { FormManager } from '../../context/form_manager/form_manager';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
-export interface PublicReferenceFieldProps {
-  onChange: (fieldName: string, value: any) => void;
-  engagement: Engagement;
-}
-export function PublicReferenceField(props: PublicReferenceFieldProps) {
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('public_reference'), [registerField]);
+export function PublicReferenceField() {
+  const [isPublicReference, setIsPublicReference] = useEngagementFormField(
+    'public_reference',
+    EngagementGroupings.engagementSummary
+  );
   return (
     <Checkbox
       id="public-reference"
       label="Can this be used as a public reference?"
-      isChecked={props.engagement.public_reference ?? false}
-      onChange={checked => props.onChange('public_reference', checked)}
+      isChecked={isPublicReference ?? false}
+      onChange={setIsPublicReference}
     />
   );
 }

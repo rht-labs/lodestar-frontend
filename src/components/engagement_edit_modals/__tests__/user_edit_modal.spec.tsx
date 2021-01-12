@@ -38,7 +38,11 @@ describe('Point of Contact edit modal', () => {
     const addUser = jest.fn();
     const { getByTestId } = render(
       <EngagementContext.Provider
-        value={{ engagementFormConfig: EngagementFormConfig.fromFake() }}
+        value={
+          ({
+            engagementFormConfig: EngagementFormConfig.fromFake(),
+          } as unknown) as IEngagementContext
+        }
       >
         <UserEditModal
           onSave={onSave}

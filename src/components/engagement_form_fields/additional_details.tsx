@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { FormGroup, TextArea } from '@patternfly/react-core';
 import { APP_FEATURES } from '../../common/app_features';
-import { FormManager } from '../../context/form_manager/form_manager';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export interface DescriptionFormFieldProps {
@@ -12,10 +11,6 @@ export interface DescriptionFormFieldProps {
 
 export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
   const { hasFeature } = useFeatures();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => {
-    registerField('additional_details');
-  }, [registerField]);
   return (
     <FormGroup label="Additional Information" fieldId="additional_details">
       <TextArea
