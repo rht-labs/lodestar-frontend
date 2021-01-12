@@ -1,7 +1,9 @@
 import semver from 'semver';
 import { AppFeature } from '../common/app_features';
 
-export type FeatureVersionMap = { [key in AppFeature]: string };
+export type FeatureVersionMap = {
+  [key in AppFeature]?: string;
+};
 
 export const FEATURE_VERSION_MAP: FeatureVersionMap = {
   resetUser: 'v1.1.50',
