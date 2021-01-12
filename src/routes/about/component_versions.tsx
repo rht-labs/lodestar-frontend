@@ -1,45 +1,35 @@
 import React from 'react';
-import {
-  Grid,
-  GridItem,
-} from '@patternfly/react-core';
+import { Grid, GridItem } from '@patternfly/react-core';
+import { IVersionContext } from '../../context/version_context/version_context';
+import { Version } from '../../schemas/version';
 
 interface ComponentVersionProps {
-  versionContext: any;
+  versionContext: IVersionContext;
 }
 
 export function ComponentVersions(props: ComponentVersionProps) {
-
-  function allComponents() {
-    if (!!props.versionContext?.versions?.component_versions) {
-      return props.versionContext?.versions?.component_versions;
-    }
-    else
-      return [{name: '', value:''}]
-  };
+  const components = (function allComponents(): Version[] {
+    if (!!props.versionContext?.versions?.componentVersions) {
+      return props.versionContext?.versions?.componentVersions;
+    } else return [{ name: '', value: '', link_address: '' }];
+  })();
 
   return (
     <>
-      <Grid span={6} style={{marginTop: '1rem'}}>
-        <GridItem span={12} style={{marginLeft: '1rem'}}>
+      <Grid span={6} style={{ marginTop: '1rem' }}>
+        <GridItem span={12} style={{ marginLeft: '1rem' }}>
           <b>Components versions </b>
         </GridItem>
         <GridItem span={12}>
           <Grid span={12}>
-            {
-              allComponents().map( component =>
-                <>
-                  <Grid hasGutter span={6} style={{marginLeft: '1rem'}}>
-                    <GridItem span={2}>
-                      { component.name }
-                    </GridItem>
-                    <GridItem span={2}>
-                      { component.value }
-                    </GridItem>
-                  </Grid>
-                </>
-              )
-            }
+            {components.map(component => (
+              <>
+                <Grid hasGutter span={6} style={{ marginLeft: '1rem' }}>
+                  <GridItem span={2}>{component.name}</GridItem>
+                  <GridItem span={2}>{component.value}</GridItem>
+                </Grid>
+              </>
+            ))}
           </Grid>
         </GridItem>
       </Grid>
