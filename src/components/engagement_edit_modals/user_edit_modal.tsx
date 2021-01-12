@@ -38,7 +38,7 @@ export interface UserEditModalProps {
   onChange: (users: EngagementUser[]) => void;
   engagement: Engagement;
   isOpen: boolean;
-  onSave: (users: EngagementUser[]) => void;
+  onSave: (users: EngagementUser[], commitMessage?: string) => void;
   onClose: () => void;
   addUser: () => void;
 }
@@ -51,6 +51,7 @@ export function UserEditModal({
 }: UserEditModalProps) {
   const { users, addUser, updateUser } = useEngagementUserManager();
   const [deletedUsers, setDeletedUsers] = useState<string[]>([]);
+  const [resetUsers, setResetUsers] = useState<string[]>([]);
 
   function toggleDeleted(user: EngagementUser) {
     if (deletedUsers.indexOf(user.uuid) < 0) {
@@ -61,13 +62,37 @@ export function UserEditModal({
       setDeletedUsers(newDeletedUsers);
     }
   }
+
+  function toggleReset(user: EngagementUser) {
+    if (resetUsers.indexOf(user.uuid) < 0) {
+      setResetUsers([...resetUsers, user.uuid]);
+    } else {
+      const newResetUsers = [...resetUsers];
+      newResetUsers.splice(resetUsers.indexOf(user.uuid), 1);
+      setResetUsers(newResetUsers);
+    }
+  }
+
   const deletedUsersFilter = (u: EngagementUser) =>
     !deletedUsers.includes(u.uuid);
 
+  const resetUsersFilter = (u: EngagementUser) =>
+    resetUsers.includes(u.uuid);
+
   const onSave = () => {
     const newUsers = users.filter(deletedUsersFilter);
-    propsOnSave(newUsers);
+    const resetUsers = users.filter(resetUsersFilter);
+    propsOnSave(newUsers, freeStyleCommitMessage(resetUsers));
     onClose();
+  };
+
+  const freeStyleCommitMessage = (users: EngagementUser[]) => {
+    const text= '';
+    return users.length > 0 ? `Following users have been reset: ${
+      users.map(user => {
+        return user.email.toString() + ', ' + text
+      })
+      }` : '';
   };
 
   const status = getEngagementStatus(engagement);
@@ -158,6 +183,8 @@ export function UserEditModal({
                         {users.map(user => {
                           const isDeleted =
                             deletedUsers.indexOf(user.uuid) > -1;
+                          const isUserReset =
+                            resetUsers.indexOf(user.uuid) > -1;
                           return (
                             <UserRow
                               key={user.uuid}
@@ -165,6 +192,8 @@ export function UserEditModal({
                               toggleDeleted={toggleDeleted}
                               onChange={updateUser}
                               isDeleted={isDeleted}
+                              isUserReset={isUserReset}
+                              toggleReset={toggleReset}
                               status={status}
                             />
                           );

@@ -53,8 +53,8 @@ export function UserCard() {
     }
     requestOpen(USER_EDIT_MODAL_KEY);
   }
-  const onSave = (users: EngagementUser[]) => {
-    saveEngagement({ ...currentChanges, engagement_users: users });
+  const onSave = (users: EngagementUser[], commitMessage?: string) => {
+    saveEngagement({ ...currentChanges, engagement_users: users}, commitMessage);
   };
 
   return (

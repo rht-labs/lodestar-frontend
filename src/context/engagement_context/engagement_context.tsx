@@ -408,11 +408,12 @@ export const EngagementProvider = ({
   }, [currentEngagement, _validateHostingEnvironment]);
 
   const saveEngagement = useCallback(
-    async (data: Engagement) => {
+    async (data: Engagement, freeStyleCommitMessage: string) => {
       const _createCommitMessage = (
         changedFields: string[],
         fieldGroupings: { [key: string]: string[] } = {}
       ): string => {
+        console.log(freeStyleCommitMessage);
         const changedGroups = Array.from(
           new Set(
             changedFields
@@ -426,7 +427,8 @@ export const EngagementProvider = ({
         );
         const commitMessage = `Changed ${changedGroups.join(
           ', '
-        )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
+        )}\nThe following fields were changed:\n${changedFields.join('\n')}
+        ${freeStyleCommitMessage}`;
         return commitMessage;
       };
       const commitMessage = _createCommitMessage(changedFields, fieldGroups);
