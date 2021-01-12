@@ -5,7 +5,6 @@ export type FeatureVersionMap = { [key in AppFeature]: string };
 
 export const FEATURE_VERSION_MAP: FeatureVersionMap = {
   resetUser: 'v1.1.50',
-  testFeature: 'v0.0.9',
 };
 const getSemverFromVersionString = (version: string = ''): string => {
   return semver.clean(version);
