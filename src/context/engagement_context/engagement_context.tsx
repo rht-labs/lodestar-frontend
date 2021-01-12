@@ -433,21 +433,6 @@ export const EngagementProvider = ({
         changedFields: string[],
         changedGroups: string[]
       ): string => {
-<<<<<<< HEAD
-        console.log(freeStyleCommitMessage);
-        const changedGroups = Array.from(
-          new Set(
-            changedFields
-              .map(field =>
-                Object.keys(fieldGroupings).find(group =>
-                  fieldGroupings[group].includes(field)
-                )
-              )
-              .filter(group => !!group)
-          )
-        );
-=======
->>>>>>> 4cdb4f82f11551d23100bb324427477e35c8315b
         const commitMessage = `Changed ${changedGroups.join(
           ', '
         )}\nThe following fields were changed:\n${changedFields.join('\n')}
