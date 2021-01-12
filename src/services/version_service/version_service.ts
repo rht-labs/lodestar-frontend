@@ -1,5 +1,5 @@
-import { Version } from '../../schemas/version';
+import { AppVersion } from '../../schemas/version';
 
 export abstract class VersionService {
-  abstract async fetchVersion(): Promise<Version>;
+  abstract fetchVersion(): Promise<AppVersion>;
 }
