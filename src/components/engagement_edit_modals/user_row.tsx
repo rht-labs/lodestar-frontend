@@ -157,8 +157,11 @@ export const UserRow = ({
             </FormSelect>
           </FormGroup>
         </GridItem>
-        <Feature name={APP_FEATURES.writer}>
-          <GridItem span={1} style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}>
+        <Feature name={'writer'}>
+          <GridItem
+            span={1}
+            style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}
+          >
             <Tooltip
               content={"Select users you want to reset (Active Engagements only)"}
               entryDelay={0}
