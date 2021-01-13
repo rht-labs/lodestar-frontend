@@ -1,5 +1,5 @@
 import { VersionService } from '../version_service';
-import { Version } from '../../../schemas/version';
+import { AppVersion } from '../../../schemas/version';
 import Axios, { AxiosInstance } from 'axios';
 import { UserToken } from '../../../schemas/user_token';
 import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
@@ -34,7 +34,7 @@ export class Apiv1VersionService extends VersionService {
     return rObject;
   }
 
-  async fetchVersion(): Promise<Version> {
+  async fetchVersion(): Promise<AppVersion> {
     try {
       const { data } = await this.axios.get(
         `${this.baseUrl}/api/version/manifest`
