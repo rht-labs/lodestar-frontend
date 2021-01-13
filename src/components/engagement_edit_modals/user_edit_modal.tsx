@@ -17,7 +17,11 @@ import {
   validateString,
 } from '../../common/user_validation';
 import { UserRolesTooltip } from '../engagement_data_cards/user_card/user_roles_tooltip';
-import {Engagement, EngagementUser, getEngagementStatus} from '../../schemas/engagement';
+import {
+  Engagement,
+  EngagementUser,
+  getEngagementStatus,
+} from '../../schemas/engagement';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import {
   cellWidth,
@@ -32,13 +36,13 @@ import { APP_FEATURES } from '../../common/app_features';
 import { uuid } from 'uuidv4';
 import { PlusIcon } from '@patternfly/react-icons';
 import { useEngagementUserManager } from '../../context/engagement_context/engagement_context';
-import {UserResetTooltip} from "../engagement_data_cards/user_card/user_reset_tooltip";
+import { UserResetTooltip } from '../engagement_data_cards/user_card/user_reset_tooltip';
 
 export interface UserEditModalProps {
   onChange: (users: EngagementUser[]) => void;
   engagement: Engagement;
   isOpen: boolean;
-  onSave: (users: EngagementUser[]) => void;
+  onSave: (users: EngagementUser[], commitMessage?: string) => void;
   onClose: () => void;
   addUser: () => void;
 }
@@ -61,6 +65,7 @@ export function UserEditModal({
       setDeletedUsers(newDeletedUsers);
     }
   }
+
   const deletedUsersFilter = (u: EngagementUser) =>
     !deletedUsers.includes(u.uuid);
 
@@ -72,7 +77,7 @@ export function UserEditModal({
 
   const status = getEngagementStatus(engagement);
   const columns = [
-    { title: 'Email' , transforms: [cellWidth(20)]},
+    { title: 'Email', transforms: [cellWidth(20)] },
     { title: 'First name', transforms: [cellWidth(15)] },
     { title: 'Last name', transforms: [cellWidth(15)] },
     {
@@ -81,7 +86,8 @@ export function UserEditModal({
           Role
           <UserRolesTooltip />
         </>
-      ), transforms: [cellWidth(15)],
+      ),
+      transforms: [cellWidth(15)],
     },
     {
       title: (
@@ -89,9 +95,10 @@ export function UserEditModal({
           Reset
           <UserResetTooltip />
         </>
-      ),transforms: [cellWidth(10)],
+      ),
+      transforms: [cellWidth(10)],
     },
-    { title: ('Delete'),transforms: [cellWidth(10)] },
+    { title: 'Delete', transforms: [cellWidth(10)] },
   ];
 
   const areFieldsValid = engagement?.engagement_users
