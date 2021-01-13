@@ -1,27 +1,15 @@
 import { Serializer } from '../serializer';
-import { Version } from '../../schemas/version';
+import { AppVersion } from '../../schemas/version';
 
-export class VersionJsonSerializer implements Serializer<Version, object> {
-  serialize(version: Version): object {
+export class VersionJsonSerializer implements Serializer<AppVersion, object> {
+  serialize(version: AppVersion): object {
     return version;
   }
-  deserialize(data: object): Version {
+  deserialize(data: object): AppVersion {
     return {
-      ...(data as Version),
-      versions: {
-        componentVersions: [
-          {
-            link_address: data['link_address'],
-            name: data['name'],
-            value: data['value'],
-          },
-        ],
-        mainVersion: {
-          link_address: data['link_address'],
-          name: data['name'],
-          value: data['value'],
-        },
-      },
+      ...(data as AppVersion),
+      componentVersions: data['component_versions'],
+      mainVersion: data['main_version'],
     };
   }
 }

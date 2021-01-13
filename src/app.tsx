@@ -2,7 +2,10 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './context/auth_context/auth_context';
-import { VersionProvider } from './context/version_context/version_context';
+import {
+  VersionContext,
+  VersionProvider,
+} from './context/version_context/version_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary/error_boundary';
 import { LodestarRouter } from './routes/router';
@@ -75,26 +78,39 @@ export const App = ({ config }: { config: Config }) => {
                                 <VersionProvider
                                   versionService={versionService}
                                 >
-                                  <FeatureToggles>
-                                    <Router>
-                                      <FeedbackContext.Consumer>
-                                        {feedbackContext => (
-                                          <EngagementProvider
-                                            authContext={authContext}
-                                            feedbackContext={feedbackContext}
-                                            engagementService={
-                                              engagementService
-                                            }
-                                            categoryService={categoryService}
-                                          >
-                                            <NavigationAnalytics>
-                                              <LodestarRouter />
-                                            </NavigationAnalytics>
-                                          </EngagementProvider>
-                                        )}
-                                      </FeedbackContext.Consumer>
-                                    </Router>
-                                  </FeatureToggles>
+                                  <VersionContext.Consumer>
+                                    {versionContext => {
+                                      return (
+                                        <FeatureToggles
+                                          versionContext={versionContext}
+                                          authContext={authContext}
+                                        >
+                                          <Router>
+                                            <FeedbackContext.Consumer>
+                                              {feedbackContext => (
+                                                <EngagementProvider
+                                                  authContext={authContext}
+                                                  feedbackContext={
+                                                    feedbackContext
+                                                  }
+                                                  engagementService={
+                                                    engagementService
+                                                  }
+                                                  categoryService={
+                                                    categoryService
+                                                  }
+                                                >
+                                                  <NavigationAnalytics>
+                                                    <LodestarRouter />
+                                                  </NavigationAnalytics>
+                                                </EngagementProvider>
+                                              )}
+                                            </FeedbackContext.Consumer>
+                                          </Router>
+                                        </FeatureToggles>
+                                      );
+                                    }}
+                                  </VersionContext.Consumer>
                                 </VersionProvider>
                               </NotificationProvider>
                             )}
