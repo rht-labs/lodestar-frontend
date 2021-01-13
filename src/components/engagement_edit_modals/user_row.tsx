@@ -25,8 +25,6 @@ export interface UserRowProps {
   onChange: (user: EngagementUser) => void;
   toggleDeleted: (user: EngagementUser) => void;
   isDeleted: boolean;
-  isUserReset: boolean;
-  toggleReset: (user: EngagementUser) => void;
   status: EngagementStatus
 }
 
@@ -35,8 +33,6 @@ export const UserRow = ({
   onChange,
   toggleDeleted,
   isDeleted: isUserDeleted,
-  isUserReset,
-  toggleReset,
   status,
 }: UserRowProps) => {
   const { engagementFormConfig } = useEngagements();
@@ -174,7 +170,6 @@ export const UserRow = ({
                         isChecked={isReset}
                         onChange={e => {
                           setIsReset(e);
-                          toggleReset(user);
                           onChange({ ...user, reset: e });
                         }}
                         id={user.uuid} />
