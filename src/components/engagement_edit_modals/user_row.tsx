@@ -160,7 +160,7 @@ export const UserRow = ({
         <Feature name={APP_FEATURES.writer}>
           <GridItem span={1} style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}>
             <Tooltip
-              content={ APP_FEATURES.resetUser
+              content={ hasFeature(APP_FEATURES.resetUser)
                 ? "This feature will be available soon"
                 : "Select users you want to reset (Active Engagements only)"}
               entryDelay={0}
