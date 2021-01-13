@@ -19,7 +19,7 @@ import { TrashIcon, UndoIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 import { useFeatures } from '../../context/feature_context/feature_hook';
-import {EngagementStatus, EngagementUser} from '../../schemas/engagement';
+import { EngagementStatus, EngagementUser } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface UserRowProps {
@@ -27,7 +27,7 @@ export interface UserRowProps {
   onChange: (user: EngagementUser) => void;
   toggleDeleted: (user: EngagementUser) => void;
   isDeleted: boolean;
-  status: EngagementStatus
+  status: EngagementStatus;
 }
 
 export const UserRow = ({
@@ -165,23 +165,20 @@ export const UserRow = ({
             style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}
           >
             <Tooltip
-              content={"Select users you want to reset (Active Engagements only)"}
+              content={
+                'Select users you want to reset (Active Engagements only)'
+              }
               entryDelay={0}
               exitDelay={10}
               isContentLeftAligned={true}
               position={TooltipPosition.top}
             >
-<<<<<<< Updated upstream
-              <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted || status !== EngagementStatus.active}
-                        isChecked={isReset}
-                        onChange={e => {
-                          setIsReset(e);
-                          onChange({ ...user, reset: e });
-                        }}
-                        id={user.uuid} />
-=======
               <Checkbox
-                isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+                isDisabled={
+                  !hasFeature(APP_FEATURES.writer) ||
+                  isUserDeleted ||
+                  status !== EngagementStatus.active
+                }
                 isChecked={isReset}
                 onChange={e => {
                   setIsReset(e);
@@ -189,7 +186,6 @@ export const UserRow = ({
                 }}
                 id={user.uuid}
               />
->>>>>>> Stashed changes
             </Tooltip>
           </GridItem>
           <GridItem
