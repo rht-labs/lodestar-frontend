@@ -86,15 +86,6 @@ export function UserEditModal({
     onClose();
   };
 
-  // const freeStyleCommitMessage = (users: EngagementUser[]) => {
-  //   const text= '';
-  //   return users.length > 0 ? `Following users have been reset: ${
-  //     users.map(user => {
-  //       return user.email.toString() + ', ' + text
-  //     })
-  //     }` : '';
-  // };
-
   const status = getEngagementStatus(engagement);
   const columns = [
     { title: 'Email', transforms: [cellWidth(20)] },
