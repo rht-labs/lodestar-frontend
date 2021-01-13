@@ -6,7 +6,9 @@ import {
   Grid,
   GridItem,
   FormGroup,
-  Checkbox, Tooltip, TooltipPosition
+  Checkbox,
+  Tooltip,
+  TooltipPosition,
 } from '@patternfly/react-core';
 import {
   validateEmail,
@@ -37,11 +39,11 @@ export const UserRow = ({
 }: UserRowProps) => {
   const { engagementFormConfig } = useEngagements();
   const { hasFeature } = useFeatures();
-  const [ isReset, setIsReset ] = useState(false);
+  const [isReset, setIsReset] = useState(false);
 
   return (
     <>
-      <Grid hasGutter style={{ marginTop: '1rem' , marginLeft:'0rem'}}>
+      <Grid hasGutter style={{ marginTop: '1rem', marginLeft: '0rem' }}>
         <GridItem span={3}>
           <FormGroup
             fieldId={'user_email'}
@@ -55,7 +57,7 @@ export const UserRow = ({
               isRequired
               isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
               onChange={e => {
-                onChange({ ...user, email: e });
+                onChange({ ...user, email: e.toLowerCase() });
               }}
               placeholder="Email Address"
               type="email"
@@ -158,7 +160,10 @@ export const UserRow = ({
           </FormGroup>
         </GridItem>
         <Feature name={APP_FEATURES.writer}>
-          <GridItem span={1} style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}>
+          <GridItem
+            span={1}
+            style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}
+          >
             <Tooltip
               content={"Select users you want to reset (Active Engagements only)"}
               entryDelay={0}
@@ -166,6 +171,7 @@ export const UserRow = ({
               isContentLeftAligned={true}
               position={TooltipPosition.top}
             >
+<<<<<<< Updated upstream
               <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted || status !== EngagementStatus.active}
                         isChecked={isReset}
                         onChange={e => {
@@ -173,9 +179,23 @@ export const UserRow = ({
                           onChange({ ...user, reset: e });
                         }}
                         id={user.uuid} />
+=======
+              <Checkbox
+                isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
+                isChecked={isReset}
+                onChange={e => {
+                  setIsReset(e);
+                  onChange({ ...user, reset: e });
+                }}
+                id={user.uuid}
+              />
+>>>>>>> Stashed changes
             </Tooltip>
           </GridItem>
-          <GridItem span={1} style={{ paddingTop: '0.5rem', paddingLeft: '3.5rem'  }}>
+          <GridItem
+            span={1}
+            style={{ paddingTop: '0.5rem', paddingLeft: '3.5rem' }}
+          >
             {isUserDeleted ? (
               <UndoIcon
                 onClick={() => {
@@ -189,7 +209,7 @@ export const UserRow = ({
                 onClick={() => {
                   toggleDeleted(user);
                 }}
-                style={{ fontSize: 'small'}}
+                style={{ fontSize: 'small' }}
               />
             )}
           </GridItem>
