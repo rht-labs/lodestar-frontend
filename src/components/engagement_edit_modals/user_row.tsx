@@ -166,7 +166,10 @@ export const UserRow = ({
               isContentLeftAligned={true}
               position={TooltipPosition.top}
             >
-              <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted || status !== EngagementStatus.active}
+              <Checkbox isDisabled={ !hasFeature(APP_FEATURES.writer)
+                                    || hasFeature(APP_FEATURES.resetUser)
+                                    || isUserDeleted
+                                    || status !== EngagementStatus.active }
                         isChecked={isReset}
                         onChange={e => {
                           setIsReset(e);
