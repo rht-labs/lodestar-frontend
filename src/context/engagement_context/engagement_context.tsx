@@ -428,20 +428,30 @@ export const EngagementProvider = ({
   }, [currentEngagement, _validateHostingEnvironment]);
 
   const saveEngagement = useCallback(
-    async (data: Engagement, freeStyleCommitMessage: string) => {
+    async (data: Engagement) => {
       const _createCommitMessage = (
         changedFields: string[],
-        changedGroups: string[]
+        changedGroups: string[],
+        engagementChanges: Partial<Engagement>
       ): string => {
-        const commitMessage = `Changed ${changedGroups.join(
+        let commitMessage = `Changed ${changedGroups.join(
           ', '
-        )}\nThe following fields were changed:\n${changedFields.join('\n')}
-        ${freeStyleCommitMessage}`;
+        )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
+        if (engagementChanges.engagement_users.some(user => user.reset)) {
+          commitMessage += '\nThe following users have been reset';
+          engagementChanges.engagement_users
+            .filter(u => u.reset)
+            .forEach(
+              user =>
+                (commitMessage += `\n${user.first_name} ${user.last_name}`)
+            );
+        }
         return commitMessage;
       };
       const commitMessage = _createCommitMessage(
         Object.keys(changedFields).filter(k => changedFields[k]),
-        Object.keys(changedGroups).filter(k => changedGroups[k])
+        Object.keys(changedGroups).filter(k => changedGroups[k]),
+        currentEngagementChanges
       );
       feedbackContext.showLoader();
       const oldEngagement = _updateEngagementInPlace(data);
@@ -484,6 +494,7 @@ export const EngagementProvider = ({
     [
       feedbackContext,
       _updateEngagementInPlace,
+      currentEngagementChanges,
       engagementService,
       _handleErrors,
       changedFields,
