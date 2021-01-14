@@ -159,7 +159,7 @@ export const UserRow = ({
             </FormSelect>
           </FormGroup>
         </GridItem>
-        <Feature name={APP_FEATURES.writer}>
+        <Feature name={'writer'}>
           <GridItem
             span={1}
             style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}
