@@ -32,19 +32,16 @@ import {
 } from '@patternfly/react-table';
 import { UserRow } from './user_row';
 import { Feature } from '../feature/feature';
-import { APP_FEATURES } from '../../common/app_features';
 import { uuid } from 'uuidv4';
 import { PlusIcon } from '@patternfly/react-icons';
 import { useEngagementUserManager } from '../../context/engagement_context/engagement_context';
 import { UserResetTooltip } from '../engagement_data_cards/user_card/user_reset_tooltip';
 
 export interface UserEditModalProps {
-  onChange: (users: EngagementUser[]) => void;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (users: EngagementUser[], commitMessage?: string) => void;
   onClose: () => void;
-  addUser: () => void;
 }
 
 export function UserEditModal({
@@ -177,7 +174,7 @@ export function UserEditModal({
                           );
                         })}
                       </GridItem>
-                      <Feature name={APP_FEATURES.writer}>
+                      <Feature name={'writer'}>
                         <Button
                           variant="secondary"
                           onClick={() =>
