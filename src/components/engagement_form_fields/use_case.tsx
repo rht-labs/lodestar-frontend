@@ -44,7 +44,7 @@ export function EngagementUseCaseField({
 
   return (
     <FormGroup fieldId="Engagement Use Cases" label="Engagement Use Cases">
-      {useCases.map(useCase => (
+      {useCases?.map(useCase => (
         <UseCaseField
           useCase={useCase}
           onDelete={onDelete}
