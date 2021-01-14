@@ -17,10 +17,7 @@ import { RedhatIcon, UserIcon, UsersIcon } from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { uuid } from 'uuidv4';
-import {
-  EngagementGroupings,
-  useEngagementFormField,
-} from '../../../context/engagement_context/engagement_context';
+import { useEngagementUserManager } from '../../../context/engagement_context/engagement_context';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -39,31 +36,22 @@ export function UserCard() {
     currentEngagement: engagement,
     saveEngagement,
   } = useEngagements();
-  const [, setUsers] = useEngagementFormField(
-    'engagement_users',
-    EngagementGroupings.users
-  );
   const onClose = () => {
     requestClose();
     clearCurrentChanges();
   };
-
-  function addUser() {
-    const newUser: EngagementUser = {
-      reset: false,
-      first_name: '',
-      last_name: '',
-      email: '',
-      role: '',
-      uuid: uuid(),
-    };
-    engagement?.engagement_users?.push(newUser);
-    setUsers(engagement?.engagement_users);
-  }
+  const { addUser } = useEngagementUserManager();
 
   function handleAddNewUserOrEdit() {
     if (engagement?.engagement_users?.length === 0) {
-      addUser();
+      addUser({
+        uuid: uuid(),
+        first_name: '',
+        last_name: '',
+        role: '',
+        reset: false,
+        email: '',
+      });
     }
     requestOpen(USER_EDIT_MODAL_KEY);
   }
@@ -74,12 +62,10 @@ export function UserCard() {
   return (
     <>
       <UserEditModal
-        onChange={setUsers}
         onSave={onSave}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
         engagement={currentChanges as Engagement}
-        addUser={addUser}
       />
       <DataCard
         actionButton={() => (
