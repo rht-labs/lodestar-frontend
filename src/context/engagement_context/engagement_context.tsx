@@ -683,7 +683,11 @@ export const useEngagementUserManager = () => {
 
   const addUser = (user: EngagementUser) => {
     const newUsers = [...users, user];
-    updateEngagementFormField('engagement_users', newUsers);
+    updateEngagementFormField(
+      'engagement_users',
+      newUsers,
+      EngagementGroupings.users
+    );
     return newUsers;
   };
 
@@ -691,7 +695,11 @@ export const useEngagementUserManager = () => {
     const updateIndex = users.findIndex(u => u.uuid === user.uuid);
     const newUsers = [...users];
     newUsers.splice(updateIndex, 1, user);
-    updateEngagementFormField('engagement_users', newUsers);
+    updateEngagementFormField(
+      'engagement_users',
+      newUsers,
+      EngagementGroupings.users
+    );
     return newUsers;
   };
 
