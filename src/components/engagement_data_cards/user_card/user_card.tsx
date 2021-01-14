@@ -39,7 +39,7 @@ export function UserCard() {
     currentEngagement: engagement,
     saveEngagement,
   } = useEngagements();
-  const [users, setUsers] = useEngagementFormField(
+  const [, setUsers] = useEngagementFormField(
     'engagement_users',
     EngagementGroupings.users
   );
@@ -49,7 +49,8 @@ export function UserCard() {
   };
 
   function addUser() {
-    const newUser = {
+    const newUser: EngagementUser = {
+      reset: false,
       first_name: '',
       last_name: '',
       email: '',
@@ -67,7 +68,7 @@ export function UserCard() {
     requestOpen(USER_EDIT_MODAL_KEY);
   }
   const onSave = (users: EngagementUser[]) => {
-    saveEngagement({ ...currentChanges, engagement_users: users});
+    saveEngagement({ ...currentChanges, engagement_users: users });
   };
 
   return (
@@ -90,7 +91,7 @@ export function UserCard() {
         )}
         title="Engagement Users"
       >
-        <UserTable users={users ?? []} />
+        <UserTable users={engagement?.engagement_users ?? []} />
       </DataCard>
     </>
   );
