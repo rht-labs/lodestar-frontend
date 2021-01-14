@@ -163,13 +163,18 @@ export const UserRow = ({
             style={{ paddingTop: '1rem', paddingLeft: '1.5rem' }}
           >
             <Tooltip
-              content={"Select users you want to reset (Active Engagements only)"}
+              content={ hasFeature(APP_FEATURES.resetUser)
+                ? "This feature will be available soon"
+                : "Select users you want to reset (Active Engagements only)"}
               entryDelay={0}
               exitDelay={10}
               isContentLeftAligned={true}
               position={TooltipPosition.top}
             >
-              <Checkbox isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted || status !== EngagementStatus.active}
+              <Checkbox isDisabled={ !hasFeature(APP_FEATURES.writer)
+                                    || hasFeature(APP_FEATURES.resetUser)
+                                    || isUserDeleted
+                                    || status !== EngagementStatus.active }
                         isChecked={isReset}
                         onChange={e => {
                           setIsReset(e);
