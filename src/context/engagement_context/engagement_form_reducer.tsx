@@ -2,40 +2,10 @@ import { Engagement } from '../../schemas/engagement';
 import { addDays, startOfToday } from 'date-fns';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
-export const getInitialState = (
-  engagement?: Partial<Engagement>
-): Partial<Engagement> => {
-  return {
-    artifacts: engagement?.artifacts ?? [],
-    project_id: engagement?.project_id ?? null,
-    customer_name: engagement?.customer_name ?? null,
-    project_name: engagement?.project_name ?? null,
-    description: engagement?.description ?? null,
-    location: engagement?.location ?? null,
-    start_date: engagement?.start_date ?? null,
-    end_date: engagement?.end_date ?? null,
-    launch: engagement?.launch ?? undefined,
-    archive_date: engagement?.archive_date ?? null,
-    engagement_users: engagement?.engagement_users ?? [],
-    mongo_id: engagement?.mongo_id ?? undefined,
-    last_update: engagement?.last_update ?? '',
-    last_update_by_name: engagement?.last_update_by_name ?? '',
-    engagement_lead_name: engagement?.engagement_lead_name ?? null,
-    engagement_lead_email: engagement?.engagement_lead_email ?? null,
-    technical_lead_name: engagement?.technical_lead_name ?? null,
-    technical_lead_email: engagement?.technical_lead_email ?? null,
-    customer_contact_name: engagement?.customer_contact_name ?? null,
-    customer_contact_email: engagement?.customer_contact_email ?? null,
-    engagement_categories: engagement?.engagement_categories ?? [],
-    use_cases: engagement?.use_cases ?? [],
-    hosting_environments: engagement?.hosting_environments ?? [],
-  };
-};
-
 export const engagementFormReducer = (
   engagementFormConfig: EngagementFormConfig
 ) => (
-  state: Partial<Engagement> = getInitialState(),
+  state: Partial<Engagement> = {},
   action?: { type: string; payload?: any }
 ): Partial<Engagement> => {
   const curriedEngagementDatesFunction = getEngagementDates(
@@ -80,7 +50,7 @@ export const engagementFormReducer = (
     case 'hosting_environments':
       return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
-      return { ...state, ...action.payload };
+      return {};
     default:
       return state;
   }

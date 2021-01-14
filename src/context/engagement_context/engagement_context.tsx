@@ -27,10 +27,7 @@ import { EngagementService } from '../../services/engagement_service/engagement_
 import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
-import {
-  engagementFormReducer,
-  getInitialState,
-} from './engagement_form_reducer';
+import { engagementFormReducer } from './engagement_form_reducer';
 import { IAuthContext } from '../auth_context/auth_context';
 export type FieldGroup = { [key: string]: string[] };
 
@@ -117,7 +114,7 @@ export const EngagementProvider = ({
   >();
   const setCurrentEngagement = useCallback(
     (engagement: Engagement) => {
-      dispatch(getInitialState(engagement));
+      dispatch({});
       _setCurrentEngagement(engagement);
     },
     [_setCurrentEngagement]
@@ -126,26 +123,21 @@ export const EngagementProvider = ({
     EngagementFormConfig
   >();
   const [currentEngagementChanges, dispatch] = useReducer<
-    (state: any, action: any) => any
+    (state: any, action: any) => Partial<Engagement>
   >(
     engagementFormReducer(engagementFormConfig),
     engagementFormReducer(engagementFormConfig)()
   );
 
-  const [changedFields, setChangedFields] = useState<{
-    [key: string]: boolean;
-  }>({});
   const [changedGroups, setChangedGroups] = useState<{
     [key: string]: boolean;
   }>({});
   const clearCurrentChanges = useCallback(() => {
     dispatch({
       type: 'switch_engagement',
-      payload: getInitialState(currentEngagement),
     });
-    setChangedFields({});
     setChangedGroups({});
-  }, [dispatch, currentEngagement]);
+  }, [dispatch]);
   useEffect(() => {
     clearCurrentChanges();
   }, [currentEngagement, clearCurrentChanges]);
@@ -430,14 +422,16 @@ export const EngagementProvider = ({
   const saveEngagement = useCallback(
     async (data: Engagement) => {
       const _createCommitMessage = (
-        changedFields: string[],
         changedGroups: string[],
         engagementChanges: Partial<Engagement>
       ): string => {
+        const changedFields = Object.keys(currentEngagementChanges).filter(
+          k => !!currentEngagementChanges[k]
+        );
         let commitMessage = `Changed ${changedGroups.join(
           ', '
         )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
-        if (engagementChanges.engagement_users.some(user => user.reset)) {
+        if (engagementChanges?.engagement_users?.some?.(user => user.reset)) {
           commitMessage += '\nThe following users have been reset:';
           engagementChanges.engagement_users
             .filter(u => u.reset)
@@ -449,8 +443,7 @@ export const EngagementProvider = ({
         return commitMessage;
       };
       const commitMessage = _createCommitMessage(
-        Object.keys(changedFields).filter(k => changedFields[k]),
-        Object.keys(changedGroups).filter(k => changedGroups[k]),
+        Object.keys(changedGroups).filter(k => !!changedGroups[k]),
         currentEngagementChanges
       );
       feedbackContext.showLoader();
@@ -466,7 +459,6 @@ export const EngagementProvider = ({
           AlertType.success
         );
         feedbackContext.hideLoader();
-        setChangedFields({});
         setChangedGroups({});
         _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
@@ -497,7 +489,6 @@ export const EngagementProvider = ({
       currentEngagementChanges,
       engagementService,
       _handleErrors,
-      changedFields,
       changedGroups,
       setCurrentEngagement,
     ]
@@ -573,7 +564,6 @@ export const EngagementProvider = ({
     value: any,
     group?: EngagementGroupings
   ) => {
-    setChangedFields({ ...changedFields, [fieldName]: true });
     setChangedGroups({ ...changedGroups, [group]: true });
     dispatch({ type: fieldName, payload: value });
     try {

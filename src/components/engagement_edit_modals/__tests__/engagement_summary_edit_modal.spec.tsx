@@ -18,7 +18,6 @@ describe('Engagement Summary edit modal', () => {
               onSave={() => {}}
               isOpen={true}
               engagement={Engagement.fromFake(true)}
-              onChange={() => {}}
             />
           </TestStateWrapper>
         </MemoryRouter>
@@ -37,7 +36,6 @@ describe('Engagement Summary edit modal', () => {
             onSave={onSave}
             engagement={Engagement.fromFake(true)}
             isOpen={true}
-            onChange={() => {}}
           />
         </TestStateWrapper>
       </MemoryRouter>
