@@ -295,13 +295,16 @@ For more descriptions of each variable, please see the [Runtime Configuration Va
 
 Depending on the type of deployment, the way of setting these variables may vary. However done, the following values are options that can be set to succesfully run the frontend:
 
-| Variable          | Type    | Description                                                                            | Required | Default |
-| :---------------- | :------ | :------------------------------------------------------------------------------------- | :------- | :------ |
-| **baseUrl**       | string  | Target URL for the deployment of **this** Frontend App                                 | Yes      | N/A     |
-| **authBaseUrl**   | string  | URI for SSO integration                                                                | Yes      | N/A     |
-| **clientId**      | string  | Identification of the client application for SSO integration                           | Yes      | N/A     |
-| **backendUrl**    | string  | URI for [Backend](https://github.com/rht-labs/lodestar-backend.git) APIs | Yes      | N/A     |
-| **disableLaunch** | boolean | Flag to toggle launch functionality on/off                                             | Yes      | N/A     |
+| Variable                  | Type    | Description                                                                            | Required | Default  |
+| :------------------------ | :------ | :------------------------------------------------------------------------------------- | :------- | :------- |
+| **baseUrl**               | string  | Target URL for the deployment of **this** Frontend App                                 | Yes      | N/A      |
+| **authBaseUrl**           | string  | URI for SSO integration                                                                | Yes      | N/A      |
+| **clientId**              | string  | Identification of the client application for SSO integration                           | Yes      | N/A      |
+| **backendUrl**            | string  | URI for [Backend](https://github.com/rht-labs/lodestar-backend.git) APIs               | Yes      | N/A      |
+| **disableLaunch**         | boolean | Flag to toggle launch functionality on/off                                             | No       | false    |
+| **supportEmailAddress**   | string  | e-mail address to display on the support page, etc.                                    | Yes      | N/A      |
+| **analyticsTrackingCode** | string  | Google analystics tracking code.                                                       | No       | UA-FAKED |
+| **allowVersionOverride**  | boolean | Used to override the overall LodeStar version to emulate other versions of the app.    | No       | false    |
 
 # Learn More
 
