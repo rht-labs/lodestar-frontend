@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { AppVersion, Version } from '../../schemas/version';
+import { AppVersion } from '../../schemas/version';
 import { useFeedback } from '../feedback_context/feedback_context';
 import { VersionService } from '../../services/version_service/version_service';
 
@@ -19,7 +19,7 @@ export const VersionProvider = ({
   children: React.ReactChild;
   versionService: VersionService;
 }) => {
-  const [versions, setVersions] = useState<Version | undefined>();
+  const [versions, setVersions] = useState<AppVersion | undefined>();
   const feedbackContext = useFeedback();
   const fetchVersions = useCallback(async () => {
     try {

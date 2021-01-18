@@ -53,39 +53,40 @@ export const App = ({ config }: { config: Config }) => {
             analyticsService,
           }) => {
             return (
-              <AnalyticsProvider analyticsService={analyticsService}>
-                <>
-                  {appConfig?.bannerMessages?.map(message => {
-                    return (
-                      <CustomGlobalBanner
-                        color={message.backgroundcolor}
-                        message={message.message}
-                      />
-                    );
-                  })}
-                  <AnalyticsContext.Consumer>
-                    {analyticsContext => (
-                      <FeedbackProvider>
-                        <AuthProvider
-                          authService={authService}
-                          analyticsContext={analyticsContext}
-                        >
-                          <AuthContext.Consumer>
-                            {authContext => (
-                              <NotificationProvider
-                                notificationService={notificationService}
-                              >
-                                <VersionProvider
-                                  versionService={versionService}
+              <Router>
+                <AnalyticsProvider analyticsService={analyticsService}>
+                  <>
+                    {appConfig?.bannerMessages?.map(message => {
+                      return (
+                        <CustomGlobalBanner
+                          color={message.backgroundcolor}
+                          message={message.message}
+                        />
+                      );
+                    })}
+                    <AnalyticsContext.Consumer>
+                      {analyticsContext => (
+                        <FeedbackProvider>
+                          <AuthProvider
+                            authService={authService}
+                            analyticsContext={analyticsContext}
+                          >
+                            <AuthContext.Consumer>
+                              {authContext => (
+                                <NotificationProvider
+                                  notificationService={notificationService}
                                 >
-                                  <VersionContext.Consumer>
-                                    {versionContext => {
-                                      return (
-                                        <FeatureToggles
-                                          versionContext={versionContext}
-                                          authContext={authContext}
-                                        >
-                                          <Router>
+                                  <VersionProvider
+                                    versionService={versionService}
+                                  >
+                                    <VersionContext.Consumer>
+                                      {versionContext => {
+                                        return (
+                                          <FeatureToggles
+                                            config={appConfig}
+                                            versionContext={versionContext}
+                                            authContext={authContext}
+                                          >
                                             <FeedbackContext.Consumer>
                                               {feedbackContext => (
                                                 <EngagementProvider
@@ -106,21 +107,21 @@ export const App = ({ config }: { config: Config }) => {
                                                 </EngagementProvider>
                                               )}
                                             </FeedbackContext.Consumer>
-                                          </Router>
-                                        </FeatureToggles>
-                                      );
-                                    }}
-                                  </VersionContext.Consumer>
-                                </VersionProvider>
-                              </NotificationProvider>
-                            )}
-                          </AuthContext.Consumer>
-                        </AuthProvider>
-                      </FeedbackProvider>
-                    )}
-                  </AnalyticsContext.Consumer>
-                </>
-              </AnalyticsProvider>
+                                          </FeatureToggles>
+                                        );
+                                      }}
+                                    </VersionContext.Consumer>
+                                  </VersionProvider>
+                                </NotificationProvider>
+                              )}
+                            </AuthContext.Consumer>
+                          </AuthProvider>
+                        </FeedbackProvider>
+                      )}
+                    </AnalyticsContext.Consumer>
+                  </>
+                </AnalyticsProvider>
+              </Router>
             );
           }}
         </ServiceProviderContext.Consumer>
