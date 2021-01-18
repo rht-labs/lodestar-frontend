@@ -40,15 +40,12 @@ export const FeatureToggles = ({
 
   const location = useLocation();
   if (config?.allowVersionOverride) {
-    console.log(true);
     const query = qs.parse(location.search);
     const queryVersion = query['versionOverride'];
-    console.log(query);
     if (queryVersion) {
       version = Array.isArray(queryVersion) ? queryVersion[0] : queryVersion;
     }
   }
-  console.log(version);
   const versionFeatures = getFeaturesFromVersion(version, FEATURE_VERSION_MAP);
   const roleFeatures = (authContext?.sessionData?.roles ?? []).concat(
     features ?? []

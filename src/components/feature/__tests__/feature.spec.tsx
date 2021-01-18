@@ -4,9 +4,12 @@ import '@testing-library/jest-dom/extend-expect';
 import { Feature } from '../feature';
 import { AppFeature } from '../../../common/app_features';
 import { render } from '@testing-library/react';
+import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
 const Wrapper = ({ children }) => (
-  <FeatureToggles features={['foo']}>{children}</FeatureToggles>
+  <TestStateWrapper>
+    <FeatureToggles features={['foo']}>{children}</FeatureToggles>
+  </TestStateWrapper>
 );
 
 describe('Feature component', () => {
