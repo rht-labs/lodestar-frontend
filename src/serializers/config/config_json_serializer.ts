@@ -18,7 +18,7 @@ export class ConfigJsonSerializer implements Serializer<Config, object> {
       supportEmailAddress: data['supportEmailAddress'],
       bannerMessages: data['bannerMessages'],
       analyticsTrackingCode: data['analyticsTrackingCode'] ?? '',
-      allowVersionOverride: data['allowVerionOverride'] ?? false,
+      allowVersionOverride: data['allowVersionOverride'] ?? false,
     };
   }
 }
