@@ -28,6 +28,7 @@ export function getFeaturesFromVersion(
     return [];
   }
   const givenSemver = getSemverFromVersionString(version);
+  console.log(givenSemver);
   const featureFromVersions = Object.keys(featureVersionMap).filter(k => {
     const wantedVersionString = featureVersionMap[k];
     const wantedSemver = getSemverFromVersionString(wantedVersionString);
