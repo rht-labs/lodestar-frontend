@@ -64,7 +64,7 @@ function getEngagementDates(gracePeriodInDays, maxGracePeriodInDays) {
   }: Pick<Engagement, 'start_date' | 'end_date' | 'archive_date'>) {
     let endDate = normalizeEndDate(end_date, start_date);
     return {
-      start_date,
+      start_date: start_date,
       end_date: endDate,
       archive_date: normalizeRetirementDate({
         retirementDate: archive_date,
@@ -76,7 +76,7 @@ function getEngagementDates(gracePeriodInDays, maxGracePeriodInDays) {
   };
 }
 
-function normalizeEndDate(endDate, startDate) {
+function normalizeEndDate(endDate: Date, startDate: Date): Date {
   if (endDate < startDate) {
     return startDate;
   }

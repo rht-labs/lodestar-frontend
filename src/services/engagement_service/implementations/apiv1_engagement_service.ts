@@ -16,6 +16,7 @@ export class Apiv1EngagementService implements EngagementService {
       return request;
     });
   }
+  private static lastReceivedEngagement?: Engagement;
   private static engagementSerializer = new EngagementJsonSerializer();
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
@@ -52,17 +53,21 @@ export class Apiv1EngagementService implements EngagementService {
     }
   }
   async saveEngagement(
-    engagementData: Engagement,
+    engagement: Engagement,
     commitMessage?: string
   ): Promise<Engagement> {
     try {
       const serializedEngagement = Apiv1EngagementService.engagementSerializer.serialize(
-        engagementData
+        engagement
+      );
+      console.log(
+        Apiv1EngagementService.lastReceivedEngagement,
+        serializedEngagement
       );
       const {
         data,
       } = await this.axios.put(
-        `/engagements/customers/${engagementData.customer_name}/projects/${engagementData.project_name}`,
+        `/engagements/customers/${engagement.customer_name}/projects/${engagement.project_name}`,
         { ...serializedEngagement, commit_message: commitMessage }
       );
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
@@ -123,7 +128,11 @@ export class Apiv1EngagementService implements EngagementService {
       const { data } = await this.axios.get(
         `/engagements/customers/${customer_name}/projects/${project_name}`
       );
-      return Apiv1EngagementService.engagementSerializer.deserialize(data);
+      const deserializedEngagement = Apiv1EngagementService.engagementSerializer.deserialize(
+        data
+      );
+      Apiv1EngagementService.lastReceivedEngagement = deserializedEngagement;
+      return deserializedEngagement;
     } catch (e) {
       if (e.isAxiosError) {
         handleAxiosResponseErrors(e);

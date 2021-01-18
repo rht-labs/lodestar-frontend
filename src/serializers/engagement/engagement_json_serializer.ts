@@ -1,6 +1,6 @@
 import { Serializer } from '../serializer';
 import { Engagement, Artifact, EngagementUser } from '../../schemas/engagement';
-import { parse, parseISO, isValid, formatISO } from 'date-fns';
+import { parse, parseISO, isValid } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
@@ -10,8 +10,8 @@ import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
-  private static formatDate(date: Date) {
-    return formatISO(date);
+  private static formatDate(date: Date): string {
+    return date?.toISOString?.();
   }
   private static gitCommitSerializer = new GitCommitJsonSerializer();
   private static clusterStatusSerializer = new ClusterStatusJsonSerializer();
@@ -38,7 +38,7 @@ export class EngagementJsonSerializer
     const e = {
       ...engagement,
       archive_date: engagement.archive_date
-        ? EngagementJsonSerializer.formatDate(engagement.archive_date)
+        ? EngagementJsonSerializer.formatDate(engagement.archive_date.to)
         : null,
       end_date: engagement.end_date
         ? EngagementJsonSerializer.formatDate(engagement.end_date)

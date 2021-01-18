@@ -2,7 +2,7 @@ import React from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_start_end_date';
+import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_dates';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 import { EngagementUseCaseField } from '../engagement_form_fields/use_case';
 import { useHistory } from 'react-router';
