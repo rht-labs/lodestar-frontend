@@ -2,11 +2,14 @@ import React from 'react';
 import { useFeatures } from './feature_hook';
 import { renderHook } from '@testing-library/react-hooks';
 import { FeatureToggles } from './feature_toggles';
+import { TestStateWrapper } from '../../common/test_state_wrapper';
 
 describe('Feature Context Hook', () => {
   const getHook = (features?: string[]) => {
     const wrapper = ({ children }) => (
-      <FeatureToggles features={features}>{children}</FeatureToggles>
+      <TestStateWrapper>
+        <FeatureToggles features={features}>{children}</FeatureToggles>
+      </TestStateWrapper>
     );
     return renderHook(() => useFeatures(), { wrapper });
   };
