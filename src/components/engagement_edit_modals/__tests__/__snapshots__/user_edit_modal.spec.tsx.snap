@@ -62,6 +62,7 @@ Object {
               </h1>
             </header>
             <div
+              autocomplete="off"
               class="pf-c-modal-box__body"
               id="pf-modal-part-2"
             >

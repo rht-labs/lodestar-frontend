@@ -42,7 +42,7 @@ export const UserRow = ({
   const [isReset, setIsReset] = useState(false);
 
   return (
-    <>
+    <div>
       <Grid hasGutter style={{ marginTop: '1rem', marginLeft: '0rem' }}>
         <GridItem span={3}>
           <FormGroup
@@ -65,6 +65,7 @@ export const UserRow = ({
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
+              autoComplete="none"
             />
           </FormGroup>
         </GridItem>
@@ -89,6 +90,7 @@ export const UserRow = ({
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
+              autoComplete="none"
             />
           </FormGroup>
         </GridItem>
@@ -113,6 +115,7 @@ export const UserRow = ({
               style={
                 isUserDeleted ? { textDecorationLine: 'line-through' } : {}
               }
+              autoComplete="none"
             />
           </FormGroup>
         </GridItem>
@@ -214,6 +217,6 @@ export const UserRow = ({
           </GridItem>
         </Feature>
       </Grid>
-    </>
+    </div>
   );
 };
