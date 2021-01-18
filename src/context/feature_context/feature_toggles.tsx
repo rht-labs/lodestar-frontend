@@ -41,7 +41,7 @@ export const FeatureToggles = ({
   const location = useLocation();
   if (config?.allowVersionOverride) {
     const query = qs.parse(location.search);
-    const queryVersion = query['versionOverride'];
+    const queryVersion = query['lodestar-version'];
     if (queryVersion) {
       version = Array.isArray(queryVersion) ? queryVersion[0] : queryVersion;
     }
