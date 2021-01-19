@@ -116,6 +116,7 @@ export function UserEditModal({
       isOpen={isOpen}
       onClose={onClose}
       title="Engagement Users"
+      autoComplete={'off'}
     >
       <EditModalTemplate
         actions={
