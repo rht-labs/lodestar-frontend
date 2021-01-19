@@ -16,7 +16,6 @@ export class Apiv1EngagementService implements EngagementService {
       return request;
     });
   }
-  private static lastReceivedEngagement?: Engagement;
   private static engagementSerializer = new EngagementJsonSerializer();
   axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
@@ -59,10 +58,6 @@ export class Apiv1EngagementService implements EngagementService {
     try {
       const serializedEngagement = Apiv1EngagementService.engagementSerializer.serialize(
         engagement
-      );
-      console.log(
-        Apiv1EngagementService.lastReceivedEngagement,
-        serializedEngagement
       );
       const {
         data,
@@ -131,7 +126,6 @@ export class Apiv1EngagementService implements EngagementService {
       const deserializedEngagement = Apiv1EngagementService.engagementSerializer.deserialize(
         data
       );
-      Apiv1EngagementService.lastReceivedEngagement = deserializedEngagement;
       return deserializedEngagement;
     } catch (e) {
       if (e.isAxiosError) {
