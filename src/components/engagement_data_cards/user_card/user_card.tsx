@@ -8,6 +8,7 @@ import {
   Grid,
   GridItem,
   Title,
+  Tooltip,
 } from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
@@ -69,11 +70,17 @@ export function UserCard() {
       />
       <DataCard
         actionButton={() => (
-          <EditButton
-            onClick={handleAddNewUserOrEdit}
-            text={'Edit'}
-            dataCy={'edit_user_button'}
-          />
+          <Tooltip
+            content={
+              'Update Engagement Users for both Red Hat and External users'
+            }
+          >
+            <EditButton
+              onClick={handleAddNewUserOrEdit}
+              text={'Edit'}
+              dataCy={'edit_user_button'}
+            />
+          </Tooltip>
         )}
         title="Engagement Users"
       >
