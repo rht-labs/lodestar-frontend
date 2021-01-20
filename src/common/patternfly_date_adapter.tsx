@@ -8,7 +8,8 @@ export const getFormattedDate = (inputDate: Date | string = ''): string => {
     return;
   }
   if (inputDate instanceof Date) {
-    return formatDate(inputDate, 'yyyy-MM-dd');
+    const dateString = `${inputDate.getUTCFullYear()}-${(inputDate.getUTCMonth() + 1).toString().padStart(2, '0')}-${inputDate.getUTCDate().toString().padStart(2, '0')}`
+    return dateString
   } else if (inputDate.indexOf('-') > -1) {
     return inputDate;
   } else {
@@ -18,3 +19,16 @@ export const getFormattedDate = (inputDate: Date | string = ''): string => {
     );
   }
 };
+
+export const parseDatePickerDate = (dateString: string): Date | undefined => {
+  const dateParts = dateString.split('-')
+  const parsedDateParts = dateParts.map(p => parseInt(p, 10))
+  if (parsedDateParts.some(p => p === NaN)) {
+    return
+  }
+  if (parsedDateParts.length === 3) {
+    return new Date(Date.UTC(parsedDateParts[0], parsedDateParts[1] - 1, parsedDateParts[2]))
+  }
+
+  return
+}

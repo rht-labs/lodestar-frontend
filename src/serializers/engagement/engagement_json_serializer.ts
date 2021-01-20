@@ -10,12 +10,12 @@ import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
-  private static formatDate(date: Date): string {
+  private static formatDate(date: Date): string | undefined {
     return date?.toISOString?.();
   }
   private static gitCommitSerializer = new GitCommitJsonSerializer();
   private static clusterStatusSerializer = new ClusterStatusJsonSerializer();
-  private static parseDate(dateInput: any): Date {
+  private static parseDate(dateInput: any): Date | undefined {
     if (typeof dateInput === 'string') {
       try {
         let parsedDate;
@@ -38,7 +38,7 @@ export class EngagementJsonSerializer
     const e = {
       ...engagement,
       archive_date: engagement.archive_date
-        ? EngagementJsonSerializer.formatDate(engagement.archive_date.to)
+        ? EngagementJsonSerializer.formatDate(engagement.archive_date)
         : null,
       end_date: engagement.end_date
         ? EngagementJsonSerializer.formatDate(engagement.end_date)
@@ -152,7 +152,7 @@ export class EngagementJsonSerializer
 
   private static deserializeEngagementUser(data: object): EngagementUser {
     return {
-      ...data,
+      ...data as EngagementUser,
       uuid: data['uuid'] ?? uuid(),
     };
   }
