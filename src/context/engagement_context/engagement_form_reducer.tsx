@@ -61,7 +61,7 @@ function normalizeEngagementDates(gracePeriodInDays, maxGracePeriodInDays) {
     start_date,
     end_date,
     archive_date,
-  }: Pick<Engagement, 'start_date' | 'end_date' | 'archive_date'>) {
+  }: Partial<Pick<Engagement, 'start_date' | 'end_date' | 'archive_date'>>) {
     let normalizedEndDate = normalizeEndDate(end_date, start_date);
     const normalizedArchiveDate = normalizeRetirementDate({
       retirementDate: archive_date,
