@@ -3,7 +3,6 @@ import { Engagement } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
 import slugify from 'slugify';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   EmptyState,
@@ -16,7 +15,7 @@ import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshif
 import { EngagementFormOption } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { DatabaseIcon, PlusIcon } from '@patternfly/react-icons';
+import { DatabaseIcon } from '@patternfly/react-icons';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import {
   cellWidth,
@@ -29,8 +28,11 @@ import { Feature } from '../../feature/feature';
 import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
-import { FormManager } from '../../../context/form_manager/form_manager';
 import { ReadyCheck } from '../../ready_check/ready_check';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../../context/engagement_context/engagement_context';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
@@ -42,29 +44,29 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
   'environment_name',
 ];
 
-export interface OpenShiftClusterSummaryCardProps {
-  currentEngagementChanges: Partial<Engagement>;
-  onChange: (hostingEnvironments: HostingEnvironment[]) => void;
-  onClear: () => void;
-  onSave: (hostingEnvironments: HostingEnvironment[]) => void;
-  missingRequiredFields: string[];
-}
-
-export function OpenShiftClusterSummaryCard({
-  currentEngagementChanges,
-  onClear,
-  onChange,
-}: OpenShiftClusterSummaryCardProps) {
+export function HostingEnvironmentCard() {
+  const {
+    currentEngagement,
+    currentChanges,
+    saveEngagement,
+    engagementFormConfig,
+    clearCurrentChanges,
+  } = useEngagements();
   const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
     HostingEnvironment
   >(null);
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
-  const { saveEngagement, engagementFormConfig } = useEngagements();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => registerField('hosting_environments'), [registerField]);
+  const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
+    'hosting_environments',
+    EngagementGroupings.hostingEnvironment
+  );
+
+  useEffect(() => {
+    setCurrentHostingEnvironment(null);
+  }, [currentEngagement]);
   const onClose = () => {
-    onClear();
+    clearCurrentChanges();
     requestClose();
   };
   const getUniqueProviders = (
@@ -75,14 +77,14 @@ export function OpenShiftClusterSummaryCard({
     );
   };
   const onSave = (hostingEnvironment: HostingEnvironment) => {
-    const hostingEnvironments = getUniqueProviders([
-      ...currentEngagementChanges.hosting_environments,
+    const newEnvironments = getUniqueProviders([
+      ...hostingEnvironments,
       hostingEnvironment,
     ]);
-    onChange(hostingEnvironments);
+    setHostingEnvironments(newEnvironments);
     saveEngagement({
-      ...currentEngagementChanges,
-      hosting_environments: hostingEnvironments,
+      ...(currentChanges as Engagement),
+      hosting_environments: newEnvironments,
     });
   };
   const openHostingEnvironmentModal = (
@@ -91,35 +93,42 @@ export function OpenShiftClusterSummaryCard({
     setCurrentHostingEnvironment(hostingEnvironment);
     requestOpen(OPENSHIFT_MODAL_KEY);
   };
-  // const onDelete = (hostingEnvironment: HostingEnvironment) => {
-  //   const hostingEnvironments = [
-  //     ...currentEngagementChanges.hosting_environments,
-  //   ];
-  //   hostingEnvironments.splice(
-  //     hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
-  //     1
-  //   );
-  //   onChange(hostingEnvironments);
-  //   propsOnSave(hostingEnvironments);
-  //   saveEngagement({
-  //     ...currentEngagementChanges,
-  //     hosting_environments: hostingEnvironments,
-  //   });
-  // };
-  const addProvider = () => {
-    openHostingEnvironmentModal({ id: uuid() } as HostingEnvironment);
+  const onDelete = (hostingEnvironment: HostingEnvironment) => {
+    const hostingEnvironments = [...currentChanges.hosting_environments];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      1
+    );
+    setHostingEnvironments(hostingEnvironments);
+    saveEngagement({
+      ...(currentChanges as Engagement),
+      hosting_environments: hostingEnvironments,
+    });
   };
-  const actionItems = (hostingEnvironment: HostingEnvironment) => [
-    <DropdownItem
-      key="edit"
-      onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
-    >
-      Edit
-    </DropdownItem>,
-    // <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
-    //   Delete
-    // </DropdownItem>,
-  ];
+  const addProvider = () => {
+    openHostingEnvironmentModal({
+      id: uuid(),
+    } as HostingEnvironment);
+  };
+  const actionItems = (hostingEnvironment: HostingEnvironment) => {
+    const items = [
+      <DropdownItem
+        key="edit"
+        onClick={() => openHostingEnvironmentModal(hostingEnvironment)}
+      >
+        Edit
+      </DropdownItem>,
+    ];
+    if (!currentEngagement?.launch) {
+      return [
+        ...items,
+        <DropdownItem onClick={() => onDelete(hostingEnvironment)} key="delete">
+          Delete
+        </DropdownItem>,
+      ];
+    }
+    return items;
+  };
   const columns = [
     { title: '', transforms: [cellWidth(10)] },
     { title: 'Environment Name' },
@@ -128,7 +137,7 @@ export function OpenShiftClusterSummaryCard({
     { title: 'Cloud Provider' },
     { title: 'Actions' },
   ];
-  const rows = currentEngagementChanges?.hosting_environments?.map?.(
+  const rows = currentChanges?.hosting_environments?.map?.(
     (hostingEnvironment, idx) => [
       {
         title: (
@@ -198,46 +207,44 @@ export function OpenShiftClusterSummaryCard({
     if (randomizer?.length > 0) {
       slug = `${slug}-${randomizer}`;
     }
-    console.log(slug);
     return slug;
   };
-  const currentEnvironmentIndex = currentEngagementChanges?.hosting_environments?.findIndex(
+  const currentEnvironmentIndex = currentChanges?.hosting_environments?.findIndex(
     he => currentHostingEnvironment?.id === he?.id
   );
+  const isAddHostingButtonDisabled =
+    currentChanges?.hosting_environments?.length >=
+    (engagementFormConfig?.logistics_options?.max_hosting_env_count ?? 1);
   return (
     <>
       <OpenShiftClusterEditModal
-        isEngagementLaunched={!!currentEngagementChanges?.launch}
+        isEngagementLaunched={!!currentChanges?.launch}
         onSave={onSave}
         onClose={onClose}
-        hostingEnvironment={currentHostingEnvironment}
+        hostingEnvironment={{
+          ocp_sub_domain: generateSuggestedSubdomain(
+            currentChanges?.project_name,
+            currentChanges?.customer_name,
+            currentEnvironmentIndex + 1 > 0
+              ? (currentEnvironmentIndex + 1)?.toString()
+              : '1'
+          ),
+          ...currentHostingEnvironment,
+        }}
         isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
-        suggestedSubdomain={generateSuggestedSubdomain(
-          currentEngagementChanges?.project_name,
-          currentEngagementChanges?.customer_name,
-          currentEnvironmentIndex + 1 > 0
-            ? (currentEnvironmentIndex + 1)?.toString()
-            : '1'
-        )}
       />
       <DataCard
         actionButton={() => (
-          <div>
-            <EditButton
-              isDisabled={
-                currentEngagementChanges?.hosting_environments?.length >=
-                (engagementFormConfig?.logistics_options
-                  ?.max_hosting_env_count ?? 1)
-              }
-              onClick={addProvider}
-              text={'Add Hosting Environment'}
-              dataCy={'hosting_env_button'}
-            />
-          </div>
+          <EditButton
+            isDisabled={isAddHostingButtonDisabled}
+            onClick={addProvider}
+            text={'Add Hosting Environment'}
+            dataCy={'hosting_env_button'}
+          />
         )}
         title="Hosting Environment"
       >
-        {currentEngagementChanges?.hosting_environments?.length > 0 ? (
+        {currentChanges?.hosting_environments?.length > 0 ? (
           <Table
             aria-label="Engagement Hosting Environments"
             variant={TableVariant.compact}
@@ -249,23 +256,19 @@ export function OpenShiftClusterSummaryCard({
           </Table>
         ) : (
           <EmptyState>
-            <EmptyStateIcon icon={DatabaseIcon} />
-            <Title headingLevel="h4" size="lg">
+            <EmptyStateIcon
+              icon={DatabaseIcon}
+              style={{ fontSize: '34px', margin: '0' }}
+            />
+            <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
               No Hosting Environments Added
             </Title>
             <EmptyStateBody>
-              <p>No hosting environments have been added to this engagement</p>
-              <p>Click below to start adding hosting environments</p>
+              <p>
+                Click 'Add Hosting Environment' to start adding hosting
+                environments
+              </p>
             </EmptyStateBody>
-            <Button
-              variant="secondary"
-              onClick={addProvider}
-              data-testid={'add-first-hosting-environment'}
-              data-cy={'add_new_environment'}
-              style={{ margin: '1rem' }}
-            >
-              <PlusIcon style={{ fontSize: 'small' }} /> Add Hosting Environment
-            </Button>
           </EmptyState>
         )}
       </DataCard>

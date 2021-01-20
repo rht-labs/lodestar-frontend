@@ -80,7 +80,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="subdomain"
+                        for="hosting_environment_name"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -103,10 +103,11 @@ Object {
                       <input
                         aria-invalid="false"
                         class="pf-c-form-control"
-                        data-cy="desired_subdomain_input"
-                        data-testid="subdomain-input"
-                        id="ocp_sub_domain"
-                        name="ocp_sub_domain"
+                        data-cy="hosting_environment_name"
+                        data-testid="hosting_environment_name"
+                        id="hosting_environment_name"
+                        name="hosting_environment_name"
+                        placeholder=""
                         required=""
                         type="text"
                         value="name"
@@ -219,19 +220,12 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="cloud-provider-region"
+                        for=""
                       >
                         <span
                           class="pf-c-form__label-text"
                         >
                           Provider Region
-                        </span>
-                        <span
-                          aria-hidden="true"
-                          class="pf-c-form__label-required"
-                        >
-                           
-                          *
                         </span>
                       </label>
                        
@@ -241,14 +235,14 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="Cloud provider region"
                         class="pf-c-form-control"
+                        data-cy=""
                         data-ouia-component-id="4"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
-                        data-testid="provider-region-select"
+                        data-testid=""
                         disabled=""
-                        id="cloud_provider_region_dropdown"
+                        id=""
                       >
                         <option
                           class=""
@@ -259,7 +253,6 @@ Object {
                         <option
                           class=""
                           data-cy="N. Virginia"
-                          disabled=""
                           value="N. Virginia"
                         >
                           N. Virginia
@@ -276,7 +269,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="openshift-provider"
+                        for="openshift-version"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -298,20 +291,19 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="OpenShift Version"
                         class="pf-c-form-control"
+                        data-cy="oc-version-select"
                         data-ouia-component-id="5"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="oc-version-select"
-                        disabled=""
-                        id="oc_version_dropdown"
+                        id="openshift-version"
                       >
                         <option
                           class=""
                           value=""
                         >
-                          Select OpenShift version
+                          Select a version
                         </option>
                       </select>
                       
@@ -349,7 +341,7 @@ Object {
                         aria-invalid="false"
                         class="pf-c-form-control"
                         data-cy="desired_subdomain_input"
-                        data-testid="subdomain-input"
+                        data-testid="desired_subdomain_input"
                         disabled=""
                         id="ocp_sub_domain"
                         name="ocp_sub_domain"
@@ -360,8 +352,29 @@ Object {
                       <div>
                         Applications will live at: 
                         <strong>
-                          ordoabchao.na-1.rht-labs.com
+                          ordoabchao
                         </strong>
+                        <span
+                          style="font-style: italic;"
+                        >
+                          .region.example.com
+                        </span>
+                          
+                        <svg
+                          aria-describedby="pf-tooltip-1"
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="1em"
+                          role="img"
+                          style="vertical-align: -0.125em;"
+                          viewBox="0 0 512 512"
+                          width="1em"
+                        >
+                          <path
+                            d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                            transform=""
+                          />
+                        </svg>
                       </div>
                     </div>
                   </div>
@@ -373,7 +386,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="persistent-storage-needs"
+                        for="persistent_storage_dropdown"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -395,20 +408,19 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="Persistent Storage Needs"
                         class="pf-c-form-control"
+                        data-cy="persistent-storage-select"
                         data-ouia-component-id="6"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="persistent-storage-select"
-                        disabled=""
                         id="persistent_storage_dropdown"
                       >
                         <option
                           class=""
                           value=""
                         >
-                          Select storage size
+                          Select a storage size
                         </option>
                       </select>
                       
@@ -422,7 +434,7 @@ Object {
                     >
                       <label
                         class="pf-c-form__label"
-                        for="cluster-size"
+                        for="cluster_size_dropdown"
                       >
                         <span
                           class="pf-c-form__label-text"
@@ -444,15 +456,14 @@ Object {
                     >
                       <select
                         aria-invalid="false"
-                        aria-label="Cluster Size"
                         class="pf-c-form-control"
+                        data-cy="cluster-size-select"
                         data-ouia-component-id="7"
                         data-ouia-component-type="PF4/FormSelect"
                         data-ouia-safe="true"
                         data-testid="cluster-size-select"
                         disabled=""
                         id="cluster_size_dropdown"
-                        required=""
                       >
                         <option
                           class=""

@@ -33,7 +33,7 @@ describe('new engagement', () => {
     const id = uuid();
     const testEngagementName = `cypressio_${id}`;
 
-    cy.get('[data-cy=new_engagement_name]').type(testEngagementName);
+    cy.get('[data-cy=project-name]').type(testEngagementName);
     cy.get('[data-cy=new_engagement_region]').select('latam');
     cy.get('[data-cy=createNewEngagement]').click();
 

@@ -15,6 +15,7 @@ export interface Config {
   logLevel?: LogVerbosity;
   supportEmailAddress: string;
   bannerMessages?: BannerMessage[];
+  allowVersionOverride?: boolean;
 }
 
 export abstract class Config {
@@ -34,6 +35,7 @@ export abstract class Config {
           backgroundcolor: '#FF0000',
         },
       ],
+      allowVersionOverride: false,
     };
   }
 }

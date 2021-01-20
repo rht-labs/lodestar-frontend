@@ -17,6 +17,7 @@ public/config/*
 package-contents.zip
 
 # misc
+.eslintcache
 .DS_Store
 .env
 .env.local

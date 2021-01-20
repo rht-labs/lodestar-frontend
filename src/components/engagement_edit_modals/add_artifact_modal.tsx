@@ -11,8 +11,10 @@ import {
 } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { Artifact, ArtifactType } from '../../schemas/engagement';
-import { FormManager } from '../../context/form_manager/form_manager';
-import { useAnalytics, AnalyticsCategory } from '../../context/analytics_context/analytics_context';
+import {
+  useAnalytics,
+  AnalyticsCategory,
+} from '../../context/analytics_context/analytics_context';
 
 export interface ArtifactEditModalProps {
   onClose: () => void;
@@ -23,10 +25,7 @@ export interface ArtifactEditModalProps {
 
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
-  const { registerField } = FormManager.useFormGroupManager();
   const { logEvent } = useAnalytics();
-
-  useEffect(() => registerField('artifacts'), [registerField]);
 
   useEffect(
     () =>
@@ -38,10 +37,8 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
   );
 
   const onSave = () => {
-    props.onSave({
-      ...(props.artifact ?? {}),
-      ...artifactEdits,
-    } as Artifact);
+    const newArtifacts = { ...(props.artifact ?? {}), ...artifactEdits };
+    props.onSave(newArtifacts as Artifact);
     logEvent({
       action: 'Add Artifact',
       category: AnalyticsCategory.engagements,
@@ -74,10 +71,10 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               aria-label="Artifact Type"
               id="artifact-type-select"
               value={artifactEdits?.type}
-              onChange={(value: ArtifactType) => {
+              onChange={(value: string, _) => {
                 setArtifactEdits({
                   ...artifactEdits,
-                  type: value,
+                  type: ArtifactType[value],
                 });
               }}
             >

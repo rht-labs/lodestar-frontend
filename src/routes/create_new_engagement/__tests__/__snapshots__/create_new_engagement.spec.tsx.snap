@@ -179,17 +179,26 @@ Object {
                   <div
                     class="pf-c-form__group-control"
                   >
-                    <input
-                      aria-invalid="false"
-                      class="pf-c-form-control"
-                      data-cy="new_engagement_name"
-                      data-testid="project-name"
-                      id="project_name"
-                      name="project_name"
-                      placeholder="Mars Probe"
-                      type="text"
-                      value=""
-                    />
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="pf-c-form-control"
+                          data-cy="project-name"
+                          data-testid="project-name"
+                          id="project_name"
+                          name="project_name"
+                          placeholder="Mars Probe"
+                          type="text"
+                          value=""
+                        />
+                        
+                      </div>
+                    </div>
                     <div
                       aria-live="polite"
                       class="pf-c-form__helper-text"
@@ -327,7 +336,7 @@ Object {
                           <h2
                             class="pf-c-title pf-m-xl"
                           >
-                            Copy From  
+                            Copy From
                           </h2>
                         </div>
                       </span>
@@ -560,17 +569,26 @@ Object {
                 <div
                   class="pf-c-form__group-control"
                 >
-                  <input
-                    aria-invalid="false"
-                    class="pf-c-form-control"
-                    data-cy="new_engagement_name"
-                    data-testid="project-name"
-                    id="project_name"
-                    name="project_name"
-                    placeholder="Mars Probe"
-                    type="text"
-                    value=""
-                  />
+                  <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <input
+                        aria-invalid="false"
+                        class="pf-c-form-control"
+                        data-cy="project-name"
+                        data-testid="project-name"
+                        id="project_name"
+                        name="project_name"
+                        placeholder="Mars Probe"
+                        type="text"
+                        value=""
+                      />
+                      
+                    </div>
+                  </div>
                   <div
                     aria-live="polite"
                     class="pf-c-form__helper-text"
@@ -708,7 +726,7 @@ Object {
                         <h2
                           class="pf-c-title pf-m-xl"
                         >
-                          Copy From  
+                          Copy From
                         </h2>
                       </div>
                     </span>

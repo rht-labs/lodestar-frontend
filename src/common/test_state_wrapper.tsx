@@ -19,14 +19,17 @@ import {
 } from '../context/feedback_context/feedback_context';
 import { AnalyticsProvider } from '../context/analytics_context/analytics_context';
 import { createFakedServices } from '../services/factories/service_factory';
+import { MemoryRouter } from 'react-router';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
-    <ServiceProvider
-      serviceFactory={createFakedServices({ shouldUseStaticData: true })}
-    >
-      <TestContexts>{children}</TestContexts>
-    </ServiceProvider>
+    <MemoryRouter>
+      <ServiceProvider
+        serviceFactory={createFakedServices({ shouldUseStaticData: true })}
+      >
+        <TestContexts>{children}</TestContexts>
+      </ServiceProvider>
+    </MemoryRouter>
   );
 };
 

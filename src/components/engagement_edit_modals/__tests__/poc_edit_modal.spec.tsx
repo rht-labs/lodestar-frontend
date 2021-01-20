@@ -2,10 +2,16 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { PointOfContactEditModal } from '../point_of_contact_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import MockDate from 'mockdate';
-import { ValidationContext } from '../../../context/validation_context/validation_context';
+import {
+  IValidationContext,
+  ValidationContext,
+} from '../../../context/validation_context/validation_context';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
+import {
+  EngagementContext,
+  IEngagementContext,
+} from '../../../context/engagement_context/engagement_context';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
@@ -13,11 +19,10 @@ describe('Point of Contact edit modal', () => {
     expect(
       render(
         <PointOfContactEditModal
+          onClose={() => {}}
           onSave={() => {}}
-          engagementFormConfig={EngagementFormConfig.fromFake()}
           isOpen={true}
           engagement={Engagement.fromFake(true)}
-          onChange={() => {}}
         />
       )
     ).toMatchSnapshot();
@@ -30,9 +35,8 @@ describe('Point of Contact edit modal', () => {
       <PointOfContactEditModal
         onSave={onSave}
         engagement={Engagement.fromFake(true)}
-        engagementFormConfig={{}}
         isOpen={true}
-        onChange={() => {}}
+        onClose={() => {}}
       />
     );
     await fireEvent.click(getByTestId('poc-edit-save'));
@@ -41,13 +45,20 @@ describe('Point of Contact edit modal', () => {
   test('When editing a field, the onChange method is called', async () => {
     const onChange = jest.fn();
     const { getByTestId } = render(
-      <PointOfContactEditModal
-        onSave={() => {}}
-        engagement={Engagement.fromFake(true)}
-        engagementFormConfig={{}}
-        isOpen={true}
-        onChange={onChange}
-      />
+      <EngagementContext.Provider
+        value={
+          ({
+            updateEngagementFormField: onChange,
+          } as unknown) as IEngagementContext
+        }
+      >
+        <PointOfContactEditModal
+          onClose={() => {}}
+          onSave={() => {}}
+          engagement={Engagement.fromFake(true)}
+          isOpen={true}
+        />
+      </EngagementContext.Provider>
     );
     const textField = await getByTestId('el-email');
     await fireEvent.change(textField, {
@@ -59,18 +70,19 @@ describe('Point of Contact edit modal', () => {
     const { findAllByText } = render(
       <TestStateWrapper>
         <ValidationContext.Provider
-          value={{
-            clearValidationResults: () => {},
-            validationResults: {},
-            getValidationResult: () => ['Incorrect input'],
-          }}
+          value={
+            ({
+              clearValidationResults: () => {},
+              validationResults: {},
+              getValidationResult: () => ['Incorrect input'],
+            } as unknown) as IValidationContext
+          }
         >
           <PointOfContactEditModal
             onSave={() => {}}
             engagement={Engagement.fromFake(true)}
-            engagementFormConfig={{}}
+            onClose={() => {}}
             isOpen={true}
-            onChange={() => {}}
           />
         </ValidationContext.Provider>
       </TestStateWrapper>
@@ -92,9 +104,8 @@ describe('Point of Contact edit modal', () => {
           <PointOfContactEditModal
             onSave={() => {}}
             engagement={Engagement.fromFake(true)}
-            engagementFormConfig={{}}
             isOpen={true}
-            onChange={() => {}}
+            onClose={() => {}}
           />
         </ValidationContext.Provider>
       </TestStateWrapper>

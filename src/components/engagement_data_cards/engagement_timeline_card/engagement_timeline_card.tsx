@@ -19,52 +19,47 @@ import {
   EmptyStateIcon,
   Title,
   EmptyStateBody,
-  Button,
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
-import { PlusIcon, ClipboardCheckIcon } from '@patternfly/react-icons';
+import { ClipboardCheckIcon } from '@patternfly/react-icons';
 import { APP_FEATURES } from '../../../common/app_features';
 import { Feature } from '../../feature/feature';
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
 
 export interface EngagementTimelineCardProps {
   artifacts: Artifact[];
-  onChangeArtifacts: (value: Artifact[]) => void;
   onClear: () => void;
   onSave: (artifacts: Array<Artifact>) => void;
 }
 
 const ARTIFACT_CRUD_MODAL = 'artifact_crud_modal';
 
-export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
+export function EngagementTimelineCard() {
+  const {
+    currentChanges,
+    saveEngagement,
+    clearCurrentChanges,
+  } = useEngagements();
+  const { addArtifact, artifacts } = useEngagementArtifacts();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifact, setCurrentArtifact] = useState<Artifact>();
-  const _getUniqueArtifacts = (artifacts: Array<Artifact>): Array<Artifact> => {
-    const uniqueArtifactMap = artifacts.reduce<{ [key: string]: Artifact }>(
-      (prev, curr) => {
-        return {
-          ...prev,
-          [curr.id]: curr,
-        };
-      },
-      {}
-    );
-    return Object.keys(uniqueArtifactMap).map(k => uniqueArtifactMap[k]);
-  };
 
   const onEditArtifact = (artifact: Artifact) => {
     setCurrentArtifact(artifact);
     requestOpen(ARTIFACT_CRUD_MODAL);
   };
 
-  const addArtifact = () => {
+  const openArtifactModal = () => {
     requestOpen(ARTIFACT_CRUD_MODAL);
     setCurrentArtifact({ id: uuid() } as Artifact);
   };
 
-  const _onSave = (artifact: Artifact) => {
-    const artifacts = _getUniqueArtifacts([...props.artifacts, artifact]);
-    props.onChangeArtifacts(artifacts);
-    props.onSave(artifacts);
+  const onSave = (artifacts: Artifact[]) =>
+    saveEngagement({ ...currentChanges, artifacts });
+
+  const onFinishArtifactEdit = (artifact: Artifact) => {
+    onSave(addArtifact(artifact));
   };
 
   return (
@@ -74,9 +69,9 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         isOpen={activeModalKey === ARTIFACT_CRUD_MODAL}
         onClose={() => {
           requestClose();
-          props.onClear();
+          clearCurrentChanges();
         }}
-        onSave={_onSave}
+        onSave={onFinishArtifactEdit}
       />
       <DataCard
         title="Engagement Artifacts"
@@ -84,14 +79,16 @@ export function EngagementTimelineCard(props: EngagementTimelineCardProps) {
         actionButton={() => (
           <EditButton
             text="Add an Artifact"
-            onClick={addArtifact}
+            onClick={openArtifactModal}
             data-testid="add-artifact-button"
           />
         )}
       >
         <EngagementTimelineCardBody
-          {...props}
-          onAdd={addArtifact}
+          artifacts={artifacts}
+          onClear={clearCurrentChanges}
+          onSave={artifacts => saveEngagement({ ...currentChanges, artifacts })}
+          onAdd={openArtifactModal}
           editArtifact={onEditArtifact}
         />
       </DataCard>
@@ -179,23 +176,16 @@ function EngagementTimelineCardBody(
     </Table>
   ) : (
     <EmptyState>
-      <EmptyStateIcon icon={ClipboardCheckIcon} />
-      <Title headingLevel="h4" size="lg">
+      <EmptyStateIcon
+        icon={ClipboardCheckIcon}
+        style={{ fontSize: '34px', margin: '0' }}
+      />
+      <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
         No Artifacts Added
       </Title>
       <EmptyStateBody>
-        <p>No artifacts have been added to this engagement</p>
-        <p>Click below to start adding artifacts</p>
+        <p>Click 'Add Artifact' button to start adding artifacts</p>
       </EmptyStateBody>
-      <Button
-        variant="secondary"
-        onClick={props.onAdd}
-        data-testid={'add-first-artifact'}
-        data-cy={'add_new_artifact'}
-        style={{ margin: '1rem' }}
-      >
-        <PlusIcon style={{ fontSize: 'small' }} /> Add Artifact
-      </Button>
     </EmptyState>
   );
 }

@@ -13,6 +13,7 @@ import {
 } from '@patternfly/react-core';
 import 'ace-builds/src-noconflict/theme-github';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { Feature } from '../../components/feature/feature';
 
 export interface EngagementJsonDumpProps {
   json: string;
@@ -44,7 +45,9 @@ export function EngagementJsonDump(props: EngagementJsonDumpProps) {
       <PageSection variant={PageSectionVariants.light}>
         <Flex justifyContent={{ default: 'justifyContentFlexEnd' }}>
           <FlexItem>
-            <Button onClick={handleSave}>Save</Button>
+            <Feature name="admin">
+              <Button onClick={handleSave}>Save</Button>
+            </Feature>
           </FlexItem>
         </Flex>
       </PageSection>

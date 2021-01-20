@@ -3,7 +3,6 @@ import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Route, useParams, Switch, useRouteMatch } from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
-import { Alert } from '@patternfly/react-core';
 import { ValidationProvider } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementOverview } from './overview';
@@ -33,16 +32,10 @@ export const EngagementDetailView = () => {
   const {
     createEngagementPoll,
     saveEngagement,
-    error: engagementFormRequestError,
     setCurrentEngagement,
     getEngagement,
     currentEngagement,
     engagementFormConfig,
-    missingRequiredFields,
-    saveChanges,
-    updateEngagementFormField,
-    currentChanges,
-    clearCurrentChanges,
   } = useEngagements();
 
   useEffect(() => {
@@ -67,14 +60,6 @@ export const EngagementDetailView = () => {
     });
   }, [customer_name, project_name, getEngagement, setCurrentEngagement]);
 
-  const AlertMessage = () => {
-    return engagementFormRequestError ? (
-      <Alert isInline title="We encountered an error." variant="danger">
-        {engagementFormRequestError.message}
-      </Alert>
-    ) : null;
-  };
-
   const validators = getValidatorsFromEngagementFormConfig(
     engagementFormConfig
   );
@@ -95,9 +80,8 @@ export const EngagementDetailView = () => {
     <ValidationProvider validators={validators}>
       <EngagementDetailsViewTemplate
         engagement={currentEngagement}
-        onSave={saveChanges}
+        onSave={saveEngagement}
       >
-        <AlertMessage />
         <Switch>
           <Route path={`${url}/json`}>
             <EngagementJsonDump
@@ -112,14 +96,7 @@ export const EngagementDetailView = () => {
             />
           </Route>
           <Route path={`${url}/`}>
-            <EngagementOverview
-              currentEngagement={currentEngagement}
-              missingRequiredFields={missingRequiredFields}
-              onSave={saveChanges}
-              onChange={updateEngagementFormField}
-              currentEngagementChanges={currentChanges}
-              clearCurrentChanges={clearCurrentChanges}
-            />
+            <EngagementOverview />
           </Route>
         </Switch>
       </EngagementDetailsViewTemplate>

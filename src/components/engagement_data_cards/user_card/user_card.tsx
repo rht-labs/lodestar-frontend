@@ -1,14 +1,23 @@
 import React from 'react';
 import { Engagement, EngagementUser } from '../../../schemas/engagement';
 import { DataCard } from '../data_card';
-import { Grid, GridItem } from '@patternfly/react-core';
+import {
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  Grid,
+  GridItem,
+  Title,
+} from '@patternfly/react-core';
 import { UserEditModal } from '../../engagement_edit_modals/user_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { UserList } from './user_list';
-import { RedhatIcon, UserIcon } from '@patternfly/react-icons';
+import { RedhatIcon, UserIcon, UsersIcon } from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { uuid } from 'uuidv4';
+import { useEngagementUserManager } from '../../../context/engagement_context/engagement_context';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -19,37 +28,49 @@ export interface UserCardProps {
   onClear: () => void;
 }
 
-export function UserCard({
-  engagement,
-  onSave,
-  onClear,
-  onChange,
-}: UserCardProps) {
+export function UserCard() {
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
+  const {
+    clearCurrentChanges,
+    currentChanges,
+    currentEngagement: engagement,
+    saveEngagement,
+  } = useEngagements();
   const onClose = () => {
     requestClose();
-    onClear();
+    clearCurrentChanges();
   };
+  const { addUser } = useEngagementUserManager();
 
-  function onCancel() {
-    requestClose();
-    window.location.reload();
+  function handleAddNewUserOrEdit() {
+    if (engagement?.engagement_users?.length === 0) {
+      addUser({
+        uuid: uuid(),
+        first_name: '',
+        last_name: '',
+        role: '',
+        reset: false,
+        email: '',
+      });
+    }
+    requestOpen(USER_EDIT_MODAL_KEY);
   }
+  const onSave = (users: EngagementUser[]) => {
+    saveEngagement({ ...currentChanges, engagement_users: users });
+  };
 
   return (
     <>
       <UserEditModal
-        onChange={users => onChange('engagement_users', users)}
         onSave={onSave}
         isOpen={activeModalKey === USER_EDIT_MODAL_KEY}
         onClose={onClose}
-        engagement={engagement}
-        onCancel={onCancel}
+        engagement={currentChanges as Engagement}
       />
       <DataCard
         actionButton={() => (
           <EditButton
-            onClick={() => requestOpen(USER_EDIT_MODAL_KEY)}
+            onClick={handleAddNewUserOrEdit}
             text={'Edit'}
             dataCy={'edit_user_button'}
           />
@@ -76,46 +97,56 @@ const externalUsers = (
   />
 );
 
-const UserTable = ({
-  users,
-}: {
-  users: {
-    first_name: string;
-    last_name: string;
-    email: string;
-    role: string;
-  }[];
-}) => {
+const UserTable = ({ users }: { users: EngagementUser[] }) => {
   const { engagementFormConfig } = useEngagements();
   const getRoleName = (userRole: string) =>
     engagementFormConfig?.user_options?.user_roles?.options?.find?.(
       role => role.value === userRole
     )?.label ?? userRole;
-  const allRows: string[][] = [];
-  users.map((user: EngagementUser) =>
-    allRows.push([
+
+  const allRows = users.map((user: EngagementUser) => {
+    return [
       user.first_name + ' ' + user.last_name,
       user.email,
       getRoleName(user.role),
-    ])
-  );
+    ];
+  });
 
   return (
-    <Grid hasGutter>
-      <GridItem span={10}>
-        <UserList
-          title={redHatUsers}
-          defaultRows={allRows.filter(
-            row => row[1]?.toLowerCase().indexOf('redhat.com') !== -1
-          )}
-        />
-        <UserList
-          title={externalUsers}
-          defaultRows={allRows.filter(
-            row => row[1]?.toLowerCase().indexOf('redhat.com') === -1
-          )}
-        />
-      </GridItem>
-    </Grid>
+    <>
+      <div>
+        {users?.length > 0 ? (
+          <Grid hasGutter>
+            <GridItem>
+              <UserList
+                title={redHatUsers}
+                defaultRows={allRows.filter(
+                  row => row[1]?.toLowerCase().indexOf('redhat.com') !== -1
+                )}
+              />
+              <UserList
+                title={externalUsers}
+                defaultRows={allRows.filter(
+                  row => row[1]?.toLowerCase().indexOf('redhat.com') === -1
+                )}
+              />
+            </GridItem>
+          </Grid>
+        ) : (
+          <EmptyState>
+            <EmptyStateIcon
+              icon={UsersIcon}
+              style={{ fontSize: '34px', margin: '0' }}
+            />
+            <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
+              No Users Added
+            </Title>
+            <EmptyStateBody>
+              <p>Click the 'Edit' button, to begin adding users</p>
+            </EmptyStateBody>
+          </EmptyState>
+        )}
+      </div>
+    </>
   );
 };

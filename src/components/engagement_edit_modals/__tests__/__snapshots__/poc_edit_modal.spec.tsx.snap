@@ -134,7 +134,7 @@ Object {
                           placeholder="Full Name"
                           style="background-color: rgb(237, 237, 237);"
                           type="text"
-                          value="Alice Doe"
+                          value=""
                         />
                         <label
                           class="pf-c-input-group__text"
@@ -168,7 +168,7 @@ Object {
                           placeholder="Email Address"
                           style="background-color: rgb(237, 237, 237);"
                           type="email"
-                          value="alice@doe.com"
+                          value=""
                         />
                       </div>
                       <div
@@ -243,7 +243,7 @@ Object {
                           placeholder="Full Name"
                           style="background-color: rgb(237, 237, 237);"
                           type="text"
-                          value="Eve Doe"
+                          value=""
                         />
                         <label
                           class="pf-c-input-group__text"
@@ -277,7 +277,7 @@ Object {
                           placeholder="Email Address"
                           style="background-color: rgb(237, 237, 237);"
                           type="email"
-                          value="eve@doe.com"
+                          value=""
                         />
                       </div>
                       <div
@@ -352,7 +352,7 @@ Object {
                           placeholder="Full Name"
                           style="background-color: rgb(237, 237, 237);"
                           type="text"
-                          value="Bob Doe"
+                          value=""
                         />
                         <label
                           class="pf-c-input-group__text"
@@ -386,7 +386,7 @@ Object {
                           placeholder="Email Address"
                           style="background-color: rgb(237, 237, 237);"
                           type="email"
-                          value="bob@doe.com"
+                          value=""
                         />
                       </div>
                       <div

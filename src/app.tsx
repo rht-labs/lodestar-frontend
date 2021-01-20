@@ -2,7 +2,10 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './context/auth_context/auth_context';
-import { VersionProvider } from './context/version_context/version_context';
+import {
+  VersionContext,
+  VersionProvider,
+} from './context/version_context/version_context';
 import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary/error_boundary';
 import { LodestarRouter } from './routes/router';
@@ -50,61 +53,75 @@ export const App = ({ config }: { config: Config }) => {
             analyticsService,
           }) => {
             return (
-              <AnalyticsProvider analyticsService={analyticsService}>
-                <>
-                  {appConfig?.bannerMessages?.map(message => {
-                    return (
-                      <CustomGlobalBanner
-                        color={message.backgroundcolor}
-                        message={message.message}
-                      />
-                    );
-                  })}
-                  <AnalyticsContext.Consumer>
-                    {analyticsContext => (
-                      <FeedbackProvider>
-                        <AuthProvider
-                          authService={authService}
-                          analyticsContext={analyticsContext}
-                        >
-                          <AuthContext.Consumer>
-                            {authContext => (
-                              <NotificationProvider
-                                notificationService={notificationService}
-                              >
-                                <VersionProvider
-                                  versionService={versionService}
+              <Router>
+                <AnalyticsProvider analyticsService={analyticsService}>
+                  <>
+                    {appConfig?.bannerMessages?.map(message => {
+                      return (
+                        <CustomGlobalBanner
+                          color={message.backgroundcolor}
+                          message={message.message}
+                        />
+                      );
+                    })}
+                    <AnalyticsContext.Consumer>
+                      {analyticsContext => (
+                        <FeedbackProvider>
+                          <AuthProvider
+                            authService={authService}
+                            analyticsContext={analyticsContext}
+                          >
+                            <AuthContext.Consumer>
+                              {authContext => (
+                                <NotificationProvider
+                                  notificationService={notificationService}
                                 >
-                                  <FeatureToggles>
-                                    <Router>
-                                      <FeedbackContext.Consumer>
-                                        {feedbackContext => (
-                                          <EngagementProvider
+                                  <VersionProvider
+                                    versionService={versionService}
+                                  >
+                                    <VersionContext.Consumer>
+                                      {versionContext => {
+                                        return (
+                                          <FeatureToggles
+                                            config={appConfig}
+                                            versionContext={versionContext}
                                             authContext={authContext}
-                                            feedbackContext={feedbackContext}
-                                            engagementService={
-                                              engagementService
-                                            }
-                                            categoryService={categoryService}
                                           >
-                                            <NavigationAnalytics>
-                                              <LodestarRouter />
-                                            </NavigationAnalytics>
-                                          </EngagementProvider>
-                                        )}
-                                      </FeedbackContext.Consumer>
-                                    </Router>
-                                  </FeatureToggles>
-                                </VersionProvider>
-                              </NotificationProvider>
-                            )}
-                          </AuthContext.Consumer>
-                        </AuthProvider>
-                      </FeedbackProvider>
-                    )}
-                  </AnalyticsContext.Consumer>
-                </>
-              </AnalyticsProvider>
+                                            <FeedbackContext.Consumer>
+                                              {feedbackContext => (
+                                                <EngagementProvider
+                                                  authContext={authContext}
+                                                  feedbackContext={
+                                                    feedbackContext
+                                                  }
+                                                  engagementService={
+                                                    engagementService
+                                                  }
+                                                  categoryService={
+                                                    categoryService
+                                                  }
+                                                >
+                                                  <NavigationAnalytics>
+                                                    <LodestarRouter />
+                                                  </NavigationAnalytics>
+                                                </EngagementProvider>
+                                              )}
+                                            </FeedbackContext.Consumer>
+                                          </FeatureToggles>
+                                        );
+                                      }}
+                                    </VersionContext.Consumer>
+                                  </VersionProvider>
+                                </NotificationProvider>
+                              )}
+                            </AuthContext.Consumer>
+                          </AuthProvider>
+                        </FeedbackProvider>
+                      )}
+                    </AnalyticsContext.Consumer>
+                  </>
+                </AnalyticsProvider>
+              </Router>
             );
           }}
         </ServiceProviderContext.Consumer>

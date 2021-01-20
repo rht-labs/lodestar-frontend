@@ -7,20 +7,20 @@ import {
   Grid,
   GridItem,
   Title,
-  TextVariants
+  TextVariants,
 } from '@patternfly/react-core';
 import { useVersion } from '../../context/version_context/version_context';
-import { ComponentVersions } from "./component_versions";
-import { LodeStarVersion } from "./lodeStar_version";
-import { AboutText } from "./about_text";
-import { NeedHelp } from "./need_help";
+import { ComponentVersions } from './component_versions';
+import { LodeStarVersion } from './lodeStar_version';
+import { AboutText } from './about_text';
+import { NeedHelp } from './need_help';
 
 export function About() {
   const versionContext = useVersion();
 
   useEffect(() => {
     if (!versionContext.versions) {
-      versionContext.fetchVersions();
+      versionContext?.fetchVersions();
     }
   }, [versionContext]);
 
@@ -37,23 +37,29 @@ export function About() {
         mainContainerId={pageId}
       >
         <PageSection>
-          <Title headingLevel="h1" style={{fontWeight: 'normal', marginBottom: '1rem'}}>
+          <Title
+            headingLevel="h1"
+            style={{ fontWeight: 'normal', marginBottom: '1rem' }}
+          >
             LodeStar
           </Title>
           <Grid hasGutter span={12}>
             <GridItem>
-              <AboutText/>
+              <AboutText />
             </GridItem>
             <GridItem>
-             <NeedHelp/>
+              <NeedHelp />
             </GridItem>
             <GridItem>
-              <Title headingLevel="h2" style={{fontWeight: 'lighter', margin:'0.5rem 0'}}>
+              <Title
+                headingLevel="h2"
+                style={{ fontWeight: 'lighter', margin: '0.5rem 0' }}
+              >
                 Version
               </Title>
               <Text component={TextVariants.small}>
-                <LodeStarVersion versionContext={versionContext}/>
-                <ComponentVersions versionContext={versionContext}/>
+                <LodeStarVersion versionContext={versionContext} />
+                <ComponentVersions versionContext={versionContext} />
               </Text>
             </GridItem>
           </Grid>
@@ -62,4 +68,3 @@ export function About() {
     </>
   );
 }
-

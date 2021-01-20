@@ -1,5 +1,5 @@
 import React from 'react';
-import { Engagement, EngagementUseCase } from '../../schemas/engagement';
+import { EngagementUseCase } from '../../schemas/engagement';
 import {
   FormGroup,
   TextInput,
@@ -11,40 +11,40 @@ import {
 import { TrashAltIcon } from '@patternfly/react-icons';
 import { uuid } from 'uuidv4';
 
-export interface EngagementUseCaseFieldProps {
-  engagement: Engagement;
-  onChange: (useCases: EngagementUseCase[]) => void;
-}
-
-export function EngagementUseCaseField(props: EngagementUseCaseFieldProps) {
-  const { use_cases } = props.engagement;
+export function EngagementUseCaseField({
+  useCases,
+  setUseCases,
+}: {
+  useCases: EngagementUseCase[];
+  setUseCases: (useCases: EngagementUseCase[]) => void;
+}) {
   const addUseCase = () => {
-    props.onChange([...use_cases, { id: uuid() }]);
+    setUseCases([...useCases, { id: uuid() }]);
   };
 
   const onDelete = (useCase: EngagementUseCase) => {
-    const deleteIndex = use_cases.findIndex(
+    const deleteIndex = useCases.findIndex(
       currentCase => useCase === currentCase
     );
-    const mutableCases = [...use_cases];
+    const mutableCases = [...useCases];
     if (deleteIndex > -1) {
       mutableCases.splice(deleteIndex, 1);
     }
-    props.onChange(mutableCases);
+    setUseCases(mutableCases);
   };
 
   const onChange = (useCase: EngagementUseCase) => {
-    const index = use_cases.findIndex(
+    const index = useCases.findIndex(
       currentCase => currentCase.id === useCase.id
     );
-    const mutableCases = [...use_cases];
+    const mutableCases = [...useCases];
     mutableCases.splice(index, 1, useCase);
-    props.onChange(mutableCases);
+    setUseCases(mutableCases);
   };
 
   return (
     <FormGroup fieldId="Engagement Use Cases" label="Engagement Use Cases">
-      {use_cases.map(useCase => (
+      {useCases?.map(useCase => (
         <UseCaseField
           useCase={useCase}
           onDelete={onDelete}

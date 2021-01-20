@@ -5,7 +5,7 @@ import { EngagementNavigation } from '../components/drawer_and_header/engagement
 import { Drawer, DrawerContent, Page } from '@patternfly/react-core';
 import { NotificationContent } from '../components/drawer_and_header/notification_content';
 import { useNotification } from '../context/notification_context/notification_hook';
-import { APPLICATION_CONTENT_CONTAINER_ID } from '../common/constants'
+import { APPLICATION_CONTENT_CONTAINER_ID } from '../common/constants';
 
 export interface MainTemplateProps {
   children: React.ReactChild;

@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { DataCard } from '../data_card';
-import { Engagement } from '../../../schemas/engagement';
 import { Grid, GridItem, Accordion } from '@patternfly/react-core';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { GitCommit } from '../../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-export interface GitHistoryCardProps {
-  engagement: Engagement;
-}
+import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+
 const ACTIVITY_HISTORY_MODAL_KEY = 'activity_history';
 
-export function ActivityHistoryCard({ engagement }: GitHistoryCardProps) {
+export function ActivityHistoryCard() {
   const { requestOpen, activeModalKey } = useModalVisibility();
+  const { currentEngagement: engagement } = useEngagements();
   const commits = engagement?.commits ?? [];
   return (
     <>

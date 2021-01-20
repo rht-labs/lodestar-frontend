@@ -2,11 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { SystemStatusCard } from '../system_status_card';
 import { TestStateWrapper } from '../../../../common/test_state_wrapper';
-import {
-  Engagement,
-  EngagementStatus,
-  getEngagementStatus,
-} from '../../../../schemas/engagement';
+import { Engagement, EngagementStatus } from '../../../../schemas/engagement';
 import { StatusMessageItem } from '../status_message_item';
 import { Severity } from '../../../../schemas/system_message';
 import { SubsystemDetailsModal } from '../subsystem_details_modal';
@@ -83,7 +79,7 @@ describe('System Status Card', () => {
   test('Clicking a subsystem requests a modal to open', async () => {
     const onRequestOpen = jest.fn();
     const wrapper = render(
-      <ModalVisibilityContext.Provider value={{ requestOpen: onRequestOpen }} >
+      <ModalVisibilityContext.Provider value={{ requestOpen: onRequestOpen }}>
         <SystemStatusCard
           currentEngagement={Engagement.fromFake(true, {
             status: EngagementStatus.active,

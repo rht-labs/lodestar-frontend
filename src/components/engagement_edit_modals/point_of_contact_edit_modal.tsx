@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Engagement } from '../../schemas/engagement';
 import {
   Modal,
@@ -15,36 +15,52 @@ import { UserIcon, EnvelopeIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useValidation } from '../../context/validation_context/validation_hook';
-import { FormManager } from '../../context/form_manager/form_manager';
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 export interface PointOfContactEditModalProps {
-  onChange: (fieldName: string, value: any) => void;
   engagement: Engagement;
   isOpen: boolean;
   onSave: (engagement: Engagement) => void;
   onClose: () => void;
 }
 export function PointOfContactEditModal({
-  onChange,
   engagement,
   isOpen,
   onClose = () => {},
   onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
   const { hasFeature } = useFeatures();
+  const { validate, getValidationResult } = useValidation();
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
   };
-  const { validate, getValidationResult } = useValidation();
-  const { registerField } = FormManager.useFormGroupManager();
-  useEffect(() => {
-    registerField('engagement_lead_email');
-  }, [registerField]);
-  useEffect(() => registerField('engagement_lead_name'), [registerField]);
-  useEffect(() => registerField('technical_lead_email'), [registerField]);
-  useEffect(() => registerField('technical_lead_name'), [registerField]);
-  useEffect(() => registerField('customer_contact_name'), [registerField]);
-  useEffect(() => registerField('customer_contact_email'), [registerField]);
+  const [engagementLeadName, setEngagementLeadName] = useEngagementFormField(
+    'engagement_lead_name',
+    EngagementGroupings.pointOfContact
+  );
+  const [engagementLeadEmail, setEngagementLeadEmail] = useEngagementFormField(
+    'engagement_lead_email',
+    EngagementGroupings.pointOfContact
+  );
+  const [technicalLeadEmail, setTechnicalLeadEmail] = useEngagementFormField(
+    'technical_lead_email',
+    EngagementGroupings.pointOfContact
+  );
+  const [technicalLeadName, setTechnicalLeadName] = useEngagementFormField(
+    'technical_lead_name',
+    EngagementGroupings.pointOfContact
+  );
+  const [customerContactName, setCustomerContactName] = useEngagementFormField(
+    'customer_contact_name',
+    EngagementGroupings.pointOfContact
+  );
+  const [
+    customerContactEmail,
+    setCustomerContactEmail,
+  ] = useEngagementFormField('customer_contact_email');
   const onSave = () => {
     propsOnSave(engagement);
     onClose();
@@ -99,12 +115,10 @@ export function PointOfContactEditModal({
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 id="name"
                 name="engagement-lead-name"
-                onChange={e => {
-                  onChange('engagement_lead_name', e);
-                }}
+                onChange={setEngagementLeadName}
                 placeholder="Full Name"
                 type="text"
-                value={engagement.engagement_lead_name || ''}
+                value={engagementLeadName}
                 data-cy={'engagement_lead_name'}
               />
               <InputGroupText
@@ -121,13 +135,13 @@ export function PointOfContactEditModal({
                 id="email"
                 style={input}
                 name="engagement-lead-email"
-                onChange={e =>
-                  validate('engagement_lead_email')(e) &&
-                  onChange('engagement_lead_email', e)
-                }
+                onChange={e => {
+                  validate('engagement_lead_email')(e);
+                  setEngagementLeadEmail(e);
+                }}
                 placeholder="Email Address"
                 type="email"
-                value={engagement.engagement_lead_email || ''}
+                value={engagementLeadEmail}
                 data-cy={'engagement_lead_email'}
               />
             </InputGroup>
@@ -161,10 +175,10 @@ export function PointOfContactEditModal({
                 id="tech-lead-name"
                 style={input}
                 name="tech-lead-name"
-                onChange={e => onChange('technical_lead_name', e)}
+                onChange={setTechnicalLeadName}
                 placeholder="Full Name"
                 type="text"
-                value={engagement.technical_lead_name || ''}
+                value={technicalLeadName}
                 data-cy={'tech_lead_name'}
               />
               <InputGroupText
@@ -181,13 +195,13 @@ export function PointOfContactEditModal({
                 aria-label="tech lead email"
                 id="tech-lead-email"
                 name="tech-lead-email"
-                onChange={e =>
-                  validate('technical_lead_email')(e) &&
-                  onChange('technical_lead_email', e)
-                }
+                onChange={e => {
+                  setTechnicalLeadEmail(e);
+                  validate('technical_lead_email')(e);
+                }}
                 placeholder="Email Address"
                 type="email"
-                value={engagement.technical_lead_email || ''}
+                value={technicalLeadEmail}
                 data-cy={'tech_lead_email'}
               />
             </InputGroup>
@@ -221,10 +235,10 @@ export function PointOfContactEditModal({
                 aria-label="Customer contact name"
                 id="customer-contact-name"
                 name="customer-contact-name"
-                onChange={e => onChange('customer_contact_name', e)}
+                onChange={setCustomerContactName}
                 type="text"
                 placeholder="Full Name"
-                value={engagement.customer_contact_name || ''}
+                value={customerContactName}
                 data-cy={'customer_contact_name'}
               />
               <InputGroupText
@@ -241,13 +255,13 @@ export function PointOfContactEditModal({
                 id="customer-contact-email"
                 name="customer-contact-email"
                 style={input}
-                onChange={e =>
-                  validate('customer_contact_email')(e) &&
-                  onChange('customer_contact_email', e)
-                }
+                onChange={e => {
+                  setCustomerContactEmail(e);
+                  validate('customer_contact_email')(e);
+                }}
                 placeholder="Email Address"
                 type="email"
-                value={engagement.customer_contact_email || ''}
+                value={customerContactEmail}
                 data-cy={'customer_contact_email'}
               />
             </InputGroup>

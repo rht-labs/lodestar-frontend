@@ -1,20 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Card, CardActions, CardBody, CardHeader, CardHeaderMain,
+  Card,
+  CardActions,
+  CardBody,
+  CardHeader,
+  CardHeaderMain,
 } from '@patternfly/react-core';
-import { TableBody, TableHeader, TableVariant, Table } from "@patternfly/react-table";
-import { Pagination } from "@patternfly/react-core";
+import {
+  TableBody,
+  TableHeader,
+  TableVariant,
+  Table,
+  cellWidth,
+} from '@patternfly/react-table';
+import { Pagination } from '@patternfly/react-core';
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Table/table';
-import { UserRolesTooltip } from "./user_roles_tooltip";
+import { UserRolesTooltip } from './user_roles_tooltip';
 
-interface UserListProps{
+interface UserListProps {
   defaultRows: string[][];
   title: any;
 }
 
 export function UserList(props: UserListProps) {
-
   const defaultPerPage = 5;
   const [perPage, setPerPage] = useState(5);
   const [page, setPage] = useState(1);
@@ -44,9 +53,9 @@ export function UserList(props: UserListProps) {
         perPage={perPage}
         defaultToFullPage
         perPageOptions={[
-          { title: "5", value: 5 },
-          { title: "10", value: 10},
-          { title: "20", value: 20}
+          { title: '5', value: 5 },
+          { title: '10', value: 10 },
+          { title: '20', value: 20 },
         ]}
         onSetPage={handleSetPage}
         onPerPageSelect={handlePerPageSelect}
@@ -55,26 +64,29 @@ export function UserList(props: UserListProps) {
   }
 
   const columns = [
-    { title: 'Full name'},
-    { title: 'Email' },
-    { title:
+    { title: 'Full name', transforms: [cellWidth(10)] },
+    { title: 'Email', transforms: [cellWidth(10)] },
+    {
+      title: (
         <>
           Role
           <UserRolesTooltip />
         </>
+      ),
+      transforms: [cellWidth(10)],
     },
   ];
 
   const customRowWrapper = ({
-                              trRef,
-                              className,
-                              rowProps,
-                              row: { isExpanded, isHeightAuto },
-                              ...props
-                            }) => {
+    trRef,
+    className,
+    rowProps,
+    row: { isExpanded, isHeightAuto },
+    ...props
+  }) => {
     const isOddRow = (rowProps.rowIndex + 1) % 2;
     const customStyle = {
-      background: '#F5F5F5'
+      background: '#F5F5F5',
     };
     return (
       <tr
@@ -82,7 +94,7 @@ export function UserList(props: UserListProps) {
         ref={trRef}
         className={css(
           className,
-          (isOddRow ? 'odd-row-class' : 'even-row-class'),
+          isOddRow ? 'odd-row-class' : 'even-row-class',
           'custom-static-class',
           isExpanded !== undefined && styles.tableExpandableRow,
           isExpanded && styles.modifiers.expanded,
@@ -95,39 +107,30 @@ export function UserList(props: UserListProps) {
   };
 
   return (
-    <Card isFlat style={{borderWidth: 0}}>
+    <Card isFlat style={{ borderWidth: 0 }}>
       <CardHeader>
         <CardHeaderMain>
-          <b>
-            { props.title }
-          </b>
+          <b>{props.title}</b>
         </CardHeaderMain>
-        <CardActions>
-          { renderPagination() }
-        </CardActions>
+        <CardActions>{renderPagination()}</CardActions>
       </CardHeader>
       <CardBody>
-        {
-          props.defaultRows.length > 0
-          ?
-            <Table
-              aria-label="Engagement users table"
-              variant={TableVariant.compact}
-              borders={true}
-              cells={columns}
-              rows={rows}
-              rowWrapper={ customRowWrapper }
-            >
+        {props.defaultRows.length > 0 ? (
+          <Table
+            aria-label="Engagement users table"
+            variant={TableVariant.compact}
+            borders={true}
+            cells={columns}
+            rows={rows}
+            rowWrapper={customRowWrapper}
+          >
             <TableHeader />
             <TableBody />
-            </Table>
-
-          :
-            <p style={{fontStyle: 'italic'}}> No users have been added </p>
-        }
-
+          </Table>
+        ) : (
+          <p style={{ fontStyle: 'italic' }}> No users have been added </p>
+        )}
       </CardBody>
     </Card>
   );
 }
-
