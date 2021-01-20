@@ -23,7 +23,7 @@ export const getFormattedDate = (inputDate: Date | string = ''): string => {
 export const parseDatePickerDate = (dateString: string): Date | undefined => {
   const dateParts = dateString.split('-')
   const parsedDateParts = dateParts.map(p => parseInt(p, 10))
-  if (parsedDateParts.some(p => p === NaN)) {
+  if (parsedDateParts.some(p => isNaN(p))) {
     return
   }
   if (parsedDateParts.length === 3) {
