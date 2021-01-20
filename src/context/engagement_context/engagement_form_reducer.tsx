@@ -8,7 +8,7 @@ export const engagementFormReducer = (
   state: Partial<Engagement> = {},
   action?: { type: string; payload?: any }
 ): Partial<Engagement> => {
-    const curriedEngagementDatesFunction = getEngagementDates(
+    const curriedDateNormalizer = normalizeEngagementDates(
       engagementFormConfig?.logistics_options?.env_default_grace_period,
       engagementFormConfig?.logistics_options?.env_grace_period_max
     );
@@ -22,7 +22,7 @@ export const engagementFormReducer = (
         const { end_date, start_date, archive_date } = state;
         return {
           ...state,
-          ...curriedEngagementDatesFunction({
+          ...curriedDateNormalizer({
             start_date,
             end_date,
             archive_date,
@@ -56,23 +56,30 @@ export const engagementFormReducer = (
     }
   };
 
-function getEngagementDates(gracePeriodInDays, maxGracePeriodInDays) {
+function normalizeEngagementDates(gracePeriodInDays, maxGracePeriodInDays) {
   return function ({
     start_date,
     end_date,
     archive_date,
   }: Pick<Engagement, 'start_date' | 'end_date' | 'archive_date'>) {
     let normalizedEndDate = normalizeEndDate(end_date, start_date);
-    return {
-      start_date,
-      end_date: normalizedEndDate,
-      archive_date: normalizeRetirementDate({
-        retirementDate: archive_date,
-        endDate: normalizedEndDate,
-        gracePeriodInDays,
-        maxGracePeriodInDays,
-      }),
-    };
+    const normalizedArchiveDate = normalizeRetirementDate({
+      retirementDate: archive_date,
+      endDate: normalizedEndDate,
+      gracePeriodInDays,
+      maxGracePeriodInDays,
+    })
+
+    const dates: Partial<Pick<Engagement, 'start_date' | 'end_date' | 'archive_date'>> = {}
+    if (start_date) {
+      dates.start_date = start_date
+    }
+    if (normalizedEndDate) {
+      dates.end_date = normalizedEndDate
+    } if (normalizedArchiveDate) {
+      dates.archive_date = normalizedArchiveDate
+    }
+    return dates
   };
 }
 
