@@ -22,7 +22,6 @@ import {
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { ClipboardCheckIcon } from '@patternfly/react-icons';
-import { APP_FEATURES } from '../../../common/app_features';
 import { Feature } from '../../feature/feature';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
