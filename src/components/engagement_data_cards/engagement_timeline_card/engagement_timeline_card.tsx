@@ -138,7 +138,7 @@ function EngagementTimelineCardBody(
       artifact.description,
       {
         title: (
-          <Feature name={APP_FEATURES.writer}>
+          <Feature name={'writer'}>
             <Dropdown
               isPlain
               dropdownItems={actionItems}
@@ -175,17 +175,17 @@ function EngagementTimelineCardBody(
       <TableBody />
     </Table>
   ) : (
-    <EmptyState>
-      <EmptyStateIcon
-        icon={ClipboardCheckIcon}
-        style={{ fontSize: '34px', margin: '0' }}
-      />
-      <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
-        No Artifacts Added
+      <EmptyState>
+        <EmptyStateIcon
+          icon={ClipboardCheckIcon}
+          style={{ fontSize: '34px', margin: '0' }}
+        />
+        <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
+          No Artifacts Added
       </Title>
-      <EmptyStateBody>
-        <p>Click 'Add Artifact' button to start adding artifacts</p>
-      </EmptyStateBody>
-    </EmptyState>
-  );
+        <EmptyStateBody>
+          <p>Click 'Add Artifact' button to start adding artifacts</p>
+        </EmptyStateBody>
+      </EmptyState>
+    );
 }
