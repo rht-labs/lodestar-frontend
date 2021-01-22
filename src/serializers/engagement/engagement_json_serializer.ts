@@ -1,6 +1,6 @@
 import { Serializer } from '../serializer';
 import { Engagement, Artifact, EngagementUser } from '../../schemas/engagement';
-import { parse, parseISO, isValid, formatISO } from 'date-fns';
+import { parse, parseISO, isValid } from 'date-fns';
 import { LaunchData } from '../../schemas/launch_data';
 import { GitCommitJsonSerializer } from '../git_commit/git_commit_json_serializer';
 import { ClusterStatusJsonSerializer } from '../cluster_status/cluster_status_json_serializer';
@@ -10,12 +10,12 @@ import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export class EngagementJsonSerializer
   implements Serializer<Engagement, object> {
-  private static formatDate(date: Date) {
-    return formatISO(date);
+  private static formatDate(date: Date): string | undefined {
+    return date?.toISOString?.();
   }
   private static gitCommitSerializer = new GitCommitJsonSerializer();
   private static clusterStatusSerializer = new ClusterStatusJsonSerializer();
-  private static parseDate(dateInput: any): Date {
+  private static parseDate(dateInput: any): Date | undefined {
     if (typeof dateInput === 'string') {
       try {
         let parsedDate;
@@ -152,7 +152,7 @@ export class EngagementJsonSerializer
 
   private static deserializeEngagementUser(data: object): EngagementUser {
     return {
-      ...data,
+      ...data as EngagementUser,
       uuid: data['uuid'] ?? uuid(),
     };
   }
