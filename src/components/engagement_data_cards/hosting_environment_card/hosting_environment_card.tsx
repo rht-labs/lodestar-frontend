@@ -25,7 +25,6 @@ import {
   TableVariant,
 } from '@patternfly/react-table';
 import { Feature } from '../../feature/feature';
-import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { ReadyCheck } from '../../ready_check/ready_check';
@@ -163,7 +162,7 @@ export function HostingEnvironmentCard() {
       ),
       {
         title: (
-          <Feature name={APP_FEATURES.writer}>
+          <Feature name={'writer'}>
             <Dropdown
               isPlain
               dropdownItems={actionItems(hostingEnvironment)}
@@ -255,22 +254,22 @@ export function HostingEnvironmentCard() {
             <TableBody />
           </Table>
         ) : (
-          <EmptyState>
-            <EmptyStateIcon
-              icon={DatabaseIcon}
-              style={{ fontSize: '34px', margin: '0' }}
-            />
-            <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
-              No Hosting Environments Added
+            <EmptyState>
+              <EmptyStateIcon
+                icon={DatabaseIcon}
+                style={{ fontSize: '34px', margin: '0' }}
+              />
+              <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
+                No Hosting Environments Added
             </Title>
-            <EmptyStateBody>
-              <p>
-                Click 'Add Hosting Environment' to start adding hosting
-                environments
+              <EmptyStateBody>
+                <p>
+                  Click 'Add Hosting Environment' to start adding hosting
+                  environments
               </p>
-            </EmptyStateBody>
-          </EmptyState>
-        )}
+              </EmptyStateBody>
+            </EmptyState>
+          )}
       </DataCard>
     </>
   );

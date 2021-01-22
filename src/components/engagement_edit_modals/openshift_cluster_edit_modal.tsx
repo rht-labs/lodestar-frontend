@@ -14,6 +14,7 @@ import { TextFormField } from '../form_fields/text_form_field';
 import { SelectFormField } from '../form_fields/select_form_field';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
+import { useSubdomainUniqueness } from '../../hooks/subdomain_checker';
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: HostingEnvironment;
   isOpen: boolean;
@@ -24,7 +25,7 @@ export interface OpenShiftClusterEditModalProps {
 }
 
 export function OpenShiftClusterEditModal({
-  onClose = () => {},
+  onClose = () => { },
   hostingEnvironment: propsHostingEnvironment,
   isOpen,
   onSave: propsOnSave,
@@ -36,6 +37,7 @@ export function OpenShiftClusterEditModal({
     HostingEnvironment
   >();
 
+  const { isUnique, checkSubdomain, loading: subdomainCheckLoading } = useSubdomainUniqueness()
   const { hasFeature } = useFeatures();
   useEffect(() => {
     setHostingEnvironment(propsHostingEnvironment);
@@ -81,6 +83,7 @@ export function OpenShiftClusterEditModal({
             <Button
               data-testid="oc-edit-save"
               onClick={onSave}
+              isDisabled={subdomainCheckLoading || !isUnique}
               data-cy={'hosting_env_save'}
             >
               Save
@@ -140,7 +143,12 @@ export function OpenShiftClusterEditModal({
           />
           <SubdomainFormField
             isEngagementLaunched={isEngagementLaunched}
-            onChange={value => onChange('ocp_sub_domain', value)}
+            isUnique={isUnique}
+            isLoading={subdomainCheckLoading}
+            onChange={value => {
+              checkSubdomain(value)
+              onChange('ocp_sub_domain', value)
+            }}
             hostingEnvironment={hostingEnvironment}
             suggestedSubdomain={suggestedSubdomain}
           />
