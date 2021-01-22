@@ -22,7 +22,6 @@ import {
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { ClipboardCheckIcon } from '@patternfly/react-icons';
-import { APP_FEATURES } from '../../../common/app_features';
 import { Feature } from '../../feature/feature';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
@@ -138,7 +137,7 @@ function EngagementTimelineCardBody(
       artifact.description,
       {
         title: (
-          <Feature name={APP_FEATURES.writer}>
+          <Feature name={'writer'}>
             <Dropdown
               isPlain
               dropdownItems={actionItems}
@@ -175,17 +174,17 @@ function EngagementTimelineCardBody(
       <TableBody />
     </Table>
   ) : (
-    <EmptyState>
-      <EmptyStateIcon
-        icon={ClipboardCheckIcon}
-        style={{ fontSize: '34px', margin: '0' }}
-      />
-      <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
-        No Artifacts Added
+      <EmptyState>
+        <EmptyStateIcon
+          icon={ClipboardCheckIcon}
+          style={{ fontSize: '34px', margin: '0' }}
+        />
+        <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
+          No Artifacts Added
       </Title>
-      <EmptyStateBody>
-        <p>Click 'Add Artifact' button to start adding artifacts</p>
-      </EmptyStateBody>
-    </EmptyState>
-  );
+        <EmptyStateBody>
+          <p>Click 'Add Artifact' button to start adding artifacts</p>
+        </EmptyStateBody>
+      </EmptyState>
+    );
 }
