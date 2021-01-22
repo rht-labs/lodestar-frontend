@@ -4,7 +4,7 @@ import { useServiceProviders } from '../context/service_provider_context/service
 
 export const useSubdomainUniqueness = () => {
   const { engagementService } = useServiceProviders()
-  const [isUnique, setIsUnique] = React.useState<boolean | undefined>(undefined)
+  const [isUnique, setIsUnique] = React.useState<boolean | undefined>(true)
   const [loading, setLoading] = React.useState<boolean>(false)
   const checkSubdomain = lodash.debounce(async (subdomain: string) => {
     setLoading(true)

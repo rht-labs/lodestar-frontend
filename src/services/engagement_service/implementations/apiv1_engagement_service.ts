@@ -16,19 +16,8 @@ export class Apiv1EngagementService implements EngagementService {
       return request;
     });
   }
-  async checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
-    try {
-
-      const response = await this.axios.head(`/engagements/subdomain/${subdomain}`)
-      if (response.status === 200) {
-        return true
-      } else {
-        return false
-      }
-    } catch (e) {
-      console.error(e)
-      return false
-    }
+  checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
+    return this.axios.head(`/engagements/subdomain/${subdomain}`).then(() => true).catch(() => false)
   }
   private static engagementSerializer = new EngagementJsonSerializer();
   axios?: AxiosInstance;

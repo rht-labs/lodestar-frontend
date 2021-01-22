@@ -46,6 +46,7 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
           ...props.regions.map(region => {
             return (
               <SelectOption
+                key={region.value}
                 data-testid={`engagement_region`}
                 value={region.value}
               >
