@@ -437,7 +437,13 @@ Object {
             type="text"
             value="ordoabchao"
           />
-          
+          <div
+            aria-live="polite"
+            class="pf-c-form__helper-text pf-m-error"
+            id="subdomain-helper"
+          >
+            This subdomain is already being used. Please choose a unique subdomain.
+          </div>
         </div>
       </div>
     </div>
@@ -483,7 +489,13 @@ Object {
           type="text"
           value="ordoabchao"
         />
-        
+        <div
+          aria-live="polite"
+          class="pf-c-form__helper-text pf-m-error"
+          id="subdomain-helper"
+        >
+          This subdomain is already being used. Please choose a unique subdomain.
+        </div>
       </div>
     </div>
   </div>,
