@@ -1,5 +1,8 @@
 import React from 'react';
-import { FeedbackContext } from '../../../context/feedback_context/feedback_context';
+import {
+  FeedbackContext,
+  IFeedbackContext,
+} from '../../../context/feedback_context/feedback_context';
 import { Feedback } from '../omp_feedback';
 import { render, fireEvent } from '@testing-library/react';
 
@@ -7,7 +10,9 @@ describe('Lodestar Feedback Component', () => {
   test('Feedback modal shows', async () => {
     const { getByText } = render(
       <FeedbackContext.Provider
-        value={({ alertMsg: 'This is an alert' } as unknown) as FeedbackContext}
+        value={
+          ({ alertMsg: 'This is an alert' } as unknown) as IFeedbackContext
+        }
       >
         <Feedback />
       </FeedbackContext.Provider>
@@ -24,7 +29,7 @@ describe('Lodestar Feedback Component', () => {
             alertMsg: 'This is an alert',
             alertActions: [{ action: testAction, title: 'Click Me' }],
             hideAlert,
-          } as unknown) as FeedbackContext
+          } as unknown) as IFeedbackContext
         }
       >
         <Feedback />

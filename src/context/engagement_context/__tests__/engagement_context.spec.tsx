@@ -135,6 +135,9 @@ describe('Engagement Context', () => {
                       feedbackContext={feedbackContext}
                       engagementService={
                         ({
+                          async checkSubdomainUniqueness(s) {
+                            return true;
+                          },
                           async fetchEngagements() {
                             throw new AuthenticationError();
                           },
@@ -184,6 +187,9 @@ describe('Engagement Context', () => {
                   feedbackContext={feedbackContext}
                   engagementService={
                     ({
+                      async checkSubdomainUniqueness(s) {
+                        return true;
+                      },
                       async fetchEngagements() {
                         throw new Error('just a random error');
                       },
@@ -235,6 +241,9 @@ describe('Engagement Context', () => {
                       authContext={authContext}
                       engagementService={
                         ({
+                          async checkSubdomainUniqueness(s) {
+                            return true;
+                          },
                           async fetchEngagements() {
                             return [];
                           },
@@ -314,6 +323,9 @@ describe('Engagement Context', () => {
                 feedbackContext={fakedFeedbackContext}
                 engagementService={
                   ({
+                    async checkSubdomainUniqueness(s) {
+                      return true;
+                    },
                     async fetchEngagements() {
                       return [initialEngagement];
                     },
@@ -438,6 +450,9 @@ describe('Engagement Context', () => {
                     async fetchEngagements() {
                       return [initialEngagement];
                     },
+                    async checkSubdomainUniqueness(s) {
+                      return true;
+                    },
                     async launchEngagement(engagement) {
                       throw Error('a generic network error');
                     },
@@ -499,6 +514,9 @@ describe('Engagement Context', () => {
                     },
                     async createEngagement(engagement) {
                       throw new AlreadyExistsError();
+                    },
+                    async checkSubdomainUniqueness(s) {
+                      return true;
                     },
                   } as unknown) as EngagementService
                 }

@@ -32,16 +32,9 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../../context/engagement_context/engagement_context';
+import { useHostingEnvironmentCheck } from '../../../hooks/hosting_environment_checker';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
-const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
-  'ocp_cloud_provider_name',
-  'ocp_cloud_provider_region',
-  'ocp_persistent_storage_size',
-  'ocp_sub_domain',
-  'ocp_version',
-  'environment_name',
-];
 
 export function HostingEnvironmentCard() {
   const {
@@ -140,14 +133,7 @@ export function HostingEnvironmentCard() {
     (hostingEnvironment, idx) => [
       {
         title: (
-          <ReadyCheck
-            isReady={requiredHostingEnvironmentFields.every(
-              f =>
-                hostingEnvironment[f] !== undefined &&
-                hostingEnvironment[f] !== null &&
-                hostingEnvironment[f] !== ''
-            )}
-          />
+          <HostingEnvironmentValidity hostingEnvironment={hostingEnvironment} />
         ),
       },
       hostingEnvironment.environment_name,
@@ -254,22 +240,22 @@ export function HostingEnvironmentCard() {
             <TableBody />
           </Table>
         ) : (
-            <EmptyState>
-              <EmptyStateIcon
-                icon={DatabaseIcon}
-                style={{ fontSize: '34px', margin: '0' }}
-              />
-              <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
-                No Hosting Environments Added
+          <EmptyState>
+            <EmptyStateIcon
+              icon={DatabaseIcon}
+              style={{ fontSize: '34px', margin: '0' }}
+            />
+            <Title headingLevel="h5" size="md" style={{ marginTop: '0' }}>
+              No Hosting Environments Added
             </Title>
-              <EmptyStateBody>
-                <p>
-                  Click 'Add Hosting Environment' to start adding hosting
-                  environments
+            <EmptyStateBody>
+              <p>
+                Click 'Add Hosting Environment' to start adding hosting
+                environments
               </p>
-              </EmptyStateBody>
-            </EmptyState>
-          )}
+            </EmptyStateBody>
+          </EmptyState>
+        )}
       </DataCard>
     </>
   );
@@ -281,3 +267,12 @@ function getHumanReadableLabel(
 ) {
   return lookupArray?.find(option => option.value === value)?.label ?? value;
 }
+
+const HostingEnvironmentValidity = ({
+  hostingEnvironment,
+}: {
+  hostingEnvironment: HostingEnvironment;
+}) => {
+  const { isValid } = useHostingEnvironmentCheck(hostingEnvironment);
+  return <ReadyCheck isReady={isValid} />;
+};
