@@ -10,8 +10,8 @@ interface SubdomainFormFieldProps {
   hostingEnvironment: HostingEnvironment;
   onChange: (value: string) => void;
   isEngagementLaunched: boolean;
-  isLoading?: boolean
-  isUnique?: boolean
+  isLoading?: boolean;
+  isUnique?: boolean;
   suggestedSubdomain: string;
 }
 
@@ -20,7 +20,7 @@ export function SubdomainFormField({
   hostingEnvironment,
   suggestedSubdomain,
   isUnique,
-  isLoading
+  isLoading,
 }: SubdomainFormFieldProps) {
   const { hasFeature } = useFeatures();
   const [editedByUser, setEditedByUser] = useState(false);
@@ -47,16 +47,20 @@ export function SubdomainFormField({
     }
   };
 
-  const getValidationStatus = (): "error" | "success" | "warning" | "default" => {
+  const getValidationStatus = ():
+    | 'error'
+    | 'success'
+    | 'warning'
+    | 'default' => {
     if (isLoading) {
-      return "default"
+      return 'default';
     }
     if (isUnique) {
-      return "success"
+      return 'success';
     }
 
-    return "error"
-  }
+    return 'error';
+  };
 
   const subdomainValue = getSubdomainFieldText();
   return (
@@ -77,6 +81,11 @@ export function SubdomainFormField({
           &nbsp;&nbsp;
           {isLoading ? <Spinner size="sm" /> : null}
         </div>
+      }
+      helperTextInvalid={
+        !isUnique
+          ? 'This subdomain is already being used. Please choose a unique subdomain.'
+          : 'Something went wrong'
       }
     >
       <TextInput
