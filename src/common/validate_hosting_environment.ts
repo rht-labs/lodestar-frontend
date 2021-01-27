@@ -13,11 +13,17 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
 const notNullOrUndefined = x => x !== null && x !== undefined && x !== '';
 export async function validateHostingEnvironment(
   hostingEnvironment: HostingEnvironment,
-  engagementService: EngagementService
+  engagementService: EngagementService,
+  deconflictedSubdomain?: string
 ): Promise<boolean> {
-  const isSubdomainValid = await engagementService.checkSubdomainUniqueness(
-    hostingEnvironment?.ocp_sub_domain
-  );
+  let isSubdomainValid = false;
+  if (hostingEnvironment.ocp_sub_domain === deconflictedSubdomain) {
+    isSubdomainValid = true;
+  } else {
+    isSubdomainValid = await engagementService.checkSubdomainUniqueness(
+      hostingEnvironment?.ocp_sub_domain
+    );
+  }
   const hasRequiredFields = requiredHostingEnvironmentFields.every(k =>
     notNullOrUndefined(hostingEnvironment[k])
   );

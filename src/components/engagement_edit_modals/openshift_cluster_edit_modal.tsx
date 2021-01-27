@@ -25,7 +25,7 @@ export interface OpenShiftClusterEditModalProps {
 }
 
 export function OpenShiftClusterEditModal({
-  onClose = () => { },
+  onClose = () => {},
   hostingEnvironment: propsHostingEnvironment,
   isOpen,
   onSave: propsOnSave,
@@ -37,7 +37,11 @@ export function OpenShiftClusterEditModal({
     HostingEnvironment
   >();
 
-  const { isUnique, checkSubdomain, loading: subdomainCheckLoading } = useSubdomainUniqueness()
+  const {
+    isUnique,
+    checkSubdomain,
+    loading: subdomainCheckLoading,
+  } = useSubdomainUniqueness();
   const { hasFeature } = useFeatures();
   useEffect(() => {
     setHostingEnvironment(propsHostingEnvironment);
@@ -146,8 +150,8 @@ export function OpenShiftClusterEditModal({
             isUnique={isUnique}
             isLoading={subdomainCheckLoading}
             onChange={value => {
-              checkSubdomain(value)
-              onChange('ocp_sub_domain', value)
+              checkSubdomain(value, propsHostingEnvironment?.ocp_sub_domain);
+              onChange('ocp_sub_domain', value);
             }}
             hostingEnvironment={hostingEnvironment}
             suggestedSubdomain={suggestedSubdomain}

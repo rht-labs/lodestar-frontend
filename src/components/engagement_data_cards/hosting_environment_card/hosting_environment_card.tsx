@@ -129,7 +129,7 @@ export function HostingEnvironmentCard() {
     { title: 'Cloud Provider' },
     { title: 'Actions' },
   ];
-  const rows = currentChanges?.hosting_environments?.map?.(
+  const rows = currentEngagement?.hosting_environments?.map?.(
     (hostingEnvironment, idx) => [
       {
         title: (
@@ -273,6 +273,9 @@ const HostingEnvironmentValidity = ({
 }: {
   hostingEnvironment: HostingEnvironment;
 }) => {
-  const { isValid } = useHostingEnvironmentCheck(hostingEnvironment);
+  const { isValid } = useHostingEnvironmentCheck(
+    hostingEnvironment,
+    hostingEnvironment.ocp_sub_domain
+  );
   return <ReadyCheck isReady={isValid} />;
 };

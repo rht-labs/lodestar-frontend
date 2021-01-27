@@ -4,7 +4,8 @@ import { useServiceProviders } from '../context/service_provider_context/service
 import { HostingEnvironment } from '../schemas/hosting_environment';
 
 export const useHostingEnvironmentCheck = (
-  hostingEnvironment: HostingEnvironment
+  hostingEnvironment: HostingEnvironment,
+  deconflictedSubdomain?: string
 ) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState<boolean | undefined>(undefined);
@@ -15,7 +16,8 @@ export const useHostingEnvironmentCheck = (
       try {
         const isValid = await validateHostingEnvironment(
           hostingEnvironment,
-          engagementService
+          engagementService,
+          deconflictedSubdomain
         );
         setIsValid(isValid);
       } catch (e) {
@@ -24,7 +26,7 @@ export const useHostingEnvironmentCheck = (
         setIsLoading(false);
       }
     },
-    [setIsValid, setIsLoading, engagementService]
+    [setIsValid, setIsLoading, engagementService, deconflictedSubdomain]
   );
   useEffect(() => {
     checkHostingEnvironment(hostingEnvironment);
