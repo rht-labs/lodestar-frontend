@@ -19,7 +19,6 @@ import {
   FeedbackContext,
   FeedbackProvider,
 } from '../../feedback_context/feedback_context';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 describe('Engagement Context', () => {
   const getHook = () => {
     const wrapper = ({ children }) => (
@@ -370,6 +369,29 @@ describe('Engagement Context', () => {
     expect(error.message).toBe(
       'This engagement does not have the required fields to launch'
     );
+  });
+  test('can launch an engagement whose fields are completed', async () => {
+    const { result, waitForNextUpdate } = getHook();
+    expect(result.current.isLaunchable).toBe(false);
+    await act(async () => {
+      result.current.setCurrentEngagement({
+        end_date: new Date(2021, 5, 1),
+        start_date: new Date(2021, 1, 1),
+        archive_date: new Date(2021, 5, 20),
+        engagement_lead_email: 'abcd@cnn.com',
+        engagement_lead_name: 'Frank EL',
+        technical_lead_email: 'frank@fake.com',
+        technical_lead_name: 'Frank techie',
+        customer_contact_email: 'Contactme@company.com',
+        customer_contact_name: 'Connie Contact',
+        project_name: 'A fake project',
+        customer_name: 'A fake customer',
+        hosting_environments: [],
+      });
+      await waitForNextUpdate();
+      expect(result.current.missingRequiredFields).toEqual([]);
+      expect(result.current.isLaunchable).toBe(true);
+    });
   });
   test('cannot launch an engagement whose fields are not completed', async () => {
     const { result, waitForNextUpdate } = getHook();

@@ -415,7 +415,7 @@ export const EngagementProvider = ({
           !currentEngagement?.[field]
       )
       .concat(
-        !!currentEngagement?.hosting_environments?.every?.(
+        currentEngagement?.hosting_environments?.every?.(
           _validateHostingEnvironment
         )
           ? []
