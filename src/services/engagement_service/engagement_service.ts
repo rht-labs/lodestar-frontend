@@ -13,6 +13,7 @@ export interface EngagementService {
   launchEngagement(data: Engagement): Promise<Engagement>;
   getConfig(): Promise<EngagementFormConfig>;
   checkHasUpdates(engagement: Engagement): Promise<boolean>;
+  checkSubdomainUniqueness(subdomain: string): Promise<boolean>
   getEngagementByCustomerAndProjectName(
     customer_name: string,
     project_name: string

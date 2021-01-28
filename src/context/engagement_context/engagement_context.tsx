@@ -26,9 +26,10 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
-import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { engagementFormReducer } from './engagement_form_reducer';
 import { IAuthContext } from '../auth_context/auth_context';
+import { validateHostingEnvironment } from '../../common/validate_hosting_environment';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 export type FieldGroup = { [key: string]: string[] };
 
 export interface IEngagementContext {
@@ -129,6 +130,10 @@ export const EngagementProvider = ({
   >(
     engagementFormReducer(engagementFormConfig),
     engagementFormReducer(engagementFormConfig)()
+  );
+
+  const [missingRequiredFields, setMissingRequiredFields] = useState<string[]>(
+    []
   );
 
   const [changedGroups, setChangedGroups] = useState<{
@@ -363,26 +368,15 @@ export const EngagementProvider = ({
       _handleErrors,
     ]
   );
-  const notNullOrUndefined = x => x !== null && x !== undefined && x !== '';
   const _validateHostingEnvironment = useCallback(
-    ({
-      ocp_cloud_provider_name,
-      ocp_cloud_provider_region,
-      ocp_cluster_size,
-      ocp_persistent_storage_size,
-      ocp_sub_domain,
-      ocp_version,
-    }: HostingEnvironment): boolean => {
-      return [
-        ocp_cloud_provider_name,
-        ocp_cloud_provider_region,
-        ocp_cluster_size,
-        ocp_persistent_storage_size,
-        ocp_sub_domain,
-        ocp_version,
-      ].every(notNullOrUndefined);
+    async (hostingEnvironment: HostingEnvironment): Promise<boolean> => {
+      return validateHostingEnvironment(
+        hostingEnvironment,
+        engagementService,
+        hostingEnvironment?.ocp_sub_domain
+      );
     },
-    []
+    [engagementService]
   );
   const _checkLaunchReady = useCallback(() => {
     if (!currentEngagement) {
@@ -406,22 +400,28 @@ export const EngagementProvider = ({
     setIsLaunchable(_checkLaunchReady());
   }, [currentEngagement, _checkLaunchReady]);
 
-  const missingRequiredFields = useCallback(() => {
-    return requiredFields
+  const getMissingRequiredFields = useCallback(async () => {
+    const heValidation = await Promise.all(
+      (currentEngagement?.hosting_environments ?? []).map?.(
+        _validateHostingEnvironment
+      )
+    );
+    const fields = (requiredFields ?? [])
       .filter(
         field =>
           currentEngagement?.[field] !== 'boolean' &&
           currentEngagement?.[field] !== 'number' &&
           !currentEngagement?.[field]
       )
-      .concat(
-        currentEngagement?.hosting_environments?.every?.(
-          _validateHostingEnvironment
-        )
-          ? []
-          : ['hosting_environments']
-      );
+      .concat(heValidation.every(a => a) ? [] : ['hosting_environments']);
+    return fields;
   }, [currentEngagement, _validateHostingEnvironment]);
+
+  useEffect(() => {
+    getMissingRequiredFields().then(fields => {
+      setMissingRequiredFields(fields);
+    });
+  }, [getMissingRequiredFields, currentEngagement]);
 
   const saveEngagement = useCallback(
     async (data: Engagement) => {
@@ -585,7 +585,7 @@ export const EngagementProvider = ({
         engagementFormConfig: _getEngagementFormConfig(),
         requiredFields,
         currentEngagement,
-        missingRequiredFields: missingRequiredFields(),
+        missingRequiredFields,
         isLaunchable,
         setCurrentEngagement,
         engagements,
