@@ -167,7 +167,7 @@ export const EngagementProvider = ({
     };
   }, [authContext]);
 
-  const _validateAuthStatusRef = useRef(async () => { });
+  const _validateAuthStatusRef = useRef(async () => {});
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -562,6 +562,7 @@ export const EngagementProvider = ({
     value: any,
     group?: EngagementGroupings
   ) => {
+    console.log(group);
     setChangedGroups({ ...changedGroups, [group]: true });
     dispatch({ type: fieldName, payload: value });
     try {
@@ -569,7 +570,7 @@ export const EngagementProvider = ({
         category: AnalyticsCategory.engagements,
         action: 'Update Engagement',
       });
-    } catch (e) { }
+    } catch (e) {}
   };
   return (
     <Provider
@@ -655,14 +656,25 @@ export const useEngagementArtifacts = () => {
   );
   const { artifacts } = currentEngagement ?? {};
   const addArtifact = (artifact: Artifact) => {
-    updateEngagementFormField('artifacts', [...artifacts, artifact], EngagementGroupings.artifacts);
-    return [...artifacts, artifact];
+    const artifactsCopy = [...(artifacts ?? [])];
+    const index = artifactsCopy.findIndex(a => a.id === artifact.id);
+    if (index > -1) {
+      artifactsCopy.splice(index, 1, artifact);
+    } else {
+      artifactsCopy.push(artifact);
+    }
+    updateEngagementFormField('artifacts', EngagementGroupings.artifacts);
+    return artifactsCopy;
   };
   const removeArtifact = (artifact: Artifact) => {
     const artifactsClone = [...artifacts];
     const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
     artifactsClone.splice(removeIndex, 1);
-    updateEngagementFormField('artifacts', artifactsClone, EngagementGroupings.artifacts);
+    updateEngagementFormField(
+      'artifacts',
+      artifactsClone,
+      EngagementGroupings.artifacts
+    );
     return artifactsClone;
   };
   return {
