@@ -30,6 +30,9 @@ export class FakedEngagementService implements EngagementService {
   async checkHasUpdates(engagement: Engagement): Promise<boolean> {
     return false;
   }
+  async checkSubdomainUniqueness(s: string): Promise<boolean> {
+    return true;
+  }
   async getEngagementByCustomerAndProjectName(
     customer_name: string,
     project_name: string

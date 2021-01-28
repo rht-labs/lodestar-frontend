@@ -25,7 +25,6 @@ import {
   TableVariant,
 } from '@patternfly/react-table';
 import { Feature } from '../../feature/feature';
-import { APP_FEATURES } from '../../../common/app_features';
 import { uuid } from 'uuidv4';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { ReadyCheck } from '../../ready_check/ready_check';
@@ -33,16 +32,9 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../../context/engagement_context/engagement_context';
+import { useHostingEnvironmentCheck } from '../../../hooks/hosting_environment_checker';
 
 const OPENSHIFT_MODAL_KEY = 'openshift_modal';
-const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
-  'ocp_cloud_provider_name',
-  'ocp_cloud_provider_region',
-  'ocp_persistent_storage_size',
-  'ocp_sub_domain',
-  'ocp_version',
-  'environment_name',
-];
 
 export function HostingEnvironmentCard() {
   const {
@@ -137,18 +129,11 @@ export function HostingEnvironmentCard() {
     { title: 'Cloud Provider' },
     { title: 'Actions' },
   ];
-  const rows = currentChanges?.hosting_environments?.map?.(
+  const rows = currentEngagement?.hosting_environments?.map?.(
     (hostingEnvironment, idx) => [
       {
         title: (
-          <ReadyCheck
-            isReady={requiredHostingEnvironmentFields.every(
-              f =>
-                hostingEnvironment[f] !== undefined &&
-                hostingEnvironment[f] !== null &&
-                hostingEnvironment[f] !== ''
-            )}
-          />
+          <HostingEnvironmentValidity hostingEnvironment={hostingEnvironment} />
         ),
       },
       hostingEnvironment.environment_name,
@@ -163,7 +148,7 @@ export function HostingEnvironmentCard() {
       ),
       {
         title: (
-          <Feature name={APP_FEATURES.writer}>
+          <Feature name={'writer'}>
             <Dropdown
               isPlain
               dropdownItems={actionItems(hostingEnvironment)}
@@ -282,3 +267,15 @@ function getHumanReadableLabel(
 ) {
   return lookupArray?.find(option => option.value === value)?.label ?? value;
 }
+
+const HostingEnvironmentValidity = ({
+  hostingEnvironment,
+}: {
+  hostingEnvironment: HostingEnvironment;
+}) => {
+  const { isValid } = useHostingEnvironmentCheck(
+    hostingEnvironment,
+    hostingEnvironment.ocp_sub_domain
+  );
+  return <ReadyCheck isReady={isValid} />;
+};
