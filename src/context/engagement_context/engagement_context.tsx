@@ -163,7 +163,7 @@ export const EngagementProvider = ({
     };
   }, [authContext]);
 
-  const _validateAuthStatusRef = useRef(async () => {});
+  const _validateAuthStatusRef = useRef(async () => { });
 
   const _updateEngagementInPlace = useCallback(
     engagement => {
@@ -571,7 +571,7 @@ export const EngagementProvider = ({
         category: AnalyticsCategory.engagements,
         action: 'Update Engagement',
       });
-    } catch (e) {}
+    } catch (e) { }
   };
   return (
     <Provider
@@ -657,14 +657,14 @@ export const useEngagementArtifacts = () => {
   );
   const { artifacts } = currentEngagement ?? {};
   const addArtifact = (artifact: Artifact) => {
-    updateEngagementFormField('artifacts', [...artifacts, artifact]);
+    updateEngagementFormField('artifacts', [...artifacts, artifact], EngagementGroupings.artifacts);
     return [...artifacts, artifact];
   };
   const removeArtifact = (artifact: Artifact) => {
     const artifactsClone = [...artifacts];
     const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
     artifactsClone.splice(removeIndex, 1);
-    updateEngagementFormField('artifacts', artifactsClone);
+    updateEngagementFormField('artifacts', artifactsClone, EngagementGroupings.artifacts);
     return artifactsClone;
   };
   return {

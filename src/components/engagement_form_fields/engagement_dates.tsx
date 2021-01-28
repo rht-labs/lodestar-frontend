@@ -8,11 +8,11 @@ import {
 import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { getFormattedDate } from '../../common/patternfly_date_adapter';
-import { parse as parseDate, startOfToday } from 'date-fns';
-import { addDays } from 'date-fns';
+import { getFormattedDate, parseDatePickerDate } from '../../common/patternfly_date_adapter';
+import startOfToday from 'date-fns/startOfToday';
+import addDays from 'date-fns/addDays';
 import { useValidation } from '../../context/validation_context/validation_hook';
-import { max } from 'date-fns';
+import max from 'date-fns/max';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import {
   EngagementGroupings,
@@ -91,7 +91,7 @@ export function EngagementStartEndDateFormField() {
             value={startDateText}
             onChange={setStartDateText}
             onBlur={e =>
-              setStartDate(parseDate(e.target.value, 'yyyy-MM-dd', 0))
+              setStartDate(parseDatePickerDate(e.target.value))
             }
             data-cy={'start_date_input'}
           />
@@ -107,7 +107,7 @@ export function EngagementStartEndDateFormField() {
             )}
             onChange={setEndDateText}
             onBlur={e => {
-              const parsedDate = parseDate(e.target.value, 'yyyy-MM-dd', 0);
+              const parsedDate = parseDatePickerDate(e.target.value)
               validate('end_date')(parsedDate);
               setEndDate(parsedDate);
             }}
@@ -135,7 +135,7 @@ export function EngagementStartEndDateFormField() {
             aria-label="Environment Retirement Date"
             value={archiveDateText}
             onBlur={e => {
-              const parsedDate = parseDate(e.target.value, 'yyyy-MM-dd', 0);
+              const parsedDate = parseDatePickerDate(e.target.value);
               validate('archive_date')(parsedDate);
               setArchiveDate(parsedDate);
             }}
