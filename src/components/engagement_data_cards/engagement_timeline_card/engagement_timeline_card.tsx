@@ -109,7 +109,7 @@ function EngagementTimelineCardBody(
     { title: 'Actions' },
   ];
   function getAbsoluteUrl(url: string): string {
-    if (url.includes('://')) {
+    if (url?.includes?.('://')) {
       return url;
     } else {
       return `//${url}`;

@@ -112,6 +112,8 @@ export const EngagementProvider = ({
   const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
+
+  const [isLaunchable, setIsLaunchable] = useState<boolean>(false);
   const setCurrentEngagement = useCallback(
     (engagement: Engagement) => {
       dispatch({});
@@ -382,7 +384,6 @@ export const EngagementProvider = ({
     },
     []
   );
-
   const _checkLaunchReady = useCallback(() => {
     if (!currentEngagement) {
       return false;
@@ -401,6 +402,9 @@ export const EngagementProvider = ({
       );
     }
   }, [currentEngagement, _validateHostingEnvironment]);
+  useEffect(() => {
+    setIsLaunchable(_checkLaunchReady());
+  }, [currentEngagement, _checkLaunchReady]);
 
   const missingRequiredFields = useCallback(() => {
     return requiredFields
@@ -582,7 +586,7 @@ export const EngagementProvider = ({
         requiredFields,
         currentEngagement,
         missingRequiredFields: missingRequiredFields(),
-        isLaunchable: _checkLaunchReady(),
+        isLaunchable,
         setCurrentEngagement,
         engagements,
         getEngagement,
