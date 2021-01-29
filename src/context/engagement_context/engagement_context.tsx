@@ -29,6 +29,7 @@ import { CategoryService } from '../../services/category_service/category_servic
 import { engagementFormReducer } from './engagement_form_reducer';
 import { IAuthContext } from '../auth_context/auth_context';
 import { validateHostingEnvironment } from '../../common/validate_hosting_environment';
+import { HostingEnvironment } from '../../schemas/hosting_environment';
 export type FieldGroup = { [key: string]: string[] };
 
 export interface IEngagementContext {
@@ -112,6 +113,8 @@ export const EngagementProvider = ({
   const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
+
+  const [isLaunchable, setIsLaunchable] = useState<boolean>(false);
   const setCurrentEngagement = useCallback(
     (engagement: Engagement) => {
       dispatch({});
@@ -366,12 +369,15 @@ export const EngagementProvider = ({
     ]
   );
   const _validateHostingEnvironment = useCallback(
-    async (hostingEnvironment): Promise<boolean> => {
-      return validateHostingEnvironment(hostingEnvironment, engagementService);
+    async (hostingEnvironment: HostingEnvironment): Promise<boolean> => {
+      return validateHostingEnvironment(
+        hostingEnvironment,
+        engagementService,
+        hostingEnvironment?.ocp_sub_domain
+      );
     },
     [engagementService]
   );
-
   const _checkLaunchReady = useCallback(() => {
     if (!currentEngagement) {
       return false;
@@ -390,31 +396,31 @@ export const EngagementProvider = ({
       );
     }
   }, [currentEngagement, _validateHostingEnvironment]);
+  useEffect(() => {
+    setIsLaunchable(_checkLaunchReady());
+  }, [currentEngagement, _checkLaunchReady]);
 
   const getMissingRequiredFields = useCallback(async () => {
-    const fields =
-      requiredFields ??
-      []
-        .filter(
-          field =>
-            currentEngagement?.[field] !== 'boolean' &&
-            currentEngagement?.[field] !== 'number' &&
-            !currentEngagement?.[field]
-        )
-        .concat(
-          !!(
-            await currentEngagement?.hosting_environments?.map?.(
-              _validateHostingEnvironment
-            )
-          ).every(a => a)
-            ? []
-            : ['hosting_environments']
-        );
+    const heValidation = await Promise.all(
+      (currentEngagement?.hosting_environments ?? []).map?.(
+        _validateHostingEnvironment
+      )
+    );
+    const fields = (requiredFields ?? [])
+      .filter(
+        field =>
+          currentEngagement?.[field] !== 'boolean' &&
+          currentEngagement?.[field] !== 'number' &&
+          !currentEngagement?.[field]
+      )
+      .concat(heValidation.every(a => a) ? [] : ['hosting_environments']);
     return fields;
   }, [currentEngagement, _validateHostingEnvironment]);
 
   useEffect(() => {
-    getMissingRequiredFields().then(setMissingRequiredFields);
+    getMissingRequiredFields().then(fields => {
+      setMissingRequiredFields(fields);
+    });
   }, [getMissingRequiredFields, currentEngagement]);
 
   const saveEngagement = useCallback(
@@ -580,7 +586,7 @@ export const EngagementProvider = ({
         requiredFields,
         currentEngagement,
         missingRequiredFields,
-        isLaunchable: _checkLaunchReady(),
+        isLaunchable,
         setCurrentEngagement,
         engagements,
         getEngagement,
