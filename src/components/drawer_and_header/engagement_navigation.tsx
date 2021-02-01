@@ -9,7 +9,6 @@ import {
   PlusIcon,
 } from '@patternfly/react-icons';
 import { Feature } from '../feature/feature';
-import { APP_FEATURES } from '../../common/app_features';
 
 export const EngagementNavigation = () => {
   const { pathname } = useLocation();
