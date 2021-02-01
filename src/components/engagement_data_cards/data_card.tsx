@@ -8,7 +8,6 @@ import {
   LevelItem,
 } from '@patternfly/react-core';
 import { Feature } from '../feature/feature';
-import { APP_FEATURES } from '../../common/app_features';
 
 export interface DataCardProps {
   title: string;
@@ -34,7 +33,7 @@ export function DataCard({
             </Title>
           </LevelItem>
           <LevelItem>
-            <Feature name={APP_FEATURES.writer}>
+            <Feature name={'writer'}>
               <div style={{ marginRight: '1rem' }} data-testId={'data-card-button'}>
                 <ActionButton />
               </div>

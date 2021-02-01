@@ -37,7 +37,7 @@ export function Dashboard() {
     engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
   ).length;
   const numberOfPastEngagements = engagements?.filter(
-    engagementFilterFactory({ allowedStatuses: [EngagementStatus.past] })
+    engagementFilterFactory({ allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating] })
   ).length;
 
   return (

@@ -395,7 +395,7 @@ export function CreateNewEngagementForm() {
                 </FormSelect>
               </FormGroup>
             </Form>
-            <Feature name={APP_FEATURES.writer}>
+            <Feature name={'writer'}>
               <Button
                 data-testid="create-engagement-button"
                 data-cy="createNewEngagement"

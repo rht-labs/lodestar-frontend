@@ -17,7 +17,6 @@ import {
   UserIcon,
 } from '@patternfly/react-icons';
 import { ActivityHistoryLineItem } from '../activity_history_line_item/activity_history_line_item';
-import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 import { EngagementStatusText } from '../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../common/display_created_by_name';
@@ -113,7 +112,7 @@ export function EngagementAtAGlance({
                 {engagement?.artifacts?.length || 0}
               </FlexItem>
             </Flex>
-            <Feature name={APP_FEATURES.engagementCardIcons}>
+            <Feature name={'engagementCardIcons'}>
               <>
                 <Flex>
                   <FlexItem spacer={{ default: 'spacerSm' }}>

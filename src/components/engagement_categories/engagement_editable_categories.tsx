@@ -59,7 +59,7 @@ export function EngagementEditableCategories({
             Add new tag
           </Label>
         )}
-        <Feature name={APP_FEATURES.writer}>
+        <Feature name={'writer'}>
           <PencilAltIcon
             onClick={e => setEditMode(!editMode)}
             style={{

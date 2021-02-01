@@ -71,7 +71,7 @@ export const EngagementNavigation = () => {
                 Past
               </Link>
             </NavItem>
-            <Feature name={APP_FEATURES.writer}>
+            <Feature name={'writer'}>
               <NavItem
                 id="New"
                 itemId={0}
