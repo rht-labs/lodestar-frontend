@@ -26,7 +26,7 @@ export function DeleteModal(
         </Button>
       ]}
     >
-     Are you sure you want to delete {props.customerName} - {props.projectName}? By deleting this engagement, all related data will be lost and can not be retrieved.
+     Are you sure you want to delete {props.customerName} ({props.projectName})? By deleting this engagement, all related data will be lost and can not be retrieved.
     </Modal>
   );
 }

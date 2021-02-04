@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormGroup, TextInput, Tooltip } from '@patternfly/react-core';
+import { FormGroup, Spinner, TextInput, Tooltip } from '@patternfly/react-core';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { slugify } from 'transliteration';
@@ -10,6 +10,8 @@ interface SubdomainFormFieldProps {
   hostingEnvironment: HostingEnvironment;
   onChange: (value: string) => void;
   isEngagementLaunched: boolean;
+  isLoading?: boolean;
+  isUnique?: boolean;
   suggestedSubdomain: string;
 }
 
@@ -17,6 +19,8 @@ export function SubdomainFormField({
   onChange,
   hostingEnvironment,
   suggestedSubdomain,
+  isUnique,
+  isLoading,
 }: SubdomainFormFieldProps) {
   const { hasFeature } = useFeatures();
   const [editedByUser, setEditedByUser] = useState(false);
@@ -43,12 +47,28 @@ export function SubdomainFormField({
     }
   };
 
+  const getValidationStatus = ():
+    | 'error'
+    | 'success'
+    | 'warning'
+    | 'default' => {
+    if (isLoading) {
+      return 'default';
+    }
+    if (isUnique) {
+      return 'success';
+    }
+
+    return 'error';
+  };
+
   const subdomainValue = getSubdomainFieldText();
   return (
     <FormGroup
       label="Desired Subdomain"
       isRequired
       fieldId="subdomain"
+      validated={getValidationStatus()}
       helperText={
         <div>
           Applications will live at:&nbsp;
@@ -58,10 +78,18 @@ export function SubdomainFormField({
           <Tooltip content="The full domain is shown as an example. The actual domain(s) used within the environment(s) will be available as part of the status once the engagement is launched">
             <InfoCircleIcon></InfoCircleIcon>
           </Tooltip>
+          &nbsp;&nbsp;
+          {isLoading ? <Spinner size="sm" /> : null}
         </div>
+      }
+      helperTextInvalid={
+        !isUnique
+          ? 'This subdomain is already being used. Please choose a unique subdomain.'
+          : 'Something went wrong'
       }
     >
       <TextInput
+        validated={getValidationStatus()}
         isRequired
         data-testid="desired_subdomain_input"
         isDisabled={!hasFeature(APP_FEATURES.writer)}

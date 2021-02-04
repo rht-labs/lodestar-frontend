@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import { HealthStatus } from '../../schemas/cluster_status';
 import { useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
-import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 import { useModalVisibility } from "../../context/edit_modal_visibility_context/edit_modal_visibility_hook";
 import { DeleteModal } from "./delete_modal";
@@ -77,7 +76,7 @@ export function LaunchAlertBanner({
         actionLinks={
           !engagement?.launch ? (
             <div>
-              <Feature name={APP_FEATURES.writer}>
+              <Feature name={'writer'}>
                 <Flex>
                   <FlexItem span={1}>
                     <Button

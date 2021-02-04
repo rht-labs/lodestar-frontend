@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
-import { Artifact } from '../../../schemas/engagement';
+import {Artifact, ArtifactType} from '../../../schemas/engagement';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import {
@@ -22,7 +22,6 @@ import {
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { ClipboardCheckIcon } from '@patternfly/react-icons';
-import { APP_FEATURES } from '../../../common/app_features';
 import { Feature } from '../../feature/feature';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
@@ -110,7 +109,7 @@ function EngagementTimelineCardBody(
     { title: 'Actions' },
   ];
   function getAbsoluteUrl(url: string): string {
-    if (url.includes('://')) {
+    if (url?.includes?.('://')) {
       return url;
     } else {
       return `//${url}`;
@@ -123,7 +122,7 @@ function EngagementTimelineCardBody(
   ];
   const rows =
     props?.artifacts?.map?.((artifact, idx) => [
-      artifact.type,
+      ArtifactType[artifact.type],
       {
         title: (
           <a
@@ -138,7 +137,7 @@ function EngagementTimelineCardBody(
       artifact.description,
       {
         title: (
-          <Feature name={APP_FEATURES.writer}>
+          <Feature name={'writer'}>
             <Dropdown
               isPlain
               dropdownItems={actionItems}
