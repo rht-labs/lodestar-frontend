@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
-import { Artifact } from '../../../schemas/engagement';
+import {Artifact, ArtifactType} from '../../../schemas/engagement';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import {
@@ -122,7 +122,7 @@ function EngagementTimelineCardBody(
   ];
   const rows =
     props?.artifacts?.map?.((artifact, idx) => [
-      artifact.type,
+      ArtifactType[artifact.type],
       {
         title: (
           <a
