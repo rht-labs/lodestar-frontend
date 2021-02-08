@@ -20,7 +20,6 @@ import { CustomerSelectDropdown } from '../../components/customer_select_dropdow
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
-import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
 import { TextFormField } from '../../components/form_fields/text_form_field';
@@ -73,15 +72,19 @@ export function CreateNewEngagementForm() {
               e => e.default
             )?.value,
           engagement_categories: copiedEngagement?.engagement_categories,
-          hosting_environments: copiedEngagement?.hosting_environments.map( hosting_env => {
-            return {
-              ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
-              ocp_cloud_provider_region: hosting_env.ocp_cloud_provider_region,
-              ocp_cluster_size: hosting_env.ocp_cluster_size,
-              ocp_persistent_storage_size: hosting_env.ocp_persistent_storage_size,
-              ocp_version: hosting_env.ocp_version,
+          hosting_environments: copiedEngagement?.hosting_environments.map(
+            hosting_env => {
+              return {
+                ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
+                ocp_cloud_provider_region:
+                  hosting_env.ocp_cloud_provider_region,
+                ocp_cluster_size: hosting_env.ocp_cluster_size,
+                ocp_persistent_storage_size:
+                  hosting_env.ocp_persistent_storage_size,
+                ocp_version: hosting_env.ocp_version,
+              };
             }
-          }),
+          ),
         });
       } else {
         await createEngagement({
@@ -272,7 +275,7 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="region"
                   data-cy="new_engagement_region"
-                  value={region}
+                  value={region ?? ''}
                   onChange={e => {
                     setRegion(e);
                   }}
@@ -313,7 +316,7 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="new-engagement-type"
                   data-cy="new_engagement_type"
-                  value={engagementType}
+                  value={engagementType ?? ''}
                   onChange={e => {
                     setEngagementType(e);
                   }}
@@ -339,7 +342,7 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="new-engagement-copy-from"
                   data-cy="new-engagement-copy-from"
-                  value={selectedProjectNameToFind}
+                  value={selectedProjectNameToFind ?? ''}
                   onChange={e => {
                     setSelectedProjectNameToFind(e);
                   }}
@@ -395,7 +398,7 @@ export function CreateNewEngagementForm() {
                 </FormSelect>
               </FormGroup>
             </Form>
-            <Feature name={APP_FEATURES.writer}>
+            <Feature name={'writer'}>
               <Button
                 data-testid="create-engagement-button"
                 data-cy="createNewEngagement"

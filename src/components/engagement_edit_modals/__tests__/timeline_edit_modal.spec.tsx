@@ -20,7 +20,7 @@ describe('Engagement Edit Modal', () => {
         onClose={onClose}
       />
     );
-    act(async () => {
+    await act(async () => {
       fireEvent.change(modal.getByTestId('artifact-title-input'), {
         target: { value: 'Vanderbilt week 1' },
       });

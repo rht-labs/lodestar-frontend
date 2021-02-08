@@ -6,7 +6,6 @@ import {
   VersionContext,
   VersionProvider,
 } from './context/version_context/version_context';
-import { EngagementProvider } from './context/engagement_context/engagement_context';
 import { ErrorBoundary } from './components/error_boundary/error_boundary';
 import { LodestarRouter } from './routes/router';
 import { FeatureToggles } from './context/feature_context/feature_toggles';
@@ -14,10 +13,7 @@ import {
   ServiceProvider,
   ServiceProviderContext,
 } from './context/service_provider_context/service_provider_context';
-import {
-  FeedbackContext,
-  FeedbackProvider,
-} from './context/feedback_context/feedback_context';
+import { FeedbackProvider } from './context/feedback_context/feedback_context';
 import {
   AnalyticsProvider,
   AnalyticsContext,
@@ -48,8 +44,6 @@ export const App = ({ config }: { config: Config }) => {
             authService,
             notificationService,
             versionService,
-            engagementService,
-            categoryService,
             analyticsService,
           }) => {
             return (
@@ -59,6 +53,7 @@ export const App = ({ config }: { config: Config }) => {
                     {appConfig?.bannerMessages?.map(message => {
                       return (
                         <CustomGlobalBanner
+                          key={message.message}
                           color={message.backgroundcolor}
                           message={message.message}
                         />
@@ -87,26 +82,9 @@ export const App = ({ config }: { config: Config }) => {
                                             versionContext={versionContext}
                                             authContext={authContext}
                                           >
-                                            <FeedbackContext.Consumer>
-                                              {feedbackContext => (
-                                                <EngagementProvider
-                                                  authContext={authContext}
-                                                  feedbackContext={
-                                                    feedbackContext
-                                                  }
-                                                  engagementService={
-                                                    engagementService
-                                                  }
-                                                  categoryService={
-                                                    categoryService
-                                                  }
-                                                >
-                                                  <NavigationAnalytics>
-                                                    <LodestarRouter />
-                                                  </NavigationAnalytics>
-                                                </EngagementProvider>
-                                              )}
-                                            </FeedbackContext.Consumer>
+                                            <NavigationAnalytics>
+                                              <LodestarRouter />
+                                            </NavigationAnalytics>
                                           </FeatureToggles>
                                         );
                                       }}

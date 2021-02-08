@@ -118,7 +118,7 @@ export function PointOfContactEditModal({
                 onChange={setEngagementLeadName}
                 placeholder="Full Name"
                 type="text"
-                value={engagementLeadName}
+                value={engagementLeadName ?? ''}
                 data-cy={'engagement_lead_name'}
               />
               <InputGroupText
@@ -141,7 +141,7 @@ export function PointOfContactEditModal({
                 }}
                 placeholder="Email Address"
                 type="email"
-                value={engagementLeadEmail}
+                value={engagementLeadEmail ?? ''}
                 data-cy={'engagement_lead_email'}
               />
             </InputGroup>
@@ -178,7 +178,7 @@ export function PointOfContactEditModal({
                 onChange={setTechnicalLeadName}
                 placeholder="Full Name"
                 type="text"
-                value={technicalLeadName}
+                value={technicalLeadName ?? ''}
                 data-cy={'tech_lead_name'}
               />
               <InputGroupText
@@ -201,7 +201,7 @@ export function PointOfContactEditModal({
                 }}
                 placeholder="Email Address"
                 type="email"
-                value={technicalLeadEmail}
+                value={technicalLeadEmail ?? ''}
                 data-cy={'tech_lead_email'}
               />
             </InputGroup>
@@ -238,7 +238,7 @@ export function PointOfContactEditModal({
                 onChange={setCustomerContactName}
                 type="text"
                 placeholder="Full Name"
-                value={customerContactName}
+                value={customerContactName ?? ''}
                 data-cy={'customer_contact_name'}
               />
               <InputGroupText
@@ -261,7 +261,7 @@ export function PointOfContactEditModal({
                 }}
                 placeholder="Email Address"
                 type="email"
-                value={customerContactEmail}
+                value={customerContactEmail ?? ''}
                 data-cy={'customer_contact_email'}
               />
             </InputGroup>

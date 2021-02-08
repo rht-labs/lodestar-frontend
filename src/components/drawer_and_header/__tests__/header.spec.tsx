@@ -1,19 +1,25 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { render } from '@testing-library/react';
+import { act, render, waitForDomChange } from '@testing-library/react';
 import { Header } from '../header';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
 describe('Notification UI ', () => {
-  test('should match snapshot', () => {
-    expect(
-      render(
+  test('should match snapshot', async () => {
+    await act(async () => {
+      const rendered = render(
         <MemoryRouter>
           <TestStateWrapper>
-            <Header isDrawerOpen={true} onNavToggle={() => null} />
+            <Header
+              onNotificationClick={() => {}}
+              isDrawerOpen={true}
+              onNavToggle={() => null}
+            />
           </TestStateWrapper>
         </MemoryRouter>
-      )
-    ).toMatchSnapshot();
+      );
+      await waitForDomChange();
+      expect(rendered).toMatchSnapshot();
+    });
   });
 });

@@ -7,7 +7,11 @@ export class FakedEngagementService implements EngagementService {
   async fetchEngagements(): Promise<Engagement[]> {
     return new Array(8)
       .fill(null)
-      .map(() => Engagement.fromFake(this.shouldUseStaticData));
+      .map((_, i) =>
+        Engagement.fromFake(this.shouldUseStaticData, {
+          uniqueSuffix: i.toString(),
+        })
+      );
   }
   async createEngagement(data: Engagement): Promise<Engagement> {
     return data;

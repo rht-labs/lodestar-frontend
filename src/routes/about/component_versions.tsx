@@ -23,12 +23,12 @@ export function ComponentVersions(props: ComponentVersionProps) {
         <GridItem span={12}>
           <Grid span={12}>
             {components.map(component => (
-              <>
+              <div key={component.value}>
                 <Grid hasGutter span={6} style={{ marginLeft: '1rem' }}>
                   <GridItem span={2}>{component.name}</GridItem>
                   <GridItem span={2}>{component.value}</GridItem>
                 </Grid>
-              </>
+              </div>
             ))}
           </Grid>
         </GridItem>

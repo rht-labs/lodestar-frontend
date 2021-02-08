@@ -73,7 +73,7 @@ describe('Engagement Artifact Card', () => {
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
     );
-    act(async () => {
+    await act(async () => {
       fireEvent.click(card.getByTestId('artifact-action-kebab'));
       await waitForDomChange({ container: card.container });
       fireEvent.click(card.getByTestId('artifact-edit-button'));
