@@ -5,7 +5,6 @@ import { EngagementCategory } from '../../schemas/engagement_category';
 import { Engagement } from '../../schemas/engagement';
 import { CategoryTypehead } from './category_typehead';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
-import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 
 export function EngagementEditableCategories({
@@ -59,7 +58,7 @@ export function EngagementEditableCategories({
             Add new tag
           </Label>
         )}
-        <Feature name={APP_FEATURES.writer}>
+        <Feature name={'writer'}>
           <PencilAltIcon
             onClick={e => setEditMode(!editMode)}
             style={{
