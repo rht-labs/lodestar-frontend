@@ -100,6 +100,7 @@ export const EngagementProvider = ({
   feedbackContext,
   authContext,
   analyticsContext,
+  engagementFormConfig,
 }: {
   children: React.ReactChild;
   authContext: IAuthContext;
@@ -107,6 +108,7 @@ export const EngagementProvider = ({
   categoryService: CategoryService;
   feedbackContext: IFeedbackContext;
   analyticsContext?: IAnalyticsContext;
+  engagementFormConfig: EngagementFormConfig;
 }) => {
   const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
@@ -122,9 +124,6 @@ export const EngagementProvider = ({
     },
     [_setCurrentEngagement]
   );
-  const [engagementFormConfig, setEngagementFormConfig] = useState<
-    EngagementFormConfig
-  >();
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => Partial<Engagement>
   >(
@@ -554,21 +553,11 @@ export const EngagementProvider = ({
     }
   }, [categoryService, _handleErrors]);
 
-  const _getEngagementFormConfig = () => {
-    if (!engagementFormConfig) {
-      engagementService
-        ?.getConfig?.()
-        ?.then?.(config => setEngagementFormConfig(config));
-    }
-    return engagementFormConfig;
-  };
-
   const updateEngagementFormField = (
     fieldName: keyof Engagement,
     value: any,
     group?: EngagementGroupings
   ) => {
-    console.log(group);
     setChangedGroups({ ...changedGroups, [group]: true });
     dispatch({ type: fieldName, payload: value });
     try {
@@ -582,7 +571,7 @@ export const EngagementProvider = ({
     <Provider
       value={{
         createEngagementPoll,
-        engagementFormConfig: _getEngagementFormConfig(),
+        engagementFormConfig,
         requiredFields,
         currentEngagement,
         missingRequiredFields,

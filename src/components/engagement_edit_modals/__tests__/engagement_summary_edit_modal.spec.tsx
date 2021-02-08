@@ -1,16 +1,17 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitForDomChange } from '@testing-library/react';
 import { EngagementSummaryEditModal } from '../engagement_summary_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
 import { MemoryRouter } from 'react-router';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
+import { act } from 'react-dom/test-utils';
 
 describe('Engagement Summary edit modal', () => {
-  test('matches snapshot', () => {
-    MockDate.set(new Date(2020, 8, 3));
-    expect(
-      render(
+  test('matches snapshot', async () => {
+    await act(async () => {
+      MockDate.set(new Date(2020, 8, 3));
+      const rendered = render(
         <MemoryRouter>
           <TestStateWrapper>
             <EngagementSummaryEditModal
@@ -21,26 +22,30 @@ describe('Engagement Summary edit modal', () => {
             />
           </TestStateWrapper>
         </MemoryRouter>
-      )
-    ).toMatchSnapshot();
-    MockDate.reset();
+      );
+      await waitForDomChange;
+      expect(rendered).toMatchSnapshot();
+      MockDate.reset();
+    });
   });
 
   test('When clicking the save button, the onSave method is called', async () => {
-    const onSave = jest.fn();
-    const { getByTestId } = render(
-      <MemoryRouter>
-        <TestStateWrapper>
-          <EngagementSummaryEditModal
-            onClose={() => {}}
-            onSave={onSave}
-            engagement={Engagement.fromFake(true)}
-            isOpen={true}
-          />
-        </TestStateWrapper>
-      </MemoryRouter>
-    );
-    await fireEvent.click(getByTestId('engagement-summary-save'));
-    expect(onSave).toHaveBeenCalled();
+    await act(async () => {
+      const onSave = jest.fn();
+      const { findByTestId } = render(
+        <MemoryRouter>
+          <TestStateWrapper>
+            <EngagementSummaryEditModal
+              onClose={() => {}}
+              onSave={onSave}
+              engagement={Engagement.fromFake(true)}
+              isOpen={true}
+            />
+          </TestStateWrapper>
+        </MemoryRouter>
+      );
+      await fireEvent.click(await findByTestId('engagement-summary-save'));
+      expect(onSave).toHaveBeenCalled();
+    });
   });
 });

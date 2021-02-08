@@ -20,6 +20,7 @@ import {
 import { AnalyticsProvider } from '../context/analytics_context/analytics_context';
 import { createFakedServices } from '../services/factories/service_factory';
 import { MemoryRouter } from 'react-router';
+import { EngagementFormConfig } from '../schemas/engagement_config';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
@@ -50,6 +51,7 @@ function TestContexts({ children = null }) {
               <AuthContext.Consumer>
                 {authContext => (
                   <EngagementProvider
+                    engagementFormConfig={EngagementFormConfig.fromFake()}
                     categoryService={categoryService}
                     feedbackContext={feedbackContext}
                     engagementService={engagementService}

@@ -39,16 +39,19 @@ export interface ClusterStatus {
 }
 
 export abstract class ClusterStatus {
-  static fromFake(staticData = false): ClusterStatus {
+  static fromFake(
+    staticData = false,
+    options?: { uniqueSuffix?: string }
+  ): ClusterStatus {
     return {
       overall_status: staticData
         ? HealthStatus.green
         : HealthStatus[HealthStatus[faker.random.number(2)]],
-      messages: Array.apply(null, new Array(4)).map(x =>
-        SystemMessage.fromFake(staticData)
+      messages: Array.apply(null, new Array(4)).map((x, i) =>
+        SystemMessage.fromFake(staticData, { uniqueSuffix: `${i}` })
       ) as SystemMessage[],
-      subsystems: Array.apply(null, new Array(4)).map(x =>
-        Subsystem.fromFake(staticData)
+      subsystems: Array.apply(null, new Array(4)).map((x, i) =>
+        Subsystem.fromFake(staticData, { uniqueSuffix: `${i}` })
       ) as Subsystem[],
     };
   }
