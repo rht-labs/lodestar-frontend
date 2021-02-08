@@ -657,7 +657,7 @@ export const useEngagementFormField = <K extends keyof Engagement>(
 };
 
 export const useEngagementArtifacts = () => {
-  const [artifacts, setArtifacts] = useEngagementFormField(
+  const [artifacts = [], setArtifacts] = useEngagementFormField(
     'artifacts',
     EngagementGroupings.artifacts
   );

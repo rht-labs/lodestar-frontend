@@ -18,6 +18,7 @@ describe('Engagement Edit Modal', () => {
         isOpen={true}
         onSave={onSave}
         onClose={onClose}
+        onUpdate={() => {}}
       />
     );
     act(async () => {

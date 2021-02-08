@@ -33,20 +33,24 @@ describe('Engagement Artifact Card', () => {
   test('clicking add an artifact opens the edit artifact modal', async () => {
     const requestOpen = jest.fn();
     const card = render(
-      <FeatureToggleContext.Provider
-        value={{
-          hasFeature: () => true,
-          features: [APP_FEATURES.writer, APP_FEATURES.reader],
-        }}
+      <EngagementContext.Provider
+        value={{ updateEngagementFormField: () => {} }}
       >
-        <ModalVisibilityContext.Provider
-          value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
+        <FeatureToggleContext.Provider
+          value={{
+            hasFeature: () => true,
+            features: [APP_FEATURES.writer, APP_FEATURES.reader],
+          }}
         >
-          <EngagementArtifactCard></EngagementArtifactCard>
-        </ModalVisibilityContext.Provider>
-      </FeatureToggleContext.Provider>
+          <ModalVisibilityContext.Provider
+            value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
+          >
+            <EngagementArtifactCard></EngagementArtifactCard>
+          </ModalVisibilityContext.Provider>
+        </FeatureToggleContext.Provider>
+      </EngagementContext.Provider>
     );
-    act(() => {
+    act(async () => {
       fireEvent.click(card.getByTestId('add-artifact-button'));
       expect(requestOpen).toHaveBeenCalled();
     });
@@ -74,6 +78,7 @@ describe('Engagement Artifact Card', () => {
       </FeatureToggleContext.Provider>
     );
     act(async () => {
+      await waitForDomChange();
       fireEvent.click(card.getByTestId('artifact-action-kebab'));
       await waitForDomChange({ container: card.container });
       fireEvent.click(card.getByTestId('artifact-edit-button'));
