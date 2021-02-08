@@ -657,36 +657,41 @@ export const useEngagementFormField = <K extends keyof Engagement>(
 };
 
 export const useEngagementArtifacts = () => {
-  const { currentEngagement, updateEngagementFormField } = useContext(
-    EngagementContext
+  const [artifacts, setArtifacts] = useEngagementFormField(
+    'artifacts',
+    EngagementGroupings.artifacts
   );
-  const { artifacts } = currentEngagement ?? {};
   const addArtifact = (artifact: Artifact) => {
-    const artifactsCopy = [...(artifacts ?? [])];
+    const artifactsCopy = [...artifacts];
     const index = artifactsCopy.findIndex(a => a.id === artifact.id);
     if (index > -1) {
       artifactsCopy.splice(index, 1, artifact);
     } else {
       artifactsCopy.push(artifact);
     }
-    updateEngagementFormField('artifacts', EngagementGroupings.artifacts);
+    setArtifacts(artifactsCopy);
     return artifactsCopy;
   };
   const removeArtifact = (artifact: Artifact) => {
     const artifactsClone = [...artifacts];
     const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
     artifactsClone.splice(removeIndex, 1);
-    updateEngagementFormField(
-      'artifacts',
-      artifactsClone,
-      EngagementGroupings.artifacts
-    );
+    setArtifacts(artifactsClone);
+    return artifactsClone;
+  };
+
+  const updateArtifact = (artifact: Artifact) => {
+    const artifactsClone = [...artifacts];
+    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    artifactsClone.splice(removeIndex, 1, artifact);
+    setArtifacts(artifactsClone);
     return artifactsClone;
   };
   return {
     artifacts: artifacts ?? [],
     addArtifact,
     removeArtifact,
+    updateArtifact,
   };
 };
 

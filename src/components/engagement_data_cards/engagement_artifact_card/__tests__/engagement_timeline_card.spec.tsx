@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import { EngagementTimelineCard } from '../engagement_timeline_card';
+import { EngagementArtifactCard } from '../engagement_artifact_card';
 import { APP_FEATURES } from '../../../../common/app_features';
 import { FeatureToggles } from '../../../../context/feature_context/feature_toggles';
 
@@ -10,7 +10,7 @@ describe('Engagement timeline card', () => {
     const Component = () => (
       <MemoryRouter>
         <FeatureToggles features={[APP_FEATURES.reader]}>
-          <EngagementTimelineCard />
+          <EngagementArtifactCard />
         </FeatureToggles>
       </MemoryRouter>
     );

@@ -6,7 +6,7 @@ import {
   waitForDomChange,
 } from '@testing-library/react';
 
-import { EngagementTimelineCard } from '../engagement_timeline_card/engagement_timeline_card';
+import { EngagementArtifactCard } from '../engagement_artifact_card/engagement_artifact_card';
 import { Artifact } from '../../../schemas/engagement';
 import { ModalVisibilityContext } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { FeatureToggleContext } from '../../../context/feature_context/feature_toggles';
@@ -25,7 +25,7 @@ describe('Engagement Artifact Card', () => {
           },
         }}
       >
-        <EngagementTimelineCard />
+        <EngagementArtifactCard />
       </EngagementContext.Provider>
     );
     expect(timelineCard).toMatchSnapshot();
@@ -42,7 +42,7 @@ describe('Engagement Artifact Card', () => {
         <ModalVisibilityContext.Provider
           value={{ requestOpen, activeModalKey: '', requestClose: () => {} }}
         >
-          <EngagementTimelineCard></EngagementTimelineCard>
+          <EngagementArtifactCard></EngagementArtifactCard>
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
     );
@@ -68,7 +68,7 @@ describe('Engagement Artifact Card', () => {
               currentEngagement: { artifacts: [Artifact.fromFake(true)] },
             }}
           >
-            <EngagementTimelineCard></EngagementTimelineCard>
+            <EngagementArtifactCard></EngagementArtifactCard>
           </EngagementContext.Provider>
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
