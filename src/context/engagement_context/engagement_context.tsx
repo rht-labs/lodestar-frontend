@@ -568,7 +568,6 @@ export const EngagementProvider = ({
     value: any,
     group?: EngagementGroupings
   ) => {
-    console.log(group);
     setChangedGroups({ ...changedGroups, [group]: true });
     dispatch({ type: fieldName, payload: value });
     try {
@@ -773,7 +772,6 @@ export const useHostingEnvironmentManager = () => {
   };
 
   const updateHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
-    console.log(hostingEnvironment);
     const updateIndex = hostingEnvironments.findIndex(
       he => he.id === hostingEnvironment.id
     );
