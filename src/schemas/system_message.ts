@@ -23,10 +23,15 @@ export interface SystemMessage {
 }
 
 export abstract class SystemMessage {
-  static fromFake(staticData = false): SystemMessage {
+  static fromFake(
+    staticData = false,
+    options?: { uniqueSuffix: string }
+  ): SystemMessage {
     return {
       severity: staticData ? Severity.info : Severity.info,
-      message: staticData ? 'System Message' : faker.lorem.sentence(),
+      message: staticData
+        ? `System Message${options?.uniqueSuffix ? options?.uniqueSuffix : ''}`
+        : faker.lorem.sentence(),
       updated: staticData ? new Date(2020, 1, 1) : faker.date.recent(),
     };
   }

@@ -25,10 +25,13 @@ const fakeSubsystemNames = [
 ];
 
 export abstract class Subsystem {
-  static fromFake(staticData = false): Subsystem {
+  static fromFake(
+    staticData = false,
+    options?: { uniqueSuffix?: string }
+  ): Subsystem {
     return {
       name: staticData
-        ? 'Openshift'
+        ? `Openshift${options?.uniqueSuffix ? options?.uniqueSuffix : ''}`
         : fakeSubsystemNames[
             faker.random.number(fakeSubsystemNames.length - 1)
           ],

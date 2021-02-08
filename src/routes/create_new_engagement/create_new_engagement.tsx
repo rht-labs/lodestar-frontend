@@ -72,15 +72,19 @@ export function CreateNewEngagementForm() {
               e => e.default
             )?.value,
           engagement_categories: copiedEngagement?.engagement_categories,
-          hosting_environments: copiedEngagement?.hosting_environments.map( hosting_env => {
-            return {
-              ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
-              ocp_cloud_provider_region: hosting_env.ocp_cloud_provider_region,
-              ocp_cluster_size: hosting_env.ocp_cluster_size,
-              ocp_persistent_storage_size: hosting_env.ocp_persistent_storage_size,
-              ocp_version: hosting_env.ocp_version,
+          hosting_environments: copiedEngagement?.hosting_environments.map(
+            hosting_env => {
+              return {
+                ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
+                ocp_cloud_provider_region:
+                  hosting_env.ocp_cloud_provider_region,
+                ocp_cluster_size: hosting_env.ocp_cluster_size,
+                ocp_persistent_storage_size:
+                  hosting_env.ocp_persistent_storage_size,
+                ocp_version: hosting_env.ocp_version,
+              };
             }
-          }),
+          ),
         });
       } else {
         await createEngagement({
@@ -271,7 +275,7 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="region"
                   data-cy="new_engagement_region"
-                  value={region}
+                  value={region ?? ''}
                   onChange={e => {
                     setRegion(e);
                   }}
@@ -312,7 +316,7 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="new-engagement-type"
                   data-cy="new_engagement_type"
-                  value={engagementType}
+                  value={engagementType ?? ''}
                   onChange={e => {
                     setEngagementType(e);
                   }}
@@ -338,7 +342,7 @@ export function CreateNewEngagementForm() {
                 <FormSelect
                   data-testid="new-engagement-copy-from"
                   data-cy="new-engagement-copy-from"
-                  value={selectedProjectNameToFind}
+                  value={selectedProjectNameToFind ?? ''}
                   onChange={e => {
                     setSelectedProjectNameToFind(e);
                   }}

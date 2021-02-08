@@ -125,16 +125,18 @@ Object {
                       <div
                         class="pf-l-grid pf-m-all-12-col"
                       >
-                        <div
-                          class="pf-l-grid pf-m-all-6-col pf-m-gutter"
-                          style="margin-left: 1rem;"
-                        >
+                        <div>
                           <div
-                            class="pf-l-grid__item pf-m-2-col"
-                          />
-                          <div
-                            class="pf-l-grid__item pf-m-2-col"
-                          />
+                            class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                            style="margin-left: 1rem;"
+                          >
+                            <div
+                              class="pf-l-grid__item pf-m-2-col"
+                            />
+                            <div
+                              class="pf-l-grid__item pf-m-2-col"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -268,16 +270,18 @@ Object {
                     <div
                       class="pf-l-grid pf-m-all-12-col"
                     >
-                      <div
-                        class="pf-l-grid pf-m-all-6-col pf-m-gutter"
-                        style="margin-left: 1rem;"
-                      >
+                      <div>
                         <div
-                          class="pf-l-grid__item pf-m-2-col"
-                        />
-                        <div
-                          class="pf-l-grid__item pf-m-2-col"
-                        />
+                          class="pf-l-grid pf-m-all-6-col pf-m-gutter"
+                          style="margin-left: 1rem;"
+                        >
+                          <div
+                            class="pf-l-grid__item pf-m-2-col"
+                          />
+                          <div
+                            class="pf-l-grid__item pf-m-2-col"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

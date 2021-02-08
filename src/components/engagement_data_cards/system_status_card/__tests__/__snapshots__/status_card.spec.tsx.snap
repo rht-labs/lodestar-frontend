@@ -73,7 +73,7 @@ Object {
                     data-testid="subsystem-item"
                     type="button"
                   >
-                    Openshift
+                    Openshift0
                   </button>
                 </div>
               </div>
@@ -114,7 +114,7 @@ Object {
                     data-testid="subsystem-item"
                     type="button"
                   >
-                    Openshift
+                    Openshift1
                   </button>
                 </div>
               </div>
@@ -155,7 +155,7 @@ Object {
                     data-testid="subsystem-item"
                     type="button"
                   >
-                    Openshift
+                    Openshift2
                   </button>
                 </div>
               </div>
@@ -196,7 +196,7 @@ Object {
                     data-testid="subsystem-item"
                     type="button"
                   >
-                    Openshift
+                    Openshift3
                   </button>
                 </div>
               </div>
@@ -280,7 +280,7 @@ Object {
                   data-testid="subsystem-item"
                   type="button"
                 >
-                  Openshift
+                  Openshift0
                 </button>
               </div>
             </div>
@@ -321,7 +321,7 @@ Object {
                   data-testid="subsystem-item"
                   type="button"
                 >
-                  Openshift
+                  Openshift1
                 </button>
               </div>
             </div>
@@ -362,7 +362,7 @@ Object {
                   data-testid="subsystem-item"
                   type="button"
                 >
-                  Openshift
+                  Openshift2
                 </button>
               </div>
             </div>
@@ -403,7 +403,7 @@ Object {
                   data-testid="subsystem-item"
                   type="button"
                 >
-                  Openshift
+                  Openshift3
                 </button>
               </div>
             </div>
@@ -1485,7 +1485,7 @@ Object {
                               </b>
                               <span>
                                  
-                                System Message
+                                System Message0
                                  
                               </span>
                             </div>
@@ -1538,7 +1538,7 @@ Object {
                               </b>
                               <span>
                                  
-                                System Message
+                                System Message1
                                  
                               </span>
                             </div>
@@ -1591,7 +1591,7 @@ Object {
                               </b>
                               <span>
                                  
-                                System Message
+                                System Message2
                                  
                               </span>
                             </div>
@@ -1644,7 +1644,7 @@ Object {
                               </b>
                               <span>
                                  
-                                System Message
+                                System Message3
                                  
                               </span>
                             </div>

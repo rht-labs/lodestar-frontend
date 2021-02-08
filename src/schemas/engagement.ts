@@ -35,6 +35,7 @@ export abstract class EngagementUser {
 }
 
 export interface FakedEngagementOptions {
+  uniqueSuffix: string;
   status: EngagementStatus;
 }
 
@@ -217,7 +218,11 @@ export abstract class Engagement {
       mongo_id: '1',
       hosting_environments: [HostingEnvironment.fromFake(staticData)],
       project_id: staticData ? 1 : faker.random.number(),
-      project_name: staticData ? 'Boots on the Moon' : faker.company.bsNoun(),
+      project_name: staticData
+        ? `Boots on the Moon${
+            options?.uniqueSuffix ? ` ${options.uniqueSuffix}` : ''
+          }`
+        : faker.company.bsNoun(),
       public_reference: staticData ? false : faker.random.boolean(),
       engagement_region: regions[0],
       technical_lead_email: staticData ? 'eve@doe.com' : faker.internet.email(),
@@ -247,7 +252,7 @@ export abstract class Engagement {
             launched_date_time: faker.date.recent(),
           }
         : null,
-      status: ClusterStatus.fromFake(staticData),
+      status: ClusterStatus.fromFake(staticData, options),
       use_cases: staticData
         ? [{ id: '1', description: 'an engagement use case' }]
         : new Array(3).fill(null).map(() => ({

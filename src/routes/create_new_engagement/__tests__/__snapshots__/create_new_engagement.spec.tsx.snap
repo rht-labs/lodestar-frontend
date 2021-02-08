@@ -266,6 +266,30 @@ Object {
                       >
                         Select a region
                       </option>
+                      <option
+                        class=""
+                        value="na"
+                      >
+                        NA
+                      </option>
+                      <option
+                        class=""
+                        value="latam"
+                      >
+                        LATAM
+                      </option>
+                      <option
+                        class=""
+                        value="emea"
+                      >
+                        EMEA
+                      </option>
+                      <option
+                        class=""
+                        value="apac"
+                      >
+                        APAC
+                      </option>
                     </select>
                     <div
                       aria-live="polite"
@@ -313,7 +337,20 @@ Object {
                       data-ouia-component-type="PF4/FormSelect"
                       data-ouia-safe="true"
                       data-testid="new-engagement-type"
-                    />
+                    >
+                      <option
+                        class=""
+                        value="DO500"
+                      >
+                        DO500
+                      </option>
+                      <option
+                        class=""
+                        value="Residency"
+                      >
+                        Residency
+                      </option>
+                    </select>
                     
                   </div>
                 </div>
@@ -656,6 +693,30 @@ Object {
                     >
                       Select a region
                     </option>
+                    <option
+                      class=""
+                      value="na"
+                    >
+                      NA
+                    </option>
+                    <option
+                      class=""
+                      value="latam"
+                    >
+                      LATAM
+                    </option>
+                    <option
+                      class=""
+                      value="emea"
+                    >
+                      EMEA
+                    </option>
+                    <option
+                      class=""
+                      value="apac"
+                    >
+                      APAC
+                    </option>
                   </select>
                   <div
                     aria-live="polite"
@@ -703,7 +764,20 @@ Object {
                     data-ouia-component-type="PF4/FormSelect"
                     data-ouia-safe="true"
                     data-testid="new-engagement-type"
-                  />
+                  >
+                    <option
+                      class=""
+                      value="DO500"
+                    >
+                      DO500
+                    </option>
+                    <option
+                      class=""
+                      value="Residency"
+                    >
+                      Residency
+                    </option>
+                  </select>
                   
                 </div>
               </div>
