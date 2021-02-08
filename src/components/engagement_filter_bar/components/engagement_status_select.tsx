@@ -26,6 +26,15 @@ export function EngagementStatusSelect({
       return 'Terminating';
     }
   };
+
+  const updateAllowedStatuses = (status: EngagementStatus) => {
+    return status
+      ? status === EngagementStatus.past
+        ? [EngagementStatus.past, EngagementStatus.terminating]
+        : [status]
+      : undefined;
+  };
+
   return (
     <>
       <InputGroup>
@@ -41,7 +50,7 @@ export function EngagementStatusSelect({
           onSelect={(_, status: EngagementStatus) =>
             onChange({
               ...filter,
-              allowedStatuses: status ? [status] : undefined,
+              allowedStatuses: updateAllowedStatuses(status),
             })
           }
         >
