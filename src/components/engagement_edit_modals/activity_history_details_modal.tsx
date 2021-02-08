@@ -44,6 +44,7 @@ function DetailedActivityHistoryList({ commits }: { commits: GitCommit[] }) {
     <Accordion>
       {commits?.map(commit => (
         <ActivityHistoryLineItem
+          key={commit.id}
           commit={commit}
           isAccordionItem
           onToggle={commitId =>

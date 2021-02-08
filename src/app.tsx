@@ -59,6 +59,7 @@ export const App = ({ config }: { config: Config }) => {
                     {appConfig?.bannerMessages?.map(message => {
                       return (
                         <CustomGlobalBanner
+                          key={message.message}
                           color={message.backgroundcolor}
                           message={message.message}
                         />
