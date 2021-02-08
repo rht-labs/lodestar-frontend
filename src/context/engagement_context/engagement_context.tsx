@@ -752,3 +752,46 @@ export const useEngagementUser = (user: EngagementUser) => {
     validateRole(user.role);
   return [currentUserEdits, isValid, setUser];
 };
+
+export const useHostingEnvironmentManager = () => {
+  const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
+    'hosting_environments',
+    EngagementGroupings.hostingEnvironment
+  );
+
+  const addHostingEnvironment = (
+    hostingEnvironment: Partial<HostingEnvironment>
+  ) => {
+    const newHostingEnvironments = [...hostingEnvironments, hostingEnvironment];
+    setHostingEnvironments(newHostingEnvironments as HostingEnvironment[]);
+    return newHostingEnvironments;
+  };
+
+  const updateHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
+    console.log(hostingEnvironment);
+    const updateIndex = hostingEnvironments.findIndex(
+      he => he.id === hostingEnvironment.id
+    );
+    const newHostingEnvironments = [...hostingEnvironments];
+    newHostingEnvironments.splice(updateIndex, 1, hostingEnvironment);
+    setHostingEnvironments(newHostingEnvironments);
+    return newHostingEnvironments;
+  };
+
+  const deleteHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
+    const newHostingEnvironments = [...hostingEnvironments];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      1
+    );
+    setHostingEnvironments(newHostingEnvironments);
+    return newHostingEnvironments;
+  };
+
+  return {
+    addHostingEnvironment,
+    deleteHostingEnvironment,
+    updateHostingEnvironment,
+    hostingEnvironments,
+  };
+};

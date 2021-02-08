@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import {
@@ -22,30 +22,27 @@ export interface OpenShiftClusterEditModalProps {
   onClose: () => void;
   isEngagementLaunched: boolean;
   suggestedSubdomain?: string;
+  setHostingEnvironment: (HostingEnvironment: HostingEnvironment) => void;
 }
 
 export function OpenShiftClusterEditModal({
   onClose = () => {},
-  hostingEnvironment: propsHostingEnvironment,
+  hostingEnvironment,
   isOpen,
   onSave: propsOnSave,
   suggestedSubdomain,
   isEngagementLaunched,
+  setHostingEnvironment,
 }: OpenShiftClusterEditModalProps) {
   const { engagementFormConfig } = useEngagements();
-  const [hostingEnvironment, setHostingEnvironment] = useState<
-    HostingEnvironment
-  >();
 
   const {
     isUnique,
     checkSubdomain,
     loading: subdomainCheckLoading,
   } = useSubdomainUniqueness();
+
   const { hasFeature } = useFeatures();
-  useEffect(() => {
-    setHostingEnvironment(propsHostingEnvironment);
-  }, [propsHostingEnvironment, setHostingEnvironment]);
 
   const availableProviders = getAvailableProviders(
     hostingEnvironment,
@@ -62,7 +59,7 @@ export function OpenShiftClusterEditModal({
   );
 
   const onSave = () => {
-    propsOnSave({ ...(propsHostingEnvironment ?? {}), ...hostingEnvironment });
+    propsOnSave(hostingEnvironment);
     onClose();
   };
 
@@ -150,7 +147,7 @@ export function OpenShiftClusterEditModal({
             isUnique={isUnique}
             isLoading={subdomainCheckLoading}
             onChange={value => {
-              checkSubdomain(value, propsHostingEnvironment?.ocp_sub_domain);
+              checkSubdomain(value, hostingEnvironment?.ocp_sub_domain);
               onChange('ocp_sub_domain', value);
             }}
             hostingEnvironment={hostingEnvironment}
