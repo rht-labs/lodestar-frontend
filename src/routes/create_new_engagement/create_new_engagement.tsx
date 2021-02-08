@@ -20,7 +20,6 @@ import { CustomerSelectDropdown } from '../../components/customer_select_dropdow
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { SectionTitle } from '../../components/section_title/section_title';
-import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
 import { TextFormField } from '../../components/form_fields/text_form_field';
@@ -399,7 +398,7 @@ export function CreateNewEngagementForm() {
                 </FormSelect>
               </FormGroup>
             </Form>
-            <Feature name={APP_FEATURES.writer}>
+            <Feature name={'writer'}>
               <Button
                 data-testid="create-engagement-button"
                 data-cy="createNewEngagement"

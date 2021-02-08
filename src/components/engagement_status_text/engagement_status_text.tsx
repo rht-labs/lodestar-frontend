@@ -14,6 +14,9 @@ export const EngagementStatusText = ({
     } else if (status === EngagementStatus.past) {
       return 'Past';
     }
+    else if (status === EngagementStatus.terminating) {
+      return 'Past (Terminating)';
+    }
     return '';
   };
   const getStatusColor = (status?: EngagementStatus) => {
