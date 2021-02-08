@@ -74,18 +74,16 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               onChange={(value: string, _) => {
                 setArtifactEdits({
                   ...artifactEdits,
-                  type: ArtifactType[value],
+                  type: value,
                 });
               }}
             >
-              {Object.keys(ArtifactType).map(artifactTypeKey => (
+              {Object.keys(ArtifactType).map((artifactTypeKey, index) => (
                 <FormSelectOption
-                  key={ArtifactType[artifactTypeKey]}
-                  value={ArtifactType[artifactTypeKey]}
+                  key={index}
+                  value={artifactTypeKey}
                   label={ArtifactType[artifactTypeKey]}
-                >
-                  {ArtifactType[artifactTypeKey]}
-                </FormSelectOption>
+                />
               ))}
             </FormSelect>
           </FormGroup>
