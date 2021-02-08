@@ -8,6 +8,8 @@ import { HashLink } from 'react-router-hash-link';
 import { Feature } from '../feature/feature';
 import { useModalVisibility } from "../../context/edit_modal_visibility_context/edit_modal_visibility_hook";
 import { DeleteModal } from "./delete_modal";
+import {AlertType} from "../../context/feedback_context/feedback_context";
+import {AlreadyExistsError} from "../../services/engagement_service/engagement_service_errors";
 
 interface LaunchAlertBannerProps {
   engagement: Engagement;
@@ -64,8 +66,7 @@ export function LaunchAlertBanner({
     <>
       <DeleteModal
         isOpen={activeModalKey?.includes(DELETE_ENGAGEMENT_MODAL_KEY)}
-        customerName={engagement?.customer_name}
-        projectName={engagement?.project_name}
+        engagement={engagement}
       />
       <Alert
         isInline

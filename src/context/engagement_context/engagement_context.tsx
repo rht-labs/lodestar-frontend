@@ -8,7 +8,11 @@ import React, {
 import { Artifact, Engagement, EngagementUser } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import {
+  AlreadyExistsError,
+  AlreadyLaunchedError,
+  NotFoundError
+} from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 import {
   AlertType,
@@ -51,6 +55,7 @@ export interface IEngagementContext {
   ) => Promise<Engagement>;
   createEngagement: (data: any) => Promise<Engagement>;
   saveEngagement: (data: Engagement, commitMessage?: string) => Promise<void>;
+  deleteEngagement: (data: Engagement) => Promise<void>;
   missingRequiredFields: string[];
   isLaunchable: boolean;
   engagementFormConfig?: EngagementFormConfig;
@@ -539,6 +544,55 @@ export const EngagementProvider = ({
       setCurrentEngagement,
     ]
   );
+
+  const _deleteEngagement = useCallback(
+    async (deletedEngagement: Engagement) => {
+      try {
+        engagements.filter(engagement => engagement.uuid !== deletedEngagement.uuid);
+        setEngagements(engagements);
+      } catch (e) {
+        await _handleErrors(e);
+      }
+    },
+    [engagements, _handleErrors]
+  );
+
+  const deleteEngagement = useCallback(async(engagement: Engagement) => {
+    try {
+      await engagementService.deleteEngagement(engagement);
+      _deleteEngagement(engagement);
+      setEngagements([...(engagements ?? [])]);
+      feedbackContext.showAlert(
+        'Engagement is deleted successfully',
+        AlertType.success
+      );
+      feedbackContext.hideLoader();
+
+    } catch (e) {
+      feedbackContext.hideLoader();
+      let errorMessage;
+      if (e instanceof AlreadyLaunchedError) {
+        errorMessage =
+          'This engagement is already launched and has not been removed';
+      }
+      if (e instanceof NotFoundError) {
+        errorMessage =
+          'Engagement is not found';
+      }
+      else {
+        try {
+          await _handleErrors(e);
+        } catch (e) {
+          errorMessage =
+            'There was an issue with deleting selected engagement. Please follow up with an administrator if this continues.';
+        }
+      }
+
+      feedbackContext.showAlert(errorMessage, AlertType.error);
+      await _handleErrors(e);
+      }
+  }, [engagementService, _handleErrors]);
+
   const fetchCategories = useCallback(async () => {
     try {
       // feedbackContext.showLoader();
@@ -592,6 +646,7 @@ export const EngagementProvider = ({
         getEngagement,
         getEngagements: fetchEngagements,
         createEngagement,
+        deleteEngagement,
         saveEngagement,
         launchEngagement,
         fetchCategories,
