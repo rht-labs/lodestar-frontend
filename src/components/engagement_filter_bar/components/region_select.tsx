@@ -42,7 +42,9 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
         }}
       >
         {[
-          <SelectOption value="any">Any</SelectOption>,
+          <SelectOption key="any" value="any">
+            Any
+          </SelectOption>,
           ...props.regions.map(region => {
             return (
               <SelectOption

@@ -19,7 +19,7 @@ export function RequiredFieldsWarning({
       <div>
         <ul>
           {neededFields.map(field => (
-            <li>{field}</li>
+            <li key={field}>{field}</li>
           ))}
         </ul>
       </div>

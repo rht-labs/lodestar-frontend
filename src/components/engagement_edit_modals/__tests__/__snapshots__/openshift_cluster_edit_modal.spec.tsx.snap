@@ -235,6 +235,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="Provider Region"
                         class="pf-c-form-control"
                         data-cy=""
                         data-ouia-component-id="4"
@@ -246,6 +247,7 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select a region
@@ -291,6 +293,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="OpenShift Version"
                         class="pf-c-form-control"
                         data-cy="oc-version-select"
                         data-ouia-component-id="5"
@@ -301,6 +304,7 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select a version
@@ -409,6 +413,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="Persistent Storage Needs"
                         class="pf-c-form-control"
                         data-cy="persistent-storage-select"
                         data-ouia-component-id="6"
@@ -419,6 +424,7 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select a storage size
@@ -457,6 +463,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="Cluster Size"
                         class="pf-c-form-control"
                         data-cy="cluster-size-select"
                         data-ouia-component-id="7"
@@ -468,6 +475,7 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select cluster size

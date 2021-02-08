@@ -81,7 +81,9 @@ export function LaunchAlertBanner({
     >
       <div>
         <LaunchMessage engagement={engagement} />
-        {!engagement?.launch ? (
+        {engagement?.launch ? (
+          undefined
+        ) : (
           <div>
             <div>
               <span style={{ fontStyle: 'italic' }}>
@@ -96,8 +98,8 @@ export function LaunchAlertBanner({
                       field => ENGAGEMENT_FIELD_MAP[field]
                     )
                   )
-                ).map(section => (
-                  <li>
+                ).map((section: string, i) => (
+                  <li key={i}>
                     <HashLink smooth to={`${path}#${section}`}>
                       {ENGAGEMENT_CARDS[section]}
                     </HashLink>
@@ -106,8 +108,6 @@ export function LaunchAlertBanner({
               </ul>
             </div>
           </div>
-        ) : (
-          undefined
         )}
       </div>
     </Alert>

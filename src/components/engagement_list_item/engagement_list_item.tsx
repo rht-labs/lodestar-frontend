@@ -47,19 +47,21 @@ export function EngagementListItem(props: DataCardProps) {
               <Title style={{ fontWeight: 'normal' }} headingLevel="h4">
                 {engagement.customer_name}
               </Title>
-              {
-                engagement.engagement_categories?.length > 0
-                  ? engagement?.engagement_categories.map(currentChip => (
-                    <>
-                      <Label key={currentChip.name}
-                             style={{marginTop: '1rem', marginRight:'0.5rem'}}
-                             color="blue">
-                        {currentChip.name}
-                      </Label>
-                  </>
-                  ))
-                  : <></>
-              }
+              {engagement.engagement_categories?.length > 0 ? (
+                engagement?.engagement_categories.map(currentChip => (
+                  <div key={currentChip.name}>
+                    <Label
+                      key={currentChip.name}
+                      style={{ marginTop: '1rem', marginRight: '0.5rem' }}
+                      color="blue"
+                    >
+                      {currentChip.name}
+                    </Label>
+                  </div>
+                ))
+              ) : (
+                <></>
+              )}
             </GridItem>
             <GridItem md={12} lg={7}>
               <EngagementAtAGlance engagement={engagement} status={status} />
