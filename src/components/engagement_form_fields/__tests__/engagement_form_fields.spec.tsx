@@ -2,7 +2,7 @@ import React from 'react';
 import { AdditionalDetailsFormField } from '../additional_details';
 import { CloudProviderFormField } from '../cloud_provider';
 import { SubdomainFormField } from '../subdomain';
-import { render, fireEvent, waitForDomChange } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { act } from 'react-dom/test-utils';
@@ -17,7 +17,6 @@ describe('Engagement form fields', () => {
           />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });
@@ -50,7 +49,6 @@ describe('Engagement form fields', () => {
           />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });
@@ -66,7 +64,6 @@ describe('Engagement form fields', () => {
           />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       const textArea = await wrapper.findByTestId('cloud-provider-select');
       await fireEvent.change(textArea, { target: { value: 'bot' } });
       expect(onChange).toHaveBeenCalled();
@@ -84,7 +81,6 @@ describe('Engagement form fields', () => {
           />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });

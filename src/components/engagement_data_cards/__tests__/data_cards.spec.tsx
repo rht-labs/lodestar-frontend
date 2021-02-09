@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForDomChange } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { EngagementSummaryCard } from '../engagement_summary_card/engagement_summary_card';
 import { HostingEnvironmentCard } from '../hosting_environment_card/hosting_environment_card';
 import { PointOfContactCard } from '../point_of_contact_card/point_of_contact_card';
@@ -22,7 +22,6 @@ describe('Engagement summary card', () => {
           </TestStateWrapper>
         </MemoryRouter>
       );
-      await waitForDomChange;
 
       expect(rendered).toMatchSnapshot();
     });
@@ -37,7 +36,6 @@ describe('OpenShift Cluster Summary', () => {
           <HostingEnvironmentCard />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });
@@ -51,7 +49,6 @@ describe('Point of Contact Card', () => {
           <PointOfContactCard />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });
@@ -78,7 +75,6 @@ describe('Edit button', () => {
       );
 
       const wrapper = render(<Component />);
-      await waitForDomChange;
       expect(wrapper.findByTestId('data-card-button')).toMatchObject({});
     });
   });

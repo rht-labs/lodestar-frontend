@@ -56,68 +56,70 @@ export function EngagementSummaryEditModal(
   );
 
   return (
-    <Modal
-      variant={ModalVariant.small}
-      isOpen={props.isOpen}
-      onClose={() => {
-        props.onClose?.();
-      }}
-      title="Engagement Summary"
-    >
-      <EditModalTemplate
-        actions={
-          <div>
-            <Button
-              data-testid="engagement-summary-save"
-              onClick={onSave}
-              data-cy={'save_summary_card'}
-            >
-              Save
-            </Button>
-          </div>
-        }
+    <div data-testid="engagement_summary_edit_modal">
+      <Modal
+        variant={ModalVariant.small}
+        isOpen={props.isOpen}
+        onClose={() => {
+          props.onClose?.();
+        }}
+        title="Engagement Summary"
       >
-        <Form>
-          <TextFormField
-            value={customerName}
-            onChange={setCustomerName}
-            fieldId="customer_name"
-            testId="customer_name_field"
-            label="Client Name"
-            isRequired={true}
-          />
-          <TextFormField
-            value={engagementName}
-            onChange={setEngagementName}
-            fieldId="engagement_name"
-            testId="engagement_name_field"
-            label="Engagement Name"
-            isRequired={true}
-          />
-          <EngagementUseCaseField
-            useCases={useCases}
-            setUseCases={setUseCases}
-          />
-          <TextFormField
-            value={description}
-            onChange={setDescription}
-            fieldId="description"
-            label="Description"
-            placeholder="Description and notes for the Engagement"
-          />
-          <TextFormField
-            value={location}
-            onChange={setLocation}
-            placeholder="e.g. Pasadena, CA"
-            fieldId="location"
-            testId="location-field"
-            helperText="Where will this be held?"
-            label="Location"
-          />
-          <EngagementStartEndDateFormField />
-          <PublicReferenceField />
-        </Form>
-      </EditModalTemplate>
-    </Modal>
+        <EditModalTemplate
+          actions={
+            <div>
+              <Button
+                data-testid="engagement-summary-save"
+                onClick={onSave}
+                data-cy={'save_summary_card'}
+              >
+                Save
+              </Button>
+            </div>
+          }
+        >
+          <Form>
+            <TextFormField
+              value={customerName}
+              onChange={setCustomerName}
+              fieldId="customer_name"
+              testId="customer_name_field"
+              label="Client Name"
+              isRequired={true}
+            />
+            <TextFormField
+              value={engagementName}
+              onChange={setEngagementName}
+              fieldId="engagement_name"
+              testId="engagement_name_field"
+              label="Engagement Name"
+              isRequired={true}
+            />
+            <EngagementUseCaseField
+              useCases={useCases}
+              setUseCases={setUseCases}
+            />
+            <TextFormField
+              value={description}
+              onChange={setDescription}
+              fieldId="description"
+              label="Description"
+              placeholder="Description and notes for the Engagement"
+            />
+            <TextFormField
+              value={location}
+              onChange={setLocation}
+              placeholder="e.g. Pasadena, CA"
+              fieldId="location"
+              testId="location-field"
+              helperText="Where will this be held?"
+              label="Location"
+            />
+            <EngagementStartEndDateFormField />
+            <PublicReferenceField />
+          </Form>
+        </EditModalTemplate>
+      </Modal>
+    </div>
   );
 }

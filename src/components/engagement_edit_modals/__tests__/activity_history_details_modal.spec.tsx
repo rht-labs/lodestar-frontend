@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForDomChange } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { ActivityHistoryDetailsModal } from '../activity_history_details_modal';
 import { Engagement } from '../../../schemas/engagement';
@@ -17,7 +17,9 @@ describe('Activity History Details Modal', () => {
         </TestStateWrapper>
       );
       const rendered = render(el);
-      await waitForDomChange;
+      await waitFor(() =>
+        expect(screen.getByTestId('activity_history_modal')).toBeDefined()
+      );
       expect(rendered).toMatchSnapshot();
     });
   });

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  render,
-  act,
-  fireEvent,
-  waitForDomChange,
-} from '@testing-library/react';
+import { render, act, fireEvent, screen } from '@testing-library/react';
 
 import { EngagementArtifactCard } from '../engagement_artifact_card/engagement_artifact_card';
 import { Artifact, Engagement } from '../../../schemas/engagement';
@@ -42,7 +37,7 @@ describe('Engagement Artifact Card', () => {
   });
   test('clicking add an artifact opens the edit artifact modal', async () => {
     const requestOpen = jest.fn();
-    const card = render(
+    render(
       <EngagementContext.Provider
         value={{ updateEngagementFormField: () => {} }}
       >
@@ -60,15 +55,15 @@ describe('Engagement Artifact Card', () => {
         </FeatureToggleContext.Provider>
       </EngagementContext.Provider>
     );
-    act(async () => {
-      fireEvent.click(card.getByTestId('add-artifact-button'));
+    act(() => {
+      fireEvent.click(screen.getByTestId('add-artifact-button'));
       expect(requestOpen).toHaveBeenCalled();
     });
   });
   test('clicking the edit artifact dropdown item opens the edit artifact modal', async () => {
     const requestOpen = jest.fn();
     const e = Engagement.fromFake();
-    const card = render(
+    render(
       <FeatureToggleContext.Provider
         value={
           ({
@@ -95,12 +90,8 @@ describe('Engagement Artifact Card', () => {
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
     );
-    act(async () => {
-      await waitForDomChange();
-      fireEvent.click(card.getByTestId('artifact-action-kebab'));
-      await waitForDomChange({ container: card.container });
-      fireEvent.click(card.getByTestId('artifact-edit-button'));
-      expect(requestOpen).toHaveBeenCalled();
-    });
+    await fireEvent.click(screen.getByTestId('artifact-action-kebab'));
+    await fireEvent.click(screen.getByTestId('artifact-edit-button'));
+    expect(requestOpen).toHaveBeenCalled();
   });
 });
