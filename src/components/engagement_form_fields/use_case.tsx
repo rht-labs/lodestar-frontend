@@ -12,7 +12,7 @@ import { TrashAltIcon } from '@patternfly/react-icons';
 import { uuid } from 'uuidv4';
 
 export function EngagementUseCaseField({
-  useCases,
+  useCases = [],
   setUseCases,
 }: {
   useCases: EngagementUseCase[];
