@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-  render,
-  act,
-  fireEvent,
-  queryByAttribute,
-} from '@testing-library/react';
+import { render, queryByAttribute } from '@testing-library/react';
 import { EngagementFilterBar } from '../engagement_filter_bar';
-import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import {
+  EngagementContext,
+  IEngagementContext,
+} from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 
 const getById = queryByAttribute.bind(null, 'id');
@@ -17,7 +14,11 @@ describe('Engagement Navigation ', () => {
     expect(
       render(
         <EngagementContext.Provider
-          value={{ engagementFormConfig: EngagementFormConfig.fromFake() }}
+          value={
+            ({
+              engagementFormConfig: EngagementFormConfig.fromFake(),
+            } as unknown) as IEngagementContext
+          }
         >
           <EngagementFilterBar filter={{}} onChange={() => {}} />
         </EngagementContext.Provider>
@@ -27,7 +28,11 @@ describe('Engagement Navigation ', () => {
   test('can find engagement region filter select', async () => {
     const wrapper = render(
       <EngagementContext.Provider
-        value={{ engagementFormConfig: EngagementFormConfig.fromFake() }}
+        value={
+          ({
+            engagementFormConfig: EngagementFormConfig.fromFake(),
+          } as unknown) as IEngagementContext
+        }
       >
         <EngagementFilterBar filter={{}} onChange={() => {}} />
       </EngagementContext.Provider>

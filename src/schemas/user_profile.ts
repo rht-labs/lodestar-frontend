@@ -18,13 +18,13 @@ export abstract class UserProfile {
     }
   }
 
-  static fromFake() {
+  static fromFake(): UserProfile {
     return {
       username: faker.internet.userName(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
-      groups: ['reader', 'writer'],
+      groups: ['writer', 'reader'],
     };
   }
 }
