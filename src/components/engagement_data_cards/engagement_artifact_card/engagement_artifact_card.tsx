@@ -58,8 +58,7 @@ export function EngagementArtifactCard() {
   };
 
   const indexedArtifactChanges =
-    currentChanges?.artifacts?.reduce?.((p, c) => ({ ...p, [c.id]: c }), {}) ??
-    {};
+    artifacts.reduce?.((p, c) => ({ ...p, [c.id]: c }), {}) ?? {};
 
   const onSave = (artifacts: Artifact[]) =>
     saveEngagement({ ...currentChanges, artifacts });
