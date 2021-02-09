@@ -17,7 +17,10 @@ export class Apiv1EngagementService implements EngagementService {
     });
   }
   checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
-    return this.axios.head(`/engagements/subdomain/${subdomain}`).then(() => true).catch(() => false)
+    return this.axios
+      .head(`/engagements/subdomain/${subdomain}`)
+      .then(() => true)
+      .catch(() => false);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
   axios?: AxiosInstance;

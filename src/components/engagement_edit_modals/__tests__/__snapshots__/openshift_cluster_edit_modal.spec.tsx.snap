@@ -3,14 +3,638 @@
 exports[`Hosting Environment edit modal matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": <body
+    class="pf-c-backdrop__open"
+  >
+    <div
+      aria-hidden="true"
+    />
     <div>
-      <div />
+      <div
+        class="pf-c-backdrop"
+      >
+        <div
+          class="pf-l-bullseye"
+        >
+          <div
+            aria-describedby="pf-modal-part-2"
+            aria-labelledby="pf-modal-part-1"
+            aria-modal="true"
+            class="pf-c-modal-box pf-m-lg"
+            data-ouia-component-id="9"
+            data-ouia-component-type="PF4/ModalContent"
+            data-ouia-safe="true"
+            id="pf-modal-part-0"
+            role="dialog"
+          >
+            <button
+              aria-disabled="false"
+              aria-label="Close"
+              class="pf-c-button pf-m-plain"
+              data-ouia-component-id="10"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 352 512"
+                width="1em"
+              >
+                <path
+                  d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                  transform=""
+                />
+              </svg>
+            </button>
+            <header
+              class="pf-c-modal-box__header"
+            >
+              <h1
+                class="pf-c-modal-box__title pf-c-modal-box__title"
+                id="pf-modal-part-1"
+              >
+                Hosting Environment
+              </h1>
+            </header>
+            <div
+              class="pf-c-modal-box__body"
+              id="pf-modal-part-2"
+            >
+              <div
+                data-testid="he_edit_modal"
+              >
+                <section
+                  class="pf-c-page__main-section"
+                >
+                  <form
+                    class="pf-c-form pf-m-horizontal"
+                    novalidate=""
+                  >
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="hosting_environment_name"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Environment Name
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            class="pf-c-form__label-required"
+                          >
+                             
+                            *
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="pf-c-form-control"
+                          data-cy="hosting_environment_name"
+                          data-testid="hosting_environment_name"
+                          id="hosting_environment_name"
+                          name="hosting_environment_name"
+                          placeholder=""
+                          required=""
+                          type="text"
+                          value="name"
+                        />
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="Hosting Platform"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Hosting Type
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <select
+                          aria-invalid="false"
+                          class="pf-c-form-control"
+                          data-ouia-component-id="11"
+                          data-ouia-component-type="PF4/FormSelect"
+                          data-ouia-safe="true"
+                          disabled=""
+                          required=""
+                        >
+                          <option
+                            class=""
+                            value=""
+                          >
+                            OpenShift Container Platform
+                          </option>
+                        </select>
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="cloud-provider"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Cloud Provider
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            class="pf-c-form__label-required"
+                          >
+                             
+                            *
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <select
+                          aria-invalid="false"
+                          aria-label="Cloud Provider"
+                          class="pf-c-form-control"
+                          data-ouia-component-id="12"
+                          data-ouia-component-type="PF4/FormSelect"
+                          data-ouia-safe="true"
+                          data-testid="cloud-provider-select"
+                          disabled=""
+                          id="cloud_provider_dropdown"
+                          required=""
+                        >
+                          <option
+                            class=""
+                            value=""
+                          >
+                            Select a provider
+                          </option>
+                          <option
+                            class=""
+                            data-cy="AWS"
+                            value="ec2"
+                          >
+                            AWS
+                          </option>
+                          <option
+                            class=""
+                            data-cy="Other"
+                            value="other"
+                          >
+                            Other
+                          </option>
+                          <option
+                            class=""
+                            data-cy="AWS"
+                            value="AWS"
+                          >
+                            AWS
+                          </option>
+                        </select>
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for=""
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Provider Region
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <select
+                          aria-invalid="false"
+                          aria-label="Provider Region"
+                          class="pf-c-form-control"
+                          data-cy=""
+                          data-ouia-component-id="13"
+                          data-ouia-component-type="PF4/FormSelect"
+                          data-ouia-safe="true"
+                          data-testid=""
+                          disabled=""
+                          id=""
+                        >
+                          <option
+                            class=""
+                            data-cy=""
+                            value=""
+                          >
+                            Select a region
+                          </option>
+                          <option
+                            class=""
+                            data-cy="N. Virginia"
+                            value="N. Virginia"
+                          >
+                            N. Virginia
+                          </option>
+                        </select>
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="openshift-version"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            OpenShift Version
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            class="pf-c-form__label-required"
+                          >
+                             
+                            *
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <select
+                          aria-invalid="false"
+                          aria-label="OpenShift Version"
+                          class="pf-c-form-control"
+                          data-cy="oc-version-select"
+                          data-ouia-component-id="14"
+                          data-ouia-component-type="PF4/FormSelect"
+                          data-ouia-safe="true"
+                          data-testid="oc-version-select"
+                          id="openshift-version"
+                        >
+                          <option
+                            class=""
+                            data-cy=""
+                            value=""
+                          >
+                            Select a version
+                          </option>
+                          <option
+                            class=""
+                            data-cy="4.3.31"
+                            value="4.3.31"
+                          >
+                            v4.3
+                          </option>
+                          <option
+                            class=""
+                            data-cy="4.4.15"
+                            value="4.4.15"
+                          >
+                            v4.4
+                          </option>
+                          <option
+                            class=""
+                            data-cy="4.5.4"
+                            value="4.5.4"
+                          >
+                            v4.5
+                          </option>
+                        </select>
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="subdomain"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Desired Subdomain
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            class="pf-c-form__label-required"
+                          >
+                             
+                            *
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="pf-c-form-control pf-m-success"
+                          data-cy="desired_subdomain_input"
+                          data-testid="desired_subdomain_input"
+                          disabled=""
+                          id="ocp_sub_domain"
+                          name="ocp_sub_domain"
+                          required=""
+                          type="text"
+                          value="ordoabchao"
+                        />
+                        <div>
+                          Applications will live at: 
+                          <strong>
+                            ordoabchao
+                          </strong>
+                          <span
+                            style="font-style: italic;"
+                          >
+                            .region.example.com
+                          </span>
+                            
+                          <svg
+                            aria-describedby="pf-tooltip-2"
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              transform=""
+                            />
+                          </svg>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="persistent_storage_dropdown"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Persistent Storage Needs
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            class="pf-c-form__label-required"
+                          >
+                             
+                            *
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <select
+                          aria-invalid="false"
+                          aria-label="Persistent Storage Needs"
+                          class="pf-c-form-control"
+                          data-cy="persistent-storage-select"
+                          data-ouia-component-id="15"
+                          data-ouia-component-type="PF4/FormSelect"
+                          data-ouia-safe="true"
+                          data-testid="persistent-storage-select"
+                          id="persistent_storage_dropdown"
+                        >
+                          <option
+                            class=""
+                            data-cy=""
+                            value=""
+                          >
+                            Select a storage size
+                          </option>
+                          <option
+                            class=""
+                            data-cy="50G"
+                            value="50G"
+                          >
+                            50GB
+                          </option>
+                          <option
+                            class=""
+                            data-cy="100G"
+                            value="100G"
+                          >
+                            100GB
+                          </option>
+                          <option
+                            class=""
+                            data-cy="250G"
+                            value="250G"
+                          >
+                            250GB
+                          </option>
+                          <option
+                            class=""
+                            data-cy="500G"
+                            value="500G"
+                          >
+                            500GB
+                          </option>
+                        </select>
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="cluster_size_dropdown"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Cluster Size
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            class="pf-c-form__label-required"
+                          >
+                             
+                            *
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <select
+                          aria-invalid="false"
+                          aria-label="Cluster Size"
+                          class="pf-c-form-control"
+                          data-cy="cluster-size-select"
+                          data-ouia-component-id="16"
+                          data-ouia-component-type="PF4/FormSelect"
+                          data-ouia-safe="true"
+                          data-testid="cluster-size-select"
+                          disabled=""
+                          id="cluster_size_dropdown"
+                        >
+                          <option
+                            class=""
+                            data-cy=""
+                            value=""
+                          >
+                            Select cluster size
+                          </option>
+                          <option
+                            class=""
+                            data-cy="small"
+                            value="small"
+                          >
+                            Small
+                          </option>
+                        </select>
+                        
+                      </div>
+                    </div>
+                    <div
+                      class="pf-c-form__group"
+                    >
+                      <div
+                        class="pf-c-form__group-label"
+                      >
+                        <label
+                          class="pf-c-form__label"
+                          for="additional_details"
+                        >
+                          <span
+                            class="pf-c-form__label-text"
+                          >
+                            Additional Information
+                          </span>
+                        </label>
+                         
+                      </div>
+                      <div
+                        class="pf-c-form__group-control"
+                      >
+                        <textarea
+                          aria-invalid="false"
+                          aria-label="Additional provisioning information"
+                          class="pf-c-form-control pf-m-resize-vertical"
+                          data-testid="additional-details-text-area"
+                          disabled=""
+                          id="additional_details"
+                          name="additional_details"
+                          placeholder="Provide additional details"
+                        >
+                          details
+                        </textarea>
+                        
+                      </div>
+                    </div>
+                  </form>
+                </section>
+                <section
+                  class="pf-c-page__main-section"
+                >
+                  <div
+                    style="margin-top: 1rem;"
+                  >
+                    <div
+                      class="pf-l-flex pf-m-justify-content-flex-end"
+                    >
+                      <div
+                        class=""
+                      >
+                        <div>
+                          <button
+                            aria-disabled="false"
+                            class="pf-c-button pf-m-primary"
+                            data-cy="hosting_env_save"
+                            data-ouia-component-id="17"
+                            data-ouia-component-type="PF4/Button"
+                            data-ouia-safe="true"
+                            data-testid="oc-edit-save"
+                            type="button"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>,
-  "container": <div>
-    <div />
-  </div>,
+  "container": <div
+    aria-hidden="true"
+  />,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],

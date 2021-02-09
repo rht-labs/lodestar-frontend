@@ -15,9 +15,9 @@ describe('Engagement Navigation ', () => {
       render(
         <EngagementContext.Provider
           value={
-            ({
+            {
               engagementFormConfig: EngagementFormConfig.fromFake(),
-            } as unknown) as IEngagementContext
+            } as IEngagementContext
           }
         >
           <EngagementFilterBar filter={{}} onChange={() => {}} />
@@ -29,9 +29,9 @@ describe('Engagement Navigation ', () => {
     const wrapper = render(
       <EngagementContext.Provider
         value={
-          ({
+          {
             engagementFormConfig: EngagementFormConfig.fromFake(),
-          } as unknown) as IEngagementContext
+          } as IEngagementContext
         }
       >
         <EngagementFilterBar filter={{}} onChange={() => {}} />
