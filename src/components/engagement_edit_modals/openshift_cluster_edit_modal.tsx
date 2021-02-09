@@ -78,112 +78,114 @@ export function OpenShiftClusterEditModal({
       onClose={onClose}
       title="Hosting Environment"
     >
-      <EditModalTemplate
-        actions={
-          <div>
-            <Button
-              data-testid="oc-edit-save"
-              onClick={onSave}
-              isDisabled={subdomainCheckLoading || !isUnique}
-              data-cy={'hosting_env_save'}
-            >
-              Save
-            </Button>
-          </div>
-        }
-      >
-        <Form isHorizontal>
-          <TextFormField
-            isRequired
-            data-testid="hosting_environment_name"
-            type="text"
-            fieldId="hosting_environment_name"
-            testId={'hosting_environment_name'}
-            value={hostingEnvironment.environment_name}
-            onChange={e => {
-              onChange('environment_name', e);
-            }}
-            label="Environment Name"
-          />
-          <CloudProviderFormField
-            onChange={(value: string) =>
-              onChange('ocp_cloud_provider_name', value)
-            }
-            availableProviders={availableProviders}
-            hostingEnvironment={hostingEnvironment}
-          />
-          <SelectFormField
-            label="Provider Region"
-            isDisabled={
-              availableProviderRegionOptions?.length === 0 ||
-              !hasFeature(APP_FEATURES.writer)
-            }
-            data-testid="provider-region-select"
-            emptyValue={{
-              label: 'Select a region',
-            }}
-            options={availableProviderRegionOptions?.map?.(o => ({
-              disabled: o.disabled,
-              value: o.value,
-              label: o.label,
-            }))}
-            onChange={value => onChange('ocp_cloud_provider_region', value)}
-            value={hostingEnvironment?.ocp_cloud_provider_region}
-          />
-          <SelectFormField
-            value={hostingEnvironment?.ocp_version || ''}
-            testId="oc-version-select"
-            emptyValue={{ label: 'Select a version' }}
-            options={engagementFormConfig?.openshift_options?.versions?.options?.map?.(
-              v => ({ label: v.label, disabled: v.disabled, value: v.value })
-            )}
-            label={'OpenShift Version'}
-            fieldId="openshift-version"
-            isRequired={true}
-            onChange={value => onChange('ocp_version', value)}
-          />
-          <SubdomainFormField
-            isEngagementLaunched={isEngagementLaunched}
-            isUnique={isUnique}
-            isLoading={subdomainCheckLoading}
-            onChange={value => {
-              checkSubdomain(value, hostingEnvironment?.ocp_sub_domain);
-              onChange('ocp_sub_domain', value);
-            }}
-            hostingEnvironment={hostingEnvironment}
-            suggestedSubdomain={suggestedSubdomain}
-          />
-          <SelectFormField
-            value={hostingEnvironment?.ocp_persistent_storage_size}
-            testId="persistent-storage-select"
-            label="Persistent Storage Needs"
-            options={engagementFormConfig?.openshift_options?.persistent_storage?.options?.map?.(
-              v => ({ label: v.label, disabled: v.disabled, value: v.value })
-            )}
-            emptyValue={{ label: 'Select a storage size' }}
-            fieldId="persistent_storage_dropdown"
-            isRequired={true}
-            onChange={value => onChange('ocp_persistent_storage_size', value)}
-          />
-          <SelectFormField
-            isRequired
-            options={engagementFormConfig?.openshift_options?.cluster_size?.options?.map?.(
-              v => ({ label: v.label, disabled: v.disabled, value: v.value })
-            )}
-            testId="cluster-size-select"
-            fieldId="cluster_size_dropdown"
-            value={hostingEnvironment?.ocp_cluster_size || ''}
-            emptyValue={{ label: 'Select cluster size' }}
-            label="Cluster Size"
-            isDisabled={!hasFeature(APP_FEATURES.writer)}
-            onChange={value => onChange('ocp_cluster_size', value)}
-          />
-          <AdditionalDetailsFormField
-            onChange={value => onChange('additional_details', value)}
-            hostingEnvironment={hostingEnvironment}
-          />
-        </Form>
-      </EditModalTemplate>
+      <div data-testid="he_edit_modal">
+        <EditModalTemplate
+          actions={
+            <div>
+              <Button
+                data-testid="oc-edit-save"
+                onClick={onSave}
+                isDisabled={subdomainCheckLoading || !isUnique}
+                data-cy={'hosting_env_save'}
+              >
+                Save
+              </Button>
+            </div>
+          }
+        >
+          <Form isHorizontal>
+            <TextFormField
+              isRequired
+              data-testid="hosting_environment_name"
+              type="text"
+              fieldId="hosting_environment_name"
+              testId={'hosting_environment_name'}
+              value={hostingEnvironment.environment_name}
+              onChange={e => {
+                onChange('environment_name', e);
+              }}
+              label="Environment Name"
+            />
+            <CloudProviderFormField
+              onChange={(value: string) =>
+                onChange('ocp_cloud_provider_name', value)
+              }
+              availableProviders={availableProviders}
+              hostingEnvironment={hostingEnvironment}
+            />
+            <SelectFormField
+              label="Provider Region"
+              isDisabled={
+                availableProviderRegionOptions?.length === 0 ||
+                !hasFeature(APP_FEATURES.writer)
+              }
+              data-testid="provider-region-select"
+              emptyValue={{
+                label: 'Select a region',
+              }}
+              options={availableProviderRegionOptions?.map?.(o => ({
+                disabled: o.disabled,
+                value: o.value,
+                label: o.label,
+              }))}
+              onChange={value => onChange('ocp_cloud_provider_region', value)}
+              value={hostingEnvironment?.ocp_cloud_provider_region}
+            />
+            <SelectFormField
+              value={hostingEnvironment?.ocp_version || ''}
+              testId="oc-version-select"
+              emptyValue={{ label: 'Select a version' }}
+              options={engagementFormConfig?.openshift_options?.versions?.options?.map?.(
+                v => ({ label: v.label, disabled: v.disabled, value: v.value })
+              )}
+              label={'OpenShift Version'}
+              fieldId="openshift-version"
+              isRequired={true}
+              onChange={value => onChange('ocp_version', value)}
+            />
+            <SubdomainFormField
+              isEngagementLaunched={isEngagementLaunched}
+              isUnique={isUnique}
+              isLoading={subdomainCheckLoading}
+              onChange={value => {
+                checkSubdomain(value, hostingEnvironment?.ocp_sub_domain);
+                onChange('ocp_sub_domain', value);
+              }}
+              hostingEnvironment={hostingEnvironment}
+              suggestedSubdomain={suggestedSubdomain}
+            />
+            <SelectFormField
+              value={hostingEnvironment?.ocp_persistent_storage_size}
+              testId="persistent-storage-select"
+              label="Persistent Storage Needs"
+              options={engagementFormConfig?.openshift_options?.persistent_storage?.options?.map?.(
+                v => ({ label: v.label, disabled: v.disabled, value: v.value })
+              )}
+              emptyValue={{ label: 'Select a storage size' }}
+              fieldId="persistent_storage_dropdown"
+              isRequired={true}
+              onChange={value => onChange('ocp_persistent_storage_size', value)}
+            />
+            <SelectFormField
+              isRequired
+              options={engagementFormConfig?.openshift_options?.cluster_size?.options?.map?.(
+                v => ({ label: v.label, disabled: v.disabled, value: v.value })
+              )}
+              testId="cluster-size-select"
+              fieldId="cluster_size_dropdown"
+              value={hostingEnvironment?.ocp_cluster_size || ''}
+              emptyValue={{ label: 'Select cluster size' }}
+              label="Cluster Size"
+              isDisabled={!hasFeature(APP_FEATURES.writer)}
+              onChange={value => onChange('ocp_cluster_size', value)}
+            />
+            <AdditionalDetailsFormField
+              onChange={value => onChange('additional_details', value)}
+              hostingEnvironment={hostingEnvironment}
+            />
+          </Form>
+        </EditModalTemplate>
+      </div>
     </Modal>
   );
 }

@@ -507,6 +507,7 @@ Object {
         </div>
       </article>
     </div>
+    <div />
   </body>,
   "container": <div>
     <article

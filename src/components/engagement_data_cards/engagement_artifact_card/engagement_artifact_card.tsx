@@ -155,16 +155,18 @@ export function EngagementArtifactCard() {
           />
         )}
       >
-        {artifacts?.length > 0 ? (
-          <Table
-            aria-label="Engagement Artifacts"
-            variant={TableVariant.compact}
-            cells={columns}
-            rows={rows}
-          >
-            <TableHeader />
-            <TableBody />
-          </Table>
+        {currentEngagement?.artifacts?.length > 0 ? (
+          <div data-testid="artifact-table">
+            <Table
+              aria-label="Engagement Artifacts"
+              variant={TableVariant.compact}
+              cells={columns}
+              rows={rows}
+            >
+              <TableHeader />
+              <TableBody />
+            </Table>
+          </div>
         ) : (
           <EmptyState>
             <EmptyStateIcon
