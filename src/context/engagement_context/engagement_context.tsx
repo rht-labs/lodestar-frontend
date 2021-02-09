@@ -558,7 +558,9 @@ export const EngagementProvider = ({
     value: any,
     group?: EngagementGroupings
   ) => {
-    setChangedGroups({ ...changedGroups, [group]: true });
+    if (!!group) {
+      setChangedGroups({ ...changedGroups, [group]: true });
+    }
     dispatch({ type: fieldName, payload: value });
     try {
       analyticsContext.logEvent({
