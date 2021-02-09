@@ -117,6 +117,17 @@ describe('Engagement Context', () => {
     });
   });
 
+  test('Can delete an engagement', async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate;
+      const engagement = Engagement.fromFake();
+      result.current.deleteEngagement(engagement);
+      await waitForNextUpdate();
+      expect(result.current.engagements?.length).toEqual(0);
+    });
+  });
+
   test('_handleErrors handles authentication errors', async () => {
     await act(async () => {
       const isLoggedIn = jest.fn(async () => true);
