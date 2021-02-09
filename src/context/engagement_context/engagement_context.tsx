@@ -545,13 +545,9 @@ export const EngagementProvider = ({
   );
 
   const _deleteEngagement = useCallback(
-    async (deletedEngagement: Engagement) => {
-      try {
-        engagements.filter(engagement => engagement.uuid !== deletedEngagement.uuid);
-        setEngagements(engagements);
-      } catch (e) {
-        await _handleErrors(e);
-      }
+    (deletedEngagement: Engagement) => {
+      const updatedEngagements = engagements.filter(engagement => engagement.uuid !== deletedEngagement.uuid);
+      setEngagements(updatedEngagements);
     },
     [engagements, _handleErrors]
   );
@@ -560,7 +556,6 @@ export const EngagementProvider = ({
     try {
       await engagementService.deleteEngagement(engagement);
       _deleteEngagement(engagement);
-      setEngagements([...(engagements ?? [])]);
       feedbackContext.showAlert(
         'Engagement is deleted successfully',
         AlertType.success
@@ -590,7 +585,7 @@ export const EngagementProvider = ({
       feedbackContext.showAlert(errorMessage, AlertType.error);
       await _handleErrors(e);
       }
-  }, [engagementService, _handleErrors]);
+  }, [engagementService, _handleErrors, _deleteEngagement, engagements, feedbackContext]);
 
   const fetchCategories = useCallback(async () => {
     try {
