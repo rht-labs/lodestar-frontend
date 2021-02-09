@@ -87,7 +87,13 @@ describe('System Status Card', () => {
   test('Clicking a subsystem requests a modal to open', async () => {
     const onRequestOpen = jest.fn();
     const wrapper = render(
-      <ModalVisibilityContext.Provider value={{ requestOpen: onRequestOpen }}>
+      <ModalVisibilityContext.Provider
+        value={{
+          requestOpen: onRequestOpen,
+          activeModalKey: '',
+          requestClose: () => {},
+        }}
+      >
         <SystemStatusCard
           currentEngagement={Engagement.fromFake(true, {
             status: EngagementStatus.active,
