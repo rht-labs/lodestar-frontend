@@ -8,7 +8,10 @@ import {
 import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import { getFormattedDate, parseDatePickerDate } from '../../common/patternfly_date_adapter';
+import {
+  getFormattedDate,
+  parseDatePickerDate,
+} from '../../common/patternfly_date_adapter';
 import startOfToday from 'date-fns/startOfToday';
 import addDays from 'date-fns/addDays';
 import { useValidation } from '../../context/validation_context/validation_hook';
@@ -88,11 +91,9 @@ export function EngagementStartEndDateFormField() {
             id="start_date"
             type="date"
             aria-label="The start date."
-            value={startDateText}
+            value={startDateText ?? ''}
             onChange={setStartDateText}
-            onBlur={e =>
-              setStartDate(parseDatePickerDate(e.target.value))
-            }
+            onBlur={e => setStartDate(parseDatePickerDate(e.target.value))}
             data-cy={'start_date_input'}
           />
           <TextInput
@@ -101,13 +102,13 @@ export function EngagementStartEndDateFormField() {
             id="end_date"
             type="date"
             aria-label="The end date"
-            value={endDateText}
+            value={endDateText ?? ''}
             min={getFormattedDate(
               max([startOfToday(), startDate ?? startOfToday()])
             )}
             onChange={setEndDateText}
             onBlur={e => {
-              const parsedDate = parseDatePickerDate(e.target.value)
+              const parsedDate = parseDatePickerDate(e.target.value);
               validate('end_date')(parsedDate);
               setEndDate(parsedDate);
             }}
@@ -133,7 +134,7 @@ export function EngagementStartEndDateFormField() {
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
-            value={archiveDateText}
+            value={archiveDateText ?? ''}
             onBlur={e => {
               const parsedDate = parseDatePickerDate(e.target.value);
               validate('archive_date')(parsedDate);

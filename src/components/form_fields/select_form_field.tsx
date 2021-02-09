@@ -20,6 +20,7 @@ export interface SelectFormFieldProps {
   isDisabled?: boolean;
   readOnly?: boolean;
   value: string;
+
   onChange: (value: string) => void;
 }
 export function SelectFormField({
@@ -36,9 +37,9 @@ export function SelectFormField({
 }: SelectFormFieldProps) {
   let finalOptions = options;
   if (!!emptyValue) {
-    finalOptions = ([emptyValue] as Partial<SelectFormFieldOption>[]).concat(
-      finalOptions
-    );
+    finalOptions = ([{ ...emptyValue, value: '' }] as Partial<
+      SelectFormFieldOption
+    >[]).concat(finalOptions);
   }
   return (
     <FormGroup label={label} isRequired={isRequired} fieldId={fieldId}>
@@ -50,6 +51,7 @@ export function SelectFormField({
         isDisabled={isDisabled}
         readOnly={readOnly}
         id={fieldId}
+        aria-label={label}
       >
         {finalOptions
           .filter(o => !!o)

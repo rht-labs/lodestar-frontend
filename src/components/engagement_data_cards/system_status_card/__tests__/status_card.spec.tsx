@@ -1,5 +1,10 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitForDomChange,
+  act,
+} from '@testing-library/react';
 import { SystemStatusCard } from '../system_status_card';
 import { TestStateWrapper } from '../../../../common/test_state_wrapper';
 import { Engagement, EngagementStatus } from '../../../../schemas/engagement';
@@ -14,18 +19,21 @@ import { HealthStatus } from '../../../../schemas/cluster_status';
 import { ModalVisibilityContext } from '../../../../context/edit_modal_visibility_context/edit_modal_visibility_context';
 
 describe('System Status Card', () => {
-  test('Card matches snapshot', () => {
-    expect(
-      render(
+  test('Card matches snapshot', async () => {
+    await act(async () => {
+      const rendered = render(
         <TestStateWrapper>
           <SystemStatusCard
             currentEngagement={Engagement.fromFake(true, {
               status: EngagementStatus.active,
+              uniqueSuffix: '0',
             })}
           />
         </TestStateWrapper>
-      )
-    ).toMatchSnapshot();
+      );
+      await waitForDomChange;
+      expect(rendered).toMatchSnapshot();
+    });
   });
   test('Message item matches snapshot', () => {
     expect(
@@ -79,7 +87,13 @@ describe('System Status Card', () => {
   test('Clicking a subsystem requests a modal to open', async () => {
     const onRequestOpen = jest.fn();
     const wrapper = render(
-      <ModalVisibilityContext.Provider value={{ requestOpen: onRequestOpen }}>
+      <ModalVisibilityContext.Provider
+        value={{
+          requestOpen: onRequestOpen,
+          activeModalKey: '',
+          requestClose: () => {},
+        }}
+      >
         <SystemStatusCard
           currentEngagement={Engagement.fromFake(true, {
             status: EngagementStatus.active,

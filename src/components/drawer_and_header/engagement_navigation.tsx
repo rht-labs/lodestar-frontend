@@ -9,7 +9,6 @@ import {
   PlusIcon,
 } from '@patternfly/react-icons';
 import { Feature } from '../feature/feature';
-import { APP_FEATURES } from '../../common/app_features';
 
 export const EngagementNavigation = () => {
   const { pathname } = useLocation();
@@ -71,7 +70,7 @@ export const EngagementNavigation = () => {
                 Past
               </Link>
             </NavItem>
-            <Feature name={APP_FEATURES.writer}>
+            <Feature name={'writer'}>
               <NavItem
                 id="New"
                 itemId={0}

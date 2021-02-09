@@ -28,7 +28,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const { logEvent } = useAnalytics();
 
   const onSave = () => {
-    props.onSave(props.artifact);
+    props.onSave();
     logEvent({
       action: 'Add Artifact',
       category: AnalyticsCategory.engagements,

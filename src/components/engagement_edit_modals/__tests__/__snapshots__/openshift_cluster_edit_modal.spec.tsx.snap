@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Point of Contact edit modal matches snapshot 1`] = `
+exports[`Hosting Environment edit modal matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body
@@ -204,6 +204,20 @@ Object {
                         <option
                           class=""
                           data-cy="AWS"
+                          value="ec2"
+                        >
+                          AWS
+                        </option>
+                        <option
+                          class=""
+                          data-cy="Other"
+                          value="other"
+                        >
+                          Other
+                        </option>
+                        <option
+                          class=""
+                          data-cy="AWS"
                           value="AWS"
                         >
                           AWS
@@ -235,6 +249,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="Provider Region"
                         class="pf-c-form-control"
                         data-cy=""
                         data-ouia-component-id="4"
@@ -246,6 +261,7 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select a region
@@ -291,6 +307,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="OpenShift Version"
                         class="pf-c-form-control"
                         data-cy="oc-version-select"
                         data-ouia-component-id="5"
@@ -301,9 +318,31 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select a version
+                        </option>
+                        <option
+                          class=""
+                          data-cy="4.3.31"
+                          value="4.3.31"
+                        >
+                          v4.3
+                        </option>
+                        <option
+                          class=""
+                          data-cy="4.4.15"
+                          value="4.4.15"
+                        >
+                          v4.4
+                        </option>
+                        <option
+                          class=""
+                          data-cy="4.5.4"
+                          value="4.5.4"
+                        >
+                          v4.5
                         </option>
                       </select>
                       
@@ -409,6 +448,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="Persistent Storage Needs"
                         class="pf-c-form-control"
                         data-cy="persistent-storage-select"
                         data-ouia-component-id="6"
@@ -419,9 +459,38 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select a storage size
+                        </option>
+                        <option
+                          class=""
+                          data-cy="50G"
+                          value="50G"
+                        >
+                          50GB
+                        </option>
+                        <option
+                          class=""
+                          data-cy="100G"
+                          value="100G"
+                        >
+                          100GB
+                        </option>
+                        <option
+                          class=""
+                          data-cy="250G"
+                          value="250G"
+                        >
+                          250GB
+                        </option>
+                        <option
+                          class=""
+                          data-cy="500G"
+                          value="500G"
+                        >
+                          500GB
                         </option>
                       </select>
                       
@@ -457,6 +526,7 @@ Object {
                     >
                       <select
                         aria-invalid="false"
+                        aria-label="Cluster Size"
                         class="pf-c-form-control"
                         data-cy="cluster-size-select"
                         data-ouia-component-id="7"
@@ -468,9 +538,17 @@ Object {
                       >
                         <option
                           class=""
+                          data-cy=""
                           value=""
                         >
                           Select cluster size
+                        </option>
+                        <option
+                          class=""
+                          data-cy="small"
+                          value="small"
+                        >
+                          Small
                         </option>
                       </select>
                       

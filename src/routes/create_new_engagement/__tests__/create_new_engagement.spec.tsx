@@ -8,11 +8,16 @@ import {
   queryByAttribute,
 } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import { EngagementContext } from '../../../context/engagement_context/engagement_context';
-import { AnalyticsProvider } from '../../../context/analytics_context/analytics_context';
+import {
+  EngagementContext,
+  IEngagementContext,
+} from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { APP_FEATURES } from '../../../common/app_features';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
+import { IAuthContext } from '../../../context/auth_context/auth_context';
+import { Engagement } from '../../../schemas/engagement';
+import { IVersionContext } from '../../../context/version_context/version_context';
 const getById = queryByAttribute.bind(null, 'id');
 
 describe('Create New Engagement Route', () => {
@@ -51,25 +56,28 @@ describe('Create New Engagement Route', () => {
   });
   test('clicking the submit button creates a new engagement', async () => {
     const createEngagement = jest.fn();
+    const e = Engagement.fromFake();
+    e.customer_name = 'a';
     const Component = () => (
       <MemoryRouter>
-        <AnalyticsProvider analyticsService={{ logEvent: () => {} }}>
-          <EngagementContext.Provider
-            value={{
-              engagements: [{ customer_name: 'a' }],
+        <EngagementContext.Provider
+          value={
+            ({
+              engagements: [e],
               getEngagements: async () => [],
               createEngagement,
-              getConfig: () => {},
               engagementFormConfig: EngagementFormConfig.fromFake(),
-            }}
+            } as unknown) as IEngagementContext
+          }
+        >
+          <FeatureToggles
+            authContext={{} as IAuthContext}
+            versionContext={{} as IVersionContext}
+            features={[APP_FEATURES.writer, APP_FEATURES.reader]}
           >
-            <FeatureToggles
-              features={[APP_FEATURES.writer, APP_FEATURES.reader]}
-            >
-              <CreateNewEngagement />
-            </FeatureToggles>
-          </EngagementContext.Provider>
-        </AnalyticsProvider>
+            <CreateNewEngagement />
+          </FeatureToggles>
+        </EngagementContext.Provider>
       </MemoryRouter>
     );
 

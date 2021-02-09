@@ -1,37 +1,30 @@
 import React from 'react';
-import {
-  render,
-  act,
-  fireEvent,
-  waitForDomChange,
-} from '@testing-library/react';
+import { render, act, fireEvent } from '@testing-library/react';
 import { ArtifactEditModal } from '../add_artifact_modal';
 import { Artifact } from '../../../schemas/engagement';
 
 describe('Engagement Edit Modal', () => {
-  test('when clicking save, a single artifact is passed as a parameter to onSave', async () => {
+  test('artifact callbacks are called correctly when an artifact is updated', () => {
     const onClose = jest.fn();
     const onSave = jest.fn();
+    const onUpdate = jest.fn();
+    const artifact = Artifact.fromFake(true);
+    const newTitle = 'Vanderbilt week 1';
     const modal = render(
       <ArtifactEditModal
-        artifact={Artifact.fromFake(true)}
+        artifact={artifact}
         isOpen={true}
         onSave={onSave}
         onClose={onClose}
-        onUpdate={() => {}}
+        onUpdate={onUpdate}
       />
     );
-    act(async () => {
-      fireEvent.change(modal.getByTestId('artifact-title-input'), {
-        target: { value: 'Vanderbilt week 1' },
-      });
-      await waitForDomChange({ container: modal.container });
-      fireEvent.click(modal.getByTestId('save-artifact'));
-      expect(onSave).toHaveBeenCalledWith({
-        ...Artifact.fromFake(true),
-        title: 'Vanderbilt week 1',
-      });
-      expect(onClose).toHaveBeenCalled();
+    fireEvent.change(modal.getByTestId('artifact-title-input'), {
+      target: { value: newTitle },
     });
+    expect(onUpdate).toHaveBeenCalledWith({ ...artifact, title: newTitle });
+    fireEvent.click(modal.getByTestId('save-artifact'));
+    expect(onSave).toHaveBeenCalled();
+    expect(onClose).toHaveBeenCalled();
   });
 });

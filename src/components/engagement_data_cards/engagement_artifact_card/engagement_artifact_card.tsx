@@ -36,21 +36,25 @@ const ARTIFACT_CRUD_MODAL = 'artifact_crud_modal';
 
 export function EngagementArtifactCard() {
   const {
+    currentEngagement,
     currentChanges,
     saveEngagement,
     clearCurrentChanges,
   } = useEngagements();
   const { addArtifact, artifacts, updateArtifact } = useEngagementArtifacts();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
+  const [currentArtifactId, setCurrentArtifactId] = useState<string>(null);
 
   const onEditArtifact = (artifact: Artifact) => {
-    requestOpen(getModalKey(artifact.id));
+    requestOpen(getModalKey());
+    setCurrentArtifactId(artifact.id);
   };
 
   const openArtifactModal = () => {
     const newArtifact = { id: uuid() };
     addArtifact(newArtifact as Artifact);
-    requestOpen(getModalKey(newArtifact.id));
+    requestOpen(getModalKey());
+    setCurrentArtifactId(newArtifact.id);
   };
 
   const indexedArtifactChanges =
@@ -60,8 +64,8 @@ export function EngagementArtifactCard() {
   const onSave = (artifacts: Artifact[]) =>
     saveEngagement({ ...currentChanges, artifacts });
 
-  const onFinishArtifactEdit = (artifact: Artifact) => {
-    onSave(addArtifact(artifact));
+  const onFinishArtifactEdit = () => {
+    onSave(addArtifact(indexedArtifactChanges[currentArtifactId]));
   };
   const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
   const columns = [
@@ -82,9 +86,9 @@ export function EngagementArtifactCard() {
       <span data-testid="artifact-edit-button">Edit</span>
     </DropdownItem>,
   ];
-  const getModalKey = (id: string) => `${ARTIFACT_CRUD_MODAL}${id}`;
+  const getModalKey = () => `${ARTIFACT_CRUD_MODAL}`;
   const rows =
-    artifacts?.map?.((artifact, idx) => [
+    currentEngagement?.artifacts?.map?.((artifact, idx) => [
       ArtifactType[artifact.type],
       {
         title: (
@@ -101,16 +105,6 @@ export function EngagementArtifactCard() {
       {
         title: (
           <>
-            <ArtifactEditModal
-              artifact={indexedArtifactChanges[artifact.id]}
-              isOpen={activeModalKey === getModalKey(artifact.id)}
-              onUpdate={updateArtifact}
-              onClose={() => {
-                requestClose();
-                clearCurrentChanges();
-              }}
-              onSave={onFinishArtifactEdit}
-            />
             <Feature name={'writer'}>
               <Dropdown
                 isPlain
@@ -140,6 +134,16 @@ export function EngagementArtifactCard() {
 
   return (
     <div>
+      <ArtifactEditModal
+        artifact={indexedArtifactChanges[currentArtifactId]}
+        isOpen={activeModalKey === getModalKey()}
+        onUpdate={updateArtifact}
+        onClose={() => {
+          requestClose();
+          clearCurrentChanges();
+        }}
+        onSave={onFinishArtifactEdit}
+      />
       <DataCard
         title="Engagement Artifacts"
         trailingIcon={() => <div />}
