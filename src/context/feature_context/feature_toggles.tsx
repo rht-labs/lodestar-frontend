@@ -9,7 +9,7 @@ import { IVersionContext } from '../version_context/version_context';
 import qs from 'query-string';
 import { Config } from '../../schemas/config';
 
-interface IFeatureToggleContext {
+export interface IFeatureToggleContext {
   features: string[];
   isLoading: boolean;
   hasFeature: (name: string) => boolean;
@@ -53,7 +53,7 @@ export const FeatureToggles = ({
   const [hasFetchedVersions, setHasFetchedVersions] = useState(false);
   useEffect(() => {
     if (!hasFetchedVersions) {
-      versionContext?.fetchVersions();
+      versionContext?.fetchVersions?.();
       setHasFetchedVersions(true);
     }
   }, [versionContext, hasFetchedVersions]);

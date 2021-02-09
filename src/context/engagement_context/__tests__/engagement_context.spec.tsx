@@ -6,6 +6,7 @@ import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import {
   AuthContext,
   AuthProvider,
+  IAuthContext,
   useSession,
 } from '../../auth_context/auth_context';
 import { EngagementService } from '../../../services/engagement_service/engagement_service';
@@ -20,6 +21,8 @@ import {
   FeedbackProvider,
   IFeedbackContext,
 } from '../../feedback_context/feedback_context';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { CategoryService } from '../../../services/category_service/category_service';
 
 describe('Engagement Context', () => {
   const getHook = () => {
@@ -138,6 +141,8 @@ describe('Engagement Context', () => {
                   <AuthContext.Consumer>
                     {authContext => (
                       <EngagementProvider
+                        engagementFormConfig={EngagementFormConfig.fromFake()}
+                        categoryService={{} as CategoryService}
                         authContext={authContext}
                         feedbackContext={feedbackContext}
                         engagementService={
@@ -191,6 +196,9 @@ describe('Engagement Context', () => {
                 }
               >
                 <EngagementProvider
+                  engagementFormConfig={EngagementFormConfig.fromFake()}
+                  authContext={{} as IAuthContext}
+                  categoryService={{} as CategoryService}
                   feedbackContext={feedbackContext}
                   engagementService={
                     ({
@@ -244,6 +252,8 @@ describe('Engagement Context', () => {
                 <AuthContext.Consumer>
                   {authContext => (
                     <EngagementProvider
+                      categoryService={{} as CategoryService}
+                      engagementFormConfig={EngagementFormConfig.fromFake()}
                       feedbackContext={feedbackContext}
                       authContext={authContext}
                       engagementService={
@@ -325,6 +335,8 @@ describe('Engagement Context', () => {
           <AuthContext.Consumer>
             {authContext => (
               <EngagementProvider
+                categoryService={{} as CategoryService}
+                engagementFormConfig={EngagementFormConfig.fromFake()}
                 authContext={authContext}
                 feedbackContext={fakedFeedbackContext}
                 engagementService={
@@ -474,6 +486,8 @@ describe('Engagement Context', () => {
           <AuthContext.Consumer>
             {authContext => (
               <EngagementProvider
+                categoryService={{} as CategoryService}
+                engagementFormConfig={EngagementFormConfig.fromFake()}
                 authContext={authContext}
                 feedbackContext={fakedFeedbackContext}
                 engagementService={
@@ -536,6 +550,8 @@ describe('Engagement Context', () => {
           <AuthContext.Consumer>
             {authContext => (
               <EngagementProvider
+                categoryService={{} as CategoryService}
+                engagementFormConfig={EngagementFormConfig.fromFake()}
                 authContext={authContext}
                 feedbackContext={fakedFeedbackContext}
                 engagementService={

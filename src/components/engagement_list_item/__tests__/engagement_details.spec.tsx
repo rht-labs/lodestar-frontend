@@ -14,7 +14,7 @@ afterEach(cleanup);
 
 describe('Upcoming Engagement', () => {
   test('shows the right status and label', () => {
-    const { getByTestId, getByText } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <EngagementAtAGlance
           engagement={upcomingEngagement()}
@@ -41,7 +41,7 @@ describe('Upcoming Engagement', () => {
 
 describe('Active Engagement', () => {
   test('shows the right status and label', () => {
-    const { getByTestId, getByText } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <EngagementAtAGlance
           engagement={currentEngagement()}
@@ -68,7 +68,7 @@ describe('Active Engagement', () => {
 
 describe('Past Engagement', () => {
   test('shows the right status and label', () => {
-    const { getByTestId, getByText } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <EngagementAtAGlance
           engagement={pastEngagement()}

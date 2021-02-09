@@ -4,12 +4,18 @@ import { MemoryRouter } from 'react-router';
 import { EngagementTimelineCard } from '../engagement_timeline_card';
 import { APP_FEATURES } from '../../../../common/app_features';
 import { FeatureToggles } from '../../../../context/feature_context/feature_toggles';
+import { IAuthContext } from '../../../../context/auth_context/auth_context';
+import { IVersionContext } from '../../../../context/version_context/version_context';
 
 describe('Engagement timeline card', () => {
   test('should not be rendered for reader role', async () => {
     const Component = () => (
       <MemoryRouter>
-        <FeatureToggles features={[APP_FEATURES.reader]}>
+        <FeatureToggles
+          authContext={{} as IAuthContext}
+          versionContext={{} as IVersionContext}
+          features={[APP_FEATURES.reader]}
+        >
           <EngagementTimelineCard />
         </FeatureToggles>
       </MemoryRouter>

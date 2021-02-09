@@ -9,6 +9,8 @@ import { FeatureToggles } from '../../../context/feature_context/feature_toggles
 import { DataCard } from '../data_card';
 import { MemoryRouter } from 'react-router';
 import { act } from 'react-dom/test-utils';
+import { IAuthContext } from '../../../context/auth_context/auth_context';
+import { IVersionContext } from '../../../context/version_context/version_context';
 
 describe('Engagement summary card', () => {
   test('matches snapshot', async () => {
@@ -60,7 +62,11 @@ describe('Edit button', () => {
     await act(async () => {
       const Component = () => (
         <MemoryRouter>
-          <FeatureToggles features={[APP_FEATURES.reader]}>
+          <FeatureToggles
+            authContext={{} as IAuthContext}
+            versionContext={{} as IVersionContext}
+            features={[APP_FEATURES.reader]}
+          >
             <DataCard
               title={'test'}
               children={<></>}
