@@ -6,7 +6,7 @@ import { HostingEnvironmentCard } from '../../components/engagement_data_cards/h
 import { UserCard } from '../../components/engagement_data_cards/user_card/user_card';
 import { ActivityHistoryCard } from '../../components/engagement_data_cards/activity_history_card/activity_history_card';
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
-import { EngagementTimelineCard } from '../../components/engagement_data_cards/engagement_timeline_card/engagement_timeline_card';
+import { EngagementArtifactCard } from '../../components/engagement_data_cards/engagement_artifact_card/engagement_artifact_card';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export function EngagementOverview() {
@@ -45,7 +45,7 @@ export function EngagementOverview() {
         </GridItem>
         <GridItem span={12}>
           <div id="timeline_card">
-            <EngagementTimelineCard />
+            <EngagementArtifactCard />
           </div>
         </GridItem>
         <GridItem span={12}>

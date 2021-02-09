@@ -31,6 +31,7 @@ import { ReadyCheck } from '../../ready_check/ready_check';
 import {
   EngagementGroupings,
   useEngagementFormField,
+  useHostingEnvironmentManager,
 } from '../../../context/engagement_context/engagement_context';
 import { useHostingEnvironmentCheck } from '../../../hooks/hosting_environment_checker';
 
@@ -38,70 +39,92 @@ const OPENSHIFT_MODAL_KEY = 'openshift_modal';
 
 export function HostingEnvironmentCard() {
   const {
-    currentEngagement,
     currentChanges,
+    currentEngagement,
     saveEngagement,
     engagementFormConfig,
     clearCurrentChanges,
   } = useEngagements();
-  const [currentHostingEnvironment, setCurrentHostingEnvironment] = useState<
-    HostingEnvironment
-  >(null);
-  const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
-  const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
-  const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
+  const [
+    currentHostingEnvironmentId,
+    setCurrentHostingEnvironmentId,
+  ] = useState<string>(null);
+  const [currentHostingEnvironmentChanges = []] = useEngagementFormField(
     'hosting_environments',
     EngagementGroupings.hostingEnvironment
   );
+  const [currentOpenDropdown, setCurrentOpenDropdown] = useState<number>();
+  const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
+  const {
+    addHostingEnvironment,
+    hostingEnvironments,
+    deleteHostingEnvironment,
+    updateHostingEnvironment,
+  } = useHostingEnvironmentManager();
+  const currentEnvironmentIndex = currentHostingEnvironmentChanges.findIndex(
+    he => currentHostingEnvironmentId === he?.id
+  );
+  const indexedChanges = currentHostingEnvironmentChanges.reduce(
+    (p, c) => ({ ...p, [c.id]: c }),
+    {}
+  );
 
   useEffect(() => {
-    setCurrentHostingEnvironment(null);
+    setCurrentHostingEnvironmentId(null);
   }, [currentEngagement]);
+
   const onClose = () => {
     clearCurrentChanges();
     requestClose();
   };
-  const getUniqueProviders = (
-    providers: HostingEnvironment[]
-  ): HostingEnvironment[] => {
-    return Object.values(
-      providers.reduce((prev, curr) => ({ ...prev, [curr.id]: curr }), {})
-    );
-  };
-  const onSave = (hostingEnvironment: HostingEnvironment) => {
-    const newEnvironments = getUniqueProviders([
-      ...hostingEnvironments,
-      hostingEnvironment,
-    ]);
-    setHostingEnvironments(newEnvironments);
-    saveEngagement({
-      ...(currentChanges as Engagement),
-      hosting_environments: newEnvironments,
-    });
-  };
-  const openHostingEnvironmentModal = (
-    hostingEnvironment: HostingEnvironment
-  ) => {
-    setCurrentHostingEnvironment(hostingEnvironment);
-    requestOpen(OPENSHIFT_MODAL_KEY);
-  };
-  const onDelete = (hostingEnvironment: HostingEnvironment) => {
-    const hostingEnvironments = [...currentChanges.hosting_environments];
-    hostingEnvironments.splice(
-      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
-      1
-    );
-    setHostingEnvironments(hostingEnvironments);
+
+  const onSave = () => {
     saveEngagement({
       ...(currentChanges as Engagement),
       hosting_environments: hostingEnvironments,
     });
   };
-  const addProvider = () => {
-    openHostingEnvironmentModal({
-      id: uuid(),
-    } as HostingEnvironment);
+
+  const openHostingEnvironmentModal = (
+    hostingEnvironment: HostingEnvironment
+  ) => {
+    setCurrentHostingEnvironmentId(hostingEnvironment.id);
+    requestOpen(generateModalId(hostingEnvironment.id));
   };
+  const generateModalId = (id: string) => `${OPENSHIFT_MODAL_KEY}${id}`;
+
+  const onDelete = (hostingEnvironment: HostingEnvironment) => {
+    deleteHostingEnvironment(hostingEnvironment);
+  };
+
+  const generateSuggestedSubdomain = (
+    project_name: string = '',
+    customer_name: string = '',
+    randomizer: string = ''
+  ): string => {
+    let slug = '';
+    const maxLen = 8;
+    if (project_name?.length > 2) {
+      slug = project_name;
+    } else if (customer_name?.length > 2) {
+      slug = customer_name;
+    }
+    if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
+      slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
+    }
+    slug = slugify(slug.substring(0, maxLen));
+    if (randomizer?.length > 0) {
+      slug = `${slug}-${randomizer}`;
+    }
+    return slug;
+  };
+
+  const addEnvironment = () => {
+    const newEnv = { id: uuid() };
+    addHostingEnvironment(newEnv);
+    openHostingEnvironmentModal(newEnv as HostingEnvironment);
+  };
+
   const actionItems = (hostingEnvironment: HostingEnvironment) => {
     const items = [
       <DropdownItem
@@ -148,57 +171,35 @@ export function HostingEnvironmentCard() {
       ),
       {
         title: (
-          <Feature name={'writer'}>
-            <Dropdown
-              isPlain
-              dropdownItems={actionItems(hostingEnvironment)}
-              isOpen={idx === currentOpenDropdown}
-              onSelect={() => {
-                setCurrentOpenDropdown(undefined);
-              }}
-              toggle={
-                <KebabToggle
-                  onToggle={() =>
-                    currentOpenDropdown === idx
-                      ? setCurrentOpenDropdown(undefined)
-                      : setCurrentOpenDropdown(idx)
-                  }
-                  id={`toggle-id-${idx}`}
-                  data-testid="hosting-provider-action-kebab"
-                />
-              }
-            />
-          </Feature>
+          <>
+            <Feature name={'writer'}>
+              <Dropdown
+                isPlain
+                dropdownItems={actionItems(hostingEnvironment)}
+                isOpen={idx === currentOpenDropdown}
+                onSelect={() => {
+                  setCurrentOpenDropdown(undefined);
+                }}
+                toggle={
+                  <KebabToggle
+                    onToggle={() =>
+                      currentOpenDropdown === idx
+                        ? setCurrentOpenDropdown(undefined)
+                        : setCurrentOpenDropdown(idx)
+                    }
+                    id={`toggle-id-${idx}`}
+                    data-testid="hosting-provider-action-kebab"
+                  />
+                }
+              />
+            </Feature>
+          </>
         ),
       },
     ]
   );
-  const generateSuggestedSubdomain = (
-    project_name: string = '',
-    customer_name: string = '',
-    randomizer: string = ''
-  ): string => {
-    let slug = '';
-    const maxLen = 8;
-    if (project_name?.length > 2) {
-      slug = project_name;
-    } else if (customer_name?.length > 2) {
-      slug = customer_name;
-    }
-    if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
-      slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
-    }
-    slug = slugify(slug.substring(0, maxLen));
-    if (randomizer?.length > 0) {
-      slug = `${slug}-${randomizer}`;
-    }
-    return slug;
-  };
-  const currentEnvironmentIndex = currentChanges?.hosting_environments?.findIndex(
-    he => currentHostingEnvironment?.id === he?.id
-  );
   const isAddHostingButtonDisabled =
-    currentChanges?.hosting_environments?.length >=
+    currentHostingEnvironmentChanges.length >=
     (engagementFormConfig?.logistics_options?.max_hosting_env_count ?? 1);
   return (
     <>
@@ -206,6 +207,7 @@ export function HostingEnvironmentCard() {
         isEngagementLaunched={!!currentChanges?.launch}
         onSave={onSave}
         onClose={onClose}
+        setHostingEnvironment={updateHostingEnvironment}
         hostingEnvironment={{
           ocp_sub_domain: generateSuggestedSubdomain(
             currentChanges?.project_name,
@@ -214,22 +216,22 @@ export function HostingEnvironmentCard() {
               ? (currentEnvironmentIndex + 1)?.toString()
               : '1'
           ),
-          ...currentHostingEnvironment,
+          ...(indexedChanges[currentHostingEnvironmentId] ?? {}),
         }}
-        isOpen={activeModalKey === OPENSHIFT_MODAL_KEY}
+        isOpen={activeModalKey === generateModalId(currentHostingEnvironmentId)}
       />
       <DataCard
         actionButton={() => (
           <EditButton
             isDisabled={isAddHostingButtonDisabled}
-            onClick={addProvider}
+            onClick={addEnvironment}
             text={'Add Hosting Environment'}
             dataCy={'hosting_env_button'}
           />
         )}
         title="Hosting Environment"
       >
-        {currentChanges?.hosting_environments?.length > 0 ? (
+        {currentHostingEnvironmentChanges.length > 0 ? (
           <Table
             aria-label="Engagement Hosting Environments"
             variant={TableVariant.compact}
