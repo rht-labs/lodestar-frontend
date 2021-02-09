@@ -585,7 +585,7 @@ export const EngagementProvider = ({
       feedbackContext.showAlert(errorMessage, AlertType.error);
       await _handleErrors(e);
       }
-  }, [engagementService, _handleErrors, _deleteEngagement, engagements, feedbackContext]);
+  }, [engagementService, _deleteEngagement, feedbackContext]);
 
   const fetchCategories = useCallback(async () => {
     try {
