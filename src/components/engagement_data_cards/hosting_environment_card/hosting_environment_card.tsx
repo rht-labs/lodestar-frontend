@@ -172,23 +172,6 @@ export function HostingEnvironmentCard() {
       {
         title: (
           <>
-            <OpenShiftClusterEditModal
-              isEngagementLaunched={!!currentChanges?.launch}
-              onSave={onSave}
-              onClose={onClose}
-              setHostingEnvironment={updateHostingEnvironment}
-              hostingEnvironment={{
-                ocp_sub_domain: generateSuggestedSubdomain(
-                  currentChanges?.project_name,
-                  currentChanges?.customer_name,
-                  currentEnvironmentIndex + 1 > 0
-                    ? (currentEnvironmentIndex + 1)?.toString()
-                    : '1'
-                ),
-                ...(indexedChanges[hostingEnvironment.id] ?? {}),
-              }}
-              isOpen={activeModalKey === generateModalId(hostingEnvironment.id)}
-            />
             <Feature name={'writer'}>
               <Dropdown
                 isPlain
@@ -220,6 +203,23 @@ export function HostingEnvironmentCard() {
     (engagementFormConfig?.logistics_options?.max_hosting_env_count ?? 1);
   return (
     <>
+      <OpenShiftClusterEditModal
+        isEngagementLaunched={!!currentChanges?.launch}
+        onSave={onSave}
+        onClose={onClose}
+        setHostingEnvironment={updateHostingEnvironment}
+        hostingEnvironment={{
+          ocp_sub_domain: generateSuggestedSubdomain(
+            currentChanges?.project_name,
+            currentChanges?.customer_name,
+            currentEnvironmentIndex + 1 > 0
+              ? (currentEnvironmentIndex + 1)?.toString()
+              : '1'
+          ),
+          ...(indexedChanges[currentHostingEnvironmentId] ?? {}),
+        }}
+        isOpen={activeModalKey === generateModalId(currentHostingEnvironmentId)}
+      />
       <DataCard
         actionButton={() => (
           <EditButton
