@@ -549,7 +549,7 @@ export const EngagementProvider = ({
       const updatedEngagements = engagements.filter(engagement => engagement.uuid !== deletedEngagement.uuid);
       setEngagements(updatedEngagements);
     },
-    [engagements, _handleErrors]
+    [engagements]
   );
 
   const deleteEngagement = useCallback(async(engagement: Engagement) => {
@@ -585,7 +585,7 @@ export const EngagementProvider = ({
       feedbackContext.showAlert(errorMessage, AlertType.error);
       await _handleErrors(e);
       }
-  }, [engagementService, _deleteEngagement, feedbackContext]);
+  }, [engagementService, _deleteEngagement, feedbackContext, _handleErrors]);
 
   const fetchCategories = useCallback(async () => {
     try {
