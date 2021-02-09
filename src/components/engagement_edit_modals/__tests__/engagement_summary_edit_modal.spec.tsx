@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitForDomChange } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import { EngagementSummaryEditModal } from '../engagement_summary_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
@@ -12,18 +12,20 @@ describe('Engagement Summary edit modal', () => {
     await act(async () => {
       MockDate.set(new Date(2020, 8, 3));
       const rendered = render(
-        <MemoryRouter>
-          <TestStateWrapper>
-            <EngagementSummaryEditModal
-              onClose={() => {}}
-              onSave={() => {}}
-              isOpen={true}
-              engagement={Engagement.fromFake(true)}
-            />
-          </TestStateWrapper>
-        </MemoryRouter>
+        <TestStateWrapper>
+          <EngagementSummaryEditModal
+            onClose={() => {}}
+            onSave={() => {}}
+            isOpen={true}
+            engagement={Engagement.fromFake(true)}
+          />
+        </TestStateWrapper>
       );
-      await waitForDomChange;
+      await waitFor(() =>
+        expect(
+          screen.getByTestId('engagement_summary_edit_modal')
+        ).toBeDefined()
+      );
       expect(rendered).toMatchSnapshot();
       MockDate.reset();
     });

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  render,
-  act,
-  fireEvent,
-  waitForDomChange,
-} from '@testing-library/react';
+import { render, act, fireEvent, screen } from '@testing-library/react';
 
 import { EngagementTimelineCard } from '../engagement_timeline_card/engagement_timeline_card';
 import { Artifact, Engagement } from '../../../schemas/engagement';
@@ -59,7 +54,7 @@ describe('Engagement Artifact Card', () => {
       </FeatureToggleContext.Provider>
     );
     act(() => {
-      fireEvent.click(card.getByTestId('add-artifact-button'));
+      fireEvent.click(screen.getByTestId('add-artifact-button'));
       expect(requestOpen).toHaveBeenCalled();
     });
   });
@@ -93,11 +88,8 @@ describe('Engagement Artifact Card', () => {
         </ModalVisibilityContext.Provider>
       </FeatureToggleContext.Provider>
     );
-    await act(async () => {
-      fireEvent.click(card.getByTestId('artifact-action-kebab'));
-      await waitForDomChange({ container: card.container });
-      fireEvent.click(card.getByTestId('artifact-edit-button'));
-      expect(requestOpen).toHaveBeenCalled();
-    });
+    await fireEvent.click(screen.getByTestId('artifact-action-kebab'));
+    await fireEvent.click(screen.getByTestId('artifact-edit-button'));
+    expect(requestOpen).toHaveBeenCalled();
   });
 });

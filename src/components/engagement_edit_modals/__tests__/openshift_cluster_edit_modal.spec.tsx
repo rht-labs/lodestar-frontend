@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  waitForDomChange,
-  act,
-} from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 import { OpenShiftClusterEditModal } from '../openshift_cluster_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
@@ -25,7 +20,6 @@ describe('Hosting Environment edit modal', () => {
         </TestStateWrapper>
       );
 
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });

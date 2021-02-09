@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { act, render, waitForDomChange } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { Header } from '../header';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
@@ -18,7 +18,6 @@ describe('Notification UI ', () => {
           </TestStateWrapper>
         </MemoryRouter>
       );
-      await waitForDomChange();
       expect(rendered).toMatchSnapshot();
     });
   });
