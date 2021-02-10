@@ -91,6 +91,7 @@ describe('timezone select', () => {
         'America/Denver',
         'Engagement Summary'
       );
+      expect(await view.queryByTestId('America/Denver')).toBeNull();
     });
   });
 });

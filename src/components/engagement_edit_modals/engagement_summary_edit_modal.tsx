@@ -159,6 +159,7 @@ export function EngagementSummaryEditModal(
                       t => t.name === selection
                     )?.tzCode;
                     setTimezone(timezoneValue);
+                    setIsTZSelectOpen(false);
                   }}
                 >
                   {getSelectComponents(TIMEZONES)}
