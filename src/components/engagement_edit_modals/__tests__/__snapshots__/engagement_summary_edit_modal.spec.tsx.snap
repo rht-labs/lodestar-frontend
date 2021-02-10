@@ -25,7 +25,7 @@ Object {
             aria-labelledby="pf-modal-part-1"
             aria-modal="true"
             class="pf-c-modal-box pf-m-sm"
-            data-ouia-component-id="5"
+            data-ouia-component-id="OUIA-Generated-Modal-small-1"
             data-ouia-component-type="PF4/ModalContent"
             data-ouia-safe="true"
             id="pf-modal-part-0"
@@ -35,7 +35,7 @@ Object {
               aria-disabled="false"
               aria-label="Close"
               class="pf-c-button pf-m-plain"
-              data-ouia-component-id="6"
+              data-ouia-component-id="OUIA-Generated-Button-plain-1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -51,7 +51,6 @@ Object {
               >
                 <path
                   d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                  transform=""
                 />
               </svg>
             </button>
@@ -59,10 +58,15 @@ Object {
               class="pf-c-modal-box__header"
             >
               <h1
-                class="pf-c-modal-box__title pf-c-modal-box__title"
+                class="pf-c-modal-box__title"
                 id="pf-modal-part-1"
               >
-                Engagement Summary
+                
+                <span
+                  class="pf-c-modal-box__title-text"
+                >
+                  Engagement Summary
+                </span>
               </h1>
             </header>
             <div
@@ -186,7 +190,7 @@ Object {
                       <button
                         aria-disabled="false"
                         class="pf-c-button pf-m-secondary"
-                        data-ouia-component-id="7"
+                        data-ouia-component-id="OUIA-Generated-Button-secondary-1"
                         data-ouia-component-type="PF4/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -255,7 +259,7 @@ Object {
                       >
                         <div
                           class="pf-c-select"
-                          data-ouia-component-id="10"
+                          data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                           data-ouia-component-type="PF4/Select"
                           data-ouia-safe="true"
                         >
@@ -297,7 +301,6 @@ Object {
                               >
                                 <path
                                   d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                                  transform=""
                                 />
                               </svg>
                             </button>
@@ -395,33 +398,102 @@ Object {
                           >
                             <path
                               d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                              transform=""
                             />
                           </svg>
                         </label>
-                        <input
-                          aria-invalid="false"
-                          aria-label="The start date."
-                          class="pf-c-form-control"
+                        <div
+                          class="pf-c-date-picker"
                           data-cy="start_date_input"
-                          disabled=""
                           id="start_date"
                           name="start_date"
+                          style="--pf-c-date-picker__input--c-form-control--width-chars: 10;"
                           type="date"
-                          value=""
-                        />
-                        <input
-                          aria-invalid="false"
-                          aria-label="The end date"
-                          class="pf-c-form-control"
+                        >
+                          <div
+                            class="pf-c-date-picker__input"
+                          >
+                            <div
+                              class="pf-c-input-group"
+                            >
+                              <input
+                                aria-invalid="false"
+                                aria-label="The start date."
+                                class="pf-c-form-control"
+                                disabled=""
+                                placeholder="yyyy-MM-dd"
+                                type="text"
+                                value=""
+                              />
+                              <button
+                                aria-label="Toggle date picker"
+                                class="pf-c-button pf-m-control"
+                                disabled=""
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  fill="currentColor"
+                                  height="1em"
+                                  role="img"
+                                  style="vertical-align: -0.125em;"
+                                  viewBox="0 0 448 512"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                  />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div
+                          class="pf-c-date-picker"
                           data-cy="end_date_input"
-                          disabled=""
                           id="end_date"
                           min="2020-09-03"
                           name="end_date"
+                          style="--pf-c-date-picker__input--c-form-control--width-chars: 10;"
                           type="date"
-                          value=""
-                        />
+                        >
+                          <div
+                            class="pf-c-date-picker__input"
+                          >
+                            <div
+                              class="pf-c-input-group"
+                            >
+                              <input
+                                aria-invalid="false"
+                                aria-label="The end date"
+                                class="pf-c-form-control"
+                                disabled=""
+                                placeholder="yyyy-MM-dd"
+                                type="text"
+                                value=""
+                              />
+                              <button
+                                aria-label="Toggle date picker"
+                                class="pf-c-button pf-m-control"
+                                disabled=""
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  fill="currentColor"
+                                  height="1em"
+                                  role="img"
+                                  style="vertical-align: -0.125em;"
+                                  viewBox="0 0 448 512"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                  />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                          
+                        </div>
                       </div>
                       <div
                         aria-live="polite"
@@ -461,7 +533,6 @@ Any changes to this field should be coordinated with Labs leadership."
                             >
                               <path
                                 d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                transform=""
                               />
                             </svg>
                           </span>
@@ -476,17 +547,52 @@ Any changes to this field should be coordinated with Labs leadership."
                         class="pf-c-input-group"
                         label="Retirement Date"
                       >
-                        <input
-                          aria-invalid="false"
-                          aria-label="Environment Retirement Date"
-                          class="pf-c-form-control"
+                        <div
+                          class="pf-c-date-picker"
                           data-cy="retirement_date_input"
-                          disabled=""
                           id="archive_date"
                           name="archive_date"
+                          style="--pf-c-date-picker__input--c-form-control--width-chars: 10;"
                           type="date"
-                          value=""
-                        />
+                        >
+                          <div
+                            class="pf-c-date-picker__input"
+                          >
+                            <div
+                              class="pf-c-input-group"
+                            >
+                              <input
+                                aria-invalid="false"
+                                aria-label="Environment Retirement Date"
+                                class="pf-c-form-control"
+                                disabled=""
+                                placeholder="yyyy-MM-dd"
+                                type="text"
+                                value=""
+                              />
+                              <button
+                                aria-label="Toggle date picker"
+                                class="pf-c-button pf-m-control"
+                                disabled=""
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  fill="currentColor"
+                                  height="1em"
+                                  role="img"
+                                  style="vertical-align: -0.125em;"
+                                  viewBox="0 0 448 512"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                  />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                          
+                        </div>
                       </div>
                       
                     </div>
@@ -526,7 +632,7 @@ Any changes to this field should be coordinated with Labs leadership."
                           aria-disabled="false"
                           class="pf-c-button pf-m-primary"
                           data-cy="save_summary_card"
-                          data-ouia-component-id="9"
+                          data-ouia-component-id="OUIA-Generated-Button-primary-1"
                           data-ouia-component-type="PF4/Button"
                           data-ouia-safe="true"
                           data-testid="engagement-summary-save"

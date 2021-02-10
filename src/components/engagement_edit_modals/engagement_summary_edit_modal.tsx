@@ -137,6 +137,7 @@ export function EngagementSummaryEditModal(
               <FormGroup fieldId="timezone" label="Timezone">
                 <Select
                   aria-label="Timezone"
+                  menuAppendTo={'parent'}
                   toggleId="timezone-dropdown"
                   variant={SelectVariant.typeahead}
                   selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
@@ -144,6 +145,7 @@ export function EngagementSummaryEditModal(
                   isOpen={isTZSelectOpen}
                   onToggle={setIsTZSelectOpen}
                   isCreatable={false}
+                  maxHeight={'20rem'}
                   onFilter={e => {
                     const lower = e.target.value.toLowerCase();
                     return getSelectComponents(
