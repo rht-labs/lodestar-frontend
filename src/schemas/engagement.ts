@@ -78,6 +78,7 @@ export interface EngagementOverview {
   public_reference: boolean;
   engagement_categories: EngagementCategory[];
   engagement_region: string;
+  timezone?: string;
 }
 
 export interface EngagementHistory {
@@ -249,6 +250,7 @@ export abstract class Engagement {
           })),
       ...getStatusDeterminers(),
       uuid: staticData ? 'uuid' : faker.random.uuid(),
+      timezone: 'Americas/Denver',
     };
   }
 }
