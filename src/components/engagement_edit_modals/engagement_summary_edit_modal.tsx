@@ -73,7 +73,12 @@ export function EngagementSummaryEditModal(
 
   const getSelectComponents = (timezones: typeof TIMEZONES) => {
     return timezones.map(t => (
-      <SelectOption key={t.name} value={t.name} description={t.tzCode} />
+      <SelectOption
+        data-testid={t.tzCode}
+        key={t.name}
+        value={t.name}
+        description={t.tzCode}
+      />
     ));
   };
 
@@ -128,35 +133,38 @@ export function EngagementSummaryEditModal(
               label="Description"
               placeholder="Description and notes for the Engagement"
             />
-            <FormGroup fieldId="timezone" label="Timezone">
-              <Select
-                aria-label="Timezone"
-                variant={SelectVariant.typeahead}
-                selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
-                label={'Timezone'}
-                isOpen={isTZSelectOpen}
-                onToggle={setIsTZSelectOpen}
-                isCreatable={false}
-                onFilter={e => {
-                  const lower = e.target.value.toLowerCase();
-                  return getSelectComponents(
-                    TIMEZONES.filter(
-                      t =>
-                        t.name.toLowerCase().includes(lower) ||
-                        t.label.toLowerCase().includes(lower)
-                    )
-                  );
-                }}
-                onSelect={(_, selection) => {
-                  const timezoneValue = TIMEZONES.find(
-                    t => t.name === selection
-                  )?.tzCode;
-                  setTimezone(timezoneValue);
-                }}
-              >
-                {getSelectComponents(TIMEZONES)}
-              </Select>
-            </FormGroup>
+            <div data-testid="timezone-select">
+              <FormGroup fieldId="timezone" label="Timezone">
+                <Select
+                  aria-label="Timezone"
+                  toggleId="timezone-dropdown"
+                  variant={SelectVariant.typeahead}
+                  selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
+                  label={'Timezone'}
+                  isOpen={isTZSelectOpen}
+                  onToggle={setIsTZSelectOpen}
+                  isCreatable={false}
+                  onFilter={e => {
+                    const lower = e.target.value.toLowerCase();
+                    return getSelectComponents(
+                      TIMEZONES.filter(
+                        t =>
+                          t.name.toLowerCase().includes(lower) ||
+                          t.label.toLowerCase().includes(lower)
+                      )
+                    );
+                  }}
+                  onSelect={(_, selection) => {
+                    const timezoneValue = TIMEZONES.find(
+                      t => t.name === selection
+                    )?.tzCode;
+                    setTimezone(timezoneValue);
+                  }}
+                >
+                  {getSelectComponents(TIMEZONES)}
+                </Select>
+              </FormGroup>
+            </div>
             <TextFormField
               value={location}
               onChange={setLocation}
