@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
+import { TIMEZONES } from '../../common/timezones';
+import {
+  Modal,
+  ModalVariant,
+  Button,
+  Form,
+  Select,
+  SelectVariant,
+  SelectOption,
+  FormGroup,
+} from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_dates';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
@@ -54,6 +64,18 @@ export function EngagementSummaryEditModal(
     'location',
     EngagementGroupings.engagementSummary
   );
+  const [timezone, setTimezone] = useEngagementFormField(
+    'timezone',
+    EngagementGroupings.engagementSummary
+  );
+
+  const [isTZSelectOpen, setIsTZSelectOpen] = useState<boolean>(false);
+
+  const getSelectComponents = (timezones: typeof TIMEZONES) => {
+    return timezones.map(t => (
+      <SelectOption key={t.name} value={t.name} description={t.tzCode} />
+    ));
+  };
 
   return (
     <div data-testid="engagement_summary_edit_modal">
@@ -106,6 +128,35 @@ export function EngagementSummaryEditModal(
               label="Description"
               placeholder="Description and notes for the Engagement"
             />
+            <FormGroup fieldId="timezone" label="Timezone">
+              <Select
+                aria-label="Timezone"
+                variant={SelectVariant.typeahead}
+                selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
+                label={'Timezone'}
+                isOpen={isTZSelectOpen}
+                onToggle={setIsTZSelectOpen}
+                isCreatable={false}
+                onFilter={e => {
+                  const lower = e.target.value.toLowerCase();
+                  return getSelectComponents(
+                    TIMEZONES.filter(
+                      t =>
+                        t.name.toLowerCase().includes(lower) ||
+                        t.label.toLowerCase().includes(lower)
+                    )
+                  );
+                }}
+                onSelect={(_, selection) => {
+                  const timezoneValue = TIMEZONES.find(
+                    t => t.name === selection
+                  )?.tzCode;
+                  setTimezone(timezoneValue);
+                }}
+              >
+                {getSelectComponents(TIMEZONES)}
+              </Select>
+            </FormGroup>
             <TextFormField
               value={location}
               onChange={setLocation}
