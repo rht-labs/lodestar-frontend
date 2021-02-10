@@ -137,6 +137,8 @@ export function EngagementSummaryEditModal(
               <FormGroup fieldId="timezone" label="Timezone">
                 <Select
                   aria-label="Timezone"
+                  menuAppendTo={document.body}
+                  maxHeight={'20rem'}
                   toggleId="timezone-dropdown"
                   variant={SelectVariant.typeahead}
                   selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
