@@ -105,6 +105,13 @@ describe('Engagement Context', () => {
     });
   });
 
+  test('should not be launchable if every added hosting environment is not complete and valid', async () => {
+    expect(true).toBe(false);
+  });
+  test('launch is allowed if no hosting environment has been added', async () => {
+    expect(true).toBe(false);
+  });
+
   test('Can create a new engagement', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();

@@ -16,9 +16,9 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useSubdomainUniqueness } from '../../hooks/subdomain_checker';
 export interface OpenShiftClusterEditModalProps {
-  hostingEnvironment: HostingEnvironment;
+  hostingEnvironment: Partial<HostingEnvironment>;
   isOpen: boolean;
-  onSave: (hostingEnvironment: HostingEnvironment) => void;
+  onSave: (hostingEnvironment: Partial<HostingEnvironment>) => void;
   onClose: () => void;
   isEngagementLaunched: boolean;
   suggestedSubdomain?: string;
@@ -64,7 +64,10 @@ export function OpenShiftClusterEditModal({
   };
 
   const onChange = (field: keyof HostingEnvironment, value) => {
-    setHostingEnvironment({ ...hostingEnvironment, [field]: value });
+    setHostingEnvironment({
+      ...hostingEnvironment,
+      [field]: value,
+    } as HostingEnvironment);
   };
 
   if (!hostingEnvironment) {
@@ -191,7 +194,7 @@ export function OpenShiftClusterEditModal({
 }
 
 function getAvailableProviders(
-  hostingEnvironment: HostingEnvironment,
+  hostingEnvironment: Partial<HostingEnvironment>,
   engagementFormConfig: EngagementFormConfig
 ) {
   const availableProviders =
@@ -214,7 +217,7 @@ function getAvailableProviders(
 
 function getAvailableRegionOptions(
   provider: EngagementFormOption,
-  hostingEnvironment: HostingEnvironment
+  hostingEnvironment: Partial<HostingEnvironment>
 ) {
   const availableProviderRegionOptions = provider?.options ?? [];
 

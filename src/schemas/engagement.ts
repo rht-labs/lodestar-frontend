@@ -127,7 +127,7 @@ export interface Engagement
     EngagementHistory {
   artifacts: Artifact[];
   engagement_users: EngagementUser[];
-  hosting_environments: HostingEnvironment[];
+  hosting_environments: Partial<HostingEnvironment>[];
   uuid?: string;
 }
 
