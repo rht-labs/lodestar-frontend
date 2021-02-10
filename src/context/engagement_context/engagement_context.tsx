@@ -117,12 +117,48 @@ export const EngagementProvider = ({
   >();
 
   const [isLaunchable, setIsLaunchable] = useState<boolean>(false);
+  const [changedGroups, setChangedGroups] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const updateEngagementFormField = useCallback(
+    <T extends keyof Engagement>(
+      fieldName: T,
+      value: Engagement[T],
+      group?: EngagementGroupings
+    ) => {
+      if (!!group) {
+        setChangedGroups({ ...changedGroups, [group]: true });
+      }
+      dispatch({ type: fieldName, payload: value });
+      try {
+        analyticsContext.logEvent({
+          category: AnalyticsCategory.engagements,
+          action: 'Update Engagement',
+        });
+      } catch (e) {}
+    },
+    [analyticsContext, changedGroups]
+  );
   const setCurrentEngagement = useCallback(
     (engagement: Engagement) => {
       dispatch({});
       _setCurrentEngagement(engagement);
+      if (!engagement?.timezone) {
+        const getTimeZone = () => {
+          try {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone;
+          } catch (e) {
+            return undefined;
+          }
+        };
+        updateEngagementFormField(
+          'timezone',
+          getTimeZone(),
+          EngagementGroupings.engagementSummary
+        );
+      }
     },
-    [_setCurrentEngagement]
+    [_setCurrentEngagement, updateEngagementFormField]
   );
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => Partial<Engagement>
@@ -135,9 +171,6 @@ export const EngagementProvider = ({
     []
   );
 
-  const [changedGroups, setChangedGroups] = useState<{
-    [key: string]: boolean;
-  }>({});
   const clearCurrentChanges = useCallback(() => {
     dispatch({
       type: 'switch_engagement',
@@ -553,22 +586,6 @@ export const EngagementProvider = ({
     }
   }, [categoryService, _handleErrors]);
 
-  const updateEngagementFormField = (
-    fieldName: keyof Engagement,
-    value: any,
-    group?: EngagementGroupings
-  ) => {
-    if (!!group) {
-      setChangedGroups({ ...changedGroups, [group]: true });
-    }
-    dispatch({ type: fieldName, payload: value });
-    try {
-      analyticsContext.logEvent({
-        category: AnalyticsCategory.engagements,
-        action: 'Update Engagement',
-      });
-    } catch (e) {}
-  };
   return (
     <Provider
       value={{

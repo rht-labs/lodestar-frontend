@@ -117,6 +117,31 @@ describe('Engagement Context', () => {
     });
   });
 
+  test("By default, an engagement uses the browser's timezone", async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement({
+        ...Engagement.fromFake(true),
+        timezone: undefined,
+      });
+      await waitForNextUpdate();
+      expect(result.current.currentChanges?.timezone).toBe('America/New_York');
+    });
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement({
+        ...Engagement.fromFake(true),
+        timezone: 'America/Los_Angeles',
+      });
+      await waitForNextUpdate();
+      expect(result.current.currentChanges?.timezone).toBe(
+        'America/Los_Angeles'
+      );
+    });
+  });
+
   test('_handleErrors handles authentication errors', async () => {
     await act(async () => {
       const isLoggedIn = jest.fn(async () => true);
