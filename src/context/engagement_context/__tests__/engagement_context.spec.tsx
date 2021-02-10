@@ -128,6 +128,8 @@ describe('Engagement Context', () => {
       await waitForNextUpdate();
       expect(result.current.currentChanges?.timezone).toBe('America/New_York');
     });
+  });
+  test('If an engagement has a timezone already defined, that timezone is not overridden when switching engagements', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
       await waitForNextUpdate();
@@ -135,7 +137,6 @@ describe('Engagement Context', () => {
         ...Engagement.fromFake(true),
         timezone: 'America/Los_Angeles',
       });
-      console.log(result.current.currentChanges);
       await waitForNextUpdate();
       expect(result.current.currentChanges?.timezone).toBe(
         'America/Los_Angeles'
