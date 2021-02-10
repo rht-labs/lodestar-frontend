@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
-import { Artifact, ArtifactType } from '../../../schemas/engagement';
+import { Artifact } from '../../../schemas/engagement';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { getLabelForValue } from '../../../common/label_value_tools';
 import {
   Table,
   TableVariant,
@@ -40,6 +41,7 @@ export function EngagementArtifactCard() {
     currentChanges,
     saveEngagement,
     clearCurrentChanges,
+    engagementFormConfig,
   } = useEngagements();
   const { addArtifact, artifacts, updateArtifact } = useEngagementArtifacts();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
@@ -88,7 +90,10 @@ export function EngagementArtifactCard() {
   const getModalKey = () => `${ARTIFACT_CRUD_MODAL}`;
   const rows =
     currentEngagement?.artifacts?.map?.((artifact, idx) => [
-      ArtifactType[artifact.type],
+      getLabelForValue(
+        engagementFormConfig?.logistics_options?.artifact_types ?? [],
+        artifact.type
+      ),
       {
         title: (
           <a
@@ -142,6 +147,9 @@ export function EngagementArtifactCard() {
           clearCurrentChanges();
         }}
         onSave={onFinishArtifactEdit}
+        artifactTypes={
+          engagementFormConfig?.logistics_options?.artifact_types ?? []
+        }
       />
       <DataCard
         title="Engagement Artifacts"

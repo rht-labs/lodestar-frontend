@@ -48,20 +48,8 @@ export interface Artifact {
   id: string;
   linkAddress: string;
   title: string;
-  type: ArtifactType;
+  type: string;
   description: string;
-}
-
-export enum ArtifactType {
-  demo = 'Demo',
-  weeklyReport = 'Weekly Report',
-  other = 'Other',
-  blog = 'Blog',
-  multimedia = 'Photo/Video',
-  news = 'News Article',
-  social = 'Social Media Post',
-  whitepaper = 'Whitepaper',
-  successStory = 'Success Story/Case Study',
 }
 
 export abstract class Artifact {
@@ -70,7 +58,7 @@ export abstract class Artifact {
       id: staticData ? '1' : faker.random.uuid(),
       linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
       title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
-      type: ArtifactType.demo,
+      type: 'demo',
       description: staticData
         ? 'Artifact Description'
         : faker.lorem.paragraph(),
@@ -90,6 +78,7 @@ export interface EngagementOverview {
   public_reference: boolean;
   engagement_categories: EngagementCategory[];
   engagement_region: string;
+  timezone?: string;
 }
 
 export interface EngagementHistory {
@@ -261,6 +250,7 @@ export abstract class Engagement {
           })),
       ...getStatusDeterminers(),
       uuid: staticData ? 'uuid' : faker.random.uuid(),
+      timezone: 'Americas/Denver',
     };
   }
 }
