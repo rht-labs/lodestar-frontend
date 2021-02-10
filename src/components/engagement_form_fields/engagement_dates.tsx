@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import {
-  DatePicker,
-  FormGroup,
-  InputGroup,
-  InputGroupText,
-  TextInput,
-} from '@patternfly/react-core';
-import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
+import React from 'react';
+import { DatePicker, FormGroup, InputGroup } from '@patternfly/react-core';
+import { InfoCircleIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
-import {
-  getFormattedDate,
-  parseDatePickerDate,
-} from '../../common/patternfly_date_adapter';
-import startOfToday from 'date-fns/startOfToday';
+import { getFormattedDate } from '../../common/patternfly_date_adapter';
 import addDays from 'date-fns/addDays';
 import { useValidation } from '../../context/validation_context/validation_hook';
-import max from 'date-fns/max';
-import format from 'date-fns/format';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import {
   EngagementGroupings,
@@ -42,26 +30,6 @@ export function EngagementStartEndDateFormField() {
     EngagementGroupings.engagementSummary
   );
 
-  const [startDateText, setStartDateText] = useState(
-    getFormattedDate(startDate) || ''
-  );
-  const [endDateText, setEndDateText] = useState(
-    getFormattedDate(endDate) || ''
-  );
-  const [archiveDateText, setArchiveDateText] = useState(
-    getFormattedDate(archiveDate) || ''
-  );
-
-  useEffect(() => {
-    setEndDateText(getFormattedDate(endDate));
-  }, [endDate]);
-  useEffect(() => {
-    setStartDateText(getFormattedDate(startDate));
-  }, [startDate]);
-  useEffect(() => {
-    setArchiveDateText(getFormattedDate(archiveDate));
-  }, [archiveDate]);
-
   const getMaxRetirementDate = () => {
     return maxGracePeriodInDays
       ? addDays(endDate, maxGracePeriodInDays)
@@ -82,38 +50,31 @@ export function EngagementStartEndDateFormField() {
         isRequired
       >
         <InputGroup label="Engagement Duration">
-          <InputGroupText component="label" htmlFor="engagement-duration">
-            <CalendarAltIcon />
-          </InputGroupText>
           <DatePicker
             isDisabled={
               !hasFeature(APP_FEATURES.writer) || !!currentEngagement?.launch
             }
             name="start_date"
             id="start_date"
-            type="date"
             aria-label="The start date."
-            value={startDateText ?? ''}
-            onChange={setStartDateText}
-            onBlur={e => setStartDate(parseDatePickerDate(e.target.value))}
+            value={getFormattedDate(startDate)}
+            onChange={(_, d) => {
+              setStartDate(d);
+            }}
             data-cy={'start_date_input'}
           />
           <DatePicker
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             name="end_date"
             id="end_date"
-            type="date"
-            aria-label="The end date"
-            // value={endDateText ?? ''}
-            value={endDateText}
-            min={getFormattedDate(
-              max([startOfToday(), startDate ?? startOfToday()])
-            )}
-            onChange={setEndDateText}
-            onBlur={e => {
-              const parsedDate = parseDatePickerDate(e.target.value);
-              validate('end_date')(parsedDate);
-              setEndDate(parsedDate);
+            aria-label="Engagement End Date"
+            value={getFormattedDate(endDate)}
+            // min={getFormattedDate(
+            //   max([startOfToday(), startDate ?? startOfToday()])
+            // )}
+            onChange={(_, d) => {
+              validate('end_date')(d);
+              setEndDate(d);
             }}
             data-cy={'end_date_input'}
           />
@@ -137,14 +98,10 @@ export function EngagementStartEndDateFormField() {
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
-            value={archiveDateText ?? ''}
-            onBlur={e => {
-              const parsedDate = parseDatePickerDate(e.target.value);
-              validate('archive_date')(parsedDate);
-              setArchiveDate(parsedDate);
-            }}
-            onChange={e => {
-              setArchiveDateText(e);
+            value={getFormattedDate(archiveDate)}
+            onChange={(_, d) => {
+              validate('archive_date')(d);
+              setArchiveDate(d);
             }}
             min={getFormattedDate(endDate)}
             max={getFormattedDate(getMaxRetirementDate())}
