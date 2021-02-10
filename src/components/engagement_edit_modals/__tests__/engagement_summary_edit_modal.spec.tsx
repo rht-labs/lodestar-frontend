@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import { getById } from '../../../utilities/get_by_id';
 import { EngagementSummaryEditModal } from '../engagement_summary_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
