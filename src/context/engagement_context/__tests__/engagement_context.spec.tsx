@@ -135,6 +135,7 @@ describe('Engagement Context', () => {
         ...Engagement.fromFake(true),
         timezone: 'America/Los_Angeles',
       });
+      console.log(result.current.currentChanges);
       await waitForNextUpdate();
       expect(result.current.currentChanges?.timezone).toBe(
         'America/Los_Angeles'

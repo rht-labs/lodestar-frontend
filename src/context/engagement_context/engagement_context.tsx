@@ -120,6 +120,18 @@ export const EngagementProvider = ({
   const [changedGroups, setChangedGroups] = useState<{
     [key: string]: boolean;
   }>({});
+  const [currentEngagementChanges, dispatch] = useReducer<
+    (state: any, action: any) => Partial<Engagement>
+  >(
+    engagementFormReducer(engagementFormConfig),
+    engagementFormReducer(engagementFormConfig)()
+  );
+  const clearCurrentChanges = useCallback(() => {
+    dispatch({
+      type: 'switch_engagement',
+    });
+    setChangedGroups({});
+  }, [dispatch]);
   const updateEngagementFormField = useCallback(
     <T extends keyof Engagement>(
       fieldName: T,
@@ -141,8 +153,7 @@ export const EngagementProvider = ({
   );
   const setCurrentEngagement = useCallback(
     (engagement: Engagement) => {
-      dispatch({});
-      _setCurrentEngagement(engagement);
+      const defaults: Partial<Engagement> = {};
       if (!engagement?.timezone) {
         const getTimeZone = () => {
           try {
@@ -151,35 +162,19 @@ export const EngagementProvider = ({
             return undefined;
           }
         };
-        updateEngagementFormField(
-          'timezone',
-          getTimeZone(),
-          EngagementGroupings.engagementSummary
-        );
+        defaults.timezone = getTimeZone();
       }
+      clearCurrentChanges();
+      dispatch({ type: 'switch_engagement', payload: defaults });
+      _setCurrentEngagement(engagement);
     },
-    [_setCurrentEngagement, updateEngagementFormField]
-  );
-  const [currentEngagementChanges, dispatch] = useReducer<
-    (state: any, action: any) => Partial<Engagement>
-  >(
-    engagementFormReducer(engagementFormConfig),
-    engagementFormReducer(engagementFormConfig)()
+    [_setCurrentEngagement, clearCurrentChanges]
   );
 
   const [missingRequiredFields, setMissingRequiredFields] = useState<string[]>(
     []
   );
 
-  const clearCurrentChanges = useCallback(() => {
-    dispatch({
-      type: 'switch_engagement',
-    });
-    setChangedGroups({});
-  }, [dispatch]);
-  useEffect(() => {
-    clearCurrentChanges();
-  }, [currentEngagement, clearCurrentChanges]);
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);

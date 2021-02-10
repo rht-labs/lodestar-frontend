@@ -230,6 +230,47 @@ Object {
                     </div>
                   </div>
                   <div
+                    class="pf-c-form__group"
+                  >
+                    <div
+                      class="pf-c-form__group-label"
+                    >
+                      <label
+                        class="pf-c-form__label"
+                        for="location"
+                      >
+                        <span
+                          class="pf-c-form__label-text"
+                        >
+                          Location
+                        </span>
+                      </label>
+                       
+                    </div>
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <input
+                        aria-invalid="false"
+                        class="pf-c-form-control"
+                        data-cy="location-field"
+                        data-testid="location-field"
+                        id="location"
+                        name="location"
+                        placeholder="e.g. Pasadena, CA"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        aria-live="polite"
+                        class="pf-c-form__helper-text"
+                        id="location-helper"
+                      >
+                        Where will this be held?
+                      </div>
+                    </div>
+                  </div>
+                  <div
                     data-testid="timezone-select"
                   >
                     <div
@@ -304,47 +345,6 @@ Object {
                           </div>
                         </div>
                         
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="pf-c-form__group"
-                  >
-                    <div
-                      class="pf-c-form__group-label"
-                    >
-                      <label
-                        class="pf-c-form__label"
-                        for="location"
-                      >
-                        <span
-                          class="pf-c-form__label-text"
-                        >
-                          Location
-                        </span>
-                      </label>
-                       
-                    </div>
-                    <div
-                      class="pf-c-form__group-control"
-                    >
-                      <input
-                        aria-invalid="false"
-                        class="pf-c-form-control"
-                        data-cy="location-field"
-                        data-testid="location-field"
-                        id="location"
-                        name="location"
-                        placeholder="e.g. Pasadena, CA"
-                        type="text"
-                        value=""
-                      />
-                      <div
-                        aria-live="polite"
-                        class="pf-c-form__helper-text"
-                        id="location-helper"
-                      >
-                        Where will this be held?
                       </div>
                     </div>
                   </div>
