@@ -1,0 +1,16 @@
+[
+  {
+    "first_name": "Spencer",
+    "last_name": "McLode",
+    "email": "spencer@customer.com",
+    "role": "Developer",
+    "role_value": "lodestar-developers"
+  },
+  {
+    "first_name": "Venus",
+    "last_name": "Northstar",
+    "email": "venus@redhat.com",
+    "role": "Admin",
+    "role_value": "lodestar-admins"
+  }
+]

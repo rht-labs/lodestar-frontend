@@ -119,7 +119,7 @@ export function OpenShiftClusterEditModal({
                 availableProviderRegionOptions?.length === 0 ||
                 !hasFeature(APP_FEATURES.writer)
               }
-              data-testid="provider-region-select"
+              testId="provider-region-select"
               emptyValue={{
                 label: 'Select a region',
               }}
@@ -133,7 +133,7 @@ export function OpenShiftClusterEditModal({
             />
             <SelectFormField
               value={hostingEnvironment?.ocp_version || ''}
-              testId="oc-version-select"
+              testId="oc_version_select"
               emptyValue={{ label: 'Select a version' }}
               options={engagementFormConfig?.openshift_options?.versions?.options?.map?.(
                 v => ({ label: v.label, disabled: v.disabled, value: v.value })
