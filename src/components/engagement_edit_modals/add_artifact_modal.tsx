@@ -10,7 +10,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { Artifact, ArtifactType } from '../../schemas/engagement';
+import { Artifact } from '../../schemas/engagement';
 import {
   useAnalytics,
   AnalyticsCategory,
@@ -21,7 +21,8 @@ export interface ArtifactEditModalProps {
   isOpen: boolean;
   artifact: Artifact;
   onUpdate: (artifact: Artifact) => void;
-  onSave: (artifact: Artifact) => void;
+  onSave: () => void;
+  artifactTypes: { label: string; value: string }[];
 }
 
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
@@ -61,19 +62,15 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               aria-label="Artifact Type"
               id="artifact-type-select"
               value={props?.artifact?.type}
-              onChange={(value: string, _) => {
+              onChange={(type: string, _) => {
                 props.onUpdate({
                   ...props.artifact,
-                  type: ArtifactType[value],
+                  type,
                 });
               }}
             >
-              {Object.keys(ArtifactType).map((artifactTypeKey, index) => (
-                <FormSelectOption
-                  key={index}
-                  value={artifactTypeKey}
-                  label={ArtifactType[artifactTypeKey]}
-                />
+              {props.artifactTypes?.map?.((artifactType, index) => (
+                <FormSelectOption key={index} {...artifactType} />
               ))}
             </FormSelect>
           </FormGroup>
