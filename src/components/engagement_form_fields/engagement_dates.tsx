@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+  DatePicker,
   FormGroup,
   InputGroup,
   InputGroupText,
@@ -16,6 +17,7 @@ import startOfToday from 'date-fns/startOfToday';
 import addDays from 'date-fns/addDays';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import max from 'date-fns/max';
+import format from 'date-fns/format';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import {
   EngagementGroupings,
@@ -83,7 +85,7 @@ export function EngagementStartEndDateFormField() {
           <InputGroupText component="label" htmlFor="engagement-duration">
             <CalendarAltIcon />
           </InputGroupText>
-          <TextInput
+          <DatePicker
             isDisabled={
               !hasFeature(APP_FEATURES.writer) || !!currentEngagement?.launch
             }
@@ -96,13 +98,14 @@ export function EngagementStartEndDateFormField() {
             onBlur={e => setStartDate(parseDatePickerDate(e.target.value))}
             data-cy={'start_date_input'}
           />
-          <TextInput
+          <DatePicker
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             name="end_date"
             id="end_date"
             type="date"
             aria-label="The end date"
-            value={endDateText ?? ''}
+            // value={endDateText ?? ''}
+            value={endDateText}
             min={getFormattedDate(
               max([startOfToday(), startDate ?? startOfToday()])
             )}
@@ -127,7 +130,7 @@ export function EngagementStartEndDateFormField() {
         fieldId="retirement"
       >
         <InputGroup label="Retirement Date">
-          <TextInput
+          <DatePicker
             id="archive_date"
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             data-cy={'retirement_date_input'}

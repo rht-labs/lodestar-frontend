@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@patternfly/react-core": "^4.32.1",
-    "@patternfly/react-icons": "^3.14.30",
-    "@patternfly/react-table": "^4.15.5",
+    "@patternfly/react-core": "^4.90.2",
+    "@patternfly/react-icons": "^4.8.4",
+    "@patternfly/react-table": "^4.20.15",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^7.2.1",
