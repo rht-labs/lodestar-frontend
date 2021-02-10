@@ -2,27 +2,26 @@
   "basic_information": {
     "engagement_types": {
       "options": [
-        { "label": "DO500", "value": "DO500" },
-        { "label": "Residency", "value": "Residency", "default": true }
+        {
+          "label": "DO500",
+          "value": "DO500"
+        },
+        {
+          "label": "Open Transformation",
+          "value": "OpenTransformation"
+        },
+        {
+          "label": "Residency",
+          "value": "Residency",
+          "default": true
+        }
       ]
     },
     "engagement_regions": {
       "options": [
         {
-          "label": "NA",
-          "value": "na"
-        },
-        {
-          "label": "LATAM",
-          "value": "latam"
-        },
-        {
-          "label": "EMEA",
-          "value": "emea"
-        },
-        {
-          "label": "APAC",
-          "value": "apac"
+          "label": "DEV",
+          "value": "dev-1"
         }
       ]
     },
@@ -97,6 +96,10 @@
               "value": "eu-north-1"
             },
             {
+              "label": "Middle East (Bahrain)",
+              "value": "me-south-1"
+            },
+            {
               "label": "South America (São Paulo)",
               "value": "sa-east-1"
             },
@@ -135,16 +138,16 @@
     "versions": {
       "options": [
         {
-          "label": "v4.3",
-          "value": "4.3.31"
-        },
-        {
           "label": "v4.4",
           "value": "4.4.15"
         },
         {
           "label": "v4.5",
-          "value": "4.5.4"
+          "value": "4.5.18"
+        },
+        {
+          "label": "v4.6",
+          "value": "4.6.9"
         }
       ]
     },
@@ -155,6 +158,10 @@
         }
       ],
       "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
         {
           "label": "50GB",
           "value": "50G"
@@ -187,17 +194,17 @@
       "options": [
         {
           "label": "Developer",
-          "value": "developer",
+          "value": "lodestar-developers",
           "description": "Role used for someone that is part of the engagement team as a technical resource, e.g.: developer, and need access to perform most tasks that do not require elevated privileges."
         },
         {
           "label": "Observer",
-          "value": "observer",
+          "value": "lodestar-observers",
           "description": "Role used as a view-only mode for anybody interested in following the engagement by having access to systems but without any permissions to make changes."
         },
         {
           "label": "Admin",
-          "value": "admin",
+          "value": "lodestar-admins",
           "description": "Role with elevated privileges that allows for full control over most systems that are part of the engagement. Careful: this role allows the user to potentially apply breaking changes within the environment! Please use selectively."
         }
       ]
@@ -219,6 +226,44 @@
     "technical_contact_email": null,
     "env_default_grace_period": 30,
     "env_grace_period_max": 180,
-    "max_hosting_env_count": 1
+    "max_hosting_env_count": 1,
+    "artifact_types": [
+      {
+        "label": "Demo",
+        "value": "demo"
+      },
+      {
+        "label": "Weekly Report",
+        "value": "weeklyReport"
+      },
+      {
+        "label": "Other",
+        "value": "other"
+      },
+      {
+        "label": "Blog",
+        "value": "blog"
+      },
+      {
+        "label": "Photo/Video",
+        "value": "multimedia"
+      },
+      {
+        "label": "News Article",
+        "value": "news"
+      },
+      {
+        "label": "Social Media Post",
+        "value": "social"
+      },
+      {
+        "label": "Whitepaper",
+        "value": "whitepaper"
+      },
+      {
+        "label": "Success Story/Case Study",
+        "value": "successStory"
+      }
+    ]
   }
 }

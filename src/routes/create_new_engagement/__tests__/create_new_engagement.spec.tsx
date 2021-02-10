@@ -97,7 +97,7 @@ describe('Create New Engagement Route', () => {
         target: { value: 'Mars Rover' },
       });
       await fireEvent.change(wrapper.getByTestId('region'), {
-        target: { value: 'na' },
+        target: { value: 'dev-1' },
       });
 
       wrapper.rerender(<Component />);
@@ -106,7 +106,7 @@ describe('Create New Engagement Route', () => {
       fireEvent.click(createButton);
       expect(createEngagement).toHaveBeenCalledWith({
         customer_name: 'a',
-        engagement_region: 'na',
+        engagement_region: 'dev-1',
         engagement_type: 'Residency',
         project_name: 'Mars Rover',
       });
