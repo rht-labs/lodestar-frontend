@@ -1,5 +1,6 @@
 import React from 'react';
 import { DataCard } from '../data_card';
+import { Timezone } from '../../../schemas/timezone';
 import { Engagement, getEngagementStatus } from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
@@ -120,6 +121,17 @@ export function EngagementSummaryCard() {
                     lastUpdatedBy={currentEngagement?.last_update_by_name}
                   />
                 </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={4}>
+                <div data-testid="timezone_label">
+                  <TitledDataPoint
+                    title="Timezone"
+                    dataCy={'timezone_label'}
+                    data-testid="timezone_label"
+                  >
+                    {Timezone.getLabelFromCode(currentEngagement?.timezone)}
+                  </TitledDataPoint>
+                </div>
               </GridItem>
               <GridItem md={12}>
                 <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>

@@ -151,6 +151,26 @@ Object {
                   </div>
                 </div>
                 <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                >
+                  <div
+                    data-testid="timezone_label"
+                  >
+                    <div
+                      class="pf-c-content"
+                      data-cy="timezone_label"
+                    >
+                      <h6
+                        class=""
+                        data-pf-content="true"
+                        style="margin-bottom: 0.1rem;"
+                      >
+                        Timezone
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <div
                   class="pf-l-grid__item pf-m-12-col-on-md"
                 >
                   <div
@@ -337,6 +357,26 @@ Object {
                   >
                     Created By
                   </h6>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+              >
+                <div
+                  data-testid="timezone_label"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="timezone_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Timezone
+                    </h6>
+                  </div>
                 </div>
               </div>
               <div
