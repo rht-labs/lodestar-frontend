@@ -68,6 +68,7 @@ export enum EngagementGroupings {
   users = 'Engagement Users',
   artifacts = 'Engagement Artifacts',
   activityHistory = 'Activity History',
+  categories = 'Engagement Categories',
 }
 
 export type CreateEngagementParams = Pick<

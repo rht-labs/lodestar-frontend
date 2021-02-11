@@ -6,6 +6,7 @@ import { Engagement } from '../../schemas/engagement';
 import { CategoryTypehead } from './category_typehead';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Feature } from '../feature/feature';
+import {EngagementGroupings, useEngagementFormField} from "../../context/engagement_context/engagement_context";
 
 export function EngagementEditableCategories({
   engagementCategories,
@@ -20,6 +21,11 @@ export function EngagementEditableCategories({
   const [editMode, setEditMode] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
   const { categories, fetchCategories } = useEngagements();
+
+  const [updatedCategories, setUpdatedCategories] = useEngagementFormField(
+    'engagement_categories',
+    EngagementGroupings.categories
+  );
 
   useEffect(() => {
     if (!hasFetched && categories === undefined) {
@@ -75,9 +81,10 @@ export function EngagementEditableCategories({
 
   const SaveAndCloseEditMode = (selectedChips: string[]) => {
     setEditMode(!editMode);
+    setUpdatedCategories(selectedChips.map(chip => ({ name: chip })));
     saveEngagement({
       ...engagement,
-      engagement_categories: selectedChips.map(chip => ({ name: chip })),
+      engagement_categories: updatedCategories,
     });
   };
 

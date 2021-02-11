@@ -11,7 +11,7 @@ import { EngagementCategory } from '../../schemas/engagement_category';
 
 export interface CategoryTypeheadProps {
   engagementCategories: string[];
-  allCategories: EngagementCategory[];
+  allCategories?: EngagementCategory[];
   saveAndCloseEditMode: (selectedChips: string[]) => void;
   cancelEdit: () => void;
 }
