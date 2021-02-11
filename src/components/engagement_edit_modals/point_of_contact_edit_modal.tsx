@@ -60,7 +60,10 @@ export function PointOfContactEditModal({
   const [
     customerContactEmail,
     setCustomerContactEmail,
-  ] = useEngagementFormField('customer_contact_email');
+  ] = useEngagementFormField(
+    'customer_contact_email',
+    EngagementGroupings.pointOfContact
+  );
   const onSave = () => {
     propsOnSave(engagement);
     onClose();

@@ -607,7 +607,9 @@ export const EngagementProvider = ({
     value: any,
     group?: EngagementGroupings
   ) => {
-    setChangedGroups({ ...changedGroups, [group]: true });
+    if (!!group) {
+      setChangedGroups({ ...changedGroups, [group]: true });
+    }
     dispatch({ type: fieldName, payload: value });
     try {
       analyticsContext.logEvent({
@@ -696,36 +698,41 @@ export const useEngagementFormField = <K extends keyof Engagement>(
 };
 
 export const useEngagementArtifacts = () => {
-  const { currentEngagement, updateEngagementFormField } = useContext(
-    EngagementContext
+  const [artifacts = [], setArtifacts] = useEngagementFormField(
+    'artifacts',
+    EngagementGroupings.artifacts
   );
-  const { artifacts } = currentEngagement ?? {};
   const addArtifact = (artifact: Artifact) => {
-    const artifactsCopy = [...(artifacts ?? [])];
+    const artifactsCopy = [...artifacts];
     const index = artifactsCopy.findIndex(a => a.id === artifact.id);
     if (index > -1) {
       artifactsCopy.splice(index, 1, artifact);
     } else {
       artifactsCopy.push(artifact);
     }
-    updateEngagementFormField('artifacts', EngagementGroupings.artifacts);
+    setArtifacts(artifactsCopy);
     return artifactsCopy;
   };
   const removeArtifact = (artifact: Artifact) => {
     const artifactsClone = [...artifacts];
     const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
     artifactsClone.splice(removeIndex, 1);
-    updateEngagementFormField(
-      'artifacts',
-      artifactsClone,
-      EngagementGroupings.artifacts
-    );
+    setArtifacts(artifactsClone);
+    return artifactsClone;
+  };
+
+  const updateArtifact = (artifact: Artifact) => {
+    const artifactsClone = [...artifacts];
+    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    artifactsClone.splice(removeIndex, 1, artifact);
+    setArtifacts(artifactsClone);
     return artifactsClone;
   };
   return {
     artifacts: artifacts ?? [],
     addArtifact,
     removeArtifact,
+    updateArtifact,
   };
 };
 
@@ -790,4 +797,46 @@ export const useEngagementUser = (user: EngagementUser) => {
     validateString(user.last_name) &&
     validateRole(user.role);
   return [currentUserEdits, isValid, setUser];
+};
+
+export const useHostingEnvironmentManager = () => {
+  const [hostingEnvironments, setHostingEnvironments] = useEngagementFormField(
+    'hosting_environments',
+    EngagementGroupings.hostingEnvironment
+  );
+
+  const addHostingEnvironment = (
+    hostingEnvironment: Partial<HostingEnvironment>
+  ) => {
+    const newHostingEnvironments = [...hostingEnvironments, hostingEnvironment];
+    setHostingEnvironments(newHostingEnvironments as HostingEnvironment[]);
+    return newHostingEnvironments;
+  };
+
+  const updateHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
+    const updateIndex = hostingEnvironments.findIndex(
+      he => he.id === hostingEnvironment.id
+    );
+    const newHostingEnvironments = [...hostingEnvironments];
+    newHostingEnvironments.splice(updateIndex, 1, hostingEnvironment);
+    setHostingEnvironments(newHostingEnvironments);
+    return newHostingEnvironments;
+  };
+
+  const deleteHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
+    const newHostingEnvironments = [...hostingEnvironments];
+    hostingEnvironments.splice(
+      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      1
+    );
+    setHostingEnvironments(newHostingEnvironments);
+    return newHostingEnvironments;
+  };
+
+  return {
+    addHostingEnvironment,
+    deleteHostingEnvironment,
+    updateHostingEnvironment,
+    hostingEnvironments,
+  };
 };

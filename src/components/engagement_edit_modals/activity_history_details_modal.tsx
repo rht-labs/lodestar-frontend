@@ -21,19 +21,21 @@ export function ActivityHistoryDetailsModal(
       onClose={requestClose}
       title="Activity History"
     >
-      <EditModalTemplate
-        actions={
-          <div>
-            <Button onClick={requestClose}>Close</Button>
-          </div>
-        }
-      >
-        {anyActivities ? (
-          <DetailedActivityHistoryList commits={props.engagement?.commits} />
-        ) : (
-          <p style={{ fontStyle: 'italic' }}> No activity to display</p>
-        )}
-      </EditModalTemplate>
+      <div data-testid="activity_history_modal">
+        <EditModalTemplate
+          actions={
+            <div>
+              <Button onClick={requestClose}>Close</Button>
+            </div>
+          }
+        >
+          {anyActivities ? (
+            <DetailedActivityHistoryList commits={props.engagement?.commits} />
+          ) : (
+            <p style={{ fontStyle: 'italic' }}> No activity to display</p>
+          )}
+        </EditModalTemplate>
+      </div>
     </Modal>
   );
 }

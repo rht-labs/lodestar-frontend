@@ -2,8 +2,9 @@ import React from 'react';
 import {
   render,
   fireEvent,
-  waitForDomChange,
   act,
+  waitFor,
+  screen,
 } from '@testing-library/react';
 import { OpenShiftClusterEditModal } from '../openshift_cluster_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
@@ -24,8 +25,10 @@ describe('Hosting Environment edit modal', () => {
           />
         </TestStateWrapper>
       );
+      await waitFor(() =>
+        expect(screen.getByTestId('he_edit_modal')).toBeDefined()
+      );
 
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });
@@ -46,6 +49,7 @@ describe('Hosting Environment edit modal', () => {
           />
         </TestStateWrapper>
       );
+
       await fireEvent.click(await findByTestId('oc-edit-save'));
       expect(onSave).toHaveBeenCalled();
     });

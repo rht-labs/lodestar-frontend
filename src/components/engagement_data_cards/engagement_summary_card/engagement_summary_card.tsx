@@ -16,11 +16,13 @@ const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
 const formatUtcDate = (date?: Date): string | undefined => {
   if (!date) {
-    return ''
+    return '';
   }
-  const dateString = formatDate(utcToZonedTime(date, 'UTC'), 'MMM dd, yyyy', { timeZone: 'UTC' })
-  return dateString
-}
+  const dateString = formatDate(utcToZonedTime(date, 'UTC'), 'MMM dd, yyyy', {
+    timeZone: 'UTC',
+  });
+  return dateString;
+};
 
 export function EngagementSummaryCard() {
   const {
@@ -58,11 +60,11 @@ export function EngagementSummaryCard() {
           !currentEngagement || currentEngagement?.launch ? (
             <div />
           ) : (
-              <RequiredFieldsWarning
-                missingRequiredFields={missingRequiredFields}
-                requiredFields={engagementSummaryRequiredFields}
-              />
-            )
+            <RequiredFieldsWarning
+              missingRequiredFields={missingRequiredFields}
+              requiredFields={engagementSummaryRequiredFields}
+            />
+          )
         }
         actionButton={() => (
           <EditButton
@@ -123,7 +125,9 @@ export function EngagementSummaryCard() {
                 <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
                   <>
                     {currentEngagement?.use_cases?.map?.(useCase => (
-                      <p>{useCase.description}</p>
+                      <p key={useCase.id ?? useCase.description}>
+                        {useCase.description}
+                      </p>
                     ))}
                   </>
                 </TitledDataPoint>

@@ -10,10 +10,10 @@ interface AxiosError {
 }
 
 export function handleAxiosResponseErrors(error: AxiosError) {
-  if (error.response.status === 401) {
+  if (error.response?.status === 401) {
     throw new AuthenticationError();
   }
-  if (error.response.status === 403) {
+  if (error.response?.status === 403) {
     throw new AuthorizationError();
   }
   throw error;

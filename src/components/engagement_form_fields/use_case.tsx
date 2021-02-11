@@ -12,7 +12,7 @@ import { TrashAltIcon } from '@patternfly/react-icons';
 import { uuid } from 'uuidv4';
 
 export function EngagementUseCaseField({
-  useCases,
+  useCases = [],
   setUseCases,
 }: {
   useCases: EngagementUseCase[];
@@ -46,6 +46,7 @@ export function EngagementUseCaseField({
     <FormGroup fieldId="Engagement Use Cases" label="Engagement Use Cases">
       {useCases?.map(useCase => (
         <UseCaseField
+          key={useCase.id ?? useCase.description}
           useCase={useCase}
           onDelete={onDelete}
           onChange={onChange}

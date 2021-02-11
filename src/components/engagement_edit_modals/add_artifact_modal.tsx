@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Modal,
   ModalVariant,
@@ -10,7 +10,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { Artifact, ArtifactType } from '../../schemas/engagement';
+import { Artifact } from '../../schemas/engagement';
 import {
   useAnalytics,
   AnalyticsCategory,
@@ -20,25 +20,16 @@ export interface ArtifactEditModalProps {
   onClose: () => void;
   isOpen: boolean;
   artifact: Artifact;
-  onSave: (artifact: Artifact) => void;
+  onUpdate: (artifact: Artifact) => void;
+  onSave: () => void;
+  artifactTypes: { label: string; value: string }[];
 }
 
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
-  const [artifactEdits, setArtifactEdits] = useState<Partial<Artifact>>({});
   const { logEvent } = useAnalytics();
 
-  useEffect(
-    () =>
-      setArtifactEdits({
-        type: ArtifactType.demo,
-        ...props.artifact,
-      }),
-    [props.artifact]
-  );
-
   const onSave = () => {
-    const newArtifacts = { ...(props.artifact ?? {}), ...artifactEdits };
-    props.onSave(newArtifacts as Artifact);
+    props.onSave();
     logEvent({
       action: 'Add Artifact',
       category: AnalyticsCategory.engagements,
@@ -70,20 +61,16 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               data-testid="artifact-type-select"
               aria-label="Artifact Type"
               id="artifact-type-select"
-              value={artifactEdits?.type}
-              onChange={(value: string, _) => {
-                setArtifactEdits({
-                  ...artifactEdits,
-                  type: value,
+              value={props?.artifact?.type}
+              onChange={(type: string, _) => {
+                props.onUpdate({
+                  ...props.artifact,
+                  type,
                 });
               }}
             >
-              {Object.keys(ArtifactType).map((artifactTypeKey, index) => (
-                <FormSelectOption
-                  key={index}
-                  value={artifactTypeKey}
-                  label={ArtifactType[artifactTypeKey]}
-                />
+              {props.artifactTypes?.map?.((artifactType, index) => (
+                <FormSelectOption key={index} {...artifactType} />
               ))}
             </FormSelect>
           </FormGroup>
@@ -94,8 +81,8 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               name="artifact_title"
               data-cy="artifact-title-input"
               aria-label="Artifact Title"
-              value={artifactEdits?.title ?? ''}
-              onChange={e => setArtifactEdits({ ...artifactEdits, title: e })}
+              value={props.artifact?.title ?? ''}
+              onChange={e => props.onUpdate({ ...props.artifact, title: e })}
             />
           </FormGroup>
           <FormGroup label="Artifact Link" isRequired fieldId="artifact-link">
@@ -105,9 +92,9 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               name="artifact_link"
               aria-label="Artifact Link"
               data-cy="artifact-link-input"
-              value={artifactEdits?.linkAddress ?? ''}
+              value={props.artifact?.linkAddress ?? ''}
               onChange={e =>
-                setArtifactEdits({ ...artifactEdits, linkAddress: e })
+                props.onUpdate({ ...props.artifact, linkAddress: e })
               }
             />
           </FormGroup>
@@ -115,7 +102,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
             label="Artifact Description"
             isRequired
             fieldId="artifact-description"
-            helperText={`${artifactEdits?.description?.length ?? 0}/250`}
+            helperText={`${props.artifact?.description?.length ?? 0}/250`}
           >
             <TextInput
               isRequired
@@ -124,9 +111,9 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               name="artifact_description"
               data-cy="artifact-description-input"
               aria-label="Artifact Description"
-              value={artifactEdits?.description ?? ''}
+              value={props.artifact?.description ?? ''}
               onChange={e =>
-                setArtifactEdits({ ...artifactEdits, description: e })
+                props.onUpdate({ ...props.artifact, description: e })
               }
             />
           </FormGroup>

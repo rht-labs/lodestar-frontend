@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  waitForDomChange,
-  act,
-} from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 import { SystemStatusCard } from '../system_status_card';
 import { TestStateWrapper } from '../../../../common/test_state_wrapper';
 import { Engagement, EngagementStatus } from '../../../../schemas/engagement';
@@ -31,7 +26,6 @@ describe('System Status Card', () => {
           />
         </TestStateWrapper>
       );
-      await waitForDomChange;
       expect(rendered).toMatchSnapshot();
     });
   });
