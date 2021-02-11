@@ -35,6 +35,11 @@ export function EngagementEditableCategories({
   }, [categories, hasFetched, setHasFetched, fetchCategories]);
 
   useEffect(() => {
+    setUpdatedCategories(chips.map(chip => ({ name: chip })))
+    // eslint-disable-next-line
+  }, [chips]);
+
+  useEffect(() => {
     const formatedItem = engagementCategories?.map(item => item.name);
 
     setChips(formatedItem ? formatedItem : []);
@@ -79,10 +84,10 @@ export function EngagementEditableCategories({
     );
   };
 
-  const SaveAndCloseEditMode = (selectedChips: string[]) => {
+  const SaveAndCloseEditMode = async (selectedChips: string[]) => {
+    setChips(selectedChips);
     setEditMode(!editMode);
-    setUpdatedCategories(selectedChips.map(chip => ({ name: chip })));
-    saveEngagement({
+    await saveEngagement({
       ...engagement,
       engagement_categories: updatedCategories,
     });
