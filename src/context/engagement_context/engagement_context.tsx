@@ -8,7 +8,11 @@ import React, {
 import { Artifact, Engagement, EngagementUser } from '../../schemas/engagement';
 import { useState, useCallback } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import {
+  AlreadyExistsError,
+  AlreadyLaunchedError,
+  NotFoundError
+} from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 import {
   AlertType,
@@ -51,6 +55,7 @@ export interface IEngagementContext {
   ) => Promise<Engagement>;
   createEngagement: (data: any) => Promise<Engagement>;
   saveEngagement: (data: Engagement, commitMessage?: string) => Promise<void>;
+  deleteEngagement: (data: Engagement) => Promise<void>;
   missingRequiredFields: string[];
   isLaunchable: boolean;
   engagementFormConfig?: EngagementFormConfig;
@@ -118,36 +123,64 @@ export const EngagementProvider = ({
   >();
 
   const [isLaunchable, setIsLaunchable] = useState<boolean>(false);
-  const setCurrentEngagement = useCallback(
-    (engagement: Engagement) => {
-      dispatch({});
-      _setCurrentEngagement(engagement);
-    },
-    [_setCurrentEngagement]
-  );
+  const [changedGroups, setChangedGroups] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => Partial<Engagement>
   >(
     engagementFormReducer(engagementFormConfig),
     engagementFormReducer(engagementFormConfig)()
   );
-
-  const [missingRequiredFields, setMissingRequiredFields] = useState<string[]>(
-    []
-  );
-
-  const [changedGroups, setChangedGroups] = useState<{
-    [key: string]: boolean;
-  }>({});
   const clearCurrentChanges = useCallback(() => {
     dispatch({
       type: 'switch_engagement',
     });
     setChangedGroups({});
   }, [dispatch]);
-  useEffect(() => {
-    clearCurrentChanges();
-  }, [currentEngagement, clearCurrentChanges]);
+  const updateEngagementFormField = useCallback(
+    <T extends keyof Engagement>(
+      fieldName: T,
+      value: Engagement[T],
+      group?: EngagementGroupings
+    ) => {
+      if (!!group) {
+        setChangedGroups({ ...changedGroups, [group]: true });
+      }
+      dispatch({ type: fieldName, payload: value });
+      try {
+        analyticsContext.logEvent({
+          category: AnalyticsCategory.engagements,
+          action: 'Update Engagement',
+        });
+      } catch (e) {}
+    },
+    [analyticsContext, changedGroups]
+  );
+  const setCurrentEngagement = useCallback(
+    (engagement: Engagement) => {
+      const defaults: Partial<Engagement> = {};
+      if (!engagement?.timezone) {
+        const getTimeZone = () => {
+          try {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone;
+          } catch (e) {
+            return undefined;
+          }
+        };
+        defaults.timezone = getTimeZone();
+      }
+      clearCurrentChanges();
+      dispatch({ type: 'switch_engagement', payload: defaults });
+      _setCurrentEngagement(engagement);
+    },
+    [_setCurrentEngagement, clearCurrentChanges]
+  );
+
+  const [missingRequiredFields, setMissingRequiredFields] = useState<string[]>(
+    []
+  );
+
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);
@@ -539,6 +572,50 @@ export const EngagementProvider = ({
       setCurrentEngagement,
     ]
   );
+
+  const _deleteEngagement = useCallback(
+    (deletedEngagement: Engagement) => {
+      const updatedEngagements = engagements.filter(engagement => engagement.uuid !== deletedEngagement.uuid);
+      setEngagements(updatedEngagements);
+    },
+    [engagements]
+  );
+
+  const deleteEngagement = useCallback(async(engagement: Engagement) => {
+    try {
+      await engagementService.deleteEngagement(engagement);
+      _deleteEngagement(engagement);
+      feedbackContext.showAlert(
+        'Engagement is deleted successfully',
+        AlertType.success
+      );
+      feedbackContext.hideLoader();
+
+    } catch (e) {
+      feedbackContext.hideLoader();
+      let errorMessage;
+      if (e instanceof AlreadyLaunchedError) {
+        errorMessage =
+          'This engagement is already launched and has not been removed';
+      }
+      if (e instanceof NotFoundError) {
+        errorMessage =
+          'Engagement is not found';
+      }
+      else {
+        try {
+          await _handleErrors(e);
+        } catch (e) {
+          errorMessage =
+            'There was an issue with deleting selected engagement. Please follow up with an administrator if this continues.';
+        }
+      }
+
+      feedbackContext.showAlert(errorMessage, AlertType.error);
+      await _handleErrors(e);
+      }
+  }, [engagementService, _deleteEngagement, feedbackContext, _handleErrors]);
+
   const fetchCategories = useCallback(async () => {
     try {
       // feedbackContext.showLoader();
@@ -554,22 +631,6 @@ export const EngagementProvider = ({
     }
   }, [categoryService, _handleErrors]);
 
-  const updateEngagementFormField = (
-    fieldName: keyof Engagement,
-    value: any,
-    group?: EngagementGroupings
-  ) => {
-    if (!!group) {
-      setChangedGroups({ ...changedGroups, [group]: true });
-    }
-    dispatch({ type: fieldName, payload: value });
-    try {
-      analyticsContext.logEvent({
-        category: AnalyticsCategory.engagements,
-        action: 'Update Engagement',
-      });
-    } catch (e) {}
-  };
   return (
     <Provider
       value={{
@@ -584,6 +645,7 @@ export const EngagementProvider = ({
         getEngagement,
         getEngagements: fetchEngagements,
         createEngagement,
+        deleteEngagement,
         saveEngagement,
         launchEngagement,
         fetchCategories,

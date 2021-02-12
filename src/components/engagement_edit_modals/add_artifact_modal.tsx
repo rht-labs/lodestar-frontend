@@ -10,7 +10,7 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
-import { Artifact, ArtifactType } from '../../schemas/engagement';
+import { Artifact } from '../../schemas/engagement';
 import {
   useAnalytics,
   AnalyticsCategory,
@@ -19,13 +19,15 @@ import {
 export interface ArtifactEditModalProps {
   onClose: () => void;
   isOpen: boolean;
-  artifact: Artifact;
-  onUpdate: (artifact: Artifact) => void;
-  onSave: (artifact: Artifact) => void;
+  artifact: Partial<Artifact>;
+  onUpdate: (artifact: Partial<Artifact>) => void;
+  onSave: () => void;
+  artifactTypes: { label: string; value: string }[];
 }
 
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const { logEvent } = useAnalytics();
+  const { artifact } = props;
 
   const onSave = () => {
     props.onSave();
@@ -35,6 +37,12 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
     });
     props.onClose?.();
   };
+  const isSaveEnabled =
+    artifact &&
+    !!artifact.description &&
+    !!artifact.linkAddress &&
+    !!artifact.title &&
+    !!artifact.type;
 
   return (
     <Modal
@@ -49,6 +57,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
             data-testid="save-artifact"
             onClick={onSave}
             data-cy={'save-artifact-button'}
+            isDisabled={!isSaveEnabled}
           >
             Save
           </Button>
@@ -61,19 +70,15 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
               aria-label="Artifact Type"
               id="artifact-type-select"
               value={props?.artifact?.type}
-              onChange={(value: string, _) => {
+              onChange={(type: string, _) => {
                 props.onUpdate({
                   ...props.artifact,
-                  type: ArtifactType[value],
+                  type,
                 });
               }}
             >
-              {Object.keys(ArtifactType).map((artifactTypeKey, index) => (
-                <FormSelectOption
-                  key={index}
-                  value={artifactTypeKey}
-                  label={ArtifactType[artifactTypeKey]}
-                />
+              {props.artifactTypes?.map?.((artifactType, index) => (
+                <FormSelectOption key={index} {...artifactType} />
               ))}
             </FormSelect>
           </FormGroup>
