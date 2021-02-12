@@ -227,7 +227,9 @@
     "env_default_grace_period": 30,
     "env_grace_period_max": 180,
     "max_hosting_env_count": 1,
-    "artifact_types": [
+  },
+  "artifact_types": {
+    "options": [
       {
         "label": "Demo",
         "value": "demo"
