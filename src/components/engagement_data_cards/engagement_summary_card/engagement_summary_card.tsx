@@ -144,14 +144,17 @@ export function EngagementSummaryCard() {
                   </>
                 </TitledDataPoint>
               </GridItem>
+              <GridItem md={12} lg={4}>
+                <TitledDataPoint
+                  title="Description"
+                  dataCy={'description_label'}
+                >
+                  <span style={{ whiteSpace: 'pre-line' }}>
+                    {currentEngagement?.description}
+                  </span>
+                </TitledDataPoint>
+              </GridItem>
             </Grid>
-          </GridItem>
-          <GridItem md={12} lg={4}>
-            <TitledDataPoint title="Description" dataCy={'description_label'}>
-              <span style={{ whiteSpace: 'pre-line' }}>
-                {currentEngagement?.description}
-              </span>
-            </TitledDataPoint>
           </GridItem>
         </Grid>
       </DataCard>
