@@ -47,13 +47,19 @@ export function EngagementArtifactCard() {
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifactId, setCurrentArtifactId] = useState<string>(null);
 
+  const artifactTypes =
+    engagementFormConfig?.logistics_options?.artifact_types ?? [];
+
   const onEditArtifact = (artifact: Artifact) => {
     requestOpen(getModalKey());
     setCurrentArtifactId(artifact.id);
   };
 
   const openArtifactModal = () => {
-    const newArtifact = { id: uuid() };
+    const newArtifact: Partial<Artifact> = {
+      id: uuid(),
+      type: artifactTypes[0].value,
+    };
     addArtifact(newArtifact as Artifact);
     requestOpen(getModalKey());
     setCurrentArtifactId(newArtifact.id);
@@ -147,9 +153,7 @@ export function EngagementArtifactCard() {
           clearCurrentChanges();
         }}
         onSave={onFinishArtifactEdit}
-        artifactTypes={
-          engagementFormConfig?.logistics_options?.artifact_types ?? []
-        }
+        artifactTypes={artifactTypes}
       />
       <DataCard
         title="Engagement Artifacts"

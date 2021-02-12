@@ -12,6 +12,10 @@ describe('Engagement Edit Modal', () => {
     const newTitle = 'Vanderbilt week 1';
     const modal = render(
       <ArtifactEditModal
+        artifactTypes={[
+          { label: 'Demo', value: 'demo' },
+          { label: 'Weekly Report', value: 'weeklyReport' },
+        ]}
         artifact={artifact}
         isOpen={true}
         onSave={onSave}
