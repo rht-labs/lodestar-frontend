@@ -226,7 +226,7 @@
     "technical_contact_email": null,
     "env_default_grace_period": 30,
     "env_grace_period_max": 180,
-    "max_hosting_env_count": 1
+    "max_hosting_env_count": 2
   },
   "artifact_options": {
     "types": {
