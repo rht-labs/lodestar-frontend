@@ -132,13 +132,14 @@ export function EngagementSummaryEditModal(
               fieldId="description"
               label="Description"
               placeholder="Description and notes for the Engagement"
+              testId="description_field"
             />
             <TextFormField
               value={location}
               onChange={setLocation}
               placeholder="e.g. Pasadena, CA"
               fieldId="location"
-              testId="location-field"
+              testId="location_field"
               helperText="Where will this be held?"
               label="Location"
             />

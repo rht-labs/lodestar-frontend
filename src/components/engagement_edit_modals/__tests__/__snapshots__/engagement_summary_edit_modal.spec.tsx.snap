@@ -220,6 +220,8 @@ Object {
                       <input
                         aria-invalid="false"
                         class="pf-c-form-control"
+                        data-cy="description_field"
+                        data-testid="description_field"
                         id="description"
                         name="description"
                         placeholder="Description and notes for the Engagement"
@@ -253,8 +255,8 @@ Object {
                       <input
                         aria-invalid="false"
                         class="pf-c-form-control"
-                        data-cy="location-field"
-                        data-testid="location-field"
+                        data-cy="location_field"
+                        data-testid="location_field"
                         id="location"
                         name="location"
                         placeholder="e.g. Pasadena, CA"
