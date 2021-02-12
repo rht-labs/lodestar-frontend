@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
-import { Artifact, ArtifactType } from '../../../schemas/engagement';
+import { Artifact } from '../../../schemas/engagement';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
+import { getLabelForValue } from '../../../common/label_value_tools';
 import {
   Table,
   TableVariant,
@@ -40,10 +41,14 @@ export function EngagementArtifactCard() {
     currentChanges,
     saveEngagement,
     clearCurrentChanges,
+    engagementFormConfig,
   } = useEngagements();
   const { addArtifact, artifacts, updateArtifact } = useEngagementArtifacts();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifactId, setCurrentArtifactId] = useState<string>(null);
+
+  const artifactTypes =
+    engagementFormConfig?.artifact_options?.types?.options ?? [];
 
   const onEditArtifact = (artifact: Artifact) => {
     requestOpen(getModalKey());
@@ -51,7 +56,10 @@ export function EngagementArtifactCard() {
   };
 
   const openArtifactModal = () => {
-    const newArtifact = { id: uuid() };
+    const newArtifact: Partial<Artifact> = {
+      id: uuid(),
+      type: artifactTypes[0]?.value,
+    };
     addArtifact(newArtifact as Artifact);
     requestOpen(getModalKey());
     setCurrentArtifactId(newArtifact.id);
@@ -88,7 +96,10 @@ export function EngagementArtifactCard() {
   const getModalKey = () => `${ARTIFACT_CRUD_MODAL}`;
   const rows =
     currentEngagement?.artifacts?.map?.((artifact, idx) => [
-      ArtifactType[artifact.type],
+      getLabelForValue(
+        engagementFormConfig?.artifact_options?.types?.options ?? [],
+        artifact.type
+      ),
       {
         title: (
           <a
@@ -142,6 +153,7 @@ export function EngagementArtifactCard() {
           clearCurrentChanges();
         }}
         onSave={onFinishArtifactEdit}
+        artifactTypes={artifactTypes}
       />
       <DataCard
         title="Engagement Artifacts"

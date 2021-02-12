@@ -28,6 +28,9 @@ export class FakedEngagementService implements EngagementService {
       },
     } as Engagement;
   }
+  async deleteEngagement(data: Engagement): Promise<Engagement> {
+    return data;
+  }
   async getConfig(): Promise<EngagementFormConfig> {
     return EngagementFormConfig.fromFake();
   }

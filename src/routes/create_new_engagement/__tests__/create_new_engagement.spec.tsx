@@ -1,12 +1,8 @@
 import React from 'react';
 import { CreateNewEngagement } from '../create_new_engagement';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import {
-  render,
-  act,
-  fireEvent,
-  queryByAttribute,
-} from '@testing-library/react';
+import { render, act, fireEvent } from '@testing-library/react';
+import { getById } from '../../../utilities/get_by_id';
 import { MemoryRouter } from 'react-router';
 import {
   EngagementContext,
@@ -18,7 +14,6 @@ import { FeatureToggles } from '../../../context/feature_context/feature_toggles
 import { IAuthContext } from '../../../context/auth_context/auth_context';
 import { Engagement } from '../../../schemas/engagement';
 import { IVersionContext } from '../../../context/version_context/version_context';
-const getById = queryByAttribute.bind(null, 'id');
 
 describe('Create New Engagement Route', () => {
   const getComponent = () => {
@@ -97,7 +92,7 @@ describe('Create New Engagement Route', () => {
         target: { value: 'Mars Rover' },
       });
       await fireEvent.change(wrapper.getByTestId('region'), {
-        target: { value: 'na' },
+        target: { value: 'dev-1' },
       });
 
       wrapper.rerender(<Component />);
@@ -106,7 +101,7 @@ describe('Create New Engagement Route', () => {
       fireEvent.click(createButton);
       expect(createEngagement).toHaveBeenCalledWith({
         customer_name: 'a',
-        engagement_region: 'na',
+        engagement_region: 'dev-1',
         engagement_type: 'Residency',
         project_name: 'Mars Rover',
       });

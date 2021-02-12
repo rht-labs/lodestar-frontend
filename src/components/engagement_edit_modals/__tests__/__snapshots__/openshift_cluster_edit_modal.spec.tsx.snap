@@ -254,11 +254,11 @@ Object {
                           aria-invalid="false"
                           aria-label="Provider Region"
                           class="pf-c-form-control"
-                          data-cy=""
+                          data-cy="provider-region-select"
                           data-ouia-component-id="13"
                           data-ouia-component-type="PF4/FormSelect"
                           data-ouia-safe="true"
-                          data-testid=""
+                          data-testid="provider-region-select"
                           disabled=""
                           id=""
                         >
@@ -312,11 +312,11 @@ Object {
                           aria-invalid="false"
                           aria-label="OpenShift Version"
                           class="pf-c-form-control"
-                          data-cy="oc-version-select"
+                          data-cy="oc_version_select"
                           data-ouia-component-id="14"
                           data-ouia-component-type="PF4/FormSelect"
                           data-ouia-safe="true"
-                          data-testid="oc-version-select"
+                          data-testid="oc_version_select"
                           id="openshift-version"
                         >
                           <option
@@ -328,13 +328,6 @@ Object {
                           </option>
                           <option
                             class=""
-                            data-cy="4.3.31"
-                            value="4.3.31"
-                          >
-                            v4.3
-                          </option>
-                          <option
-                            class=""
                             data-cy="4.4.15"
                             value="4.4.15"
                           >
@@ -342,10 +335,17 @@ Object {
                           </option>
                           <option
                             class=""
-                            data-cy="4.5.4"
-                            value="4.5.4"
+                            data-cy="4.5.18"
+                            value="4.5.18"
                           >
                             v4.5
+                          </option>
+                          <option
+                            class=""
+                            data-cy="4.6.9"
+                            value="4.6.9"
+                          >
+                            v4.6
                           </option>
                         </select>
                         
@@ -466,6 +466,13 @@ Object {
                             value=""
                           >
                             Select a storage size
+                          </option>
+                          <option
+                            class=""
+                            data-cy="none"
+                            value="none"
+                          >
+                            None
                           </option>
                           <option
                             class=""

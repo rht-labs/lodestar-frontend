@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { Modal, ModalVariant, Button, Form } from '@patternfly/react-core';
+import { TIMEZONES } from '../../common/timezones';
+import {
+  Modal,
+  ModalVariant,
+  Button,
+  Form,
+  Select,
+  SelectVariant,
+  SelectOption,
+  FormGroup,
+} from '@patternfly/react-core';
 import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_dates';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
@@ -54,6 +64,23 @@ export function EngagementSummaryEditModal(
     'location',
     EngagementGroupings.engagementSummary
   );
+  const [timezone, setTimezone] = useEngagementFormField(
+    'timezone',
+    EngagementGroupings.engagementSummary
+  );
+
+  const [isTZSelectOpen, setIsTZSelectOpen] = useState<boolean>(false);
+
+  const getSelectComponents = (timezones: typeof TIMEZONES) => {
+    return timezones.map(t => (
+      <SelectOption
+        data-testid={t.tzCode}
+        key={t.name}
+        value={t.name}
+        description={t.tzCode}
+      />
+    ));
+  };
 
   return (
     <div data-testid="engagement_summary_edit_modal">
@@ -105,16 +132,52 @@ export function EngagementSummaryEditModal(
               fieldId="description"
               label="Description"
               placeholder="Description and notes for the Engagement"
+              testId="description_field"
             />
             <TextFormField
               value={location}
               onChange={setLocation}
               placeholder="e.g. Pasadena, CA"
               fieldId="location"
-              testId="location-field"
+              testId="location_field"
               helperText="Where will this be held?"
               label="Location"
             />
+            <div data-testid="timezone-select">
+              <FormGroup fieldId="timezone" label="Timezone">
+                <Select
+                  aria-label="Timezone"
+                  menuAppendTo={document.body}
+                  maxHeight={'20rem'}
+                  toggleId="timezone-dropdown"
+                  variant={SelectVariant.typeahead}
+                  selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
+                  label={'Timezone'}
+                  isOpen={isTZSelectOpen}
+                  onToggle={setIsTZSelectOpen}
+                  isCreatable={false}
+                  onFilter={e => {
+                    const lower = e.target.value.toLowerCase();
+                    return getSelectComponents(
+                      TIMEZONES.filter(
+                        t =>
+                          t.name.toLowerCase().includes(lower) ||
+                          t.label.toLowerCase().includes(lower)
+                      )
+                    );
+                  }}
+                  onSelect={(_, selection) => {
+                    const timezoneValue = TIMEZONES.find(
+                      t => t.name === selection
+                    )?.tzCode;
+                    setTimezone(timezoneValue);
+                    setIsTZSelectOpen(false);
+                  }}
+                >
+                  {getSelectComponents(TIMEZONES)}
+                </Select>
+              </FormGroup>
+            </div>
             <EngagementStartEndDateFormField />
             <PublicReferenceField />
           </Form>

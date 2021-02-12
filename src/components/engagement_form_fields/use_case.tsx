@@ -46,6 +46,7 @@ export function EngagementUseCaseField({
     <FormGroup fieldId="Engagement Use Cases" label="Engagement Use Cases">
       {useCases?.map(useCase => (
         <UseCaseField
+          key={useCase.id ?? useCase.description}
           useCase={useCase}
           onDelete={onDelete}
           onChange={onChange}
