@@ -119,8 +119,8 @@ export function LaunchAlertBanner({
                         field => ENGAGEMENT_FIELD_MAP[field]
                       )
                     )
-                  ).map(section => (
-                    <li>
+                  ).map((section, index) => (
+                    <li key={index}>
                       <HashLink smooth to={`${path}#${section}`}>
                         {ENGAGEMENT_CARDS[section]}
                       </HashLink>

@@ -121,8 +121,17 @@ describe('Engagement Context', () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
       await waitForNextUpdate;
-      const engagement = Engagement.fromFake();
-      result.current.deleteEngagement(engagement);
+      result.current.createEngagement({
+        customer_name: 'new engagement',
+        uuid: '123'
+      } as Engagement);
+      await waitForNextUpdate();
+      expect(result.current.engagements?.length).toEqual(1);
+
+      await waitForNextUpdate();
+      result.current.deleteEngagement({
+        uuid: '123'
+      } as Engagement);
       await waitForNextUpdate();
       expect(result.current.engagements?.length).toEqual(0);
     });
