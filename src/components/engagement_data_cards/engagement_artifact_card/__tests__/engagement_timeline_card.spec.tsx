@@ -29,7 +29,7 @@ describe('Engagement timeline card', () => {
     expect(wrapper.findByTestId('artifact-action-kebab')).toMatchObject({});
   });
 
-  test('by default, when creating a new artifact, the first artifact type in the array of artifact types be selected', async () => {
+  test('by default, when creating a new artifact, the first artifact type in the array of artifact types is selected', async () => {
     let view: RenderResult;
     const onUpdateField = jest.fn();
     await act(async () => {
