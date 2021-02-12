@@ -48,7 +48,7 @@ export function EngagementArtifactCard() {
   const [currentArtifactId, setCurrentArtifactId] = useState<string>(null);
 
   const artifactTypes =
-    engagementFormConfig?.logistics_options?.artifact_types ?? [];
+    engagementFormConfig?.artifact_options?.types?.options ?? [];
 
   const onEditArtifact = (artifact: Artifact) => {
     requestOpen(getModalKey());
