@@ -133,6 +133,15 @@ export function EngagementSummaryEditModal(
               label="Description"
               placeholder="Description and notes for the Engagement"
             />
+            <TextFormField
+              value={location}
+              onChange={setLocation}
+              placeholder="e.g. Pasadena, CA"
+              fieldId="location"
+              testId="location-field"
+              helperText="Where will this be held?"
+              label="Location"
+            />
             <div data-testid="timezone-select">
               <FormGroup fieldId="timezone" label="Timezone">
                 <Select
@@ -168,15 +177,6 @@ export function EngagementSummaryEditModal(
                 </Select>
               </FormGroup>
             </div>
-            <TextFormField
-              value={location}
-              onChange={setLocation}
-              placeholder="e.g. Pasadena, CA"
-              fieldId="location"
-              testId="location-field"
-              helperText="Where will this be held?"
-              label="Location"
-            />
             <EngagementStartEndDateFormField />
             <PublicReferenceField />
           </Form>

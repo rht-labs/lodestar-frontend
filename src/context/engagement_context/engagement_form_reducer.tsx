@@ -51,7 +51,7 @@ export const engagementFormReducer = (
     case 'hosting_environments':
       return { ...state, [action.type]: action.payload };
     case 'switch_engagement':
-      return {};
+      return action.payload ?? {};
     default:
       return state;
   }
