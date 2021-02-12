@@ -10,20 +10,21 @@ import {
 import { EngagementCategory } from '../../schemas/engagement_category';
 
 export interface CategoryTypeheadProps {
-  engagementCategories: string[];
   allCategories?: EngagementCategory[];
   saveAndCloseEditMode: (selectedChips: string[]) => void;
   cancelEdit: () => void;
+  onChange: (categories: string[]) => void;
+  selected: string[];
 }
 
 export function CategoryTypehead({
-  engagementCategories,
   cancelEdit,
   saveAndCloseEditMode,
   allCategories,
+  onChange,
+  selected = [],
 }: CategoryTypeheadProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(engagementCategories);
 
   const onToggle = isOpen => {
     setIsOpen(isOpen);
@@ -31,38 +32,46 @@ export function CategoryTypehead({
 
   const onSelect = (event, selection) => {
     if (selected.includes(selection)) {
-      setSelected([...selected.filter(item => item !== selection)]);
+      onChange([...selected.filter(item => item !== selection)]);
     } else {
-      setSelected([...selected, selection]);
+      onChange([...selected, selection]);
     }
   };
 
   return (
     <Flex>
       <FlexItem>
-        <Select
-          variant={SelectVariant.typeaheadMulti}
-          typeAheadAriaLabel="Add new tag"
-          onToggle={onToggle}
-          onSelect={onSelect}
-          onClear={cancelEdit}
-          clearSelectionsAriaLabel={'Clear all'}
-          selections={selected}
-          isOpen={isOpen}
-          isPlain={true}
-          aria-labelledby={'titleId'}
-          placeholderText="Add new tag"
-          isCreatable={true}
-        >
-          {allCategories?.map((category, index) => (
-            <SelectOption key={index} value={category.name} />
-          ))}
-        </Select>
+        <div data-testid="category-select-wrapper">
+          <Select
+            data-testid="category-select"
+            variant={SelectVariant.typeaheadMulti}
+            typeAheadAriaLabel="Add new tag"
+            onToggle={onToggle}
+            onSelect={onSelect}
+            onClear={cancelEdit}
+            clearSelectionsAriaLabel={'Clear all'}
+            selections={selected}
+            isOpen={isOpen}
+            isPlain={true}
+            aria-labelledby={'titleId'}
+            placeholderText="Add new tag"
+            isCreatable={true}
+          >
+            {allCategories?.map((category, index) => (
+              <SelectOption
+                data-testid="category-option"
+                key={index}
+                value={category.name}
+              />
+            ))}
+          </Select>
+        </div>
       </FlexItem>
       <FlexItem>
         <Button
           variant="secondary"
           isInline
+          data-testid="save_categories"
           key={'saveCategories'}
           style={{ minWidth: '2rem' }}
           onClick={() => saveAndCloseEditMode(selected)}
@@ -73,4 +82,3 @@ export function CategoryTypehead({
     </Flex>
   );
 }
-

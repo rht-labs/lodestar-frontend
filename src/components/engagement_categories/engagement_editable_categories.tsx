@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Label } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
-import { EngagementCategory } from '../../schemas/engagement_category';
-import { Engagement } from '../../schemas/engagement';
 import { CategoryTypehead } from './category_typehead';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Feature } from '../feature/feature';
-import {EngagementGroupings, useEngagementFormField} from "../../context/engagement_context/engagement_context";
+import {
+  EngagementGroupings,
+  useEngagementFormField,
+} from '../../context/engagement_context/engagement_context';
 
-export function EngagementEditableCategories({
-  engagementCategories,
-  engagement,
-}: {
-  engagementCategories?: EngagementCategory[];
-  onSave: (engagement: Engagement) => void;
-  engagement: Engagement;
-}) {
-  const { saveEngagement } = useEngagements();
-  const [chips, setChips] = useState<string[]>([]);
+export function EngagementEditableCategories() {
+  const { saveEngagement, currentEngagement: engagement } = useEngagements();
   const [editMode, setEditMode] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
-  const { categories, fetchCategories } = useEngagements();
+  const { availableCategories, fetchAvailableCategories } = useEngagements();
 
   const [updatedCategories, setUpdatedCategories] = useEngagementFormField(
     'engagement_categories',
@@ -28,32 +21,31 @@ export function EngagementEditableCategories({
   );
 
   useEffect(() => {
-    if (!hasFetched && categories === undefined) {
+    if (!hasFetched && availableCategories === undefined) {
       setHasFetched(true);
-      fetchCategories();
+      fetchAvailableCategories();
     }
-  }, [categories, hasFetched, setHasFetched, fetchCategories]);
+  }, [
+    availableCategories,
+    hasFetched,
+    setHasFetched,
+    fetchAvailableCategories,
+  ]);
 
-  useEffect(() => {
-    setUpdatedCategories(chips.map(chip => ({ name: chip })))
-    // eslint-disable-next-line
-  }, [chips]);
-
-  useEffect(() => {
-    const formatedItem = engagementCategories?.map(item => item.name);
-
-    setChips(formatedItem ? formatedItem : []);
-  }, [engagementCategories]);
+  const formattedCategories = engagement?.engagement_categories?.map?.(
+    item => item.name
+  );
 
   const CategoriesReadOnly = () => {
     return (
       <>
-        {chips.length > 0 ? (
-          chips.map(currentChip => (
+        {formattedCategories?.length > 0 ? (
+          formattedCategories?.map?.(currentChip => (
             <Label
               key={currentChip}
               style={{ marginRight: '0.5rem' }}
               color="blue"
+              data-testid="category-chip"
             >
               {currentChip}
             </Label>
@@ -70,22 +62,22 @@ export function EngagementEditableCategories({
           </Label>
         )}
         <Feature name={'writer'}>
-          <PencilAltIcon
-            onClick={e => setEditMode(!editMode)}
-            style={{
-              fontSize: 'small',
-              margin: '-0.1rem 0.5rem',
-              cursor: 'pointer',
-              color: '#0066CC',
-            }}
-          />
+          <span data-testid="edit-icon" onClick={e => setEditMode(!editMode)}>
+            <PencilAltIcon
+              style={{
+                fontSize: 'small',
+                margin: '-0.1rem 0.5rem',
+                cursor: 'pointer',
+                color: '#0066CC',
+              }}
+            />
+          </span>
         </Feature>
       </>
     );
   };
 
   const SaveAndCloseEditMode = async (selectedChips: string[]) => {
-    setChips(selectedChips);
     setEditMode(!editMode);
     await saveEngagement({
       ...engagement,
@@ -102,8 +94,15 @@ export function EngagementEditableCategories({
       {editMode ? (
         <Flex>
           <CategoryTypehead
-            engagementCategories={chips}
-            allCategories={categories}
+            selected={updatedCategories?.map?.(c => c?.name) ?? []}
+            onChange={c =>
+              setUpdatedCategories(
+                c.map(c => ({
+                  name: c,
+                }))
+              )
+            }
+            allCategories={availableCategories}
             cancelEdit={cancelEdit}
             saveAndCloseEditMode={SaveAndCloseEditMode}
           />
