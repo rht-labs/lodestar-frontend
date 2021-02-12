@@ -58,7 +58,7 @@ export function EngagementArtifactCard() {
   const openArtifactModal = () => {
     const newArtifact: Partial<Artifact> = {
       id: uuid(),
-      type: artifactTypes[0].value,
+      type: artifactTypes[0]?.value,
     };
     addArtifact(newArtifact as Artifact);
     requestOpen(getModalKey());

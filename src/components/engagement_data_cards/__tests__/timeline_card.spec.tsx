@@ -58,10 +58,8 @@ describe('Engagement Artifact Card', () => {
         </FeatureToggleContext.Provider>
       </EngagementContext.Provider>
     );
-    act(() => {
-      fireEvent.click(screen.getByTestId('add-artifact-button'));
-      expect(requestOpen).toHaveBeenCalled();
-    });
+    await fireEvent.click(screen.getByTestId('add-artifact-button'));
+    expect(requestOpen).toHaveBeenCalled();
   });
   test('clicking the edit artifact dropdown item opens the edit artifact modal', async () => {
     await act(async () => {
