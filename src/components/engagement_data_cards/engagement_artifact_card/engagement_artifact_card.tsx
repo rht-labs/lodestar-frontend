@@ -91,7 +91,7 @@ export function EngagementArtifactCard() {
   const rows =
     currentEngagement?.artifacts?.map?.((artifact, idx) => [
       getLabelForValue(
-        engagementFormConfig?.artifact_types?.options ?? [],
+        engagementFormConfig?.artifact_options?.types?.options ?? [],
         artifact.type
       ),
       {
@@ -148,7 +148,7 @@ export function EngagementArtifactCard() {
         }}
         onSave={onFinishArtifactEdit}
         artifactTypes={
-          engagementFormConfig?.artifact_types?.options ?? []
+          engagementFormConfig?.artifact_options?.types?.options ?? []
         }
       />
       <DataCard
