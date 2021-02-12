@@ -144,6 +144,26 @@ describe('Engagement Context', () => {
     });
   });
 
+  test('Can delete an engagement', async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate;
+      result.current.createEngagement({
+        customer_name: 'new engagement',
+        uuid: '123'
+      } as Engagement);
+      await waitForNextUpdate();
+      expect(result.current.engagements?.length).toEqual(1);
+
+      await waitForNextUpdate();
+      result.current.deleteEngagement({
+        uuid: '123'
+      } as Engagement);
+      await waitForNextUpdate();
+      expect(result.current.engagements?.length).toEqual(0);
+    });
+  });
+
   test('_handleErrors handles authentication errors', async () => {
     await act(async () => {
       const isLoggedIn = jest.fn(async () => true);
