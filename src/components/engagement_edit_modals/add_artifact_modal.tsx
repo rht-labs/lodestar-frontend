@@ -19,14 +19,15 @@ import {
 export interface ArtifactEditModalProps {
   onClose: () => void;
   isOpen: boolean;
-  artifact: Artifact;
-  onUpdate: (artifact: Artifact) => void;
+  artifact: Partial<Artifact>;
+  onUpdate: (artifact: Partial<Artifact>) => void;
   onSave: () => void;
   artifactTypes: { label: string; value: string }[];
 }
 
 export function ArtifactEditModal(props: ArtifactEditModalProps) {
   const { logEvent } = useAnalytics();
+  const { artifact } = props;
 
   const onSave = () => {
     props.onSave();
@@ -36,6 +37,12 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
     });
     props.onClose?.();
   };
+  const isSaveEnabled =
+    artifact &&
+    !!artifact.description &&
+    !!artifact.linkAddress &&
+    !!artifact.title &&
+    !!artifact.type;
 
   return (
     <Modal
@@ -50,6 +57,7 @@ export function ArtifactEditModal(props: ArtifactEditModalProps) {
             data-testid="save-artifact"
             onClick={onSave}
             data-cy={'save-artifact-button'}
+            isDisabled={!isSaveEnabled}
           >
             Save
           </Button>

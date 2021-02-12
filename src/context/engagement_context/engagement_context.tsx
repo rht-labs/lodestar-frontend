@@ -122,36 +122,64 @@ export const EngagementProvider = ({
   >();
 
   const [isLaunchable, setIsLaunchable] = useState<boolean>(false);
-  const setCurrentEngagement = useCallback(
-    (engagement: Engagement) => {
-      dispatch({});
-      _setCurrentEngagement(engagement);
-    },
-    [_setCurrentEngagement]
-  );
+  const [changedGroups, setChangedGroups] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => Partial<Engagement>
   >(
     engagementFormReducer(engagementFormConfig),
     engagementFormReducer(engagementFormConfig)()
   );
-
-  const [missingRequiredFields, setMissingRequiredFields] = useState<string[]>(
-    []
-  );
-
-  const [changedGroups, setChangedGroups] = useState<{
-    [key: string]: boolean;
-  }>({});
   const clearCurrentChanges = useCallback(() => {
     dispatch({
       type: 'switch_engagement',
     });
     setChangedGroups({});
   }, [dispatch]);
-  useEffect(() => {
-    clearCurrentChanges();
-  }, [currentEngagement, clearCurrentChanges]);
+  const updateEngagementFormField = useCallback(
+    <T extends keyof Engagement>(
+      fieldName: T,
+      value: Engagement[T],
+      group?: EngagementGroupings
+    ) => {
+      if (!!group) {
+        setChangedGroups({ ...changedGroups, [group]: true });
+      }
+      dispatch({ type: fieldName, payload: value });
+      try {
+        analyticsContext.logEvent({
+          category: AnalyticsCategory.engagements,
+          action: 'Update Engagement',
+        });
+      } catch (e) {}
+    },
+    [analyticsContext, changedGroups]
+  );
+  const setCurrentEngagement = useCallback(
+    (engagement: Engagement) => {
+      const defaults: Partial<Engagement> = {};
+      if (!engagement?.timezone) {
+        const getTimeZone = () => {
+          try {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone;
+          } catch (e) {
+            return undefined;
+          }
+        };
+        defaults.timezone = getTimeZone();
+      }
+      clearCurrentChanges();
+      dispatch({ type: 'switch_engagement', payload: defaults });
+      _setCurrentEngagement(engagement);
+    },
+    [_setCurrentEngagement, clearCurrentChanges]
+  );
+
+  const [missingRequiredFields, setMissingRequiredFields] = useState<string[]>(
+    []
+  );
+
   const _handleErrors = useCallback(
     async error => {
       Logger.instance.debug('EngagementContext:_handleErrors', error);
@@ -602,22 +630,6 @@ export const EngagementProvider = ({
     }
   }, [categoryService, _handleErrors]);
 
-  const updateEngagementFormField = (
-    fieldName: keyof Engagement,
-    value: any,
-    group?: EngagementGroupings
-  ) => {
-    if (!!group) {
-      setChangedGroups({ ...changedGroups, [group]: true });
-    }
-    dispatch({ type: fieldName, payload: value });
-    try {
-      analyticsContext.logEvent({
-        category: AnalyticsCategory.engagements,
-        action: 'Update Engagement',
-      });
-    } catch (e) {}
-  };
   return (
     <Provider
       value={{
