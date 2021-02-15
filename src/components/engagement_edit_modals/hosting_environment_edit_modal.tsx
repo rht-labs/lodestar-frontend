@@ -15,10 +15,11 @@ import { SelectFormField } from '../form_fields/select_form_field';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useSubdomainUniqueness } from '../../hooks/subdomain_checker';
+import { hasRequiredFields } from '../../common/validate_hosting_environment';
 export interface OpenShiftClusterEditModalProps {
-  hostingEnvironment: HostingEnvironment;
+  hostingEnvironment: Partial<HostingEnvironment>;
   isOpen: boolean;
-  onSave: (hostingEnvironment: HostingEnvironment) => void;
+  onSave: (hostingEnvironment: Partial<HostingEnvironment>) => void;
   onClose: () => void;
   isEngagementLaunched: boolean;
   suggestedSubdomain?: string;
@@ -64,7 +65,19 @@ export function OpenShiftClusterEditModal({
   };
 
   const onChange = (field: keyof HostingEnvironment, value) => {
-    setHostingEnvironment({ ...hostingEnvironment, [field]: value });
+    setHostingEnvironment({
+      ...hostingEnvironment,
+      [field]: value,
+    } as HostingEnvironment);
+  };
+
+  const canSaveEnvironment = (): boolean => {
+    const isSubdomainReady = subdomainCheckLoading || !isUnique;
+    if (isEngagementLaunched) {
+      return hasRequiredFields(hostingEnvironment) && isSubdomainReady;
+    } else {
+      return true;
+    }
   };
 
   if (!hostingEnvironment) {
@@ -85,7 +98,7 @@ export function OpenShiftClusterEditModal({
               <Button
                 data-testid="oc-edit-save"
                 onClick={onSave}
-                isDisabled={subdomainCheckLoading || !isUnique}
+                isDisabled={!canSaveEnvironment()}
                 data-cy={'hosting_env_save'}
               >
                 Save
@@ -191,7 +204,7 @@ export function OpenShiftClusterEditModal({
 }
 
 function getAvailableProviders(
-  hostingEnvironment: HostingEnvironment,
+  hostingEnvironment: Partial<HostingEnvironment>,
   engagementFormConfig: EngagementFormConfig
 ) {
   const availableProviders =
@@ -214,7 +227,7 @@ function getAvailableProviders(
 
 function getAvailableRegionOptions(
   provider: EngagementFormOption,
-  hostingEnvironment: HostingEnvironment
+  hostingEnvironment: Partial<HostingEnvironment>
 ) {
   const availableProviderRegionOptions = provider?.options ?? [];
 
