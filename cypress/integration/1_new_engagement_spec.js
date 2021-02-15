@@ -56,7 +56,7 @@ describe('new engagement', () => {
     const format = 'YYYY-MM-DD';
     const start = Cypress.moment().subtract(14, 'days').format(format);
     const end = Cypress.moment().add(14, 'days').format(format);
-    const retire = Cypress.moment().add(43, 'days').format(format);
+    const retire = Cypress.moment().add(44, 'days').format(format);
     
 
     cy.get('[data-cy=edit_summary_card]').click();
