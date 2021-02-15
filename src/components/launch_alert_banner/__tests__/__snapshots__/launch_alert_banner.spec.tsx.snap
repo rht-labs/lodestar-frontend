@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Engagement Navigation  matches the snapshot 1`] = `
+exports[`Engagement launch alert banner  matches the snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -60,7 +60,44 @@ Object {
         <div
           class="pf-c-alert__action-group"
         >
-          <div />
+          <div>
+            <div
+              class="pf-l-flex"
+            >
+              <div
+                class=""
+                span="1"
+              >
+                <button
+                  aria-disabled="false"
+                  class="pf-c-button pf-m-primary"
+                  data-cy="launch_button"
+                  data-ouia-component-id="1"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe="true"
+                  type="button"
+                >
+                  Launch
+                </button>
+              </div>
+              <div
+                class=""
+                span="1"
+              >
+                <button
+                  aria-disabled="false"
+                  class="pf-c-button pf-m-danger"
+                  data-ouia-component-id="2"
+                  data-ouia-component-type="PF4/Button"
+                  data-ouia-safe="true"
+                  data-testid="delete-button"
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -122,7 +159,44 @@ Object {
       <div
         class="pf-c-alert__action-group"
       >
-        <div />
+        <div>
+          <div
+            class="pf-l-flex"
+          >
+            <div
+              class=""
+              span="1"
+            >
+              <button
+                aria-disabled="false"
+                class="pf-c-button pf-m-primary"
+                data-cy="launch_button"
+                data-ouia-component-id="1"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                Launch
+              </button>
+            </div>
+            <div
+              class=""
+              span="1"
+            >
+              <button
+                aria-disabled="false"
+                class="pf-c-button pf-m-danger"
+                data-ouia-component-id="2"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="delete-button"
+                type="button"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>,
