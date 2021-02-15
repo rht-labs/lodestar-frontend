@@ -48,12 +48,18 @@ export interface EngagementFormLogisticsOptions {
   env_grace_period_max: number;
   max_hosting_env_count: number;
 }
+
+export interface EngagementFormArtifactOptions {
+  types: EngagementFormOption[];
+}
+
 export interface EngagementFormConfig {
   basic_information: EngagementFormBasicInformation;
   cloud_options: EngagementFormCloudOptions;
   openshift_options: EngagementFormOpenshiftOptions;
   user_options: EngagementFormUserOptions;
   logistics_options: EngagementFormLogisticsOptions;
+  artifact_options: EngagementFormArtifactOptions;
 }
 
 export abstract class EngagementFormConfig {

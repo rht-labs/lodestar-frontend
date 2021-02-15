@@ -151,6 +151,26 @@ Object {
                   </div>
                 </div>
                 <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                >
+                  <div
+                    data-testid="timezone_label"
+                  >
+                    <div
+                      class="pf-c-content"
+                      data-cy="timezone_label"
+                    >
+                      <h6
+                        class=""
+                        data-pf-content="true"
+                        style="margin-bottom: 0.1rem;"
+                      >
+                        Timezone
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <div
                   class="pf-l-grid__item pf-m-12-col-on-md"
                 >
                   <div
@@ -166,25 +186,25 @@ Object {
                     </h6>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
-            >
-              <div
-                class="pf-c-content"
-                data-cy="description_label"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
+                <div
+                  class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
                 >
-                  Description
-                </h6>
-                <span
-                  style="white-space: pre-line;"
-                />
+                  <div
+                    class="pf-c-content"
+                    data-cy="description_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Description
+                    </h6>
+                    <span
+                      style="white-space: pre-line;"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -340,6 +360,26 @@ Object {
                 </div>
               </div>
               <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+              >
+                <div
+                  data-testid="timezone_label"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="timezone_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Timezone
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div
                 class="pf-l-grid__item pf-m-12-col-on-md"
               >
                 <div
@@ -355,25 +395,25 @@ Object {
                   </h6>
                 </div>
               </div>
-            </div>
-          </div>
-          <div
-            class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
-          >
-            <div
-              class="pf-c-content"
-              data-cy="description_label"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
+              <div
+                class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
               >
-                Description
-              </h6>
-              <span
-                style="white-space: pre-line;"
-              />
+                <div
+                  class="pf-c-content"
+                  data-cy="description_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Description
+                  </h6>
+                  <span
+                    style="white-space: pre-line;"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -441,7 +481,7 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
-        data-ouia-component-id="3"
+        data-ouia-component-id="2"
         data-ouia-component-type="PF4/Card"
         data-ouia-safe="true"
         style="padding: 1rem;"
@@ -512,7 +552,7 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
-      data-ouia-component-id="3"
+      data-ouia-component-id="2"
       data-ouia-component-type="PF4/Card"
       data-ouia-safe="true"
       style="padding: 1rem;"
@@ -639,7 +679,7 @@ Object {
     <div>
       <article
         class="pf-c-card pf-m-compact"
-        data-ouia-component-id="6"
+        data-ouia-component-id="4"
         data-ouia-component-type="PF4/Card"
         data-ouia-safe="true"
         style="padding: 1rem;"
@@ -710,7 +750,7 @@ Object {
   "container": <div>
     <article
       class="pf-c-card pf-m-compact"
-      data-ouia-component-id="6"
+      data-ouia-component-id="4"
       data-ouia-component-type="PF4/Card"
       data-ouia-safe="true"
       style="padding: 1rem;"
