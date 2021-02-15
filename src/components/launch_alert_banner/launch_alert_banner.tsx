@@ -48,8 +48,6 @@ const ENGAGEMENT_FIELD_MAP = {
   suggested_subdomain: 'oc_summary_card',
 };
 
-const DELETE_ENGAGEMENT_MODAL_KEY = 'delete_engagement';
-
 export function LaunchAlertBanner({
   engagement,
   onLaunch,
@@ -59,6 +57,7 @@ export function LaunchAlertBanner({
   const overallStatus = engagement?.status?.overall_status;
   const path = useLocation().pathname;
   const { requestOpen, activeModalKey } = useModalVisibility();
+  const DELETE_ENGAGEMENT_MODAL_KEY = `delete-engagement-${engagement?.customer_name}-${engagement?.project_name}`;
 
   return (
     <>
@@ -88,6 +87,7 @@ export function LaunchAlertBanner({
                   </FlexItem>
                   <FlexItem span={1}>
                     <Button
+                      data-testid="delete-button"
                       variant="danger"
                       onClick={() => requestOpen(DELETE_ENGAGEMENT_MODAL_KEY)}
                     >

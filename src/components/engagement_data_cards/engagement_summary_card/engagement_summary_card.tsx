@@ -4,7 +4,6 @@ import { Timezone } from '../../../schemas/timezone';
 import { Engagement, getEngagementStatus } from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
-import { format as formatDate, utcToZonedTime } from 'date-fns-tz';
 import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagement_summary_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
@@ -12,18 +11,9 @@ import { RequiredFieldsWarning } from '../../required_fields_warning/required_fi
 import { EngagementStatusText } from '../../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { formatUtcDate } from '../../../common/dates';
 
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
-
-const formatUtcDate = (date?: Date): string | undefined => {
-  if (!date) {
-    return '';
-  }
-  const dateString = formatDate(utcToZonedTime(date, 'UTC'), 'MMM dd, yyyy', {
-    timeZone: 'UTC',
-  });
-  return dateString;
-};
 
 export function EngagementSummaryCard() {
   const {

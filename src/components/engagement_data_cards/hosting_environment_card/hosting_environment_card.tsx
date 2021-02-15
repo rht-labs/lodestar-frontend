@@ -11,7 +11,7 @@ import {
   KebabToggle,
   Title,
 } from '@patternfly/react-core';
-import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/openshift_cluster_edit_modal';
+import { OpenShiftClusterEditModal } from '../../engagement_edit_modals/hosting_environment_edit_modal';
 import { EngagementFormOption } from '../../../schemas/engagement_config';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';

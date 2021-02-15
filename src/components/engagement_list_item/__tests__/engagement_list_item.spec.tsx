@@ -14,6 +14,7 @@ import {
 import { EngagementListItem } from '../engagement_list_item';
 import { MemoryRouter } from 'react-router';
 import MockDate from 'mockdate';
+import { parseISO } from 'date-fns';
 
 afterEach(cleanup);
 
@@ -44,5 +45,20 @@ describe('Engagement status', () => {
       )
     ).toMatchSnapshot();
     MockDate.reset();
+  });
+  test('shows the correct start date', async () => {
+    const view = render(
+      <MemoryRouter>
+        <EngagementListItem
+          engagement={{
+            ...Engagement.fromFake(true),
+            start_date: parseISO('2021-03-01T00:00:00.000Z'),
+          }}
+        />
+      </MemoryRouter>
+    );
+    expect(
+      await view.findByText('Target start date: Mar 01, 2021')
+    ).toBeDefined();
   });
 });

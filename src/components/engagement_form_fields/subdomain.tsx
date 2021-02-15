@@ -7,7 +7,7 @@ import { HostingEnvironment } from '../../schemas/hosting_environment';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 
 interface SubdomainFormFieldProps {
-  hostingEnvironment: HostingEnvironment;
+  hostingEnvironment: Partial<HostingEnvironment>;
   onChange: (value: string) => void;
   isEngagementLaunched: boolean;
   isLoading?: boolean;
@@ -97,7 +97,7 @@ export function SubdomainFormField({
         id="ocp_sub_domain"
         name="ocp_sub_domain"
         data-cy={'desired_subdomain_input'}
-        value={subdomainValue}
+        value={subdomainValue ?? ''}
         onChange={e => {
           if (!editedByUser) {
             setEditedByUser(true);

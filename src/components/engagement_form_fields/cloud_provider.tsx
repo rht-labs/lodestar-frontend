@@ -9,7 +9,7 @@ import { APP_FEATURES } from '../../common/app_features';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 interface CloudProviderFormFieldProps {
-  hostingEnvironment: HostingEnvironment;
+  hostingEnvironment: Partial<HostingEnvironment>;
   onChange: (value: string) => void;
   availableProviders: { label: string; value: string }[];
 }
