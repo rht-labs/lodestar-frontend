@@ -103,6 +103,36 @@ describe('Hosting Environment edit modal', () => {
     expect(await findButton()).not.toHaveAttribute('disabled');
   });
   test('Once an engagement has launched, a hosting environment may not be saved if that environment is not complete and valid', async () => {
-    expect(true).toBe(false);
+    let he: Partial<HostingEnvironment> = {};
+    const Component = ({ env }) => (
+      <TestStateWrapper>
+        <OpenShiftClusterEditModal
+          setHostingEnvironment={() => {}}
+          onSave={() => {}}
+          hostingEnvironment={env}
+          isOpen={true}
+          isEngagementLaunched={true}
+          onClose={() => {}}
+        />
+      </TestStateWrapper>
+    );
+    const requiredHeFields: Array<keyof HostingEnvironment> = [
+      'ocp_cloud_provider_name',
+      'ocp_cloud_provider_region',
+      'ocp_cluster_size',
+      'ocp_persistent_storage_size',
+      'ocp_sub_domain',
+      'ocp_version',
+    ];
+
+    const view = render(<Component env={{}} />);
+    for (let field of requiredHeFields) {
+      he = HostingEnvironment.fromFake(true);
+      delete he[field];
+      view.rerender(<Component env={he} />);
+      expect(await view.findByTestId('oc-edit-save')).toHaveAttribute(
+        'disabled'
+      );
+    }
   });
 });

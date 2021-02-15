@@ -10,9 +10,17 @@ const requiredHostingEnvironmentFields: Array<keyof HostingEnvironment> = [
   'ocp_version',
 ];
 
+export function hasRequiredFields(
+  hostingEnvironment: Partial<HostingEnvironment>
+) {
+  return requiredHostingEnvironmentFields.every(k =>
+    notNullOrUndefined(hostingEnvironment[k])
+  );
+}
+
 const notNullOrUndefined = x => x !== null && x !== undefined && x !== '';
 export async function validateHostingEnvironment(
-  hostingEnvironment: HostingEnvironment,
+  hostingEnvironment: Partial<HostingEnvironment>,
   engagementService: EngagementService,
   deconflictedSubdomain?: string
 ): Promise<boolean> {
@@ -24,8 +32,5 @@ export async function validateHostingEnvironment(
       hostingEnvironment?.ocp_sub_domain
     );
   }
-  const hasRequiredFields = requiredHostingEnvironmentFields.every(k =>
-    notNullOrUndefined(hostingEnvironment[k])
-  );
-  return hasRequiredFields && isSubdomainValid;
+  return hasRequiredFields(hostingEnvironment) && isSubdomainValid;
 }

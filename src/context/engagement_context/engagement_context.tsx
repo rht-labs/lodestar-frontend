@@ -11,7 +11,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import {
   AlreadyExistsError,
   AlreadyLaunchedError,
-  NotFoundError
+  NotFoundError,
 } from '../../services/engagement_service/engagement_service_errors';
 import { Logger } from '../../utilities/logger';
 import {
@@ -401,7 +401,9 @@ export const EngagementProvider = ({
     ]
   );
   const _validateHostingEnvironment = useCallback(
-    async (hostingEnvironment: HostingEnvironment): Promise<boolean> => {
+    async (
+      hostingEnvironment: Partial<HostingEnvironment>
+    ): Promise<boolean> => {
       return validateHostingEnvironment(
         hostingEnvironment,
         engagementService,
@@ -410,7 +412,7 @@ export const EngagementProvider = ({
     },
     [engagementService]
   );
-  const _checkLaunchReady = useCallback(() => {
+  const _checkLaunchReady = useCallback(async () => {
     if (!currentEngagement) {
       return false;
     }
@@ -423,13 +425,17 @@ export const EngagementProvider = ({
     if (!result) {
       return result;
     } else {
-      return currentEngagement?.hosting_environments?.every(e =>
-        _validateHostingEnvironment(e)
-      );
+      return (
+        await Promise.all(
+          currentEngagement?.hosting_environments?.map(e =>
+            _validateHostingEnvironment(e)
+          )
+        )
+      ).every(r => r);
     }
   }, [currentEngagement, _validateHostingEnvironment]);
   useEffect(() => {
-    setIsLaunchable(_checkLaunchReady());
+    _checkLaunchReady().then(isLaunchable => setIsLaunchable(isLaunchable));
   }, [currentEngagement, _checkLaunchReady]);
 
   const getMissingRequiredFields = useCallback(async () => {
@@ -532,7 +538,7 @@ export const EngagementProvider = ({
 
   const launchEngagement = useCallback(
     async (data: any) => {
-      if (!_checkLaunchReady()) {
+      if (!(await _checkLaunchReady())) {
         throw Error(
           'This engagement does not have the required fields to launch'
         );
@@ -574,46 +580,48 @@ export const EngagementProvider = ({
 
   const _deleteEngagement = useCallback(
     (deletedEngagement: Engagement) => {
-      const updatedEngagements = engagements.filter(engagement => engagement.uuid !== deletedEngagement.uuid);
+      const updatedEngagements = engagements.filter(
+        engagement => engagement.uuid !== deletedEngagement.uuid
+      );
       setEngagements(updatedEngagements);
     },
     [engagements]
   );
 
-  const deleteEngagement = useCallback(async(engagement: Engagement) => {
-    try {
-      await engagementService.deleteEngagement(engagement);
-      _deleteEngagement(engagement);
-      feedbackContext.showAlert(
-        'Engagement is deleted successfully',
-        AlertType.success
-      );
-      feedbackContext.hideLoader();
-
-    } catch (e) {
-      feedbackContext.hideLoader();
-      let errorMessage;
-      if (e instanceof AlreadyLaunchedError) {
-        errorMessage =
-          'This engagement is already launched and has not been removed';
-      }
-      if (e instanceof NotFoundError) {
-        errorMessage =
-          'Engagement is not found';
-      }
-      else {
-        try {
-          await _handleErrors(e);
-        } catch (e) {
+  const deleteEngagement = useCallback(
+    async (engagement: Engagement) => {
+      try {
+        await engagementService.deleteEngagement(engagement);
+        _deleteEngagement(engagement);
+        feedbackContext.showAlert(
+          'Engagement is deleted successfully',
+          AlertType.success
+        );
+        feedbackContext.hideLoader();
+      } catch (e) {
+        feedbackContext.hideLoader();
+        let errorMessage;
+        if (e instanceof AlreadyLaunchedError) {
           errorMessage =
-            'There was an issue with deleting selected engagement. Please follow up with an administrator if this continues.';
+            'This engagement is already launched and has not been removed';
         }
-      }
+        if (e instanceof NotFoundError) {
+          errorMessage = 'Engagement is not found';
+        } else {
+          try {
+            await _handleErrors(e);
+          } catch (e) {
+            errorMessage =
+              'There was an issue with deleting selected engagement. Please follow up with an administrator if this continues.';
+          }
+        }
 
-      feedbackContext.showAlert(errorMessage, AlertType.error);
-      await _handleErrors(e);
+        feedbackContext.showAlert(errorMessage, AlertType.error);
+        await _handleErrors(e);
       }
-  }, [engagementService, _deleteEngagement, feedbackContext, _handleErrors]);
+    },
+    [engagementService, _deleteEngagement, feedbackContext, _handleErrors]
+  );
 
   const fetchCategories = useCallback(async () => {
     try {

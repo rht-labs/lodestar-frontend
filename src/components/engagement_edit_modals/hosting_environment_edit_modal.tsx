@@ -15,6 +15,7 @@ import { SelectFormField } from '../form_fields/select_form_field';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useSubdomainUniqueness } from '../../hooks/subdomain_checker';
+import { hasRequiredFields } from '../../common/validate_hosting_environment';
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: Partial<HostingEnvironment>;
   isOpen: boolean;
@@ -70,6 +71,15 @@ export function OpenShiftClusterEditModal({
     } as HostingEnvironment);
   };
 
+  const canSaveEnvironment = (): boolean => {
+    const isSubdomainReady = subdomainCheckLoading || !isUnique;
+    if (isEngagementLaunched) {
+      return hasRequiredFields(hostingEnvironment) && isSubdomainReady;
+    } else {
+      return true;
+    }
+  };
+
   if (!hostingEnvironment) {
     return <div />;
   }
@@ -88,7 +98,7 @@ export function OpenShiftClusterEditModal({
               <Button
                 data-testid="oc-edit-save"
                 onClick={onSave}
-                isDisabled={subdomainCheckLoading || !isUnique}
+                isDisabled={!canSaveEnvironment()}
                 data-cy={'hosting_env_save'}
               >
                 Save
