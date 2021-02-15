@@ -53,23 +53,25 @@ describe('Engagement Summary edit modal', () => {
   });
 });
 
+const Component = ({
+  spy = jest.fn(),
+  engagement = Engagement.fromFake(true),
+}) => (
+  <TestStateWrapper>
+    <EngagementContext.Provider value={{ updateEngagementFormField: spy }}>
+      <EngagementSummaryEditModal
+        engagement={engagement}
+        isOpen={true}
+        onClose={() => {}}
+        onSave={() => {}}
+      />
+    </EngagementContext.Provider>
+  </TestStateWrapper>
+);
 describe('timezone select', () => {
-  const getView = (spy = jest.fn()) =>
-    render(
-      <TestStateWrapper>
-        <EngagementContext.Provider value={{ updateEngagementFormField: spy }}>
-          <EngagementSummaryEditModal
-            engagement={Engagement.fromFake()}
-            isOpen={true}
-            onClose={() => {}}
-            onSave={() => {}}
-          />
-        </EngagementContext.Provider>
-      </TestStateWrapper>
-    );
   test('exists in the edit modal', async () => {
     await act(async () => {
-      const view = getView();
+      const view = render(<Component />);
       const { findByTestId } = view;
       expect(await findByTestId('timezone-select')).toBeDefined();
     });
@@ -77,7 +79,7 @@ describe('timezone select', () => {
   test('can toggle timezone dropdown', async () => {
     await act(async () => {
       const spy = jest.fn();
-      const view = getView(spy);
+      const view = render(<Component spy={spy} />);
       const dropdown = await view.findByTestId('timezone-select');
       const buttons = dropdown.getElementsByTagName('button');
 
@@ -91,6 +93,51 @@ describe('timezone select', () => {
         'Engagement Summary'
       );
       expect(await view.queryByTestId('America/Denver')).toBeNull();
+    });
+  });
+});
+describe('engagement dates', () => {
+  test('engagement dates can each be set and cleared', async () => {
+    await act(async () => {
+      let view = render(
+        <TestStateWrapper>
+          <EngagementContext.Consumer>
+            {engagementContext => {
+              return (
+                <EngagementSummaryEditModal
+                  isOpen={true}
+                  onClose={() => {}}
+                  onSave={() => {}}
+                  engagement={engagementContext.currentChanges}
+                ></EngagementSummaryEditModal>
+              );
+            }}
+          </EngagementContext.Consumer>
+        </TestStateWrapper>
+      );
+
+      async function testDateInput(inputId: string) {
+        await fireEvent.change(await view.findByTestId('start_date_input'), {
+          target: { value: '2023-03-21' },
+        });
+
+        let node = await view.findByDisplayValue('2023-03-21');
+        expect(node).toHaveValue('2023-03-21');
+        await fireEvent.change(await view.findByTestId('start_date_input'), {
+          target: { value: '' },
+        });
+        node = await view.findByTestId('start_date_input');
+        expect(node).toHaveValue('');
+      }
+
+      const dateInputs = [
+        'archive_date_input',
+        'start_date_input',
+        'end_date_input',
+      ];
+      for (let input of dateInputs) {
+        await testDateInput(input);
+      }
     });
   });
 });

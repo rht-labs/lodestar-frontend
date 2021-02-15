@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   FormGroup,
   InputGroup,
@@ -40,26 +40,6 @@ export function EngagementStartEndDateFormField() {
     EngagementGroupings.engagementSummary
   );
 
-  const [startDateText, setStartDateText] = useState(
-    getFormattedDate(startDate) || ''
-  );
-  const [endDateText, setEndDateText] = useState(
-    getFormattedDate(endDate) || ''
-  );
-  const [archiveDateText, setArchiveDateText] = useState(
-    getFormattedDate(archiveDate) || ''
-  );
-
-  useEffect(() => {
-    setEndDateText(getFormattedDate(endDate));
-  }, [endDate]);
-  useEffect(() => {
-    setStartDateText(getFormattedDate(startDate));
-  }, [startDate]);
-  useEffect(() => {
-    setArchiveDateText(getFormattedDate(archiveDate));
-  }, [archiveDate]);
-
   const getMaxRetirementDate = () => {
     return maxGracePeriodInDays
       ? addDays(endDate, maxGracePeriodInDays)
@@ -87,13 +67,13 @@ export function EngagementStartEndDateFormField() {
             isDisabled={
               !hasFeature(APP_FEATURES.writer) || !!currentEngagement?.launch
             }
+            data-testid={'start_date_input'}
             name="start_date"
             id="start_date"
             type="date"
             aria-label="The start date."
-            value={startDateText ?? ''}
-            onChange={setStartDateText}
-            onBlur={e => setStartDate(parseDatePickerDate(e.target.value))}
+            value={getFormattedDate(startDate) ?? ''}
+            onChange={e => setStartDate(parseDatePickerDate(e))}
             data-cy={'start_date_input'}
           />
           <TextInput
@@ -102,13 +82,16 @@ export function EngagementStartEndDateFormField() {
             id="end_date"
             type="date"
             aria-label="The end date"
-            value={endDateText ?? ''}
+            data-testid="end_date_input"
+            value={getFormattedDate(endDate) ?? ''}
             min={getFormattedDate(
               max([startOfToday(), startDate ?? startOfToday()])
             )}
-            onChange={setEndDateText}
-            onBlur={e => {
-              const parsedDate = parseDatePickerDate(e.target.value);
+            onChange={e => {
+              if (e === '') {
+                setEndDate(null);
+              }
+              const parsedDate = parseDatePickerDate(e);
               validate('end_date')(parsedDate);
               setEndDate(parsedDate);
             }}
@@ -129,19 +112,17 @@ export function EngagementStartEndDateFormField() {
         <InputGroup label="Retirement Date">
           <TextInput
             id="archive_date"
+            data-testid="archive_date_input"
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             data-cy={'retirement_date_input'}
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
-            value={archiveDateText ?? ''}
-            onBlur={e => {
-              const parsedDate = parseDatePickerDate(e.target.value);
+            value={getFormattedDate(archiveDate)}
+            onChange={e => {
+              const parsedDate = parseDatePickerDate(e);
               validate('archive_date')(parsedDate);
               setArchiveDate(parsedDate);
-            }}
-            onChange={e => {
-              setArchiveDateText(e);
             }}
             min={getFormattedDate(endDate)}
             max={getFormattedDate(getMaxRetirementDate())}
