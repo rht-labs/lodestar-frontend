@@ -19,17 +19,6 @@ export const engagementFormReducer = () =>
       case 'start_date':
       case 'end_date':
       case 'archive_date':
-      // const { end_date, start_date, archive_date } = state;
-      // return {
-      //   ...state,
-      //   ...curriedDateNormalizer({
-      //     start_date,
-      //     end_date,
-      //     archive_date,
-      //     // overwrite the current field that's being changed with the payload value
-      //     [action.type]: action.payload,
-      //   }),
-      // };
       case 'customer_name':
       case 'project_name':
       case 'additional_details':

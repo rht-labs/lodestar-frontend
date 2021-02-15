@@ -140,4 +140,28 @@ describe('engagement dates', () => {
       }
     });
   });
+  test('start date can be set to any date', async () => {
+    expect(true).toBe(false);
+  });
+  test('by default, the archive date is equal to the end date + the default grace period', async () => {
+    expect(true).toBe(false);
+  });
+  test('Archive date can be cahnged to any date after the end date up to the max grace period', async () => {
+    expect(true).toBe(false);
+  });
+  test('If you change the end date, the archive date is the end date + the previous difference between the archive date and the end date, not to exceed the max grace period', async () => {
+    expect(true).toBe(false);
+  });
+  test('If the engagement is not launched, any date can be cleared', async () => {
+    expect(true).toBe(false);
+  });
+  test('If the engagement is launched, the end date cannot be set to the past. The end date can be set to today', async () => {
+    expect(true).toBe(false);
+  });
+  test('If the engagement is launched, the archive date can be set to today, but not the past (same as above)', async () => {
+    expect(true).toBe(false);
+  });
+  test('If the archive and end date are set, then the end date is cleared, then the end date is set again, the archive date is set to the default suggested value (end date + grace period, not to exceed max grace)', async () => {
+    expect(true).toBe(false);
+  });
 });
