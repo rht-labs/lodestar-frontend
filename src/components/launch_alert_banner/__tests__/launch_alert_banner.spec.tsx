@@ -23,7 +23,7 @@ describe('Engagement launch alert banner ', () => {
 
   test('matches the snapshot',  () => {
     expect(
-      getLaunchBar
+      getLaunchBar()
     ).toMatchSnapshot();
   });
 
