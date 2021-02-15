@@ -1,6 +1,6 @@
 import React from 'react';
 import { Engagement, EngagementStatus } from '../../schemas/engagement';
-import { differenceInWeeks, format as formatDate, isValid } from 'date-fns';
+import { differenceInWeeks, isValid } from 'date-fns';
 import {
   Flex,
   FlexItem,
@@ -20,6 +20,7 @@ import { ActivityHistoryLineItem } from '../activity_history_line_item/activity_
 import { Feature } from '../feature/feature';
 import { EngagementStatusText } from '../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../common/display_created_by_name';
+import { formatUtcDate } from '../../common/dates';
 
 function DurationInWeeks({
   startDate,
@@ -55,7 +56,7 @@ export function EngagementAtAGlance({
             <GridItem>
               Target start date:{' '}
               {!!engagement?.start_date && isValid(engagement?.start_date)
-                ? formatDate(engagement?.start_date, 'MMM dd, yyyy')
+                ? formatUtcDate(engagement?.start_date)
                 : 'TBA'}
             </GridItem>
             <GridItem>
@@ -108,9 +109,7 @@ export function EngagementAtAGlance({
                   <ClipboardCheckIcon />
                 </Tooltip>
               </FlexItem>
-              <FlexItem>
-                {engagement?.artifacts?.length || 0}
-              </FlexItem>
+              <FlexItem>{engagement?.artifacts?.length || 0}</FlexItem>
             </Flex>
             <Feature name={'engagementCardIcons'}>
               <>
