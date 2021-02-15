@@ -5,7 +5,7 @@ import { APP_FEATURES } from '../../common/app_features';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 
 export interface DescriptionFormFieldProps {
-  hostingEnvironment: HostingEnvironment;
+  hostingEnvironment: Partial<HostingEnvironment>;
   onChange: (value: string) => void;
 }
 
@@ -20,7 +20,7 @@ export function AdditionalDetailsFormField(props: DescriptionFormFieldProps) {
         id="additional_details"
         aria-label="Additional provisioning information"
         placeholder="Provide additional details"
-        value={props.hostingEnvironment.additional_details || ''}
+        value={props.hostingEnvironment?.additional_details || ''}
         resizeOrientation="vertical"
         onChange={props.onChange}
       />

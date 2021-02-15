@@ -404,7 +404,9 @@ export const EngagementProvider = ({
     ]
   );
   const _validateHostingEnvironment = useCallback(
-    async (hostingEnvironment: HostingEnvironment): Promise<boolean> => {
+    async (
+      hostingEnvironment: Partial<HostingEnvironment>
+    ): Promise<boolean> => {
       return validateHostingEnvironment(
         hostingEnvironment,
         engagementService,
@@ -413,7 +415,7 @@ export const EngagementProvider = ({
     },
     [engagementService]
   );
-  const _checkLaunchReady = useCallback(() => {
+  const _checkLaunchReady = useCallback(async () => {
     if (!currentEngagement) {
       return false;
     }
@@ -426,13 +428,17 @@ export const EngagementProvider = ({
     if (!result) {
       return result;
     } else {
-      return currentEngagement?.hosting_environments?.every(e =>
-        _validateHostingEnvironment(e)
-      );
+      return (
+        await Promise.all(
+          currentEngagement?.hosting_environments?.map(e =>
+            _validateHostingEnvironment(e)
+          )
+        )
+      ).every(r => r);
     }
   }, [currentEngagement, _validateHostingEnvironment]);
   useEffect(() => {
-    setIsLaunchable(_checkLaunchReady());
+    _checkLaunchReady().then(isLaunchable => setIsLaunchable(isLaunchable));
   }, [currentEngagement, _checkLaunchReady]);
 
   const getMissingRequiredFields = useCallback(async () => {
@@ -535,7 +541,7 @@ export const EngagementProvider = ({
 
   const launchEngagement = useCallback(
     async (data: any) => {
-      if (!_checkLaunchReady()) {
+      if (!(await _checkLaunchReady())) {
         throw Error(
           'This engagement does not have the required fields to launch'
         );
