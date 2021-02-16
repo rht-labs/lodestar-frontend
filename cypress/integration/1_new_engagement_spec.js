@@ -1,6 +1,14 @@
 /// <reference types="cypress" />
 
+
+
 describe('new engagement', () => {
+  const uuid = () => Cypress._.random(0, 1e6);
+  const id = uuid();
+  const testEngagementName = `cypressio_${id}`;
+  const customerName = 'Ldstr E2E';
+  const reqUrl = `engagements/customers/${customerName}/projects/${testEngagementName}`;
+
   beforeEach('Login', () => {
     cy.login();
 
@@ -9,13 +17,10 @@ describe('new engagement', () => {
         // "this" is still the test context object
         this.users = users;
       });
+
+      cy.server();
+      cy.route({ method: 'PUT', url: reqUrl }).as('saveEngagement');
   });
-
-  const uuid = () => Cypress._.random(0, 1e6);
-  const id = uuid();
-  const testEngagementName = `cypressio_${id}`;
-  const customerName = 'Ldstr E2E';
-
 
   it('creates a new engagement', () => {
     cy.server();
@@ -35,8 +40,6 @@ describe('new engagement', () => {
     cy.contains(customerName)
       .click();
 
-    
-
     cy.get('[data-cy=project-name]').type(testEngagementName);
     cy.get('[data-cy=new_engagement_region]').select('DEV').should('have.value', 'dev-1');
     cy.get('[data-cy=createNewEngagement]').click();
@@ -54,11 +57,10 @@ describe('new engagement', () => {
 
   it('Edit engagement summary', () => {
     const format = 'YYYY-MM-DD';
-    const start = Cypress.moment().subtract(14, 'days').format(format);
-    const end = Cypress.moment().add(14, 'days').format(format);
-    const retire = Cypress.moment().add(44, 'days').format(format);
+    const start = Cypress.moment().startOf('day').subtract(14, 'days').format(format);
+    const end = Cypress.moment().startOf('day').add(14, 'days').format(format);
+    const retire = Cypress.moment().startOf('day').add(44, 'days').format(format);
     
-
     cy.get('[data-cy=edit_summary_card]').click();
 
     cy.get('input[data-cy=description_field]')
@@ -83,6 +85,7 @@ describe('new engagement', () => {
 
     cy.get('button[data-cy=save_summary_card]').click();
 
+    cy.wait('@saveEngagement').should('have.property', 'status', 200);
     cy.get('[data-cy=launch_button]').should('be.disabled');
 
     // cy.get('li > .pf-c-alert')
@@ -93,10 +96,6 @@ describe('new engagement', () => {
   });
 
   it('Edit points of contact', () => {
-    cy.server();
-    cy.route({ method: 'PUT', url: `engagements/customers/${customerName}/projects/${testEngagementName}` })
-      .as('updateContacts');
-
     cy.get('[data-cy="points_of_contact"]').click();
 
     cy.get('[data-cy="engagement_lead_name"]')
@@ -120,7 +119,7 @@ describe('new engagement', () => {
 
     cy.get('[data-cy=save_point_of_contact]').click();
 
-    cy.wait('@updateContacts').should('have.property', 'status', 200);
+    cy.wait('@saveEngagement').should('have.property', 'status', 200);
 
     cy.get('[data-cy=launch_button]').contains('Launch').should('be.enabled');
 
@@ -128,9 +127,9 @@ describe('new engagement', () => {
   });
 
   it('Edit hosting environment', () => {
-    cy.get('[data-cy="hosting_env_button"]').click();
+    cy.get('[data-cy="hosting_env_button"]').click({waitForAnimations: true, animationDistanceThreshold: 100});
 
-    cy.get('[data-cy=hosting_environment_name]')
+    cy.get('[data-cy=hosting_environment_name]' {timeout: 7000})
       .type('Test Env 1')
       .get('#cloud_provider_dropdown')
       .select('AWS', { force: true })
@@ -153,20 +152,17 @@ describe('new engagement', () => {
 
     cy.get('[data-cy=hosting_env_save]').click();
 
+    cy.wait('@saveEngagement').should('have.property', 'status', 200);
+
     cy.get('.pf-c-alert__action > .pf-c-button').click();
   });
 
   it('Edit engagement users', () => {
-    cy.server();
-    cy.route({
-      method: 'PUT',
-      url: 'engagements/customers/e2e/projects/cypressio',
-    }).as('saveCheck');
 
     cy.get('button[data-cy=edit_user_button]').click();
     cy.get('button[data-cy=add_new_user]').click();
 
-    cy.get('input[data-cy=input_user_email]')
+    cy.get('input[data-cy=input_user_email]', {timeout: 2000})
       .each(($el, index, $list) => {
         cy.wrap($el).clear().type((this.users[index].email);
       })
@@ -187,15 +183,13 @@ describe('new engagement', () => {
 
     cy.get('button[data-cy=save_users]').click();
 
+    cy.wait('@saveEngagement').should('have.property', 'status', 200);
+
     cy.get('.pf-c-alert__action > .pf-c-button').click();
   });
 
   it('Launch engagement', () => {
     cy.server();
-    cy.route({
-      method: 'PUT',
-      url: 'engagements/customers/NASA/projects/cypressio4',
-    }).as('saveEngagement');
     cy.route({ method: 'PUT', url: 'engagements/launch' }).as(
       'launchEngagement'
     );
