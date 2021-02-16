@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  screen,
+  RenderResult,
+} from '@testing-library/react';
 import { EngagementSummaryEditModal } from '../engagement_summary_edit_modal';
 import { Engagement } from '../../../schemas/engagement';
 import MockDate from 'mockdate';
@@ -220,17 +226,26 @@ describe('Engagement date start field', () => {
     });
   });
 });
-describe('all dates', () => {
-  const Component = () => {
+describe('Engagement Dates', () => {
+  let engagement: Partial<Engagement> = {};
+  let view: RenderResult;
+  const Component = ({
+    currentChanges = {},
+    currentEngagement = engagement,
+    updateEngagementFormField = (f, v) => (engagement[f] = v),
+  }: {
+    currentChanges?: Partial<Engagement>;
+    isLaunched?: boolean;
+    currentEngagement?: Partial<Engagement>;
+    updateEngagementFormField?: (f, v) => void;
+  }) => {
     return (
       <MemoryRouter>
         <EngagementContext.Provider
           value={{
-            currentEngagement: {} as Engagement,
-            updateEngagementFormField: (f, v) => {
-              engagement[f] = v;
-            },
-            currentChanges: engagement,
+            currentEngagement,
+            updateEngagementFormField,
+            currentChanges,
           }}
         >
           <EngagementSummaryEditModal
@@ -243,29 +258,38 @@ describe('all dates', () => {
     );
   };
   const dates = ['start_date', 'end_date', 'archive_date'];
-  let engagement: Partial<Engagement> = {};
   beforeEach(() => {
     engagement = {};
   });
   test.each(dates)(
     'If the engagement is not launched, %p can be cleared',
     async currentDate => {
-      await act(async () => {
-        dates.forEach(d => (engagement[d] = new Date(2020, 0, 1)));
-        const inputId = `${currentDate}_input`;
-        const view = render(<Component />);
-        const input = await view.findByTestId(inputId);
-        fireEvent.change(input, { target: { value: '' } });
-        view.rerender(<Component />);
-        expect(await view.findByTestId(inputId)).toHaveValue('');
-      });
+      dates.forEach(d => (engagement[d] = new Date(2020, 0, 1)));
+      view = render(<Component />);
+      const inputId = `${currentDate}_input`;
+      const input = await view.findByTestId(inputId);
+      fireEvent.change(input, { target: { value: '' } });
+      view.rerender(<Component />);
+      expect(await view.findByTestId(inputId)).toHaveValue('');
+      expect(engagement[currentDate]).toBe(undefined);
     }
   );
+  test('If the engagement is launched, the end date cannot be set to the past. However, the end date can be set to today', async () => {
+    const props = {
+      currentEngagement: { launch: {} },
+      currentChanges: engagement,
+    };
+    view = render(<Component {...props} />);
+    const getInput = () => view.findByTestId('end_date_input');
+    await fireEvent.change(await getInput(), {
+      target: { value: '2000-01-01' },
+    });
+    view.rerender(<Component {...props} />);
+
+    expect(await getInput()).toHaveValue('');
+  });
 });
 describe('End date field', () => {
-  test('If the engagement is launched, the end date cannot be set to the past. The end date can be set to today', async () => {
-    expect(true).toBe(false);
-  });
   test('by default, the archive date is equal to the end date + the default grace period', async () => {
     expect(true).toBe(false);
   });
