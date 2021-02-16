@@ -41,9 +41,9 @@ export interface IEngagementContext {
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
-  updateEngagementFormField: (
-    field: keyof Engagement,
-    value: any,
+  updateEngagementFormField: <T extends keyof Engagement>(
+    field: T,
+    value: Engagement[T],
     group?: EngagementGroupings
   ) => void;
   currentChanges: Engagement;

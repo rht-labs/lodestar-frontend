@@ -9,7 +9,7 @@ import { CalendarAltIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import {
-  getFormattedDate,
+  formatUtcDateForPF,
   parseDatePickerDate,
 } from '../../common/patternfly_date_adapter';
 import startOfToday from 'date-fns/startOfToday';
@@ -72,7 +72,7 @@ export function EngagementStartEndDateFormField() {
             id="start_date"
             type="date"
             aria-label="The start date."
-            value={getFormattedDate(startDate) ?? ''}
+            value={formatUtcDateForPF(startDate) ?? ''}
             onChange={e => setStartDate(parseDatePickerDate(e))}
             data-cy={'start_date_input'}
           />
@@ -83,8 +83,8 @@ export function EngagementStartEndDateFormField() {
             type="date"
             aria-label="The end date"
             data-testid="end_date_input"
-            value={getFormattedDate(endDate) ?? ''}
-            min={getFormattedDate(
+            value={formatUtcDateForPF(endDate) ?? ''}
+            min={formatUtcDateForPF(
               max([startOfToday(), startDate ?? startOfToday()])
             )}
             onChange={e => {
@@ -118,14 +118,14 @@ export function EngagementStartEndDateFormField() {
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
-            value={getFormattedDate(archiveDate)}
+            value={formatUtcDateForPF(archiveDate)}
             onChange={e => {
               const parsedDate = parseDatePickerDate(e);
               validate('archive_date')(parsedDate);
               setArchiveDate(parsedDate);
             }}
-            min={getFormattedDate(endDate)}
-            max={getFormattedDate(getMaxRetirementDate())}
+            min={formatUtcDateForPF(endDate)}
+            max={formatUtcDateForPF(getMaxRetirementDate())}
           />
         </InputGroup>
       </FormGroup>

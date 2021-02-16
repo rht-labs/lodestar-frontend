@@ -23,9 +23,9 @@ import {
 } from '../../context/engagement_context/engagement_context';
 
 export interface EngagementSummaryEditModalProps {
-  engagement: Engagement;
+  engagement: Partial<Engagement>;
   isOpen: boolean;
-  onSave: (engagement: Engagement) => void;
+  onSave: (engagement: Partial<Engagement>) => void;
   onClose: () => void;
 }
 export function EngagementSummaryEditModal(

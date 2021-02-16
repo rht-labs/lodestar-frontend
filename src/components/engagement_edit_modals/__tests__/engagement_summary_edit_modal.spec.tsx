@@ -6,7 +6,11 @@ import MockDate from 'mockdate';
 import { MemoryRouter } from 'react-router';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { act } from 'react-dom/test-utils';
-import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import {
+  EngagementContext,
+  EngagementProvider,
+} from '../../../context/engagement_context/engagement_context';
+import { EngagementStartEndDateFormField } from '../../engagement_form_fields/engagement_dates';
 
 describe('Engagement Summary edit modal', () => {
   test('matches snapshot', async () => {
@@ -53,22 +57,22 @@ describe('Engagement Summary edit modal', () => {
   });
 });
 
-const Component = ({
-  spy = jest.fn(),
-  engagement = Engagement.fromFake(true),
-}) => (
-  <TestStateWrapper>
-    <EngagementContext.Provider value={{ updateEngagementFormField: spy }}>
-      <EngagementSummaryEditModal
-        engagement={engagement}
-        isOpen={true}
-        onClose={() => {}}
-        onSave={() => {}}
-      />
-    </EngagementContext.Provider>
-  </TestStateWrapper>
-);
 describe('timezone select', () => {
+  const Component = ({
+    spy = jest.fn(),
+    engagement = Engagement.fromFake(true),
+  }) => (
+    <TestStateWrapper>
+      <EngagementContext.Provider value={{ updateEngagementFormField: spy }}>
+        <EngagementSummaryEditModal
+          engagement={engagement}
+          isOpen={true}
+          onClose={() => {}}
+          onSave={() => {}}
+        />
+      </EngagementContext.Provider>
+    </TestStateWrapper>
+  );
   test('exists in the edit modal', async () => {
     await act(async () => {
       const view = render(<Component />);
@@ -140,22 +144,135 @@ describe('engagement dates', () => {
       }
     });
   });
-  test('start date can be set to any date', async () => {
+});
+describe('Engagement date start field', () => {
+  let isLaunched: boolean;
+  let engagement: Engagement;
+  let calledChange;
+  function resetValues() {
+    calledChange = null;
+    engagement = {} as Engagement;
+    isLaunched = false;
+  }
+  beforeEach(() => {
+    resetValues();
+  });
+  const Component = () => {
+    calledChange = jest.fn();
+
+    return (
+      <MemoryRouter>
+        <EngagementContext.Provider
+          value={{
+            currentEngagement: {
+              launch: isLaunched ? { launched_by: 'a test' } : null,
+            } as Engagement,
+            updateEngagementFormField: (f, v) => {
+              calledChange();
+              engagement[f] = v;
+            },
+            currentChanges: engagement,
+          }}
+        >
+          <EngagementSummaryEditModal
+            isOpen={true}
+            onSave={() => {}}
+            onClose={() => {}}
+          />
+        </EngagementContext.Provider>
+      </MemoryRouter>
+    );
+  };
+  test('when an engagement has been launched, the start date can be set to any date', async () => {
+    await act(async () => {
+      engagement = {
+        end_date: new Date(),
+        archive_date: new Date(),
+      } as Engagement;
+      isLaunched = true;
+      let view = render(<Component />);
+      await fireEvent.change(await view.findByTestId('start_date_input'), {
+        target: { value: '2000-05-01' },
+      });
+      expect(calledChange).toHaveBeenCalled();
+      view.rerender(<Component />);
+      expect(await view.findByTestId('start_date_input')).toHaveValue(
+        '2000-05-01'
+      );
+    });
+  });
+  test('when an engagement has NOT been launched, the start date can be set to any date', async () => {
+    await act(async () => {
+      engagement = {
+        end_date: new Date(),
+        archive_date: new Date(),
+      } as Engagement;
+      isLaunched = false;
+      let view = render(<Component />);
+      await fireEvent.change(await view.findByTestId('start_date_input'), {
+        target: { value: '2000-05-01' },
+      });
+      expect(calledChange).toHaveBeenCalled();
+      view.rerender(<Component />);
+      expect(await view.findByTestId('start_date_input')).toHaveValue(
+        '2000-05-01'
+      );
+    });
+  });
+});
+describe('all dates', () => {
+  const Component = () => {
+    return (
+      <MemoryRouter>
+        <EngagementContext.Provider
+          value={{
+            currentEngagement: {} as Engagement,
+            updateEngagementFormField: (f, v) => {
+              engagement[f] = v;
+            },
+            currentChanges: engagement,
+          }}
+        >
+          <EngagementSummaryEditModal
+            isOpen={true}
+            onSave={() => {}}
+            onClose={() => {}}
+          />
+        </EngagementContext.Provider>
+      </MemoryRouter>
+    );
+  };
+  const dates = ['start_date', 'end_date', 'archive_date'];
+  let engagement: Partial<Engagement> = {};
+  beforeEach(() => {
+    engagement = {};
+  });
+  test.each(dates)(
+    'If the engagement is not launched, %p can be cleared',
+    async currentDate => {
+      await act(async () => {
+        dates.forEach(d => (engagement[d] = new Date(2020, 0, 1)));
+        const inputId = `${currentDate}_input`;
+        const view = render(<Component />);
+        const input = await view.findByTestId(inputId);
+        fireEvent.change(input, { target: { value: '' } });
+        view.rerender(<Component />);
+        expect(await view.findByTestId(inputId)).toHaveValue('');
+      });
+    }
+  );
+});
+describe('End date field', () => {
+  test('If the engagement is launched, the end date cannot be set to the past. The end date can be set to today', async () => {
     expect(true).toBe(false);
   });
   test('by default, the archive date is equal to the end date + the default grace period', async () => {
     expect(true).toBe(false);
   });
-  test('Archive date can be cahnged to any date after the end date up to the max grace period', async () => {
+  test('Archive date can be changed to any date after the end date up to the max grace period', async () => {
     expect(true).toBe(false);
   });
   test('If you change the end date, the archive date is the end date + the previous difference between the archive date and the end date, not to exceed the max grace period', async () => {
-    expect(true).toBe(false);
-  });
-  test('If the engagement is not launched, any date can be cleared', async () => {
-    expect(true).toBe(false);
-  });
-  test('If the engagement is launched, the end date cannot be set to the past. The end date can be set to today', async () => {
     expect(true).toBe(false);
   });
   test('If the engagement is launched, the archive date can be set to today, but not the past (same as above)', async () => {
