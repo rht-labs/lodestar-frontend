@@ -61,8 +61,8 @@ export interface IEngagementContext {
   engagementFormConfig?: EngagementFormConfig;
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
-  fetchCategories: () => void;
-  categories?: EngagementCategory[];
+  fetchAvailableCategories: () => void;
+  availableCategories?: EngagementCategory[];
 }
 
 export enum EngagementGroupings {
@@ -73,6 +73,7 @@ export enum EngagementGroupings {
   users = 'Engagement Users',
   artifacts = 'Engagement Artifacts',
   activityHistory = 'Activity History',
+  categories = 'Engagement Categories',
 }
 
 export type CreateEngagementParams = Pick<
@@ -116,7 +117,9 @@ export const EngagementProvider = ({
   engagementFormConfig: EngagementFormConfig;
 }) => {
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [categories, setCategories] = useState<EngagementCategory[]>(undefined);
+  const [availableCategories, setAvailableCategories] = useState<
+    EngagementCategory[]
+  >(undefined);
   const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -623,11 +626,11 @@ export const EngagementProvider = ({
     [engagementService, _deleteEngagement, feedbackContext, _handleErrors]
   );
 
-  const fetchCategories = useCallback(async () => {
+  const fetchAvailableCategories = useCallback(async () => {
     try {
       // feedbackContext.showLoader();
       const categories = await categoryService.fetchCategories();
-      setCategories(categories);
+      setAvailableCategories(categories);
       // feedbackContext.hideLoader();
     } catch (e) {
       try {
@@ -655,8 +658,8 @@ export const EngagementProvider = ({
         deleteEngagement,
         saveEngagement,
         launchEngagement,
-        fetchCategories,
-        categories,
+        fetchAvailableCategories,
+        availableCategories,
         currentChanges: {
           ...currentEngagement,
           ...currentEngagementChanges,
