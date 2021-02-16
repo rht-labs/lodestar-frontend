@@ -72,7 +72,7 @@ export function OpenShiftClusterEditModal({
   };
 
   const canSaveEnvironment = (): boolean => {
-    const isSubdomainReady = subdomainCheckLoading || !isUnique;
+    const isSubdomainReady = !subdomainCheckLoading && isUnique;
     if (isEngagementLaunched) {
       return hasRequiredFields(hostingEnvironment) && isSubdomainReady;
     } else {
