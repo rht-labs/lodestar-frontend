@@ -12,6 +12,7 @@ import { Engagement } from '../../../schemas/engagement';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { ServiceProviderContext } from '../../../context/service_provider_context/service_provider_context';
+import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 
 describe('Hosting Environment edit modal', () => {
   test('matches snapshot', async () => {
@@ -134,5 +135,42 @@ describe('Hosting Environment edit modal', () => {
         'disabled'
       );
     }
+  });
+
+  test('Once an engagement has launched, a hosting environment can be saved if the environment information is complete and valid', async () => {
+    await act(async () => {
+      const Component = ({ env }) => (
+        <TestStateWrapper>
+          <ServiceProviderContext.Consumer>
+            {serviceProviders => (
+              <ServiceProviderContext.Provider
+                value={{
+                  ...serviceProviders,
+                  engagementService: {
+                    ...serviceProviders.engagementService,
+                    checkSubdomainUniqueness: async () => true,
+                  },
+                }}
+              >
+                <OpenShiftClusterEditModal
+                  setHostingEnvironment={() => {}}
+                  onSave={() => {}}
+                  hostingEnvironment={env}
+                  isOpen={true}
+                  isEngagementLaunched={true}
+                  onClose={() => {}}
+                />
+              </ServiceProviderContext.Provider>
+            )}
+          </ServiceProviderContext.Consumer>
+        </TestStateWrapper>
+      );
+      const view = render(
+        <Component env={HostingEnvironment.fromFake(true)} />
+      );
+      expect(await view.findByTestId('oc-edit-save')).not.toHaveAttribute(
+        'disabled'
+      );
+    });
   });
 });
