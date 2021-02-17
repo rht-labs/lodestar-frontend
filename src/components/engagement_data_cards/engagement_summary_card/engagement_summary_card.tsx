@@ -73,12 +73,12 @@ export function EngagementSummaryCard() {
           <GridItem md={12} lg={6}>
             <Grid hasGutter>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Company" dataCy={'company_label'}>
+                <TitledDataPoint title="Client Name" dataCy={'company_label'}>
                   {currentEngagement?.customer_name}
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Project" dataCy={'project_label'}>
+                <TitledDataPoint title="Engagement Name" dataCy={'project_label'}>
                   {currentEngagement?.project_name}
                 </TitledDataPoint>
               </GridItem>
@@ -112,7 +112,7 @@ export function EngagementSummaryCard() {
                   />
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={6} lg={4}>
+              <GridItem md={8} lg={6}>
                 <div data-testid="timezone_label">
                   <TitledDataPoint
                     title="Timezone"
@@ -123,28 +123,29 @@ export function EngagementSummaryCard() {
                   </TitledDataPoint>
                 </div>
               </GridItem>
-              <GridItem md={12}>
-                <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
-                  <>
-                    {currentEngagement?.use_cases?.map?.(useCase => (
-                      <p key={useCase.id ?? useCase.description}>
-                        {useCase.description}
-                      </p>
-                    ))}
-                  </>
-                </TitledDataPoint>
-              </GridItem>
-              <GridItem md={12} lg={4}>
-                <TitledDataPoint
-                  title="Description"
-                  dataCy={'description_label'}
-                >
-                  <span style={{ whiteSpace: 'pre-line' }}>
-                    {currentEngagement?.description}
-                  </span>
-                </TitledDataPoint>
-              </GridItem>
             </Grid>
+          </GridItem>
+          <GridItem md={12} lg={6}>
+            <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
+              <>
+                {currentEngagement?.use_cases?.map?.(useCase => (
+                  <p key={useCase.id ?? useCase.description}>
+                    {useCase.description}
+                  </p>
+                ))}
+              </>
+            </TitledDataPoint>
+          </GridItem>
+
+          <GridItem span={12}>
+            <TitledDataPoint
+              title="Description"
+              dataCy={'description_label'}
+            >
+                <span style={{ whiteSpace: 'pre-line' }}>
+                  {currentEngagement?.description}
+                </span>
+            </TitledDataPoint>
           </GridItem>
         </Grid>
       </DataCard>
