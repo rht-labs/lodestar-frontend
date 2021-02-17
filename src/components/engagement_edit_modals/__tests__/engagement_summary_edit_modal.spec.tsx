@@ -16,7 +16,8 @@ import {
   EngagementContext,
   EngagementProvider,
 } from '../../../context/engagement_context/engagement_context';
-import { EngagementStartEndDateFormField } from '../../engagement_form_fields/engagement_dates';
+import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { EngagementConfigContext } from '../../../context/engagement_config_context/engagement_config_context';
 
 describe('Engagement Summary edit modal', () => {
   test('matches snapshot', async () => {
@@ -274,25 +275,67 @@ describe('Engagement Dates', () => {
       expect(engagement[currentDate]).toBe(undefined);
     }
   );
-  test('If the engagement is launched, the end date cannot be set to the past. However, the end date can be set to today', async () => {
-    const props = {
-      currentEngagement: { launch: {} },
-      currentChanges: engagement,
-    };
-    view = render(<Component {...props} />);
-    const getInput = () => view.findByTestId('end_date_input');
-    await fireEvent.change(await getInput(), {
-      target: { value: '2000-01-01' },
-    });
-    view.rerender(<Component {...props} />);
+  //   test('If the engagement is launched, selecting an "end_date" in the past will set the end date to the greater of today or the start date', async () => {
+  //     const props = {
+  //       currentEngagement: { launch: {} },
+  //       currentChanges: engagement,
+  //     };
+  //     view = render(<Component {...props} />);
+  //     const getInput = () => view.findByTestId('end_date_input');
+  //     await fireEvent.change(await getInput(), {
+  //       target: { value: '2000-01-01' },
+  //     });
+  //     view.rerender(<Component {...props} />);
 
-    expect(await getInput()).toHaveValue('');
+  //     expect(await getInput()).toHaveValue('');
+  //   });
+  test('by default, the archive date is equal to the end date + the default grace period', async () => {
+    const Component = ({
+      engagementFormConfig,
+    }: {
+      engagementFormConfig: EngagementFormConfig;
+    }) => {
+      return (
+        <MemoryRouter>
+          <EngagementConfigContext.Provider value={engagementFormConfig}>
+            <EngagementConfigContext.Consumer>
+              {config => {
+                return (
+                  <EngagementProvider
+                    engagementFormConfig={engagementFormConfig}
+                    authContext={{}}
+                    categoryService={{}}
+                    engagementService={{}}
+                    feedbackContext={{}}
+                  >
+                    <EngagementSummaryEditModal
+                      isOpen={true}
+                    ></EngagementSummaryEditModal>
+                  </EngagementProvider>
+                );
+              }}
+            </EngagementConfigContext.Consumer>
+          </EngagementConfigContext.Provider>
+        </MemoryRouter>
+      );
+    };
+    await act(async () => {
+      const fakedConfig = {
+        ...EngagementFormConfig.fromFake(),
+        logistics_options: { env_default_grace_period: 90 },
+      };
+      const view = render(<Component engagementFormConfig={fakedConfig} />);
+      await fireEvent.change(await view.findByTestId('end_date_input'), {
+        target: { value: '2020-01-01' },
+      });
+
+      expect(await view.findByTestId('archive_date_input')).toHaveValue(
+        '2020-03-30'
+      );
+    });
   });
 });
 describe('End date field', () => {
-  test('by default, the archive date is equal to the end date + the default grace period', async () => {
-    expect(true).toBe(false);
-  });
   test('Archive date can be changed to any date after the end date up to the max grace period', async () => {
     expect(true).toBe(false);
   });
