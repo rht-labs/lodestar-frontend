@@ -66,7 +66,7 @@ Object {
                       data-pf-content="true"
                       style="margin-bottom: 0.1rem;"
                     >
-                      Company
+                      Client Name
                     </h6>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ Object {
                       data-pf-content="true"
                       style="margin-bottom: 0.1rem;"
                     >
-                      Project
+                      Engagement Name
                     </h6>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                  class="pf-l-grid__item pf-m-8-col-on-md pf-m-6-col-on-lg"
                 >
                   <div
                     data-testid="timezone_label"
@@ -170,41 +170,41 @@ Object {
                     </div>
                   </div>
                 </div>
-                <div
-                  class="pf-l-grid__item pf-m-12-col-on-md"
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+            >
+              <div
+                class="pf-c-content"
+                data-cy="use_cases"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
                 >
-                  <div
-                    class="pf-c-content"
-                    data-cy="use_cases"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Use Cases
-                    </h6>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
+                  Use Cases
+                </h6>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item pf-m-12-col"
+            >
+              <div
+                class="pf-c-content"
+                data-cy="description_label"
+              >
+                <h6
+                  class=""
+                  data-pf-content="true"
+                  style="margin-bottom: 0.1rem;"
                 >
-                  <div
-                    class="pf-c-content"
-                    data-cy="description_label"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Description
-                    </h6>
-                    <span
-                      style="white-space: pre-line;"
-                    />
-                  </div>
-                </div>
+                  Description
+                </h6>
+                <span
+                  style="white-space: pre-line;"
+                />
               </div>
             </div>
           </div>
@@ -275,7 +275,7 @@ Object {
                     data-pf-content="true"
                     style="margin-bottom: 0.1rem;"
                   >
-                    Company
+                    Client Name
                   </h6>
                 </div>
               </div>
@@ -291,7 +291,7 @@ Object {
                     data-pf-content="true"
                     style="margin-bottom: 0.1rem;"
                   >
-                    Project
+                    Engagement Name
                   </h6>
                 </div>
               </div>
@@ -360,7 +360,7 @@ Object {
                 </div>
               </div>
               <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                class="pf-l-grid__item pf-m-8-col-on-md pf-m-6-col-on-lg"
               >
                 <div
                   data-testid="timezone_label"
@@ -379,41 +379,41 @@ Object {
                   </div>
                 </div>
               </div>
-              <div
-                class="pf-l-grid__item pf-m-12-col-on-md"
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+          >
+            <div
+              class="pf-c-content"
+              data-cy="use_cases"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
               >
-                <div
-                  class="pf-c-content"
-                  data-cy="use_cases"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Use Cases
-                  </h6>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-12-col-on-md pf-m-4-col-on-lg"
+                Use Cases
+              </h6>
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-12-col"
+          >
+            <div
+              class="pf-c-content"
+              data-cy="description_label"
+            >
+              <h6
+                class=""
+                data-pf-content="true"
+                style="margin-bottom: 0.1rem;"
               >
-                <div
-                  class="pf-c-content"
-                  data-cy="description_label"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Description
-                  </h6>
-                  <span
-                    style="white-space: pre-line;"
-                  />
-                </div>
-              </div>
+                Description
+              </h6>
+              <span
+                style="white-space: pre-line;"
+              />
             </div>
           </div>
         </div>
