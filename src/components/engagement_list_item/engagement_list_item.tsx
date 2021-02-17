@@ -49,7 +49,6 @@ export function EngagementListItem(props: DataCardProps) {
               </Title>
               {engagement.engagement_categories?.length > 0 ? (
                 engagement?.engagement_categories.map(currentChip => (
-                  <div key={currentChip.name}>
                     <Label
                       key={currentChip.name}
                       style={{ marginTop: '1rem', marginRight: '0.5rem' }}
@@ -57,7 +56,6 @@ export function EngagementListItem(props: DataCardProps) {
                     >
                       {currentChip.name}
                     </Label>
-                  </div>
                 ))
               ) : (
                 <></>

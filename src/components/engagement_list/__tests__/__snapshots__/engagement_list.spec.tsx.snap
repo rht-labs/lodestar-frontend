@@ -45,18 +45,16 @@ Object {
               >
                 NASA
               </h4>
-              <div>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-top: 1rem; margin-right: 0.5rem;"
+              >
                 <span
-                  class="pf-c-label pf-m-blue"
-                  style="margin-top: 1rem; margin-right: 0.5rem;"
+                  class="pf-c-label__content"
                 >
-                  <span
-                    class="pf-c-label__content"
-                  >
-                    DO500
-                  </span>
+                  DO500
                 </span>
-              </div>
+              </span>
             </div>
             <div
               class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"
@@ -275,18 +273,16 @@ Object {
             >
               NASA
             </h4>
-            <div>
+            <span
+              class="pf-c-label pf-m-blue"
+              style="margin-top: 1rem; margin-right: 0.5rem;"
+            >
               <span
-                class="pf-c-label pf-m-blue"
-                style="margin-top: 1rem; margin-right: 0.5rem;"
+                class="pf-c-label__content"
               >
-                <span
-                  class="pf-c-label__content"
-                >
-                  DO500
-                </span>
+                DO500
               </span>
-            </div>
+            </span>
           </div>
           <div
             class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"
@@ -562,18 +558,16 @@ Object {
               >
                 NASA
               </h4>
-              <div>
+              <span
+                class="pf-c-label pf-m-blue"
+                style="margin-top: 1rem; margin-right: 0.5rem;"
+              >
                 <span
-                  class="pf-c-label pf-m-blue"
-                  style="margin-top: 1rem; margin-right: 0.5rem;"
+                  class="pf-c-label__content"
                 >
-                  <span
-                    class="pf-c-label__content"
-                  >
-                    DO500
-                  </span>
+                  DO500
                 </span>
-              </div>
+              </span>
             </div>
             <div
               class="pf-l-grid__item pf-m-12-col-on-md pf-m-7-col-on-lg"
