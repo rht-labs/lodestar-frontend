@@ -37,6 +37,7 @@ export function EngagementDetailsViewTemplate({
   const { appConfig } = useConfig();
 
   const { logEvent } = useAnalytics();
+  const { engagementFormConfig } = useEngagements();
 
   return (
     <>
@@ -74,7 +75,11 @@ export function EngagementDetailsViewTemplate({
             <FlexItem>
               <TextContent>
                 <Text component="h3" style={{ marginTop: '0.5rem' }}>
-                  {engagement?.engagement_type}
+                  {
+                    engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
+                      e => e.value === engagement?.engagement_type
+                    )?.label
+                  }
                 </Text>
               </TextContent>
             </FlexItem>
