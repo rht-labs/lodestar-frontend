@@ -49,13 +49,13 @@ Object {
               />
             </div>
             <div
-              class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+              class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
             >
               <div
                 class="pf-l-grid pf-m-gutter"
               >
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                 >
                   <div
                     class="pf-c-content"
@@ -71,7 +71,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                 >
                   <div
                     class="pf-c-content"
@@ -87,7 +87,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                 >
                   <div
                     class="pf-c-content"
@@ -103,7 +103,23 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="created_by_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Created By
+                    </h6>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                 >
                   <div
                     class="pf-c-content"
@@ -119,7 +135,7 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                 >
                   <div
                     class="pf-c-content"
@@ -131,22 +147,6 @@ Object {
                       style="margin-bottom: 0.1rem;"
                     >
                       End Date
-                    </h6>
-                  </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
-                >
-                  <div
-                    class="pf-c-content"
-                    data-cy="created_by_label"
-                  >
-                    <h6
-                      class=""
-                      data-pf-content="true"
-                      style="margin-bottom: 0.1rem;"
-                    >
-                      Created By
                     </h6>
                   </div>
                 </div>
@@ -173,38 +173,46 @@ Object {
               </div>
             </div>
             <div
-              class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
-            >
-              <div
-                class="pf-c-content"
-                data-cy="use_cases"
-              >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
-                >
-                  Use Cases
-                </h6>
-              </div>
-            </div>
-            <div
               class="pf-l-grid__item pf-m-12-col"
             >
               <div
-                class="pf-c-content"
-                data-cy="description_label"
+                class="pf-l-grid pf-m-gutter"
               >
-                <h6
-                  class=""
-                  data-pf-content="true"
-                  style="margin-bottom: 0.1rem;"
+                <div
+                  class="pf-l-grid__item pf-m-12-col"
                 >
-                  Description
-                </h6>
-                <span
-                  style="white-space: pre-line;"
-                />
+                  <div
+                    class="pf-c-content"
+                    data-cy="description_label"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Description
+                    </h6>
+                    <span
+                      style="white-space: pre-line;"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-12-col"
+                >
+                  <div
+                    class="pf-c-content"
+                    data-cy="use_cases"
+                  >
+                    <h6
+                      class=""
+                      data-pf-content="true"
+                      style="margin-bottom: 0.1rem;"
+                    >
+                      Use Cases
+                    </h6>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -258,13 +266,13 @@ Object {
             />
           </div>
           <div
-            class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
+            class="pf-l-grid__item pf-m-12-col-on-md pf-m-12-col-on-lg"
           >
             <div
               class="pf-l-grid pf-m-gutter"
             >
               <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
               >
                 <div
                   class="pf-c-content"
@@ -280,7 +288,7 @@ Object {
                 </div>
               </div>
               <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
               >
                 <div
                   class="pf-c-content"
@@ -296,7 +304,7 @@ Object {
                 </div>
               </div>
               <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
               >
                 <div
                   class="pf-c-content"
@@ -312,7 +320,23 @@ Object {
                 </div>
               </div>
               <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="created_by_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Created By
+                  </h6>
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
               >
                 <div
                   class="pf-c-content"
@@ -328,7 +352,7 @@ Object {
                 </div>
               </div>
               <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
+                class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
               >
                 <div
                   class="pf-c-content"
@@ -340,22 +364,6 @@ Object {
                     style="margin-bottom: 0.1rem;"
                   >
                     End Date
-                  </h6>
-                </div>
-              </div>
-              <div
-                class="pf-l-grid__item pf-m-6-col-on-md pf-m-4-col-on-lg"
-              >
-                <div
-                  class="pf-c-content"
-                  data-cy="created_by_label"
-                >
-                  <h6
-                    class=""
-                    data-pf-content="true"
-                    style="margin-bottom: 0.1rem;"
-                  >
-                    Created By
                   </h6>
                 </div>
               </div>
@@ -382,38 +390,46 @@ Object {
             </div>
           </div>
           <div
-            class="pf-l-grid__item pf-m-12-col-on-md pf-m-6-col-on-lg"
-          >
-            <div
-              class="pf-c-content"
-              data-cy="use_cases"
-            >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
-              >
-                Use Cases
-              </h6>
-            </div>
-          </div>
-          <div
             class="pf-l-grid__item pf-m-12-col"
           >
             <div
-              class="pf-c-content"
-              data-cy="description_label"
+              class="pf-l-grid pf-m-gutter"
             >
-              <h6
-                class=""
-                data-pf-content="true"
-                style="margin-bottom: 0.1rem;"
+              <div
+                class="pf-l-grid__item pf-m-12-col"
               >
-                Description
-              </h6>
-              <span
-                style="white-space: pre-line;"
-              />
+                <div
+                  class="pf-c-content"
+                  data-cy="description_label"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Description
+                  </h6>
+                  <span
+                    style="white-space: pre-line;"
+                  />
+                </div>
+              </div>
+              <div
+                class="pf-l-grid__item pf-m-12-col"
+              >
+                <div
+                  class="pf-c-content"
+                  data-cy="use_cases"
+                >
+                  <h6
+                    class=""
+                    data-pf-content="true"
+                    style="margin-bottom: 0.1rem;"
+                  >
+                    Use Cases
+                  </h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>
