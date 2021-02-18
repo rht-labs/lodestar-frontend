@@ -25,6 +25,34 @@ export interface EngagementDetailViewProps {
   ) => Promise<{ cancel: () => void }>;
   getEngagement: (customer_name, project_name) => Promise<Engagement>;
 }
+export const validatorsWithDateValidators = (
+  validators: FormValidator,
+  dates: Pick<Engagement, 'start_date' | 'end_date'>
+): FormValidator => {
+  return {
+    ...validators,
+    end_date: [
+      ...(validators['end_date'] ?? []),
+      endDate => {
+        const result =
+          dates?.start_date > endDate
+            ? 'End date must be after the start date'
+            : null;
+        return result;
+      },
+    ],
+    archive_date: [
+      ...(validators['archive_date'] ?? []),
+      archiveDate => {
+        const result =
+          archiveDate < dates?.end_date
+            ? 'Archive date must be after the end date'
+            : null;
+        return result;
+      },
+    ],
+  };
+};
 
 export const EngagementDetailView = () => {
   const { project_name, customer_name } = useParams<{
@@ -81,34 +109,13 @@ export const EngagementDetailView = () => {
   } = currentEngagement ?? {};
   const { end_date, start_date } = currentChanges;
 
-  const validatorsWithDateValidators = (): FormValidator => {
-    return {
-      ...validators,
-      end_date: [
-        ...(validators['end_date'] ?? []),
-        endDate => {
-          const result =
-            start_date > endDate
-              ? 'End date must be after the start date'
-              : null;
-          return result;
-        },
-      ],
-      archive_date: [
-        ...(validators['archive_date'] ?? []),
-        archiveDate => {
-          const result =
-            archiveDate < end_date
-              ? 'Archive date must be after the end date'
-              : null;
-          return result;
-        },
-      ],
-    };
-  };
-
   return (
-    <ValidationProvider validators={validatorsWithDateValidators()}>
+    <ValidationProvider
+      validators={validatorsWithDateValidators(validators, {
+        end_date,
+        start_date,
+      })}
+    >
       <EngagementDetailsViewTemplate
         engagement={currentEngagement}
         onSave={saveEngagement}

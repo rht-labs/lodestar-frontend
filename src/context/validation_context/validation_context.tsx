@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Validator } from '../../schemas/validators/validator';
 
 export interface IValidationContext {
@@ -30,7 +30,6 @@ export const ValidationProvider = ({
     if (validationResults?.current?.[fieldName]) {
       return validationResults?.current?.[fieldName];
     }
-    console.log(fieldName, validationResults.current);
     return [];
   };
 

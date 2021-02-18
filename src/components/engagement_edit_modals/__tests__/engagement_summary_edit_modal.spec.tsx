@@ -12,12 +12,13 @@ import MockDate from 'mockdate';
 import { MemoryRouter } from 'react-router';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { act } from 'react-dom/test-utils';
+import { validatorsWithDateValidators } from '../../../routes/engagement_details/engagement_details';
 import {
-  EngagementContext,
-  EngagementProvider,
-} from '../../../context/engagement_context/engagement_context';
+  ValidationContext,
+  ValidationProvider,
+} from '../../../context/validation_context/validation_context';
+import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import { EngagementConfigContext } from '../../../context/engagement_config_context/engagement_config_context';
 
 describe('Engagement Summary edit modal', () => {
   test('matches snapshot', async () => {
@@ -303,7 +304,14 @@ describe('Engagement Summary Edit Modal > Archive Date', () => {
             currentEngagement,
           }}
         >
-          <EngagementSummaryEditModal isOpen={true} />
+          <ValidationProvider
+            validators={validatorsWithDateValidators(
+              {},
+              currentEngagementChanges
+            )}
+          >
+            <EngagementSummaryEditModal isOpen={true} />
+          </ValidationProvider>
         </EngagementContext.Provider>
       </MemoryRouter>
     );
@@ -348,32 +356,48 @@ describe('Engagement Summary Edit Modal > Archive Date', () => {
       );
     });
   });
-  test('save button should be disabled when the engagement is launched and the dates are in an invalid configuration', async () => {
-    const INVALID_CONFIGURATIONS: Array<Pick<
-      Engagement,
-      'start_date' | 'archive_date' | 'end_date'
-    >> = [
+  const INVALID_CONFIGURATIONS: Array<[
+    string,
+    Pick<Engagement, 'start_date' | 'archive_date' | 'end_date'>
+  ]> = [
+    [
+      'End date must be after the start date',
       {
         /// The end date before the start date
         start_date: new Date(2021, 1, 1),
         end_date: new Date(2020, 1, 1),
         archive_date: new Date(2020, 1, 1),
       },
+    ],
+    [
+      'Archive date must be after the end date',
       {
         /// The archive date before the end date
         start_date: new Date(2021, 0, 1),
         end_date: new Date(2021, 0, 3),
         archive_date: new Date(2021, 0, 2),
       },
-    ];
+    ],
+  ];
+  test('save button should be disabled when the engagement is launched and the dates are in an invalid configuration', async () => {
     const view = render(<Component currentEngagement={{ launch: {} }} />);
     for (const invalidConfig of INVALID_CONFIGURATIONS) {
-      engagement = invalidConfig;
+      engagement = invalidConfig[1];
       view.rerender(<Component currentEngagement={{ launch: {} }} />);
 
       expect(
         await view.findByTestId('engagement-summary-save')
       ).toHaveAttribute('disabled');
+    }
+  });
+  test('validation messages should be shown when the dates are in an invalid configuration', async () => {
+    const view = render(<Component />);
+    for (const invalidConfig of INVALID_CONFIGURATIONS) {
+      engagement = invalidConfig[1];
+      view.rerender(<Component />);
+      await waitFor(() =>
+        expect(screen.getByText(invalidConfig[0])).toBeDefined()
+      );
     }
   });
 });
