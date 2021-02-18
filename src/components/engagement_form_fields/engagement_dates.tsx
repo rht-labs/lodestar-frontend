@@ -68,9 +68,7 @@ export function EngagementStartEndDateFormField() {
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
-            isDisabled={
-              !hasFeature(APP_FEATURES.writer) || !!currentEngagement?.launch
-            }
+            isDisabled={!hasFeature(APP_FEATURES.writer)}
             data-testid={'start_date_input'}
             name="start_date"
             id="start_date"
