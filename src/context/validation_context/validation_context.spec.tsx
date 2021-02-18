@@ -22,11 +22,6 @@ describe('Validation Context Hook', () => {
     )).not.toThrowError();
   });
 
-  test('by default, form validation errors is an empty object', () => {
-    const { result } = getHook();
-    expect(result.current.validationResults).toEqual({});
-  });
-
   test('getting a validation result for a field that has not been validated returns an empty array', () => {
     const { result } = getHook();
     expect(result.current.getValidationResult('hello')).toEqual([]);

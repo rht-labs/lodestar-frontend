@@ -129,6 +129,18 @@ export abstract class Engagement {
         a?.project_name === b?.customer_name)
     );
   }
+  static areDatesValid = (start?: Date, end?: Date, archive?: Date) => {
+    if (!start || !end || !archive) {
+      return false;
+    }
+    if (end < start) {
+      return false;
+    }
+    if (archive < end) {
+      return false;
+    }
+    return true;
+  };
   static fromFake(
     staticData = false,
     options: Partial<FakedEngagementOptions> = {}
@@ -138,7 +150,7 @@ export abstract class Engagement {
       'start_date' | 'end_date' | 'archive_date' | 'launch'
     > => {
       const defaults = {
-        archive_date: staticData ? new Date(2020, 6, 30) : faker.date.recent(),
+        archive_date: staticData ? new Date(2020, 6, 30) : faker.date.future(),
         end_date: staticData ? new Date(2020, 6, 1) : faker.date.future(),
         start_date: staticData ? new Date(2020, 5, 1) : faker.date.recent(),
       };

@@ -88,9 +88,26 @@ describe('Engagement Context', () => {
     await act(async () => {
       const { result, waitForNextUpdate, waitFor } = getHook();
       await waitForNextUpdate;
-      result.current.setCurrentEngagement(Engagement.fromFake());
+      const engagement = Engagement.fromFake(true);
+      result.current.setCurrentEngagement(engagement);
+
       await waitFor(() => expect(result.current.isLaunchable).toBeTruthy());
       expect(result.current.isLaunchable).toBeTruthy();
+    });
+  });
+
+  test('the form is not launchable if the engagement fields are complete, but the dates are invalid', async () => {
+    const engagement = Engagement.fromFake(true);
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement({
+        ...engagement,
+        start_date: new Date(2020, 0, 1),
+        end_date: new Date(2021, 0, 1),
+      });
+      await waitForNextUpdate();
+      expect(result.current.isLaunchable).toBe(false);
     });
   });
 
