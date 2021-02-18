@@ -70,39 +70,24 @@ export function EngagementSummaryCard() {
           <GridItem md={12} lg={12} style={{ marginBottom: '1rem' }}>
             <EngagementStatusText status={status} />
           </GridItem>
-          <GridItem md={12} lg={6}>
+          <GridItem md={12} lg={12}>
             <Grid hasGutter>
-              <GridItem md={6} lg={4}>
+              <GridItem md={6} lg={3}>
                 <TitledDataPoint title="Client Name" dataCy={'company_label'}>
                   {currentEngagement?.customer_name}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={6} lg={4}>
+              <GridItem md={6} lg={3}>
                 <TitledDataPoint title="Engagement Name" dataCy={'project_label'}>
                   {currentEngagement?.project_name}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={6} lg={4}>
+              <GridItem md={6} lg={3}>
                 <TitledDataPoint title="Location" dataCy={'location_label'}>
                   {currentEngagement?.location}
                 </TitledDataPoint>
               </GridItem>
-
-              <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Start Date" dataCy={'start_date_label'}>
-                  {currentEngagement?.start_date
-                    ? formatUtcDate(currentEngagement?.start_date)
-                    : null}
-                </TitledDataPoint>
-              </GridItem>
-              <GridItem md={6} lg={4}>
-                <TitledDataPoint title="End Date" dataCy={'end_date_label'}>
-                  {currentEngagement?.end_date
-                    ? formatUtcDate(currentEngagement?.end_date)
-                    : null}
-                </TitledDataPoint>
-              </GridItem>
-              <GridItem md={6} lg={4}>
+              <GridItem md={6} lg={3}>
                 <TitledDataPoint title="Created By" dataCy={'created_by_label'}>
                   <DisplayCreatedByName
                     userFromServer={
@@ -110,6 +95,20 @@ export function EngagementSummaryCard() {
                     }
                     lastUpdatedBy={currentEngagement?.last_update_by_name}
                   />
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={3}>
+                <TitledDataPoint title="Start Date" dataCy={'start_date_label'}>
+                  {currentEngagement?.start_date
+                    ? formatUtcDate(currentEngagement?.start_date)
+                    : null}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={3}>
+                <TitledDataPoint title="End Date" dataCy={'end_date_label'}>
+                  {currentEngagement?.end_date
+                    ? formatUtcDate(currentEngagement?.end_date)
+                    : null}
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={8} lg={6}>
@@ -125,27 +124,30 @@ export function EngagementSummaryCard() {
               </GridItem>
             </Grid>
           </GridItem>
-          <GridItem md={12} lg={6}>
-            <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
-              <>
-                {currentEngagement?.use_cases?.map?.(useCase => (
-                  <p key={useCase.id ?? useCase.description}>
-                    {useCase.description}
-                  </p>
-                ))}
-              </>
-            </TitledDataPoint>
-          </GridItem>
-
           <GridItem span={12}>
-            <TitledDataPoint
-              title="Description"
-              dataCy={'description_label'}
-            >
-                <span style={{ whiteSpace: 'pre-line' }}>
-                  {currentEngagement?.description}
-                </span>
-            </TitledDataPoint>
+            <Grid hasGutter>
+              <GridItem span={12}>
+                <TitledDataPoint
+                  title="Description"
+                  dataCy={'description_label'}
+                >
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {currentEngagement?.description}
+                    </span>
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem span={12}>
+                <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
+                  <>
+                    {currentEngagement?.use_cases?.map?.(useCase => (
+                      <p key={useCase.id ?? useCase.description}>
+                        {useCase.description}
+                      </p>
+                    ))}
+                  </>
+                </TitledDataPoint>
+              </GridItem>
+            </Grid>
           </GridItem>
         </Grid>
       </DataCard>
