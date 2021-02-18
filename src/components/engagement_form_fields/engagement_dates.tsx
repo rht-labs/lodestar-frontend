@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FormGroup,
   InputGroup,
@@ -21,6 +21,7 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../context/engagement_context/engagement_context';
+import { differenceInDays } from 'date-fns';
 
 export function EngagementStartEndDateFormField() {
   const { engagementFormConfig, currentEngagement } = useEngagements();
@@ -47,6 +48,9 @@ export function EngagementStartEndDateFormField() {
   };
 
   const { hasFeature } = useFeatures();
+  validate('end_date')(endDate);
+  validate('start_date')(startDate);
+  validate('archive_date')(archiveDate);
   return (
     <>
       <FormGroup
@@ -73,7 +77,9 @@ export function EngagementStartEndDateFormField() {
             type="date"
             aria-label="The start date."
             value={formatUtcDateForPF(startDate) ?? ''}
-            onChange={e => setStartDate(parseDatePickerDate(e))}
+            onChange={e => {
+              setStartDate(parseDatePickerDate(e));
+            }}
             data-cy={'start_date_input'}
           />
           <TextInput
@@ -83,6 +89,9 @@ export function EngagementStartEndDateFormField() {
             type="date"
             aria-label="The end date"
             data-testid="end_date_input"
+            validated={
+              getValidationResult('end_date').length > 0 ? 'error' : 'default'
+            }
             value={formatUtcDateForPF(endDate) ?? ''}
             min={formatUtcDateForPF(
               max([startOfToday(), startDate ?? startOfToday()])
@@ -93,6 +102,23 @@ export function EngagementStartEndDateFormField() {
               }
               const parsedDate = parseDatePickerDate(e);
               validate('end_date')(parsedDate);
+              if (!currentEngagement?.archive_date) {
+                if (archiveDate && endDate) {
+                  const delta = differenceInDays(archiveDate, endDate);
+                  setArchiveDate(addDays(parsedDate, delta));
+                } else if (
+                  !!engagementFormConfig?.logistics_options
+                    ?.env_default_grace_period
+                ) {
+                  setArchiveDate(
+                    addDays(
+                      parsedDate,
+                      engagementFormConfig.logistics_options
+                        .env_default_grace_period
+                    )
+                  );
+                }
+              }
               setEndDate(parsedDate);
             }}
             data-cy={'end_date_input'}
@@ -108,6 +134,10 @@ export function EngagementStartEndDateFormField() {
           </span>
         }
         fieldId="retirement"
+        helperTextInvalid={getValidationResult('archive_date')}
+        validated={
+          getValidationResult('archive_date').length > 0 ? 'error' : 'default'
+        }
       >
         <InputGroup label="Retirement Date">
           <TextInput
@@ -115,13 +145,18 @@ export function EngagementStartEndDateFormField() {
             data-testid="archive_date_input"
             isDisabled={!hasFeature(APP_FEATURES.writer)}
             data-cy={'retirement_date_input'}
+            validated={
+              getValidationResult('archive_date').length > 0
+                ? 'error'
+                : 'default'
+            }
             type="date"
             name="archive_date"
             aria-label="Environment Retirement Date"
             value={formatUtcDateForPF(archiveDate)}
             onChange={e => {
               const parsedDate = parseDatePickerDate(e);
-              validate('archive_date')(parsedDate);
+
               setArchiveDate(parsedDate);
             }}
             min={formatUtcDateForPF(endDate)}

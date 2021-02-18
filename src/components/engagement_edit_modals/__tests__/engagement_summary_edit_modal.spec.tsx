@@ -231,8 +231,8 @@ describe('Engagement Dates', () => {
   let engagement: Partial<Engagement> = {};
   let view: RenderResult;
   const Component = ({
-    currentChanges = {},
-    currentEngagement = engagement,
+    currentChanges = engagement,
+    currentEngagement = {},
     updateEngagementFormField = (f, v) => (engagement[f] = v),
   }: {
     currentChanges?: Partial<Engagement>;
@@ -265,59 +265,71 @@ describe('Engagement Dates', () => {
   test.each(dates)(
     'If the engagement is not launched, %p can be cleared',
     async currentDate => {
-      dates.forEach(d => (engagement[d] = new Date(2020, 0, 1)));
-      view = render(<Component />);
+      const currentEngagement = {};
+      dates.forEach(d => (currentEngagement[d] = new Date(2020, 0, 1)));
+      view = render(<Component currentEngagement={currentEngagement} />);
       const inputId = `${currentDate}_input`;
       const input = await view.findByTestId(inputId);
       fireEvent.change(input, { target: { value: '' } });
-      view.rerender(<Component />);
+      view.rerender(<Component currentEngagement={currentEngagement} />);
       expect(await view.findByTestId(inputId)).toHaveValue('');
       expect(engagement[currentDate]).toBe(undefined);
     }
   );
-  //   test('If the engagement is launched, selecting an "end_date" in the past will set the end date to the greater of today or the start date', async () => {
-  //     const props = {
-  //       currentEngagement: { launch: {} },
-  //       currentChanges: engagement,
-  //     };
-  //     view = render(<Component {...props} />);
-  //     const getInput = () => view.findByTestId('end_date_input');
-  //     await fireEvent.change(await getInput(), {
-  //       target: { value: '2000-01-01' },
-  //     });
-  //     view.rerender(<Component {...props} />);
+});
 
-  //     expect(await getInput()).toHaveValue('');
-  //   });
-  test('by default, the archive date is equal to the end date + the default grace period', async () => {
-    const Component = ({
-      engagementFormConfig,
-    }: {
-      engagementFormConfig: EngagementFormConfig;
-    }) => {
-      return (
-        <MemoryRouter>
-          <EngagementConfigContext.Provider value={engagementFormConfig}>
-            <EngagementConfigContext.Consumer>
-              {config => {
-                return (
-                  <EngagementProvider
-                    engagementFormConfig={engagementFormConfig}
-                    authContext={{}}
-                    categoryService={{}}
-                    engagementService={{}}
-                    feedbackContext={{}}
-                  >
-                    <EngagementSummaryEditModal
-                      isOpen={true}
-                    ></EngagementSummaryEditModal>
-                  </EngagementProvider>
-                );
-              }}
-            </EngagementConfigContext.Consumer>
-          </EngagementConfigContext.Provider>
-        </MemoryRouter>
-      );
+describe('Engagement Summary Edit Modal > Archive Date', () => {
+  let engagement: Partial<Engagement> = {};
+  let updateEngagement = (f, v) => (engagement[f] = v);
+  beforeEach(() => {
+    engagement = {};
+  });
+  const Component = ({
+    engagementFormConfig = EngagementFormConfig.fromFake(),
+    currentEngagement,
+    currentEngagementChanges = engagement,
+  }: {
+    engagementFormConfig: EngagementFormConfig;
+    currentEngagement: Partial<Engagement>;
+    currentEngagementChanges: Partial<Engagement>;
+  }) => {
+    return (
+      <MemoryRouter>
+        <EngagementContext.Provider
+          value={{
+            engagementFormConfig,
+            updateEngagementFormField: updateEngagement,
+            currentChanges: currentEngagementChanges,
+            currentEngagement,
+          }}
+        >
+          <EngagementSummaryEditModal isOpen={true} />
+        </EngagementContext.Provider>
+      </MemoryRouter>
+    );
+  };
+  test('if the archive date is undefined, and the end date is set, the archive date should be set to the end date plus the default grace period', async () => {
+    const fakedConfig = {
+      ...EngagementFormConfig.fromFake(),
+      logistics_options: { env_default_grace_period: 90 },
+    };
+    const view = render(<Component engagementFormConfig={fakedConfig} />);
+
+    await fireEvent.change(await view.findByTestId('end_date_input'), {
+      target: { value: '2020-01-01' },
+    });
+    view.rerender(
+      <Component engagementFormConfig={fakedConfig} engagement={engagement} />
+    );
+
+    expect(await view.findByTestId('archive_date_input')).toHaveValue(
+      '2020-03-30'
+    );
+  });
+  test('if the archive date is defined, but not committed to the backend, and the end date is set, the archive date should be set to the delta of the previous end date and archive date', async () => {
+    engagement = {
+      archive_date: new Date(2020, 0, 14),
+      end_date: new Date(2020, 0, 1),
     };
     await act(async () => {
       const fakedConfig = {
@@ -325,27 +337,43 @@ describe('Engagement Dates', () => {
         logistics_options: { env_default_grace_period: 90 },
       };
       const view = render(<Component engagementFormConfig={fakedConfig} />);
+
       await fireEvent.change(await view.findByTestId('end_date_input'), {
-        target: { value: '2020-01-01' },
+        target: { value: '2020-02-01' },
       });
+      view.rerender(<Component engagementFormConfig={fakedConfig} />);
 
       expect(await view.findByTestId('archive_date_input')).toHaveValue(
-        '2020-03-30'
+        '2020-02-14'
       );
     });
   });
-});
-describe('End date field', () => {
-  test('Archive date can be changed to any date after the end date up to the max grace period', async () => {
-    expect(true).toBe(false);
-  });
-  test('If you change the end date, the archive date is the end date + the previous difference between the archive date and the end date, not to exceed the max grace period', async () => {
-    expect(true).toBe(false);
-  });
-  test('If the engagement is launched, the archive date can be set to today, but not the past (same as above)', async () => {
-    expect(true).toBe(false);
-  });
-  test('If the archive and end date are set, then the end date is cleared, then the end date is set again, the archive date is set to the default suggested value (end date + grace period, not to exceed max grace)', async () => {
-    expect(true).toBe(false);
+  test('save button should be disabled when the engagement is launched and the dates are in an invalid configuration', async () => {
+    const INVALID_CONFIGURATIONS: Array<Pick<
+      Engagement,
+      'start_date' | 'archive_date' | 'end_date'
+    >> = [
+      {
+        /// The end date before the start date
+        start_date: new Date(2021, 1, 1),
+        end_date: new Date(2020, 1, 1),
+        archive_date: new Date(2020, 1, 1),
+      },
+      {
+        /// The archive date before the end date
+        start_date: new Date(2021, 0, 1),
+        end_date: new Date(2021, 0, 3),
+        archive_date: new Date(2021, 0, 2),
+      },
+    ];
+    const view = render(<Component currentEngagement={{ launch: {} }} />);
+    for (const invalidConfig of INVALID_CONFIGURATIONS) {
+      engagement = invalidConfig;
+      view.rerender(<Component currentEngagement={{ launch: {} }} />);
+
+      expect(
+        await view.findByTestId('engagement-summary-save')
+      ).toHaveAttribute('disabled');
+    }
   });
 });

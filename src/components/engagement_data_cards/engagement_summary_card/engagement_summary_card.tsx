@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataCard } from '../data_card';
 import { Timezone } from '../../../schemas/timezone';
-import { Engagement, getEngagementStatus } from '../../../schemas/engagement';
+import { getEngagementStatus } from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
 import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagement_summary_edit_modal';
@@ -12,6 +12,7 @@ import { EngagementStatusText } from '../../engagement_status_text/engagement_st
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
 import { formatUtcDate } from '../../../common/dates';
+import { useHistory } from 'react-router';
 
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
@@ -35,15 +36,20 @@ export function EngagementSummaryCard() {
     requestClose();
     clearCurrentChanges();
   };
-  const onSave = (engagement: Engagement) => {
-    saveEngagement(engagement);
+  const history = useHistory();
+  const onSave = () => {
+    saveEngagement(currentChanges);
+    if (currentEngagement.customer_name && currentEngagement.project_name) {
+      history.push(
+        `/app/engagements/${currentEngagement.customer_name}/${currentEngagement.project_name}`
+      );
+    }
   };
   return (
     <>
       <EngagementSummaryEditModal
         onClose={onClose}
         onSave={onSave}
-        engagement={currentChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard

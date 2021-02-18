@@ -127,10 +127,7 @@ export const EngagementProvider = ({
   }>({});
   const [currentEngagementChanges, dispatch] = useReducer<
     (state: any, action: any) => Partial<Engagement>
-  >(
-    engagementFormReducer(engagementFormConfig),
-    engagementFormReducer(engagementFormConfig)()
-  );
+  >(engagementFormReducer, {});
   const clearCurrentChanges = useCallback(() => {
     dispatch({
       type: 'switch_engagement',
@@ -416,14 +413,22 @@ export const EngagementProvider = ({
     if (!currentEngagement) {
       return false;
     }
-    let result = requiredFields.every(
+    let hasAllRequiredFields = requiredFields.every(
       o =>
         typeof currentEngagement[o] === 'boolean' ||
         typeof currentEngagement[o] === 'number' ||
         !!currentEngagement[o]
     );
-    if (!result) {
-      return result;
+    if (!hasAllRequiredFields) {
+      return false;
+    } else if (
+      !Engagement.areDatesValid(
+        currentEngagement?.start_date,
+        currentEngagement?.end_date,
+        currentEngagement?.archive_date
+      )
+    ) {
+      return false;
     } else {
       return (
         await Promise.all(

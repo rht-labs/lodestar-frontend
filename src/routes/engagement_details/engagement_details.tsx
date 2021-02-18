@@ -3,7 +3,10 @@ import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Route, useParams, Switch, useRouteMatch } from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
-import { ValidationProvider } from '../../context/validation_context/validation_context';
+import {
+  ValidationProvider,
+  FormValidator,
+} from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementOverview } from './overview';
 import { EngagementJsonDump } from './json_dump';
@@ -35,6 +38,7 @@ export const EngagementDetailView = () => {
     setCurrentEngagement,
     getEngagement,
     currentEngagement,
+    currentChanges,
     engagementFormConfig,
   } = useEngagements();
 
@@ -75,9 +79,36 @@ export const EngagementDetailView = () => {
     launch,
     ...editableFields
   } = currentEngagement ?? {};
+  const { end_date, start_date } = currentChanges;
+
+  const validatorsWithDateValidators = (): FormValidator => {
+    return {
+      ...validators,
+      end_date: [
+        ...(validators['end_date'] ?? []),
+        endDate => {
+          const result =
+            start_date > endDate
+              ? 'End date must be after the start date'
+              : null;
+          return result;
+        },
+      ],
+      archive_date: [
+        ...(validators['archive_date'] ?? []),
+        archiveDate => {
+          const result =
+            archiveDate < end_date
+              ? 'Archive date must be after the end date'
+              : null;
+          return result;
+        },
+      ],
+    };
+  };
 
   return (
-    <ValidationProvider validators={validators}>
+    <ValidationProvider validators={validatorsWithDateValidators()}>
       <EngagementDetailsViewTemplate
         engagement={currentEngagement}
         onSave={saveEngagement}
