@@ -76,7 +76,7 @@ describe('Create New Engagement Route', () => {
       </MemoryRouter>
     );
 
-    await act(async () => {
+    act(async () => {
       const wrapper = render(<Component />);
       const customerNameField = wrapper
         .getByTestId('customer-name')
@@ -87,11 +87,11 @@ describe('Create New Engagement Route', () => {
       const dropdownButton = getById(wrapper.container, 'customer_dropdown');
       fireEvent.click(dropdownButton);
       wrapper.rerender(<Component />);
-      await fireEvent.click(wrapper.getByTestId('a'));
-      await fireEvent.change(wrapper.getByTestId('project-name'), {
+      fireEvent.click(wrapper.getByTestId('a'));
+      fireEvent.change(wrapper.getByTestId('project-name'), {
         target: { value: 'Mars Rover' },
       });
-      await fireEvent.change(wrapper.getByTestId('region'), {
+      fireEvent.change(wrapper.getByTestId('region'), {
         target: { value: 'dev-1' },
       });
 
