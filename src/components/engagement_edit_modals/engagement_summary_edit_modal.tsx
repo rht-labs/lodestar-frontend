@@ -15,35 +15,26 @@ import { EditModalTemplate } from '../../layout/edit_modal_template';
 import { EngagementStartEndDateFormField } from '../engagement_form_fields/engagement_dates';
 import { PublicReferenceField } from '../engagement_form_fields/public_reference';
 import { EngagementUseCaseField } from '../engagement_form_fields/use_case';
-import { useHistory } from 'react-router';
 import { TextFormField } from '../form_fields/text_form_field';
 import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../context/engagement_context/engagement_context';
+import { useEngagements } from '../../context/engagement_context/engagement_hook';
 
 export interface EngagementSummaryEditModalProps {
-  engagement: Engagement;
   isOpen: boolean;
-  onSave: (engagement: Engagement) => void;
+  onSave: () => void;
   onClose: () => void;
 }
 export function EngagementSummaryEditModal(
   props: EngagementSummaryEditModalProps
 ) {
-  const history = useHistory();
   const onSave = () => {
-    reRoute();
-    props.onSave(props.engagement);
+    props.onSave();
     props.onClose?.();
   };
-  const reRoute = () => {
-    if (props.engagement.customer_name && props.engagement.project_name) {
-      history.push(
-        `/app/engagements/${props.engagement.customer_name}/${props.engagement.project_name}`
-      );
-    }
-  };
+  const { currentEngagement } = useEngagements();
   const [customerName, setCustomerName] = useEngagementFormField(
     'customer_name',
     EngagementGroupings.engagementSummary
@@ -68,6 +59,9 @@ export function EngagementSummaryEditModal(
     'timezone',
     EngagementGroupings.engagementSummary
   );
+  const [startDate] = useEngagementFormField('start_date');
+  const [endDate] = useEngagementFormField('end_date');
+  const [archiveDate] = useEngagementFormField('archive_date');
 
   const [isTZSelectOpen, setIsTZSelectOpen] = useState<boolean>(false);
 
@@ -80,6 +74,13 @@ export function EngagementSummaryEditModal(
         description={t.tzCode}
       />
     ));
+  };
+
+  const canSave = () => {
+    if (currentEngagement?.launch) {
+      return Engagement.areDatesValid(startDate, endDate, archiveDate);
+    }
+    return true;
   };
 
   return (
@@ -99,6 +100,7 @@ export function EngagementSummaryEditModal(
                 data-testid="engagement-summary-save"
                 onClick={onSave}
                 data-cy={'save_summary_card'}
+                isDisabled={!canSave()}
               >
                 Save
               </Button>
@@ -132,12 +134,23 @@ export function EngagementSummaryEditModal(
               fieldId="description"
               label="Description"
               placeholder="Description and notes for the Engagement"
+              testId="description_field"
+            />
+            <TextFormField
+              value={location}
+              onChange={setLocation}
+              placeholder="e.g. Pasadena, CA"
+              fieldId="location"
+              testId="location_field"
+              helperText="Where will this be held?"
+              label="Location"
             />
             <div data-testid="timezone-select">
               <FormGroup fieldId="timezone" label="Timezone">
                 <Select
                   aria-label="Timezone"
-                  menuAppendTo={'parent'}
+                  menuAppendTo={document.body}
+                  maxHeight={'20rem'}
                   toggleId="timezone-dropdown"
                   variant={SelectVariant.typeahead}
                   selections={TIMEZONES.find(t => t.tzCode === timezone)?.name}
@@ -145,7 +158,6 @@ export function EngagementSummaryEditModal(
                   isOpen={isTZSelectOpen}
                   onToggle={setIsTZSelectOpen}
                   isCreatable={false}
-                  maxHeight={'20rem'}
                   onFilter={e => {
                     const lower = e.target.value.toLowerCase();
                     return getSelectComponents(
@@ -168,15 +180,6 @@ export function EngagementSummaryEditModal(
                 </Select>
               </FormGroup>
             </div>
-            <TextFormField
-              value={location}
-              onChange={setLocation}
-              placeholder="e.g. Pasadena, CA"
-              fieldId="location"
-              testId="location-field"
-              helperText="Where will this be held?"
-              label="Location"
-            />
             <EngagementStartEndDateFormField />
             <PublicReferenceField />
           </Form>

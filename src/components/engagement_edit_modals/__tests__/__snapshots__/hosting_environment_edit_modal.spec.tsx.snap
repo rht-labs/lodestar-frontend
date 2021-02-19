@@ -254,11 +254,11 @@ Object {
                           aria-invalid="false"
                           aria-label="Provider Region"
                           class="pf-c-form-control"
-                          data-cy=""
+                          data-cy="provider-region-select"
                           data-ouia-component-id="13"
                           data-ouia-component-type="PF4/FormSelect"
                           data-ouia-safe="true"
-                          data-testid=""
+                          data-testid="provider-region-select"
                           disabled=""
                           id=""
                         >
@@ -312,11 +312,11 @@ Object {
                           aria-invalid="false"
                           aria-label="OpenShift Version"
                           class="pf-c-form-control"
-                          data-cy="oc-version-select"
+                          data-cy="oc_version_select"
                           data-ouia-component-id="14"
                           data-ouia-component-type="PF4/FormSelect"
                           data-ouia-safe="true"
-                          data-testid="oc-version-select"
+                          data-testid="oc_version_select"
                           id="openshift-version"
                         >
                           <option

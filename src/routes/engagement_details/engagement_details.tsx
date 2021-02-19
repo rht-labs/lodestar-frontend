@@ -3,7 +3,10 @@ import { Engagement } from '../../schemas/engagement';
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { Route, useParams, Switch, useRouteMatch } from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
-import { ValidationProvider } from '../../context/validation_context/validation_context';
+import {
+  ValidationProvider,
+  FormValidator,
+} from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
 import { EngagementOverview } from './overview';
 import { EngagementJsonDump } from './json_dump';
@@ -22,6 +25,34 @@ export interface EngagementDetailViewProps {
   ) => Promise<{ cancel: () => void }>;
   getEngagement: (customer_name, project_name) => Promise<Engagement>;
 }
+export const validatorsWithDateValidators = (
+  validators: FormValidator,
+  dates: Pick<Engagement, 'start_date' | 'end_date'>
+): FormValidator => {
+  return {
+    ...validators,
+    end_date: [
+      ...(validators['end_date'] ?? []),
+      endDate => {
+        const result =
+          dates?.start_date > endDate
+            ? 'End date must be after the start date'
+            : null;
+        return result;
+      },
+    ],
+    archive_date: [
+      ...(validators['archive_date'] ?? []),
+      archiveDate => {
+        const result =
+          archiveDate < dates?.end_date
+            ? 'Archive date must be after the end date'
+            : null;
+        return result;
+      },
+    ],
+  };
+};
 
 export const EngagementDetailView = () => {
   const { project_name, customer_name } = useParams<{
@@ -35,6 +66,7 @@ export const EngagementDetailView = () => {
     setCurrentEngagement,
     getEngagement,
     currentEngagement,
+    currentChanges,
     engagementFormConfig,
   } = useEngagements();
 
@@ -75,9 +107,15 @@ export const EngagementDetailView = () => {
     launch,
     ...editableFields
   } = currentEngagement ?? {};
+  const { end_date, start_date } = currentChanges;
 
   return (
-    <ValidationProvider validators={validators}>
+    <ValidationProvider
+      validators={validatorsWithDateValidators(validators, {
+        end_date,
+        start_date,
+      })}
+    >
       <EngagementDetailsViewTemplate
         engagement={currentEngagement}
         onSave={saveEngagement}

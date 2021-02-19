@@ -1,11 +1,13 @@
 import React from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { Alert, AlertVariant, Button } from '@patternfly/react-core';
+import { Alert, AlertVariant, Button, Flex, FlexItem } from '@patternfly/react-core';
 import { format } from 'date-fns';
 import { HealthStatus } from '../../schemas/cluster_status';
 import { useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import { Feature } from '../feature/feature';
+import { useModalVisibility } from "../../context/edit_modal_visibility_context/edit_modal_visibility_hook";
+import { DeleteModal } from "./delete_modal";
 
 interface LaunchAlertBannerProps {
   engagement: Engagement;
@@ -54,63 +56,85 @@ export function LaunchAlertBanner({
 }: LaunchAlertBannerProps) {
   const overallStatus = engagement?.status?.overall_status;
   const path = useLocation().pathname;
+  const { requestOpen, activeModalKey } = useModalVisibility();
+  const DELETE_ENGAGEMENT_MODAL_KEY = `delete-engagement-${engagement?.customer_name}-${engagement?.project_name}`;
+
   return (
-    <Alert
-      isInline
-      title={
-        engagement?.launch ? 'Engagement Launched' : 'Engagement Not Launched'
-      }
-      variant={statusAlert(overallStatus)}
-      actionLinks={
-        !engagement?.launch ? (
-          <div>
-            <Feature name={'writer'}>
-              <Button
-                isDisabled={!isLaunchable}
-                onClick={() => onLaunch(engagement)}
-                data-cy={'launch_button'}
-              >
-                Launch
-              </Button>
-            </Feature>
-          </div>
-        ) : (
-          undefined
-        )
-      }
-    >
-      <div>
-        <LaunchMessage engagement={engagement} />
-        {engagement?.launch ? (
-          undefined
-        ) : (
-          <div>
+    <>
+      <DeleteModal
+        isOpen={activeModalKey?.includes(DELETE_ENGAGEMENT_MODAL_KEY)}
+        engagement={engagement}
+      />
+      <Alert
+        isInline
+        title={
+          engagement?.launch ? 'Engagement Launched' : 'Engagement Not Launched'
+        }
+        variant={statusAlert(overallStatus)}
+        actionLinks={
+          !engagement?.launch ? (
             <div>
-              <span style={{ fontStyle: 'italic' }}>
-                {missingRequiredFields?.length !== 0
-                  ? 'Required fields are missing in the following sections:'
-                  : null}
-              </span>
-              <ul>
-                {Array.from(
-                  new Set(
-                    missingRequiredFields.map(
-                      field => ENGAGEMENT_FIELD_MAP[field]
-                    )
-                  )
-                ).map((section: string, i) => (
-                  <li key={i}>
-                    <HashLink smooth to={`${path}#${section}`}>
-                      {ENGAGEMENT_CARDS[section]}
-                    </HashLink>
-                  </li>
-                ))}
-              </ul>
+              <Feature name={'writer'}>
+                <Flex>
+                  <FlexItem span={1}>
+                    <Button
+                      isDisabled={!isLaunchable}
+                      onClick={() => onLaunch(engagement)}
+                      data-cy={'launch_button'}
+                    >
+                      Launch
+                    </Button>
+                  </FlexItem>
+                  <FlexItem span={1}>
+                    <Button
+                      data-testid="delete-button"
+                      variant="danger"
+                      onClick={() => requestOpen(DELETE_ENGAGEMENT_MODAL_KEY)}
+                    >
+                      Delete
+                    </Button>
+                  </FlexItem>
+                </Flex>
+              </Feature>
             </div>
-          </div>
-        )}
-      </div>
-    </Alert>
+          ) : (
+            undefined
+          )
+        }
+      >
+        <div>
+          <LaunchMessage engagement={engagement} />
+          {!engagement?.launch ? (
+            <div>
+              <div>
+                <span style={{ fontStyle: 'italic' }}>
+                  {missingRequiredFields?.length !== 0
+                    ? 'Required fields are missing in the following sections:'
+                    : null}
+                </span>
+                <ul>
+                  {Array.from(
+                    new Set(
+                      missingRequiredFields.map(
+                        field => ENGAGEMENT_FIELD_MAP[field]
+                      )
+                    )
+                  ).map((section, index) => (
+                    <li key={index}>
+                      <HashLink smooth to={`${path}#${section}`}>
+                        {ENGAGEMENT_CARDS[section]}
+                      </HashLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ) : (
+            undefined
+          )}
+        </div>
+      </Alert>
+    </>
   );
 }
 

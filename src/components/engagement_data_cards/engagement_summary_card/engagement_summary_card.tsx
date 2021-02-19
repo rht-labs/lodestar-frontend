@@ -1,9 +1,9 @@
 import React from 'react';
 import { DataCard } from '../data_card';
-import { Engagement, getEngagementStatus } from '../../../schemas/engagement';
+import { Timezone } from '../../../schemas/timezone';
+import { getEngagementStatus } from '../../../schemas/engagement';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { TitledDataPoint } from '../../titled_data_point/titled_data_point';
-import { format as formatDate, utcToZonedTime } from 'date-fns-tz';
 import { EngagementSummaryEditModal } from '../../engagement_edit_modals/engagement_summary_edit_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
@@ -11,18 +11,10 @@ import { RequiredFieldsWarning } from '../../required_fields_warning/required_fi
 import { EngagementStatusText } from '../../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { formatUtcDate } from '../../../common/dates';
+import { useHistory } from 'react-router';
 
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
-
-const formatUtcDate = (date?: Date): string | undefined => {
-  if (!date) {
-    return '';
-  }
-  const dateString = formatDate(utcToZonedTime(date, 'UTC'), 'MMM dd, yyyy', {
-    timeZone: 'UTC',
-  });
-  return dateString;
-};
 
 export function EngagementSummaryCard() {
   const {
@@ -44,15 +36,20 @@ export function EngagementSummaryCard() {
     requestClose();
     clearCurrentChanges();
   };
-  const onSave = (engagement: Engagement) => {
-    saveEngagement(engagement);
+  const history = useHistory();
+  const onSave = () => {
+    saveEngagement(currentChanges);
+    if (currentEngagement.customer_name && currentEngagement.project_name) {
+      history.push(
+        `/app/engagements/${currentEngagement.customer_name}/${currentEngagement.project_name}`
+      );
+    }
   };
   return (
     <>
       <EngagementSummaryEditModal
         onClose={onClose}
         onSave={onSave}
-        engagement={currentChanges}
         isOpen={activeModalKey === ENGAGEMENT_SUMMARY_MODAL_KEY}
       />
       <DataCard
@@ -79,39 +76,24 @@ export function EngagementSummaryCard() {
           <GridItem md={12} lg={12} style={{ marginBottom: '1rem' }}>
             <EngagementStatusText status={status} />
           </GridItem>
-          <GridItem md={12} lg={6}>
+          <GridItem md={12} lg={12}>
             <Grid hasGutter>
-              <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Company" dataCy={'company_label'}>
+              <GridItem md={6} lg={3}>
+                <TitledDataPoint title="Client Name" dataCy={'company_label'}>
                   {currentEngagement?.customer_name}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Project" dataCy={'project_label'}>
+              <GridItem md={6} lg={3}>
+                <TitledDataPoint title="Engagement Name" dataCy={'project_label'}>
                   {currentEngagement?.project_name}
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={6} lg={4}>
+              <GridItem md={6} lg={3}>
                 <TitledDataPoint title="Location" dataCy={'location_label'}>
                   {currentEngagement?.location}
                 </TitledDataPoint>
               </GridItem>
-
-              <GridItem md={6} lg={4}>
-                <TitledDataPoint title="Start Date" dataCy={'start_date_label'}>
-                  {currentEngagement?.start_date
-                    ? formatUtcDate(currentEngagement?.start_date)
-                    : null}
-                </TitledDataPoint>
-              </GridItem>
-              <GridItem md={6} lg={4}>
-                <TitledDataPoint title="End Date" dataCy={'end_date_label'}>
-                  {currentEngagement?.end_date
-                    ? formatUtcDate(currentEngagement?.end_date)
-                    : null}
-                </TitledDataPoint>
-              </GridItem>
-              <GridItem md={6} lg={4}>
+              <GridItem md={6} lg={3}>
                 <TitledDataPoint title="Created By" dataCy={'created_by_label'}>
                   <DisplayCreatedByName
                     userFromServer={
@@ -121,7 +103,46 @@ export function EngagementSummaryCard() {
                   />
                 </TitledDataPoint>
               </GridItem>
-              <GridItem md={12}>
+              <GridItem md={6} lg={3}>
+                <TitledDataPoint title="Start Date" dataCy={'start_date_label'}>
+                  {currentEngagement?.start_date
+                    ? formatUtcDate(currentEngagement?.start_date)
+                    : null}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={6} lg={3}>
+                <TitledDataPoint title="End Date" dataCy={'end_date_label'}>
+                  {currentEngagement?.end_date
+                    ? formatUtcDate(currentEngagement?.end_date)
+                    : null}
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem md={8} lg={6}>
+                <div data-testid="timezone_label">
+                  <TitledDataPoint
+                    title="Timezone"
+                    dataCy={'timezone_label'}
+                    data-testid="timezone_label"
+                  >
+                    {Timezone.getLabelFromCode(currentEngagement?.timezone)}
+                  </TitledDataPoint>
+                </div>
+              </GridItem>
+            </Grid>
+          </GridItem>
+          <GridItem span={12}>
+            <Grid hasGutter>
+              <GridItem span={12}>
+                <TitledDataPoint
+                  title="Description"
+                  dataCy={'description_label'}
+                >
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {currentEngagement?.description}
+                    </span>
+                </TitledDataPoint>
+              </GridItem>
+              <GridItem span={12}>
                 <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
                   <>
                     {currentEngagement?.use_cases?.map?.(useCase => (
@@ -133,13 +154,6 @@ export function EngagementSummaryCard() {
                 </TitledDataPoint>
               </GridItem>
             </Grid>
-          </GridItem>
-          <GridItem md={12} lg={4}>
-            <TitledDataPoint title="Description" dataCy={'description_label'}>
-              <span style={{ whiteSpace: 'pre-line' }}>
-                {currentEngagement?.description}
-              </span>
-            </TitledDataPoint>
           </GridItem>
         </Grid>
       </DataCard>

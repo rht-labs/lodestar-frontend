@@ -129,6 +129,7 @@ export const UserRow = ({
               name="role"
               aria-label="User Role"
               id="user_role_dropdown"
+              data-cy={'user_role_dropdown'}
               value={user.role}
               isDisabled={!hasFeature(APP_FEATURES.writer) || isUserDeleted}
               onChange={e => {

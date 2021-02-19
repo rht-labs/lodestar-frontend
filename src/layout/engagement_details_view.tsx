@@ -17,6 +17,7 @@ import {
   useAnalytics,
   AnalyticsCategory,
 } from '../context/analytics_context/analytics_context';
+import {getLabelForValue} from "../common/label_value_tools";
 
 export function EngagementDetailsViewTemplate({
   engagement,
@@ -37,6 +38,7 @@ export function EngagementDetailsViewTemplate({
   const { appConfig } = useConfig();
 
   const { logEvent } = useAnalytics();
+  const { engagementFormConfig } = useEngagements();
 
   return (
     <>
@@ -74,7 +76,12 @@ export function EngagementDetailsViewTemplate({
             <FlexItem>
               <TextContent>
                 <Text component="h3" style={{ marginTop: '0.5rem' }}>
-                  {engagement?.engagement_type}
+                  {
+                    getLabelForValue(
+                      engagementFormConfig?.basic_information?.engagement_types?.options ?? [],
+                      engagement?.engagement_type
+                    )
+                  }
                 </Text>
               </TextContent>
             </FlexItem>

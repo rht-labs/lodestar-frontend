@@ -23,6 +23,8 @@ import {
 } from '../../feedback_context/feedback_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { CategoryService } from '../../../services/category_service/category_service';
+import { HostingEnvironment } from '../../../schemas/hosting_environment';
+import { waitFor } from '@testing-library/react';
 
 describe('Engagement Context', () => {
   const getHook = () => {
@@ -84,12 +86,28 @@ describe('Engagement Context', () => {
 
   test('Form is launchable when required fields are filled', async () => {
     await act(async () => {
-      const { result, waitForNextUpdate } = getHook();
+      const { result, waitForNextUpdate, waitFor } = getHook();
       await waitForNextUpdate;
-      result.current.setCurrentEngagement(Engagement.fromFake());
-      await waitForNextUpdate;
-      await waitForNextUpdate;
+      const engagement = Engagement.fromFake(true);
+      result.current.setCurrentEngagement(engagement);
+
+      await waitFor(() => expect(result.current.isLaunchable).toBeTruthy());
       expect(result.current.isLaunchable).toBeTruthy();
+    });
+  });
+
+  test('the form is not launchable if the engagement fields are complete, but the dates are invalid', async () => {
+    const engagement = Engagement.fromFake(true);
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement({
+        ...engagement,
+        start_date: new Date(2020, 0, 1),
+        end_date: new Date(2021, 0, 1),
+      });
+      await waitForNextUpdate();
+      expect(result.current.isLaunchable).toBe(false);
     });
   });
 
@@ -105,6 +123,32 @@ describe('Engagement Context', () => {
     });
   });
 
+  test('should not be launchable if every added hosting environment is not complete and valid', async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      const engagement = Engagement.fromFake(true);
+      const invalidHe = HostingEnvironment.fromFake(true);
+      const validHe = HostingEnvironment.fromFake(true);
+      invalidHe.ocp_cluster_size = null;
+      engagement.hosting_environments = [invalidHe, validHe];
+      result.current.setCurrentEngagement(engagement);
+      await waitForNextUpdate();
+      expect(result.current.isLaunchable).toBeFalsy();
+    });
+  });
+  test('launch is allowed if no hosting environment has been added', async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      const engagement = Engagement.fromFake(true);
+      engagement.hosting_environments = [];
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement(engagement);
+      await waitForNextUpdate();
+      expect(result.current.isLaunchable).toBeTruthy();
+    });
+  });
+
   test('Can create a new engagement', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
@@ -114,6 +158,53 @@ describe('Engagement Context', () => {
       } as Engagement);
       await waitForNextUpdate();
       expect(result.current.engagements[0].customer_name).toEqual('spencer');
+    });
+  });
+
+  test("By default, an engagement uses the browser's timezone", async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement({
+        ...Engagement.fromFake(true),
+        timezone: undefined,
+      });
+      await waitForNextUpdate();
+      expect(result.current.currentChanges?.timezone).toBe('America/New_York');
+    });
+  });
+  test('If an engagement has a timezone already defined, that timezone is not overridden when switching engagements', async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate();
+      result.current.setCurrentEngagement({
+        ...Engagement.fromFake(true),
+        timezone: 'America/Los_Angeles',
+      });
+      await waitForNextUpdate();
+      expect(result.current.currentChanges?.timezone).toBe(
+        'America/Los_Angeles'
+      );
+    });
+  });
+
+  test('Can delete an engagement', async () => {
+    await act(async () => {
+      const { result, waitForNextUpdate } = getHook();
+      await waitForNextUpdate;
+      result.current.createEngagement({
+        customer_name: 'new engagement',
+        uuid: '123',
+      } as Engagement);
+      await waitForNextUpdate();
+      expect(result.current.engagements?.length).toEqual(1);
+
+      await waitForNextUpdate();
+      result.current.deleteEngagement({
+        uuid: '123',
+      } as Engagement);
+      await waitForNextUpdate();
+      expect(result.current.engagements?.length).toEqual(0);
     });
   });
 
@@ -283,7 +374,6 @@ describe('Engagement Context', () => {
         wrapper,
       }
     );
-    let error;
 
     await act(async () => {
       result.current.engagements.getEngagements();
@@ -394,11 +484,11 @@ describe('Engagement Context', () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
       let error;
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       result.current
         .launchEngagement(Engagement.fromFake(true))
         .catch(e => (error = e));
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       expect(error.message).toBe(
         'This engagement does not have the required fields to launch'
       );
@@ -437,11 +527,12 @@ describe('Engagement Context', () => {
       const currentEngagement = Engagement.fromFake(true);
       delete currentEngagement.start_date;
       result.current.setCurrentEngagement(currentEngagement);
+      await waitForNextUpdate();
       let error;
       result.current
         .launchEngagement(Engagement.fromFake(true))
         .catch(e => (error = e));
-      await waitForNextUpdate();
+      await waitFor(() => expect(error).toBeDefined());
       expect(error.message).toBe(
         'This engagement does not have the required fields to launch'
       );
@@ -522,6 +613,7 @@ describe('Engagement Context', () => {
     await act(async () => {
       result.current.setCurrentEngagement(Engagement.fromFake(true));
       result.current.launchEngagement(Engagement.fromFake(true)).catch(onCatch);
+      await waitForNextUpdate();
       await waitForNextUpdate();
       expect(onCatch).toHaveBeenCalled();
       expect(result.current.currentEngagement.launch).toBeFalsy();
