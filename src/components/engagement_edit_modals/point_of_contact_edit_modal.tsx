@@ -140,7 +140,7 @@ export function PointOfContactEditModal({
                 name="engagement-lead-email"
                 onChange={e => {
                   validate('engagement_lead_email')(e);
-                  setEngagementLeadEmail(e);
+                  setEngagementLeadEmail(e.toLowerCase());
                 }}
                 placeholder="Email Address"
                 type="email"
@@ -199,8 +199,8 @@ export function PointOfContactEditModal({
                 id="tech-lead-email"
                 name="tech-lead-email"
                 onChange={e => {
-                  setTechnicalLeadEmail(e);
                   validate('technical_lead_email')(e);
+                  setTechnicalLeadEmail(e.toLowerCase());
                 }}
                 placeholder="Email Address"
                 type="email"
@@ -259,8 +259,8 @@ export function PointOfContactEditModal({
                 name="customer-contact-email"
                 style={input}
                 onChange={e => {
-                  setCustomerContactEmail(e);
                   validate('customer_contact_email')(e);
+                  setCustomerContactEmail(e.toLowerCase());
                 }}
                 placeholder="Email Address"
                 type="email"
