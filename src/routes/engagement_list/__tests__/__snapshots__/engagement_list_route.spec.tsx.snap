@@ -54,7 +54,7 @@ Object {
                     aria-disabled="false"
                     aria-label="search button for search input"
                     class="pf-c-button pf-m-control"
-                    data-ouia-component-id="0"
+                    data-ouia-component-id="OUIA-Generated-Button-control-1"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -70,7 +70,6 @@ Object {
                     >
                       <path
                         d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                        transform=""
                       />
                     </svg>
                   </button>
@@ -96,7 +95,7 @@ Object {
                     aria-disabled="false"
                     aria-label="search button for search input"
                     class="pf-c-button pf-m-control"
-                    data-ouia-component-id="1"
+                    data-ouia-component-id="OUIA-Generated-Button-control-2"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -112,13 +111,12 @@ Object {
                     >
                       <path
                         d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
-                        transform=""
                       />
                     </svg>
                   </button>
                   <div
                     class="pf-c-select"
-                    data-ouia-component-id="2"
+                    data-ouia-component-id="OUIA-Generated-Select-single-1"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
                   >
@@ -153,7 +151,6 @@ Object {
                         >
                           <path
                             d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                            transform=""
                           />
                         </svg>
                       </span>
@@ -171,7 +168,7 @@ Object {
                     aria-disabled="false"
                     aria-label="engagement regions"
                     class="pf-c-button pf-m-control"
-                    data-ouia-component-id="3"
+                    data-ouia-component-id="OUIA-Generated-Button-control-3"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -187,13 +184,12 @@ Object {
                     >
                       <path
                         d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"
-                        transform=""
                       />
                     </svg>
                   </button>
                   <div
                     class="pf-c-select"
-                    data-ouia-component-id="4"
+                    data-ouia-component-id="OUIA-Generated-Select-single-2"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
                   >
@@ -228,7 +224,6 @@ Object {
                         >
                           <path
                             d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                            transform=""
                           />
                         </svg>
                       </span>
@@ -246,7 +241,7 @@ Object {
                     aria-disabled="false"
                     aria-label="search button for search input"
                     class="pf-c-button pf-m-control"
-                    data-ouia-component-id="5"
+                    data-ouia-component-id="OUIA-Generated-Button-control-4"
                     data-ouia-component-type="PF4/Button"
                     data-ouia-safe="true"
                     type="button"
@@ -262,13 +257,12 @@ Object {
                     >
                       <path
                         d="M304 416h-64a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-128-64h-48V48a16 16 0 0 0-16-16H80a16 16 0 0 0-16 16v304H16c-14.19 0-21.37 17.24-11.29 27.31l80 96a16 16 0 0 0 22.62 0l80-96C197.35 369.26 190.22 352 176 352zm256-192H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h192a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-64 128H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM496 32H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h256a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
-                        transform=""
                       />
                     </svg>
                   </button>
                   <div
                     class="pf-c-select"
-                    data-ouia-component-id="6"
+                    data-ouia-component-id="OUIA-Generated-Select-single-3"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
                   >
@@ -303,7 +297,6 @@ Object {
                         >
                           <path
                             d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                            transform=""
                           />
                         </svg>
                       </span>
@@ -318,7 +311,7 @@ Object {
                   aria-disabled="false"
                   class="pf-c-button pf-m-secondary"
                   data-cy="reset_button"
-                  data-ouia-component-id="7"
+                  data-ouia-component-id="OUIA-Generated-Button-secondary-1"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   type="button"
@@ -352,7 +345,6 @@ Object {
             >
               <path
                 d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                transform=""
               />
             </svg>
             <h4
@@ -371,7 +363,7 @@ Object {
               <button
                 aria-disabled="false"
                 class="pf-c-button pf-m-primary"
-                data-ouia-component-id="8"
+                data-ouia-component-id="OUIA-Generated-Button-primary-1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 type="button"
@@ -434,7 +426,7 @@ Object {
                   aria-disabled="false"
                   aria-label="search button for search input"
                   class="pf-c-button pf-m-control"
-                  data-ouia-component-id="0"
+                  data-ouia-component-id="OUIA-Generated-Button-control-1"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   type="button"
@@ -450,7 +442,6 @@ Object {
                   >
                     <path
                       d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                      transform=""
                     />
                   </svg>
                 </button>
@@ -476,7 +467,7 @@ Object {
                   aria-disabled="false"
                   aria-label="search button for search input"
                   class="pf-c-button pf-m-control"
-                  data-ouia-component-id="1"
+                  data-ouia-component-id="OUIA-Generated-Button-control-2"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   type="button"
@@ -492,13 +483,12 @@ Object {
                   >
                     <path
                       d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
-                      transform=""
                     />
                   </svg>
                 </button>
                 <div
                   class="pf-c-select"
-                  data-ouia-component-id="2"
+                  data-ouia-component-id="OUIA-Generated-Select-single-1"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
                 >
@@ -533,7 +523,6 @@ Object {
                       >
                         <path
                           d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                          transform=""
                         />
                       </svg>
                     </span>
@@ -551,7 +540,7 @@ Object {
                   aria-disabled="false"
                   aria-label="engagement regions"
                   class="pf-c-button pf-m-control"
-                  data-ouia-component-id="3"
+                  data-ouia-component-id="OUIA-Generated-Button-control-3"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   type="button"
@@ -567,13 +556,12 @@ Object {
                   >
                     <path
                       d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"
-                      transform=""
                     />
                   </svg>
                 </button>
                 <div
                   class="pf-c-select"
-                  data-ouia-component-id="4"
+                  data-ouia-component-id="OUIA-Generated-Select-single-2"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
                 >
@@ -608,7 +596,6 @@ Object {
                       >
                         <path
                           d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                          transform=""
                         />
                       </svg>
                     </span>
@@ -626,7 +613,7 @@ Object {
                   aria-disabled="false"
                   aria-label="search button for search input"
                   class="pf-c-button pf-m-control"
-                  data-ouia-component-id="5"
+                  data-ouia-component-id="OUIA-Generated-Button-control-4"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   type="button"
@@ -642,13 +629,12 @@ Object {
                   >
                     <path
                       d="M304 416h-64a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-128-64h-48V48a16 16 0 0 0-16-16H80a16 16 0 0 0-16 16v304H16c-14.19 0-21.37 17.24-11.29 27.31l80 96a16 16 0 0 0 22.62 0l80-96C197.35 369.26 190.22 352 176 352zm256-192H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h192a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-64 128H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM496 32H240a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h256a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
-                      transform=""
                     />
                   </svg>
                 </button>
                 <div
                   class="pf-c-select"
-                  data-ouia-component-id="6"
+                  data-ouia-component-id="OUIA-Generated-Select-single-3"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
                 >
@@ -683,7 +669,6 @@ Object {
                       >
                         <path
                           d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                          transform=""
                         />
                       </svg>
                     </span>
@@ -698,7 +683,7 @@ Object {
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
                 data-cy="reset_button"
-                data-ouia-component-id="7"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 type="button"
@@ -732,7 +717,6 @@ Object {
           >
             <path
               d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-              transform=""
             />
           </svg>
           <h4
@@ -751,7 +735,7 @@ Object {
             <button
               aria-disabled="false"
               class="pf-c-button pf-m-primary"
-              data-ouia-component-id="8"
+              data-ouia-component-id="OUIA-Generated-Button-primary-1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"

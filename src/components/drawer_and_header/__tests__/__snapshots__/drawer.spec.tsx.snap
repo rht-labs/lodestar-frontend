@@ -6,6 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
+        aria-hidden="false"
         class="pf-c-page__sidebar pf-m-expanded"
         id="page-sidebar"
       >
@@ -17,6 +18,7 @@ Object {
   </body>,
   "container": <div>
     <div
+      aria-hidden="false"
       class="pf-c-page__sidebar pf-m-expanded"
       id="page-sidebar"
     >

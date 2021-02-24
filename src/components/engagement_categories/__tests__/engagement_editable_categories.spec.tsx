@@ -1,6 +1,12 @@
 import React from 'react';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementEditableCategories } from '../engagement_editable_categories';
 import { Engagement } from '../../../schemas/engagement';
@@ -34,16 +40,15 @@ describe('Engagement Editable Categories', () => {
     });
     expect((await view.findAllByTestId('category-chip')).length).toBe(1);
     const editButton = await view.findByTestId('edit-icon');
-    await fireEvent.click(editButton);
+    fireEvent.click(editButton);
     const inputWrapper = await view.findByTestId('category-select-wrapper');
     const inputs = inputWrapper.getElementsByTagName('input');
     const input = inputs[0];
-    await fireEvent.change(input, { target: { value: 'a category' } });
-    const buttons = inputWrapper.getElementsByTagName('button');
-    await fireEvent.click(buttons[1]);
-    await fireEvent.click(await view.findByText('Create "a category"'));
+    fireEvent.change(input, { target: { value: 'a category' } });
+    fireEvent.click(await view.findByText('Create "a category"'));
 
     expect(onUpdateField).toHaveBeenCalled();
+    screen.debug();
 
     await fireEvent.click(await view.findByTestId('save_categories'));
 
