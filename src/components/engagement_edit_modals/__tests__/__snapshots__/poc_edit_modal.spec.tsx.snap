@@ -173,10 +173,10 @@ Object {
                       </div>
                       <div
                         aria-live="polite"
-                        class="pf-c-form__helper-text"
+                        class="pf-c-form__helper-text pf-m-error"
                         id="engagement_lead-helper"
                       >
-                        Who is the Engagement Lead?
+                        Enter valid email address
                       </div>
                     </div>
                   </div>
@@ -282,10 +282,10 @@ Object {
                       </div>
                       <div
                         aria-live="polite"
-                        class="pf-c-form__helper-text"
+                        class="pf-c-form__helper-text pf-m-error"
                         id="technical_lead-helper"
                       >
-                        Who is the Tech Lead?
+                        Enter valid email address
                       </div>
                     </div>
                   </div>
@@ -391,10 +391,10 @@ Object {
                       </div>
                       <div
                         aria-live="polite"
-                        class="pf-c-form__helper-text"
+                        class="pf-c-form__helper-text pf-m-error"
                         id="customer-contact-helper"
                       >
-                        Who is the point person for the project?
+                        Enter valid email address
                       </div>
                     </div>
                   </div>

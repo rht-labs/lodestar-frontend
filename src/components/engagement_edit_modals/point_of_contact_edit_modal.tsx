@@ -19,6 +19,10 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../context/engagement_context/engagement_context';
+import {
+  validateEmail
+} from '../../common/user_validation';
+
 export interface PointOfContactEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
@@ -32,7 +36,7 @@ export function PointOfContactEditModal({
   onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
   const { hasFeature } = useFeatures();
-  const { validate, getValidationResult } = useValidation();
+  const { validate } = useValidation();
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -95,14 +99,12 @@ export function PointOfContactEditModal({
             helperText="Who is the Engagement Lead?"
             isRequired
             label="Labs EL"
-            helperTextInvalid={getValidationResult(
-              'engagement_lead_email'
-            ).join(' ')}
             validated={
-              getValidationResult('engagement_lead_email').length > 0
-                ? 'error'
-                : 'default'
+              validateEmail(engagementLeadEmail)
+                ? 'default'
+                : 'error'
             }
+            helperTextInvalid={'Enter valid email address'}
           >
             <InputGroup>
               <InputGroupText
@@ -155,14 +157,12 @@ export function PointOfContactEditModal({
             isRequired
             helperText="Who is the Tech Lead?"
             label="Labs Technical Lead"
-            helperTextInvalid={getValidationResult('technical_lead_email').join(
-              ' '
-            )}
             validated={
-              getValidationResult('technical_lead_email').length > 0
-                ? 'error'
-                : 'default'
+              validateEmail(technicalLeadEmail)
+                ? 'default'
+                : 'error'
             }
+            helperTextInvalid={'Enter valid email address'}
           >
             <InputGroup label="Labs Tech Lead">
               <InputGroupText
@@ -215,14 +215,12 @@ export function PointOfContactEditModal({
             helperText="Who is the point person for the project?"
             isRequired
             label="Customer Contact"
-            helperTextInvalid={getValidationResult(
-              'customer_contact_email'
-            ).join(' ')}
             validated={
-              getValidationResult('customer_contact_email').length > 0
-                ? 'error'
-                : 'default'
+              validateEmail(customerContactEmail)
+                ? 'default'
+                : 'error'
             }
+            helperTextInvalid={'Enter valid email address'}
           >
             <InputGroup label="Customer Contact">
               <InputGroupText
