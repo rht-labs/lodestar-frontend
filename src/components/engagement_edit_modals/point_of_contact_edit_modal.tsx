@@ -37,6 +37,7 @@ export function PointOfContactEditModal({
 }: PointOfContactEditModalProps) {
   const { hasFeature } = useFeatures();
   const { validate } = useValidation();
+  const INVALID_TEXT = 'Please enter a valid email address';
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -104,7 +105,7 @@ export function PointOfContactEditModal({
                 ? 'default'
                 : 'error'
             }
-            helperTextInvalid={'Enter valid email address'}
+            helperTextInvalid={INVALID_TEXT}
           >
             <InputGroup>
               <InputGroupText
@@ -162,7 +163,7 @@ export function PointOfContactEditModal({
                 ? 'default'
                 : 'error'
             }
-            helperTextInvalid={'Enter valid email address'}
+            helperTextInvalid={INVALID_TEXT}
           >
             <InputGroup label="Labs Tech Lead">
               <InputGroupText
@@ -220,7 +221,7 @@ export function PointOfContactEditModal({
                 ? 'default'
                 : 'error'
             }
-            helperTextInvalid={'Enter valid email address'}
+            helperTextInvalid={INVALID_TEXT}
           >
             <InputGroup label="Customer Contact">
               <InputGroupText

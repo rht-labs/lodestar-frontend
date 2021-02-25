@@ -176,7 +176,7 @@ Object {
                         class="pf-c-form__helper-text pf-m-error"
                         id="engagement_lead-helper"
                       >
-                        Enter valid email address
+                        Please enter a valid email address
                       </div>
                     </div>
                   </div>
@@ -285,7 +285,7 @@ Object {
                         class="pf-c-form__helper-text pf-m-error"
                         id="technical_lead-helper"
                       >
-                        Enter valid email address
+                        Please enter a valid email address
                       </div>
                     </div>
                   </div>
@@ -394,7 +394,7 @@ Object {
                         class="pf-c-form__helper-text pf-m-error"
                         id="customer-contact-helper"
                       >
-                        Enter valid email address
+                        Please enter a valid email address
                       </div>
                     </div>
                   </div>

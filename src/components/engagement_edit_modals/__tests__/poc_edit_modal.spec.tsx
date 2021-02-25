@@ -92,6 +92,6 @@ describe('Point of Contact edit modal', () => {
     await fireEvent.change(await findByTestId('customer-email'), {
       target: { value: 'invalidEmail' },
     });
-    expect(await view.findAllByText('Enter valid email address')).toHaveLength(3);
+    expect(await view.findAllByText('Please enter a valid email address')).toHaveLength(3);
   });
 });
