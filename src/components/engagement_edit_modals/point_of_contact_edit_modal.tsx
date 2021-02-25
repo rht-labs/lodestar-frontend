@@ -19,6 +19,10 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../context/engagement_context/engagement_context';
+import {
+  validateEmail
+} from '../../common/user_validation';
+
 export interface PointOfContactEditModalProps {
   engagement: Engagement;
   isOpen: boolean;
@@ -32,7 +36,8 @@ export function PointOfContactEditModal({
   onSave: propsOnSave,
 }: PointOfContactEditModalProps) {
   const { hasFeature } = useFeatures();
-  const { validate, getValidationResult } = useValidation();
+  const { validate } = useValidation();
+  const INVALID_TEXT = 'Please enter a valid email address';
 
   const input: React.CSSProperties = {
     backgroundColor: '#EDEDED',
@@ -95,14 +100,12 @@ export function PointOfContactEditModal({
             helperText="Who is the Engagement Lead?"
             isRequired
             label="Labs EL"
-            helperTextInvalid={getValidationResult(
-              'engagement_lead_email'
-            ).join(' ')}
             validated={
-              getValidationResult('engagement_lead_email').length > 0
-                ? 'error'
-                : 'default'
+              validateEmail(engagementLeadEmail)
+                ? 'default'
+                : 'error'
             }
+            helperTextInvalid={INVALID_TEXT}
           >
             <InputGroup>
               <InputGroupText
@@ -140,7 +143,7 @@ export function PointOfContactEditModal({
                 name="engagement-lead-email"
                 onChange={e => {
                   validate('engagement_lead_email')(e);
-                  setEngagementLeadEmail(e);
+                  setEngagementLeadEmail(e.toLowerCase());
                 }}
                 placeholder="Email Address"
                 type="email"
@@ -155,14 +158,12 @@ export function PointOfContactEditModal({
             isRequired
             helperText="Who is the Tech Lead?"
             label="Labs Technical Lead"
-            helperTextInvalid={getValidationResult('technical_lead_email').join(
-              ' '
-            )}
             validated={
-              getValidationResult('technical_lead_email').length > 0
-                ? 'error'
-                : 'default'
+              validateEmail(technicalLeadEmail)
+                ? 'default'
+                : 'error'
             }
+            helperTextInvalid={INVALID_TEXT}
           >
             <InputGroup label="Labs Tech Lead">
               <InputGroupText
@@ -199,8 +200,8 @@ export function PointOfContactEditModal({
                 id="tech-lead-email"
                 name="tech-lead-email"
                 onChange={e => {
-                  setTechnicalLeadEmail(e);
                   validate('technical_lead_email')(e);
+                  setTechnicalLeadEmail(e.toLowerCase());
                 }}
                 placeholder="Email Address"
                 type="email"
@@ -215,14 +216,12 @@ export function PointOfContactEditModal({
             helperText="Who is the point person for the project?"
             isRequired
             label="Customer Contact"
-            helperTextInvalid={getValidationResult(
-              'customer_contact_email'
-            ).join(' ')}
             validated={
-              getValidationResult('customer_contact_email').length > 0
-                ? 'error'
-                : 'default'
+              validateEmail(customerContactEmail)
+                ? 'default'
+                : 'error'
             }
+            helperTextInvalid={INVALID_TEXT}
           >
             <InputGroup label="Customer Contact">
               <InputGroupText
@@ -259,8 +258,8 @@ export function PointOfContactEditModal({
                 name="customer-contact-email"
                 style={input}
                 onChange={e => {
-                  setCustomerContactEmail(e);
                   validate('customer_contact_email')(e);
+                  setCustomerContactEmail(e.toLowerCase());
                 }}
                 placeholder="Email Address"
                 type="email"
