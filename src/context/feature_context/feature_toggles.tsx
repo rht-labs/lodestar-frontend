@@ -47,9 +47,7 @@ export const FeatureToggles = ({
     }
   }
   const versionFeatures = getFeaturesFromVersion(version, FEATURE_VERSION_MAP);
-  const roleFeatures = (authContext?.sessionData?.roles ?? []).concat(
-    features ?? []
-  );
+  const roleFeatures = (authContext?.roles ?? []).concat(features ?? []);
   const [hasFetchedVersions, setHasFetchedVersions] = useState(false);
   useEffect(() => {
     if (!hasFetchedVersions) {

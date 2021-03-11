@@ -16,16 +16,17 @@ export interface SessionData {
 export interface IAuthContext {
   authError?: any;
   setAuthError: (error: any) => void;
-  sessionData?: SessionData;
   axios?: AxiosInstance;
   checkIsAuthenticated: () => Promise<boolean>;
+  userProfile?: UserProfile;
+  roles: string[];
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<IAuthContext>({
-  sessionData: undefined,
   authError: null,
+  roles: [],
   setAuthError: (error: any) => {},
   axios: Axios.create(),
   checkIsAuthenticated: async () => false,
@@ -112,11 +113,12 @@ export const AuthProvider = ({
     <Provider
       value={{
         authError,
+        userProfile: sessionData?.profile,
         setAuthError,
         checkIsAuthenticated,
-        sessionData,
         handleLoginCallback,
         logout: logout,
+        roles: sessionData?.roles ?? [],
       }}
     >
       {children}

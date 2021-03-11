@@ -27,10 +27,10 @@ import {
 import { useServiceProviders } from '../context/service_provider_context/service_provider_context';
 import { useFeedback } from '../context/feedback_context/feedback_context';
 import { EngagementProvider } from '../context/engagement_context/engagement_context';
+import { Token } from '../packages/api_v1_sdk/token';
 
 function WhatsMyToken() {
-  const { sessionData } = useSession();
-  return <pre>{sessionData?.tokens?.accessToken}</pre>;
+  return <pre>{Token.token.accessToken}</pre>;
 }
 
 export function LodestarRouter() {
@@ -117,7 +117,10 @@ export function LodestarRouter() {
                               <PrivateRoute path="/app/engagements/past">
                                 <EngagementListRoute
                                   filterDefinition={{
-                                    allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
+                                    allowedStatuses: [
+                                      EngagementStatus.past,
+                                      EngagementStatus.terminating,
+                                    ],
                                   }}
                                   title="Engagements"
                                 />
