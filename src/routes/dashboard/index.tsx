@@ -22,10 +22,9 @@ import { useFeedback } from '../../context/feedback_context/feedback_context';
 export function Dashboard() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const feedbackContext = useFeedback();
-  const { engagements, getEngagements } = useEngagementCollection(
-    {},
-    feedbackContext
-  );
+  const { engagements, getEngagements } = useEngagementCollection({
+    feedbackContext,
+  });
 
   useEffect(() => {
     if (!hasFetched) {

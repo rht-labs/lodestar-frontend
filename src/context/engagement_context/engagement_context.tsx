@@ -620,7 +620,6 @@ export const EngagementProvider = ({
          * ? REFACTOR: What is the relationship between set current engagement and this collection?
          */
         setCurrentEngagement,
-        engagements,
         /**
          * ? REFACTOR: This is no longer part of the public API?
          */
