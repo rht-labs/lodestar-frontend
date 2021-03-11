@@ -1,12 +1,12 @@
-import { EngagementService } from '../engagement_service';
-import { Engagement } from '../../../schemas/engagement';
+import { EngagementService } from '../../services/engagement_service/engagement_service';
+import { Engagement } from '../../schemas/engagement';
 import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import { AlreadyExistsError } from '../engagement_service_errors';
-import { EngagementJsonSerializer } from '../../../serializers/engagement/engagement_json_serializer';
-import { Logger } from '../../../utilities/logger';
-import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
-import { UserToken } from '../../../schemas/user_token';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
+import { Logger } from '../../utilities/logger';
+import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
+import { UserToken } from '../../schemas/user_token';
 
 export class Apiv1EngagementService implements EngagementService {
   constructor(baseURL: string) {

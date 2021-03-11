@@ -374,7 +374,7 @@ export const EngagementProvider = ({
         return engagement;
       } catch (e) {
         feedbackContext.hideLoader();
-        let errorMessage;
+        let errorMessage: string;
         if (e instanceof AlreadyExistsError) {
           errorMessage =
             'This client already has a project with that name. Please choose a different project name.';
@@ -652,18 +652,36 @@ export const EngagementProvider = ({
         createEngagementPoll,
         engagementFormConfig,
         requiredFields,
+        /**
+         * ? REFACTOR: This just becomes engagement?
+         */
         currentEngagement,
         missingRequiredFields,
         isLaunchable,
+        /**
+         * ? REFACTOR: What is the relationship between set current engagement and this collection?
+         */
         setCurrentEngagement,
         engagements,
+        /**
+         * ? REFACTOR: This is no longer part of the public API?
+         */
         getEngagement,
+        /**
+         * ? REFACTOR: This gets removed into engagement collections
+         */
         getEngagements: fetchEngagements,
         createEngagement,
         deleteEngagement,
         saveEngagement,
         launchEngagement,
+        /**
+         * ? REFACTOR: Where does this belong?
+         */
         fetchAvailableCategories,
+        /**
+         * ? REFACTOR: Does this get moved to a different context?
+         */
         availableCategories,
         currentChanges: {
           ...currentEngagement,

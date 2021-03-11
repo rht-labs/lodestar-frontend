@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/auth_service/authentication_service';
-import { AnalyticsContext } from '../analytics_context/analytics_context';
 import { AnalyticsCategory } from '../../schemas/analytics';
 
 import { UserProfile } from '../../schemas/user_profile';
-import { UserToken, LocalStoragePersistence } from '../../schemas/user_token';
+import { UserToken } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
+import { IAnalyticsContext } from '../analytics_context/analytics_context';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -22,8 +22,6 @@ export interface IAuthContext {
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
-
-UserToken.setPersistenceStrategy(new LocalStoragePersistence());
 
 export const AuthContext = createContext<IAuthContext>({
   sessionData: undefined,
@@ -43,7 +41,7 @@ export const AuthProvider = ({
 }: {
   children: React.ReactChild;
   authService: AuthService;
-  analyticsContext?: AnalyticsContext;
+  analyticsContext?: IAnalyticsContext;
 }) => {
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined

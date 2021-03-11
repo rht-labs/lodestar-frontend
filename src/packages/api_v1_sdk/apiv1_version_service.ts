@@ -1,9 +1,9 @@
-import { VersionService } from '../version_service';
-import { AppVersion } from '../../../schemas/version';
+import { VersionService } from '../../services/version_service/version_service';
+import { AppVersion } from '../../schemas/version';
 import Axios, { AxiosInstance } from 'axios';
-import { UserToken } from '../../../schemas/user_token';
-import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
-import { VersionJsonSerializer } from '../../../serializers/version/version_json_serializer';
+import { UserToken } from '../../schemas/user_token';
+import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
+import { VersionJsonSerializer } from '../../serializers/version/version_json_serializer';
 
 export class Apiv1VersionService extends VersionService {
   constructor(baseURL: string) {

@@ -1,11 +1,12 @@
 import Axios, { AxiosInstance } from 'axios';
-import { UserToken } from '../../../schemas/user_token';
+import { UserToken } from '../../schemas/user_token';
 import qs from 'query-string';
-import { UserProfile } from '../../../schemas/user_profile';
-import { AuthService } from '../authentication_service';
-import { Config } from '../../../schemas/config';
-import { Logger } from '../../../utilities/logger';
-import { AppFeature } from '../../../common/app_features';
+import { UserProfile } from '../../schemas/user_profile';
+import { AuthService } from '../../services/auth_service/authentication_service';
+import { Config } from '../../schemas/config';
+import { Logger } from '../../utilities/logger';
+import { AppFeature } from '../../common/app_features';
+import { Token } from './token';
 
 export class Apiv1AuthService implements AuthService {
   constructor(config: Config) {
@@ -18,15 +19,15 @@ export class Apiv1AuthService implements AuthService {
   axios: AxiosInstance;
 
   saveToken(tokenObject: UserToken) {
-    UserToken.token = tokenObject;
+    Token.token = tokenObject;
   }
 
   async clearSession() {
     this.saveToken(null);
   }
 
-  getToken = () => {
-    return UserToken.token;
+  getToken = (): UserToken => {
+    return Token.token;
   };
 
   isLoggedIn = async (): Promise<boolean> => {
