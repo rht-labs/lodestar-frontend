@@ -16,16 +16,16 @@ import {
 } from '@patternfly/react-icons';
 import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
-import {
-  EngagementCollectionProvider,
-  useEngagementCollection,
-} from '../../context/engagement_collection_context/engagement_collection_context';
-import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
 
-function DASHBOARD() {
+export function Dashboard() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
-  const { engagements, getEngagements } = useEngagementCollection({});
+  const feedbackContext = useFeedback();
+  const { engagements, getEngagements } = useEngagementCollection(
+    {},
+    feedbackContext
+  );
 
   useEffect(() => {
     if (!hasFetched) {
@@ -99,18 +99,5 @@ function DASHBOARD() {
         </Gallery>
       </PageSection>
     </>
-  );
-}
-
-export function Dashboard() {
-  const { engagementService } = useServiceProviders();
-  const feedbackContext = useFeedback();
-  return (
-    <EngagementCollectionProvider
-      engagementService={engagementService}
-      feedbackContext={feedbackContext}
-    >
-      <DASHBOARD />
-    </EngagementCollectionProvider>
   );
 }

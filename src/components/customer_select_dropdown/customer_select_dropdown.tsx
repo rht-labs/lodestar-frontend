@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select, SelectVariant, SelectOption } from '@patternfly/react-core';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 export interface CustomerSelectDropdownProps {
   onSelect: (selectedOption: string) => void;
   selectedValue?: string;
@@ -41,7 +41,7 @@ export function _CustomerSelectDropdown(
 }
 
 export function CustomerSelectDropdown(props: CustomerSelectDropdownProps) {
-  const { engagements, getEngagements } = useEngagements();
+  const { engagements, getEngagements } = useEngagementCollection();
   const customerNames = Array.from(
     new Set(
       engagements?.filter(e => !!e.customer_name).map(e => e.customer_name) ??

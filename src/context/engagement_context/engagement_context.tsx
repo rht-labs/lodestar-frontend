@@ -220,25 +220,6 @@ export const EngagementProvider = ({
     [engagements]
   );
 
-  // const fetchEngagements = useCallback(async () => {
-  //   try {
-  //     await _validateAuthStatusRef.current();
-  //     feedbackContext.showLoader();
-  //     const engagements = await engagementService.fetchEngagements();
-  //     setEngagements(engagements);
-  //     feedbackContext.hideLoader();
-  //     return engagements;
-  //   } catch (e) {
-  //     feedbackContext.showAlert(
-  //       'Something went wrong while getting the engagements',
-  //       AlertType.error,
-  //       true
-  //     );
-  //     feedbackContext.hideLoader();
-  //     await _handleErrors(e);
-  //   }
-  // }, [engagementService, feedbackContext, _handleErrors]);
-
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
       await _validateAuthStatusRef.current();
