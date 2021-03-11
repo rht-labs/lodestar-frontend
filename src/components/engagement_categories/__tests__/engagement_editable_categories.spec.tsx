@@ -11,6 +11,7 @@ import { EngagementContext } from '../../../context/engagement_context/engagemen
 import { EngagementEditableCategories } from '../engagement_editable_categories';
 import { Engagement } from '../../../schemas/engagement';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
+import { CategoryContext } from '../../../context/category_context/category_context';
 
 describe('Engagement Editable Categories', () => {
   test('changing a category updates the engagement context', async () => {
@@ -24,7 +25,6 @@ describe('Engagement Editable Categories', () => {
             <EngagementContext.Provider
               value={{
                 updateEngagementFormField: onUpdateField,
-                fetchAvailableCategories: async () => [],
                 saveEngagement: onSave,
                 currentEngagement: {
                   ...Engagement.fromFake(true),
@@ -32,7 +32,11 @@ describe('Engagement Editable Categories', () => {
                 },
               }}
             >
-              <EngagementEditableCategories></EngagementEditableCategories>
+              <CategoryContext.Provider
+                value={{ fetchCategories: async () => [], categories: [] }}
+              >
+                <EngagementEditableCategories></EngagementEditableCategories>
+              </CategoryContext.Provider>
             </EngagementContext.Provider>
           </FeatureToggles>
         </TestStateWrapper>

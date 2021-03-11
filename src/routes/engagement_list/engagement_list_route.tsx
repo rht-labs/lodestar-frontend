@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import {
   PageSection,
   Text,
@@ -19,6 +18,12 @@ import { EngagementFilter } from '../../schemas/engagement_filter';
 import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 import { EngagementList } from '../../components/engagement_list/engagement_list';
 import { Feature } from '../../components/feature/feature';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import {
+  EngagementCollectionProvider,
+  useEngagementCollection,
+} from '../../context/engagement_collection_context/engagement_collection_context';
+import { useFeedback } from '../../context/feedback_context/feedback_context';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
@@ -27,10 +32,13 @@ export interface EngagementListRouteProps {
   subtitle?: string;
 }
 
-export function EngagementListRoute(props: EngagementListRouteProps) {
+export function ENGAGEMENT_LIST_ROUTE(props: EngagementListRouteProps) {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
-  const { engagements: contextEngagements, getEngagements } = useEngagements();
 
+  const {
+    engagements: contextEngagements,
+    getEngagements,
+  } = useEngagementCollection();
   useEffect(() => {
     if (!hasFetched) {
       setHasFetched(true);
@@ -98,5 +106,18 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
         <EngagementList engagements={filteredEngagements} />
       </PageSection>
     </>
+  );
+}
+
+export function EngagementListRoute(props: EngagementListRouteProps) {
+  const { engagementService } = useServiceProviders();
+  const feedbackContext = useFeedback();
+  return (
+    <EngagementCollectionProvider
+      feedbackContext={feedbackContext}
+      engagementService={engagementService}
+    >
+      <ENGAGEMENT_LIST_ROUTE {...props} />
+    </EngagementCollectionProvider>
   );
 }

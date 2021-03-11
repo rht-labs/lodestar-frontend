@@ -13,7 +13,7 @@ import { EngagementAtAGlance } from './engagement_at_a_glance';
 import { getEngagementStatus, Engagement } from '../../schemas/engagement';
 
 export interface DataCardProps {
-  engagement: Engagement;
+  engagement: Partial<Engagement>;
 }
 
 export function EngagementListItem(props: DataCardProps) {
@@ -49,13 +49,13 @@ export function EngagementListItem(props: DataCardProps) {
               </Title>
               {engagement.engagement_categories?.length > 0 ? (
                 engagement?.engagement_categories.map(currentChip => (
-                    <Label
-                      key={currentChip.name}
-                      style={{ marginTop: '1rem', marginRight: '0.5rem' }}
-                      color="blue"
-                    >
-                      {currentChip.name}
-                    </Label>
+                  <Label
+                    key={currentChip.name}
+                    style={{ marginTop: '1rem', marginRight: '0.5rem' }}
+                    color="blue"
+                  >
+                    {currentChip.name}
+                  </Label>
                 ))
               ) : (
                 <></>

@@ -1,20 +1,18 @@
 import { CategoryService } from '../../services/category_service/category_service';
 import { EngagementCategory } from '../../schemas/engagement_category';
-import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { UserToken } from '../../schemas/user_token';
 import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
+import { getApiV1HttpClient } from './client';
 
 export class Apiv1CategoryService implements CategoryService {
+  private baseUrl: string;
   constructor(baseURL: string) {
-    this.axios = Axios.create({ baseURL });
-    this.axios.interceptors.request.use((request: AxiosRequestConfig) => {
-      request.headers.Authorization = `Bearer ${UserToken.token?.accessToken}`;
-      return request;
-    });
+    this.baseUrl = baseURL;
+  }
+  private get axios() {
+    return getApiV1HttpClient(this.baseUrl);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
-  axios?: AxiosInstance;
 
   async fetchCategories(): Promise<EngagementCategory[]> {
     try {

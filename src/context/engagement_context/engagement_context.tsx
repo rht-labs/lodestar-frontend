@@ -28,7 +28,6 @@ import {
   EngagementPollIntervalStrategy,
 } from '../../schemas/engagement_poll';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
-import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 import { engagementFormReducer } from './engagement_form_reducer';
 import { IAuthContext } from '../auth_context/auth_context';
@@ -37,7 +36,6 @@ import { HostingEnvironment } from '../../schemas/hosting_environment';
 export type FieldGroup = { [key: string]: string[] };
 
 export interface IEngagementContext {
-  getEngagements: () => Promise<Engagement[]>;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
   engagements?: Engagement[];
@@ -61,8 +59,6 @@ export interface IEngagementContext {
   engagementFormConfig?: EngagementFormConfig;
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
-  fetchAvailableCategories: () => void;
-  availableCategories?: EngagementCategory[];
 }
 
 export enum EngagementGroupings {
@@ -102,7 +98,6 @@ const { Provider } = EngagementContext;
 export const EngagementProvider = ({
   children,
   engagementService,
-  categoryService,
   feedbackContext,
   authContext,
   analyticsContext,
@@ -117,9 +112,6 @@ export const EngagementProvider = ({
   engagementFormConfig: EngagementFormConfig;
 }) => {
   const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [availableCategories, setAvailableCategories] = useState<
-    EngagementCategory[]
-  >(undefined);
   const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -228,24 +220,24 @@ export const EngagementProvider = ({
     [engagements]
   );
 
-  const fetchEngagements = useCallback(async () => {
-    try {
-      await _validateAuthStatusRef.current();
-      feedbackContext.showLoader();
-      const engagements = await engagementService.fetchEngagements();
-      setEngagements(engagements);
-      feedbackContext.hideLoader();
-      return engagements;
-    } catch (e) {
-      feedbackContext.showAlert(
-        'Something went wrong while getting the engagements',
-        AlertType.error,
-        true
-      );
-      feedbackContext.hideLoader();
-      await _handleErrors(e);
-    }
-  }, [engagementService, feedbackContext, _handleErrors]);
+  // const fetchEngagements = useCallback(async () => {
+  //   try {
+  //     await _validateAuthStatusRef.current();
+  //     feedbackContext.showLoader();
+  //     const engagements = await engagementService.fetchEngagements();
+  //     setEngagements(engagements);
+  //     feedbackContext.hideLoader();
+  //     return engagements;
+  //   } catch (e) {
+  //     feedbackContext.showAlert(
+  //       'Something went wrong while getting the engagements',
+  //       AlertType.error,
+  //       true
+  //     );
+  //     feedbackContext.hideLoader();
+  //     await _handleErrors(e);
+  //   }
+  // }, [engagementService, feedbackContext, _handleErrors]);
 
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
@@ -631,21 +623,6 @@ export const EngagementProvider = ({
     [engagementService, _deleteEngagement, feedbackContext, _handleErrors]
   );
 
-  const fetchAvailableCategories = useCallback(async () => {
-    try {
-      // feedbackContext.showLoader();
-      const categories = await categoryService.fetchCategories();
-      setAvailableCategories(categories);
-      // feedbackContext.hideLoader();
-    } catch (e) {
-      try {
-        _handleErrors(e);
-      } catch (e) {
-        throw e;
-      }
-    }
-  }, [categoryService, _handleErrors]);
-
   return (
     <Provider
       value={{
@@ -667,22 +644,10 @@ export const EngagementProvider = ({
          * ? REFACTOR: This is no longer part of the public API?
          */
         getEngagement,
-        /**
-         * ? REFACTOR: This gets removed into engagement collections
-         */
-        getEngagements: fetchEngagements,
         createEngagement,
         deleteEngagement,
         saveEngagement,
         launchEngagement,
-        /**
-         * ? REFACTOR: Where does this belong?
-         */
-        fetchAvailableCategories,
-        /**
-         * ? REFACTOR: Does this get moved to a different context?
-         */
-        availableCategories,
         currentChanges: {
           ...currentEngagement,
           ...currentEngagementChanges,

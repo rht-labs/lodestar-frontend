@@ -14,13 +14,18 @@ import {
   PendingIcon,
   TachometerAltIcon,
 } from '@patternfly/react-icons';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
+import {
+  EngagementCollectionProvider,
+  useEngagementCollection,
+} from '../../context/engagement_collection_context/engagement_collection_context';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useFeedback } from '../../context/feedback_context/feedback_context';
 
-export function Dashboard() {
-  const { engagements, getEngagements } = useEngagements();
+function DASHBOARD() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
+  const { engagements, getEngagements } = useEngagementCollection({});
 
   useEffect(() => {
     if (!hasFetched) {
@@ -37,7 +42,9 @@ export function Dashboard() {
     engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
   ).length;
   const numberOfPastEngagements = engagements?.filter(
-    engagementFilterFactory({ allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating] })
+    engagementFilterFactory({
+      allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
+    })
   ).length;
 
   return (
@@ -92,5 +99,18 @@ export function Dashboard() {
         </Gallery>
       </PageSection>
     </>
+  );
+}
+
+export function Dashboard() {
+  const { engagementService } = useServiceProviders();
+  const feedbackContext = useFeedback();
+  return (
+    <EngagementCollectionProvider
+      engagementService={engagementService}
+      feedbackContext={feedbackContext}
+    >
+      <DASHBOARD />
+    </EngagementCollectionProvider>
   );
 }

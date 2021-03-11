@@ -268,7 +268,7 @@ export abstract class Engagement {
 }
 
 export const getEngagementStatus = (
-  engagement: Engagement
+  engagement: Partial<Engagement>
 ): EngagementStatus => {
   if (!engagement) {
     return null;

@@ -1,23 +1,19 @@
 import { VersionService } from '../../services/version_service/version_service';
 import { AppVersion } from '../../schemas/version';
-import Axios, { AxiosInstance } from 'axios';
-import { UserToken } from '../../schemas/user_token';
 import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
 import { VersionJsonSerializer } from '../../serializers/version/version_json_serializer';
+import { getApiV1HttpClient } from './client';
 
 export class Apiv1VersionService extends VersionService {
   constructor(baseURL: string) {
     super();
-    this.axios = Axios.create();
     this.baseUrl = baseURL;
-    this.axios.interceptors.request.use(request => {
-      request.headers.Authorization = `Bearer ${UserToken.token?.accessToken}`;
-      return request;
-    });
   }
   baseUrl: string;
   private static versionSerializer = new VersionJsonSerializer();
-  axios?: AxiosInstance;
+  private get axios() {
+    return getApiV1HttpClient(this.baseUrl);
+  }
 
   private async fetchManifest(): Promise<object> {
     const { data } = await this.axios.get(

@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import {
@@ -54,4 +54,18 @@ export const EngagementCollectionProvider = ({
       {children}
     </EngagementCollectionContext.Provider>
   );
+};
+
+interface EngagementCollectionFilter {}
+export const useEngagementCollection = (
+  filter?: EngagementCollectionFilter
+) => {
+  const { getEngagements, engagements } = useContext(
+    EngagementCollectionContext
+  );
+  const fetchEngagementsWithParameters = () => {
+    console.log('TODO: filter engagements with:', filter);
+    getEngagements();
+  };
+  return { getEngagements: fetchEngagementsWithParameters, engagements };
 };

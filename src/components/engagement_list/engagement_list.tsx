@@ -35,7 +35,11 @@ function EngagementListEmptyState(props) {
   );
 }
 
-export function EngagementList({ engagements }: { engagements: Engagement[] }) {
+export function EngagementList({
+  engagements,
+}: {
+  engagements: Partial<Engagement>[];
+}) {
   if (!engagements || !engagements.length) {
     return <EngagementListEmptyState />;
   }

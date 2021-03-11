@@ -4,7 +4,10 @@ import {
 } from '../schemas/engagement_filter';
 import { Engagement, getEngagementStatus } from '../schemas/engagement';
 
-function hasSearchTermMatch(engagement: Engagement, searchTerm: string = '') {
+function hasSearchTermMatch(
+  engagement: Partial<Engagement>,
+  searchTerm: string = ''
+) {
   if (!searchTerm || !engagement) {
     return true;
   }
@@ -24,11 +27,11 @@ function hasSearchTermMatch(engagement: Engagement, searchTerm: string = '') {
  */
 export const engagementFilterFactory = (
   filter?: EngagementFilter
-): ((engagement: Engagement) => boolean) => {
+): ((engagement: Partial<Engagement>) => boolean) => {
   if (!filter || Object.keys(filter).length === 0) {
     return () => true;
   }
-  return (engagement: Engagement) => {
+  return (engagement: Partial<Engagement>) => {
     const filterTestResults: boolean[] = [];
     if (filter.allowedStatuses) {
       filterTestResults.push(
@@ -62,16 +65,16 @@ export const engagementFilterFactory = (
 
 const engagementSorters = (sortOrderMultiplier: number = 1) => {
   return {
-    startDate: (a: Engagement, b: Engagement) =>
+    startDate: (a: Partial<Engagement>, b: Partial<Engagement>) =>
       (a.start_date > b.start_date ? 1 : -1) * sortOrderMultiplier,
 
-    endDate: (a: Engagement, b: Engagement) =>
+    endDate: (a: Partial<Engagement>, b: Partial<Engagement>) =>
       (a.end_date > b.end_date ? 1 : -1) * sortOrderMultiplier,
 
-    customerName: (a: Engagement, b: Engagement) =>
+    customerName: (a: Partial<Engagement>, b: Partial<Engagement>) =>
       (a.customer_name > b.customer_name ? 1 : -1) * sortOrderMultiplier,
 
-    projectName: (a: Engagement, b: Engagement) =>
+    projectName: (a: Partial<Engagement>, b: Partial<Engagement>) =>
       (a.project_name > b.project_name ? 1 : -1) * sortOrderMultiplier,
   };
 };
@@ -81,8 +84,8 @@ const engagementSorters = (sortOrderMultiplier: number = 1) => {
  * It returns a single function that can be passed to the `sort` method of an Engagement array.
  */
 export const engagementSortFactory = ({ sort }: EngagementFilter = {}): ((
-  a: Engagement,
-  b: Engagement
+  a: Partial<Engagement>,
+  b: Partial<Engagement>
 ) => number) => {
   /**
    * The sort order multiplier translates the isAscending boolean field into

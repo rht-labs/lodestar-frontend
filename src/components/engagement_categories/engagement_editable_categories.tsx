@@ -8,12 +8,13 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../context/engagement_context/engagement_context';
+import { useCategories } from '../../context/category_context/category_context';
 
 export function EngagementEditableCategories() {
   const { saveEngagement, currentEngagement: engagement } = useEngagements();
   const [editMode, setEditMode] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
-  const { availableCategories, fetchAvailableCategories } = useEngagements();
+  const { categories, fetchCategories } = useCategories();
 
   const [updatedCategories, setUpdatedCategories] = useEngagementFormField(
     'engagement_categories',
@@ -21,16 +22,11 @@ export function EngagementEditableCategories() {
   );
 
   useEffect(() => {
-    if (!hasFetched && availableCategories === undefined) {
+    if (!hasFetched && categories?.length === 0) {
       setHasFetched(true);
-      fetchAvailableCategories();
+      fetchCategories();
     }
-  }, [
-    availableCategories,
-    hasFetched,
-    setHasFetched,
-    fetchAvailableCategories,
-  ]);
+  }, [categories, hasFetched, setHasFetched, fetchCategories]);
 
   const formattedCategories = engagement?.engagement_categories?.map?.(
     item => item.name
@@ -102,7 +98,7 @@ export function EngagementEditableCategories() {
                 }))
               )
             }
-            allCategories={availableCategories}
+            allCategories={categories}
             cancelEdit={cancelEdit}
             saveAndCloseEditMode={SaveAndCloseEditMode}
           />
