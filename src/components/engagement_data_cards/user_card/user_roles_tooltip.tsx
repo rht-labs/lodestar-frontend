@@ -2,10 +2,10 @@ import React from 'react';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 import { Tooltip, TooltipPosition } from '@patternfly/react-core';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 
 export function UserRolesTooltip() {
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
 
   function createTooltipText(engagementFormConfig: EngagementFormConfig) {
     let text = [<div key={'tooltipText'} />];

@@ -6,13 +6,13 @@ import { GitCommit } from '../../../schemas/git_commit';
 import { ActivityHistoryLineItem } from '../../activity_history_line_item/activity_history_line_item';
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 
 const ACTIVITY_HISTORY_MODAL_KEY = 'activity_history';
 
 export function ActivityHistoryCard() {
   const { requestOpen, activeModalKey } = useModalVisibility();
-  const { currentEngagement: engagement } = useEngagements();
+  const { currentEngagement: engagement } = useEngagement();
   const commits = engagement?.commits ?? [];
   return (
     <>

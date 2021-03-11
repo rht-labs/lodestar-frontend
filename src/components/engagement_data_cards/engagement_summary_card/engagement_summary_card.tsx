@@ -10,7 +10,7 @@ import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { EngagementStatusText } from '../../engagement_status_text/engagement_status_text';
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { formatUtcDate } from '../../../common/dates';
 import { useHistory } from 'react-router';
 
@@ -23,7 +23,7 @@ export function EngagementSummaryCard() {
     missingRequiredFields,
     currentChanges,
     saveEngagement,
-  } = useEngagements();
+  } = useEngagement();
   const { requestClose, requestOpen, activeModalKey } = useModalVisibility();
   const engagementSummaryRequiredFields = [
     'customer_name',

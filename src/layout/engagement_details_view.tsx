@@ -10,7 +10,7 @@ import {
 } from '@patternfly/react-core';
 import { LaunchAlertBanner } from '../components/launch_alert_banner/launch_alert_banner';
 import { useConfig } from '../context/config_context/config_hook';
-import { useEngagements } from '../context/engagement_context/engagement_hook';
+import { useEngagement } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
 import { EngagementEditableCategories } from '../components/engagement_categories/engagement_editable_categories';
 import {
@@ -33,12 +33,12 @@ export function EngagementDetailsViewTemplate({
     missingRequiredFields,
     isLaunchable: isEngagementLaunchable,
     requiredFields,
-  } = useEngagements();
+  } = useEngagement();
 
   const { appConfig } = useConfig();
 
   const { logEvent } = useAnalytics();
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
 
   return (
     <>

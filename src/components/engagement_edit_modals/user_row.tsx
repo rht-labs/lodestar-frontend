@@ -20,7 +20,7 @@ import { APP_FEATURES } from '../../common/app_features';
 import { Feature } from '../feature/feature';
 import { useFeatures } from '../../context/feature_context/feature_hook';
 import { EngagementStatus, EngagementUser } from '../../schemas/engagement';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 
 export interface UserRowProps {
   user: EngagementUser;
@@ -37,7 +37,7 @@ export const UserRow = ({
   isDeleted: isUserDeleted,
   status,
 }: UserRowProps) => {
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
   const { hasFeature } = useFeatures();
   const [isReset, setIsReset] = useState(false);
   const INVALID_TEXT = 'Please enter a valid email address';

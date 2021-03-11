@@ -657,22 +657,6 @@ export const useEngagementDetails = () => {
   };
 };
 
-export const useEngagement = (customerName: string, projectName: string) => {
-  const engagementContext = useContext(EngagementContext);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    setIsLoading(true);
-    engagementContext
-      .getEngagement(customerName, projectName)
-      .then(engagement => engagementContext.setCurrentEngagement(engagement))
-      .catch(error => setError(error))
-      .finally(() => setIsLoading(false));
-  }, [engagementContext, customerName, projectName]);
-  return [engagementContext.currentEngagement, error, isLoading];
-};
-
 export const useEngagementFormField = <K extends keyof Engagement>(
   formField: K,
   group?: EngagementGroupings

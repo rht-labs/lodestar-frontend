@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Flex, Label } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
 import { CategoryTypehead } from './category_typehead';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 import { Feature } from '../feature/feature';
 import {
   EngagementGroupings,
@@ -11,7 +11,7 @@ import {
 import { useCategories } from '../../context/category_context/category_context';
 
 export function EngagementEditableCategories() {
-  const { saveEngagement, currentEngagement: engagement } = useEngagements();
+  const { saveEngagement, currentEngagement: engagement } = useEngagement();
   const [editMode, setEditMode] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
   const { categories, fetchCategories } = useCategories();

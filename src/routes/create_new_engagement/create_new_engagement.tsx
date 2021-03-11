@@ -15,7 +15,7 @@ import {
 } from '@patternfly/react-core';
 import { Button, Form, FormGroup, Text } from '@patternfly/react-core';
 import { useAnalytics } from '../../context/analytics_context/analytics_context';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import { CheckCircleIcon } from '@patternfly/react-icons';
@@ -23,9 +23,10 @@ import { SectionTitle } from '../../components/section_title/section_title';
 import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
 import { TextFormField } from '../../components/form_fields/text_form_field';
+import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 
 export function CreateNewEngagement() {
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
   return (
     <ValidationProvider
       validators={getValidatorsFromEngagementFormConfig(engagementFormConfig)}
@@ -39,9 +40,8 @@ export function CreateNewEngagementForm() {
     createEngagement,
     engagementFormConfig,
     currentEngagement,
-    getEngagements,
-    engagements,
-  } = useEngagements();
+  } = useEngagement();
+  const { engagements, getEngagements } = useEngagementCollection();
   const history = useHistory();
   const [customerName, setCustomerName] = useState(null);
   const [projectName, setProjectName] = useState(null);
@@ -50,7 +50,9 @@ export function CreateNewEngagementForm() {
   const [selectedProjectNameToFind, setSelectedProjectNameToFind] = useState<
     string
   >();
-  const [copiedEngagement, setCopiedEngagement] = useState<Engagement>();
+  const [copiedEngagement, setCopiedEngagement] = useState<
+    Partial<Engagement>
+  >();
   const { logEvent } = useAnalytics();
 
   useEffect(() => {
@@ -152,7 +154,7 @@ export function CreateNewEngagementForm() {
     getValidationResult('engagement_region')?.length === 0;
 
   function findEngagementToCopy(
-    engagements: Engagement[],
+    engagements: Partial<Engagement>[],
     selectedProjectNameToFind?: string
   ) {
     return engagements?.find(

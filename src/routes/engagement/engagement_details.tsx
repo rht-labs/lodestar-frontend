@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Engagement } from '../../schemas/engagement';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 import { Route, useParams, Switch, useRouteMatch } from 'react-router';
 import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import {
@@ -18,12 +18,14 @@ export interface EngagementViewProps {
 
 export interface EngagementDetailViewProps {
   error: Error;
-  setCurrentEngagement: (engagement: Engagement) => void;
   currentEngagement: Engagement;
   createEngagementPoll: (
     engagement: Engagement
   ) => Promise<{ cancel: () => void }>;
-  getEngagement: (customer_name, project_name) => Promise<Engagement>;
+  getEngagement: (
+    customer_name: string,
+    project_name: string
+  ) => Promise<Engagement>;
 }
 export const validatorsWithDateValidators = (
   validators: FormValidator,
@@ -63,12 +65,10 @@ export const EngagementDetailView = () => {
   const {
     createEngagementPoll,
     saveEngagement,
-    setCurrentEngagement,
-    getEngagement,
     currentEngagement,
     currentChanges,
     engagementFormConfig,
-  } = useEngagements();
+  } = useEngagement({ projectName: project_name, customerName: customer_name });
 
   useEffect(() => {
     let engagementPoll;
@@ -79,18 +79,6 @@ export const EngagementDetailView = () => {
       (await engagementPoll)?.cancel?.();
     };
   }, [currentEngagement, createEngagementPoll]);
-
-  useEffect(() => {
-    if (!customer_name || !project_name) {
-      return;
-    }
-    getEngagement(customer_name, project_name).then(engagement => {
-      if (engagement) {
-        setCurrentEngagement(engagement);
-      } else {
-      }
-    });
-  }, [customer_name, project_name, getEngagement, setCurrentEngagement]);
 
   const validators = getValidatorsFromEngagementFormConfig(
     engagementFormConfig

@@ -16,7 +16,7 @@ import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { UserList } from './user_list';
 import { RedhatIcon, UserIcon, UsersIcon } from '@patternfly/react-icons';
 import { UserTableTitleIcon } from './user_table_title_icon';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { uuid } from 'uuidv4';
 import { useEngagementUserManager } from '../../../context/engagement_context/engagement_context';
 
@@ -36,7 +36,7 @@ export function UserCard() {
     currentChanges,
     currentEngagement: engagement,
     saveEngagement,
-  } = useEngagements();
+  } = useEngagement();
   const onClose = () => {
     requestClose();
     clearCurrentChanges();
@@ -105,7 +105,7 @@ const externalUsers = (
 );
 
 const UserTable = ({ users }: { users: EngagementUser[] }) => {
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
   const getRoleName = (userRole: string) =>
     engagementFormConfig?.user_options?.user_roles?.options?.find?.(
       role => role.value === userRole
