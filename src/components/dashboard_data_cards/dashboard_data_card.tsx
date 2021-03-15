@@ -16,7 +16,7 @@ export interface DashboardDataCardProps {
   icon: any;
   title: string;
   subtitle: string;
-  numberOfEngagements: number;
+  numberOfEngagements?: number;
   url: string;
 }
 
@@ -44,10 +44,9 @@ export function DashboardDataCard({
               {numberOfEngagements}
             </Text>
             <Button variant="link"
-                    isInline
                     onClick={() => { history.push(url)} }
                     data-cy={`button_${title[1]}`}>
-              <Text component={TextVariants.h2}>
+              <Text style={{textAlignVertical: "center"}} component={TextVariants.h2}>
                 {title}
               </Text>
             </Button>

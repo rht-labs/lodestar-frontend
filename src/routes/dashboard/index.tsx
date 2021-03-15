@@ -17,6 +17,7 @@ import {
 import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
+import {DashboardPeopleEnabledCard} from "../../components/dashboard_data_cards/dashboard_people_enabled_card";
 
 export function Dashboard() {
   const { engagements, getEngagements } = useEngagements();
@@ -89,6 +90,9 @@ export function Dashboard() {
             subtitle={'Engagements that are finished, closed or archived.'}
             url={'/app/engagements/past'}
           />
+        </Gallery>
+        <Gallery hasGutter style={{marginTop: '1rem'}}>
+          <DashboardPeopleEnabledCard />
         </Gallery>
       </PageSection>
     </>
