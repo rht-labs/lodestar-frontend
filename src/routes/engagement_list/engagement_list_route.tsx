@@ -20,6 +20,7 @@ import { EngagementList } from '../../components/engagement_list/engagement_list
 import { Feature } from '../../components/feature/feature';
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
@@ -32,10 +33,11 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const feedbackContext = useFeedback();
 
+  const { engagementService } = useServiceProviders();
   const {
     engagements: contextEngagements,
     getEngagements,
-  } = useEngagementCollection({ feedbackContext });
+  } = useEngagementCollection({ feedbackContext, engagementService });
   useEffect(() => {
     if (!hasFetched) {
       setHasFetched(true);

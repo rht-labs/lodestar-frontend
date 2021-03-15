@@ -18,11 +18,14 @@ import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 
 export function Dashboard() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const feedbackContext = useFeedback();
+  const { engagementService } = useServiceProviders();
   const { engagements, getEngagements } = useEngagementCollection({
+    engagementService,
     feedbackContext,
   });
 

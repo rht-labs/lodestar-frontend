@@ -24,6 +24,7 @@ import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
 import { TextFormField } from '../../components/form_fields/text_form_field';
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig } = useEngagement();
@@ -41,7 +42,10 @@ export function CreateNewEngagementForm() {
     engagementFormConfig,
     currentEngagement,
   } = useEngagement();
-  const { engagements, getEngagements } = useEngagementCollection();
+  const { engagementService } = useServiceProviders();
+  const { engagements = [], getEngagements } = useEngagementCollection({
+    engagementService,
+  });
   const history = useHistory();
   const [customerName, setCustomerName] = useState(null);
   const [projectName, setProjectName] = useState(null);

@@ -12,7 +12,7 @@ import MockDate from 'mockdate';
 import { MemoryRouter } from 'react-router';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
 import { act } from 'react-dom/test-utils';
-import { validatorsWithDateValidators } from '../../../routes/engagement_details/engagement_details';
+import { validatorsWithDateValidators } from '../../../routes/engagement/engagement_details';
 import { ValidationProvider } from '../../../context/validation_context/validation_context';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';

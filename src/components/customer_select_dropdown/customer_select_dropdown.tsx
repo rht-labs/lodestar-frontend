@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Select, SelectVariant, SelectOption } from '@patternfly/react-core';
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 export interface CustomerSelectDropdownProps {
   onSelect: (selectedOption: string) => void;
   selectedValue?: string;
@@ -41,7 +42,10 @@ export function _CustomerSelectDropdown(
 }
 
 export function CustomerSelectDropdown(props: CustomerSelectDropdownProps) {
-  const { engagements, getEngagements } = useEngagementCollection();
+  const { engagementService } = useServiceProviders();
+  const { engagements, getEngagements } = useEngagementCollection({
+    engagementService,
+  });
   const customerNames = Array.from(
     new Set(
       engagements?.filter(e => !!e.customer_name).map(e => e.customer_name) ??

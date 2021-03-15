@@ -6,6 +6,7 @@ import {
   render,
   RenderResult,
   screen,
+  waitFor,
 } from '@testing-library/react';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementEditableCategories } from '../engagement_editable_categories';
@@ -48,6 +49,7 @@ describe('Engagement Editable Categories', () => {
     const inputWrapper = await view.findByTestId('category-select-wrapper');
     const inputs = inputWrapper.getElementsByTagName('input');
     const input = inputs[0];
+    fireEvent.click(input);
     fireEvent.change(input, { target: { value: 'a category' } });
     fireEvent.click(await view.findByText('Create "a category"'));
 

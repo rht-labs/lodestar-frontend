@@ -38,7 +38,6 @@ export type FieldGroup = { [key: string]: string[] };
 export interface IEngagementContext {
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
-  engagements?: Engagement[];
   updateEngagementFormField: <T extends keyof Engagement>(
     field: T,
     value: Engagement[T],
@@ -111,7 +110,6 @@ export const EngagementProvider = ({
   analyticsContext?: IAnalyticsContext;
   engagementFormConfig: EngagementFormConfig;
 }) => {
-  const [engagements, setEngagements] = useState<Engagement[]>([]);
   const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -196,30 +194,6 @@ export const EngagementProvider = ({
 
   const _validateAuthStatusRef = useRef(async () => {});
 
-  const _updateEngagementInPlace = useCallback(
-    engagement => {
-      const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
-        if (
-          engagement?.project_name &&
-          engagement?.customer_name &&
-          engagement?.project_name === comparisonEngagement?.project_name &&
-          engagement?.customer_name === comparisonEngagement?.customer_name
-        ) {
-          return true;
-        }
-        return false;
-      });
-      const oldEngagement = engagements[oldEngagementIndex];
-      if (oldEngagementIndex > -1) {
-        const newEngagements = [...engagements];
-        newEngagements.splice(oldEngagementIndex, 1, engagement);
-        setEngagements(newEngagements);
-      }
-      return oldEngagement;
-    },
-    [engagements]
-  );
-
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
       await _validateAuthStatusRef.current();
@@ -228,18 +202,12 @@ export const EngagementProvider = ({
           engagement?.customer_name,
           engagement?.project_name
         );
-        _updateEngagementInPlace(refreshedEngagement);
         setCurrentEngagement(refreshedEngagement);
       } catch (e) {
         _handleErrors(e);
       }
     },
-    [
-      _updateEngagementInPlace,
-      engagementService,
-      _handleErrors,
-      setCurrentEngagement,
-    ]
+    [engagementService, _handleErrors, setCurrentEngagement]
   );
 
   const _checkHasUpdateRef = useRef(async () => false);
@@ -282,7 +250,7 @@ export const EngagementProvider = ({
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
       try {
-        let availableEngagements = engagements ?? [];
+        let availableEngagements = [];
         let cachedEngagement = availableEngagements?.find(
           engagement =>
             engagement?.customer_name === customerName &&
@@ -308,26 +276,7 @@ export const EngagementProvider = ({
         }
       }
     },
-    [
-      engagements,
-      feedbackContext,
-      _handleErrors,
-      engagementService,
-      setCurrentEngagement,
-    ]
-  );
-
-  const _addNewEngagement = useCallback(
-    async (newEngagement: Engagement) => {
-      try {
-        const newEngagementList = [newEngagement, ...(engagements ?? [])];
-        setEngagements(newEngagementList);
-      } catch (e) {
-        await _handleErrors(e);
-        Logger.instance.error(e);
-      }
-    },
-    [engagements, _handleErrors]
+    [feedbackContext, _handleErrors, engagementService, setCurrentEngagement]
   );
 
   const createEngagement = useCallback(
@@ -336,8 +285,6 @@ export const EngagementProvider = ({
       try {
         await _validateAuthStatusRef.current();
         const engagement = await engagementService.createEngagement(data);
-        _addNewEngagement(engagement);
-        setEngagements([...(engagements ?? []), engagement]);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
@@ -364,14 +311,7 @@ export const EngagementProvider = ({
         await _handleErrors(e);
       }
     },
-    [
-      engagementService,
-      _addNewEngagement,
-      feedbackContext,
-      engagements,
-      setCurrentEngagement,
-      _handleErrors,
-    ]
+    [engagementService, feedbackContext, setCurrentEngagement, _handleErrors]
   );
   const _validateHostingEnvironment = useCallback(
     async (
@@ -470,7 +410,6 @@ export const EngagementProvider = ({
         currentEngagementChanges
       );
       feedbackContext.showLoader();
-      const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.saveEngagement(
@@ -483,10 +422,8 @@ export const EngagementProvider = ({
         );
         feedbackContext.hideLoader();
         setChangedGroups({});
-        _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
       } catch (e) {
-        _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
@@ -508,7 +445,6 @@ export const EngagementProvider = ({
     },
     [
       feedbackContext,
-      _updateEngagementInPlace,
       currentEngagementChanges,
       engagementService,
       _handleErrors,
@@ -525,13 +461,11 @@ export const EngagementProvider = ({
         );
       }
       feedbackContext.showLoader();
-      const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.launchEngagement(
           data
         );
-        _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
@@ -539,7 +473,6 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'We were unable to launch your engagement. Please follow up with an administrator if this continues.',
@@ -550,7 +483,6 @@ export const EngagementProvider = ({
       }
     },
     [
-      _updateEngagementInPlace,
       _checkLaunchReady,
       engagementService,
       feedbackContext,
@@ -559,21 +491,13 @@ export const EngagementProvider = ({
     ]
   );
 
-  const _deleteEngagement = useCallback(
-    (deletedEngagement: Engagement) => {
-      const updatedEngagements = engagements.filter(
-        engagement => engagement.uuid !== deletedEngagement.uuid
-      );
-      setEngagements(updatedEngagements);
-    },
-    [engagements]
-  );
-
   const deleteEngagement = useCallback(
     async (engagement: Engagement) => {
       try {
         await engagementService.deleteEngagement(engagement);
-        _deleteEngagement(engagement);
+        if (currentEngagement.uuid === engagement.uuid) {
+          setCurrentEngagement(undefined);
+        }
         feedbackContext.showAlert(
           'Engagement is deleted successfully',
           AlertType.success
@@ -601,7 +525,13 @@ export const EngagementProvider = ({
         await _handleErrors(e);
       }
     },
-    [engagementService, _deleteEngagement, feedbackContext, _handleErrors]
+    [
+      engagementService,
+      setCurrentEngagement,
+      currentEngagement,
+      feedbackContext,
+      _handleErrors,
+    ]
   );
 
   return (

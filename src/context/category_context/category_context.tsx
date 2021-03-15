@@ -32,6 +32,6 @@ export const CategoryProvider = ({
 };
 
 export const useCategories = () => {
-  const { categories, fetchCategories } = useContext(CategoryContext);
+  const { categories = [], fetchCategories } = useContext(CategoryContext);
   return { categories, fetchCategories };
 };
