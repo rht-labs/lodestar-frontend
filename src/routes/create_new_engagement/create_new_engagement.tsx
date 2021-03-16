@@ -25,6 +25,7 @@ import { Engagement } from '../../schemas/engagement';
 import { TextFormField } from '../../components/form_fields/text_form_field';
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useEngagementFormConfig } from '../../context/engagement_context/engagement_context';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig } = useEngagement();
@@ -37,12 +38,10 @@ export function CreateNewEngagement() {
   );
 }
 export function CreateNewEngagementForm() {
-  const {
-    createEngagement,
-    engagementFormConfig,
-    currentEngagement,
-  } = useEngagement();
+  const { createEngagement, currentEngagement } = useEngagement();
   const { engagementService } = useServiceProviders();
+  const { engagementFormConfig } = useEngagementFormConfig();
+  console.log(engagementFormConfig);
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
   });

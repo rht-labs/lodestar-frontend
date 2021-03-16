@@ -6,7 +6,6 @@ import {
   render,
   RenderResult,
   screen,
-  waitFor,
 } from '@testing-library/react';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementEditableCategories } from '../engagement_editable_categories';

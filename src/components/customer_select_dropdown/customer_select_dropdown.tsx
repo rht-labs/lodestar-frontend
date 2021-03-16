@@ -52,12 +52,14 @@ export function CustomerSelectDropdown(props: CustomerSelectDropdownProps) {
         []
     )
   );
+  const [hasFetched, setHasFetched] = useState(false);
   const CUSTOMER_DROPDOWN = _CustomerSelectDropdown;
   useEffect(() => {
-    if (engagements === undefined) {
+    if (!hasFetched) {
       getEngagements();
+      setHasFetched(true);
     }
-  }, [engagements, getEngagements]);
+  }, [hasFetched, getEngagements]);
   return (
     <CUSTOMER_DROPDOWN
       onSelect={props.onSelect}
