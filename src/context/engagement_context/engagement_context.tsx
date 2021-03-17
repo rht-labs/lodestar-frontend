@@ -571,13 +571,6 @@ export const EngagementProvider = ({
   );
 };
 
-export const useEngagementFormConfig = () => {
-  const engagementContext = useContext(EngagementContext);
-  return {
-    engagementFormConfig: engagementContext.engagementFormConfig,
-  };
-};
-
 export const useEngagementDetails = () => {
   const engagementContext = useContext(EngagementContext);
   return {

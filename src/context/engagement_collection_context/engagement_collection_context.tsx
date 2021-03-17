@@ -34,7 +34,7 @@ export const useEngagementCollection = ({
     }
   };
   const fetchEngagementsWithParameters = () => {
-    console.log('TODO: filter engagements with:', filter);
+    // TODO: Implement filters here
     getEngagements();
   };
   return { getEngagements: fetchEngagementsWithParameters, engagements };
