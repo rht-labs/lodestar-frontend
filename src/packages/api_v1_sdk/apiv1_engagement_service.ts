@@ -1,20 +1,19 @@
-import { EngagementService } from '../engagement_service';
-import { Engagement } from '../../../schemas/engagement';
-import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
-import { AlreadyExistsError } from '../engagement_service_errors';
-import { EngagementJsonSerializer } from '../../../serializers/engagement/engagement_json_serializer';
-import { Logger } from '../../../utilities/logger';
-import { handleAxiosResponseErrors } from '../../common/axios/http_error_handlers';
-import { UserToken } from '../../../schemas/user_token';
+import { EngagementService } from '../../services/engagement_service/engagement_service';
+import { Engagement } from '../../schemas/engagement';
+import { EngagementFormConfig } from '../../schemas/engagement_config';
+import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
+import { Logger } from '../../utilities/logger';
+import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
+import { getApiV1HttpClient } from './client';
 
 export class Apiv1EngagementService implements EngagementService {
+  private baseUrl: string;
   constructor(baseURL: string) {
-    this.axios = Axios.create({ baseURL });
-    this.axios.interceptors.request.use((request: AxiosRequestConfig) => {
-      request.headers.Authorization = `Bearer ${UserToken.token?.accessToken}`;
-      return request;
-    });
+    this.baseUrl = baseURL;
+  }
+  get axios() {
+    return getApiV1HttpClient(this.baseUrl);
   }
   checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
     return this.axios
@@ -23,7 +22,6 @@ export class Apiv1EngagementService implements EngagementService {
       .catch(() => false);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
-  axios?: AxiosInstance;
   async fetchEngagements(): Promise<Engagement[]> {
     try {
       const { data: engagementsData } = await this.axios.get(`/engagements`);
@@ -95,11 +93,11 @@ export class Apiv1EngagementService implements EngagementService {
       }
     }
   }
-  async deleteEngagement(
-    engagement: Engagement
-  ): Promise<Engagement> {
+  async deleteEngagement(engagement: Engagement): Promise<Engagement> {
     try {
-      const { data } = await this.axios.delete(`/engagements/${engagement.uuid}`);
+      const { data } = await this.axios.delete(
+        `/engagements/${engagement.uuid}`
+      );
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {
       if (e.response.status === 400) {
@@ -108,9 +106,7 @@ export class Apiv1EngagementService implements EngagementService {
         );
       }
       if (e.response.status === 404) {
-        throw new AlreadyExistsError(
-          'Engagement is not found'
-        );
+        throw new AlreadyExistsError('Engagement is not found');
       }
       if (e.isAxiosError) {
         handleAxiosResponseErrors(e);

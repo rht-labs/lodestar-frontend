@@ -28,7 +28,6 @@ import {
   EngagementPollIntervalStrategy,
 } from '../../schemas/engagement_poll';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
-import { EngagementCategory } from '../../schemas/engagement_category';
 import { CategoryService } from '../../services/category_service/category_service';
 import { engagementFormReducer } from './engagement_form_reducer';
 import { IAuthContext } from '../auth_context/auth_context';
@@ -37,10 +36,8 @@ import { HostingEnvironment } from '../../schemas/hosting_environment';
 export type FieldGroup = { [key: string]: string[] };
 
 export interface IEngagementContext {
-  getEngagements: () => Promise<Engagement[]>;
   currentEngagement?: Engagement;
   setCurrentEngagement: (Engagement: Engagement) => void;
-  engagements?: Engagement[];
   updateEngagementFormField: <T extends keyof Engagement>(
     field: T,
     value: Engagement[T],
@@ -61,8 +58,6 @@ export interface IEngagementContext {
   engagementFormConfig?: EngagementFormConfig;
   launchEngagement: (data: any) => Promise<void>;
   createEngagementPoll: (engagement: Engagement) => Promise<EngagementPoll>;
-  fetchAvailableCategories: () => void;
-  availableCategories?: EngagementCategory[];
 }
 
 export enum EngagementGroupings {
@@ -102,7 +97,6 @@ const { Provider } = EngagementContext;
 export const EngagementProvider = ({
   children,
   engagementService,
-  categoryService,
   feedbackContext,
   authContext,
   analyticsContext,
@@ -116,10 +110,6 @@ export const EngagementProvider = ({
   analyticsContext?: IAnalyticsContext;
   engagementFormConfig: EngagementFormConfig;
 }) => {
-  const [engagements, setEngagements] = useState<Engagement[]>([]);
-  const [availableCategories, setAvailableCategories] = useState<
-    EngagementCategory[]
-  >(undefined);
   const [currentEngagement, _setCurrentEngagement] = useState<
     Engagement | undefined
   >();
@@ -204,49 +194,6 @@ export const EngagementProvider = ({
 
   const _validateAuthStatusRef = useRef(async () => {});
 
-  const _updateEngagementInPlace = useCallback(
-    engagement => {
-      const oldEngagementIndex = engagements.findIndex(comparisonEngagement => {
-        if (
-          engagement?.project_name &&
-          engagement?.customer_name &&
-          engagement?.project_name === comparisonEngagement?.project_name &&
-          engagement?.customer_name === comparisonEngagement?.customer_name
-        ) {
-          return true;
-        }
-        return false;
-      });
-      const oldEngagement = engagements[oldEngagementIndex];
-      if (oldEngagementIndex > -1) {
-        const newEngagements = [...engagements];
-        newEngagements.splice(oldEngagementIndex, 1, engagement);
-        setEngagements(newEngagements);
-      }
-      return oldEngagement;
-    },
-    [engagements]
-  );
-
-  const fetchEngagements = useCallback(async () => {
-    try {
-      await _validateAuthStatusRef.current();
-      feedbackContext.showLoader();
-      const engagements = await engagementService.fetchEngagements();
-      setEngagements(engagements);
-      feedbackContext.hideLoader();
-      return engagements;
-    } catch (e) {
-      feedbackContext.showAlert(
-        'Something went wrong while getting the engagements',
-        AlertType.error,
-        true
-      );
-      feedbackContext.hideLoader();
-      await _handleErrors(e);
-    }
-  }, [engagementService, feedbackContext, _handleErrors]);
-
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
       await _validateAuthStatusRef.current();
@@ -255,18 +202,12 @@ export const EngagementProvider = ({
           engagement?.customer_name,
           engagement?.project_name
         );
-        _updateEngagementInPlace(refreshedEngagement);
         setCurrentEngagement(refreshedEngagement);
       } catch (e) {
         _handleErrors(e);
       }
     },
-    [
-      _updateEngagementInPlace,
-      engagementService,
-      _handleErrors,
-      setCurrentEngagement,
-    ]
+    [engagementService, _handleErrors, setCurrentEngagement]
   );
 
   const _checkHasUpdateRef = useRef(async () => false);
@@ -309,7 +250,7 @@ export const EngagementProvider = ({
   const getEngagement = useCallback(
     async (customerName: string, projectName: string) => {
       try {
-        let availableEngagements = engagements ?? [];
+        let availableEngagements = [];
         let cachedEngagement = availableEngagements?.find(
           engagement =>
             engagement?.customer_name === customerName &&
@@ -335,26 +276,7 @@ export const EngagementProvider = ({
         }
       }
     },
-    [
-      engagements,
-      feedbackContext,
-      _handleErrors,
-      engagementService,
-      setCurrentEngagement,
-    ]
-  );
-
-  const _addNewEngagement = useCallback(
-    async (newEngagement: Engagement) => {
-      try {
-        const newEngagementList = [newEngagement, ...(engagements ?? [])];
-        setEngagements(newEngagementList);
-      } catch (e) {
-        await _handleErrors(e);
-        Logger.instance.error(e);
-      }
-    },
-    [engagements, _handleErrors]
+    [feedbackContext, _handleErrors, engagementService, setCurrentEngagement]
   );
 
   const createEngagement = useCallback(
@@ -363,8 +285,6 @@ export const EngagementProvider = ({
       try {
         await _validateAuthStatusRef.current();
         const engagement = await engagementService.createEngagement(data);
-        _addNewEngagement(engagement);
-        setEngagements([...(engagements ?? []), engagement]);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'Your engagement has been successfully created',
@@ -374,7 +294,7 @@ export const EngagementProvider = ({
         return engagement;
       } catch (e) {
         feedbackContext.hideLoader();
-        let errorMessage;
+        let errorMessage: string;
         if (e instanceof AlreadyExistsError) {
           errorMessage =
             'This client already has a project with that name. Please choose a different project name.';
@@ -391,14 +311,7 @@ export const EngagementProvider = ({
         await _handleErrors(e);
       }
     },
-    [
-      engagementService,
-      _addNewEngagement,
-      feedbackContext,
-      engagements,
-      setCurrentEngagement,
-      _handleErrors,
-    ]
+    [engagementService, feedbackContext, setCurrentEngagement, _handleErrors]
   );
   const _validateHostingEnvironment = useCallback(
     async (
@@ -497,7 +410,6 @@ export const EngagementProvider = ({
         currentEngagementChanges
       );
       feedbackContext.showLoader();
-      const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.saveEngagement(
@@ -510,10 +422,8 @@ export const EngagementProvider = ({
         );
         feedbackContext.hideLoader();
         setChangedGroups({});
-        _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
       } catch (e) {
-        _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
@@ -535,7 +445,6 @@ export const EngagementProvider = ({
     },
     [
       feedbackContext,
-      _updateEngagementInPlace,
       currentEngagementChanges,
       engagementService,
       _handleErrors,
@@ -552,13 +461,11 @@ export const EngagementProvider = ({
         );
       }
       feedbackContext.showLoader();
-      const oldEngagement = _updateEngagementInPlace(data);
       try {
         await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.launchEngagement(
           data
         );
-        _updateEngagementInPlace(returnedEngagement);
         setCurrentEngagement(returnedEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
@@ -566,7 +473,6 @@ export const EngagementProvider = ({
           AlertType.success
         );
       } catch (e) {
-        _updateEngagementInPlace(oldEngagement);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
           'We were unable to launch your engagement. Please follow up with an administrator if this continues.',
@@ -577,7 +483,6 @@ export const EngagementProvider = ({
       }
     },
     [
-      _updateEngagementInPlace,
       _checkLaunchReady,
       engagementService,
       feedbackContext,
@@ -586,21 +491,13 @@ export const EngagementProvider = ({
     ]
   );
 
-  const _deleteEngagement = useCallback(
-    (deletedEngagement: Engagement) => {
-      const updatedEngagements = engagements.filter(
-        engagement => engagement.uuid !== deletedEngagement.uuid
-      );
-      setEngagements(updatedEngagements);
-    },
-    [engagements]
-  );
-
   const deleteEngagement = useCallback(
     async (engagement: Engagement) => {
       try {
         await engagementService.deleteEngagement(engagement);
-        _deleteEngagement(engagement);
+        if (currentEngagement.uuid === engagement.uuid) {
+          setCurrentEngagement(undefined);
+        }
         feedbackContext.showAlert(
           'Engagement is deleted successfully',
           AlertType.success
@@ -628,23 +525,14 @@ export const EngagementProvider = ({
         await _handleErrors(e);
       }
     },
-    [engagementService, _deleteEngagement, feedbackContext, _handleErrors]
+    [
+      engagementService,
+      setCurrentEngagement,
+      currentEngagement,
+      feedbackContext,
+      _handleErrors,
+    ]
   );
-
-  const fetchAvailableCategories = useCallback(async () => {
-    try {
-      // feedbackContext.showLoader();
-      const categories = await categoryService.fetchCategories();
-      setAvailableCategories(categories);
-      // feedbackContext.hideLoader();
-    } catch (e) {
-      try {
-        _handleErrors(e);
-      } catch (e) {
-        throw e;
-      }
-    }
-  }, [categoryService, _handleErrors]);
 
   return (
     <Provider
@@ -652,19 +540,24 @@ export const EngagementProvider = ({
         createEngagementPoll,
         engagementFormConfig,
         requiredFields,
+        /**
+         * ? REFACTOR: This just becomes engagement?
+         */
         currentEngagement,
         missingRequiredFields,
         isLaunchable,
+        /**
+         * ? REFACTOR: What is the relationship between set current engagement and this collection?
+         */
         setCurrentEngagement,
-        engagements,
+        /**
+         * ? REFACTOR: This is no longer part of the public API?
+         */
         getEngagement,
-        getEngagements: fetchEngagements,
         createEngagement,
         deleteEngagement,
         saveEngagement,
         launchEngagement,
-        fetchAvailableCategories,
-        availableCategories,
         currentChanges: {
           ...currentEngagement,
           ...currentEngagementChanges,
@@ -678,13 +571,6 @@ export const EngagementProvider = ({
   );
 };
 
-export const useEngagementFormConfig = () => {
-  const engagementContext = useContext(EngagementContext);
-  return {
-    engagementFormConfig: engagementContext.engagementFormConfig,
-  };
-};
-
 export const useEngagementDetails = () => {
   const engagementContext = useContext(EngagementContext);
   return {
@@ -692,22 +578,6 @@ export const useEngagementDetails = () => {
     endDate: engagementContext.currentEngagement.end_date,
     archiveDate: engagementContext.currentEngagement.archive_date,
   };
-};
-
-export const useEngagement = (customerName: string, projectName: string) => {
-  const engagementContext = useContext(EngagementContext);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    setIsLoading(true);
-    engagementContext
-      .getEngagement(customerName, projectName)
-      .then(engagement => engagementContext.setCurrentEngagement(engagement))
-      .catch(error => setError(error))
-      .finally(() => setIsLoading(false));
-  }, [engagementContext, customerName, projectName]);
-  return [engagementContext.currentEngagement, error, isLoading];
 };
 
 export const useEngagementFormField = <K extends keyof Engagement>(

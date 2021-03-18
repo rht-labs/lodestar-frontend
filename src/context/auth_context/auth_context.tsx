@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AuthService } from '../../services/auth_service/authentication_service';
-import { AnalyticsContext } from '../analytics_context/analytics_context';
 import { AnalyticsCategory } from '../../schemas/analytics';
 
 import { UserProfile } from '../../schemas/user_profile';
-import { UserToken, LocalStoragePersistence } from '../../schemas/user_token';
+import { UserToken } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
+import { IAnalyticsContext } from '../analytics_context/analytics_context';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -16,18 +16,17 @@ export interface SessionData {
 export interface IAuthContext {
   authError?: any;
   setAuthError: (error: any) => void;
-  sessionData?: SessionData;
   axios?: AxiosInstance;
   checkIsAuthenticated: () => Promise<boolean>;
+  userProfile?: UserProfile;
+  roles: string[];
   handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
-UserToken.setPersistenceStrategy(new LocalStoragePersistence());
-
 export const AuthContext = createContext<IAuthContext>({
-  sessionData: undefined,
   authError: null,
+  roles: [],
   setAuthError: (error: any) => {},
   axios: Axios.create(),
   checkIsAuthenticated: async () => false,
@@ -43,7 +42,7 @@ export const AuthProvider = ({
 }: {
   children: React.ReactChild;
   authService: AuthService;
-  analyticsContext?: AnalyticsContext;
+  analyticsContext?: IAnalyticsContext;
 }) => {
   const [sessionData, setSessionData] = useState<SessionData | undefined>(
     undefined
@@ -114,11 +113,12 @@ export const AuthProvider = ({
     <Provider
       value={{
         authError,
+        userProfile: sessionData?.profile,
         setAuthError,
         checkIsAuthenticated,
-        sessionData,
         handleLoginCallback,
         logout: logout,
+        roles: sessionData?.roles ?? [],
       }}
     >
       {children}

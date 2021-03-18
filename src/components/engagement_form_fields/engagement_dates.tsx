@@ -16,7 +16,7 @@ import startOfToday from 'date-fns/startOfToday';
 import addDays from 'date-fns/addDays';
 import { useValidation } from '../../context/validation_context/validation_hook';
 import max from 'date-fns/max';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 import {
   EngagementGroupings,
   useEngagementFormField,
@@ -24,7 +24,7 @@ import {
 import { differenceInDays } from 'date-fns';
 
 export function EngagementStartEndDateFormField() {
-  const { engagementFormConfig, currentEngagement } = useEngagements();
+  const { engagementFormConfig, currentEngagement } = useEngagement();
   const { validate, getValidationResult } = useValidation();
   const maxGracePeriodInDays: number =
     engagementFormConfig?.logistics_options?.env_grace_period_max ?? 0;

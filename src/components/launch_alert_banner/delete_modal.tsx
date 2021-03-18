@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, ModalVariant, Button } from '@patternfly/react-core';
 import { useModalVisibility } from '../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
-import {useEngagements} from "../../context/engagement_context/engagement_hook";
+import {useEngagement} from "../../context/engagement_context/engagement_hook";
 import {AnalyticsCategory} from "../../schemas/analytics";
 import {useAnalytics} from "../../context/analytics_context/analytics_context";
 import {Engagement} from "../../schemas/engagement";
@@ -16,7 +16,7 @@ export function DeleteModal(
 ) {
   const {
     deleteEngagement
-  } = useEngagements();
+  } = useEngagement();
 
   const history = useHistory();
   const { logEvent } = useAnalytics();

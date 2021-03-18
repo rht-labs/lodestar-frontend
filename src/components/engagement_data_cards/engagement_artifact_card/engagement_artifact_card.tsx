@@ -24,7 +24,7 @@ import {
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
 import { ClipboardCheckIcon } from '@patternfly/react-icons';
 import { Feature } from '../../feature/feature';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
 
 export interface EngagementTimelineCardProps {
@@ -42,7 +42,7 @@ export function EngagementArtifactCard() {
     saveEngagement,
     clearCurrentChanges,
     engagementFormConfig,
-  } = useEngagements();
+  } = useEngagement();
   const { addArtifact, artifacts, updateArtifact } = useEngagementArtifacts();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
   const [currentArtifactId, setCurrentArtifactId] = useState<string>(null);
