@@ -43,7 +43,7 @@ export function DashboardPeopleEnabledCard({
                 <Text component={TextVariants.h4}>
                   Total Enabled
                 </Text>
-                <Text component={TextVariants.h1} style={{color: '#EC7A08'}}>
+                <Text component={TextVariants.h1} style={{color: '#59ABE3'}}>
                   38
                 </Text>
               </TextContent>
@@ -53,7 +53,7 @@ export function DashboardPeopleEnabledCard({
                 <Text component={TextVariants.h4}>
                   Red Hatters
                 </Text>
-                <Text component={TextVariants.h1} style={{color: '#22A7F0'}}>
+                <Text component={TextVariants.h1} style={{color: '#a4c7a4'}}>
                   10
                 </Text>
               </TextContent>
@@ -63,7 +63,7 @@ export function DashboardPeopleEnabledCard({
                 <Text component={TextVariants.h4}>
                   Non Red Hatters
                 </Text>
-                <Text component={TextVariants.h1} style={{color: '#87D37C'}}>
+                <Text component={TextVariants.h1} style={{color: '#4db445'}}>
                   28
                 </Text>
               </TextContent>

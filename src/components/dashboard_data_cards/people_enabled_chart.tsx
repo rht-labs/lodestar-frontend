@@ -1,7 +1,7 @@
 import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { ChartDonut, ChartThemeColor } from '@patternfly/react-charts';
-import {Grid, GridItem} from "@patternfly/react-core";
+import {ChartDonut, ChartLabel, ChartThemeColor} from '@patternfly/react-charts';
+import {Grid, GridItem, Text} from "@patternfly/react-core";
 
 export function PeopleEnabledChart () {
   return(
@@ -11,9 +11,9 @@ export function PeopleEnabledChart () {
           ariaDesc="People Enabled"
           ariaTitle="People Enabled Chart"
           constrainToVisibleArea={true}
-          data={[{x: 'Red Hatters', y: 10}, {x: 'Non Red Hatters', y: 28}]}
+          data={[{x: 'Red Hatters', y: 28}, {x: 'Non Red Hatters', y: 10}]}
           labels={({datum}) => `${datum.x}: ${datum.y}%`}
-          legendData={[{name: 'Red Hatter: 10'}, {name: 'Non Red Hatters: 28'}]}
+          legendData={[{name: 'Non Red Hatter: 28'}, {name: 'Red Hatters: 10'}]}
           legendOrientation="vertical"
           legendPosition="right"
           padding={{
@@ -24,8 +24,12 @@ export function PeopleEnabledChart () {
           }}
           subTitle="Total Enabled"
           subTitlePosition="bottom"
-          title="38"
-          themeColor={ChartThemeColor.multiOrdered}
+          title={'38'}
+          // Trying to make the title blue
+          // titleComponent={
+          //   <ChartLabel text={'38'}/>
+          // }
+          themeColor={ChartThemeColor.green}
           width={300}
         />
       </div>
