@@ -20,7 +20,7 @@ import {
   EngagementGroupings,
   useEngagementFormField,
 } from '../../context/engagement_context/engagement_context';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 
 export interface EngagementSummaryEditModalProps {
   isOpen: boolean;
@@ -34,7 +34,7 @@ export function EngagementSummaryEditModal(
     props.onSave();
     props.onClose?.();
   };
-  const { currentEngagement } = useEngagements();
+  const { currentEngagement } = useEngagement();
   const [customerName, setCustomerName] = useEngagementFormField(
     'customer_name',
     EngagementGroupings.engagementSummary

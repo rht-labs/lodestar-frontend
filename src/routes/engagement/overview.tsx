@@ -7,10 +7,10 @@ import { UserCard } from '../../components/engagement_data_cards/user_card/user_
 import { ActivityHistoryCard } from '../../components/engagement_data_cards/activity_history_card/activity_history_card';
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
 import { EngagementArtifactCard } from '../../components/engagement_data_cards/engagement_artifact_card/engagement_artifact_card';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 
 export function EngagementOverview() {
-  const { currentEngagement } = useEngagements();
+  const { currentEngagement } = useEngagement();
   return (
     <TextContent>
       <Grid hasGutter>

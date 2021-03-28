@@ -16,7 +16,7 @@ import {
   useAnalytics,
   AnalyticsCategory,
 } from '../../context/analytics_context/analytics_context';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 
 export interface EngagementFilterProps {
   onChange: (filter: EngagementFilter) => void;
@@ -27,7 +27,7 @@ export function EngagementFilterBar({
   onChange: _propsOnChange,
   filter,
 }: EngagementFilterProps) {
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
   const { searchTerm = '' } = filter ?? {};
   const { logEvent } = useAnalytics();
   const onChange = (filter: EngagementFilter) => {

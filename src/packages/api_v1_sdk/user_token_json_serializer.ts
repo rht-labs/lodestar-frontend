@@ -1,4 +1,4 @@
-import { Serializer } from '../serializer';
+import { Serializer } from '../../serializers/serializer';
 import { UserToken } from '../../schemas/user_token';
 export class UserTokenJsonSerializer implements Serializer<UserToken, object> {
   serialize(token: UserToken) {

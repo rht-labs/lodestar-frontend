@@ -9,7 +9,7 @@ import { CloudProviderFormField } from '../engagement_form_fields/cloud_provider
 import { SubdomainFormField } from '../engagement_form_fields/subdomain';
 import { AdditionalDetailsFormField } from '../engagement_form_fields/additional_details';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../context/engagement_context/engagement_hook';
 import { TextFormField } from '../form_fields/text_form_field';
 import { SelectFormField } from '../form_fields/select_form_field';
 import { useFeatures } from '../../context/feature_context/feature_hook';
@@ -35,7 +35,7 @@ export function OpenShiftClusterEditModal({
   isEngagementLaunched,
   setHostingEnvironment,
 }: OpenShiftClusterEditModalProps) {
-  const { engagementFormConfig } = useEngagements();
+  const { engagementFormConfig } = useEngagement();
 
   const {
     isUnique,

@@ -53,7 +53,7 @@ export function UserDropdown(props: UserDropdownProps) {
         dropdownItems={dropdownItems}
         toggle={
           <DropdownToggle onToggle={() => setIsOpen(!isOpen)}>
-            {UserProfile.getDisplayName(authContext?.sessionData?.profile)}
+            {UserProfile.getDisplayName(authContext?.userProfile)}
           </DropdownToggle>
         }
         isOpen={isOpen}

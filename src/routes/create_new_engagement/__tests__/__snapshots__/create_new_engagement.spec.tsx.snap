@@ -262,12 +262,6 @@ Object {
                       >
                         Select a region
                       </option>
-                      <option
-                        class=""
-                        value="dev-1"
-                      >
-                        DEV
-                      </option>
                     </select>
                     <div
                       aria-live="polite"
@@ -315,26 +309,7 @@ Object {
                       data-ouia-component-type="PF4/FormSelect"
                       data-ouia-safe="true"
                       data-testid="new-engagement-type"
-                    >
-                      <option
-                        class=""
-                        value="DO500"
-                      >
-                        DO500
-                      </option>
-                      <option
-                        class=""
-                        value="OpenTransformation"
-                      >
-                        Open Transformation
-                      </option>
-                      <option
-                        class=""
-                        value="Residency"
-                      >
-                        Residency
-                      </option>
-                    </select>
+                    />
                     
                   </div>
                 </div>
@@ -673,12 +648,6 @@ Object {
                     >
                       Select a region
                     </option>
-                    <option
-                      class=""
-                      value="dev-1"
-                    >
-                      DEV
-                    </option>
                   </select>
                   <div
                     aria-live="polite"
@@ -726,26 +695,7 @@ Object {
                     data-ouia-component-type="PF4/FormSelect"
                     data-ouia-safe="true"
                     data-testid="new-engagement-type"
-                  >
-                    <option
-                      class=""
-                      value="DO500"
-                    >
-                      DO500
-                    </option>
-                    <option
-                      class=""
-                      value="OpenTransformation"
-                    >
-                      Open Transformation
-                    </option>
-                    <option
-                      class=""
-                      value="Residency"
-                    >
-                      Residency
-                    </option>
-                  </select>
+                  />
                   
                 </div>
               </div>

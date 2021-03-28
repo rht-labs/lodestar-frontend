@@ -14,14 +14,20 @@ import {
   PendingIcon,
   TachometerAltIcon,
 } from '@patternfly/react-icons';
-import { useEngagements } from '../../context/engagement_context/engagement_hook';
 import { EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
-import {DashboardPeopleEnabledCard} from "../../components/dashboard_data_cards/dashboard_people_enabled_card";
+import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
+import { useFeedback } from '../../context/feedback_context/feedback_context';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 
 export function Dashboard() {
-  const { engagements, getEngagements } = useEngagements();
   const [hasFetched, setHasFetched] = useState<boolean>(false);
+  const feedbackContext = useFeedback();
+  const { engagementService } = useServiceProviders();
+  const { engagements, getEngagements } = useEngagementCollection({
+    engagementService,
+    feedbackContext,
+  });
 
   useEffect(() => {
     if (!hasFetched) {
@@ -38,7 +44,9 @@ export function Dashboard() {
     engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
   ).length;
   const numberOfPastEngagements = engagements?.filter(
-    engagementFilterFactory({ allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating] })
+    engagementFilterFactory({
+      allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
+    })
   ).length;
 
   return (
@@ -90,9 +98,6 @@ export function Dashboard() {
             subtitle={'Engagements that are finished, closed or archived.'}
             url={'/app/engagements/past'}
           />
-        </Gallery>
-        <Gallery hasGutter style={{marginTop: '1rem'}}>
-          <DashboardPeopleEnabledCard />
         </Gallery>
       </PageSection>
     </>

@@ -14,7 +14,7 @@ import { PointOfContactEditModal } from '../../engagement_edit_modals/point_of_c
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { UsersIcon } from '@patternfly/react-icons';
-import { useEngagements } from '../../../context/engagement_context/engagement_hook';
+import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
@@ -25,7 +25,7 @@ export function PointOfContactCard() {
     currentChanges,
     missingRequiredFields,
     currentEngagement,
-  } = useEngagements();
+  } = useEngagement();
   const { requestOpen, activeModalKey, requestClose } = useModalVisibility();
 
   const pointOfContactRequiredFields = [
