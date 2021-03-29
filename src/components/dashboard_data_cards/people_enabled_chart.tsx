@@ -1,7 +1,6 @@
 import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import {ChartDonut, ChartLabel, ChartThemeColor} from '@patternfly/react-charts';
-import {Grid, GridItem, Text} from "@patternfly/react-core";
+import {ChartDonut, ChartThemeColor} from '@patternfly/react-charts';
 
 export function PeopleEnabledChart () {
   return(
@@ -25,10 +24,6 @@ export function PeopleEnabledChart () {
           subTitle="Total Enabled"
           subTitlePosition="bottom"
           title={'38'}
-          // Trying to make the title blue
-          // titleComponent={
-          //   <ChartLabel text={'38'}/>
-          // }
           themeColor={ChartThemeColor.green}
           width={300}
         />

@@ -1,24 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Card,
   CardBody, CardTitle,
   Text,
   TextContent,
-  TextVariants, Flex, FlexItem, Dropdown, DropdownToggle, FormSelectOption, FormSelect, Grid, GridItem
+  TextVariants, Grid, GridItem
 } from '@patternfly/react-core';
-import { CaretDownIcon, RedhatIcon, UserIcon} from "@patternfly/react-icons";
-import {SectionTitle} from "../section_title/section_title";
-import {useEngagements} from "../../context/engagement_context/engagement_hook";
 import {PeopleEnabledChart} from "./people_enabled_chart";
 
-export interface DashboardPeopleEnabledCardProps {
-}
 
-export function DashboardPeopleEnabledCard({
-}: DashboardPeopleEnabledCardProps) {
-
-  const [region, setRegion] = useState<string>();
-  const { engagementFormConfig } = useEngagements();
+export function DashboardPeopleEnabledCard(){
 
   const miniCardShape: React.CSSProperties = {
     minHeight: '20vh',
