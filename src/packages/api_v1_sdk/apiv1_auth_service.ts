@@ -108,12 +108,13 @@ export class Apiv1AuthService implements AuthService {
   }
 
   private async getUserRoles(groups: string[] = []): Promise<AppFeature[]> {
+    const roleMappings = this.config.roles ?? {};
     const roles = Array.from(
       new Set(
         groups.reduce<AppFeature[]>(
           (prev: AppFeature[], curr: string) => [
             ...prev,
-            ...(this.config.roles[curr] ?? []),
+            ...(roleMappings[curr] ?? []),
           ],
           []
         )
