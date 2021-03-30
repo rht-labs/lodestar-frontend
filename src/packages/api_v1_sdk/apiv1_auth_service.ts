@@ -113,13 +113,12 @@ export class Apiv1AuthService implements AuthService {
         groups.reduce<AppFeature[]>(
           (prev: AppFeature[], curr: string) => [
             ...prev,
-            ...(this.config.roleMapping[curr] ?? []),
+            ...(this.config.roles[curr] ?? []),
           ],
           []
         )
       )
     );
-    console.log(roles)
     return roles;
   }
 
@@ -132,9 +131,7 @@ export class Apiv1AuthService implements AuthService {
         },
       }
     );
-    const roles = await this.getUserRoles(
-      userProfileData.data?.groups
-    );
+    const roles = await this.getUserRoles(userProfileData.data?.groups);
     return {
       username: userProfileData.data.preferred_username,
       firstName: userProfileData.data.given_name,

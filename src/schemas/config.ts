@@ -17,7 +17,7 @@ export interface Config {
   supportEmailAddress: string;
   bannerMessages?: BannerMessage[];
   allowVersionOverride?: boolean;
-  roleMapping: { [key: string]: AppFeature[] };
+  roles: { [key: string]: AppFeature[] };
 }
 
 export abstract class Config {
@@ -31,7 +31,7 @@ export abstract class Config {
       backendUrl: 'https://lodestar-backend.example.com',
       disableLaunch: false,
       supportEmailAddress: 'redhatsupport@redhat.com',
-      roleMapping: {
+      roles: {
         reader: ['reader'],
         writer: ['writer'],
       },
