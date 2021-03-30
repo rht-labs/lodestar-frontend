@@ -108,7 +108,7 @@ export class Apiv1AuthService implements AuthService {
   }
 
   private async getUserRoles(groups: string[] = []): Promise<AppFeature[]> {
-    return Array.from(
+    const roles = Array.from(
       new Set(
         groups.reduce<AppFeature[]>(
           (prev: AppFeature[], curr: string) => [
@@ -119,6 +119,8 @@ export class Apiv1AuthService implements AuthService {
         )
       )
     );
+    console.log(roles)
+    return roles;
   }
 
   async getUserProfile(): Promise<UserProfile> {
