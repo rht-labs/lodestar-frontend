@@ -133,7 +133,7 @@ export class Apiv1AuthService implements AuthService {
       }
     );
     const roles = await this.getUserRoles(
-      userProfileData.data?.realm_access?.roles
+      userProfileData.data?.groups
     );
     return {
       username: userProfileData.data.preferred_username,
