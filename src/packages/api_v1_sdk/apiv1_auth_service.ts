@@ -120,10 +120,6 @@ export class Apiv1AuthService implements AuthService {
         )
       )
     );
-    console.log('roles', roles);
-    console.log('rolemappings', roleMappings);
-    console.log('groups', groups);
-    console.log('config', this.config);
     return roles;
   }
 
@@ -136,7 +132,6 @@ export class Apiv1AuthService implements AuthService {
         },
       }
     );
-    console.log('userprofiledata', userProfileData);
     const roles = await this.getUserRoles(userProfileData.data?.groups);
     return {
       username: userProfileData.data.preferred_username,
