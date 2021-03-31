@@ -37,6 +37,10 @@ export class EngagementJsonSerializer
   serialize(engagement: Engagement): object {
     const e = {
       ...engagement,
+      hosting_environments: engagement.hosting_environments.map(he => ({
+        ...he,
+        ocp_sub_domain: (he.ocp_sub_domain ?? '').toLowerCase(),
+      })),
       archive_date: engagement.archive_date
         ? EngagementJsonSerializer.formatDate(engagement.archive_date)
         : null,
