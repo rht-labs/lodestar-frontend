@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import {
   AlertType,
   IFeedbackContext,
@@ -12,8 +12,10 @@ export interface EngagementCollectionHookParameters {
   engagementService: EngagementService;
 }
 interface EngagementCollectionFilter {
+  engagementStatus?: EngagementStatus;
   minDate?: Date;
   maxDate?: Date;
+  include?: Array<keyof Engagement>;
 }
 export const useEngagementCollection = ({
   feedbackContext,

@@ -38,7 +38,7 @@ Object {
             >
               <button
                 aria-pressed="false"
-                class="pf-c-toggle-group__button"
+                class="pf-c-toggle-group__button pf-m-light"
                 type="button"
               >
                 <span
@@ -58,7 +58,7 @@ Object {
             >
               <button
                 aria-pressed="false"
-                class="pf-c-toggle-group__button"
+                class="pf-c-toggle-group__button pf-m-light"
                 type="button"
               >
                 <span
@@ -78,7 +78,7 @@ Object {
             >
               <button
                 aria-pressed="false"
-                class="pf-c-toggle-group__button"
+                class="pf-c-toggle-group__button pf-m-light"
                 type="button"
               >
                 <span
@@ -98,7 +98,7 @@ Object {
             >
               <button
                 aria-pressed="false"
-                class="pf-c-toggle-group__button"
+                class="pf-c-toggle-group__button pf-m-light"
                 type="button"
               >
                 <span
@@ -118,7 +118,7 @@ Object {
             >
               <button
                 aria-pressed="false"
-                class="pf-c-toggle-group__button"
+                class="pf-c-toggle-group__button pf-m-light"
                 type="button"
               >
                 <span
@@ -137,8 +137,8 @@ Object {
               data-testid="alltime-window"
             >
               <button
-                aria-pressed="false"
-                class="pf-c-toggle-group__button"
+                aria-pressed="true"
+                class="pf-c-toggle-group__button pf-m-light pf-m-selected"
                 type="button"
               >
                 <span
@@ -459,7 +459,7 @@ Object {
           >
             <button
               aria-pressed="false"
-              class="pf-c-toggle-group__button"
+              class="pf-c-toggle-group__button pf-m-light"
               type="button"
             >
               <span
@@ -479,7 +479,7 @@ Object {
           >
             <button
               aria-pressed="false"
-              class="pf-c-toggle-group__button"
+              class="pf-c-toggle-group__button pf-m-light"
               type="button"
             >
               <span
@@ -499,7 +499,7 @@ Object {
           >
             <button
               aria-pressed="false"
-              class="pf-c-toggle-group__button"
+              class="pf-c-toggle-group__button pf-m-light"
               type="button"
             >
               <span
@@ -519,7 +519,7 @@ Object {
           >
             <button
               aria-pressed="false"
-              class="pf-c-toggle-group__button"
+              class="pf-c-toggle-group__button pf-m-light"
               type="button"
             >
               <span
@@ -539,7 +539,7 @@ Object {
           >
             <button
               aria-pressed="false"
-              class="pf-c-toggle-group__button"
+              class="pf-c-toggle-group__button pf-m-light"
               type="button"
             >
               <span
@@ -558,8 +558,8 @@ Object {
             data-testid="alltime-window"
           >
             <button
-              aria-pressed="false"
-              class="pf-c-toggle-group__button"
+              aria-pressed="true"
+              class="pf-c-toggle-group__button pf-m-light pf-m-selected"
               type="button"
             >
               <span

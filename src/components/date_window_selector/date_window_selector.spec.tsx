@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { sub } from 'date-fns';
 import React from 'react';
 import { DateRange, DateWindowSelector } from './date_window_selector';
