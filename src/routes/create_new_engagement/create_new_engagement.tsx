@@ -41,7 +41,6 @@ export function CreateNewEngagementForm() {
   const { createEngagement, currentEngagement } = useEngagement();
   const { engagementService } = useServiceProviders();
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
-  console.log(engagementFormConfig);
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
   });

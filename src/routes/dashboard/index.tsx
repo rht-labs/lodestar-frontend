@@ -7,19 +7,20 @@ import {
   TextContent,
   Title,
 } from '@patternfly/react-core';
-import { DashboardDataCard } from '../../components/dashboard_data_cards/dashboard_data_card';
-import {
-  AsleepIcon,
-  OnRunningIcon,
-  PendingIcon,
-  TachometerAltIcon,
-} from '@patternfly/react-icons';
-import { EngagementStatus } from '../../schemas/engagement';
-import { engagementFilterFactory } from '../../common/engagement_filter_factory';
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
+import { AllEngagementsWidget } from '../../components/dashboard/widgets/dw_all_engagements';
+import { ActiveEngagementsWidget } from '../../components/dashboard/widgets/dw_active_engagements';
+import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_past_engagements';
+import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements copy';
+
+export type DateFilter = { startDate: Date; endDate: Date };
+
+export const DashboardDateContext = React.createContext<DateFilter | undefined>(
+  undefined
+);
 
 export function Dashboard() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
@@ -37,21 +38,16 @@ export function Dashboard() {
     }
   }, [engagements, getEngagements, hasFetched, setHasFetched]);
 
-  const numberOfTotalEngagements = engagements?.length;
-  const numberOfUpcomingEngagements = engagements?.filter(
-    engagementFilterFactory({ allowedStatuses: [EngagementStatus.upcoming] })
-  ).length;
-  const numberOfcurrentEngagements = engagements?.filter(
-    engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
-  ).length;
-  const numberOfPastEngagements = engagements?.filter(
-    engagementFilterFactory({
-      allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
-    })
-  ).length;
+  const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
+    undefined
+  );
+
+  const handleSelectDateWindow = (date?: DateFilter) => {
+    setDateFilter(date);
+  };
 
   return (
-    <>
+    <DashboardDateContext.Provider value={dateFilter}>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
           <Title headingLevel="h1">Dashboard</Title>
@@ -61,47 +57,14 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <DateWindowSelector />
+        <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
         <Gallery hasGutter>
-          <DashboardDataCard
-            icon={TachometerAltIcon}
-            numberOfEngagements={numberOfTotalEngagements}
-            title={'All Engagements'}
-            subtitle={
-              'All available engagements in the system. Including upcoming, active and past ones'
-            }
-            url={'/app/engagements/all'}
-          />
-
-          <DashboardDataCard
-            icon={PendingIcon}
-            numberOfEngagements={numberOfUpcomingEngagements}
-            title={'Upcoming Engagements'}
-            subtitle={
-              'Upcoming engagements in the future, and are not launched yet.'
-            }
-            url={'/app/engagements/upcoming'}
-          />
-
-          <DashboardDataCard
-            icon={OnRunningIcon}
-            numberOfEngagements={numberOfcurrentEngagements}
-            title={'Active Engagements'}
-            subtitle={
-              'Engagements that are already in progress and running at the moment.'
-            }
-            url={'/app/engagements/active'}
-          />
-
-          <DashboardDataCard
-            icon={AsleepIcon}
-            numberOfEngagements={numberOfPastEngagements}
-            title={'Past Engagements'}
-            subtitle={'Engagements that are finished, closed or archived.'}
-            url={'/app/engagements/past'}
-          />
+          <AllEngagementsWidget dates={dateFilter} />
+          <ActiveEngagementsWidget dates={dateFilter} />
+          <UpcomingEngagementsWidget dates={dateFilter} />
+          <PastEngagementsWidget dates={dateFilter} />
         </Gallery>
       </PageSection>
-    </>
+    </DashboardDateContext.Provider>
   );
 }

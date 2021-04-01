@@ -1,8 +1,16 @@
-import { Engagement } from '../../schemas/engagement';
+import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
+export interface EngagementSearchParameters {
+  startDate?: Date;
+  endDate?: Date;
+  engagementStatus?: EngagementStatus;
+  region?: string;
+}
 export interface EngagementService {
-  fetchEngagements(): Promise<Engagement[]>;
+  fetchEngagements(
+    parameters?: EngagementSearchParameters
+  ): Promise<Engagement[]>;
   createEngagement(
     data: Pick<
       Engagement,
@@ -14,7 +22,7 @@ export interface EngagementService {
   deleteEngagement(data: Engagement): Promise<Engagement>;
   getConfig(): Promise<EngagementFormConfig>;
   checkHasUpdates(engagement: Engagement): Promise<boolean>;
-  checkSubdomainUniqueness(subdomain: string): Promise<boolean>
+  checkSubdomainUniqueness(subdomain: string): Promise<boolean>;
   getEngagementByCustomerAndProjectName(
     customer_name: string,
     project_name: string

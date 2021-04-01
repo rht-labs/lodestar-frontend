@@ -1,4 +1,7 @@
-import { EngagementService } from '../../services/engagement_service/engagement_service';
+import {
+  EngagementSearchParameters,
+  EngagementService,
+} from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -22,7 +25,9 @@ export class Apiv1EngagementService implements EngagementService {
       .catch(() => false);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
-  async fetchEngagements(): Promise<Engagement[]> {
+  async fetchEngagements(
+    params?: EngagementSearchParameters
+  ): Promise<Engagement[]> {
     try {
       const { data: engagementsData } = await this.axios.get(`/engagements`);
       const serializedEngagements = engagementsData.map(engagementMap =>

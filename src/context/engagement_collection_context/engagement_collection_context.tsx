@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import {
   AlertType,
@@ -11,11 +11,12 @@ export interface EngagementCollectionHookParameters {
   filter?: EngagementCollectionFilter;
   engagementService: EngagementService;
 }
-interface EngagementCollectionFilter {
+export interface EngagementCollectionFilter {
   engagementStatus?: EngagementStatus;
-  minDate?: Date;
-  maxDate?: Date;
+  startDate?: Date;
+  endDate?: Date;
   include?: Array<keyof Engagement>;
+  exclude?: Array<keyof Engagement>;
 }
 export const useEngagementCollection = ({
   feedbackContext,
@@ -23,10 +24,14 @@ export const useEngagementCollection = ({
   engagementService,
 }: EngagementCollectionHookParameters) => {
   const [engagements, setEngagements] = useState<Partial<Engagement>[]>([]);
-  const getEngagements = async () => {
+  const getEngagements = useCallback(async () => {
     feedbackContext?.showLoader();
     try {
-      const engagements = await engagementService.fetchEngagements();
+      const engagements = await engagementService.fetchEngagements({
+        endDate: filter?.endDate,
+        startDate: filter?.startDate,
+        engagementStatus: filter?.engagementStatus,
+      });
       setEngagements(engagements);
     } catch (e) {
       feedbackContext?.showAlert(
@@ -37,10 +42,14 @@ export const useEngagementCollection = ({
     } finally {
       feedbackContext?.hideLoader();
     }
-  };
-  const fetchEngagementsWithParameters = () => {
-    // TODO: Implement filters here
-    getEngagements();
-  };
-  return { getEngagements: fetchEngagementsWithParameters, engagements };
+  }, [
+    engagementService,
+    filter?.startDate,
+    filter?.endDate,
+    filter?.engagementStatus,
+    // filter?.include,
+    // filter?.exclude,
+    feedbackContext,
+  ]);
+  return { getEngagements, engagements };
 };
