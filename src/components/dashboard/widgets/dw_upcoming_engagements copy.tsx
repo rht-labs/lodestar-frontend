@@ -7,6 +7,7 @@ import {
 import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
 import { DashboardDataCard } from '../../dashboard_data_cards/dashboard_data_card';
 import { DateFilter } from '../../../routes/dashboard';
+import { EngagementStatus } from '../../../schemas/engagement';
 
 export interface UpcomingEngagementsWidgetProps {
   dates: DateFilter;
@@ -21,6 +22,7 @@ export const UpcomingEngagementsWidget = (
     include: ['customer_name'],
     endDate: dates?.endDate,
     startDate: dates?.startDate,
+    engagementStatus: EngagementStatus.upcoming,
   };
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,

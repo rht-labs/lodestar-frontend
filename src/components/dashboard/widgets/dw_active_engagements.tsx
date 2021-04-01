@@ -7,6 +7,7 @@ import {
 import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
 import { DashboardDataCard } from '../../dashboard_data_cards/dashboard_data_card';
 import { DateFilter } from '../../../routes/dashboard';
+import { EngagementStatus } from '../../../schemas/engagement';
 
 export interface ActiveEngagementsWidgetProps {
   dates: DateFilter;
@@ -20,6 +21,7 @@ export const ActiveEngagementsWidget = (
   const filter: EngagementCollectionFilter = {
     include: ['customer_name'],
     endDate: dates?.endDate,
+    engagementStatus: EngagementStatus.active,
     startDate: dates?.startDate,
   };
   const { engagements = [], getEngagements } = useEngagementCollection({
