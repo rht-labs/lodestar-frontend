@@ -37,7 +37,7 @@ export class EngagementJsonSerializer
   serialize(engagement: Engagement): object {
     const e = {
       ...engagement,
-      hosting_environments: engagement.hosting_environments.map(he => ({
+      hosting_environments: (engagement.hosting_environments ?? []).map(he => ({
         ...he,
         ocp_sub_domain: (he.ocp_sub_domain ?? '').toLowerCase(),
       })),
