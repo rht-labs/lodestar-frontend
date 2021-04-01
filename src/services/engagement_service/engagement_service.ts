@@ -4,8 +4,12 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 export interface EngagementSearchParameters {
   startDate?: Date;
   endDate?: Date;
-  engagementStatus?: EngagementStatus;
+  engagementStatuses?: EngagementStatus[];
   region?: string;
+  include?: Array<keyof Engagement>;
+  exclude?: Array<keyof Engagement>;
+  take?: number;
+  skip?: number;
 }
 export interface EngagementService {
   fetchEngagements(

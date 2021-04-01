@@ -7,11 +7,13 @@ import {
 import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
 import { DashboardDataCard } from '../../dashboard_data_cards/dashboard_data_card';
 import { DateFilter } from '../../../routes/dashboard';
-import { EngagementStatus } from '../../../schemas/engagement';
+import { Engagement, EngagementStatus } from '../../../schemas/engagement';
 
 export interface ActiveEngagementsWidgetProps {
   dates: DateFilter;
 }
+const include: Array<keyof Engagement> = ['customer_name'];
+const statuses = [EngagementStatus.active];
 
 export const ActiveEngagementsWidget = (
   props: ActiveEngagementsWidgetProps
@@ -19,10 +21,10 @@ export const ActiveEngagementsWidget = (
   const { dates } = props;
   const { engagementService } = useServiceProviders();
   const filter: EngagementCollectionFilter = {
-    include: ['customer_name'],
     endDate: dates?.endDate,
-    engagementStatus: EngagementStatus.active,
+    engagementStatuses: statuses,
     startDate: dates?.startDate,
+    include,
   };
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
