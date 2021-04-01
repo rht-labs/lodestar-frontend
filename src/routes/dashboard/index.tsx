@@ -19,6 +19,7 @@ import { engagementFilterFactory } from '../../common/engagement_filter_factory'
 import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
 
 export function Dashboard() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
@@ -60,6 +61,7 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
+        <DateWindowSelector />
         <Gallery hasGutter>
           <DashboardDataCard
             icon={TachometerAltIcon}

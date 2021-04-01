@@ -11,7 +11,10 @@ export interface EngagementCollectionHookParameters {
   filter?: EngagementCollectionFilter;
   engagementService: EngagementService;
 }
-interface EngagementCollectionFilter {}
+interface EngagementCollectionFilter {
+  minDate?: Date;
+  maxDate?: Date;
+}
 export const useEngagementCollection = ({
   feedbackContext,
   filter,
