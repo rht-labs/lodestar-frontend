@@ -16,6 +16,7 @@ import { FakedCategoryService } from '../category_service/implementations/faked_
 import { AnalyticsService } from '../analytics_service/analytics_service';
 import { GoogleAnalytics } from '../analytics_service/google_analytics';
 import { FakedAnalytics } from '../analytics_service/faked_analytics';
+import { ApiV1 } from '../../packages/api_v1_sdk/apiv1';
 
 export type ServiceFactory = () => {
   engagementService: EngagementService;
@@ -27,15 +28,16 @@ export type ServiceFactory = () => {
 };
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
+  ApiV1.initialize(config);
   return {
     analyticsService: new GoogleAnalytics({
       trackingCode: config.analyticsTrackingCode,
     }),
-    authService: new Apiv1AuthService(config),
-    engagementService: new Apiv1EngagementService(config.backendUrl),
+    authService: new Apiv1AuthService(),
+    engagementService: new Apiv1EngagementService(),
     notificationService: new FakedNotificationService(),
-    versionService: new Apiv1VersionService(config.backendUrl),
-    categoryService: new Apiv1CategoryService(config.backendUrl),
+    versionService: new Apiv1VersionService(),
+    categoryService: new Apiv1CategoryService(),
   };
 };
 

@@ -78,7 +78,7 @@ export const AuthProvider = ({
   );
 
   const logout = async () => {
-    await authService.clearSession();
+    authService.clearSession();
     return;
   };
 

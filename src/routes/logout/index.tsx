@@ -33,7 +33,7 @@ class LogoutPage extends React.Component<{
 
 LogoutPage.contextType = AnalyticsContext;
 
-export default React.forwardRef((props, ref) => (
+export default React.forwardRef((props, _) => (
   <ConfigContext.Consumer>
     {config => (
       <AuthContext.Consumer>
