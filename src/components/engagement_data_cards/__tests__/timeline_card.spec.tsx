@@ -58,13 +58,12 @@ describe('Engagement Artifact Card', () => {
         </FeatureToggleContext.Provider>
       </EngagementContext.Provider>
     );
-    await fireEvent.click(screen.getByTestId('add-artifact-button'));
+    fireEvent.click(screen.getByTestId('add-artifact-button'));
     expect(requestOpen).toHaveBeenCalled();
   });
   test('clicking the edit artifact dropdown item opens the edit artifact modal', async () => {
-    await act(async () => {
+    act(async () => {
       const requestOpen = jest.fn();
-      const e = Engagement.fromFake();
       render(
         <FeatureToggleContext.Provider
           value={{
@@ -89,8 +88,8 @@ describe('Engagement Artifact Card', () => {
       await waitFor(() =>
         expect(screen.getByTestId('artifact-table')).toBeDefined()
       );
-      await fireEvent.click(screen.getByTestId('artifact-action-kebab'));
-      await fireEvent.click(screen.getByTestId('artifact-edit-button'));
+      fireEvent.click(screen.getByTestId('artifact-action-kebab'));
+      fireEvent.click(screen.getByTestId('artifact-edit-button'));
       expect(requestOpen).toHaveBeenCalled();
     });
   });

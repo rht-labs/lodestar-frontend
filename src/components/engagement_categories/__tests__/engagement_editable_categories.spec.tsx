@@ -18,7 +18,7 @@ describe('Engagement Editable Categories', () => {
     const onUpdateField = jest.fn();
     const onSave = jest.fn();
     let view: RenderResult;
-    await act(async () => {
+    act(async () => {
       view = render(
         <TestStateWrapper>
           <FeatureToggles features={['writer', 'reader']}>
@@ -55,7 +55,7 @@ describe('Engagement Editable Categories', () => {
     expect(onUpdateField).toHaveBeenCalled();
     screen.debug();
 
-    await fireEvent.click(await view.findByTestId('save_categories'));
+    fireEvent.click(await view.findByTestId('save_categories'));
 
     expect(onSave).toHaveBeenCalled();
   });
