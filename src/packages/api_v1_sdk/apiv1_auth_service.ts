@@ -8,8 +8,11 @@ import { Logger } from '../../utilities/logger';
 import { AppFeature } from '../../common/app_features';
 import { Token } from './token';
 
-interface AuthConfig
-  extends Pick<Config, 'authBaseUrl' | 'baseUrl' | 'clientId'> {}
+interface AuthConfig {
+  authBaseUrl: string;
+  baseUrl: string;
+  clientId: string;
+}
 export class Apiv1AuthService implements AuthService {
   private static config?: AuthConfig;
   static initialize(config: AuthConfig) {
@@ -23,6 +26,14 @@ export class Apiv1AuthService implements AuthService {
 
   saveToken(tokenObject: UserToken) {
     Token.token = tokenObject;
+  }
+
+  private static validateConfig() {
+    if (!Apiv1AuthService.config) {
+      throw TypeError(
+        'Apiv1AuthService.initialize must be called before using the auth service'
+      );
+    }
   }
 
   async clearSession() {
@@ -67,6 +78,7 @@ export class Apiv1AuthService implements AuthService {
   };
 
   async fetchToken(code: string, grantType: string) {
+    Apiv1AuthService.validateConfig();
     const tokenUrl = `${Apiv1AuthService?.config.authBaseUrl}/token`;
     let requestParams = {};
     if (grantType === 'authorization_code') {
@@ -118,6 +130,7 @@ export class Apiv1AuthService implements AuthService {
   }
 
   async getUserProfile(): Promise<UserProfile> {
+    Apiv1AuthService.validateConfig();
     const userProfileData = await Apiv1AuthService.axios.get(
       `${Apiv1AuthService?.config.authBaseUrl}/userinfo`,
       {

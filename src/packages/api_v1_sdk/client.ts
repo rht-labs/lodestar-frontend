@@ -9,10 +9,14 @@ export function getApiV1HttpClient(baseURL: string): AxiosInstance {
     return request;
   });
   client.interceptors.response.use(async res => {
-    const authService = new Apiv1AuthService();
-    await authService.isLoggedIn();
-    const retriedResponse = await axios.request(res.config);
-    return retriedResponse;
+    if (res.status === 401 || res.status === 403) {
+      console.log('retrying request');
+      const authService = new Apiv1AuthService();
+      await authService.isLoggedIn();
+      const retriedResponse = await axios.request(res.config);
+      return retriedResponse;
+    }
+    return res;
   });
   return client;
 }

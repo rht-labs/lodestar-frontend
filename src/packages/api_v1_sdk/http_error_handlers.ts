@@ -1,4 +1,3 @@
-import axios, { AxiosInstance } from 'axios';
 import {
   AuthenticationError,
   AuthorizationError,
