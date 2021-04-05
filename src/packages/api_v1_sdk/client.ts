@@ -8,15 +8,23 @@ export function getApiV1HttpClient(baseURL: string): AxiosInstance {
     request.headers.Authorization = `Bearer ${Token.token?.accessToken}`;
     return request;
   });
-  client.interceptors.response.use(async res => {
-    if (res.status === 401 || res.status === 403) {
-      console.log('retrying request');
-      const authService = new Apiv1AuthService();
-      await authService.isLoggedIn();
-      const retriedResponse = await axios.request(res.config);
-      return retriedResponse;
+  client.interceptors.response.use(
+    async res => {
+      return res;
+    },
+    async error => {
+      if (error.response.status === 401 || error.response.status === 403) {
+        const authService = new Apiv1AuthService();
+        try {
+          await authService.isLoggedIn();
+          const retriedResponse = await axios.request(error.config);
+          return retriedResponse;
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      }
+      return Promise.reject(error);
     }
-    return res;
-  });
+  );
   return client;
 }

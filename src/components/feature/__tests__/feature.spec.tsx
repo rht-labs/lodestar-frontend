@@ -1,6 +1,5 @@
 import React from 'react';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
-import '@testing-library/jest-dom/extend-expect';
 import { Feature } from '../feature';
 import { AppFeature } from '../../../common/app_features';
 import { render, act } from '@testing-library/react';
@@ -10,7 +9,7 @@ import { VersionContext } from '../../../context/version_context/version_context
 
 describe('Feature component', () => {
   test('should render inactive component if role is not present', async () => {
-    await act(async () => {
+    act(async () => {
       function Wrapper({ children }) {
         return (
           <TestStateWrapper>
@@ -47,7 +46,7 @@ describe('Feature component', () => {
   });
 
   test('should render the active component when the role is present', async () => {
-    await act(async () => {
+    act(async () => {
       function Wrapper({ children }) {
         return (
           <TestStateWrapper>
