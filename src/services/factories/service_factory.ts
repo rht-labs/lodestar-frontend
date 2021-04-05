@@ -27,11 +27,12 @@ export type ServiceFactory = () => {
 };
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
+  Apiv1AuthService.initialize(config);
   return {
     analyticsService: new GoogleAnalytics({
       trackingCode: config.analyticsTrackingCode,
     }),
-    authService: new Apiv1AuthService(config),
+    authService: new Apiv1AuthService(),
     engagementService: new Apiv1EngagementService(config.backendUrl),
     notificationService: new FakedNotificationService(),
     versionService: new Apiv1VersionService(config.backendUrl),

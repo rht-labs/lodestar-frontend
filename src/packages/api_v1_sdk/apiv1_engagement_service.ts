@@ -4,7 +4,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { Logger } from '../../utilities/logger';
-import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
+import { handleAxiosResponseErrors } from './http_error_handlers';
 import { getApiV1HttpClient } from './client';
 
 export class Apiv1EngagementService implements EngagementService {

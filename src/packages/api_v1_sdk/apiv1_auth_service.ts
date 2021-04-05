@@ -8,15 +8,18 @@ import { Logger } from '../../utilities/logger';
 import { AppFeature } from '../../common/app_features';
 import { Token } from './token';
 
+interface AuthConfig
+  extends Pick<Config, 'authBaseUrl' | 'baseUrl' | 'clientId'> {}
 export class Apiv1AuthService implements AuthService {
-  constructor(config: Config) {
-    this.config = config;
-    this.axios = Axios.create({ baseURL: config.authBaseUrl });
+  private static config?: AuthConfig;
+  static initialize(config: AuthConfig) {
+    Apiv1AuthService.axios = Axios.create({ baseURL: config.authBaseUrl });
+    Apiv1AuthService.config = config;
   }
 
   config: Config;
 
-  axios: AxiosInstance;
+  private static axios: AxiosInstance;
 
   saveToken(tokenObject: UserToken) {
     Token.token = tokenObject;
@@ -31,7 +34,7 @@ export class Apiv1AuthService implements AuthService {
   };
 
   isLoggedIn = async (): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       try {
         const token = this.getToken();
         const accessTokenExpiryTime = token?.accessTokenExpiry.getTime();
@@ -64,20 +67,20 @@ export class Apiv1AuthService implements AuthService {
   };
 
   async fetchToken(code: string, grantType: string) {
-    const tokenUrl = `${this?.config.authBaseUrl}/token`;
+    const tokenUrl = `${Apiv1AuthService?.config.authBaseUrl}/token`;
     let requestParams = {};
     if (grantType === 'authorization_code') {
       requestParams = {
         code,
         grant_type: 'authorization_code',
-        client_id: this?.config.clientId,
-        redirect_uri: `${this?.config.baseUrl}/auth_callback`,
+        client_id: Apiv1AuthService?.config.clientId,
+        redirect_uri: `${Apiv1AuthService?.config.baseUrl}/auth_callback`,
       };
     } else if (grantType === 'refresh_token') {
       requestParams = {
         grant_type: 'refresh_token',
         refresh_token: code,
-        client_id: this?.config.clientId,
+        client_id: Apiv1AuthService?.config.clientId,
       };
     }
     const { data } = await Axios.post(tokenUrl, qs.stringify(requestParams), {
@@ -115,8 +118,8 @@ export class Apiv1AuthService implements AuthService {
   }
 
   async getUserProfile(): Promise<UserProfile> {
-    const userProfileData = await this.axios.get(
-      `${this?.config.authBaseUrl}/userinfo`,
+    const userProfileData = await Apiv1AuthService.axios.get(
+      `${Apiv1AuthService?.config.authBaseUrl}/userinfo`,
       {
         headers: {
           Authorization: `Bearer ${this.getToken()?.accessToken}`,
@@ -131,7 +134,9 @@ export class Apiv1AuthService implements AuthService {
       email: userProfileData.data.email,
       groups: Array.from(
         new Set(
-          userProfileData.data.groups?.map?.(group => rolesMap[group]) ?? []
+          userProfileData.data.groups?.map?.(
+            (group: string) => rolesMap[group]
+          ) ?? []
         )
       ),
     };

@@ -1,6 +1,6 @@
 import { CategoryService } from '../../services/category_service/category_service';
 import { EngagementCategory } from '../../schemas/engagement_category';
-import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
+import { handleAxiosResponseErrors } from './http_error_handlers';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { getApiV1HttpClient } from './client';
 

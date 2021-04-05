@@ -1,7 +1,8 @@
+import axios, { AxiosInstance } from 'axios';
 import {
   AuthenticationError,
   AuthorizationError,
-} from '../../auth_service/auth_errors';
+} from '../../services/auth_service/auth_errors';
 
 interface AxiosError {
   response: {
