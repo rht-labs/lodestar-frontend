@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Apiv1AuthService } from './apiv1_auth_service';
-import { ApiV1 } from './apiv1_config';
+import { ApiV1 } from './apiv1';
 import { Token } from './token';
 
 export function getApiV1HttpClient(): AxiosInstance {

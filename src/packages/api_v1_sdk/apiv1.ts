@@ -27,5 +27,8 @@ export abstract class ApiV1 {
     if (!ApiV1.config.baseUrl) {
       throw TypeError('baseUrl must not be null');
     }
+    if (!ApiV1.config.backendUrl) {
+      throw TypeError('backendUrl must not be null');
+    }
   }
 }

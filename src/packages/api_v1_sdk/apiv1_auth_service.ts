@@ -1,5 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
-import { ApiV1 } from './apiv1_config';
+import { ApiV1 } from './apiv1';
 import { UserToken } from '../../schemas/user_token';
 import qs from 'query-string';
 import { UserProfile } from '../../schemas/user_profile';

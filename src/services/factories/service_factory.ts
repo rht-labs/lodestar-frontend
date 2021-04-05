@@ -16,7 +16,7 @@ import { FakedCategoryService } from '../category_service/implementations/faked_
 import { AnalyticsService } from '../analytics_service/analytics_service';
 import { GoogleAnalytics } from '../analytics_service/google_analytics';
 import { FakedAnalytics } from '../analytics_service/faked_analytics';
-import { ApiV1 } from '../../packages/api_v1_sdk/apiv1_config';
+import { ApiV1 } from '../../packages/api_v1_sdk/apiv1';
 
 export type ServiceFactory = () => {
   engagementService: EngagementService;
