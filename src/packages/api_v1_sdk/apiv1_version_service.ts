@@ -4,22 +4,15 @@ import { handleAxiosResponseErrors } from './http_error_handlers';
 import { VersionJsonSerializer } from '../../serializers/version/version_json_serializer';
 import { getApiV1HttpClient } from './client';
 
-export class Apiv1VersionService extends VersionService {
-  constructor(baseURL: string) {
-    super();
-    this.baseUrl = baseURL;
-  }
-  baseUrl: string;
+export class Apiv1VersionService implements VersionService {
   private static versionSerializer = new VersionJsonSerializer();
   private get axios() {
-    return getApiV1HttpClient(this.baseUrl);
+    return getApiV1HttpClient();
   }
 
   async fetchVersion(): Promise<AppVersion> {
     try {
-      const { data } = await this.axios.get(
-        `${this.baseUrl}/api/version/manifest`
-      );
+      const { data } = await this.axios.get(`/api/version/manifest`);
 
       const serializedVersion = Apiv1VersionService.versionSerializer.deserialize(
         data

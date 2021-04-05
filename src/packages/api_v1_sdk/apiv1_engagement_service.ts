@@ -10,8 +10,8 @@ import { AxiosInstance } from 'axios';
 
 export class Apiv1EngagementService implements EngagementService {
   private axios: AxiosInstance;
-  constructor(baseURL: string) {
-    this.axios = getApiV1HttpClient(baseURL);
+  constructor() {
+    this.axios = getApiV1HttpClient();
   }
   async checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
     return this.axios
