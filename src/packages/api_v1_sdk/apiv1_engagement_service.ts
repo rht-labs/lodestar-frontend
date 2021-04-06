@@ -69,7 +69,7 @@ export class Apiv1EngagementService implements EngagementService {
   private buildQueryStringFromParameters(
     parameters: EngagementSearchParameters
   ): string {
-    let qs = '';
+    let queries = [];
     let searchParams = [];
     if (parameters.endDate) {
       searchParams.push(
@@ -91,10 +91,14 @@ export class Apiv1EngagementService implements EngagementService {
       searchParams.push(`state=${parameters.engagementStatuses.join(',')}`);
     }
     if (searchParams.length > 0) {
-      qs += `search=${searchParams.join('&')}`;
+      queries.push(`search=${searchParams.join(',')}`);
     }
 
-    return qs;
+    if (parameters.include && parameters.include.length > 0) {
+      queries.push(`include=${parameters.include.join(',')}`);
+    }
+
+    return queries.join('&');
   }
   async fetchEngagements(
     params?: EngagementSearchParameters

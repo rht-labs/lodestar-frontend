@@ -33,6 +33,7 @@ export const useEngagementCollection = ({
         startDate: filter?.startDate,
         engagementStatuses: filter?.engagementStatuses,
         regions: filter?.engagementRegions,
+        include: filter?.include,
       });
       setEngagements(engagements);
     } catch (e) {
@@ -48,6 +49,7 @@ export const useEngagementCollection = ({
     engagementService,
     filter?.startDate,
     filter?.endDate,
+    filter?.include,
     filter?.engagementStatuses,
     filter?.engagementRegions,
     feedbackContext,
