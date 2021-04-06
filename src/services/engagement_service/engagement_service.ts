@@ -5,7 +5,7 @@ export interface EngagementSearchParameters {
   startDate?: Date;
   endDate?: Date;
   engagementStatuses?: EngagementStatus[];
-  region?: string;
+  regions?: string[];
   include?: Array<keyof Engagement>;
   exclude?: Array<keyof Engagement>;
   take?: number;

@@ -12,6 +12,7 @@ export interface EngagementCollectionHookParameters {
   engagementService: EngagementService;
 }
 export interface EngagementCollectionFilter {
+  engagementRegions?: string[];
   engagementStatuses?: EngagementStatus[];
   startDate?: Date;
   endDate?: Date;
@@ -31,6 +32,7 @@ export const useEngagementCollection = ({
         endDate: filter?.endDate,
         startDate: filter?.startDate,
         engagementStatuses: filter?.engagementStatuses,
+        regions: filter?.engagementRegions,
       });
       setEngagements(engagements);
     } catch (e) {
@@ -47,8 +49,7 @@ export const useEngagementCollection = ({
     filter?.startDate,
     filter?.endDate,
     filter?.engagementStatuses,
-    // filter?.include,
-    // filter?.exclude,
+    filter?.engagementRegions,
     feedbackContext,
   ]);
   return { getEngagements, engagements };

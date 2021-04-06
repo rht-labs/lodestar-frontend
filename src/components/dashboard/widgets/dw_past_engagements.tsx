@@ -11,18 +11,20 @@ import { Engagement, EngagementStatus } from '../../../schemas/engagement';
 
 export interface PastEngagementsWidgetProps {
   dates: DateFilter;
+  regions: string[];
 }
 const statuses = [EngagementStatus.past];
 const include: Array<keyof Engagement> = ['customer_name'];
 
 export const PastEngagementsWidget = (props: PastEngagementsWidgetProps) => {
-  const { dates } = props;
+  const { dates, regions } = props;
   const { engagementService } = useServiceProviders();
   const filter: EngagementCollectionFilter = {
     include,
     endDate: dates?.endDate,
     startDate: dates?.startDate,
     engagementStatuses: statuses,
+    engagementRegions: regions,
   };
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,

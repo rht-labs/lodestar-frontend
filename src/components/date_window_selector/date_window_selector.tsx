@@ -107,6 +107,34 @@ export const DateWindowSelector = ({
           isSelected={selectedRange === DateWindows.OneYear}
         ></ToggleGroupItem>
         <ToggleGroupItem
+          text="Q1'21"
+          key={'q1'}
+          data-testid="alltime-window"
+          onChange={handleClick(DateWindows.AllTime)}
+          isSelected={selectedRange === DateWindows.AllTime}
+        ></ToggleGroupItem>{' '}
+        <ToggleGroupItem
+          text="Q4'20"
+          key={'q4'}
+          data-testid="alltime-window"
+          onChange={handleClick(DateWindows.AllTime)}
+          isSelected={selectedRange === DateWindows.AllTime}
+        ></ToggleGroupItem>{' '}
+        <ToggleGroupItem
+          text="Q3'20"
+          key={'q3'}
+          data-testid="alltime-window"
+          onChange={handleClick(DateWindows.AllTime)}
+          isSelected={selectedRange === DateWindows.AllTime}
+        ></ToggleGroupItem>{' '}
+        <ToggleGroupItem
+          text="Q2'20"
+          key={'q2'}
+          data-testid="alltime-window"
+          onChange={handleClick(DateWindows.AllTime)}
+          isSelected={selectedRange === DateWindows.AllTime}
+        ></ToggleGroupItem>{' '}
+        <ToggleGroupItem
           text="All Time"
           key={'alltime'}
           data-testid="alltime-window"

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Flex,
+  FlexItem,
   Gallery,
   PageSection,
   PageSectionVariants,
+  Select,
+  SelectOption,
   Text,
   TextContent,
   Title,
@@ -16,12 +20,18 @@ import { ActiveEngagementsWidget } from '../../components/dashboard/widgets/dw_a
 import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_past_engagements';
 import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements copy';
 import { Feature } from '../../components/feature/feature';
+import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
 export const DashboardDateContext = React.createContext<DateFilter | undefined>(
   undefined
 );
+
+export interface DashboardFilter {
+  dates: DateFilter;
+  regions: string[];
+}
 
 export function Dashboard() {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
@@ -31,6 +41,9 @@ export function Dashboard() {
     engagementService,
     feedbackContext,
   });
+  const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
+  const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const { engagementFormConfig } = useEngagementFormConfig(engagementService);
 
   useEffect(() => {
     if (!hasFetched) {
@@ -47,6 +60,15 @@ export function Dashboard() {
     setDateFilter(date);
   };
 
+  const handleSelectRegions = (region: string) => {
+    if (selectedRegions.includes(region)) {
+      setSelectedRegions(selectedRegions.filter(r => r !== region));
+    } else {
+      setSelectedRegions([...selectedRegions, region]);
+    }
+  };
+  const dashboardFilter = { dates: dateFilter, regions: selectedRegions };
+
   return (
     <DashboardDateContext.Provider value={dateFilter}>
       <PageSection variant={PageSectionVariants.light}>
@@ -58,14 +80,54 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <Feature name="newDashboard">
-          <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+        <Feature name="reader">
+          <Flex
+            justifyContent={{ default: 'justifyContentFlexEnd' }}
+            style={{ marginBottom: '1rem' }}
+          >
+            <FlexItem>
+              <Select
+                width="12rem"
+                placeholderText={'Select a region'}
+                isOpen={isRegionSelectOpen}
+                multiple={true}
+                selections={selectedRegions}
+                onSelect={(_, value) => handleSelectRegions(value as string)}
+                onToggle={() => setIsRegionSelectOpen(!isRegionSelectOpen)}
+              >
+                {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
+                  option => (
+                    <SelectOption
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                    />
+                  )
+                )}
+              </Select>
+            </FlexItem>
+            <FlexItem>
+              <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+            </FlexItem>
+          </Flex>
         </Feature>
         <Gallery hasGutter>
-          <AllEngagementsWidget dates={dateFilter} />
-          <ActiveEngagementsWidget dates={dateFilter} />
-          <UpcomingEngagementsWidget dates={dateFilter} />
-          <PastEngagementsWidget dates={dateFilter} />
+          <AllEngagementsWidget
+            dates={dashboardFilter.dates}
+            regions={selectedRegions}
+          />
+          <ActiveEngagementsWidget
+            dates={dashboardFilter.dates}
+            regions={selectedRegions}
+          />
+          <UpcomingEngagementsWidget
+            dates={dashboardFilter.dates}
+            regions={selectedRegions}
+          />
+          <PastEngagementsWidget
+            dates={dashboardFilter.dates}
+            regions={selectedRegions}
+          />
         </Gallery>
       </PageSection>
     </DashboardDateContext.Provider>

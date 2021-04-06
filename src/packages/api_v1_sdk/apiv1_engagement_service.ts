@@ -33,9 +33,9 @@ export class Apiv1EngagementService implements EngagementService {
         e => params.engagementStatuses.indexOf(getEngagementStatus(e)) > -1
       );
     }
-    if (params.region) {
-      filteredEngagements = filteredEngagements.filter(
-        e => e.engagement_region === params.region
+    if (params.regions && params.regions.length > 0) {
+      filteredEngagements = filteredEngagements.filter(e =>
+        params.regions.includes(e.engagement_region)
       );
     }
     if (params.startDate && params.endDate) {
@@ -66,16 +66,44 @@ export class Apiv1EngagementService implements EngagementService {
     }
     return filteredEngagements;
   }
+  private buildQueryStringFromParameters(
+    parameters: EngagementSearchParameters
+  ): string {
+    let qs = '';
+    let searchParams = [];
+    if (parameters.endDate) {
+      searchParams.push(
+        `end=${parameters.endDate.toISOString().split('T')[0]}`
+      );
+    }
+    if (parameters.startDate) {
+      searchParams.push(
+        `start=${parameters.startDate.toISOString().split('T')[0]}`
+      );
+    }
+    if (parameters.regions && parameters.regions.length > 0) {
+      searchParams.push(`engagement_region=${parameters.regions.join(',')}`);
+    }
+    if (searchParams.length > 0) {
+      qs += `search=${searchParams.join('&')}`;
+    }
+
+    return qs;
+  }
   async fetchEngagements(
     params?: EngagementSearchParameters
   ): Promise<Engagement[]> {
     try {
-      const { data: engagementsData } = await this.axios.get(`/engagements`);
+      const qs = this.buildQueryStringFromParameters(params);
+      const { data: engagementsData } = await this.axios.get(
+        `/engagements${qs.length > 0 ? '?' + qs : ''}`
+      );
       const serializedEngagements = engagementsData.map(
         (engagementMap: { [key: string]: any }) =>
           Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
       );
-      return this.filterForParams(serializedEngagements, params);
+      // return this.filterForParams(serializedEngagements, params);
+      return serializedEngagements;
     } catch (e) {
       if (e.isAxiosError) {
         handleAxiosResponseErrors(e);
