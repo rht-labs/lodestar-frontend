@@ -6,7 +6,7 @@ export class ConfigJsonSerializer implements Serializer<Config, object> {
   serialize(config: Config) {
     return config;
   }
-  deserialize(data: object) {
+  deserialize(data: object): Config {
     return {
       baseUrl: data['baseUrl'],
       clientId: data['clientId'],
@@ -19,6 +19,7 @@ export class ConfigJsonSerializer implements Serializer<Config, object> {
       bannerMessages: data['bannerMessages'],
       analyticsTrackingCode: data['analyticsTrackingCode'] ?? '',
       allowVersionOverride: data['allowVersionOverride'] ?? false,
+      roles: data['roles'],
     };
   }
 }

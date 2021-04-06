@@ -7,6 +7,10 @@
   "loggerType": "console",
   "logLevel": "error",
   "supportEmailAddress": "example@example.com",
+  "roles": {
+    "exampleRole": ["reader"],
+    "secondExampleRole": ["writer"]
+  },
   "bannerMessages": [
     {
       "message": "Hello message 1",

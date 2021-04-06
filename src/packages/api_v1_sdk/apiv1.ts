@@ -1,8 +1,11 @@
+import { AppFeature } from '../../common/app_features';
+
 export interface ApiV1Config {
   authBaseUrl: string;
   baseUrl: string;
   clientId: string;
   backendUrl: string;
+  roleMapping: { [key: string]: AppFeature[] };
 }
 export abstract class ApiV1 {
   private static _config: ApiV1Config;

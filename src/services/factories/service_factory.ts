@@ -28,7 +28,7 @@ export type ServiceFactory = () => {
 };
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
-  ApiV1.initialize(config);
+  ApiV1.initialize({ ...config, roleMapping: config.roles });
   return {
     analyticsService: new GoogleAnalytics({
       trackingCode: config.analyticsTrackingCode,

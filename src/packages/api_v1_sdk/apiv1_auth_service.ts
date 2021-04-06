@@ -105,11 +105,20 @@ export class Apiv1AuthService implements AuthService {
     return userToken;
   }
 
-  private async getRolesMap(): Promise<{ [key: string]: AppFeature }> {
-    return {
-      reader: 'reader',
-      writer: 'writer',
-    };
+  private async getUserRoles(groups: string[] = []): Promise<AppFeature[]> {
+    const roleMappings = ApiV1.config.roleMapping ?? {};
+    const roles = Array.from(
+      new Set(
+        groups.reduce<AppFeature[]>(
+          (prev: AppFeature[], curr: string) => [
+            ...prev,
+            ...(roleMappings[curr] ?? []),
+          ],
+          []
+        )
+      )
+    );
+    return roles;
   }
 
   async getUserProfile(): Promise<UserProfile> {
@@ -122,19 +131,13 @@ export class Apiv1AuthService implements AuthService {
         },
       }
     );
-    const rolesMap = await this.getRolesMap();
+    const roles = await this.getUserRoles(userProfileData.data?.groups);
     return {
       username: userProfileData.data.preferred_username,
       firstName: userProfileData.data.given_name,
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
-      groups: Array.from(
-        new Set(
-          userProfileData.data.groups?.map?.(
-            (group: string) => rolesMap[group]
-          ) ?? []
-        )
-      ),
+      groups: roles,
     };
   }
 }
