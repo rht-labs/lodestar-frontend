@@ -88,9 +88,7 @@ export class Apiv1EngagementService implements EngagementService {
       parameters.engagementStatuses &&
       parameters.engagementStatuses.length > 0
     ) {
-      searchParams.push(
-        `engagement_status=${parameters.engagementStatuses.join(',')}`
-      );
+      searchParams.push(`state=${parameters.engagementStatuses.join(',')}`);
     }
     if (searchParams.length > 0) {
       qs += `search=${searchParams.join('&')}`;
