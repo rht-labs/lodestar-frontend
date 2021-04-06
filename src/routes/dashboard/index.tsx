@@ -15,6 +15,7 @@ import { AllEngagementsWidget } from '../../components/dashboard/widgets/dw_all_
 import { ActiveEngagementsWidget } from '../../components/dashboard/widgets/dw_active_engagements';
 import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_past_engagements';
 import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements copy';
+import { Feature } from '../../components/feature/feature';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -57,7 +58,9 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+        <Feature name="newDashboard">
+          <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+        </Feature>
         <Gallery hasGutter>
           <AllEngagementsWidget dates={dateFilter} />
           <ActiveEngagementsWidget dates={dateFilter} />
