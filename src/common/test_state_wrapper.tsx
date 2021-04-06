@@ -2,10 +2,7 @@ import React from 'react';
 
 import '@patternfly/react-core/dist/styles/base.css';
 
-import {
-  AuthContext,
-  AuthProvider,
-} from '../context/auth_context/auth_context';
+import { AuthProvider } from '../context/auth_context/auth_context';
 import { VersionProvider } from '../context/version_context/version_context';
 import { EngagementProvider } from '../context/engagement_context/engagement_context';
 import { FeatureToggles } from '../context/feature_context/feature_toggles';
@@ -48,21 +45,16 @@ function TestContexts({ children = null }) {
         <FeedbackContext.Consumer>
           {feedbackContext => (
             <AuthProvider authService={authService}>
-              <AuthContext.Consumer>
-                {authContext => (
-                  <EngagementProvider
-                    engagementFormConfig={EngagementFormConfig.fromFake()}
-                    categoryService={categoryService}
-                    feedbackContext={feedbackContext}
-                    engagementService={engagementService}
-                    authContext={authContext}
-                  >
-                    <VersionProvider versionService={versionService}>
-                      <FeatureToggles>{children}</FeatureToggles>
-                    </VersionProvider>
-                  </EngagementProvider>
-                )}
-              </AuthContext.Consumer>
+              <EngagementProvider
+                engagementFormConfig={EngagementFormConfig.fromFake()}
+                categoryService={categoryService}
+                feedbackContext={feedbackContext}
+                engagementService={engagementService}
+              >
+                <VersionProvider versionService={versionService}>
+                  <FeatureToggles>{children}</FeatureToggles>
+                </VersionProvider>
+              </EngagementProvider>
             </AuthProvider>
           )}
         </FeedbackContext.Consumer>

@@ -11,9 +11,7 @@ import {
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { APP_FEATURES } from '../../../common/app_features';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
-import { IAuthContext } from '../../../context/auth_context/auth_context';
 import { Engagement } from '../../../schemas/engagement';
-import { IVersionContext } from '../../../context/version_context/version_context';
 
 describe('Create New Engagement Route', () => {
   const getComponent = () => {
@@ -26,25 +24,25 @@ describe('Create New Engagement Route', () => {
     );
   };
   test('should match snapshot', async () => {
-    await act(async () => {
+    act(async () => {
       const rendered = render(getComponent());
       expect(rendered).toMatchSnapshot();
     });
   });
   test('should have a field for a project name', async () => {
-    await act(async () => {
+    act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('project-name')).toBeDefined();
     });
   });
   test('should have a field for a customer name', async () => {
-    await act(async () => {
+    act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('customer-name')).toBeDefined();
     });
   });
   test('should have a field for a region name', async () => {
-    await act(async () => {
+    act(async () => {
       const wrapper = render(getComponent());
       expect(wrapper.getByTestId('region')).toBeDefined();
     });
@@ -65,11 +63,7 @@ describe('Create New Engagement Route', () => {
             } as unknown) as IEngagementContext
           }
         >
-          <FeatureToggles
-            authContext={{} as IAuthContext}
-            versionContext={{} as IVersionContext}
-            features={[APP_FEATURES.writer, APP_FEATURES.reader]}
-          >
+          <FeatureToggles features={[APP_FEATURES.writer, APP_FEATURES.reader]}>
             <CreateNewEngagement />
           </FeatureToggles>
         </EngagementContext.Provider>
@@ -81,7 +75,7 @@ describe('Create New Engagement Route', () => {
       const customerNameField = wrapper
         .getByTestId('customer-name')
         .getElementsByTagName('input')[0];
-      await fireEvent.change(customerNameField, {
+      fireEvent.change(customerNameField, {
         target: { value: 'a' },
       });
       const dropdownButton = getById(wrapper.container, 'customer_dropdown');

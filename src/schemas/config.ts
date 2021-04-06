@@ -1,3 +1,4 @@
+import { AppFeature } from '../common/app_features';
 import { LogVerbosity } from '../utilities/logger/logger';
 
 export interface BannerMessage {
@@ -16,6 +17,7 @@ export interface Config {
   supportEmailAddress: string;
   bannerMessages?: BannerMessage[];
   allowVersionOverride?: boolean;
+  roles: { [key: string]: AppFeature[] };
 }
 
 export abstract class Config {
@@ -29,6 +31,10 @@ export abstract class Config {
       backendUrl: 'https://lodestar-backend.example.com',
       disableLaunch: false,
       supportEmailAddress: 'redhatsupport@redhat.com',
+      roles: {
+        reader: ['reader'],
+        writer: ['writer'],
+      },
       bannerMessages: [
         {
           message: 'Hello message 1',

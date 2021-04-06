@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthContext, AuthProvider } from './context/auth_context/auth_context';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import qs from 'query-string';
+import { AuthProvider, useSession } from './context/auth_context/auth_context';
 import {
   VersionContext,
   VersionProvider,
@@ -27,6 +28,10 @@ import {
 import CustomGlobalBanner from './components/custom_global_banner/custom_global_banner';
 import { Config } from './schemas/config';
 import { NavigationAnalytics } from './components/navigation_analytics/navigation_analytics';
+import {
+  FEATURE_VERSION_MAP,
+  getFeaturesFromVersion,
+} from './common/version_feature_factory';
 
 export const App = ({ config }: { config: Config }) => {
   const serviceProviders =
@@ -66,33 +71,17 @@ export const App = ({ config }: { config: Config }) => {
                             authService={authService}
                             analyticsContext={analyticsContext}
                           >
-                            <AuthContext.Consumer>
-                              {authContext => (
-                                <NotificationProvider
-                                  notificationService={notificationService}
-                                >
-                                  <VersionProvider
-                                    versionService={versionService}
-                                  >
-                                    <VersionContext.Consumer>
-                                      {versionContext => {
-                                        return (
-                                          <FeatureToggles
-                                            config={appConfig}
-                                            versionContext={versionContext}
-                                            authContext={authContext}
-                                          >
-                                            <NavigationAnalytics>
-                                              <LodestarRouter />
-                                            </NavigationAnalytics>
-                                          </FeatureToggles>
-                                        );
-                                      }}
-                                    </VersionContext.Consumer>
-                                  </VersionProvider>
-                                </NotificationProvider>
-                              )}
-                            </AuthContext.Consumer>
+                            <NotificationProvider
+                              notificationService={notificationService}
+                            >
+                              <VersionProvider versionService={versionService}>
+                                <FeatureProvider>
+                                  <NavigationAnalytics>
+                                    <LodestarRouter />
+                                  </NavigationAnalytics>
+                                </FeatureProvider>
+                              </VersionProvider>
+                            </NotificationProvider>
                           </AuthProvider>
                         </FeedbackProvider>
                       )}
@@ -105,5 +94,29 @@ export const App = ({ config }: { config: Config }) => {
         </ServiceProviderContext.Consumer>
       </ServiceProvider>
     </ErrorBoundary>
+  );
+};
+
+const FeatureProvider = ({ children }) => {
+  const location = useLocation();
+  const versionContext = useContext(VersionContext);
+  const { appConfig } = useConfig();
+  let version = versionContext.versions?.mainVersion?.value;
+  if (appConfig?.allowVersionOverride) {
+    const query = qs.parse(location.search);
+    const queryVersion = query['lodestar-version'];
+    if (queryVersion) {
+      version = Array.isArray(queryVersion) ? queryVersion[0] : queryVersion;
+    }
+  }
+  const authContext = useSession();
+  return (
+    <FeatureToggles
+      features={(authContext?.roles ?? []).concat(
+        getFeaturesFromVersion(version, FEATURE_VERSION_MAP) ?? []
+      )}
+    >
+      {children}
+    </FeatureToggles>
   );
 };

@@ -1,34 +1,17 @@
 import React from 'react';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
-import '@testing-library/jest-dom/extend-expect';
 import { Feature } from '../feature';
 import { AppFeature } from '../../../common/app_features';
 import { render, act } from '@testing-library/react';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { AuthContext } from '../../../context/auth_context/auth_context';
-import { VersionContext } from '../../../context/version_context/version_context';
 
 describe('Feature component', () => {
   test('should render inactive component if role is not present', async () => {
-    await act(async () => {
+    act(async () => {
       function Wrapper({ children }) {
         return (
           <TestStateWrapper>
-            <AuthContext.Consumer>
-              {authContext => (
-                <VersionContext.Consumer>
-                  {versionContext => (
-                    <FeatureToggles
-                      authContext={authContext}
-                      versionContext={versionContext}
-                      features={['foo']}
-                    >
-                      {children}
-                    </FeatureToggles>
-                  )}
-                </VersionContext.Consumer>
-              )}
-            </AuthContext.Consumer>
+            <FeatureToggles features={['foo']}>{children}</FeatureToggles>
           </TestStateWrapper>
         );
       }
@@ -47,25 +30,11 @@ describe('Feature component', () => {
   });
 
   test('should render the active component when the role is present', async () => {
-    await act(async () => {
+    act(async () => {
       function Wrapper({ children }) {
         return (
           <TestStateWrapper>
-            <AuthContext.Consumer>
-              {authContext => (
-                <VersionContext.Consumer>
-                  {versionContext => (
-                    <FeatureToggles
-                      authContext={authContext}
-                      versionContext={versionContext}
-                      features={['foo']}
-                    >
-                      {children}
-                    </FeatureToggles>
-                  )}
-                </VersionContext.Consumer>
-              )}
-            </AuthContext.Consumer>
+            <FeatureToggles features={['foo']}>{children}</FeatureToggles>
           </TestStateWrapper>
         );
       }

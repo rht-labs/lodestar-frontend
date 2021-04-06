@@ -1,22 +1,19 @@
 import Axios, { AxiosInstance } from 'axios';
+import { ApiV1 } from './apiv1';
 import { UserToken } from '../../schemas/user_token';
 import qs from 'query-string';
 import { UserProfile } from '../../schemas/user_profile';
 import { AuthService } from '../../services/auth_service/authentication_service';
-import { Config } from '../../schemas/config';
 import { Logger } from '../../utilities/logger';
 import { AppFeature } from '../../common/app_features';
 import { Token } from './token';
+import { getApiV1HttpClient } from './client';
 
 export class Apiv1AuthService implements AuthService {
-  constructor(config: Config) {
-    this.config = config;
-    this.axios = Axios.create({ baseURL: config.authBaseUrl });
+  private axios: AxiosInstance;
+  constructor() {
+    this.axios = getApiV1HttpClient();
   }
-
-  config: Config;
-
-  axios: AxiosInstance;
 
   saveToken(tokenObject: UserToken) {
     Token.token = tokenObject;
@@ -31,7 +28,7 @@ export class Apiv1AuthService implements AuthService {
   };
 
   isLoggedIn = async (): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       try {
         const token = this.getToken();
         const accessTokenExpiryTime = token?.accessTokenExpiry.getTime();
@@ -64,20 +61,21 @@ export class Apiv1AuthService implements AuthService {
   };
 
   async fetchToken(code: string, grantType: string) {
-    const tokenUrl = `${this?.config.authBaseUrl}/token`;
+    ApiV1.validateConfig();
+    const tokenUrl = `${ApiV1?.config.authBaseUrl}/token`;
     let requestParams = {};
     if (grantType === 'authorization_code') {
       requestParams = {
         code,
         grant_type: 'authorization_code',
-        client_id: this?.config.clientId,
-        redirect_uri: `${this?.config.baseUrl}/auth_callback`,
+        client_id: ApiV1?.config.clientId,
+        redirect_uri: `${ApiV1?.config.baseUrl}/auth_callback`,
       };
     } else if (grantType === 'refresh_token') {
       requestParams = {
         grant_type: 'refresh_token',
         refresh_token: code,
-        client_id: this?.config.clientId,
+        client_id: ApiV1?.config.clientId,
       };
     }
     const { data } = await Axios.post(tokenUrl, qs.stringify(requestParams), {
@@ -107,33 +105,39 @@ export class Apiv1AuthService implements AuthService {
     return userToken;
   }
 
-  private async getRolesMap(): Promise<{ [key: string]: AppFeature }> {
-    return {
-      reader: 'reader',
-      writer: 'writer',
-    };
+  private async getUserRoles(groups: string[] = []): Promise<AppFeature[]> {
+    const roleMappings = ApiV1.config.roleMapping ?? {};
+    const roles = Array.from(
+      new Set(
+        groups.reduce<AppFeature[]>(
+          (prev: AppFeature[], curr: string) => [
+            ...prev,
+            ...(roleMappings[curr] ?? []),
+          ],
+          []
+        )
+      )
+    );
+    return roles;
   }
 
   async getUserProfile(): Promise<UserProfile> {
+    ApiV1.validateConfig();
     const userProfileData = await this.axios.get(
-      `${this?.config.authBaseUrl}/userinfo`,
+      `${ApiV1?.config.authBaseUrl}/userinfo`,
       {
         headers: {
           Authorization: `Bearer ${this.getToken()?.accessToken}`,
         },
       }
     );
-    const rolesMap = await this.getRolesMap();
+    const roles = await this.getUserRoles(userProfileData.data?.groups);
     return {
       username: userProfileData.data.preferred_username,
       firstName: userProfileData.data.given_name,
       lastName: userProfileData.data.family_name,
       email: userProfileData.data.email,
-      groups: Array.from(
-        new Set(
-          userProfileData.data.groups?.map?.(group => rolesMap[group]) ?? []
-        )
-      ),
+      groups: roles,
     };
   }
 }
