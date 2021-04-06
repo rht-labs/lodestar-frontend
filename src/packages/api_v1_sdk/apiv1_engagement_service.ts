@@ -4,18 +4,16 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { Logger } from '../../utilities/logger';
-import { handleAxiosResponseErrors } from '../../services/common/axios/http_error_handlers';
+import { handleAxiosResponseErrors } from './http_error_handlers';
 import { getApiV1HttpClient } from './client';
+import { AxiosInstance } from 'axios';
 
 export class Apiv1EngagementService implements EngagementService {
-  private baseUrl: string;
-  constructor(baseURL: string) {
-    this.baseUrl = baseURL;
+  private axios: AxiosInstance;
+  constructor() {
+    this.axios = getApiV1HttpClient();
   }
-  get axios() {
-    return getApiV1HttpClient(this.baseUrl);
-  }
-  checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
+  async checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
     return this.axios
       .head(`/engagements/subdomain/${subdomain}`)
       .then(() => true)
@@ -25,8 +23,9 @@ export class Apiv1EngagementService implements EngagementService {
   async fetchEngagements(): Promise<Engagement[]> {
     try {
       const { data: engagementsData } = await this.axios.get(`/engagements`);
-      const serializedEngagements = engagementsData.map(engagementMap =>
-        Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
+      const serializedEngagements = engagementsData.map(
+        (engagementMap: { [key: string]: any }) =>
+          Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
       );
       return serializedEngagements;
     } catch (e) {

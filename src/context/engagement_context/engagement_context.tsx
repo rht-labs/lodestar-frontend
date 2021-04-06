@@ -13,7 +13,6 @@ import {
   AlreadyLaunchedError,
   NotFoundError,
 } from '../../services/engagement_service/engagement_service_errors';
-import { Logger } from '../../utilities/logger';
 import {
   AlertType,
   IFeedbackContext,
@@ -22,7 +21,6 @@ import {
   AnalyticsCategory,
   IAnalyticsContext,
 } from '../analytics_context/analytics_context';
-import { AuthenticationError } from '../../services/auth_service/auth_errors';
 import {
   EngagementPoll,
   EngagementPollIntervalStrategy,
@@ -30,7 +28,6 @@ import {
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { CategoryService } from '../../services/category_service/category_service';
 import { engagementFormReducer } from './engagement_form_reducer';
-import { IAuthContext } from '../auth_context/auth_context';
 import { validateHostingEnvironment } from '../../common/validate_hosting_environment';
 import { HostingEnvironment } from '../../schemas/hosting_environment';
 export type FieldGroup = { [key: string]: string[] };
@@ -98,12 +95,10 @@ export const EngagementProvider = ({
   children,
   engagementService,
   feedbackContext,
-  authContext,
   analyticsContext,
   engagementFormConfig,
 }: {
   children: React.ReactChild;
-  authContext: IAuthContext;
   engagementService: EngagementService;
   categoryService: CategoryService;
   feedbackContext: IFeedbackContext;
@@ -170,33 +165,12 @@ export const EngagementProvider = ({
     []
   );
 
-  const _handleErrors = useCallback(
-    async error => {
-      Logger.instance.debug('EngagementContext:_handleErrors', error);
-      if (error instanceof AuthenticationError) {
-        if (!(await authContext.checkIsAuthenticated())) {
-          authContext.setAuthError(error);
-        }
-      } else {
-        throw error;
-      }
-    },
-    [authContext]
-  );
-
-  useEffect(() => {
-    _validateAuthStatusRef.current = async () => {
-      if (!(await authContext.checkIsAuthenticated())) {
-        throw new AuthenticationError();
-      }
-    };
-  }, [authContext]);
-
-  const _validateAuthStatusRef = useRef(async () => {});
+  const _handleErrors = useCallback((e: Error) => {
+    throw e;
+  }, []);
 
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
-      await _validateAuthStatusRef.current();
       try {
         const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
           engagement?.customer_name,
@@ -221,11 +195,9 @@ export const EngagementProvider = ({
 
   const createEngagementPoll = useCallback(
     async (engagement: Engagement): Promise<EngagementPoll> => {
-      await _validateAuthStatusRef.current();
       return new EngagementPoll(
         new EngagementPollIntervalStrategy(
           setInterval(async () => {
-            await _validateAuthStatusRef.current();
             const hasUpdates = await _checkHasUpdateRef.current();
             if (hasUpdates) {
               feedbackContext.showAlert(
@@ -267,7 +239,7 @@ export const EngagementProvider = ({
         return fetchedEngagement;
       } catch (e) {
         try {
-          await _handleErrors(e);
+          _handleErrors(e);
         } catch (e) {
           feedbackContext.showAlert(
             'There was a problem fetching this engagement',
@@ -283,7 +255,6 @@ export const EngagementProvider = ({
     async (data: CreateEngagementParams) => {
       feedbackContext.showLoader();
       try {
-        await _validateAuthStatusRef.current();
         const engagement = await engagementService.createEngagement(data);
         feedbackContext.hideLoader();
         feedbackContext.showAlert(
@@ -300,7 +271,7 @@ export const EngagementProvider = ({
             'This client already has a project with that name. Please choose a different project name.';
         } else {
           try {
-            await _handleErrors(e);
+            _handleErrors(e);
           } catch (e) {
             errorMessage =
               'There was an issue with creating your engagement. Please follow up with an administrator if this continues.';
@@ -308,7 +279,7 @@ export const EngagementProvider = ({
         }
 
         feedbackContext.showAlert(errorMessage, AlertType.error);
-        await _handleErrors(e);
+        _handleErrors(e);
       }
     },
     [engagementService, feedbackContext, setCurrentEngagement, _handleErrors]
@@ -411,7 +382,6 @@ export const EngagementProvider = ({
       );
       feedbackContext.showLoader();
       try {
-        await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.saveEngagement(
           data,
           commitMessage
@@ -435,7 +405,7 @@ export const EngagementProvider = ({
 
             // Otherwise, we are saving an existing engagement.
           } else {
-            await _handleErrors(e);
+            _handleErrors(e);
             errorMessage =
               'Your changes could not be saved. Another user has modified this data. Please refresh your data in order to make changes.';
           }
@@ -462,7 +432,6 @@ export const EngagementProvider = ({
       }
       feedbackContext.showLoader();
       try {
-        await _validateAuthStatusRef.current();
         const returnedEngagement = await engagementService.launchEngagement(
           data
         );
@@ -479,7 +448,7 @@ export const EngagementProvider = ({
           AlertType.error,
           false
         );
-        await _handleErrors(e);
+        _handleErrors(e);
       }
     },
     [
@@ -505,7 +474,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
       } catch (e) {
         feedbackContext.hideLoader();
-        let errorMessage;
+        let errorMessage: string;
         if (e instanceof AlreadyLaunchedError) {
           errorMessage =
             'This engagement is already launched and has not been removed';
@@ -514,7 +483,7 @@ export const EngagementProvider = ({
           errorMessage = 'Engagement is not found';
         } else {
           try {
-            await _handleErrors(e);
+            _handleErrors(e);
           } catch (e) {
             errorMessage =
               'There was an issue with deleting selected engagement. Please follow up with an administrator if this continues.';
@@ -522,7 +491,7 @@ export const EngagementProvider = ({
         }
 
         feedbackContext.showAlert(errorMessage, AlertType.error);
-        await _handleErrors(e);
+        _handleErrors(e);
       }
     },
     [

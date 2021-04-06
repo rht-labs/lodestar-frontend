@@ -3,12 +3,8 @@ import { renderHook, act, cleanup } from '@testing-library/react-hooks';
 import { useEngagement } from '../engagement_hook';
 import { Engagement } from '../../../schemas/engagement';
 import { TestStateWrapper } from '../../../common/test_state_wrapper';
-import { AuthContext, AuthProvider } from '../../auth_context/auth_context';
 import { EngagementService } from '../../../services/engagement_service/engagement_service';
 import { EngagementProvider } from '../engagement_context';
-import { UserToken } from '../../../schemas/user_token';
-import { UserProfile } from '../../../schemas/user_profile';
-import { AuthService } from '../../../services/auth_service/authentication_service';
 import { AlreadyExistsError } from '../../../services/engagement_service/engagement_service_errors';
 import { IFeedbackContext } from '../../feedback_context/feedback_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
@@ -41,7 +37,7 @@ describe('Engagement Context', () => {
   test('Can switch engagements', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       expect(result.current.currentEngagement).toBe(undefined);
       result.current.setCurrentEngagement({ customer_name: 'spencer' } as any);
       await waitForNextUpdate();
@@ -51,7 +47,7 @@ describe('Engagement Context', () => {
   test('Form completeness for launch', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       expect(result.current.isLaunchable).toBeFalsy();
     });
   });
@@ -59,7 +55,7 @@ describe('Engagement Context', () => {
   test('Form is launchable when required fields are filled', async () => {
     await act(async () => {
       const { result, waitForNextUpdate, waitFor } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       const engagement = Engagement.fromFake(true);
       result.current.setCurrentEngagement(engagement);
 
@@ -86,11 +82,11 @@ describe('Engagement Context', () => {
   test('should not be launchable if one required field is not defined', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       const engagement = Engagement.fromFake();
       engagement.customer_contact_email = null;
       result.current.setCurrentEngagement(engagement);
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       expect(result.current.isLaunchable).toBeFalsy();
     });
   });
@@ -124,7 +120,7 @@ describe('Engagement Context', () => {
   test('Can create a new engagement', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       result.current.createEngagement({
         customer_name: 'spencer',
       } as Engagement);
@@ -163,7 +159,7 @@ describe('Engagement Context', () => {
   test('Can delete an engagement', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       const newEngagement = {
         customer_name: 'new engagement',
         uuid: '123',
@@ -172,7 +168,6 @@ describe('Engagement Context', () => {
       await waitForNextUpdate();
       expect(result.current.currentEngagement).toEqual(newEngagement);
 
-      await waitForNextUpdate();
       result.current.deleteEngagement({
         uuid: '123',
       } as Engagement);
@@ -187,7 +182,7 @@ describe('Engagement Context', () => {
         uniqueSuffix: '0',
       });
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       result.current.setCurrentEngagement(initialEngagement);
       await waitForNextUpdate();
       expect(result.current.currentEngagement).toEqual(initialEngagement);
@@ -204,47 +199,26 @@ describe('Engagement Context', () => {
     const initialEngagement = Engagement.fromFake(true);
     const wrapper = ({ children }) => {
       return (
-        <AuthProvider
-          authService={
+        <EngagementProvider
+          categoryService={{} as CategoryService}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
+          feedbackContext={fakedFeedbackContext}
+          engagementService={
             ({
-              async isLoggedIn() {
+              async checkSubdomainUniqueness() {
                 return true;
               },
-              getToken() {
-                return UserToken.fromFake();
+              async fetchEngagements() {
+                return [initialEngagement];
               },
-              async getUserProfile() {
-                return UserProfile.fromFake();
+              async saveEngagement() {
+                throw Error();
               },
-            } as unknown) as AuthService
+            } as unknown) as EngagementService
           }
         >
-          <AuthContext.Consumer>
-            {authContext => (
-              <EngagementProvider
-                categoryService={{} as CategoryService}
-                engagementFormConfig={EngagementFormConfig.fromFake()}
-                authContext={authContext}
-                feedbackContext={fakedFeedbackContext}
-                engagementService={
-                  ({
-                    async checkSubdomainUniqueness(s) {
-                      return true;
-                    },
-                    async fetchEngagements() {
-                      return [initialEngagement];
-                    },
-                    async saveEngagement(engagement) {
-                      throw Error();
-                    },
-                  } as unknown) as EngagementService
-                }
-              >
-                {children}
-              </EngagementProvider>
-            )}
-          </AuthContext.Consumer>
-        </AuthProvider>
+          {children}
+        </EngagementProvider>
       );
     };
     const { result, waitForNextUpdate } = renderHook(() => useEngagement(), {
@@ -265,7 +239,7 @@ describe('Engagement Context', () => {
   test('getEngagement fetches engagements when none are available', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      await waitForNextUpdate;
+      await waitForNextUpdate();
       const engagement = await result.current.getEngagement(
         'NASA',
         'Boots on the Moon'
@@ -277,7 +251,7 @@ describe('Engagement Context', () => {
   test('cannot launch an engagement whose fields are not completed', async () => {
     await act(async () => {
       const { result, waitForNextUpdate } = getHook();
-      let error;
+      let error: any;
       await waitForNextUpdate();
       result.current
         .launchEngagement(Engagement.fromFake(true))
@@ -320,7 +294,7 @@ describe('Engagement Context', () => {
       delete currentEngagement.start_date;
       result.current.setCurrentEngagement(currentEngagement);
       await waitForNextUpdate();
-      let error;
+      let error: any;
       result.current
         .launchEngagement(Engagement.fromFake(true))
         .catch(e => (error = e));
@@ -347,47 +321,26 @@ describe('Engagement Context', () => {
     const initialEngagement = Engagement.fromFake(true);
     const wrapper = ({ children }) => {
       return (
-        <AuthProvider
-          authService={
+        <EngagementProvider
+          categoryService={{} as CategoryService}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
+          feedbackContext={fakedFeedbackContext}
+          engagementService={
             ({
-              async isLoggedIn() {
+              async fetchEngagements() {
+                return [initialEngagement];
+              },
+              async checkSubdomainUniqueness() {
                 return true;
               },
-              getToken() {
-                return UserToken.fromFake();
+              async launchEngagement() {
+                throw Error('a generic network error');
               },
-              async getUserProfile() {
-                return UserProfile.fromFake();
-              },
-            } as unknown) as AuthService
+            } as unknown) as EngagementService
           }
         >
-          <AuthContext.Consumer>
-            {authContext => (
-              <EngagementProvider
-                categoryService={{} as CategoryService}
-                engagementFormConfig={EngagementFormConfig.fromFake()}
-                authContext={authContext}
-                feedbackContext={fakedFeedbackContext}
-                engagementService={
-                  ({
-                    async fetchEngagements() {
-                      return [initialEngagement];
-                    },
-                    async checkSubdomainUniqueness(s) {
-                      return true;
-                    },
-                    async launchEngagement(engagement) {
-                      throw Error('a generic network error');
-                    },
-                  } as unknown) as EngagementService
-                }
-              >
-                {children}
-              </EngagementProvider>
-            )}
-          </AuthContext.Consumer>
-        </AuthProvider>
+          {children}
+        </EngagementProvider>
       );
     };
     const { result, waitForNextUpdate } = renderHook(() => useEngagement(), {
@@ -408,53 +361,32 @@ describe('Engagement Context', () => {
     const initialEngagement = Engagement.fromFake(true);
     const wrapper = ({ children }) => {
       return (
-        <AuthProvider
-          authService={
+        <EngagementProvider
+          categoryService={{} as CategoryService}
+          engagementFormConfig={EngagementFormConfig.fromFake()}
+          feedbackContext={fakedFeedbackContext}
+          engagementService={
             ({
-              async isLoggedIn() {
+              async fetchEngagements() {
+                return [initialEngagement];
+              },
+              async createEngagement() {
+                throw new AlreadyExistsError();
+              },
+              async checkSubdomainUniqueness() {
                 return true;
               },
-              getToken() {
-                return UserToken.fromFake();
-              },
-              async getUserProfile() {
-                return UserProfile.fromFake();
-              },
-            } as unknown) as AuthService
+            } as unknown) as EngagementService
           }
         >
-          <AuthContext.Consumer>
-            {authContext => (
-              <EngagementProvider
-                categoryService={{} as CategoryService}
-                engagementFormConfig={EngagementFormConfig.fromFake()}
-                authContext={authContext}
-                feedbackContext={fakedFeedbackContext}
-                engagementService={
-                  ({
-                    async fetchEngagements() {
-                      return [initialEngagement];
-                    },
-                    async createEngagement(engagement) {
-                      throw new AlreadyExistsError();
-                    },
-                    async checkSubdomainUniqueness(s) {
-                      return true;
-                    },
-                  } as unknown) as EngagementService
-                }
-              >
-                {children}
-              </EngagementProvider>
-            )}
-          </AuthContext.Consumer>
-        </AuthProvider>
+          {children}
+        </EngagementProvider>
       );
     };
     const { result } = renderHook(() => useEngagement(), {
       wrapper,
     });
-    let error;
+    let error: any;
     await act(async () => {
       result.current
         .createEngagement(Engagement.fromFake(true))

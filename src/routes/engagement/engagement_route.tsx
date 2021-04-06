@@ -5,10 +5,8 @@ import { useEngagementFormConfig } from '../../context/engagement_config_context
 import { EngagementProvider } from '../../context/engagement_context/engagement_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
-import ScrollToTop from '../scroll_to_top';
-import { EngagementDetailView } from './engagement_details';
 
-export const EngagementRoute = () => {
+export const EngagementRoute = ({ children }) => {
   const { engagementService, categoryService } = useServiceProviders();
   const feedback = useFeedback();
   const analyticsContext = useAnalytics();
@@ -23,9 +21,7 @@ export const EngagementRoute = () => {
       engagementService={engagementService}
       engagementFormConfig={engagementFormConfig}
     >
-      <ScrollToTop>
-        <EngagementDetailView />
-      </ScrollToTop>
+      {children}
     </EngagementProvider>
   );
 };

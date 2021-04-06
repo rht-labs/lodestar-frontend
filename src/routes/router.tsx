@@ -19,6 +19,8 @@ import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 import { Token } from '../packages/api_v1_sdk/token';
 import { EngagementRoute } from './engagement/engagement_route';
+import ScrollToTop from './scroll_to_top';
+import { EngagementDetailView } from './engagement/engagement_details';
 
 function WhatsMyToken() {
   return <pre>{Token.token.accessToken}</pre>;
@@ -111,11 +113,19 @@ export function LodestarRouter() {
                               />
                             </PrivateRoute>
                             <PrivateRoute path="/app/engagements/new">
-                              <CreateNewEngagement />
+                              <EngagementRoute>
+                                <CreateNewEngagement />
+                              </EngagementRoute>
                             </PrivateRoute>
                             <PrivateRoute
                               path="/app/engagements/:customer_name/:project_name/"
-                              component={EngagementRoute}
+                              component={() => (
+                                <EngagementRoute>
+                                  <ScrollToTop>
+                                    <EngagementDetailView />
+                                  </ScrollToTop>
+                                </EngagementRoute>
+                              )}
                             />
                           </Switch>
                         </ModalVisibilityProvider>
