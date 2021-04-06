@@ -3,7 +3,16 @@ import {
   ToggleGroupItem,
   ToggleGroupVariant,
 } from '@patternfly/react-core';
-import { sub } from 'date-fns';
+import {
+  addQuarters,
+  eachQuarterOfInterval,
+  endOfQuarter,
+  getQuarter,
+  startOfQuarter,
+  sub,
+  subQuarters,
+  subYears,
+} from 'date-fns';
 import React, { useState } from 'react';
 
 export interface DateRange {
@@ -22,7 +31,17 @@ enum DateWindows {
   SixMonths,
   OneYear,
   AllTime,
+  Q1,
+  Q2,
+  Q3,
+  Q4,
 }
+
+const lastDayOfLastQuarter = endOfQuarter(subQuarters(new Date(), 1));
+const quarters = eachQuarterOfInterval({
+  end: lastDayOfLastQuarter,
+  start: startOfQuarter(addQuarters(subYears(lastDayOfLastQuarter, 1), 1)),
+}).reverse();
 
 export const DateWindowSelector = ({
   onSelectWindow = () => {},
@@ -66,6 +85,16 @@ export const DateWindowSelector = ({
       case DateWindows.AllTime:
         onSelectWindow();
         break;
+      default:
+        const quarterSelection = quarters.find(
+          q => `Q${getQuarter(q)}` === DateWindows[dateWindow]
+        );
+        if (!!quarterSelection) {
+          onSelectWindow({
+            startDate: startOfQuarter(quarterSelection),
+            endDate: endOfQuarter(quarterSelection),
+          });
+        }
     }
   };
   return (
@@ -106,34 +135,20 @@ export const DateWindowSelector = ({
           onChange={handleClick(DateWindows.OneYear)}
           isSelected={selectedRange === DateWindows.OneYear}
         ></ToggleGroupItem>
-        <ToggleGroupItem
-          text="Q1'21"
-          key={'q1'}
-          data-testid="alltime-window"
-          onChange={handleClick(DateWindows.AllTime)}
-          isSelected={selectedRange === DateWindows.AllTime}
-        ></ToggleGroupItem>{' '}
-        <ToggleGroupItem
-          text="Q4'20"
-          key={'q4'}
-          data-testid="alltime-window"
-          onChange={handleClick(DateWindows.AllTime)}
-          isSelected={selectedRange === DateWindows.AllTime}
-        ></ToggleGroupItem>{' '}
-        <ToggleGroupItem
-          text="Q3'20"
-          key={'q3'}
-          data-testid="alltime-window"
-          onChange={handleClick(DateWindows.AllTime)}
-          isSelected={selectedRange === DateWindows.AllTime}
-        ></ToggleGroupItem>{' '}
-        <ToggleGroupItem
-          text="Q2'20"
-          key={'q2'}
-          data-testid="alltime-window"
-          onChange={handleClick(DateWindows.AllTime)}
-          isSelected={selectedRange === DateWindows.AllTime}
-        ></ToggleGroupItem>{' '}
+        {quarters.map(q => {
+          const quarter = getQuarter(q);
+          return (
+            <ToggleGroupItem
+              text={`Q${quarter}'${q.getFullYear() - 2000}`} //"Q1'21"
+              key={'q' + quarter.toString()}
+              data-testid={'q' + quarter.toString()}
+              onChange={handleClick(DateWindows['Q' + quarter.toString()])}
+              isSelected={
+                selectedRange === DateWindows['Q' + quarter.toString()]
+              }
+            ></ToggleGroupItem>
+          );
+        })}
         <ToggleGroupItem
           text="All Time"
           key={'alltime'}

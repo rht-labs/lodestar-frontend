@@ -112,6 +112,106 @@ Object {
           />
           <div
             class="pf-c-toggle-group__item"
+            data-testid="q1"
+          >
+            <button
+              aria-pressed="false"
+              class="pf-c-toggle-group__button pf-m-light"
+              type="button"
+            >
+              <span
+                class="pf-c-toggle-group__text"
+              >
+                Q1'21
+              </span>
+            </button>
+          </div>
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+           
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+          <div
+            class="pf-c-toggle-group__item"
+            data-testid="q4"
+          >
+            <button
+              aria-pressed="false"
+              class="pf-c-toggle-group__button pf-m-light"
+              type="button"
+            >
+              <span
+                class="pf-c-toggle-group__text"
+              >
+                Q4'20
+              </span>
+            </button>
+          </div>
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+           
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+          <div
+            class="pf-c-toggle-group__item"
+            data-testid="q3"
+          >
+            <button
+              aria-pressed="false"
+              class="pf-c-toggle-group__button pf-m-light"
+              type="button"
+            >
+              <span
+                class="pf-c-toggle-group__text"
+              >
+                Q3'20
+              </span>
+            </button>
+          </div>
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+           
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+          <div
+            class="pf-c-toggle-group__item"
+            data-testid="q2"
+          >
+            <button
+              aria-pressed="false"
+              class="pf-c-toggle-group__button pf-m-light"
+              type="button"
+            >
+              <span
+                class="pf-c-toggle-group__text"
+              >
+                Q2'20
+              </span>
+            </button>
+          </div>
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+           
+          <div
+            class="pf-c-divider pf-m-vertical"
+            role="separator"
+          />
+          <div
+            class="pf-c-toggle-group__item"
             data-testid="alltime-window"
           >
             <button
@@ -232,6 +332,106 @@ Object {
             </span>
           </button>
         </div>
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+        <div
+          class="pf-c-toggle-group__item"
+          data-testid="q1"
+        >
+          <button
+            aria-pressed="false"
+            class="pf-c-toggle-group__button pf-m-light"
+            type="button"
+          >
+            <span
+              class="pf-c-toggle-group__text"
+            >
+              Q1'21
+            </span>
+          </button>
+        </div>
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+         
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+        <div
+          class="pf-c-toggle-group__item"
+          data-testid="q4"
+        >
+          <button
+            aria-pressed="false"
+            class="pf-c-toggle-group__button pf-m-light"
+            type="button"
+          >
+            <span
+              class="pf-c-toggle-group__text"
+            >
+              Q4'20
+            </span>
+          </button>
+        </div>
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+         
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+        <div
+          class="pf-c-toggle-group__item"
+          data-testid="q3"
+        >
+          <button
+            aria-pressed="false"
+            class="pf-c-toggle-group__button pf-m-light"
+            type="button"
+          >
+            <span
+              class="pf-c-toggle-group__text"
+            >
+              Q3'20
+            </span>
+          </button>
+        </div>
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+         
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+        <div
+          class="pf-c-toggle-group__item"
+          data-testid="q2"
+        >
+          <button
+            aria-pressed="false"
+            class="pf-c-toggle-group__button pf-m-light"
+            type="button"
+          >
+            <span
+              class="pf-c-toggle-group__text"
+            >
+              Q2'20
+            </span>
+          </button>
+        </div>
+        <div
+          class="pf-c-divider pf-m-vertical"
+          role="separator"
+        />
+         
         <div
           class="pf-c-divider pf-m-vertical"
           role="separator"

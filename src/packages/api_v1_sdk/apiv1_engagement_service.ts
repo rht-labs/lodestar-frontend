@@ -84,6 +84,14 @@ export class Apiv1EngagementService implements EngagementService {
     if (parameters.regions && parameters.regions.length > 0) {
       searchParams.push(`engagement_region=${parameters.regions.join(',')}`);
     }
+    if (
+      parameters.engagementStatuses &&
+      parameters.engagementStatuses.length > 0
+    ) {
+      searchParams.push(
+        `engagement_status=${parameters.engagementStatuses.join(',')}`
+      );
+    }
     if (searchParams.length > 0) {
       qs += `search=${searchParams.join('&')}`;
     }
@@ -95,6 +103,7 @@ export class Apiv1EngagementService implements EngagementService {
   ): Promise<Engagement[]> {
     try {
       const qs = this.buildQueryStringFromParameters(params);
+      console.log(qs);
       const { data: engagementsData } = await this.axios.get(
         `/engagements${qs.length > 0 ? '?' + qs : ''}`
       );
