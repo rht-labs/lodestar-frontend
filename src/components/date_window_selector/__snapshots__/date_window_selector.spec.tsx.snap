@@ -130,11 +130,6 @@ Object {
             class="pf-c-divider pf-m-vertical"
             role="separator"
           />
-           
-          <div
-            class="pf-c-divider pf-m-vertical"
-            role="separator"
-          />
           <div
             class="pf-c-toggle-group__item"
             data-testid="q4"
@@ -151,11 +146,6 @@ Object {
               </span>
             </button>
           </div>
-          <div
-            class="pf-c-divider pf-m-vertical"
-            role="separator"
-          />
-           
           <div
             class="pf-c-divider pf-m-vertical"
             role="separator"
@@ -180,11 +170,6 @@ Object {
             class="pf-c-divider pf-m-vertical"
             role="separator"
           />
-           
-          <div
-            class="pf-c-divider pf-m-vertical"
-            role="separator"
-          />
           <div
             class="pf-c-toggle-group__item"
             data-testid="q2"
@@ -201,11 +186,6 @@ Object {
               </span>
             </button>
           </div>
-          <div
-            class="pf-c-divider pf-m-vertical"
-            role="separator"
-          />
-           
           <div
             class="pf-c-divider pf-m-vertical"
             role="separator"
@@ -356,11 +336,6 @@ Object {
           class="pf-c-divider pf-m-vertical"
           role="separator"
         />
-         
-        <div
-          class="pf-c-divider pf-m-vertical"
-          role="separator"
-        />
         <div
           class="pf-c-toggle-group__item"
           data-testid="q4"
@@ -377,11 +352,6 @@ Object {
             </span>
           </button>
         </div>
-        <div
-          class="pf-c-divider pf-m-vertical"
-          role="separator"
-        />
-         
         <div
           class="pf-c-divider pf-m-vertical"
           role="separator"
@@ -406,11 +376,6 @@ Object {
           class="pf-c-divider pf-m-vertical"
           role="separator"
         />
-         
-        <div
-          class="pf-c-divider pf-m-vertical"
-          role="separator"
-        />
         <div
           class="pf-c-toggle-group__item"
           data-testid="q2"
@@ -427,11 +392,6 @@ Object {
             </span>
           </button>
         </div>
-        <div
-          class="pf-c-divider pf-m-vertical"
-          role="separator"
-        />
-         
         <div
           class="pf-c-divider pf-m-vertical"
           role="separator"
