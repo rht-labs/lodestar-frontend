@@ -31,13 +31,14 @@ export const MainTemplate = (props: MainTemplateProps) => {
   return (
     <Page
       header={
-        <Header
-          isDrawerOpen={isDrawerOpen}
-          onNavToggle={onNavToggle}
-          onNotificationClick={onClick}
-        />
+        <>
+          <Header
+            isDrawerOpen={isDrawerOpen}
+            onNavToggle={onNavToggle}
+            onNotificationClick={onClick}
+          />
+        </>
       }
-      style={{ height: '100vh' }}
       sidebar={
         <BlackDrawer isDrawerOpen={isDrawerOpen}>
           <EngagementNavigation />

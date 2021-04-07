@@ -90,7 +90,6 @@ describe('timezone select', () => {
       const buttons = dropdown.getElementsByTagName('button');
 
       fireEvent.click(buttons[0]);
-      screen.debug(null, 10000);
       const dropdownPane = await view.findByText('No results found');
       expect(dropdownPane).toBeDefined();
     });
@@ -101,17 +100,11 @@ describe('engagement dates', () => {
     await act(async () => {
       let view = render(
         <TestStateWrapper>
-          <EngagementContext.Consumer>
-            {engagementContext => {
-              return (
-                <EngagementSummaryEditModal
-                  isOpen={true}
-                  onClose={() => {}}
-                  onSave={() => {}}
-                ></EngagementSummaryEditModal>
-              );
-            }}
-          </EngagementContext.Consumer>
+          <EngagementSummaryEditModal
+            isOpen={true}
+            onClose={() => {}}
+            onSave={() => {}}
+          ></EngagementSummaryEditModal>
         </TestStateWrapper>
       );
 
