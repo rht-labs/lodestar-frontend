@@ -8,9 +8,9 @@ import {
   EmptyStateIcon,
   Text,
   TextContent,
-  TextVariants
+  TextVariants,
 } from '@patternfly/react-core';
-import {useHistory} from "react-router";
+import { useHistory } from 'react-router';
 
 export interface DashboardDataCardProps {
   icon: any;
@@ -25,37 +25,35 @@ export function DashboardDataCard({
   title,
   numberOfEngagements,
   url,
-  subtitle
+  subtitle,
 }: DashboardDataCardProps) {
-
   const history = useHistory();
 
-  const cardShape: React.CSSProperties = {
-    minHeight: '40vh',
-  };
-
   return (
-    <Card isHoverable isCompact style={cardShape}>
+    <Card style={{ height: '100%' }}>
       <CardBody>
         <EmptyState>
-          <EmptyStateIcon icon={icon}/>
+          <EmptyStateIcon icon={icon} />
           <TextContent>
-            <Text component={TextVariants.h1} data-cy={`numbers_of_${title[1]}`}>
+            <Text
+              component={TextVariants.h1}
+              data-cy={`numbers_of_${title[1]}`}
+            >
               {numberOfEngagements}
             </Text>
-            <Button variant="link"
-                    onClick={() => { history.push(url)} }
-                    data-cy={`button_${title[1]}`}>
-              <Text style={{textAlignVertical: "center"}} component={TextVariants.h2}>
-                {title}
-              </Text>
+            <Button
+              variant="link"
+              onClick={() => {
+                history.push(url);
+              }}
+              data-cy={`button_${title[1]}`}
+            >
+              <Text component={TextVariants.h2}>{title}</Text>
             </Button>
           </TextContent>
-          <EmptyStateBody>
-            {subtitle}
-          </EmptyStateBody>
+          <EmptyStateBody>{subtitle}</EmptyStateBody>
         </EmptyState>
       </CardBody>
     </Card>
-  )
-};
+  );
+}

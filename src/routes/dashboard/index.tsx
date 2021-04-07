@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {
   Flex,
   FlexItem,
-  Gallery,
+  Grid,
+  GridItem,
   PageSection,
   PageSectionVariants,
   Select,
@@ -21,6 +22,7 @@ import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_pas
 import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements copy';
 import { Feature } from '../../components/feature/feature';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
+import { DashboardPeopleEnabledCard } from '../../components/dashboard_data_cards/dashboard_people_enabled_card';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -111,24 +113,35 @@ export function Dashboard() {
             </FlexItem>
           </Flex>
         </Feature>
-        <Gallery hasGutter>
-          <AllEngagementsWidget
-            dates={dashboardFilter.dates}
-            regions={selectedRegions}
-          />
-          <ActiveEngagementsWidget
-            dates={dashboardFilter.dates}
-            regions={selectedRegions}
-          />
-          <UpcomingEngagementsWidget
-            dates={dashboardFilter.dates}
-            regions={selectedRegions}
-          />
-          <PastEngagementsWidget
-            dates={dashboardFilter.dates}
-            regions={selectedRegions}
-          />
-        </Gallery>
+        <Grid hasGutter>
+          <GridItem lg={6} xl={4} xl2={3}>
+            <AllEngagementsWidget
+              dates={dashboardFilter.dates}
+              regions={selectedRegions}
+            />
+          </GridItem>
+          <GridItem lg={6} xl={4} xl2={3}>
+            <ActiveEngagementsWidget
+              dates={dashboardFilter.dates}
+              regions={selectedRegions}
+            />
+          </GridItem>
+          <GridItem lg={6} xl={4} xl2={3}>
+            <UpcomingEngagementsWidget
+              dates={dashboardFilter.dates}
+              regions={selectedRegions}
+            />
+          </GridItem>
+          <GridItem lg={6} xl={4} xl2={3}>
+            <PastEngagementsWidget
+              dates={dashboardFilter.dates}
+              regions={selectedRegions}
+            />
+          </GridItem>
+          <GridItem sm={12} xl={8} xl2={3}>
+            <DashboardPeopleEnabledCard />
+          </GridItem>
+        </Grid>
       </PageSection>
     </DashboardDateContext.Provider>
   );
