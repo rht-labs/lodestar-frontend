@@ -10,12 +10,12 @@ import {
   GridItem,
 } from '@patternfly/react-core';
 import { PeopleEnabledChart } from './people_enabled_chart';
-import { DateFilter } from '../../routes/dashboard';
+import { DateFilter } from '../../../routes/dashboard';
 import {
   EngagementCollectionFilter,
   useEngagementCollection,
-} from '../../context/engagement_collection_context/engagement_collection_context';
-import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+} from '../../../context/engagement_collection_context/engagement_collection_context';
+import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
 
 export interface PeopleEnabledCardProps {
   dates: DateFilter;

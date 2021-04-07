@@ -20,7 +20,7 @@ import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_pas
 import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements';
 import { Feature } from '../../components/feature/feature';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
-import { DashboardPeopleEnabledCard } from '../../components/dashboard_data_cards/dashboard_people_enabled_card';
+import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
