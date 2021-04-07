@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Flex,
   FlexItem,
@@ -12,14 +12,12 @@ import {
   TextContent,
   Title,
 } from '@patternfly/react-core';
-import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
-import { useFeedback } from '../../context/feedback_context/feedback_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
 import { AllEngagementsWidget } from '../../components/dashboard/widgets/dw_all_engagements';
 import { ActiveEngagementsWidget } from '../../components/dashboard/widgets/dw_active_engagements';
 import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_past_engagements';
-import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements copy';
+import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements';
 import { Feature } from '../../components/feature/feature';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 import { DashboardPeopleEnabledCard } from '../../components/dashboard_data_cards/dashboard_people_enabled_card';
@@ -36,23 +34,10 @@ export interface DashboardFilter {
 }
 
 export function Dashboard() {
-  const [hasFetched, setHasFetched] = useState<boolean>(false);
-  const feedbackContext = useFeedback();
   const { engagementService } = useServiceProviders();
-  const { engagements, getEngagements } = useEngagementCollection({
-    engagementService,
-    feedbackContext,
-  });
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
-
-  useEffect(() => {
-    if (!hasFetched) {
-      getEngagements();
-      setHasFetched(true);
-    }
-  }, [engagements, getEngagements, hasFetched, setHasFetched]);
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
@@ -139,7 +124,10 @@ export function Dashboard() {
             />
           </GridItem>
           <GridItem sm={12} xl={8} xl2={3}>
-            <DashboardPeopleEnabledCard />
+            <DashboardPeopleEnabledCard
+              dates={dashboardFilter.dates}
+              regions={selectedRegions}
+            />
           </GridItem>
         </Grid>
       </PageSection>

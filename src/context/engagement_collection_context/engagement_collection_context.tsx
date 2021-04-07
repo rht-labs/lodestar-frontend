@@ -21,38 +21,34 @@ export interface EngagementCollectionFilter {
 }
 export const useEngagementCollection = ({
   feedbackContext,
-  filter,
   engagementService,
 }: EngagementCollectionHookParameters) => {
-  const [engagements, setEngagements] = useState<Partial<Engagement>[]>([]);
-  const getEngagements = useCallback(async () => {
-    feedbackContext?.showLoader();
-    try {
-      const engagements = await engagementService.fetchEngagements({
-        endDate: filter?.endDate,
-        startDate: filter?.startDate,
-        engagementStatuses: filter?.engagementStatuses,
-        regions: filter?.engagementRegions,
-        include: filter?.include,
-      });
-      setEngagements(engagements);
-    } catch (e) {
-      feedbackContext?.showAlert(
-        'Something went wrong while fetching the engagements',
-        AlertType.error,
-        true
-      );
-    } finally {
-      feedbackContext?.hideLoader();
-    }
-  }, [
-    engagementService,
-    filter?.startDate,
-    filter?.endDate,
-    filter?.include,
-    filter?.engagementStatuses,
-    filter?.engagementRegions,
-    feedbackContext,
-  ]);
+  const [engagements = [], setEngagements] = useState<Partial<Engagement>[]>(
+    []
+  );
+  const getEngagements = useCallback(
+    async (filter: EngagementCollectionFilter) => {
+      feedbackContext?.showLoader();
+      try {
+        const engagements = await engagementService.fetchEngagements({
+          endDate: filter?.endDate,
+          startDate: filter?.startDate,
+          engagementStatuses: filter?.engagementStatuses,
+          regions: filter?.engagementRegions,
+          include: filter?.include,
+        });
+        setEngagements(engagements);
+      } catch (e) {
+        feedbackContext?.showAlert(
+          'Something went wrong while fetching the engagements',
+          AlertType.error,
+          true
+        );
+      } finally {
+        feedbackContext?.hideLoader();
+      }
+    },
+    [engagementService, feedbackContext]
+  );
   return { getEngagements, engagements };
 };

@@ -21,20 +21,19 @@ export const UpcomingEngagementsWidget = (
 ) => {
   const { dates, regions } = props;
   const { engagementService } = useServiceProviders();
-  const filter: EngagementCollectionFilter = {
-    include,
-    endDate: dates?.endDate,
-    startDate: dates?.startDate,
-    engagementStatuses: statuses,
-    engagementRegions: regions,
-  };
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
-    filter,
   });
   useEffect(() => {
-    getEngagements();
-  }, [getEngagements]);
+    const filter: EngagementCollectionFilter = {
+      include,
+      endDate: dates?.endDate,
+      startDate: dates?.startDate,
+      engagementStatuses: statuses,
+      engagementRegions: regions,
+    };
+    getEngagements(filter);
+  }, [getEngagements, dates?.endDate, dates?.startDate, regions]);
   return (
     <DashboardDataCard
       icon={PendingIcon}

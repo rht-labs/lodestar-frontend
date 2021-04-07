@@ -18,19 +18,18 @@ const include: Array<keyof Engagement> = ['customer_name'];
 export const AllEngagementsWidget = (props: AllEngagementsWidgetProps) => {
   const { dates, regions } = props;
   const { engagementService } = useServiceProviders();
-  const filter: EngagementCollectionFilter = {
-    include,
-    endDate: dates?.endDate,
-    startDate: dates?.startDate,
-    engagementRegions: regions,
-  };
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
-    filter,
   });
   useEffect(() => {
-    getEngagements();
-  }, [getEngagements]);
+    const filter: EngagementCollectionFilter = {
+      include,
+      endDate: dates?.endDate,
+      startDate: dates?.startDate,
+      engagementRegions: regions,
+    };
+    getEngagements(filter);
+  }, [getEngagements, dates?.endDate, dates?.startDate, regions]);
   return (
     <DashboardDataCard
       icon={TachometerAltIcon}
