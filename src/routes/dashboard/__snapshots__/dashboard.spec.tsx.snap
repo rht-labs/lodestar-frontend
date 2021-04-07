@@ -28,15 +28,586 @@ Object {
         class="pf-c-page__main-section"
       >
         <div
-          class="pf-l-gallery pf-m-gutter"
+          class="pf-l-grid pf-m-gutter"
+        >
+          <div
+            class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+          >
+            <article
+              class="pf-c-card"
+              data-ouia-component-id="OUIA-Generated-Card-1"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+              style="height: 100%;"
+            >
+              <div
+                class="pf-c-card__body"
+              >
+                <div
+                  class="pf-c-empty-state"
+                >
+                  <div
+                    class="pf-c-empty-state__content"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="pf-c-empty-state__icon"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 576 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"
+                      />
+                    </svg>
+                    <div
+                      class="pf-c-content"
+                    >
+                      <h1
+                        class=""
+                        data-cy="numbers_of_l"
+                        data-pf-content="true"
+                      >
+                        0
+                      </h1>
+                      <button
+                        aria-disabled="false"
+                        class="pf-c-button pf-m-link"
+                        data-cy="button_l"
+                        data-ouia-component-id="OUIA-Generated-Button-link-1"
+                        data-ouia-component-type="PF4/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <h2
+                          class=""
+                          data-pf-content="true"
+                        >
+                          All Engagements
+                        </h2>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-c-empty-state__body"
+                    >
+                      All available engagements in the system. Including upcoming, active and past ones
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+          >
+            <article
+              class="pf-c-card"
+              data-ouia-component-id="OUIA-Generated-Card-2"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+              style="height: 100%;"
+            >
+              <div
+                class="pf-c-card__body"
+              >
+                <div
+                  class="pf-c-empty-state"
+                >
+                  <div
+                    class="pf-c-empty-state__content"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="pf-c-empty-state__icon"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 1024 1024"
+                      width="1em"
+                    >
+                      <path
+                        d="M512.1,895.9 C300.3,895.9 128.1,723.8 128.1,511.9 C128.1,300.2 300.3,127.9 512.1,127.9 C723.9,127.9 896,300.2 896.100043,511.9 C896.2,723.6 723.8,895.9 512.1,895.9 M512.1,0 C229.7,0 0,229.7 0,512 C0,794.3 229.7,1024 512.1,1024 C794.3,1024 1024,794.3 1024,512 C1024,229.7 794.3,0 512.1,0 M716.3,482.9 C710,495.2 575.5,679.5 493.7,782.4 C478,800.2 463.4,794.2 457.3,790.3 C443.9,781.4 443.1,771.7 451,745 C458.9,718.3 494.1,576 494.1,576 L341.3,576 C328.2,576.2 312.2,576.2 307.1,563.8 C302.2,552 306.9,541.2 314.4,530.8 C370,453.5 508.1,264.9 508.1,264.9 C508.1,264.9 527.2,239.7 541.4,238.3 C554.4,237 562.9,240.5 567,249.6 C572.1,260.2 570.4,272.9 566.8,286.9 C563.5,300 526.4,448 526.4,448 L695.3,448 C702.6,448 711.5,449.4 717.4,457 C723.3,464.6 719.5,477 716.3,482.9"
+                      />
+                    </svg>
+                    <div
+                      class="pf-c-content"
+                    >
+                      <h1
+                        class=""
+                        data-cy="numbers_of_c"
+                        data-pf-content="true"
+                      >
+                        0
+                      </h1>
+                      <button
+                        aria-disabled="false"
+                        class="pf-c-button pf-m-link"
+                        data-cy="button_c"
+                        data-ouia-component-id="OUIA-Generated-Button-link-2"
+                        data-ouia-component-type="PF4/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <h2
+                          class=""
+                          data-pf-content="true"
+                        >
+                          Active Engagements
+                        </h2>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-c-empty-state__body"
+                    >
+                      Engagements that are already in progress and running at the moment.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+          >
+            <article
+              class="pf-c-card"
+              data-ouia-component-id="OUIA-Generated-Card-3"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+              style="height: 100%;"
+            >
+              <div
+                class="pf-c-card__body"
+              >
+                <div
+                  class="pf-c-empty-state"
+                >
+                  <div
+                    class="pf-c-empty-state__content"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="pf-c-empty-state__icon"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 1024 1024"
+                      width="1em"
+                    >
+                      <path
+                        d="M512.1,895.9 C300.3,895.9 128.1,723.8 128.1,511.9 C128.1,300.2 300.3,127.9 512.1,127.9 C723.8,127.9 896,300.2 896.1,511.9 C896.1,723.7 723.8,895.9 512.1,895.9 M512.1,0 C229.7,0 0,229.7 0,512 C0,794.3 229.7,1024 512.1,1024 C794.3,1024 1024,794.3 1024,512 C1024,229.7 794.3,0 512.1,0 M704,288 L704,272 C704,263.2 696.8,256 688,256 L336,256 C327.2,256 320,263.2 320,272 L320,288 C320,447 480,449 480,512 C480,575 320,575 320,736 L320,752 C320,760.8 327.2,768 336,768 L688,768 C696.8,768 704,760.8 704,752 L704,736 C704,576 544,577 544,512 C544,447 704,448 704,288 M603.9,704 L420.3,704 C417.3,704 418.2,695 419.4,686.8 C426.8,634.5 480.1,617.4 495.2,612.3 C512.3,606.6 512.3,606.6 528.9,612.3 C544,617.6 597.6,635.4 604.8,687 C605.9,695.2 606.9,704 603.9,704"
+                      />
+                    </svg>
+                    <div
+                      class="pf-c-content"
+                    >
+                      <h1
+                        class=""
+                        data-cy="numbers_of_p"
+                        data-pf-content="true"
+                      >
+                        0
+                      </h1>
+                      <button
+                        aria-disabled="false"
+                        class="pf-c-button pf-m-link"
+                        data-cy="button_p"
+                        data-ouia-component-id="OUIA-Generated-Button-link-3"
+                        data-ouia-component-type="PF4/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <h2
+                          class=""
+                          data-pf-content="true"
+                        >
+                          Upcoming Engagements
+                        </h2>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-c-empty-state__body"
+                    >
+                      Upcoming engagements in the future, and are not launched yet.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+          >
+            <article
+              class="pf-c-card"
+              data-ouia-component-id="OUIA-Generated-Card-4"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+              style="height: 100%;"
+            >
+              <div
+                class="pf-c-card__body"
+              >
+                <div
+                  class="pf-c-empty-state"
+                >
+                  <div
+                    class="pf-c-empty-state__content"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="pf-c-empty-state__icon"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 1024 1024"
+                      width="1em"
+                    >
+                      <path
+                        d="M512,128 C300.2,128 128,300.3 128,512 C128,723.9 300.2,896 512,896 C723.8,896 896,723.8 896,512 C896,300.2 723.7,128 512,128 M512.1,1024 C229.8,1024 0,794.3 0,512 C0,229.7 229.7,0 512.1,0 C794.5,0 1024,229.7 1024,512 C1024,794.3 794.4,1024 512.1,1024 M744.1,619.2 C723.2,664.3 691.733333,700.333333 649.7,727.3 C607.666667,754.266667 561.766667,767.766667 512,767.801349 C477.880448,767.912684 444.106349,760.967204 412.8,747.4 C381.4,733.8 354,715.7 331,692.7 C308,669.7 289.9,642.6 276.3,611.1 C262.774308,579.78407 255.863244,546.011774 255.998009,511.9 C255.891693,478.450317 262.417551,445.311196 275.2,414.4 C288,383.4 305.333333,356.566667 327.2,333.9 C349.066667,311.233333 375.233333,292.966667 405.7,279.1 C436.09495,265.229747 468.913253,257.449838 502.3,256.2 C512,255.8 523.3,262.3 527.1,271.4 C531.1,280.5 531.7,290.8 524.3,297.7 C505.1,315 488.3,335.2 478.2,358.2 C468.1,381.2 460.8,403.2 460.8,428.7 C460.8,461.6 466.7,489.6 482.9,517.4 C498.746034,544.796001 521.503999,567.553966 548.9,583.4 C576.6,599.6 607,607.7 639.9,607.7 C666.146645,607.723074 692.070807,601.916608 715.8,590.7 C724.9,586.7 732.9,588.1 739.8,595 C742.843305,598.084991 744.867601,602.02888 745.6,606.3 C746.409483,610.652973 745.8867,615.148908 744.1,619.2"
+                      />
+                    </svg>
+                    <div
+                      class="pf-c-content"
+                    >
+                      <h1
+                        class=""
+                        data-cy="numbers_of_a"
+                        data-pf-content="true"
+                      >
+                        0
+                      </h1>
+                      <button
+                        aria-disabled="false"
+                        class="pf-c-button pf-m-link"
+                        data-cy="button_a"
+                        data-ouia-component-id="OUIA-Generated-Button-link-4"
+                        data-ouia-component-type="PF4/Button"
+                        data-ouia-safe="true"
+                        type="button"
+                      >
+                        <h2
+                          class=""
+                          data-pf-content="true"
+                        >
+                          Past Engagements
+                        </h2>
+                      </button>
+                    </div>
+                    <div
+                      class="pf-c-empty-state__body"
+                    >
+                      Engagements that are finished, closed or archived.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-8-col-on-xl pf-m-3-col-on-2xl"
+          >
+            <article
+              class="pf-c-card pf-m-hoverable pf-m-compact"
+              data-ouia-component-id="OUIA-Generated-Card-5"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+            >
+              <div
+                class="pf-c-card__title"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h2
+                    class=""
+                    data-pf-content="true"
+                  >
+                    People Enabled
+                  </h2>
+                </div>
+              </div>
+              <div
+                class="pf-c-card__body"
+                style="margin-top: 1rem;"
+              >
+                <div
+                  class="pf-l-grid pf-m-gutter"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-4-col"
+                  >
+                    <div
+                      class="pf-c-content"
+                      style="text-align: center;"
+                    >
+                      <h4
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Total Enabled
+                      </h4>
+                      <h1
+                        class=""
+                        data-pf-content="true"
+                        style="color: rgb(89, 171, 227);"
+                      >
+                        0
+                      </h1>
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-4-col"
+                  >
+                    <div
+                      class="pf-c-content"
+                      style="text-align: center;"
+                    >
+                      <h4
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Red Hatters
+                      </h4>
+                      <h1
+                        class=""
+                        data-pf-content="true"
+                        style="color: rgb(164, 199, 164);"
+                      >
+                        0
+                      </h1>
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-4-col"
+                  >
+                    <div
+                      class="pf-c-content"
+                      style="text-align: center;"
+                    >
+                      <h4
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Non Red Hatters
+                      </h4>
+                      <h1
+                        class=""
+                        data-pf-content="true"
+                        style="color: rgb(77, 180, 69);"
+                      >
+                        0
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="height: 230px; width: 400px;"
+                >
+                  <div
+                    class="pf-c-chart"
+                    style="pointer-events: none; position: relative; width: 100%; height: 100%;"
+                  >
+                    <svg
+                      aria-describedby="victory-container-1-desc"
+                      aria-labelledby="victory-container-1-title"
+                      height="230"
+                      role="img"
+                      style="pointer-events: all; width: 100%; height: 100%;"
+                      viewBox="0 0 300 230"
+                      width="300"
+                    >
+                      <title
+                        id="victory-container-1-title"
+                      >
+                        People Enabled Chart
+                      </title>
+                      <desc
+                        id="victory-container-1-desc"
+                      >
+                        People Enabled
+                      </desc>
+                      <g>
+                        <path
+                          d="M0.6108574848861728,-69.99733461449199L0.5323186654008076,-60.99767730691445Z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #4cb140; padding: 8px; stroke: transparent; stroke-width: 1;"
+                          transform="translate(90, 115)"
+                        />
+                        <path
+                          d="M1.8323863815511352,-69.97601274828901L1.596793846780275,-60.979096823508996Z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #bde2b9; padding: 8px; stroke: transparent; stroke-width: 1;"
+                          transform="translate(90, 115)"
+                        />
+                      </g>
+                      <g>
+                        <rect
+                          height="61.809999999999995"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: none;"
+                          vector-effect="non-scaling-stroke"
+                          width="153.94062499999998"
+                          x="168"
+                          y="86.095"
+                        />
+                        <path
+                          d="M 177.128, 104.967
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #4cb140;"
+                        />
+                        <path
+                          d="M 177.128, 135.872
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #bde2b9;"
+                        />
+                        <text
+                          direction="inherit"
+                          dx="0"
+                          id="legend-labels-0"
+                          x="198.8"
+                          y="105.065"
+                        >
+                          <tspan
+                            dx="0"
+                            dy="0"
+                            style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                            text-anchor="start"
+                            x="198.8"
+                          >
+                            Non Red Hatter: 0
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx="0"
+                          id="legend-labels-1"
+                          x="198.8"
+                          y="135.97"
+                        >
+                          <tspan
+                            dx="0"
+                            dy="0"
+                            style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                            text-anchor="start"
+                            x="198.8"
+                          >
+                            Red Hatters: 0
+                          </tspan>
+                        </text>
+                      </g>
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        x="90"
+                        y="123.52"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="font-size: 24px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); fill: #252525; stroke: transparent;"
+                          text-anchor="middle"
+                          x="90"
+                        >
+                          0
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        x="90"
+                        y="205.97"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="fill: #b8bbbe; font-size: 14px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); stroke: transparent;"
+                          text-anchor="middle"
+                          x="90"
+                        >
+                          Total Enabled
+                        </tspan>
+                      </text>
+                    </svg>
+                    <div
+                      style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+                    >
+                      <svg
+                        height="230"
+                        style="overflow: visible; width: 100%; height: 100%;"
+                        viewBox="0 0 300 230"
+                        width="300"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>,
+  "container": <div>
+    <section
+      class="pf-c-page__main-section pf-m-light"
+    >
+      <div
+        class="pf-c-content"
+      >
+        <h1
+          class="pf-c-title pf-m-2xl"
+        >
+          Dashboard
+        </h1>
+        <p
+          class=""
+          data-pf-content="true"
+        >
+          This dashboard gives you an overview of all engagements.
+        </p>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section"
+    >
+      <div
+        class="pf-l-grid pf-m-gutter"
+      >
+        <div
+          class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
         >
           <article
-            class="pf-c-card pf-m-hoverable pf-m-compact"
+            class="pf-c-card"
             data-ouia-component-id="OUIA-Generated-Card-1"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
-            style="min-height: 40vh;"
+            style="height: 100%;"
           >
             <div
               class="pf-c-card__body"
@@ -73,7 +644,7 @@ Object {
                     </h1>
                     <button
                       aria-disabled="false"
-                      class="pf-c-button pf-m-link pf-m-inline"
+                      class="pf-c-button pf-m-link"
                       data-cy="button_l"
                       data-ouia-component-id="OUIA-Generated-Button-link-1"
                       data-ouia-component-type="PF4/Button"
@@ -97,13 +668,17 @@ Object {
               </div>
             </div>
           </article>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+        >
           <article
-            class="pf-c-card pf-m-hoverable pf-m-compact"
+            class="pf-c-card"
             data-ouia-component-id="OUIA-Generated-Card-2"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
-            style="min-height: 40vh;"
+            style="height: 100%;"
           >
             <div
               class="pf-c-card__body"
@@ -140,7 +715,7 @@ Object {
                     </h1>
                     <button
                       aria-disabled="false"
-                      class="pf-c-button pf-m-link pf-m-inline"
+                      class="pf-c-button pf-m-link"
                       data-cy="button_c"
                       data-ouia-component-id="OUIA-Generated-Button-link-2"
                       data-ouia-component-type="PF4/Button"
@@ -164,13 +739,17 @@ Object {
               </div>
             </div>
           </article>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+        >
           <article
-            class="pf-c-card pf-m-hoverable pf-m-compact"
+            class="pf-c-card"
             data-ouia-component-id="OUIA-Generated-Card-3"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
-            style="min-height: 40vh;"
+            style="height: 100%;"
           >
             <div
               class="pf-c-card__body"
@@ -207,7 +786,7 @@ Object {
                     </h1>
                     <button
                       aria-disabled="false"
-                      class="pf-c-button pf-m-link pf-m-inline"
+                      class="pf-c-button pf-m-link"
                       data-cy="button_p"
                       data-ouia-component-id="OUIA-Generated-Button-link-3"
                       data-ouia-component-type="PF4/Button"
@@ -231,13 +810,17 @@ Object {
               </div>
             </div>
           </article>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-6-col-on-lg pf-m-4-col-on-xl pf-m-3-col-on-2xl"
+        >
           <article
-            class="pf-c-card pf-m-hoverable pf-m-compact"
+            class="pf-c-card"
             data-ouia-component-id="OUIA-Generated-Card-4"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
-            style="min-height: 40vh;"
+            style="height: 100%;"
           >
             <div
               class="pf-c-card__body"
@@ -274,7 +857,7 @@ Object {
                     </h1>
                     <button
                       aria-disabled="false"
-                      class="pf-c-button pf-m-link pf-m-inline"
+                      class="pf-c-button pf-m-link"
                       data-cy="button_a"
                       data-ouia-component-id="OUIA-Generated-Button-link-4"
                       data-ouia-component-type="PF4/Button"
@@ -299,303 +882,260 @@ Object {
             </div>
           </article>
         </div>
-      </section>
-    </div>
-  </body>,
-  "container": <div>
-    <section
-      class="pf-c-page__main-section pf-m-light"
-    >
-      <div
-        class="pf-c-content"
-      >
-        <h1
-          class="pf-c-title pf-m-2xl"
+        <div
+          class="pf-l-grid__item pf-m-12-col-on-sm pf-m-8-col-on-xl pf-m-3-col-on-2xl"
         >
-          Dashboard
-        </h1>
-        <p
-          class=""
-          data-pf-content="true"
-        >
-          This dashboard gives you an overview of all engagements.
-        </p>
-      </div>
-    </section>
-    <section
-      class="pf-c-page__main-section"
-    >
-      <div
-        class="pf-l-gallery pf-m-gutter"
-      >
-        <article
-          class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-1"
-          data-ouia-component-type="PF4/Card"
-          data-ouia-safe="true"
-          id=""
-          style="min-height: 40vh;"
-        >
-          <div
-            class="pf-c-card__body"
+          <article
+            class="pf-c-card pf-m-hoverable pf-m-compact"
+            data-ouia-component-id="OUIA-Generated-Card-5"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
           >
             <div
-              class="pf-c-empty-state"
+              class="pf-c-card__title"
             >
               <div
-                class="pf-c-empty-state__content"
+                class="pf-c-content"
               >
-                <svg
-                  aria-hidden="true"
-                  class="pf-c-empty-state__icon"
-                  fill="currentColor"
-                  height="1em"
-                  role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 576 512"
-                  width="1em"
+                <h2
+                  class=""
+                  data-pf-content="true"
                 >
-                  <path
-                    d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"
-                  />
-                </svg>
+                  People Enabled
+                </h2>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+              style="margin-top: 1rem;"
+            >
+              <div
+                class="pf-l-grid pf-m-gutter"
+              >
                 <div
-                  class="pf-c-content"
+                  class="pf-l-grid__item pf-m-4-col"
                 >
-                  <h1
-                    class=""
-                    data-cy="numbers_of_l"
-                    data-pf-content="true"
+                  <div
+                    class="pf-c-content"
+                    style="text-align: center;"
                   >
-                    0
-                  </h1>
-                  <button
-                    aria-disabled="false"
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-cy="button_l"
-                    data-ouia-component-id="OUIA-Generated-Button-link-1"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    <h2
+                    <h4
                       class=""
                       data-pf-content="true"
                     >
-                      All Engagements
-                    </h2>
-                  </button>
+                      Total Enabled
+                    </h4>
+                    <h1
+                      class=""
+                      data-pf-content="true"
+                      style="color: rgb(89, 171, 227);"
+                    >
+                      0
+                    </h1>
+                  </div>
                 </div>
                 <div
-                  class="pf-c-empty-state__body"
+                  class="pf-l-grid__item pf-m-4-col"
                 >
-                  All available engagements in the system. Including upcoming, active and past ones
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article
-          class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-2"
-          data-ouia-component-type="PF4/Card"
-          data-ouia-safe="true"
-          id=""
-          style="min-height: 40vh;"
-        >
-          <div
-            class="pf-c-card__body"
-          >
-            <div
-              class="pf-c-empty-state"
-            >
-              <div
-                class="pf-c-empty-state__content"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="pf-c-empty-state__icon"
-                  fill="currentColor"
-                  height="1em"
-                  role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                >
-                  <path
-                    d="M512.1,895.9 C300.3,895.9 128.1,723.8 128.1,511.9 C128.1,300.2 300.3,127.9 512.1,127.9 C723.9,127.9 896,300.2 896.100043,511.9 C896.2,723.6 723.8,895.9 512.1,895.9 M512.1,0 C229.7,0 0,229.7 0,512 C0,794.3 229.7,1024 512.1,1024 C794.3,1024 1024,794.3 1024,512 C1024,229.7 794.3,0 512.1,0 M716.3,482.9 C710,495.2 575.5,679.5 493.7,782.4 C478,800.2 463.4,794.2 457.3,790.3 C443.9,781.4 443.1,771.7 451,745 C458.9,718.3 494.1,576 494.1,576 L341.3,576 C328.2,576.2 312.2,576.2 307.1,563.8 C302.2,552 306.9,541.2 314.4,530.8 C370,453.5 508.1,264.9 508.1,264.9 C508.1,264.9 527.2,239.7 541.4,238.3 C554.4,237 562.9,240.5 567,249.6 C572.1,260.2 570.4,272.9 566.8,286.9 C563.5,300 526.4,448 526.4,448 L695.3,448 C702.6,448 711.5,449.4 717.4,457 C723.3,464.6 719.5,477 716.3,482.9"
-                  />
-                </svg>
-                <div
-                  class="pf-c-content"
-                >
-                  <h1
-                    class=""
-                    data-cy="numbers_of_c"
-                    data-pf-content="true"
+                  <div
+                    class="pf-c-content"
+                    style="text-align: center;"
                   >
-                    0
-                  </h1>
-                  <button
-                    aria-disabled="false"
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-cy="button_c"
-                    data-ouia-component-id="OUIA-Generated-Button-link-2"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    <h2
+                    <h4
                       class=""
                       data-pf-content="true"
                     >
-                      Active Engagements
-                    </h2>
-                  </button>
+                      Red Hatters
+                    </h4>
+                    <h1
+                      class=""
+                      data-pf-content="true"
+                      style="color: rgb(164, 199, 164);"
+                    >
+                      0
+                    </h1>
+                  </div>
                 </div>
                 <div
-                  class="pf-c-empty-state__body"
+                  class="pf-l-grid__item pf-m-4-col"
                 >
-                  Engagements that are already in progress and running at the moment.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article
-          class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-3"
-          data-ouia-component-type="PF4/Card"
-          data-ouia-safe="true"
-          id=""
-          style="min-height: 40vh;"
-        >
-          <div
-            class="pf-c-card__body"
-          >
-            <div
-              class="pf-c-empty-state"
-            >
-              <div
-                class="pf-c-empty-state__content"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="pf-c-empty-state__icon"
-                  fill="currentColor"
-                  height="1em"
-                  role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                >
-                  <path
-                    d="M512.1,895.9 C300.3,895.9 128.1,723.8 128.1,511.9 C128.1,300.2 300.3,127.9 512.1,127.9 C723.8,127.9 896,300.2 896.1,511.9 C896.1,723.7 723.8,895.9 512.1,895.9 M512.1,0 C229.7,0 0,229.7 0,512 C0,794.3 229.7,1024 512.1,1024 C794.3,1024 1024,794.3 1024,512 C1024,229.7 794.3,0 512.1,0 M704,288 L704,272 C704,263.2 696.8,256 688,256 L336,256 C327.2,256 320,263.2 320,272 L320,288 C320,447 480,449 480,512 C480,575 320,575 320,736 L320,752 C320,760.8 327.2,768 336,768 L688,768 C696.8,768 704,760.8 704,752 L704,736 C704,576 544,577 544,512 C544,447 704,448 704,288 M603.9,704 L420.3,704 C417.3,704 418.2,695 419.4,686.8 C426.8,634.5 480.1,617.4 495.2,612.3 C512.3,606.6 512.3,606.6 528.9,612.3 C544,617.6 597.6,635.4 604.8,687 C605.9,695.2 606.9,704 603.9,704"
-                  />
-                </svg>
-                <div
-                  class="pf-c-content"
-                >
-                  <h1
-                    class=""
-                    data-cy="numbers_of_p"
-                    data-pf-content="true"
+                  <div
+                    class="pf-c-content"
+                    style="text-align: center;"
                   >
-                    0
-                  </h1>
-                  <button
-                    aria-disabled="false"
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-cy="button_p"
-                    data-ouia-component-id="OUIA-Generated-Button-link-3"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    <h2
+                    <h4
                       class=""
                       data-pf-content="true"
                     >
-                      Upcoming Engagements
-                    </h2>
-                  </button>
-                </div>
-                <div
-                  class="pf-c-empty-state__body"
-                >
-                  Upcoming engagements in the future, and are not launched yet.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-        <article
-          class="pf-c-card pf-m-hoverable pf-m-compact"
-          data-ouia-component-id="OUIA-Generated-Card-4"
-          data-ouia-component-type="PF4/Card"
-          data-ouia-safe="true"
-          id=""
-          style="min-height: 40vh;"
-        >
-          <div
-            class="pf-c-card__body"
-          >
-            <div
-              class="pf-c-empty-state"
-            >
-              <div
-                class="pf-c-empty-state__content"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="pf-c-empty-state__icon"
-                  fill="currentColor"
-                  height="1em"
-                  role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 1024 1024"
-                  width="1em"
-                >
-                  <path
-                    d="M512,128 C300.2,128 128,300.3 128,512 C128,723.9 300.2,896 512,896 C723.8,896 896,723.8 896,512 C896,300.2 723.7,128 512,128 M512.1,1024 C229.8,1024 0,794.3 0,512 C0,229.7 229.7,0 512.1,0 C794.5,0 1024,229.7 1024,512 C1024,794.3 794.4,1024 512.1,1024 M744.1,619.2 C723.2,664.3 691.733333,700.333333 649.7,727.3 C607.666667,754.266667 561.766667,767.766667 512,767.801349 C477.880448,767.912684 444.106349,760.967204 412.8,747.4 C381.4,733.8 354,715.7 331,692.7 C308,669.7 289.9,642.6 276.3,611.1 C262.774308,579.78407 255.863244,546.011774 255.998009,511.9 C255.891693,478.450317 262.417551,445.311196 275.2,414.4 C288,383.4 305.333333,356.566667 327.2,333.9 C349.066667,311.233333 375.233333,292.966667 405.7,279.1 C436.09495,265.229747 468.913253,257.449838 502.3,256.2 C512,255.8 523.3,262.3 527.1,271.4 C531.1,280.5 531.7,290.8 524.3,297.7 C505.1,315 488.3,335.2 478.2,358.2 C468.1,381.2 460.8,403.2 460.8,428.7 C460.8,461.6 466.7,489.6 482.9,517.4 C498.746034,544.796001 521.503999,567.553966 548.9,583.4 C576.6,599.6 607,607.7 639.9,607.7 C666.146645,607.723074 692.070807,601.916608 715.8,590.7 C724.9,586.7 732.9,588.1 739.8,595 C742.843305,598.084991 744.867601,602.02888 745.6,606.3 C746.409483,610.652973 745.8867,615.148908 744.1,619.2"
-                  />
-                </svg>
-                <div
-                  class="pf-c-content"
-                >
-                  <h1
-                    class=""
-                    data-cy="numbers_of_a"
-                    data-pf-content="true"
-                  >
-                    0
-                  </h1>
-                  <button
-                    aria-disabled="false"
-                    class="pf-c-button pf-m-link pf-m-inline"
-                    data-cy="button_a"
-                    data-ouia-component-id="OUIA-Generated-Button-link-4"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    <h2
+                      Non Red Hatters
+                    </h4>
+                    <h1
                       class=""
                       data-pf-content="true"
+                      style="color: rgb(77, 180, 69);"
                     >
-                      Past Engagements
-                    </h2>
-                  </button>
+                      0
+                    </h1>
+                  </div>
                 </div>
+              </div>
+              <div
+                style="height: 230px; width: 400px;"
+              >
                 <div
-                  class="pf-c-empty-state__body"
+                  class="pf-c-chart"
+                  style="pointer-events: none; position: relative; width: 100%; height: 100%;"
                 >
-                  Engagements that are finished, closed or archived.
+                  <svg
+                    aria-describedby="victory-container-1-desc"
+                    aria-labelledby="victory-container-1-title"
+                    height="230"
+                    role="img"
+                    style="pointer-events: all; width: 100%; height: 100%;"
+                    viewBox="0 0 300 230"
+                    width="300"
+                  >
+                    <title
+                      id="victory-container-1-title"
+                    >
+                      People Enabled Chart
+                    </title>
+                    <desc
+                      id="victory-container-1-desc"
+                    >
+                      People Enabled
+                    </desc>
+                    <g>
+                      <path
+                        d="M0.6108574848861728,-69.99733461449199L0.5323186654008076,-60.99767730691445Z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #4cb140; padding: 8px; stroke: transparent; stroke-width: 1;"
+                        transform="translate(90, 115)"
+                      />
+                      <path
+                        d="M1.8323863815511352,-69.97601274828901L1.596793846780275,-60.979096823508996Z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #bde2b9; padding: 8px; stroke: transparent; stroke-width: 1;"
+                        transform="translate(90, 115)"
+                      />
+                    </g>
+                    <g>
+                      <rect
+                        height="61.809999999999995"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: none;"
+                        vector-effect="non-scaling-stroke"
+                        width="153.94062499999998"
+                        x="168"
+                        y="86.095"
+                      />
+                      <path
+                        d="M 177.128, 104.967
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #4cb140;"
+                      />
+                      <path
+                        d="M 177.128, 135.872
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #bde2b9;"
+                      />
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        id="legend-labels-0"
+                        x="198.8"
+                        y="105.065"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                          text-anchor="start"
+                          x="198.8"
+                        >
+                          Non Red Hatter: 0
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        id="legend-labels-1"
+                        x="198.8"
+                        y="135.97"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                          text-anchor="start"
+                          x="198.8"
+                        >
+                          Red Hatters: 0
+                        </tspan>
+                      </text>
+                    </g>
+                    <text
+                      direction="inherit"
+                      dx="0"
+                      x="90"
+                      y="123.52"
+                    >
+                      <tspan
+                        dx="0"
+                        dy="0"
+                        style="font-size: 24px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); fill: #252525; stroke: transparent;"
+                        text-anchor="middle"
+                        x="90"
+                      >
+                        0
+                      </tspan>
+                    </text>
+                    <text
+                      direction="inherit"
+                      dx="0"
+                      x="90"
+                      y="205.97"
+                    >
+                      <tspan
+                        dx="0"
+                        dy="0"
+                        style="fill: #b8bbbe; font-size: 14px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); stroke: transparent;"
+                        text-anchor="middle"
+                        x="90"
+                      >
+                        Total Enabled
+                      </tspan>
+                    </text>
+                  </svg>
+                  <div
+                    style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+                  >
+                    <svg
+                      height="230"
+                      style="overflow: visible; width: 100%; height: 100%;"
+                      viewBox="0 0 300 230"
+                      width="300"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
     </section>
   </div>,

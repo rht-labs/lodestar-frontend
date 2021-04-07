@@ -100,7 +100,6 @@ Object {
                       style="padding-bottom: 0px; padding-top: 0px;"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-1"
                         aria-labelledby="icon-title-2"
                         fill="currentColor"
                         height="1em"
@@ -132,7 +131,6 @@ Object {
                       title="Feedback and Feature Request"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-2"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -349,7 +347,6 @@ Object {
                     style="padding-bottom: 0px; padding-top: 0px;"
                   >
                     <svg
-                      aria-describedby="pf-tooltip-1"
                       aria-labelledby="icon-title-2"
                       fill="currentColor"
                       height="1em"
@@ -381,7 +378,6 @@ Object {
                     title="Feedback and Feature Request"
                   >
                     <svg
-                      aria-describedby="pf-tooltip-2"
                       aria-hidden="true"
                       fill="currentColor"
                       height="1em"

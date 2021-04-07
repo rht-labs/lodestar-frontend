@@ -2,38 +2,38 @@
 
 exports[`Landing Page landing page matches snapshot 1`] = `
 initialize {
-  "0": Object {
+  "0": Node {
     "attribs": Object {
       "class": "landing-page",
     },
     "children": Array [
-      Object {
+      Node {
         "attribs": Object {
           "class": "pf-c-page",
         },
         "children": Array [
-          Object {
+          Node {
             "attribs": Object {
               "class": "pf-c-page__header",
               "toolbar": "[object Object]",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "pf-c-page__header-brand",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "pf-c-page__header-brand-link",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "logo-text",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "data": "LodeStar",
                             "next": null,
                             "parent": [Circular],
@@ -85,19 +85,19 @@ initialize {
             ],
             "name": "header",
             "namespace": "http://www.w3.org/1999/xhtml",
-            "next": Object {
+            "next": Node {
               "attribs": Object {
                 "class": "pf-c-page__main",
                 "tabindex": "-1",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "pf-c-page__main-section",
                     "style": "padding:0",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "style": "height:25px",
                       },
@@ -118,20 +118,20 @@ initialize {
                   ],
                   "name": "section",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "jumbotron-container",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "cta",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -141,12 +141,12 @@ initialize {
                             ],
                             "name": "span",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -157,7 +157,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -210,12 +210,12 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -226,7 +226,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -264,10 +264,10 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -295,14 +295,14 @@ initialize {
                         ],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image",
                           },
                           "children": Array [],
                           "name": "div",
                           "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": Object {
+                          "next": Node {
                             "attribs": Object {
                               "class": "background-image-overlay",
                             },
@@ -340,14 +340,14 @@ initialize {
                           "class": undefined,
                         },
                       },
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
                         "children": Array [],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image-overlay",
                           },
@@ -366,15 +366,15 @@ initialize {
                           },
                         },
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "cta",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -384,12 +384,12 @@ initialize {
                               ],
                               "name": "span",
                               "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": Object {
+                              "next": Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -400,7 +400,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -453,12 +453,12 @@ initialize {
                               "x-attribsNamespace": Object {},
                               "x-attribsPrefix": Object {},
                             },
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -469,7 +469,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -507,10 +507,10 @@ initialize {
                               "namespace": "http://www.w3.org/1999/xhtml",
                               "next": null,
                               "parent": [Circular],
-                              "prev": Object {
+                              "prev": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -557,7 +557,7 @@ initialize {
                           "class": undefined,
                         },
                       },
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "background-image-overlay",
                         },
@@ -566,7 +566,7 @@ initialize {
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": null,
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "background-image",
                           },
@@ -575,15 +575,15 @@ initialize {
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": [Circular],
                           "parent": [Circular],
-                          "prev": Object {
+                          "prev": Node {
                             "attribs": Object {
                               "class": "cta",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -593,12 +593,12 @@ initialize {
                                 ],
                                 "name": "span",
                                 "namespace": "http://www.w3.org/1999/xhtml",
-                                "next": Object {
+                                "next": Node {
                                   "attribs": Object {
                                     "href": "/app",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "attribs": Object {
                                         "aria-disabled": "false",
                                         "class": "pf-c-button pf-m-primary",
@@ -609,7 +609,7 @@ initialize {
                                         "type": "button",
                                       },
                                       "children": Array [
-                                        Object {
+                                        Node {
                                           "data": "Get Started",
                                           "next": null,
                                           "parent": [Circular],
@@ -662,12 +662,12 @@ initialize {
                                 "x-attribsNamespace": Object {},
                                 "x-attribsPrefix": Object {},
                               },
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -678,7 +678,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -716,10 +716,10 @@ initialize {
                                 "namespace": "http://www.w3.org/1999/xhtml",
                                 "next": null,
                                 "parent": [Circular],
-                                "prev": Object {
+                                "prev": Node {
                                   "attribs": Object {},
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "LodeStar",
                                       "next": null,
                                       "parent": [Circular],
@@ -777,7 +777,7 @@ initialize {
                     ],
                     "name": "div",
                     "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "pf-c-page__main-section",
                       },
@@ -817,20 +817,20 @@ initialize {
                     "style": undefined,
                   },
                 },
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "jumbotron-container",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "cta",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {},
                           "children": Array [
-                            Object {
+                            Node {
                               "data": "LodeStar",
                               "next": null,
                               "parent": [Circular],
@@ -840,12 +840,12 @@ initialize {
                           ],
                           "name": "span",
                           "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": Object {
+                          "next": Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -856,7 +856,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -909,12 +909,12 @@ initialize {
                           "x-attribsNamespace": Object {},
                           "x-attribsPrefix": Object {},
                         },
-                        Object {
+                        Node {
                           "attribs": Object {
                             "href": "/app",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
@@ -925,7 +925,7 @@ initialize {
                                 "type": "button",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "Get Started",
                                   "next": null,
                                   "parent": [Circular],
@@ -963,10 +963,10 @@ initialize {
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": null,
                           "parent": [Circular],
-                          "prev": Object {
+                          "prev": Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -994,14 +994,14 @@ initialize {
                       ],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
                         "children": Array [],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image-overlay",
                           },
@@ -1039,14 +1039,14 @@ initialize {
                         "class": undefined,
                       },
                     },
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "background-image",
                       },
                       "children": Array [],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image-overlay",
                         },
@@ -1065,15 +1065,15 @@ initialize {
                         },
                       },
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "cta",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -1083,12 +1083,12 @@ initialize {
                             ],
                             "name": "span",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -1099,7 +1099,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -1152,12 +1152,12 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -1168,7 +1168,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -1206,10 +1206,10 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -1256,7 +1256,7 @@ initialize {
                         "class": undefined,
                       },
                     },
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "background-image-overlay",
                       },
@@ -1265,7 +1265,7 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": null,
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
@@ -1274,15 +1274,15 @@ initialize {
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": [Circular],
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "cta",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -1292,12 +1292,12 @@ initialize {
                               ],
                               "name": "span",
                               "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": Object {
+                              "next": Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -1308,7 +1308,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -1361,12 +1361,12 @@ initialize {
                               "x-attribsNamespace": Object {},
                               "x-attribsPrefix": Object {},
                             },
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -1377,7 +1377,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -1415,10 +1415,10 @@ initialize {
                               "namespace": "http://www.w3.org/1999/xhtml",
                               "next": null,
                               "parent": [Circular],
-                              "prev": Object {
+                              "prev": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -1476,7 +1476,7 @@ initialize {
                   ],
                   "name": "div",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "pf-c-page__main-section",
                     },
@@ -1495,13 +1495,13 @@ initialize {
                     },
                   },
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "pf-c-page__main-section",
                       "style": "padding:0",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "style": "height:25px",
                         },
@@ -1543,7 +1543,7 @@ initialize {
                     "class": undefined,
                   },
                 },
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "pf-c-page__main-section",
                   },
@@ -1552,20 +1552,20 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "jumbotron-container",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "cta",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -1575,12 +1575,12 @@ initialize {
                             ],
                             "name": "span",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -1591,7 +1591,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -1644,12 +1644,12 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -1660,7 +1660,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -1698,10 +1698,10 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -1729,14 +1729,14 @@ initialize {
                         ],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image",
                           },
                           "children": Array [],
                           "name": "div",
                           "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": Object {
+                          "next": Node {
                             "attribs": Object {
                               "class": "background-image-overlay",
                             },
@@ -1774,14 +1774,14 @@ initialize {
                           "class": undefined,
                         },
                       },
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
                         "children": Array [],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image-overlay",
                           },
@@ -1800,15 +1800,15 @@ initialize {
                           },
                         },
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "cta",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -1818,12 +1818,12 @@ initialize {
                               ],
                               "name": "span",
                               "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": Object {
+                              "next": Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -1834,7 +1834,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -1887,12 +1887,12 @@ initialize {
                               "x-attribsNamespace": Object {},
                               "x-attribsPrefix": Object {},
                             },
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -1903,7 +1903,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -1941,10 +1941,10 @@ initialize {
                               "namespace": "http://www.w3.org/1999/xhtml",
                               "next": null,
                               "parent": [Circular],
-                              "prev": Object {
+                              "prev": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -1991,7 +1991,7 @@ initialize {
                           "class": undefined,
                         },
                       },
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "background-image-overlay",
                         },
@@ -2000,7 +2000,7 @@ initialize {
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": null,
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "background-image",
                           },
@@ -2009,15 +2009,15 @@ initialize {
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": [Circular],
                           "parent": [Circular],
-                          "prev": Object {
+                          "prev": Node {
                             "attribs": Object {
                               "class": "cta",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -2027,12 +2027,12 @@ initialize {
                                 ],
                                 "name": "span",
                                 "namespace": "http://www.w3.org/1999/xhtml",
-                                "next": Object {
+                                "next": Node {
                                   "attribs": Object {
                                     "href": "/app",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "attribs": Object {
                                         "aria-disabled": "false",
                                         "class": "pf-c-button pf-m-primary",
@@ -2043,7 +2043,7 @@ initialize {
                                         "type": "button",
                                       },
                                       "children": Array [
-                                        Object {
+                                        Node {
                                           "data": "Get Started",
                                           "next": null,
                                           "parent": [Circular],
@@ -2096,12 +2096,12 @@ initialize {
                                 "x-attribsNamespace": Object {},
                                 "x-attribsPrefix": Object {},
                               },
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -2112,7 +2112,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -2150,10 +2150,10 @@ initialize {
                                 "namespace": "http://www.w3.org/1999/xhtml",
                                 "next": null,
                                 "parent": [Circular],
-                                "prev": Object {
+                                "prev": Node {
                                   "attribs": Object {},
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "LodeStar",
                                       "next": null,
                                       "parent": [Circular],
@@ -2213,13 +2213,13 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": [Circular],
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "pf-c-page__main-section",
                         "style": "padding:0",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "style": "height:25px",
                           },
@@ -2297,19 +2297,19 @@ initialize {
               "toolbar": undefined,
             },
           },
-          Object {
+          Node {
             "attribs": Object {
               "class": "pf-c-page__main",
               "tabindex": "-1",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "pf-c-page__main-section",
                   "style": "padding:0",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "style": "height:25px",
                     },
@@ -2330,20 +2330,20 @@ initialize {
                 ],
                 "name": "section",
                 "namespace": "http://www.w3.org/1999/xhtml",
-                "next": Object {
+                "next": Node {
                   "attribs": Object {
                     "class": "jumbotron-container",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "cta",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {},
                           "children": Array [
-                            Object {
+                            Node {
                               "data": "LodeStar",
                               "next": null,
                               "parent": [Circular],
@@ -2353,12 +2353,12 @@ initialize {
                           ],
                           "name": "span",
                           "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": Object {
+                          "next": Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -2369,7 +2369,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -2422,12 +2422,12 @@ initialize {
                           "x-attribsNamespace": Object {},
                           "x-attribsPrefix": Object {},
                         },
-                        Object {
+                        Node {
                           "attribs": Object {
                             "href": "/app",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
@@ -2438,7 +2438,7 @@ initialize {
                                 "type": "button",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "Get Started",
                                   "next": null,
                                   "parent": [Circular],
@@ -2476,10 +2476,10 @@ initialize {
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": null,
                           "parent": [Circular],
-                          "prev": Object {
+                          "prev": Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -2507,14 +2507,14 @@ initialize {
                       ],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
                         "children": Array [],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image-overlay",
                           },
@@ -2552,14 +2552,14 @@ initialize {
                         "class": undefined,
                       },
                     },
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "background-image",
                       },
                       "children": Array [],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image-overlay",
                         },
@@ -2578,15 +2578,15 @@ initialize {
                         },
                       },
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "cta",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -2596,12 +2596,12 @@ initialize {
                             ],
                             "name": "span",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -2612,7 +2612,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -2665,12 +2665,12 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -2681,7 +2681,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -2719,10 +2719,10 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -2769,7 +2769,7 @@ initialize {
                         "class": undefined,
                       },
                     },
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "background-image-overlay",
                       },
@@ -2778,7 +2778,7 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": null,
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
@@ -2787,15 +2787,15 @@ initialize {
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": [Circular],
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "cta",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -2805,12 +2805,12 @@ initialize {
                               ],
                               "name": "span",
                               "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": Object {
+                              "next": Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -2821,7 +2821,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -2874,12 +2874,12 @@ initialize {
                               "x-attribsNamespace": Object {},
                               "x-attribsPrefix": Object {},
                             },
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -2890,7 +2890,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -2928,10 +2928,10 @@ initialize {
                               "namespace": "http://www.w3.org/1999/xhtml",
                               "next": null,
                               "parent": [Circular],
-                              "prev": Object {
+                              "prev": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -2989,7 +2989,7 @@ initialize {
                   ],
                   "name": "div",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "pf-c-page__main-section",
                     },
@@ -3029,20 +3029,20 @@ initialize {
                   "style": undefined,
                 },
               },
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "jumbotron-container",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "cta",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {},
                         "children": Array [
-                          Object {
+                          Node {
                             "data": "LodeStar",
                             "next": null,
                             "parent": [Circular],
@@ -3052,12 +3052,12 @@ initialize {
                         ],
                         "name": "span",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "href": "/app",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
@@ -3068,7 +3068,7 @@ initialize {
                                 "type": "button",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "Get Started",
                                   "next": null,
                                   "parent": [Circular],
@@ -3121,12 +3121,12 @@ initialize {
                         "x-attribsNamespace": Object {},
                         "x-attribsPrefix": Object {},
                       },
-                      Object {
+                      Node {
                         "attribs": Object {
                           "href": "/app",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {
                               "aria-disabled": "false",
                               "class": "pf-c-button pf-m-primary",
@@ -3137,7 +3137,7 @@ initialize {
                               "type": "button",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "Get Started",
                                 "next": null,
                                 "parent": [Circular],
@@ -3175,10 +3175,10 @@ initialize {
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": null,
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {},
                           "children": Array [
-                            Object {
+                            Node {
                               "data": "LodeStar",
                               "next": null,
                               "parent": [Circular],
@@ -3206,14 +3206,14 @@ initialize {
                     ],
                     "name": "div",
                     "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "background-image",
                       },
                       "children": Array [],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image-overlay",
                         },
@@ -3251,14 +3251,14 @@ initialize {
                       "class": undefined,
                     },
                   },
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "background-image",
                     },
                     "children": Array [],
                     "name": "div",
                     "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "background-image-overlay",
                       },
@@ -3277,15 +3277,15 @@ initialize {
                       },
                     },
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "cta",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {},
                           "children": Array [
-                            Object {
+                            Node {
                               "data": "LodeStar",
                               "next": null,
                               "parent": [Circular],
@@ -3295,12 +3295,12 @@ initialize {
                           ],
                           "name": "span",
                           "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": Object {
+                          "next": Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -3311,7 +3311,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -3364,12 +3364,12 @@ initialize {
                           "x-attribsNamespace": Object {},
                           "x-attribsPrefix": Object {},
                         },
-                        Object {
+                        Node {
                           "attribs": Object {
                             "href": "/app",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
@@ -3380,7 +3380,7 @@ initialize {
                                 "type": "button",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "Get Started",
                                   "next": null,
                                   "parent": [Circular],
@@ -3418,10 +3418,10 @@ initialize {
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": null,
                           "parent": [Circular],
-                          "prev": Object {
+                          "prev": Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -3468,7 +3468,7 @@ initialize {
                       "class": undefined,
                     },
                   },
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "background-image-overlay",
                     },
@@ -3477,7 +3477,7 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": null,
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "background-image",
                       },
@@ -3486,15 +3486,15 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": [Circular],
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "cta",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -3504,12 +3504,12 @@ initialize {
                             ],
                             "name": "span",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -3520,7 +3520,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -3573,12 +3573,12 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -3589,7 +3589,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -3627,10 +3627,10 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -3688,7 +3688,7 @@ initialize {
                 ],
                 "name": "div",
                 "namespace": "http://www.w3.org/1999/xhtml",
-                "next": Object {
+                "next": Node {
                   "attribs": Object {
                     "class": "pf-c-page__main-section",
                   },
@@ -3707,13 +3707,13 @@ initialize {
                   },
                 },
                 "parent": [Circular],
-                "prev": Object {
+                "prev": Node {
                   "attribs": Object {
                     "class": "pf-c-page__main-section",
                     "style": "padding:0",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "style": "height:25px",
                       },
@@ -3755,7 +3755,7 @@ initialize {
                   "class": undefined,
                 },
               },
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "pf-c-page__main-section",
                 },
@@ -3764,20 +3764,20 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
-                "prev": Object {
+                "prev": Node {
                   "attribs": Object {
                     "class": "jumbotron-container",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "cta",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {},
                           "children": Array [
-                            Object {
+                            Node {
                               "data": "LodeStar",
                               "next": null,
                               "parent": [Circular],
@@ -3787,12 +3787,12 @@ initialize {
                           ],
                           "name": "span",
                           "namespace": "http://www.w3.org/1999/xhtml",
-                          "next": Object {
+                          "next": Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -3803,7 +3803,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -3856,12 +3856,12 @@ initialize {
                           "x-attribsNamespace": Object {},
                           "x-attribsPrefix": Object {},
                         },
-                        Object {
+                        Node {
                           "attribs": Object {
                             "href": "/app",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "aria-disabled": "false",
                                 "class": "pf-c-button pf-m-primary",
@@ -3872,7 +3872,7 @@ initialize {
                                 "type": "button",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "Get Started",
                                   "next": null,
                                   "parent": [Circular],
@@ -3910,10 +3910,10 @@ initialize {
                           "namespace": "http://www.w3.org/1999/xhtml",
                           "next": null,
                           "parent": [Circular],
-                          "prev": Object {
+                          "prev": Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -3941,14 +3941,14 @@ initialize {
                       ],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
                         "children": Array [],
                         "name": "div",
                         "namespace": "http://www.w3.org/1999/xhtml",
-                        "next": Object {
+                        "next": Node {
                           "attribs": Object {
                             "class": "background-image-overlay",
                           },
@@ -3986,14 +3986,14 @@ initialize {
                         "class": undefined,
                       },
                     },
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "background-image",
                       },
                       "children": Array [],
                       "name": "div",
                       "namespace": "http://www.w3.org/1999/xhtml",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "background-image-overlay",
                         },
@@ -4012,15 +4012,15 @@ initialize {
                         },
                       },
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "cta",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "LodeStar",
                                 "next": null,
                                 "parent": [Circular],
@@ -4030,12 +4030,12 @@ initialize {
                             ],
                             "name": "span",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -4046,7 +4046,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -4099,12 +4099,12 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {
                               "href": "/app",
                             },
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {
                                   "aria-disabled": "false",
                                   "class": "pf-c-button pf-m-primary",
@@ -4115,7 +4115,7 @@ initialize {
                                   "type": "button",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "Get Started",
                                     "next": null,
                                     "parent": [Circular],
@@ -4153,10 +4153,10 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -4203,7 +4203,7 @@ initialize {
                         "class": undefined,
                       },
                     },
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "background-image-overlay",
                       },
@@ -4212,7 +4212,7 @@ initialize {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": null,
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "background-image",
                         },
@@ -4221,15 +4221,15 @@ initialize {
                         "namespace": "http://www.w3.org/1999/xhtml",
                         "next": [Circular],
                         "parent": [Circular],
-                        "prev": Object {
+                        "prev": Node {
                           "attribs": Object {
                             "class": "cta",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "LodeStar",
                                   "next": null,
                                   "parent": [Circular],
@@ -4239,12 +4239,12 @@ initialize {
                               ],
                               "name": "span",
                               "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": Object {
+                              "next": Node {
                                 "attribs": Object {
                                   "href": "/app",
                                 },
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "aria-disabled": "false",
                                       "class": "pf-c-button pf-m-primary",
@@ -4255,7 +4255,7 @@ initialize {
                                       "type": "button",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "Get Started",
                                         "next": null,
                                         "parent": [Circular],
@@ -4308,12 +4308,12 @@ initialize {
                               "x-attribsNamespace": Object {},
                               "x-attribsPrefix": Object {},
                             },
-                            Object {
+                            Node {
                               "attribs": Object {
                                 "href": "/app",
                               },
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {
                                     "aria-disabled": "false",
                                     "class": "pf-c-button pf-m-primary",
@@ -4324,7 +4324,7 @@ initialize {
                                     "type": "button",
                                   },
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "data": "Get Started",
                                       "next": null,
                                       "parent": [Circular],
@@ -4362,10 +4362,10 @@ initialize {
                               "namespace": "http://www.w3.org/1999/xhtml",
                               "next": null,
                               "parent": [Circular],
-                              "prev": Object {
+                              "prev": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "LodeStar",
                                     "next": null,
                                     "parent": [Circular],
@@ -4425,13 +4425,13 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": [Circular],
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "pf-c-page__main-section",
                       "style": "padding:0",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "style": "height:25px",
                         },
@@ -4486,28 +4486,28 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": null,
             "parent": [Circular],
-            "prev": Object {
+            "prev": Node {
               "attribs": Object {
                 "class": "pf-c-page__header",
                 "toolbar": "[object Object]",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "pf-c-page__header-brand",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "pf-c-page__header-brand-link",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "class": "logo-text",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "data": "LodeStar",
                               "next": null,
                               "parent": [Circular],
@@ -4600,22 +4600,17 @@ initialize {
     "name": "div",
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
-    "parent": null,
-    "prev": null,
-    "root": Object {
-      "attribs": Object {},
+    "parent": Node {
       "children": Array [
         [Circular],
       ],
       "name": "root",
-      "namespace": "http://www.w3.org/1999/xhtml",
       "next": null,
       "parent": null,
       "prev": null,
       "type": "root",
-      "x-attribsNamespace": Object {},
-      "x-attribsPrefix": Object {},
     },
+    "prev": null,
     "type": "tag",
     "x-attribsNamespace": Object {
       "class": undefined,
@@ -4628,8 +4623,6 @@ initialize {
   "length": 1,
   "options": Object {
     "decodeEntities": true,
-    "normalizeWhitespace": false,
-    "withDomLvl1": true,
     "xml": false,
   },
 }

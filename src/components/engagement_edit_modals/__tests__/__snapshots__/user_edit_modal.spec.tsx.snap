@@ -139,7 +139,6 @@ Object {
                               >
                                 Role
                                 <svg
-                                  aria-describedby="pf-tooltip-1"
                                   aria-hidden="true"
                                   fill="currentColor"
                                   height="1em"
@@ -161,7 +160,6 @@ Object {
                               >
                                 Reset
                                 <svg
-                                  aria-describedby="pf-tooltip-2"
                                   aria-hidden="true"
                                   fill="currentColor"
                                   height="1em"

@@ -158,8 +158,9 @@ export function EngagementSummaryEditModal(
                   isOpen={isTZSelectOpen}
                   onToggle={setIsTZSelectOpen}
                   isCreatable={false}
+                  data-testid="timezone-select"
                   onFilter={e => {
-                    const lower = e.target.value.toLowerCase();
+                    const lower = e?.target.value.toLowerCase();
                     return getSelectComponents(
                       TIMEZONES.filter(
                         t =>
