@@ -27,7 +27,7 @@ export const useEngagementCollection = ({
     []
   );
   const getEngagements = useCallback(
-    async (filter: EngagementCollectionFilter) => {
+    async (filter: EngagementCollectionFilter = {}) => {
       feedbackContext?.showLoader();
       try {
         const engagements = await engagementService.fetchEngagements({

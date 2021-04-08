@@ -30,6 +30,7 @@ export const MainTemplate = (props: MainTemplateProps) => {
 
   return (
     <Page
+      // style={{ height: 'auto' }}
       header={
         <>
           <Header

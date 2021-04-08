@@ -14,13 +14,11 @@ import {
 } from '@patternfly/react-core';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
-import { AllEngagementsWidget } from '../../components/dashboard/widgets/dw_all_engagements';
-import { ActiveEngagementsWidget } from '../../components/dashboard/widgets/dw_active_engagements';
-import { PastEngagementsWidget } from '../../components/dashboard/widgets/dw_past_engagements';
-import { UpcomingEngagementsWidget } from '../../components/dashboard/widgets/dw_upcoming_engagements';
 import { Feature } from '../../components/feature/feature';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
+import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
+import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -54,7 +52,6 @@ export function Dashboard() {
       setSelectedRegions([...selectedRegions, region]);
     }
   };
-  const dashboardFilter = { dates: dateFilter, regions: selectedRegions };
 
   return (
     <DashboardDateContext.Provider value={dateFilter}>
@@ -99,34 +96,23 @@ export function Dashboard() {
           </Flex>
         </Feature>
         <Grid hasGutter>
-          <GridItem lg={6} xl={4} xl2={3}>
-            <AllEngagementsWidget
-              dates={dashboardFilter.dates}
-              regions={selectedRegions}
+          <GridItem sm={12} xl={12}>
+            <EngagementQueryMediator
+              filter={{
+                startDate: dateFilter?.startDate,
+                endDate: dateFilter?.endDate,
+              }}
+              component={EngagementCountWidget}
             />
           </GridItem>
-          <GridItem lg={6} xl={4} xl2={3}>
-            <ActiveEngagementsWidget
-              dates={dashboardFilter.dates}
-              regions={selectedRegions}
-            />
-          </GridItem>
-          <GridItem lg={6} xl={4} xl2={3}>
-            <UpcomingEngagementsWidget
-              dates={dashboardFilter.dates}
-              regions={selectedRegions}
-            />
-          </GridItem>
-          <GridItem lg={6} xl={4} xl2={3}>
-            <PastEngagementsWidget
-              dates={dashboardFilter.dates}
-              regions={selectedRegions}
-            />
-          </GridItem>
-          <GridItem sm={12} xl={8} xl2={3}>
-            <DashboardPeopleEnabledCard
-              dates={dashboardFilter.dates}
-              regions={selectedRegions}
+          <GridItem sm={12} xl={6} xl2={3}>
+            <EngagementQueryMediator
+              filter={{
+                startDate: dateFilter?.startDate,
+                endDate: dateFilter?.endDate,
+                include: ['engagement_users'],
+              }}
+              component={DashboardPeopleEnabledCard}
             />
           </GridItem>
         </Grid>

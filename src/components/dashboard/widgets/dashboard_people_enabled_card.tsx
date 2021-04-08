@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Card,
   CardBody,
@@ -10,33 +10,14 @@ import {
   GridItem,
 } from '@patternfly/react-core';
 import { PeopleEnabledChart } from './people_enabled_chart';
-import { DateFilter } from '../../../routes/dashboard';
-import {
-  EngagementCollectionFilter,
-  useEngagementCollection,
-} from '../../../context/engagement_collection_context/engagement_collection_context';
-import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
+import { Engagement } from '../../../schemas/engagement';
 
 export interface PeopleEnabledCardProps {
-  dates: DateFilter;
-  regions: string[];
+  engagements?: Partial<Engagement>[];
 }
 
 export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
-  const { engagementService } = useServiceProviders();
-  const { dates, regions } = props;
-  const { engagements = [], getEngagements } = useEngagementCollection({
-    engagementService,
-  });
-  useEffect(() => {
-    const filter: EngagementCollectionFilter = {
-      include: ['engagement_users'],
-      endDate: dates?.endDate,
-      startDate: dates?.startDate,
-      engagementRegions: regions,
-    };
-    getEngagements(filter);
-  }, [getEngagements, dates?.endDate, dates?.startDate, regions]);
+  const { engagements = [] } = props;
   const emails = Object.keys(
     engagements.reduce(
       (prev, curr) => ({
