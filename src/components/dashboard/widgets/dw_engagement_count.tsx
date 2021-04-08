@@ -1,7 +1,10 @@
 import {
   Card,
   CardBody,
+  CardFooter,
   CardHeader,
+  Flex,
+  FlexItem,
   Grid,
   GridItem,
   Text,
@@ -40,33 +43,84 @@ export const EngagementCountWidget = (
         </TextContent>
       </CardHeader>
       <CardBody>
-        <Grid hasGutter>
-          <GridItem md={6} lg={3}>
-            <TextContent style={{ textAlign: 'center' }}>
-              <Text component={TextVariants.h4}>All Engagements</Text>
-              <Text component={TextVariants.h1}>{engagementCounts[0]}</Text>
-            </TextContent>
-          </GridItem>
-          <GridItem md={6} lg={3}>
-            <TextContent style={{ textAlign: 'center' }}>
-              <Text component={TextVariants.h4}>Active Engagements</Text>
-              <Text component={TextVariants.h1}>{engagementCounts[1]}</Text>
-            </TextContent>
-          </GridItem>
-          <GridItem md={6} lg={3}>
-            <TextContent style={{ textAlign: 'center' }}>
-              <Text component={TextVariants.h4}>Upcoming Engagements</Text>
-              <Text component={TextVariants.h1}>{engagementCounts[2]}</Text>
-            </TextContent>
-          </GridItem>
-          <GridItem md={6} lg={3}>
-            <TextContent style={{ textAlign: 'center' }}>
-              <Text component={TextVariants.h4}>Past Engagements</Text>
-              <Text component={TextVariants.h1}>{engagementCounts[3]}</Text>
-            </TextContent>
-          </GridItem>
-        </Grid>
+        <TextContent style={{ textAlign: 'center' }}>
+          <Grid hasGutter>
+            <GridItem md={6} lg={3}>
+              <Flex
+                direction={{ default: 'column' }}
+                alignItems={{ default: 'alignItemsCenter' }}
+                style={{ height: '100%' }}
+              >
+                <FlexItem flex={{ default: 'flex_1' }}>
+                  <Text component={TextVariants.h4}>All Engagements</Text>
+                </FlexItem>
+                <FlexItem>
+                  <TextContent>
+                    <Text component={TextVariants.h1}>
+                      {engagementCounts[0]}
+                    </Text>
+                  </TextContent>
+                </FlexItem>
+              </Flex>
+            </GridItem>
+            <GridItem md={6} lg={3}>
+              <Flex
+                direction={{ default: 'column' }}
+                alignItems={{ default: 'alignItemsCenter' }}
+                style={{ height: '100%' }}
+              >
+                <FlexItem flex={{ default: 'flex_1' }}>
+                  <Text component={TextVariants.h4}>Active Engagements</Text>
+                </FlexItem>
+                <FlexItem>
+                  <TextContent>
+                    <Text component={TextVariants.h1}>
+                      {engagementCounts[1]}
+                    </Text>
+                  </TextContent>
+                </FlexItem>
+              </Flex>
+            </GridItem>
+            <GridItem md={6} lg={3}>
+              <Flex
+                direction={{ default: 'column' }}
+                alignItems={{ default: 'alignItemsCenter' }}
+                style={{ height: '100%' }}
+              >
+                <FlexItem flex={{ default: 'flex_1' }}>
+                  <Text component={TextVariants.h4}>Upcoming Engagements</Text>
+                </FlexItem>
+                <FlexItem>
+                  <TextContent>
+                    <Text component={TextVariants.h1}>
+                      {engagementCounts[2]}
+                    </Text>
+                  </TextContent>
+                </FlexItem>
+              </Flex>
+            </GridItem>
+            <GridItem md={6} lg={3}>
+              <Flex
+                direction={{ default: 'column' }}
+                alignItems={{ default: 'alignItemsCenter' }}
+                style={{ height: '100%' }}
+              >
+                <FlexItem flex={{ default: 'flex_1' }}>
+                  <Text component={TextVariants.h4}>Past Engagements</Text>
+                </FlexItem>
+                <FlexItem>
+                  <TextContent>
+                    <Text component={TextVariants.h1}>
+                      {engagementCounts[3]}
+                    </Text>
+                  </TextContent>
+                </FlexItem>
+              </Flex>
+            </GridItem>
+          </Grid>
+        </TextContent>
       </CardBody>
+      <CardFooter></CardFooter>
     </Card>
   );
 };

@@ -96,7 +96,7 @@ export function Dashboard() {
           </Flex>
         </Feature>
         <Grid hasGutter>
-          <GridItem sm={12} xl={12}>
+          <GridItem sm={12} xl={12} xl2={6}>
             <EngagementQueryMediator
               filter={{
                 startDate: dateFilter?.startDate,

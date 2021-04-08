@@ -31,7 +31,7 @@ Object {
           class="pf-l-grid pf-m-gutter"
         >
           <div
-            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-12-col-on-xl"
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-12-col-on-xl pf-m-6-col-on-2xl"
           >
             <article
               class="pf-c-card"
@@ -59,94 +59,150 @@ Object {
                 class="pf-c-card__body"
               >
                 <div
-                  class="pf-l-grid pf-m-gutter"
+                  class="pf-c-content"
+                  style="text-align: center;"
                 >
                   <div
-                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
+                    class="pf-l-grid pf-m-gutter"
                   >
                     <div
-                      class="pf-c-content"
-                      style="text-align: center;"
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                     >
-                      <h4
-                        class=""
-                        data-pf-content="true"
+                      <div
+                        class="pf-l-flex pf-m-column pf-m-align-items-center"
+                        style="height: 100%;"
                       >
-                        All Engagements
-                      </h4>
-                      <h1
-                        class=""
-                        data-pf-content="true"
-                      >
-                        0
-                      </h1>
+                        <div
+                          class="pf-m-flex-1"
+                        >
+                          <h4
+                            class=""
+                            data-pf-content="true"
+                          >
+                            All Engagements
+                          </h4>
+                        </div>
+                        <div
+                          class=""
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h1
+                              class=""
+                              data-pf-content="true"
+                            >
+                              0
+                            </h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
-                  >
                     <div
-                      class="pf-c-content"
-                      style="text-align: center;"
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                     >
-                      <h4
-                        class=""
-                        data-pf-content="true"
+                      <div
+                        class="pf-l-flex pf-m-column pf-m-align-items-center"
+                        style="height: 100%;"
                       >
-                        Active Engagements
-                      </h4>
-                      <h1
-                        class=""
-                        data-pf-content="true"
-                      >
-                        0
-                      </h1>
+                        <div
+                          class="pf-m-flex-1"
+                        >
+                          <h4
+                            class=""
+                            data-pf-content="true"
+                          >
+                            Active Engagements
+                          </h4>
+                        </div>
+                        <div
+                          class=""
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h1
+                              class=""
+                              data-pf-content="true"
+                            >
+                              0
+                            </h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
-                  >
                     <div
-                      class="pf-c-content"
-                      style="text-align: center;"
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                     >
-                      <h4
-                        class=""
-                        data-pf-content="true"
+                      <div
+                        class="pf-l-flex pf-m-column pf-m-align-items-center"
+                        style="height: 100%;"
                       >
-                        Upcoming Engagements
-                      </h4>
-                      <h1
-                        class=""
-                        data-pf-content="true"
-                      >
-                        0
-                      </h1>
+                        <div
+                          class="pf-m-flex-1"
+                        >
+                          <h4
+                            class=""
+                            data-pf-content="true"
+                          >
+                            Upcoming Engagements
+                          </h4>
+                        </div>
+                        <div
+                          class=""
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h1
+                              class=""
+                              data-pf-content="true"
+                            >
+                              0
+                            </h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
-                  >
                     <div
-                      class="pf-c-content"
-                      style="text-align: center;"
+                      class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                     >
-                      <h4
-                        class=""
-                        data-pf-content="true"
+                      <div
+                        class="pf-l-flex pf-m-column pf-m-align-items-center"
+                        style="height: 100%;"
                       >
-                        Past Engagements
-                      </h4>
-                      <h1
-                        class=""
-                        data-pf-content="true"
-                      >
-                        0
-                      </h1>
+                        <div
+                          class="pf-m-flex-1"
+                        >
+                          <h4
+                            class=""
+                            data-pf-content="true"
+                          >
+                            Past Engagements
+                          </h4>
+                        </div>
+                        <div
+                          class=""
+                        >
+                          <div
+                            class="pf-c-content"
+                          >
+                            <h1
+                              class=""
+                              data-pf-content="true"
+                            >
+                              0
+                            </h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div
+                class="pf-c-card__footer"
+              />
             </article>
           </div>
           <div
@@ -401,6 +457,9 @@ Object {
                   </div>
                 </div>
               </div>
+              <div
+                class="pf-c-card__footer"
+              />
             </article>
           </div>
         </div>
@@ -434,7 +493,7 @@ Object {
         class="pf-l-grid pf-m-gutter"
       >
         <div
-          class="pf-l-grid__item pf-m-12-col-on-sm pf-m-12-col-on-xl"
+          class="pf-l-grid__item pf-m-12-col-on-sm pf-m-12-col-on-xl pf-m-6-col-on-2xl"
         >
           <article
             class="pf-c-card"
@@ -462,94 +521,150 @@ Object {
               class="pf-c-card__body"
             >
               <div
-                class="pf-l-grid pf-m-gutter"
+                class="pf-c-content"
+                style="text-align: center;"
               >
                 <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
+                  class="pf-l-grid pf-m-gutter"
                 >
                   <div
-                    class="pf-c-content"
-                    style="text-align: center;"
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                   >
-                    <h4
-                      class=""
-                      data-pf-content="true"
+                    <div
+                      class="pf-l-flex pf-m-column pf-m-align-items-center"
+                      style="height: 100%;"
                     >
-                      All Engagements
-                    </h4>
-                    <h1
-                      class=""
-                      data-pf-content="true"
-                    >
-                      0
-                    </h1>
+                      <div
+                        class="pf-m-flex-1"
+                      >
+                        <h4
+                          class=""
+                          data-pf-content="true"
+                        >
+                          All Engagements
+                        </h4>
+                      </div>
+                      <div
+                        class=""
+                      >
+                        <div
+                          class="pf-c-content"
+                        >
+                          <h1
+                            class=""
+                            data-pf-content="true"
+                          >
+                            0
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
-                >
                   <div
-                    class="pf-c-content"
-                    style="text-align: center;"
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                   >
-                    <h4
-                      class=""
-                      data-pf-content="true"
+                    <div
+                      class="pf-l-flex pf-m-column pf-m-align-items-center"
+                      style="height: 100%;"
                     >
-                      Active Engagements
-                    </h4>
-                    <h1
-                      class=""
-                      data-pf-content="true"
-                    >
-                      0
-                    </h1>
+                      <div
+                        class="pf-m-flex-1"
+                      >
+                        <h4
+                          class=""
+                          data-pf-content="true"
+                        >
+                          Active Engagements
+                        </h4>
+                      </div>
+                      <div
+                        class=""
+                      >
+                        <div
+                          class="pf-c-content"
+                        >
+                          <h1
+                            class=""
+                            data-pf-content="true"
+                          >
+                            0
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
-                >
                   <div
-                    class="pf-c-content"
-                    style="text-align: center;"
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                   >
-                    <h4
-                      class=""
-                      data-pf-content="true"
+                    <div
+                      class="pf-l-flex pf-m-column pf-m-align-items-center"
+                      style="height: 100%;"
                     >
-                      Upcoming Engagements
-                    </h4>
-                    <h1
-                      class=""
-                      data-pf-content="true"
-                    >
-                      0
-                    </h1>
+                      <div
+                        class="pf-m-flex-1"
+                      >
+                        <h4
+                          class=""
+                          data-pf-content="true"
+                        >
+                          Upcoming Engagements
+                        </h4>
+                      </div>
+                      <div
+                        class=""
+                      >
+                        <div
+                          class="pf-c-content"
+                        >
+                          <h1
+                            class=""
+                            data-pf-content="true"
+                          >
+                            0
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div
-                  class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
-                >
                   <div
-                    class="pf-c-content"
-                    style="text-align: center;"
+                    class="pf-l-grid__item pf-m-6-col-on-md pf-m-3-col-on-lg"
                   >
-                    <h4
-                      class=""
-                      data-pf-content="true"
+                    <div
+                      class="pf-l-flex pf-m-column pf-m-align-items-center"
+                      style="height: 100%;"
                     >
-                      Past Engagements
-                    </h4>
-                    <h1
-                      class=""
-                      data-pf-content="true"
-                    >
-                      0
-                    </h1>
+                      <div
+                        class="pf-m-flex-1"
+                      >
+                        <h4
+                          class=""
+                          data-pf-content="true"
+                        >
+                          Past Engagements
+                        </h4>
+                      </div>
+                      <div
+                        class=""
+                      >
+                        <div
+                          class="pf-c-content"
+                        >
+                          <h1
+                            class=""
+                            data-pf-content="true"
+                          >
+                            0
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div
+              class="pf-c-card__footer"
+            />
           </article>
         </div>
         <div
@@ -804,6 +919,9 @@ Object {
                 </div>
               </div>
             </div>
+            <div
+              class="pf-c-card__footer"
+            />
           </article>
         </div>
       </div>

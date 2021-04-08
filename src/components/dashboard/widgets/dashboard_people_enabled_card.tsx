@@ -8,6 +8,7 @@ import {
   TextVariants,
   Grid,
   GridItem,
+  CardFooter,
 } from '@patternfly/react-core';
 import { PeopleEnabledChart } from './people_enabled_chart';
 import { Engagement } from '../../../schemas/engagement';
@@ -72,6 +73,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
           otherCount={emails.length - redHatCount}
         />
       </CardBody>
+      <CardFooter />
     </Card>
   );
 }
