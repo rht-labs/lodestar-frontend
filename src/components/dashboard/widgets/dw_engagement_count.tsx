@@ -11,16 +11,55 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import React from 'react';
+import {
+  AsleepIcon,
+  OnRunningIcon,
+  PendingIcon,
+  TachometerAltIcon,
+} from '@patternfly/react-icons';
+import React, { ComponentClass } from 'react';
 import {
   Engagement,
   EngagementStatus,
   getEngagementStatus,
 } from '../../../schemas/engagement';
+import faker from 'faker';
+import { SVGIconProps } from '@patternfly/react-icons/dist/js/createIcon';
 
 export interface EngagementCountWidgetProps {
   engagements?: Partial<Engagement>[];
 }
+interface CountComponentProps {
+  count: number;
+  title: string;
+  subtitle: string;
+  icon: ComponentClass<SVGIconProps>;
+}
+const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => (
+  <Flex
+    direction={{ default: 'column' }}
+    alignItems={{ default: 'alignItemsCenter' }}
+    justifyContent={{ default: 'justifyContentCenter' }}
+    style={{ height: '100%' }}
+  >
+    <FlexItem flex={{ default: 'flex_1' }}>
+      <Text component={TextVariants.h4}>{props.title}</Text>
+    </FlexItem>
+    <FlexItem>
+      <Flex
+        direction={{ default: 'column' }}
+        justifyContent={{ default: 'justifyContentFlexEnd' }}
+        alignItems={{ default: 'alignItemsCenter' }}
+      >
+        <Component size="xl" />
+        <TextContent>
+          <Text component={TextVariants.h1}>{props.count}</Text>
+          <Text style={{ fontStyle: 'italic' }}>{props.subtitle}</Text>
+        </TextContent>
+      </Flex>
+    </FlexItem>
+  </Flex>
+);
 export const EngagementCountWidget = (
   props: EngagementCountWidgetProps = {}
 ) => {
@@ -36,89 +75,61 @@ export const EngagementCountWidget = (
       .length,
   ];
   return (
-    <Card>
+    <Card style={{ height: '100%' }}>
       <CardHeader>
         <TextContent>
-          <Text data-testid="engagement-count-card-title">Engagements</Text>
+          <Text
+            component={TextVariants.h2}
+            data-testid="engagement-count-card-title"
+          >
+            Engagement Summary
+          </Text>
         </TextContent>
       </CardHeader>
       <CardBody>
-        <TextContent style={{ textAlign: 'center' }}>
-          <Grid hasGutter>
-            <GridItem md={6} lg={3}>
-              <Flex
-                direction={{ default: 'column' }}
-                alignItems={{ default: 'alignItemsCenter' }}
-                style={{ height: '100%' }}
-              >
-                <FlexItem flex={{ default: 'flex_1' }}>
-                  <Text component={TextVariants.h4}>All Engagements</Text>
-                </FlexItem>
-                <FlexItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
-                      {engagementCounts[0]}
-                    </Text>
-                  </TextContent>
-                </FlexItem>
-              </Flex>
-            </GridItem>
-            <GridItem md={6} lg={3}>
-              <Flex
-                direction={{ default: 'column' }}
-                alignItems={{ default: 'alignItemsCenter' }}
-                style={{ height: '100%' }}
-              >
-                <FlexItem flex={{ default: 'flex_1' }}>
-                  <Text component={TextVariants.h4}>Active Engagements</Text>
-                </FlexItem>
-                <FlexItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
-                      {engagementCounts[1]}
-                    </Text>
-                  </TextContent>
-                </FlexItem>
-              </Flex>
-            </GridItem>
-            <GridItem md={6} lg={3}>
-              <Flex
-                direction={{ default: 'column' }}
-                alignItems={{ default: 'alignItemsCenter' }}
-                style={{ height: '100%' }}
-              >
-                <FlexItem flex={{ default: 'flex_1' }}>
-                  <Text component={TextVariants.h4}>Upcoming Engagements</Text>
-                </FlexItem>
-                <FlexItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
-                      {engagementCounts[2]}
-                    </Text>
-                  </TextContent>
-                </FlexItem>
-              </Flex>
-            </GridItem>
-            <GridItem md={6} lg={3}>
-              <Flex
-                direction={{ default: 'column' }}
-                alignItems={{ default: 'alignItemsCenter' }}
-                style={{ height: '100%' }}
-              >
-                <FlexItem flex={{ default: 'flex_1' }}>
-                  <Text component={TextVariants.h4}>Past Engagements</Text>
-                </FlexItem>
-                <FlexItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
-                      {engagementCounts[3]}
-                    </Text>
-                  </TextContent>
-                </FlexItem>
-              </Flex>
-            </GridItem>
-          </Grid>
-        </TextContent>
+        <Flex
+          alignItems={{ default: 'alignItemsCenter' }}
+          style={{ height: '100%', width: '100%' }}
+        >
+          <FlexItem flex={{ default: 'flex_1' }}>
+            <TextContent style={{ textAlign: 'center' }}>
+              <Grid hasGutter>
+                <GridItem md={6} lg={3}>
+                  <CountComponent
+                    count={engagementCounts[0]}
+                    icon={TachometerAltIcon}
+                    title="All Engagements"
+                    subtitle={faker.lorem.sentence(7)}
+                  />
+                </GridItem>
+                <GridItem md={6} lg={3}>
+                  <CountComponent
+                    count={engagementCounts[1]}
+                    icon={OnRunningIcon}
+                    title="Active Engagements"
+                    subtitle={faker.lorem.sentence(7)}
+                  />
+                </GridItem>
+                <GridItem md={6} lg={3}>
+                  <CountComponent
+                    count={engagementCounts[2]}
+                    icon={PendingIcon}
+                    title="Upcoming Engagements"
+                    subtitle={faker.lorem.sentence(7)}
+                  />
+                </GridItem>
+                <GridItem md={6} lg={3}>
+                  <CountComponent
+                    count={engagementCounts[3]}
+                    icon={AsleepIcon}
+                    title="Past Engagements"
+                    subtitle={faker.lorem.sentence(7)}
+                  />
+                </GridItem>
+              </Grid>
+            </TextContent>
+          </FlexItem>
+        </Flex>
       </CardBody>
       <CardFooter></CardFooter>
     </Card>

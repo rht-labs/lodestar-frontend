@@ -102,7 +102,9 @@ export function Dashboard() {
                 startDate: dateFilter?.startDate,
                 endDate: dateFilter?.endDate,
               }}
-              component={EngagementCountWidget}
+              component={({ engagements }) => (
+                <EngagementCountWidget engagements={engagements} />
+              )}
             />
           </GridItem>
           <GridItem sm={12} xl={6} xl2={3}>
