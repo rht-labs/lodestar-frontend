@@ -5,7 +5,7 @@ import {
   useEngagementCollection,
 } from '../../../context/engagement_collection_context/engagement_collection_context';
 import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
-import { DashboardDataCard } from '../../dashboard_data_cards/dashboard_data_card';
+import { DashboardDataCard } from '../../dashboard/widgets/dashboard_data_card';
 import { DateFilter } from '../../../routes/dashboard';
 import { Engagement, EngagementStatus } from '../../../schemas/engagement';
 
@@ -21,20 +21,19 @@ export const ActiveEngagementsWidget = (
 ) => {
   const { dates, regions } = props;
   const { engagementService } = useServiceProviders();
-  const filter: EngagementCollectionFilter = {
-    endDate: dates?.endDate,
-    engagementStatuses: statuses,
-    startDate: dates?.startDate,
-    engagementRegions: regions,
-    include,
-  };
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
-    filter,
   });
   useEffect(() => {
-    getEngagements();
-  }, [getEngagements]);
+    const filter: EngagementCollectionFilter = {
+      endDate: dates?.endDate,
+      engagementStatuses: statuses,
+      startDate: dates?.startDate,
+      engagementRegions: regions,
+      include,
+    };
+    getEngagements(filter);
+  }, [getEngagements, dates?.endDate, dates?.startDate, regions]);
   return (
     <DashboardDataCard
       icon={OnRunningIcon}
