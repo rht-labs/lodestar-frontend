@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Select, SelectVariant, SelectOption } from '@patternfly/react-core';
-import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 export interface CustomerSelectDropdownProps {
   onSelect: (selectedOption: string) => void;
   selectedValue?: string;

@@ -7,7 +7,6 @@ Object {
     <div>
       <div
         class="pf-c-page"
-        style="height: 100vh;"
       >
         <header
           class="pf-c-page__header"
@@ -558,7 +557,6 @@ Object {
   "container": <div>
     <div
       class="pf-c-page"
-      style="height: 100vh;"
     >
       <header
         class="pf-c-page__header"

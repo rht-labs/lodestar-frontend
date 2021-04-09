@@ -23,9 +23,9 @@ import { SectionTitle } from '../../components/section_title/section_title';
 import { Feature } from '../../components/feature/feature';
 import { Engagement } from '../../schemas/engagement';
 import { TextFormField } from '../../components/form_fields/text_form_field';
-import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
+import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig } = useEngagement();
