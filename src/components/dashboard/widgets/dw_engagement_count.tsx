@@ -98,7 +98,9 @@ export const EngagementCountWidget = (
                     count={engagementCounts[0]}
                     icon={TachometerAltIcon}
                     title="All Engagements"
-                    subtitle={''}
+                    subtitle={
+                      'All available engagements in the system. Including upcoming, active and past ones'
+                    }
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -106,7 +108,9 @@ export const EngagementCountWidget = (
                     count={engagementCounts[1]}
                     icon={OnRunningIcon}
                     title="Active Engagements"
-                    subtitle={''}
+                    subtitle={
+                      'Upcoming engagements in the future, and are not launched yet.'
+                    }
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -114,7 +118,9 @@ export const EngagementCountWidget = (
                     count={engagementCounts[2]}
                     icon={PendingIcon}
                     title="Upcoming Engagements"
-                    subtitle={''}
+                    subtitle={
+                      'Engagements that are already in progress and running at the moment.'
+                    }
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -122,7 +128,9 @@ export const EngagementCountWidget = (
                     count={engagementCounts[3]}
                     icon={AsleepIcon}
                     title="Past Engagements"
-                    subtitle={''}
+                    subtitle={
+                      'Engagements that are finished, closed or archived.'
+                    }
                   />
                 </GridItem>
               </Grid>

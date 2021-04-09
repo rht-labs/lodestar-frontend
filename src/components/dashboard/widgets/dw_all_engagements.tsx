@@ -1,13 +1,13 @@
 import { TachometerAltIcon } from '@patternfly/react-icons';
 import React, { useEffect } from 'react';
-import {
-  EngagementCollectionFilter,
-  useEngagementCollection,
-} from '../../../context/engagement_collection_context/engagement_collection_context';
 import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
 import { DashboardDataCard } from '../../dashboard/widgets/dashboard_data_card';
 import { DateFilter } from '../../../routes/dashboard';
 import { Engagement } from '../../../schemas/engagement';
+import {
+  EngagementCollectionFilter,
+  useEngagementCollection,
+} from '../../../hooks/engagement_collection_hook';
 
 export interface AllEngagementsWidgetProps {
   dates: DateFilter;

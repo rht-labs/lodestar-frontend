@@ -18,9 +18,9 @@ import { EngagementFilter } from '../../schemas/engagement_filter';
 import { EngagementFilterBar } from '../../components/engagement_filter_bar/engagement_filter_bar';
 import { EngagementList } from '../../components/engagement_list/engagement_list';
 import { Feature } from '../../components/feature/feature';
-import { useEngagementCollection } from '../../context/engagement_collection_context/engagement_collection_context';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;

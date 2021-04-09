@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
 import {
   EngagementCollectionFilter,
   useEngagementCollection,
-} from '../../../context/engagement_collection_context/engagement_collection_context';
-import { useServiceProviders } from '../../../context/service_provider_context/service_provider_context';
+} from '../../../hooks/engagement_collection_hook';
 import { Engagement } from '../../../schemas/engagement';
 
 export interface RequiresEngagementCollection {

@@ -1,5 +1,9 @@
-import { CategoryService } from '../../services/category_service/category_service';
-import { EngagementCategory } from '../../schemas/engagement_category';
+import {
+  CategoryService,
+  CategoryFilter,
+  CategorySortOrder,
+  CategoryWithCount,
+} from '../../services/category_service/category_service';
 import { handleAxiosResponseErrors } from './http_error_handlers';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { getApiV1HttpClient } from './client';
@@ -10,10 +14,42 @@ export class Apiv1CategoryService implements CategoryService {
   }
   private static engagementSerializer = new EngagementJsonSerializer();
 
-  async fetchCategories(): Promise<EngagementCategory[]> {
+  private buildQueryFromFilter(filter?: CategoryFilter) {
+    // example query: engagements/categories?page=10&perPage=5&sortOrder=DESC&suggest=asdf
+    let query = '';
+    const queryParams = [];
+    if (!filter) {
+      return query;
+    }
+    const {
+      sortOrder = CategorySortOrder.Descending,
+      page = 0,
+      perPage = 10,
+      searchText = '',
+    } = filter;
+    if (!!sortOrder) {
+      queryParams.push(
+        `sortOrder=${
+          (sortOrder as CategorySortOrder) === CategorySortOrder.Ascending
+            ? 'ASC'
+            : 'DESC'
+        }`
+      );
+    }
+    queryParams.push(`page=${page})`);
+    queryParams.push(`perPage=${perPage}`);
+    if (!!searchText) {
+      queryParams.push(`suggest=${searchText}`);
+    }
+
+    return queryParams.join('&');
+  }
+
+  async fetchCategories(filter?: CategoryFilter): Promise<CategoryWithCount[]> {
+    const queryString = this.buildQueryFromFilter(filter);
     try {
       const { data: categoriesData } = await this.axios.get(
-        `/engagements/categories`
+        `/engagements/categories?${queryString}`
       );
       const serializedCategories = categoriesData.map(
         (categoryMap: { [key: string]: any }) =>

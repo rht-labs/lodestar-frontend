@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
-import { Engagement, EngagementStatus } from '../../schemas/engagement';
+import { Engagement, EngagementStatus } from '../schemas/engagement';
 import {
   AlertType,
   IFeedbackContext,
-} from '../feedback_context/feedback_context';
-import { EngagementService } from '../../services/engagement_service/engagement_service';
+} from '../context/feedback_context/feedback_context';
+import { EngagementService } from '../services/engagement_service/engagement_service';
 
 export interface EngagementCollectionHookParameters {
   feedbackContext?: IFeedbackContext;
