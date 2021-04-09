@@ -407,6 +407,7 @@ Object {
                           </span>
                             
                           <svg
+                            aria-describedby="pf-tooltip-2"
                             aria-hidden="true"
                             fill="currentColor"
                             height="1em"

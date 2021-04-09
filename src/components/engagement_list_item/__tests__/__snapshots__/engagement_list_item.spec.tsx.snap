@@ -102,6 +102,7 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
+                          aria-describedby="pf-tooltip-1"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -128,6 +129,7 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
+                          aria-describedby="pf-tooltip-2"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -154,6 +156,7 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
+                          aria-describedby="pf-tooltip-3"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -325,6 +328,7 @@ Object {
                       class="pf-m-spacer-sm"
                     >
                       <svg
+                        aria-describedby="pf-tooltip-1"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -351,6 +355,7 @@ Object {
                       class="pf-m-spacer-sm"
                     >
                       <svg
+                        aria-describedby="pf-tooltip-2"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -377,6 +382,7 @@ Object {
                       class="pf-m-spacer-sm"
                     >
                       <svg
+                        aria-describedby="pf-tooltip-3"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"

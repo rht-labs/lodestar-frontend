@@ -83,14 +83,14 @@ describe('timezone select', () => {
     });
   });
   test('can toggle timezone dropdown', async () => {
-    await act(async () => {
+    act(async () => {
       const spy = jest.fn();
       const view = render(<Component spy={spy} />);
       const dropdown = await view.findByTestId('timezone-select');
       const buttons = dropdown.getElementsByTagName('button');
 
       fireEvent.click(buttons[0]);
-      const dropdownPane = await view.findByText('No results found');
+      const dropdownPane = view.findByText('America/Denver');
       expect(dropdownPane).toBeDefined();
     });
   });

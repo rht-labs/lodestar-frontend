@@ -122,7 +122,9 @@ Object {
                                     class=""
                                     data-pf-content="true"
                                     style="font-style: italic;"
-                                  />
+                                  >
+                                    All available engagements in the system. Including upcoming, active and past ones
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -177,7 +179,9 @@ Object {
                                     class=""
                                     data-pf-content="true"
                                     style="font-style: italic;"
-                                  />
+                                  >
+                                    Upcoming engagements in the future, and are not launched yet.
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -232,7 +236,9 @@ Object {
                                     class=""
                                     data-pf-content="true"
                                     style="font-style: italic;"
-                                  />
+                                  >
+                                    Engagements that are already in progress and running at the moment.
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -287,7 +293,9 @@ Object {
                                     class=""
                                     data-pf-content="true"
                                     style="font-style: italic;"
-                                  />
+                                  >
+                                    Engagements that are finished, closed or archived.
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -682,7 +690,9 @@ Object {
                                   class=""
                                   data-pf-content="true"
                                   style="font-style: italic;"
-                                />
+                                >
+                                  All available engagements in the system. Including upcoming, active and past ones
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -737,7 +747,9 @@ Object {
                                   class=""
                                   data-pf-content="true"
                                   style="font-style: italic;"
-                                />
+                                >
+                                  Upcoming engagements in the future, and are not launched yet.
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -792,7 +804,9 @@ Object {
                                   class=""
                                   data-pf-content="true"
                                   style="font-style: italic;"
-                                />
+                                >
+                                  Engagements that are already in progress and running at the moment.
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -847,7 +861,9 @@ Object {
                                   class=""
                                   data-pf-content="true"
                                   style="font-style: italic;"
-                                />
+                                >
+                                  Engagements that are finished, closed or archived.
+                                </p>
                               </div>
                             </div>
                           </div>
