@@ -11,11 +11,7 @@ export interface RequiresEngagementCollection {
 }
 export interface EngagementQueryMediatorProps {
   filter: EngagementCollectionFilter;
-  component: ({
-    engagements,
-  }: {
-    engagements: Partial<Engagement>[];
-  }) => JSX.Element;
+  component: React.FunctionComponent<{ engagements: Partial<Engagement>[] }>;
 }
 export const EngagementQueryMediator = (
   props: EngagementQueryMediatorProps

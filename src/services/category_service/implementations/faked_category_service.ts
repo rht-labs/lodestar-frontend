@@ -1,4 +1,5 @@
-import { CategoryService, CategoryWithCount } from '../category_service';
+import { CategoryWithCount } from '../../../schemas/engagement_category';
+import { CategoryService } from '../category_service';
 
 export class FakedCategoryService extends CategoryService {
   async fetchCategories(): Promise<CategoryWithCount[]> {

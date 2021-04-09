@@ -1,4 +1,4 @@
-import { EngagementCategory } from '../../schemas/engagement_category';
+import { CategoryWithCount } from '../../schemas/engagement_category';
 
 export enum CategorySortOrder {
   Ascending,
@@ -11,9 +11,6 @@ export interface CategoryFilter {
   searchText?: string;
 }
 
-export interface CategoryWithCount extends EngagementCategory {
-  count: number;
-}
 export abstract class CategoryService {
   abstract fetchCategories(
     filter?: CategoryFilter
