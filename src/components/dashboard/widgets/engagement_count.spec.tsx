@@ -7,7 +7,7 @@ describe('Dashboard Engagement Count Card', () => {
     const view = render(<EngagementCountWidget engagements={[]} />);
     const titleElement = view.getByTestId('engagement-count-card-title');
     expect(titleElement).toBeDefined();
-    expect(titleElement.textContent).toEqual('Engagements');
+    expect(titleElement.textContent).toEqual('Engagement Summary');
   });
   test('Shows the total account of engagements', () => {
     const view = render(<EngagementCountWidget engagements={[]} />);

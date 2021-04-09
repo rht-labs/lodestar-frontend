@@ -23,7 +23,6 @@ import {
   EngagementStatus,
   getEngagementStatus,
 } from '../../../schemas/engagement';
-import faker from 'faker';
 import { SVGIconProps } from '@patternfly/react-icons/dist/js/createIcon';
 
 export interface EngagementCountWidgetProps {
@@ -99,7 +98,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[0]}
                     icon={TachometerAltIcon}
                     title="All Engagements"
-                    subtitle={faker.lorem.sentence(7)}
+                    subtitle={''}
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -107,7 +106,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[1]}
                     icon={OnRunningIcon}
                     title="Active Engagements"
-                    subtitle={faker.lorem.sentence(7)}
+                    subtitle={''}
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -115,7 +114,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[2]}
                     icon={PendingIcon}
                     title="Upcoming Engagements"
-                    subtitle={faker.lorem.sentence(7)}
+                    subtitle={''}
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -123,7 +122,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[3]}
                     icon={AsleepIcon}
                     title="Past Engagements"
-                    subtitle={faker.lorem.sentence(7)}
+                    subtitle={''}
                   />
                 </GridItem>
               </Grid>
