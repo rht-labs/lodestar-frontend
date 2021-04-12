@@ -35,7 +35,7 @@ export const DwTopTags = (props: DwTopTagsProps) => {
           {categories.map(c => (
             <FlexItem key={c.name}>
               <Chip isReadOnly={true}>
-                {c.name}:&nbsp;&nbsp;{c.count}
+                <span>{c.name}</span>:&nbsp;&nbsp;{c.count}
               </Chip>
             </FlexItem>
           ))}
