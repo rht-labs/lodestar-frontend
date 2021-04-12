@@ -53,7 +53,9 @@ const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => (
         <Component size="xl" />
         <TextContent>
           <Text component={TextVariants.h1}>{props.count}</Text>
-          <Text style={{ fontStyle: 'italic' }}>{props.subtitle}</Text>
+          <Text style={{ fontStyle: 'italic', fontSize: '0.8em' }}>
+            {props.subtitle}
+          </Text>
         </TextContent>
       </Flex>
     </FlexItem>
@@ -98,9 +100,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[0]}
                     icon={TachometerAltIcon}
                     title="All Engagements"
-                    subtitle={
-                      'All available engagements in the system. Including upcoming, active and past ones'
-                    }
+                    subtitle={'All engagements in the system.'}
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -108,9 +108,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[1]}
                     icon={OnRunningIcon}
                     title="Active Engagements"
-                    subtitle={
-                      'Upcoming engagements in the future, and are not launched yet.'
-                    }
+                    subtitle={'Engagements in progress.'}
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -118,9 +116,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[2]}
                     icon={PendingIcon}
                     title="Upcoming Engagements"
-                    subtitle={
-                      'Engagements that are already in progress and running at the moment.'
-                    }
+                    subtitle={'Engagements in the future.'}
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
@@ -128,9 +124,7 @@ export const EngagementCountWidget = (
                     count={engagementCounts[3]}
                     icon={AsleepIcon}
                     title="Past Engagements"
-                    subtitle={
-                      'Engagements that are finished, closed or archived.'
-                    }
+                    subtitle={'All completed engagements.'}
                   />
                 </GridItem>
               </Grid>

@@ -66,63 +66,65 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <Feature name="reader">
-          <Flex
-            justifyContent={{ default: 'justifyContentFlexEnd' }}
-            style={{ marginBottom: '1rem' }}
-          >
-            <FlexItem>
-              <Select
-                width="12rem"
-                placeholderText={'Select a region'}
-                isOpen={isRegionSelectOpen}
-                multiple={true}
-                selections={selectedRegions}
-                onSelect={(_, value) => handleSelectRegions(value as string)}
-                onToggle={() => setIsRegionSelectOpen(!isRegionSelectOpen)}
-              >
-                {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
-                  option => (
-                    <SelectOption
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                    />
-                  )
+        <div style={{ maxWidth: '1200px' }}>
+          <Feature name="reader">
+            <Flex
+              justifyContent={{ default: 'justifyContentFlexEnd' }}
+              style={{ marginBottom: '1rem' }}
+            >
+              <FlexItem>
+                <Select
+                  width="12rem"
+                  placeholderText={'Select a region'}
+                  isOpen={isRegionSelectOpen}
+                  multiple={true}
+                  selections={selectedRegions}
+                  onSelect={(_, value) => handleSelectRegions(value as string)}
+                  onToggle={() => setIsRegionSelectOpen(!isRegionSelectOpen)}
+                >
+                  {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
+                    option => (
+                      <SelectOption
+                        key={option.value}
+                        value={option.value}
+                        label={option.label}
+                      />
+                    )
+                  )}
+                </Select>
+              </FlexItem>
+              <FlexItem>
+                <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+              </FlexItem>
+            </Flex>
+          </Feature>
+          <Grid hasGutter>
+            <GridItem sm={12} xl={12} xl2={12}>
+              <EngagementQueryMediator
+                filter={{
+                  startDate: dateFilter?.startDate,
+                  endDate: dateFilter?.endDate,
+                }}
+                component={({ engagements }) => (
+                  <EngagementCountWidget engagements={engagements} />
                 )}
-              </Select>
-            </FlexItem>
-            <FlexItem>
-              <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
-            </FlexItem>
-          </Flex>
-        </Feature>
-        <Grid hasGutter>
-          <GridItem sm={12} xl={12} xl2={6}>
-            <EngagementQueryMediator
-              filter={{
-                startDate: dateFilter?.startDate,
-                endDate: dateFilter?.endDate,
-              }}
-              component={({ engagements }) => (
-                <EngagementCountWidget engagements={engagements} />
-              )}
-            />
-          </GridItem>
-          <GridItem sm={12} xl={6} xl2={3}>
-            <EngagementQueryMediator
-              filter={{
-                startDate: dateFilter?.startDate,
-                endDate: dateFilter?.endDate,
-                include: ['engagement_users'],
-              }}
-              component={DashboardPeopleEnabledCard}
-            />
-          </GridItem>
-          <GridItem sm={12} md={6} xl={6} xl2={3}>
-            {withCategories(DwTopTags, {})}
-          </GridItem>
-        </Grid>
+              />
+            </GridItem>
+            <GridItem sm={12} xl={6} xl2={4}>
+              <EngagementQueryMediator
+                filter={{
+                  startDate: dateFilter?.startDate,
+                  endDate: dateFilter?.endDate,
+                  include: ['engagement_users'],
+                }}
+                component={DashboardPeopleEnabledCard}
+              />
+            </GridItem>
+            <GridItem sm={12} md={6} xl={6} xl2={4}>
+              {withCategories(DwTopTags, {})}
+            </GridItem>
+          </Grid>
+        </div>
       </PageSection>
     </DashboardDateContext.Provider>
   );

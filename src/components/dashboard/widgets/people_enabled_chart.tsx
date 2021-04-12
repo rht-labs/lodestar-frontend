@@ -16,13 +16,9 @@ export function PeopleEnabledChart(props: PeopleEnabledChartProps) {
           constrainToVisibleArea={true}
           data={[
             { x: 'Red Hatters', y: props.redHatterCount },
-            { x: 'Non Red Hatters', y: props.otherCount },
+            { x: 'Others', y: props.otherCount },
           ]}
           labels={({ datum }) => `${datum.x}: ${datum.y}%`}
-          legendData={[
-            { name: 'Non Red Hatter: ' + props.otherCount },
-            { name: 'Red Hatters: ' + props.redHatterCount },
-          ]}
           legendOrientation="vertical"
           legendPosition="right"
           padding={{

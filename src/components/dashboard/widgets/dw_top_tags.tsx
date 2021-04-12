@@ -30,7 +30,7 @@ export const DwTopTags = (props: DwTopTagsProps) => {
             component={TextVariants.h2}
             data-testid="engagement-count-card-title"
           >
-            Top Tags
+            Top 5 Tags
           </Text>
         </TextContent>
       </CardHeader>
