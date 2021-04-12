@@ -19,6 +19,8 @@ import { useEngagementFormConfig } from '../../context/engagement_config_context
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
+import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
+import { withCategories } from '../../components/hocs/with_categories';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -116,6 +118,9 @@ export function Dashboard() {
               }}
               component={DashboardPeopleEnabledCard}
             />
+          </GridItem>
+          <GridItem sm={12} md={6} xl={6} xl2={3}>
+            {withCategories(DwTopTags, {})}
           </GridItem>
         </Grid>
       </PageSection>

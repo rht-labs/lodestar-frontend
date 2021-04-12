@@ -568,6 +568,263 @@ Object {
               />
             </article>
           </div>
+          <div
+            class="pf-l-grid__item pf-m-12-col-on-sm pf-m-6-col-on-md pf-m-6-col-on-xl pf-m-3-col-on-2xl"
+          >
+            <article
+              class="pf-c-card pf-m-hoverable pf-m-compact"
+              data-ouia-component-id="OUIA-Generated-Card-3"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+            >
+              <div
+                class="pf-c-card__title"
+              >
+                <div
+                  class="pf-c-content"
+                >
+                  <h2
+                    class=""
+                    data-pf-content="true"
+                  >
+                    People Enabled
+                  </h2>
+                </div>
+              </div>
+              <div
+                class="pf-c-card__body"
+                style="margin-top: 1rem;"
+              >
+                <div
+                  class="pf-l-grid pf-m-gutter"
+                >
+                  <div
+                    class="pf-l-grid__item pf-m-4-col"
+                  >
+                    <div
+                      class="pf-c-content"
+                      style="text-align: center;"
+                    >
+                      <h4
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Total Enabled
+                      </h4>
+                      <h1
+                        class=""
+                        data-pf-content="true"
+                        style="color: rgb(89, 171, 227);"
+                      >
+                        0
+                      </h1>
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-4-col"
+                  >
+                    <div
+                      class="pf-c-content"
+                      style="text-align: center;"
+                    >
+                      <h4
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Red Hatters
+                      </h4>
+                      <h1
+                        class=""
+                        data-pf-content="true"
+                        style="color: rgb(164, 199, 164);"
+                      >
+                        0
+                      </h1>
+                    </div>
+                  </div>
+                  <div
+                    class="pf-l-grid__item pf-m-4-col"
+                  >
+                    <div
+                      class="pf-c-content"
+                      style="text-align: center;"
+                    >
+                      <h4
+                        class=""
+                        data-pf-content="true"
+                      >
+                        Non Red Hatters
+                      </h4>
+                      <h1
+                        class=""
+                        data-pf-content="true"
+                        style="color: rgb(77, 180, 69);"
+                      >
+                        0
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="height: 230px; width: 400px;"
+                >
+                  <div
+                    class="pf-c-chart"
+                    style="pointer-events: none; position: relative; width: 100%; height: 100%;"
+                  >
+                    <svg
+                      aria-describedby="victory-container-2-desc"
+                      aria-labelledby="victory-container-2-title"
+                      height="230"
+                      role="img"
+                      style="pointer-events: all; width: 100%; height: 100%;"
+                      viewBox="0 0 300 230"
+                      width="300"
+                    >
+                      <title
+                        id="victory-container-2-title"
+                      >
+                        People Enabled Chart
+                      </title>
+                      <desc
+                        id="victory-container-2-desc"
+                      >
+                        People Enabled
+                      </desc>
+                      <g>
+                        <path
+                          d="M0.6108574848861728,-69.99733461449199L0.5323186654008076,-60.99767730691445Z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #4cb140; padding: 8px; stroke: transparent; stroke-width: 1;"
+                          transform="translate(90, 115)"
+                        />
+                        <path
+                          d="M1.8323863815511352,-69.97601274828901L1.596793846780275,-60.979096823508996Z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #bde2b9; padding: 8px; stroke: transparent; stroke-width: 1;"
+                          transform="translate(90, 115)"
+                        />
+                      </g>
+                      <g>
+                        <rect
+                          height="61.809999999999995"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: none;"
+                          vector-effect="non-scaling-stroke"
+                          width="153.94062499999998"
+                          x="168"
+                          y="86.095"
+                        />
+                        <path
+                          d="M 177.128, 104.967
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #4cb140;"
+                        />
+                        <path
+                          d="M 177.128, 135.872
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                          role="presentation"
+                          shape-rendering="auto"
+                          style="fill: #bde2b9;"
+                        />
+                        <text
+                          direction="inherit"
+                          dx="0"
+                          id="legend-labels-0"
+                          x="198.8"
+                          y="105.065"
+                        >
+                          <tspan
+                            dx="0"
+                            dy="0"
+                            style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                            text-anchor="start"
+                            x="198.8"
+                          >
+                            Non Red Hatter: 0
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx="0"
+                          id="legend-labels-1"
+                          x="198.8"
+                          y="135.97"
+                        >
+                          <tspan
+                            dx="0"
+                            dy="0"
+                            style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                            text-anchor="start"
+                            x="198.8"
+                          >
+                            Red Hatters: 0
+                          </tspan>
+                        </text>
+                      </g>
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        x="90"
+                        y="123.52"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="font-size: 24px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); fill: #252525; stroke: transparent;"
+                          text-anchor="middle"
+                          x="90"
+                        >
+                          0
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        x="90"
+                        y="205.97"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="fill: #b8bbbe; font-size: 14px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); stroke: transparent;"
+                          text-anchor="middle"
+                          x="90"
+                        >
+                          Total Enabled
+                        </tspan>
+                      </text>
+                    </svg>
+                    <div
+                      style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+                    >
+                      <svg
+                        height="230"
+                        style="overflow: visible; width: 100%; height: 100%;"
+                        viewBox="0 0 300 230"
+                        width="300"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pf-c-card__footer"
+              />
+            </article>
+          </div>
         </div>
       </section>
     </div>
@@ -1000,6 +1257,263 @@ Object {
                     </title>
                     <desc
                       id="victory-container-1-desc"
+                    >
+                      People Enabled
+                    </desc>
+                    <g>
+                      <path
+                        d="M0.6108574848861728,-69.99733461449199L0.5323186654008076,-60.99767730691445Z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #4cb140; padding: 8px; stroke: transparent; stroke-width: 1;"
+                        transform="translate(90, 115)"
+                      />
+                      <path
+                        d="M1.8323863815511352,-69.97601274828901L1.596793846780275,-60.979096823508996Z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #bde2b9; padding: 8px; stroke: transparent; stroke-width: 1;"
+                        transform="translate(90, 115)"
+                      />
+                    </g>
+                    <g>
+                      <rect
+                        height="61.809999999999995"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: none;"
+                        vector-effect="non-scaling-stroke"
+                        width="153.94062499999998"
+                        x="168"
+                        y="86.095"
+                      />
+                      <path
+                        d="M 177.128, 104.967
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #4cb140;"
+                      />
+                      <path
+                        d="M 177.128, 135.872
+      h9.744000000000028
+      v-9.744000000000028
+      h-9.744000000000028
+      z"
+                        role="presentation"
+                        shape-rendering="auto"
+                        style="fill: #bde2b9;"
+                      />
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        id="legend-labels-0"
+                        x="198.8"
+                        y="105.065"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                          text-anchor="start"
+                          x="198.8"
+                        >
+                          Non Red Hatter: 0
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx="0"
+                        id="legend-labels-1"
+                        x="198.8"
+                        y="135.97"
+                      >
+                        <tspan
+                          dx="0"
+                          dy="0"
+                          style="font-family: \\"RedHatText\\",\\"Overpass\\",overpass,helvetica,arial,sans-serif; font-size: 14px; letter-spacing: normal; padding: 10px; stroke: transparent; fill: #252525;"
+                          text-anchor="start"
+                          x="198.8"
+                        >
+                          Red Hatters: 0
+                        </tspan>
+                      </text>
+                    </g>
+                    <text
+                      direction="inherit"
+                      dx="0"
+                      x="90"
+                      y="123.52"
+                    >
+                      <tspan
+                        dx="0"
+                        dy="0"
+                        style="font-size: 24px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); fill: #252525; stroke: transparent;"
+                        text-anchor="middle"
+                        x="90"
+                      >
+                        0
+                      </tspan>
+                    </text>
+                    <text
+                      direction="inherit"
+                      dx="0"
+                      x="90"
+                      y="205.97"
+                    >
+                      <tspan
+                        dx="0"
+                        dy="0"
+                        style="fill: #b8bbbe; font-size: 14px; text-anchor: middle; font-family: var(--pf-chart-global--FontFamily); letter-spacing: var(--pf-chart-global--letter-spacing); stroke: transparent;"
+                        text-anchor="middle"
+                        x="90"
+                      >
+                        Total Enabled
+                      </tspan>
+                    </text>
+                  </svg>
+                  <div
+                    style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+                  >
+                    <svg
+                      height="230"
+                      style="overflow: visible; width: 100%; height: 100%;"
+                      viewBox="0 0 300 230"
+                      width="300"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            />
+          </article>
+        </div>
+        <div
+          class="pf-l-grid__item pf-m-12-col-on-sm pf-m-6-col-on-md pf-m-6-col-on-xl pf-m-3-col-on-2xl"
+        >
+          <article
+            class="pf-c-card pf-m-hoverable pf-m-compact"
+            data-ouia-component-id="OUIA-Generated-Card-3"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__title"
+            >
+              <div
+                class="pf-c-content"
+              >
+                <h2
+                  class=""
+                  data-pf-content="true"
+                >
+                  People Enabled
+                </h2>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+              style="margin-top: 1rem;"
+            >
+              <div
+                class="pf-l-grid pf-m-gutter"
+              >
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                    style="text-align: center;"
+                  >
+                    <h4
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Total Enabled
+                    </h4>
+                    <h1
+                      class=""
+                      data-pf-content="true"
+                      style="color: rgb(89, 171, 227);"
+                    >
+                      0
+                    </h1>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                    style="text-align: center;"
+                  >
+                    <h4
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Red Hatters
+                    </h4>
+                    <h1
+                      class=""
+                      data-pf-content="true"
+                      style="color: rgb(164, 199, 164);"
+                    >
+                      0
+                    </h1>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-grid__item pf-m-4-col"
+                >
+                  <div
+                    class="pf-c-content"
+                    style="text-align: center;"
+                  >
+                    <h4
+                      class=""
+                      data-pf-content="true"
+                    >
+                      Non Red Hatters
+                    </h4>
+                    <h1
+                      class=""
+                      data-pf-content="true"
+                      style="color: rgb(77, 180, 69);"
+                    >
+                      0
+                    </h1>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="height: 230px; width: 400px;"
+              >
+                <div
+                  class="pf-c-chart"
+                  style="pointer-events: none; position: relative; width: 100%; height: 100%;"
+                >
+                  <svg
+                    aria-describedby="victory-container-2-desc"
+                    aria-labelledby="victory-container-2-title"
+                    height="230"
+                    role="img"
+                    style="pointer-events: all; width: 100%; height: 100%;"
+                    viewBox="0 0 300 230"
+                    width="300"
+                  >
+                    <title
+                      id="victory-container-2-title"
+                    >
+                      People Enabled Chart
+                    </title>
+                    <desc
+                      id="victory-container-2-desc"
                     >
                       People Enabled
                     </desc>

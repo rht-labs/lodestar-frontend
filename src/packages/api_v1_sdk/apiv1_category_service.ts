@@ -23,7 +23,7 @@ export class Apiv1CategoryService implements CategoryService {
     }
     const {
       sortOrder = CategorySortOrder.Descending,
-      page = 0,
+      page = 1,
       perPage = 10,
       searchText = '',
     } = filter;
@@ -36,7 +36,7 @@ export class Apiv1CategoryService implements CategoryService {
         }`
       );
     }
-    queryParams.push(`page=${page})`);
+    queryParams.push(`page=${page}`);
     queryParams.push(`perPage=${perPage}`);
     if (!!searchText) {
       queryParams.push(`suggest=${searchText}`);
