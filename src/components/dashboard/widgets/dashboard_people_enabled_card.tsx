@@ -9,6 +9,8 @@ import {
   Grid,
   GridItem,
   CardFooter,
+  Flex,
+  FlexItem,
 } from '@patternfly/react-core';
 import { PeopleEnabledChart } from './people_enabled_chart';
 import { Engagement } from '../../../schemas/engagement';
@@ -53,7 +55,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
           </GridItem>
           <GridItem span={4}>
             <TextContent style={{ textAlign: 'center' }}>
-              <Text component={TextVariants.h4}>Red Hatters</Text>
+              <Text component={TextVariants.h4}>Red Hat</Text>
               <Text component={TextVariants.h1} style={{ color: '#a4c7a4' }}>
                 {redHatCount}
               </Text>
@@ -61,17 +63,25 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
           </GridItem>
           <GridItem span={4}>
             <TextContent style={{ textAlign: 'center' }}>
-              <Text component={TextVariants.h4}>Non Red Hatters</Text>
+              <Text component={TextVariants.h4}>Others</Text>
               <Text component={TextVariants.h1} style={{ color: '#4db445' }}>
                 {emails.length - redHatCount}
               </Text>
             </TextContent>
           </GridItem>
         </Grid>
-        <PeopleEnabledChart
-          redHatterCount={redHatCount}
-          otherCount={emails.length - redHatCount}
-        />
+        <Flex
+          style={{ width: '100%' }}
+          justifyContent={{ default: 'justifyContentCenter' }}
+          alignItems={{ default: 'alignItemsCenter' }}
+        >
+          <FlexItem>
+            <PeopleEnabledChart
+              redHatterCount={redHatCount}
+              otherCount={emails.length - redHatCount}
+            />
+          </FlexItem>
+        </Flex>
       </CardBody>
       <CardFooter />
     </Card>
