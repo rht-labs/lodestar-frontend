@@ -1,11 +1,15 @@
 import {
+  Chart,
+  ChartAxis,
+  ChartBar,
+  ChartGroup,
+  ChartThemeColor,
+} from '@patternfly/react-charts';
+import {
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Chip,
-  Flex,
-  FlexItem,
   Text,
   TextContent,
   TextVariants,
@@ -31,17 +35,36 @@ export const DwTopTags = (props: DwTopTagsProps) => {
         </TextContent>
       </CardHeader>
       <CardBody>
-        <Flex>
-          {categories.map(c => (
-            <FlexItem key={c.name}>
-              <Chip isReadOnly={true}>
-                <span>{c.name}</span>:&nbsp;&nbsp;{c.count}
-              </Chip>
-            </FlexItem>
-          ))}
-        </Flex>
+        <TagBarChart categories={categories} />
       </CardBody>
       <CardFooter></CardFooter>
     </Card>
+  );
+};
+
+const TagBarChart = ({ categories }: { categories: CategoryWithCount[] }) => {
+  return (
+    <div style={{ height: '100px', width: '200px' }}>
+      <Chart
+        themeColor={ChartThemeColor.multiOrdered}
+        width={200}
+        height={100}
+        padding={{
+          bottom: 10,
+          left: 100,
+          top: 10,
+          right: 20,
+        }}
+      >
+        <ChartAxis />
+        <ChartGroup horizontal>
+          {categories
+            .sort((a, b) => a.count - b.count)
+            .map(c => (
+              <ChartBar labels={[c.count]} data={[{ x: c.name, y: c.count }]} />
+            ))}
+        </ChartGroup>
+      </Chart>
+    </div>
   );
 };
