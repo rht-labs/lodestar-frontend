@@ -99,7 +99,7 @@ export function Dashboard() {
             </Flex>
           </Feature>
           <Grid hasGutter>
-            <GridItem sm={12} xl={12} xl2={12}>
+            <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
               <EngagementQueryMediator
                 filter={{
                   startDate: dateFilter?.startDate,
@@ -110,7 +110,7 @@ export function Dashboard() {
                 )}
               />
             </GridItem>
-            <GridItem sm={12} xl={6} xl2={4}>
+            <GridItem colSpan={2} sm={12} xl={6} xl2={4}>
               <EngagementQueryMediator
                 filter={{
                   startDate: dateFilter?.startDate,
@@ -120,8 +120,35 @@ export function Dashboard() {
                 component={DashboardPeopleEnabledCard}
               />
             </GridItem>
-            <GridItem sm={12} md={6} xl={6} xl2={4}>
+            <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={4}>
               {withCategories(DwTopTags, {})}
+            </GridItem>
+            <GridItem sm={6}>
+              <div
+                style={{
+                  backgroundColor: 'white',
+                  height: '100%',
+                  width: '100%',
+                }}
+              />
+            </GridItem>
+            <GridItem sm={6}>
+              <div
+                style={{
+                  backgroundColor: 'white',
+                  height: '100%',
+                  width: '100%',
+                }}
+              />
+            </GridItem>
+            <GridItem sm={6}>
+              <div
+                style={{
+                  backgroundColor: 'white',
+                  height: '100%',
+                  width: '100%',
+                }}
+              />
             </GridItem>
           </Grid>
         </div>
