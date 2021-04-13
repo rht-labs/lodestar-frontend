@@ -70,7 +70,7 @@ export function Dashboard() {
         </TextContent>
       </PageSection>
       <PageSection>
-        <div style={{ maxWidth: '1200px' }}>
+        <div style={{ maxWidth: '1300px' }}>
           <Feature name="reader">
             <Flex
               justifyContent={{ default: 'justifyContentFlexEnd' }}
