@@ -1,8 +1,9 @@
 import {
   EngagementSearchParameters,
   EngagementService,
+  SortOrder,
 } from '../../services/engagement_service/engagement_service';
-import { Engagement, getEngagementStatus } from '../../schemas/engagement';
+import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
@@ -23,49 +24,6 @@ export class Apiv1EngagementService implements EngagementService {
       .catch(() => false);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
-  private filterForParams(
-    engagements: Array<Engagement>,
-    params: EngagementSearchParameters
-  ): Array<Engagement> {
-    let filteredEngagements = engagements;
-    if (params.engagementStatuses) {
-      filteredEngagements = filteredEngagements.filter(
-        e => params.engagementStatuses.indexOf(getEngagementStatus(e)) > -1
-      );
-    }
-    if (params.regions && params.regions.length > 0) {
-      filteredEngagements = filteredEngagements.filter(e =>
-        params.regions.includes(e.engagement_region)
-      );
-    }
-    if (params.startDate && params.endDate) {
-      filteredEngagements = filteredEngagements.filter(
-        e =>
-          (e.start_date >= params.startDate &&
-            e.start_date <= params.endDate) ||
-          (e.end_date >= params.startDate && e.end_date <= params.endDate)
-      );
-    }
-    if (params.include) {
-      filteredEngagements = filteredEngagements.filter(e => ({
-        ...params.include.reduce(
-          (prev, param) => ({
-            ...prev,
-            [param]: e[param],
-          }),
-          {}
-        ),
-      }));
-    }
-    if (params.exclude) {
-      for (let e of filteredEngagements) {
-        for (let param of params.exclude) {
-          delete e[param];
-        }
-      }
-    }
-    return filteredEngagements;
-  }
   private buildQueryStringFromParameters(
     parameters: EngagementSearchParameters
   ): string {
@@ -93,9 +51,20 @@ export class Apiv1EngagementService implements EngagementService {
     if (searchParams.length > 0) {
       queries.push(`search=${searchParams.join(',')}`);
     }
-
     if (parameters.include && parameters.include.length > 0) {
       queries.push(`include=${parameters.include.join(',')}`);
+    }
+    if (parameters.pageNumber) {
+      queries.push(`page=${parameters.pageNumber}`);
+    }
+    if (parameters.perPage) {
+      queries.push(`perPage=${parameters.perPage}`);
+    }
+    if (parameters.sortOrder && parameters.sortField) {
+      queries.push(
+        `sortOrder=${parameters.sortOrder === SortOrder.DESC ? 'DESC' : 'ASC'}`
+      );
+      queries.push(`sortFields=${parameters.sortField}`)
     }
 
     return queries.join('&');

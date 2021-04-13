@@ -26,11 +26,19 @@ export const EngagementQueryMediator = (
       startDate: propsFilter?.startDate,
       endDate: propsFilter?.endDate,
       engagementRegions: propsFilter?.engagementRegions,
+      perPage: propsFilter?.perPage,
+      pageNumber: propsFilter?.pageNumber,
+      sortField: propsFilter?.sortField,
+      sortOrder: propsFilter?.sortOrder,
     };
     getEngagements(filter);
   }, [
     propsFilter?.endDate,
+    propsFilter?.perPage,
+    propsFilter?.pageNumber,
     propsFilter?.startDate,
+    propsFilter?.sortField,
+    propsFilter?.sortOrder,
     getEngagements,
     propsFilter?.engagementRegions,
   ]);

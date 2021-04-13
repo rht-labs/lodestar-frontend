@@ -61,7 +61,11 @@ const TagBarChart = ({ categories }: { categories: CategoryWithCount[] }) => {
           {categories
             .sort((a, b) => a.count - b.count)
             .map(c => (
-              <ChartBar labels={[c.count]} data={[{ x: c.name, y: c.count }]} />
+              <ChartBar
+                key={c.name}
+                labels={[c.count]}
+                data={[{ x: c.name, y: c.count }]}
+              />
             ))}
         </ChartGroup>
       </Chart>

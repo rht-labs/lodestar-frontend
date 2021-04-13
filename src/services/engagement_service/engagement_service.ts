@@ -1,6 +1,10 @@
 import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 
+export enum SortOrder {
+  ASC,
+  DESC,
+}
 export interface EngagementSearchParameters {
   startDate?: Date;
   endDate?: Date;
@@ -8,8 +12,10 @@ export interface EngagementSearchParameters {
   regions?: string[];
   include?: Array<keyof Engagement>;
   exclude?: Array<keyof Engagement>;
-  take?: number;
-  skip?: number;
+  perPage?: number;
+  sortOrder?: SortOrder;
+  sortField?: keyof Engagement | 'last_update'
+  pageNumber?: number;
 }
 export interface EngagementService {
   fetchEngagements(

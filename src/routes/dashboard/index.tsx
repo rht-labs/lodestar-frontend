@@ -21,6 +21,8 @@ import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_eng
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { withCategories } from '../../components/hocs/with_categories';
+import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
+import { SortOrder } from '../../services/engagement_service/engagement_service';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -124,30 +126,14 @@ export function Dashboard() {
               {withCategories(DwTopTags, {})}
             </GridItem>
             <GridItem sm={6}>
-              <div
-                style={{
-                  backgroundColor: 'white',
-                  height: '100%',
-                  width: '100%',
+              <EngagementQueryMediator
+                filter={{
+                  pageNumber: 1,
+                  perPage: 5,
+                  sortField: 'last_update',
+                  sortOrder: SortOrder.DESC,
                 }}
-              />
-            </GridItem>
-            <GridItem sm={6}>
-              <div
-                style={{
-                  backgroundColor: 'white',
-                  height: '100%',
-                  width: '100%',
-                }}
-              />
-            </GridItem>
-            <GridItem sm={6}>
-              <div
-                style={{
-                  backgroundColor: 'white',
-                  height: '100%',
-                  width: '100%',
-                }}
+                component={DwLastUpdated}
               />
             </GridItem>
           </Grid>
