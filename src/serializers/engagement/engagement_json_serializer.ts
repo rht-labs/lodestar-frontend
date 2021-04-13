@@ -127,7 +127,7 @@ export class EngagementJsonSerializer
         data['hosting_environments']?.map?.(
           EngagementJsonSerializer.deserializeHostingEnvironment
         ) ?? [],
-      last_update: data['last_update'],
+      last_update: EngagementJsonSerializer.parseDate(data['last_update']),
       location: data['location'],
       project_id: data['project_id'],
       project_name: data['project_name'],

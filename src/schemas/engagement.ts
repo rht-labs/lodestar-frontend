@@ -84,7 +84,7 @@ export interface EngagementOverview {
 export interface EngagementHistory {
   commits: GitCommit[];
   last_update_by_name: string;
-  last_update: string;
+  last_update: Date;
 }
 
 export interface EngagementDates {
@@ -212,7 +212,7 @@ export abstract class Engagement {
         ? 'Alice Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
       engagement_type: 'Residency',
-      last_update: staticData ? '2020-01-01' : new Date().toString(),
+      last_update: staticData ? new Date(2020, 1, 1, 1, 1, 1, 1) : new Date(),
       location: staticData
         ? 'Nashville, TN'
         : `${faker.address.city()}, ${faker.address.stateAbbr()}`,
