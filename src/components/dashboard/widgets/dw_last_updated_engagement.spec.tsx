@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { DwLastUpdated } from './dw_last_updated_engagements';
 import { Engagement } from '../../../schemas/engagement';
 
@@ -18,7 +18,19 @@ describe('Dashboard Last Updated Engagements Widget', () => {
       .map(() => Engagement.fromFake());
     const component = render(<DwLastUpdated engagements={engagements} />);
     for (let engagement of engagements) {
-      expect(component.getByText(engagement.project_name)).toBeDefined();
+      expect(component.getAllByText(engagement.project_name)).toBeDefined();
     }
+  });
+  test('clicking the engagement link should call onClick', () => {
+    const engagement = Engagement.fromFake();
+    const spy = jest.fn();
+    const component = render(
+      <DwLastUpdated engagements={[engagement]} onClick={spy} />
+    );
+    fireEvent.click(component.getByText(engagement.project_name));
+    expect(spy).toHaveBeenCalledWith(
+      engagement.customer_name,
+      engagement.project_name
+    );
   });
 });

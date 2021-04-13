@@ -1,4 +1,6 @@
 import {
+  Button,
+  ButtonVariant,
   Card,
   CardBody,
   CardFooter,
@@ -13,10 +15,23 @@ import { Engagement } from '../../../schemas/engagement';
 
 export interface DwLastUpdatedProps {
   engagements: Partial<Engagement>[];
+  onClick?(customerName: string, projectName: string): void;
 }
 const columns = ['Hello', 'World!'];
 export const DwLastUpdated = (props: DwLastUpdatedProps) => {
-  const rows = props.engagements.map(e => [e.customer_name, e.project_name]);
+  const rows = props.engagements.map(e => [
+    e.customer_name,
+    {
+      title: (
+        <Button
+          onClick={() => props.onClick?.(e.customer_name, e.project_name)}
+          variant={ButtonVariant.link}
+        >
+          {e.project_name}
+        </Button>
+      ),
+    },
+  ]);
   return (
     <Card>
       <CardHeader>

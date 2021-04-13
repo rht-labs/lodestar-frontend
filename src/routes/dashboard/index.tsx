@@ -23,6 +23,7 @@ import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { withCategories } from '../../components/hocs/with_categories';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
+import { useHistory } from 'react-router';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -40,6 +41,7 @@ export function Dashboard() {
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
+  const history = useHistory();
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
@@ -125,7 +127,7 @@ export function Dashboard() {
             <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={4}>
               {withCategories(DwTopTags, {})}
             </GridItem>
-            <GridItem sm={6}>
+            <GridItem sm={12} xl={6} xl2={4}>
               <EngagementQueryMediator
                 filter={{
                   pageNumber: 1,
@@ -133,7 +135,16 @@ export function Dashboard() {
                   sortField: 'last_update',
                   sortOrder: SortOrder.DESC,
                 }}
-                component={DwLastUpdated}
+                component={props => (
+                  <DwLastUpdated
+                    {...props}
+                    onClick={(customerName, projectName) => {
+                      history.push(
+                        `/app/engagements/${customerName}/${projectName}/`
+                      );
+                    }}
+                  />
+                )}
               />
             </GridItem>
           </Grid>
