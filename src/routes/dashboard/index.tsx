@@ -114,7 +114,7 @@ export function Dashboard() {
                 )}
               />
             </GridItem>
-            <GridItem colSpan={2} sm={12} xl={6} xl2={4}>
+            <GridItem colSpan={2} sm={12} md={6}>
               <EngagementQueryMediator
                 filter={{
                   startDate: dateFilter?.startDate,
@@ -124,10 +124,10 @@ export function Dashboard() {
                 component={DashboardPeopleEnabledCard}
               />
             </GridItem>
-            <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={4}>
+            <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
               {withCategories(DwTopTags, {})}
             </GridItem>
-            <GridItem sm={12} xl={6} xl2={4}>
+            <GridItem sm={12} xl={12} xl2={6}>
               <EngagementQueryMediator
                 filter={{
                   pageNumber: 1,

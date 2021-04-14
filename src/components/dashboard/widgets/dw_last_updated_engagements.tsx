@@ -29,6 +29,7 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
         title: (
           <Button
             onClick={() => props.onClick?.(e.customer_name, e.project_name)}
+            isInline
             variant={ButtonVariant.link}
           >
             {e.project_name}
@@ -52,6 +53,7 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
           aria-label="Recently updated engagements"
           rows={rows}
           cells={columns}
+          gridBreakPoint={'grid-lg'}
         >
           <TableHeader />
           <TableBody />
