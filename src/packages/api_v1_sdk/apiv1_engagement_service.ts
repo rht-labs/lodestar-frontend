@@ -64,7 +64,7 @@ export class Apiv1EngagementService implements EngagementService {
       queries.push(
         `sortOrder=${parameters.sortOrder === SortOrder.DESC ? 'DESC' : 'ASC'}`
       );
-      queries.push(`sortFields=${parameters.sortField}`)
+      queries.push(`sortFields=${parameters.sortField}`);
     }
 
     return queries.join('&');
@@ -192,8 +192,19 @@ export class Apiv1EngagementService implements EngagementService {
     const response = await this.axios.head(
       `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
     );
+    /// '2021-04-13T21:33:13.497Z'
 
-    return engagement['last_update'] !== response?.headers?.['last-update'];
+    const lastUpdatedTimestamp = engagement.last_update
+      .toISOString()
+      .split('.')
+      .shift();
+    ///'2021-04-13T21:33:13.497828Z'
+
+    const headerStamp = response?.headers?.['last-update']
+      ?.split?.('.')
+      ?.shift?.();
+
+    return lastUpdatedTimestamp !== headerStamp;
   }
 
   async getEngagementByCustomerAndProjectName(
