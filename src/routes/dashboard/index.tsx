@@ -8,6 +8,7 @@ import {
   PageSectionVariants,
   Select,
   SelectOption,
+  SelectVariant,
   Text,
   TextContent,
   Title,
@@ -102,6 +103,7 @@ export function Dashboard() {
             >
               <FlexItem>
                 <Select
+                  variant={SelectVariant.checkbox}
                   width="12rem"
                   placeholderText={'Select a region'}
                   isOpen={isRegionSelectOpen}
