@@ -8,6 +8,7 @@ import {
   PageSectionVariants,
   Select,
   SelectOption,
+  SelectVariant,
   Text,
   TextContent,
   Title,
@@ -59,14 +60,38 @@ export function Dashboard() {
     }
   };
 
+  const getRegionImageSource = () => {
+    const sortedRegions = selectedRegions.sort().map(s => s.toLowerCase());
+    if (sortedRegions.length === 0) {
+      return `${process.env.PUBLIC_URL}/images/world.svg`;
+    }
+    return `${process.env.PUBLIC_URL}/images/world-${sortedRegions.join('-')}.${
+      sortedRegions.length > 1 ? 'png' : 'svg'
+    }`;
+  };
+
   return (
     <DashboardDateContext.Provider value={dateFilter}>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Title headingLevel="h1">Dashboard</Title>
-          <Text component="p">
-            This dashboard gives you an overview of all engagements.
-          </Text>
+          <Flex
+            justifyContent={{ default: 'justifyContentSpaceBetween' }}
+            alignItems={{ default: 'alignItemsCenter' }}
+          >
+            <FlexItem>
+              <Title headingLevel="h1">Dashboard</Title>
+              <Text component="p">
+                This dashboard gives you an overview of all engagements.
+              </Text>
+            </FlexItem>
+            <FlexItem>
+              <img
+                src={getRegionImageSource()}
+                alt="Selected regions"
+                width="200rm"
+              />
+            </FlexItem>
+          </Flex>
         </TextContent>
       </PageSection>
       <PageSection>
@@ -78,6 +103,7 @@ export function Dashboard() {
             >
               <FlexItem>
                 <Select
+                  variant={SelectVariant.checkbox}
                   width="12rem"
                   placeholderText={'Select a region'}
                   isOpen={isRegionSelectOpen}
@@ -89,10 +115,13 @@ export function Dashboard() {
                   {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
                     option => (
                       <SelectOption
+                        isSelected={selectedRegions.includes(option.value)}
                         key={option.value}
                         value={option.value}
-                        label={option.label}
-                      />
+                        label={option.label.toUpperCase()}
+                      >
+                        {option.label}
+                      </SelectOption>
                     )
                   )}
                 </Select>
