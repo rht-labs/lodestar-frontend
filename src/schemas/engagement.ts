@@ -107,6 +107,7 @@ export interface EngagementState {
   launch?: LaunchData;
   creation_details: CreationDetails;
   mongo_id: string;
+  last_update_id?: string;
 }
 export interface Engagement
   extends EngagementOverview,

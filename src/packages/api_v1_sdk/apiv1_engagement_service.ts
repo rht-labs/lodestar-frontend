@@ -192,17 +192,10 @@ export class Apiv1EngagementService implements EngagementService {
     const response = await this.axios.head(
       `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
     );
-    /// '2021-04-13T21:33:13.497Z'
 
-    const lastUpdatedTimestamp = engagement.last_update
-      .toISOString()
-      .split('.')
-      .shift();
-    ///'2021-04-13T21:33:13.497828Z'
+    const lastUpdatedTimestamp = engagement.last_update_id;
 
-    const headerStamp = response?.headers?.['last-update']
-      ?.split?.('.')
-      ?.shift?.();
+    const headerStamp = response?.headers?.['last-update'];
 
     return lastUpdatedTimestamp !== headerStamp;
   }
