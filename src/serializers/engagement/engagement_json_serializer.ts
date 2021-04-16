@@ -37,6 +37,7 @@ export class EngagementJsonSerializer
   serialize(engagement: Engagement): object {
     const e = {
       ...engagement,
+      last_update: engagement?.last_update_id,
       hosting_environments: (engagement.hosting_environments ?? []).map(he => ({
         ...he,
         ocp_sub_domain: (he.ocp_sub_domain ?? '').toLowerCase(),
@@ -128,6 +129,7 @@ export class EngagementJsonSerializer
           EngagementJsonSerializer.deserializeHostingEnvironment
         ) ?? [],
       last_update: EngagementJsonSerializer.parseDate(data['last_update']),
+      last_update_id: data['last_update'],
       location: data['location'],
       project_id: data['project_id'],
       project_name: data['project_name'],
