@@ -136,7 +136,9 @@ export class Apiv1EngagementService implements EngagementService {
   async launchEngagement(engagementData: Engagement): Promise<Engagement> {
     try {
       const { data } = await this.axios.put(`/engagements/launch`, {
-        ...engagementData,
+        ...Apiv1EngagementService.engagementSerializer.serialize(
+          engagementData
+        ),
         commit_message: 'Engagement Launched',
       });
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
