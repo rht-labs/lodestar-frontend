@@ -196,7 +196,6 @@ export class Apiv1EngagementService implements EngagementService {
     const lastUpdatedTimestamp = engagement.last_update_id;
 
     const headerStamp = response?.headers?.['last-update'];
-    console.log(lastUpdatedTimestamp, headerStamp);
 
     return lastUpdatedTimestamp !== headerStamp;
   }
