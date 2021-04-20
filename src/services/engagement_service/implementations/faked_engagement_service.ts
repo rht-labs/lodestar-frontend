@@ -1,17 +1,16 @@
 import { EngagementService } from '../engagement_service';
 import { Engagement } from '../../../schemas/engagement';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { mockEngagementFormConfig } from '../../../mocks/engagement_form_config_mocks';
 
 export class FakedEngagementService implements EngagementService {
   constructor(private shouldUseStaticData: boolean = false) {}
   async fetchEngagements(): Promise<Engagement[]> {
-    return new Array(8)
-      .fill(null)
-      .map((_, i) =>
-        Engagement.fromFake(this.shouldUseStaticData, {
-          uniqueSuffix: i.toString(),
-        })
-      );
+    return new Array(8).fill(null).map((_, i) =>
+      Engagement.fromFake(this.shouldUseStaticData, {
+        uniqueSuffix: i.toString(),
+      })
+    );
   }
   async createEngagement(data: Engagement): Promise<Engagement> {
     return data;
@@ -32,7 +31,7 @@ export class FakedEngagementService implements EngagementService {
     return data;
   }
   async getConfig(): Promise<EngagementFormConfig> {
-    return EngagementFormConfig.fromFake();
+    return mockEngagementFormConfig();
   }
   async checkHasUpdates(engagement: Engagement): Promise<boolean> {
     return false;

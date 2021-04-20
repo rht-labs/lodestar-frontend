@@ -21,10 +21,11 @@ import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/d
 import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
-import { withCategories } from '../../components/hocs/with_categories';
+import { withCategories } from '../../hocs/with_categories';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { useHistory } from 'react-router';
+import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_cases';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -137,6 +138,12 @@ export function Dashboard() {
                 filter={{
                   startDate: dateFilter?.startDate,
                   endDate: dateFilter?.endDate,
+                  include: [
+                    'project_name',
+                    'start_date',
+                    'end_date',
+                    'archive_date',
+                  ],
                 }}
                 component={({ engagements }) => (
                   <EngagementCountWidget engagements={engagements} />
@@ -172,6 +179,21 @@ export function Dashboard() {
                         `/app/engagements/${customerName}/${projectName}/`
                       );
                     }}
+                  />
+                )}
+              />
+            </GridItem>
+            <GridItem sm={12} xl={12} xl2={6}>
+              <EngagementQueryMediator
+                filter={{
+                  pageNumber: 1,
+                  perPage: 5,
+                  sortField: 'last_update',
+                  sortOrder: SortOrder.DESC,
+                }}
+                component={props => (
+                  <DwLastUseCases
+                    useCases={props.engagements.map(e => e.use_cases)}
                   />
                 )}
               />

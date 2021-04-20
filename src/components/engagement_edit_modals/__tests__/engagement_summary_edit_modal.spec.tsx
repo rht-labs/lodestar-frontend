@@ -16,6 +16,7 @@ import { validatorsWithDateValidators } from '../../../routes/engagement/engagem
 import { ValidationProvider } from '../../../context/validation_context/validation_context';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { mockEngagementFormConfig } from '../../../mocks/engagement_form_config_mocks';
 
 describe('Engagement Summary edit modal', () => {
   test('matches snapshot', async () => {
@@ -266,7 +267,7 @@ describe('Engagement Summary Edit Modal > Archive Date', () => {
     engagement = {};
   });
   const Component = ({
-    engagementFormConfig = EngagementFormConfig.fromFake(),
+    engagementFormConfig = mockEngagementFormConfig(),
     currentEngagement,
     currentEngagementChanges = engagement,
   }: {
@@ -298,7 +299,7 @@ describe('Engagement Summary Edit Modal > Archive Date', () => {
   };
   test('if the archive date is undefined, and the end date is set, the archive date should be set to the end date plus the default grace period', async () => {
     const fakedConfig = {
-      ...EngagementFormConfig.fromFake(),
+      ...mockEngagementFormConfig(),
       logistics_options: { env_default_grace_period: 90 },
     };
     const view = render(<Component engagementFormConfig={fakedConfig} />);
@@ -321,7 +322,7 @@ describe('Engagement Summary Edit Modal > Archive Date', () => {
     };
     await act(async () => {
       const fakedConfig = {
-        ...EngagementFormConfig.fromFake(),
+        ...mockEngagementFormConfig(),
         logistics_options: { env_default_grace_period: 90 },
       };
       const view = render(<Component engagementFormConfig={fakedConfig} />);
