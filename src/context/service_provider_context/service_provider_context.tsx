@@ -6,6 +6,7 @@ import { NotificationService } from '../../services/notification_service/notific
 import { ServiceFactory } from '../../services/factories/service_factory';
 import { CategoryService } from '../../services/category_service/category_service';
 import { AnalyticsService } from '../../services/analytics_service/analytics_service';
+import { UseCaseService } from '../../services/use_case_service/use_case_service';
 
 interface IServiceProvider {
   analyticsService: AnalyticsService;
@@ -14,6 +15,7 @@ interface IServiceProvider {
   versionService: VersionService;
   notificationService: NotificationService;
   categoryService: CategoryService;
+  useCaseService: UseCaseService;
 }
 
 export const ServiceProviderContext = React.createContext<IServiceProvider>(
