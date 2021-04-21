@@ -3,6 +3,7 @@ import { render, act, fireEvent } from '@testing-library/react';
 import { ArtifactEditModal } from '../add_artifact_modal';
 import { Artifact, Engagement } from '../../../schemas/engagement';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
+import { mockEngagementArtifact } from '../../../mocks/engagement_mocks';
 
 describe('Engagement Edit Modal', () => {
   const mockTypes = [
@@ -13,7 +14,7 @@ describe('Engagement Edit Modal', () => {
     const onClose = jest.fn();
     const onSave = jest.fn();
     const onUpdate = jest.fn();
-    const artifact = Artifact.fromFake(true);
+    const artifact = mockEngagementArtifact();
     const newTitle = 'Vanderbilt week 1';
     const modal = render(
       <ArtifactEditModal

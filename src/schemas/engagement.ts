@@ -5,6 +5,7 @@ import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
 import { EngagementCategory } from './engagement_category';
 import { HostingEnvironment } from './hosting_environment';
+import { mockEngagementArtifact } from '../mocks/engagement_mocks';
 
 export enum EngagementStatus {
   active = 'active',
@@ -50,20 +51,6 @@ export interface Artifact {
   title: string;
   type: string;
   description: string;
-}
-
-export abstract class Artifact {
-  static fromFake(staticData = false): Artifact {
-    return {
-      id: staticData ? '1' : faker.random.uuid(),
-      linkAddress: staticData ? 'https://example.com' : faker.internet.url(),
-      title: staticData ? 'An engagement artifact' : faker.lorem.words(3),
-      type: 'demo',
-      description: staticData
-        ? 'Artifact Description'
-        : faker.lorem.paragraph(),
-    };
-  }
 }
 
 export interface EngagementOverview {
@@ -193,7 +180,7 @@ export abstract class Engagement {
       additional_details: staticData
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
-      artifacts: [Artifact.fromFake(staticData)],
+      artifacts: [mockEngagementArtifact(staticData)],
       commits: [GitCommit.fromFake(staticData)],
       customer_contact_email: staticData
         ? 'bob@doe.com'
