@@ -27,6 +27,8 @@ import { SortOrder } from '../../services/engagement_service/engagement_service'
 import { useHistory } from 'react-router';
 import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_cases';
 import { withUseCases } from '../../hocs/with_use_cases';
+import { withArtifacts } from '../../hocs/with_artifacts';
+import { DwLastArtifacts } from '../../components/dashboard/widgets/dw_last_artifact';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -186,6 +188,9 @@ export function Dashboard() {
             </GridItem>
             <GridItem sm={12} xl={12} xl2={6}>
               {withUseCases(DwLastUseCases)}
+            </GridItem>
+            <GridItem sm={12} xl={12} xl2={6}>
+              {withArtifacts(DwLastArtifacts)}
             </GridItem>
           </Grid>
         </div>
