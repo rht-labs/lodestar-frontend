@@ -7,6 +7,7 @@ import {
   EngagementContext,
   IEngagementContext,
 } from '../../../context/engagement_context/engagement_context';
+import { mockEngagementFormConfig } from '../../../mocks/engagement_form_config_mocks';
 
 describe('Point of Contact edit modal', () => {
   test('matches snapshot', () => {
@@ -16,7 +17,7 @@ describe('Point of Contact edit modal', () => {
         <EngagementContext.Provider
           value={
             {
-              engagementFormConfig: EngagementFormConfig.fromFake(),
+              engagementFormConfig: mockEngagementFormConfig(),
             } as IEngagementContext
           }
         >
@@ -40,7 +41,7 @@ describe('Point of Contact edit modal', () => {
       <EngagementContext.Provider
         value={
           ({
-            engagementFormConfig: EngagementFormConfig.fromFake(),
+            engagementFormConfig: mockEngagementFormConfig(),
           } as unknown) as IEngagementContext
         }
       >

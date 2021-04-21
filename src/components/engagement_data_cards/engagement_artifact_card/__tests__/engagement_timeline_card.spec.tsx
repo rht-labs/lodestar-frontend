@@ -8,6 +8,7 @@ import { FeatureToggles } from '../../../../context/feature_context/feature_togg
 import { EngagementContext } from '../../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../../schemas/engagement_config';
 import { Artifact } from '../../../../schemas/engagement';
+import { mockEngagementFormConfig } from '../../../../mocks/engagement_form_config_mocks';
 
 describe('Engagement timeline card', () => {
   test('should not be rendered for reader role', async () => {
@@ -33,7 +34,7 @@ describe('Engagement timeline card', () => {
             value={{
               updateEngagementFormField: onUpdateField,
               engagementFormConfig: {
-                ...EngagementFormConfig.fromFake(),
+                ...mockEngagementFormConfig(),
               },
             }}
           >

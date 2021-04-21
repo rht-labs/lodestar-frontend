@@ -6,6 +6,7 @@ import {
   IEngagementContext,
 } from '../../../context/engagement_context/engagement_context';
 import { EngagementFormConfig } from '../../../schemas/engagement_config';
+import { mockEngagementFormConfig } from '../../../mocks/engagement_form_config_mocks';
 
 const getById = queryByAttribute.bind(null, 'id');
 
@@ -16,7 +17,7 @@ describe('Engagement Navigation ', () => {
         <EngagementContext.Provider
           value={
             {
-              engagementFormConfig: EngagementFormConfig.fromFake(),
+              engagementFormConfig: mockEngagementFormConfig(),
             } as IEngagementContext
           }
         >
@@ -30,7 +31,7 @@ describe('Engagement Navigation ', () => {
       <EngagementContext.Provider
         value={
           {
-            engagementFormConfig: EngagementFormConfig.fromFake(),
+            engagementFormConfig: mockEngagementFormConfig(),
           } as IEngagementContext
         }
       >

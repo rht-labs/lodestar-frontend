@@ -30,6 +30,7 @@ export const EngagementQueryMediator = (
       pageNumber: propsFilter?.pageNumber,
       sortField: propsFilter?.sortField,
       sortOrder: propsFilter?.sortOrder,
+      include: propsFilter?.include,
     };
     getEngagements(filter);
   }, [
@@ -38,6 +39,7 @@ export const EngagementQueryMediator = (
     propsFilter?.pageNumber,
     propsFilter?.startDate,
     propsFilter?.sortField,
+    propsFilter?.include,
     propsFilter?.sortOrder,
     getEngagements,
     propsFilter?.engagementRegions,

@@ -11,6 +11,7 @@ import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { CategoryService } from '../../../services/category_service/category_service';
 import { HostingEnvironment } from '../../../schemas/hosting_environment';
 import { waitFor } from '@testing-library/react';
+import { mockEngagementFormConfig } from '../../../mocks/engagement_form_config_mocks';
 
 describe('Engagement Context', () => {
   const getHook = () => {
@@ -201,7 +202,7 @@ describe('Engagement Context', () => {
       return (
         <EngagementProvider
           categoryService={{} as CategoryService}
-          engagementFormConfig={EngagementFormConfig.fromFake()}
+          engagementFormConfig={mockEngagementFormConfig()}
           feedbackContext={fakedFeedbackContext}
           engagementService={
             ({
@@ -323,7 +324,7 @@ describe('Engagement Context', () => {
       return (
         <EngagementProvider
           categoryService={{} as CategoryService}
-          engagementFormConfig={EngagementFormConfig.fromFake()}
+          engagementFormConfig={mockEngagementFormConfig()}
           feedbackContext={fakedFeedbackContext}
           engagementService={
             ({
@@ -363,7 +364,7 @@ describe('Engagement Context', () => {
       return (
         <EngagementProvider
           categoryService={{} as CategoryService}
-          engagementFormConfig={EngagementFormConfig.fromFake()}
+          engagementFormConfig={mockEngagementFormConfig()}
           feedbackContext={fakedFeedbackContext}
           engagementService={
             ({

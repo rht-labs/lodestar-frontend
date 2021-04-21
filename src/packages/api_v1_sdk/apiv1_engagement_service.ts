@@ -29,6 +29,12 @@ export class Apiv1EngagementService implements EngagementService {
   ): string {
     let queries = [];
     let searchParams = [];
+    if (!parameters.endDate && parameters.startDate) {
+      parameters.endDate = new Date();
+    }
+    if (!parameters.startDate && parameters.endDate) {
+      parameters.startDate = new Date();
+    }
     if (parameters.endDate) {
       searchParams.push(
         `end=${parameters.endDate.toISOString().split('T')[0]}`
@@ -48,9 +54,7 @@ export class Apiv1EngagementService implements EngagementService {
     ) {
       searchParams.push(`state=${parameters.engagementStatuses.join(',')}`);
     }
-    if (searchParams.length > 0) {
-      queries.push(`search=${searchParams.join(',')}`);
-    }
+
     if (parameters.include && parameters.include.length > 0) {
       queries.push(`include=${parameters.include.join(',')}`);
     }
@@ -65,6 +69,9 @@ export class Apiv1EngagementService implements EngagementService {
         `sortOrder=${parameters.sortOrder === SortOrder.DESC ? 'DESC' : 'ASC'}`
       );
       queries.push(`sortFields=${parameters.sortField}`);
+    }
+    if (searchParams.length > 0) {
+      queries.push(`search=${encodeURIComponent(searchParams.join('&'))}`);
     }
 
     return queries.join('&');
