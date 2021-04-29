@@ -1,5 +1,3 @@
-import FakedSchema from './fixtures/engagement_form_config.json';
-
 export interface EngagementFormOption {
   disabled?: boolean;
   label: string;
@@ -60,10 +58,4 @@ export interface EngagementFormConfig {
   user_options: EngagementFormUserOptions;
   logistics_options: EngagementFormLogisticsOptions;
   artifact_options: EngagementFormArtifactOptions;
-}
-
-export abstract class EngagementFormConfig {
-  static fromFake(): EngagementFormConfig {
-    return FakedSchema;
-  }
 }

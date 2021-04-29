@@ -16,6 +16,7 @@ import {
   EngagementContext,
   IEngagementContext,
 } from '../../../context/engagement_context/engagement_context';
+import { mockEngagementArtifact } from '../../../mocks/engagement_mocks';
 
 describe('Engagement Artifact Card', () => {
   test('matches snapshot', () => {
@@ -28,7 +29,7 @@ describe('Engagement Artifact Card', () => {
               ...e,
               artifacts: new Array(20)
                 .fill(null)
-                .map(() => Artifact.fromFake(true)),
+                .map(() => mockEngagementArtifact(true)),
             },
           } as unknown) as IEngagementContext
         }
@@ -76,7 +77,9 @@ describe('Engagement Artifact Card', () => {
           >
             <EngagementContext.Provider
               value={{
-                currentEngagement: { artifacts: [Artifact.fromFake(true)] },
+                currentEngagement: {
+                  artifacts: [mockEngagementArtifact(true)],
+                },
               }}
             >
               <EngagementArtifactCard />

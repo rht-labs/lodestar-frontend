@@ -104,7 +104,9 @@ Object {
                         class=""
                         data-cy="lodestar_version"
                         data-pf-content="true"
-                      />
+                      >
+                        Unknown
+                      </p>
                     </div>
                   </div>
                   <div
@@ -249,7 +251,9 @@ Object {
                       class=""
                       data-cy="lodestar_version"
                       data-pf-content="true"
-                    />
+                    >
+                      Unknown
+                    </p>
                   </div>
                 </div>
                 <div

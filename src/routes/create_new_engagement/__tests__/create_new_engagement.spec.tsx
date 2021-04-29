@@ -12,6 +12,7 @@ import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { APP_FEATURES } from '../../../common/app_features';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
 import { Engagement } from '../../../schemas/engagement';
+import { mockEngagementFormConfig } from '../../../mocks/engagement_form_config_mocks';
 
 describe('Create New Engagement Route', () => {
   const getComponent = () => {
@@ -59,7 +60,7 @@ describe('Create New Engagement Route', () => {
               engagements: [e],
               getEngagements: async () => [],
               createEngagement,
-              engagementFormConfig: EngagementFormConfig.fromFake(),
+              engagementFormConfig: mockEngagementFormConfig(),
             } as unknown) as IEngagementContext
           }
         >

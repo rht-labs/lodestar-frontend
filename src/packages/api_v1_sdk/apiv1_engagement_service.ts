@@ -1,4 +1,8 @@
-import { EngagementService } from '../../services/engagement_service/engagement_service';
+import {
+  EngagementSearchParameters,
+  EngagementService,
+  SortOrder,
+} from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
@@ -20,13 +24,72 @@ export class Apiv1EngagementService implements EngagementService {
       .catch(() => false);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
-  async fetchEngagements(): Promise<Engagement[]> {
+  private buildQueryStringFromParameters(
+    parameters: EngagementSearchParameters
+  ): string {
+    let queries = [];
+    let searchParams = [];
+    if (!parameters.endDate && parameters.startDate) {
+      parameters.endDate = new Date();
+    }
+    if (!parameters.startDate && parameters.endDate) {
+      parameters.startDate = new Date();
+    }
+    if (parameters.endDate) {
+      searchParams.push(
+        `end=${parameters.endDate.toISOString().split('T')[0]}`
+      );
+    }
+    if (parameters.startDate) {
+      searchParams.push(
+        `start=${parameters.startDate.toISOString().split('T')[0]}`
+      );
+    }
+    if (parameters.regions && parameters.regions.length > 0) {
+      searchParams.push(`engagement_region=${parameters.regions.join(',')}`);
+    }
+    if (
+      parameters.engagementStatuses &&
+      parameters.engagementStatuses.length > 0
+    ) {
+      searchParams.push(`state=${parameters.engagementStatuses.join(',')}`);
+    }
+
+    if (parameters.include && parameters.include.length > 0) {
+      queries.push(`include=${parameters.include.join(',')}`);
+    }
+    if (parameters.pageNumber) {
+      queries.push(`page=${parameters.pageNumber}`);
+    }
+    if (parameters.perPage) {
+      queries.push(`perPage=${parameters.perPage}`);
+    }
+    if (parameters.sortOrder && parameters.sortField) {
+      queries.push(
+        `sortOrder=${parameters.sortOrder === SortOrder.DESC ? 'DESC' : 'ASC'}`
+      );
+      queries.push(`sortFields=${parameters.sortField}`);
+    }
+    if (searchParams.length > 0) {
+      queries.push(`search=${encodeURIComponent(searchParams.join('&'))}`);
+    }
+
+    return queries.join('&');
+  }
+  async fetchEngagements(
+    params?: EngagementSearchParameters
+  ): Promise<Engagement[]> {
     try {
-      const { data: engagementsData } = await this.axios.get(`/engagements`);
+      const qs = this.buildQueryStringFromParameters(params);
+      console.log(qs);
+      const { data: engagementsData } = await this.axios.get(
+        `/engagements${qs.length > 0 ? '?' + qs : ''}`
+      );
       const serializedEngagements = engagementsData.map(
         (engagementMap: { [key: string]: any }) =>
           Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
       );
+      // return this.filterForParams(serializedEngagements, params);
       return serializedEngagements;
     } catch (e) {
       if (e.isAxiosError) {
@@ -80,7 +143,9 @@ export class Apiv1EngagementService implements EngagementService {
   async launchEngagement(engagementData: Engagement): Promise<Engagement> {
     try {
       const { data } = await this.axios.put(`/engagements/launch`, {
-        ...engagementData,
+        ...Apiv1EngagementService.engagementSerializer.serialize(
+          engagementData
+        ),
         commit_message: 'Engagement Launched',
       });
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
@@ -137,7 +202,11 @@ export class Apiv1EngagementService implements EngagementService {
       `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
     );
 
-    return engagement['last_update'] !== response?.headers?.['last-update'];
+    const lastUpdatedTimestamp = engagement.last_update_id;
+
+    const headerStamp = response?.headers?.['last-update'];
+
+    return lastUpdatedTimestamp !== headerStamp;
   }
 
   async getEngagementByCustomerAndProjectName(

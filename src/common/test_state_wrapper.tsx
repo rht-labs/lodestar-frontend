@@ -17,7 +17,7 @@ import {
 import { AnalyticsProvider } from '../context/analytics_context/analytics_context';
 import { createFakedServices } from '../services/factories/service_factory';
 import { MemoryRouter } from 'react-router';
-import { EngagementFormConfig } from '../schemas/engagement_config';
+import { mockEngagementFormConfig } from '../mocks/engagement_form_config_mocks';
 
 export const TestStateWrapper = ({ children = null }) => {
   return (
@@ -46,7 +46,7 @@ function TestContexts({ children = null }) {
           {feedbackContext => (
             <AuthProvider authService={authService}>
               <EngagementProvider
-                engagementFormConfig={EngagementFormConfig.fromFake()}
+                engagementFormConfig={mockEngagementFormConfig()}
                 categoryService={categoryService}
                 feedbackContext={feedbackContext}
                 engagementService={engagementService}

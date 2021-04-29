@@ -110,13 +110,11 @@ const FeatureProvider = ({ children }) => {
     }
   }
   const authContext = useSession();
+  const providedFeatures = [
+    ...(authContext.roles ?? []),
+    ...getFeaturesFromVersion(version, FEATURE_VERSION_MAP),
+  ];
   return (
-    <FeatureToggles
-      features={(authContext?.roles ?? []).concat(
-        getFeaturesFromVersion(version, FEATURE_VERSION_MAP) ?? []
-      )}
-    >
-      {children}
-    </FeatureToggles>
+    <FeatureToggles features={providedFeatures}>{children}</FeatureToggles>
   );
 };

@@ -41,7 +41,7 @@ export abstract class Config {
           backgroundcolor: '#FF0000',
         },
       ],
-      allowVersionOverride: false,
+      allowVersionOverride: true,
     };
   }
 }

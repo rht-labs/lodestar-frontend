@@ -17,19 +17,26 @@ import { AnalyticsService } from '../analytics_service/analytics_service';
 import { GoogleAnalytics } from '../analytics_service/google_analytics';
 import { FakedAnalytics } from '../analytics_service/faked_analytics';
 import { ApiV1 } from '../../packages/api_v1_sdk/apiv1';
+import { UseCaseService } from '../use_case_service/use_case_service';
+import { Apiv1UseCasesService } from '../../packages/api_v1_sdk/apiv1_use_cases_service';
+import { Apiv1ArtifactService } from '../../packages/api_v1_sdk/apiv1_artifact_service';
+import { ArtifactService } from '../artifact_service/artifact_service';
 
 export type ServiceFactory = () => {
+  artifactService: ArtifactService;
   engagementService: EngagementService;
   authService: AuthService;
   versionService: VersionService;
   notificationService: NotificationService;
   categoryService: CategoryService;
   analyticsService: AnalyticsService;
+  useCaseService: UseCaseService;
 };
 
 export const createApiV1Services = (config: Config): ServiceFactory => () => {
   ApiV1.initialize({ ...config, roleMapping: config.roles });
   return {
+    artifactService: new Apiv1ArtifactService(),
     analyticsService: new GoogleAnalytics({
       trackingCode: config.analyticsTrackingCode,
     }),
@@ -38,6 +45,7 @@ export const createApiV1Services = (config: Config): ServiceFactory => () => {
     notificationService: new FakedNotificationService(),
     versionService: new Apiv1VersionService(),
     categoryService: new Apiv1CategoryService(),
+    useCaseService: new Apiv1UseCasesService(),
   };
 };
 
@@ -55,5 +63,7 @@ export const createFakedServices = (
     notificationService: new FakedNotificationService(),
     versionService: new FakedVersionService(),
     categoryService: new FakedCategoryService(),
+    useCaseService: {},
+    artifactService: {},
   };
 };

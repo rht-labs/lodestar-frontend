@@ -7,6 +7,7 @@ export const APP_FEATURES = {
   notifications: 'notifications',
   engagementCardIcons: 'engagementCardIcons',
   resetUser: 'resetUser',
+  newDashboard: 'newDashboard',
 };
 
 export type AppFeature = keyof typeof APP_FEATURES;

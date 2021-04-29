@@ -365,7 +365,7 @@ export const EngagementProvider = ({
         let commitMessage = `Changed ${changedGroups.join(
           ', '
         )}\nThe following fields were changed:\n${changedFields.join('\n')}`;
-        if (engagementChanges?.engagement_users?.some?.(user => user.reset)) {
+        if (engagementChanges?.engagement_users?.some?.(user => user?.reset)) {
           commitMessage += '\nThe following users have been reset:';
           engagementChanges.engagement_users
             .filter(u => u.reset)
