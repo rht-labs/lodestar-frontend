@@ -24,6 +24,26 @@ jobs:
         fi
     - uses: actions/checkout@v2
       if: steps.need_to_build.outputs.need_to_build == 1
+    - name: Find and Replace Commit Manifest
+      if: steps.need_to_build.outputs.need_to_build == 1
+      uses: jacobtomlinson/gha-find-replace@0.1.1
+      with:
+        find: "4e3f530local"
+        replace: "${{ github.sha }}"
+        include: "public/manifest.json"
+      - name: npm install, build, and test
+        if: steps.need_to_build.outputs.need_to_build == 1
+        run: |
+          ./build.sh
+        env:
+          CI: true
+      - name: Find and Replace Commit Env
+        if: steps.need_to_build.outputs.need_to_build == 1
+        uses: jacobtomlinson/gha-find-replace@0.1.1
+        with:
+          find: "###GIT_COMMIT###"
+          replace: "${{ github.sha }}"
+          include: "build/.s2i"
     - uses: redhat-cop/github-actions/s2i@v2
       if: steps.need_to_build.outputs.need_to_build == 1
       with:
