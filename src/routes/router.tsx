@@ -47,7 +47,7 @@ export function LodestarRouter() {
               <Switch>
                 {/* all other routes should be considered private */}
                 <PrivateRoute path="/">
-                  <Feature name={'writer'} inactiveComponent={UnauthorizedPage}>
+                  <Feature name={'reader'} inactiveComponent={UnauthorizedPage}>
                     {/* if a user is not authorized, show the unauthorized page */}
                     <Switch>
                       {/* else, show an authorized route */}
