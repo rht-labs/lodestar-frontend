@@ -153,45 +153,47 @@ export function Dashboard() {
                 )}
               />
             </GridItem>
-            <GridItem colSpan={2} sm={12} md={6}>
-              <EngagementQueryMediator
-                filter={{
-                  startDate: dateFilter?.startDate,
-                  endDate: dateFilter?.endDate,
-                  include: ['engagement_users'],
-                }}
-                component={DashboardPeopleEnabledCard}
-              />
-            </GridItem>
-            <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-              {withCategories(DwTopTags, {})}
-            </GridItem>
-            <GridItem sm={12} xl={12} xl2={6}>
-              <EngagementQueryMediator
-                filter={{
-                  pageNumber: 1,
-                  perPage: 5,
-                  sortField: 'last_update',
-                  sortOrder: SortOrder.DESC,
-                }}
-                component={props => (
-                  <DwLastUpdated
-                    {...props}
-                    onClick={(customerName, projectName) => {
-                      history.push(
-                        `/app/engagements/${customerName}/${projectName}/`
-                      );
-                    }}
-                  />
-                )}
-              />
-            </GridItem>
-            <GridItem sm={12} xl={12} xl2={6}>
-              {withUseCases(DwLastUseCases)}
-            </GridItem>
-            <GridItem sm={12} xl={12} xl2={6}>
-              {withArtifacts(DwLastArtifacts)}
-            </GridItem>
+            <Feature name={"newDashboard"}>
+              <GridItem colSpan={2} sm={12} md={6}>
+                <EngagementQueryMediator
+                  filter={{
+                    startDate: dateFilter?.startDate,
+                    endDate: dateFilter?.endDate,
+                    include: ['engagement_users'],
+                  }}
+                  component={DashboardPeopleEnabledCard}
+                />
+              </GridItem>
+              <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
+                {withCategories(DwTopTags, {})}
+              </GridItem>
+              <GridItem sm={12} xl={12} xl2={6}>
+                <EngagementQueryMediator
+                  filter={{
+                    pageNumber: 1,
+                    perPage: 5,
+                    sortField: 'last_update',
+                    sortOrder: SortOrder.DESC,
+                  }}
+                  component={props => (
+                    <DwLastUpdated
+                      {...props}
+                      onClick={(customerName, projectName) => {
+                        history.push(
+                          `/app/engagements/${customerName}/${projectName}/`
+                        );
+                      }}
+                    />
+                  )}
+                />
+              </GridItem>
+              <GridItem sm={12} xl={12} xl2={6}>
+                {withUseCases(DwLastUseCases)}
+              </GridItem>
+              <GridItem sm={12} xl={12} xl2={6}>
+                {withArtifacts(DwLastArtifacts)}
+              </GridItem>
+            </Feature>
           </Grid>
         </div>
       </PageSection>
