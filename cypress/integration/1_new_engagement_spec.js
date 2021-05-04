@@ -41,7 +41,7 @@ describe('new engagement', () => {
       .click();
 
     cy.get('[data-cy=project-name]').type(testEngagementName);
-    cy.get('[data-cy=new_engagement_region]').select('DEV').should('have.value', 'dev-1');
+    cy.get('[data-cy=new_engagement_region]').select('DEV').should('have.value', 'dev');
     cy.get('[data-cy=createNewEngagement]').click();
 
     cy.wait('@createEngagement').should('have.property', 'status', 201);
