@@ -121,7 +121,7 @@ export const EngagementDetailView = () => {
               }}
             />
           </Route>
-          <Route path={`${url}/`}>
+          <Route path={`/`}>
             <EngagementOverview />
           </Route>
         </Switch>
