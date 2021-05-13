@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /// <reference types="cypress" />
 
 describe('navigation', () => {
@@ -26,7 +27,7 @@ describe('navigation', () => {
       .should('not.have.class', 'pf-m-expanded');
   });
 
-  it('navigates to active engagements', () => {
+  it('uses Navbar to navigate to ACTIVE engagements', () => {
     cy.visit('/app/dashboard');
     cy.contains('Dashboard');
 
@@ -45,19 +46,15 @@ describe('navigation', () => {
     cy.get('[data-cy=past]').should('not.exist');
   });
 
-  it('navigates to upcoming engagements', () => {
+  it('uses Navbar to navigate to UPCOMING engagements', () => {
     cy.contains('Upcoming').click();
-
     cy.get('[data-cy=active]').should('not.exist');
-
     cy.get('[data-cy=past]').should('not.exist');
   });
 
-  it('navigates to past engagements', () => {
+  it('uses Navbar to navigate to PAST engagements', () => {
     cy.contains('Past').click();
-
     cy.get('[data-cy=active]').should('not.exist');
-
     cy.get('[data-cy=upcoming]').should('not.exist');
   });
 
