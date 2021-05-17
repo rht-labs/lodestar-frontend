@@ -86,7 +86,7 @@ export class EngagementJsonSerializer
 
   private static deserializeArtifact(data: object): Artifact {
     return {
-      uuid: data['id'] ?? uuid(),
+      uuid: data['uuid'] ?? uuid(),
       type: data['type'],
       title: data['title'],
       linkAddress: data['link_address'],
