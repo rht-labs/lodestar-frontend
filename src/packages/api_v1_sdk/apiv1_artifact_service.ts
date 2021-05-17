@@ -6,18 +6,18 @@ export class Apiv1ArtifactService implements ArtifactService {
   private get axios() {
     return getApiV1HttpClient();
   }
-  private apiResponseToZrtifact = (apiResponseObject: any): Artifact => {
+  private apiResponseToArtifact = (apiResponseObject: any): Artifact => {
     return {
       description: apiResponseObject['description'],
       linkAddress: apiResponseObject['link_address'],
-      id: apiResponseObject['uuid'],
+      uuid: apiResponseObject['uuid'],
       title: apiResponseObject['title'],
       type: apiResponseObject['type'],
     };
   };
   async getArtifacts(): Promise<Artifact[]> {
-    const { data } = await this.axios.get('/engagements/artifacts');
-    const engagementUseCases = data.map(this.apiResponseToZrtifact);
+    const { data } = await this.axios.get(`/engagements/artifacts`);
+    const engagementUseCases = data.map(this.apiResponseToArtifact);
     return engagementUseCases;
   }
 }
