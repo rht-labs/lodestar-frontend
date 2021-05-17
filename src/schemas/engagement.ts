@@ -46,7 +46,7 @@ export interface EngagementUseCase {
 }
 
 export interface Artifact {
-  id: string;
+  uuid: string;
   linkAddress: string;
   title: string;
   type: string;

@@ -571,7 +571,7 @@ export const useEngagementArtifacts = () => {
   );
   const addArtifact = (artifact: Artifact) => {
     const artifactsCopy = [...artifacts];
-    const index = artifactsCopy.findIndex(a => a.id === artifact.id);
+    const index = artifactsCopy.findIndex(a => a.uuid === artifact.uuid);
     if (index > -1) {
       artifactsCopy.splice(index, 1, artifact);
     } else {
@@ -582,7 +582,7 @@ export const useEngagementArtifacts = () => {
   };
   const removeArtifact = (artifact: Artifact) => {
     const artifactsClone = [...artifacts];
-    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    const removeIndex = artifacts.findIndex(a => a.uuid === artifact.uuid);
     artifactsClone.splice(removeIndex, 1);
     setArtifacts(artifactsClone);
     return artifactsClone;
@@ -590,7 +590,7 @@ export const useEngagementArtifacts = () => {
 
   const updateArtifact = (artifact: Artifact) => {
     const artifactsClone = [...artifacts];
-    const removeIndex = artifacts.findIndex(a => a.id === artifact.id);
+    const removeIndex = artifacts.findIndex(a => a.uuid === artifact.uuid);
     artifactsClone.splice(removeIndex, 1, artifact);
     setArtifacts(artifactsClone);
     return artifactsClone;
