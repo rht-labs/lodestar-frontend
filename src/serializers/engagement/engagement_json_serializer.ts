@@ -18,7 +18,7 @@ export class EngagementJsonSerializer
   private static parseDate(dateInput: any): Date | undefined {
     if (typeof dateInput === 'string') {
       try {
-        let parsedDate;
+        let parsedDate: Date | undefined;
         parsedDate = parseISO(dateInput);
         if (isValid(parsedDate)) {
           return parsedDate;
@@ -86,7 +86,7 @@ export class EngagementJsonSerializer
 
   private static deserializeArtifact(data: object): Artifact {
     return {
-      id: data['id'] ?? uuid(),
+      uuid: data['uuid'] ?? uuid(),
       type: data['type'],
       title: data['title'],
       linkAddress: data['link_address'],

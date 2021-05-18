@@ -10,7 +10,7 @@ export const mockEngagementUseCase = (): EngagementUseCase => {
 
 export const mockEngagementArtifact = (useStaticData = false): Artifact => {
   return {
-    id: useStaticData ? '1' : faker.random.uuid(),
+    uuid: useStaticData ? '1' : faker.random.uuid(),
     linkAddress: useStaticData ? 'https://example.com' : faker.internet.url(),
     title: useStaticData ? 'An engagement artifact' : faker.lorem.words(3),
     type: 'demo',

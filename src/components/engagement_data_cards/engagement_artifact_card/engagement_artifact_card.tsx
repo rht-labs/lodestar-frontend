@@ -52,21 +52,21 @@ export function EngagementArtifactCard() {
 
   const onEditArtifact = (artifact: Artifact) => {
     requestOpen(getModalKey());
-    setCurrentArtifactId(artifact.id);
+    setCurrentArtifactId(artifact.uuid);
   };
 
   const openArtifactModal = () => {
     const newArtifact: Partial<Artifact> = {
-      id: uuid(),
+      uuid: uuid(),
       type: artifactTypes[0]?.value,
     };
     addArtifact(newArtifact as Artifact);
     requestOpen(getModalKey());
-    setCurrentArtifactId(newArtifact.id);
+    setCurrentArtifactId(newArtifact.uuid);
   };
 
   const indexedArtifactChanges =
-    artifacts.reduce?.((p, c) => ({ ...p, [c.id]: c }), {}) ?? {};
+    artifacts.reduce?.((p, c) => ({ ...p, [c.uuid]: c }), {}) ?? {};
 
   const onSave = (artifacts: Artifact[]) =>
     saveEngagement({ ...currentChanges, artifacts });
