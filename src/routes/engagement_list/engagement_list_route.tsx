@@ -98,6 +98,10 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
       <PageSection>
         <div style={{ margin: '0 1rem' }}>
           <EngagementFilterBar
+            availableRegions={
+              engagementFormConfig?.basic_information?.engagement_regions
+                ?.options ?? []
+            }
             filter={filterDefinition}
             onChange={handleChange}
           />
