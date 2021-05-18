@@ -16,6 +16,7 @@ import {
   useAnalytics,
   AnalyticsCategory,
 } from '../../context/analytics_context/analytics_context';
+import { EngagementStatus } from '../../schemas/engagement';
 
 export interface EngagementFilterBarProps {
   onChange: (filter: EngagementFilter) => void;
@@ -36,6 +37,14 @@ export function EngagementFilterBar({
       category: AnalyticsCategory.search,
       action: 'Filtered engagement list',
     });
+  };
+  
+  const updateAllowedStatuses = (status: EngagementStatus) => {
+    return status
+      ? status === EngagementStatus.past
+        ? [EngagementStatus.past, EngagementStatus.terminating]
+        : [status]
+      : undefined;
   };
   return (
     <Flex justifyContent={{ default: 'justifyContentFlexStart' }}>
@@ -62,11 +71,16 @@ export function EngagementFilterBar({
           </InputGroup>
         </FlexItem>
         <FlexItem>
-          <EngagementStatusSelect onChange={onChange} filter={filter} />
+          <EngagementStatusSelect onChange={(status)=> {
+            onChange({
+              ...filter,
+              allowedStatuses: updateAllowedStatuses(status),
+            })
+          }} selectedStatuses={filter?.allowedStatuses ?? []}/>
         </FlexItem>
         <FlexItem>
           <EngagementRegionSelect
-            regions={availableRegions}
+            regions={availableRegions ?? []}
             onChange={selection => {
               if (selection === 'any') {
                 return onChange({
