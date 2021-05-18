@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /// <reference types="cypress" />
 
 describe('existing engagement engagement', () => {
@@ -5,23 +6,9 @@ describe('existing engagement engagement', () => {
     cy.login();
   });
 
-  it('navigate from dashboard to all engagements', () => {
-    cy.visit('/app/dashboard');
-    cy.contains('Dashboard');
-
-    cy.get('[data-cy=numbers_of_l]').should('exist');
-    cy.get('[data-cy=numbers_of_p]').should('exist');
-    cy.get('[data-cy=numbers_of_c]').should('exist');
-    cy.get('[data-cy=numbers_of_a]').should('exist');
-
-    cy.get('[data-cy=button_l]').click();
-  });
-
-  it('can create new engagement by clicking the button', () => {
-    cy.get('[data-cy=create-new-engagement]').click();
-  });
-
   it('searches for an engagement', () => {
+    cy.visit('/app/engagements/all');
+    cy.get('[data-cy=search_input]').should('exist');
     cy.get('[data-cy=search_input]').type('cypress');
 
     cy.get('[data-cy=engagement_cards_section]')

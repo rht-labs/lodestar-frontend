@@ -18,6 +18,7 @@ import {
   TachometerAltIcon,
 } from '@patternfly/react-icons';
 import React, { ComponentClass } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Engagement,
   EngagementStatus,
@@ -25,42 +26,54 @@ import {
 } from '../../../schemas/engagement';
 import { SVGIconProps } from '@patternfly/react-icons/dist/js/createIcon';
 
+
 export interface EngagementCountWidgetProps {
   engagements?: Partial<Engagement>[];
 }
 interface CountComponentProps {
   count: number;
-  title: string;
-  subtitle: string;
   icon: ComponentClass<SVGIconProps>;
+  status: string;
+  subtitle: string;
+  title: string;
 }
-const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => (
-  <Flex
-    direction={{ default: 'column' }}
-    alignItems={{ default: 'alignItemsCenter' }}
-    justifyContent={{ default: 'justifyContentCenter' }}
-    style={{ height: '100%' }}
-  >
-    <FlexItem flex={{ default: 'flex_1' }}>
-      <Text component={TextVariants.h4}>{props.title}</Text>
-    </FlexItem>
-    <FlexItem>
-      <Flex
-        direction={{ default: 'column' }}
-        justifyContent={{ default: 'justifyContentFlexEnd' }}
-        alignItems={{ default: 'alignItemsCenter' }}
-      >
-        <Component size="xl" />
-        <TextContent>
-          <Text component={TextVariants.h1}>{props.count}</Text>
-          <Text style={{ fontStyle: 'italic', fontSize: '0.8em' }}>
-            {props.subtitle}
+const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => {
+  return(
+    <Flex
+      direction={{ default: 'column' }}
+      alignItems={{ default: 'alignItemsCenter' }}
+      justifyContent={{ default: 'justifyContentCenter' }}
+      style={{ height: '100%' }}
+    >
+      <FlexItem flex={{ default: 'flex_1' }}>
+        <Link
+          to={`/app/engagements/${props.status}`}
+          data-cy={`button_${props.status}`}
+        >
+          <Text component={TextVariants.h4}>
+            {props.title}
           </Text>
-        </TextContent>
-      </Flex>
-    </FlexItem>
-  </Flex>
-);
+        </Link>
+      </FlexItem>
+      <FlexItem>
+        <Flex
+          direction={{ default: 'column' }}
+          justifyContent={{ default: 'justifyContentFlexEnd' }}
+          alignItems={{ default: 'alignItemsCenter' }}
+        >
+          <Component size="xl" />
+          <TextContent>
+            <Text component={TextVariants.h1}>{props.count}</Text>
+            <Text style={{ fontStyle: 'italic', fontSize: '0.8em' }}>
+              {props.subtitle}
+            </Text>
+          </TextContent>
+        </Flex>
+      </FlexItem>
+    </Flex>
+  ) 
+};
+
 export const EngagementCountWidget = (
   props: EngagementCountWidgetProps = {}
 ) => {
@@ -99,32 +112,36 @@ export const EngagementCountWidget = (
                   <CountComponent
                     count={engagementCounts[0]}
                     icon={TachometerAltIcon}
-                    title="All Engagements"
+                    status={'all'}
                     subtitle={'All engagements in the system.'}
+                    title="All Engagements"
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
                   <CountComponent
                     count={engagementCounts[1]}
                     icon={OnRunningIcon}
-                    title="Active Engagements"
+                    status={'active'}
                     subtitle={'Engagements in progress.'}
+                    title="Active Engagements"
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
                   <CountComponent
                     count={engagementCounts[2]}
                     icon={PendingIcon}
-                    title="Upcoming Engagements"
+                    status={'upcoming'}
                     subtitle={'Engagements in the future.'}
+                    title="Upcoming Engagements"
                   />
                 </GridItem>
                 <GridItem md={6} lg={3}>
                   <CountComponent
                     count={engagementCounts[3]}
                     icon={AsleepIcon}
-                    title="Past Engagements"
+                    status={'past'}
                     subtitle={'All completed engagements.'}
+                    title="Past Engagements"
                   />
                 </GridItem>
               </Grid>
