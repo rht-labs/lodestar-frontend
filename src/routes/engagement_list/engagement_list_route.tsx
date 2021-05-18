@@ -21,6 +21,7 @@ import { Feature } from '../../components/feature/feature';
 import { useFeedback } from '../../context/feedback_context/feedback_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
+import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 
 export interface EngagementListRouteProps {
   filter?: (engagement: Engagement) => boolean;
@@ -34,6 +35,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const feedbackContext = useFeedback();
 
   const { engagementService } = useServiceProviders();
+  const { engagementFormConfig } = useEngagementFormConfig(engagementService);
   const {
     engagements: contextEngagements,
     getEngagements,

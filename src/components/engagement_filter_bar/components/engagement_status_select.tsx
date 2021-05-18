@@ -6,13 +6,13 @@ import {
   SelectOption,
 } from '@patternfly/react-core';
 import { EngagementStatus } from '../../../schemas/engagement';
-import { EngagementFilterProps } from '../engagement_filter_bar';
+import { EngagementFilterBarProps } from '../engagement_filter_bar';
 import { FilterIcon } from '@patternfly/react-icons';
 
 export function EngagementStatusSelect({
   onChange,
   filter,
-}: EngagementFilterProps) {
+}: EngagementFilterBarProps) {
   const [isStatusSelectOpen, setIsStatusSelectOpen] = useState<boolean>(false);
 
   const getStatusDisplayValue = (status: EngagementStatus) => {

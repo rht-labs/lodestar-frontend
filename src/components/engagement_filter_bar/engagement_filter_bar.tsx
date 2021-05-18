@@ -16,18 +16,18 @@ import {
   useAnalytics,
   AnalyticsCategory,
 } from '../../context/analytics_context/analytics_context';
-import { useEngagement } from '../../context/engagement_context/engagement_hook';
 
-export interface EngagementFilterProps {
+export interface EngagementFilterBarProps {
   onChange: (filter: EngagementFilter) => void;
+  availableRegions: { label: string; value: string }[];
   filter: EngagementFilter;
 }
 
 export function EngagementFilterBar({
   onChange: _propsOnChange,
   filter,
-}: EngagementFilterProps) {
-  const { engagementFormConfig } = useEngagement();
+  availableRegions,
+}: EngagementFilterBarProps) {
   const { searchTerm = '' } = filter ?? {};
   const { logEvent } = useAnalytics();
   const onChange = (filter: EngagementFilter) => {
@@ -66,14 +66,20 @@ export function EngagementFilterBar({
         </FlexItem>
         <FlexItem>
           <EngagementRegionSelect
-            regions={
-              engagementFormConfig?.basic_information?.engagement_regions
-                ?.options ?? []
-            }
-            onChange={sortFilter => {
-              onChange(sortFilter);
+            regions={availableRegions}
+            onChange={selection => {
+              if (selection === 'any') {
+                return onChange({
+                  ...filter,
+                  engagementRegions: undefined,
+                });
+              }
+              onChange({
+                ...filter,
+                engagementRegions: [selection],
+              });
             }}
-            filter={filter}
+            selectedOptions={filter?.engagementRegions ?? []}
           />
         </FlexItem>
         <FlexItem>
