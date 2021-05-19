@@ -32,6 +32,7 @@ import {
   FEATURE_VERSION_MAP,
   getFeaturesFromVersion,
 } from './common/version_feature_factory';
+import { CategoryProvider } from './context/category_context/category_context';
 
 export const App = ({ config }: { config: Config }) => {
   const serviceProviders =
@@ -49,6 +50,7 @@ export const App = ({ config }: { config: Config }) => {
             authService,
             notificationService,
             versionService,
+            categoryService,
             analyticsService,
           }) => {
             return (
@@ -77,7 +79,11 @@ export const App = ({ config }: { config: Config }) => {
                               <VersionProvider versionService={versionService}>
                                 <FeatureProvider>
                                   <NavigationAnalytics>
-                                    <LodestarRouter />
+                                    <CategoryProvider
+                                      categoryService={categoryService}
+                                    >
+                                      <LodestarRouter />
+                                    </CategoryProvider>
                                   </NavigationAnalytics>
                                 </FeatureProvider>
                               </VersionProvider>
