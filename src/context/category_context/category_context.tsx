@@ -26,9 +26,11 @@ export const CategoryProvider = ({
     const fetched = await categoryService.fetchCategories();
     setCategories(fetched);
   };
-  <CategoryContext.Provider value={{ categories, fetchCategories }}>
-    {children}
-  </CategoryContext.Provider>;
+  return (
+    <CategoryContext.Provider value={{ categories, fetchCategories }}>
+      {children}
+    </CategoryContext.Provider>
+  );
 };
 
 export const useCategories = () => {
