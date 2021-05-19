@@ -6,13 +6,16 @@ import {
   SelectOption,
 } from '@patternfly/react-core';
 import { EngagementStatus } from '../../../schemas/engagement';
-import { EngagementFilterProps } from '../engagement_filter_bar';
 import { FilterIcon } from '@patternfly/react-icons';
 
+export interface EngagementStatusSelectProps {
+  selectedStatuses: EngagementStatus[],
+  onChange:(status: EngagementStatus) => void
+}
 export function EngagementStatusSelect({
   onChange,
-  filter,
-}: EngagementFilterProps) {
+  selectedStatuses,
+}: EngagementStatusSelectProps) {
   const [isStatusSelectOpen, setIsStatusSelectOpen] = useState<boolean>(false);
 
   const getStatusDisplayValue = (status: EngagementStatus) => {
@@ -27,14 +30,6 @@ export function EngagementStatusSelect({
     }
   };
 
-  const updateAllowedStatuses = (status: EngagementStatus) => {
-    return status
-      ? status === EngagementStatus.past
-        ? [EngagementStatus.past, EngagementStatus.terminating]
-        : [status]
-      : undefined;
-  };
-
   return (
     <>
       <InputGroup>
@@ -46,12 +41,9 @@ export function EngagementStatusSelect({
           toggleId={'filter_dropdown'}
           isOpen={isStatusSelectOpen}
           onToggle={() => setIsStatusSelectOpen(!isStatusSelectOpen)}
-          selections={filter?.allowedStatuses}
+          selections={selectedStatuses}
           onSelect={(_, status: EngagementStatus) =>
-            onChange({
-              ...filter,
-              allowedStatuses: updateAllowedStatuses(status),
-            })
+            onChange(status)
           }
         >
           {[
