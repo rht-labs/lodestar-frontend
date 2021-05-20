@@ -62,7 +62,7 @@ export function Dashboard() {
   //TODO: remove after new dashboard release
   useEffect(() => {
     getEngagements({perPage: 10000, pageNumber: 1})
-  }, [])
+  }, [getEngagements])
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
