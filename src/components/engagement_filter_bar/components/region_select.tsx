@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { EngagementFilter } from '../../../schemas/engagement_filter';
 import {
   InputGroup,
   Button,
   Select,
   SelectOption,
+  SelectOptionObject,
 } from '@patternfly/react-core';
 import { GlobeIcon } from '@patternfly/react-icons';
 
 export interface EngagementRegionSelectProps {
-  filter: EngagementFilter;
+  selectedOptions: string[];
   regions: Array<{ label: string; value: string }>;
-  onChange: (filter: EngagementFilter) => void;
+  onChange: (option: string) => void;
 }
 export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,19 +26,10 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
         toggleId="region_dropdown"
-        selections={props?.filter?.engagementRegions}
-        onSelect={(_, selection: string) => {
+        selections={props?.selectedOptions}
+        onSelect={(_, selection: string | SelectOptionObject) => {
           setIsOpen(!isOpen);
-          if (selection === 'any') {
-            return props.onChange({
-              ...props.filter,
-              engagementRegions: undefined,
-            });
-          }
-          props.onChange({
-            ...props.filter,
-            engagementRegions: [selection],
-          });
+          props.onChange(selection as string);
         }}
       >
         {[
