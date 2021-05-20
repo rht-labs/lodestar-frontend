@@ -1,5 +1,9 @@
 import { EngagementUseCase } from '../../schemas/engagement';
 
+export interface UseCaseFilter {
+  page?: number;
+  perPage?: number;
+}
 export interface UseCaseService {
-  getUseCases(): Promise<EngagementUseCase[]>;
+  getUseCases(filter?: UseCaseFilter): Promise<EngagementUseCase[]>;
 }

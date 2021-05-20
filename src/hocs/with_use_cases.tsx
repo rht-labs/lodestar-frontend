@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useServiceProviders } from '../context/service_provider_context/service_provider_context';
 import { useUseCases } from '../hooks/use_use_cases';
 import { EngagementUseCase } from '../schemas/engagement';
+import { UseCaseFilter } from '../services/use_case_service/use_case_service';
 
 type UseCaseComponent<P> = React.FunctionComponent<
   P & {
@@ -9,12 +10,16 @@ type UseCaseComponent<P> = React.FunctionComponent<
   }
 >;
 
-export function withUseCases<P>(WrappedComponent: UseCaseComponent<P>) {
-  return <UseCaseFetcher component={WrappedComponent} />;
+export function withUseCases<P>(
+  WrappedComponent: UseCaseComponent<P>,
+  filter?: UseCaseFilter
+) {
+  return <UseCaseFetcher filter={filter} component={WrappedComponent} />;
 }
 
 interface UseCaseFetcherProps<P> {
   component: UseCaseComponent<P>;
+  filter?: UseCaseFilter;
 }
 
 const UseCaseFetcher = (props: UseCaseFetcherProps<any>) => {

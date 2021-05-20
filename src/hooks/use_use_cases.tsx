@@ -1,6 +1,9 @@
 import { useCallback, useState } from 'react';
 import { EngagementUseCase } from '../schemas/engagement';
-import { UseCaseService } from '../services/use_case_service/use_case_service';
+import {
+  UseCaseFilter,
+  UseCaseService,
+} from '../services/use_case_service/use_case_service';
 
 export const useUseCases = (useCaseService: UseCaseService) => {
   const [useCases, setUseCases] = useState<EngagementUseCase[]>([]);
@@ -10,5 +13,8 @@ export const useUseCases = (useCaseService: UseCaseService) => {
     setUseCases(result);
   }, [useCaseService]);
 
-  return [useCases, getUseCases] as [EngagementUseCase[], () => Promise<void>];
+  return [useCases, getUseCases] as [
+    EngagementUseCase[],
+    (filter?: UseCaseFilter) => Promise<void>
+  ];
 };
