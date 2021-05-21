@@ -18,15 +18,19 @@ import { useServiceProviders } from '../../context/service_provider_context/serv
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
 import { Feature } from '../../components/feature/feature';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
-import { useEngagementCollection } from '../../hooks/engagement_collection_hook'
+import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { withCategories } from '../../hocs/with_categories';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
-import {Engagement, EngagementStatus} from '../../schemas/engagement'
-import {engagementFilterFactory} from '../../common/engagement_filter_factory'
+import {
+  Artifact,
+  Engagement,
+  EngagementStatus,
+} from '../../schemas/engagement';
+import { engagementFilterFactory } from '../../common/engagement_filter_factory';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { useHistory } from 'react-router';
 import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_cases';
@@ -40,6 +44,7 @@ import {
   PendingIcon,
   TachometerAltIcon,
 } from '@patternfly/react-icons';
+import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -57,12 +62,14 @@ export function Dashboard() {
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
-  const {engagements, getEngagements} = useEngagementCollection({engagementService})
+  const { engagements, getEngagements } = useEngagementCollection({
+    engagementService,
+  });
   const history = useHistory();
   //TODO: remove after new dashboard release
   useEffect(() => {
-    getEngagements({perPage: 10000, pageNumber: 1})
-  }, [getEngagements])
+    getEngagements({ perPage: 10000, pageNumber: 1 });
+  }, [getEngagements]);
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
@@ -119,7 +126,9 @@ export function Dashboard() {
           <Feature name="reader">
             <Feature
               name={'newDashboard'}
-              inactiveComponent={() => <DashBoardGallery engagements={engagements} />}
+              inactiveComponent={() => (
+                <DashBoardGallery engagements={engagements} />
+              )}
             >
               <Flex
                 justifyContent={{ default: 'justifyContentFlexEnd' }}
@@ -214,6 +223,15 @@ export function Dashboard() {
                 <GridItem sm={12} xl={12} xl2={6}>
                   {withArtifacts(DwLastArtifacts)}
                 </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  {withArtifacts(({ artifacts }: { artifacts: Artifact[] }) => (
+                    <DwLastDemo
+                      demos={artifacts.filter(
+                        a => a.type.toLowerCase() === 'demo'
+                      )}
+                    />
+                  ))}
+                </GridItem>
               </Grid>
             </Feature>
           </Feature>
@@ -224,55 +242,62 @@ export function Dashboard() {
 }
 
 //TODO: Nuke after new dashboards launch
-const DashBoardGallery = ({engagements}: {engagements: Array<Partial<Engagement>>}) => {
-const numberOfTotalEngagements = engagements?.length;
-const numberOfUpcomingEngagements = engagements?.filter(
-  engagementFilterFactory({ allowedStatuses: [EngagementStatus.upcoming] })
-).length;
-const numberOfcurrentEngagements = engagements?.filter(
-  engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
-).length;
-const numberOfPastEngagements = engagements?.filter(
-  engagementFilterFactory({
-    allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
-  })
-).length;
-  return(
-  <Gallery hasGutter>
-    <DashboardDataCard
-      icon={TachometerAltIcon}
-      numberOfEngagements={numberOfTotalEngagements}
-      title={'All Engagements'}
-      subtitle={
-        'All available engagements in the system. Including upcoming, active and past ones'
-      }
-      url={'/app/engagements/all'}
-    />
+const DashBoardGallery = ({
+  engagements,
+}: {
+  engagements: Array<Partial<Engagement>>;
+}) => {
+  const numberOfTotalEngagements = engagements?.length;
+  const numberOfUpcomingEngagements = engagements?.filter(
+    engagementFilterFactory({ allowedStatuses: [EngagementStatus.upcoming] })
+  ).length;
+  const numberOfcurrentEngagements = engagements?.filter(
+    engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
+  ).length;
+  const numberOfPastEngagements = engagements?.filter(
+    engagementFilterFactory({
+      allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
+    })
+  ).length;
+  return (
+    <Gallery hasGutter>
+      <DashboardDataCard
+        icon={TachometerAltIcon}
+        numberOfEngagements={numberOfTotalEngagements}
+        title={'All Engagements'}
+        subtitle={
+          'All available engagements in the system. Including upcoming, active and past ones'
+        }
+        url={'/app/engagements/all'}
+      />
 
-    <DashboardDataCard
-      icon={PendingIcon}
-      numberOfEngagements={numberOfUpcomingEngagements}
-      title={'Upcoming Engagements'}
-      subtitle={'Upcoming engagements in the future, and are not launched yet.'}
-      url={'/app/engagements/upcoming'}
-    />
+      <DashboardDataCard
+        icon={PendingIcon}
+        numberOfEngagements={numberOfUpcomingEngagements}
+        title={'Upcoming Engagements'}
+        subtitle={
+          'Upcoming engagements in the future, and are not launched yet.'
+        }
+        url={'/app/engagements/upcoming'}
+      />
 
-    <DashboardDataCard
-      icon={OnRunningIcon}
-      numberOfEngagements={numberOfcurrentEngagements}
-      title={'Active Engagements'}
-      subtitle={
-        'Engagements that are already in progress and running at the moment.'
-      }
-      url={'/app/engagements/active'}
-    />
+      <DashboardDataCard
+        icon={OnRunningIcon}
+        numberOfEngagements={numberOfcurrentEngagements}
+        title={'Active Engagements'}
+        subtitle={
+          'Engagements that are already in progress and running at the moment.'
+        }
+        url={'/app/engagements/active'}
+      />
 
-    <DashboardDataCard
-      icon={AsleepIcon}
-      numberOfEngagements={numberOfPastEngagements}
-      title={'Past Engagements'}
-      subtitle={'Engagements that are finished, closed or archived.'}
-      url={'/app/engagements/past'}
-    />
-  </Gallery>
-);}
+      <DashboardDataCard
+        icon={AsleepIcon}
+        numberOfEngagements={numberOfPastEngagements}
+        title={'Past Engagements'}
+        subtitle={'Engagements that are finished, closed or archived.'}
+        url={'/app/engagements/past'}
+      />
+    </Gallery>
+  );
+};
