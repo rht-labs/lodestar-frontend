@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Flex,
   FlexItem,
+  Gallery,
   Grid,
   GridItem,
   PageSection,
@@ -17,18 +18,28 @@ import { useServiceProviders } from '../../context/service_provider_context/serv
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
 import { Feature } from '../../components/feature/feature';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
+import { useEngagementCollection } from '../../hooks/engagement_collection_hook'
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { withCategories } from '../../hocs/with_categories';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
+import {Engagement, EngagementStatus} from '../../schemas/engagement'
+import {engagementFilterFactory} from '../../common/engagement_filter_factory'
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { useHistory } from 'react-router';
 import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_cases';
 import { withUseCases } from '../../hocs/with_use_cases';
 import { withArtifacts } from '../../hocs/with_artifacts';
 import { DwLastArtifacts } from '../../components/dashboard/widgets/dw_last_artifact';
+import { DashboardDataCard } from '../../components/dashboard/widgets/dashboard_data_card';
+import {
+  AsleepIcon,
+  OnRunningIcon,
+  PendingIcon,
+  TachometerAltIcon,
+} from '@patternfly/react-icons';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -46,7 +57,12 @@ export function Dashboard() {
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
+  const {engagements, getEngagements} = useEngagementCollection({engagementService})
   const history = useHistory();
+  //TODO: remove after new dashboard release
+  useEffect(() => {
+    getEngagements({perPage: 10000, pageNumber: 1})
+  }, [getEngagements])
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
@@ -101,102 +117,162 @@ export function Dashboard() {
       <PageSection>
         <div style={{ maxWidth: '1300px' }}>
           <Feature name="reader">
-            <Flex
-              justifyContent={{ default: 'justifyContentFlexEnd' }}
-              style={{ marginBottom: '1rem' }}
+            <Feature
+              name={'newDashboard'}
+              inactiveComponent={() => <DashBoardGallery engagements={engagements} />}
             >
-              <FlexItem>
-                <Select
-                  variant={SelectVariant.checkbox}
-                  width="12rem"
-                  placeholderText={'Select a region'}
-                  isOpen={isRegionSelectOpen}
-                  multiple={true}
-                  selections={selectedRegions}
-                  onSelect={(_, value) => handleSelectRegions(value as string)}
-                  onToggle={() => setIsRegionSelectOpen(!isRegionSelectOpen)}
-                >
-                  {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
-                    option => (
-                      <SelectOption
-                        isSelected={selectedRegions.includes(option.value)}
-                        key={option.value}
-                        value={option.value}
-                        label={option.label.toUpperCase()}
-                      >
-                        {option.label}
-                      </SelectOption>
-                    )
-                  )}
-                </Select>
-              </FlexItem>
-              <FlexItem>
-                <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
-              </FlexItem>
-            </Flex>
-          </Feature>
-          <Grid hasGutter>
-            <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
-              <EngagementQueryMediator
-                filter={{
-                  startDate: dateFilter?.startDate,
-                  endDate: dateFilter?.endDate,
-                  include: [
-                    'project_name',
-                    'start_date',
-                    'end_date',
-                    'archive_date',
-                  ],
-                }}
-                component={({ engagements }) => (
-                  <EngagementCountWidget engagements={engagements} />
-                )}
-              />
-            </GridItem>
-            <Feature name={"newDashboard"}>
-              <GridItem colSpan={2} sm={12} md={6}>
-                <EngagementQueryMediator
-                  filter={{
-                    startDate: dateFilter?.startDate,
-                    endDate: dateFilter?.endDate,
-                    include: ['engagement_users'],
-                  }}
-                  component={DashboardPeopleEnabledCard}
-                />
-              </GridItem>
-              <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-                {withCategories(DwTopTags, {})}
-              </GridItem>
-              <GridItem sm={12} xl={12} xl2={6}>
-                <EngagementQueryMediator
-                  filter={{
-                    pageNumber: 1,
-                    perPage: 5,
-                    sortField: 'last_update',
-                    sortOrder: SortOrder.DESC,
-                  }}
-                  component={props => (
-                    <DwLastUpdated
-                      {...props}
-                      onClick={(customerName, projectName) => {
-                        history.push(
-                          `/app/engagements/${customerName}/${projectName}/`
-                        );
-                      }}
-                    />
-                  )}
-                />
-              </GridItem>
-              <GridItem sm={12} xl={12} xl2={6}>
-                {withUseCases(DwLastUseCases)}
-              </GridItem>
-              <GridItem sm={12} xl={12} xl2={6}>
-                {withArtifacts(DwLastArtifacts)}
-              </GridItem>
+              <Flex
+                justifyContent={{ default: 'justifyContentFlexEnd' }}
+                style={{ marginBottom: '1rem' }}
+              >
+                <FlexItem>
+                  <Select
+                    variant={SelectVariant.checkbox}
+                    width="12rem"
+                    placeholderText={'Select a region'}
+                    isOpen={isRegionSelectOpen}
+                    multiple={true}
+                    selections={selectedRegions}
+                    onSelect={(_, value) =>
+                      handleSelectRegions(value as string)
+                    }
+                    onToggle={() => setIsRegionSelectOpen(!isRegionSelectOpen)}
+                  >
+                    {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
+                      option => (
+                        <SelectOption
+                          isSelected={selectedRegions.includes(option.value)}
+                          key={option.value}
+                          value={option.value}
+                          label={option.label.toUpperCase()}
+                        >
+                          {option.label}
+                        </SelectOption>
+                      )
+                    )}
+                  </Select>
+                </FlexItem>
+                <FlexItem>
+                  <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+                </FlexItem>
+              </Flex>
+
+              <Grid hasGutter>
+                <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
+                  <EngagementQueryMediator
+                    filter={{
+                      startDate: dateFilter?.startDate,
+                      endDate: dateFilter?.endDate,
+                      include: [
+                        'project_name',
+                        'start_date',
+                        'end_date',
+                        'archive_date',
+                      ],
+                    }}
+                    component={({ engagements }) => (
+                      <EngagementCountWidget engagements={engagements} />
+                    )}
+                  />
+                </GridItem>
+                <GridItem colSpan={2} sm={12} md={6}>
+                  <EngagementQueryMediator
+                    filter={{
+                      startDate: dateFilter?.startDate,
+                      endDate: dateFilter?.endDate,
+                      include: ['engagement_users'],
+                    }}
+                    component={DashboardPeopleEnabledCard}
+                  />
+                </GridItem>
+                <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
+                  {withCategories(DwTopTags, {})}
+                </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  <EngagementQueryMediator
+                    filter={{
+                      pageNumber: 1,
+                      perPage: 5,
+                      sortField: 'last_update',
+                      sortOrder: SortOrder.DESC,
+                    }}
+                    component={props => (
+                      <DwLastUpdated
+                        {...props}
+                        onClick={(customerName, projectName) => {
+                          history.push(
+                            `/app/engagements/${customerName}/${projectName}/`
+                          );
+                        }}
+                      />
+                    )}
+                  />
+                </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  {withUseCases(DwLastUseCases)}
+                </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  {withArtifacts(DwLastArtifacts)}
+                </GridItem>
+              </Grid>
             </Feature>
-          </Grid>
+          </Feature>
         </div>
       </PageSection>
     </DashboardDateContext.Provider>
   );
 }
+
+//TODO: Nuke after new dashboards launch
+const DashBoardGallery = ({engagements}: {engagements: Array<Partial<Engagement>>}) => {
+const numberOfTotalEngagements = engagements?.length;
+const numberOfUpcomingEngagements = engagements?.filter(
+  engagementFilterFactory({ allowedStatuses: [EngagementStatus.upcoming] })
+).length;
+const numberOfcurrentEngagements = engagements?.filter(
+  engagementFilterFactory({ allowedStatuses: [EngagementStatus.active] })
+).length;
+const numberOfPastEngagements = engagements?.filter(
+  engagementFilterFactory({
+    allowedStatuses: [EngagementStatus.past, EngagementStatus.terminating],
+  })
+).length;
+  return(
+  <Gallery hasGutter>
+    <DashboardDataCard
+      icon={TachometerAltIcon}
+      numberOfEngagements={numberOfTotalEngagements}
+      title={'All Engagements'}
+      subtitle={
+        'All available engagements in the system. Including upcoming, active and past ones'
+      }
+      url={'/app/engagements/all'}
+    />
+
+    <DashboardDataCard
+      icon={PendingIcon}
+      numberOfEngagements={numberOfUpcomingEngagements}
+      title={'Upcoming Engagements'}
+      subtitle={'Upcoming engagements in the future, and are not launched yet.'}
+      url={'/app/engagements/upcoming'}
+    />
+
+    <DashboardDataCard
+      icon={OnRunningIcon}
+      numberOfEngagements={numberOfcurrentEngagements}
+      title={'Active Engagements'}
+      subtitle={
+        'Engagements that are already in progress and running at the moment.'
+      }
+      url={'/app/engagements/active'}
+    />
+
+    <DashboardDataCard
+      icon={AsleepIcon}
+      numberOfEngagements={numberOfPastEngagements}
+      title={'Past Engagements'}
+      subtitle={'Engagements that are finished, closed or archived.'}
+      url={'/app/engagements/past'}
+    />
+  </Gallery>
+);}
