@@ -9,10 +9,19 @@ export class Apiv1ArtifactService implements ArtifactService {
   private get axios() {
     return getApiV1HttpClient();
   }
-  private buildQueryString({ page = 1, perPage = 10 }: ArtifactFilter): string {
+  private buildQueryString({
+    page = 1,
+    perPage = 10,
+    type,
+  }: ArtifactFilter): string {
     const queries: string[] = [];
     queries.push(`perPage=${perPage}`);
     queries.push(`page=${page}`);
+    let search = [];
+    if (!!type) {
+      search.push(`artifacts.type=${type}`);
+    }
+    queries.push(`search=${encodeURIComponent(search.join('&'))}`);
     return queries.join('&');
   }
   private apiResponseToArtifact = (apiResponseObject: any): Artifact => {
