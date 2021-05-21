@@ -221,16 +221,12 @@ export function Dashboard() {
                   {withUseCases(DwLastUseCases, { page: 1, perPage: 5 })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withArtifacts(DwLastArtifacts)}
+                  {withArtifacts(DwLastArtifacts, { page: 1, perPage: 5 })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   {withArtifacts(
                     ({ artifacts }: { artifacts: Artifact[] }) => (
-                      <DwLastDemo
-                        demos={artifacts.filter(
-                          a => a.type.toLowerCase() === 'demo'
-                        )}
-                      />
+                      <DwLastDemo demos={artifacts} />
                     ),
                     { page: 1, perPage: 5, type: 'demo' }
                   )}
