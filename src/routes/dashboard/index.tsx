@@ -195,7 +195,7 @@ export function Dashboard() {
                   />
                 </GridItem>
                 <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-                  {withCategories(DwTopTags, {})}
+                  {withCategories(DwTopTags, { page: 1, perPage: 5 })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   <EngagementQueryMediator
@@ -218,19 +218,22 @@ export function Dashboard() {
                   />
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withUseCases(DwLastUseCases)}
+                  {withUseCases(DwLastUseCases, { page: 1, perPage: 5 })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   {withArtifacts(DwLastArtifacts)}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withArtifacts(({ artifacts }: { artifacts: Artifact[] }) => (
-                    <DwLastDemo
-                      demos={artifacts.filter(
-                        a => a.type.toLowerCase() === 'demo'
-                      )}
-                    />
-                  ))}
+                  {withArtifacts(
+                    ({ artifacts }: { artifacts: Artifact[] }) => (
+                      <DwLastDemo
+                        demos={artifacts.filter(
+                          a => a.type.toLowerCase() === 'demo'
+                        )}
+                      />
+                    ),
+                    { page: 1, perPage: 5, type: 'demo' }
+                  )}
                 </GridItem>
               </Grid>
             </Feature>
