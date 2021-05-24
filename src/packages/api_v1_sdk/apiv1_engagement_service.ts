@@ -179,13 +179,17 @@ export class Apiv1EngagementService implements EngagementService {
       }
     }
   }
-  async getConfig(): Promise<EngagementFormConfig> {
+  async getConfig(type?: string): Promise<EngagementFormConfig> {
     try {
+      console.log(type);
       const { data } = await this.axios.get(`/config`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept-version': 'v2',
           Accept: 'application/json',
+        },
+        params: {
+          type,
         },
       });
       return data as EngagementFormConfig;

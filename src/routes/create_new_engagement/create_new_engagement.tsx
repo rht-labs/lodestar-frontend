@@ -40,7 +40,10 @@ export function CreateNewEngagement() {
 export function CreateNewEngagementForm() {
   const { createEngagement, currentEngagement } = useEngagement();
   const { engagementService } = useServiceProviders();
-  const { engagementFormConfig } = useEngagementFormConfig(engagementService);
+  const {
+    engagementFormConfig,
+    fetchEngagementFormConfig /* TODO: implement callback here as well */,
+  } = useEngagementFormConfig(engagementService);
   const { engagements = [], getEngagements } = useEngagementCollection({
     engagementService,
   });
@@ -165,6 +168,14 @@ export function CreateNewEngagementForm() {
         selectedProjectNameToFind?.trim()?.toLowerCase()
     );
   }
+
+  useEffect(() => {
+    fetchEngagementFormConfig(engagementType);
+  }, [engagementType, fetchEngagementFormConfig]);
+
+  const _handleEngagementTypeChange = (engagementType: string) => {
+    setEngagementType(engagementType);
+  };
 
   return (
     <div
@@ -321,9 +332,7 @@ export function CreateNewEngagementForm() {
                   data-testid="new-engagement-type"
                   data-cy="new_engagement_type"
                   value={engagementType ?? ''}
-                  onChange={e => {
-                    setEngagementType(e);
-                  }}
+                  onChange={_handleEngagementTypeChange}
                 >
                   {engagementFormConfig?.basic_information?.engagement_types?.options?.map(
                     r => {
