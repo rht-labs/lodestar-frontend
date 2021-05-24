@@ -198,15 +198,29 @@ export class Apiv1EngagementService implements EngagementService {
     }
   }
   async checkHasUpdates(engagement: Engagement): Promise<boolean> {
-    const response = await this.axios.head(
-      `/engagements/customers/${engagement?.customer_name}/projects/${engagement?.project_name}`
-    );
+    const response = await this.axios.head(`/engagements/${engagement.uuid}`);
 
     const lastUpdatedTimestamp = engagement.last_update_id;
 
     const headerStamp = response?.headers?.['last-update'];
 
     return lastUpdatedTimestamp !== headerStamp;
+  }
+
+  async getEngagementById(id: string): Promise<Engagement> {
+    try {
+      const { data } = await this.axios.get(`/engagements/${id}`);
+      const deserializedEngagement = Apiv1EngagementService.engagementSerializer.deserialize(
+        data
+      );
+      return deserializedEngagement;
+    } catch (e) {
+      if (e.isAxiosError) {
+        handleAxiosResponseErrors(e);
+      } else {
+        throw e;
+      }
+    }
   }
 
   async getEngagementByCustomerAndProjectName(

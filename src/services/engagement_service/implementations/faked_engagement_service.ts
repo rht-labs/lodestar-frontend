@@ -45,4 +45,7 @@ export class FakedEngagementService implements EngagementService {
   ) {
     return Engagement.fromFake(this.shouldUseStaticData);
   }
+  async getEngagementById(id: string) {
+    return Engagement.fromFake(this.shouldUseStaticData);
+  }
 }

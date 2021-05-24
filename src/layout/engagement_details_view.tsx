@@ -13,15 +13,10 @@ import { useConfig } from '../context/config_context/config_hook';
 import { useEngagement } from '../context/engagement_context/engagement_hook';
 import { Region } from '../components/region/region';
 import { EngagementEditableCategories } from '../components/engagement_categories/engagement_editable_categories';
-import {
-  useAnalytics,
-  AnalyticsCategory,
-} from '../context/analytics_context/analytics_context';
-import {getLabelForValue} from "../common/label_value_tools";
+import { getLabelForValue } from '../common/label_value_tools';
 
 export function EngagementDetailsViewTemplate({
   engagement,
-  onSave,
   children,
 }: {
   engagement: Engagement;
@@ -37,7 +32,6 @@ export function EngagementDetailsViewTemplate({
 
   const { appConfig } = useConfig();
 
-  const { logEvent } = useAnalytics();
   const { engagementFormConfig } = useEngagement();
 
   return (
@@ -54,17 +48,7 @@ export function EngagementDetailsViewTemplate({
               </Text>
             </TextContent>
             <div style={{ marginTop: '1.5rem' }}>
-              <EngagementEditableCategories
-                engagementCategories={engagement?.engagement_categories}
-                onSave={engagement => {
-                  onSave(engagement);
-                  logEvent({
-                    category: AnalyticsCategory.engagements,
-                    action: 'Modified Engagement Tags',
-                  });
-                }}
-                engagement={engagement}
-              />
+              <EngagementEditableCategories />
             </div>
           </FlexItem>
           <Flex
@@ -76,12 +60,11 @@ export function EngagementDetailsViewTemplate({
             <FlexItem>
               <TextContent>
                 <Text component="h3" style={{ marginTop: '0.5rem' }}>
-                  {
-                    getLabelForValue(
-                      engagementFormConfig?.basic_information?.engagement_types?.options ?? [],
-                      engagement?.engagement_type
-                    )
-                  }
+                  {getLabelForValue(
+                    engagementFormConfig?.basic_information?.engagement_types
+                      ?.options ?? [],
+                    engagement?.engagement_type
+                  )}
                 </Text>
               </TextContent>
             </FlexItem>

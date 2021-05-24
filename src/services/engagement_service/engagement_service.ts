@@ -14,7 +14,7 @@ export interface EngagementSearchParameters {
   exclude?: Array<keyof Engagement>;
   perPage?: number;
   sortOrder?: SortOrder;
-  sortField?: keyof Engagement | 'last_update'
+  sortField?: keyof Engagement | 'last_update';
   pageNumber?: number;
 }
 export interface EngagementService {
@@ -33,6 +33,7 @@ export interface EngagementService {
   getConfig(): Promise<EngagementFormConfig>;
   checkHasUpdates(engagement: Engagement): Promise<boolean>;
   checkSubdomainUniqueness(subdomain: string): Promise<boolean>;
+  getEngagementById(id: string): Promise<Engagement>;
   getEngagementByCustomerAndProjectName(
     customer_name: string,
     project_name: string

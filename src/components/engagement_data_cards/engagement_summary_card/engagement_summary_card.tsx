@@ -12,7 +12,6 @@ import { EngagementStatusText } from '../../engagement_status_text/engagement_st
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { formatUtcDate } from '../../../common/dates';
-import { useHistory } from 'react-router';
 
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
@@ -36,15 +35,14 @@ export function EngagementSummaryCard() {
     requestClose();
     clearCurrentChanges();
   };
-  const history = useHistory();
-  const onSave = () => {
-    saveEngagement(currentChanges);
-    if (currentEngagement.customer_name && currentEngagement.project_name) {
-      history.push(
-        `/app/engagements/${currentEngagement.customer_name}/${currentEngagement.project_name}`
-      );
+  const onSave = async () => {
+    try {
+      await saveEngagement(currentChanges);
+    } catch (e) {
+      console.log('something went wrong while saving the engagement');
     }
   };
+
   return (
     <>
       <EngagementSummaryEditModal
@@ -84,7 +82,10 @@ export function EngagementSummaryCard() {
                 </TitledDataPoint>
               </GridItem>
               <GridItem md={6} lg={3}>
-                <TitledDataPoint title="Engagement Name" dataCy={'project_label'}>
+                <TitledDataPoint
+                  title="Engagement Name"
+                  dataCy={'project_label'}
+                >
                   {currentEngagement?.project_name}
                 </TitledDataPoint>
               </GridItem>
@@ -137,9 +138,9 @@ export function EngagementSummaryCard() {
                   title="Description"
                   dataCy={'description_label'}
                 >
-                    <span style={{ whiteSpace: 'pre-line' }}>
-                      {currentEngagement?.description}
-                    </span>
+                  <span style={{ whiteSpace: 'pre-line' }}>
+                    {currentEngagement?.description}
+                  </span>
                 </TitledDataPoint>
               </GridItem>
               <GridItem span={12}>
