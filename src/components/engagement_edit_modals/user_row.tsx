@@ -40,7 +40,7 @@ export const UserRow = ({
   const { engagementFormConfig } = useEngagement();
   const { hasFeature } = useFeatures();
   const [isReset, setIsReset] = useState(false);
-  const INVALID_TEXT = 'Please enter a valid email address';
+  const INVALID_EMAIL_TEXT = 'Please enter a valid email address';
 
   return (
     <div>
@@ -48,7 +48,7 @@ export const UserRow = ({
         <GridItem span={3}>
           <FormGroup
             fieldId={'user_email'}
-            helperTextInvalid={INVALID_TEXT}
+            helperTextInvalid={INVALID_EMAIL_TEXT}
             validated={validateEmail(user.email) ? 'default' : 'error'}
           >
             <TextInput
@@ -73,7 +73,7 @@ export const UserRow = ({
         <GridItem span={2}>
           <FormGroup
             fieldId={'user_first_name'}
-            helperTextInvalid={INVALID_TEXT}
+            helperTextInvalid={'First name must not be empty'}
             validated={validateString(user.first_name) ? 'default' : 'error'}
           >
             <TextInput
@@ -98,7 +98,7 @@ export const UserRow = ({
         <GridItem span={2}>
           <FormGroup
             fieldId={'user_last_name'}
-            helperTextInvalid={INVALID_TEXT}
+            helperTextInvalid={'Last name must not be empty'}
             validated={validateString(user.last_name) ? 'default' : 'error'}
           >
             <TextInput
