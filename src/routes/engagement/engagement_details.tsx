@@ -57,9 +57,10 @@ export const validatorsWithDateValidators = (
 };
 
 export const EngagementDetailView = () => {
-  const { project_name, customer_name } = useParams<{
+  const { project_name, customer_name, uuid: engagementUuid } = useParams<{
     customer_name: string;
     project_name: string;
+    uuid: string;
   }>();
 
   const {
@@ -68,7 +69,11 @@ export const EngagementDetailView = () => {
     currentEngagement,
     currentChanges,
     engagementFormConfig,
-  } = useEngagement({ projectName: project_name, customerName: customer_name });
+  } = useEngagement({
+    projectName: project_name,
+    customerName: customer_name,
+    uuid: engagementUuid,
+  });
 
   useEffect(() => {
     let engagementPoll;

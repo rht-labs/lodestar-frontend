@@ -44,8 +44,9 @@ export interface IEngagementContext {
   clearCurrentChanges: () => void;
   requiredFields: string[];
   getEngagement: (
-    customerName: string,
-    projectName: string
+    customerName?: string,
+    projectName?: string,
+    uuid?: string
   ) => Promise<Engagement>;
   createEngagement: (data: any) => Promise<Engagement>;
   saveEngagement: (data: Engagement, commitMessage?: string) => Promise<void>;
@@ -220,7 +221,12 @@ export const EngagementProvider = ({
   );
 
   const getEngagement = useCallback(
-    async (customerName: string, projectName: string) => {
+    async (customerName?: string, projectName?: string, uuid?: string) => {
+      if (!(customerName && projectName) && !uuid) {
+        throw new Error(
+          'Either projectName and customerName or uuid must not be empty'
+        );
+      }
       try {
         let availableEngagements = [];
         let cachedEngagement = availableEngagements?.find(
@@ -231,10 +237,15 @@ export const EngagementProvider = ({
         if (cachedEngagement !== null) {
           setCurrentEngagement(cachedEngagement);
         }
-        let fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-          customerName,
-          projectName
-        );
+        let fetchedEngagement: Engagement;
+        if (!!uuid) {
+          fetchedEngagement = await engagementService.getEngagementById(uuid);
+        } else {
+          fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
+            customerName,
+            projectName
+          );
+        }
         setCurrentEngagement(fetchedEngagement);
         return fetchedEngagement;
       } catch (e) {

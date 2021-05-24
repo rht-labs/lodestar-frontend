@@ -127,6 +127,16 @@ export function LodestarRouter() {
                                 </EngagementRoute>
                               )}
                             />
+                            <PrivateRoute
+                              path="/app/engagements/:uuid/"
+                              component={() => (
+                                <EngagementRoute>
+                                  <ScrollToTop>
+                                    <EngagementDetailView />
+                                  </ScrollToTop>
+                                </EngagementRoute>
+                              )}
+                            />
                           </Switch>
                         </ModalVisibilityProvider>
                       </PrivateRoute>

@@ -18,7 +18,7 @@ export interface DataCardProps {
 
 export function EngagementListItem(props: DataCardProps) {
   const { engagement } = props;
-  const url = `/app/engagements/${engagement.customer_name}/${engagement.project_name}`;
+  const url = `/app/engagements/${engagement.uuid}`;
   const history = useHistory();
   const status = getEngagementStatus(engagement);
 
@@ -62,7 +62,10 @@ export function EngagementListItem(props: DataCardProps) {
               )}
             </GridItem>
             <GridItem md={12} lg={7}>
-              <EngagementAtAGlance engagement={engagement} status={status} />
+              <EngagementAtAGlance
+                engagement={engagement as Engagement}
+                status={status}
+              />
             </GridItem>
             <GridItem sm={12} md={4} lg={2}>
               <Button
