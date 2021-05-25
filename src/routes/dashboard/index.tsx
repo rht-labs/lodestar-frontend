@@ -45,6 +45,7 @@ import {
   TachometerAltIcon,
 } from '@patternfly/react-icons';
 import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
+import { DwLastWeeklyReport } from '../../components/dashboard/widgets/dw_last_weekly_report';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -229,6 +230,14 @@ export function Dashboard() {
                       <DwLastDemo demos={artifacts} />
                     ),
                     { page: 1, perPage: 5, type: 'demo' }
+                  )}
+                </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  {withArtifacts(
+                    ({ artifacts }: { artifacts: Artifact[] }) => (
+                      <DwLastWeeklyReport artifacts={artifacts} />
+                    ),
+                    { page: 1, perPage: 5, type: 'weeklyReport' }
                   )}
                 </GridItem>
               </Grid>
