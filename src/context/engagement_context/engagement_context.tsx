@@ -52,6 +52,7 @@ export interface IEngagementContext {
   saveEngagement: (data: Engagement, commitMessage?: string) => Promise<void>;
   deleteEngagement: (data: Engagement) => Promise<void>;
   missingRequiredFields: string[];
+  fetchEngagementFormConfig: (engagementType: string) => void;
   isLaunchable: boolean;
   engagementFormConfig?: EngagementFormConfig;
   launchEngagement: (data: any) => Promise<void>;
@@ -98,10 +99,12 @@ export const EngagementProvider = ({
   feedbackContext,
   analyticsContext,
   engagementFormConfig,
+  fetchEngagementFormConfig: propsFetchFormConfig,
 }: {
   children: React.ReactChild;
   engagementService: EngagementService;
   categoryService: CategoryService;
+  fetchEngagementFormConfig: (type?: string) => void;
   feedbackContext: IFeedbackContext;
   analyticsContext?: IAnalyticsContext;
   engagementFormConfig: EngagementFormConfig;
@@ -517,6 +520,7 @@ export const EngagementProvider = ({
   return (
     <Provider
       value={{
+        fetchEngagementFormConfig: propsFetchFormConfig,
         createEngagementPoll,
         engagementFormConfig,
         requiredFields,

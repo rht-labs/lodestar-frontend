@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 export const useEngagementFormConfig = (
@@ -9,6 +9,13 @@ export const useEngagementFormConfig = (
   >(null);
 
   const [hasFetched, setHasFetched] = useState<boolean>(false);
+
+  const fetchEngagementFormConfig = useCallback(
+    (engagementType: string) => {
+      engagementService.getConfig(engagementType).then(setEngagementFormConfig);
+    },
+    [engagementService]
+  );
 
   useEffect(() => {
     if (!engagementFormConfig && !hasFetched) {
@@ -22,5 +29,8 @@ export const useEngagementFormConfig = (
     setEngagementFormConfig,
     engagementService,
   ]);
-  return { engagementFormConfig };
+  return {
+    engagementFormConfig,
+    fetchEngagementFormConfig,
+  };
 };

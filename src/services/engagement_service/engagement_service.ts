@@ -30,7 +30,7 @@ export interface EngagementService {
   saveEngagement(data: Engagement, commitMessage?: string): Promise<Engagement>;
   launchEngagement(data: Engagement): Promise<Engagement>;
   deleteEngagement(data: Engagement): Promise<Engagement>;
-  getConfig(): Promise<EngagementFormConfig>;
+  getConfig(type?: string): Promise<EngagementFormConfig>;
   checkHasUpdates(engagement: Engagement): Promise<boolean>;
   checkSubdomainUniqueness(subdomain: string): Promise<boolean>;
   getEngagementById(id: string): Promise<Engagement>;

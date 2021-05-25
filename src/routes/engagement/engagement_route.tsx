@@ -9,9 +9,13 @@ export const EngagementRoute = ({ children }) => {
   const { engagementService, categoryService } = useServiceProviders();
   const feedback = useFeedback();
   const analyticsContext = useAnalytics();
-  const { engagementFormConfig } = useEngagementFormConfig(engagementService);
+  const {
+    engagementFormConfig,
+    fetchEngagementFormConfig,
+  } = useEngagementFormConfig(engagementService);
   return (
     <EngagementProvider
+      fetchEngagementFormConfig={fetchEngagementFormConfig}
       feedbackContext={feedback}
       analyticsContext={analyticsContext}
       categoryService={categoryService}

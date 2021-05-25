@@ -8,9 +8,16 @@ import {
   FormValidator,
 } from '../../context/validation_context/validation_context';
 import { EngagementDetailsViewTemplate } from '../../layout/engagement_details_view';
-import { EngagementOverview } from './overview';
 import { EngagementJsonDump } from './json_dump';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
+import { TextContent, Grid, GridItem } from '@patternfly/react-core';
+import { ActivityHistoryCard } from '../../components/engagement_data_cards/activity_history_card/activity_history_card';
+import { EngagementArtifactCard } from '../../components/engagement_data_cards/engagement_artifact_card/engagement_artifact_card';
+import { EngagementSummaryCard } from '../../components/engagement_data_cards/engagement_summary_card/engagement_summary_card';
+import { HostingEnvironmentCard } from '../../components/engagement_data_cards/hosting_environment_card/hosting_environment_card';
+import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
+import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
+import { UserCard } from '../../components/engagement_data_cards/user_card/user_card';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
@@ -69,6 +76,7 @@ export const EngagementDetailView = () => {
     currentEngagement,
     currentChanges,
     engagementFormConfig,
+    fetchEngagementFormConfig,
   } = useEngagement({
     projectName: project_name,
     customerName: customer_name,
@@ -88,6 +96,9 @@ export const EngagementDetailView = () => {
   const validators = getValidatorsFromEngagementFormConfig(
     engagementFormConfig
   );
+  useEffect(() => {
+    fetchEngagementFormConfig(currentEngagement?.engagement_type);
+  }, [currentEngagement?.engagement_type, fetchEngagementFormConfig]);
   const { url } = useRouteMatch();
   const serializer = new EngagementJsonSerializer();
   const {
@@ -127,7 +138,49 @@ export const EngagementDetailView = () => {
             />
           </Route>
           <Route path={`/`}>
-            <EngagementOverview />
+            <TextContent>
+              <Grid hasGutter>
+                <GridItem span={12}>
+                  <div id="engagement_summary_card">
+                    <EngagementSummaryCard />
+                  </div>
+                </GridItem>
+                {currentEngagement?.launch ? (
+                  <GridItem span={12}>
+                    <div id="system_status_card">
+                      <SystemStatusCard currentEngagement={currentEngagement} />
+                    </div>
+                  </GridItem>
+                ) : (
+                  <></>
+                )}
+                <GridItem span={12}>
+                  <div id="poc_card">
+                    <PointOfContactCard />
+                  </div>
+                </GridItem>
+                <GridItem span={12}>
+                  <div id="user_card">
+                    <UserCard />
+                  </div>
+                </GridItem>
+                <GridItem span={12}>
+                  <div id="oc_summary_card">
+                    <HostingEnvironmentCard />
+                  </div>
+                </GridItem>
+                <GridItem span={12}>
+                  <div id="timeline_card">
+                    <EngagementArtifactCard />
+                  </div>
+                </GridItem>
+                <GridItem span={12}>
+                  <div id="activity_card">
+                    <ActivityHistoryCard />
+                  </div>
+                </GridItem>
+              </Grid>
+            </TextContent>{' '}
           </Route>
         </Switch>
       </EngagementDetailsViewTemplate>
