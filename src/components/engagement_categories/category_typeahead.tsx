@@ -37,6 +37,7 @@ export function CategoryTypeahead({
       onChange([...selected, selection]);
     }
   };
+  const [searchText, setSearchText] = useState('');
   const options = allCategories?.map((category, index) => (
     <SelectOption
       data-testid="category-option"
@@ -45,6 +46,16 @@ export function CategoryTypeahead({
     />
   ));
 
+  const getOptions = (search?: string) => {
+    if (search === '' || !search) {
+      return options;
+    }
+    return options.filter(
+      ({ props: { value: optionValue } }) =>
+        (optionValue?.toLowerCase() ?? '').indexOf(search.toLowerCase()) > -1
+    );
+  };
+  const filteredOptions = getOptions(searchText);
   return (
     <Flex>
       <FlexItem>
@@ -57,14 +68,18 @@ export function CategoryTypeahead({
             onSelect={onSelect}
             onClear={cancelEdit}
             clearSelectionsAriaLabel={'Clear all'}
+            onFilter={({ target: { value } }) => {
+              setSearchText(value);
+              return getOptions(value);
+            }}
             selections={selected}
             isOpen={isOpen}
             isPlain={true}
             aria-labelledby={'titleId'}
             placeholderText="Add new tag"
-            isCreatable={true}
+            isCreatable={filteredOptions.length === 0}
           >
-            {options}
+            {filteredOptions}
           </Select>
         </div>
       </FlexItem>
