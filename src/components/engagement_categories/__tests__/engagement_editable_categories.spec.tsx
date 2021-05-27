@@ -6,6 +6,7 @@ import {
   render,
   RenderResult,
   screen,
+  waitFor,
 } from '@testing-library/react';
 import { EngagementContext } from '../../../context/engagement_context/engagement_context';
 import { EngagementEditableCategories } from '../engagement_editable_categories';
@@ -49,7 +50,9 @@ describe('Engagement Editable Categories', () => {
     const inputs = inputWrapper.getElementsByTagName('input');
     const input = inputs[0];
     fireEvent.click(input);
+    await waitFor(() => view.getByText('No results found'));
     fireEvent.change(input, { target: { value: 'a category' } });
+    await waitFor(() => view.getByText('Create "a category"'));
     fireEvent.click(await view.findByText('Create "a category"'));
 
     expect(onUpdateField).toHaveBeenCalled();

@@ -17,7 +17,7 @@ export interface CategoryTypeheadProps {
   selected: string[];
 }
 
-export function CategoryTypehead({
+export function CategoryTypeahead({
   cancelEdit,
   saveAndCloseEditMode,
   allCategories,
@@ -30,13 +30,20 @@ export function CategoryTypehead({
     setIsOpen(isOpen);
   };
 
-  const onSelect = (event, selection) => {
+  const onSelect = (_, selection) => {
     if (selected.includes(selection)) {
       onChange([...selected.filter(item => item !== selection)]);
     } else {
       onChange([...selected, selection]);
     }
   };
+  const options = allCategories?.map((category, index) => (
+    <SelectOption
+      data-testid="category-option"
+      key={index}
+      value={category.name}
+    />
+  ));
 
   return (
     <Flex>
@@ -57,13 +64,7 @@ export function CategoryTypehead({
             placeholderText="Add new tag"
             isCreatable={true}
           >
-            {allCategories?.map((category, index) => (
-              <SelectOption
-                data-testid="category-option"
-                key={index}
-                value={category.name}
-              />
-            ))}
+            {options}
           </Select>
         </div>
       </FlexItem>

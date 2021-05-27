@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Label } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
-import { CategoryTypehead } from './category_typehead';
+import { CategoryTypeahead } from './category_typeahead';
 import { useEngagement } from '../../context/engagement_context/engagement_hook';
 import { Feature } from '../feature/feature';
 import {
@@ -73,7 +73,7 @@ export function EngagementEditableCategories() {
     );
   };
 
-  const SaveAndCloseEditMode = async (selectedChips: string[]) => {
+  const SaveAndCloseEditMode = async () => {
     setEditMode(!editMode);
     await saveEngagement({
       ...engagement,
@@ -89,7 +89,7 @@ export function EngagementEditableCategories() {
     <>
       {editMode ? (
         <Flex>
-          <CategoryTypehead
+          <CategoryTypeahead
             selected={updatedCategories?.map?.(c => c?.name) ?? []}
             onChange={c =>
               setUpdatedCategories(
