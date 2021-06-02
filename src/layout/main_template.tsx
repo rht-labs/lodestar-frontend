@@ -49,6 +49,7 @@ export const MainTemplate = (props: MainTemplateProps) => {
     >
       <Drawer isExpanded={isNotificationExpanded} id={'notification_drawer'}>
         <DrawerContent
+          style={{marginBottom: "2rem"}}
           id={APPLICATION_CONTENT_CONTAINER_ID}
           panelContent={
             <NotificationContent
