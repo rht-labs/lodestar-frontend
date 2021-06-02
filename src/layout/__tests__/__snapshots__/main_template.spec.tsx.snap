@@ -457,6 +457,7 @@ Object {
               <div
                 class="pf-c-drawer__content"
                 id="main-application-content"
+                style="margin-bottom: 2rem;"
               >
                 <div
                   data-testid="mainTemplateContent"
@@ -1007,6 +1008,7 @@ Object {
             <div
               class="pf-c-drawer__content"
               id="main-application-content"
+              style="margin-bottom: 2rem;"
             >
               <div
                 data-testid="mainTemplateContent"
