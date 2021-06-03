@@ -3,19 +3,18 @@
 }
 
 .logo-text {
+  /* TODO: define fonts globally */
   font-family: 'Red Hat Display';
   color: white;
-  font-size: 25;
+  font-size: 1.5rem;
 }
 
 .jumbotron-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   padding: 3rem;
-  height: 60%;
-  width: 100%;
   position: relative;
 }
 
@@ -23,7 +22,7 @@
   background: url(https://regmedia.co.uk/2020/04/28/redhat.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: top;
   z-index: -2;
   position: absolute;
   top: 0;
@@ -33,7 +32,7 @@
 }
 
 .background-image-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -42,16 +41,23 @@
   z-index: -1;
 }
 
-.cta {
-  color: white;
-  font-family: 'Red Hat Display';
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 40px;
+.info-video {
+  width: 50%;
 }
 
-.cta > span {
-  padding-bottom: 20px;
+.aspect-ratio--16x9 {
+  height: 0;
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.aspect-ratio-object {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
 }
