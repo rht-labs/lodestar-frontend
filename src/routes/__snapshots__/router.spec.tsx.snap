@@ -13,7 +13,6 @@ Object {
         >
           <header
             class="pf-c-page__header"
-            toolbar="[object Object]"
           >
             <div
               class="pf-c-page__header-brand"
@@ -28,105 +27,10 @@ Object {
                 </span>
               </a>
             </div>
-          </header>
-          <main
-            class="pf-c-page__main"
-            tabindex="-1"
-          >
-            <section
-              class="pf-c-page__main-section"
-              style="padding: 0px;"
-            >
-              <div
-                style="height: 25px;"
-              />
-            </section>
             <div
-              class="jumbotron-container"
+              class="pf-c-toolbar"
+              id="pf-random-id-0"
             >
-              <div
-                class="cta"
-              >
-                <span>
-                  LodeStar
-                </span>
-                <a
-                  href="/app"
-                >
-                  <button
-                    aria-disabled="false"
-                    class="pf-c-button pf-m-primary"
-                    data-cy="get_started_button"
-                    data-ouia-component-id="OUIA-Generated-Button-primary-1"
-                    data-ouia-component-type="PF4/Button"
-                    data-ouia-safe="true"
-                    type="button"
-                  >
-                    Get Started
-                  </button>
-                </a>
-              </div>
-              <div
-                class="background-image"
-              />
-              <div
-                class="background-image-overlay"
-              />
-            </div>
-            <section
-              class="pf-c-page__main-section"
-            />
-          </main>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="landing-page"
-    >
-      <div
-        class="pf-c-page"
-      >
-        <header
-          class="pf-c-page__header"
-          toolbar="[object Object]"
-        >
-          <div
-            class="pf-c-page__header-brand"
-          >
-            <a
-              class="pf-c-page__header-brand-link"
-            >
-              <span
-                class="logo-text"
-              >
-                LodeStar
-              </span>
-            </a>
-          </div>
-        </header>
-        <main
-          class="pf-c-page__main"
-          tabindex="-1"
-        >
-          <section
-            class="pf-c-page__main-section"
-            style="padding: 0px;"
-          >
-            <div
-              style="height: 25px;"
-            />
-          </section>
-          <div
-            class="jumbotron-container"
-          >
-            <div
-              class="cta"
-            >
-              <span>
-                LodeStar
-              </span>
               <a
                 href="/app"
               >
@@ -142,6 +46,129 @@ Object {
                   Get Started
                 </button>
               </a>
+              <div
+                class="pf-c-toolbar__content pf-m-hidden"
+                hidden=""
+              >
+                <div
+                  class="pf-c-toolbar__group"
+                />
+              </div>
+            </div>
+          </header>
+          <main
+            class="pf-c-page__main"
+            tabindex="-1"
+          >
+            <div
+              class="jumbotron-container"
+              style="height: 100vh;"
+            >
+              <div
+                class="info-video"
+              >
+                <div
+                  class="aspect-ratio--16x9"
+                >
+                  <iframe
+                    allow="autoplay *; fullscreen *; encrypted-media *"
+                    class="aspect-ratio-object"
+                    frameborder="0"
+                    id="kaltura_player"
+                    sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation"
+                    src="https://cdnapisec.kaltura.com/p/2300461/sp/230046100/embedIframeJs/uiconf_id/42569541/partner_id/2300461?iframeembed=true&playerId=kaltura_player&entry_id=1_2h6lcr8p&flashvars[streamerType]=auto&flashvars[localizationCode]=en&flashvars[leadWithHTML5]=true&flashvars[sideBarContainer.plugin]=true&flashvars[sideBarContainer.position]=left&flashvars[sideBarContainer.clickToClose]=true&flashvars[chapters.plugin]=true&flashvars[chapters.layout]=vertical&flashvars[chapters.thumbnailRotator]=false&flashvars[streamSelector.plugin]=true&flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&flashvars[dualScreen.plugin]=true&flashvars[hotspots.plugin]=1&flashvars[Kaltura.addCrossoriginToIframe]=true&&wid=1_un5h0nqz"
+                    title="Kaltura Player"
+                  />
+                </div>
+              </div>
+              <div
+                class="background-image"
+              />
+              <div
+                class="background-image-overlay"
+              />
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="landing-page"
+    >
+      <div
+        class="pf-c-page"
+      >
+        <header
+          class="pf-c-page__header"
+        >
+          <div
+            class="pf-c-page__header-brand"
+          >
+            <a
+              class="pf-c-page__header-brand-link"
+            >
+              <span
+                class="logo-text"
+              >
+                LodeStar
+              </span>
+            </a>
+          </div>
+          <div
+            class="pf-c-toolbar"
+            id="pf-random-id-0"
+          >
+            <a
+              href="/app"
+            >
+              <button
+                aria-disabled="false"
+                class="pf-c-button pf-m-primary"
+                data-cy="get_started_button"
+                data-ouia-component-id="OUIA-Generated-Button-primary-1"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                Get Started
+              </button>
+            </a>
+            <div
+              class="pf-c-toolbar__content pf-m-hidden"
+              hidden=""
+            >
+              <div
+                class="pf-c-toolbar__group"
+              />
+            </div>
+          </div>
+        </header>
+        <main
+          class="pf-c-page__main"
+          tabindex="-1"
+        >
+          <div
+            class="jumbotron-container"
+            style="height: 100vh;"
+          >
+            <div
+              class="info-video"
+            >
+              <div
+                class="aspect-ratio--16x9"
+              >
+                <iframe
+                  allow="autoplay *; fullscreen *; encrypted-media *"
+                  class="aspect-ratio-object"
+                  frameborder="0"
+                  id="kaltura_player"
+                  sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation"
+                  src="https://cdnapisec.kaltura.com/p/2300461/sp/230046100/embedIframeJs/uiconf_id/42569541/partner_id/2300461?iframeembed=true&playerId=kaltura_player&entry_id=1_2h6lcr8p&flashvars[streamerType]=auto&flashvars[localizationCode]=en&flashvars[leadWithHTML5]=true&flashvars[sideBarContainer.plugin]=true&flashvars[sideBarContainer.position]=left&flashvars[sideBarContainer.clickToClose]=true&flashvars[chapters.plugin]=true&flashvars[chapters.layout]=vertical&flashvars[chapters.thumbnailRotator]=false&flashvars[streamSelector.plugin]=true&flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&flashvars[dualScreen.plugin]=true&flashvars[hotspots.plugin]=1&flashvars[Kaltura.addCrossoriginToIframe]=true&&wid=1_un5h0nqz"
+                  title="Kaltura Player"
+                />
+              </div>
             </div>
             <div
               class="background-image"
@@ -150,9 +177,6 @@ Object {
               class="background-image-overlay"
             />
           </div>
-          <section
-            class="pf-c-page__main-section"
-          />
         </main>
       </div>
     </div>
