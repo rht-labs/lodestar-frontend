@@ -11,7 +11,7 @@ data:
       "clientId": "{{ .Values.clientId }}",
       "authBaseUrl": "{{ .Values.authBaseUrl }}",
       "backendUrl": "{{ .Values.backendUrl }}",
-      "disableLaunch": "{{ .Values.disableLaunch }}"
+      "disableLaunch": "{{ .Values.disableLaunch }}",
       "roles": {
         {{- range  $i, $group := .Values.access.groups }}
         {{- if $i }},{{ end }}
