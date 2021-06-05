@@ -35,6 +35,7 @@ helm template . \
   --set clientId=<your-sso-client-id> \
   --set authBaseUrl=<your-sso-openid-connect-url> \
   --set backendUrl=<your-backend-url> \
+  --set 'access.groups[0].name=group-name','access.groups[0].roles={access_type,axxess_type}'
 | oc apply -f -
 ```
 
@@ -48,6 +49,8 @@ It accepts the following variables
 | `clientId`  | The client ID that the SSO server is configured to accept auth requests using  |
 | `authBaseUrl`  | The url that your SSO server accepts OpenID Connect requests on - for Keycloak, something like `https://<keycloak-base-url>.com/auth/realms/<realm-id>/protocol/openid-connect`  |
 | `backendUrl`  | The url that the LodeStar backend accepts requests on  |
+| `access.groups` | A list of groups to receive access to LodeStar |
+| `access.groups[i].roles` | A list of roles to map access | 
 
 
 This will spin up all of the usual resources that this service needs in production, plus a `BuildConfig` configured to build it from source from the Git repository specified. To trigger this build, use `oc start-build lodestar-frontend`.
