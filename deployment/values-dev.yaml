@@ -15,6 +15,16 @@ clientId: secret
 authBaseUrl: url
 backendUrl: url
 
+access:
+  groups:
+  - name: general
+    roles:
+    - basic
+    - view
+  - name: advanced
+    roles:
+    - admin
+
 e2eTestJob:
   enabled: false
   createSecret: false

@@ -4,12 +4,20 @@ kind: ConfigMap
 metadata:
   name: frontend-config
 data:
+
   config.json: |
     {
       "baseUrl": "{{ .Values.baseUrl }}",
       "clientId": "{{ .Values.clientId }}",
       "authBaseUrl": "{{ .Values.authBaseUrl }}",
       "backendUrl": "{{ .Values.backendUrl }}",
-      "disableLaunch": "{{ .Values.disableLaunch }}"
+      "disableLaunch": "{{ .Values.disableLaunch }}",
+      "roles": {
+        {{- range  $i, $group := .Values.access.groups }}
+        {{- if $i }},{{ end }}
+        {{ $group.name | quote }}: [
+          {{- range $j, $role := $group.roles }}{{ if $j }},{{ end }}{{ $role | quote }}{{- end }}]
+        {{- end }} 
+      }
     }
 {{- end }}
