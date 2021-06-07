@@ -163,7 +163,14 @@ export function Dashboard() {
                   </Select>
                 </FlexItem>
                 <FlexItem>
-                  <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
+                  <Feature
+                    name={'dashboardDateSelector'}
+                    inactiveComponent={() => <div />}
+                  >
+                    <DateWindowSelector
+                      onSelectWindow={handleSelectDateWindow}
+                    />
+                  </Feature>
                 </FlexItem>
               </Flex>
 
