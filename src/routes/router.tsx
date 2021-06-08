@@ -21,9 +21,24 @@ import { Token } from '../packages/api_v1_sdk/token';
 import { EngagementRoute } from './engagement/engagement_route';
 import ScrollToTop from './scroll_to_top';
 import { EngagementDetailView } from './engagement/engagement_details';
+import {
+  ClipboardCopy,
+  PageSection,
+  PageSectionVariants,
+} from '@patternfly/react-core';
 
 function WhatsMyToken() {
-  return <pre>{Token.token.accessToken}</pre>;
+  return (
+    <PageSection variant={PageSectionVariants.light}>
+      <ClipboardCopy
+        isReadOnly
+        isExpanded
+        style={{ wordWrap: 'break-word', fontFamily: 'monospace' }}
+      >
+        {Token.token.accessToken}
+      </ClipboardCopy>
+    </PageSection>
+  );
 }
 
 export function LodestarRouter() {
