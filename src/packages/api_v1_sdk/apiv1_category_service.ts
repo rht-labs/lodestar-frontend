@@ -52,7 +52,7 @@ export class Apiv1CategoryService implements CategoryService {
       searchParams.push(`engagement_region=${regions.join(',')}`);
     }
     if (searchText.length > 0) {
-      searchParams.push(`categories.name=${searchText}`);
+      searchParams.push(`categories.name like ${searchText}`);
     }
     if (searchParams.length > 0) {
       queryParams.push(`search=${searchParams.join('&')}`);
