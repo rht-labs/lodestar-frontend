@@ -173,6 +173,7 @@ export function Dashboard() {
                     filter={{
                       startDate: dateFilter?.startDate,
                       endDate: dateFilter?.endDate,
+                      engagementRegions: selectedRegions,
                       include: [
                         'project_name',
                         'start_date',
@@ -190,6 +191,7 @@ export function Dashboard() {
                     filter={{
                       startDate: dateFilter?.startDate,
                       endDate: dateFilter?.endDate,
+                      engagementRegions: selectedRegions,
                       include: ['engagement_users'],
                     }}
                     component={DashboardPeopleEnabledCard}
@@ -202,6 +204,7 @@ export function Dashboard() {
                   <EngagementQueryMediator
                     filter={{
                       pageNumber: 1,
+                      engagementRegions: selectedRegions,
                       perPage: 5,
                       sortField: 'last_update',
                       sortOrder: SortOrder.DESC,
