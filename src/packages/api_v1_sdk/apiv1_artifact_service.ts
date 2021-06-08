@@ -12,16 +12,30 @@ export class Apiv1ArtifactService implements ArtifactService {
   private buildQueryString({
     page = 1,
     perPage = 10,
+    startDate,
+    endDate,
+    regions,
     type,
   }: ArtifactFilter): string {
     const queries: string[] = [];
     queries.push(`perPage=${perPage}`);
     queries.push(`page=${page}`);
-    let search = [];
+    const searchParams = [];
     if (!!type) {
-      search.push(`artifacts.type=${type}`);
+      searchParams.push(`artifacts.type=${type}`);
     }
-    queries.push(`search=${encodeURIComponent(search.join('&'))}`);
+    if (startDate != null) {
+      searchParams.push(`start=${startDate.toISOString().split('T')[0]}`);
+    }
+    if (endDate != null) {
+      searchParams.push(`start=${endDate.toISOString().split('T')[0]}`);
+    }
+    if (regions.length > 0) {
+      searchParams.push(`engagement_region=${regions.join(',')}`);
+    }
+    if (searchParams.length > 0) {
+      queries.push(`search=${encodeURIComponent(searchParams.join('&'))}`);
+    }
     return queries.join('&');
   }
   private apiResponseToArtifact = (apiResponseObject: any): Artifact => {

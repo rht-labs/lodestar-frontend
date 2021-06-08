@@ -27,7 +27,7 @@ const UseCaseFetcher = (props: UseCaseFetcherProps<any>) => {
   const { useCaseService } = useServiceProviders();
   const [useCases, fetchUseCases] = useUseCases(useCaseService);
   useEffect(() => {
-    fetchUseCases();
-  }, [useCaseService, fetchUseCases]);
+    fetchUseCases(props.filter);
+  }, [useCaseService, fetchUseCases, props.filter]);
   return <WrappedComponent {...props} useCases={useCases} />;
 };

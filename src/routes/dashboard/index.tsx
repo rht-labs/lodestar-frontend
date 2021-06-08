@@ -205,7 +205,13 @@ export function Dashboard() {
                   />
                 </GridItem>
                 <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-                  {withCategories(DwTopTags, { page: 1, perPage: 5 })}
+                  {withCategories(DwTopTags, {
+                    page: 1,
+                    perPage: 5,
+                    startDate: dateFilter?.startDate,
+                    endDate: dateFilter?.endDate,
+                    regions: selectedRegions,
+                  })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   <EngagementQueryMediator
@@ -215,6 +221,8 @@ export function Dashboard() {
                       perPage: 5,
                       sortField: 'last_update',
                       sortOrder: SortOrder.DESC,
+                      startDate: dateFilter?.startDate,
+                      endDate: dateFilter?.endDate,
                     }}
                     component={props => (
                       <DwLastUpdated
@@ -229,17 +237,36 @@ export function Dashboard() {
                   />
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withUseCases(DwLastUseCases, { page: 1, perPage: 5 })}
+                  {withUseCases(DwLastUseCases, {
+                    page: 1,
+                    perPage: 5,
+                    startDate: dateFilter?.startDate,
+                    endDate: dateFilter?.endDate,
+                    regions: selectedRegions,
+                  })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withArtifacts(DwLastArtifacts, { page: 1, perPage: 5 })}
+                  {withArtifacts(DwLastArtifacts, {
+                    page: 1,
+                    perPage: 5,
+                    startDate: dateFilter?.startDate,
+                    endDate: dateFilter?.endDate,
+                    regions: selectedRegions,
+                  })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   {withArtifacts(
                     ({ artifacts }: { artifacts: Artifact[] }) => (
                       <DwLastDemo demos={artifacts} />
                     ),
-                    { page: 1, perPage: 5, type: 'demo' }
+                    {
+                      page: 1,
+                      perPage: 5,
+                      type: 'demo',
+                      startDate: dateFilter?.startDate,
+                      endDate: dateFilter?.endDate,
+                      regions: selectedRegions,
+                    }
                   )}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
@@ -247,7 +274,14 @@ export function Dashboard() {
                     ({ artifacts }: { artifacts: Artifact[] }) => (
                       <DwLastWeeklyReport artifacts={artifacts} />
                     ),
-                    { page: 1, perPage: 5, type: 'weeklyReport' }
+                    {
+                      page: 1,
+                      perPage: 5,
+                      type: 'weeklyReport',
+                      startDate: dateFilter?.startDate,
+                      endDate: dateFilter?.endDate,
+                      regions: selectedRegions,
+                    }
                   )}
                 </GridItem>
               </Grid>

@@ -25,6 +25,9 @@ export class Apiv1CategoryService implements CategoryService {
       sortOrder = CategorySortOrder.Descending,
       page = 1,
       perPage = 10,
+      endDate,
+      startDate,
+      regions = [],
       searchText = '',
     } = filter;
     if (!!sortOrder) {
@@ -38,8 +41,21 @@ export class Apiv1CategoryService implements CategoryService {
     }
     queryParams.push(`page=${page}`);
     queryParams.push(`perPage=${perPage}`);
-    if (!!searchText) {
-      queryParams.push(`suggest=${searchText}`);
+    const searchParams = [];
+    if (startDate != null) {
+      searchParams.push(`start=${startDate.toISOString().split('T')[0]}`);
+    }
+    if (endDate != null) {
+      searchParams.push(`start=${endDate.toISOString().split('T')[0]}`);
+    }
+    if (regions.length > 0) {
+      searchParams.push(`engagement_region=${regions.join(',')}`);
+    }
+    if (searchText.length > 0) {
+      searchParams.push(`categories.name=${searchText}`);
+    }
+    if (searchParams.length > 0) {
+      queryParams.push(`search=${searchParams.join('&')}`);
     }
 
     return queryParams.join('&');
