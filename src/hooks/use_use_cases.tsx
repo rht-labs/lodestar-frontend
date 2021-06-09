@@ -8,10 +8,13 @@ import {
 export const useUseCases = (useCaseService: UseCaseService) => {
   const [useCases, setUseCases] = useState<EngagementUseCase[]>([]);
 
-  const getUseCases = useCallback(async () => {
-    const result = await useCaseService.getUseCases();
-    setUseCases(result);
-  }, [useCaseService]);
+  const getUseCases = useCallback(
+    async (filter: UseCaseFilter) => {
+      const result = await useCaseService.getUseCases(filter);
+      setUseCases(result);
+    },
+    [useCaseService]
+  );
 
   return [useCases, getUseCases] as [
     EngagementUseCase[],

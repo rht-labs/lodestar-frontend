@@ -9,6 +9,9 @@ export interface CategoryFilter {
   perPage?: number;
   sortOrder?: CategorySortOrder;
   searchText?: string;
+  startDate?: Date;
+  endDate?: Date;
+  regions?: string[];
 }
 
 export abstract class CategoryService {

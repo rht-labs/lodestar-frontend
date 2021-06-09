@@ -81,7 +81,6 @@ export class Apiv1EngagementService implements EngagementService {
   ): Promise<Engagement[]> {
     try {
       const qs = this.buildQueryStringFromParameters(params);
-      console.log(qs);
       const { data: engagementsData } = await this.axios.get(
         `/engagements${qs.length > 0 ? '?' + qs : ''}`
       );
@@ -89,7 +88,6 @@ export class Apiv1EngagementService implements EngagementService {
         (engagementMap: { [key: string]: any }) =>
           Apiv1EngagementService.engagementSerializer.deserialize(engagementMap)
       );
-      // return this.filterForParams(serializedEngagements, params);
       return serializedEngagements;
     } catch (e) {
       if (e.isAxiosError) {
@@ -181,7 +179,6 @@ export class Apiv1EngagementService implements EngagementService {
   }
   async getConfig(type?: string): Promise<EngagementFormConfig> {
     try {
-      console.log(type);
       const { data } = await this.axios.get(`/config`, {
         headers: {
           'Content-Type': 'application/json',
