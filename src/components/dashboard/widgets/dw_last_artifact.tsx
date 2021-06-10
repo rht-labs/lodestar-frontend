@@ -12,16 +12,31 @@ import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { Artifact, Engagement } from '../../../schemas/engagement';
 import { Link } from 'react-router-dom';
 export interface DwLastArtifactsProps {
-  artifacts: (Artifact & Partial<Engagement>)[];
+  artifacts: Artifact[];
+  engagements: Partial<Engagement>[];
 }
 const columns = ['Engagement', 'Artifact', 'Type'];
-export const DwLastArtifacts = (props: DwLastArtifactsProps) => {
-  const rows = props.artifacts.map(artifact => {
+export const DwLastArtifacts = ({
+  artifacts = [],
+  engagements = [],
+}: DwLastArtifactsProps) => {
+  const engagementsById = artifacts.reduce(
+    (acc, curr) => ({
+      ...acc,
+      [curr.engagement_uuid]: engagements.find(
+        e => e.uuid === curr.engagement_uuid
+      ),
+    }),
+    {}
+  );
+  const rows = artifacts.map(artifact => {
     return [
       {
         title: (
           <Link to={`/app/engagements/${artifact.engagement_uuid}#artifacts`}>
-            {artifact?.customer_name + ' — ' + artifact?.project_name}
+            {engagementsById[artifact.engagement_uuid]?.customer_name +
+              ' — ' +
+              engagementsById[artifact.engagement_uuid]?.project_name}
           </Link>
         ),
       },

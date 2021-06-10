@@ -9,15 +9,38 @@ import {
 } from '@patternfly/react-core';
 import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 import React from 'react';
-import { Artifact } from '../../../schemas/engagement';
+import { Link } from 'react-router-dom';
+import { Artifact, Engagement } from '../../../schemas/engagement';
 
 export interface DwLastWeeklyReportProps {
   artifacts: Artifact[];
+  engagements: Partial<Engagement>[];
 }
-const columns = ['Weekly Report'];
-export function DwLastWeeklyReport({ artifacts }: DwLastWeeklyReportProps) {
+const columns = ['Engagement', 'Weekly Report'];
+export function DwLastWeeklyReport({
+  artifacts = [],
+  engagements = [],
+}: DwLastWeeklyReportProps) {
+  const engagementsById = artifacts.reduce(
+    (acc, curr) => ({
+      ...acc,
+      [curr.engagement_uuid]: engagements.find(
+        e => e.uuid === curr.engagement_uuid
+      ),
+    }),
+    {}
+  );
   const rows = artifacts.map(artifact => {
     return [
+      {
+        title: (
+          <Link to={`/app/engagements/${artifact.engagement_uuid}`}>
+            {engagementsById[artifact.engagement_uuid]?.customer_name}
+            &nbsp;—&nbsp;
+            {engagementsById[artifact.engagement_uuid]?.project_name}
+          </Link>
+        ),
+      },
       {
         title: artifact?.description,
       },

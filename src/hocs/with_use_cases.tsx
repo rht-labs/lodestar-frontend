@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useServiceProviders } from '../context/service_provider_context/service_provider_context';
 import { useUseCases } from '../hooks/use_use_cases';
 import { EngagementUseCase } from '../schemas/engagement';
-import { UseCaseFilter } from '../services/use_case_service/use_case_service';
 
 type UseCaseComponent<P> = React.FunctionComponent<
   P & {
@@ -12,22 +11,22 @@ type UseCaseComponent<P> = React.FunctionComponent<
 
 export function withUseCases<P>(
   WrappedComponent: UseCaseComponent<P>,
-  filter?: UseCaseFilter
+  fetcher: () => Promise<EngagementUseCase[]>
 ) {
-  return <UseCaseFetcher filter={filter} component={WrappedComponent} />;
+  return <UseCaseFetcher fetcher={fetcher} component={WrappedComponent} />;
 }
 
 interface UseCaseFetcherProps<P> {
   component: UseCaseComponent<P>;
-  filter?: UseCaseFilter;
+  fetcher: () => Promise<EngagementUseCase[]>;
 }
 
 const UseCaseFetcher = (props: UseCaseFetcherProps<any>) => {
   const { component: WrappedComponent } = props;
   const { useCaseService } = useServiceProviders();
-  const [useCases, fetchUseCases] = useUseCases(useCaseService);
+  const [useCases, fetchUseCases] = useUseCases(props.fetcher);
   useEffect(() => {
-    fetchUseCases(props.filter);
-  }, [useCaseService, fetchUseCases, props.filter]);
+    fetchUseCases();
+  }, [useCaseService, fetchUseCases]);
   return <WrappedComponent {...props} useCases={useCases} />;
 };
