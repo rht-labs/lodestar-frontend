@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { useServiceProviders } from '../context/service_provider_context/service_provider_context';
 import { useArtifacts } from '../hooks/use_artifacts';
 import { Artifact } from '../schemas/engagement';
-import { ArtifactFilter } from '../services/artifact_service/artifact_service';
 
 type ArtifactsComponent<P> = React.FunctionComponent<
   P & {
@@ -12,22 +10,21 @@ type ArtifactsComponent<P> = React.FunctionComponent<
 
 export function withArtifacts<P>(
   WrappedComponent: ArtifactsComponent<P>,
-  filter: ArtifactFilter = {}
+  fetcher: () => Promise<Artifact[]>
 ) {
-  return <ArtifactFetcher filter={filter} component={WrappedComponent} />;
+  return <ArtifactFetcher component={WrappedComponent} fetcher={fetcher} />;
 }
 
 interface ArtifactFetcherProps<P> {
   component: ArtifactsComponent<P>;
-  filter?: ArtifactFilter;
+  fetcher: () => Promise<Artifact[]>;
 }
 
 const ArtifactFetcher = (props: ArtifactFetcherProps<any>) => {
   const { component: WrappedComponent } = props;
-  const { artifactService } = useServiceProviders();
-  const [artifacts, fetchArtifacts] = useArtifacts(artifactService);
+  const [artifacts, fetchArtifacts] = useArtifacts(props.fetcher);
   useEffect(() => {
-    fetchArtifacts(props.filter);
-  }, [fetchArtifacts, props.filter]);
+    fetchArtifacts();
+  }, [fetchArtifacts]);
   return <WrappedComponent {...props} artifacts={artifacts} />;
 };

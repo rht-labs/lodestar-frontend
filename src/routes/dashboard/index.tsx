@@ -46,6 +46,7 @@ import {
 } from '@patternfly/react-icons';
 import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
 import { DwLastWeeklyReport } from '../../components/dashboard/widgets/dw_last_weekly_report';
+import { withEngagement } from '../../decorators/with_engagment';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -59,7 +60,7 @@ export interface DashboardFilter {
 }
 
 export function Dashboard() {
-  const { engagementService } = useServiceProviders();
+  const { engagementService, artifactService } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
@@ -246,27 +247,38 @@ export function Dashboard() {
                   })}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withArtifacts(DwLastArtifacts, {
-                    page: 1,
-                    perPage: 5,
-                    startDate: dateFilter?.startDate,
-                    endDate: dateFilter?.endDate,
-                    regions: selectedRegions,
-                  })}
+                  {withArtifacts(
+                    DwLastArtifacts,
+                    withEngagement(
+                      () =>
+                        artifactService.getArtifacts({
+                          page: 1,
+                          perPage: 5,
+                          startDate: dateFilter?.startDate,
+                          endDate: dateFilter?.endDate,
+                          regions: selectedRegions,
+                        }),
+                      engagementService.getEngagementById
+                    ) as any
+                  )}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   {withArtifacts(
                     ({ artifacts }: { artifacts: Artifact[] }) => (
                       <DwLastDemo demos={artifacts} />
                     ),
-                    {
-                      page: 1,
-                      perPage: 5,
-                      type: 'demo',
-                      startDate: dateFilter?.startDate,
-                      endDate: dateFilter?.endDate,
-                      regions: selectedRegions,
-                    }
+                    withEngagement(
+                      () =>
+                        artifactService.getArtifacts({
+                          page: 1,
+                          perPage: 5,
+                          type: 'demo',
+                          startDate: dateFilter?.startDate,
+                          endDate: dateFilter?.endDate,
+                          regions: selectedRegions,
+                        }),
+                      engagementService.getEngagementById
+                    ) as any
                   )}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
@@ -274,14 +286,18 @@ export function Dashboard() {
                     ({ artifacts }: { artifacts: Artifact[] }) => (
                       <DwLastWeeklyReport artifacts={artifacts} />
                     ),
-                    {
-                      page: 1,
-                      perPage: 5,
-                      type: 'weeklyReport',
-                      startDate: dateFilter?.startDate,
-                      endDate: dateFilter?.endDate,
-                      regions: selectedRegions,
-                    }
+                    withEngagement(
+                      () =>
+                        artifactService.getArtifacts({
+                          page: 1,
+                          perPage: 5,
+                          type: 'weeklyReport',
+                          startDate: dateFilter?.startDate,
+                          endDate: dateFilter?.endDate,
+                          regions: selectedRegions,
+                        }),
+                      engagementService.getEngagementById
+                    ) as any
                   )}
                 </GridItem>
               </Grid>

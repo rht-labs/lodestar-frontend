@@ -45,6 +45,7 @@ export class Apiv1ArtifactService implements ArtifactService {
       uuid: apiResponseObject['uuid'],
       title: apiResponseObject['title'],
       type: apiResponseObject['type'],
+      engagement_uuid: apiResponseObject['engagement_uuid'],
     };
   };
   async getArtifacts(filter: ArtifactFilter = {}): Promise<Artifact[]> {

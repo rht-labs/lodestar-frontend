@@ -16,6 +16,7 @@ export class Apiv1EngagementService implements EngagementService {
   private axios: AxiosInstance;
   constructor() {
     this.axios = getApiV1HttpClient();
+    this.getEngagementById = this.getEngagementById.bind(this);
   }
   async checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
     return this.axios
