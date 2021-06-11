@@ -170,7 +170,7 @@ export const EngagementDetailView = () => {
                   </div>
                 </GridItem>
                 <GridItem span={12}>
-                  <div id="timeline_card">
+                  <div id="artifacts">
                     <EngagementArtifactCard />
                   </div>
                 </GridItem>

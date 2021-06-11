@@ -2,19 +2,14 @@ import { useCallback, useState } from 'react';
 import { Artifact } from '../schemas/engagement';
 import {
   ArtifactFilter,
-  ArtifactService,
 } from '../services/artifact_service/artifact_service';
 
-export const useArtifacts = (artifactService: ArtifactService) => {
+export const useArtifacts = (fetcher: () => Promise<Artifact[]>) => {
   const [artifacts, setArtifacts] = useState<Artifact[]>([]);
 
-  const getArtifacts = useCallback(
-    async (filter: ArtifactFilter) => {
-      const result = await artifactService.getArtifacts(filter);
-      setArtifacts(result);
-    },
-    [artifactService]
-  );
+  const getArtifacts = useCallback(async () => {
+    setArtifacts(await fetcher());
+  }, [fetcher]);
 
   return [artifacts, getArtifacts] as [
     Artifact[],

@@ -25,11 +25,7 @@ import { EngagementQueryMediator } from '../../components/dashboard/widgets/enga
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { withCategories } from '../../hocs/with_categories';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
-import {
-  Artifact,
-  Engagement,
-  EngagementStatus,
-} from '../../schemas/engagement';
+import { Engagement, EngagementStatus } from '../../schemas/engagement';
 import { engagementFilterFactory } from '../../common/engagement_filter_factory';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { useHistory } from 'react-router';
@@ -59,7 +55,11 @@ export interface DashboardFilter {
 }
 
 export function Dashboard() {
-  const { engagementService } = useServiceProviders();
+  const {
+    engagementService,
+    artifactService,
+    useCaseService,
+  } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
@@ -237,51 +237,61 @@ export function Dashboard() {
                   />
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
-                  {withUseCases(DwLastUseCases, {
-                    page: 1,
-                    perPage: 5,
-                    startDate: dateFilter?.startDate,
-                    endDate: dateFilter?.endDate,
-                    regions: selectedRegions,
-                  })}
-                </GridItem>
-                <GridItem sm={12} xl={12} xl2={6}>
-                  {withArtifacts(DwLastArtifacts, {
-                    page: 1,
-                    perPage: 5,
-                    startDate: dateFilter?.startDate,
-                    endDate: dateFilter?.endDate,
-                    regions: selectedRegions,
-                  })}
-                </GridItem>
-                <GridItem sm={12} xl={12} xl2={6}>
-                  {withArtifacts(
-                    ({ artifacts }: { artifacts: Artifact[] }) => (
-                      <DwLastDemo demos={artifacts} />
-                    ),
-                    {
+                  {withUseCases(DwLastUseCases, () =>
+                    useCaseService.getUseCases({
                       page: 1,
                       perPage: 5,
-                      type: 'demo',
                       startDate: dateFilter?.startDate,
                       endDate: dateFilter?.endDate,
                       regions: selectedRegions,
-                    }
+                    })
                   )}
                 </GridItem>
                 <GridItem sm={12} xl={12} xl2={6}>
                   {withArtifacts(
-                    ({ artifacts }: { artifacts: Artifact[] }) => (
-                      <DwLastWeeklyReport artifacts={artifacts} />
+                    DwLastArtifacts,
+                    () =>
+                      artifactService.getArtifacts({
+                        page: 1,
+                        perPage: 5,
+                        startDate: dateFilter?.startDate,
+                        endDate: dateFilter?.endDate,
+                        regions: selectedRegions,
+                      }),
+                    engagementService.getEngagementById
+                  )}
+                </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  {withArtifacts(
+                    ({ artifacts, engagements }) => (
+                      <DwLastDemo demos={artifacts} engagements={engagements} />
                     ),
-                    {
-                      page: 1,
-                      perPage: 5,
-                      type: 'weeklyReport',
-                      startDate: dateFilter?.startDate,
-                      endDate: dateFilter?.endDate,
-                      regions: selectedRegions,
-                    }
+                    () =>
+                      artifactService.getArtifacts({
+                        page: 1,
+                        perPage: 5,
+                        type: 'demo',
+                        startDate: dateFilter?.startDate,
+                        endDate: dateFilter?.endDate,
+                        regions: selectedRegions,
+                      }),
+                    engagementService.getEngagementById
+                  )}
+                </GridItem>
+                <GridItem sm={12} xl={12} xl2={6}>
+                  {withArtifacts(
+                    DwLastWeeklyReport,
+                    () =>
+                      artifactService.getArtifacts({
+                        page: 1,
+                        perPage: 5,
+                        type: 'weeklyReport',
+                        startDate: dateFilter?.startDate,
+                        endDate: dateFilter?.endDate,
+                        regions: selectedRegions,
+                      }),
+
+                    engagementService.getEngagementById
                   )}
                 </GridItem>
               </Grid>

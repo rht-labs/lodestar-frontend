@@ -43,6 +43,7 @@ export interface FakedEngagementOptions {
 export interface EngagementUseCase {
   description?: string;
   id: string;
+  engagement_uuid: string;
 }
 
 export interface Artifact {
@@ -51,6 +52,7 @@ export interface Artifact {
   title: string;
   type: string;
   description: string;
+  engagement_uuid?: string;
 }
 
 export interface EngagementOverview {

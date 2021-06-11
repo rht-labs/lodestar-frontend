@@ -1,33 +1,51 @@
-import React, { useEffect } from 'react';
-import { useServiceProviders } from '../context/service_provider_context/service_provider_context';
+import React, { useEffect, useState } from 'react';
 import { useArtifacts } from '../hooks/use_artifacts';
-import { Artifact } from '../schemas/engagement';
-import { ArtifactFilter } from '../services/artifact_service/artifact_service';
+import { Artifact, Engagement } from '../schemas/engagement';
 
 type ArtifactsComponent<P> = React.FunctionComponent<
   P & {
     artifacts: Artifact[];
+    engagements: Partial<Engagement>[];
   }
 >;
 
 export function withArtifacts<P>(
   WrappedComponent: ArtifactsComponent<P>,
-  filter: ArtifactFilter = {}
+  fetcher: () => Promise<Artifact[]>,
+  fetchEngagementById: (id: string) => Promise<Partial<Engagement>>
 ) {
-  return <ArtifactFetcher filter={filter} component={WrappedComponent} />;
+  return (
+    <ArtifactFetcher
+      component={WrappedComponent}
+      fetcher={fetcher}
+      getEngagementById={fetchEngagementById}
+    />
+  );
 }
 
 interface ArtifactFetcherProps<P> {
   component: ArtifactsComponent<P>;
-  filter?: ArtifactFilter;
+  fetcher: () => Promise<Artifact[]>;
+  getEngagementById: (id: string) => Promise<Partial<Engagement>>;
 }
 
 const ArtifactFetcher = (props: ArtifactFetcherProps<any>) => {
-  const { component: WrappedComponent } = props;
-  const { artifactService } = useServiceProviders();
-  const [artifacts, fetchArtifacts] = useArtifacts(artifactService);
+  const { component: WrappedComponent, getEngagementById } = props;
+  const [artifacts, fetchArtifacts] = useArtifacts(props.fetcher);
+  const [engagements, setEngagements] = useState([]);
   useEffect(() => {
-    fetchArtifacts(props.filter);
-  }, [fetchArtifacts, props.filter]);
-  return <WrappedComponent {...props} artifacts={artifacts} />;
+    fetchArtifacts();
+  }, [fetchArtifacts]);
+  useEffect(() => {
+    Promise.all(
+      artifacts.map(artifact => getEngagementById(artifact.engagement_uuid))
+    ).then(engagements => setEngagements(engagements));
+  }, [artifacts, getEngagementById]);
+  return (
+    <WrappedComponent
+      {...props}
+      artifacts={artifacts}
+      engagements={engagements}
+    />
+  );
 };
