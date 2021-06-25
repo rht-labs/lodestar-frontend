@@ -241,7 +241,7 @@ export function CreateNewEngagementForm() {
                   </SectionTitle>
                 }
                 fieldId="project-name"
-                helperText="A descriptive name to idenitfy your engagement"
+                helperText="A descriptive name to identify your engagement"
                 helperTextInvalid={getValidationResult('project_name').join(
                   ' '
                 )}

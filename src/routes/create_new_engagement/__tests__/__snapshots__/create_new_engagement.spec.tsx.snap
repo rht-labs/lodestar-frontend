@@ -201,7 +201,7 @@ Object {
                       class="pf-c-form__helper-text"
                       id="project-name-helper"
                     >
-                      A descriptive name to idenitfy your engagement
+                      A descriptive name to identify your engagement
                     </div>
                   </div>
                 </div>
@@ -587,7 +587,7 @@ Object {
                     class="pf-c-form__helper-text"
                     id="project-name-helper"
                   >
-                    A descriptive name to idenitfy your engagement
+                    A descriptive name to identify your engagement
                   </div>
                 </div>
               </div>
