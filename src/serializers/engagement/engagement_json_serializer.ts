@@ -72,7 +72,7 @@ export class EngagementJsonSerializer
     data: object
   ): HostingEnvironment {
     return {
-      id: data['id'] || uuid(),
+      uuid: data['uuid'] || uuid(),
       environment_name: data['environment_name'],
       ocp_cloud_provider_name: data['ocp_cloud_provider_name'],
       ocp_cloud_provider_region: data['ocp_cloud_provider_region'],

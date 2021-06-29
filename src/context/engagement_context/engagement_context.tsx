@@ -697,7 +697,7 @@ export const useHostingEnvironmentManager = () => {
 
   const updateHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
     const updateIndex = hostingEnvironments.findIndex(
-      he => he.id === hostingEnvironment.id
+      he => he.uuid === hostingEnvironment.uuid
     );
     const newHostingEnvironments = [...hostingEnvironments];
     newHostingEnvironments.splice(updateIndex, 1, hostingEnvironment);
@@ -708,7 +708,7 @@ export const useHostingEnvironmentManager = () => {
   const deleteHostingEnvironment = (hostingEnvironment: HostingEnvironment) => {
     const newHostingEnvironments = [...hostingEnvironments];
     hostingEnvironments.splice(
-      hostingEnvironments.findIndex(p => p.id === hostingEnvironment.id),
+      hostingEnvironments.findIndex(p => p.uuid === hostingEnvironment.uuid),
       1
     );
     setHostingEnvironments(newHostingEnvironments);
