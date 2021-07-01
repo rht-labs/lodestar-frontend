@@ -24,21 +24,13 @@ export const LandingPage = () => {
   return (
     <div className="landing-page">
       <Page header={pageHeader}>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div className="jumbotron-container" style={{ height: '100vh' }}>
+        <div className="jumbotron-container">
+          <div className="cta">
+            <span>LodeStar</span>
+            <Link to="/app">
+              <Button data-cy={'get_started_button'}>Get Started</Button>
+            </Link>
+          </div>
           <div className="video-container">
             <div className="aspect-ratio--16x9 homepage-video">
               <iframe
@@ -83,26 +75,9 @@ export const LandingPage = () => {
               ></iframe>
             </div>
           </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-          <div className="cta">
-            <span>LodeStar</span>
-            <Link to="/app">
-              <Button data-cy={'get_started_button'}>Get Started</Button>
-            </Link>
-          </div>
-          <div className="background-image" />
-          <div className="background-image-overlay" />
+        </div>
+        <div className="background-image" />
+        <div className="background-image-overlay" />
       </Page>
     </div>
   );
