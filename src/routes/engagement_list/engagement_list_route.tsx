@@ -80,9 +80,10 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const history = useHistory();
   const handleChange = useCallback(
     (propsFilter: EngagementFilter) => {
+      history.replace(`${location.pathname}?filter=${createBase64ParseableFIlter(propsFilter)}`)
       setFilterDefinition(propsFilter);
     },
-    [setFilterDefinition]
+    [setFilterDefinition, history, location.pathname]
   );
   return (
     <>

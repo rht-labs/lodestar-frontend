@@ -50,7 +50,6 @@ const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => {
     >
       <FlexItem flex={{ default: 'flex_1' }}>
         <Button
-          // to={`/app/engagements/${props.status}`}
           onClick={() => props.onClickCount(props.status)}
           data-cy={`button_${props.status}`}
           variant={ButtonVariant.link}
