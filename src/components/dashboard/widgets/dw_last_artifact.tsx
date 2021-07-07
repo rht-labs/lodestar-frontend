@@ -15,7 +15,7 @@ export interface DwLastArtifactsProps {
   artifacts: Artifact[];
   engagements: Partial<Engagement>[];
 }
-const columns = ['Engagement', 'Artifact', 'Type'];
+const columns = ['Artifact', 'Type', 'Engagement'];
 export const DwLastArtifacts = ({
   artifacts = [],
   engagements = [],
@@ -32,6 +32,10 @@ export const DwLastArtifacts = ({
   const rows = artifacts.map(artifact => {
     return [
       {
+        title: artifact?.description,
+      },
+      artifact?.type,
+      {
         title: (
           <Link to={`/app/engagements/${artifact.engagement_uuid}#artifacts`}>
             {engagementsById[artifact.engagement_uuid]?.customer_name +
@@ -39,11 +43,7 @@ export const DwLastArtifacts = ({
               engagementsById[artifact.engagement_uuid]?.project_name}
           </Link>
         ),
-      },
-      {
-        title: artifact?.description,
-      },
-      artifact?.type,
+      }
     ];
   });
   return (

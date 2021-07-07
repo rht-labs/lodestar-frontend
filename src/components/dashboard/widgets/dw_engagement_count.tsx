@@ -1,4 +1,6 @@
 import {
+  Button,
+  ButtonVariant,
   Card,
   CardBody,
   CardFooter,
@@ -18,7 +20,6 @@ import {
   TachometerAltIcon,
 } from '@patternfly/react-icons';
 import React, { ComponentClass } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Engagement,
   EngagementStatus,
@@ -29,6 +30,7 @@ import { SVGIconProps } from '@patternfly/react-icons/dist/js/createIcon';
 
 export interface EngagementCountWidgetProps {
   engagements?: Partial<Engagement>[];
+  onClickCount?: (status: string) => void
 }
 interface CountComponentProps {
   count: number;
@@ -36,9 +38,10 @@ interface CountComponentProps {
   status: string;
   subtitle: string;
   title: string;
+  onClickCount: (status: string) => void
 }
 const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => {
-  return(
+  return (
     <Flex
       direction={{ default: 'column' }}
       alignItems={{ default: 'alignItemsCenter' }}
@@ -46,14 +49,16 @@ const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => {
       style={{ height: '100%' }}
     >
       <FlexItem flex={{ default: 'flex_1' }}>
-        <Link
-          to={`/app/engagements/${props.status}`}
+        <Button
+          // to={`/app/engagements/${props.status}`}
+          onClick={() => props.onClickCount(props.status)}
           data-cy={`button_${props.status}`}
+          variant={ButtonVariant.link}
         >
           <Text component={TextVariants.h4}>
             {props.title}
           </Text>
-        </Link>
+        </Button>
       </FlexItem>
       <FlexItem>
         <Flex
@@ -71,7 +76,7 @@ const CountComponent = ({ icon: Component, ...props }: CountComponentProps) => {
         </Flex>
       </FlexItem>
     </Flex>
-  ) 
+  )
 };
 
 export const EngagementCountWidget = (
@@ -110,6 +115,7 @@ export const EngagementCountWidget = (
               <Grid hasGutter>
                 <GridItem md={6} lg={3}>
                   <CountComponent
+                    onClickCount={props.onClickCount}
                     count={engagementCounts[0]}
                     icon={TachometerAltIcon}
                     status={'all'}
@@ -119,6 +125,7 @@ export const EngagementCountWidget = (
                 </GridItem>
                 <GridItem md={6} lg={3}>
                   <CountComponent
+                    onClickCount={props.onClickCount}
                     count={engagementCounts[1]}
                     icon={OnRunningIcon}
                     status={'active'}
@@ -128,6 +135,7 @@ export const EngagementCountWidget = (
                 </GridItem>
                 <GridItem md={6} lg={3}>
                   <CountComponent
+                    onClickCount={props.onClickCount}
                     count={engagementCounts[2]}
                     icon={PendingIcon}
                     status={'upcoming'}
@@ -137,6 +145,7 @@ export const EngagementCountWidget = (
                 </GridItem>
                 <GridItem md={6} lg={3}>
                   <CountComponent
+                    onClickCount={props.onClickCount}
                     count={engagementCounts[3]}
                     icon={AsleepIcon}
                     status={'past'}

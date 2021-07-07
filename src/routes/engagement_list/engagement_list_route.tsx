@@ -8,7 +8,8 @@ import {
   FlexItem,
   Button,
 } from '@patternfly/react-core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation, } from 'react-router-dom';
+import qs from 'query-string';
 import {
   engagementFilterFactory,
   engagementSortFactory,
@@ -30,10 +31,26 @@ export interface EngagementListRouteProps {
   subtitle?: string;
 }
 
+export function createBase64ParseableFIlter(filterDefinition: EngagementFilter): string {
+  return btoa(JSON.stringify(filterDefinition))
+}
+
 export function EngagementListRoute(props: EngagementListRouteProps) {
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const feedbackContext = useFeedback();
 
+  const location = useLocation()
+  const params = qs.parse(location.search)
+  const base64ParamFilter = params?.['filter'] ?? ""
+  const paramFilter = atob(base64ParamFilter as string)
+  let parsedFilter
+  if (!!paramFilter) {
+    try {
+      parsedFilter = JSON.parse(paramFilter)
+    } catch (e) {
+      parsedFilter = {}
+    }
+  }
   const { engagementService } = useServiceProviders();
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
   const {
@@ -46,14 +63,9 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
       getEngagements();
     }
   }, [contextEngagements, getEngagements, hasFetched]);
-  const { filterDefinition: propsFilter } = props;
-  const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
-    props.filterDefinition
-  );
+  const initialFilter = { ...(parsedFilter ?? {}), ...(props.filterDefinition ?? {}), }
+  const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(initialFilter);
 
-  useEffect(() => {
-    setFilterDefinition(propsFilter);
-  }, [propsFilter, setFilterDefinition]);
 
   const filter = engagementFilterFactory(filterDefinition);
   const sorter = engagementSortFactory(filterDefinition);
