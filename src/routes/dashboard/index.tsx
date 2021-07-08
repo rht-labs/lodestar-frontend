@@ -94,9 +94,8 @@ export function Dashboard() {
     if (sortedRegions.length === 0) {
       return `${process.env.PUBLIC_URL}/images/world.svg`;
     }
-    return `${process.env.PUBLIC_URL}/images/world-${sortedRegions.join('-')}.${
-      sortedRegions.length > 1 ? 'png' : 'svg'
-    }`;
+    return `${process.env.PUBLIC_URL}/images/world-${sortedRegions.join('-')}.${sortedRegions.length > 1 ? 'png' : 'svg'
+      }`;
   };
 
   return (
