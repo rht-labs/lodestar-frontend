@@ -42,7 +42,7 @@ import {
 } from '@patternfly/react-icons';
 import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
 import { DwLastWeeklyReport } from '../../components/dashboard/widgets/dw_last_weekly_report';
-import { createBase64ParseableFIlter as createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
+import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -189,11 +189,21 @@ export function Dashboard() {
                       ],
                     }}
                     component={({ engagements }) => (
-                      <EngagementCountWidget engagements={engagements} onClickCount={
-                        (status: string) => {
-                          history.push(`/app/engagements/${status}?filter=${createBase64ParseableFilter({ engagementRegions: selectedRegions })}`)
-                        }
-                      } />
+                      <EngagementCountWidget
+                        engagements={engagements}
+                        onClickCount={(status: string) => {
+                          history.push(
+                            `/app/engagements/${status}?filter=${createBase64ParseableFilter(
+                              {
+                                engagementRegions:
+                                  selectedRegions.length > 0
+                                    ? selectedRegions
+                                    : undefined,
+                              }
+                            )}`
+                          );
+                        }}
+                      />
                     )}
                   />
                 </GridItem>
