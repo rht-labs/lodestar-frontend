@@ -16,7 +16,7 @@ export interface DwLastWeeklyReportProps {
   artifacts: Artifact[];
   engagements: Partial<Engagement>[];
 }
-const columns = ['Engagement', 'Weekly Report'];
+const columns = ['Weekly Report', 'Engagement'];
 export function DwLastWeeklyReport({
   artifacts = [],
   engagements = [],
@@ -33,6 +33,9 @@ export function DwLastWeeklyReport({
   const rows = artifacts.map(artifact => {
     return [
       {
+        title: artifact?.description,
+      },
+      {
         title: (
           <Link to={`/app/engagements/${artifact.engagement_uuid}`}>
             {engagementsById[artifact.engagement_uuid]?.customer_name}
@@ -40,10 +43,7 @@ export function DwLastWeeklyReport({
             {engagementsById[artifact.engagement_uuid]?.project_name}
           </Link>
         ),
-      },
-      {
-        title: artifact?.description,
-      },
+      }
     ];
   });
   return (
