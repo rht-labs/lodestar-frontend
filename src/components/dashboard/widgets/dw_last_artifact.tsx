@@ -10,6 +10,7 @@ import {
 } from '@patternfly/react-core';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { Artifact, Engagement } from '../../../schemas/engagement';
+import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import { Link } from 'react-router-dom';
 export interface DwLastArtifactsProps {
   artifacts: Artifact[];
@@ -32,7 +33,11 @@ export const DwLastArtifacts = ({
   const rows = artifacts.map(artifact => {
     return [
       {
-        title: artifact?.description,
+        title: (
+          <LinkOrSpan href={artifact.linkAddress}>
+            {artifact?.description}
+          </LinkOrSpan>
+        ),
       },
       artifact?.type,
       {
@@ -43,7 +48,7 @@ export const DwLastArtifacts = ({
               engagementsById[artifact.engagement_uuid]?.project_name}
           </Link>
         ),
-      }
+      },
     ];
   });
   return (

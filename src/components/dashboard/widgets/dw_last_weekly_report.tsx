@@ -11,6 +11,7 @@ import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Artifact, Engagement } from '../../../schemas/engagement';
+import { LinkOrSpan } from '../../link_or_span/link_or_span';
 
 export interface DwLastWeeklyReportProps {
   artifacts: Artifact[];
@@ -33,7 +34,11 @@ export function DwLastWeeklyReport({
   const rows = artifacts.map(artifact => {
     return [
       {
-        title: artifact?.description,
+        title: (
+          <LinkOrSpan href={artifact?.linkAddress}>
+            {artifact?.description}
+          </LinkOrSpan>
+        ),
       },
       {
         title: (
@@ -43,7 +48,7 @@ export function DwLastWeeklyReport({
             {engagementsById[artifact.engagement_uuid]?.project_name}
           </Link>
         ),
-      }
+      },
     ];
   });
   return (
