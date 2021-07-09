@@ -11,12 +11,13 @@ import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Artifact, Engagement } from '../../../schemas/engagement';
+import { LinkOrSpan } from '../../link_or_span/link_or_span';
 
 export interface DwLastDemoProps {
   demos: Artifact[];
   engagements: Partial<Engagement>[];
 }
-const columns = ['Engagement', 'Demo'];
+const columns = ['Demo', 'Engagement'];
 export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
   const engagementsById = demos.reduce(
     (acc, curr) => ({
@@ -31,14 +32,16 @@ export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
     return [
       {
         title: (
+          <LinkOrSpan href={demo.linkAddress}>{demo?.description}</LinkOrSpan>
+        ),
+      },
+      {
+        title: (
           <Link to={`/app/engagements/${demo.engagement_uuid}`}>
             {engagementsById[demo.engagement_uuid]?.customer_name}&nbsp;—&nbsp;
             {engagementsById[demo.engagement_uuid]?.project_name}
           </Link>
         ),
-      },
-      {
-        title: demo?.description,
       },
     ];
   });

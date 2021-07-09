@@ -68,7 +68,6 @@ export function Dashboard() {
     engagementService,
   });
   const history = useHistory();
-  //TODO: remove after new dashboard release
   useEffect(() => {
     getEngagements({ perPage: 10000, pageNumber: 1 });
   }, [getEngagements]);
