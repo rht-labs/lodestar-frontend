@@ -90,20 +90,23 @@ export function EngagementFilterBar({
                   ...filter,
                   engagementRegions: undefined,
                 });
-              } else if (filter.engagementRegions.indexOf(selection) > -1) {
-                onChange({
-                  ...filter,
-                  engagementRegions: filter.engagementRegions.filter(
-                    s => s !== selection
-                  ),
-                });
-              } else {
+              } else if (
+                !filter.engagementRegions ||
+                filter.engagementRegions.indexOf(selection) === -1
+              ) {
                 onChange({
                   ...filter,
                   engagementRegions: [
                     ...(filter.engagementRegions ?? []),
                     selection,
                   ],
+                });
+              } else {
+                onChange({
+                  ...filter,
+                  engagementRegions: filter.engagementRegions.filter(
+                    s => s !== selection
+                  ),
                 });
               }
             }}
