@@ -5,6 +5,7 @@ import {
   Select,
   SelectOption,
   SelectOptionObject,
+  SelectVariant,
 } from '@patternfly/react-core';
 import { GlobeIcon } from '@patternfly/react-icons';
 
@@ -25,6 +26,7 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
         placeholderText="Engagement Region"
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
+        variant={SelectVariant.checkbox}
         toggleId="region_dropdown"
         selections={props?.selectedOptions}
         onSelect={(_, selection: string | SelectOptionObject) => {
