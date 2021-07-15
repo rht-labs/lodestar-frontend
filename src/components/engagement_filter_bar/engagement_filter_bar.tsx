@@ -38,7 +38,7 @@ export function EngagementFilterBar({
       action: 'Filtered engagement list',
     });
   };
-  
+
   const updateAllowedStatuses = (status: EngagementStatus) => {
     return status
       ? status === EngagementStatus.past
@@ -71,12 +71,15 @@ export function EngagementFilterBar({
           </InputGroup>
         </FlexItem>
         <FlexItem>
-          <EngagementStatusSelect onChange={(status)=> {
-            onChange({
-              ...filter,
-              allowedStatuses: updateAllowedStatuses(status),
-            })
-          }} selectedStatuses={filter?.allowedStatuses ?? []}/>
+          <EngagementStatusSelect
+            onChange={status => {
+              onChange({
+                ...filter,
+                allowedStatuses: updateAllowedStatuses(status),
+              });
+            }}
+            selectedStatuses={filter?.allowedStatuses ?? []}
+          />
         </FlexItem>
         <FlexItem>
           <EngagementRegionSelect
@@ -87,11 +90,22 @@ export function EngagementFilterBar({
                   ...filter,
                   engagementRegions: undefined,
                 });
+              } else if (filter.engagementRegions.indexOf(selection) > -1) {
+                onChange({
+                  ...filter,
+                  engagementRegions: filter.engagementRegions.filter(
+                    s => s !== selection
+                  ),
+                });
+              } else {
+                onChange({
+                  ...filter,
+                  engagementRegions: [
+                    ...(filter.engagementRegions ?? []),
+                    selection,
+                  ],
+                });
               }
-              onChange({
-                ...filter,
-                engagementRegions: [selection],
-              });
             }}
             selectedOptions={filter?.engagementRegions ?? []}
           />
