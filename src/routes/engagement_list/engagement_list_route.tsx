@@ -72,6 +72,9 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
     initialFilter
   );
+  useEffect(() => {
+    setFilterDefinition(props.filterDefinition);
+  }, [props.filterDefinition, setFilterDefinition]);
 
   const filter = engagementFilterFactory(filterDefinition);
   const sorter = engagementSortFactory(filterDefinition);
