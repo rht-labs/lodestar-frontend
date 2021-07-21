@@ -41,7 +41,6 @@ export const App = ({ config }: { config: Config }) => {
       : createApiV1Services(config);
 
   const { appConfig } = useConfig();
-
   return (
     <ErrorBoundary>
       <ServiceProvider serviceFactory={serviceProviders}>

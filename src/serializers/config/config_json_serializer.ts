@@ -17,6 +17,7 @@ export class ConfigJsonSerializer implements Serializer<Config, object> {
       logLevel: getLogVerbosityFromString(data['logLevel'] as string),
       supportEmailAddress: data['supportEmailAddress'],
       bannerMessages: data['bannerMessages'],
+      landingVideos: data['landingVideos'],
       analyticsTrackingCode: data['analyticsTrackingCode'] ?? '',
       allowVersionOverride: data['allowVersionOverride'] ?? false,
       roles: data['roles'],

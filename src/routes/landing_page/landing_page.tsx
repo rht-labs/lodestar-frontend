@@ -5,31 +5,14 @@ import {
   Button,
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
+import { useConfig } from '../../context/config_context/config_hook';
 import './landing_page.css';
+
 export const LandingPage = () => {
-  const videoObject = [
-    {
-      video1: {
-        url:
-          'https://cdnapisec.kaltura.com/p/2300461/sp/230046100/embedIframeJs/uiconf_id/42569541/partner_id/2300461?iframeembed=true&playerId=kaltura_player&entry_id=1_e1kbegt0&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_aphcva5b',
-        description: 'this is a video',
-      },
-    },
-    {
-      video2: {
-        url:
-          'https://cdnapisec.kaltura.com/p/2300461/sp/230046100/embedIframeJs/uiconf_id/42569541/partner_id/2300461?iframeembed=true&playerId=kaltura_player&entry_id=1_e1kbegt0&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_aphcva5b',
-        description: 'this is a video',
-      },
-    },
-    {
-      video3: {
-        url:
-          'https://cdnapisec.kaltura.com/p/2300461/sp/230046100/embedIframeJs/uiconf_id/42569541/partner_id/2300461?iframeembed=true&playerId=kaltura_player&entry_id=1_e1kbegt0&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_aphcva5b',
-        description: 'this is a video',
-      },
-    },
-  ];
+
+  const { appConfig } = useConfig();
+  
+
   return (
     <div className="landing-page">
       <Page
@@ -45,12 +28,13 @@ export const LandingPage = () => {
             </Link>
           </div>
           <div className="video-container">
-            {videoObject.map(index => (
+          {appConfig?.landingVideos?.map(video => {
+            return (
               <div className="aspect-ratio--16x9 homepage-video">
                 <iframe
                   className="aspect-ratio-object"
                   id="kaltura_player"
-                  src={videoObject[0].video1.url}
+                  src={video.url}
                   width="768"
                   height="432"
                   allowFullScreen
@@ -60,7 +44,8 @@ export const LandingPage = () => {
                   title="Kaltura Player"
                 ></iframe>
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
         <div className="background-image" />
