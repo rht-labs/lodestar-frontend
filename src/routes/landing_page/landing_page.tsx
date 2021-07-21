@@ -30,7 +30,7 @@ export const LandingPage = () => {
           <div className="video-container">
           {appConfig?.landingVideos?.map(video => {
             return (
-              <div className="aspect-ratio--16x9 homepage-video">
+              <div key={video.description} className="aspect-ratio--16x9 homepage-video">
                 <iframe
                   className="aspect-ratio-object"
                   id="kaltura_player"
