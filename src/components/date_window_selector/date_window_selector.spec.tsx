@@ -79,8 +79,4 @@ describe('Date window selector', () => {
         .className.split(' ')
     ).toContain('pf-m-selected');
   });
-  test('matches snapshot', () => {
-    const component = render(<DateWindowSelector onSelectWindow={() => {}} />);
-    expect(component).toMatchSnapshot();
-  });
 });
