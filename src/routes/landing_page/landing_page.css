@@ -1,3 +1,7 @@
+.landing-page {
+  height: 100vh;
+}
+
 .logo-text {
   /* TODO: define fonts globally */
   font-family: 'Red Hat Display';
@@ -13,7 +17,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: auto; 
+  height: 100%;
   position: relative;
   overflow: hidden;
 }

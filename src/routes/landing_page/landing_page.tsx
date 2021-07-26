@@ -48,8 +48,6 @@ export const LandingPage = () => {
           })}
           </div>
         </div>
-        <div className="background-image" />
-        <div className="background-image-overlay" />
       </Page>
     </div>
   );
