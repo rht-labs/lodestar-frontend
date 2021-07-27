@@ -44,15 +44,6 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   const location = useLocation();
   const params = qs.parse(location.search);
   const base64ParamFilter = params?.['filter'] ?? '';
-  const paramFilter = atob(base64ParamFilter as string);
-  let parsedFilter;
-  if (!!paramFilter) {
-    try {
-      parsedFilter = JSON.parse(paramFilter);
-    } catch (e) {
-      parsedFilter = {};
-    }
-  }
   const { engagementService } = useServiceProviders();
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
   const {
@@ -65,16 +56,25 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
       getEngagements();
     }
   }, [contextEngagements, getEngagements, hasFetched]);
-  const initialFilter = {
-    ...(parsedFilter ?? {}),
-    ...(props.filterDefinition ?? {}),
-  };
   const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
-    initialFilter
+
   );
   useEffect(() => {
-    setFilterDefinition(props.filterDefinition);
-  }, [props.filterDefinition, setFilterDefinition]);
+    const paramFilter = atob(base64ParamFilter as string);
+    let parsedFilter;
+    if (!!paramFilter) {
+      try {
+        parsedFilter = JSON.parse(paramFilter);
+      } catch (e) {
+        parsedFilter = {};
+      }
+    }
+    const initialFilter = {
+      ...(parsedFilter ?? {}),
+      ...(props.filterDefinition ?? {}),
+    };
+    setFilterDefinition(initialFilter);
+  }, [base64ParamFilter, props.filterDefinition, setFilterDefinition]);
 
   const filter = engagementFilterFactory(filterDefinition);
   const sorter = engagementSortFactory(filterDefinition);
