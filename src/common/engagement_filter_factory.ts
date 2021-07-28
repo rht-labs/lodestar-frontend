@@ -33,7 +33,7 @@ export const engagementFilterFactory = (
   }
   return (engagement: Partial<Engagement>) => {
     const filterTestResults: boolean[] = [];
-    if (filter.allowedStatuses) {
+    if (filter.allowedStatuses && filter.allowedStatuses.length > 0) {
       filterTestResults.push(
         filter.allowedStatuses.includes(getEngagementStatus(engagement))
       );
@@ -43,7 +43,7 @@ export const engagementFilterFactory = (
         hasSearchTermMatch(engagement, filter?.searchTerm)
       );
     }
-    if (filter.engagementRegions) {
+    if (filter.engagementRegions && filter.engagementRegions.length > 0) {
       filterTestResults.push(
         filter.engagementRegions.includes(engagement.engagement_region)
       );
