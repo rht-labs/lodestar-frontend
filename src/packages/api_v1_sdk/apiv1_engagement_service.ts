@@ -83,7 +83,12 @@ export class Apiv1EngagementService implements EngagementService {
     try {
       const qs = this.buildQueryStringFromParameters(params);
       const { data: engagementsData } = await this.axios.get(
-        `/engagements${qs.length > 0 ? '?' + qs : ''}`
+        `/engagements${qs.length > 0 ? '?' + qs : ''}`,
+        {
+          headers: {
+            "Accept-version": "v1"
+          }
+        }
       );
       const serializedEngagements = engagementsData.map(
         (engagementMap: { [key: string]: any }) =>
