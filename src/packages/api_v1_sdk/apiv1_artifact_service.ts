@@ -51,7 +51,10 @@ export class Apiv1ArtifactService implements ArtifactService {
   async getArtifacts(filter: ArtifactFilter = {}): Promise<Artifact[]> {
     const queryString = this.buildQueryString(filter);
     const { data } = await this.axios.get(
-      `/engagements/artifacts?${queryString}`
+      `/engagements/artifacts?${queryString}`,
+      {
+        headers: { "Accept-version": "v1" }
+      }
     );
     const artifacts = data.map(this.apiResponseToArtifact);
     return artifacts;
