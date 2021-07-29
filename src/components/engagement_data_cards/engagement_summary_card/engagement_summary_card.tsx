@@ -12,6 +12,7 @@ import { EngagementStatusText } from '../../engagement_status_text/engagement_st
 import { DisplayCreatedByName } from '../../../common/display_created_by_name';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { formatUtcDate } from '../../../common/dates';
+import { Feature } from '../../feature/feature';
 
 const ENGAGEMENT_SUMMARY_MODAL_KEY = 'engagement_summary';
 
@@ -62,11 +63,13 @@ export function EngagementSummaryCard() {
           )
         }
         actionButton={() => (
-          <EditButton
-            onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
-            text={'Edit'}
-            dataCy={'edit_summary_card'}
-          />
+          <Feature name="writer">
+            <EditButton
+              onClick={() => requestOpen(ENGAGEMENT_SUMMARY_MODAL_KEY)}
+              text={'Edit'}
+              dataCy={'edit_summary_card'}
+            />
+          </Feature>
         )}
         title="Engagement Summary"
       >

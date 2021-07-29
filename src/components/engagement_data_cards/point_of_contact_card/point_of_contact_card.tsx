@@ -15,6 +15,7 @@ import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { RequiredFieldsWarning } from '../../required_fields_warning/required_fields_warning';
 import { UsersIcon } from '@patternfly/react-icons';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
+import { Feature } from '../../feature/feature';
 
 const POINT_OF_CONTACT_MODAL_KEY = 'poc_modal';
 
@@ -61,11 +62,13 @@ export function PointOfContactCard() {
           )
         }
         actionButton={() => (
-          <EditButton
-            onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
-            text={'Edit'}
-            dataCy={'points_of_contact'}
-          />
+          <Feature name="writer">
+            <EditButton
+              onClick={() => requestOpen(POINT_OF_CONTACT_MODAL_KEY)}
+              text={'Edit'}
+              dataCy={'points_of_contact'}
+            />
+          </Feature>
         )}
       >
         {currentEngagement?.engagement_lead_name ||

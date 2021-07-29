@@ -19,6 +19,7 @@ import { UserTableTitleIcon } from './user_table_title_icon';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { uuid } from 'uuidv4';
 import { useEngagementUserManager } from '../../../context/engagement_context/engagement_context';
+import { Feature } from '../../feature/feature';
 
 const USER_EDIT_MODAL_KEY = 'user_modal';
 
@@ -75,11 +76,13 @@ export function UserCard() {
               'Update Engagement Users for both Red Hat and External users'
             }
           >
-            <EditButton
-              onClick={handleAddNewUserOrEdit}
-              text={'Edit'}
-              dataCy={'edit_user_button'}
-            />
+            <Feature name="writer">
+              <EditButton
+                onClick={handleAddNewUserOrEdit}
+                text={'Edit'}
+                dataCy={'edit_user_button'}
+              />
+            </Feature>
           </Tooltip>
         )}
         title="Engagement Users"

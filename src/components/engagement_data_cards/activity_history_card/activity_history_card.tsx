@@ -7,6 +7,7 @@ import { ActivityHistoryLineItem } from '../../activity_history_line_item/activi
 import { ActivityHistoryDetailsModal } from '../../engagement_edit_modals/activity_history_details_modal';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
+import { Feature } from '../../feature/feature';
 
 const ACTIVITY_HISTORY_MODAL_KEY = 'activity_history';
 
@@ -22,10 +23,12 @@ export function ActivityHistoryCard() {
       />
       <DataCard
         actionButton={() => (
-          <EditButton
-            onClick={() => requestOpen(ACTIVITY_HISTORY_MODAL_KEY)}
-            text={'View More'}
-          />
+          <Feature name={'writer'}>
+            <EditButton
+              onClick={() => requestOpen(ACTIVITY_HISTORY_MODAL_KEY)}
+              text={'View More'}
+            />
+          </Feature>
         )}
         title="Activity History"
       >

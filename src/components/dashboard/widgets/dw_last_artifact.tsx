@@ -12,6 +12,7 @@ import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { Artifact, Engagement } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import { Link } from 'react-router-dom';
+import { InfoCircleIcon } from '@patternfly/react-icons';
 export interface DwLastArtifactsProps {
   artifacts: Artifact[];
   engagements: Partial<Engagement>[];
@@ -54,6 +55,7 @@ export const DwLastArtifacts = ({
   return (
     <Card>
       <CardHeader>
+        <InfoCircleIcon></InfoCircleIcon>
         <TextContent>
           <Text component={TextVariants.h2}>Last 5 Artifacts</Text>
         </TextContent>
