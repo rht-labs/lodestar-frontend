@@ -7,6 +7,7 @@ import {
   TextVariants,
   Text,
 } from '@patternfly/react-core';
+import {ReactComponent as BroadcastIcon} from '../../../assets/images/broadcast-tower.svg';
 import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -48,8 +49,14 @@ export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
   return (
     <Card>
       <CardHeader>
+      <BroadcastIcon
+          width="25"
+          fill="#9400D3"
+          stroke="#9400D3"
+          style={{marginRight:"5px"}}
+        ></BroadcastIcon>
         <TextContent>
-          <Text component={TextVariants.h2}>Last 5 Demos</Text>
+          <Text component={TextVariants.h2}>Demos <span style={{fontSize:"12px", color:"#999999", verticalAlign:"middle"}}>(last 5)</span></Text>
         </TextContent>
       </CardHeader>
       <CardBody>

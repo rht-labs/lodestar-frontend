@@ -8,11 +8,11 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
+import {ReactComponent as CubesIcon} from '../../../assets/images/cubes.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { Artifact, Engagement } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import { Link } from 'react-router-dom';
-import { InfoCircleIcon } from '@patternfly/react-icons';
 export interface DwLastArtifactsProps {
   artifacts: Artifact[];
   engagements: Partial<Engagement>[];
@@ -55,9 +55,14 @@ export const DwLastArtifacts = ({
   return (
     <Card>
       <CardHeader>
-        <InfoCircleIcon></InfoCircleIcon>
+        <CubesIcon
+          width="25"
+          fill="#4CB140"
+          stroke="#4CB140"
+          style={{marginRight:"5px"}}
+        ></CubesIcon>
         <TextContent>
-          <Text component={TextVariants.h2}>Last 5 Artifacts</Text>
+          <Text component={TextVariants.h2}>Artifacts <span style={{fontSize:"12px", color:"#999999", verticalAlign:"middle"}}>(last 5)</span></Text>
         </TextContent>
       </CardHeader>
       <CardBody>
