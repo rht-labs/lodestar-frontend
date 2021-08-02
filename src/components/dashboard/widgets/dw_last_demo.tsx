@@ -46,6 +46,20 @@ export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
       },
     ];
   });
+  const customRowWrapper = ({ trRef, className, rowProps, row: { isExpanded, isHeightAuto }, ...props }) => {
+    const isOddRow = (rowProps.rowIndex + 1) % 2;
+    const customStyle = {
+      backgroundColor: 'rgba(0, 102, 205, 0.03)'
+    };
+    return (
+      <tr
+        {...props}
+        ref={trRef}
+        hidden={isExpanded !== undefined && !isExpanded}
+        style={isOddRow ? customStyle : { }}
+      />
+    );
+  };
   return (
     <Card>
       <CardHeader>
@@ -65,6 +79,7 @@ export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
           rows={rows}
           cells={columns}
           gridBreakPoint={'grid-lg'}
+          rowWrapper={customRowWrapper}
         >
           <TableHeader />
           <TableBody />
