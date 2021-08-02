@@ -11,6 +11,7 @@ import {
 import {ReactComponent as AtomIcon} from '../../../assets/images/atom-alt.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { EngagementUseCase } from '../../../schemas/engagement';
+import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 export interface DwLastUseCasesProps {
   useCases: EngagementUseCase[];
 }
@@ -26,20 +27,6 @@ export const DwLastUseCases = (props: DwLastUseCasesProps) => {
       },
     ];
   });
-  const customRowWrapper = ({ trRef, className, rowProps, row: { isExpanded, isHeightAuto }, ...props }) => {
-    const isOddRow = (rowProps.rowIndex + 1) % 2;
-    const customStyle = {
-      backgroundColor: 'rgba(0, 102, 205, 0.03)'
-    };
-    return (
-      <tr
-        {...props}
-        ref={trRef}
-        hidden={isExpanded !== undefined && !isExpanded}
-        style={isOddRow ? customStyle : { }}
-      />
-    );
-  };
   return (
     <Card>
       <CardHeader>
@@ -59,8 +46,7 @@ export const DwLastUseCases = (props: DwLastUseCasesProps) => {
           rows={rows}
           cells={columns}
           gridBreakPoint={'grid-lg'}
-          rowWrapper={customRowWrapper}
-        >
+          rowWrapper={({trRef, rowProps, ...props}) => <CustomRowWrapper trref={trRef} rowprops={rowProps} {...props}/>}        >
           <TableHeader />
           <TableBody />
         </Table>

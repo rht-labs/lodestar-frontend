@@ -13,6 +13,7 @@ import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { Artifact, Engagement } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import { Link } from 'react-router-dom';
+import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 export interface DwLastArtifactsProps {
   artifacts: Artifact[];
   engagements: Partial<Engagement>[];
@@ -52,20 +53,6 @@ export const DwLastArtifacts = ({
       },
     ];
   });
-  const customRowWrapper = ({ trRef, className, rowProps, row: { isExpanded, isHeightAuto }, ...props }) => {
-    const isOddRow = (rowProps.rowIndex + 1) % 2;
-    const customStyle = {
-      backgroundColor: 'rgba(0, 102, 205, 0.03)'
-    };
-    return (
-      <tr
-        {...props}
-        ref={trRef}
-        hidden={isExpanded !== undefined && !isExpanded}
-        style={isOddRow ? customStyle : { }}
-      />
-    );
-  };
   return (
     <Card>
       <CardHeader>
@@ -85,7 +72,7 @@ export const DwLastArtifacts = ({
           rows={rows}
           cells={columns}
           gridBreakPoint={'grid-lg'}
-          rowWrapper={customRowWrapper}
+          rowWrapper={({trRef, rowProps, ...props}) => <CustomRowWrapper trref={trRef} rowprops={rowProps} {...props}/>}
         >
           <TableHeader />
           <TableBody />

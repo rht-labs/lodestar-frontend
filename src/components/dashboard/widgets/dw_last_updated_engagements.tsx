@@ -14,6 +14,7 @@ import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { formatRelative } from 'date-fns';
 import React from 'react';
 import { Engagement } from '../../../schemas/engagement';
+import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 
 export interface DwLastUpdatedProps {
   engagements: Partial<Engagement>[];
@@ -42,20 +43,6 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
       },
     ];
   });
-  const customRowWrapper = ({ trRef, className, rowProps, row: { isExpanded, isHeightAuto }, ...props }) => {
-    const isOddRow = (rowProps.rowIndex + 1) % 2;
-    const customStyle = {
-      backgroundColor: 'rgba(0, 102, 205, 0.03)'
-    };
-    return (
-      <tr
-        {...props}
-        ref={trRef}
-        hidden={isExpanded !== undefined && !isExpanded}
-        style={isOddRow ? customStyle : { }}
-      />
-    );
-  };
   return (
     <Card>
       <CardHeader>
@@ -75,7 +62,9 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
           rows={rows}
           cells={columns}
           gridBreakPoint={'grid-lg'}
-          rowWrapper={customRowWrapper}
+          rowWrapper={({trRef, rowProps, ...props}) => <CustomRowWrapper trref={trRef} rowprops={rowProps} {...props}/>}
+
+
         >
           <TableHeader />
           <TableBody />
