@@ -11,7 +11,7 @@ describe('Dashboard last weekly reports', () => {
         <DwLastWeeklyReport artifacts={[]} engagements={[]} />
       </MemoryRouter>
     );
-    expect(component.getByText('Last 5 Weekly Reports')).toBeDefined();
+    expect(component.getByText('Weekly Reports')).toBeDefined();
   });
   test('shows the reports', () => {
     const artifacts = new Array(10).fill(null).map(mockEngagementArtifact);
