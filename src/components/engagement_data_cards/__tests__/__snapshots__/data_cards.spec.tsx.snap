@@ -32,7 +32,12 @@ Object {
                 <div />
               </h3>
             </div>
-            <div />
+            <div>
+              <div
+                data-testid="data-card-button"
+                style="margin-right: 1rem;"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -250,7 +255,12 @@ Object {
               <div />
             </h3>
           </div>
-          <div />
+          <div>
+            <div
+              data-testid="data-card-button"
+              style="margin-right: 1rem;"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -521,7 +531,12 @@ Object {
                 <div />
               </h3>
             </div>
-            <div />
+            <div>
+              <div
+                data-testid="data-card-button"
+                style="margin-right: 1rem;"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -592,7 +607,12 @@ Object {
               <div />
             </h3>
           </div>
-          <div />
+          <div>
+            <div
+              data-testid="data-card-button"
+              style="margin-right: 1rem;"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -719,7 +739,12 @@ Object {
                 <div />
               </h3>
             </div>
-            <div />
+            <div>
+              <div
+                data-testid="data-card-button"
+                style="margin-right: 1rem;"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -790,7 +815,12 @@ Object {
               <div />
             </h3>
           </div>
-          <div />
+          <div>
+            <div
+              data-testid="data-card-button"
+              style="margin-right: 1rem;"
+            />
+          </div>
         </div>
       </div>
       <div
