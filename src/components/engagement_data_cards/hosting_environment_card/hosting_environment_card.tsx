@@ -222,12 +222,14 @@ export function HostingEnvironmentCard() {
       />
       <DataCard
         actionButton={() => (
-          <EditButton
-            isDisabled={isAddHostingButtonDisabled}
-            onClick={addEnvironment}
-            text={'Add Hosting Environment'}
-            dataCy={'hosting_env_button'}
-          />
+          <Feature name="writer">
+            <EditButton
+              isDisabled={isAddHostingButtonDisabled}
+              onClick={addEnvironment}
+              text={'Add Hosting Environment'}
+              dataCy={'hosting_env_button'}
+            />
+          </Feature>
         )}
         title="Hosting Environment"
       >

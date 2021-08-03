@@ -8,8 +8,10 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
+import {ReactComponent as AtomIcon} from '../../../assets/images/atom-alt.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { EngagementUseCase } from '../../../schemas/engagement';
+import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 export interface DwLastUseCasesProps {
   useCases: EngagementUseCase[];
 }
@@ -28,8 +30,14 @@ export const DwLastUseCases = (props: DwLastUseCasesProps) => {
   return (
     <Card>
       <CardHeader>
+      <AtomIcon
+          width="25"
+          fill="#EC7A0A"
+          stroke="#EC7A0A"
+          style={{marginRight:"5px"}}
+        ></AtomIcon>
         <TextContent>
-          <Text component={TextVariants.h2}>Last 5 Use Cases</Text>
+          <Text component={TextVariants.h2}>Use Cases <span style={{fontSize:"12px", color:"#999999", verticalAlign:"middle"}}>(last 5)</span></Text>
         </TextContent>
       </CardHeader>
       <CardBody>
@@ -38,7 +46,7 @@ export const DwLastUseCases = (props: DwLastUseCasesProps) => {
           rows={rows}
           cells={columns}
           gridBreakPoint={'grid-lg'}
-        >
+          rowWrapper={({trRef, rowProps, ...props}) => <CustomRowWrapper trref={trRef} rowprops={rowProps} {...props}/>}        >
           <TableHeader />
           <TableBody />
         </Table>

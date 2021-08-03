@@ -6,7 +6,7 @@ import { DwLastUseCases } from './dw_last_use_cases';
 describe('Last Use Cases dashboard widget', () => {
   test('has the correct title', () => {
     const component = render(<DwLastUseCases useCases={[]} />);
-    expect(component.getByText('Last 5 Use Cases')).toBeDefined();
+    expect(component.getByText('Use Cases')).toBeDefined();
   });
   test('shows the use cases', () => {
     const useCases = new Array(10).fill(null).map(mockEngagementUseCase);

@@ -9,10 +9,12 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
+import {ReactComponent as HandshakeIcon} from '../../../assets/images/handshake-alt.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
 import { formatRelative } from 'date-fns';
 import React from 'react';
 import { Engagement } from '../../../schemas/engagement';
+import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 
 export interface DwLastUpdatedProps {
   engagements: Partial<Engagement>[];
@@ -44,8 +46,14 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
   return (
     <Card>
       <CardHeader>
+      <HandshakeIcon
+          width="25"
+          fill="#0066CC"
+          stroke="#0066CC"
+          style={{marginRight:"5px"}}
+        ></HandshakeIcon>
         <TextContent>
-          <Text component={TextVariants.h2}>Recently Updated Engagements</Text>
+          <Text component={TextVariants.h2}>Recently Updated Engagements <span style={{fontSize:"12px", color:"#999999", verticalAlign:"middle"}}>(last 5)</span></Text>
         </TextContent>
       </CardHeader>
       <CardBody>
@@ -54,6 +62,9 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
           rows={rows}
           cells={columns}
           gridBreakPoint={'grid-lg'}
+          rowWrapper={({trRef, rowProps, ...props}) => <CustomRowWrapper trref={trRef} rowprops={rowProps} {...props}/>}
+
+
         >
           <TableHeader />
           <TableBody />

@@ -11,6 +11,7 @@ import { SystemStatusDetailsModal } from './system_status_details_modal';
 import { useModalVisibility } from '../../../context/edit_modal_visibility_context/edit_modal_visibility_hook';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
 import { ClusterStatus } from '../../../schemas/cluster_status';
+import { Feature } from '../../feature/feature';
 
 export interface SystemStatusCardProps {
   currentEngagement: Engagement;
@@ -31,10 +32,12 @@ export function SystemStatusCard({ currentEngagement }: SystemStatusCardProps) {
       />
       <DataCard
         actionButton={() => (
-          <EditButton
-            onClick={() => requestOpen(SYSTEM_STATUS_MODAL_KEY)}
-            text={'View More'}
-          />
+          <Feature name="writer">
+            <EditButton
+              onClick={() => requestOpen(SYSTEM_STATUS_MODAL_KEY)}
+              text={'View More'}
+            />
+          </Feature>
         )}
         title="System Status"
       >

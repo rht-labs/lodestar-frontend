@@ -159,11 +159,13 @@ export function EngagementArtifactCard() {
         title="Engagement Artifacts"
         trailingIcon={() => <div />}
         actionButton={() => (
-          <EditButton
-            text="Add an Artifact"
-            onClick={openArtifactModal}
-            data-testid="add-artifact-button"
-          />
+          <Feature name="writer">
+            <EditButton
+              text="Add an Artifact"
+              onClick={openArtifactModal}
+              data-testid="add-artifact-button"
+            />
+          </Feature>
         )}
       >
         {currentEngagement?.artifacts?.length > 0 ? (

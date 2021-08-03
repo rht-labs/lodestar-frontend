@@ -7,7 +7,7 @@ import { DwLastDemo } from './dw_last_demo';
 describe('Dashboard last demos', () => {
   test('has the correct title', () => {
     const component = render(<DwLastDemo demos={[]} engagements={[]} />);
-    expect(component.getByText('Last 5 Demos')).toBeDefined();
+    expect(component.getByText('Demos')).toBeDefined();
   });
   test('shows the demos', () => {
     const artifacts = new Array(10).fill(null).map(mockEngagementArtifact);
