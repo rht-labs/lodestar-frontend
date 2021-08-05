@@ -91,7 +91,7 @@ function CommitData({ commit }: { commit: GitCommit }) {
         <span style={{ whiteSpace: 'pre-wrap' }}>{commit.message}</span>
       </div>
       <div>
-        <a href={commit.web_url}>See in GitLab</a>
+        <a href={commit.web_url} taget="_blank" rel="noopener noreferrer">See in GitLab</a>
       </div>
     </div>
   );
