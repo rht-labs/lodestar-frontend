@@ -151,6 +151,8 @@ Object {
                           <div>
                             <a
                               href="https://gitlab.example.com/my-org/engagements/company/project/iac/-/commit/e169e7c04a9c180a7a75af124f0cbfc657fc47ae"
+                              rel=""noopener noreferrer"
+                              target="_blank"
                             >
                               See in GitLab
                             </a>
