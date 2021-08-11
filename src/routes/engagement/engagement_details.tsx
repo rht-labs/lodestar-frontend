@@ -87,7 +87,7 @@ export const EngagementDetailView = () => {
     uuid: engagementUuid,
   });
 
-  const isWriteable = false; //currentEngagement?.writeable ?? false;
+  const isWriteable = currentEngagement?.writeable ?? false;
 
   useEffect(() => {
     let engagementPoll;
