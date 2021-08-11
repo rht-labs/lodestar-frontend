@@ -172,7 +172,7 @@ export function HostingEnvironmentCard() {
       {
         title: (
           <>
-            <Feature name={'writer'}>
+            <Feature name={'engagementWriter'}>
               <Dropdown
                 isPlain
                 dropdownItems={actionItems(hostingEnvironment)}

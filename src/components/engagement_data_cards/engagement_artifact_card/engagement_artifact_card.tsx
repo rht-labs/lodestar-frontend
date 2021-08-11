@@ -115,7 +115,7 @@ export function EngagementArtifactCard() {
       {
         title: (
           <>
-            <Feature name={'writer'}>
+            <Feature name={'engagementWriter'}>
               <Dropdown
                 isPlain
                 dropdownItems={actionItems}

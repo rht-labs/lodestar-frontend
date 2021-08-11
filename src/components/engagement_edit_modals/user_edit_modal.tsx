@@ -175,7 +175,7 @@ export function UserEditModal({
                           );
                         })}
                       </GridItem>
-                      <Feature name={'writer'}>
+                      <Feature name={'engagementWriter'}>
                         <Button
                           variant="secondary"
                           onClick={() =>

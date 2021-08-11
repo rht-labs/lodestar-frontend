@@ -108,10 +108,12 @@ export interface Engagement
   engagement_users: EngagementUser[];
   hosting_environments: Partial<HostingEnvironment>[];
   uuid?: string;
+  writeable: boolean;
 }
 
 const regions = ['emea', 'latam', 'na', 'apac'];
 export abstract class Engagement {
+  writeable: boolean;
   static equals(a?: Engagement, b?: Engagement): boolean {
     return (
       a?.uuid === b?.uuid ||
@@ -245,13 +247,15 @@ export abstract class Engagement {
         : null,
       status: ClusterStatus.fromFake(staticData, options),
       use_cases: staticData
-        ? [{ id: '1', description: 'an engagement use case' }]
+        ? [{ id: '1', description: 'an engagement use case', engagement_uuid: '475hf89-578978972897-8979879' }]
         : new Array(3).fill(null).map(() => ({
             description: faker.lorem.sentence(),
             id: faker.random.uuid().toString(),
+            engagement_uuid: "475hf89-578978972897-8979879"
           })),
       ...getStatusDeterminers(),
       uuid: staticData ? 'uuid' : faker.random.uuid(),
+      writeable: false,
       timezone: 'Americas/Denver',
     };
   }

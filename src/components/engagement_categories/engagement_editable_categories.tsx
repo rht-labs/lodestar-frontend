@@ -57,7 +57,7 @@ export function EngagementEditableCategories() {
             Add new tag
           </Label>
         )}
-        <Feature name={'writer'}>
+        <Feature name={'engagementWriter'}>
           <span data-testid="edit-icon" onClick={e => setEditMode(!editMode)}>
             <PencilAltIcon
               style={{
