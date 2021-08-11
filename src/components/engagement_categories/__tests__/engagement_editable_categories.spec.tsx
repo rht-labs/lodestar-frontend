@@ -22,7 +22,7 @@ describe('Engagement Editable Categories', () => {
     act(async () => {
       view = render(
         <TestStateWrapper>
-          <FeatureToggles features={['writer', 'reader']}>
+          <FeatureToggles features={['writer', 'reader', 'engagementWriter']}>
             <EngagementContext.Provider
               value={{
                 updateEngagementFormField: onUpdateField,

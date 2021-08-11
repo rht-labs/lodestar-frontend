@@ -9,7 +9,7 @@ describe('Engagement launch alert banner ', () => {
   const getLaunchBar = () =>
     render(
       <MemoryRouter>
-        <FeatureToggles features={['reader', 'writer']}>
+        <FeatureToggles features={['reader', 'writer', 'engagementWriter']}>
           <LaunchAlertBanner
             isLaunchable={true}
             engagement={Engagement.fromFake(true)}
