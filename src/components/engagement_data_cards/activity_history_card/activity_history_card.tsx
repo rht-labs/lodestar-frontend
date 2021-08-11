@@ -26,7 +26,6 @@ export function ActivityHistoryCard() {
         actionButton={() => (
           <Feature name={'engagementWriter'}>
             <EditButton
-              // isDisabled={!isWriteable}
               onClick={() => requestOpen(ACTIVITY_HISTORY_MODAL_KEY)}
               text={'View More'}
             />
