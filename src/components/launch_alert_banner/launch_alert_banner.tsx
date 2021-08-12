@@ -74,7 +74,7 @@ export function LaunchAlertBanner({
         actionLinks={
           !engagement?.launch ? (
             <div>
-              <Feature name={'writer'}>
+              <Feature name={'engagementWriter'}>
                 <Flex>
                   <FlexItem span={1}>
                     <Button

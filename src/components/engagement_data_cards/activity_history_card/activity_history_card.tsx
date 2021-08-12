@@ -15,6 +15,7 @@ export function ActivityHistoryCard() {
   const { requestOpen, activeModalKey } = useModalVisibility();
   const { currentEngagement: engagement } = useEngagement();
   const commits = engagement?.commits ?? [];
+
   return (
     <>
       <ActivityHistoryDetailsModal
@@ -23,7 +24,7 @@ export function ActivityHistoryCard() {
       />
       <DataCard
         actionButton={() => (
-          <Feature name={'writer'}>
+          <Feature name={'engagementWriter'}>
             <EditButton
               onClick={() => requestOpen(ACTIVITY_HISTORY_MODAL_KEY)}
               text={'View More'}

@@ -18,6 +18,8 @@ import { HostingEnvironmentCard } from '../../components/engagement_data_cards/h
 import { PointOfContactCard } from '../../components/engagement_data_cards/point_of_contact_card/point_of_contact_card';
 import { SystemStatusCard } from '../../components/engagement_data_cards/system_status_card/system_status_card';
 import { UserCard } from '../../components/engagement_data_cards/user_card/user_card';
+import { FeatureToggles } from '../../context/feature_context/feature_toggles';
+import { useFeatures } from '../../context/feature_context/feature_hook';
 
 export interface EngagementViewProps {
   currentEngagement?: Engagement;
@@ -70,6 +72,8 @@ export const EngagementDetailView = () => {
     uuid: string;
   }>();
 
+  const {features=[]} = useFeatures();
+
   const {
     createEngagementPoll,
     saveEngagement,
@@ -82,6 +86,8 @@ export const EngagementDetailView = () => {
     customerName: customer_name,
     uuid: engagementUuid,
   });
+
+  const isWriteable = currentEngagement?.writeable ?? false;
 
   useEffect(() => {
     let engagementPoll;
@@ -114,76 +120,78 @@ export const EngagementDetailView = () => {
   const { end_date, start_date } = currentChanges;
 
   return (
-    <ValidationProvider
-      validators={validatorsWithDateValidators(validators, {
-        end_date,
-        start_date,
-      })}
-    >
-      <EngagementDetailsViewTemplate
-        engagement={currentEngagement}
-        onSave={saveEngagement}
+    <FeatureToggles features={[...features, ...(isWriteable ? ["engagementWriter" ] : [])]}>
+      <ValidationProvider
+        validators={validatorsWithDateValidators(validators, {
+          end_date,
+          start_date,
+        })}
       >
-        <Switch>
-          <Route path={`${url}/json`}>
-            <EngagementJsonDump
-              json={JSON.stringify(
-                serializer.serialize((editableFields ?? {}) as Engagement),
-                null,
-                2
-              )}
-              onSave={value => {
-                saveEngagement(serializer.deserialize(JSON.parse(value)));
-              }}
-            />
-          </Route>
-          <Route path={`/`}>
-            <TextContent>
-              <Grid hasGutter>
-                <GridItem span={12}>
-                  <div id="engagement_summary_card">
-                    <EngagementSummaryCard />
-                  </div>
-                </GridItem>
-                {currentEngagement?.launch ? (
+        <EngagementDetailsViewTemplate
+          engagement={currentEngagement}
+          onSave={saveEngagement}
+        >
+          <Switch>
+            <Route path={`${url}/json`}>
+              <EngagementJsonDump
+                json={JSON.stringify(
+                  serializer.serialize((editableFields ?? {}) as Engagement),
+                  null,
+                  2
+                )}
+                onSave={value => {
+                  saveEngagement(serializer.deserialize(JSON.parse(value)));
+                }}
+              />
+            </Route>
+            <Route path={`/`}>
+              <TextContent>
+                <Grid hasGutter>
                   <GridItem span={12}>
-                    <div id="system_status_card">
-                      <SystemStatusCard currentEngagement={currentEngagement} />
+                    <div id="engagement_summary_card">
+                      <EngagementSummaryCard />
                     </div>
                   </GridItem>
-                ) : (
-                  <></>
-                )}
-                <GridItem span={12}>
-                  <div id="poc_card">
-                    <PointOfContactCard />
-                  </div>
-                </GridItem>
-                <GridItem span={12}>
-                  <div id="user_card">
-                    <UserCard />
-                  </div>
-                </GridItem>
-                <GridItem span={12}>
-                  <div id="oc_summary_card">
-                    <HostingEnvironmentCard />
-                  </div>
-                </GridItem>
-                <GridItem span={12}>
-                  <div id="artifacts">
-                    <EngagementArtifactCard />
-                  </div>
-                </GridItem>
-                <GridItem span={12}>
-                  <div id="activity_card">
-                    <ActivityHistoryCard />
-                  </div>
-                </GridItem>
-              </Grid>
-            </TextContent>{' '}
-          </Route>
-        </Switch>
-      </EngagementDetailsViewTemplate>
-    </ValidationProvider>
+                  {currentEngagement?.launch ? (
+                    <GridItem span={12}>
+                      <div id="system_status_card">
+                        <SystemStatusCard currentEngagement={currentEngagement} />
+                      </div>
+                    </GridItem>
+                  ) : (
+                    <></>
+                  )}
+                  <GridItem span={12}>
+                    <div id="poc_card">
+                      <PointOfContactCard />
+                    </div>
+                  </GridItem>
+                  <GridItem span={12}>
+                    <div id="user_card">
+                      <UserCard />
+                    </div>
+                  </GridItem>
+                  <GridItem span={12}>
+                    <div id="oc_summary_card">
+                      <HostingEnvironmentCard />
+                    </div>
+                  </GridItem>
+                  <GridItem span={12}>
+                    <div id="artifacts">
+                      <EngagementArtifactCard />
+                    </div>
+                  </GridItem>
+                  <GridItem span={12}>
+                    <div id="activity_card">
+                      <ActivityHistoryCard />
+                    </div>
+                  </GridItem>
+                </Grid>
+              </TextContent>{' '}
+            </Route>
+          </Switch>
+        </EngagementDetailsViewTemplate>
+      </ValidationProvider>
+    </FeatureToggles>
   );
 };
