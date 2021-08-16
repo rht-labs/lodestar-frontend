@@ -69,7 +69,7 @@ export function Dashboard() {
   });
   const history = useHistory();
   useEffect(() => {
-    getEngagements({ perPage: 10000, pageNumber: 1 });
+    getEngagements({ perPage: 10000, pageNumber: 1,  exclude: ['commits']});
   }, [getEngagements]);
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
