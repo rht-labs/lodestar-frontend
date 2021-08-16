@@ -44,6 +44,7 @@ export const useEngagementCollection = ({
           engagementStatuses: filter?.engagementStatuses,
           regions: filter?.engagementRegions,
           include: filter?.include,
+          exclude: filter?.exclude,
           perPage: filter?.perPage,
           pageNumber: filter?.pageNumber,
           sortField: filter?.sortField,
