@@ -53,12 +53,10 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
   useEffect(() => {
     if (!hasFetched) {
       setHasFetched(true);
-      getEngagements();
+      getEngagements({ exclude: ['commits'] });
     }
   }, [contextEngagements, getEngagements, hasFetched]);
-  const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>(
-
-  );
+  const [filterDefinition, setFilterDefinition] = useState<EngagementFilter>();
   useEffect(() => {
     const paramFilter = atob(base64ParamFilter as string);
     let parsedFilter;
