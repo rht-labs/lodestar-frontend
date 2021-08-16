@@ -59,6 +59,9 @@ export class Apiv1EngagementService implements EngagementService {
     if (parameters.include && parameters.include.length > 0) {
       queries.push(`include=${parameters.include.join(',')}`);
     }
+    if (parameters.exclude && parameters.exclude.length > 0) {
+      queries.push(`exclude=${parameters.exclude.join(',')}`);
+    }
     if (parameters.pageNumber) {
       queries.push(`page=${parameters.pageNumber}`);
     }
@@ -86,8 +89,8 @@ export class Apiv1EngagementService implements EngagementService {
         `/engagements${qs.length > 0 ? '?' + qs : ''}`,
         {
           headers: {
-            "Accept-version": "v1"
-          }
+            'Accept-version': 'v1',
+          },
         }
       );
       const serializedEngagements = engagementsData.map(
