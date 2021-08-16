@@ -6,7 +6,7 @@ export type FeatureVersionMap = {
 };
 
 export const FEATURE_VERSION_MAP: FeatureVersionMap = {
-  resetUser: 'v1.1.50',
+  resetUser: 'v1.2.5',
   newDashboard: 'v1.2.0',
 };
 const getSemverFromVersionString = (version: string = ''): string => {
