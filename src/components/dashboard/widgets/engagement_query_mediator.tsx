@@ -31,6 +31,7 @@ export const EngagementQueryMediator = (
       sortField: propsFilter?.sortField,
       sortOrder: propsFilter?.sortOrder,
       include: propsFilter?.include,
+      exclude: propsFilter?.exclude,
     };
     getEngagements(filter);
   }, [
@@ -40,6 +41,7 @@ export const EngagementQueryMediator = (
     propsFilter?.startDate,
     propsFilter?.sortField,
     propsFilter?.include,
+    propsFilter?.exclude,
     propsFilter?.sortOrder,
     getEngagements,
     propsFilter?.engagementRegions,
