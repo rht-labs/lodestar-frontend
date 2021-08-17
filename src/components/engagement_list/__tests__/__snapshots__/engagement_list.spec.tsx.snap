@@ -78,6 +78,11 @@ Object {
                     <div
                       class="pf-l-grid__item"
                     >
+                      Engagement Type: Residency
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
                       Target start date:
                        
                       Jun 01, 2020
@@ -300,6 +305,11 @@ Object {
                   >
                     Created by: 
                     dwasinge
+                  </div>
+                  <div
+                    class="pf-l-grid__item"
+                  >
+                    Engagement Type: Residency
                   </div>
                   <div
                     class="pf-l-grid__item"
@@ -583,6 +593,11 @@ Object {
                     >
                       Created by: 
                       dwasinge
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      Engagement Type: Residency
                     </div>
                     <div
                       class="pf-l-grid__item"
