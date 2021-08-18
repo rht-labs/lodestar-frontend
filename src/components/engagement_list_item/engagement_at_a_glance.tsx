@@ -54,6 +54,12 @@ export function EngagementAtAGlance({
               />
             </GridItem>
             <GridItem>
+              {engagement?.engagement_type
+                ? 'Engagement Type: ' +
+                  engagement?.engagement_type
+                : null}
+            </GridItem>
+            <GridItem>
               Target start date:{' '}
               {!!engagement?.start_date && isValid(engagement?.start_date)
                 ? formatUtcDate(engagement?.start_date)

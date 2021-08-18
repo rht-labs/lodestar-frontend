@@ -23,6 +23,11 @@ Object {
             <div
               class="pf-l-grid__item"
             >
+              Engagement Type: Residency
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
               Target start date:
                
               Feb 01, 2000
@@ -158,6 +163,11 @@ Object {
           >
             Created by: 
             John Doe
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            Engagement Type: Residency
           </div>
           <div
             class="pf-l-grid__item"
@@ -358,6 +368,11 @@ Object {
             <div
               class="pf-l-grid__item"
             >
+              Engagement Type: Residency
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
               Target start date:
                
               Feb 01, 2020
@@ -493,6 +508,11 @@ Object {
           >
             Created by: 
             John Doe
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            Engagement Type: Residency
           </div>
           <div
             class="pf-l-grid__item"
@@ -693,6 +713,11 @@ Object {
             <div
               class="pf-l-grid__item"
             >
+              Engagement Type: Residency
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
               Target start date:
                
               Feb 01, 2050
@@ -828,6 +853,11 @@ Object {
           >
             Created by: 
             John Doe
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            Engagement Type: Residency
           </div>
           <div
             class="pf-l-grid__item"
