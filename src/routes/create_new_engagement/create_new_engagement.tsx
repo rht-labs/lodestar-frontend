@@ -49,6 +49,7 @@ export function CreateNewEngagementForm() {
   });
   const history = useHistory();
   const [customerName, setCustomerName] = useState(null);
+  // const [uuid, setUuid] = useState(null);
   const [projectName, setProjectName] = useState(null);
   const [region, setRegion] = useState<string>();
   const [engagementType, setEngagementType] = useState<string>();
@@ -59,6 +60,7 @@ export function CreateNewEngagementForm() {
     Partial<Engagement>
   >();
   const { logEvent } = useAnalytics();
+  let uuid = null;
 
   useEffect(() => {
     setCopiedEngagement(
@@ -69,7 +71,7 @@ export function CreateNewEngagementForm() {
   const submitNewEngagement = async () => {
     if (customerName && projectName) {
       if (selectedProjectNameToFind) {
-        await createEngagement({
+        const result = await createEngagement({
           customer_name: customerName,
           project_name: projectName,
           engagement_region: region,
@@ -93,8 +95,9 @@ export function CreateNewEngagementForm() {
             }
           ),
         });
+        uuid = result.uuid;
       } else {
-        await createEngagement({
+        const result = await createEngagement({
           customer_name: customerName,
           project_name: projectName,
           engagement_region: region,
@@ -104,14 +107,16 @@ export function CreateNewEngagementForm() {
               e => e.default
             )?.value,
         });
+        uuid = result.uuid;
       }
-
+      // want to inject uuid from the post return here
       logEvent({
         action: 'Create New Engagement',
         category: AnalyticsCategory.engagements,
       });
+      
       history.push({
-        pathname: `/app/engagements/${customerName}/${projectName}`,
+        pathname: `/app/engagements/${uuid}`,
       });
     } else {
       history.push('/app/engagements');
@@ -146,6 +151,7 @@ export function CreateNewEngagementForm() {
   ]);
   useEffect(() => {
     setCustomerName(null);
+    // setUuid(null);
     setProjectName(null);
     setRegion(null);
   }, [currentEngagement]);
