@@ -21,7 +21,6 @@ export function EngagementListItem(props: DataCardProps) {
   const url = `/app/engagements/${engagement.uuid}`;
   const history = useHistory();
   const status = getEngagementStatus(engagement);
-
   return (
     <>
       <Card isCompact style={{ margin: '1rem', padding: '2rem 0.5rem' }}>
