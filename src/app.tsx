@@ -33,6 +33,7 @@ import {
   getFeaturesFromVersion,
 } from './common/version_feature_factory';
 import { CategoryProvider } from './context/category_context/category_context';
+// import { useVersion } from './context/version_context/version_context';
 
 export const App = ({ config }: { config: Config }) => {
   const serviceProviders =
@@ -41,6 +42,7 @@ export const App = ({ config }: { config: Config }) => {
       : createApiV1Services(config);
 
   const { appConfig } = useConfig();
+
   return (
     <ErrorBoundary>
       <ServiceProvider serviceFactory={serviceProviders}>

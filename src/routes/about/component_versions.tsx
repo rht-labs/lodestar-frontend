@@ -13,7 +13,6 @@ export function ComponentVersions(props: ComponentVersionProps) {
       return props.versionContext?.versions?.componentVersions;
     } else return [{ name: '', value: '', link_address: '' }];
   })();
-
   return (
     <>
       <Grid span={6} style={{ marginTop: '1rem' }}>
@@ -23,7 +22,7 @@ export function ComponentVersions(props: ComponentVersionProps) {
         <GridItem span={12}>
           <Grid span={12}>
             {components.map(component => (
-              <div key={component.value}>
+              <div key={component.name}>
                 <Grid hasGutter span={6} style={{ marginLeft: '1rem' }}>
                   <GridItem span={2}>{component.name}</GridItem>
                   <GridItem span={2}>{component.value}</GridItem>

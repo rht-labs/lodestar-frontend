@@ -14,6 +14,7 @@ import {
   TextContent,
   Title,
 } from '@patternfly/react-core';
+import { useVersion } from '../../context/version_context/version_context';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
 import { Feature } from '../../components/feature/feature';
@@ -56,6 +57,14 @@ export interface DashboardFilter {
 }
 
 export function Dashboard() {
+  const versionContext = useVersion();
+
+  useEffect(() => {
+    if (!versionContext.versions) {
+      versionContext?.fetchVersions();
+    }
+  }, [versionContext]);
+  
   const {
     engagementService,
     artifactService,
