@@ -13,6 +13,7 @@ export function ComponentVersions(props: ComponentVersionProps) {
       return props.versionContext?.versions?.componentVersions;
     } else return [{ name: '', value: '', link_address: '' }];
   })();
+  
   return (
     <>
       <Grid span={6} style={{ marginTop: '1rem' }}>
