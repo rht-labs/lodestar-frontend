@@ -41,11 +41,17 @@ export function EngagementAtAGlance({
   engagement?: Engagement;
   status?: EngagementStatus;
 }) {
+  const styles = {
+    lsGutterGapHack: {
+      gridGap: '4px',
+    },
+  };
+
   return (
     <>
       <Grid hasGutter>
         <GridItem md={6} lg={12}>
-          <Grid hasGutter>
+          <Grid hasGutter style={styles.lsGutterGapHack}>
             <GridItem span={12}>
               {'Created by: '}
               <DisplayCreatedByName
