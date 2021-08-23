@@ -194,6 +194,7 @@ export function Dashboard() {
                         'start_date',
                         'end_date',
                         'archive_date',
+                        'launch',
                       ],
                     }}
                     component={({ engagements }) => (
