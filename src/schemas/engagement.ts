@@ -267,7 +267,6 @@ export const getEngagementStatus = (
   if (!engagement) {
     return null;
   }
-  // console.log(engagement);
   const Today = new Date();
   const { launch, end_date, archive_date } = engagement;
   const hasLaunched = !!launch?.launched_date_time;
