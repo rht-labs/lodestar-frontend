@@ -70,7 +70,7 @@ function ActivityList({ commits }: { commits: GitCommit[] }) {
             } else {
               return (
                 <ActivityHistoryLineItem
-                  key={commit.id}
+                  key={commit.committed_date.toString()}
                   isExpanded={expandedItems.includes(commit.id)}
                   isAccordionItem={true}
                   onToggle={toggleItem}

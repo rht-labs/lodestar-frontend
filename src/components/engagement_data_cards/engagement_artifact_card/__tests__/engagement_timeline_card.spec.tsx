@@ -52,7 +52,7 @@ describe('Engagement timeline card', () => {
       'artifacts',
       [
         {
-          uuid: expect.anything(),
+          uuid: null,
           type: 'demo',
         } as Artifact,
       ],
