@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { uuid } from 'uuidv4';
 import { DataCard } from '../data_card';
 import { Artifact } from '../../../schemas/engagement';
 import { EditButton } from '../../data_card_edit_button/data_card_edit_button';
@@ -57,7 +56,7 @@ export function EngagementArtifactCard() {
 
   const openArtifactModal = () => {
     const newArtifact: Partial<Artifact> = {
-      uuid: uuid(),
+      uuid: null,
       type: artifactTypes[0]?.value,
     };
     addArtifact(newArtifact as Artifact);
