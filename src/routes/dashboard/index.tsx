@@ -280,6 +280,8 @@ export function Dashboard() {
                         startDate: dateFilter?.startDate,
                         endDate: dateFilter?.endDate,
                         regions: selectedRegions,
+                        sortOrder: 'DESC',
+                        sortFields: 'updated',
                       }),
                     engagementService.getEngagementById
                   )}
@@ -297,6 +299,8 @@ export function Dashboard() {
                         startDate: dateFilter?.startDate,
                         endDate: dateFilter?.endDate,
                         regions: selectedRegions,
+                        sortOrder: 'DESC',
+                        sortFields: 'updated',
                       }),
                     engagementService.getEngagementById
                   )}
@@ -312,6 +316,8 @@ export function Dashboard() {
                         startDate: dateFilter?.startDate,
                         endDate: dateFilter?.endDate,
                         regions: selectedRegions,
+                        sortOrder: 'DESC',
+                        sortFields: 'updated',
                       }),
 
                     engagementService.getEngagementById
