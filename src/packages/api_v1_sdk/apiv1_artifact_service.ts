@@ -16,6 +16,8 @@ export class Apiv1ArtifactService implements ArtifactService {
     endDate,
     regions,
     type,
+    sortFields,
+    sortOrder,
   }: ArtifactFilter): string {
     const queries: string[] = [];
     queries.push(`perPage=${perPage}`);
@@ -35,6 +37,12 @@ export class Apiv1ArtifactService implements ArtifactService {
     }
     if (searchParams.length > 0) {
       queries.push(`search=${encodeURIComponent(searchParams.join('&'))}`);
+    }
+    if (sortFields != null) {
+      queries.push(`sortFields=${sortFields}`);
+    }
+    if (sortOrder != null) {
+      queries.push(`sortOrder=${sortOrder}`);
     }
     return queries.join('&');
   }
