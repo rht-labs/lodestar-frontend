@@ -49,7 +49,7 @@ Object {
               <img
                 alt="Open Innovation Labs"
                 class="pf-c-brand"
-                src="/oil_logo.png"
+                src="/labs_logo.png"
               />
             </a>
           </div>
@@ -600,7 +600,7 @@ Object {
             <img
               alt="Open Innovation Labs"
               class="pf-c-brand"
-              src="/oil_logo.png"
+              src="/labs_logo.png"
             />
           </a>
         </div>

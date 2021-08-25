@@ -37,7 +37,7 @@ export function Header(props: HeaderProps) {
       logo={
         <Brand
           alt="Open Innovation Labs"
-          src={`${process.env.PUBLIC_URL}/oil_logo.png`}
+          src={`${process.env.PUBLIC_URL}/labs_logo.png`}
         />
       }
       headerTools={
