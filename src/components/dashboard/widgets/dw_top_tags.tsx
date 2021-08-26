@@ -11,7 +11,6 @@ import {
   CardFooter,
   CardHeader,
   Flex,
-  FlexItem,
   Text,
   TextContent,
   TextVariants,
