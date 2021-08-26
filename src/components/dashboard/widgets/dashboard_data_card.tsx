@@ -28,7 +28,6 @@ export function DashboardDataCard({
   subtitle,
 }: DashboardDataCardProps) {
   const history = useHistory();
-
   return (
     <Card style={{ height: '100%' }}>
       <CardBody>
