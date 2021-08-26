@@ -11,7 +11,6 @@ import {
   CardFooter,
   CardHeader,
   Flex,
-  FlexItem,
   Text,
   TextContent,
   TextVariants,
@@ -38,13 +37,11 @@ export const DwTopTags = (props: DwTopTagsProps) => {
       </CardHeader>
       <CardBody>
         <Flex
-          style={{ height: '100%' }}
+          style={{ height: '100%', width: '100%' }}
           alignItems={{ default: 'alignItemsCenter' }}
           justifyContent={{ default: 'justifyContentFlexStart' }}
         >
-          <FlexItem>
-            <TagBarChart categories={categories} />
-          </FlexItem>
+          <TagBarChart categories={categories} />
         </Flex>
       </CardBody>
       <CardFooter></CardFooter>
@@ -54,16 +51,16 @@ export const DwTopTags = (props: DwTopTagsProps) => {
 
 const TagBarChart = ({ categories }: { categories: CategoryWithCount[] }) => {
   return (
-    <div style={{ height: '180px', width: '200px' }}>
+    <div style={{ height: '180px', width: '100%' }}>
       <Chart
         themeColor={ChartThemeColor.multiOrdered}
-        width={200}
+        width={400}
         height={180}
         padding={{
           bottom: 10,
           left: 100,
           top: 10,
-          right: 20,
+          right: 30,
         }}
       >
         <ChartAxis />
