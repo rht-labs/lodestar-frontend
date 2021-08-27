@@ -89,8 +89,8 @@ export const EngagementCountWidget = (
     engagements.filter(
       e => getEngagementStatus(e) === EngagementStatus.upcoming
     ).length,
-    engagements.filter(e => getEngagementStatus(e) === EngagementStatus.past)
-      .length,
+    engagements.filter(e => getEngagementStatus(e) === EngagementStatus.past || getEngagementStatus(e) === EngagementStatus.terminating
+    ).length,
   ];
   return (
     <Card style={{ height: '100%' }}>
