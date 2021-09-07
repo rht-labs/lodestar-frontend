@@ -37,7 +37,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
     .length;
 
   return (
-    <Card isHoverable isCompact>
+    <Card isCompact>
       <CardTitle>
         <TextContent>
           <Text component={TextVariants.h2}>People Enabled</Text>
@@ -56,7 +56,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
           <GridItem span={4}>
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Red Hat</Text>
-              <Text component={TextVariants.h1} style={{ color: '#a4c7a4' }}>
+              <Text component={TextVariants.h1} style={{ color: '#4db445' }}>
                 {redHatCount}
               </Text>
             </TextContent>
@@ -64,7 +64,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
           <GridItem span={4}>
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Others</Text>
-              <Text component={TextVariants.h1} style={{ color: '#4db445' }}>
+              <Text component={TextVariants.h1} style={{ color: '#a4c7a4' }}>
                 {emails.length - redHatCount}
               </Text>
             </TextContent>

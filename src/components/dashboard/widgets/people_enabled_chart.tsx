@@ -14,8 +14,8 @@ export function PeopleEnabledChart(props: PeopleEnabledChartProps) {
         ariaTitle="People Enabled Chart"
         constrainToVisibleArea={true}
         data={[
-          { x: 'Red Hatters', y: props.redHatterCount },
-          { x: 'Others', y: props.otherCount },
+          { x: 'Red Hatters', y: Math.round((props.redHatterCount / (props.redHatterCount + props.otherCount)) * 100).toString() },
+          { x: 'Others', y: Math.round((props.otherCount / (props.redHatterCount + props.otherCount)) * 100).toString() },
         ]}
         labels={({ datum }) => `${datum.x}: ${datum.y}%`}
         legendOrientation="vertical"
