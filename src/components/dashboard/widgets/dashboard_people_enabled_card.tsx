@@ -37,7 +37,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
     .length;
 
   return (
-    <Card isHoverable isCompact>
+    <Card isCompact>
       <CardTitle>
         <TextContent>
           <Text component={TextVariants.h2}>People Enabled</Text>
