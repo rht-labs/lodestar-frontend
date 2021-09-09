@@ -51,6 +51,7 @@ export class Apiv1AuthService implements AuthService {
           });
         } else {
           // Nothing is valid!
+          this.clearSession()
           resolve(false);
         }
       } catch (e) {
