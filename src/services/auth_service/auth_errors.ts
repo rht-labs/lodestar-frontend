@@ -1,3 +1,7 @@
 export class AuthorizationError {}
 
-export class AuthenticationError {}
+export class AuthenticationError {
+  constructor() {
+    window.location.reload()
+  }
+}
