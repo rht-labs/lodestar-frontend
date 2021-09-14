@@ -64,7 +64,7 @@ export function Dashboard() {
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
-  const { engagements, getEngagements } = useEngagementCollection({
+  const { getEngagements } = useEngagementCollection({
     engagementService,
   });
   const history = useHistory();
