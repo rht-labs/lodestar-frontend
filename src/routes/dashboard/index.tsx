@@ -27,6 +27,7 @@ import { EngagementQueryMediator } from '../../components/dashboard/widgets/enga
 import { Feature } from '../../components/feature/feature';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
+import { useEnabledUsers } from '../../hooks/use_enabled_users';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 import { useHistory } from 'react-router';
@@ -60,6 +61,7 @@ export function Dashboard() {
     engagementService,
     artifactService,
     useCaseService,
+    enabledUsersService
   } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
@@ -67,6 +69,7 @@ export function Dashboard() {
   const { getEngagements } = useEngagementCollection({
     engagementService,
   });
+  const {} = useEnabledUsers( )
   const history = useHistory();
   useEffect(() => {
     getEngagements({ perPage: 10000, pageNumber: 1,  exclude: ['commits']});
@@ -211,6 +214,14 @@ export function Dashboard() {
                   }}
                   component={DashboardPeopleEnabledCard}
                 />
+              </GridItem>
+              <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
+                {withEnabledUsers(DashboardPeopleEnabledCard, {
+                   startDate: dateFilter?.startDate,
+                   endDate: dateFilter?.endDate,
+                   engagementRegions: selectedRegions,
+                   include: ['engagement_users'],
+                })}
               </GridItem>
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
                 {withCategories(DwTopTags, {

@@ -1,25 +1,27 @@
-import React from 'react';
 import {
   Card,
   CardBody,
+  CardFooter,
   CardTitle,
+  Flex,
+  FlexItem,
+  Grid,
+  GridItem,
   Text,
   TextContent,
   TextVariants,
-  Grid,
-  GridItem,
-  CardFooter,
-  Flex,
-  FlexItem,
 } from '@patternfly/react-core';
-import { PeopleEnabledChart } from './people_enabled_chart';
+
 import { Engagement } from '../../../schemas/engagement';
+import { PeopleEnabledChart } from './people_enabled_chart';
+import React from 'react';
 
 export interface PeopleEnabledCardProps {
   engagements?: Partial<Engagement>[];
 }
 
 export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
+  console.log(props);
   const { engagements = [] } = props;
   const emails = Object.keys(
     engagements.reduce(
