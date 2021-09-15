@@ -1,17 +1,20 @@
 import React, { useContext } from 'react';
-import { EngagementService } from '../../services/engagement_service/engagement_service';
+
+import { AnalyticsService } from '../../services/analytics_service/analytics_service';
+import { ArtifactService } from '../../services/artifact_service/artifact_service';
 import { AuthService } from '../../services/auth_service/authentication_service';
-import { VersionService } from '../../services/version_service/version_service';
+import { CategoryService } from '../../services/category_service/category_service';
+import { EnabledUsersService } from '../../services/enabled_users_service/enabled_users_service';
+import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { NotificationService } from '../../services/notification_service/notification_service';
 import { ServiceFactory } from '../../services/factories/service_factory';
-import { CategoryService } from '../../services/category_service/category_service';
-import { AnalyticsService } from '../../services/analytics_service/analytics_service';
 import { UseCaseService } from '../../services/use_case_service/use_case_service';
-import { ArtifactService } from '../../services/artifact_service/artifact_service';
+import { VersionService } from '../../services/version_service/version_service';
 
 interface IServiceProvider {
   artifactService: ArtifactService;
   analyticsService: AnalyticsService;
+  enabledUsersService:EnabledUsersService;
   engagementService: EngagementService;
   authService: AuthService;
   versionService: VersionService;

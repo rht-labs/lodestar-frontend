@@ -1,10 +1,10 @@
-import faker from 'faker/locale/en_US';
-import { LaunchData } from './launch_data';
-import { GitCommit } from './git_commit';
-import { CreationDetails } from './creation_details';
 import { ClusterStatus } from './cluster_status';
+import { CreationDetails } from './creation_details';
 import { EngagementCategory } from './engagement_category';
+import { GitCommit } from './git_commit';
 import { HostingEnvironment } from './hosting_environment';
+import { LaunchData } from './launch_data';
+import faker from 'faker/locale/en_US';
 import { mockEngagementArtifact } from '../mocks/engagement_mocks';
 
 export enum EngagementStatus {
@@ -40,6 +40,11 @@ export interface FakedEngagementOptions {
   status: EngagementStatus;
 }
 
+export interface EnabledUsers {
+  allUsersCount?: number;
+  otherUsersCount?: number;
+  rhUsersCount?: number;
+}
 export interface EngagementUseCase {
   description?: string;
   id: string;
