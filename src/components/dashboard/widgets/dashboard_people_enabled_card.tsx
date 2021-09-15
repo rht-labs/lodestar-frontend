@@ -12,37 +12,27 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 
-import { Engagement } from '../../../schemas/engagement';
+import { EnabledUsers } from '../../../schemas/engagement';
 import { PeopleEnabledChart } from './people_enabled_chart';
 import React from 'react';
 
 export interface PeopleEnabledCardProps {
-  engagements?: Partial<Engagement>[];
+  usersEnabled?: EnabledUsers;
+  isLoading?: boolean;
 }
 
-export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
-  console.log(props);
-  const { engagements = [] } = props;
-  const emails = Object.keys(
-    engagements.reduce(
-      (prev, curr) => ({
-        ...prev,
-        ...curr.engagement_users?.reduce(
-          (prev, curr) => ({ ...prev, [curr?.email]: true }),
-          {}
-        ),
-      }),
-      {}
-    )
-  );
-  const redHatCount = emails.filter(e => e.toLowerCase().includes('redhat.com'))
-    .length;
-
+export function DashboardPeopleEnabledCard({
+  usersEnabled,
+  isLoading = false,
+}: PeopleEnabledCardProps) {
+  console.log(usersEnabled);
   return (
     <Card isCompact>
       <CardTitle>
         <TextContent>
-          <Text component={TextVariants.h2}>People Enabled</Text>
+          <Text component={TextVariants.h2}>
+            People Enabled {usersEnabled?.allUsersCount}
+          </Text>
         </TextContent>
       </CardTitle>
       <CardBody style={{ marginTop: '1rem' }}>
@@ -51,7 +41,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Total Enabled</Text>
               <Text component={TextVariants.h1} style={{ color: '#59ABE3' }}>
-                {emails.length}
+                {usersEnabled?.allUsersCount}
               </Text>
             </TextContent>
           </GridItem>
@@ -59,7 +49,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Red Hat</Text>
               <Text component={TextVariants.h1} style={{ color: '#4db445' }}>
-                {redHatCount}
+                {usersEnabled?.rhUsersCount}
               </Text>
             </TextContent>
           </GridItem>
@@ -67,7 +57,7 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Others</Text>
               <Text component={TextVariants.h1} style={{ color: '#a4c7a4' }}>
-                {emails.length - redHatCount}
+                {usersEnabled?.otherUsersCount}
               </Text>
             </TextContent>
           </GridItem>
@@ -79,8 +69,8 @@ export function DashboardPeopleEnabledCard(props: PeopleEnabledCardProps) {
         >
           <FlexItem>
             <PeopleEnabledChart
-              redHatterCount={redHatCount}
-              otherCount={emails.length - redHatCount}
+              redHatterCount={usersEnabled?.rhUsersCount ?? 0}
+              otherCount={usersEnabled?.otherUsersCount ?? 0}
             />
           </FlexItem>
         </Flex>

@@ -25,7 +25,7 @@ export class Apiv1EnabledUsersService implements EnabledUsersService {
       searchParams.push(`start=${startDate.toISOString().split('T')[0]}`);
     }
     if (endDate != null) {
-      searchParams.push(`start=${endDate.toISOString().split('T')[0]}`);
+      searchParams.push(`end=${endDate.toISOString().split('T')[0]}`);
     }
     if (regions.length > 0) {
       searchParams.push(`engagement_region=${regions.join(',')}`);
@@ -35,19 +35,14 @@ export class Apiv1EnabledUsersService implements EnabledUsersService {
     }
     return queries.join('&');
   }
-  // private apiResponseToUseCase = (
-  //   apiResponseObject: any
-  // ): EnabledUsers => {
-  //   return {
-  //     id: apiResponseObject['uuid'],
-  //     description: apiResponseObject['description'],
-  //   };
-  // };
-  async getEnabledUsers(filter?: EnabledUsersFilter): Promise<EnabledUsers[]> {
+  async getEnabledUsers(filter?: EnabledUsersFilter): Promise<EnabledUsers> {
     const { data } = await this.axios.get(
       `/engagements/users/summary?${this.buildQueryString(filter)}`
     );
-    // const engagementUseCases = data.map(this.apiResponseToUseCase);
-    return data;
+    return {
+      allUsersCount: data.all_users_count,
+      otherUsersCount: data.other_users_count,
+      rhUsersCount: data.rh_users_count,
+    };
   }
 }

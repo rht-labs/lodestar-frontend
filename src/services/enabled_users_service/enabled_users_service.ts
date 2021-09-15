@@ -8,5 +8,5 @@ export interface EnabledUsersFilter {
   regions?: string[];
 }
 export interface EnabledUsersService {
-  getEnabledUsers(filter?: EnabledUsersFilter): Promise<EnabledUsers[]>;
+  getEnabledUsers(filter?: EnabledUsersFilter): Promise<EnabledUsers>;
 }

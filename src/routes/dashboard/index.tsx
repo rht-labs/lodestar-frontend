@@ -12,7 +12,7 @@ import {
   TextContent,
   Title,
 } from '@patternfly/react-core';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
@@ -36,6 +36,7 @@ import { useVersion } from '../../context/version_context/version_context';
 import { withArtifacts } from '../../hocs/with_artifacts';
 import { withCategories } from '../../hocs/with_categories';
 import { withUseCases } from '../../hocs/with_use_cases';
+import { EnabledUsersFilter } from '../../services/enabled_users_service/enabled_users_service';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -56,12 +57,12 @@ export function Dashboard() {
       versionContext?.fetchVersions();
     }
   }, [versionContext]);
-  
+
   const {
     engagementService,
     artifactService,
     useCaseService,
-    enabledUsersService
+    enabledUsersService,
   } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
@@ -69,14 +70,23 @@ export function Dashboard() {
   const { getEngagements } = useEngagementCollection({
     engagementService,
   });
-  const {} = useEnabledUsers( )
+
   const history = useHistory();
   useEffect(() => {
-    getEngagements({ perPage: 10000, pageNumber: 1,  exclude: ['commits']});
+    getEngagements({ perPage: 10000, pageNumber: 1, exclude: ['commits'] });
   }, [getEngagements]);
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
+  );
+  const enabledUsersFetcher = useCallback(() => {
+    const filter: EnabledUsersFilter = {
+      regions: [],
+    };
+    return enabledUsersService.getEnabledUsers(filter);
+  }, [enabledUsersService]);
+  const { enabledUsers, isLoading: isLoadingEnabledUsers } = useEnabledUsers(
+    enabledUsersFetcher
   );
 
   const handleSelectDateWindow = (date?: DateFilter) => {
@@ -96,10 +106,11 @@ export function Dashboard() {
     if (sortedRegions.length === 0) {
       return `${process.env.PUBLIC_URL}/images/world.svg`;
     }
-    return `${process.env.PUBLIC_URL}/images/world-${sortedRegions.join('-')}.${sortedRegions.length > 1 ? 'png' : 'svg'
-      }`;
+    return `${process.env.PUBLIC_URL}/images/world-${sortedRegions.join('-')}.${
+      sortedRegions.length > 1 ? 'png' : 'svg'
+    }`;
   };
-
+  console.log(enabledUsers);
   return (
     <DashboardDateContext.Provider value={dateFilter}>
       <PageSection variant={PageSectionVariants.light}>
@@ -139,9 +150,7 @@ export function Dashboard() {
                   isOpen={isRegionSelectOpen}
                   multiple={true}
                   selections={selectedRegions}
-                  onSelect={(_, value) =>
-                    handleSelectRegions(value as string)
-                  }
+                  onSelect={(_, value) => handleSelectRegions(value as string)}
                   onToggle={() => setIsRegionSelectOpen(!isRegionSelectOpen)}
                 >
                   {engagementFormConfig?.basic_information?.engagement_regions?.options?.map?.(
@@ -163,9 +172,7 @@ export function Dashboard() {
                   name={'dashboardDateSelector'}
                   inactiveComponent={() => <div />}
                 >
-                  <DateWindowSelector
-                    onSelectWindow={handleSelectDateWindow}
-                  />
+                  <DateWindowSelector onSelectWindow={handleSelectDateWindow} />
                 </Feature>
               </FlexItem>
             </Flex>
@@ -204,24 +211,11 @@ export function Dashboard() {
                   )}
                 />
               </GridItem>
-              <GridItem colSpan={2} sm={12} md={6}>
-                <EngagementQueryMediator
-                  filter={{
-                    startDate: dateFilter?.startDate,
-                    endDate: dateFilter?.endDate,
-                    engagementRegions: selectedRegions,
-                    include: ['engagement_users'],
-                  }}
-                  component={DashboardPeopleEnabledCard}
-                />
-              </GridItem>
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-                {withEnabledUsers(DashboardPeopleEnabledCard, {
-                   startDate: dateFilter?.startDate,
-                   endDate: dateFilter?.endDate,
-                   engagementRegions: selectedRegions,
-                   include: ['engagement_users'],
-                })}
+                <DashboardPeopleEnabledCard
+                  usersEnabled={enabledUsers}
+                  isLoading={isLoadingEnabledUsers}
+                />
               </GridItem>
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
                 {withCategories(DwTopTags, {
