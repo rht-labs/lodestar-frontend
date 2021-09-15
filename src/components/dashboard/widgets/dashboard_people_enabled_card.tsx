@@ -30,7 +30,7 @@ export function DashboardPeopleEnabledCard({
       <CardTitle>
         <TextContent>
           <Text component={TextVariants.h2}>
-            People Enabled {usersEnabled?.allUsersCount}
+            People Enabled
           </Text>
         </TextContent>
       </CardTitle>
