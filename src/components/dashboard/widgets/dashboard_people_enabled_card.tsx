@@ -25,7 +25,6 @@ export function DashboardPeopleEnabledCard({
   usersEnabled,
   isLoading = false,
 }: PeopleEnabledCardProps) {
-  console.log(usersEnabled);
   return (
     <Card isCompact>
       <CardTitle>

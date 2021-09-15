@@ -22,6 +22,7 @@ import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_update
 import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_cases';
 import { DwLastWeeklyReport } from '../../components/dashboard/widgets/dw_last_weekly_report';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
+import { EnabledUsersFilter } from '../../services/enabled_users_service/enabled_users_service';
 import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { Feature } from '../../components/feature/feature';
@@ -36,7 +37,6 @@ import { useVersion } from '../../context/version_context/version_context';
 import { withArtifacts } from '../../hocs/with_artifacts';
 import { withCategories } from '../../hocs/with_categories';
 import { withUseCases } from '../../hocs/with_use_cases';
-import { EnabledUsersFilter } from '../../services/enabled_users_service/enabled_users_service';
 
 export type DateFilter = { startDate: Date; endDate: Date };
 
@@ -110,7 +110,6 @@ export function Dashboard() {
       sortedRegions.length > 1 ? 'png' : 'svg'
     }`;
   };
-  console.log(enabledUsers);
   return (
     <DashboardDateContext.Provider value={dateFilter}>
       <PageSection variant={PageSectionVariants.light}>
