@@ -81,10 +81,10 @@ export function Dashboard() {
   );
   const enabledUsersFetcher = useCallback(() => {
     const filter: EnabledUsersFilter = {
-      regions: [],
+      regions: selectedRegions,
     };
     return enabledUsersService.getEnabledUsers(filter);
-  }, [enabledUsersService]);
+  }, [enabledUsersService, selectedRegions]);
   const { enabledUsers, isLoading: isLoadingEnabledUsers } = useEnabledUsers(
     enabledUsersFetcher
   );
