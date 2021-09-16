@@ -47,7 +47,7 @@ export function DashboardPeopleEnabledCard({
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Total Enabled</Text>
               <Text component={TextVariants.h1} style={{ color: '#59ABE3' }}>
-                {usersEnabled?.allUsersCount}
+                {usersEnabled?.allUsersCount ?? 0}
               </Text>
             </TextContent>
           </GridItem>
@@ -55,7 +55,7 @@ export function DashboardPeopleEnabledCard({
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Red Hat</Text>
               <Text component={TextVariants.h1} style={{ color: '#4db445' }}>
-                {usersEnabled?.rhUsersCount}
+                {usersEnabled?.rhUsersCount ?? 0}
               </Text>
             </TextContent>
           </GridItem>
@@ -63,7 +63,7 @@ export function DashboardPeopleEnabledCard({
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Others</Text>
               <Text component={TextVariants.h1} style={{ color: 'a4c7a4#' }}>
-                {usersEnabled?.otherUsersCount}
+                {usersEnabled?.otherUsersCount ?? 0}
               </Text>
             </TextContent>
           </GridItem>
