@@ -1,11 +1,4 @@
 import {
-  Chart,
-  ChartAxis,
-  ChartBar,
-  ChartGroup,
-  ChartThemeColor,
-} from '@patternfly/react-charts';
-import {
   Card,
   CardBody,
   CardFooter,
@@ -15,8 +8,17 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import React from 'react';
+import {
+  Chart,
+  ChartAxis,
+  ChartBar,
+  ChartGroup,
+  ChartThemeColor,
+} from '@patternfly/react-charts';
+
 import { CategoryWithCount } from '../../../schemas/engagement_category';
+import React from 'react';
+import {ReactComponent as TagsIcon} from '../../../assets/images/tags.svg';
 
 export interface DwTopTagsProps {
   categories?: CategoryWithCount[];
@@ -31,6 +33,12 @@ export const DwTopTags = (props: DwTopTagsProps) => {
             component={TextVariants.h2}
             data-testid="engagement-count-card-title"
           >
+            <TagsIcon
+              width="23"
+              fill="#F3C044"
+              stroke="#F3C044"
+              style={{marginRight:"5px"}}
+            ></TagsIcon>
             Top 5 Tags
           </Text>
         </TextContent>

@@ -12,6 +12,7 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 
+import {ReactComponent as EnabledIcon} from '../../../assets/images/graduation-cap.svg';
 import { EnabledUsers } from '../../../schemas/engagement';
 import { PeopleEnabledChart } from './people_enabled_chart';
 import React from 'react';
@@ -30,6 +31,12 @@ export function DashboardPeopleEnabledCard({
       <CardTitle>
         <TextContent>
           <Text component={TextVariants.h2}>
+            <EnabledIcon
+              width="25"
+              fill="#a4c7a4"
+              stroke="#a4c7a4"
+              style={{marginRight:"5px"}}
+            ></EnabledIcon>
             People Enabled
           </Text>
         </TextContent>
@@ -55,7 +62,7 @@ export function DashboardPeopleEnabledCard({
           <GridItem span={4}>
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Others</Text>
-              <Text component={TextVariants.h1} style={{ color: '#a4c7a4' }}>
+              <Text component={TextVariants.h1} style={{ color: 'a4c7a4#' }}>
                 {usersEnabled?.otherUsersCount}
               </Text>
             </TextContent>
