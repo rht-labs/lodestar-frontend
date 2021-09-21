@@ -14,6 +14,7 @@ import {
 } from '@patternfly/react-core';
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { CategoryFilter } from '../../services/category_service/category_service';
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
 import { DwLastArtifacts } from '../../components/dashboard/widgets/dw_last_artifact';
@@ -28,6 +29,7 @@ import { EngagementQueryMediator } from '../../components/dashboard/widgets/enga
 import { Feature } from '../../components/feature/feature';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
+import { useCategories } from '../../hooks/use_categories';
 import { useEnabledUsers } from '../../hooks/use_enabled_users';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
@@ -35,7 +37,6 @@ import { useHistory } from 'react-router';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { useVersion } from '../../context/version_context/version_context';
 import { withArtifacts } from '../../hocs/with_artifacts';
-import { withCategories } from '../../hocs/with_categories';
 import { withUseCases } from '../../hocs/with_use_cases';
 
 export type DateFilter = { startDate: Date; endDate: Date };
@@ -59,6 +60,7 @@ export function Dashboard() {
   }, [versionContext]);
 
   const {
+    categoryService,
     engagementService,
     artifactService,
     useCaseService,
@@ -79,12 +81,25 @@ export function Dashboard() {
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
   );
+
+  const categoryFetcher = useCallback(() => {
+    const filter: CategoryFilter = {
+      regions: selectedRegions,
+    };
+    return categoryService.fetchCategories(filter);
+  }, [categoryService, selectedRegions]);
+
+  const { categories, isLoading: isLoadingCategories } = useCategories(
+    categoryFetcher
+  );
+
   const enabledUsersFetcher = useCallback(() => {
     const filter: EnabledUsersFilter = {
       regions: selectedRegions,
     };
     return enabledUsersService.getEnabledUsers(filter);
   }, [enabledUsersService, selectedRegions]);
+
   const { enabledUsers, isLoading: isLoadingEnabledUsers } = useEnabledUsers(
     enabledUsersFetcher
   );
@@ -217,13 +232,10 @@ export function Dashboard() {
                 />
               </GridItem>
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-                {withCategories(DwTopTags, {
-                  page: 1,
-                  perPage: 5,
-                  startDate: dateFilter?.startDate,
-                  endDate: dateFilter?.endDate,
-                  regions: selectedRegions,
-                })}
+                <DwTopTags
+                  categories={categories}
+                  isLoading={isLoadingCategories}
+                />
               </GridItem>
               <GridItem sm={12} xl={12} xl2={6}>
                 <EngagementQueryMediator
