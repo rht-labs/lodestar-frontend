@@ -62,7 +62,7 @@ export function DashboardPeopleEnabledCard({
           <GridItem span={4}>
             <TextContent style={{ textAlign: 'center' }}>
               <Text component={TextVariants.h4}>Others</Text>
-              <Text component={TextVariants.h1} style={{ color: 'a4c7a4#' }}>
+              <Text component={TextVariants.h1} style={{ color: '#a4c7a4' }}>
                 {usersEnabled?.otherUsersCount ?? 0}
               </Text>
             </TextContent>
