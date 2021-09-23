@@ -17,6 +17,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { CategoryFilter } from '../../services/category_service/category_service';
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
+import { DwEngagementCount } from '../../components/dashboard/widgets/dw_engagement_count2';
 import { DwLastArtifacts } from '../../components/dashboard/widgets/dw_last_artifact';
 import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
@@ -24,17 +25,18 @@ import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_c
 import { DwLastWeeklyReport } from '../../components/dashboard/widgets/dw_last_weekly_report';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { EnabledUsersFilter } from '../../services/enabled_users_service/enabled_users_service';
-import { EngagementCountWidget } from '../../components/dashboard/widgets/dw_engagement_count';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { Feature } from '../../components/feature/feature';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
-import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
+import { SummaryCountFilter } from '../../services/summary_count_service/summary_count_service';
+// import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
 import { useCategories } from '../../hooks/use_categories';
 import { useEnabledUsers } from '../../hooks/use_enabled_users';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 import { useHistory } from 'react-router';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useSummaryCount } from '../../hooks/use_summary_count';
 import { useVersion } from '../../context/version_context/version_context';
 import { withArtifacts } from '../../hocs/with_artifacts';
 import { withUseCases } from '../../hocs/with_use_cases';
@@ -65,6 +67,7 @@ export function Dashboard() {
     artifactService,
     useCaseService,
     enabledUsersService,
+    summaryCountService,
   } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
@@ -102,6 +105,17 @@ export function Dashboard() {
 
   const { enabledUsers, isLoading: isLoadingEnabledUsers } = useEnabledUsers(
     enabledUsersFetcher
+  );
+
+  const summaryCountFetcher = useCallback(() => {
+    const filter: SummaryCountFilter = {
+      regions: selectedRegions,
+    };
+    return summaryCountService.getSummaryCount(filter);
+  }, [summaryCountService, selectedRegions]);
+
+  const { summaryCount, isLoading: isLoadingSummaryCount } = useSummaryCount(
+    summaryCountFetcher
   );
 
   const handleSelectDateWindow = (date?: DateFilter) => {
@@ -192,7 +206,7 @@ export function Dashboard() {
             </Flex>
 
             <Grid hasGutter>
-              <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
+              {/* <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
                 <EngagementQueryMediator
                   filter={{
                     startDate: dateFilter?.startDate,
@@ -223,6 +237,12 @@ export function Dashboard() {
                       }}
                     />
                   )}
+                />
+              </GridItem> */}
+              <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
+                <DwEngagementCount
+                  summaryCount={summaryCount}
+                  isLoading={isLoadingSummaryCount}
                 />
               </GridItem>
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
