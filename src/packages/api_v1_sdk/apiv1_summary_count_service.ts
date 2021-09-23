@@ -36,11 +36,9 @@ export class Apiv1SummaryCountService implements SummaryCountService {
     return queries.join('&');
   }
   async getSummaryCount(filter?: SummaryCountFilter): Promise<SummaryCount> {
-    console.log('getSummaryCount');
     const { data } = await this.axios.get(
       `/engagements/count?${this.buildQueryString(filter)}`
     );
-    console.log(data);
     return {
       upcoming: data.UPCOMING,
       past: data.PAST,

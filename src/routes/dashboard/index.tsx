@@ -17,7 +17,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { CategoryFilter } from '../../services/category_service/category_service';
 import { DashboardPeopleEnabledCard } from '../../components/dashboard/widgets/dashboard_people_enabled_card';
 import { DateWindowSelector } from '../../components/date_window_selector/date_window_selector';
-import { DwEngagementCount } from '../../components/dashboard/widgets/dw_engagement_count2';
+import { DwEngagementCount } from '../../components/dashboard/widgets/dw_engagement_count';
 import { DwLastArtifacts } from '../../components/dashboard/widgets/dw_last_artifact';
 import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
@@ -29,7 +29,7 @@ import { EngagementQueryMediator } from '../../components/dashboard/widgets/enga
 import { Feature } from '../../components/feature/feature';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { SummaryCountFilter } from '../../services/summary_count_service/summary_count_service';
-// import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
+import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
 import { useCategories } from '../../hooks/use_categories';
 import { useEnabledUsers } from '../../hooks/use_enabled_users';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
@@ -206,43 +206,22 @@ export function Dashboard() {
             </Flex>
 
             <Grid hasGutter>
-              {/* <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
-                <EngagementQueryMediator
-                  filter={{
-                    startDate: dateFilter?.startDate,
-                    endDate: dateFilter?.endDate,
-                    engagementRegions: selectedRegions,
-                    include: [
-                      'project_name',
-                      'start_date',
-                      'end_date',
-                      'archive_date',
-                      'launch',
-                    ],
-                  }}
-                  component={({ engagements }) => (
-                    <EngagementCountWidget
-                      engagements={engagements}
-                      onClickCount={(status: string) => {
-                        history.push(
-                          `/app/engagements/${status}?filter=${createBase64ParseableFilter(
-                            {
-                              engagementRegions:
-                                selectedRegions.length > 0
-                                  ? selectedRegions
-                                  : undefined,
-                            }
-                          )}`
-                        );
-                      }}
-                    />
-                  )}
-                />
-              </GridItem> */}
               <GridItem colSpan={2} sm={12} xl={12} xl2={12}>
                 <DwEngagementCount
                   summaryCount={summaryCount}
                   isLoading={isLoadingSummaryCount}
+                  onClickCount={(status: string) => {
+                    history.push(
+                      `/app/engagements/${status}?filter=${createBase64ParseableFilter(
+                        {
+                          engagementRegions:
+                            selectedRegions.length > 0
+                              ? selectedRegions
+                              : undefined,
+                        }
+                      )}`
+                    );
+                  }}
                 />
               </GridItem>
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
