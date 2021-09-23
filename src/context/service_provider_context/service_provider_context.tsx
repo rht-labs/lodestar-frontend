@@ -8,6 +8,7 @@ import { EnabledUsersService } from '../../services/enabled_users_service/enable
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { NotificationService } from '../../services/notification_service/notification_service';
 import { ServiceFactory } from '../../services/factories/service_factory';
+import { SummaryCountService } from '../../services/summary_count_service/summary_count_service';
 import { UseCaseService } from '../../services/use_case_service/use_case_service';
 import { VersionService } from '../../services/version_service/version_service';
 
@@ -21,6 +22,7 @@ interface IServiceProvider {
   notificationService: NotificationService;
   categoryService: CategoryService;
   useCaseService: UseCaseService;
+  summaryCountService: SummaryCountService;
 }
 
 export const ServiceProviderContext = React.createContext<IServiceProvider>(
