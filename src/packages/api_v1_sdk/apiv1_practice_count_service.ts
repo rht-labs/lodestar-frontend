@@ -40,7 +40,7 @@ export class Apiv1PracticeCountService implements PracticeCountService {
       `https://word-analyzer-engagements-dev.apps.hivec.sandbox1405.opentlc.com/aggregate-for-engagement?uuid=999`
     );
     
-    let sorted = data.data.slice().sort((a, b) => b.value - a.value).splice(1, 5);
+    let sorted = data.data.slice().sort((a, b) => b.value - a.value).splice(1, 5).reverse();
     
     return sorted.map(value => ({count: value.value, name: value.key}));
   }
