@@ -40,6 +40,10 @@ export interface FakedEngagementOptions {
   status: EngagementStatus;
 }
 
+export interface PracticeCount {
+  count: number;
+  name: string;
+}
 export interface SummaryCount {
   upcoming?: number;
   past?: number;
