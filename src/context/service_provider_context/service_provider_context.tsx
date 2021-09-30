@@ -7,6 +7,7 @@ import { CategoryService } from '../../services/category_service/category_servic
 import { EnabledUsersService } from '../../services/enabled_users_service/enabled_users_service';
 import { EngagementService } from '../../services/engagement_service/engagement_service';
 import { NotificationService } from '../../services/notification_service/notification_service';
+import { PracticeCountService } from '../../services/practice_count_service/practice_count_service';
 import { ServiceFactory } from '../../services/factories/service_factory';
 import { SummaryCountService } from '../../services/summary_count_service/summary_count_service';
 import { UseCaseService } from '../../services/use_case_service/use_case_service';
@@ -22,6 +23,7 @@ interface IServiceProvider {
   notificationService: NotificationService;
   categoryService: CategoryService;
   useCaseService: UseCaseService;
+  practiceCountService: PracticeCountService;
   summaryCountService: SummaryCountService;
 }
 
