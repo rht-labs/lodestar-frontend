@@ -37,7 +37,7 @@ export class Apiv1PracticeCountService implements PracticeCountService {
   }
   async getPracticeCount(filter?: PracticeCountFilter): Promise<PracticeCount[]> {
     const { data } = await this.axios.get(
-      `https://word-analyzer-engagements-dev.apps.hivec.sandbox1405.opentlc.com/aggregate-for-engagement?uuid=999`
+      `https://word-analyzer-engagements-dev.apps.openshift-4813-7bsw4.do500.redhatlabs.dev/aggregate-for-engagement?uuid=999`
     );
     
     let sorted = data.data.slice().sort((a, b) => b.value - a.value).splice(1, 5).reverse();

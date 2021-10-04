@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { PracticeCount } from '../schemas/engagement';
 
-export const usePracticeCount = (fetcher: () => Promise<PracticeCount>) => {
-  const [practiceCount, setPracticeCount] = useState<PracticeCount | undefined>(
+export const usePracticeCount = (fetcher: () => Promise<PracticeCount[]>) => {
+  const [practiceCount, setPracticeCount] = useState<PracticeCount[] | undefined>(
     undefined
   );
   const [isLoading, setIsLoading] = useState(false);
