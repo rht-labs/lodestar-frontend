@@ -6,7 +6,7 @@ export interface LinkOrSpanProps {
 }
 export const LinkOrSpan = ({ href, children }: LinkOrSpanProps) => {
   if (!!href) {
-    return <a href={href}>{children}</a>;
+    return <a href={href} target="_blank" rel="noreferrer">{children}</a>;
   } else {
     return <span>{children}</span>;
   }
