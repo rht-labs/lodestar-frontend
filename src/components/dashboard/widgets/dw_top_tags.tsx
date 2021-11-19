@@ -44,7 +44,7 @@ export function DwTopTags ({
                 stroke="#F3C044"
                 style={{marginRight:"5px"}}
               ></TagsIcon>
-              Top 5 Tags
+              Top 10 Tags
             </Text>
           </TextContent>
         </CardHeader>
