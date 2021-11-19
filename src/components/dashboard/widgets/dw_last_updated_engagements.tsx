@@ -24,7 +24,6 @@ export interface DwLastUpdatedProps {
 const columns = ['Customer Name', 'Name', 'Last Update'];
 export const DwLastUpdated = (props: DwLastUpdatedProps) => {
   const rows = props.engagements.map(e => {
-    console.log(e);
     let relativeDate = formatRelative(e.last_update, new Date());
     relativeDate = relativeDate.charAt(0).toUpperCase() + relativeDate.slice(1);
     return [
