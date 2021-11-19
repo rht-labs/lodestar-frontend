@@ -290,9 +290,9 @@ export function Dashboard() {
                   component={props => (
                     <DwLastUpdated
                       {...props}
-                      onClick={(customerName, projectName) => {
+                      onClick={(uuid) => {
                         history.push(
-                          `/app/engagements/${customerName}/${projectName}/`
+                          `/app/engagements/${uuid}`
                         );
                       }}
                     />
