@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
-import { ValidationProvider } from '../../context/validation_context/validation_context';
-import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
-import { AnalyticsCategory } from '../../schemas/analytics';
+import { Button, Form, FormGroup, Text } from '@patternfly/react-core';
 import {
-  PageSection,
-  Title,
-  PageSectionVariants,
   FormSelect,
   FormSelectOption,
+  FormSelectOptionGroup,
   Grid,
   GridItem,
-  FormSelectOptionGroup,
+  PageSection,
+  PageSectionVariants,
+  Title,
 } from '@patternfly/react-core';
-import { Button, Form, FormGroup, Text } from '@patternfly/react-core';
+import React, { useEffect, useState } from 'react';
+
+import { AnalyticsCategory } from '../../schemas/analytics';
+import { CheckCircleIcon } from '@patternfly/react-icons';
+import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
+import { Engagement } from '../../schemas/engagement';
+import { Feature } from '../../components/feature/feature';
+import { SectionTitle } from '../../components/section_title/section_title';
+import { TextFormField } from '../../components/form_fields/text_form_field';
+import { ValidationProvider } from '../../context/validation_context/validation_context';
+import { getValidatorsFromEngagementFormConfig } from '../../common/config_validator_adapter';
 import { useAnalytics } from '../../context/analytics_context/analytics_context';
 import { useEngagement } from '../../context/engagement_context/engagement_hook';
-import { CustomerSelectDropdown } from '../../components/customer_select_dropdown/customer_select_dropdown';
-import { useValidation } from '../../context/validation_context/validation_hook';
-import { CheckCircleIcon } from '@patternfly/react-icons';
-import { SectionTitle } from '../../components/section_title/section_title';
-import { Feature } from '../../components/feature/feature';
-import { Engagement } from '../../schemas/engagement';
-import { TextFormField } from '../../components/form_fields/text_form_field';
-import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
-import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
+import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
+import { useHistory } from 'react-router';
+import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
+import { useValidation } from '../../context/validation_context/validation_hook';
 
 export function CreateNewEngagement() {
   const { engagementFormConfig } = useEngagement();
@@ -353,6 +354,7 @@ export function CreateNewEngagementForm() {
                   )}
                 </FormSelect>
               </FormGroup>
+              <Feature name={'copyFrom'}>
               <FormGroup
                 label={<SectionTitle>Copy From</SectionTitle>}
                 fieldId="copyFrom"
@@ -416,6 +418,7 @@ export function CreateNewEngagementForm() {
                   </FormSelectOptionGroup>
                 </FormSelect>
               </FormGroup>
+              </Feature>
             </Form>
             <Feature name={'writer'}>
               <Button
