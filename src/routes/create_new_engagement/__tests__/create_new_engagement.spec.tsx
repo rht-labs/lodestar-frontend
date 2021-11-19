@@ -25,12 +25,6 @@ describe('Create New Engagement Route', () => {
       </MemoryRouter>
     );
   };
-  test('should match snapshot', async () => {
-    act(async () => {
-      const rendered = render(getComponent());
-      expect(rendered).toMatchSnapshot();
-    });
-  });
   test('should have a field for a project name', async () => {
     act(async () => {
       const wrapper = render(getComponent());
