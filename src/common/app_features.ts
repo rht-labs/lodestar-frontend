@@ -9,7 +9,8 @@ export const APP_FEATURES = {
   resetUser: 'resetUser',
   dashboardDateSelector: 'dashboard-date-selector',
   newDashboard: 'newDashboard',
-  engagementWriter: 'engagementWriter'
+  engagementWriter: 'engagementWriter',
+  copyFrom: 'copyFrom'
 };
 
 export type AppFeature = keyof typeof APP_FEATURES;
