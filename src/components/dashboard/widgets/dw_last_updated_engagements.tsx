@@ -9,20 +9,22 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import {ReactComponent as HandshakeIcon} from '../../../assets/images/handshake-alt.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
-import { formatRelative } from 'date-fns';
-import React from 'react';
-import { Engagement } from '../../../schemas/engagement';
+
 import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
+import { Engagement } from '../../../schemas/engagement';
+import {ReactComponent as HandshakeIcon} from '../../../assets/images/handshake-alt.svg';
+import React from 'react';
+import { formatRelative } from 'date-fns';
 
 export interface DwLastUpdatedProps {
   engagements: Partial<Engagement>[];
-  onClick?(customerName: string, projectName: string): void;
+  onClick?(uuid: string): void;
 }
 const columns = ['Customer Name', 'Name', 'Last Update'];
 export const DwLastUpdated = (props: DwLastUpdatedProps) => {
   const rows = props.engagements.map(e => {
+    console.log(e);
     let relativeDate = formatRelative(e.last_update, new Date());
     relativeDate = relativeDate.charAt(0).toUpperCase() + relativeDate.slice(1);
     return [
@@ -30,7 +32,7 @@ export const DwLastUpdated = (props: DwLastUpdatedProps) => {
       {
         title: (
           <Button
-            onClick={() => props.onClick?.(e.customer_name, e.project_name)}
+            onClick={() => props.onClick?.(e.uuid)}
             isInline
             variant={ButtonVariant.link}
           >
