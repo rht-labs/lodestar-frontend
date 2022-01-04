@@ -1,13 +1,13 @@
-import { render } from '@testing-library/react';
-import React from 'react';
+import { DwEngagementCount } from './dw_engagement_count';
 import { MemoryRouter } from 'react-router';
-import { EngagementCountWidget } from './dw_engagement_count';
+import React from 'react';
+import { render } from '@testing-library/react';
 
 describe('Dashboard Engagement Count Card', () => {
   test('Shows the title "Engagements"', () => {
     const view = render(
       <MemoryRouter>
-        <EngagementCountWidget engagements={[]} />
+        <DwEngagementCount summaryCount={{}} />
       </MemoryRouter>
     );
     const titleElement = view.getByTestId('engagement-count-card-title');
@@ -17,7 +17,7 @@ describe('Dashboard Engagement Count Card', () => {
   test('Shows the total account of engagements', () => {
     const view = render(
       <MemoryRouter>
-        <EngagementCountWidget engagements={[]} />
+        <DwEngagementCount summaryCount={{}} />
       </MemoryRouter>
     );
     expect(view.getByText('All Engagements')).toBeDefined();

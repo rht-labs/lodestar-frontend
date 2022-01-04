@@ -1,7 +1,8 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+
 import { DwLastUpdated } from './dw_last_updated_engagements';
 import { Engagement } from '../../../schemas/engagement';
+import React from 'react';
 
 describe('Dashboard Last Updated Engagements Widget', () => {
   test('is defined', () => {
@@ -29,8 +30,7 @@ describe('Dashboard Last Updated Engagements Widget', () => {
     );
     fireEvent.click(component.getByText(engagement.project_name));
     expect(spy).toHaveBeenCalledWith(
-      engagement.customer_name,
-      engagement.project_name
+      engagement.uuid
     );
   });
 });
