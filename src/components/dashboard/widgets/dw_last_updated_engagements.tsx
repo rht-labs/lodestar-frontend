@@ -21,7 +21,7 @@ export interface DwLastUpdatedProps {
   engagements: Partial<Engagement>[];
   onClick?(uuid: string): void;
 }
-const columns = ['Customer Name', 'Name', 'Last Update'];
+const columns = ['Client Name', 'Name', 'Last Update'];
 export const DwLastUpdated = (props: DwLastUpdatedProps) => {
   const rows = props.engagements.map(e => {
     let relativeDate = formatRelative(e.last_update, new Date());

@@ -2,9 +2,9 @@ export function getHumanReadableFieldName(field: string): string {
   const humanReadableFieldMap = {
     archive_date: 'Archive Date',
     commits: 'History',
-    customer_contact_email: 'Customer Contact Email',
-    customer_contact_name: 'Customer Contact Name',
-    customer_name: 'Customer Name',
+    customer_contact_email: 'Client Contact Email',
+    customer_contact_name: 'Client Contact Name',
+    customer_name: 'Client Name',
     description: 'Description',
     end_date: 'End Date',
     engagement_users: 'Engagement Users',

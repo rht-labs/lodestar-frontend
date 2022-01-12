@@ -302,7 +302,7 @@ Object {
                         <span
                           class="pf-c-form__label-text"
                         >
-                          Customer Contact
+                          Client Contact
                         </span>
                         <span
                           aria-hidden="true"
@@ -319,7 +319,7 @@ Object {
                     >
                       <div
                         class="pf-c-input-group"
-                        label="Customer Contact"
+                        label="Client Contact"
                       >
                         <label
                           class="pf-c-input-group__text"
@@ -342,7 +342,7 @@ Object {
                         </label>
                         <input
                           aria-invalid="false"
-                          aria-label="Customer contact name"
+                          aria-label="Client contact name"
                           class="pf-c-form-control"
                           data-cy="customer_contact_name"
                           disabled=""

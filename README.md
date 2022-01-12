@@ -267,13 +267,13 @@ An engagement cannot be launched until the following fields are populated for th
 
 | Variable                   | Section           | Description                                  |
 | :------------------------- | :---------------- | :------------------------------------------- |
-| **Customer Name**          | Basic             | The name of the customer for this engagement |
+| **Client Name**            | Basic             | The name of the client for this engagement   |
 | **Project Name**           | Basic             | The name of this engagements project         |
 | **Residency Date (Start)** | Basic             | The start date of the engagement             |
 | **Residency Date (End)**   | Basic             | The start date of the engagement             |
 | **Labs EL**                | Point of Contact  | The name and email for the Engagement Lead   |
 | **Labs Technical Lead**    | Point of Contact  | The name and email for the Technical Lead    |
-| **Customer Contact**       | Point of Contact  | The name and email for the client contact    |
+| **Client Contact**         | Point of Contact  | The name and email for the Client contact    |
 | **Cloud Provider**         | OpenShift Cluster | Which cloud provider is being utilized       |
 | **Provider Region**        | OpenShift Cluster | Which region is this cloud hosted            |
 | **Open Shift Version**     | OpenShift Cluster | Which version of OpenShift is required       |

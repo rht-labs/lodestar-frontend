@@ -86,7 +86,7 @@ export function PointOfContactCard() {
               </TitledDataPoint>
             </GridItem>
             <GridItem sm={12} md={4}>
-              <TitledDataPoint title="Customer Contact">
+              <TitledDataPoint title="Client Contact">
                 {currentEngagement?.customer_contact_name}
               </TitledDataPoint>
             </GridItem>

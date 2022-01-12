@@ -215,7 +215,7 @@ export function PointOfContactEditModal({
             fieldId="customer-contact"
             helperText="Who is the point person for the project?"
             isRequired
-            label="Customer Contact"
+            label="Client Contact"
             validated={
               validateEmail(customerContactEmail)
                 ? 'default'
@@ -223,7 +223,7 @@ export function PointOfContactEditModal({
             }
             helperTextInvalid={INVALID_TEXT}
           >
-            <InputGroup label="Customer Contact">
+            <InputGroup label="Client Contact">
               <InputGroupText
                 style={input}
                 component="label"
@@ -234,7 +234,7 @@ export function PointOfContactEditModal({
               <TextInput
                 isDisabled={!hasFeature(APP_FEATURES.writer)}
                 style={input}
-                aria-label="Customer contact name"
+                aria-label="Client contact name"
                 id="customer-contact-name"
                 name="customer-contact-name"
                 onChange={setCustomerContactName}

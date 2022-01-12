@@ -25,7 +25,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
       } else if (e === EngagementSortFields.endDate) {
         return 'End Date';
       } else if (e === EngagementSortFields.customerName) {
-        return 'Customer Name';
+        return 'Client Name';
       } else if (e === EngagementSortFields.projectName) {
         return 'Project Name';
       }
