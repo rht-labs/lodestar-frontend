@@ -39,3 +39,4 @@ report*.json
 .adhoc
 
 test-report.xml
+e2e.sh
