@@ -15,7 +15,8 @@ export function getApiV1HttpClient(): AxiosInstance {
       return res;
     },
     async error => {
-      if (error.response.status === 401 || error.response.status === 403) {
+
+      if (error.response != null && (error.response.status === 401 || error.response.status === 403)) {
         const authService = new Apiv1AuthService();
         try {
           await authService.isLoggedIn();

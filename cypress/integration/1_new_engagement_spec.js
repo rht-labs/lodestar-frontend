@@ -7,33 +7,27 @@ describe('new engagement', () => {
   const id = uuid();
   const testEngagementName = `cypressio_${id}`;
   const customerName = 'Ldstr E2E';
-  const reqUrl = `engagements/customers/${customerName}/projects/${testEngagementName}`;
+  const reqUrl = `engagements/customers/` + encodeURIComponent(customerName) + `/projects/${testEngagementName}`;
 
   beforeEach('Login', () => {
     cy.login();
-
-    cy.fixture('users')
-      .then((users) => {
-        // "this" is still the test context object
-        this.users = users;
-      });
-
-      cy.server();
-      cy.route({ method: 'PUT', url: reqUrl }).as('saveEngagement');
+    cy.fixture('users.json').as('users');
+    cy.intercept('PUT', reqUrl ).as('saveEngagement');
   });
 
   it('creates a new engagement', () => {
-    cy.server();
-    cy.route({ method: 'POST', url: 'engagements' }).as('createEngagement');
+
+    cy.intercept('POST', 'engagements').as('createEngagement');
+    cy.intercept({ pathname: '/config', query:  { type: 'Residency'}} ).as('getConfig');
 
     cy.visit('/app/dashboard');
 
     cy.toggleNav();
-
     cy.contains('Engagements');
     cy.contains('Create New').click();
     cy.toggleNav();
-    cy.wait(2000);
+    
+    cy.wait('@getConfig');
 
     cy.get('[id=customer_dropdown-select-typeahead]')
       .type(customerName)
@@ -44,7 +38,7 @@ describe('new engagement', () => {
     cy.get('[data-cy=new_engagement_region]').select('DEV').should('have.value', 'dev');
     cy.get('[data-cy=createNewEngagement]').click();
 
-    cy.wait('@createEngagement').should('have.property', 'status', 201);
+    cy.wait('@createEngagement').its('response.statusCode').should('eq', 201);
 
     cy.get('li > .pf-c-alert').contains(
       'Your engagement has been successfully created'
@@ -57,13 +51,15 @@ describe('new engagement', () => {
 
   it('Edit engagement summary', () => {
     const format = 'YYYY-MM-DD';
-    const start = Cypress.moment().startOf('day').subtract(14, 'days').format(format);
-    const end = Cypress.moment().startOf('day').add(14, 'days').format(format);
-    const retire = Cypress.moment().startOf('day').add(44, 'days').format(format);
+    const dayjs = require('dayjs');
+
+    const start = dayjs().startOf('day').subtract(14, 'days').format(format);
+    const end = dayjs().startOf('day').add(14, 'days').format(format);
+    const retire = dayjs().startOf('day').add(44, 'days').format(format);
     
     cy.get('[data-cy=edit_summary_card]').click();
 
-    cy.get('input[data-cy=description_field]')
+    cy.get('input[data-cy=description_field]').as('descriptionElement')
       .clear()
       .type('Test description')
       .get('input[data-cy=location_field]')
@@ -85,14 +81,14 @@ describe('new engagement', () => {
 
     cy.get('button[data-cy=save_summary_card]').click();
 
-    cy.wait('@saveEngagement').should('have.property', 'status', 200);
+    cy.wait('@saveEngagement').its('response.statusCode').should('eq', 200);
     cy.get('[data-cy=launch_button]').should('be.disabled');
 
     // cy.get('li > .pf-c-alert')
     //     .contains('Your updates have been successfully saved.');
 
     cy.get('.pf-c-alert__action > .pf-c-button').click();
-    cy.waitForLoadingBackdropToDisappear();
+    //cy.waitForLoadingBackdropToDisappear();
   });
 
   it('Edit points of contact', () => {
@@ -119,7 +115,7 @@ describe('new engagement', () => {
 
     cy.get('[data-cy=save_point_of_contact]').click();
 
-    cy.wait('@saveEngagement').should('have.property', 'status', 200);
+    cy.wait('@saveEngagement').its('response.statusCode').should('eq', 200);
 
     cy.get('[data-cy=launch_button]').contains('Launch').should('be.enabled');
 
@@ -129,7 +125,7 @@ describe('new engagement', () => {
   it('Edit hosting environment', () => {
     cy.get('[data-cy="hosting_env_button"]').click({waitForAnimations: true, animationDistanceThreshold: 100});
 
-    cy.get('[data-cy=hosting_environment_name]' {timeout: 7000})
+    cy.get('[data-cy=hosting_environment_name]', {timeout: 7000})
       .type('Test Env 1')
       .get('#cloud_provider_dropdown')
       .select('AWS', { force: true })
@@ -139,7 +135,7 @@ describe('new engagement', () => {
       .should('have.value', 'eu-west-3')
       .get('[data-cy=oc_version_select]')
       .select('v4.5', { force: true })
-      .should('have.value', '4.5.18')
+      .should('have.value', '4.5.41')
       .get('[data-cy=desired_subdomain_input]')
       .clear()
       .type(testEngagementName)
@@ -152,19 +148,19 @@ describe('new engagement', () => {
 
     cy.get('[data-cy=hosting_env_save]').click();
 
-    cy.wait('@saveEngagement').should('have.property', 'status', 200);
+    cy.wait('@saveEngagement').its('response.statusCode').should('eq', 200);
 
     cy.get('.pf-c-alert__action > .pf-c-button').click();
   });
 
-  it('Edit engagement users', () => {
+  it('Edit engagement users', function() {
 
     cy.get('button[data-cy=edit_user_button]').click();
     cy.get('button[data-cy=add_new_user]').click();
 
     cy.get('input[data-cy=input_user_email]', {timeout: 2000})
       .each(($el, index, $list) => {
-        cy.wrap($el).clear().type((this.users[index].email);
+        cy.wrap($el).clear().type(this.users[index].email);
       })
       .get('[data-cy=input_user_firstname]')
       .each(($el, index, $list) => {
@@ -183,20 +179,17 @@ describe('new engagement', () => {
 
     cy.get('button[data-cy=save_users]').click();
 
-    cy.wait('@saveEngagement').should('have.property', 'status', 200);
+    cy.wait('@saveEngagement').its('response.statusCode').should('eq', 200);
 
     cy.get('.pf-c-alert__action > .pf-c-button').click();
   });
 
   it('Launch engagement', () => {
-    cy.server();
-    cy.route({ method: 'PUT', url: 'engagements/launch' }).as(
-      'launchEngagement'
-    );
+    cy.intercept('PUT', 'engagements/launch').as('launchEngagement');
 
     cy.get('[data-cy=launch_button]').click();
 
-    cy.wait('@launchEngagement').should('have.property', 'status', 200);
+    cy.wait('@launchEngagement').its('response.statusCode').should('eq', 200);
 
     cy.get('li > .pf-c-alert > .pf-c-alert__title').contains(
       'You have successfully launched your engagement!'
