@@ -16,5 +16,16 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.log('LodeStar uncaught exception');
+  console.log(err);
+  console.log(err.request);
+  
+  if(err.request == null || err.request.aborted == null) {
+    return true;
+  }
+  return !err.request.aborted;
+})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

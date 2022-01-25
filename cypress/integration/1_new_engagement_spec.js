@@ -26,8 +26,7 @@ describe('new engagement', () => {
     cy.contains('Engagements');
     cy.contains('Create New').click();
     cy.toggleNav();
-    
-    cy.wait('@getConfig');
+    cy.wait('@getConfig', { timeout: 5000 });
 
     cy.get('[id=customer_dropdown-select-typeahead]')
       .type(customerName)
