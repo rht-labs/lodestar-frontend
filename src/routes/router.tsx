@@ -26,6 +26,8 @@ import {
   PageSection,
   PageSectionVariants,
 } from '@patternfly/react-core';
+import { ArtifactView } from './artifacts';
+import { useServiceProviders } from '../context/service_provider_context/service_provider_context';
 
 function WhatsMyToken() {
   return (
@@ -46,6 +48,7 @@ export function LodestarRouter() {
   useEffect(() => {
     fetchNotifications();
   }, [fetchNotifications]);
+  const providers = useServiceProviders();
 
   return (
     <Switch>
@@ -78,6 +81,14 @@ export function LodestarRouter() {
                       <PrivateRoute
                         path="/app/dashboard"
                         component={Dashboard}
+                      />
+                      <PrivateRoute
+                        path="/app/artifacts"
+                        component={() => (
+                          <ArtifactView
+                            artifactService={providers.artifactService}
+                          />
+                        )}
                       />
                       <PrivateRoute path="/app/engagements">
                         <ModalVisibilityProvider>
