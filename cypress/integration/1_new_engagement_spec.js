@@ -46,9 +46,11 @@ describe('new engagement', () => {
     cy.get('[data-cy=launch_button]').should('be.disabled');
 
     cy.get('.pf-c-alert__action > .pf-c-button').click();
+    cy.wait(1500);
   });
 
   it('Edit engagement summary', () => {
+    
     const format = 'YYYY-MM-DD';
     const dayjs = require('dayjs');
 
@@ -94,23 +96,24 @@ describe('new engagement', () => {
     cy.get('[data-cy="points_of_contact"]').click();
 
     cy.get('[data-cy="engagement_lead_name"]')
-      .clear()
-      .type('Test EL')
+      .clear().type('Test EL')
       .get('[data-cy=engagement_lead_email]')
-      .clear()
-      .type('test.el@redhat.com')
+      .clear().type('test.el@redhat.com')
       .get('[data-cy=tech_lead_name]')
-      .clear()
-      .type('Test tech')
+      .clear().type('Test tech')
       .get('[data-cy=tech_lead_email]')
-      .clear()
-      .type('test.tech@redhat.com')
+      .clear().type('test.tech@redhat.com')
       .get('[data-cy=customer_contact_name]')
-      .clear()
-      .type('Test Customer')
+      .clear().type('Test Customer')
       .get('[data-cy=customer_contact_email]')
-      .clear()
-      .type('test@customer.com');
+      .clear().type('test@customer.com');
+
+    cy.get('[data-cy="engagement_lead_name"]').should("have.value", "Test EL")
+      .get('[data-cy=engagement_lead_email]').should("have.value", 'test.el@redhat.com')
+      .get('[data-cy=tech_lead_name]').should("have.value", 'Test tech')
+      .get('[data-cy=tech_lead_email]').should("have.value", 'test.tech@redhat.com')
+      .get('[data-cy=customer_contact_name]').should("have.value", 'Test Customer')
+      .get('[data-cy=customer_contact_email]').should("have.value", 'test@customer.com');
 
     cy.get('[data-cy=save_point_of_contact]').click();
 
@@ -122,7 +125,7 @@ describe('new engagement', () => {
   });
 
   it('Edit hosting environment', () => {
-    cy.get('[data-cy="hosting_env_button"]').click({waitForAnimations: true, animationDistanceThreshold: 100});
+    cy.get('[data-cy="hosting_env_button"]').click({timeout: 7000, waitForAnimations: true, animationDistanceThreshold: 100});
 
     cy.get('[data-cy=hosting_environment_name]', {timeout: 7000})
       .type('Test Env 1')
@@ -154,7 +157,8 @@ describe('new engagement', () => {
 
   it('Edit engagement users', function() {
 
-    cy.get('button[data-cy=edit_user_button]').click();
+    cy.wait(1000);
+    cy.get('button[data-cy=edit_user_button]', { timeout: 2000 }).click();
     cy.get('button[data-cy=add_new_user]').click();
 
     cy.get('input[data-cy=input_user_email]', {timeout: 2000})
