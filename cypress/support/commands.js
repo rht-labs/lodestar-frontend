@@ -44,6 +44,7 @@ Cypress.Commands.add(
         client_id: client_id,
       },
     }).then(resp => {
+      expect(resp.status).to.eq(200);
       const jwt = resp.body;
       const currentTime = new Date();
       const accessTokenExpiry = new Date(
