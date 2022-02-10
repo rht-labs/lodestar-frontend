@@ -40,6 +40,9 @@ export class Apiv1UseCasesService implements UseCaseService {
     return {
       id: apiResponseObject['uuid'],
       description: apiResponseObject['description'],
+      engagement_uuid: apiResponseObject['engagement_uuid'],
+      project_name: apiResponseObject['name'],
+      customer_name: apiResponseObject['customer_name'],
     };
   };
   async getUseCases(filter?: UseCaseFilter): Promise<EngagementUseCase[]> {
