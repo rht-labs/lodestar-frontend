@@ -10,6 +10,7 @@ import {
 } from '@patternfly/react-core';
 import {ReactComponent as CubesIcon} from '../../../assets/images/cubes.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { Artifact, Engagement } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import { Link } from 'react-router-dom';
@@ -37,7 +38,7 @@ export const DwLastArtifacts = ({
       {
         title: (
           <LinkOrSpan href={artifact.linkAddress}>
-            {artifact?.description}
+            {artifact?.description} &nbsp; <ExternalLinkAltIcon />
           </LinkOrSpan>
         ),
       },
