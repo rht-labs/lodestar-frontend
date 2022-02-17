@@ -21,7 +21,7 @@ import {
   EmptyStateBody,
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
-import { ClipboardCheckIcon } from '@patternfly/react-icons';
+import { ClipboardCheckIcon, ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { Feature } from '../../feature/feature';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
@@ -105,8 +105,9 @@ export function EngagementArtifactCard() {
             target="_blank"
             rel="noopener noreferrer"
             href={getAbsoluteUrl(artifact.linkAddress)}
+            className="nowrap"
           >
-            {artifact.title}
+            {artifact.title}&nbsp;&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/>
           </a>
         ),
       },

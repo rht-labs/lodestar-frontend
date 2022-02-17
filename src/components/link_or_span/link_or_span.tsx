@@ -7,7 +7,7 @@ export interface LinkOrSpanProps {
 }
 export const LinkOrSpan = ({ href, children }: LinkOrSpanProps) => {
   if (!!href) {
-    return <a href={href} target="_blank" rel="noreferrer">{children} &nbsp; <ExternalLinkAltIcon /></a>;
+    return <a href={href} target="_blank" rel="noreferrer" className="nowrap">{children}&nbsp;&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/></a>;
   } else {
     return <span>{children}</span>;
   }
