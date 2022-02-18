@@ -61,6 +61,8 @@ export interface EngagementUseCase {
   description?: string;
   id: string;
   engagement_uuid: string;
+  project_name?: string;
+  customer_name?: string;
 }
 
 export interface Artifact {
@@ -264,11 +266,17 @@ export abstract class Engagement {
         : null,
       status: ClusterStatus.fromFake(staticData, options),
       use_cases: staticData
-        ? [{ id: '1', description: 'an engagement use case', engagement_uuid: '475hf89-578978972897-8979879' }]
+        ? [
+            {
+              id: '1',
+              description: 'an engagement use case',
+              engagement_uuid: '475hf89-578978972897-8979879',
+            },
+          ]
         : new Array(3).fill(null).map(() => ({
             description: faker.lorem.sentence(),
             id: faker.random.uuid().toString(),
-            engagement_uuid: "475hf89-578978972897-8979879"
+            engagement_uuid: '475hf89-578978972897-8979879',
           })),
       ...getStatusDeterminers(),
       uuid: staticData ? 'uuid' : faker.random.uuid(),
