@@ -93,6 +93,10 @@ export function EngagementArtifactCard() {
     </DropdownItem>,
   ];
   const getModalKey = () => `${ARTIFACT_CRUD_MODAL}`;
+  const addLinkIconWithWrapCorrection = (children: any) => {
+    const childrenArray = String(children).split(' ');
+    return <>{childrenArray.slice(0, -1).join(' ')} <span className="nowrap">{childrenArray.slice(-1)}&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/></span></>;
+  }
   const rows =
     currentEngagement?.artifacts?.map?.((artifact, idx) => [
       getLabelForValue(
@@ -105,9 +109,8 @@ export function EngagementArtifactCard() {
             target="_blank"
             rel="noopener noreferrer"
             href={getAbsoluteUrl(artifact.linkAddress)}
-            className="nowrap"
           >
-            {artifact.title}&nbsp;&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/>
+            {addLinkIconWithWrapCorrection(artifact.title)}
           </a>
         ),
       },

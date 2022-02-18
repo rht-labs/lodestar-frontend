@@ -15,16 +15,10 @@
   width: 0.7em;
   height: 0.7em;
   vertical-align: baseline !important;
-  margin-right: 24px;
-}
-
-.externalAltLinkIcon::after{
-  display: inline-block;
-  margin-right: -24px;
 }
 
 .nowrap {
-  /* white-space: nowrap; */
+  white-space: nowrap;
 }
 
 /* .pf-c-page__main {
