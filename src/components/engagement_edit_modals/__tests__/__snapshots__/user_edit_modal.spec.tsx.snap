@@ -31,7 +31,7 @@ Object {
               aria-disabled="false"
               aria-label="Close"
               class="pf-c-button pf-m-plain"
-              data-ouia-component-id="OUIA-Generated-Button-plain-1"
+              data-ouia-component-id="OUIA-Generated-Modal-large-1-ModalBoxCloseButton"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -139,7 +139,6 @@ Object {
                               >
                                 Role
                                 <svg
-                                  aria-describedby="pf-tooltip-1"
                                   aria-hidden="true"
                                   fill="currentColor"
                                   height="1em"
@@ -161,7 +160,6 @@ Object {
                               >
                                 Reset
                                 <svg
-                                  aria-describedby="pf-tooltip-2"
                                   aria-hidden="true"
                                   fill="currentColor"
                                   height="1em"

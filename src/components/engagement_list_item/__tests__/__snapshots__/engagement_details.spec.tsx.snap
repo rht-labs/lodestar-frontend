@@ -50,7 +50,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-10"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -77,7 +76,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-11"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -104,7 +102,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-12"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -194,7 +191,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-10"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -221,7 +217,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-11"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -248,7 +243,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-12"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -395,7 +389,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-16"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -422,7 +415,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-17"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -449,7 +441,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-18"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -539,7 +530,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-16"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -566,7 +556,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-17"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -593,7 +582,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-18"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -740,7 +728,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-4"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -767,7 +754,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-5"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -794,7 +780,6 @@ Object {
                 class="pf-m-spacer-sm"
               >
                 <svg
-                  aria-describedby="pf-tooltip-6"
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
@@ -884,7 +869,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-4"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -911,7 +895,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-5"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"
@@ -938,7 +921,6 @@ Object {
               class="pf-m-spacer-sm"
             >
               <svg
-                aria-describedby="pf-tooltip-6"
                 aria-hidden="true"
                 fill="currentColor"
                 height="1em"

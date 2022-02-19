@@ -35,6 +35,9 @@ Object {
               >
                 <h3
                   class="pf-c-title pf-m-lg"
+                  data-ouia-component-id="OUIA-Generated-Title-1"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
                   style="font-weight: bolder;"
                 >
                   Boots on the Moon
@@ -42,6 +45,9 @@ Object {
               </button>
               <h4
                 class="pf-c-title pf-m-md"
+                data-ouia-component-id="OUIA-Generated-Title-2"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
                 style="font-weight: normal;"
               >
                 NASA
@@ -107,7 +113,6 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
-                          aria-describedby="pf-tooltip-1"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -134,7 +139,6 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
-                          aria-describedby="pf-tooltip-2"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -161,7 +165,6 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
-                          aria-describedby="pf-tooltip-3"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -266,6 +269,9 @@ Object {
             >
               <h3
                 class="pf-c-title pf-m-lg"
+                data-ouia-component-id="OUIA-Generated-Title-1"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
                 style="font-weight: bolder;"
               >
                 Boots on the Moon
@@ -273,6 +279,9 @@ Object {
             </button>
             <h4
               class="pf-c-title pf-m-md"
+              data-ouia-component-id="OUIA-Generated-Title-2"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
               style="font-weight: normal;"
             >
               NASA
@@ -338,7 +347,6 @@ Object {
                       class="pf-m-spacer-sm"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-1"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -365,7 +373,6 @@ Object {
                       class="pf-m-spacer-sm"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-2"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -392,7 +399,6 @@ Object {
                       class="pf-m-spacer-sm"
                     >
                       <svg
-                        aria-describedby="pf-tooltip-3"
                         aria-hidden="true"
                         fill="currentColor"
                         height="1em"
@@ -554,6 +560,9 @@ Object {
               >
                 <h3
                   class="pf-c-title pf-m-lg"
+                  data-ouia-component-id="OUIA-Generated-Title-1"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
                   style="font-weight: bolder;"
                 >
                   Boots on the Moon
@@ -561,6 +570,9 @@ Object {
               </button>
               <h4
                 class="pf-c-title pf-m-md"
+                data-ouia-component-id="OUIA-Generated-Title-2"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
                 style="font-weight: normal;"
               >
                 NASA
@@ -626,7 +638,6 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
-                          aria-describedby="pf-tooltip-1"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -653,7 +664,6 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
-                          aria-describedby="pf-tooltip-2"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -680,7 +690,6 @@ Object {
                         class="pf-m-spacer-sm"
                       >
                         <svg
-                          aria-describedby="pf-tooltip-3"
                           aria-hidden="true"
                           fill="currentColor"
                           height="1em"
@@ -776,6 +785,9 @@ Object {
           </svg>
           <h4
             class="pf-c-title pf-m-lg"
+            data-ouia-component-id="OUIA-Generated-Title-3"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe="true"
           >
             There's nothing here.
           </h4>
@@ -825,6 +837,9 @@ Object {
         </svg>
         <h4
           class="pf-c-title pf-m-lg"
+          data-ouia-component-id="OUIA-Generated-Title-3"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
         >
           There's nothing here.
         </h4>

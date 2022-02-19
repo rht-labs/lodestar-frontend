@@ -1,7 +1,6 @@
 import {
   ToggleGroup,
   ToggleGroupItem,
-  ToggleGroupVariant,
 } from '@patternfly/react-core';
 import {
   addQuarters,
@@ -99,7 +98,7 @@ export const DateWindowSelector = ({
   };
   return (
     <div>
-      <ToggleGroup variant={ToggleGroupVariant.light}>
+      <ToggleGroup>
         <ToggleGroupItem
           text="1w"
           key={'1w'}
