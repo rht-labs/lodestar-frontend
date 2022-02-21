@@ -13,15 +13,15 @@ describe('Last Use Cases dashboard widget', () => {
         <DwLastUseCases useCases={[]} />
       </Router>
     );
-    expect(component.getByText('Use Cases')).toBeDefined();
+    expect(component.getAllByText('Use Cases')).toBeDefined();
   });
   test('shows the use cases', () => {
     const useCases = new Array(10).fill(null).map(mockEngagementUseCase);
     const component = render(
-      <Router history={createMemoryHistory({})}>
-        <DwLastUseCases useCases={useCases} />
-      </Router>
-    );
+        <Router history={createMemoryHistory({})}>
+          <DwLastUseCases useCases={useCases} />
+        </Router>
+      );
     for (let useCase of useCases) {
       expect(component.getByText(useCase.description)).toBeDefined();
     }
