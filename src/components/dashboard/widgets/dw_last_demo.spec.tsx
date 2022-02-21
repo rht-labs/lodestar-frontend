@@ -18,7 +18,8 @@ describe('Dashboard last demos', () => {
       </MemoryRouter>
     );
     for (let demo of demos) {
-      expect(component.getByText(demo.description)).toBeDefined();
+      expect(component.getByText(demo.description.substring(0, demo.description.lastIndexOf(" ")))).toBeDefined();
+      // The last word will be wrapped in a span with an icon, so only match until the last space
     }
   });
 });

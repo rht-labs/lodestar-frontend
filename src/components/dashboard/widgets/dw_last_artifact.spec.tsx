@@ -2,9 +2,8 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
-import { mockEngagementArtifact, mockEngagementUseCase } from '../../../mocks/engagement_mocks';
+import { mockEngagementArtifact } from '../../../mocks/engagement_mocks';
 import { DwLastArtifacts } from './dw_last_artifact';
-import { DwLastUseCases } from './dw_last_use_cases';
 
 describe('Last Use Cases dashboard widget', () => {
   test('has the correct title', () => {
@@ -23,7 +22,8 @@ describe('Last Use Cases dashboard widget', () => {
       </Router>
     );
     for (let artifact of artifacts) {
-      expect(component.getByText(artifact.description)).toBeDefined();
+      expect(component.getByText(artifact.description.substring(0, artifact.description.lastIndexOf(" ")))).toBeDefined();
+      // The last word will be wrapped in a span with an icon, so only match until the last space
     }
   });
 });

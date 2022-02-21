@@ -10,6 +10,17 @@
   margin-right: 14px !important;
 }
 
+.externalAltLinkIcon {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  vertical-align: baseline !important;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
 /* .pf-c-page__main {
   z-index: 301;
 }

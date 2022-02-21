@@ -21,7 +21,7 @@ import {
   EmptyStateBody,
 } from '@patternfly/react-core';
 import { ArtifactEditModal } from '../../engagement_edit_modals/add_artifact_modal';
-import { ClipboardCheckIcon } from '@patternfly/react-icons';
+import { ClipboardCheckIcon, ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { Feature } from '../../feature/feature';
 import { useEngagement } from '../../../context/engagement_context/engagement_hook';
 import { useEngagementArtifacts } from '../../../context/engagement_context/engagement_context';
@@ -93,6 +93,10 @@ export function EngagementArtifactCard() {
     </DropdownItem>,
   ];
   const getModalKey = () => `${ARTIFACT_CRUD_MODAL}`;
+  const addLinkIconWithWrapCorrection = (children: any) => {
+    const childrenArray = String(children).split(' ');
+    return <>{childrenArray.slice(0, -1).join(' ')} <span className="nowrap">{childrenArray.slice(-1)}&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/></span></>;
+  }
   const rows =
     currentEngagement?.artifacts?.map?.((artifact, idx) => [
       getLabelForValue(
@@ -106,7 +110,7 @@ export function EngagementArtifactCard() {
             rel="noopener noreferrer"
             href={getAbsoluteUrl(artifact.linkAddress)}
           >
-            {artifact.title}
+            {addLinkIconWithWrapCorrection(artifact.title)}
           </a>
         ),
       },
