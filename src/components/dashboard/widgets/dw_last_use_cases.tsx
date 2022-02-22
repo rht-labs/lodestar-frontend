@@ -27,7 +27,7 @@ export const DwLastUseCases = (props: DwLastUseCasesProps) => {
   const rows = props.useCases.map(useCase => {
     return [
       {
-        title: <div><div><b>Engagement:</b> <Link to={`/app/engagements/${useCase.engagement_uuid}`}>{ useCase?.customer_name + ' - ' + useCase?.project_name }</Link></div><div>{useCase?.description}</div></div>,
+        title: <div><div><b><Link to={`/app/engagements/${useCase.engagement_uuid}`}>{ useCase?.customer_name + ' - ' + useCase?.project_name }</Link></b></div><div>{useCase?.description}</div></div>,
       },
     ];
   });
