@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { differenceInDays } from 'date-fns';
 import { GitCommit } from '../../schemas/git_commit';
 import {
@@ -91,7 +92,7 @@ function CommitData({ commit }: { commit: GitCommit }) {
         <span style={{ whiteSpace: 'pre-wrap' }}>{commit.message}</span>
       </div>
       <div>
-        <a href={commit.web_url} target="_blank" rel="noopener noreferrer">See in GitLab</a>
+        <a href={commit.web_url} target="_blank" rel="noopener noreferrer" className="nowrap">See in GitLab&nbsp;&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/></a>
       </div>
     </div>
   );

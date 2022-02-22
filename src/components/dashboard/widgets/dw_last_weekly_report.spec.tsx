@@ -22,7 +22,8 @@ describe('Dashboard last weekly reports', () => {
       </MemoryRouter>
     );
     for (let report of weeklyReports) {
-      expect(component.getByText(report.description)).toBeDefined();
+      expect(component.getByText(report.description.substring(0, report.description.lastIndexOf(" ")))).toBeDefined();
+      // The last word will be wrapped in a span with an icon, so only match until the last space
     }
   });
 });

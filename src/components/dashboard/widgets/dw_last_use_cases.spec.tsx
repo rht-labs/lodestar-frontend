@@ -5,6 +5,7 @@ import { Router } from 'react-router';
 import { mockEngagementUseCase } from '../../../mocks/engagement_mocks';
 import { DwLastUseCases } from './dw_last_use_cases';
 
+
 describe('Last Use Cases dashboard widget', () => {
   test('has the correct title', () => {
     const component = render(
