@@ -78,7 +78,7 @@ export function CreateNewEngagementForm() {
           engagement_region: region,
           engagement_type:
             engagementType ??
-            engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+            engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
               e => e.default
             )?.value,
           engagement_categories: copiedEngagement?.engagement_categories,
@@ -104,7 +104,7 @@ export function CreateNewEngagementForm() {
           engagement_region: region,
           engagement_type:
             engagementType ??
-            engagementFormConfig?.basic_information?.engagement_type?.options?.find?.(
+            engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
               e => e.default
             )?.value,
         });

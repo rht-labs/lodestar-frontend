@@ -24,6 +24,9 @@ Object {
           >
             <h1
               class="pf-c-title pf-m-2xl"
+              data-ouia-component-id="OUIA-Generated-Title-1"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
               style="font-weight: normal; margin-bottom: 1rem;"
             >
               LodeStar
@@ -36,12 +39,18 @@ Object {
               >
                 <h2
                   class="pf-c-title pf-m-xl"
+                  data-ouia-component-id="OUIA-Generated-Title-2"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
                   style="font-weight: lighter; margin: 0.5rem 0px;"
                 >
                   About
                 </h2>
                 <small
                   class=""
+                  data-ouia-component-id="OUIA-Generated-Text-1"
+                  data-ouia-component-type="PF4/Text"
+                  data-ouia-safe="true"
                   data-pf-content="true"
                   style="text-align: justify;"
                 >
@@ -56,12 +65,18 @@ Object {
               >
                 <h2
                   class="pf-c-title pf-m-xl"
+                  data-ouia-component-id="OUIA-Generated-Title-3"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
                   style="font-weight: lighter; margin: 0.5rem 0px;"
                 >
                   Need Help?
                 </h2>
                 <small
                   class=""
+                  data-ouia-component-id="OUIA-Generated-Text-2"
+                  data-ouia-component-type="PF4/Text"
+                  data-ouia-safe="true"
                   data-pf-content="true"
                 >
                   Have questions or need help? Please checkout 
@@ -78,12 +93,18 @@ Object {
               >
                 <h2
                   class="pf-c-title pf-m-xl"
+                  data-ouia-component-id="OUIA-Generated-Title-4"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
                   style="font-weight: lighter; margin: 0.5rem 0px;"
                 >
                   Version
                 </h2>
                 <small
                   class=""
+                  data-ouia-component-id="OUIA-Generated-Text-3"
+                  data-ouia-component-type="PF4/Text"
+                  data-ouia-safe="true"
                   data-pf-content="true"
                 >
                   <div
@@ -103,6 +124,9 @@ Object {
                       <p
                         class=""
                         data-cy="lodestar_version"
+                        data-ouia-component-id="OUIA-Generated-Text-4"
+                        data-ouia-component-type="PF4/Text"
+                        data-ouia-safe="true"
                         data-pf-content="true"
                       >
                         Unknown
@@ -171,6 +195,9 @@ Object {
         >
           <h1
             class="pf-c-title pf-m-2xl"
+            data-ouia-component-id="OUIA-Generated-Title-1"
+            data-ouia-component-type="PF4/Title"
+            data-ouia-safe="true"
             style="font-weight: normal; margin-bottom: 1rem;"
           >
             LodeStar
@@ -183,12 +210,18 @@ Object {
             >
               <h2
                 class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-2"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
                 style="font-weight: lighter; margin: 0.5rem 0px;"
               >
                 About
               </h2>
               <small
                 class=""
+                data-ouia-component-id="OUIA-Generated-Text-1"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
                 data-pf-content="true"
                 style="text-align: justify;"
               >
@@ -203,12 +236,18 @@ Object {
             >
               <h2
                 class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-3"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
                 style="font-weight: lighter; margin: 0.5rem 0px;"
               >
                 Need Help?
               </h2>
               <small
                 class=""
+                data-ouia-component-id="OUIA-Generated-Text-2"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
                 data-pf-content="true"
               >
                 Have questions or need help? Please checkout 
@@ -225,12 +264,18 @@ Object {
             >
               <h2
                 class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-4"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
                 style="font-weight: lighter; margin: 0.5rem 0px;"
               >
                 Version
               </h2>
               <small
                 class=""
+                data-ouia-component-id="OUIA-Generated-Text-3"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
                 data-pf-content="true"
               >
                 <div
@@ -250,6 +295,9 @@ Object {
                     <p
                       class=""
                       data-cy="lodestar_version"
+                      data-ouia-component-id="OUIA-Generated-Text-4"
+                      data-ouia-component-type="PF4/Text"
+                      data-ouia-safe="true"
                       data-pf-content="true"
                     >
                       Unknown
