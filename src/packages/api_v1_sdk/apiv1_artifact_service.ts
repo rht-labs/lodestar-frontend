@@ -53,7 +53,10 @@ export class Apiv1ArtifactService implements ArtifactService {
       uuid: apiResponseObject['uuid'],
       title: apiResponseObject['title'],
       type: apiResponseObject['type'],
+      pretty_type: apiResponseObject['pretty_type'],
       engagement_uuid: apiResponseObject['engagement_uuid'],
+      customer_name: apiResponseObject['customer_name'],
+      project_name: apiResponseObject['project_name'],
     };
   };
   async getArtifacts(filter: ArtifactFilter = {}): Promise<Artifact[]> {
@@ -61,7 +64,7 @@ export class Apiv1ArtifactService implements ArtifactService {
     const { data } = await this.axios.get(
       `/engagements/artifacts?${queryString}`,
       {
-        headers: { "Accept-version": "v1" }
+        headers: { "Accept-version": "v2" }
       }
     );
     const artifacts = data.map(this.apiResponseToArtifact);

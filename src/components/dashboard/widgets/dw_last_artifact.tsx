@@ -23,15 +23,6 @@ export const DwLastArtifacts = ({
   artifacts = [],
   engagements = [],
 }: DwLastArtifactsProps) => {
-  const engagementsById = artifacts.reduce(
-    (acc, curr) => ({
-      ...acc,
-      [curr.engagement_uuid]: engagements.find(
-        e => e.uuid === curr.engagement_uuid
-      ),
-    }),
-    {}
-  );
   const rows = artifacts.map(artifact => {
     return [
       {
@@ -41,13 +32,13 @@ export const DwLastArtifacts = ({
           </LinkOrSpan>
         ),
       },
-      artifact?.type,
+      artifact?.pretty_type,
       {
         title: (
           <Link to={`/app/engagements/${artifact.engagement_uuid}#artifacts`}>
-            {engagementsById[artifact.engagement_uuid]?.customer_name +
+            {artifact?.customer_name +
               ' — ' +
-              engagementsById[artifact.engagement_uuid]?.project_name}
+              artifact?.project_name}
           </Link>
         ),
       },
