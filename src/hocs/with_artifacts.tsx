@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useArtifacts } from '../hooks/use_artifacts';
 import { Artifact, Engagement } from '../schemas/engagement';
 
