@@ -28,7 +28,7 @@ export class Apiv1SummaryCountService implements SummaryCountService {
       searchParams.push(`end=${endDate.toISOString().split('T')[0]}`);
     }
     if (regions.length > 0) {
-      searchParams.push(`engagement_region=${regions.join(',')}`);
+      regions.forEach(region => queries.push(`region=${region}`));
     }
     if (searchParams.length > 0) {
       queries.push(`search=${encodeURIComponent(searchParams.join('&'))}`);
