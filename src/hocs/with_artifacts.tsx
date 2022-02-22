@@ -12,13 +12,11 @@ type ArtifactsComponent<P> = React.FunctionComponent<
 export function withArtifacts<P>(
   WrappedComponent: ArtifactsComponent<P>,
   fetcher: () => Promise<Artifact[]>,
-  fetchEngagementById: (id: string) => Promise<Partial<Engagement>>
 ) {
   return (
     <ArtifactFetcher
       component={WrappedComponent}
       fetcher={fetcher}
-      getEngagementById={fetchEngagementById}
     />
   );
 }
@@ -26,26 +24,19 @@ export function withArtifacts<P>(
 interface ArtifactFetcherProps<P> {
   component: ArtifactsComponent<P>;
   fetcher: () => Promise<Artifact[]>;
-  getEngagementById: (id: string) => Promise<Partial<Engagement>>;
 }
 
 const ArtifactFetcher = (props: ArtifactFetcherProps<any>) => {
-  const { component: WrappedComponent, getEngagementById } = props;
+  const { component: WrappedComponent } = props;
   const [artifacts, fetchArtifacts] = useArtifacts(props.fetcher);
-  const [engagements, setEngagements] = useState([]);
   useEffect(() => {
     fetchArtifacts();
   }, [fetchArtifacts]);
-  useEffect(() => {
-    Promise.all(
-      artifacts.map(artifact => getEngagementById(artifact.engagement_uuid))
-    ).then(engagements => setEngagements(engagements));
-  }, [artifacts, getEngagementById]);
+  useEffect(() => {}, [artifacts]);
   return (
     <WrappedComponent
       {...props}
       artifacts={artifacts}
-      engagements={engagements}
     />
   );
 };

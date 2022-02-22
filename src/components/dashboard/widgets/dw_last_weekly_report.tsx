@@ -11,28 +11,17 @@ import {ReactComponent as HeartbeatIcon} from '../../../assets/images/heart-rate
 import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Artifact, Engagement } from '../../../schemas/engagement';
+import { Artifact } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 
 export interface DwLastWeeklyReportProps {
   artifacts: Artifact[];
-  engagements: Partial<Engagement>[];
 }
 const columns = ['Weekly Report', 'Engagement'];
 export function DwLastWeeklyReport({
   artifacts = [],
-  engagements = [],
 }: DwLastWeeklyReportProps) {
-  const engagementsById = artifacts.reduce(
-    (acc, curr) => ({
-      ...acc,
-      [curr.engagement_uuid]: engagements.find(
-        e => e.uuid === curr.engagement_uuid
-      ),
-    }),
-    {}
-  );
   const rows = artifacts.map(artifact => {
     return [
       {
@@ -45,9 +34,9 @@ export function DwLastWeeklyReport({
       {
         title: (
           <Link to={`/app/engagements/${artifact.engagement_uuid}`}>
-            {engagementsById[artifact.engagement_uuid]?.customer_name}
+            {artifact?.customer_name}
             &nbsp;—&nbsp;
-            {engagementsById[artifact.engagement_uuid]?.project_name}
+            {artifact?.project_name}
           </Link>
         ),
       },

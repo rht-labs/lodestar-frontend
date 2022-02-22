@@ -10,18 +10,16 @@ import {
 } from '@patternfly/react-core';
 import {ReactComponent as CubesIcon} from '../../../assets/images/cubes.svg';
 import { Table, TableBody, TableHeader } from '@patternfly/react-table';
-import { Artifact, Engagement } from '../../../schemas/engagement';
+import { Artifact } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import { Link } from 'react-router-dom';
 import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 export interface DwLastArtifactsProps {
   artifacts: Artifact[];
-  engagements: Partial<Engagement>[];
 }
 const columns = ['Artifact', 'Type', 'Engagement'];
 export const DwLastArtifacts = ({
   artifacts = [],
-  engagements = [],
 }: DwLastArtifactsProps) => {
   const rows = artifacts.map(artifact => {
     return [
