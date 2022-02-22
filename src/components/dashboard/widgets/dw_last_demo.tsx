@@ -11,24 +11,14 @@ import {ReactComponent as BroadcastIcon} from '../../../assets/images/broadcast-
 import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Artifact, Engagement } from '../../../schemas/engagement';
+import { Artifact } from '../../../schemas/engagement';
 import { LinkOrSpan } from '../../link_or_span/link_or_span';
 import CustomRowWrapper from '../../../components/custom_row_wrapper/custom_row_wrapper';
 export interface DwLastDemoProps {
   demos: Artifact[];
-  engagements: Partial<Engagement>[];
 }
 const columns = ['Demo', 'Engagement'];
-export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
-  const engagementsById = demos.reduce(
-    (acc, curr) => ({
-      ...acc,
-      [curr.engagement_uuid]: engagements.find(
-        e => e.uuid === curr.engagement_uuid
-      ),
-    }),
-    {}
-  );
+export function DwLastDemo({ demos = [] }: DwLastDemoProps) {
   const rows = demos.map(demo => {
     return [
       {
@@ -39,8 +29,7 @@ export function DwLastDemo({ demos = [], engagements = [] }: DwLastDemoProps) {
       {
         title: (
           <Link to={`/app/engagements/${demo.engagement_uuid}`}>
-            {engagementsById[demo.engagement_uuid]?.customer_name}&nbsp;—&nbsp;
-            {engagementsById[demo.engagement_uuid]?.project_name}
+            {demo?.customer_name}&nbsp;—&nbsp;{demo?.project_name}
           </Link>
         ),
       },

@@ -322,14 +322,13 @@ export function Dashboard() {
                       regions: selectedRegions,
                       sortOrder: 'DESC',
                       sortFields: 'updated',
-                    }),
-                  engagementService.getEngagementById
+                    })
                 )}
               </GridItem>
               <GridItem sm={12} xl={12} xl2={6}>
                 {withArtifacts(
                   ({ artifacts, engagements }) => (
-                    <DwLastDemo demos={artifacts} engagements={engagements} />
+                    <DwLastDemo demos={artifacts} />
                   ),
                   () =>
                     artifactService.getArtifacts({
@@ -341,8 +340,7 @@ export function Dashboard() {
                       regions: selectedRegions,
                       sortOrder: 'DESC',
                       sortFields: 'updated',
-                    }),
-                  engagementService.getEngagementById
+                    })
                 )}
               </GridItem>
               <GridItem sm={12} xl={12} xl2={6}>
@@ -358,9 +356,7 @@ export function Dashboard() {
                       regions: selectedRegions,
                       sortOrder: 'DESC',
                       sortFields: 'updated',
-                    }),
-
-                  engagementService.getEngagementById
+                    })
                 )}
               </GridItem>
             </Grid>
