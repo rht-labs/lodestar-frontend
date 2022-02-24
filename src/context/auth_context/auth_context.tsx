@@ -1,11 +1,15 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { AuthService } from '../../services/auth_service/authentication_service';
-import { AnalyticsCategory } from '../../schemas/analytics';
-
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import { UserProfile } from '../../schemas/user_profile';
 import { UserToken } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
 import { IAnalyticsContext } from '../analytics_context/analytics_context';
+import { KeycloakInstance } from 'keycloak-js';
 
 export interface SessionData {
   profile?: UserProfile;
@@ -20,7 +24,6 @@ export interface IAuthContext {
   checkIsAuthenticated: () => Promise<boolean>;
   userProfile?: UserProfile;
   roles: string[];
-  handleLoginCallback: (authorizationCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -30,84 +33,41 @@ export const AuthContext = createContext<IAuthContext>({
   setAuthError: (error: any) => {},
   axios: Axios.create(),
   checkIsAuthenticated: async () => false,
-  handleLoginCallback: async () => {},
   logout: async () => {},
 });
 const { Provider } = AuthContext;
 
 export const AuthProvider = ({
   children,
-  authService,
   analyticsContext,
+  keycloak,
 }: {
   children: React.ReactChild;
-  authService: AuthService;
   analyticsContext?: IAnalyticsContext;
+  keycloak: KeycloakInstance;
 }) => {
-  const [sessionData, setSessionData] = useState<SessionData | undefined>(
-    undefined
-  );
   const [authError, setAuthError] = useState<any>(null);
-  const createSessionData = (profile: UserProfile, tokens: UserToken) => ({
-    profile,
-    roles: profile.groups,
-    tokens,
-  });
-  const handleLoginCallback = useCallback(
-    async (authorizationCode: string) => {
-      try {
-        const userToken = await authService.fetchToken(
-          authorizationCode,
-          'authorization_code'
-        );
-        if (await authService.isLoggedIn()) {
-          const profile = await authService.getUserProfile();
-          setSessionData(createSessionData(profile, userToken));
-          return;
-        }
-        analyticsContext?.logEvent?.({
-          category: AnalyticsCategory.profile,
-          action: 'Log In',
-        });
-      } catch (e) {
-        setAuthError(e);
-        throw e;
-      }
-    },
-    [analyticsContext, authService]
-  );
+
+  const sessionData = useMemo(() => {
+    console.log(keycloak?.tokenParsed);
+    return {
+      profile: keycloak.profile,
+      roles: (keycloak?.tokenParsed as any)?.groups,
+      tokens: {
+        accessToken: keycloak.token,
+        refreshToken: keycloak.refreshToken,
+      },
+    };
+  }, [keycloak]);
 
   const logout = async () => {
-    authService.clearSession();
+    keycloak.logout();
     return;
   };
 
   const checkIsAuthenticated = useCallback(async () => {
-    try {
-      if (!authService) {
-        return false;
-      }
-      const isLoggedIn = await authService.isLoggedIn();
-      if (!isLoggedIn) {
-        return false;
-      }
-      const tokens = authService.getToken();
-      if (
-        !sessionData?.profile ||
-        !sessionData?.roles ||
-        !sessionData?.tokens
-      ) {
-        const profile = await authService.getUserProfile();
-        setSessionData(createSessionData(profile, tokens));
-      }
-      if (isLoggedIn && tokens) {
-        return true;
-      }
-      return false;
-    } catch (e) {
-      return false;
-    }
-  }, [authService, sessionData]);
+    return keycloak.authenticated;
+  }, [keycloak.authenticated]);
 
   return (
     <Provider
@@ -116,7 +76,6 @@ export const AuthProvider = ({
         userProfile: sessionData?.profile,
         setAuthError,
         checkIsAuthenticated,
-        handleLoginCallback,
         logout: logout,
         roles: sessionData?.roles ?? [],
       }}
