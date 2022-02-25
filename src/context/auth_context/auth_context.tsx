@@ -8,7 +8,6 @@ import React, {
 import { UserProfile } from '../../schemas/user_profile';
 import { UserToken } from '../../schemas/user_token';
 import Axios, { AxiosInstance } from 'axios';
-import { IAnalyticsContext } from '../analytics_context/analytics_context';
 import { KeycloakInstance } from 'keycloak-js';
 
 export interface SessionData {
@@ -30,38 +29,43 @@ export interface IAuthContext {
 export const AuthContext = createContext<IAuthContext>({
   authError: null,
   roles: [],
-  setAuthError: (error: any) => {},
+  setAuthError: (error: any) => { },
   axios: Axios.create(),
   checkIsAuthenticated: async () => false,
-  logout: async () => {},
+  logout: async () => { },
 });
 const { Provider } = AuthContext;
 
 export const AuthProvider = ({
   children,
-  analyticsContext,
   keycloak,
+  publicUrl,
 }: {
   children: React.ReactChild;
-  analyticsContext?: IAnalyticsContext;
   keycloak: KeycloakInstance;
+  publicUrl: string
 }) => {
   const [authError, setAuthError] = useState<any>(null);
 
   const sessionData = useMemo(() => {
-    console.log(keycloak?.tokenParsed);
     return {
-      profile: keycloak.profile,
+      profile: {
+        email: (keycloak.tokenParsed as any)?.email,
+        firstName: (keycloak.tokenParsed as any)?.given_name,
+        lastName: (keycloak.tokenParsed as any)?.family_name,
+        groups: (keycloak.tokenParsed as any)?.groups,
+        username: (keycloak.tokenParsed as any)?.preferred_username,
+      } as UserProfile,
       roles: (keycloak?.tokenParsed as any)?.groups,
       tokens: {
         accessToken: keycloak.token,
         refreshToken: keycloak.refreshToken,
       },
     };
-  }, [keycloak]);
+  }, [keycloak.token, keycloak.refreshToken, keycloak.tokenParsed,]);
 
   const logout = async () => {
-    keycloak.logout();
+    keycloak.logout({ redirectUri: publicUrl });
     return;
   };
 

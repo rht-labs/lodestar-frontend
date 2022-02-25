@@ -11,15 +11,7 @@ class LogoutPage extends React.Component<{
   componentDidMount(): void {
     const { session } = this.props;
     session
-      .logout()
-      .then(
-        () =>
-          (window.location.href = `${
-            this.props.config.appConfig.authBaseUrl
-          }/logout?redirect_uri=${encodeURI(
-            this.props.config.appConfig.baseUrl
-          )}`)
-      );
+      .logout();
     this.context?.logEvent?.({
       category: AnalyticsCategory.profile,
       action: 'Log Out',
