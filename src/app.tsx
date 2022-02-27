@@ -71,7 +71,7 @@ export const App = ({ config }: { config: Config }) => {
                         <FeedbackProvider>
                           <AuthProvider
                             keycloak={keycloak}
-                            analyticsContext={analyticsContext}
+                            publicUrl={appConfig.baseUrl}
                           >
                             <NotificationProvider
                               notificationService={notificationService}

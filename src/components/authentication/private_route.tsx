@@ -5,11 +5,12 @@ import { useKeycloak } from '@react-keycloak/web';
 export const PrivateRoute = (props: RouteProps) => {
   const { keycloak, initialized } = useKeycloak();
   if (!initialized) {
-    return null;
+    return <div />;
   }
   if (keycloak.authenticated) {
     return <Route {...props} />;
   } else {
     keycloak.login();
+    return <div />
   }
 };
