@@ -13,6 +13,7 @@ export interface LandingVideos {
 export interface Config {
   analyticsTrackingCode: string;
   baseUrl: string;
+  realm: string;
   clientId: string;
   authBaseUrl: string;
   backendUrl: string;
@@ -31,6 +32,7 @@ export abstract class Config {
     return {
       analyticsTrackingCode: 'UA-FAKED',
       baseUrl: 'http://localhost:3000',
+      realm: 'fake',
       clientId: 'lodestar',
       authBaseUrl:
         'https://sso.example.com/auth/realms/lodestar/protocol/openid-connect',

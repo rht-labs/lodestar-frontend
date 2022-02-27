@@ -1,6 +1,7 @@
 {
   "baseUrl": "http://my-base.url",
   "clientId": "lodestar",
+  "realm": "realm",
   "authBaseUrl": "https://my-sso-endpoint.url",
   "backendUrl": "http://my-backend.url/api",
   "disableLaunch": true,
