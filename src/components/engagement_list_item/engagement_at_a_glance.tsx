@@ -60,9 +60,9 @@ export function EngagementAtAGlance({
               />
             </GridItem>
             <GridItem>
-              {engagement?.engagement_type
+              {engagement?.pretty_type
                 ? 'Engagement Type: ' +
-                  engagement?.engagement_type
+                  engagement?.pretty_type
                 : null}
             </GridItem>
             <GridItem>
