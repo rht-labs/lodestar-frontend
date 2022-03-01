@@ -22,7 +22,7 @@ describe('Last Use Cases dashboard widget', () => {
       </Router>
     );
     for (let artifact of artifacts) {
-      expect(component.getByText(artifact.description.substring(0, artifact.description.lastIndexOf(" ")))).toBeDefined();
+      expect(component.getByText(artifact.title.substring(0, artifact.title.trim().lastIndexOf(" ")))).toBeDefined();
       // The last word will be wrapped in a span with an icon, so only match until the last space
     }
   });

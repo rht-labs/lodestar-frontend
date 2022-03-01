@@ -94,7 +94,7 @@ export function EngagementArtifactCard() {
   ];
   const getModalKey = () => `${ARTIFACT_CRUD_MODAL}`;
   const addLinkIconWithWrapCorrection = (children: any) => {
-    const childrenArray = String(children).split(' ');
+    const childrenArray = String(children).trim().split(' ');
     return <>{childrenArray.slice(0, -1).join(' ')} <span className="nowrap">{childrenArray.slice(-1)}&nbsp;<ExternalLinkAltIcon className="externalAltLinkIcon"/></span></>;
   }
   const rows =

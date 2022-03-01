@@ -25,8 +25,8 @@ export const DwLastArtifacts = ({
     return [
       {
         title: (
-          <LinkOrSpan href={artifact.linkAddress}>
-            {artifact?.description}
+          <LinkOrSpan href={artifact.linkAddress} tooltip={artifact?.description}>
+            {artifact?.title}
           </LinkOrSpan>
         ),
       },
