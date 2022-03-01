@@ -507,7 +507,7 @@ Object {
               aria-disabled="false"
               aria-label="Close"
               class="pf-c-button pf-m-plain"
-              data-ouia-component-id="OUIA-Generated-Modal-large-1-ModalBoxCloseButton"
+              data-ouia-component-id="OUIA-Generated-Modal-large-6-ModalBoxCloseButton"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
@@ -617,7 +617,7 @@ Object {
                         >
                           <h3
                             class="pf-c-title pf-m-lg"
-                            data-ouia-component-id="OUIA-Generated-Title-1"
+                            data-ouia-component-id="OUIA-Generated-Title-2"
                             data-ouia-component-type="PF4/Title"
                             data-ouia-safe="true"
                           >
@@ -644,7 +644,7 @@ Object {
                         >
                           <h3
                             class="pf-c-title pf-m-lg"
-                            data-ouia-component-id="OUIA-Generated-Title-2"
+                            data-ouia-component-id="OUIA-Generated-Title-3"
                             data-ouia-component-type="PF4/Title"
                             data-ouia-safe="true"
                           >
@@ -1425,7 +1425,7 @@ Object {
               aria-disabled="false"
               aria-label="Close"
               class="pf-c-button pf-m-plain"
-              data-ouia-component-id="OUIA-Generated-Modal-large-3-ModalBoxCloseButton"
+              data-ouia-component-id="OUIA-Generated-Modal-large-8-ModalBoxCloseButton"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               type="button"
