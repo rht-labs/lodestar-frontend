@@ -124,6 +124,7 @@ export class EngagementJsonSerializer
       engagement_lead_email: data['engagement_lead_email'],
       engagement_lead_name: data['engagement_lead_name'],
       engagement_type: data['engagement_type'],
+      pretty_type: data['pretty_type'],
       hosting_environments:
         data['hosting_environments']?.map?.(
           EngagementJsonSerializer.deserializeHostingEnvironment
@@ -144,6 +145,8 @@ export class EngagementJsonSerializer
       last_update_by_name: data['last_update_by_name'],
       engagement_categories: data['engagement_categories'],
       timezone: data['timezone'],
+      artifact_count: data['artifact_count'],
+      participant_count: data['participant_count'],
     };
   }
 

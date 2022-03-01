@@ -85,11 +85,14 @@ export interface EngagementOverview {
   project_name: string;
   customer_name: string;
   engagement_type: string;
+  pretty_type: string;
   description: string;
   public_reference: boolean;
   engagement_categories: EngagementCategory[];
   engagement_region: string;
   timezone?: string;
+  artifact_count: number;
+  participant_count: number;
 }
 
 export interface EngagementHistory {
@@ -226,6 +229,7 @@ export abstract class Engagement {
         ? 'Alice Doe'
         : `${faker.name.firstName()} ${faker.name.lastName()}`,
       engagement_type: 'Residency',
+      pretty_type: 'Residency',
       last_update: staticData ? new Date(2020, 1, 1, 1, 1, 1, 1) : new Date(),
       location: staticData
         ? 'Nashville, TN'
@@ -285,6 +289,8 @@ export abstract class Engagement {
       uuid: staticData ? 'uuid' : faker.random.uuid(),
       writeable: false,
       timezone: 'Americas/Denver',
+      artifact_count: 0,
+      participant_count: 0,
     };
   }
 }
