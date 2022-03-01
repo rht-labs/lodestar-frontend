@@ -7,6 +7,7 @@
     "@patternfly/react-core": "^4.192.15",
     "@patternfly/react-icons": "^4.43.15",
     "@patternfly/react-table": "^4.61.15",
+    "@react-keycloak/web": "^3.4.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^7.2.1",

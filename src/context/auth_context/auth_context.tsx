@@ -50,19 +50,19 @@ export const AuthProvider = ({
   const sessionData = useMemo(() => {
     return {
       profile: {
-        email: (keycloak.tokenParsed as any)?.email,
-        firstName: (keycloak.tokenParsed as any)?.given_name,
-        lastName: (keycloak.tokenParsed as any)?.family_name,
-        groups: (keycloak.tokenParsed as any)?.groups,
-        username: (keycloak.tokenParsed as any)?.preferred_username,
+        email: (keycloak?.tokenParsed as any)?.email,
+        firstName: (keycloak?.tokenParsed as any)?.given_name,
+        lastName: (keycloak?.tokenParsed as any)?.family_name,
+        groups: (keycloak?.tokenParsed as any)?.groups,
+        username: (keycloak?.tokenParsed as any)?.preferred_username,
       } as UserProfile,
       roles: (keycloak?.tokenParsed as any)?.groups,
       tokens: {
-        accessToken: keycloak.token,
-        refreshToken: keycloak.refreshToken,
+        accessToken: keycloak?.token,
+        refreshToken: keycloak?.refreshToken,
       },
     };
-  }, [keycloak.token, keycloak.refreshToken, keycloak.tokenParsed,]);
+  }, [keycloak?.token, keycloak?.refreshToken, keycloak?.tokenParsed,]);
 
   const logout = async () => {
     keycloak.logout({ redirectUri: publicUrl });
@@ -70,8 +70,8 @@ export const AuthProvider = ({
   };
 
   const checkIsAuthenticated = useCallback(async () => {
-    return keycloak.authenticated;
-  }, [keycloak.authenticated]);
+    return keycloak?.authenticated;
+  }, [keycloak?.authenticated]);
 
   return (
     <Provider
