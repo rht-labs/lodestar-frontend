@@ -70,8 +70,11 @@ export interface Artifact {
   linkAddress: string;
   title: string;
   type: string;
+  pretty_type?: string;
   description: string;
   engagement_uuid?: string;
+  project_name?: string;
+  customer_name?: string;
 }
 
 export interface EngagementOverview {

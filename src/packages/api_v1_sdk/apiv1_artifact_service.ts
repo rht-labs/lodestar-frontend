@@ -24,7 +24,7 @@ export class Apiv1ArtifactService implements ArtifactService {
     queries.push(`page=${page}`);
     const searchParams = [];
     if (!!type) {
-      searchParams.push(`artifacts.type=${type}`);
+      queries.push(`type=${type}`)
     }
     if (startDate != null) {
       searchParams.push(`start=${startDate.toISOString().split('T')[0]}`);
@@ -33,7 +33,7 @@ export class Apiv1ArtifactService implements ArtifactService {
       searchParams.push(`start=${endDate.toISOString().split('T')[0]}`);
     }
     if (regions.length > 0) {
-      searchParams.push(`engagement_region=${regions.join(',')}`);
+      regions.forEach(region => queries.push(`region=${region}`));
     }
     if (searchParams.length > 0) {
       queries.push(`search=${encodeURIComponent(searchParams.join('&'))}`);
@@ -53,7 +53,10 @@ export class Apiv1ArtifactService implements ArtifactService {
       uuid: apiResponseObject['uuid'],
       title: apiResponseObject['title'],
       type: apiResponseObject['type'],
+      pretty_type: apiResponseObject['pretty_type'],
       engagement_uuid: apiResponseObject['engagement_uuid'],
+      customer_name: apiResponseObject['customer_name'],
+      project_name: apiResponseObject['project_name'],
     };
   };
   async getArtifacts(filter: ArtifactFilter = {}): Promise<Artifact[]> {
@@ -61,7 +64,7 @@ export class Apiv1ArtifactService implements ArtifactService {
     const { data } = await this.axios.get(
       `/engagements/artifacts?${queryString}`,
       {
-        headers: { "Accept-version": "v1" }
+        headers: { "Accept-version": "v2" }
       }
     );
     const artifacts = data.map(this.apiResponseToArtifact);
