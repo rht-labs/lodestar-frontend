@@ -31,9 +31,6 @@ Object {
             </svg>
             <h4
               class="pf-c-title pf-m-lg"
-              data-ouia-component-id="OUIA-Generated-Title-1"
-              data-ouia-component-type="PF4/Title"
-              data-ouia-safe="true"
             >
               You've found an unexpected feature.
             </h4>
@@ -83,9 +80,6 @@ Object {
           </svg>
           <h4
             class="pf-c-title pf-m-lg"
-            data-ouia-component-id="OUIA-Generated-Title-1"
-            data-ouia-component-type="PF4/Title"
-            data-ouia-safe="true"
           >
             You've found an unexpected feature.
           </h4>
