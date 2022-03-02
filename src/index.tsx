@@ -31,7 +31,7 @@ const AppWithConfig = () => {
           }
           const keycloak = Keycloak({
             url: appConfig.authBaseUrl,
-            realm: 'ETL',
+            realm: appConfig.realm,
             clientId: appConfig.clientId,
           });
           return (
