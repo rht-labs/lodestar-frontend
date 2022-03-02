@@ -9,6 +9,7 @@ data:
     {
       "baseUrl": "{{ .Values.baseUrl }}",
       "clientId": "{{ .Values.clientId }}",
+      "realm": "{{ .Values.realm }}",
       "authBaseUrl": "{{ .Values.authBaseUrl }}",
       "backendUrl": "{{ .Values.backendUrl }}",
       "disableLaunch": "{{ .Values.disableLaunch }}",

@@ -34,6 +34,7 @@ helm template . \
   --set baseUrl=<your-base-url> \
   --set clientId=<your-sso-client-id> \
   --set authBaseUrl=<your-sso-openid-connect-url> \
+  --set realm=<your-realm> \
   --set backendUrl=<your-backend-url> \
   --set 'access.groups[0].name=group-name','access.groups[0].roles={access_type,axxess_type}'
 | oc apply -f -
@@ -47,7 +48,8 @@ It accepts the following variables
 | `git.ref`  | The branch name to build  |
 | `baseUrl`  | The FQDN at which this route will be exposed - depends on your environment  |
 | `clientId`  | The client ID that the SSO server is configured to accept auth requests using  |
-| `authBaseUrl`  | The url that your SSO server accepts OpenID Connect requests on - for Keycloak, something like `https://<keycloak-base-url>.com/auth/realms/<realm-id>/protocol/openid-connect`  |
+| `realm`  | Realm for SSO integration
+| `authBaseUrl`  | The url that your SSO server accepts OpenID Connect requests on - for Keycloak, something like `https://<keycloak-base-url>.com/auth`  |
 | `backendUrl`  | The url that the LodeStar backend accepts requests on  |
 | `access.groups` | A list of groups to receive access to LodeStar |
 | `access.groups[i].roles` | A list of roles to map access | 

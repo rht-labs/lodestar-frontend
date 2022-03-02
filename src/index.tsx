@@ -34,6 +34,12 @@ const AppWithConfig = () => {
             realm: appConfig.realm,
             clientId: appConfig.clientId,
           });
+          keycloak.init({
+            onLoad: 'check-sso',
+            silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+            enableLogging: true,
+            checkLoginIframe: false
+          })
           return (
             <ReactKeycloakProvider
               onTokens={tokens => {
