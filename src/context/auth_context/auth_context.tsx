@@ -70,7 +70,7 @@ export const AuthProvider = ({
   };
 
   const checkIsAuthenticated = useCallback(async () => {
-    return keycloak?.authenticated;
+    return keycloak?.authenticated || false;
   }, [keycloak?.authenticated]);
 
   return (
