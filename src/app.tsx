@@ -72,6 +72,7 @@ export const App = ({ config }: { config: Config }) => {
                           <AuthProvider
                             keycloak={keycloak}
                             publicUrl={appConfig.baseUrl}
+                            roleMapping={appConfig.roles}
                           >
                             <NotificationProvider
                               notificationService={notificationService}
