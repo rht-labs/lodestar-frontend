@@ -7,11 +7,12 @@ describe('new engagement', () => {
   const id = uuid();
   const testEngagementName = `cypressio_${id}`;
   const customerName = 'Ldstr E2E';
-  const reqUrl = `engagements/customers/` + encodeURIComponent(customerName) + `/projects/${testEngagementName}`;
+  const reqUrl = 'engagements/**';
 
   beforeEach('Login', () => {
     cy.login();
     cy.fixture('users.json').as('users');
+
     cy.intercept('PUT', reqUrl ).as('saveEngagement');
   });
 
@@ -37,7 +38,10 @@ describe('new engagement', () => {
     cy.get('[data-cy=new_engagement_region]').select('DEV').should('have.value', 'dev');
     cy.get('[data-cy=createNewEngagement]').click();
 
-    cy.wait('@createEngagement').its('response.statusCode').should('eq', 201);
+    cy.wait('@createEngagement').should((xhr) => {
+      expect(xhr.response.statusCode, 'expecting successful POST').to.equal(201)
+      expect(xhr.response.body.engagement_uuid, 'expecting engagement uuid to be set').to.not.be.null
+    })
 
     cy.get('li > .pf-c-alert').contains(
       'Your engagement has been successfully created'
