@@ -176,9 +176,8 @@ export const EngagementProvider = ({
   const _refreshEngagementData = useCallback(
     async (engagement: Engagement) => {
       try {
-        const refreshedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-          engagement?.customer_name,
-          engagement?.project_name
+        const refreshedEngagement = await engagementService.getEngagementById(
+          engagement?.uuid,
         );
         setCurrentEngagement(refreshedEngagement);
       } catch (e) {
@@ -244,6 +243,8 @@ export const EngagementProvider = ({
         if (!!uuid) {
           fetchedEngagement = await engagementService.getEngagementById(uuid);
         } else {
+          //This is probably not used anymore. Check backend logs for "Deprecated get method used"
+          //Delete this and engagementService.getEngagementByCustomerAndProjectName if none by 03/17/2022
           fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
             customerName,
             projectName

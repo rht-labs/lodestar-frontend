@@ -135,7 +135,7 @@ export class Apiv1EngagementService implements EngagementService {
       const {
         data,
       } = await this.axios.put(
-        `/engagements/customers/${engagement.customer_name}/projects/${engagement.project_name}`,
+        `/engagements/${engagement.uuid}`,
         { ...serializedEngagement, commit_message: commitMessage }
       );
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
