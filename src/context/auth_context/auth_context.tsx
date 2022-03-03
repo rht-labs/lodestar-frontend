@@ -70,10 +70,10 @@ export const AuthProvider = ({
         email: (keycloak?.tokenParsed as any)?.email,
         firstName: (keycloak?.tokenParsed as any)?.given_name,
         lastName: (keycloak?.tokenParsed as any)?.family_name,
-        groups: getUserRoles((keycloak?.tokenParsed as any)?.groups),
+        groups: (keycloak?.tokenParsed as any)?.groups,
         username: (keycloak?.tokenParsed as any)?.preferred_username,
       } as UserProfile,
-      roles: (keycloak?.tokenParsed as any)?.groups,
+      roles: getUserRoles((keycloak?.tokenParsed as any)?.groups),
       tokens: {
         accessToken: keycloak?.token,
         refreshToken: keycloak?.refreshToken,
