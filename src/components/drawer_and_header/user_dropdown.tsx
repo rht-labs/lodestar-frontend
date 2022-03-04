@@ -12,7 +12,6 @@ export interface UserDropdownProps { }
 
 export function UserDropdown(props: UserDropdownProps) {
   const authContext = useSession();
-  console.log(authContext)
   const [isOpen, setIsOpen] = useState(false);
   const { logEvent } = useAnalytics();
   const dropdownItems = [
