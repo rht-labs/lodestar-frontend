@@ -1,9 +1,12 @@
 import './wdyr';
 import React, { Profiler } from 'react';
 import ReactDOM from 'react-dom';
+import Keycloak from 'keycloak-js';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
 import { App } from './app';
 import { unstable_trace as trace } from 'scheduler/tracing';
 import './assets/css/overrides.css';
+import { Token } from './packages/api_v1_sdk/token';
 import {
   ConfigProvider,
   ConfigContext,
@@ -26,7 +29,31 @@ const AppWithConfig = () => {
             fetchConfig();
             return null;
           }
-          return <App config={appConfig} />;
+          const keycloak = Keycloak({
+            url: appConfig.authBaseUrl,
+            realm: appConfig.realm,
+            clientId: appConfig.clientId,
+          });
+          keycloak.init({
+            onLoad: 'check-sso',
+            silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+            enableLogging: true,
+            checkLoginIframe: false
+          })
+          return (
+            <ReactKeycloakProvider
+              onTokens={tokens => {
+                Token.token = {
+                  accessToken: tokens.token,
+                  refreshToken: tokens.refreshToken,
+                };
+              }}
+              initOptions={{}}
+              authClient={keycloak}
+            >
+              <App config={appConfig} />
+            </ReactKeycloakProvider>
+          );
         }}
       </ConfigContext.Consumer>
     </ConfigProvider>

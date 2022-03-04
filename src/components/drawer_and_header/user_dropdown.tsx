@@ -8,7 +8,7 @@ import {
   AnalyticsCategory,
 } from '../../context/analytics_context/analytics_context';
 
-export interface UserDropdownProps {}
+export interface UserDropdownProps { }
 
 export function UserDropdown(props: UserDropdownProps) {
   const authContext = useSession();

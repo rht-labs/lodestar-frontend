@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Apiv1AuthService } from './apiv1_auth_service';
 import { ApiV1 } from './apiv1';
 import { Token } from './token';
 
@@ -15,17 +14,6 @@ export function getApiV1HttpClient(): AxiosInstance {
       return res;
     },
     async error => {
-
-      if (error.response != null && (error.response.status === 401 || error.response.status === 403)) {
-        const authService = new Apiv1AuthService();
-        try {
-          await authService.isLoggedIn();
-          const retriedResponse = await axios.request(error.config);
-          return retriedResponse;
-        } catch (e) {
-          return Promise.reject(e);
-        }
-      }
       return Promise.reject(error);
     }
   );

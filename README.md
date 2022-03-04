@@ -298,7 +298,8 @@ Depending on the type of deployment, the way of setting these variables may vary
 | Variable                  | Type    | Description                                                                            | Required | Default  |
 | :------------------------ | :------ | :------------------------------------------------------------------------------------- | :------- | :------- |
 | **baseUrl**               | string  | Target URL for the deployment of **this** Frontend App                                 | Yes      | N/A      |
-| **authBaseUrl**           | string  | URI for SSO integration                                                                | Yes      | N/A      |
+| **authBaseUrl**           | string  | URI for SSO integration (ending in /auth for Keycloak/RHSSO)                           | Yes      | N/A      |
+| **realm**                 | string  | Realm for SSO integration                                                              | Yes      | N/A      |
 | **clientId**              | string  | Identification of the client application for SSO integration                           | Yes      | N/A      |
 | **backendUrl**            | string  | URI for [Backend](https://github.com/rht-labs/lodestar-backend.git) APIs               | Yes      | N/A      |
 | **disableLaunch**         | boolean | Flag to toggle launch functionality on/off                                             | No       | false    |

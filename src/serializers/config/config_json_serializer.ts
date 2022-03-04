@@ -10,6 +10,7 @@ export class ConfigJsonSerializer implements Serializer<Config, object> {
     return {
       baseUrl: data['baseUrl'],
       clientId: data['clientId'],
+      realm: data['realm'],
       authBaseUrl: data['authBaseUrl'],
       backendUrl: data['backendUrl'],
       disableLaunch: data['disableLaunch'] ?? false,

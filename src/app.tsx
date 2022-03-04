@@ -33,6 +33,7 @@ import {
   getFeaturesFromVersion,
 } from './common/version_feature_factory';
 import { CategoryProvider } from './context/category_context/category_context';
+import { useKeycloak } from '@react-keycloak/web';
 
 export const App = ({ config }: { config: Config }) => {
   const serviceProviders =
@@ -41,12 +42,12 @@ export const App = ({ config }: { config: Config }) => {
       : createApiV1Services(config);
 
   const { appConfig } = useConfig();
+  const { keycloak } = useKeycloak();
   return (
     <ErrorBoundary>
       <ServiceProvider serviceFactory={serviceProviders}>
         <ServiceProviderContext.Consumer>
           {({
-            authService,
             notificationService,
             versionService,
             categoryService,
@@ -69,8 +70,9 @@ export const App = ({ config }: { config: Config }) => {
                       {analyticsContext => (
                         <FeedbackProvider>
                           <AuthProvider
-                            authService={authService}
-                            analyticsContext={analyticsContext}
+                            keycloak={keycloak}
+                            publicUrl={appConfig.baseUrl}
+                            roleMapping={appConfig.roles}
                           >
                             <NotificationProvider
                               notificationService={notificationService}

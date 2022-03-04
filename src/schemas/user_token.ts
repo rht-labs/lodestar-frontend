@@ -12,8 +12,6 @@ export abstract class UserToken {
     return {
       accessToken: faker.random.uuid(),
       refreshToken: faker.random.uuid(),
-      accessTokenExpiry: faker.date.future(),
-      refreshTokenExpiry: faker.date.future(),
     };
   }
 }
