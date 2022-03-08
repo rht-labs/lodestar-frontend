@@ -59,7 +59,7 @@ export interface EnabledUsers {
 }
 export interface EngagementUseCase {
   description?: string;
-  id: string;
+  uuid: string;
   engagement_uuid: string;
   project_name?: string;
   customer_name?: string;
