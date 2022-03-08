@@ -2,11 +2,11 @@ import React from 'react';
 import { EngagementUseCase } from '../../schemas/engagement';
 import {
   FormGroup,
-  TextInput,
   Button,
   ButtonVariant,
   Flex,
   FlexItem,
+  TextArea,
 } from '@patternfly/react-core';
 import { TrashAltIcon } from '@patternfly/react-icons';
 import { uuid } from 'uuidv4';
@@ -70,7 +70,7 @@ function UseCaseField({ useCase, ...props }: UseCaseFieldProps) {
     <div style={{ margin: '0.5em 0' }}>
       <Flex direction={{ default: 'row' }}>
         <FlexItem flex={{ default: 'flex_1' }}>
-          <TextInput
+          <TextArea autoResize
             aria-label='Use Case'
             onChange={e => props.onChange({ ...useCase, description: e })}
             value={useCase.description ?? ''}
