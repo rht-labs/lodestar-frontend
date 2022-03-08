@@ -275,14 +275,14 @@ export abstract class Engagement {
       use_cases: staticData
         ? [
             {
-              id: '1',
+              uuid: '1',
               description: 'an engagement use case',
               engagement_uuid: '475hf89-578978972897-8979879',
             },
           ]
         : new Array(3).fill(null).map(() => ({
             description: faker.lorem.sentence(),
-            id: faker.random.uuid().toString(),
+            uuid: faker.random.uuid().toString(),
             engagement_uuid: '475hf89-578978972897-8979879',
           })),
       ...getStatusDeterminers(),
