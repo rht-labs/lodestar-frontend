@@ -2,11 +2,11 @@ import React from 'react';
 import { EngagementUseCase } from '../../schemas/engagement';
 import {
   FormGroup,
-  TextInput,
   Button,
   ButtonVariant,
   Flex,
   FlexItem,
+  TextArea,
 } from '@patternfly/react-core';
 import { TrashAltIcon } from '@patternfly/react-icons';
 import { uuid } from 'uuidv4';
@@ -19,7 +19,7 @@ export function EngagementUseCaseField({
   setUseCases: (useCases: EngagementUseCase[]) => void;
 }) {
   const addUseCase = () => {
-    setUseCases([...useCases, { id: uuid() }]);
+    setUseCases([...useCases, { uuid: uuid(), engagement_uuid: null }]);
   };
 
   const onDelete = (useCase: EngagementUseCase) => {
@@ -35,7 +35,7 @@ export function EngagementUseCaseField({
 
   const onChange = (useCase: EngagementUseCase) => {
     const index = useCases.findIndex(
-      currentCase => currentCase.id === useCase.id
+      currentCase => currentCase.uuid === useCase.uuid
     );
     const mutableCases = [...useCases];
     mutableCases.splice(index, 1, useCase);
@@ -46,7 +46,7 @@ export function EngagementUseCaseField({
     <FormGroup fieldId="Engagement Use Cases" label="Engagement Use Cases">
       {useCases?.map(useCase => (
         <UseCaseField
-          key={useCase.id ?? useCase.description}
+          key={useCase.uuid ?? useCase.description}
           useCase={useCase}
           onDelete={onDelete}
           onChange={onChange}
@@ -70,7 +70,8 @@ function UseCaseField({ useCase, ...props }: UseCaseFieldProps) {
     <div style={{ margin: '0.5em 0' }}>
       <Flex direction={{ default: 'row' }}>
         <FlexItem flex={{ default: 'flex_1' }}>
-          <TextInput
+          <TextArea autoResize
+            aria-label='Use Case'
             onChange={e => props.onChange({ ...useCase, description: e })}
             value={useCase.description ?? ''}
           />
