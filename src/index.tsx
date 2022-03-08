@@ -35,6 +35,8 @@ const AppWithConfig = () => {
             clientId: appConfig.clientId,
           });
           keycloak.init({
+            token: localStorage.getItem("e2e_access_token"),
+            refreshToken: localStorage.getItem("e2e_refresh_token"),
             onLoad: 'check-sso',
             silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
             enableLogging: true,
