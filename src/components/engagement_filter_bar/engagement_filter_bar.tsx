@@ -17,10 +17,12 @@ import {
   AnalyticsCategory,
 } from '../../context/analytics_context/analytics_context';
 import { EngagementStatus } from '../../schemas/engagement';
+import { EngagementTypeSelect } from './components/type_select';
 
 export interface EngagementFilterBarProps {
   onChange: (filter: EngagementFilter) => void;
   availableRegions: { label: string; value: string }[];
+  availableTypes: { label: string; value: string }[];
   filter: EngagementFilter;
 }
 
@@ -28,7 +30,8 @@ export function EngagementFilterBar({
   onChange: _propsOnChange,
   filter,
   availableRegions,
-}: EngagementFilterBarProps) {
+  availableTypes,
+}: EngagementFilterBarProps) {  
   const { searchTerm = '' } = filter ?? {};
   const { logEvent } = useAnalytics();
   const onChange = (filter: EngagementFilter) => {
@@ -79,6 +82,38 @@ export function EngagementFilterBar({
               });
             }}
             selectedStatuses={filter?.allowedStatuses ?? []}
+          />
+        </FlexItem>
+        <FlexItem>
+          <EngagementTypeSelect
+            types={availableTypes ?? []}
+            onChange={selection => {
+              if (selection === 'any') {
+                return onChange({
+                  ...filter,
+                  engagementTypes: undefined,
+                });
+              } else if (
+                !filter.engagementTypes ||
+                filter.engagementTypes.indexOf(selection) === -1
+              ) {
+                onChange({
+                  ...filter,
+                  engagementTypes: [
+                    ...(filter.engagementTypes ?? []),
+                    selection,
+                  ],
+                });
+              } else {
+                onChange({
+                  ...filter,
+                  engagementTypes: filter.engagementTypes.filter(
+                    s => s !== selection
+                  ),
+                });
+              }
+            }}
+            selectedOptions={filter?.engagementTypes ?? []}
           />
         </FlexItem>
         <FlexItem>

@@ -67,9 +67,10 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
         parsedFilter = {};
       }
     }
-    const initialFilter = {
-      ...(parsedFilter ?? {}),
+    const initialFilter = parsedFilter === undefined ? {
       ...(props.filterDefinition ?? {}),
+    } : {
+      ...(parsedFilter ?? {}),
     };
     setFilterDefinition(initialFilter);
   }, [base64ParamFilter, props.filterDefinition, setFilterDefinition]);
@@ -125,6 +126,9 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
             availableRegions={
               engagementFormConfig?.basic_information?.engagement_regions
                 ?.options ?? []
+            }
+            availableTypes={
+              engagementFormConfig?.basic_information.engagement_types?.options ?? []
             }
             filter={filterDefinition}
             onChange={handleChange}
