@@ -5,6 +5,7 @@ export interface EngagementFilter {
   allowedStatuses?: EngagementStatus[];
   sort?: SortOption<EngagementSortFields>;
   engagementRegions?: string[];
+  engagementTypes?: string[];
 }
 
 export enum EngagementSortFields {

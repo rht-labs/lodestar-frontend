@@ -7,27 +7,27 @@ import {
   SelectOptionObject,
   SelectVariant,
 } from '@patternfly/react-core';
-import { GlobeIcon } from '@patternfly/react-icons';
+import { FilterIcon } from '@patternfly/react-icons';
 
-export interface EngagementRegionSelectProps {
+export interface EngagementTypeSelectProps {
   selectedOptions: string[];
-  regions: Array<{ label: string; value: string }>;
+  types: Array<{ label: string; value: string }>;
   onChange: (option: string) => void;
 }
-export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
+export function EngagementTypeSelect(props: EngagementTypeSelectProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <InputGroup>
-      <Button variant="control" aria-label="engagement regions">
-        <GlobeIcon />
+      <Button variant="control" aria-label="engagement types">
+      <FilterIcon />
       </Button>
       <Select
-        data-testid="region"
-        placeholderText="Region"
+        data-testid="type"
+        placeholderText="Type"
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
         variant={SelectVariant.checkbox}
-        toggleId="region_dropdown"
+        toggleId="type_dropdown"
         selections={props?.selectedOptions}
         onSelect={(_, selection: string | SelectOptionObject) => {
           setIsOpen(!isOpen);
@@ -38,14 +38,14 @@ export function EngagementRegionSelect(props: EngagementRegionSelectProps) {
           <SelectOption key="any" value="any">
             Any
           </SelectOption>,
-          ...props.regions.map(region => {
+          ...props.types.map(type => {
             return (
               <SelectOption
-                key={region.value}
-                data-testid={`engagement_region`}
-                value={region.value}
+                key={type.value}
+                data-testid={`engagement_type`}
+                value={type.value}
               >
-                {region.label}
+                {type.label}
               </SelectOption>
             );
           }),

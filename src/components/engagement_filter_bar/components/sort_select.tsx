@@ -71,7 +71,7 @@ export function SortSelect({ filter, onChange }: EngagementFilterProps) {
           <SortAmountDownIcon />
         </Button>
         <Select
-          placeholderText="Sort by"
+          placeholderText="Sort"
           isOpen={isSortSelectOpen}
           onToggle={() => setIsSortSelectOpen(!isSortSelectOpen)}
           toggleId={'sort_dropdown'}

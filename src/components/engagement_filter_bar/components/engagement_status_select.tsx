@@ -37,7 +37,7 @@ export function EngagementStatusSelect({
           <FilterIcon />
         </Button>
         <Select
-          placeholderText="Engagement Status"
+          placeholderText="Status"
           toggleId={'filter_dropdown'}
           isOpen={isStatusSelectOpen}
           onToggle={() => setIsStatusSelectOpen(!isStatusSelectOpen)}

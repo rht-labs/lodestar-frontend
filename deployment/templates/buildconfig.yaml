@@ -20,7 +20,7 @@ spec:
       uri: {{ .Values.git.uri }}
     type: Git
     dockerfile: |
-      FROM node:12.2.0-alpine AS builder
+      FROM quay.io/jitesoft/node:12 AS builder
       WORKDIR /app
       COPY . /app
       RUN ./build.sh

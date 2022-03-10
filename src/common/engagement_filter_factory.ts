@@ -48,6 +48,13 @@ export const engagementFilterFactory = (
         filter.engagementRegions.includes(engagement.engagement_region)
       );
     }
+
+    if(filter.engagementTypes && filter.engagementTypes.length > 0) {
+      filterTestResults.push(
+        filter.engagementTypes.includes(engagement.engagement_type)
+      );
+    }
+
     /**
      * If filterTestResult has a length of 0, this means no tests were performed.
      * The default behavior of the filter should be to show engagements.
