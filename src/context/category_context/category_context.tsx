@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { EngagementCategory } from '../../schemas/engagement_category';
-import { CategoryService } from '../../services/category_service/category_service';
+import { CategoryFilter, CategoryService } from '../../services/category_service/category_service';
 
 export interface ICategoryContext {
   fetchCategories: () => void;
@@ -8,7 +8,7 @@ export interface ICategoryContext {
 }
 
 export const CategoryContext = createContext<ICategoryContext>({
-  fetchCategories: () => {},
+  fetchCategories: (filter?: CategoryFilter) => {},
   categories: [],
 });
 
@@ -22,8 +22,8 @@ export const CategoryProvider = ({
   categoryService,
 }: CategoryProviderProps) => {
   const [categories, setCategories] = useState<EngagementCategory[]>([]);
-  const fetchCategories = async () => {
-    const fetched = await categoryService.fetchCategories();
+  const fetchCategories = async (filter?: CategoryFilter) => {
+    const fetched = await categoryService.fetchCategories(filter);
     setCategories(fetched);
   };
   return (

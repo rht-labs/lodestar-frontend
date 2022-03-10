@@ -24,7 +24,7 @@ export function EngagementEditableCategories() {
   useEffect(() => {
     if (!hasFetched && categories?.length === 0) {
       setHasFetched(true);
-      fetchCategories();
+      fetchCategories({ page: 1, perPage: 1000});
     }
   }, [categories, hasFetched, setHasFetched, fetchCategories]);
 
