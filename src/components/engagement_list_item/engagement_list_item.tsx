@@ -68,11 +68,10 @@ export function EngagementListItem(props: DataCardProps) {
             </GridItem>
             <GridItem sm={12} md={4} lg={2}>
               <Button
-                onClick={() => {
-                  history.push(url);
-                }}
+                href = { url }
                 variant="secondary"
-                data-cy={'view_engagement_button'}
+                data-cy="view_engagement_button"
+                component="a"
               >
                 View Engagement
               </Button>
