@@ -63,6 +63,7 @@ export function CategoryTypeahead({
             aria-labelledby={'titleId'}
             placeholderText="Add new tag"
             isCreatable={true}
+            maxHeight={300}
           >
             {options}
           </Select>
