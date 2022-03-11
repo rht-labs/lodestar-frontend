@@ -46,6 +46,22 @@ Cypress.Commands.add(
     }).then(resp => {
       expect(resp.status).to.eq(200);
       const jwt = resp.body;
+      const currentTime = new Date();
+      const accessTokenExpiry = new Date(
+        currentTime.getTime() + jwt.expires_in * 100000
+      ).toISOString();
+      const refreshTokenExpiry = new Date(
+        currentTime.getTime() + jwt.refresh_expires_in * 100000
+      ).toISOString();
+
+      var elToken = {
+        accessToken: jwt.access_token,
+        accessTokenExpiry: accessTokenExpiry,
+        refreshToken: jwt.refresh_token,
+        refreshTokenExpiry: refreshTokenExpiry,
+      };
+
+      window.localStorage.setItem('token', JSON.stringify(elToken));
 
       window.localStorage.setItem('e2e_access_token', jwt.access_token);
       window.localStorage.setItem('e2e_refresh_token', jwt.refresh_token);

@@ -3,10 +3,11 @@ import {
   CategoryFilter,
   CategorySortOrder,
 } from '../../services/category_service/category_service';
-import { handleAxiosResponseErrors } from './http_error_handlers';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { getApiV1HttpClient } from './client';
 import { CategoryWithCount } from '../../schemas/engagement_category';
+import { ConsoleLogger } from '../../utilities/logger/loggers';
+import { LogVerbosity } from '../../utilities/logger/logger';
 
 export class Apiv1CategoryService implements CategoryService {
   private get axios() {
@@ -73,11 +74,7 @@ export class Apiv1CategoryService implements CategoryService {
       );
       return serializedCategories;
     } catch (e) {
-      if (e.isAxiosError) {
-        handleAxiosResponseErrors(e);
-      } else {
-        throw e;
-      }
+      ConsoleLogger(LogVerbosity.error).error("fetch category failure", e);
     }
   }
 }
