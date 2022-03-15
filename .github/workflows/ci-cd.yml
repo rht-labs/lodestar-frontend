@@ -27,8 +27,15 @@ jobs:
   # TODO: This fails because we don't have linting... Consider (please) adding strict linting.
   code-quality:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Run tests for coverage report
         run: npm install && npm run test:ci
       - name: Replace lcov paths with sonar docker mount folder
@@ -50,7 +57,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
