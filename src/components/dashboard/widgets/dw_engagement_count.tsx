@@ -134,7 +134,7 @@ export function DwEngagementCount({
                 <GridItem md={6} lg={3}>
                   <CountComponent
                     onClickCount={onClickCount}
-                    count={summaryCount?.past + summaryCount?.terminating}
+                    count={(summaryCount?.past || 0) + (summaryCount?.terminating || 0)}
                     icon={AsleepIcon}
                     status={'past'}
                     subtitle={'All completed engagements.'}

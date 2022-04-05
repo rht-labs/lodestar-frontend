@@ -227,37 +227,18 @@ export function Dashboard() {
                   summaryCount={summaryCount}
                   isLoading={isLoadingSummaryCount}
                   onClickCount={(status: string) => {
-                    history.push(
-                      `/app/engagements/${status}?filter=${createBase64ParseableFilter(
-                        {
-                          engagementRegions:
-                            selectedRegions.length > 0
-                              ? selectedRegions
-                              : undefined,
-                        }
-                      )}`
-                    );
+                    const filter = {engagementRegions: [], allowedStatuses:[]}
+                    if(selectedRegions.length > 0) {
+                      filter.engagementRegions = selectedRegions
+                    }
+                    if(status !== 'all') {
+                      filter.allowedStatuses = [status];
+                    }
+                    
+                    history.push(`/app/engagements/${status}?filter=${createBase64ParseableFilter(filter)}`);
                   }}
                 />
               </GridItem>
-              {/* <GridItem sm={12} xl={12} xl2={6}>
-                {withArtifacts(
-                  DwLastWeeklyReport2,
-                  () =>
-                    artifactService.getArtifacts({
-                      page: 1,
-                      perPage: 5,
-                      type: 'weeklyReport',
-                      startDate: dateFilter?.startDate,
-                      endDate: dateFilter?.endDate,
-                      regions: selectedRegions,
-                      sortOrder: 'DESC',
-                      sortFields: 'updated',
-                    }),
-
-                  engagementService.getEngagementById
-                )}
-              </GridItem> */}
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
                 <DashboardPeopleEnabledCard
                   usersEnabled={enabledUsers}
