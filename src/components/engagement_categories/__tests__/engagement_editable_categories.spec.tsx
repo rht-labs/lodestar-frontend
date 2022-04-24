@@ -56,7 +56,7 @@ describe('Engagement Editable Categories', () => {
     fireEvent.click(await view.findByText('Create "a category"'));
 
     expect(onUpdateField).toHaveBeenCalled();
-    screen.debug();
+    //screen.debug();
 
     fireEvent.click(await view.findByTestId('save_categories'));
 

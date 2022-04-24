@@ -143,10 +143,12 @@ export class EngagementJsonSerializer
       ),
       creation_details: data['creation_details'],
       last_update_by_name: data['last_update_by_name'],
+      categories: data['categories'],
       engagement_categories: data['engagement_categories'],
       timezone: data['timezone'],
       artifact_count: data['artifact_count'],
       participant_count: data['participant_count'],
+      writeable: data['writeable']
     };
   }
 

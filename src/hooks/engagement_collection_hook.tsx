@@ -18,14 +18,17 @@ export interface EngagementCollectionHookParameters {
 export interface EngagementCollectionFilter {
   engagementRegions?: string[];
   engagementStatuses?: EngagementStatus[];
+  types?: string[];
   startDate?: Date;
   endDate?: Date;
   include?: Array<keyof Engagement>;
   exclude?: Array<keyof Engagement>;
   perPage?: number;
   pageNumber?: number;
-  sortField?: keyof Engagement | 'last_update';
+  sortField?: string | 'last_update';
   sortOrder?: SortOrder;
+  category?: string;
+  search?: string;
 }
 export const useEngagementCollection = ({
   feedbackContext,
@@ -43,12 +46,15 @@ export const useEngagementCollection = ({
           startDate: filter?.startDate,
           engagementStatuses: filter?.engagementStatuses,
           regions: filter?.engagementRegions,
+          types: filter?.types,
           include: filter?.include,
           exclude: filter?.exclude,
           perPage: filter?.perPage,
           pageNumber: filter?.pageNumber,
           sortField: filter?.sortField,
           sortOrder: filter?.sortOrder,
+          category: filter?.category,
+          search: filter?.search,
         });
         setEngagements(engagements);
       } catch (e) {

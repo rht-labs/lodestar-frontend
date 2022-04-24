@@ -37,8 +37,10 @@ function EngagementListEmptyState(props) {
 
 export function EngagementList({
   engagements,
+  onCategorySelect,
 }: {
   engagements: Partial<Engagement>[];
+  onCategorySelect:(searchTerm:string, category:string) => void
 }) {
   if (!engagements || !engagements.length) {
     return <EngagementListEmptyState />;
@@ -49,6 +51,7 @@ export function EngagementList({
         <EngagementListItem
           key={`${e.project_name}${e.customer_name}`}
           engagement={e}
+          onCategorySelect={onCategorySelect}
         />
       ))}
     </>

@@ -3,7 +3,7 @@ import faker from 'faker';
 
 export const mockEngagementUseCase = (): EngagementUseCase => {
   return {
-    id: faker.random.uuid(),
+    uuid: faker.random.uuid(),
     engagement_uuid: "1",
     description: faker.lorem.sentences(2),
   };

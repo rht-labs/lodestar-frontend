@@ -91,7 +91,7 @@ export function EngagementAtAGlance({
                   <UserIcon />
                 </Tooltip>
               </FlexItem>
-              <FlexItem>{engagement?.engagement_users?.length || 0}</FlexItem>
+              <FlexItem>{engagement?.participant_count || 0}</FlexItem>
             </Flex>
 
             <Flex>
@@ -121,7 +121,7 @@ export function EngagementAtAGlance({
                   <ClipboardCheckIcon />
                 </Tooltip>
               </FlexItem>
-              <FlexItem>{engagement?.artifacts?.length || 0}</FlexItem>
+              <FlexItem>{engagement?.artifact_count || 0}</FlexItem>
             </Flex>
             <Feature name={'engagementCardIcons'}>
               <>

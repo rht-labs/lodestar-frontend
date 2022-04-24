@@ -9,10 +9,10 @@ export interface EngagementFilter {
 }
 
 export enum EngagementSortFields {
-  startDate,
-  endDate,
-  projectName,
-  customerName,
+  startDate = "Start Date",
+  endDate = "End Date",
+  projectName = "Engagement",
+  customerName = "Customer",
 }
 
 export interface SortOption<T = any> {

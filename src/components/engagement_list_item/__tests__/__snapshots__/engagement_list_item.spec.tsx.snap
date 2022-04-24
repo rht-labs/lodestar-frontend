@@ -56,11 +56,12 @@ Object {
                 class="pf-c-label pf-m-blue"
                 style="margin-top: 1rem; margin-right: 0.5rem;"
               >
-                <span
+                <a
                   class="pf-c-label__content"
+                  href="#"
                 >
                   DO500
-                </span>
+                </a>
               </span>
             </div>
             <div
@@ -290,11 +291,12 @@ Object {
               class="pf-c-label pf-m-blue"
               style="margin-top: 1rem; margin-right: 0.5rem;"
             >
-              <span
+              <a
                 class="pf-c-label__content"
+                href="#"
               >
                 DO500
-              </span>
+              </a>
             </span>
           </div>
           <div
