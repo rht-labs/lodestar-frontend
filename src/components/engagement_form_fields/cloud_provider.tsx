@@ -24,7 +24,7 @@ export function CloudProviderFormField({
     <>
       <FormGroup fieldId="Hosting Platform" label="Hosting Type">
         <FormSelect isRequired isDisabled={true}>
-          <FormSelectOption label={'OpenShift Container Platform'} />
+          <FormSelectOption label={'OpenShift Container Platform'} aria-label="Hosting Platform"/>
         </FormSelect>
       </FormGroup>
       <FormGroup fieldId="cloud-provider" label="Cloud Provider" isRequired>
