@@ -33,7 +33,6 @@ export function AdvancedSearchInput({
 
   const [ isAdvancedSearchOpen, setIsAdvancedSearchOpen ] = useState<boolean>(false);
 
-
   function handleSearch() {
     setIsAdvancedSearchOpen(false);
     //const freeSearch = searchValue.replace(/category='.*?'/, '');
@@ -63,14 +62,13 @@ export function AdvancedSearchInput({
   }, [isAdvancedSearchOpen]);
 
   useEffect(() => {
+    const handleClickOutside = event => {
+      if (isAdvancedSearchOpen && advancedFormRef && advancedFormRef.current && !advancedFormRef.current.contains(event.target)) {
+        setIsAdvancedSearchOpen(false);
+      }
+    };
     window.addEventListener('click', handleClickOutside);
   },[advancedFormRef, isAdvancedSearchOpen]);
-
-  const handleClickOutside = event => {
-    if (isAdvancedSearchOpen && advancedFormRef && advancedFormRef.current && !advancedFormRef.current.contains(event.target)) {
-      setIsAdvancedSearchOpen(false);
-    }
-  };
 
   const advancedForm = (
     <div ref={advancedFormRef} role="dialog" aria-label="Advanced search form">

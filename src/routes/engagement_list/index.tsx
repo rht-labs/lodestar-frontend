@@ -43,6 +43,7 @@ const useEngagementFilter = () => {
   });
 
   const [isRegionExpanded, setRegionExpanded] = useState<boolean>(false);
+  const [regionChips, setRegionChips] = useState<Map<string,string>>(new Map<string,string>())
 
   const [types, setTypes] = useState(() => {
     const search = new URLSearchParams(location.search);
@@ -51,6 +52,7 @@ const useEngagementFilter = () => {
   });
 
   const [isTypeExpanded, setTypeExpanded] = useState<boolean>(false);
+  const [typeChips, setTypeChips] = useState<Map<string,string>>(new Map<string,string>());
 
   const [statii, setStatus] = useState(() => {
     const search = new URLSearchParams(location.search);
@@ -99,11 +101,26 @@ const useEngagementFilter = () => {
   
   const { engagementService } = useServiceProviders();
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
+
   const feedbackContext = useFeedback();
   const {
     engagements: contextEngagements,
     getEngagements,
   } = useEngagementCollection({ feedbackContext, engagementService });
+
+  useEffect(() => {
+    const tchips = new Map(engagementFormConfig?.basic_information.engagement_types?.options.map(t => {
+        return [ t.label, t.value];
+      }),
+    );
+    setTypeChips(tchips);
+
+    const rchips = new Map(engagementFormConfig?.basic_information.engagement_regions?.options.map(region => {
+      return [ region.label, region.value];
+    }),
+  );
+  setRegionChips(rchips);
+  }, [engagementFormConfig]);
 
   useEffect(() => {
     if (!hasFetched) {
@@ -149,7 +166,7 @@ const useEngagementFilter = () => {
       setHasFetched(true);
       getEngagements({ search: justSearch, engagementStatuses: statii, engagementRegions: regions, types: types, sortField: sort, category: category });
     }
-  }, [contextEngagements, getEngagements, hasFetched]);
+  }, [contextEngagements, getEngagements, hasFetched, statii, regions, category, history, search, sort, types, location.pathname]);
   
 
   function handleRegionToggle() {
@@ -157,14 +174,15 @@ const useEngagementFilter = () => {
   }
 
   function handleRegionSelection(selected:string) {
+    const selectedValue = regionChips.has(selected) ? regionChips.get(selected) : selected;
     if(selected == null) {
       setRegions([]);
-    } else if(regions.includes(selected)) {
+    } else if(regions.includes(selectedValue)) {
       setRegions(regions.filter(function(element) {
-        return element !== selected;
+        return element !== selectedValue;
       }));
     } else {
-      setRegions([...regions, selected]);
+      setRegions([...regions, selectedValue]);
     }
     setHasFetched(false);
   }
@@ -174,14 +192,15 @@ const useEngagementFilter = () => {
   }
 
   function handleTypeSelection(selected:string) {
+    const selectedValue = typeChips.has(selected) ? typeChips.get(selected) : selected;
     if(selected == null) {
       setTypes([]);
-    } else if(types.includes(selected)) {
+    } else if(types.includes(selectedValue)) {
       setTypes(types.filter(function(element) {
-        return element !== selected;
+        return element !== selectedValue;
       }));
     } else {
-      setTypes([...types, selected]);
+      setTypes([...types, selectedValue]);
     }
     setHasFetched(false);
   }
@@ -190,15 +209,16 @@ const useEngagementFilter = () => {
     setStatusExpanded(!isStatusExpanded);
   }
 
-  function handleStatusSelection(selected:EngagementStatus) {
-    if(selected == null) {
+  function handleStatusSelection(selected:string) {
+    const selectedEnum = EngagementStatus[selected?.toLowerCase()];
+    if(selected == null) { //clear all
       setStatus([]);
-    } else if(statii.includes(selected)) {
+    } else if(statii.includes(selectedEnum)) { //clear one
       setStatus(statii.filter(function(element) {
-        return element !== selected;
+        return element !== selectedEnum;
       }));
-    } else {
-      setStatus([...statii, selected]);
+    } else { //add
+      setStatus([...statii, selectedEnum]);
     }
     setHasFetched(false);
   }
@@ -235,14 +255,11 @@ const useEngagementFilter = () => {
        : setSearch(search.replace(regex, `category='${cat}'`))
   }
 
-  function handleSearchGo(searchTerm: string, category: string) {
-
-    setCategory(category);
+  function handleSearchGo(searchTerm: string, leCategory: string) {
+    setCategory(leCategory);
     setSearch(searchTerm.trim());
 
-    if(searchTerm?.trim().length !== 0 || category?.trim().length !== 0) {
-      setHasFetched(false);
-    }
+    setHasFetched(false);
   }
 
   function handleClearAll() {
@@ -349,8 +366,8 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
     );
   });
 
-  const typeChips = availableTypes.filter(type => types.includes(type.value))
-    .flatMap(type => [type.label]);
+  const typeChipsSelected = availableTypes.filter(type => types.includes(type.value))
+    .flatMap(type => type.label);
 
   const statusOptions = Object.keys(EngagementStatus).map(statusKey => {
     return (
@@ -364,7 +381,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
     );
   });
 
-  const statusChips = Object.keys(EngagementStatus).filter(statusKey => statii.includes(EngagementStatus[statusKey]))
+  const statusChipsSelected = Object.keys(EngagementStatus).filter(statusKey => statii.includes(EngagementStatus[statusKey]))
     .flatMap(statusKey => EngagementStatus[statusKey].charAt(0).toUpperCase() + EngagementStatus[statusKey].slice(1));
 
   const sortSelectOptions = Object.keys(EngagementSortFields)
@@ -427,7 +444,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
                 onCategoryChange={(category) => handleCategoryChange(category)}/>
             </ToolbarItem>
             <ToolbarItem>
-            <ToolbarFilter categoryName="status" chips={statusChips}
+            <ToolbarFilter categoryName="status" chips={statusChipsSelected}
                 deleteChip={(_event, type) => handleStatusSelection(type as EngagementStatus)}
                 deleteChipGroup={() => handleStatusSelection(null)}>
                 <Select 
@@ -444,7 +461,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
               </ToolbarFilter>
             </ToolbarItem>
             <ToolbarItem>
-              <ToolbarFilter categoryName="type" chips={typeChips}
+              <ToolbarFilter categoryName="type" chips={typeChipsSelected}
                 deleteChip={(_event, type) => handleTypeSelection(type as string)}
                 deleteChipGroup={() => handleTypeSelection(null)}>
                 <Select 
