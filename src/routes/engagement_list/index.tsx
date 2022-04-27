@@ -142,6 +142,8 @@ const useEngagementFilter = () => {
     setSearch('');
     setHasFetched(false);
 
+    // need location.search but don't want to know about changes to it
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[location.pathname]);
 
   useEffect(() => {
