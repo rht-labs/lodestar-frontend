@@ -123,6 +123,28 @@ const useEngagementFilter = () => {
   }, [engagementFormConfig]);
 
   useEffect(() => {
+    const pathStatii: EngagementStatus[] = [];
+
+    const pathState = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+    if("past" === pathState) {
+      pathStatii.push(EngagementStatus[pathState]);
+      pathStatii.push(EngagementStatus["terminating"]);
+    } else if("all" !== pathState) {
+      pathStatii.push(EngagementStatus[pathState]);
+    }
+    setStatus(pathStatii);
+
+    const search = new URLSearchParams(location.search);
+    const pathRegions = search.get('regions') ? search.get('regions').split(',') : [];
+    setRegions(pathRegions);
+    setTypes([]);
+    setCategory('');
+    setSearch('');
+    setHasFetched(false);
+
+  },[location.pathname]);
+
+  useEffect(() => {
     if (!hasFetched) {
       let lead = '?';
       let params = '';
