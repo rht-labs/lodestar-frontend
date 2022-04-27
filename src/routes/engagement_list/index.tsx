@@ -233,6 +233,7 @@ const useEngagementFilter = () => {
   }
 
   function handleSearchChange(searchTerm: string) {
+    console.log('sarch', `${searchTerm}..`);
     const regex = /category='.*?'/; //Does a valid category match anywhere in the search bar
     const match = searchTerm.match(regex);
 
@@ -249,10 +250,12 @@ const useEngagementFilter = () => {
 
     const regex = /category='(.*?)'/; 
     const findMatch = search.match(regex);
+    
+    const catSearch = cat ? `category='${cat}'` : ''
 
     findMatch == null
-       ? setSearch(`${search} category='${cat}'`) 
-       : setSearch(search.replace(regex, `category='${cat}'`))
+       ? setSearch(`${search} ${catSearch}`)
+       : setSearch(search.replace(regex, catSearch))
   }
 
   function handleSearchGo(searchTerm: string, leCategory: string) {
@@ -455,6 +458,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
                   onSelect={(_event, type) => handleStatusSelection(type as EngagementStatus)}
                   onToggle={handleStatusToggle}
                   toggleIcon={<FilterIcon/>}
+                  toggleId={'status_dropdown'}
                   selections={[...statii]}>
                   {statusOptions}
                 </Select>
@@ -472,6 +476,7 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
                   onSelect={(_event, type) => handleTypeSelection(type as string)}
                   onToggle={handleTypeToggle}
                   toggleIcon={<FilterIcon/>}
+                  toggleId={'type_dropdown'}
                   selections={[...types]}>
                   {typeOptions}
                 </Select>
@@ -489,19 +494,22 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
                   onSelect={(_event, region) => handleRegionSelection(region as string)}
                   onToggle={handleRegionToggle}
                   toggleIcon={<GlobeIcon/>}
+                  toggleId={'region_dropdown'}
                   selections={[...regions]}>
                   {regionOptions}
                 </Select>
               </ToolbarFilter>
             </ToolbarItem>
             <ToolbarItem>
-              <ToolbarFilter categoryName="sort">
-                <Select 
+              <ToolbarFilter categoryName="sort" data-cy="sort-filter">
+                <Select
+                  aria-label="Sort by"
                   placeholderText="Sort"
                   isOpen={isSortExpanded}
                   onSelect={(_event, sort) => handleSortSelection(sort)}
                   onToggle={handleSortToggle}
                   toggleIcon={<SortAmountDownIcon/>}
+                  toggleId={'sort_dropdown'}
                   selections={sort}>
                   {sortSelectOptions}
                 </Select>

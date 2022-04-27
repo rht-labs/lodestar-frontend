@@ -35,7 +35,6 @@ export function AdvancedSearchInput({
 
   function handleSearch() {
     setIsAdvancedSearchOpen(false);
-    //const freeSearch = searchValue.replace(/category='.*?'/, '');
     onSearch(searchValue, categoryValue);
   }
 
@@ -77,16 +76,16 @@ export function AdvancedSearchInput({
           <Form>
             <FormGroup label='Category' fieldId='categorySearch' key='categorySearch'>
               <TextInput aria-label='Category' value={categoryValue} ref={categoryRef} onChange={(e) => onCategoryChange(e)}
-                placeholder='Exact match. 1 Category per search'/>
+                placeholder='Exact match. 1 Category per search'  data-cy='category'/>
             </FormGroup>
             <FormGroup label='Customer / Engagement' fieldId='engagementSearch' key='engagementSearch'>
-              <TextInput aria-label='Engagement' value={searchValue.replace(/category='.*?'/, '').trim()} ref={engagementRef}
+              <TextInput aria-label='Engagement or Customer' value={searchValue.replace(/ category='.*?'/, '')} ref={engagementRef}
                 onChange={(searchTerm) => handleEngagementBoxChange(searchTerm)}
-                placeholder='Partial match. '/>
+                placeholder='Partial match.' data-cy='engagement-customer'/>
             </FormGroup>
             <ActionGroup>
               <Button variant="primary" type="button" onClick={handleSearch}>Search</Button>
-                <Button variant="link" type="reset" onClick={(e) => onSearchChange('')}>Reset</Button>
+              <Button variant="link" type="reset" onClick={(e) => onSearchChange('')} data-cy="reset_button">Reset</Button>
             </ActionGroup>
           </Form>
         </CardBody>
@@ -108,6 +107,7 @@ export function AdvancedSearchInput({
       onSearch={handleSearch}
       ref={searchInputRef}
       id="custom-advanced-search"
+      data-cy='search_input'
     />
   );
 

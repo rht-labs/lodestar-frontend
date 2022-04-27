@@ -72,6 +72,7 @@ Object {
                       >
                         <div
                           class="pf-c-search-input"
+                          data-cy="search_input"
                           id="custom-advanced-search"
                         >
                           <div
@@ -174,9 +175,9 @@ Object {
                             <button
                               aria-expanded="false"
                               aria-label="Options menu"
-                              aria-labelledby=" pf-select-toggle-id-0"
+                              aria-labelledby=" status_dropdown"
                               class="pf-c-select__toggle"
-                              id="pf-select-toggle-id-0"
+                              id="status_dropdown"
                               type="button"
                             >
                               <div
@@ -241,9 +242,9 @@ Object {
                             <button
                               aria-expanded="false"
                               aria-label="Options menu"
-                              aria-labelledby=" pf-select-toggle-id-1"
+                              aria-labelledby=" type_dropdown"
                               class="pf-c-select__toggle"
-                              id="pf-select-toggle-id-1"
+                              id="type_dropdown"
                               type="button"
                             >
                               <div
@@ -308,9 +309,9 @@ Object {
                             <button
                               aria-expanded="false"
                               aria-label="Options menu"
-                              aria-labelledby=" pf-select-toggle-id-2"
+                              aria-labelledby=" region_dropdown"
                               class="pf-c-select__toggle"
-                              id="pf-select-toggle-id-2"
+                              id="region_dropdown"
                               type="button"
                             >
                               <div
@@ -365,6 +366,7 @@ Object {
                       >
                         <div
                           class="pf-c-toolbar__item"
+                          data-cy="sort-filter"
                         >
                           <div
                             class="pf-c-select"
@@ -376,9 +378,9 @@ Object {
                               aria-expanded="false"
                               aria-haspopup="listbox"
                               aria-label="Options menu"
-                              aria-labelledby=" pf-select-toggle-id-3"
+                              aria-labelledby=" sort_dropdown"
                               class="pf-c-select__toggle"
-                              id="pf-select-toggle-id-3"
+                              id="sort_dropdown"
                               type="button"
                             >
                               <div
@@ -576,6 +578,7 @@ Object {
                     >
                       <div
                         class="pf-c-search-input"
+                        data-cy="search_input"
                         id="custom-advanced-search"
                       >
                         <div
@@ -678,9 +681,9 @@ Object {
                           <button
                             aria-expanded="false"
                             aria-label="Options menu"
-                            aria-labelledby=" pf-select-toggle-id-0"
+                            aria-labelledby=" status_dropdown"
                             class="pf-c-select__toggle"
-                            id="pf-select-toggle-id-0"
+                            id="status_dropdown"
                             type="button"
                           >
                             <div
@@ -745,9 +748,9 @@ Object {
                           <button
                             aria-expanded="false"
                             aria-label="Options menu"
-                            aria-labelledby=" pf-select-toggle-id-1"
+                            aria-labelledby=" type_dropdown"
                             class="pf-c-select__toggle"
-                            id="pf-select-toggle-id-1"
+                            id="type_dropdown"
                             type="button"
                           >
                             <div
@@ -812,9 +815,9 @@ Object {
                           <button
                             aria-expanded="false"
                             aria-label="Options menu"
-                            aria-labelledby=" pf-select-toggle-id-2"
+                            aria-labelledby=" region_dropdown"
                             class="pf-c-select__toggle"
-                            id="pf-select-toggle-id-2"
+                            id="region_dropdown"
                             type="button"
                           >
                             <div
@@ -869,6 +872,7 @@ Object {
                     >
                       <div
                         class="pf-c-toolbar__item"
+                        data-cy="sort-filter"
                       >
                         <div
                           class="pf-c-select"
@@ -880,9 +884,9 @@ Object {
                             aria-expanded="false"
                             aria-haspopup="listbox"
                             aria-label="Options menu"
-                            aria-labelledby=" pf-select-toggle-id-3"
+                            aria-labelledby=" sort_dropdown"
                             class="pf-c-select__toggle"
-                            id="pf-select-toggle-id-3"
+                            id="sort_dropdown"
                             type="button"
                           >
                             <div
