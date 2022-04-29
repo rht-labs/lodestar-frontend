@@ -123,6 +123,7 @@ const useEngagementFilter = () => {
   }, [engagementFormConfig]);
 
   useEffect(() => {
+
     const pathStatii: EngagementStatus[] = [];
 
     const pathState = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
@@ -132,12 +133,18 @@ const useEngagementFilter = () => {
     } else if("all" !== pathState) {
       pathStatii.push(EngagementStatus[pathState]);
     }
-    setStatus(pathStatii);
-
     const search = new URLSearchParams(location.search);
+    const paramStatii = search.get('statii') ? search.get('statii').split(',') : [];
+    paramStatii.forEach(ps => {
+      if(!pathStatii.includes(EngagementStatus[ps])) {
+        pathStatii.push(EngagementStatus[ps]);
+      }
+    });
+    setStatus(pathStatii);
     const pathRegions = search.get('regions') ? search.get('regions').split(',') : [];
     setRegions(pathRegions);
-    setTypes([]);
+    const pathTypes = search.get('types') ? search.get('types').split(',') : [];
+    setTypes(pathTypes);
     setCategory('');
     setSearch('');
     setHasFetched(false);
@@ -257,7 +264,6 @@ const useEngagementFilter = () => {
   }
 
   function handleSearchChange(searchTerm: string) {
-    console.log('sarch', `${searchTerm}..`);
     const regex = /category='.*?'/; //Does a valid category match anywhere in the search bar
     const match = searchTerm.match(regex);
 
@@ -454,9 +460,8 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
       </PageSection>
       <PageSection>
         <div style={{ margin: '0 1rem' }}>
-        <Flex justifyContent={{ default: 'justifyContentFlexStart' }}>
-    <Flex
-      style={{ marginTop: '2rem' }}
+    <Flex justifyContent={{ default: 'justifyContentFlexStart' }}
+      style={{ marginTop: '0.5rem' }}
       direction={{ default: 'column', md: 'row' }}
     >
       <FlexItem grow={{ default: 'grow' }}>
@@ -542,7 +547,6 @@ export function EngagementListRoute(props: EngagementListRouteProps) {
           </ToolbarContent>
         </Toolbar>
       </FlexItem>
-    </Flex>
     </Flex>
         </div>
       </PageSection>
