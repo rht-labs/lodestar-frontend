@@ -156,6 +156,7 @@ Object {
                           required=""
                         >
                           <option
+                            aria-label="Hosting Platform"
                             class=""
                             value=""
                           >

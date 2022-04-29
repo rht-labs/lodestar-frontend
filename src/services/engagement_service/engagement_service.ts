@@ -10,12 +10,15 @@ export interface EngagementSearchParameters {
   endDate?: Date;
   engagementStatuses?: EngagementStatus[];
   regions?: string[];
+  types?: string[];
   include?: Array<keyof Engagement>;
   exclude?: Array<keyof Engagement>;
   perPage?: number;
   sortOrder?: SortOrder;
-  sortField?: keyof Engagement | 'last_update';
+  sortField?: string | 'last_update';
   pageNumber?: number;
+  category?: string;
+  search?: string;
 }
 export interface EngagementService {
   fetchEngagements(

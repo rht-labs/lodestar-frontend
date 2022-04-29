@@ -171,6 +171,7 @@ Object {
             required=""
           >
             <option
+              aria-label="Hosting Platform"
               class=""
               value=""
             >
@@ -271,6 +272,7 @@ Object {
           required=""
         >
           <option
+            aria-label="Hosting Platform"
             class=""
             value=""
           >

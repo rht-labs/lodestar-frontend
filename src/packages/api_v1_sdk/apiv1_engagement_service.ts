@@ -1,7 +1,6 @@
 import {
   EngagementSearchParameters,
   EngagementService,
-  SortOrder,
 } from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
@@ -46,16 +45,21 @@ export class Apiv1EngagementService implements EngagementService {
         `start=${parameters.startDate.toISOString().split('T')[0]}`
       );
     }
+    if(parameters.types && parameters.types.length > 0) {
+      parameters.types.forEach(type => queries.push(`types=${type}`))
+    }
     if (parameters.regions && parameters.regions.length > 0) {
-      searchParams.push(`engagement_region=${parameters.regions.join(',')}`);
+      parameters.regions.forEach(region => queries.push(`regions=${region}`))
     }
-    if (
-      parameters.engagementStatuses &&
-      parameters.engagementStatuses.length > 0
-    ) {
-      searchParams.push(`state=${parameters.engagementStatuses.join(',')}`);
+    if (parameters.engagementStatuses && parameters.engagementStatuses.length > 0) {
+        parameters.engagementStatuses.forEach(stat => queries.push(`states=${stat.toLocaleUpperCase()}`))
     }
-
+    if(parameters.search) {
+      queries.push(`q=${parameters.search.trim()}`)
+    }
+    if (parameters.category) {
+      queries.push(`category=${parameters.category}`)
+    }
     if (parameters.include && parameters.include.length > 0) {
       queries.push(`include=${parameters.include.join(',')}`);
     }
@@ -68,10 +72,7 @@ export class Apiv1EngagementService implements EngagementService {
     if (parameters.perPage) {
       queries.push(`perPage=${parameters.perPage}`);
     }
-    if (parameters.sortOrder && parameters.sortField) {
-      queries.push(
-        `sortOrder=${parameters.sortOrder === SortOrder.DESC ? 'DESC' : 'ASC'}`
-      );
+    if (parameters.sortField) {
       queries.push(`sortFields=${parameters.sortField}`);
     }
     if (searchParams.length > 0) {

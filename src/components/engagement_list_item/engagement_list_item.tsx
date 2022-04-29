@@ -14,6 +14,7 @@ import { getEngagementStatus, Engagement } from '../../schemas/engagement';
 
 export interface DataCardProps {
   engagement: Partial<Engagement>;
+  onCategorySelect:(value:string, category:string) => void;
 }
 
 export function EngagementListItem(props: DataCardProps) {
@@ -46,14 +47,16 @@ export function EngagementListItem(props: DataCardProps) {
               <Title style={{ fontWeight: 'normal' }} headingLevel="h4">
                 {engagement.customer_name}
               </Title>
-              {engagement.engagement_categories?.length > 0 ? (
-                engagement?.engagement_categories.map(currentChip => (
+              {engagement.categories?.length > 0 ? (
+                engagement?.categories.map(currentChip => (
                   <Label
-                    key={currentChip.name}
-                    style={{ marginTop: '1rem', marginRight: '0.5rem' }}
+                    key={currentChip}
+                    style={{ marginTop: '1rem', marginRight: '0.5rem'}}
                     color="blue"
+                    href="#"
+                    onClick={() => props.onCategorySelect(`category='${currentChip}'`, currentChip)}
                   >
-                    {currentChip.name}
+                    {currentChip}
                   </Label>
                 ))
               ) : (

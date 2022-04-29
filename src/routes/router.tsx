@@ -11,10 +11,9 @@ import { Feature } from '../components/feature/feature';
 import { LandingPage } from './landing_page/landing_page';
 import { MainTemplate } from '../layout/main_template';
 import { CreateNewEngagement } from './create_new_engagement/create_new_engagement';
-import { EngagementListRoute } from './engagement_list/engagement_list_route';
+import { EngagementListRoute } from './engagement_list/';
 import { ModalVisibilityProvider } from '../context/edit_modal_visibility_context/edit_modal_visibility_context';
 import { useNotification } from '../context/notification_context/notification_hook';
-import { EngagementStatus } from '../schemas/engagement';
 import { Feedback } from '../components/omp_feedback/omp_feedback';
 import { ErrorBoundary } from '../components/error_boundary/error_boundary';
 import { Token } from '../packages/api_v1_sdk/token';
@@ -40,6 +39,7 @@ function WhatsMyToken() {
     </PageSection>
   );
 }
+
 
 export function LodestarRouter() {
   const { fetchNotifications } = useNotification();
@@ -91,41 +91,16 @@ export function LodestarRouter() {
                               <EngagementListRoute title="Engagements" />
                             </PrivateRoute>
                             <PrivateRoute path="/app/engagements/upcoming">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [EngagementStatus.upcoming],
-                                }}
-                                title="Engagements"
-                              />
+                              <EngagementListRoute title="Engagements" />
                             </PrivateRoute>
                             <PrivateRoute path="/app/engagements/active">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [EngagementStatus.active],
-                                }}
-                                title="Engagements"
-                              />
+                              <EngagementListRoute title="Engagements" />
                             </PrivateRoute>
                             <PrivateRoute path="/app/engagements/terminating">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [
-                                    EngagementStatus.terminating,
-                                  ],
-                                }}
-                                title="Engagements"
-                              />
+                              <EngagementListRoute title="Engagements"/>
                             </PrivateRoute>
                             <PrivateRoute path="/app/engagements/past">
-                              <EngagementListRoute
-                                filterDefinition={{
-                                  allowedStatuses: [
-                                    EngagementStatus.past,
-                                    EngagementStatus.terminating,
-                                  ],
-                                }}
-                                title="Engagements"
-                              />
+                              <EngagementListRoute title="Engagements"/>
                             </PrivateRoute>
                             <PrivateRoute path="/app/engagements/new">
                               <EngagementRoute>

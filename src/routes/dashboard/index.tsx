@@ -23,22 +23,17 @@ import { DwLastDemo } from '../../components/dashboard/widgets/dw_last_demo';
 import { DwLastUpdated } from '../../components/dashboard/widgets/dw_last_updated_engagements';
 import { DwLastUseCases } from '../../components/dashboard/widgets/dw_last_use_cases';
 import { DwLastWeeklyReport } from '../../components/dashboard/widgets/dw_last_weekly_report';
-//import { DwLastWeeklyReport2 } from '../../components/dashboard/widgets/dw_last_weekly_report2';
-//import { DwTopPractices } from '../../components/dashboard/widgets/dw_top_practices';
 import { DwTopTags } from '../../components/dashboard/widgets/dw_top_tags';
 import { EnabledUsersFilter } from '../../services/enabled_users_service/enabled_users_service';
 import { EngagementQueryMediator } from '../../components/dashboard/widgets/engagement_query_mediator';
 import { Feature } from '../../components/feature/feature';
-//import { PracticeCountFilter } from '../../services/practice_count_service/practice_count_service';
 import { SortOrder } from '../../services/engagement_service/engagement_service';
 import { SummaryCountFilter } from '../../services/summary_count_service/summary_count_service';
-import { createBase64ParseableFilter } from '../engagement_list/engagement_list_route';
 import { useCategories } from '../../hooks/use_categories';
 import { useEnabledUsers } from '../../hooks/use_enabled_users';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
 import { useHistory } from 'react-router';
-//import { usePracticeCount } from '../../hooks/use_practice_count';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { useSummaryCount } from '../../hooks/use_summary_count';
 import { useVersion } from '../../context/version_context/version_context';
@@ -71,7 +66,6 @@ export function Dashboard() {
     artifactService,
     useCaseService,
     enabledUsersService,
- //   practiceCountService,
     summaryCountService,
   } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
@@ -89,17 +83,6 @@ export function Dashboard() {
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
   );
-
-  // const practiceFetcher = useCallback(() => {
-  //   const filter: PracticeCountFilter = {
-  //     regions: selectedRegions,
-  //   };
-  //   return practiceCountService.getPracticeCount(filter);
-  // }, [practiceCountService, selectedRegions]);
-
-  // const { practiceCount, isLoading: isLoadingPractices } = usePracticeCount(
-  //   practiceFetcher
-  // );
 
   const categoryFetcher = useCallback(() => {
     const filter: CategoryFilter = {
@@ -227,15 +210,11 @@ export function Dashboard() {
                   summaryCount={summaryCount}
                   isLoading={isLoadingSummaryCount}
                   onClickCount={(status: string) => {
-                    const filter = {engagementRegions: [], allowedStatuses:[]}
+                    let filter = '';
                     if(selectedRegions.length > 0) {
-                      filter.engagementRegions = selectedRegions
+                      filter = "?regions=" + selectedRegions.join(',');
                     }
-                    if(status !== 'all') {
-                      filter.allowedStatuses = [status];
-                    }
-                    
-                    history.push(`/app/engagements/${status}?filter=${createBase64ParseableFilter(filter)}`);
+                    history.push(`/app/engagements/${status}${filter}`);
                   }}
                 />
               </GridItem>
@@ -245,12 +224,6 @@ export function Dashboard() {
                   isLoading={isLoadingEnabledUsers}
                 />
               </GridItem>
-              {/* <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
-                <DwTopPractices
-                  practices={practiceCount}
-                  isLoading={isLoadingPractices}
-                />
-              </GridItem> */}
               <GridItem colSpan={1} sm={12} md={6} xl={6} xl2={6}>
                 <DwTopTags
                   categories={categories}

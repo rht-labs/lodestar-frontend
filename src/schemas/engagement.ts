@@ -79,6 +79,7 @@ export interface Artifact {
 
 export interface EngagementOverview {
   additional_details: string;
+  categories: string[];
   use_cases: EngagementUseCase[];
   location: string;
   project_id: number;
@@ -210,6 +211,10 @@ export abstract class Engagement {
         ? 'Additional information here'
         : faker.lorem.paragraphs(2),
       artifacts: [mockEngagementArtifact(staticData)],
+      artifact_count: 1,
+      categories: staticData
+        ? ["DO500"]
+        : [faker.lorem.word(), faker.lorem.word(), faker.lorem.word()],
       commits: [GitCommit.fromFake(staticData)],
       customer_contact_email: staticData
         ? 'bob@doe.com'
@@ -222,6 +227,7 @@ export abstract class Engagement {
         ? "It's rocket science"
         : faker.lorem.paragraphs(5),
       engagement_users: [EngagementUser.fromFake(staticData)],
+      participant_count: 1,
       engagement_lead_email: staticData
         ? 'alice@doe.com'
         : faker.internet.email(),
@@ -289,8 +295,6 @@ export abstract class Engagement {
       uuid: staticData ? 'uuid' : faker.random.uuid(),
       writeable: false,
       timezone: 'Americas/Denver',
-      artifact_count: 0,
-      participant_count: 0,
     };
   }
 }
