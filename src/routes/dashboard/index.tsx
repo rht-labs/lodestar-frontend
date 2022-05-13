@@ -33,7 +33,7 @@ import { useCategories } from '../../hooks/use_categories';
 import { useEnabledUsers } from '../../hooks/use_enabled_users';
 import { useEngagementCollection } from '../../hooks/engagement_collection_hook';
 import { useEngagementFormConfig } from '../../context/engagement_config_context/engagement_config_hook';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { useSummaryCount } from '../../hooks/use_summary_count';
 import { useVersion } from '../../context/version_context/version_context';
@@ -60,6 +60,9 @@ export function Dashboard() {
     }
   }, [versionContext]);
 
+  const history = useHistory();
+  const location = useLocation();
+
   const {
     categoryService,
     engagementService,
@@ -69,16 +72,24 @@ export function Dashboard() {
     summaryCountService,
   } = useServiceProviders();
   const [isRegionSelectOpen, setIsRegionSelectOpen] = useState(false);
-  const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [selectedRegions, setSelectedRegions] = useState(() => {
+    const search = new URLSearchParams(location.search);
+    const initialState = search.get('regions') ? search.get('regions').split(',') : [];
+    return initialState;
+  });
   const { engagementFormConfig } = useEngagementFormConfig(engagementService);
   const { getEngagements } = useEngagementCollection({
     engagementService,
   });
 
-  const history = useHistory();
   useEffect(() => {
     getEngagements({ perPage: 10000, pageNumber: 1, exclude: ['commits'] });
   }, [getEngagements]);
+
+  useEffect(() => {
+    const params = selectedRegions.length === 0 ? '' : `?regions=${selectedRegions.join(',')}`;
+    history.replace(`${location.pathname}${params}`)
+  }, [selectedRegions, history, location.pathname]);
 
   const [dateFilter, setDateFilter] = useState<DateFilter | undefined>(
     undefined
