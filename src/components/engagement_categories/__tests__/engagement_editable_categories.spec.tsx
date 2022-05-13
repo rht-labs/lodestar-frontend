@@ -19,7 +19,7 @@ describe('Engagement Editable Categories', () => {
     const onUpdateField = jest.fn();
     const onSave = jest.fn();
     let view: RenderResult;
-    act(async () => {
+    await act(async () => {
       view = render(
         <TestStateWrapper>
           <FeatureToggles features={['writer', 'reader', 'engagementWriter']}>

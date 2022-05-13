@@ -7,7 +7,7 @@ import { TestStateWrapper } from '../../../common/test_state_wrapper';
 
 describe('Feature component', () => {
   test('should render inactive component if role is not present', async () => {
-    act(async () => {
+    await act(async () => {
       function Wrapper({ children }) {
         return (
           <TestStateWrapper>
@@ -30,7 +30,7 @@ describe('Feature component', () => {
   });
 
   test('should render the active component when the role is present', async () => {
-    act(async () => {
+    await act(async () => {
       function Wrapper({ children }) {
         return (
           <TestStateWrapper>

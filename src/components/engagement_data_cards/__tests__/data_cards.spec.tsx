@@ -12,7 +12,7 @@ import { act } from 'react-dom/test-utils';
 
 describe('Engagement summary card', () => {
   test('matches snapshot', async () => {
-    act(async () => {
+    await act(async () => {
       const rendered = render(
         <MemoryRouter>
           <TestStateWrapper>
@@ -28,7 +28,7 @@ describe('Engagement summary card', () => {
 
 describe('OpenShift Cluster Summary', () => {
   test('matches snapshot', async () => {
-    act(async () => {
+    await act(async () => {
       const rendered = render(
         <TestStateWrapper>
           <HostingEnvironmentCard />
@@ -41,7 +41,7 @@ describe('OpenShift Cluster Summary', () => {
 
 describe('Point of Contact Card', () => {
   test('matches snapshot', async () => {
-    act(async () => {
+    await act(async () => {
       const rendered = render(
         <TestStateWrapper>
           <PointOfContactCard />
@@ -54,7 +54,7 @@ describe('Point of Contact Card', () => {
 
 describe('Edit button', () => {
   test('should not be rendered for reader role', async () => {
-    act(async () => {
+    await act(async () => {
       const Component = () => (
         <MemoryRouter>
           <FeatureToggles features={[APP_FEATURES.reader]}>
