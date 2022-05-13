@@ -84,7 +84,7 @@ describe('timezone select', () => {
     });
   });
   test('can toggle timezone dropdown', async () => {
-    act(async () => {
+    await act(async () => {
       const spy = jest.fn();
       const view = render(<Component spy={spy} />);
       const dropdown = await view.findByTestId('timezone-select');

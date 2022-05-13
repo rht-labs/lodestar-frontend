@@ -7,7 +7,6 @@ import { act, fireEvent, render } from '@testing-library/react';
 import { APP_FEATURES } from '../../../common/app_features';
 import { CreateNewEngagement } from '../create_new_engagement';
 import { Engagement } from '../../../schemas/engagement';
-import { EngagementFormConfig } from '../../../schemas/engagement_config';
 import { FeatureToggles } from '../../../context/feature_context/feature_toggles';
 import { MemoryRouter } from 'react-router';
 import React from 'react';

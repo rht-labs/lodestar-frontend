@@ -63,7 +63,7 @@ describe('Engagement Artifact Card', () => {
     expect(requestOpen).toHaveBeenCalled();
   });
   test('clicking the edit artifact dropdown item opens the edit artifact modal', async () => {
-    act(async () => {
+    await act(async () => {
       const requestOpen = jest.fn();
       render(
         <FeatureToggleContext.Provider

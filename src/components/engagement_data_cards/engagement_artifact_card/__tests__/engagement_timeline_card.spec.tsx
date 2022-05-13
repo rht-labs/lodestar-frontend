@@ -27,7 +27,7 @@ describe('Engagement timeline card', () => {
   test('by default, when creating a new artifact, the first artifact type in the array of artifact types is selected', async () => {
     let view: RenderResult;
     const onUpdateField = jest.fn();
-    act(async () => {
+    await act(async () => {
       view = render(
         <TestStateWrapper>
           <EngagementContext.Provider

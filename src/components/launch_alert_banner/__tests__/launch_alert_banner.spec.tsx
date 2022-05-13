@@ -27,7 +27,7 @@ describe('Engagement launch alert banner ', () => {
 
   test('shows the delete button for launchable engagements', async () => {
     let view: RenderResult;
-    act(async () => {
+    await act(async () => {
       view = getLaunchBar();
     });
     expect(await view.findByTestId('delete-button')).toBeDefined();
@@ -48,7 +48,7 @@ describe('Engagement launch alert banner ', () => {
       );
 
     let view: RenderResult;
-    act(async () => {
+    await act(async () => {
       view = getLaunchBarForNonLaunchableEngagement();
     });
     expect(view.queryByTestId('delete-button')).toBeNull();
