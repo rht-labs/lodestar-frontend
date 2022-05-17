@@ -20,6 +20,7 @@ export function _CustomerSelectDropdown(
   };
   return (
     <Select
+      aria-label='Customer select'
       isOpen={isOpen}
       onToggle={() => setIsOpen(!isOpen)}
       onSelect={handleSelect}

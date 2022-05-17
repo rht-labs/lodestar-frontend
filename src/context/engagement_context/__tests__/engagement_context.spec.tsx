@@ -225,7 +225,9 @@ describe('Engagement Context', () => {
     const { result, waitForNextUpdate } = renderHook(() => useEngagement(), {
       wrapper,
     });
-    result.current.setCurrentEngagement(initialEngagement);
+
+    act(() => result.current.setCurrentEngagement(initialEngagement));
+
     let modifiedEngagement = {
       ...initialEngagement,
       customer_contact_email: 'tennessee@nasa.gov',

@@ -19,19 +19,19 @@ import { createFakedServices } from '../services/factories/service_factory';
 import { MemoryRouter } from 'react-router';
 import { mockEngagementFormConfig } from '../mocks/engagement_form_config_mocks';
 
-export const TestStateWrapper = ({ children = null }) => {
+export const TestStateWrapper = ({ children = null, spyedEngagementService = null }) => {
   return (
     <MemoryRouter>
       <ServiceProvider
         serviceFactory={createFakedServices({ shouldUseStaticData: true })}
       >
-        <TestContexts>{children}</TestContexts>
+        <TestContexts spyedEngagementService={spyedEngagementService}>{children}</TestContexts>
       </ServiceProvider>
     </MemoryRouter>
   );
 };
 
-function TestContexts({ children = null }) {
+function TestContexts({ children = null, spyedEngagementService = null }) {
   const {
     authService,
     engagementService,
@@ -49,7 +49,7 @@ function TestContexts({ children = null }) {
                 engagementFormConfig={mockEngagementFormConfig()}
                 categoryService={categoryService}
                 feedbackContext={feedbackContext}
-                engagementService={engagementService}
+                engagementService={spyedEngagementService ? spyedEngagementService : engagementService}
               >
                 <VersionProvider versionService={versionService}>
                   <FeatureToggles>{children}</FeatureToggles>

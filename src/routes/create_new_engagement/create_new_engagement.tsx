@@ -295,6 +295,7 @@ export function CreateNewEngagementForm() {
                 }
               >
                 <FormSelect
+                  arial-label="Region select"
                   data-testid="region"
                   data-cy="new_engagement_region"
                   value={region ?? ''}
@@ -336,6 +337,7 @@ export function CreateNewEngagementForm() {
                 }
               >
                 <FormSelect
+                  aria-label='Engagment type select'
                   data-testid="new-engagement-type"
                   data-cy="new_engagement_type"
                   value={engagementType ?? ''}
@@ -361,6 +363,7 @@ export function CreateNewEngagementForm() {
                 helperText="Prepopulate details of this engagement based on a selected template or an existing engagement"
               >
                 <FormSelect
+                  aria-label='Copy select'
                   data-testid="new-engagement-copy-from"
                   data-cy="new-engagement-copy-from"
                   value={selectedProjectNameToFind ?? ''}

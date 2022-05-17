@@ -62,10 +62,10 @@ export function HostingEnvironmentCard() {
     updateHostingEnvironment,
   } = useHostingEnvironmentManager();
   const currentEnvironmentIndex = currentHostingEnvironmentChanges.findIndex(
-    he => currentHostingEnvironmentId === he?.id
+    he => currentHostingEnvironmentId === he?.uuid
   );
   const indexedChanges = currentHostingEnvironmentChanges.reduce(
-    (p, c) => ({ ...p, [c.id]: c }),
+    (p, c) => ({ ...p, [c.uuid]: c }),
     {}
   );
 
@@ -88,8 +88,8 @@ export function HostingEnvironmentCard() {
   const openHostingEnvironmentModal = (
     hostingEnvironment: HostingEnvironment
   ) => {
-    setCurrentHostingEnvironmentId(hostingEnvironment.id);
-    requestOpen(generateModalId(hostingEnvironment.id));
+    setCurrentHostingEnvironmentId(hostingEnvironment.uuid);
+    requestOpen(generateModalId(hostingEnvironment.uuid));
   };
   const generateModalId = (id: string) => `${OPENSHIFT_MODAL_KEY}${id}`;
 
@@ -110,7 +110,7 @@ export function HostingEnvironmentCard() {
       slug = customer_name;
     }
     if (slug.length > maxLen && slug.substring(0, maxLen).includes(' ')) {
-      slug = slug.substr(0, slug.lastIndexOf(' ', maxLen));
+      slug = slug.substring(0, slug.lastIndexOf(' ', maxLen));
     }
     slug = slugify(slug.substring(0, maxLen));
     if (randomizer?.length > 0) {
