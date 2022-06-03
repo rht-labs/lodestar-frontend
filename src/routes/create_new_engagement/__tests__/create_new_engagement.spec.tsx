@@ -117,6 +117,7 @@ describe('Create New Engagement Route', () => {
         engagement_region: 'dev-1',
         engagement_type: 'Residency',
         project_name: 'Mars Rover',
+        timezone: 'America/New_York',
       });
     });
   });
