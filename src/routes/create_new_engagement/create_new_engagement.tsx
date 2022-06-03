@@ -63,6 +63,14 @@ export function CreateNewEngagementForm() {
   const { logEvent } = useAnalytics();
   let uuid = null;
 
+  const getTimeZone = () => {
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch (e) {
+      return 'Europe/London';
+    }
+  };
+
   useEffect(() => {
     setCopiedEngagement(
       findEngagementToCopy(engagements, selectedProjectNameToFind)
@@ -107,6 +115,7 @@ export function CreateNewEngagementForm() {
             engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
               e => e.default
             )?.value,
+          timezone: getTimeZone(),
         });
         uuid = result.uuid;
       }
