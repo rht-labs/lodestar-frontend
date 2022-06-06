@@ -101,7 +101,9 @@ export function PointOfContactCard() {
               No Points of Contact Added
             </Title>
             <EmptyStateBody>
-              <p>Click the 'Edit' button, to begin adding point of contacts</p>
+              <Feature name="writer">
+                <p>Click the 'Edit' button, to begin adding point of contacts</p>
+              </Feature>
             </EmptyStateBody>
           </EmptyState>
         )}

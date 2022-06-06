@@ -856,11 +856,7 @@ Object {
               </h5>
               <div
                 class="pf-c-empty-state__body"
-              >
-                <p>
-                  Click the 'Edit' button, to begin adding point of contacts
-                </p>
-              </div>
+              />
             </div>
           </div>
         </div>
@@ -938,11 +934,7 @@ Object {
             </h5>
             <div
               class="pf-c-empty-state__body"
-            >
-              <p>
-                Click the 'Edit' button, to begin adding point of contacts
-              </p>
-            </div>
+            />
           </div>
         </div>
       </div>

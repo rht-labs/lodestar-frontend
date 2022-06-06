@@ -4,7 +4,7 @@ import {
 } from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { AlreadyExistsError } from '../../services/engagement_service/engagement_service_errors';
+import { AlreadyExistsError, NamingError } from '../../services/engagement_service/engagement_service_errors';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { Logger } from '../../utilities/logger';
 import { handleAxiosResponseErrors } from './http_error_handlers';
@@ -17,6 +17,7 @@ export class Apiv1EngagementService implements EngagementService {
     this.axios = getApiV1HttpClient();
     this.getEngagementById = this.getEngagementById.bind(this);
   }
+
   async checkSubdomainUniqueness(subdomain: string): Promise<boolean> {
     return this.axios
       .head(`/engagements/subdomain/${subdomain}`)
@@ -24,6 +25,7 @@ export class Apiv1EngagementService implements EngagementService {
       .catch(() => false);
   }
   private static engagementSerializer = new EngagementJsonSerializer();
+
   private buildQueryStringFromParameters(
     parameters: EngagementSearchParameters
   ): string {
@@ -115,7 +117,7 @@ export class Apiv1EngagementService implements EngagementService {
       Logger.instance.error(e);
       if (e.response.status === 409) {
         throw new AlreadyExistsError(
-          'A project with this customer name and project name already exists'
+          'A project with this customer name and project name already exists 👀'
         );
       }
       if (e.isAxiosError) {
@@ -142,6 +144,26 @@ export class Apiv1EngagementService implements EngagementService {
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {
       if (e.isAxiosError) {
+        console.error("yo", (e.response.status === 400 && e.response.data["parameter_violations"]))
+        if(e.response.status === 400 && e.response.data["parameter_violations"]) {
+          const errorMessage = e.response.data["parameter_violations"][0];
+          let field = "Parameter";
+          if(errorMessage.path === 'put.engagement.customerName') {
+            field = "Client name";
+          } else if(errorMessage.path === 'put.engagement.name') {
+            field = 'Engagement name';
+          }
+          throw new NamingError(
+            `${field} value ${errorMessage.value} is invalid. 😔 ${errorMessage.message}`
+          );
+        }
+
+        if (e.response.status === 409) {
+          console.error("yo", e.response.status)
+          throw new AlreadyExistsError(
+            'A project with this customer name and project name already exists 👀'
+          );
+        }
         handleAxiosResponseErrors(e);
       } else {
         throw e;

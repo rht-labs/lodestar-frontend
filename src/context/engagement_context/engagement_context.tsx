@@ -11,6 +11,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import {
   AlreadyExistsError,
   AlreadyLaunchedError,
+  NamingError,
   NotFoundError,
 } from '../../services/engagement_service/engagement_service_errors';
 import {
@@ -204,7 +205,7 @@ export const EngagementProvider = ({
             const hasUpdates = await _checkHasUpdateRef.current();
             if (hasUpdates) {
               feedbackContext.showAlert(
-                'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten."',
+                'Another user edited this engagement. In order to continue, you must refresh the page. By refreshing, your unsaved changes will be overwritten.',
                 AlertType.error,
                 false,
                 [
@@ -412,18 +413,8 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
-        if (e instanceof AlreadyExistsError) {
-          // If there is no mongo id associated with the engagement, then it is being committed to the backend for the first time. It is a net new engagement.
-          if (!!data.mongo_id) {
-            errorMessage =
-              'The path that you input is already taken.  Please update and try saving again.';
-
-            // Otherwise, we are saving an existing engagement.
-          } else {
-            _handleErrors(e);
-            errorMessage =
-              'Your changes could not be saved. Another user has modified this data. Please refresh your data in order to make changes.';
-          }
+        if (e instanceof AlreadyExistsError || e instanceof NamingError) {
+          errorMessage = e.message;
         }
         feedbackContext.showAlert(errorMessage, AlertType.error);
       }
