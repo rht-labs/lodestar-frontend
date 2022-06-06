@@ -163,7 +163,7 @@ export function HostingEnvironmentCard() {
       'Openshift Container Platform',
       getHumanReadableLabel(
         engagementFormConfig?.openshift_options?.versions?.options,
-        hostingEnvironment?.ocp_version
+        hostingEnvironment.ocp_version
       ),
       getHumanReadableLabel(
         engagementFormConfig?.cloud_options?.providers?.options,
