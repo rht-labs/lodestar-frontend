@@ -269,7 +269,7 @@ function getHumanReadableLabel(
   lookupArray: EngagementFormOption[] = [],
   value: string
 ) {
-  return lookupArray?.find(option => option.value === value)?.label ?? value;
+  return lookupArray?.find(option => option.value == value)?.label ?? value;
 }
 
 const HostingEnvironmentValidity = ({
