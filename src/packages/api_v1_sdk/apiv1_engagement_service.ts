@@ -144,7 +144,6 @@ export class Apiv1EngagementService implements EngagementService {
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {
       if (e.isAxiosError) {
-        console.error("yo", (e.response.status === 400 && e.response.data["parameter_violations"]))
         if(e.response.status === 400 && e.response.data["parameter_violations"]) {
           const errorMessage = e.response.data["parameter_violations"][0];
           let field = "Parameter";
@@ -159,7 +158,6 @@ export class Apiv1EngagementService implements EngagementService {
         }
 
         if (e.response.status === 409) {
-          console.error("yo", e.response.status)
           throw new AlreadyExistsError(
             'A project with this customer name and project name already exists 👀'
           );

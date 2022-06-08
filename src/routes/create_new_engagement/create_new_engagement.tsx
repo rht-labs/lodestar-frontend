@@ -78,59 +78,64 @@ export function CreateNewEngagementForm() {
   }, [selectedProjectNameToFind, engagements]);
 
   const submitNewEngagement = async () => {
-    if (customerName && projectName) {
-      if (selectedProjectNameToFind) {
-        const result = await createEngagement({
-          customer_name: customerName,
-          project_name: projectName,
-          engagement_region: region,
-          engagement_type:
-            engagementType ??
-            engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
-              e => e.default
-            )?.value,
-          engagement_categories: copiedEngagement?.engagement_categories,
-          hosting_environments: copiedEngagement?.hosting_environments.map(
-            hosting_env => {
-              return {
-                ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
-                ocp_cloud_provider_region:
-                  hosting_env.ocp_cloud_provider_region,
-                ocp_cluster_size: hosting_env.ocp_cluster_size,
-                ocp_persistent_storage_size:
-                  hosting_env.ocp_persistent_storage_size,
-                ocp_version: hosting_env.ocp_version,
-              };
-            }
-          ),
+    try {
+      if (customerName && projectName) {
+        if (selectedProjectNameToFind) {
+          const result = await createEngagement({
+            customer_name: customerName,
+            project_name: projectName,
+            engagement_region: region,
+            engagement_type:
+              engagementType ??
+              engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
+                e => e.default
+              )?.value,
+            engagement_categories: copiedEngagement?.engagement_categories,
+            hosting_environments: copiedEngagement?.hosting_environments.map(
+              hosting_env => {
+                return {
+                  ocp_cloud_provider_name: hosting_env.ocp_cloud_provider_name,
+                  ocp_cloud_provider_region:
+                    hosting_env.ocp_cloud_provider_region,
+                  ocp_cluster_size: hosting_env.ocp_cluster_size,
+                  ocp_persistent_storage_size:
+                    hosting_env.ocp_persistent_storage_size,
+                  ocp_version: hosting_env.ocp_version,
+                };
+              }
+            ),
+          });
+          uuid = result.uuid;
+        } else {
+          const result = await createEngagement({
+            customer_name: customerName,
+            project_name: projectName,
+            engagement_region: region,
+            engagement_type:
+              engagementType ??
+              engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
+                e => e.default
+              )?.value,
+            timezone: getTimeZone(),
+          });
+          uuid = result.uuid;
+        }
+        // want to inject uuid from the post return here
+        logEvent({
+          action: 'Create New Engagement',
+          category: AnalyticsCategory.engagements,
         });
-        uuid = result.uuid;
+        
+        history.push({
+          pathname: `/app/engagements/${uuid}`,
+        });
       } else {
-        const result = await createEngagement({
-          customer_name: customerName,
-          project_name: projectName,
-          engagement_region: region,
-          engagement_type:
-            engagementType ??
-            engagementFormConfig?.basic_information?.engagement_types?.options?.find?.(
-              e => e.default
-            )?.value,
-          timezone: getTimeZone(),
-        });
-        uuid = result.uuid;
+        history.push('/app/engagements');
       }
-      // want to inject uuid from the post return here
-      logEvent({
-        action: 'Create New Engagement',
-        category: AnalyticsCategory.engagements,
-      });
-      
-      history.push({
-        pathname: `/app/engagements/${uuid}`,
-      });
-    } else {
-      history.push('/app/engagements');
+    } catch(e) {
+      console.log('something went wrong while creating the engagement', e);
     }
+    
   };
 
   const [hasFetchedEngagements, setHasFetchedEngagements] = useState<boolean>(

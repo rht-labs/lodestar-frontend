@@ -423,7 +423,6 @@ export const EngagementProvider = ({
       feedbackContext,
       currentEngagementChanges,
       engagementService,
-      _handleErrors,
       changedGroups,
       setCurrentEngagement,
     ]
