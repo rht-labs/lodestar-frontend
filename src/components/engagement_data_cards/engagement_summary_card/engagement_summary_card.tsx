@@ -150,7 +150,7 @@ export function EngagementSummaryCard() {
                 <TitledDataPoint title="Use Cases" dataCy={'use_cases'}>
                   <>
                     {currentEngagement?.use_cases?.map?.(useCase => (
-                      <p key={useCase.id ?? useCase.description}>
+                      <p key={useCase.uuid ?? useCase.description}>
                         {useCase.description}
                       </p>
                     ))}
