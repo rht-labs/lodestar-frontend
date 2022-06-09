@@ -13,6 +13,7 @@ export function getHumanReadableFieldName(field: string): string {
     location: `Location`,
     ocp_cloud_provider_name: 'Cloud Provider Name',
     ocp_cloud_provider_region: 'Cloud Provider Region',
+    ocp_cloud_provider_availability_zone: 'Cloud Provider Availability Zone',
     ocp_cluster_size: 'Cluster Size',
     ocp_persistent_storage_size: `Persistent Storage Size`,
     ocp_sub_domain: 'Subdomain',

@@ -62,10 +62,15 @@ export function OpenShiftClusterEditModal({
   );
 
   const onSave = () => {
-    propsOnSave({
-      ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
-      ...hostingEnvironment
-    });
+    // const p = {
+    //   ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
+    //   ...hostingEnvironment
+    // }
+    if (hostingEnvironment.ocp_cloud_provider_availability_zone === undefined) {
+      hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value;
+    }
+    console.log(hostingEnvironment);
+    propsOnSave(hostingEnvironment);
     onClose();
   };
 
@@ -89,12 +94,12 @@ export function OpenShiftClusterEditModal({
     return <div />;
   }
 
-  if (
-    !hostingEnvironment.ocp_cloud_provider_availability_zone
-  ) {
-    hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default)?.value;
-    console.log(hostingEnvironment)
-  }
+  // if (
+  //   !hostingEnvironment.ocp_cloud_provider_availability_zone
+  // ) {
+  //   hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default)?.value;
+  //   console.log(hostingEnvironment)
+  // }
 
   return (
     <Modal
@@ -171,7 +176,7 @@ export function OpenShiftClusterEditModal({
                 v => ({ label: v.label, disabled: v.disabled, value: v.value })
               )}
               onChange={value => onChange('ocp_cloud_provider_availability_zone', value)}
-              value={hostingEnvironment?.ocp_cloud_provider_availability_zone}
+              value={hostingEnvironment?.ocp_cloud_provider_availability_zone ?? engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value}
             />
             <SelectFormField
               value={hostingEnvironment?.ocp_version || ''}

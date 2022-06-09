@@ -101,6 +101,7 @@ export function CreateNewEngagementForm() {
                   ocp_persistent_storage_size:
                     hosting_env.ocp_persistent_storage_size,
                   ocp_version: hosting_env.ocp_version,
+                  ocp_cloud_provider_availability_zone: hosting_env.ocp_cloud_provider_availability_zone,
                 };
               }
             ),
