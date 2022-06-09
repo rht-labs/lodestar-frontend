@@ -6,6 +6,7 @@ export interface HostingEnvironment {
   ocp_cloud_provider_name: string;
   suggested_subdomain?: string;
   ocp_cloud_provider_region: string;
+  ocp_cloud_provider_availability_zone: string;
   ocp_cluster_size: string;
   ocp_persistent_storage_size: string;
   ocp_sub_domain: string;
@@ -23,6 +24,7 @@ export abstract class HostingEnvironment {
       ocp_cloud_provider_region: staticData
         ? 'N. Virginia'
         : faker.lorem.word(),
+      ocp_cloud_provider_availability_zone: staticData ? 'One' : 'One',
       ocp_cluster_size: staticData ? 'Large' : 'Large',
       ocp_persistent_storage_size: staticData
         ? '100G'

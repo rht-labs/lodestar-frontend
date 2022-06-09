@@ -16,6 +16,8 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useSubdomainUniqueness } from '../../hooks/subdomain_checker';
 import { hasRequiredFields } from '../../common/validate_hosting_environment';
+import { AvailabilityZoneTooltip } from '../engagement_data_cards/hosting_environment_card/availability_zone_tooltip';
+
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: Partial<HostingEnvironment>;
   isOpen: boolean;
@@ -60,7 +62,10 @@ export function OpenShiftClusterEditModal({
   );
 
   const onSave = () => {
-    propsOnSave(hostingEnvironment);
+    propsOnSave({
+      ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
+      ...hostingEnvironment
+    });
     onClose();
   };
 
@@ -82,6 +87,13 @@ export function OpenShiftClusterEditModal({
 
   if (!hostingEnvironment) {
     return <div />;
+  }
+
+  if (
+    !hostingEnvironment.ocp_cloud_provider_availability_zone
+  ) {
+    hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default)?.value;
+    console.log(hostingEnvironment)
   }
 
   return (
@@ -143,6 +155,23 @@ export function OpenShiftClusterEditModal({
               }))}
               onChange={value => onChange('ocp_cloud_provider_region', value)}
               value={hostingEnvironment?.ocp_cloud_provider_region}
+            />
+            <SelectFormField
+              label={<>Availability Zone
+              <AvailabilityZoneTooltip /></>}
+              isDisabled={
+                engagementFormConfig?.cloud_options?.availability_zones?.options?.length === 0 ||
+                !hasFeature(APP_FEATURES.writer)
+              }
+              testId="provider-availability-zone-select"
+              emptyValue={{
+                label: "Select an availability zone configuration"
+              }}
+              options={engagementFormConfig?.cloud_options?.availability_zones?.options?.map?.(
+                v => ({ label: v.label, disabled: v.disabled, value: v.value })
+              )}
+              onChange={value => onChange('ocp_cloud_provider_availability_zone', value)}
+              value={hostingEnvironment?.ocp_cloud_provider_availability_zone}
             />
             <SelectFormField
               value={hostingEnvironment?.ocp_version || ''}
