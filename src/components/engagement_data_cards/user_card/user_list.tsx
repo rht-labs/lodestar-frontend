@@ -73,6 +73,7 @@ export function UserList(props: UserListProps) {
           <UserRolesTooltip />
         </>
       ),
+      dataLabel: 'Role',
       transforms: [cellWidth(10)],
     },
   ];
