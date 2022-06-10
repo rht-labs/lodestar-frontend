@@ -202,4 +202,14 @@ describe('new engagement', () => {
       'You have successfully launched your engagement!'
     );
   });
+
+  it('Add tag', () => {
+    
+    cy.get('[data-testid=edit-icon]').click().wait(1000);
+    cy.get('input').type('e2e tag').get('button').contains('Create').click().get('button').contains('Save').click();
+
+    cy.wait('@saveEngagement').its('response.statusCode').should('eq', 200);
+
+    cy.get('[data-testid=category-chip]').contains('e2e tag').should('exist');
+  });
 });
