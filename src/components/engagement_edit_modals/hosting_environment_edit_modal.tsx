@@ -62,10 +62,6 @@ export function OpenShiftClusterEditModal({
   );
 
   const onSave = async () => {
-    // const p = {
-    //   ...hostingEnvironment
-    //   ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
-    // }
     if (hostingEnvironment.ocp_cloud_provider_availability_zone === undefined) {
       await setHostingEnvironment({
         ...hostingEnvironment,
@@ -97,13 +93,6 @@ export function OpenShiftClusterEditModal({
   if (!hostingEnvironment) {
     return <div />;
   }
-
-  // if (
-  //   !hostingEnvironment.ocp_cloud_provider_availability_zone
-  // ) {
-  //   hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default)?.value;
-  //   console.log(hostingEnvironment)
-  // }
 
   return (
     <Modal
