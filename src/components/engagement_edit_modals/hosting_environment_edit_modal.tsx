@@ -61,12 +61,16 @@ export function OpenShiftClusterEditModal({
     hostingEnvironment
   );
 
-  const onSave = () => {
+  const onSave = async () => {
     // const p = {
-    //   ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
     //   ...hostingEnvironment
+    //   ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
     // }
     if (hostingEnvironment.ocp_cloud_provider_availability_zone === undefined) {
+      await setHostingEnvironment({
+        ...hostingEnvironment,
+        ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
+      } as HostingEnvironment);
       hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value;
     }
     console.log(hostingEnvironment);
