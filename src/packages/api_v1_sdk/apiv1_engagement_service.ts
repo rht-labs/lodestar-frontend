@@ -4,7 +4,7 @@ import {
 } from '../../services/engagement_service/engagement_service';
 import { Engagement } from '../../schemas/engagement';
 import { EngagementFormConfig } from '../../schemas/engagement_config';
-import { AlreadyExistsError, NamingError } from '../../services/engagement_service/engagement_service_errors';
+import { AlreadyExistsError, BadRequestError, NamingError } from '../../services/engagement_service/engagement_service_errors';
 import { EngagementJsonSerializer } from '../../serializers/engagement/engagement_json_serializer';
 import { Logger } from '../../utilities/logger';
 import { handleAxiosResponseErrors } from './http_error_handlers';
@@ -144,17 +144,22 @@ export class Apiv1EngagementService implements EngagementService {
       return Apiv1EngagementService.engagementSerializer.deserialize(data);
     } catch (e) {
       if (e.isAxiosError) {
-        if(e.response.status === 400 && e.response.data["parameter_violations"]) {
-          const errorMessage = e.response.data["parameter_violations"][0];
-          let field = "Parameter";
-          if(errorMessage.path === 'put.engagement.customerName') {
-            field = "Client name";
-          } else if(errorMessage.path === 'put.engagement.name') {
-            field = 'Engagement name';
+        if(e.response.status === 400) {
+
+          if(e.response.data["parameter_violations"]) {
+            const errorMessage = e.response.data["parameter_violations"][0];
+            let field = "Parameter";
+            if(errorMessage.path === 'put.engagement.customerName') {
+              field = "Client name";
+            } else if(errorMessage.path === 'put.engagement.name') {
+              field = 'Engagement name';
+            }
+            throw new NamingError(
+              `${field} value ${errorMessage.value} is invalid. 😔 ${errorMessage.message}`
+            );
+          } else if(e.response.data["lodestarMessage"]) {
+            throw new BadRequestError(e.response.data["lodestarMessage"]);
           }
-          throw new NamingError(
-            `${field} value ${errorMessage.value} is invalid. 😔 ${errorMessage.message}`
-          );
         }
 
         if (e.response.status === 409) {
