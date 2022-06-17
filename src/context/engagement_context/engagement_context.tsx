@@ -11,6 +11,7 @@ import { EngagementFormConfig } from '../../schemas/engagement_config';
 import {
   AlreadyExistsError,
   AlreadyLaunchedError,
+  BadRequestError,
   NamingError,
   NotFoundError,
 } from '../../services/engagement_service/engagement_service_errors';
@@ -413,7 +414,7 @@ export const EngagementProvider = ({
         feedbackContext.hideLoader();
         let errorMessage =
           'There was an issue with saving your changes. Please follow up with an administrator if this continues.';
-        if (e instanceof AlreadyExistsError || e instanceof NamingError) {
+        if (e instanceof AlreadyExistsError || e instanceof NamingError || e instanceof BadRequestError) {
           errorMessage = e.message;
         }
         feedbackContext.showAlert(errorMessage, AlertType.error);
