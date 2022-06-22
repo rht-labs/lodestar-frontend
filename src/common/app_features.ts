@@ -6,9 +6,7 @@ export const APP_FEATURES = {
   reader: 'reader',
   notifications: 'notifications',
   engagementCardIcons: 'engagementCardIcons',
-  resetUser: 'resetUser',
   dashboardDateSelector: 'dashboard-date-selector',
-  newDashboard: 'newDashboard',
   engagementWriter: 'engagementWriter',
   copyFrom: 'copyFrom'
 };
