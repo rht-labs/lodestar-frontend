@@ -69,7 +69,6 @@ export function OpenShiftClusterEditModal({
       } as HostingEnvironment);
       hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value;
     }
-    console.log(hostingEnvironment);
     propsOnSave(hostingEnvironment);
     onClose();
   };
