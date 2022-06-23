@@ -26,6 +26,7 @@ export interface EngagementFormBasicInformation {
 
 export interface EngagementFormCloudOptions {
   providers: FormConfig;
+  availability_zones: FormConfig;
 }
 
 export interface EngagementFormOpenshiftOptions {

@@ -81,7 +81,14 @@ export function HostingEnvironmentCard() {
   const onSave = () => {
     saveEngagement({
       ...(currentChanges as Engagement),
-      hosting_environments: hostingEnvironments,
+      hosting_environments: hostingEnvironments.map(he => ({
+        ...he,
+        ocp_cloud_provider_availability_zone:
+          he.ocp_cloud_provider_availability_zone ??
+          engagementFormConfig?.cloud_options?.availability_zones?.options?.find(
+            element => element.default
+          ).value,
+      })),
     });
   };
 
