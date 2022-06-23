@@ -8,7 +8,8 @@ export const APP_FEATURES = {
   engagementCardIcons: 'engagementCardIcons',
   dashboardDateSelector: 'dashboard-date-selector',
   engagementWriter: 'engagementWriter',
-  copyFrom: 'copyFrom'
+  copyFrom: 'copyFrom',
+  availabilityZone: 'availabilityZone',
 };
 
 export type AppFeature = keyof typeof APP_FEATURES;

@@ -137,6 +137,7 @@ export function OpenShiftClusterEditModal({
               hostingEnvironment={hostingEnvironment}
             />
             <SelectFormField
+              arial-label="Provider Region"
               label="Provider Region"
               isDisabled={
                 availableProviderRegionOptions?.length === 0 ||
@@ -154,7 +155,9 @@ export function OpenShiftClusterEditModal({
               onChange={value => onChange('ocp_cloud_provider_region', value)}
               value={hostingEnvironment?.ocp_cloud_provider_region}
             />
+            {hasFeature(APP_FEATURES.availabilityZone) ?
             <SelectFormField
+              aria-label='Availability Zone'
               label={<>Availability Zone
               <AvailabilityZoneTooltip /></>}
               isDisabled={
@@ -171,7 +174,10 @@ export function OpenShiftClusterEditModal({
               onChange={value => onChange('ocp_cloud_provider_availability_zone', value)}
               value={hostingEnvironment?.ocp_cloud_provider_availability_zone ?? engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value}
             />
+
+            : ''}
             <SelectFormField
+              aria-label='OpenShift version'
               value={hostingEnvironment?.ocp_version || ''}
               testId="oc_version_select"
               emptyValue={{ label: 'Select a version' }}
@@ -197,6 +203,7 @@ export function OpenShiftClusterEditModal({
             <SelectFormField
               value={hostingEnvironment?.ocp_persistent_storage_size}
               testId="persistent-storage-select"
+              aria-label='Persistent Storage Needs'
               label="Persistent Storage Needs"
               options={engagementFormConfig?.openshift_options?.persistent_storage?.options?.map?.(
                 v => ({ label: v.label, disabled: v.disabled, value: v.value })
@@ -216,6 +223,7 @@ export function OpenShiftClusterEditModal({
               value={hostingEnvironment?.ocp_cluster_size || ''}
               emptyValue={{ label: 'Select cluster size' }}
               label="Cluster Size"
+              aria-label="Cluster Size"
               isDisabled={!hasFeature(APP_FEATURES.writer)}
               onChange={value => onChange('ocp_cluster_size', value)}
             />
