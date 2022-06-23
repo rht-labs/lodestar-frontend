@@ -7,7 +7,7 @@ import { getApiV1HttpClient } from './client';
 export class Apiv1VersionService implements VersionService {
   private static versionSerializer = new VersionJsonSerializer();
   private get axios() {
-    return getApiV1HttpClient();
+    return getApiV1HttpClient(false);
   }
 
   async fetchVersion(): Promise<AppVersion> {

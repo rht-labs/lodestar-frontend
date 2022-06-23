@@ -225,33 +225,14 @@ export const EngagementProvider = ({
   );
 
   const getEngagement = useCallback(
-    async (customerName?: string, projectName?: string, uuid?: string) => {
-      if (!(customerName && projectName) && !uuid) {
+    async (uuid: string) => {
+      if (!uuid) {
         throw new Error(
-          'Either projectName and customerName or uuid must not be empty'
+          'UUID must not be empty'
         );
       }
       try {
-        let availableEngagements = [];
-        let cachedEngagement = availableEngagements?.find(
-          engagement =>
-            engagement?.customer_name === customerName &&
-            engagement?.project_name === projectName
-        );
-        if (cachedEngagement !== null) {
-          setCurrentEngagement(cachedEngagement);
-        }
-        let fetchedEngagement: Engagement;
-        if (!!uuid) {
-          fetchedEngagement = await engagementService.getEngagementById(uuid);
-        } else {
-          //This is probably not used anymore. Check backend logs for "Deprecated get method used"
-          //Delete this and engagementService.getEngagementByCustomerAndProjectName if none by 03/17/2022
-          fetchedEngagement = await engagementService.getEngagementByCustomerAndProjectName(
-            customerName,
-            projectName
-          );
-        }
+        let fetchedEngagement: Engagement = await engagementService.getEngagementById(uuid);
         setCurrentEngagement(fetchedEngagement);
         return fetchedEngagement;
       } catch (e) {

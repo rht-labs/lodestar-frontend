@@ -5,8 +5,6 @@ export interface EngagementHookUuid {
   uuid: string;
 }
 export interface EngagementHookProjectCustomerName {
-  projectName?: string;
-  customerName?: string;
   uuid?: string;
 }
 export const useEngagement = (
@@ -14,18 +12,17 @@ export const useEngagement = (
 ) => {
   const engagementContext = useContext(EngagementContext);
   const { getEngagement, setCurrentEngagement } = engagementContext;
-  const { customerName, projectName, uuid } = params;
+  const { uuid } = params;
   useEffect(() => {
-    if (!(!!customerName && !!projectName) && !uuid) {
+    if (!uuid) {
       return;
     }
-    getEngagement(customerName, projectName, uuid).then(engagement => {
+    getEngagement(uuid).then(engagement => {
       if (engagement) {
         setCurrentEngagement(engagement);
-      } else {
       }
     });
-  }, [customerName, projectName, getEngagement, setCurrentEngagement, uuid]);
+  }, [getEngagement, setCurrentEngagement, uuid]);
 
   return engagementContext;
 };

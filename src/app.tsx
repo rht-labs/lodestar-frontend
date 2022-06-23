@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import qs from 'query-string';
@@ -107,6 +107,12 @@ export const App = ({ config }: { config: Config }) => {
 const FeatureProvider = ({ children }) => {
   const location = useLocation();
   const versionContext = useContext(VersionContext);
+  useEffect(() => {
+    if (!versionContext.versions) {
+      versionContext?.fetchVersions();
+    }
+  }, [versionContext]);
+
   const { appConfig } = useConfig();
   let version = versionContext.versions?.mainVersion?.value;
   if (appConfig?.allowVersionOverride) {

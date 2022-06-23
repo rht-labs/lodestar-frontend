@@ -66,9 +66,7 @@ export const validatorsWithDateValidators = (
 };
 
 export const EngagementDetailView = () => {
-  const { project_name, customer_name, uuid: engagementUuid } = useParams<{
-    customer_name: string;
-    project_name: string;
+  const { uuid: engagementUuid } = useParams<{
     uuid: string;
   }>();
 
@@ -82,8 +80,6 @@ export const EngagementDetailView = () => {
     engagementFormConfig,
     fetchEngagementFormConfig,
   } = useEngagement({
-    projectName: project_name,
-    customerName: customer_name,
     uuid: engagementUuid,
   });
 

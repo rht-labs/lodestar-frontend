@@ -36,7 +36,6 @@ import { useEngagementFormConfig } from '../../context/engagement_config_context
 import { useHistory, useLocation } from 'react-router';
 import { useServiceProviders } from '../../context/service_provider_context/service_provider_context';
 import { useSummaryCount } from '../../hooks/use_summary_count';
-import { useVersion } from '../../context/version_context/version_context';
 import { withArtifacts } from '../../hocs/with_artifacts';
 import { withUseCases } from '../../hocs/with_use_cases';
 
@@ -52,14 +51,6 @@ export interface DashboardFilter {
 }
 
 export function Dashboard() {
-  const versionContext = useVersion();
-
-  useEffect(() => {
-    if (!versionContext.versions) {
-      versionContext?.fetchVersions();
-    }
-  }, [versionContext]);
-
   const history = useHistory();
   const location = useLocation();
 
