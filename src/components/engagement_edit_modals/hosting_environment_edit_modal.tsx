@@ -16,6 +16,8 @@ import { useFeatures } from '../../context/feature_context/feature_hook';
 import { APP_FEATURES } from '../../common/app_features';
 import { useSubdomainUniqueness } from '../../hooks/subdomain_checker';
 import { hasRequiredFields } from '../../common/validate_hosting_environment';
+import { AvailabilityZoneTooltip } from '../engagement_data_cards/hosting_environment_card/availability_zone_tooltip';
+
 export interface OpenShiftClusterEditModalProps {
   hostingEnvironment: Partial<HostingEnvironment>;
   isOpen: boolean;
@@ -59,7 +61,14 @@ export function OpenShiftClusterEditModal({
     hostingEnvironment
   );
 
-  const onSave = () => {
+  const onSave = async () => {
+    if (hostingEnvironment.ocp_cloud_provider_availability_zone === undefined) {
+      await setHostingEnvironment({
+        ...hostingEnvironment,
+        ocp_cloud_provider_availability_zone: engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value,
+      } as HostingEnvironment);
+      hostingEnvironment.ocp_cloud_provider_availability_zone = engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value;
+    }
     propsOnSave(hostingEnvironment);
     onClose();
   };
@@ -127,6 +136,7 @@ export function OpenShiftClusterEditModal({
               hostingEnvironment={hostingEnvironment}
             />
             <SelectFormField
+              arial-label="Provider Region"
               label="Provider Region"
               isDisabled={
                 availableProviderRegionOptions?.length === 0 ||
@@ -144,7 +154,29 @@ export function OpenShiftClusterEditModal({
               onChange={value => onChange('ocp_cloud_provider_region', value)}
               value={hostingEnvironment?.ocp_cloud_provider_region}
             />
+            {hasFeature(APP_FEATURES.availabilityZone) ?
             <SelectFormField
+              aria-label='Availability Zone'
+              label={<>Availability Zone
+              <AvailabilityZoneTooltip /></>}
+              isDisabled={
+                engagementFormConfig?.cloud_options?.availability_zones?.options?.length === 0 ||
+                !hasFeature(APP_FEATURES.writer)
+              }
+              testId="provider-availability-zone-select"
+              emptyValue={{
+                label: "Select an availability zone configuration"
+              }}
+              options={engagementFormConfig?.cloud_options?.availability_zones?.options?.map?.(
+                v => ({ label: v.label, disabled: v.disabled, value: v.value })
+              )}
+              onChange={value => onChange('ocp_cloud_provider_availability_zone', value)}
+              value={hostingEnvironment?.ocp_cloud_provider_availability_zone ?? engagementFormConfig?.cloud_options?.availability_zones?.options?.find(element => element.default).value}
+            />
+
+            : ''}
+            <SelectFormField
+              aria-label='OpenShift version'
               value={hostingEnvironment?.ocp_version || ''}
               testId="oc_version_select"
               emptyValue={{ label: 'Select a version' }}
@@ -170,6 +202,7 @@ export function OpenShiftClusterEditModal({
             <SelectFormField
               value={hostingEnvironment?.ocp_persistent_storage_size}
               testId="persistent-storage-select"
+              aria-label='Persistent Storage Needs'
               label="Persistent Storage Needs"
               options={engagementFormConfig?.openshift_options?.persistent_storage?.options?.map?.(
                 v => ({ label: v.label, disabled: v.disabled, value: v.value })
@@ -189,6 +222,7 @@ export function OpenShiftClusterEditModal({
               value={hostingEnvironment?.ocp_cluster_size || ''}
               emptyValue={{ label: 'Select cluster size' }}
               label="Cluster Size"
+              aria-label="Cluster Size"
               isDisabled={!hasFeature(APP_FEATURES.writer)}
               onChange={value => onChange('ocp_cluster_size', value)}
             />

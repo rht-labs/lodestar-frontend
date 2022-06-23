@@ -5,7 +5,9 @@ export type FeatureVersionMap = {
   [key in AppFeature]?: string;
 };
 
-export const FEATURE_VERSION_MAP: FeatureVersionMap = {};
+export const FEATURE_VERSION_MAP: FeatureVersionMap = {
+  availabilityZone: 'v1.3.40',
+};
 
 const getSemverFromVersionString = (version: string = ''): string => {
   return semver.clean(version);

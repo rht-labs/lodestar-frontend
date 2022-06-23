@@ -76,6 +76,7 @@ export class EngagementJsonSerializer
       environment_name: data['environment_name'],
       ocp_cloud_provider_name: data['ocp_cloud_provider_name'],
       ocp_cloud_provider_region: data['ocp_cloud_provider_region'],
+      ocp_cloud_provider_availability_zone: data['ocp_cloud_provider_availability_zone'],
       ocp_cluster_size: data['ocp_cluster_size'],
       ocp_persistent_storage_size: data['ocp_persistent_storage_size'],
       ocp_sub_domain: data['ocp_sub_domain'],

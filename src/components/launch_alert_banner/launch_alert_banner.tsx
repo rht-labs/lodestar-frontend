@@ -41,6 +41,7 @@ const ENGAGEMENT_FIELD_MAP = {
   hosting_environments: 'oc_summary_card',
   ocp_cloud_provider_name: 'oc_summary_card',
   ocp_cloud_provider_region: 'oc_summary_card',
+  ocp_cloud_provider_availability_zone: 'oc_summary_card',
   ocp_version: 'oc_summary_card',
   ocp_sub_domain: 'oc_summary_card',
   ocp_persistent_storage_size: { hash: 'oc_summary_card' },
